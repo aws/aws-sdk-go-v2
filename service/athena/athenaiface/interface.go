@@ -65,13 +65,21 @@ type ClientAPI interface {
 
 	BatchGetQueryExecutionRequest(*athena.BatchGetQueryExecutionInput) athena.BatchGetQueryExecutionRequest
 
+	CreateDataCatalogRequest(*athena.CreateDataCatalogInput) athena.CreateDataCatalogRequest
+
 	CreateNamedQueryRequest(*athena.CreateNamedQueryInput) athena.CreateNamedQueryRequest
 
 	CreateWorkGroupRequest(*athena.CreateWorkGroupInput) athena.CreateWorkGroupRequest
 
+	DeleteDataCatalogRequest(*athena.DeleteDataCatalogInput) athena.DeleteDataCatalogRequest
+
 	DeleteNamedQueryRequest(*athena.DeleteNamedQueryInput) athena.DeleteNamedQueryRequest
 
 	DeleteWorkGroupRequest(*athena.DeleteWorkGroupInput) athena.DeleteWorkGroupRequest
+
+	GetDataCatalogRequest(*athena.GetDataCatalogInput) athena.GetDataCatalogRequest
+
+	GetDatabaseRequest(*athena.GetDatabaseInput) athena.GetDatabaseRequest
 
 	GetNamedQueryRequest(*athena.GetNamedQueryInput) athena.GetNamedQueryRequest
 
@@ -79,11 +87,19 @@ type ClientAPI interface {
 
 	GetQueryResultsRequest(*athena.GetQueryResultsInput) athena.GetQueryResultsRequest
 
+	GetTableMetadataRequest(*athena.GetTableMetadataInput) athena.GetTableMetadataRequest
+
 	GetWorkGroupRequest(*athena.GetWorkGroupInput) athena.GetWorkGroupRequest
+
+	ListDataCatalogsRequest(*athena.ListDataCatalogsInput) athena.ListDataCatalogsRequest
+
+	ListDatabasesRequest(*athena.ListDatabasesInput) athena.ListDatabasesRequest
 
 	ListNamedQueriesRequest(*athena.ListNamedQueriesInput) athena.ListNamedQueriesRequest
 
 	ListQueryExecutionsRequest(*athena.ListQueryExecutionsInput) athena.ListQueryExecutionsRequest
+
+	ListTableMetadataRequest(*athena.ListTableMetadataInput) athena.ListTableMetadataRequest
 
 	ListTagsForResourceRequest(*athena.ListTagsForResourceInput) athena.ListTagsForResourceRequest
 
@@ -96,6 +112,8 @@ type ClientAPI interface {
 	TagResourceRequest(*athena.TagResourceInput) athena.TagResourceRequest
 
 	UntagResourceRequest(*athena.UntagResourceInput) athena.UntagResourceRequest
+
+	UpdateDataCatalogRequest(*athena.UpdateDataCatalogInput) athena.UpdateDataCatalogRequest
 
 	UpdateWorkGroupRequest(*athena.UpdateWorkGroupInput) athena.UpdateWorkGroupRequest
 }

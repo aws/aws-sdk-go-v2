@@ -33,6 +33,14 @@ const (
 	ApiCacheTypeR42xlarge ApiCacheType = "R4_2XLARGE"
 	ApiCacheTypeR44xlarge ApiCacheType = "R4_4XLARGE"
 	ApiCacheTypeR48xlarge ApiCacheType = "R4_8XLARGE"
+	ApiCacheTypeSmall     ApiCacheType = "SMALL"
+	ApiCacheTypeMedium    ApiCacheType = "MEDIUM"
+	ApiCacheTypeLarge     ApiCacheType = "LARGE"
+	ApiCacheTypeXlarge    ApiCacheType = "XLARGE"
+	ApiCacheTypeLarge2x   ApiCacheType = "LARGE_2X"
+	ApiCacheTypeLarge4x   ApiCacheType = "LARGE_4X"
+	ApiCacheTypeLarge8x   ApiCacheType = "LARGE_8X"
+	ApiCacheTypeLarge12x  ApiCacheType = "LARGE_12X"
 )
 
 func (enum ApiCacheType) MarshalValue() (string, error) {

@@ -177,15 +177,22 @@ func (s Contributor) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Contact information that the DRT can use to contact you during a suspected
-// attack.
+// Contact information that the DRT can use to contact you if you have proactive
+// engagement enabled, for escalations to the DRT and to initiate proactive
+// customer support.
 type EmergencyContact struct {
 	_ struct{} `type:"structure"`
 
-	// An email address that the DRT can use to contact you during a suspected attack.
+	// Additional notes regarding the contact.
+	ContactNotes *string `min:"1" type:"string"`
+
+	// The email address for the contact.
 	//
 	// EmailAddress is a required field
 	EmailAddress *string `min:"1" type:"string" required:"true"`
+
+	// The phone number for the contact.
+	PhoneNumber *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -196,12 +203,18 @@ func (s EmergencyContact) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *EmergencyContact) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "EmergencyContact"}
+	if s.ContactNotes != nil && len(*s.ContactNotes) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ContactNotes", 1))
+	}
 
 	if s.EmailAddress == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EmailAddress"))
 	}
 	if s.EmailAddress != nil && len(*s.EmailAddress) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("EmailAddress", 1))
+	}
+	if s.PhoneNumber != nil && len(*s.PhoneNumber) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("PhoneNumber", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -302,6 +315,17 @@ type Subscription struct {
 
 	// Specifies how many protections of a given type you can create.
 	Limits []Limit `type:"list"`
+
+	// If ENABLED, the DDoS Response Team (DRT) will use email and phone to notify
+	// contacts about escalations to the DRT and to initiate proactive customer
+	// support.
+	//
+	// If PENDING, you have requested proactive engagement and the request is pending.
+	// The status changes to ENABLED when your request is fully processed.
+	//
+	// If DISABLED, the DRT will not proactively notify contacts about escalations
+	// or to initiate proactive customer support.
+	ProactiveEngagementStatus ProactiveEngagementStatus `type:"string" enum:"true"`
 
 	// The start time of the subscription, in Unix time in seconds. For more information
 	// see timestamp (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).

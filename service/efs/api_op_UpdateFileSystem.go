@@ -97,6 +97,10 @@ type UpdateFileSystemOutput struct {
 	// A Boolean value that, if true, indicates that the file system is encrypted.
 	Encrypted *bool `type:"boolean"`
 
+	// The Amazon Resource Name (ARN) for the EFS file system, in the format arn:aws:elasticfilesystem:region:account-id:file-system/file-system-id
+	// . Example with sample data: arn:aws:elasticfilesystem:us-west-2:1111333322228888:file-system/fs-01234567
+	FileSystemArn *string `type:"string"`
+
 	// The ID of the file system, assigned by Amazon EFS.
 	//
 	// FileSystemId is a required field
@@ -104,7 +108,7 @@ type UpdateFileSystemOutput struct {
 
 	// The ID of an AWS Key Management Service (AWS KMS) customer master key (CMK)
 	// that was used to protect the encrypted file system.
-	KmsKeyId *string `min:"1" type:"string"`
+	KmsKeyId *string `type:"string"`
 
 	// The lifecycle phase of the file system.
 	//
@@ -193,6 +197,12 @@ func (s UpdateFileSystemOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Encrypted", protocol.BoolValue(v), metadata)
+	}
+	if s.FileSystemArn != nil {
+		v := *s.FileSystemArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FileSystemArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.FileSystemId != nil {
 		v := *s.FileSystemId

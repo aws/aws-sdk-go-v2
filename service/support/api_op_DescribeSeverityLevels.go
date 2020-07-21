@@ -44,7 +44,15 @@ const opDescribeSeverityLevels = "DescribeSeverityLevels"
 //
 // Returns the list of severity levels that you can assign to an AWS Support
 // case. The severity level for a case is also a field in the CaseDetails data
-// type included in any CreateCase request.
+// type that you include for a CreateCase request.
+//
+//    * You must have a Business or Enterprise support plan to use the AWS Support
+//    API.
+//
+//    * If you call the AWS Support API from an account that does not have a
+//    Business or Enterprise support plan, the SubscriptionRequiredException
+//    error message appears. For information about changing your support plan,
+//    see AWS Support (http://aws.amazon.com/premiumsupport/).
 //
 //    // Example sending a request using DescribeSeverityLevelsRequest.
 //    req := client.DescribeSeverityLevelsRequest(params)

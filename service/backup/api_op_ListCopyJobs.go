@@ -14,6 +14,10 @@ import (
 type ListCopyJobsInput struct {
 	_ struct{} `type:"structure"`
 
+	// The account ID to list the jobs from. Returns only copy jobs associated with
+	// the specified account ID.
+	ByAccountId *string `location:"querystring" locationName:"accountId" type:"string"`
+
 	// Returns only copy jobs that were created after the specified date.
 	ByCreatedAfter *time.Time `location:"querystring" locationName:"createdAfter" type:"timestamp"`
 
@@ -30,7 +34,11 @@ type ListCopyJobsInput struct {
 
 	// Returns only backup jobs for the specified resources:
 	//
+	//    * DynamoDB for Amazon DynamoDB
+	//
 	//    * EBS for Amazon Elastic Block Store
+	//
+	//    * EC2 for Amazon Elastic Compute Cloud
 	//
 	//    * EFS for Amazon Elastic File System
 	//
@@ -74,6 +82,12 @@ func (s *ListCopyJobsInput) Validate() error {
 func (s ListCopyJobsInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
+	if s.ByAccountId != nil {
+		v := *s.ByAccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.ByCreatedAfter != nil {
 		v := *s.ByCreatedAfter
 

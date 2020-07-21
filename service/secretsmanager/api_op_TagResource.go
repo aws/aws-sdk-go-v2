@@ -28,7 +28,12 @@ type TagResourceInput struct {
 	// a partial ARN, then those characters cause Secrets Manager to assume that
 	// you’re specifying a complete ARN. This confusion can cause unexpected results.
 	// To avoid this situation, we recommend that you don’t create secret names
-	// that end with a hyphen followed by six characters.
+	// ending with a hyphen followed by six characters.
+	//
+	// If you specify an incomplete ARN without the random suffix, and instead provide
+	// the 'friendly name', you must not include the random suffix. If you do include
+	// the random suffix added by Secrets Manager, you receive either a ResourceNotFoundException
+	// or an AccessDeniedException error, depending on your permissions.
 	//
 	// SecretId is a required field
 	SecretId *string `min:"1" type:"string" required:"true"`
@@ -109,14 +114,14 @@ const opTagResource = "TagResource"
 //
 //    * Tag keys and values are case sensitive.
 //
-//    * Do not use the aws: prefix in your tag names or values because it is
-//    reserved for AWS use. You can't edit or delete tag names or values with
-//    this prefix. Tags with this prefix do not count against your tags per
-//    secret limit.
+//    * Do not use the aws: prefix in your tag names or values because AWS reserves
+//    it for AWS use. You can't edit or delete tag names or values with this
+//    prefix. Tags with this prefix do not count against your tags per secret
+//    limit.
 //
-//    * If your tagging schema will be used across multiple services and resources,
-//    remember that other services might have restrictions on allowed characters.
-//    Generally allowed characters are: letters, spaces, and numbers representable
+//    * If you use your tagging schema across multiple services and resources,
+//    remember other services might have restrictions on allowed characters.
+//    Generally allowed characters: letters, spaces, and numbers representable
 //    in UTF-8, plus the following special characters: + - = . _ : / @.
 //
 // If you use tags as part of your security strategy, then adding or removing

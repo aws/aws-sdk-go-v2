@@ -52,6 +52,9 @@ func (s *DescribeDetectorInput) Validate() error {
 type DescribeDetectorOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The detector ARN.
+	Arn *string `locationName:"arn" min:"1" type:"string"`
+
 	// The detector ID.
 	DetectorId *string `locationName:"detectorId" min:"1" type:"string"`
 

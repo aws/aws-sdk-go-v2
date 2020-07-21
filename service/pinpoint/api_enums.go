@@ -62,6 +62,7 @@ type ChannelType string
 
 // Enum values for ChannelType
 const (
+	ChannelTypePush            ChannelType = "PUSH"
 	ChannelTypeGcm             ChannelType = "GCM"
 	ChannelTypeApns            ChannelType = "APNS"
 	ChannelTypeApnsSandbox     ChannelType = "APNS_SANDBOX"
@@ -146,6 +147,7 @@ type EndpointTypesElement string
 
 // Enum values for EndpointTypesElement
 const (
+	EndpointTypesElementPush            EndpointTypesElement = "PUSH"
 	EndpointTypesElementGcm             EndpointTypesElement = "GCM"
 	EndpointTypesElementApns            EndpointTypesElement = "APNS"
 	EndpointTypesElementApnsSandbox     EndpointTypesElement = "APNS_SANDBOX"

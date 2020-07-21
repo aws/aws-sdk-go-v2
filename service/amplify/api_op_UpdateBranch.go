@@ -10,60 +10,61 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for update branch request.
+// The request structure for the update branch request.
 type UpdateBranchInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for an Amplify App.
+	// The unique ID for an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// ARN for a Backend Environment, part of an Amplify App.
+	// The Amazon Resource Name (ARN) for a backend environment that is part of
+	// an Amplify app.
 	BackendEnvironmentArn *string `locationName:"backendEnvironmentArn" min:"1" type:"string"`
 
-	// Basic Authorization credentials for the branch.
-	BasicAuthCredentials *string `locationName:"basicAuthCredentials" type:"string"`
+	// The basic authorization credentials for the branch.
+	BasicAuthCredentials *string `locationName:"basicAuthCredentials" type:"string" sensitive:"true"`
 
-	// Name for the branch.
+	// The name for the branch.
 	//
 	// BranchName is a required field
 	BranchName *string `location:"uri" locationName:"branchName" min:"1" type:"string" required:"true"`
 
-	// BuildSpec for the branch.
+	// The build specification (build spec) for the branch.
 	BuildSpec *string `locationName:"buildSpec" min:"1" type:"string"`
 
-	// Description for the branch.
+	// The description for the branch.
 	Description *string `locationName:"description" type:"string"`
 
-	// Display name for a branch, will use as the default domain prefix.
+	// The display name for a branch. This is used as the default domain prefix.
 	DisplayName *string `locationName:"displayName" type:"string"`
 
 	// Enables auto building for the branch.
 	EnableAutoBuild *bool `locationName:"enableAutoBuild" type:"boolean"`
 
-	// Enables Basic Auth for the branch.
+	// Enables basic authorization for the branch.
 	EnableBasicAuth *bool `locationName:"enableBasicAuth" type:"boolean"`
 
 	// Enables notifications for the branch.
 	EnableNotification *bool `locationName:"enableNotification" type:"boolean"`
 
-	// Enables Pull Request Preview for this branch.
+	// Enables pull request preview for this branch.
 	EnablePullRequestPreview *bool `locationName:"enablePullRequestPreview" type:"boolean"`
 
-	// Environment Variables for the branch.
+	// The environment variables for the branch.
 	EnvironmentVariables map[string]string `locationName:"environmentVariables" type:"map"`
 
-	// Framework for the branch.
+	// The framework for the branch.
 	Framework *string `locationName:"framework" type:"string"`
 
-	// The Amplify Environment name for the pull request.
+	// The Amplify environment name for the pull request.
 	PullRequestEnvironmentName *string `locationName:"pullRequestEnvironmentName" type:"string"`
 
-	// Stage for the branch.
+	// Describes the current stage for the branch.
 	Stage Stage `locationName:"stage" type:"string" enum:"true"`
 
-	// The content TTL for the website in seconds.
+	// The content Time to Live (TTL) for the website in seconds.
 	Ttl *string `locationName:"ttl" type:"string"`
 }
 
@@ -211,11 +212,11 @@ func (s UpdateBranchInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Result structure for update branch request.
+// The result structure for the update branch request.
 type UpdateBranchOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Branch structure for an Amplify App.
+	// The branch for an Amplify app, which maps to a third-party repository branch.
 	//
 	// Branch is a required field
 	Branch *Branch `locationName:"branch" type:"structure" required:"true"`
@@ -242,7 +243,7 @@ const opUpdateBranch = "UpdateBranch"
 // UpdateBranchRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Updates a branch for an Amplify App.
+// Updates a branch for an Amplify app.
 //
 //    // Example sending a request using UpdateBranchRequest.
 //    req := client.UpdateBranchRequest(params)

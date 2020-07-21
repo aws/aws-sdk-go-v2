@@ -1099,6 +1099,24 @@ func (enum EmbeddedScte20Detection) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Feature Activations Input Prepare Schedule Actions
+type FeatureActivationsInputPrepareScheduleActions string
+
+// Enum values for FeatureActivationsInputPrepareScheduleActions
+const (
+	FeatureActivationsInputPrepareScheduleActionsDisabled FeatureActivationsInputPrepareScheduleActions = "DISABLED"
+	FeatureActivationsInputPrepareScheduleActionsEnabled  FeatureActivationsInputPrepareScheduleActions = "ENABLED"
+)
+
+func (enum FeatureActivationsInputPrepareScheduleActions) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FeatureActivationsInputPrepareScheduleActions) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Fec Output Include Fec
 type FecOutputIncludeFec string
 

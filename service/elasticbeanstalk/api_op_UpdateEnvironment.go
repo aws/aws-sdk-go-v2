@@ -190,6 +190,11 @@ type UpdateEnvironmentOutput struct {
 	// For more information, see Health Colors and Statuses (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html).
 	HealthStatus EnvironmentHealthStatus `type:"string" enum:"true"`
 
+	// The Amazon Resource Name (ARN) of the environment's operations role. For
+	// more information, see Operations roles (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html)
+	// in the AWS Elastic Beanstalk Developer Guide.
+	OperationsRole *string `min:"1" type:"string"`
+
 	// The ARN of the platform version.
 	PlatformArn *string `type:"string"`
 

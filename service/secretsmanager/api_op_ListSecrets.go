@@ -4,6 +4,7 @@ package secretsmanager
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -12,7 +13,10 @@ import (
 type ListSecretsInput struct {
 	_ struct{} `type:"structure"`
 
-	// (Optional) Limits the number of results that you want to include in the response.
+	// Lists the secret request filters.
+	Filters []Filter `type:"list"`
+
+	// (Optional) Limits the number of results you want to include in the response.
 	// If you don't include this parameter, it defaults to a value that's specific
 	// to the operation. If additional items exist beyond the maximum you specify,
 	// the NextToken response element is present and has a value (isn't null). Include
@@ -24,10 +28,13 @@ type ListSecretsInput struct {
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// (Optional) Use this parameter in a request if you receive a NextToken response
-	// in a previous request that indicates that there's more output available.
-	// In a subsequent call, set it to the value of the previous call's NextToken
-	// response to indicate where the output should continue from.
+	// in a previous request indicating there's more output available. In a subsequent
+	// call, set it to the value of the previous call NextToken response to indicate
+	// where the output should continue from.
 	NextToken *string `min:"1" type:"string"`
+
+	// Lists secrets in the requested order.
+	SortOrder SortOrderType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -44,6 +51,13 @@ func (s *ListSecretsInput) Validate() error {
 	if s.NextToken != nil && len(*s.NextToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("NextToken", 1))
 	}
+	if s.Filters != nil {
+		for i, v := range s.Filters {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -55,8 +69,8 @@ type ListSecretsOutput struct {
 	_ struct{} `type:"structure"`
 
 	// If present in the response, this value indicates that there's more output
-	// available than what's included in the current response. This can occur even
-	// when the response includes no values at all, such as when you ask for a filtered
+	// available than included in the current response. This can occur even when
+	// the response includes no values at all, such as when you ask for a filtered
 	// view of a very long list. Use this value in the NextToken request parameter
 	// in a subsequent call to the operation to continue processing and get the
 	// next part of the output. You should repeat this until the NextToken response
@@ -84,7 +98,7 @@ const opListSecrets = "ListSecrets"
 //
 // Always check the NextToken response parameter when calling any of the List*
 // operations. These operations can occasionally return an empty or shorter
-// than expected list of results even when there are more results available.
+// than expected list of results even when there more results become available.
 // When this happens, the NextToken response parameter contains a value to pass
 // to the next call to the same API to request the next part of the list.
 //

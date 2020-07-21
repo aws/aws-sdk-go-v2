@@ -12,6 +12,15 @@ import (
 type PutResourcePolicyInput struct {
 	_ struct{} `type:"structure"`
 
+	// Allows you to specify if you want to use both resource-level and account/catalog-level
+	// resource policies. A resource-level policy is a policy attached to an individual
+	// resource such as a database or a table.
+	//
+	// The default value of NO indicates that resource-level policies cannot co-exist
+	// with an account-level policy. A value of YES means the use of both resource-level
+	// and account/catalog-level resource policies is allowed.
+	EnableHybrid EnableHybridValues `type:"string" enum:"true"`
+
 	// A value of MUST_EXIST is used to update a policy. A value of NOT_EXIST is
 	// used to create a new policy. If a value of NONE or a null value is used,
 	// the call will not depend on the existence of a policy.
@@ -26,6 +35,11 @@ type PutResourcePolicyInput struct {
 	//
 	// PolicyInJson is a required field
 	PolicyInJson *string `min:"2" type:"string" required:"true"`
+
+	// The ARN of the AWS Glue resource for the resource policy to be set. For more
+	// information about AWS Glue resource ARNs, see the AWS Glue ARN string pattern
+	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id)
+	ResourceArn *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -45,6 +59,9 @@ func (s *PutResourcePolicyInput) Validate() error {
 	}
 	if s.PolicyInJson != nil && len(*s.PolicyInJson) < 2 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyInJson", 2))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {

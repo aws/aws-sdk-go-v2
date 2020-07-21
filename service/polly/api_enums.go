@@ -188,6 +188,7 @@ const (
 	VoiceIdJustin    VoiceId = "Justin"
 	VoiceIdKarl      VoiceId = "Karl"
 	VoiceIdKendra    VoiceId = "Kendra"
+	VoiceIdKevin     VoiceId = "Kevin"
 	VoiceIdKimberly  VoiceId = "Kimberly"
 	VoiceIdLea       VoiceId = "Lea"
 	VoiceIdLiv       VoiceId = "Liv"

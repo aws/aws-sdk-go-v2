@@ -22,7 +22,7 @@ type DetectSentimentInput struct {
 	// encoded characters.
 	//
 	// Text is a required field
-	Text *string `min:"1" type:"string" required:"true"`
+	Text *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -51,7 +51,7 @@ func (s *DetectSentimentInput) Validate() error {
 }
 
 type DetectSentimentOutput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" sensitive:"true"`
 
 	// The inferred sentiment that Amazon Comprehend has the highest level of confidence
 	// in.

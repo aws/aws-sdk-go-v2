@@ -47,6 +47,15 @@ type CreateEnvironmentInput struct {
 	// for details.
 	GroupName *string `min:"1" type:"string"`
 
+	// The Amazon Resource Name (ARN) of an existing IAM role to be used as the
+	// environment's operations role. If specified, Elastic Beanstalk uses the operations
+	// role for permissions to downstream services during this call and during subsequent
+	// calls acting on this environment. To specify an operations role, you must
+	// have the iam:PassRole permission for the role. For more information, see
+	// Operations roles (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html)
+	// in the AWS Elastic Beanstalk Developer Guide.
+	OperationsRole *string `min:"1" type:"string"`
+
 	// If specified, AWS Elastic Beanstalk sets the specified configuration options
 	// to the requested value in the configuration set for the new environment.
 	// These override the values obtained from the solution stack or the configuration
@@ -119,6 +128,9 @@ func (s *CreateEnvironmentInput) Validate() error {
 	}
 	if s.GroupName != nil && len(*s.GroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("GroupName", 1))
+	}
+	if s.OperationsRole != nil && len(*s.OperationsRole) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("OperationsRole", 1))
 	}
 	if s.TemplateName != nil && len(*s.TemplateName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("TemplateName", 1))
@@ -219,6 +231,11 @@ type CreateEnvironmentOutput struct {
 	// Returns the health status of the application running in your environment.
 	// For more information, see Health Colors and Statuses (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html).
 	HealthStatus EnvironmentHealthStatus `type:"string" enum:"true"`
+
+	// The Amazon Resource Name (ARN) of the environment's operations role. For
+	// more information, see Operations roles (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html)
+	// in the AWS Elastic Beanstalk Developer Guide.
+	OperationsRole *string `min:"1" type:"string"`
 
 	// The ARN of the platform version.
 	PlatformArn *string `type:"string"`

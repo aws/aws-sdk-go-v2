@@ -257,6 +257,41 @@ func (enum AutoRegistrationStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type AwsJobAbortCriteriaAbortAction string
+
+// Enum values for AwsJobAbortCriteriaAbortAction
+const (
+	AwsJobAbortCriteriaAbortActionCancel AwsJobAbortCriteriaAbortAction = "CANCEL"
+)
+
+func (enum AwsJobAbortCriteriaAbortAction) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AwsJobAbortCriteriaAbortAction) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type AwsJobAbortCriteriaFailureType string
+
+// Enum values for AwsJobAbortCriteriaFailureType
+const (
+	AwsJobAbortCriteriaFailureTypeFailed   AwsJobAbortCriteriaFailureType = "FAILED"
+	AwsJobAbortCriteriaFailureTypeRejected AwsJobAbortCriteriaFailureType = "REJECTED"
+	AwsJobAbortCriteriaFailureTypeTimedOut AwsJobAbortCriteriaFailureType = "TIMED_OUT"
+	AwsJobAbortCriteriaFailureTypeAll      AwsJobAbortCriteriaFailureType = "ALL"
+)
+
+func (enum AwsJobAbortCriteriaFailureType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AwsJobAbortCriteriaFailureType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CACertificateStatus string
 
 // Enum values for CACertificateStatus

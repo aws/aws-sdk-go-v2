@@ -35,6 +35,7 @@ type CreateClusterInput struct {
 	// SubnetIds is a required field
 	SubnetIds []string `min:"1" type:"list" required:"true"`
 
+	// Tags to apply to the CloudHSM cluster during creation.
 	TagList []Tag `min:"1" type:"list"`
 }
 

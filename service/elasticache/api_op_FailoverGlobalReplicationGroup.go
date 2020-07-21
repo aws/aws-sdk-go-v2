@@ -79,7 +79,7 @@ const opFailoverGlobalReplicationGroup = "FailoverGlobalReplicationGroup"
 // Amazon ElastiCache.
 //
 // Used to failover the primary region to a selected secondary region. The selected
-// secondary region will be come primary, and all other clusters will become
+// secondary region will become primary, and all other clusters will become
 // secondary.
 //
 //    // Example sending a request using FailoverGlobalReplicationGroupRequest.

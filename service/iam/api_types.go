@@ -1627,6 +1627,13 @@ type ServiceLastAccessed struct {
 	// the reporting period (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	LastAuthenticatedEntity *string `min:"20" type:"string"`
 
+	// The Region from which the authenticated entity (user or role) last attempted
+	// to access the service. AWS does not report unauthenticated requests.
+	//
+	// This field is null if no IAM entities attempted to access the service within
+	// the reporting period (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
+	LastAuthenticatedRegion *string `type:"string"`
+
 	// The name of the service in which access was attempted.
 	//
 	// ServiceName is a required field
@@ -1651,6 +1658,16 @@ type ServiceLastAccessed struct {
 	// This field is null if no principals attempted to access the service within
 	// the reporting period (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	TotalAuthenticatedEntities *int64 `type:"integer"`
+
+	// An object that contains details about the most recent attempt to access a
+	// tracked action within the service.
+	//
+	// This field is null if there no tracked actions or if the principal did not
+	// use the tracked actions within the reporting period (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
+	// This field is also null if the report was generated at the service level
+	// and not the action level. For more information, see the Granularity field
+	// in GenerateServiceLastAccessedDetails.
+	TrackedActionsLastAccessed []TrackedActionLastAccessed `type:"list"`
 }
 
 // String returns the string representation
@@ -1864,6 +1881,46 @@ func (s *Tag) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Contains details about the most recent attempt to access an action within
+// the service.
+//
+// This data type is used as a response element in the GetServiceLastAccessedDetails
+// operation.
+type TrackedActionLastAccessed struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the tracked action to which access was attempted. Tracked actions
+	// are actions that report activity to IAM.
+	ActionName *string `type:"string"`
+
+	// The Amazon Resource Name (ARN). ARNs are unique identifiers for AWS resources.
+	//
+	// For more information about ARNs, go to Amazon Resource Names (ARNs) and AWS
+	// Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// in the AWS General Reference.
+	LastAccessedEntity *string `min:"20" type:"string"`
+
+	// The Region from which the authenticated entity (user or role) last attempted
+	// to access the tracked action. AWS does not report unauthenticated requests.
+	//
+	// This field is null if no IAM entities attempted to access the service within
+	// the reporting period (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
+	LastAccessedRegion *string `type:"string"`
+
+	// The date and time, in ISO 8601 date-time format (http://www.iso.org/iso/iso8601),
+	// when an authenticated entity most recently attempted to access the tracked
+	// service. AWS does not report unauthenticated requests.
+	//
+	// This field is null if no IAM entities attempted to access the service within
+	// the reporting period (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
+	LastAccessedTime *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation
+func (s TrackedActionLastAccessed) String() string {
+	return awsutil.Prettify(s)
 }
 
 // Contains information about an IAM user entity.

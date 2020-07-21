@@ -58,6 +58,19 @@ type CreateClusterInput struct {
 	// each device moves to its destination while in transit. Regional shipping
 	// speeds are as follows:
 	//
+	//    * In Australia, you have access to express shipping. Typically, Snowballs
+	//    shipped express are delivered in about a day.
+	//
+	//    * In the European Union (EU), you have access to express shipping. Typically,
+	//    Snowballs shipped express are delivered in about a day. In addition, most
+	//    countries in the EU have access to standard shipping, which typically
+	//    takes less than a week, one way.
+	//
+	//    * In India, Snowballs are delivered in one to seven days.
+	//
+	//    * In the United States of America (US), you have access to one-day shipping
+	//    and two-day shipping.
+	//
 	//    * In Australia, you have access to express shipping. Typically, devices
 	//    shipped express are delivered in about a day.
 	//
@@ -73,11 +86,9 @@ type CreateClusterInput struct {
 	// ShippingOption is a required field
 	ShippingOption ShippingOption `type:"string" required:"true" enum:"true"`
 
-	// The type of AWS Snowball device to use for this cluster. Currently, the only
-	// supported device type for cluster jobs is EDGE.
+	// The type of AWS Snowball device to use for this cluster.
 	//
-	// For more information, see Snowball Edge Device Options (https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html)
-	// in the Snowball Edge Developer Guide.
+	// For cluster jobs, AWS Snowball currently supports only the EDGE device type.
 	SnowballType SnowballType `type:"string" enum:"true"`
 
 	// The tax documents required in your AWS Region.

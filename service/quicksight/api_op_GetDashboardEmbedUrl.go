@@ -140,10 +140,10 @@ func (s GetDashboardEmbedUrlInput) MarshalFields(e protocol.FieldEncoder) error 
 type GetDashboardEmbedUrlOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An URL that you can put into your server-side webpage to embed your dashboard.
-	// This URL is valid for 5 minutes, and the resulting session is valid for 10
-	// hours. The API provides the URL with an auth_code value that enables a single
-	// sign-on session.
+	// A single-use URL that you can put into your server-side webpage to embed
+	// your dashboard. This URL is valid for 5 minutes. The API provides the URL
+	// with an auth_code value that enables one (and only one) sign-on to a user
+	// session that is valid for 10 hours.
 	EmbedUrl *string `type:"string" sensitive:"true"`
 
 	// The AWS request ID for this operation.
@@ -181,15 +181,26 @@ const opGetDashboardEmbedUrl = "GetDashboardEmbedUrl"
 // GetDashboardEmbedUrlRequest returns a request value for making API operation for
 // Amazon QuickSight.
 //
-// Generates a server-side embeddable URL and authorization code. For this process
-// to work properly, first configure the dashboards and user permissions. For
-// more information, see Embedding Amazon QuickSight Dashboards (https://docs.aws.amazon.com/quicksight/latest/user/embedding-dashboards.html)
+// Generates a URL and authorization code that you can embed in your web server
+// code. Before you use this command, make sure that you have configured the
+// dashboards and permissions.
+//
+// Currently, you can use GetDashboardEmbedURL only from the server, not from
+// the user's browser. The following rules apply to the combination of URL and
+// authorization code:
+//
+//    * They must be used together.
+//
+//    * They can be used one time only.
+//
+//    * They are valid for 5 minutes after you run this command.
+//
+//    * The resulting user session is valid for 10 hours.
+//
+// For more information, see Embedding Amazon QuickSight Dashboards (https://docs.aws.amazon.com/quicksight/latest/user/embedding-dashboards.html)
 // in the Amazon QuickSight User Guide or Embedding Amazon QuickSight Dashboards
 // (https://docs.aws.amazon.com/quicksight/latest/APIReference/qs-dev-embedded-dashboards.html)
 // in the Amazon QuickSight API Reference.
-//
-// Currently, you can use GetDashboardEmbedURL only from the server, not from
-// the user’s browser.
 //
 //    // Example sending a request using GetDashboardEmbedUrlRequest.
 //    req := client.GetDashboardEmbedUrlRequest(params)

@@ -74,9 +74,9 @@ const opCreateAlias = "CreateAlias"
 // AWS Key Management Service.
 //
 // Creates a display name for a customer managed customer master key (CMK).
-// You can use an alias to identify a CMK in cryptographic operations, such
-// as Encrypt and GenerateDataKey. You can change the CMK associated with the
-// alias at any time.
+// You can use an alias to identify a CMK in cryptographic operations (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations),
+// such as Encrypt and GenerateDataKey. You can change the CMK associated with
+// the alias at any time.
 //
 // Aliases are easier to remember than key IDs. They can also help to simplify
 // your applications. For example, if you use an alias in your code, you can
@@ -123,11 +123,12 @@ const opCreateAlias = "CreateAlias"
 //    a new alias with the desired name.
 //
 //    * You can use an alias name or alias ARN to identify a CMK in AWS KMS
-//    cryptographic operations and in the DescribeKey operation. However, you
-//    cannot use alias names or alias ARNs in API operations that manage CMKs,
-//    such as DisableKey or GetKeyPolicy. For information about the valid CMK
-//    identifiers for each AWS KMS API operation, see the descriptions of the
-//    KeyId parameter in the API operation documentation.
+//    cryptographic operations (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
+//    and in the DescribeKey operation. However, you cannot use alias names
+//    or alias ARNs in API operations that manage CMKs, such as DisableKey or
+//    GetKeyPolicy. For information about the valid CMK identifiers for each
+//    AWS KMS API operation, see the descriptions of the KeyId parameter in
+//    the API operation documentation.
 //
 // Because an alias is not a property of a CMK, you can delete and change the
 // aliases of a CMK without affecting the CMK. Also, aliases do not appear in

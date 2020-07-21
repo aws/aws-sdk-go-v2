@@ -16,7 +16,7 @@ type CreateFieldLevelEncryptionConfigInput struct {
 	// The request to create a new field-level encryption configuration.
 	//
 	// FieldLevelEncryptionConfig is a required field
-	FieldLevelEncryptionConfig *FieldLevelEncryptionConfig `locationName:"FieldLevelEncryptionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
+	FieldLevelEncryptionConfig *FieldLevelEncryptionConfig `locationName:"FieldLevelEncryptionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2020-05-31/"`
 }
 
 // String returns the string representation
@@ -49,7 +49,7 @@ func (s CreateFieldLevelEncryptionConfigInput) MarshalFields(e protocol.FieldEnc
 	if s.FieldLevelEncryptionConfig != nil {
 		v := s.FieldLevelEncryptionConfig
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2020-05-31/"}
 		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryptionConfig", v, metadata)
 	}
 	return nil
@@ -65,8 +65,7 @@ type CreateFieldLevelEncryptionConfigOutput struct {
 	// Returned when you create a new field-level encryption configuration.
 	FieldLevelEncryption *FieldLevelEncryption `type:"structure"`
 
-	// The fully qualified URI of the new configuration resource just created. For
-	// example: https://cloudfront.amazonaws.com/2010-11-01/field-level-encryption-config/EDFDVBD632BHDS5.
+	// The fully qualified URI of the new configuration resource just created.
 	Location *string `location:"header" locationName:"Location" type:"string"`
 }
 
@@ -98,7 +97,7 @@ func (s CreateFieldLevelEncryptionConfigOutput) MarshalFields(e protocol.FieldEn
 	return nil
 }
 
-const opCreateFieldLevelEncryptionConfig = "CreateFieldLevelEncryptionConfig2019_03_26"
+const opCreateFieldLevelEncryptionConfig = "CreateFieldLevelEncryptionConfig2020_05_31"
 
 // CreateFieldLevelEncryptionConfigRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -112,12 +111,12 @@ const opCreateFieldLevelEncryptionConfig = "CreateFieldLevelEncryptionConfig2019
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateFieldLevelEncryptionConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateFieldLevelEncryptionConfig
 func (c *Client) CreateFieldLevelEncryptionConfigRequest(input *CreateFieldLevelEncryptionConfigInput) CreateFieldLevelEncryptionConfigRequest {
 	op := &aws.Operation{
 		Name:       opCreateFieldLevelEncryptionConfig,
 		HTTPMethod: "POST",
-		HTTPPath:   "/2019-03-26/field-level-encryption",
+		HTTPPath:   "/2020-05-31/field-level-encryption",
 	}
 
 	if input == nil {

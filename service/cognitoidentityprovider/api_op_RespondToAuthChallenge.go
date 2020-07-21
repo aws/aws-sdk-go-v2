@@ -179,6 +179,7 @@ func (c *Client) RespondToAuthChallengeRequest(input *RespondToAuthChallengeInpu
 	}
 
 	req := c.newRequest(op, input, &RespondToAuthChallengeOutput{})
+	req.Config.Credentials = aws.AnonymousCredentials
 
 	return RespondToAuthChallengeRequest{Request: req, Input: input, Copy: c.RespondToAuthChallengeRequest}
 }

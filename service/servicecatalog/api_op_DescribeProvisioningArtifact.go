@@ -22,14 +22,16 @@ type DescribeProvisioningArtifactInput struct {
 	AcceptLanguage *string `type:"string"`
 
 	// The product identifier.
-	//
-	// ProductId is a required field
-	ProductId *string `min:"1" type:"string" required:"true"`
+	ProductId *string `min:"1" type:"string"`
+
+	// The product name.
+	ProductName *string `type:"string"`
 
 	// The identifier of the provisioning artifact.
-	//
-	// ProvisioningArtifactId is a required field
-	ProvisioningArtifactId *string `min:"1" type:"string" required:"true"`
+	ProvisioningArtifactId *string `min:"1" type:"string"`
+
+	// The provisioning artifact name.
+	ProvisioningArtifactName *string `type:"string"`
 
 	// Indicates whether a verbose level of detail is enabled.
 	Verbose *bool `type:"boolean"`
@@ -43,16 +45,8 @@ func (s DescribeProvisioningArtifactInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeProvisioningArtifactInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeProvisioningArtifactInput"}
-
-	if s.ProductId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProductId"))
-	}
 	if s.ProductId != nil && len(*s.ProductId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProductId", 1))
-	}
-
-	if s.ProvisioningArtifactId == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ProvisioningArtifactId"))
 	}
 	if s.ProvisioningArtifactId != nil && len(*s.ProvisioningArtifactId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ProvisioningArtifactId", 1))

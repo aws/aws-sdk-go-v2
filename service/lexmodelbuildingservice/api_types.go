@@ -911,6 +911,89 @@ func (s IntentMetadata) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Provides configuration information for the AMAZON.KendraSearchIntent intent.
+// When you use this intent, Amazon Lex searches the specified Amazon Kendra
+// index and returns documents from the index that match the user's utterance.
+// For more information, see AMAZON.KendraSearchIntent (http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html).
+type KendraConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the
+	// AMAZON.KendraSearchIntent intent to search. The index must be in the same
+	// account and Region as the Amazon Lex bot. If the Amazon Kendra index does
+	// not exist, you get an exception when you call the PutIntent operation.
+	//
+	// KendraIndex is a required field
+	KendraIndex *string `locationName:"kendraIndex" min:"20" type:"string" required:"true"`
+
+	// A query filter that Amazon Lex sends to Amazon Kendra to filter the response
+	// from the query. The filter is in the format defined by Amazon Kendra. For
+	// more information, see Filtering queries (http://docs.aws.amazon.com/kendra/latest/dg/filtering.html).
+	//
+	// You can override this filter string with a new filter string at runtime.
+	QueryFilterString *string `locationName:"queryFilterString" type:"string"`
+
+	// The Amazon Resource Name (ARN) of an IAM role that has permission to search
+	// the Amazon Kendra index. The role must be in the same account and Region
+	// as the Amazon Lex bot. If the role does not exist, you get an exception when
+	// you call the PutIntent operation.
+	//
+	// Role is a required field
+	Role *string `locationName:"role" min:"20" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s KendraConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *KendraConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "KendraConfiguration"}
+
+	if s.KendraIndex == nil {
+		invalidParams.Add(aws.NewErrParamRequired("KendraIndex"))
+	}
+	if s.KendraIndex != nil && len(*s.KendraIndex) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("KendraIndex", 20))
+	}
+
+	if s.Role == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Role"))
+	}
+	if s.Role != nil && len(*s.Role) < 20 {
+		invalidParams.Add(aws.NewErrParamMinLen("Role", 20))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s KendraConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.KendraIndex != nil {
+		v := *s.KendraIndex
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "kendraIndex", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.QueryFilterString != nil {
+		v := *s.QueryFilterString
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "queryFilterString", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Role != nil {
+		v := *s.Role
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "role", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Settings used to configure delivery mode and destination for conversation
 // logs.
 type LogSettingsRequest struct {
@@ -1284,12 +1367,12 @@ type Slot struct {
 	// (https://docs.aws.amazon.com/lex/latest/dg/how-obfuscate.html).
 	ObfuscationSetting ObfuscationSetting `locationName:"obfuscationSetting" type:"string" enum:"true"`
 
-	// Directs Lex the order in which to elicit this slot value from the user. For
-	// example, if the intent has two slots with priorities 1 and 2, AWS Lex first
-	// elicits a value for the slot with priority 1.
+	// Directs Amazon Lex the order in which to elicit this slot value from the
+	// user. For example, if the intent has two slots with priorities 1 and 2, AWS
+	// Amazon Lex first elicits a value for the slot with priority 1.
 	//
-	// If multiple slots share the same priority, the order in which Lex elicits
-	// values is arbitrary.
+	// If multiple slots share the same priority, the order in which Amazon Lex
+	// elicits values is arbitrary.
 	Priority *int64 `locationName:"priority" type:"integer"`
 
 	// A set of possible responses for the slot type used by text-based clients.

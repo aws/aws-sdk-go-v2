@@ -4,6 +4,7 @@ package frauddetector
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -18,7 +19,7 @@ type UpdateRuleVersionInput struct {
 	// The rule expression.
 	//
 	// Expression is a required field
-	Expression *string `locationName:"expression" min:"1" type:"string" required:"true"`
+	Expression *string `locationName:"expression" min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The language.
 	//
@@ -34,6 +35,9 @@ type UpdateRuleVersionInput struct {
 	//
 	// Rule is a required field
 	Rule *Rule `locationName:"rule" type:"structure" required:"true"`
+
+	// The tags to assign to the rule version.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -73,6 +77,13 @@ func (s *UpdateRuleVersionInput) Validate() error {
 			invalidParams.AddNested("Rule", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -97,7 +108,8 @@ const opUpdateRuleVersion = "UpdateRuleVersion"
 // UpdateRuleVersionRequest returns a request value for making API operation for
 // Amazon Fraud Detector.
 //
-// Updates a rule version resulting in a new rule version.
+// Updates a rule version resulting in a new rule version. Updates a rule version
+// resulting in a new rule version (version 1, 2, 3 ...).
 //
 //    // Example sending a request using UpdateRuleVersionRequest.
 //    req := client.UpdateRuleVersionRequest(params)

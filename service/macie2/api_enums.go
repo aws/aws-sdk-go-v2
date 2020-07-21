@@ -78,15 +78,16 @@ func (enum EffectivePermission) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The server-side encryption algorithm that's used when storing the S3 bucket
-// or object. Valid values are:
+// The type of server-side encryption that's used to encrypt objects in the
+// S3 bucket. Valid values are:
 type EncryptionType string
 
 // Enum values for EncryptionType
 const (
-	EncryptionTypeNone   EncryptionType = "NONE"
-	EncryptionTypeAes256 EncryptionType = "AES256"
-	EncryptionTypeAwsKms EncryptionType = "aws:kms"
+	EncryptionTypeNone    EncryptionType = "NONE"
+	EncryptionTypeAes256  EncryptionType = "AES256"
+	EncryptionTypeAwsKms  EncryptionType = "aws:kms"
+	EncryptionTypeUnknown EncryptionType = "UNKNOWN"
 )
 
 func (enum EncryptionType) MarshalValue() (string, error) {
@@ -116,6 +117,8 @@ func (enum ErrorCode) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// The type of action that occurred for the resource and produced the policy
+// finding:
 type FindingActionType string
 
 // Enum values for FindingActionType
@@ -150,9 +153,10 @@ func (enum FindingCategory) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The frequency with which Amazon Macie publishes findings for an account.
-// This includes adding findings to AWS Security Hub and exporting finding events
-// to Amazon CloudWatch. Valid values are:
+// The frequency with which Amazon Macie publishes updates to policy findings
+// for an account. This includes publishing updates to AWS Security Hub and
+// Amazon EventBridge (formerly called Amazon CloudWatch Events). Valid values
+// are:
 type FindingPublishingFrequency string
 
 // Enum values for FindingPublishingFrequency
@@ -215,8 +219,9 @@ func (enum FindingType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The action to perform on findings that meet the filter criteria. Valid values
-// are:
+// The action to perform on findings that meet the filter criteria. To suppress
+// (automatically archive) findings that meet the criteria, set this value to
+// ARCHIVE. Valid values are:
 type FindingsFilterAction string
 
 // Enum values for FindingsFilterAction
@@ -276,7 +281,7 @@ func (enum JobComparator) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The current status of a classification job. Valid values are:
+// The current status of a classification job. Possible values are:
 type JobStatus string
 
 // Enum values for JobStatus
@@ -404,6 +409,8 @@ const (
 	RelationshipStatusResigned                    RelationshipStatus = "Resigned"
 	RelationshipStatusEmailVerificationInProgress RelationshipStatus = "EmailVerificationInProgress"
 	RelationshipStatusEmailVerificationFailed     RelationshipStatus = "EmailVerificationFailed"
+	RelationshipStatusRegionDisabled              RelationshipStatus = "RegionDisabled"
+	RelationshipStatusAccountSuspended            RelationshipStatus = "AccountSuspended"
 )
 
 func (enum RelationshipStatus) MarshalValue() (string, error) {
@@ -437,6 +444,8 @@ func (enum ScopeFilterKey) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// The category of sensitive data that was detected and produced the finding.
+// Possible values are:
 type SensitiveDataItemCategory string
 
 // Enum values for SensitiveDataItemCategory
@@ -456,7 +465,7 @@ func (enum SensitiveDataItemCategory) MarshalValueBuf(b []byte) ([]byte, error) 
 	return append(b, enum...), nil
 }
 
-// The textual representation of the finding's severity. Valid values are:
+// The textual representation of the finding's severity. Possible values are:
 type SeverityDescription string
 
 // Enum values for SeverityDescription
@@ -493,7 +502,7 @@ func (enum SharedAccess) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// The storage class of the S3 bucket or object. Valid values are:
+// The storage class of the S3 bucket or object. Possible values are:
 type StorageClass string
 
 // Enum values for StorageClass
@@ -550,7 +559,7 @@ func (enum Unit) MarshalValueBuf(b []byte) ([]byte, error) {
 }
 
 // The field to use to filter the results of a query for account quotas and
-// usage data.
+// usage data:
 type UsageStatisticsFilterKey string
 
 // Enum values for UsageStatisticsFilterKey
@@ -568,7 +577,7 @@ func (enum UsageStatisticsFilterKey) MarshalValueBuf(b []byte) ([]byte, error) {
 }
 
 // The field to use to sort the results of a query for account quotas and usage
-// data.
+// data. Valid values are:
 type UsageStatisticsSortKey string
 
 // Enum values for UsageStatisticsSortKey
@@ -604,7 +613,8 @@ func (enum UsageType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Reserved for future use.
+// The type of entity that performed the action on the affected resource. Possible
+// values are:
 type UserIdentityType string
 
 // Enum values for UserIdentityType

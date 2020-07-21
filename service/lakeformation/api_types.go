@@ -107,7 +107,8 @@ func (s ColumnWildcard) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The AWS Lake Formation principal.
+// The AWS Lake Formation principal. Supported principals are IAM users or IAM
+// roles.
 type DataLakePrincipal struct {
 	_ struct{} `type:"structure"`
 
@@ -133,20 +134,31 @@ func (s *DataLakePrincipal) Validate() error {
 	return nil
 }
 
-// The AWS Lake Formation principal.
+// A structure representing a list of AWS Lake Formation principals designated
+// as data lake administrators and lists of principal permission entries for
+// default create database and default create table permissions.
 type DataLakeSettings struct {
 	_ struct{} `type:"structure"`
 
-	// A list of up to three principal permissions entries for default create database
-	// permissions.
+	// A structure representing a list of up to three principal permissions entries
+	// for default create database permissions.
 	CreateDatabaseDefaultPermissions []PrincipalPermissions `type:"list"`
 
-	// A list of up to three principal permissions entries for default create table
-	// permissions.
+	// A structure representing a list of up to three principal permissions entries
+	// for default create table permissions.
 	CreateTableDefaultPermissions []PrincipalPermissions `type:"list"`
 
-	// A list of AWS Lake Formation principals.
+	// A list of AWS Lake Formation principals. Supported principals are IAM users
+	// or IAM roles.
 	DataLakeAdmins []DataLakePrincipal `type:"list"`
+
+	// A list of the resource-owning account IDs that the caller's account can use
+	// to share their user access details (user ARNs). The user ARNs can be logged
+	// in the resource owner's AWS CloudTrail log.
+	//
+	// You may want to specify this property when you are in a high-trust boundary,
+	// such as the same team or company.
+	TrustedResourceOwners []string `type:"list"`
 }
 
 // String returns the string representation
@@ -189,6 +201,10 @@ func (s *DataLakeSettings) Validate() error {
 type DataLocationResource struct {
 	_ struct{} `type:"structure"`
 
+	// The identifier for the Data Catalog where the location is registered with
+	// AWS Lake Formation. By default, it is the account ID of the caller.
+	CatalogId *string `min:"1" type:"string"`
+
 	// The Amazon Resource Name (ARN) that uniquely identifies the data location
 	// resource.
 	//
@@ -204,6 +220,9 @@ func (s DataLocationResource) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DataLocationResource) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DataLocationResource"}
+	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
+	}
 
 	if s.ResourceArn == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ResourceArn"))
@@ -219,6 +238,10 @@ func (s *DataLocationResource) Validate() error {
 type DatabaseResource struct {
 	_ struct{} `type:"structure"`
 
+	// The identifier for the Data Catalog. By default, it is the account ID of
+	// the caller.
+	CatalogId *string `min:"1" type:"string"`
+
 	// The name of the database resource. Unique to the Data Catalog.
 	//
 	// Name is a required field
@@ -233,6 +256,9 @@ func (s DatabaseResource) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DatabaseResource) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DatabaseResource"}
+	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
+	}
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
@@ -424,6 +450,10 @@ func (s ResourceInfo) String() string {
 type TableResource struct {
 	_ struct{} `type:"structure"`
 
+	// The identifier for the Data Catalog. By default, it is the account ID of
+	// the caller.
+	CatalogId *string `min:"1" type:"string"`
+
 	// The name of the database for the table. Unique to a Data Catalog. A database
 	// is a set of associated table definitions organized into a logical group.
 	// You can Grant and Revoke database privileges to a principal.
@@ -432,9 +462,12 @@ type TableResource struct {
 	DatabaseName *string `min:"1" type:"string" required:"true"`
 
 	// The name of the table.
+	Name *string `min:"1" type:"string"`
+
+	// A wildcard object representing every table under a database.
 	//
-	// Name is a required field
-	Name *string `min:"1" type:"string" required:"true"`
+	// At least one of TableResource$Name or TableResource$TableWildcard is required.
+	TableWildcard *TableWildcard `type:"structure"`
 }
 
 // String returns the string representation
@@ -445,16 +478,15 @@ func (s TableResource) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TableResource) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TableResource"}
+	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
+	}
 
 	if s.DatabaseName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
 	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
-	}
-
-	if s.Name == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
@@ -466,6 +498,16 @@ func (s *TableResource) Validate() error {
 	return nil
 }
 
+// A wildcard object representing every table under a database.
+type TableWildcard struct {
+	_ struct{} `type:"structure"`
+}
+
+// String returns the string representation
+func (s TableWildcard) String() string {
+	return awsutil.Prettify(s)
+}
+
 // A structure for a table with columns object. This object is only used when
 // granting a SELECT permission.
 //
@@ -473,6 +515,10 @@ func (s *TableResource) Validate() error {
 // or ColumnsWildcard.
 type TableWithColumnsResource struct {
 	_ struct{} `type:"structure"`
+
+	// The identifier for the Data Catalog. By default, it is the account ID of
+	// the caller.
+	CatalogId *string `min:"1" type:"string"`
 
 	// The list of column names for the table. At least one of ColumnNames or ColumnWildcard
 	// is required.
@@ -485,11 +531,15 @@ type TableWithColumnsResource struct {
 	// The name of the database for the table with columns resource. Unique to the
 	// Data Catalog. A database is a set of associated table definitions organized
 	// into a logical group. You can Grant and Revoke database privileges to a principal.
-	DatabaseName *string `min:"1" type:"string"`
+	//
+	// DatabaseName is a required field
+	DatabaseName *string `min:"1" type:"string" required:"true"`
 
 	// The name of the table resource. A table is a metadata definition that represents
 	// your data. You can Grant and Revoke table privileges to a principal.
-	Name *string `min:"1" type:"string"`
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -500,8 +550,19 @@ func (s TableWithColumnsResource) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *TableWithColumnsResource) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "TableWithColumnsResource"}
+	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
+	}
+
+	if s.DatabaseName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DatabaseName"))
+	}
 	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))

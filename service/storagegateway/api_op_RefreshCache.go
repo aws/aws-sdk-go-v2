@@ -20,17 +20,19 @@ type RefreshCacheInput struct {
 
 	// A comma-separated list of the paths of folders to refresh in the cache. The
 	// default is ["/"]. The default refreshes objects and folders at the root of
-	// the Amazon S3 bucket. If Recursive is set to "true", the entire S3 bucket
-	// that the file share has access to is refreshed.
+	// the Amazon S3 bucket. If Recursive is set to true, the entire S3 bucket that
+	// the file share has access to is refreshed.
 	FolderList []string `min:"1" type:"list"`
 
 	// A value that specifies whether to recursively refresh folders in the cache.
 	// The refresh includes folders that were in the cache the last time the gateway
-	// listed the folder's contents. If this value set to "true", each folder that
+	// listed the folder's contents. If this value set to true, each folder that
 	// is listed in FolderList is recursively updated. Otherwise, subfolders listed
 	// in FolderList are not refreshed. Only objects that are in folders listed
 	// directly under FolderList are found and used for the update. The default
-	// is "true".
+	// is true.
+	//
+	// Valid Values: true | false
 	Recursive *bool `type:"boolean"`
 }
 
@@ -82,11 +84,12 @@ const opRefreshCache = "RefreshCache"
 // AWS Storage Gateway.
 //
 // Refreshes the cache for the specified file share. This operation finds objects
-// in the Amazon S3 bucket that were added, removed or replaced since the gateway
+// in the Amazon S3 bucket that were added, removed, or replaced since the gateway
 // last listed the bucket's contents and cached the results. This operation
 // is only supported in the file gateway type. You can subscribe to be notified
 // through an Amazon CloudWatch event when your RefreshCache operation completes.
-// For more information, see Getting Notified About File Operations (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification).
+// For more information, see Getting notified about file operations (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification)
+// in the AWS Storage Gateway User Guide.
 //
 // When this API is called, it only initiates the refresh operation. When the
 // API call completes and returns a success code, it doesn't necessarily mean
@@ -98,13 +101,15 @@ const opRefreshCache = "RefreshCache"
 // Throttle limit: This API is asynchronous so the gateway will accept no more
 // than two refreshes at any time. We recommend using the refresh-complete CloudWatch
 // event notification before issuing additional requests. For more information,
-// see Getting Notified About File Operations (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification).
+// see Getting notified about file operations (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification)
+// in the AWS Storage Gateway User Guide.
 //
 // If you invoke the RefreshCache API when two requests are already being processed,
 // any new request will cause an InvalidGatewayRequestException error because
 // too many requests were sent to the server.
 //
-// For more information, see "https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification".
+// For more information, see Getting notified about file operations (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification)
+// in the AWS Storage Gateway User Guide.
 //
 //    // Example sending a request using RefreshCacheRequest.
 //    req := client.RefreshCacheRequest(params)

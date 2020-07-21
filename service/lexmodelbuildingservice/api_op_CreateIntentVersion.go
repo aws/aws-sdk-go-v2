@@ -99,6 +99,10 @@ type CreateIntentVersionOutput struct {
 	// Describes how the intent is fulfilled.
 	FulfillmentActivity *FulfillmentActivity `locationName:"fulfillmentActivity" type:"structure"`
 
+	// Configuration information, if any, for connectin an Amazon Kendra index with
+	// the AMAZON.KendraSearchIntent intent.
+	KendraConfiguration *KendraConfiguration `locationName:"kendraConfiguration" type:"structure"`
+
 	// The date that the intent was updated.
 	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp"`
 
@@ -178,6 +182,12 @@ func (s CreateIntentVersionOutput) MarshalFields(e protocol.FieldEncoder) error 
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "fulfillmentActivity", v, metadata)
+	}
+	if s.KendraConfiguration != nil {
+		v := s.KendraConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "kendraConfiguration", v, metadata)
 	}
 	if s.LastUpdatedDate != nil {
 		v := *s.LastUpdatedDate

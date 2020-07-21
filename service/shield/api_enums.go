@@ -59,6 +59,24 @@ func (enum AutoRenew) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ProactiveEngagementStatus string
+
+// Enum values for ProactiveEngagementStatus
+const (
+	ProactiveEngagementStatusEnabled  ProactiveEngagementStatus = "ENABLED"
+	ProactiveEngagementStatusDisabled ProactiveEngagementStatus = "DISABLED"
+	ProactiveEngagementStatusPending  ProactiveEngagementStatus = "PENDING"
+)
+
+func (enum ProactiveEngagementStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ProactiveEngagementStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SubResourceType string
 
 // Enum values for SubResourceType

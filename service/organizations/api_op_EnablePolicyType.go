@@ -12,7 +12,16 @@ import (
 type EnablePolicyTypeInput struct {
 	_ struct{} `type:"structure"`
 
-	// The policy type that you want to enable.
+	// The policy type that you want to enable. You can specify one of the following
+	// values:
+	//
+	//    * AISERVICES_OPT_OUT_POLICY (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
+	//
+	//    * BACKUP_POLICY (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
+	//
+	//    * SERVICE_CONTROL_POLICY (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
+	//
+	//    * TAG_POLICY (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
 	//
 	// PolicyType is a required field
 	PolicyType PolicyType `type:"string" required:"true" enum:"true"`

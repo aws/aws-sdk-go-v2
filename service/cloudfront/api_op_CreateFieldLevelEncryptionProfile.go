@@ -16,7 +16,7 @@ type CreateFieldLevelEncryptionProfileInput struct {
 	// The request to create a field-level encryption profile.
 	//
 	// FieldLevelEncryptionProfileConfig is a required field
-	FieldLevelEncryptionProfileConfig *FieldLevelEncryptionProfileConfig `locationName:"FieldLevelEncryptionProfileConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
+	FieldLevelEncryptionProfileConfig *FieldLevelEncryptionProfileConfig `locationName:"FieldLevelEncryptionProfileConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2020-05-31/"`
 }
 
 // String returns the string representation
@@ -49,7 +49,7 @@ func (s CreateFieldLevelEncryptionProfileInput) MarshalFields(e protocol.FieldEn
 	if s.FieldLevelEncryptionProfileConfig != nil {
 		v := s.FieldLevelEncryptionProfileConfig
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2020-05-31/"}
 		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryptionProfileConfig", v, metadata)
 	}
 	return nil
@@ -64,8 +64,7 @@ type CreateFieldLevelEncryptionProfileOutput struct {
 	// Returned when you create a new field-level encryption profile.
 	FieldLevelEncryptionProfile *FieldLevelEncryptionProfile `type:"structure"`
 
-	// The fully qualified URI of the new profile resource just created. For example:
-	// https://cloudfront.amazonaws.com/2010-11-01/field-level-encryption-profile/EDFDVBD632BHDS5.
+	// The fully qualified URI of the new profile resource just created.
 	Location *string `location:"header" locationName:"Location" type:"string"`
 }
 
@@ -97,7 +96,7 @@ func (s CreateFieldLevelEncryptionProfileOutput) MarshalFields(e protocol.FieldE
 	return nil
 }
 
-const opCreateFieldLevelEncryptionProfile = "CreateFieldLevelEncryptionProfile2019_03_26"
+const opCreateFieldLevelEncryptionProfile = "CreateFieldLevelEncryptionProfile2020_05_31"
 
 // CreateFieldLevelEncryptionProfileRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -111,12 +110,12 @@ const opCreateFieldLevelEncryptionProfile = "CreateFieldLevelEncryptionProfile20
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateFieldLevelEncryptionProfile
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateFieldLevelEncryptionProfile
 func (c *Client) CreateFieldLevelEncryptionProfileRequest(input *CreateFieldLevelEncryptionProfileInput) CreateFieldLevelEncryptionProfileRequest {
 	op := &aws.Operation{
 		Name:       opCreateFieldLevelEncryptionProfile,
 		HTTPMethod: "POST",
-		HTTPPath:   "/2019-03-26/field-level-encryption-profile",
+		HTTPPath:   "/2020-05-31/field-level-encryption-profile",
 	}
 
 	if input == nil {

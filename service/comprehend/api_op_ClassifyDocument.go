@@ -20,7 +20,7 @@ type ClassifyDocumentInput struct {
 	// The document text to be analyzed.
 	//
 	// Text is a required field
-	Text *string `min:"1" type:"string" required:"true"`
+	Text *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -50,7 +50,7 @@ func (s *ClassifyDocumentInput) Validate() error {
 }
 
 type ClassifyDocumentOutput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" sensitive:"true"`
 
 	// The classes used by the document being analyzed. These are used for multi-class
 	// trained models. Individual classes are mutually exclusive and each document

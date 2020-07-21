@@ -99,6 +99,8 @@ type ClientAPI interface {
 
 	ListFleetsRequest(*worklink.ListFleetsInput) worklink.ListFleetsRequest
 
+	ListTagsForResourceRequest(*worklink.ListTagsForResourceInput) worklink.ListTagsForResourceRequest
+
 	ListWebsiteAuthorizationProvidersRequest(*worklink.ListWebsiteAuthorizationProvidersInput) worklink.ListWebsiteAuthorizationProvidersRequest
 
 	ListWebsiteCertificateAuthoritiesRequest(*worklink.ListWebsiteCertificateAuthoritiesInput) worklink.ListWebsiteCertificateAuthoritiesRequest
@@ -108,6 +110,10 @@ type ClientAPI interface {
 	RevokeDomainAccessRequest(*worklink.RevokeDomainAccessInput) worklink.RevokeDomainAccessRequest
 
 	SignOutUserRequest(*worklink.SignOutUserInput) worklink.SignOutUserRequest
+
+	TagResourceRequest(*worklink.TagResourceInput) worklink.TagResourceRequest
+
+	UntagResourceRequest(*worklink.UntagResourceInput) worklink.UntagResourceRequest
 
 	UpdateAuditStreamConfigurationRequest(*worklink.UpdateAuditStreamConfigurationInput) worklink.UpdateAuditStreamConfigurationRequest
 

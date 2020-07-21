@@ -13,7 +13,8 @@ import (
 type ListRecommendationsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the code review to describe.
+	// The Amazon Resource Name (ARN) of the CodeReview (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
+	// object.
 	//
 	// CodeReviewArn is a required field
 	CodeReviewArn *string `location:"uri" locationName:"CodeReviewArn" min:"1" type:"string" required:"true"`

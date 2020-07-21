@@ -157,7 +157,7 @@ const opListImageBuildVersions = "ListImageBuildVersions"
 // ListImageBuildVersionsRequest returns a request value for making API operation for
 // EC2 Image Builder.
 //
-// Returns a list of distribution configurations.
+// Returns a list of image build versions.
 //
 //    // Example sending a request using ListImageBuildVersionsRequest.
 //    req := client.ListImageBuildVersionsRequest(params)

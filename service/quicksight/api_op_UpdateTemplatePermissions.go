@@ -20,10 +20,10 @@ type UpdateTemplatePermissionsInput struct {
 	AwsAccountId *string `location:"uri" locationName:"AwsAccountId" min:"12" type:"string" required:"true"`
 
 	// A list of resource permissions to be granted on the template.
-	GrantPermissions []ResourcePermission `min:"1" type:"list"`
+	GrantPermissions []ResourcePermission `type:"list"`
 
 	// A list of resource permissions to be revoked from the template.
-	RevokePermissions []ResourcePermission `min:"1" type:"list"`
+	RevokePermissions []ResourcePermission `type:"list"`
 
 	// The ID for the template.
 	//
@@ -45,12 +45,6 @@ func (s *UpdateTemplatePermissionsInput) Validate() error {
 	}
 	if s.AwsAccountId != nil && len(*s.AwsAccountId) < 12 {
 		invalidParams.Add(aws.NewErrParamMinLen("AwsAccountId", 12))
-	}
-	if s.GrantPermissions != nil && len(s.GrantPermissions) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GrantPermissions", 1))
-	}
-	if s.RevokePermissions != nil && len(s.RevokePermissions) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RevokePermissions", 1))
 	}
 
 	if s.TemplateId == nil {

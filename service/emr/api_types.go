@@ -443,6 +443,11 @@ type Cluster struct {
 	// in the EMR Management Guide.
 	KerberosAttributes *KerberosAttributes `type:"structure"`
 
+	// The AWS KMS customer master key (CMK) used for encrypting log files. This
+	// attribute is only available with EMR version 5.30.0 and later, excluding
+	// EMR 6.0.0.
+	LogEncryptionKmsKeyId *string `type:"string"`
+
 	// The path to the Amazon S3 location where logs for this cluster are stored.
 	LogUri *string `type:"string"`
 
@@ -659,11 +664,18 @@ type ComputeLimits struct {
 	// MaximumCapacityUnits is a required field
 	MaximumCapacityUnits *int64 `type:"integer" required:"true"`
 
-	// The upper boundary of on-demand EC2 units. It is measured through VCPU cores
+	// The upper boundary of EC2 units for core node type in a cluster. It is measured
+	// through VCPU cores or instances for instance groups and measured through
+	// units for instance fleets. The core units are not allowed to scale beyond
+	// this boundary. The parameter is used to split capacity allocation between
+	// core and task nodes.
+	MaximumCoreCapacityUnits *int64 `type:"integer"`
+
+	// The upper boundary of On-Demand EC2 units. It is measured through VCPU cores
 	// or instances for instance groups and measured through units for instance
-	// fleets. The on-demand units are not allowed to scale beyond this boundary.
-	// The limit only applies to the core and task nodes. The master node cannot
-	// be scaled after initial configuration.
+	// fleets. The On-Demand units are not allowed to scale beyond this boundary.
+	// The parameter is used to split capacity allocation between On-Demand and
+	// Spot instances.
 	MaximumOnDemandCapacityUnits *int64 `type:"integer"`
 
 	// The lower boundary of EC2 units. It is measured through VCPU cores or instances
@@ -1264,18 +1276,25 @@ func (s *InstanceFleetModifyConfig) Validate() error {
 }
 
 // The launch specification for Spot instances in the fleet, which determines
-// the defined duration and provisioning timeout behavior.
+// the defined duration, provisioning timeout behavior, and allocation strategy.
 //
 // The instance fleet configuration is available only in Amazon EMR versions
-// 4.8.0 and later, excluding 5.0.x versions.
+// 4.8.0 and later, excluding 5.0.x versions. On-Demand and Spot instance allocation
+// strategies are available in Amazon EMR version 5.12.1 and later.
 type InstanceFleetProvisioningSpecifications struct {
 	_ struct{} `type:"structure"`
 
-	// The launch specification for Spot instances in the fleet, which determines
-	// the defined duration and provisioning timeout behavior.
+	// The launch specification for On-Demand instances in the instance fleet, which
+	// determines the allocation strategy.
 	//
-	// SpotSpecification is a required field
-	SpotSpecification *SpotProvisioningSpecification `type:"structure" required:"true"`
+	// The instance fleet configuration is available only in Amazon EMR versions
+	// 4.8.0 and later, excluding 5.0.x versions. On-Demand instances allocation
+	// strategy is available in Amazon EMR version 5.12.1 and later.
+	OnDemandSpecification *OnDemandProvisioningSpecification `type:"structure"`
+
+	// The launch specification for Spot instances in the fleet, which determines
+	// the defined duration, provisioning timeout behavior, and allocation strategy.
+	SpotSpecification *SpotProvisioningSpecification `type:"structure"`
 }
 
 // String returns the string representation
@@ -1286,9 +1305,10 @@ func (s InstanceFleetProvisioningSpecifications) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *InstanceFleetProvisioningSpecifications) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "InstanceFleetProvisioningSpecifications"}
-
-	if s.SpotSpecification == nil {
-		invalidParams.Add(aws.NewErrParamRequired("SpotSpecification"))
+	if s.OnDemandSpecification != nil {
+		if err := s.OnDemandSpecification.Validate(); err != nil {
+			invalidParams.AddNested("OnDemandSpecification", err.(aws.ErrInvalidParams))
+		}
 	}
 	if s.SpotSpecification != nil {
 		if err := s.SpotSpecification.Validate(); err != nil {
@@ -1941,6 +1961,11 @@ type JobFlowDetail struct {
 	// of the job flow assume this role.
 	JobFlowRole *string `type:"string"`
 
+	// The AWS KMS customer master key (CMK) used for encrypting log files. This
+	// attribute is only available with EMR version 5.30.0 and later, excluding
+	// EMR 6.0.0.
+	LogEncryptionKmsKeyId *string `type:"string"`
+
 	// The location in Amazon S3 where log files for the job are stored.
 	LogUri *string `type:"string"`
 
@@ -2340,6 +2365,41 @@ func (s MetricDimension) String() string {
 	return awsutil.Prettify(s)
 }
 
+// The launch specification for On-Demand instances in the instance fleet, which
+// determines the allocation strategy.
+//
+// The instance fleet configuration is available only in Amazon EMR versions
+// 4.8.0 and later, excluding 5.0.x versions. On-Demand instances allocation
+// strategy is available in Amazon EMR version 5.12.1 and later.
+type OnDemandProvisioningSpecification struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the strategy to use in launching On-Demand instance fleets. Currently,
+	// the only option is lowest-price (the default), which launches the lowest
+	// price first.
+	//
+	// AllocationStrategy is a required field
+	AllocationStrategy OnDemandProvisioningAllocationStrategy `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s OnDemandProvisioningSpecification) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *OnDemandProvisioningSpecification) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "OnDemandProvisioningSpecification"}
+	if len(s.AllocationStrategy) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("AllocationStrategy"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // The Amazon EC2 Availability Zone configuration of the cluster (job flow).
 type PlacementType struct {
 	_ struct{} `type:"structure"`
@@ -2706,12 +2766,20 @@ func (s *SimpleScalingPolicyConfiguration) Validate() error {
 }
 
 // The launch specification for Spot instances in the instance fleet, which
-// determines the defined duration and provisioning timeout behavior.
+// determines the defined duration, provisioning timeout behavior, and allocation
+// strategy.
 //
 // The instance fleet configuration is available only in Amazon EMR versions
-// 4.8.0 and later, excluding 5.0.x versions.
+// 4.8.0 and later, excluding 5.0.x versions. Spot instance allocation strategy
+// is available in Amazon EMR version 5.12.1 and later.
 type SpotProvisioningSpecification struct {
 	_ struct{} `type:"structure"`
+
+	// Specifies the strategy to use in launching Spot instance fleets. Currently,
+	// the only option is capacity-optimized (the default), which launches instances
+	// from Spot instance pools with optimal capacity for the number of instances
+	// that are launching.
+	AllocationStrategy SpotProvisioningAllocationStrategy `type:"string" enum:"true"`
 
 	// The defined duration for Spot instances (also known as Spot blocks) in minutes.
 	// When specified, the Spot instance does not terminate before the defined duration

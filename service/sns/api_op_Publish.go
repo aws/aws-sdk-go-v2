@@ -154,8 +154,9 @@ const opPublish = "Publish"
 // PublishRequest returns a request value for making API operation for
 // Amazon Simple Notification Service.
 //
-// Sends a message to an Amazon SNS topic or sends a text message (SMS message)
-// directly to a phone number.
+// Sends a message to an Amazon SNS topic, a text message (SMS message) directly
+// to a phone number, or a message to a mobile platform endpoint (when you specify
+// the TargetArn).
 //
 // If you send a message to a topic, Amazon SNS delivers the message to each
 // endpoint that is subscribed to the topic. The format of the message depends
@@ -171,6 +172,8 @@ const opPublish = "Publish"
 //
 // For more information about formatting messages, see Send Custom Platform-Specific
 // Payloads in Messages to Mobile Devices (https://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-custommessage.html).
+//
+// You can publish messages only to topics and endpoints in the same AWS Region.
 //
 //    // Example sending a request using PublishRequest.
 //    req := client.PublishRequest(params)

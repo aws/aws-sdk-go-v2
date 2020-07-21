@@ -24,8 +24,10 @@ type RegisterScalableTargetInput struct {
 	// the minimum capacity limit in response to changing demand.
 	//
 	// This parameter is required if you are registering a scalable target. For
-	// Lambda provisioned concurrency, the minimum value allowed is 0. For all other
-	// resources, the minimum value allowed is 1.
+	// certain resources, the minimum value allowed is 0. This includes Lambda provisioned
+	// concurrency, Spot Fleet, ECS services, Aurora DB clusters, EMR clusters,
+	// and custom resources. For all other resources, the minimum value allowed
+	// is 1.
 	MinCapacity *int64 `type:"integer"`
 
 	// The identifier of the resource that is associated with the scalable target.

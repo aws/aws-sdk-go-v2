@@ -110,7 +110,7 @@ func (s DeleteDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-const opDeleteDistribution = "DeleteDistribution2019_03_26"
+const opDeleteDistribution = "DeleteDistribution2020_05_31"
 
 // DeleteDistributionRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -124,12 +124,12 @@ const opDeleteDistribution = "DeleteDistribution2019_03_26"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteDistribution
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteDistribution
 func (c *Client) DeleteDistributionRequest(input *DeleteDistributionInput) DeleteDistributionRequest {
 	op := &aws.Operation{
 		Name:       opDeleteDistribution,
 		HTTPMethod: "DELETE",
-		HTTPPath:   "/2019-03-26/distribution/{Id}",
+		HTTPPath:   "/2020-05-31/distribution/{Id}",
 	}
 
 	if input == nil {

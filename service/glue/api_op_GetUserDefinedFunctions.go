@@ -16,7 +16,9 @@ type GetUserDefinedFunctionsInput struct {
 	// If none is provided, the AWS account ID is used by default.
 	CatalogId *string `min:"1" type:"string"`
 
-	// The name of the catalog database where the functions are located.
+	// The name of the catalog database where the functions are located. If none
+	// is provided, functions from all the databases across the catalog will be
+	// returned.
 	DatabaseName *string `min:"1" type:"string"`
 
 	// The maximum number of functions to return in one response.

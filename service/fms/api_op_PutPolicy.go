@@ -56,10 +56,10 @@ func (s *PutPolicyInput) Validate() error {
 type PutPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The details of the AWS Firewall Manager policy that was created.
+	// The details of the AWS Firewall Manager policy.
 	Policy *Policy `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the policy that was created.
+	// The Amazon Resource Name (ARN) of the policy.
 	PolicyArn *string `min:"1" type:"string"`
 }
 

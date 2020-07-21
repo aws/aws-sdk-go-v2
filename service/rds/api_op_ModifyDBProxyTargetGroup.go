@@ -72,10 +72,6 @@ const opModifyDBProxyTargetGroup = "ModifyDBProxyTargetGroup"
 // ModifyDBProxyTargetGroupRequest returns a request value for making API operation for
 // Amazon Relational Database Service.
 //
-//
-// This is prerelease documentation for the RDS Database Proxy feature in preview
-// release. It is subject to change.
-//
 // Modifies the properties of a DBProxyTargetGroup.
 //
 //    // Example sending a request using ModifyDBProxyTargetGroupRequest.

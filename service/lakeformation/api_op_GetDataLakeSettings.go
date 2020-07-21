@@ -40,7 +40,8 @@ func (s *GetDataLakeSettingsInput) Validate() error {
 type GetDataLakeSettingsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of AWS Lake Formation principals.
+	// A structure representing a list of AWS Lake Formation principals designated
+	// as data lake administrators.
 	DataLakeSettings *DataLakeSettings `type:"structure"`
 }
 
@@ -54,7 +55,8 @@ const opGetDataLakeSettings = "GetDataLakeSettings"
 // GetDataLakeSettingsRequest returns a request value for making API operation for
 // AWS Lake Formation.
 //
-// The AWS Lake Formation principal.
+// Retrieves the list of the data lake administrators of a Lake Formation-managed
+// data lake.
 //
 //    // Example sending a request using GetDataLakeSettingsRequest.
 //    req := client.GetDataLakeSettingsRequest(params)

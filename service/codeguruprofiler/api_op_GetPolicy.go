@@ -59,12 +59,12 @@ func (s GetPolicyInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetPolicyOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The resource-based policy attached to the ProfilingGroup.
+	// The JSON-formatted resource-based policy attached to the ProfilingGroup.
 	//
 	// Policy is a required field
 	Policy *string `locationName:"policy" type:"string" required:"true"`
 
-	// A unique identifier for the current revision of the policy.
+	// A unique identifier for the current revision of the returned policy.
 	//
 	// RevisionId is a required field
 	RevisionId *string `locationName:"revisionId" type:"string" required:"true"`
@@ -97,7 +97,7 @@ const opGetPolicy = "GetPolicy"
 // GetPolicyRequest returns a request value for making API operation for
 // Amazon CodeGuru Profiler.
 //
-// Gets the profiling group policy.
+// Returns the JSON-formatted resource-based policy on a profiling group.
 //
 //    // Example sending a request using GetPolicyRequest.
 //    req := client.GetPolicyRequest(params)

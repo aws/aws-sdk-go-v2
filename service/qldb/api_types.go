@@ -275,8 +275,8 @@ func (s JournalS3ExportDescription) MarshalFields(e protocol.FieldEncoder) error
 type KinesisConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// Enables QLDB to publish multiple stream records in a single Kinesis Data
-	// Streams record. To learn more, see KPL Key Concepts (https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-concepts.html)
+	// Enables QLDB to publish multiple data records in a single Kinesis Data Streams
+	// record. To learn more, see KPL Key Concepts (https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-concepts.html)
 	// in the Amazon Kinesis Data Streams Developer Guide.
 	AggregationEnabled *bool `type:"boolean"`
 
@@ -530,7 +530,7 @@ func (s S3ExportConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A structure that can contain an Amazon Ion value in multiple encoding formats.
+// A structure that can contain a value in multiple encoding formats.
 type ValueHolder struct {
 	_ struct{} `type:"structure" sensitive:"true"`
 

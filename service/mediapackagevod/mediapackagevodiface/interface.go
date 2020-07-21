@@ -90,6 +90,8 @@ type ClientAPI interface {
 	TagResourceRequest(*mediapackagevod.TagResourceInput) mediapackagevod.TagResourceRequest
 
 	UntagResourceRequest(*mediapackagevod.UntagResourceInput) mediapackagevod.UntagResourceRequest
+
+	UpdatePackagingGroupRequest(*mediapackagevod.UpdatePackagingGroupInput) mediapackagevod.UpdatePackagingGroupRequest
 }
 
 var _ ClientAPI = (*mediapackagevod.Client)(nil)

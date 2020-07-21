@@ -91,7 +91,7 @@ func (s GetInvalidationOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-const opGetInvalidation = "GetInvalidation2019_03_26"
+const opGetInvalidation = "GetInvalidation2020_05_31"
 
 // GetInvalidationRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -105,12 +105,12 @@ const opGetInvalidation = "GetInvalidation2019_03_26"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetInvalidation
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetInvalidation
 func (c *Client) GetInvalidationRequest(input *GetInvalidationInput) GetInvalidationRequest {
 	op := &aws.Operation{
 		Name:       opGetInvalidation,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2019-03-26/distribution/{DistributionId}/invalidation/{Id}",
+		HTTPPath:   "/2020-05-31/distribution/{DistributionId}/invalidation/{Id}",
 	}
 
 	if input == nil {

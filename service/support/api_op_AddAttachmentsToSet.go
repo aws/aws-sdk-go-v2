@@ -80,6 +80,14 @@ const opAddAttachmentsToSet = "AddAttachmentsToSet"
 // a case or case communication. The set is available for 1 hour after it's
 // created. The expiryTime returned in the response is when the set expires.
 //
+//    * You must have a Business or Enterprise support plan to use the AWS Support
+//    API.
+//
+//    * If you call the AWS Support API from an account that does not have a
+//    Business or Enterprise support plan, the SubscriptionRequiredException
+//    error message appears. For information about changing your support plan,
+//    see AWS Support (http://aws.amazon.com/premiumsupport/).
+//
 //    // Example sending a request using AddAttachmentsToSetRequest.
 //    req := client.AddAttachmentsToSetRequest(params)
 //    resp, err := req.Send(context.TODO())

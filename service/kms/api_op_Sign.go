@@ -102,8 +102,8 @@ func (s *SignInput) Validate() error {
 type SignOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the asymmetric CMK that was used to sign
-	// the message.
+	// The Amazon Resource Name (key ARN (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
+	// of the asymmetric CMK that was used to sign the message.
 	KeyId *string `min:"1" type:"string"`
 
 	// The cryptographic signature that was generated for the message.

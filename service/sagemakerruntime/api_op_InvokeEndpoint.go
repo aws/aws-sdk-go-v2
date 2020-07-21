@@ -19,7 +19,7 @@ type InvokeEndpointInput struct {
 	// Provides input data, in the format specified in the ContentType request header.
 	// Amazon SageMaker passes all of the data in the body to the model.
 	//
-	// For information about the format of the request body, see Common Data Formats—Inference
+	// For information about the format of the request body, see Common Data Formats-Inference
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html).
 	//
 	// Body is a required field
@@ -46,9 +46,14 @@ type InvokeEndpointInput struct {
 	// EndpointName is a required field
 	EndpointName *string `location:"uri" locationName:"EndpointName" type:"string" required:"true"`
 
-	// Specifies the model to be requested for an inference when invoking a multi-model
-	// endpoint.
+	// The model to request for inference when invoking a multi-model endpoint.
 	TargetModel *string `location:"header" locationName:"X-Amzn-SageMaker-Target-Model" min:"1" type:"string"`
+
+	// Specify the production variant to send the inference request to when invoking
+	// an endpoint that is running two or more variants. Note that this parameter
+	// overrides the default behavior for the endpoint, which is to distribute the
+	// invocation traffic based on the variant weights.
+	TargetVariant *string `location:"header" locationName:"X-Amzn-SageMaker-Target-Variant" type:"string"`
 }
 
 // String returns the string representation
@@ -104,6 +109,12 @@ func (s InvokeEndpointInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.HeaderTarget, "X-Amzn-SageMaker-Target-Model", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.TargetVariant != nil {
+		v := *s.TargetVariant
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.HeaderTarget, "X-Amzn-SageMaker-Target-Variant", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.EndpointName != nil {
 		v := *s.EndpointName
 
@@ -124,7 +135,7 @@ type InvokeEndpointOutput struct {
 
 	// Includes the inference provided by the model.
 	//
-	// For information about the format of the response body, see Common Data Formats—Inference
+	// For information about the format of the response body, see Common Data Formats-Inference
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html).
 	//
 	// Body is a required field

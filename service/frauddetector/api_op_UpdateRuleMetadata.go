@@ -68,7 +68,7 @@ const opUpdateRuleMetadata = "UpdateRuleMetadata"
 // UpdateRuleMetadataRequest returns a request value for making API operation for
 // Amazon Fraud Detector.
 //
-// Updates a rule's metadata.
+// Updates a rule's metadata. The description attribute can be updated.
 //
 //    // Example sending a request using UpdateRuleMetadataRequest.
 //    req := client.UpdateRuleMetadataRequest(params)

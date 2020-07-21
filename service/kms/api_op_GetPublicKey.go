@@ -79,7 +79,8 @@ type GetPublicKeyOutput struct {
 	// is ENCRYPT_DECRYPT.
 	EncryptionAlgorithms []EncryptionAlgorithmSpec `type:"list"`
 
-	// The identifier of the asymmetric CMK from which the public key was downloaded.
+	// The Amazon Resource Name (key ARN (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
+	// of the asymmetric CMK from which the public key was downloaded.
 	KeyId *string `min:"1" type:"string"`
 
 	// The permitted use of the public key. Valid values are ENCRYPT_DECRYPT or

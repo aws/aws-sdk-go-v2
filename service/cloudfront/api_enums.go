@@ -2,6 +2,78 @@
 
 package cloudfront
 
+type CachePolicyCookieBehavior string
+
+// Enum values for CachePolicyCookieBehavior
+const (
+	CachePolicyCookieBehaviorNone      CachePolicyCookieBehavior = "none"
+	CachePolicyCookieBehaviorWhitelist CachePolicyCookieBehavior = "whitelist"
+	CachePolicyCookieBehaviorAllExcept CachePolicyCookieBehavior = "allExcept"
+	CachePolicyCookieBehaviorAll       CachePolicyCookieBehavior = "all"
+)
+
+func (enum CachePolicyCookieBehavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CachePolicyCookieBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type CachePolicyHeaderBehavior string
+
+// Enum values for CachePolicyHeaderBehavior
+const (
+	CachePolicyHeaderBehaviorNone      CachePolicyHeaderBehavior = "none"
+	CachePolicyHeaderBehaviorWhitelist CachePolicyHeaderBehavior = "whitelist"
+)
+
+func (enum CachePolicyHeaderBehavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CachePolicyHeaderBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type CachePolicyQueryStringBehavior string
+
+// Enum values for CachePolicyQueryStringBehavior
+const (
+	CachePolicyQueryStringBehaviorNone      CachePolicyQueryStringBehavior = "none"
+	CachePolicyQueryStringBehaviorWhitelist CachePolicyQueryStringBehavior = "whitelist"
+	CachePolicyQueryStringBehaviorAllExcept CachePolicyQueryStringBehavior = "allExcept"
+	CachePolicyQueryStringBehaviorAll       CachePolicyQueryStringBehavior = "all"
+)
+
+func (enum CachePolicyQueryStringBehavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CachePolicyQueryStringBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type CachePolicyType string
+
+// Enum values for CachePolicyType
+const (
+	CachePolicyTypeManaged CachePolicyType = "managed"
+	CachePolicyTypeCustom  CachePolicyType = "custom"
+)
+
+func (enum CachePolicyType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CachePolicyType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type CertificateSource string
 
 // Enum values for CertificateSource
@@ -157,6 +229,7 @@ const (
 	MinimumProtocolVersionTlsv12016  MinimumProtocolVersion = "TLSv1_2016"
 	MinimumProtocolVersionTlsv112016 MinimumProtocolVersion = "TLSv1.1_2016"
 	MinimumProtocolVersionTlsv122018 MinimumProtocolVersion = "TLSv1.2_2018"
+	MinimumProtocolVersionTlsv122019 MinimumProtocolVersion = "TLSv1.2_2019"
 )
 
 func (enum MinimumProtocolVersion) MarshalValue() (string, error) {
@@ -182,6 +255,78 @@ func (enum OriginProtocolPolicy) MarshalValue() (string, error) {
 }
 
 func (enum OriginProtocolPolicy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type OriginRequestPolicyCookieBehavior string
+
+// Enum values for OriginRequestPolicyCookieBehavior
+const (
+	OriginRequestPolicyCookieBehaviorNone      OriginRequestPolicyCookieBehavior = "none"
+	OriginRequestPolicyCookieBehaviorWhitelist OriginRequestPolicyCookieBehavior = "whitelist"
+	OriginRequestPolicyCookieBehaviorAll       OriginRequestPolicyCookieBehavior = "all"
+)
+
+func (enum OriginRequestPolicyCookieBehavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OriginRequestPolicyCookieBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type OriginRequestPolicyHeaderBehavior string
+
+// Enum values for OriginRequestPolicyHeaderBehavior
+const (
+	OriginRequestPolicyHeaderBehaviorNone                            OriginRequestPolicyHeaderBehavior = "none"
+	OriginRequestPolicyHeaderBehaviorWhitelist                       OriginRequestPolicyHeaderBehavior = "whitelist"
+	OriginRequestPolicyHeaderBehaviorAllViewer                       OriginRequestPolicyHeaderBehavior = "allViewer"
+	OriginRequestPolicyHeaderBehaviorAllViewerAndWhitelistCloudFront OriginRequestPolicyHeaderBehavior = "allViewerAndWhitelistCloudFront"
+)
+
+func (enum OriginRequestPolicyHeaderBehavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OriginRequestPolicyHeaderBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type OriginRequestPolicyQueryStringBehavior string
+
+// Enum values for OriginRequestPolicyQueryStringBehavior
+const (
+	OriginRequestPolicyQueryStringBehaviorNone      OriginRequestPolicyQueryStringBehavior = "none"
+	OriginRequestPolicyQueryStringBehaviorWhitelist OriginRequestPolicyQueryStringBehavior = "whitelist"
+	OriginRequestPolicyQueryStringBehaviorAll       OriginRequestPolicyQueryStringBehavior = "all"
+)
+
+func (enum OriginRequestPolicyQueryStringBehavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OriginRequestPolicyQueryStringBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type OriginRequestPolicyType string
+
+// Enum values for OriginRequestPolicyType
+const (
+	OriginRequestPolicyTypeManaged OriginRequestPolicyType = "managed"
+	OriginRequestPolicyTypeCustom  OriginRequestPolicyType = "custom"
+)
+
+func (enum OriginRequestPolicyType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OriginRequestPolicyType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

@@ -65,6 +65,8 @@ const opDeleteConstraint = "DeleteConstraint"
 //
 // Deletes the specified constraint.
 //
+// A delegated admin is authorized to invoke this command.
+//
 //    // Example sending a request using DeleteConstraintRequest.
 //    req := client.DeleteConstraintRequest(params)
 //    resp, err := req.Send(context.TODO())

@@ -16,7 +16,7 @@ type CreateUserInput struct {
 	// The landing directory (folder) for a user when they log in to the file transfer
 	// protocol-enabled server using the client.
 	//
-	// An example is your-Amazon-S3-bucket-name>/home/username.
+	// An example is your-Amazon-S3-bucket-name>/home/username .
 	HomeDirectory *string `type:"string"`
 
 	// Logical directory mappings that specify what Amazon S3 paths and keys should
@@ -24,8 +24,7 @@ type CreateUserInput struct {
 	// to specify the "Entry" and "Target" pair, where Entry shows how the path
 	// is made visible and Target is the actual Amazon S3 path. If you only specify
 	// a target, it will be displayed as is. You will need to also make sure that
-	// your AWS IAM Role provides access to paths in Target. The following is an
-	// example.
+	// your IAM role provides access to paths in Target. The following is an example.
 	//
 	// '[ "/bucket2/documentation", { "Entry": "your-personal-report.pdf", "Target":
 	// "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]'
@@ -60,7 +59,7 @@ type CreateUserInput struct {
 	// blob, instead of the Amazon Resource Name (ARN) of the policy. You save the
 	// policy as a JSON blob and pass it in the Policy argument.
 	//
-	// For an example of a scope-down policy, see Creating a Scope-Down Policy (https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down).
+	// For an example of a scope-down policy, see Creating a scope-down policy (https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down).
 	//
 	// For more information, see AssumeRole (https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html)
 	// in the AWS Security Token Service API Reference.

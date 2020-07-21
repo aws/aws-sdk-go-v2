@@ -53,13 +53,13 @@ type DescribeUserProfileOutput struct {
 	// The creation time.
 	CreationTime *time.Time `type:"timestamp"`
 
-	// The domain ID.
+	// The ID of the domain that contains the profile.
 	DomainId *string `type:"string"`
 
 	// The failure reason.
 	FailureReason *string `type:"string"`
 
-	// The home Amazon Elastic File System (EFS) Uid.
+	// The ID of the user's profile in the Amazon Elastic File System (EFS) volume.
 	HomeEfsFileSystemUid *string `type:"string"`
 
 	// The last modified time.
@@ -94,7 +94,7 @@ const opDescribeUserProfile = "DescribeUserProfile"
 // DescribeUserProfileRequest returns a request value for making API operation for
 // Amazon SageMaker Service.
 //
-// Describes the user profile.
+// Describes a user profile. For more information, see CreateUserProfile.
 //
 //    // Example sending a request using DescribeUserProfileRequest.
 //    req := client.DescribeUserProfileRequest(params)

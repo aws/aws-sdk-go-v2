@@ -56,6 +56,11 @@ type DescribeGatewayInformationOutput struct {
 	// The AWS Region where the Amazon EC2 instance is located.
 	Ec2InstanceRegion *string `type:"string"`
 
+	// The type of endpoint for your gateway.
+	//
+	// Valid Values: STANDARD | FIPS
+	EndpointType *string `min:"4" type:"string"`
+
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
 	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`

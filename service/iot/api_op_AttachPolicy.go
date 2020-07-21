@@ -19,7 +19,7 @@ type AttachPolicyInput struct {
 	// PolicyName is a required field
 	PolicyName *string `location:"uri" locationName:"policyName" min:"1" type:"string" required:"true"`
 
-	// The identity (https://docs.aws.amazon.com/iot/latest/developerguide/iot-security-identity.html)
+	// The identity (https://docs.aws.amazon.com/iot/latest/developerguide/security-iam.html)
 	// to which the policy is attached.
 	//
 	// Target is a required field

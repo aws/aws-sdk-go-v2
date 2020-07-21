@@ -4,6 +4,7 @@ package alexaforbusiness
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -39,6 +40,9 @@ type CreateBusinessReportScheduleInput struct {
 
 	// The name identifier of the schedule.
 	ScheduleName *string `type:"string"`
+
+	// The tags for the business report schedule.
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -58,6 +62,18 @@ func (s *CreateBusinessReportScheduleInput) Validate() error {
 	}
 	if len(s.Format) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("Format"))
+	}
+	if s.ContentRange != nil {
+		if err := s.ContentRange.Validate(); err != nil {
+			invalidParams.AddNested("ContentRange", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {

@@ -47,7 +47,7 @@ type CreateFileSystemInput struct {
 	//
 	// EFS accepts only symmetric CMKs. You cannot use asymmetric CMKs with EFS
 	// file systems.
-	KmsKeyId *string `min:"1" type:"string"`
+	KmsKeyId *string `type:"string"`
 
 	// The performance mode of the file system. We recommend generalPurpose performance
 	// mode for most file systems. File systems using the maxIO performance mode
@@ -94,9 +94,6 @@ func (s *CreateFileSystemInput) Validate() error {
 	}
 	if s.CreationToken != nil && len(*s.CreationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CreationToken", 1))
-	}
-	if s.KmsKeyId != nil && len(*s.KmsKeyId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("KmsKeyId", 1))
 	}
 	if s.ProvisionedThroughputInMibps != nil && *s.ProvisionedThroughputInMibps < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("ProvisionedThroughputInMibps", 1))
@@ -193,6 +190,10 @@ type CreateFileSystemOutput struct {
 	// A Boolean value that, if true, indicates that the file system is encrypted.
 	Encrypted *bool `type:"boolean"`
 
+	// The Amazon Resource Name (ARN) for the EFS file system, in the format arn:aws:elasticfilesystem:region:account-id:file-system/file-system-id
+	// . Example with sample data: arn:aws:elasticfilesystem:us-west-2:1111333322228888:file-system/fs-01234567
+	FileSystemArn *string `type:"string"`
+
 	// The ID of the file system, assigned by Amazon EFS.
 	//
 	// FileSystemId is a required field
@@ -200,7 +201,7 @@ type CreateFileSystemOutput struct {
 
 	// The ID of an AWS Key Management Service (AWS KMS) customer master key (CMK)
 	// that was used to protect the encrypted file system.
-	KmsKeyId *string `min:"1" type:"string"`
+	KmsKeyId *string `type:"string"`
 
 	// The lifecycle phase of the file system.
 	//
@@ -289,6 +290,12 @@ func (s CreateFileSystemOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Encrypted", protocol.BoolValue(v), metadata)
+	}
+	if s.FileSystemArn != nil {
+		v := *s.FileSystemArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FileSystemArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.FileSystemId != nil {
 		v := *s.FileSystemId

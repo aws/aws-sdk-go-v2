@@ -1758,6 +1758,10 @@ func (s ActivitiesResponse) MarshalFields(e protocol.FieldEncoder) error {
 type Activity struct {
 	_ struct{} `type:"structure"`
 
+	// The settings for a custom message activity. This type of activity calls an
+	// AWS Lambda function or web hook that sends messages to participants.
+	CUSTOM *CustomMessageActivity `type:"structure"`
+
 	// The settings for a yes/no split activity. This type of activity sends participants
 	// down one of two paths in a journey, based on conditions that you specify.
 	ConditionalSplit *ConditionalSplitActivity `type:"structure"`
@@ -1778,10 +1782,18 @@ type Activity struct {
 	// path) in a journey, based on conditions that you specify.
 	MultiCondition *MultiConditionalSplitActivity `type:"structure"`
 
+	// The settings for a push notification activity. This type of activity sends
+	// a push notification to participants.
+	PUSH *PushMessageActivity `type:"structure"`
+
 	// The settings for a random split activity. This type of activity randomly
 	// sends specified percentages of participants down one of as many as five paths
 	// in a journey, based on conditions that you specify.
 	RandomSplit *RandomSplitActivity `type:"structure"`
+
+	// The settings for an SMS activity. This type of activity sends a text message
+	// to participants.
+	SMS *SMSMessageActivity `type:"structure"`
 
 	// The settings for a wait activity. This type of activity waits for a certain
 	// amount of time or until a specific date and time before moving participants
@@ -1821,6 +1833,12 @@ func (s *Activity) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Activity) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CUSTOM != nil {
+		v := s.CUSTOM
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CUSTOM", v, metadata)
+	}
 	if s.ConditionalSplit != nil {
 		v := s.ConditionalSplit
 
@@ -1851,11 +1869,23 @@ func (s Activity) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "MultiCondition", v, metadata)
 	}
+	if s.PUSH != nil {
+		v := s.PUSH
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "PUSH", v, metadata)
+	}
 	if s.RandomSplit != nil {
 		v := s.RandomSplit
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "RandomSplit", v, metadata)
+	}
+	if s.SMS != nil {
+		v := s.SMS
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SMS", v, metadata)
 	}
 	if s.Wait != nil {
 		v := s.Wait
@@ -3667,10 +3697,10 @@ type CampaignSmsMessage struct {
 	// The body of the SMS message.
 	Body *string `type:"string"`
 
-	// The type of SMS message. Valid values are: TRANSACTIONAL, the message is
-	// critical or time-sensitive, such as a one-time password that supports a customer
-	// transaction; and, PROMOTIONAL, the message isn't critical or time-sensitive,
-	// such as a marketing message.
+	// The SMS message type. Valid values are TRANSACTIONAL (for messages that are
+	// critical or time-sensitive, such as a one-time passwords) and PROMOTIONAL
+	// (for messsages that aren't critical or time-sensitive, such as marketing
+	// messages).
 	MessageType MessageType `type:"string" enum:"true"`
 
 	// The sender ID to display on recipients' devices when they receive the SMS
@@ -4398,6 +4428,103 @@ func (s CustomDeliveryConfiguration) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
+// The settings for a custom message activity. This type of activity calls an
+// AWS Lambda function or web hook that sends messages to participants.
+type CustomMessageActivity struct {
+	_ struct{} `type:"structure"`
+
+	// The destination to send the custom message to. This value can be one of the
+	// following:
+	//
+	//    * The name or Amazon Resource Name (ARN) of an AWS Lambda function to
+	//    invoke to handle delivery of the custom message.
+	//
+	//    * The URL for a web application or service that supports HTTPS and can
+	//    receive the message. The URL has to be a full URL, including the HTTPS
+	//    protocol.
+	DeliveryUri *string `type:"string"`
+
+	// The types of endpoints to send the custom message to. Each valid value maps
+	// to a type of channel that you can associate with an endpoint by using the
+	// ChannelType property of an endpoint.
+	EndpointTypes []EndpointTypesElement `type:"list"`
+
+	// Specifies the message data included in a custom channel message that's sent
+	// to participants in a journey.
+	MessageConfig *JourneyCustomMessage `type:"structure"`
+
+	// The unique identifier for the next activity to perform, after Amazon Pinpoint
+	// calls the AWS Lambda function or web hook.
+	NextActivity *string `type:"string"`
+
+	// The name of the custom message template to use for the message. If specified,
+	// this value must match the name of an existing message template.
+	TemplateName *string `type:"string"`
+
+	// The unique identifier for the version of the message template to use for
+	// the message. If specified, this value must match the identifier for an existing
+	// template version. To retrieve a list of versions and version identifiers
+	// for a template, use the Template Versions resource.
+	//
+	// If you don't specify a value for this property, Amazon Pinpoint uses the
+	// active version of the template. The active version is typically the version
+	// of a template that's been most recently reviewed and approved for use, depending
+	// on your workflow. It isn't necessarily the latest version of a template.
+	TemplateVersion *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CustomMessageActivity) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CustomMessageActivity) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DeliveryUri != nil {
+		v := *s.DeliveryUri
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeliveryUri", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EndpointTypes != nil {
+		v := s.EndpointTypes
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "EndpointTypes", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.MessageConfig != nil {
+		v := s.MessageConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "MessageConfig", v, metadata)
+	}
+	if s.NextActivity != nil {
+		v := *s.NextActivity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextActivity", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TemplateName != nil {
+		v := *s.TemplateName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TemplateVersion != nil {
+		v := *s.TemplateVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Specifies the default message for all channels.
 type DefaultMessage struct {
 	_ struct{} `type:"structure"`
@@ -5101,14 +5228,16 @@ func (s EmailMessage) MarshalFields(e protocol.FieldEncoder) error {
 type EmailMessageActivity struct {
 	_ struct{} `type:"structure"`
 
-	// The "From" address to use for the message.
+	// Specifies the sender address for an email message that's sent to participants
+	// in the journey.
 	MessageConfig *JourneyEmailMessage `type:"structure"`
 
 	// The unique identifier for the next activity to perform, after the message
 	// is sent.
 	NextActivity *string `type:"string"`
 
-	// The name of the email template to use for the message.
+	// The name of the email message template to use for the message. If specified,
+	// this value must match the name of an existing message template.
 	TemplateName *string `type:"string"`
 
 	// The unique identifier for the version of the email template to use for the
@@ -8477,6 +8606,31 @@ func (s ItemResponse) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies the message content for a custom channel message that's sent to
+// participants in a journey.
+type JourneyCustomMessage struct {
+	_ struct{} `type:"structure"`
+
+	// The message content that's passed to an AWS Lambda function or to a web hook.
+	Data *string `type:"string"`
+}
+
+// String returns the string representation
+func (s JourneyCustomMessage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JourneyCustomMessage) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Data != nil {
+		v := *s.Data
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Data", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Provides the results of a query that retrieved the data for a standard engagement
 // metric that applies to a journey, and provides information about that query.
 type JourneyDateRangeKpiResponse struct {
@@ -8654,7 +8808,7 @@ type JourneyExecutionActivityMetricsResponse struct {
 
 	// A JSON object that contains the results of the query. The results vary depending
 	// on the type of activity (ActivityType). For information about the structure
-	// and contents of the results, see the Amazon Pinpoint Developer Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html).
+	// and contents of the results, see the Amazon Pinpoint Developer Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html).
 	//
 	// Metrics is a required field
 	Metrics map[string]string `type:"map" required:"true"`
@@ -8735,7 +8889,7 @@ type JourneyExecutionMetricsResponse struct {
 
 	// A JSON object that contains the results of the query. For information about
 	// the structure and contents of the results, see the Amazon Pinpoint Developer
-	// Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html).
+	// Guide (https://docs.aws.amazon.com/pinpoint/latest/developerguide/analytics-standard-metrics.html).
 	//
 	// Metrics is a required field
 	Metrics map[string]string `type:"map" required:"true"`
@@ -8823,6 +8977,39 @@ func (s JourneyLimits) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "MessagesPerSecond", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Specifies the message configuration for a push notification that's sent to
+// participants in a journey.
+type JourneyPushMessage struct {
+	_ struct{} `type:"structure"`
+
+	// The number of seconds that the push notification service should keep the
+	// message, if the service is unable to deliver the notification the first time.
+	// This value is converted to an expiration value when it's sent to a push-notification
+	// service. If this value is 0, the service treats the notification as if it
+	// expires immediately and the service doesn't store or try to deliver the notification
+	// again.
+	//
+	// This value doesn't apply to messages that are sent through the Amazon Device
+	// Messaging (ADM) service.
+	TimeToLive *string `type:"string"`
+}
+
+// String returns the string representation
+func (s JourneyPushMessage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JourneyPushMessage) MarshalFields(e protocol.FieldEncoder) error {
+	if s.TimeToLive != nil {
+		v := *s.TimeToLive
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TimeToLive", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -9033,6 +9220,46 @@ func (s JourneyResponse) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ms0.End()
 
+	}
+	return nil
+}
+
+// Specifies the sender ID and message type for an SMS message that's sent to
+// participants in a journey.
+type JourneySMSMessage struct {
+	_ struct{} `type:"structure"`
+
+	// The SMS message type. Valid values are TRANSACTIONAL (for messages that are
+	// critical or time-sensitive, such as a one-time passwords) and PROMOTIONAL
+	// (for messsages that aren't critical or time-sensitive, such as marketing
+	// messages).
+	MessageType MessageType `type:"string" enum:"true"`
+
+	// The sender ID to display as the sender of the message on a recipient's device.
+	// Support for sender IDs varies by country or region. For more information,
+	// see Supported Countries and Regions (https://docs.aws.amazon.com.amazon.com/pinpoint/latest/userguide/channels-sms-countries.html)
+	// in the Amazon Pinpoint User Guide.
+	SenderId *string `type:"string"`
+}
+
+// String returns the string representation
+func (s JourneySMSMessage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s JourneySMSMessage) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.MessageType) > 0 {
+		v := s.MessageType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MessageType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.SenderId != nil {
+		v := *s.SenderId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SenderId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -10275,6 +10502,69 @@ func (s PublicEndpoint) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies the settings for a push notification activity in a journey. This
+// type of activity sends a push notification to participants.
+type PushMessageActivity struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the time to live (TTL) value for push notifications that are sent
+	// to participants in a journey.
+	MessageConfig *JourneyPushMessage `type:"structure"`
+
+	// The unique identifier for the next activity to perform, after the message
+	// is sent.
+	NextActivity *string `type:"string"`
+
+	// The name of the push notification template to use for the message. If specified,
+	// this value must match the name of an existing message template.
+	TemplateName *string `type:"string"`
+
+	// The unique identifier for the version of the push notification template to
+	// use for the message. If specified, this value must match the identifier for
+	// an existing template version. To retrieve a list of versions and version
+	// identifiers for a template, use the Template Versions resource.
+	//
+	// If you don't specify a value for this property, Amazon Pinpoint uses the
+	// active version of the template. The active version is typically the version
+	// of a template that's been most recently reviewed and approved for use, depending
+	// on your workflow. It isn't necessarily the latest version of a template.
+	TemplateVersion *string `type:"string"`
+}
+
+// String returns the string representation
+func (s PushMessageActivity) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PushMessageActivity) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MessageConfig != nil {
+		v := s.MessageConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "MessageConfig", v, metadata)
+	}
+	if s.NextActivity != nil {
+		v := *s.NextActivity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextActivity", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TemplateName != nil {
+		v := *s.TemplateName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TemplateVersion != nil {
+		v := *s.TemplateVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Specifies the content and settings for a message template that can be used
 // in messages that are sent through a push notification channel.
 type PushNotificationTemplateRequest struct {
@@ -11265,10 +11555,10 @@ type SMSMessage struct {
 	// The URL of an image or video to display in the SMS message.
 	MediaUrl *string `type:"string"`
 
-	// The SMS message type. Valid values are: TRANSACTIONAL, the message is critical
-	// or time-sensitive, such as a one-time password that supports a customer transaction;
-	// and, PROMOTIONAL, the message is not critical or time-sensitive, such as
-	// a marketing message.
+	// The SMS message type. Valid values are TRANSACTIONAL (for messages that are
+	// critical or time-sensitive, such as a one-time passwords) and PROMOTIONAL
+	// (for messsages that aren't critical or time-sensitive, such as marketing
+	// messages).
 	MessageType MessageType `type:"string" enum:"true"`
 
 	// The number to send the SMS message from. This value should be one of the
@@ -11345,6 +11635,69 @@ func (s SMSMessage) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ms0.End()
 
+	}
+	return nil
+}
+
+// Specifies the settings for an SMS activity in a journey. This type of activity
+// sends a text message to participants.
+type SMSMessageActivity struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the sender ID and message type for an SMS message that's sent to
+	// participants in a journey.
+	MessageConfig *JourneySMSMessage `type:"structure"`
+
+	// The unique identifier for the next activity to perform, after the message
+	// is sent.
+	NextActivity *string `type:"string"`
+
+	// The name of the SMS message template to use for the message. If specified,
+	// this value must match the name of an existing message template.
+	TemplateName *string `type:"string"`
+
+	// The unique identifier for the version of the SMS template to use for the
+	// message. If specified, this value must match the identifier for an existing
+	// template version. To retrieve a list of versions and version identifiers
+	// for a template, use the Template Versions resource.
+	//
+	// If you don't specify a value for this property, Amazon Pinpoint uses the
+	// active version of the template. The active version is typically the version
+	// of a template that's been most recently reviewed and approved for use, depending
+	// on your workflow. It isn't necessarily the latest version of a template.
+	TemplateVersion *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SMSMessageActivity) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SMSMessageActivity) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MessageConfig != nil {
+		v := s.MessageConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "MessageConfig", v, metadata)
+	}
+	if s.NextActivity != nil {
+		v := *s.NextActivity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextActivity", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TemplateName != nil {
+		v := *s.TemplateName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TemplateVersion != nil {
+		v := *s.TemplateVersion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TemplateVersion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

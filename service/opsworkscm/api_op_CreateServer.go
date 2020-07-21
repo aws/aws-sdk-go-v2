@@ -68,7 +68,9 @@ type CreateServerInput struct {
 
 	// The configuration management engine to use. Valid values include ChefAutomate
 	// and Puppet.
-	Engine *string `type:"string"`
+	//
+	// Engine is a required field
+	Engine *string `type:"string" required:"true"`
 
 	// Optional engine attributes on a specified server.
 	//
@@ -104,7 +106,7 @@ type CreateServerInput struct {
 	EngineModel *string `type:"string"`
 
 	// The major release version of the engine that you want to use. For a Chef
-	// server, the valid value for EngineVersion is currently 12. For a Puppet server,
+	// server, the valid value for EngineVersion is currently 2. For a Puppet server,
 	// the valid value is 2017.
 	EngineVersion *string `type:"string"`
 
@@ -136,8 +138,8 @@ type CreateServerInput struct {
 	//
 	//    * DDD:HH:MM for weekly backups
 	//
-	// The specified time is in coordinated universal time (UTC). The default value
-	// is a random, daily start time.
+	// MM must be specified as 00. The specified time is in coordinated universal
+	// time (UTC). The default value is a random, daily start time.
 	//
 	// Example: 08:00, which represents a daily start time of 08:00 UTC.
 	//
@@ -147,9 +149,10 @@ type CreateServerInput struct {
 
 	// The start time for a one-hour period each week during which AWS OpsWorks
 	// CM performs maintenance on the instance. Valid values must be specified in
-	// the following format: DDD:HH:MM. The specified time is in coordinated universal
-	// time (UTC). The default value is a random one-hour period on Tuesday, Wednesday,
-	// or Friday. See TimeWindowDefinition for more information.
+	// the following format: DDD:HH:MM. MM must be specified as 00. The specified
+	// time is in coordinated universal time (UTC). The default value is a random
+	// one-hour period on Tuesday, Wednesday, or Friday. See TimeWindowDefinition
+	// for more information.
 	//
 	// Example: Mon:08:00, which represents a start time of every Monday at 08:00
 	// UTC. (8:00 a.m.)
@@ -225,6 +228,10 @@ func (s *CreateServerInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateServerInput"}
 	if s.BackupRetentionCount != nil && *s.BackupRetentionCount < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("BackupRetentionCount", 1))
+	}
+
+	if s.Engine == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Engine"))
 	}
 
 	if s.InstanceProfileArn == nil {

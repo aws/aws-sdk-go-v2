@@ -14,7 +14,7 @@ import (
 type DescribeFleetMetadataInput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the fleet.
+	// The Amazon Resource Name (ARN) of the fleet.
 	//
 	// FleetArn is a required field
 	FleetArn *string `min:"20" type:"string" required:"true"`
@@ -79,6 +79,9 @@ type DescribeFleetMetadataOutput struct {
 	// The option to optimize for better performance by routing traffic through
 	// the closest AWS Region to users, which may be outside of your home Region.
 	OptimizeForEndUserLocation *bool `type:"boolean"`
+
+	// The tags attached to the resource. A tag is a key-value pair.
+	Tags map[string]string `min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -131,6 +134,18 @@ func (s DescribeFleetMetadataOutput) MarshalFields(e protocol.FieldEncoder) erro
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "OptimizeForEndUserLocation", protocol.BoolValue(v), metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	return nil
 }

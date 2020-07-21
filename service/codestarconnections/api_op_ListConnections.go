@@ -12,6 +12,9 @@ import (
 type ListConnectionsInput struct {
 	_ struct{} `type:"structure"`
 
+	// Filters the list of connections to those associated with a specified host.
+	HostArnFilter *string `type:"string"`
+
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int64 `type:"integer"`

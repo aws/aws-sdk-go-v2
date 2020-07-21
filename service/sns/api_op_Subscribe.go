@@ -40,9 +40,11 @@ type SubscribeInput struct {
 
 	// The endpoint that you want to receive notifications. Endpoints vary by protocol:
 	//
-	//    * For the http protocol, the endpoint is an URL beginning with http://
+	//    * For the http protocol, the (public) endpoint is a URL beginning with
+	//    http://
 	//
-	//    * For the https protocol, the endpoint is a URL beginning with https://
+	//    * For the https protocol, the (public) endpoint is a URL beginning with
+	//    https://
 	//
 	//    * For the email protocol, the endpoint is an email address
 	//
@@ -85,16 +87,12 @@ type SubscribeInput struct {
 	// Sets whether the response from the Subscribe request includes the subscription
 	// ARN, even if the subscription is not yet confirmed.
 	//
-	//    * If you have the subscription ARN returned, the response includes the
-	//    ARN in all cases, even if the subscription is not yet confirmed.
-	//
-	//    * If you don't have the subscription ARN returned, in addition to the
-	//    ARN for confirmed subscriptions, the response also includes the pending
-	//    subscription ARN value for subscriptions that aren't yet confirmed. A
-	//    subscription becomes confirmed when the subscriber calls the ConfirmSubscription
+	//    * If you set this parameter to true, the response includes the ARN in
+	//    all cases, even if the subscription is not yet confirmed. In addition
+	//    to the ARN for confirmed subscriptions, the response also includes the
+	//    pending subscription ARN value for subscriptions that aren't yet confirmed.
+	//    A subscription becomes confirmed when the subscriber calls the ConfirmSubscription
 	//    action with a confirmation token.
-	//
-	// If you set this parameter to true, .
 	//
 	// The default value is false.
 	ReturnSubscriptionArn *bool `type:"boolean"`
@@ -149,10 +147,12 @@ const opSubscribe = "Subscribe"
 // SubscribeRequest returns a request value for making API operation for
 // Amazon Simple Notification Service.
 //
-// Prepares to subscribe an endpoint by sending the endpoint a confirmation
-// message. To actually create a subscription, the endpoint owner must call
-// the ConfirmSubscription action with the token from the confirmation message.
-// Confirmation tokens are valid for three days.
+// Subscribes an endpoint to an Amazon SNS topic. If the endpoint type is HTTP/S
+// or email, or if the endpoint and the topic are not in the same AWS account,
+// the endpoint owner must the ConfirmSubscription action to confirm the subscription.
+//
+// You call the ConfirmSubscription action with the token from the subscription
+// response. Confirmation tokens are valid for three days.
 //
 // This action is throttled at 100 transactions per second (TPS).
 //

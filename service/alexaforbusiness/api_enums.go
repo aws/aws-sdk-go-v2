@@ -174,21 +174,23 @@ type DeviceStatusDetailCode string
 
 // Enum values for DeviceStatusDetailCode
 const (
-	DeviceStatusDetailCodeDeviceSoftwareUpdateNeeded      DeviceStatusDetailCode = "DEVICE_SOFTWARE_UPDATE_NEEDED"
-	DeviceStatusDetailCodeDeviceWasOffline                DeviceStatusDetailCode = "DEVICE_WAS_OFFLINE"
-	DeviceStatusDetailCodeCredentialsAccessFailure        DeviceStatusDetailCode = "CREDENTIALS_ACCESS_FAILURE"
-	DeviceStatusDetailCodeTlsVersionMismatch              DeviceStatusDetailCode = "TLS_VERSION_MISMATCH"
-	DeviceStatusDetailCodeAssociationRejection            DeviceStatusDetailCode = "ASSOCIATION_REJECTION"
-	DeviceStatusDetailCodeAuthenticationFailure           DeviceStatusDetailCode = "AUTHENTICATION_FAILURE"
-	DeviceStatusDetailCodeDhcpFailure                     DeviceStatusDetailCode = "DHCP_FAILURE"
-	DeviceStatusDetailCodeInternetUnavailable             DeviceStatusDetailCode = "INTERNET_UNAVAILABLE"
-	DeviceStatusDetailCodeDnsFailure                      DeviceStatusDetailCode = "DNS_FAILURE"
-	DeviceStatusDetailCodeUnknownFailure                  DeviceStatusDetailCode = "UNKNOWN_FAILURE"
-	DeviceStatusDetailCodeCertificateIssuingLimitExceeded DeviceStatusDetailCode = "CERTIFICATE_ISSUING_LIMIT_EXCEEDED"
-	DeviceStatusDetailCodeInvalidCertificateAuthority     DeviceStatusDetailCode = "INVALID_CERTIFICATE_AUTHORITY"
-	DeviceStatusDetailCodeNetworkProfileNotFound          DeviceStatusDetailCode = "NETWORK_PROFILE_NOT_FOUND"
-	DeviceStatusDetailCodeInvalidPasswordState            DeviceStatusDetailCode = "INVALID_PASSWORD_STATE"
-	DeviceStatusDetailCodePasswordNotFound                DeviceStatusDetailCode = "PASSWORD_NOT_FOUND"
+	DeviceStatusDetailCodeDeviceSoftwareUpdateNeeded       DeviceStatusDetailCode = "DEVICE_SOFTWARE_UPDATE_NEEDED"
+	DeviceStatusDetailCodeDeviceWasOffline                 DeviceStatusDetailCode = "DEVICE_WAS_OFFLINE"
+	DeviceStatusDetailCodeCredentialsAccessFailure         DeviceStatusDetailCode = "CREDENTIALS_ACCESS_FAILURE"
+	DeviceStatusDetailCodeTlsVersionMismatch               DeviceStatusDetailCode = "TLS_VERSION_MISMATCH"
+	DeviceStatusDetailCodeAssociationRejection             DeviceStatusDetailCode = "ASSOCIATION_REJECTION"
+	DeviceStatusDetailCodeAuthenticationFailure            DeviceStatusDetailCode = "AUTHENTICATION_FAILURE"
+	DeviceStatusDetailCodeDhcpFailure                      DeviceStatusDetailCode = "DHCP_FAILURE"
+	DeviceStatusDetailCodeInternetUnavailable              DeviceStatusDetailCode = "INTERNET_UNAVAILABLE"
+	DeviceStatusDetailCodeDnsFailure                       DeviceStatusDetailCode = "DNS_FAILURE"
+	DeviceStatusDetailCodeUnknownFailure                   DeviceStatusDetailCode = "UNKNOWN_FAILURE"
+	DeviceStatusDetailCodeCertificateIssuingLimitExceeded  DeviceStatusDetailCode = "CERTIFICATE_ISSUING_LIMIT_EXCEEDED"
+	DeviceStatusDetailCodeInvalidCertificateAuthority      DeviceStatusDetailCode = "INVALID_CERTIFICATE_AUTHORITY"
+	DeviceStatusDetailCodeNetworkProfileNotFound           DeviceStatusDetailCode = "NETWORK_PROFILE_NOT_FOUND"
+	DeviceStatusDetailCodeInvalidPasswordState             DeviceStatusDetailCode = "INVALID_PASSWORD_STATE"
+	DeviceStatusDetailCodePasswordNotFound                 DeviceStatusDetailCode = "PASSWORD_NOT_FOUND"
+	DeviceStatusDetailCodePasswordManagerAccessDenied      DeviceStatusDetailCode = "PASSWORD_MANAGER_ACCESS_DENIED"
+	DeviceStatusDetailCodeCertificateAuthorityAccessDenied DeviceStatusDetailCode = "CERTIFICATE_AUTHORITY_ACCESS_DENIED"
 )
 
 func (enum DeviceStatusDetailCode) MarshalValue() (string, error) {

@@ -67,8 +67,8 @@ const opEnableKey = "EnableKey"
 // AWS Key Management Service.
 //
 // Sets the key state of a customer master key (CMK) to enabled. This allows
-// you to use the CMK for cryptographic operations. You cannot perform this
-// operation on a CMK in a different AWS account.
+// you to use the CMK for cryptographic operations (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations).
+// You cannot perform this operation on a CMK in a different AWS account.
 //
 // The CMK that you use for this operation must be in a compatible key state.
 // For details, see How Key State Affects Use of a Customer Master Key (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)

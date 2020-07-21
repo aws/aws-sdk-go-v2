@@ -56,15 +56,6 @@ type ModifyReplicationGroupInput struct {
 	// primary if the existing primary encounters a failure.
 	//
 	// Valid values: true | false
-	//
-	// Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover
-	// on:
-	//
-	//    * Redis versions earlier than 2.8.6.
-	//
-	//    * Redis (cluster mode disabled): T1 node types.
-	//
-	//    * Redis (cluster mode enabled): T1 node types.
 	AutomaticFailoverEnabled *bool `type:"boolean"`
 
 	// A valid cache node type that you want to scale this replication group to.
@@ -95,6 +86,10 @@ type ModifyReplicationGroupInput struct {
 	// an earlier engine version, you must delete the existing replication group
 	// and create it anew with the earlier engine version.
 	EngineVersion *string `type:"string"`
+
+	// A flag indicating if you have Multi-AZ enabled to enhance fault tolerance.
+	// For more information, see Minimizing Downtime: Multi-AZ (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html).
+	MultiAZEnabled *bool `type:"boolean"`
 
 	// Deprecated. This parameter is not used.
 	NodeGroupId *string `deprecated:"true" type:"string"`

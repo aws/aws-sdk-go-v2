@@ -23,7 +23,8 @@ type UpdateThreatIntelSetInput struct {
 	// DetectorId is a required field
 	DetectorId *string `location:"uri" locationName:"detectorId" min:"1" type:"string" required:"true"`
 
-	// The updated URI of the file that contains the ThreateIntelSet.
+	// The updated URI of the file that contains the ThreateIntelSet. For example:
+	// https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
 	Location *string `locationName:"location" min:"1" type:"string"`
 
 	// The unique ID that specifies the ThreatIntelSet that you want to update.

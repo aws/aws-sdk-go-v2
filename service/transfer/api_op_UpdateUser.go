@@ -25,8 +25,7 @@ type UpdateUserInput struct {
 	// to specify the "Entry" and "Target" pair, where Entry shows how the path
 	// is made visible and Target is the actual Amazon S3 path. If you only specify
 	// a target, it will be displayed as is. You will need to also make sure that
-	// your AWS IAM Role provides access to paths in Target. The following is an
-	// example.
+	// your IAM role provides access to paths in Target. The following is an example.
 	//
 	// '[ "/bucket2/documentation", { "Entry": "your-personal-report.pdf", "Target":
 	// "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]'
@@ -53,16 +52,15 @@ type UpdateUserInput struct {
 	HomeDirectoryType HomeDirectoryType `type:"string" enum:"true"`
 
 	// Allows you to supply a scope-down policy for your user so you can use the
-	// same AWS Identity and Access Management (IAM) role across multiple users.
-	// The policy scopes down user access to portions of your Amazon S3 bucket.
-	// Variables you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory},
-	// and ${Transfer:HomeBucket}.
+	// same IAM role across multiple users. The policy scopes down user access to
+	// portions of your Amazon S3 bucket. Variables you can use inside this policy
+	// include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.
 	//
 	// For scope-down policies, AWS Transfer Family stores the policy as a JSON
 	// blob, instead of the Amazon Resource Name (ARN) of the policy. You save the
 	// policy as a JSON blob and pass it in the Policy argument.
 	//
-	// For an example of a scope-down policy, see Creating a Scope-Down Policy (https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down).
+	// For an example of a scope-down policy, see Creating a scope-down policy (https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down).
 	//
 	// For more information, see AssumeRole (https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html)
 	// in the AWS Security Token Service API Reference.

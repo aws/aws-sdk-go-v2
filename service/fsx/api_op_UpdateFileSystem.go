@@ -13,12 +13,12 @@ import (
 type UpdateFileSystemInput struct {
 	_ struct{} `type:"structure"`
 
-	// (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to
-	// ensure idempotent updates. This string is automatically filled on your behalf
-	// when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
+	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
+	// updates. This string is automatically filled on your behalf when you use
+	// the AWS Command Line Interface (AWS CLI) or an AWS SDK.
 	ClientRequestToken *string `min:"1" type:"string" idempotencyToken:"true"`
 
-	// The globally unique ID of the file system, assigned by Amazon FSx.
+	// Identifies the file system that you are updating.
 	//
 	// FileSystemId is a required field
 	FileSystemId *string `min:"11" type:"string" required:"true"`
@@ -27,9 +27,18 @@ type UpdateFileSystemInput struct {
 	// UpdateFileSystem operation.
 	LustreConfiguration *UpdateFileSystemLustreConfiguration `type:"structure"`
 
-	// The configuration update for this Microsoft Windows file system. The only
-	// supported options are for backup and maintenance and for self-managed Active
-	// Directory configuration.
+	// Use this parameter to increase the storage capacity of an Amazon FSx for
+	// Windows File Server file system. Specifies the storage capacity target value,
+	// GiB, for the file system you're updating. The storage capacity target value
+	// must be at least 10 percent (%) greater than the current storage capacity
+	// value. In order to increase storage capacity, the file system needs to have
+	// at least 16 MB/s of throughput capacity. You cannot make a storage capacity
+	// increase request if there is an existing storage capacity increase request
+	// in progress. For more information, see Managing Storage Capacity (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html).
+	StorageCapacity *int64 `type:"integer"`
+
+	// The configuration updates for an Amazon FSx for Windows File Server file
+	// system.
 	WindowsConfiguration *UpdateFileSystemWindowsConfiguration `type:"structure"`
 }
 
@@ -86,7 +95,24 @@ const opUpdateFileSystem = "UpdateFileSystem"
 // UpdateFileSystemRequest returns a request value for making API operation for
 // Amazon FSx.
 //
-// Updates a file system configuration.
+// Use this operation to update the configuration of an existing Amazon FSx
+// file system. For an Amazon FSx for Lustre file system, you can update only
+// the WeeklyMaintenanceStartTime. For an Amazon for Windows File Server file
+// system, you can update the following properties:
+//
+//    * AutomaticBackupRetentionDays
+//
+//    * DailyAutomaticBackupStartTime
+//
+//    * SelfManagedActiveDirectoryConfiguration
+//
+//    * StorageCapacity
+//
+//    * ThroughputCapacity
+//
+//    * WeeklyMaintenanceStartTime
+//
+// You can update multiple properties in a single request.
 //
 //    // Example sending a request using UpdateFileSystemRequest.
 //    req := client.UpdateFileSystemRequest(params)

@@ -212,7 +212,7 @@ type Server struct {
 	EngineModel *string `type:"string"`
 
 	// The engine version of the server. For a Chef server, the valid value for
-	// EngineVersion is currently 12. For a Puppet server, the valid value is 2017.
+	// EngineVersion is currently 2. For a Puppet server, the valid value is 2017.
 	EngineVersion *string `type:"string"`
 
 	// The instance profile ARN of the server.

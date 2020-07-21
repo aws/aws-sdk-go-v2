@@ -12,6 +12,12 @@ import (
 type ListQueuesInput struct {
 	_ struct{} `type:"structure"`
 
+	// Maximum number of results to include in the response.
+	MaxResults *int64 `type:"integer"`
+
+	// Pagination token to request the next set of results.
+	NextToken *string `type:"string"`
+
 	// A string to use for filtering the list results. Only those queues whose name
 	// begins with the specified string are returned.
 	//
@@ -28,7 +34,11 @@ func (s ListQueuesInput) String() string {
 type ListQueuesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of queue URLs, up to 1,000 entries.
+	// Pagination token to include in the next request.
+	NextToken *string `type:"string"`
+
+	// A list of queue URLs, up to 1,000 entries, or the value of MaxResults that
+	// you sent in the request.
 	QueueUrls []string `locationNameList:"QueueUrl" type:"list" flattened:"true"`
 }
 
@@ -63,6 +73,12 @@ func (c *Client) ListQueuesRequest(input *ListQueuesInput) ListQueuesRequest {
 		Name:       opListQueues,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -96,6 +112,53 @@ func (r ListQueuesRequest) Send(ctx context.Context) (*ListQueuesResponse, error
 	}
 
 	return resp, nil
+}
+
+// NewListQueuesRequestPaginator returns a paginator for ListQueues.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListQueuesRequest(input)
+//   p := sqs.NewListQueuesRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListQueuesPaginator(req ListQueuesRequest) ListQueuesPaginator {
+	return ListQueuesPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListQueuesInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListQueuesPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListQueuesPaginator struct {
+	aws.Pager
+}
+
+func (p *ListQueuesPaginator) CurrentPage() *ListQueuesOutput {
+	return p.Pager.CurrentPage().(*ListQueuesOutput)
 }
 
 // ListQueuesResponse is the response type for the

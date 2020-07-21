@@ -61,8 +61,9 @@ const opDescribeTrustedAdvisorCheckResult = "DescribeTrustedAdvisorCheckResult"
 // DescribeTrustedAdvisorCheckResultRequest returns a request value for making API operation for
 // AWS Support.
 //
-// Returns the results of the Trusted Advisor check that has the specified check
-// ID. Check IDs can be obtained by calling DescribeTrustedAdvisorChecks.
+// Returns the results of the AWS Trusted Advisor check that has the specified
+// check ID. You can get the check IDs by calling the DescribeTrustedAdvisorChecks
+// operation.
 //
 // The response contains a TrustedAdvisorCheckResult object, which contains
 // these three objects:
@@ -75,12 +76,20 @@ const opDescribeTrustedAdvisorCheckResult = "DescribeTrustedAdvisorCheckResult"
 //
 // In addition, the response contains these fields:
 //
-//    * status. The alert status of the check: "ok" (green), "warning" (yellow),
+//    * status - The alert status of the check: "ok" (green), "warning" (yellow),
 //    "error" (red), or "not_available".
 //
-//    * timestamp. The time of the last refresh of the check.
+//    * timestamp - The time of the last refresh of the check.
 //
-//    * checkId. The unique identifier for the check.
+//    * checkId - The unique identifier for the check.
+//
+//    * You must have a Business or Enterprise support plan to use the AWS Support
+//    API.
+//
+//    * If you call the AWS Support API from an account that does not have a
+//    Business or Enterprise support plan, the SubscriptionRequiredException
+//    error message appears. For information about changing your support plan,
+//    see AWS Support (http://aws.amazon.com/premiumsupport/).
 //
 //    // Example sending a request using DescribeTrustedAdvisorCheckResultRequest.
 //    req := client.DescribeTrustedAdvisorCheckResultRequest(params)

@@ -82,7 +82,7 @@ func (s GetPublicKeyConfigOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-const opGetPublicKeyConfig = "GetPublicKeyConfig2019_03_26"
+const opGetPublicKeyConfig = "GetPublicKeyConfig2020_05_31"
 
 // GetPublicKeyConfigRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -96,12 +96,12 @@ const opGetPublicKeyConfig = "GetPublicKeyConfig2019_03_26"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetPublicKeyConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetPublicKeyConfig
 func (c *Client) GetPublicKeyConfigRequest(input *GetPublicKeyConfigInput) GetPublicKeyConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetPublicKeyConfig,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2019-03-26/public-key/{Id}/config",
+		HTTPPath:   "/2020-05-31/public-key/{Id}/config",
 	}
 
 	if input == nil {

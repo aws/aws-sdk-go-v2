@@ -26,9 +26,17 @@ type CreateTemplateInput struct {
 	// A list of resource permissions to be set on the template.
 	Permissions []ResourcePermission `min:"1" type:"list"`
 
-	// The Amazon Resource Name (ARN) of the source entity from which this template
-	// is being created. Currently, you can create a template from an analysis or
-	// another template. If the ARN is for an analysis, include its dataset references.
+	// The entity that you are using as a source when you create the template. In
+	// SourceEntity, you specify the type of object you're using as source: SourceTemplate
+	// for a template or SourceAnalysis for an analysis. Both of these require an
+	// Amazon Resource Name (ARN). For SourceTemplate, specify the ARN of the source
+	// template. For SourceAnalysis, specify the ARN of the source analysis. The
+	// SourceTemplate ARN can contain any AWS Account and any QuickSight-supported
+	// AWS Region.
+	//
+	// Use the DataSetReferences entity within SourceTemplate or SourceAnalysis
+	// to list the replacement datasets for the placeholders listed in the original.
+	// The schema in each dataset must match its placeholder.
 	//
 	// SourceEntity is a required field
 	SourceEntity *TemplateSourceEntity `type:"structure" required:"true"`

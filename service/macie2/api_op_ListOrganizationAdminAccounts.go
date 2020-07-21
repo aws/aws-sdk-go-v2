@@ -114,6 +114,12 @@ func (c *Client) ListOrganizationAdminAccountsRequest(input *ListOrganizationAdm
 		Name:       opListOrganizationAdminAccounts,
 		HTTPMethod: "GET",
 		HTTPPath:   "/admin",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -147,6 +153,53 @@ func (r ListOrganizationAdminAccountsRequest) Send(ctx context.Context) (*ListOr
 	}
 
 	return resp, nil
+}
+
+// NewListOrganizationAdminAccountsRequestPaginator returns a paginator for ListOrganizationAdminAccounts.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListOrganizationAdminAccountsRequest(input)
+//   p := macie2.NewListOrganizationAdminAccountsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListOrganizationAdminAccountsPaginator(req ListOrganizationAdminAccountsRequest) ListOrganizationAdminAccountsPaginator {
+	return ListOrganizationAdminAccountsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListOrganizationAdminAccountsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListOrganizationAdminAccountsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListOrganizationAdminAccountsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListOrganizationAdminAccountsPaginator) CurrentPage() *ListOrganizationAdminAccountsOutput {
+	return p.Pager.CurrentPage().(*ListOrganizationAdminAccountsOutput)
 }
 
 // ListOrganizationAdminAccountsResponse is the response type for the

@@ -13,94 +13,100 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// Amplify App represents different branches of a repository for building, deploying,
-// and hosting.
+// Represents the different branches of a repository for building, deploying,
+// and hosting an Amplify app.
 type App struct {
 	_ struct{} `type:"structure"`
 
-	// ARN for the Amplify App.
+	// The Amazon Resource Name (ARN) of the Amplify app.
 	//
 	// AppArn is a required field
 	AppArn *string `locationName:"appArn" type:"string" required:"true"`
 
-	// Unique Id for the Amplify App.
+	// The unique ID of the Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Automated branch creation config for the Amplify App.
+	// Describes the automated branch creation configuration for the Amplify app.
 	AutoBranchCreationConfig *AutoBranchCreationConfig `locationName:"autoBranchCreationConfig" type:"structure"`
 
-	// Automated branch creation glob patterns for the Amplify App.
+	// Describes the automated branch creation glob patterns for the Amplify app.
 	AutoBranchCreationPatterns []string `locationName:"autoBranchCreationPatterns" type:"list"`
 
-	// Basic Authorization credentials for branches for the Amplify App.
-	BasicAuthCredentials *string `locationName:"basicAuthCredentials" type:"string"`
+	// The basic authorization credentials for branches for the Amplify app.
+	BasicAuthCredentials *string `locationName:"basicAuthCredentials" type:"string" sensitive:"true"`
 
-	// BuildSpec content for Amplify App.
+	// Describes the content of the build specification (build spec) for the Amplify
+	// app.
 	BuildSpec *string `locationName:"buildSpec" min:"1" type:"string"`
 
-	// Create date / time for the Amplify App.
+	// Creates a date and time for the Amplify app.
 	//
 	// CreateTime is a required field
 	CreateTime *time.Time `locationName:"createTime" type:"timestamp" required:"true"`
 
-	// Custom redirect / rewrite rules for the Amplify App.
+	// Describes the custom redirect and rewrite rules for the Amplify app.
 	CustomRules []CustomRule `locationName:"customRules" type:"list"`
 
-	// Default domain for the Amplify App.
+	// The default domain for the Amplify app.
 	//
 	// DefaultDomain is a required field
 	DefaultDomain *string `locationName:"defaultDomain" min:"1" type:"string" required:"true"`
 
-	// Description for the Amplify App.
+	// The description for the Amplify app.
 	//
 	// Description is a required field
 	Description *string `locationName:"description" type:"string" required:"true"`
 
-	// Enables automated branch creation for the Amplify App.
+	// Enables automated branch creation for the Amplify app.
 	EnableAutoBranchCreation *bool `locationName:"enableAutoBranchCreation" type:"boolean"`
 
-	// Enables Basic Authorization for branches for the Amplify App.
+	// Enables basic authorization for the Amplify app's branches.
 	//
 	// EnableBasicAuth is a required field
 	EnableBasicAuth *bool `locationName:"enableBasicAuth" type:"boolean" required:"true"`
 
-	// Enables auto-building of branches for the Amplify App.
+	// Enables the auto-building of branches for the Amplify app.
 	//
 	// EnableBranchAutoBuild is a required field
 	EnableBranchAutoBuild *bool `locationName:"enableBranchAutoBuild" type:"boolean" required:"true"`
 
-	// Environment Variables for the Amplify App.
+	// Automatically disconnect a branch in the Amplify Console when you delete
+	// a branch from your Git repository.
+	EnableBranchAutoDeletion *bool `locationName:"enableBranchAutoDeletion" type:"boolean"`
+
+	// The environment variables for the Amplify app.
 	//
 	// EnvironmentVariables is a required field
 	EnvironmentVariables map[string]string `locationName:"environmentVariables" type:"map" required:"true"`
 
-	// IAM service role ARN for the Amplify App.
+	// The AWS Identity and Access Management (IAM) service role for the Amazon
+	// Resource Name (ARN) of the Amplify app.
 	IamServiceRoleArn *string `locationName:"iamServiceRoleArn" min:"1" type:"string"`
 
-	// Name for the Amplify App.
+	// The name for the Amplify app.
 	//
 	// Name is a required field
 	Name *string `locationName:"name" min:"1" type:"string" required:"true"`
 
-	// Platform for the Amplify App.
+	// The platform for the Amplify app.
 	//
 	// Platform is a required field
 	Platform Platform `locationName:"platform" type:"string" required:"true" enum:"true"`
 
-	// Structure with Production Branch information.
+	// Describes the information about a production branch of the Amplify app.
 	ProductionBranch *ProductionBranch `locationName:"productionBranch" type:"structure"`
 
-	// Repository for the Amplify App.
+	// The repository for the Amplify app.
 	//
 	// Repository is a required field
 	Repository *string `locationName:"repository" type:"string" required:"true"`
 
-	// Tag for Amplify App.
+	// The tag for the Amplify app.
 	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 
-	// Update date / time for the Amplify App.
+	// Updates the date and time for the Amplify app.
 	//
 	// UpdateTime is a required field
 	UpdateTime *time.Time `locationName:"updateTime" type:"timestamp" required:"true"`
@@ -204,6 +210,12 @@ func (s App) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "enableBranchAutoBuild", protocol.BoolValue(v), metadata)
 	}
+	if s.EnableBranchAutoDeletion != nil {
+		v := *s.EnableBranchAutoDeletion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "enableBranchAutoDeletion", protocol.BoolValue(v), metadata)
+	}
 	if s.EnvironmentVariables != nil {
 		v := s.EnvironmentVariables
 
@@ -268,16 +280,16 @@ func (s App) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Structure for artifact.
+// Describes an artifact.
 type Artifact struct {
 	_ struct{} `type:"structure"`
 
-	// File name for the artifact.
+	// The file name for the artifact.
 	//
 	// ArtifactFileName is a required field
 	ArtifactFileName *string `locationName:"artifactFileName" type:"string" required:"true"`
 
-	// Unique Id for a artifact.
+	// The unique ID for the artifact.
 	//
 	// ArtifactId is a required field
 	ArtifactId *string `locationName:"artifactId" type:"string" required:"true"`
@@ -305,35 +317,35 @@ func (s Artifact) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Structure with auto branch creation config.
+// Describes the automated branch creation configuration.
 type AutoBranchCreationConfig struct {
 	_ struct{} `type:"structure"`
 
-	// Basic Authorization credentials for the auto created branch.
-	BasicAuthCredentials *string `locationName:"basicAuthCredentials" type:"string"`
+	// The basic authorization credentials for the autocreated branch.
+	BasicAuthCredentials *string `locationName:"basicAuthCredentials" type:"string" sensitive:"true"`
 
-	// BuildSpec for the auto created branch.
+	// The build specification (build spec) for the autocreated branch.
 	BuildSpec *string `locationName:"buildSpec" min:"1" type:"string"`
 
-	// Enables auto building for the auto created branch.
+	// Enables auto building for the autocreated branch.
 	EnableAutoBuild *bool `locationName:"enableAutoBuild" type:"boolean"`
 
-	// Enables Basic Auth for the auto created branch.
+	// Enables basic authorization for the autocreated branch.
 	EnableBasicAuth *bool `locationName:"enableBasicAuth" type:"boolean"`
 
-	// Enables Pull Request Preview for auto created branch.
+	// Enables pull request preview for the autocreated branch.
 	EnablePullRequestPreview *bool `locationName:"enablePullRequestPreview" type:"boolean"`
 
-	// Environment Variables for the auto created branch.
+	// The environment variables for the autocreated branch.
 	EnvironmentVariables map[string]string `locationName:"environmentVariables" type:"map"`
 
-	// Framework for the auto created branch.
+	// The framework for the autocreated branch.
 	Framework *string `locationName:"framework" type:"string"`
 
-	// The Amplify Environment name for the pull request.
+	// The Amplify environment name for the pull request.
 	PullRequestEnvironmentName *string `locationName:"pullRequestEnvironmentName" type:"string"`
 
-	// Stage for the auto created branch.
+	// Describes the current stage for the autocreated branch.
 	Stage Stage `locationName:"stage" type:"string" enum:"true"`
 }
 
@@ -420,33 +432,35 @@ func (s AutoBranchCreationConfig) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Backend environment for an Amplify App.
+// Describes the backend environment for an Amplify app.
 type BackendEnvironment struct {
 	_ struct{} `type:"structure"`
 
-	// Arn for a backend environment, part of an Amplify App.
+	// The Amazon Resource Name (ARN) for a backend environment that is part of
+	// an Amplify app.
 	//
 	// BackendEnvironmentArn is a required field
 	BackendEnvironmentArn *string `locationName:"backendEnvironmentArn" min:"1" type:"string" required:"true"`
 
-	// Creation date and time for a backend environment, part of an Amplify App.
+	// The creation date and time for a backend environment that is part of an Amplify
+	// app.
 	//
 	// CreateTime is a required field
 	CreateTime *time.Time `locationName:"createTime" type:"timestamp" required:"true"`
 
-	// Name of deployment artifacts.
+	// The name of deployment artifacts.
 	DeploymentArtifacts *string `locationName:"deploymentArtifacts" min:"1" type:"string"`
 
-	// Name for a backend environment, part of an Amplify App.
+	// The name for a backend environment that is part of an Amplify app.
 	//
 	// EnvironmentName is a required field
 	EnvironmentName *string `locationName:"environmentName" min:"1" type:"string" required:"true"`
 
-	// CloudFormation stack name of backend environment.
+	// The AWS CloudFormation stack name of a backend environment.
 	StackName *string `locationName:"stackName" min:"1" type:"string"`
 
-	// Last updated date and time for a backend environment, part of an Amplify
-	// App.
+	// The last updated date and time for a backend environment that is part of
+	// an Amplify app.
 	//
 	// UpdateTime is a required field
 	UpdateTime *time.Time `locationName:"updateTime" type:"timestamp" required:"true"`
@@ -500,48 +514,50 @@ func (s BackendEnvironment) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Branch for an Amplify App, which maps to a 3rd party repository branch.
+// The branch for an Amplify app, which maps to a third-party repository branch.
 type Branch struct {
 	_ struct{} `type:"structure"`
 
-	// Id of the active job for a branch, part of an Amplify App.
+	// The ID of the active job for a branch of an Amplify app.
 	//
 	// ActiveJobId is a required field
 	ActiveJobId *string `locationName:"activeJobId" type:"string" required:"true"`
 
-	// List of custom resources that are linked to this branch.
+	// A list of custom resources that are linked to this branch.
 	AssociatedResources []string `locationName:"associatedResources" type:"list"`
 
-	// ARN for a Backend Environment, part of an Amplify App.
+	// The Amazon Resource Name (ARN) for a backend environment that is part of
+	// an Amplify app.
 	BackendEnvironmentArn *string `locationName:"backendEnvironmentArn" min:"1" type:"string"`
 
-	// Basic Authorization credentials for a branch, part of an Amplify App.
-	BasicAuthCredentials *string `locationName:"basicAuthCredentials" type:"string"`
+	// The basic authorization credentials for a branch of an Amplify app.
+	BasicAuthCredentials *string `locationName:"basicAuthCredentials" type:"string" sensitive:"true"`
 
-	// ARN for a branch, part of an Amplify App.
+	// The Amazon Resource Name (ARN) for a branch that is part of an Amplify app.
 	//
 	// BranchArn is a required field
 	BranchArn *string `locationName:"branchArn" type:"string" required:"true"`
 
-	// Name for a branch, part of an Amplify App.
+	// The name for the branch that is part of an Amplify app.
 	//
 	// BranchName is a required field
 	BranchName *string `locationName:"branchName" min:"1" type:"string" required:"true"`
 
-	// BuildSpec content for branch for Amplify App.
+	// The build specification (build spec) content for the branch of an Amplify
+	// app.
 	BuildSpec *string `locationName:"buildSpec" min:"1" type:"string"`
 
-	// Creation date and time for a branch, part of an Amplify App.
+	// The creation date and time for a branch that is part of an Amplify app.
 	//
 	// CreateTime is a required field
 	CreateTime *time.Time `locationName:"createTime" type:"timestamp" required:"true"`
 
-	// Custom domains for a branch, part of an Amplify App.
+	// The custom domains for a branch of an Amplify app.
 	//
 	// CustomDomains is a required field
 	CustomDomains []string `locationName:"customDomains" type:"list" required:"true"`
 
-	// Description for a branch, part of an Amplify App.
+	// The description for the branch that is part of an Amplify app.
 	//
 	// Description is a required field
 	Description *string `locationName:"description" type:"string" required:"true"`
@@ -549,69 +565,69 @@ type Branch struct {
 	// The destination branch if the branch is a pull request branch.
 	DestinationBranch *string `locationName:"destinationBranch" min:"1" type:"string"`
 
-	// Display name for a branch, will use as the default domain prefix.
+	// The display name for the branch. This is used as the default domain prefix.
 	//
 	// DisplayName is a required field
 	DisplayName *string `locationName:"displayName" type:"string" required:"true"`
 
-	// Enables auto-building on push for a branch, part of an Amplify App.
+	// Enables auto-building on push for a branch of an Amplify app.
 	//
 	// EnableAutoBuild is a required field
 	EnableAutoBuild *bool `locationName:"enableAutoBuild" type:"boolean" required:"true"`
 
-	// Enables Basic Authorization for a branch, part of an Amplify App.
+	// Enables basic authorization for a branch of an Amplify app.
 	//
 	// EnableBasicAuth is a required field
 	EnableBasicAuth *bool `locationName:"enableBasicAuth" type:"boolean" required:"true"`
 
-	// Enables notifications for a branch, part of an Amplify App.
+	// Enables notifications for a branch that is part of an Amplify app.
 	//
 	// EnableNotification is a required field
 	EnableNotification *bool `locationName:"enableNotification" type:"boolean" required:"true"`
 
-	// Enables Pull Request Preview for this branch.
+	// Enables pull request preview for the branch.
 	//
 	// EnablePullRequestPreview is a required field
 	EnablePullRequestPreview *bool `locationName:"enablePullRequestPreview" type:"boolean" required:"true"`
 
-	// Environment Variables specific to a branch, part of an Amplify App.
+	// The environment variables specific to a branch of an Amplify app.
 	//
 	// EnvironmentVariables is a required field
 	EnvironmentVariables map[string]string `locationName:"environmentVariables" type:"map" required:"true"`
 
-	// Framework for a branch, part of an Amplify App.
+	// The framework for a branch of an Amplify app.
 	//
 	// Framework is a required field
 	Framework *string `locationName:"framework" type:"string" required:"true"`
 
-	// The Amplify Environment name for the pull request.
+	// The Amplify environment name for the pull request.
 	PullRequestEnvironmentName *string `locationName:"pullRequestEnvironmentName" type:"string"`
 
 	// The source branch if the branch is a pull request branch.
 	SourceBranch *string `locationName:"sourceBranch" min:"1" type:"string"`
 
-	// Stage for a branch, part of an Amplify App.
+	// The current stage for the branch that is part of an Amplify app.
 	//
 	// Stage is a required field
 	Stage Stage `locationName:"stage" type:"string" required:"true" enum:"true"`
 
-	// Tag for branch for Amplify App.
+	// The tag for the branch of an Amplify app.
 	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 
-	// Thumbnail URL for the branch.
+	// The thumbnail URL for the branch of an Amplify app.
 	ThumbnailUrl *string `locationName:"thumbnailUrl" min:"1" type:"string"`
 
-	// Total number of Jobs part of an Amplify App.
+	// The total number of jobs that are part of an Amplify app.
 	//
 	// TotalNumberOfJobs is a required field
 	TotalNumberOfJobs *string `locationName:"totalNumberOfJobs" type:"string" required:"true"`
 
-	// The content TTL for the website in seconds.
+	// The content Time to Live (TTL) for the website in seconds.
 	//
 	// Ttl is a required field
 	Ttl *string `locationName:"ttl" type:"string" required:"true"`
 
-	// Last updated date and time for a branch, part of an Amplify App.
+	// The last updated date and time for a branch that is part of an Amplify app.
 	//
 	// UpdateTime is a required field
 	UpdateTime *time.Time `locationName:"updateTime" type:"timestamp" required:"true"`
@@ -809,11 +825,11 @@ func (s Branch) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Custom rewrite / redirect rule.
+// Describes a custom rewrite or redirect rule.
 type CustomRule struct {
 	_ struct{} `type:"structure"`
 
-	// The condition for a URL rewrite or redirect rule, e.g. country code.
+	// The condition for a URL rewrite or redirect rule, such as a country code.
 	Condition *string `locationName:"condition" min:"1" type:"string"`
 
 	// The source pattern for a URL rewrite or redirect rule.
@@ -894,40 +910,47 @@ func (s CustomRule) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Structure for Domain Association, which associates a custom domain with an
-// Amplify App.
+// Describes a domain association that associates a custom domain with an Amplify
+// app.
 type DomainAssociation struct {
 	_ struct{} `type:"structure"`
 
-	// DNS Record for certificate verification.
+	// Sets branch patterns for automatic subdomain creation.
+	AutoSubDomainCreationPatterns []string `locationName:"autoSubDomainCreationPatterns" type:"list"`
+
+	// The required AWS Identity and Access Management (IAM) service role for the
+	// Amazon Resource Name (ARN) for automatically creating subdomains.
+	AutoSubDomainIAMRole *string `locationName:"autoSubDomainIAMRole" type:"string"`
+
+	// The DNS record for certificate verification.
 	CertificateVerificationDNSRecord *string `locationName:"certificateVerificationDNSRecord" type:"string"`
 
-	// ARN for the Domain Association.
+	// The Amazon Resource Name (ARN) for the domain association.
 	//
 	// DomainAssociationArn is a required field
 	DomainAssociationArn *string `locationName:"domainAssociationArn" type:"string" required:"true"`
 
-	// Name of the domain.
+	// The name of the domain.
 	//
 	// DomainName is a required field
 	DomainName *string `locationName:"domainName" type:"string" required:"true"`
 
-	// Status fo the Domain Association.
+	// The current status of the domain association.
 	//
 	// DomainStatus is a required field
 	DomainStatus DomainStatus `locationName:"domainStatus" type:"string" required:"true" enum:"true"`
 
-	// Enables automated creation of Subdomains for branches. (Currently not supported)
+	// Enables the automated creation of subdomains for branches.
 	//
 	// EnableAutoSubDomain is a required field
 	EnableAutoSubDomain *bool `locationName:"enableAutoSubDomain" type:"boolean" required:"true"`
 
-	// Reason for the current status of the Domain Association.
+	// The reason for the current status of the domain association.
 	//
 	// StatusReason is a required field
 	StatusReason *string `locationName:"statusReason" type:"string" required:"true"`
 
-	// Subdomains for the Domain Association.
+	// The subdomains for the domain association.
 	//
 	// SubDomains is a required field
 	SubDomains []SubDomain `locationName:"subDomains" type:"list" required:"true"`
@@ -940,6 +963,24 @@ func (s DomainAssociation) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DomainAssociation) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AutoSubDomainCreationPatterns != nil {
+		v := s.AutoSubDomainCreationPatterns
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "autoSubDomainCreationPatterns", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.AutoSubDomainIAMRole != nil {
+		v := *s.AutoSubDomainIAMRole
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "autoSubDomainIAMRole", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.CertificateVerificationDNSRecord != nil {
 		v := *s.CertificateVerificationDNSRecord
 
@@ -991,16 +1032,16 @@ func (s DomainAssociation) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Structure for an execution job for an Amplify App.
+// Describes an execution job for an Amplify app.
 type Job struct {
 	_ struct{} `type:"structure"`
 
-	// Execution steps for an execution job, for an Amplify App.
+	// The execution steps for an execution job, for an Amplify app.
 	//
 	// Steps is a required field
 	Steps []Step `locationName:"steps" type:"list" required:"true"`
 
-	// Summary for an execution job for an Amplify App.
+	// Describes the summary for an execution job for an Amplify app.
 	//
 	// Summary is a required field
 	Summary *JobSummary `locationName:"summary" type:"structure" required:"true"`
@@ -1034,51 +1075,52 @@ func (s Job) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Structure for the summary of a Job.
+// Describes the summary for an execution job for an Amplify app.
 type JobSummary struct {
 	_ struct{} `type:"structure"`
 
-	// Commit Id from 3rd party repository provider for the Job.
+	// The commit ID from a third-party repository provider for the job.
 	//
 	// CommitId is a required field
 	CommitId *string `locationName:"commitId" type:"string" required:"true"`
 
-	// Commit message from 3rd party repository provider for the Job.
+	// The commit message from a third-party repository provider for the job.
 	//
 	// CommitMessage is a required field
 	CommitMessage *string `locationName:"commitMessage" type:"string" required:"true"`
 
-	// Commit date / time for the Job.
+	// The commit date and time for the job.
 	//
 	// CommitTime is a required field
 	CommitTime *time.Time `locationName:"commitTime" type:"timestamp" required:"true"`
 
-	// End date / time for the Job.
+	// The end date and time for the job.
 	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
 
-	// Arn for the Job.
+	// The Amazon Resource Name (ARN) for the job.
 	//
 	// JobArn is a required field
 	JobArn *string `locationName:"jobArn" type:"string" required:"true"`
 
-	// Unique Id for the Job.
+	// The unique ID for the job.
 	//
 	// JobId is a required field
 	JobId *string `locationName:"jobId" type:"string" required:"true"`
 
-	// Type for the Job. \n "RELEASE": Manually released from source by using StartJob
-	// API. "RETRY": Manually retried by using StartJob API. "WEB_HOOK": Automatically
-	// triggered by WebHooks.
+	// The type for the job. If the value is RELEASE, the job was manually released
+	// from its source by using the StartJob API. If the value is RETRY, the job
+	// was manually retried using the StartJob API. If the value is WEB_HOOK, the
+	// job was automatically triggered by webhooks.
 	//
 	// JobType is a required field
 	JobType JobType `locationName:"jobType" type:"string" required:"true" enum:"true"`
 
-	// Start date / time for the Job.
+	// The start date and time for the job.
 	//
 	// StartTime is a required field
 	StartTime *time.Time `locationName:"startTime" type:"timestamp" required:"true"`
 
-	// Status for the Job.
+	// The current status for the job.
 	//
 	// Status is a required field
 	Status JobStatus `locationName:"status" type:"string" required:"true" enum:"true"`
@@ -1151,20 +1193,20 @@ func (s JobSummary) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Structure with Production Branch information.
+// Describes the information about a production branch for an Amplify app.
 type ProductionBranch struct {
 	_ struct{} `type:"structure"`
 
-	// Branch Name for Production Branch.
+	// The branch name for the production branch.
 	BranchName *string `locationName:"branchName" min:"1" type:"string"`
 
-	// Last Deploy Time of Production Branch.
+	// The last deploy time of the production branch.
 	LastDeployTime *time.Time `locationName:"lastDeployTime" type:"timestamp"`
 
-	// Status of Production Branch.
+	// The status of the production branch.
 	Status *string `locationName:"status" min:"3" type:"string"`
 
-	// Thumbnail URL for Production Branch.
+	// The thumbnail URL for the production branch.
 	ThumbnailUrl *string `locationName:"thumbnailUrl" min:"1" type:"string"`
 }
 
@@ -1203,49 +1245,49 @@ func (s ProductionBranch) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Structure for an execution step for an execution job, for an Amplify App.
+// Describes an execution step, for an execution job, for an Amplify app.
 type Step struct {
 	_ struct{} `type:"structure"`
 
-	// URL to the artifact for the execution step.
+	// The URL to the artifact for the execution step.
 	ArtifactsUrl *string `locationName:"artifactsUrl" type:"string"`
 
-	// The context for current step, will include build image if step is build.
+	// The context for the current step. Includes a build image if the step is build.
 	Context *string `locationName:"context" type:"string"`
 
-	// End date/ time of the execution step.
+	// The end date and time of the execution step.
 	//
 	// EndTime is a required field
 	EndTime *time.Time `locationName:"endTime" type:"timestamp" required:"true"`
 
-	// URL to the logs for the execution step.
+	// The URL to the logs for the execution step.
 	LogUrl *string `locationName:"logUrl" type:"string"`
 
-	// List of screenshot URLs for the execution step, if relevant.
+	// The list of screenshot URLs for the execution step, if relevant.
 	Screenshots map[string]string `locationName:"screenshots" type:"map"`
 
-	// Start date/ time of the execution step.
+	// The start date and time of the execution step.
 	//
 	// StartTime is a required field
 	StartTime *time.Time `locationName:"startTime" type:"timestamp" required:"true"`
 
-	// Status of the execution step.
+	// The status of the execution step.
 	//
 	// Status is a required field
 	Status JobStatus `locationName:"status" type:"string" required:"true" enum:"true"`
 
-	// The reason for current step status.
+	// The reason for the current step status.
 	StatusReason *string `locationName:"statusReason" type:"string"`
 
-	// Name of the execution step.
+	// The name of the execution step.
 	//
 	// StepName is a required field
 	StepName *string `locationName:"stepName" type:"string" required:"true"`
 
-	// URL to the test artifact for the execution step.
+	// The URL to the test artifact for the execution step.
 	TestArtifactsUrl *string `locationName:"testArtifactsUrl" type:"string"`
 
-	// URL to the test config for the execution step.
+	// The URL to the test configuration for the execution step.
 	TestConfigUrl *string `locationName:"testConfigUrl" type:"string"`
 }
 
@@ -1333,21 +1375,21 @@ func (s Step) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Subdomain for the Domain Association.
+// The subdomain for the domain association.
 type SubDomain struct {
 	_ struct{} `type:"structure"`
 
-	// DNS record for the Subdomain.
+	// The DNS record for the subdomain.
 	//
 	// DnsRecord is a required field
 	DnsRecord *string `locationName:"dnsRecord" type:"string" required:"true"`
 
-	// Setting structure for the Subdomain.
+	// Describes the settings for the subdomain.
 	//
 	// SubDomainSetting is a required field
 	SubDomainSetting *SubDomainSetting `locationName:"subDomainSetting" type:"structure" required:"true"`
 
-	// Verified status of the Subdomain
+	// The verified status of the subdomain
 	//
 	// Verified is a required field
 	Verified *bool `locationName:"verified" type:"boolean" required:"true"`
@@ -1381,16 +1423,16 @@ func (s SubDomain) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Setting for the Subdomain.
+// Describes the settings for the subdomain.
 type SubDomainSetting struct {
 	_ struct{} `type:"structure"`
 
-	// Branch name setting for the Subdomain.
+	// The branch name setting for the subdomain.
 	//
 	// BranchName is a required field
 	BranchName *string `locationName:"branchName" min:"1" type:"string" required:"true"`
 
-	// Prefix setting for the Subdomain.
+	// The prefix setting for the subdomain.
 	//
 	// Prefix is a required field
 	Prefix *string `locationName:"prefix" type:"string" required:"true"`
@@ -1439,41 +1481,41 @@ func (s SubDomainSetting) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Structure for webhook, which associates a webhook with an Amplify App.
+// Describes a webhook that connects repository events to an Amplify app.
 type Webhook struct {
 	_ struct{} `type:"structure"`
 
-	// Name for a branch, part of an Amplify App.
+	// The name for a branch that is part of an Amplify app.
 	//
 	// BranchName is a required field
 	BranchName *string `locationName:"branchName" min:"1" type:"string" required:"true"`
 
-	// Create date / time for a webhook.
+	// The create date and time for a webhook.
 	//
 	// CreateTime is a required field
 	CreateTime *time.Time `locationName:"createTime" type:"timestamp" required:"true"`
 
-	// Description for a webhook.
+	// The description for a webhook.
 	//
 	// Description is a required field
 	Description *string `locationName:"description" type:"string" required:"true"`
 
-	// Update date / time for a webhook.
+	// Updates the date and time for a webhook.
 	//
 	// UpdateTime is a required field
 	UpdateTime *time.Time `locationName:"updateTime" type:"timestamp" required:"true"`
 
-	// ARN for the webhook.
+	// The Amazon Resource Name (ARN) for the webhook.
 	//
 	// WebhookArn is a required field
 	WebhookArn *string `locationName:"webhookArn" type:"string" required:"true"`
 
-	// Id of the webhook.
+	// The ID of the webhook.
 	//
 	// WebhookId is a required field
 	WebhookId *string `locationName:"webhookId" type:"string" required:"true"`
 
-	// Url of the webhook.
+	// The URL of the webhook.
 	//
 	// WebhookUrl is a required field
 	WebhookUrl *string `locationName:"webhookUrl" type:"string" required:"true"`

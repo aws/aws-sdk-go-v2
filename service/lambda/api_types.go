@@ -187,8 +187,7 @@ func (s AliasConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 type AliasRoutingConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the second alias, and the percentage of traffic that's routed
-	// to it.
+	// The second version, and the percentage of traffic that's routed to it.
 	AdditionalVersionWeights map[string]float64 `type:"map"`
 }
 
@@ -550,6 +549,63 @@ func (s EventSourceMappingConfiguration) MarshalFields(e protocol.FieldEncoder) 
 	return nil
 }
 
+// Details about the connection between a Lambda function and an Amazon EFS
+// file system.
+type FileSystemConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the Amazon EFS access point that provides
+	// access to the file system.
+	//
+	// Arn is a required field
+	Arn *string `type:"string" required:"true"`
+
+	// The path where the function can access the file system, starting with /mnt/.
+	//
+	// LocalMountPath is a required field
+	LocalMountPath *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s FileSystemConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *FileSystemConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "FileSystemConfig"}
+
+	if s.Arn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Arn"))
+	}
+
+	if s.LocalMountPath == nil {
+		invalidParams.Add(aws.NewErrParamRequired("LocalMountPath"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FileSystemConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LocalMountPath != nil {
+		v := *s.LocalMountPath
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LocalMountPath", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The code for the Lambda function. You can specify either an object in Amazon
 // S3, or upload a deployment package directly.
 type FunctionCode struct {
@@ -677,6 +733,9 @@ type FunctionConfiguration struct {
 	// The function's environment variables.
 	Environment *EnvironmentResponse `type:"structure"`
 
+	// Connection settings for an Amazon EFS file system.
+	FileSystemConfigs []FileSystemConfig `type:"list"`
+
 	// The function's Amazon Resource Name (ARN).
 	FunctionArn *string `type:"string"`
 
@@ -783,6 +842,18 @@ func (s FunctionConfiguration) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Environment", v, metadata)
+	}
+	if s.FileSystemConfigs != nil {
+		v := s.FileSystemConfigs
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "FileSystemConfigs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.FunctionArn != nil {
 		v := *s.FunctionArn

@@ -4,6 +4,7 @@ package frauddetector
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -11,6 +12,9 @@ import (
 
 type PutExternalModelInput struct {
 	_ struct{} `type:"structure"`
+
+	// The event type name.
+	EventTypeName *string `locationName:"eventTypeName" min:"1" type:"string"`
 
 	// The model endpoint input configuration.
 	//
@@ -20,7 +24,7 @@ type PutExternalModelInput struct {
 	// The model endpoints name.
 	//
 	// ModelEndpoint is a required field
-	ModelEndpoint *string `locationName:"modelEndpoint" type:"string" required:"true"`
+	ModelEndpoint *string `locationName:"modelEndpoint" min:"1" type:"string" required:"true"`
 
 	// The model endpoint’s status in Amazon Fraud Detector.
 	//
@@ -41,6 +45,9 @@ type PutExternalModelInput struct {
 	//
 	// Role is a required field
 	Role *Role `locationName:"role" type:"structure" required:"true"`
+
+	// A collection of key and value pairs.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -51,6 +58,9 @@ func (s PutExternalModelInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *PutExternalModelInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "PutExternalModelInput"}
+	if s.EventTypeName != nil && len(*s.EventTypeName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("EventTypeName", 1))
+	}
 
 	if s.InputConfiguration == nil {
 		invalidParams.Add(aws.NewErrParamRequired("InputConfiguration"))
@@ -58,6 +68,9 @@ func (s *PutExternalModelInput) Validate() error {
 
 	if s.ModelEndpoint == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ModelEndpoint"))
+	}
+	if s.ModelEndpoint != nil && len(*s.ModelEndpoint) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ModelEndpoint", 1))
 	}
 	if len(s.ModelEndpointStatus) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ModelEndpointStatus"))
@@ -86,6 +99,13 @@ func (s *PutExternalModelInput) Validate() error {
 	if s.Role != nil {
 		if err := s.Role.Validate(); err != nil {
 			invalidParams.AddNested("Role", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 

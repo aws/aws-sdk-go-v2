@@ -37,12 +37,15 @@ type CreateStorediSCSIVolumeInput struct {
 	// GatewayARN is a required field
 	GatewayARN *string `min:"50" type:"string" required:"true"`
 
-	// True to use Amazon S3 server-side encryption with your own AWS KMS key, or
-	// false to use a key managed by Amazon S3. Optional.
+	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS
+	// key, or false to use a key managed by Amazon S3. Optional.
+	//
+	// Valid Values: true | false
 	KMSEncrypted *bool `type:"boolean"`
 
-	// The Amazon Resource Name (ARN) of the KMS key used for Amazon S3 server-side
-	// encryption. This value can only be set when KMSEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
+	// for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric
+	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string `min:"7" type:"string"`
 
 	// The network interface of the gateway on which to expose the iSCSI target.
@@ -54,17 +57,17 @@ type CreateStorediSCSIVolumeInput struct {
 	// NetworkInterfaceId is a required field
 	NetworkInterfaceId *string `type:"string" required:"true"`
 
-	// Specify this field as true if you want to preserve the data on the local
-	// disk. Otherwise, specifying this field as false creates an empty volume.
+	// Set to true true if you want to preserve the data on the local disk. Otherwise,
+	// set to false to create an empty volume.
 	//
-	// Valid Values: true, false
+	// Valid Values: true | false
 	//
 	// PreserveExistingData is a required field
 	PreserveExistingData *bool `type:"boolean" required:"true"`
 
 	// The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as the
 	// new stored volume. Specify this field if you want to create the iSCSI storage
-	// volume from a snapshot otherwise do not include this field. To list snapshots
+	// volume from a snapshot; otherwise, do not include this field. To list snapshots
 	// for your account use DescribeSnapshots (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html)
 	// in the Amazon Elastic Compute Cloud API Reference.
 	SnapshotId *string `type:"string"`

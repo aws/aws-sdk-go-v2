@@ -19,7 +19,7 @@ type SetSMBGuestPasswordInput struct {
 	// GatewayARN is a required field
 	GatewayARN *string `min:"50" type:"string" required:"true"`
 
-	// The password that you want to set for your SMB Server.
+	// The password that you want to set for your SMB server.
 	//
 	// Password is a required field
 	Password *string `min:"6" type:"string" required:"true" sensitive:"true"`

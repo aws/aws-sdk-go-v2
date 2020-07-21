@@ -44,6 +44,38 @@ func (s AvailSuppression) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The configuration for bumpers. Bumpers are short audio or video clips that
+// play at the start or before the end of an ad break.
+type Bumper struct {
+	_ struct{} `type:"structure"`
+
+	EndUrl *string `type:"string"`
+
+	StartUrl *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Bumper) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Bumper) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EndUrl != nil {
+		v := *s.EndUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EndUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.StartUrl != nil {
+		v := *s.StartUrl
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StartUrl", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // The configuration for using a content delivery network (CDN), like Amazon
 // CloudFront, for content and ad segment management.
 type CdnConfiguration struct {

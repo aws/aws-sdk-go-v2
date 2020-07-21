@@ -12,7 +12,16 @@ import (
 type DisablePolicyTypeInput struct {
 	_ struct{} `type:"structure"`
 
-	// The policy type that you want to disable in this root.
+	// The policy type that you want to disable in this root. You can specify one
+	// of the following values:
+	//
+	//    * AISERVICES_OPT_OUT_POLICY (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
+	//
+	//    * BACKUP_POLICY (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
+	//
+	//    * SERVICE_CONTROL_POLICY (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
+	//
+	//    * TAG_POLICY (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
 	//
 	// PolicyType is a required field
 	PolicyType PolicyType `type:"string" required:"true" enum:"true"`
@@ -66,14 +75,14 @@ const opDisablePolicyType = "DisablePolicyType"
 // DisablePolicyTypeRequest returns a request value for making API operation for
 // AWS Organizations.
 //
-// Disables an organizational control policy type in a root. A policy of a certain
-// type can be attached to entities in a root only if that type is enabled in
-// the root. After you perform this operation, you no longer can attach policies
+// Disables an organizational policy type in a root. A policy of a certain type
+// can be attached to entities in a root only if that type is enabled in the
+// root. After you perform this operation, you no longer can attach policies
 // of the specified type to that root or to any organizational unit (OU) or
 // account in that root. You can undo this by using the EnablePolicyType operation.
 //
 // This is an asynchronous request that AWS performs in the background. If you
-// disable a policy for a root, it still appears enabled for the organization
+// disable a policy type for a root, it still appears enabled for the organization
 // if all features (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
 // are enabled for the organization. AWS recommends that you first use ListRoots
 // to see the status of policy types for a specified root, and then use this

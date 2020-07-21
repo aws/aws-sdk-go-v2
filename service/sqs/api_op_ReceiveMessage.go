@@ -15,31 +15,31 @@ type ReceiveMessageInput struct {
 	// A list of attributes that need to be returned along with each message. These
 	// attributes include:
 	//
-	//    * All - Returns all values.
+	//    * All – Returns all values.
 	//
-	//    * ApproximateFirstReceiveTimestamp - Returns the time the message was
+	//    * ApproximateFirstReceiveTimestamp – Returns the time the message was
 	//    first received from the queue (epoch time (http://en.wikipedia.org/wiki/Unix_time)
 	//    in milliseconds).
 	//
-	//    * ApproximateReceiveCount - Returns the number of times a message has
-	//    been received from the queue but not deleted.
+	//    * ApproximateReceiveCount – Returns the number of times a message has
+	//    been received across all queues but not deleted.
 	//
-	//    * AWSTraceHeader - Returns the AWS X-Ray trace header string.
+	//    * AWSTraceHeader – Returns the AWS X-Ray trace header string.
 	//
 	//    * SenderId For an IAM user, returns the IAM user ID, for example ABCDEFGHI1JKLMNOPQ23R.
 	//    For an IAM role, returns the IAM role ID, for example ABCDE1F2GH3I4JK5LMNOP:i-a123b456.
 	//
-	//    * SentTimestamp - Returns the time the message was sent to the queue (epoch
-	//    time (http://en.wikipedia.org/wiki/Unix_time) in milliseconds).
+	//    * SentTimestamp – Returns the time the message was sent to the queue
+	//    (epoch time (http://en.wikipedia.org/wiki/Unix_time) in milliseconds).
 	//
-	//    * MessageDeduplicationId - Returns the value provided by the producer
+	//    * MessageDeduplicationId – Returns the value provided by the producer
 	//    that calls the SendMessage action.
 	//
-	//    * MessageGroupId - Returns the value provided by the producer that calls
+	//    * MessageGroupId – Returns the value provided by the producer that calls
 	//    the SendMessage action. Messages with the same MessageGroupId are returned
 	//    in sequence.
 	//
-	//    * SequenceNumber - Returns the value provided by Amazon SQS.
+	//    * SequenceNumber – Returns the value provided by Amazon SQS.
 	AttributeNames []QueueAttributeName `locationNameList:"AttributeName" type:"list" flattened:"true"`
 
 	// The maximum number of messages to return. Amazon SQS never returns more messages
@@ -80,9 +80,9 @@ type ReceiveMessageInput struct {
 	//
 	// The token used for deduplication of ReceiveMessage calls. If a networking
 	// issue occurs after a ReceiveMessage action, and instead of a response you
-	// receive a generic error, you can retry the same action with an identical
-	// ReceiveRequestAttemptId to retrieve the same set of messages, even if their
-	// visibility timeout has not yet expired.
+	// receive a generic error, it is possible to retry the same action with an
+	// identical ReceiveRequestAttemptId to retrieve the same set of messages, even
+	// if their visibility timeout has not yet expired.
 	//
 	//    * You can use ReceiveRequestAttemptId only for 5 minutes after a ReceiveMessage
 	//    action.
@@ -93,7 +93,7 @@ type ReceiveMessageInput struct {
 	//    * If a caller of the ReceiveMessage action doesn't provide a ReceiveRequestAttemptId,
 	//    Amazon SQS generates a ReceiveRequestAttemptId.
 	//
-	//    * You can retry the ReceiveMessage action with the same ReceiveRequestAttemptId
+	//    * It is possible to retry the ReceiveMessage action with the same ReceiveRequestAttemptId
 	//    if none of the messages have been modified (deleted or had their visibility
 	//    changes).
 	//
@@ -120,7 +120,7 @@ type ReceiveMessageInput struct {
 	//    no retries work until the original visibility timeout expires. As a result,
 	//    delays might occur but the messages in the queue remain in a strict order.
 	//
-	// The length of ReceiveRequestAttemptId is 128 characters. ReceiveRequestAttemptId
+	// The maximum length of ReceiveRequestAttemptId is 128 characters. ReceiveRequestAttemptId
 	// can contain alphanumeric characters (a-z, A-Z, 0-9) and punctuation (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~).
 	//
 	// For best practices of using ReceiveRequestAttemptId, see Using the ReceiveRequestAttemptId
@@ -136,6 +136,13 @@ type ReceiveMessageInput struct {
 	// in the queue before returning. If a message is available, the call returns
 	// sooner than WaitTimeSeconds. If no messages are available and the wait time
 	// expires, the call returns successfully with an empty list of messages.
+	//
+	// To avoid HTTP errors, ensure that the HTTP response timeout for ReceiveMessage
+	// requests is longer than the WaitTimeSeconds parameter. For example, with
+	// the Java SDK, you can set HTTP transport settings using the NettyNioAsyncHttpClient
+	// (https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/http/nio/netty/NettyNioAsyncHttpClient.html)
+	// for asynchronous clients, or the ApacheHttpClient (https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/http/apache/ApacheHttpClient.html)
+	// for synchronous clients.
 	WaitTimeSeconds *int64 `type:"integer"`
 }
 

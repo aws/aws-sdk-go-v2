@@ -17,6 +17,7 @@ type UpdateStandardsControlInput struct {
 	ControlStatus ControlStatus `type:"string" enum:"true"`
 
 	// A description of the reason why you are disabling a security standard control.
+	// If you are disabling a control, then this is required.
 	DisabledReason *string `type:"string"`
 
 	// The ARN of the security standard control to enable or disable.

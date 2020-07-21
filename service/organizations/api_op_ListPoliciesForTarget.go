@@ -12,7 +12,16 @@ import (
 type ListPoliciesForTargetInput struct {
 	_ struct{} `type:"structure"`
 
-	// The type of policy that you want to include in the returned list.
+	// The type of policy that you want to include in the returned list. You must
+	// specify one of the following values:
+	//
+	//    * AISERVICES_OPT_OUT_POLICY (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
+	//
+	//    * BACKUP_POLICY (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
+	//
+	//    * SERVICE_CONTROL_POLICY (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
+	//
+	//    * TAG_POLICY (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
 	//
 	// Filter is a required field
 	Filter PolicyType `type:"string" required:"true" enum:"true"`

@@ -12,7 +12,10 @@ import (
 type GetEC2InstanceRecommendationsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS account IDs for which to return instance recommendations.
+	// The IDs of the AWS accounts for which to return instance recommendations.
+	//
+	// If your account is the master account of an organization, use this parameter
+	// to specify the member accounts for which you want to return instance recommendations.
 	//
 	// Only one account ID can be specified per request.
 	AccountIds []string `locationName:"accountIds" type:"list"`
@@ -24,10 +27,10 @@ type GetEC2InstanceRecommendationsInput struct {
 	// The Amazon Resource Name (ARN) of the instances for which to return recommendations.
 	InstanceArns []string `locationName:"instanceArns" type:"list"`
 
-	// The maximum number of instance recommendations to return with a single call.
+	// The maximum number of instance recommendations to return with a single request.
 	//
-	// To retrieve the remaining results, make another call with the returned NextToken
-	// value.
+	// To retrieve the remaining results, make another request with the returned
+	// NextToken value.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
 	// The token to advance to the next page of instance recommendations.

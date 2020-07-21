@@ -42,7 +42,7 @@ type CreateAliasInput struct {
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	// The routing configuration (https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html)
+	// The routing configuration (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing)
 	// of the alias.
 	RoutingConfig *AliasRoutingConfiguration `type:"structure"`
 }

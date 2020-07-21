@@ -76,6 +76,8 @@ type ClientAPI interface {
 
 	DeleteAttributesRequest(*ecs.DeleteAttributesInput) ecs.DeleteAttributesRequest
 
+	DeleteCapacityProviderRequest(*ecs.DeleteCapacityProviderInput) ecs.DeleteCapacityProviderRequest
+
 	DeleteClusterRequest(*ecs.DeleteClusterInput) ecs.DeleteClusterRequest
 
 	DeleteServiceRequest(*ecs.DeleteServiceInput) ecs.DeleteServiceRequest

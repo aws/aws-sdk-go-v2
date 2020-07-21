@@ -17,7 +17,7 @@ type CreateStreamingDistributionWithTagsInput struct {
 	// The streaming distribution's configuration information.
 	//
 	// StreamingDistributionConfigWithTags is a required field
-	StreamingDistributionConfigWithTags *StreamingDistributionConfigWithTags `locationName:"StreamingDistributionConfigWithTags" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
+	StreamingDistributionConfigWithTags *StreamingDistributionConfigWithTags `locationName:"StreamingDistributionConfigWithTags" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2020-05-31/"`
 }
 
 // String returns the string representation
@@ -50,7 +50,7 @@ func (s CreateStreamingDistributionWithTagsInput) MarshalFields(e protocol.Field
 	if s.StreamingDistributionConfigWithTags != nil {
 		v := s.StreamingDistributionConfigWithTags
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2020-05-31/"}
 		e.SetFields(protocol.PayloadTarget, "StreamingDistributionConfigWithTags", v, metadata)
 	}
 	return nil
@@ -64,7 +64,6 @@ type CreateStreamingDistributionWithTagsOutput struct {
 	ETag *string `location:"header" locationName:"ETag" type:"string"`
 
 	// The fully qualified URI of the new streaming distribution resource just created.
-	// For example:https://cloudfront.amazonaws.com/2010-11-01/streaming-distribution/EGTXBD79H29TRA8.
 	Location *string `location:"header" locationName:"Location" type:"string"`
 
 	// The streaming distribution's information.
@@ -99,7 +98,7 @@ func (s CreateStreamingDistributionWithTagsOutput) MarshalFields(e protocol.Fiel
 	return nil
 }
 
-const opCreateStreamingDistributionWithTags = "CreateStreamingDistributionWithTags2019_03_26"
+const opCreateStreamingDistributionWithTags = "CreateStreamingDistributionWithTags2020_05_31"
 
 // CreateStreamingDistributionWithTagsRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -113,12 +112,12 @@ const opCreateStreamingDistributionWithTags = "CreateStreamingDistributionWithTa
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateStreamingDistributionWithTags
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateStreamingDistributionWithTags
 func (c *Client) CreateStreamingDistributionWithTagsRequest(input *CreateStreamingDistributionWithTagsInput) CreateStreamingDistributionWithTagsRequest {
 	op := &aws.Operation{
 		Name:       opCreateStreamingDistributionWithTags,
 		HTTPMethod: "POST",
-		HTTPPath:   "/2019-03-26/streaming-distribution?WithTags",
+		HTTPPath:   "/2020-05-31/streaming-distribution?WithTags",
 	}
 
 	if input == nil {

@@ -63,8 +63,9 @@ const opDisconnectCustomKeyStore = "DisconnectCustomKeyStore"
 //
 // While a custom key store is disconnected, all attempts to create customer
 // master keys (CMKs) in the custom key store or to use existing CMKs in cryptographic
-// operations will fail. This action can prevent users from storing and accessing
-// sensitive data.
+// operations (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
+// will fail. This action can prevent users from storing and accessing sensitive
+// data.
 //
 // To find the connection state of a custom key store, use the DescribeCustomKeyStores
 // operation. To reconnect a custom key store, use the ConnectCustomKeyStore

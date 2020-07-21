@@ -64,10 +64,6 @@ const opRegisterDBProxyTargets = "RegisterDBProxyTargets"
 // RegisterDBProxyTargetsRequest returns a request value for making API operation for
 // Amazon Relational Database Service.
 //
-//
-// This is prerelease documentation for the RDS Database Proxy feature in preview
-// release. It is subject to change.
-//
 // Associate one or more DBProxyTarget data structures with a DBProxyTargetGroup.
 //
 //    // Example sending a request using RegisterDBProxyTargetsRequest.

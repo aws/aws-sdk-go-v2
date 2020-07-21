@@ -53,7 +53,7 @@ type DescribeForecastOutput struct {
 	// The name of the forecast.
 	ForecastName *string `min:"1" type:"string"`
 
-	// The quantiles at which proababilistic forecasts were generated.
+	// The quantiles at which probabilistic forecasts were generated.
 	ForecastTypes []string `min:"1" type:"list"`
 
 	// Initially, the same as CreationTime (status is CREATE_PENDING). Updated when

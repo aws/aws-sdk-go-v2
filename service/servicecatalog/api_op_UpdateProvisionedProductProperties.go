@@ -34,9 +34,9 @@ type UpdateProvisionedProductPropertiesInput struct {
 
 	// A map that contains the provisioned product properties to be updated.
 	//
-	// The OWNER key only accepts user ARNs. The owner is the user that is allowed
-	// to see, update, terminate, and execute service actions in the provisioned
-	// product.
+	// The OWNER key accepts user ARNs and role ARNs. The owner is the user that
+	// is allowed to see, update, terminate, and execute service actions in the
+	// provisioned product.
 	//
 	// The administrator can change the owner of a provisioned product to another
 	// IAM user within the same account. Both end user owners and administrators

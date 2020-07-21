@@ -104,6 +104,10 @@ type GetIntentOutput struct {
 	// Describes how the intent is fulfilled. For more information, see PutIntent.
 	FulfillmentActivity *FulfillmentActivity `locationName:"fulfillmentActivity" type:"structure"`
 
+	// Configuration information, if any, to connect to an Amazon Kendra index with
+	// the AMAZON.KendraSearchIntent intent.
+	KendraConfiguration *KendraConfiguration `locationName:"kendraConfiguration" type:"structure"`
+
 	// The date that the intent was updated. When you create a resource, the creation
 	// date and the last updated date are the same.
 	LastUpdatedDate *time.Time `locationName:"lastUpdatedDate" type:"timestamp"`
@@ -183,6 +187,12 @@ func (s GetIntentOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "fulfillmentActivity", v, metadata)
+	}
+	if s.KendraConfiguration != nil {
+		v := s.KendraConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "kendraConfiguration", v, metadata)
 	}
 	if s.LastUpdatedDate != nil {
 		v := *s.LastUpdatedDate

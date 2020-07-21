@@ -19,7 +19,7 @@ type CreateRoomInput struct {
 	// The description for the room.
 	Description *string `min:"1" type:"string"`
 
-	// The profile ARN for the room.
+	// The profile ARN for the room. This is required.
 	ProfileArn *string `type:"string"`
 
 	// The calendar ARN for the room.

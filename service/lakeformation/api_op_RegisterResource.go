@@ -17,11 +17,14 @@ type RegisterResourceInput struct {
 	// ResourceArn is a required field
 	ResourceArn *string `type:"string" required:"true"`
 
-	// The identifier for the role.
+	// The identifier for the role that registers the resource.
 	RoleArn *string `type:"string"`
 
-	// Designates a trusted caller, an IAM principal, by registering this caller
-	// with the Data Catalog.
+	// Designates an AWS Identity and Access Management (IAM) service-linked role
+	// by registering this role with the Data Catalog. A service-linked role is
+	// a unique type of IAM role that is linked directly to Lake Formation.
+	//
+	// For more information, see Using Service-Linked Roles for Lake Formation (https://docs-aws.amazon.com/lake-formation/latest/dg/service-linked-roles.html).
 	UseServiceLinkedRole *bool `type:"boolean"`
 }
 
@@ -68,6 +71,15 @@ const opRegisterResource = "RegisterResource"
 // path to the inline policy and attaches it to the service-linked role. When
 // you register subsequent paths, Lake Formation adds the path to the existing
 // policy.
+//
+// The following request registers a new location and gives AWS Lake Formation
+// permission to use the service-linked role to access that location.
+//
+// ResourceArn = arn:aws:s3:::my-bucket UseServiceLinkedRole = true
+//
+// If UseServiceLinkedRole is not set to true, you must provide or set the RoleArn:
+//
+// arn:aws:iam::12345:role/my-data-access-role
 //
 //    // Example sending a request using RegisterResourceRequest.
 //    req := client.RegisterResourceRequest(params)

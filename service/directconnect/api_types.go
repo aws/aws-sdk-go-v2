@@ -614,7 +614,9 @@ type NewPrivateVirtualInterface struct {
 	// The ID of the virtual private gateway.
 	VirtualGatewayId *string `locationName:"virtualGatewayId" type:"string"`
 
-	// The name of the virtual interface assigned by the customer network.
+	// The name of the virtual interface assigned by the customer network. The name
+	// has a maximum of 100 characters. The following are valid characters: a-z,
+	// 0-9 and a hyphen (-).
 	//
 	// VirtualInterfaceName is a required field
 	VirtualInterfaceName *string `locationName:"virtualInterfaceName" type:"string" required:"true"`
@@ -693,7 +695,9 @@ type NewPrivateVirtualInterfaceAllocation struct {
 	// The tags associated with the private virtual interface.
 	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
-	// The name of the virtual interface assigned by the customer network.
+	// The name of the virtual interface assigned by the customer network. The name
+	// has a maximum of 100 characters. The following are valid characters: a-z,
+	// 0-9 and a hyphen (-).
 	//
 	// VirtualInterfaceName is a required field
 	VirtualInterfaceName *string `locationName:"virtualInterfaceName" type:"string" required:"true"`
@@ -772,7 +776,9 @@ type NewPublicVirtualInterface struct {
 	// The tags associated with the public virtual interface.
 	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
-	// The name of the virtual interface assigned by the customer network.
+	// The name of the virtual interface assigned by the customer network. The name
+	// has a maximum of 100 characters. The following are valid characters: a-z,
+	// 0-9 and a hyphen (-).
 	//
 	// VirtualInterfaceName is a required field
 	VirtualInterfaceName *string `locationName:"virtualInterfaceName" type:"string" required:"true"`
@@ -851,7 +857,9 @@ type NewPublicVirtualInterfaceAllocation struct {
 	// The tags associated with the public virtual interface.
 	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
-	// The name of the virtual interface assigned by the customer network.
+	// The name of the virtual interface assigned by the customer network. The name
+	// has a maximum of 100 characters. The following are valid characters: a-z,
+	// 0-9 and a hyphen (-).
 	//
 	// VirtualInterfaceName is a required field
 	VirtualInterfaceName *string `locationName:"virtualInterfaceName" type:"string" required:"true"`
@@ -931,7 +939,9 @@ type NewTransitVirtualInterface struct {
 	// The tags associated with the transitive virtual interface.
 	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
-	// The name of the virtual interface assigned by the customer network.
+	// The name of the virtual interface assigned by the customer network. The name
+	// has a maximum of 100 characters. The following are valid characters: a-z,
+	// 0-9 and a hyphen (-).
 	VirtualInterfaceName *string `locationName:"virtualInterfaceName" type:"string"`
 
 	// The ID of the VLAN.
@@ -992,7 +1002,9 @@ type NewTransitVirtualInterfaceAllocation struct {
 	// The tags associated with the transitive virtual interface.
 	Tags []Tag `locationName:"tags" min:"1" type:"list"`
 
-	// The name of the virtual interface assigned by the customer network.
+	// The name of the virtual interface assigned by the customer network. The name
+	// has a maximum of 100 characters. The following are valid characters: a-z,
+	// 0-9 and a hyphen (-).
 	VirtualInterfaceName *string `locationName:"virtualInterfaceName" type:"string"`
 
 	// The ID of the VLAN.
@@ -1185,7 +1197,9 @@ type VirtualInterface struct {
 	// The ID of the virtual interface.
 	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string"`
 
-	// The name of the virtual interface assigned by the customer network.
+	// The name of the virtual interface assigned by the customer network. The name
+	// has a maximum of 100 characters. The following are valid characters: a-z,
+	// 0-9 and a hyphen (-).
 	VirtualInterfaceName *string `locationName:"virtualInterfaceName" type:"string"`
 
 	// The state of the virtual interface. The following are the possible values:
@@ -1229,5 +1243,40 @@ type VirtualInterface struct {
 
 // String returns the string representation
 func (s VirtualInterface) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about the virtual interface failover test.
+type VirtualInterfaceTestHistory struct {
+	_ struct{} `type:"structure"`
+
+	// The BGP peers that were put in the DOWN state as part of the virtual interface
+	// failover test.
+	BgpPeers []string `locationName:"bgpPeers" type:"list"`
+
+	// The time that the virtual interface moves out of the DOWN state.
+	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
+
+	// The owner ID of the tested virtual interface.
+	OwnerAccount *string `locationName:"ownerAccount" type:"string"`
+
+	// The time that the virtual interface moves to the DOWN state.
+	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
+
+	// The status of the virtual interface failover test.
+	Status *string `locationName:"status" type:"string"`
+
+	// The time that the virtual interface failover test ran in minutes.
+	TestDurationInMinutes *int64 `locationName:"testDurationInMinutes" type:"integer"`
+
+	// The ID of the virtual interface failover test.
+	TestId *string `locationName:"testId" type:"string"`
+
+	// The ID of the tested virtual interface.
+	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string"`
+}
+
+// String returns the string representation
+func (s VirtualInterfaceTestHistory) String() string {
 	return awsutil.Prettify(s)
 }

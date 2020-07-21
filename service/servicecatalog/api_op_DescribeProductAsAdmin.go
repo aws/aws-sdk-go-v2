@@ -22,9 +22,10 @@ type DescribeProductAsAdminInput struct {
 	AcceptLanguage *string `type:"string"`
 
 	// The product identifier.
-	//
-	// Id is a required field
-	Id *string `min:"1" type:"string" required:"true"`
+	Id *string `min:"1" type:"string"`
+
+	// The product name.
+	Name *string `type:"string"`
 }
 
 // String returns the string representation
@@ -35,10 +36,6 @@ func (s DescribeProductAsAdminInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeProductAsAdminInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeProductAsAdminInput"}
-
-	if s.Id == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Id"))
-	}
 	if s.Id != nil && len(*s.Id) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Id", 1))
 	}

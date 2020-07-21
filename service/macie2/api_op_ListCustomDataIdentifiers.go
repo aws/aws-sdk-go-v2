@@ -102,6 +102,12 @@ func (c *Client) ListCustomDataIdentifiersRequest(input *ListCustomDataIdentifie
 		Name:       opListCustomDataIdentifiers,
 		HTTPMethod: "POST",
 		HTTPPath:   "/custom-data-identifiers/list",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -135,6 +141,53 @@ func (r ListCustomDataIdentifiersRequest) Send(ctx context.Context) (*ListCustom
 	}
 
 	return resp, nil
+}
+
+// NewListCustomDataIdentifiersRequestPaginator returns a paginator for ListCustomDataIdentifiers.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListCustomDataIdentifiersRequest(input)
+//   p := macie2.NewListCustomDataIdentifiersRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListCustomDataIdentifiersPaginator(req ListCustomDataIdentifiersRequest) ListCustomDataIdentifiersPaginator {
+	return ListCustomDataIdentifiersPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListCustomDataIdentifiersInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListCustomDataIdentifiersPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListCustomDataIdentifiersPaginator struct {
+	aws.Pager
+}
+
+func (p *ListCustomDataIdentifiersPaginator) CurrentPage() *ListCustomDataIdentifiersOutput {
+	return p.Pager.CurrentPage().(*ListCustomDataIdentifiersOutput)
 }
 
 // ListCustomDataIdentifiersResponse is the response type for the

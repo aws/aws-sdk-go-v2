@@ -575,6 +575,70 @@ func (s DomainInfo) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+type DomainInformation struct {
+	_ struct{} `type:"structure"`
+
+	// The name of an Elasticsearch domain. Domain names are unique across the domains
+	// owned by an account within an AWS region. Domain names start with a letter
+	// or number and can contain the following characters: a-z (lowercase), 0-9,
+	// and - (hyphen).
+	//
+	// DomainName is a required field
+	DomainName *string `min:"3" type:"string" required:"true"`
+
+	OwnerId *string `min:"12" type:"string"`
+
+	Region *string `type:"string"`
+}
+
+// String returns the string representation
+func (s DomainInformation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DomainInformation) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DomainInformation"}
+
+	if s.DomainName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("DomainName"))
+	}
+	if s.DomainName != nil && len(*s.DomainName) < 3 {
+		invalidParams.Add(aws.NewErrParamMinLen("DomainName", 3))
+	}
+	if s.OwnerId != nil && len(*s.OwnerId) < 12 {
+		invalidParams.Add(aws.NewErrParamMinLen("OwnerId", 12))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DomainInformation) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DomainName != nil {
+		v := *s.DomainName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DomainName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.OwnerId != nil {
+		v := *s.OwnerId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OwnerId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Region != nil {
+		v := *s.Region
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Region", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Information on a package that is associated with a domain.
 type DomainPackageDetails struct {
 	_ struct{} `type:"structure"`
@@ -1459,6 +1523,163 @@ func (s ErrorDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A filter used to limit results when describing inbound or outbound cross-cluster
+// search connections. Multiple values can be specified per filter. A cross-cluster
+// search connection must match at least one of the specified values for it
+// to be returned from an operation.
+type Filter struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the name of the filter.
+	Name *string `min:"1" type:"string"`
+
+	// Contains one or more values for the filter.
+	Values []string `min:"1" type:"list"`
+}
+
+// String returns the string representation
+func (s Filter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Filter) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Filter"}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+	if s.Values != nil && len(s.Values) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Values", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Filter) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Values != nil {
+		v := s.Values
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Values", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// Specifies details of an inbound connection.
+type InboundCrossClusterSearchConnection struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the InboundCrossClusterSearchConnectionStatus for the outbound
+	// connection.
+	ConnectionStatus *InboundCrossClusterSearchConnectionStatus `type:"structure"`
+
+	// Specifies the connection id for the inbound cross-cluster search connection.
+	CrossClusterSearchConnectionId *string `type:"string"`
+
+	// Specifies the DomainInformation for the destination Elasticsearch domain.
+	DestinationDomainInfo *DomainInformation `type:"structure"`
+
+	// Specifies the DomainInformation for the source Elasticsearch domain.
+	SourceDomainInfo *DomainInformation `type:"structure"`
+}
+
+// String returns the string representation
+func (s InboundCrossClusterSearchConnection) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InboundCrossClusterSearchConnection) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ConnectionStatus != nil {
+		v := s.ConnectionStatus
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ConnectionStatus", v, metadata)
+	}
+	if s.CrossClusterSearchConnectionId != nil {
+		v := *s.CrossClusterSearchConnectionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CrossClusterSearchConnectionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DestinationDomainInfo != nil {
+		v := s.DestinationDomainInfo
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "DestinationDomainInfo", v, metadata)
+	}
+	if s.SourceDomainInfo != nil {
+		v := s.SourceDomainInfo
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SourceDomainInfo", v, metadata)
+	}
+	return nil
+}
+
+// Specifies the coonection status of an inbound cross-cluster search connection.
+type InboundCrossClusterSearchConnectionStatus struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies verbose information for the inbound connection status.
+	Message *string `type:"string"`
+
+	// The state code for inbound connection. This can be one of the following:
+	//
+	//    * PENDING_ACCEPTANCE: Inbound connection is not yet accepted by destination
+	//    domain owner.
+	//
+	//    * APPROVED: Inbound connection is pending acceptance by destination domain
+	//    owner.
+	//
+	//    * REJECTING: Inbound connection rejection is in process.
+	//
+	//    * REJECTED: Inbound connection is rejected.
+	//
+	//    * DELETING: Inbound connection deletion is in progress.
+	//
+	//    * DELETED: Inbound connection is deleted and cannot be used further.
+	StatusCode InboundCrossClusterSearchConnectionStatusCode `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s InboundCrossClusterSearchConnectionStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InboundCrossClusterSearchConnectionStatus) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Message != nil {
+		v := *s.Message
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Message", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.StatusCode) > 0 {
+		v := s.StatusCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StatusCode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // InstanceCountLimits represents the limits on number of instances that be
 // created in Amazon Elasticsearch for given InstanceType.
 type InstanceCountLimits struct {
@@ -1844,6 +2065,118 @@ func (s OptionStatus) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "UpdateVersion", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Specifies details of an outbound connection.
+type OutboundCrossClusterSearchConnection struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the connection alias for the outbound cross-cluster search connection.
+	ConnectionAlias *string `type:"string"`
+
+	// Specifies the OutboundCrossClusterSearchConnectionStatus for the outbound
+	// connection.
+	ConnectionStatus *OutboundCrossClusterSearchConnectionStatus `type:"structure"`
+
+	// Specifies the connection id for the outbound cross-cluster search connection.
+	CrossClusterSearchConnectionId *string `type:"string"`
+
+	// Specifies the DomainInformation for the destination Elasticsearch domain.
+	DestinationDomainInfo *DomainInformation `type:"structure"`
+
+	// Specifies the DomainInformation for the source Elasticsearch domain.
+	SourceDomainInfo *DomainInformation `type:"structure"`
+}
+
+// String returns the string representation
+func (s OutboundCrossClusterSearchConnection) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OutboundCrossClusterSearchConnection) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ConnectionAlias != nil {
+		v := *s.ConnectionAlias
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ConnectionAlias", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ConnectionStatus != nil {
+		v := s.ConnectionStatus
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ConnectionStatus", v, metadata)
+	}
+	if s.CrossClusterSearchConnectionId != nil {
+		v := *s.CrossClusterSearchConnectionId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CrossClusterSearchConnectionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DestinationDomainInfo != nil {
+		v := s.DestinationDomainInfo
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "DestinationDomainInfo", v, metadata)
+	}
+	if s.SourceDomainInfo != nil {
+		v := s.SourceDomainInfo
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "SourceDomainInfo", v, metadata)
+	}
+	return nil
+}
+
+// Specifies the connection status of an outbound cross-cluster search connection.
+type OutboundCrossClusterSearchConnectionStatus struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies verbose information for the outbound connection status.
+	Message *string `type:"string"`
+
+	// The state code for outbound connection. This can be one of the following:
+	//
+	//    * VALIDATING: The outbound connection request is being validated.
+	//
+	//    * VALIDATION_FAILED: Validation failed for the connection request.
+	//
+	//    * PENDING_ACCEPTANCE: Outbound connection request is validated and is
+	//    not yet accepted by destination domain owner.
+	//
+	//    * PROVISIONING: Outbound connection request is in process.
+	//
+	//    * ACTIVE: Outbound connection is active and ready to use.
+	//
+	//    * REJECTED: Outbound connection request is rejected by destination domain
+	//    owner.
+	//
+	//    * DELETING: Outbound connection deletion is in progress.
+	//
+	//    * DELETED: Outbound connection is deleted and cannot be used further.
+	StatusCode OutboundCrossClusterSearchConnectionStatusCode `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s OutboundCrossClusterSearchConnectionStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OutboundCrossClusterSearchConnectionStatus) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Message != nil {
+		v := *s.Message
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Message", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.StatusCode) > 0 {
+		v := s.StatusCode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "StatusCode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }

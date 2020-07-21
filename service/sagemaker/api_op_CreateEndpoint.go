@@ -98,6 +98,17 @@ const opCreateEndpoint = "CreateEndpoint"
 // When it receives the request, Amazon SageMaker creates the endpoint, launches
 // the resources (ML compute instances), and deploys the model(s) on them.
 //
+// When you call CreateEndpoint, a load call is made to DynamoDB to verify that
+// your endpoint configuration exists. When you read data from a DynamoDB table
+// supporting Eventually Consistent Reads (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html),
+// the response might not reflect the results of a recently completed write
+// operation. The response might include some stale data. If the dependent entities
+// are not yet in DynamoDB, this causes a validation error. If you repeat your
+// read request after a short time, the response should return the latest data.
+// So retry logic is recommended to handle these possible issues. We also recommend
+// that customers call DescribeEndpointConfig before calling CreateEndpoint
+// to minimize the potential impact of a DynamoDB eventually consistent read.
+//
 // When Amazon SageMaker receives the request, it sets the endpoint status to
 // Creating. After it creates the endpoint, it sets the status to InService.
 // Amazon SageMaker can then process incoming requests for inferences. To check

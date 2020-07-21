@@ -287,6 +287,41 @@ func (enum CountryCode) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type FallbackBehavior string
+
+// Enum values for FallbackBehavior
+const (
+	FallbackBehaviorMatch   FallbackBehavior = "MATCH"
+	FallbackBehaviorNoMatch FallbackBehavior = "NO_MATCH"
+)
+
+func (enum FallbackBehavior) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FallbackBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ForwardedIPPosition string
+
+// Enum values for ForwardedIPPosition
+const (
+	ForwardedIPPositionFirst ForwardedIPPosition = "FIRST"
+	ForwardedIPPositionLast  ForwardedIPPosition = "LAST"
+	ForwardedIPPositionAny   ForwardedIPPosition = "ANY"
+)
+
+func (enum ForwardedIPPosition) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ForwardedIPPosition) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type IPAddressVersion string
 
 // Enum values for IPAddressVersion
@@ -346,6 +381,11 @@ const (
 	ParameterExceptionFieldTagKeys                        ParameterExceptionField = "TAG_KEYS"
 	ParameterExceptionFieldMetricName                     ParameterExceptionField = "METRIC_NAME"
 	ParameterExceptionFieldFirewallManagerStatement       ParameterExceptionField = "FIREWALL_MANAGER_STATEMENT"
+	ParameterExceptionFieldFallbackBehavior               ParameterExceptionField = "FALLBACK_BEHAVIOR"
+	ParameterExceptionFieldPosition                       ParameterExceptionField = "POSITION"
+	ParameterExceptionFieldForwardedIpConfig              ParameterExceptionField = "FORWARDED_IP_CONFIG"
+	ParameterExceptionFieldIpSetForwardedIpConfig         ParameterExceptionField = "IP_SET_FORWARDED_IP_CONFIG"
+	ParameterExceptionFieldHeaderName                     ParameterExceptionField = "HEADER_NAME"
 )
 
 func (enum ParameterExceptionField) MarshalValue() (string, error) {
@@ -381,7 +421,8 @@ type RateBasedStatementAggregateKeyType string
 
 // Enum values for RateBasedStatementAggregateKeyType
 const (
-	RateBasedStatementAggregateKeyTypeIp RateBasedStatementAggregateKeyType = "IP"
+	RateBasedStatementAggregateKeyTypeIp          RateBasedStatementAggregateKeyType = "IP"
+	RateBasedStatementAggregateKeyTypeForwardedIp RateBasedStatementAggregateKeyType = "FORWARDED_IP"
 )
 
 func (enum RateBasedStatementAggregateKeyType) MarshalValue() (string, error) {

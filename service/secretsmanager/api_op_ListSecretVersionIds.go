@@ -17,7 +17,7 @@ type ListSecretVersionIdsInput struct {
 	// deprecated and are subject to deletion by Secrets Manager as needed.
 	IncludeDeprecated *bool `type:"boolean"`
 
-	// (Optional) Limits the number of results that you want to include in the response.
+	// (Optional) Limits the number of results you want to include in the response.
 	// If you don't include this parameter, it defaults to a value that's specific
 	// to the operation. If additional items exist beyond the maximum you specify,
 	// the NextToken response element is present and has a value (isn't null). Include
@@ -29,9 +29,9 @@ type ListSecretVersionIdsInput struct {
 	MaxResults *int64 `min:"1" type:"integer"`
 
 	// (Optional) Use this parameter in a request if you receive a NextToken response
-	// in a previous request that indicates that there's more output available.
-	// In a subsequent call, set it to the value of the previous call's NextToken
-	// response to indicate where the output should continue from.
+	// in a previous request indicating there's more output available. In a subsequent
+	// call, set it to the value of the previous call NextToken response to indicate
+	// where the output should continue from.
 	NextToken *string `min:"1" type:"string"`
 
 	// The identifier for the secret containing the versions you want to list. You
@@ -48,7 +48,12 @@ type ListSecretVersionIdsInput struct {
 	// a partial ARN, then those characters cause Secrets Manager to assume that
 	// you’re specifying a complete ARN. This confusion can cause unexpected results.
 	// To avoid this situation, we recommend that you don’t create secret names
-	// that end with a hyphen followed by six characters.
+	// ending with a hyphen followed by six characters.
+	//
+	// If you specify an incomplete ARN without the random suffix, and instead provide
+	// the 'friendly name', you must not include the random suffix. If you do include
+	// the random suffix added by Secrets Manager, you receive either a ResourceNotFoundException
+	// or an AccessDeniedException error, depending on your permissions.
 	//
 	// SecretId is a required field
 	SecretId *string `min:"1" type:"string" required:"true"`
@@ -99,8 +104,8 @@ type ListSecretVersionIdsOutput struct {
 	Name *string `min:"1" type:"string"`
 
 	// If present in the response, this value indicates that there's more output
-	// available than what's included in the current response. This can occur even
-	// when the response includes no values at all, such as when you ask for a filtered
+	// available than included in the current response. This can occur even when
+	// the response includes no values at all, such as when you ask for a filtered
 	// view of a very long list. Use this value in the NextToken request parameter
 	// in a subsequent call to the operation to continue processing and get the
 	// next part of the output. You should repeat this until the NextToken response
@@ -128,7 +133,7 @@ const opListSecretVersionIds = "ListSecretVersionIds"
 //
 // Always check the NextToken response parameter when calling any of the List*
 // operations. These operations can occasionally return an empty or shorter
-// than expected list of results even when there are more results available.
+// than expected list of results even when there more results become available.
 // When this happens, the NextToken response parameter contains a value to pass
 // to the next call to the same API to request the next part of the list.
 //

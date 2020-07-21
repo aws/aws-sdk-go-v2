@@ -13,8 +13,12 @@ import (
 type UpdateEmergencyContactSettingsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of email addresses that the DRT can use to contact you during a suspected
-	// attack.
+	// A list of email addresses and phone numbers that the DDoS Response Team (DRT)
+	// can use to contact you if you have proactive engagement enabled, for escalations
+	// to the DRT and to initiate proactive customer support.
+	//
+	// If you have proactive engagement enabled, the contact list must include at
+	// least one phone number.
 	EmergencyContactList []EmergencyContact `type:"list"`
 }
 
@@ -54,8 +58,10 @@ const opUpdateEmergencyContactSettings = "UpdateEmergencyContactSettings"
 // UpdateEmergencyContactSettingsRequest returns a request value for making API operation for
 // AWS Shield.
 //
-// Updates the details of the list of email addresses that the DRT can use to
-// contact you during a suspected attack.
+// Updates the details of the list of email addresses and phone numbers that
+// the DDoS Response Team (DRT) can use to contact you if you have proactive
+// engagement enabled, for escalations to the DRT and to initiate proactive
+// customer support.
 //
 //    // Example sending a request using UpdateEmergencyContactSettingsRequest.
 //    req := client.UpdateEmergencyContactSettingsRequest(params)

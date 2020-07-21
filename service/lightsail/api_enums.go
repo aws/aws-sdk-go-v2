@@ -305,6 +305,8 @@ const (
 	InstanceMetricNameStatusCheckFailed         InstanceMetricName = "StatusCheckFailed"
 	InstanceMetricNameStatusCheckFailedInstance InstanceMetricName = "StatusCheckFailed_Instance"
 	InstanceMetricNameStatusCheckFailedSystem   InstanceMetricName = "StatusCheckFailed_System"
+	InstanceMetricNameBurstCapacityTime         InstanceMetricName = "BurstCapacityTime"
+	InstanceMetricNameBurstCapacityPercentage   InstanceMetricName = "BurstCapacityPercentage"
 )
 
 func (enum InstanceMetricName) MarshalValue() (string, error) {
@@ -565,6 +567,8 @@ const (
 	MetricNameFreeStorageSpace               MetricName = "FreeStorageSpace"
 	MetricNameNetworkReceiveThroughput       MetricName = "NetworkReceiveThroughput"
 	MetricNameNetworkTransmitThroughput      MetricName = "NetworkTransmitThroughput"
+	MetricNameBurstCapacityTime              MetricName = "BurstCapacityTime"
+	MetricNameBurstCapacityPercentage        MetricName = "BurstCapacityPercentage"
 )
 
 func (enum MetricName) MarshalValue() (string, error) {

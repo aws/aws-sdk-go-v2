@@ -54,6 +54,9 @@ type DescribePackagingGroupOutput struct {
 
 	Arn *string `locationName:"arn" type:"string"`
 
+	// CDN Authorization credentials
+	Authorization *Authorization `locationName:"authorization" type:"structure"`
+
 	DomainName *string `locationName:"domainName" type:"string"`
 
 	Id *string `locationName:"id" type:"string"`
@@ -74,6 +77,12 @@ func (s DescribePackagingGroupOutput) MarshalFields(e protocol.FieldEncoder) err
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Authorization != nil {
+		v := s.Authorization
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "authorization", v, metadata)
 	}
 	if s.DomainName != nil {
 		v := *s.DomainName

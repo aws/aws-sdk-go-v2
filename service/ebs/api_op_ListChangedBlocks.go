@@ -123,7 +123,7 @@ type ListChangedBlocksOutput struct {
 	NextToken *string `type:"string"`
 
 	// The size of the volume in GB.
-	VolumeSize *int64 `type:"long"`
+	VolumeSize *int64 `min:"1" type:"long"`
 }
 
 // String returns the string representation

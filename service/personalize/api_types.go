@@ -119,6 +119,9 @@ type BatchInferenceJob struct {
 	// If the batch inference job failed, the reason for the failure.
 	FailureReason *string `locationName:"failureReason" type:"string"`
 
+	// The ARN of the filter used on the batch inference job.
+	FilterArn *string `locationName:"filterArn" type:"string"`
+
 	// The Amazon S3 path that leads to the input data used to generate the batch
 	// inference job.
 	JobInput *BatchInferenceJobInput `locationName:"jobInput" type:"structure"`
@@ -953,6 +956,78 @@ type FeatureTransformation struct {
 
 // String returns the string representation
 func (s FeatureTransformation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Contains information on a recommendation filter, including its ARN, status,
+// and filter expression.
+type Filter struct {
+	_ struct{} `type:"structure"`
+
+	// The time at which the filter was created.
+	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp"`
+
+	// The ARN of the dataset group to which the filter belongs.
+	DatasetGroupArn *string `locationName:"datasetGroupArn" type:"string"`
+
+	// If the filter failed, the reason for its failure.
+	FailureReason *string `locationName:"failureReason" type:"string"`
+
+	// The ARN of the filter.
+	FilterArn *string `locationName:"filterArn" type:"string"`
+
+	// Specifies the type of item interactions to filter out of recommendation results.
+	// The filter expression must follow the following format:
+	//
+	// EXCLUDE itemId WHERE INTERACTIONS.event_type in ("EVENT_TYPE")
+	//
+	// Where "EVENT_TYPE" is the type of event to filter out. For more information,
+	// see Using Filters with Amazon Personalize.
+	FilterExpression *string `locationName:"filterExpression" min:"1" type:"string" sensitive:"true"`
+
+	// The time at which the filter was last updated.
+	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
+
+	// The name of the filter.
+	Name *string `locationName:"name" min:"1" type:"string"`
+
+	// The status of the filter.
+	Status *string `locationName:"status" type:"string"`
+}
+
+// String returns the string representation
+func (s Filter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A short summary of a filter's attributes.
+type FilterSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The time at which the filter was created.
+	CreationDateTime *time.Time `locationName:"creationDateTime" type:"timestamp"`
+
+	// The ARN of the dataset group to which the filter belongs.
+	DatasetGroupArn *string `locationName:"datasetGroupArn" type:"string"`
+
+	// If the filter failed, the reason for the failure.
+	FailureReason *string `locationName:"failureReason" type:"string"`
+
+	// The ARN of the filter.
+	FilterArn *string `locationName:"filterArn" type:"string"`
+
+	// The time at which the filter was last updated.
+	LastUpdatedDateTime *time.Time `locationName:"lastUpdatedDateTime" type:"timestamp"`
+
+	// The name of the filter.
+	Name *string `locationName:"name" min:"1" type:"string"`
+
+	// The status of the filter.
+	Status *string `locationName:"status" type:"string"`
+}
+
+// String returns the string representation
+func (s FilterSummary) String() string {
 	return awsutil.Prettify(s)
 }
 

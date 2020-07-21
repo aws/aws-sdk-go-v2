@@ -41,6 +41,8 @@ const opEnableAWSOrganizationsAccess = "EnableAWSOrganizationsAccess"
 // on your behalf so that your shares can be in sync with any changes in your
 // AWS Organizations structure.
 //
+// Note that a delegated administrator is not authorized to invoke EnableAWSOrganizationsAccess.
+//
 //    // Example sending a request using EnableAWSOrganizationsAccessRequest.
 //    req := client.EnableAWSOrganizationsAccessRequest(params)
 //    resp, err := req.Send(context.TODO())

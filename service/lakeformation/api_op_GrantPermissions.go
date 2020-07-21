@@ -108,7 +108,7 @@ const opGrantPermissions = "GrantPermissions"
 // and data organized in underlying data storage such as Amazon S3.
 //
 // For information about permissions, see Security and Access Control to Metadata
-// and Data (https://docs-aws.amazon.com/michigan/latest/dg/security-data-access.html).
+// and Data (https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html).
 //
 //    // Example sending a request using GrantPermissionsRequest.
 //    req := client.GrantPermissionsRequest(params)

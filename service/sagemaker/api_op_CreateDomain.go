@@ -13,7 +13,7 @@ import (
 type CreateDomainInput struct {
 	_ struct{} `type:"structure"`
 
-	// The mode of authentication that member use to access the domain.
+	// The mode of authentication that members use to access the domain.
 	//
 	// AuthMode is a required field
 	AuthMode AuthMode `type:"string" required:"true" enum:"true"`
@@ -32,17 +32,18 @@ type CreateDomainInput struct {
 	// customer master key (CMK) is not supported.
 	HomeEfsFileSystemKmsKeyId *string `type:"string"`
 
-	// Security setting to limit to a set of subnets.
+	// The VPC subnets to use for communication with the EFS volume.
 	//
 	// SubnetIds is a required field
 	SubnetIds []string `min:"1" type:"list" required:"true"`
 
-	// Each tag consists of a key and an optional value. Tag keys must be unique
-	// per resource.
+	// Tags to associated with the Domain. Each tag consists of a key and an optional
+	// value. Tag keys must be unique per resource. Tags are searchable using the
+	// Search API.
 	Tags []Tag `type:"list"`
 
-	// Security setting to limit the domain's communication to a Amazon Virtual
-	// Private Cloud.
+	// The ID of the Amazon Virtual Private Cloud (VPC) to use for communication
+	// with the EFS volume.
 	//
 	// VpcId is a required field
 	VpcId *string `type:"string" required:"true"`
@@ -117,15 +118,24 @@ const opCreateDomain = "CreateDomain"
 // CreateDomainRequest returns a request value for making API operation for
 // Amazon SageMaker Service.
 //
-// Creates a Domain for Amazon SageMaker Studio, which can be accessed by end-users
-// in a web browser. A Domain has an associated directory, list of authorized
-// users, and a variety of security, application, policies, and Amazon Virtual
-// Private Cloud configurations. An AWS account is limited to one Domain, per
-// region. Users within a domain can share notebook files and other artifacts
-// with each other. When a Domain is created, an Amazon Elastic File System
-// (EFS) is also created for use by all of the users within the Domain. Each
-// user receives a private home directory within the EFS for notebooks, Git
-// repositories, and data files.
+// Creates a Domain used by SageMaker Studio. A domain consists of an associated
+// directory, a list of authorized users, and a variety of security, application,
+// policy, and Amazon Virtual Private Cloud (VPC) configurations. An AWS account
+// is limited to one domain per region. Users within a domain can share notebook
+// files and other artifacts with each other.
+//
+// When a domain is created, an Amazon Elastic File System (EFS) volume is also
+// created for use by all of the users within the domain. Each user receives
+// a private home directory within the EFS for notebooks, Git repositories,
+// and data files.
+//
+// All traffic between the domain and the EFS volume is communicated through
+// the specified subnet IDs. All other traffic goes over the Internet through
+// an Amazon SageMaker system VPC. The EFS traffic uses the NFS/TCP protocol
+// over port 2049.
+//
+// NFS traffic over TCP on port 2049 needs to be allowed in both inbound and
+// outbound rules in order to launch a SageMaker Studio app successfully.
 //
 //    // Example sending a request using CreateDomainRequest.
 //    req := client.CreateDomainRequest(params)

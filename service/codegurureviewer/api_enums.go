@@ -25,9 +25,10 @@ type ProviderType string
 
 // Enum values for ProviderType
 const (
-	ProviderTypeCodeCommit ProviderType = "CodeCommit"
-	ProviderTypeGitHub     ProviderType = "GitHub"
-	ProviderTypeBitbucket  ProviderType = "Bitbucket"
+	ProviderTypeCodeCommit             ProviderType = "CodeCommit"
+	ProviderTypeGitHub                 ProviderType = "GitHub"
+	ProviderTypeBitbucket              ProviderType = "Bitbucket"
+	ProviderTypeGitHubEnterpriseServer ProviderType = "GitHubEnterpriseServer"
 )
 
 func (enum ProviderType) MarshalValue() (string, error) {

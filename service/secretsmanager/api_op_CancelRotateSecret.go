@@ -12,9 +12,8 @@ import (
 type CancelRotateSecretInput struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the secret for which you want to cancel a rotation request. You
-	// can specify either the Amazon Resource Name (ARN) or the friendly name of
-	// the secret.
+	// Specifies the secret to cancel a rotation request. You can specify either
+	// the Amazon Resource Name (ARN) or the friendly name of the secret.
 	//
 	// If you specify an ARN, we generally recommend that you specify a complete
 	// ARN. You can specify a partial ARN too—for example, if you don’t include
@@ -26,7 +25,12 @@ type CancelRotateSecretInput struct {
 	// a partial ARN, then those characters cause Secrets Manager to assume that
 	// you’re specifying a complete ARN. This confusion can cause unexpected results.
 	// To avoid this situation, we recommend that you don’t create secret names
-	// that end with a hyphen followed by six characters.
+	// ending with a hyphen followed by six characters.
+	//
+	// If you specify an incomplete ARN without the random suffix, and instead provide
+	// the 'friendly name', you must not include the random suffix. If you do include
+	// the random suffix added by Secrets Manager, you receive either a ResourceNotFoundException
+	// or an AccessDeniedException error, depending on your permissions.
 	//
 	// SecretId is a required field
 	SecretId *string `min:"1" type:"string" required:"true"`
@@ -63,11 +67,11 @@ type CancelRotateSecretOutput struct {
 	// The friendly name of the secret for which rotation was canceled.
 	Name *string `min:"1" type:"string"`
 
-	// The unique identifier of the version of the secret that was created during
-	// the rotation. This version might not be complete, and should be evaluated
-	// for possible deletion. At the very least, you should remove the VersionStage
-	// value AWSPENDING to enable this version to be deleted. Failing to clean up
-	// a cancelled rotation can block you from successfully starting future rotations.
+	// The unique identifier of the version of the secret created during the rotation.
+	// This version might not be complete, and should be evaluated for possible
+	// deletion. At the very least, you should remove the VersionStage value AWSPENDING
+	// to enable this version to be deleted. Failing to clean up a cancelled rotation
+	// can block you from successfully starting future rotations.
 	VersionId *string `min:"32" type:"string"`
 }
 
@@ -82,28 +86,28 @@ const opCancelRotateSecret = "CancelRotateSecret"
 // AWS Secrets Manager.
 //
 // Disables automatic scheduled rotation and cancels the rotation of a secret
-// if one is currently in progress.
+// if currently in progress.
 //
 // To re-enable scheduled rotation, call RotateSecret with AutomaticallyRotateAfterDays
-// set to a value greater than 0. This will immediately rotate your secret and
-// then enable the automatic schedule.
+// set to a value greater than 0. This immediately rotates your secret and then
+// enables the automatic schedule.
 //
-// If you cancel a rotation that is in progress, it can leave the VersionStage
-// labels in an unexpected state. Depending on what step of the rotation was
-// in progress, you might need to remove the staging label AWSPENDING from the
-// partially created version, specified by the VersionId response value. You
-// should also evaluate the partially rotated new version to see if it should
-// be deleted, which you can do by removing all staging labels from the new
-// version's VersionStage field.
+// If you cancel a rotation while in progress, it can leave the VersionStage
+// labels in an unexpected state. Depending on the step of the rotation in progress,
+// you might need to remove the staging label AWSPENDING from the partially
+// created version, specified by the VersionId response value. You should also
+// evaluate the partially rotated new version to see if it should be deleted,
+// which you can do by removing all staging labels from the new version VersionStage
+// field.
 //
 // To successfully start a rotation, the staging label AWSPENDING must be in
 // one of the following states:
 //
-//    * Not be attached to any version at all
+//    * Not attached to any version at all
 //
 //    * Attached to the same version as the staging label AWSCURRENT
 //
-// If the staging label AWSPENDING is attached to a different version than the
+// If the staging label AWSPENDING attached to a different version than the
 // version with AWSCURRENT then the attempt to rotate fails.
 //
 // Minimum permissions

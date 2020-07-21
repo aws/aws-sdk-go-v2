@@ -68,11 +68,12 @@ type CustomKeyStoresListEntry struct {
 	//    to the custom key store.
 	//
 	//    * SUBNET_NOT_FOUND - A subnet in the AWS CloudHSM cluster configuration
-	//    was deleted. If AWS KMS cannot find all of the subnets that were configured
-	//    for the cluster when the custom key store was created, attempts to connect
-	//    fail. To fix this error, create a cluster from a backup and associate
-	//    it with your custom key store. This process includes selecting a VPC and
-	//    subnets. For details, see How to Fix a Connection Failure (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-failed)
+	//    was deleted. If AWS KMS cannot find all of the subnets in the cluster
+	//    configuration, attempts to connect the custom key store to the AWS CloudHSM
+	//    cluster fail. To fix this error, create a cluster from a recent backup
+	//    and associate it with your custom key store. (This process creates a new
+	//    cluster configuration with a VPC and private subnets.) For details, see
+	//    How to Fix a Connection Failure (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-failed)
 	//    in the AWS Key Management Service Developer Guide.
 	//
 	//    * USER_LOCKED_OUT - The kmsuser CU account is locked out of the associated
@@ -135,24 +136,16 @@ func (s CustomKeyStoresListEntry) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Use this structure to allow cryptographic operations in the grant only when
-// the operation request includes the specified encryption context (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context).
+// Use this structure to allow cryptographic operations (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
+// in the grant only when the operation request includes the specified encryption
+// context (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context).
 //
-// AWS KMS applies the grant constraints only when the grant allows a cryptographic
-// operation that accepts an encryption context as input, such as the following.
-//
-//    * Encrypt
-//
-//    * Decrypt
-//
-//    * GenerateDataKey
-//
-//    * GenerateDataKeyWithoutPlaintext
-//
-//    * ReEncrypt
-//
-// AWS KMS does not apply the grant constraints to other operations, such as
-// DescribeKey or ScheduleKeyDeletion.
+// AWS KMS applies the grant constraints only to cryptographic operations that
+// support an encryption context, that is, all cryptographic operations with
+// a symmetric CMK (https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html#symmetric-cmks).
+// Grant constraints are not applied to operations that do not support an encryption
+// context, such as cryptographic operations with asymmetric CMKs and management
+// operations, such as DescribeKey or ScheduleKeyDeletion.
 //
 // In a cryptographic operation, the encryption context in the decryption operation
 // must be an exact, case-sensitive match for the keys and values in the encryption
@@ -170,16 +163,16 @@ type GrantConstraints struct {
 	_ struct{} `type:"structure"`
 
 	// A list of key-value pairs that must match the encryption context in the cryptographic
-	// operation request. The grant allows the operation only when the encryption
-	// context in the request is the same as the encryption context specified in
-	// this constraint.
+	// operation (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
+	// request. The grant allows the operation only when the encryption context
+	// in the request is the same as the encryption context specified in this constraint.
 	EncryptionContextEquals map[string]string `type:"map"`
 
 	// A list of key-value pairs that must be included in the encryption context
-	// of the cryptographic operation request. The grant allows the cryptographic
-	// operation only when the encryption context in the request includes the key-value
-	// pairs specified in this constraint, although it can include additional key-value
-	// pairs.
+	// of the cryptographic operation (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
+	// request. The grant allows the cryptographic operation only when the encryption
+	// context in the request includes the key-value pairs specified in this constraint,
+	// although it can include additional key-value pairs.
 	EncryptionContextSubset map[string]string `type:"map"`
 }
 
@@ -188,7 +181,7 @@ func (s GrantConstraints) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Contains information about an entry in a list of grants.
+// Contains information about a grant.
 type GrantListEntry struct {
 	_ struct{} `type:"structure"`
 
@@ -202,7 +195,13 @@ type GrantListEntry struct {
 	// The unique identifier for the grant.
 	GrantId *string `min:"1" type:"string"`
 
-	// The principal that receives the grant's permissions.
+	// The identity that gets the permissions in the grant.
+	//
+	// The GranteePrincipal field in the ListGrants response usually contains the
+	// user or role designated as the grantee principal in the grant. However, when
+	// the grantee principal in the grant is an AWS service, the GranteePrincipal
+	// field contains the service principal (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services),
+	// which might represent several different grantee principals.
 	GranteePrincipal *string `min:"1" type:"string"`
 
 	// The AWS account under which the grant was issued.
@@ -288,8 +287,8 @@ type KeyMetadata struct {
 	// is true, otherwise it is false.
 	Enabled *bool `type:"boolean"`
 
-	// A list of encryption algorithms that the CMK supports. You cannot use the
-	// CMK with other encryption algorithms within AWS KMS.
+	// The encryption algorithms that the CMK supports. You cannot use the CMK with
+	// other encryption algorithms within AWS KMS.
 	//
 	// This field appears only when the KeyUsage of the CMK is ENCRYPT_DECRYPT.
 	EncryptionAlgorithms []EncryptionAlgorithmSpec `type:"list"`
@@ -309,14 +308,15 @@ type KeyMetadata struct {
 	// in the AWS Key Management Service Developer Guide.
 	KeyManager KeyManagerType `type:"string" enum:"true"`
 
-	// The state of the CMK.
+	// The current status of the CMK.
 	//
-	// For more information about how key state affects the use of a CMK, see How
-	// Key State Affects the Use of a Customer Master Key (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+	// For more information about how key state affects the use of a CMK, see Key
+	// state: Effect on your CMK (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
 	// in the AWS Key Management Service Developer Guide.
 	KeyState KeyState `type:"string" enum:"true"`
 
-	// The cryptographic operations for which you can use the CMK.
+	// The cryptographic operations (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
+	// for which you can use the CMK.
 	KeyUsage KeyUsageType `type:"string" enum:"true"`
 
 	// The source of the CMK's key material. When this value is AWS_KMS, AWS KMS
@@ -326,8 +326,8 @@ type KeyMetadata struct {
 	// in the AWS CloudHSM cluster associated with a custom key store.
 	Origin OriginType `type:"string" enum:"true"`
 
-	// A list of signing algorithms that the CMK supports. You cannot use the CMK
-	// with other signing algorithms within AWS KMS.
+	// The signing algorithms that the CMK supports. You cannot use the CMK with
+	// other signing algorithms within AWS KMS.
 	//
 	// This field appears only when the KeyUsage of the CMK is SIGN_VERIFY.
 	SigningAlgorithms []SigningAlgorithmSpec `type:"list"`

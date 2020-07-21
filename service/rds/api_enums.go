@@ -204,3 +204,23 @@ func (enum TargetType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
+
+type WriteForwardingStatus string
+
+// Enum values for WriteForwardingStatus
+const (
+	WriteForwardingStatusEnabled   WriteForwardingStatus = "enabled"
+	WriteForwardingStatusDisabled  WriteForwardingStatus = "disabled"
+	WriteForwardingStatusEnabling  WriteForwardingStatus = "enabling"
+	WriteForwardingStatusDisabling WriteForwardingStatus = "disabling"
+	WriteForwardingStatusUnknown   WriteForwardingStatus = "unknown"
+)
+
+func (enum WriteForwardingStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum WriteForwardingStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

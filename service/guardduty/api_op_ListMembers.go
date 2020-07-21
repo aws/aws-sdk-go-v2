@@ -28,10 +28,8 @@ type ListMembersInput struct {
 	// from the previous response to continue listing data.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 
-	// Specifies what member accounts the response includes based on their relationship
-	// status with the master account. The default value is "true". If set to "false"
-	// the response includes all existing member accounts (including members who
-	// haven't been invited yet or have been disassociated).
+	// Specifies whether to only return associated members or to return all members
+	// (including members who haven't been invited yet or have been disassociated).
 	OnlyAssociated *string `location:"querystring" locationName:"onlyAssociated" type:"string"`
 }
 
@@ -135,8 +133,8 @@ const opListMembers = "ListMembers"
 // ListMembersRequest returns a request value for making API operation for
 // Amazon GuardDuty.
 //
-// Lists details about associated member accounts for the current GuardDuty
-// master account.
+// Lists details about all member accounts for the current GuardDuty master
+// account.
 //
 //    // Example sending a request using ListMembersRequest.
 //    req := client.ListMembersRequest(params)

@@ -88,9 +88,10 @@ type CreateKeyInput struct {
 	// a task.
 	Description *string `type:"string"`
 
-	// Determines the cryptographic operations for which you can use the CMK. The
-	// default value is ENCRYPT_DECRYPT. This parameter is required only for asymmetric
-	// CMKs. You can't change the KeyUsage value after the CMK is created.
+	// Determines the cryptographic operations (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
+	// for which you can use the CMK. The default value is ENCRYPT_DECRYPT. This
+	// parameter is required only for asymmetric CMKs. You can't change the KeyUsage
+	// value after the CMK is created.
 	//
 	// Select only one valid value.
 	//

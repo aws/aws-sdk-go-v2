@@ -10,21 +10,21 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for stop job request.
+// The request structure for the stop job request.
 type StopJobInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for an Amplify App.
+	// The unique ID for an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Name for the branch, for the Job.
+	// The name for the branch, for the job.
 	//
 	// BranchName is a required field
 	BranchName *string `location:"uri" locationName:"branchName" min:"1" type:"string" required:"true"`
 
-	// Unique Id for the Job.
+	// The unique id for the job.
 	//
 	// JobId is a required field
 	JobId *string `location:"uri" locationName:"jobId" type:"string" required:"true"`
@@ -88,11 +88,11 @@ func (s StopJobInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Result structure for the stop job request.
+// The result structure for the stop job request.
 type StopJobOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Summary for the Job.
+	// The summary for the job.
 	//
 	// JobSummary is a required field
 	JobSummary *JobSummary `locationName:"jobSummary" type:"structure" required:"true"`
@@ -119,7 +119,7 @@ const opStopJob = "StopJob"
 // StopJobRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Stop a job that is in progress, for an Amplify branch, part of Amplify App.
+// Stops a job that is in progress for a branch of an Amplify app.
 //
 //    // Example sending a request using StopJobRequest.
 //    req := client.StopJobRequest(params)

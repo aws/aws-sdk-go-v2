@@ -18,9 +18,9 @@ type DeleteBackupInput struct {
 	// BackupId is a required field
 	BackupId *string `min:"12" type:"string" required:"true"`
 
-	// (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to
-	// ensure idempotent deletion. This is automatically filled on your behalf when
-	// using the AWS CLI or SDK.
+	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
+	// deletion. This is automatically filled on your behalf when using the AWS
+	// CLI or SDK.
 	ClientRequestToken *string `min:"1" type:"string" idempotencyToken:"true"`
 }
 
@@ -70,8 +70,8 @@ const opDeleteBackup = "DeleteBackup"
 // DeleteBackupRequest returns a request value for making API operation for
 // Amazon FSx.
 //
-// Deletes an Amazon FSx for Windows File Server backup, deleting its contents.
-// After deletion, the backup no longer exists, and its data is gone.
+// Deletes an Amazon FSx backup, deleting its contents. After deletion, the
+// backup no longer exists, and its data is gone.
 //
 // The DeleteBackup call returns instantly. The backup will not show up in later
 // DescribeBackups calls.

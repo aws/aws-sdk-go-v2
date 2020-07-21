@@ -19,16 +19,14 @@ type ExecutePolicyInput struct {
 
 	// The breach threshold for the alarm.
 	//
-	// Conditional: This parameter is required if the policy type is StepScaling
-	// and not supported otherwise.
+	// Required if the policy type is StepScaling and not supported otherwise.
 	BreachThreshold *float64 `type:"double"`
 
 	// Indicates whether Amazon EC2 Auto Scaling waits for the cooldown period to
 	// complete before executing the policy.
 	//
-	// This parameter is not supported if the policy type is StepScaling or TargetTrackingScaling.
-	//
-	// For more information, see Scaling Cooldowns (https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html)
+	// Valid only if the policy type is SimpleScaling. For more information, see
+	// Scaling Cooldowns for Amazon EC2 Auto Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	HonorCooldown *bool `type:"boolean"`
 
@@ -41,8 +39,7 @@ type ExecutePolicyInput struct {
 	// If you specify a metric value that doesn't correspond to a step adjustment
 	// for the policy, the call returns an error.
 	//
-	// Conditional: This parameter is required if the policy type is StepScaling
-	// and not supported otherwise.
+	// Required if the policy type is StepScaling and not supported otherwise.
 	MetricValue *float64 `type:"double"`
 
 	// The name or ARN of the policy.
@@ -90,7 +87,8 @@ const opExecutePolicy = "ExecutePolicy"
 // ExecutePolicyRequest returns a request value for making API operation for
 // Auto Scaling.
 //
-// Executes the specified policy.
+// Executes the specified policy. This can be useful for testing the design
+// of your scaling policy.
 //
 //    // Example sending a request using ExecutePolicyRequest.
 //    req := client.ExecutePolicyRequest(params)

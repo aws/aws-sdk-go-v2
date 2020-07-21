@@ -10,24 +10,24 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for list backend environments request.
+// The request structure for the list backend environments request.
 type ListBackendEnvironmentsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for an amplify App.
+	// The unique ID for an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Name of the backend environment
-	EnvironmentName *string `locationName:"environmentName" min:"1" type:"string"`
+	// The name of the backend environment
+	EnvironmentName *string `location:"querystring" locationName:"environmentName" min:"1" type:"string"`
 
-	// Maximum number of records to list in a single response.
+	// The maximum number of records to list in a single response.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
-	// Pagination token. Set to null to start listing backen environments from start.
-	// If a non-null pagination token is returned in a result, then pass its value
-	// in here to list more backend environments.
+	// A pagination token. Set to null to start listing backend environments from
+	// the start. If a non-null pagination token is returned in a result, pass its
+	// value in here to list more backend environments.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
 
@@ -63,17 +63,17 @@ func (s *ListBackendEnvironmentsInput) Validate() error {
 func (s ListBackendEnvironmentsInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
-	if s.EnvironmentName != nil {
-		v := *s.EnvironmentName
-
-		metadata := protocol.Metadata{}
-		e.SetValue(protocol.BodyTarget, "environmentName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
-	}
 	if s.AppId != nil {
 		v := *s.AppId
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "appId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EnvironmentName != nil {
+		v := *s.EnvironmentName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "environmentName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.MaxResults != nil {
 		v := *s.MaxResults
@@ -90,17 +90,17 @@ func (s ListBackendEnvironmentsInput) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Result structure for list backend environments result.
+// The result structure for the list backend environments result.
 type ListBackendEnvironmentsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// List of backend environments for an Amplify App.
+	// The list of backend environments for an Amplify app.
 	//
 	// BackendEnvironments is a required field
 	BackendEnvironments []BackendEnvironment `locationName:"backendEnvironments" type:"list" required:"true"`
 
-	// Pagination token. If non-null pagination token is returned in a result, then
-	// pass its value in another request to fetch more entries.
+	// A pagination token. If a non-null pagination token is returned in a result,
+	// pass its value in another request to retrieve more entries.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
@@ -137,7 +137,7 @@ const opListBackendEnvironments = "ListBackendEnvironments"
 // ListBackendEnvironmentsRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Lists backend environments for an Amplify App.
+// Lists the backend environments for an Amplify app.
 //
 //    // Example sending a request using ListBackendEnvironmentsRequest.
 //    req := client.ListBackendEnvironmentsRequest(params)

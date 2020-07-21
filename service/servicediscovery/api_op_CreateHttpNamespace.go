@@ -4,6 +4,7 @@ package servicediscovery
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -24,6 +25,11 @@ type CreateHttpNamespaceInput struct {
 	//
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
+
+	// The tags to add to the namespace. Each tag consists of a key and an optional
+	// value, both of which you define. Tag keys can have a maximum character length
+	// of 128 characters, and tag values can have a maximum length of 256 characters.
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -37,6 +43,13 @@ func (s *CreateHttpNamespaceInput) Validate() error {
 
 	if s.Name == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {

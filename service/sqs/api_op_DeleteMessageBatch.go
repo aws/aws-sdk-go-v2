@@ -95,9 +95,9 @@ const opDeleteMessageBatch = "DeleteMessageBatch"
 // param.n notation. Values of n are integers starting from 1. For example,
 // a parameter list with two elements looks like this:
 //
-// &Attribute.1=first
+// &AttributeName.1=first
 //
-// &Attribute.2=second
+// &AttributeName.2=second
 //
 //    // Example sending a request using DeleteMessageBatchRequest.
 //    req := client.DeleteMessageBatchRequest(params)

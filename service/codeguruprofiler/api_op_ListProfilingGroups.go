@@ -14,7 +14,10 @@ import (
 type ListProfilingGroupsInput struct {
 	_ struct{} `type:"structure"`
 
-	// A Boolean value indicating whether to include a description.
+	// A Boolean value indicating whether to include a description. If true, then
+	// a list of ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
+	// objects that contain detailed information about profiling groups is returned.
+	// If false, then a list of profiling group names is returned.
 	IncludeDescription *bool `location:"querystring" locationName:"includeDescription" type:"boolean"`
 
 	// The maximum number of profiling groups results returned by ListProfilingGroups
@@ -90,12 +93,18 @@ type ListProfilingGroupsOutput struct {
 	// there are no more results to return.
 	NextToken *string `locationName:"nextToken" min:"1" type:"string"`
 
-	// Information about profiling group names.
+	// A returned list of profiling group names. A list of the names is returned
+	// only if includeDescription is false, otherwise a list of ProfilingGroupDescription
+	// (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
+	// objects is returned.
 	//
 	// ProfilingGroupNames is a required field
 	ProfilingGroupNames []string `locationName:"profilingGroupNames" type:"list" required:"true"`
 
-	// Information about profiling groups.
+	// A returned list ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
+	// objects. A list of ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
+	// objects is returned only if includeDescription is true, otherwise a list
+	// of profiling group names is returned.
 	ProfilingGroups []ProfilingGroupDescription `locationName:"profilingGroups" type:"list"`
 }
 
@@ -144,7 +153,9 @@ const opListProfilingGroups = "ListProfilingGroups"
 // ListProfilingGroupsRequest returns a request value for making API operation for
 // Amazon CodeGuru Profiler.
 //
-// Lists profiling groups.
+// Returns a list of profiling groups. The profiling groups are returned as
+// ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
+// objects.
 //
 //    // Example sending a request using ListProfilingGroupsRequest.
 //    req := client.ListProfilingGroupsRequest(params)

@@ -94,11 +94,10 @@ const opStartQueryExecution = "StartQueryExecution"
 // Amazon Athena.
 //
 // Runs the SQL query statements contained in the Query. Requires you to have
-// access to the workgroup in which the query ran.
-//
-// For code samples using the AWS SDK for Java, see Examples and Code Samples
-// (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html) in the Amazon
-// Athena User Guide.
+// access to the workgroup in which the query ran. Running queries against an
+// external catalog requires GetDataCatalog permission to the catalog. For code
+// samples using the AWS SDK for Java, see Examples and Code Samples (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html)
+// in the Amazon Athena User Guide.
 //
 //    // Example sending a request using StartQueryExecutionRequest.
 //    req := client.StartQueryExecutionRequest(params)

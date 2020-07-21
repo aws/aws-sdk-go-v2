@@ -162,8 +162,8 @@ const opCreateRole = "CreateRole"
 //
 // Creates a new role for your AWS account. For more information about roles,
 // go to IAM Roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html).
-// For information about limitations on role names and the number of roles you
-// can create, go to Limitations on IAM Entities (https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html)
+// The number and size of IAM resources in an AWS account are limited. For more
+// information, see IAM and STS Quotas (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html)
 // in the IAM User Guide.
 //
 //    // Example sending a request using CreateRoleRequest.

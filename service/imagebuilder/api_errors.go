@@ -101,6 +101,13 @@ const (
 	// This exception is thrown when the service encounters an unrecoverable exception.
 	ErrCodeServiceException = "ServiceException"
 
+	// ErrCodeServiceQuotaExceededException for service response error code
+	// "ServiceQuotaExceededException".
+	//
+	// You have exceeded the number of permitted resources or operations for this
+	// service. For service quotas, see EC2 Image Builder endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/imagebuilder.html#limits_imagebuilder).
+	ErrCodeServiceQuotaExceededException = "ServiceQuotaExceededException"
+
 	// ErrCodeServiceUnavailableException for service response error code
 	// "ServiceUnavailableException".
 	//

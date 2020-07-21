@@ -11,24 +11,26 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for the generate access logs request.
+// The request structure for the generate access logs request.
 type GenerateAccessLogsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for an Amplify App.
+	// The unique ID for an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Name of the domain.
+	// The name of the domain.
 	//
 	// DomainName is a required field
 	DomainName *string `locationName:"domainName" type:"string" required:"true"`
 
-	// The time at which the logs should end, inclusive.
+	// The time at which the logs should end. The time range specified is inclusive
+	// of the end time.
 	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
 
-	// The time at which the logs should start, inclusive.
+	// The time at which the logs should start. The time range specified is inclusive
+	// of the start time.
 	StartTime *time.Time `locationName:"startTime" type:"timestamp"`
 }
 
@@ -91,11 +93,11 @@ func (s GenerateAccessLogsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Result structure for the generate access logs request.
+// The result structure for the generate access logs request.
 type GenerateAccessLogsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Pre-signed URL for the requested access logs.
+	// The pre-signed URL for the requested access logs.
 	LogUrl *string `locationName:"logUrl" type:"string"`
 }
 
@@ -120,7 +122,8 @@ const opGenerateAccessLogs = "GenerateAccessLogs"
 // GenerateAccessLogsRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Retrieve website access logs for a specific time range via a pre-signed URL.
+// Returns the website access logs for a specific time range using a presigned
+// URL.
 //
 //    // Example sending a request using GenerateAccessLogsRequest.
 //    req := client.GenerateAccessLogsRequest(params)

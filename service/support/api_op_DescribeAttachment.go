@@ -67,6 +67,14 @@ const opDescribeAttachment = "DescribeAttachment"
 // to a case or case communication. Attachment IDs are returned in the AttachmentDetails
 // objects that are returned by the DescribeCommunications operation.
 //
+//    * You must have a Business or Enterprise support plan to use the AWS Support
+//    API.
+//
+//    * If you call the AWS Support API from an account that does not have a
+//    Business or Enterprise support plan, the SubscriptionRequiredException
+//    error message appears. For information about changing your support plan,
+//    see AWS Support (http://aws.amazon.com/premiumsupport/).
+//
 //    // Example sending a request using DescribeAttachmentRequest.
 //    req := client.DescribeAttachmentRequest(params)
 //    resp, err := req.Send(context.TODO())

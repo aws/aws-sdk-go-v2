@@ -103,6 +103,8 @@ func (s DescribeTemplateInput) MarshalFields(e protocol.FieldEncoder) error {
 type DescribeTemplateOutput struct {
 	_ struct{} `type:"structure"`
 
+	RequestId *string `type:"string"`
+
 	// The HTTP status of the request.
 	Status *int64 `location:"statusCode" type:"integer"`
 
@@ -117,6 +119,12 @@ func (s DescribeTemplateOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeTemplateOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.RequestId != nil {
+		v := *s.RequestId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "RequestId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.Template != nil {
 		v := s.Template
 

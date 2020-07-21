@@ -10,26 +10,26 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for list job request.
+// The request structure for the list jobs request.
 type ListJobsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for an Amplify App.
+	// The unique ID for an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Name for a branch.
+	// The name for a branch.
 	//
 	// BranchName is a required field
 	BranchName *string `location:"uri" locationName:"branchName" min:"1" type:"string" required:"true"`
 
-	// Maximum number of records to list in a single response.
+	// The maximum number of records to list in a single response.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
-	// Pagination token. Set to null to start listing steps from start. If a non-null
-	// pagination token is returned in a result, then pass its value in here to
-	// list more steps.
+	// A pagination token. Set to null to start listing steps from the start. If
+	// a non-null pagination token is returned in a result, pass its value in here
+	// to list more steps.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
 
@@ -96,17 +96,17 @@ func (s ListJobsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Maximum number of records to list in a single response.
+// The maximum number of records to list in a single response.
 type ListJobsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Result structure for list job result request.
+	// The result structure for the list job result request.
 	//
 	// JobSummaries is a required field
 	JobSummaries []JobSummary `locationName:"jobSummaries" type:"list" required:"true"`
 
-	// Pagination token. If non-null pagination token is returned in a result, then
-	// pass its value in another request to fetch more entries.
+	// A pagination token. If non-null the pagination token is returned in a result.
+	// Pass its value in another request to retrieve more entries.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
@@ -143,7 +143,7 @@ const opListJobs = "ListJobs"
 // ListJobsRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// List Jobs for a branch, part of an Amplify App.
+// Lists the jobs for a branch of an Amplify app.
 //
 //    // Example sending a request using ListJobsRequest.
 //    req := client.ListJobsRequest(params)

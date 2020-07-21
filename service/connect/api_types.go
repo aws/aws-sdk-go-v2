@@ -179,7 +179,9 @@ func (s Credentials) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about a real-time metric.
+// Contains information about a real-time metric. For a description of each
+// metric, see Real-time Metrics Definitions (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html)
+// in the Amazon Connect Administrator Guide.
 type CurrentMetric struct {
 	_ struct{} `type:"structure"`
 
@@ -640,7 +642,9 @@ func (s HierarchyStructure) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Contains information about a historical metric.
+// Contains information about a historical metric. For a description of each
+// metric, see Historical Metrics Definitions (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html)
+// in the Amazon Connect Administrator Guide.
 type HistoricalMetric struct {
 	_ struct{} `type:"structure"`
 
@@ -1391,6 +1395,30 @@ func (s UserSummary) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Username", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Contains information about the recording configuration settings.
+type VoiceRecordingConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Identifies which track is being recorded.
+	VoiceRecordingTrack VoiceRecordingTrack `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s VoiceRecordingConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VoiceRecordingConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.VoiceRecordingTrack) > 0 {
+		v := s.VoiceRecordingTrack
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VoiceRecordingTrack", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }

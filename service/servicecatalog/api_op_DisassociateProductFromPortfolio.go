@@ -77,6 +77,8 @@ const opDisassociateProductFromPortfolio = "DisassociateProductFromPortfolio"
 //
 // Disassociates the specified product from the specified portfolio.
 //
+// A delegated admin is authorized to invoke this command.
+//
 //    // Example sending a request using DisassociateProductFromPortfolioRequest.
 //    req := client.DisassociateProductFromPortfolioRequest(params)
 //    resp, err := req.Send(context.TODO())

@@ -68,6 +68,8 @@ const opDeletePortfolio = "DeletePortfolio"
 // You cannot delete a portfolio if it was shared with you or if it has associated
 // products, users, constraints, or shared accounts.
 //
+// A delegated admin is authorized to invoke this command.
+//
 //    // Example sending a request using DeletePortfolioRequest.
 //    req := client.DeletePortfolioRequest(params)
 //    resp, err := req.Send(context.TODO())

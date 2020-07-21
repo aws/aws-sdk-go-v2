@@ -45,6 +45,12 @@ const (
 	// or UntagResource.
 	ErrCodeManagedRuleException = "ManagedRuleException"
 
+	// ErrCodeOperationDisabledException for service response error code
+	// "OperationDisabledException".
+	//
+	// The operation you are attempting is not available in this region.
+	ErrCodeOperationDisabledException = "OperationDisabledException"
+
 	// ErrCodePolicyLengthExceededException for service response error code
 	// "PolicyLengthExceededException".
 	//

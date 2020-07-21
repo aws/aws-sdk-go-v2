@@ -85,7 +85,7 @@ func (s GetCloudFrontOriginAccessIdentityConfigOutput) MarshalFields(e protocol.
 	return nil
 }
 
-const opGetCloudFrontOriginAccessIdentityConfig = "GetCloudFrontOriginAccessIdentityConfig2019_03_26"
+const opGetCloudFrontOriginAccessIdentityConfig = "GetCloudFrontOriginAccessIdentityConfig2020_05_31"
 
 // GetCloudFrontOriginAccessIdentityConfigRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -99,12 +99,12 @@ const opGetCloudFrontOriginAccessIdentityConfig = "GetCloudFrontOriginAccessIden
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetCloudFrontOriginAccessIdentityConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetCloudFrontOriginAccessIdentityConfig
 func (c *Client) GetCloudFrontOriginAccessIdentityConfigRequest(input *GetCloudFrontOriginAccessIdentityConfigInput) GetCloudFrontOriginAccessIdentityConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetCloudFrontOriginAccessIdentityConfig,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2019-03-26/origin-access-identity/cloudfront/{Id}/config",
+		HTTPPath:   "/2020-05-31/origin-access-identity/cloudfront/{Id}/config",
 	}
 
 	if input == nil {

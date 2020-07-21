@@ -18,6 +18,26 @@ func (enum ActionGroup) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type AgentParameterField string
+
+// Enum values for AgentParameterField
+const (
+	AgentParameterFieldMaxStackDepth                         AgentParameterField = "MaxStackDepth"
+	AgentParameterFieldMemoryUsageLimitPercent               AgentParameterField = "MemoryUsageLimitPercent"
+	AgentParameterFieldMinimumTimeForReportingInMilliseconds AgentParameterField = "MinimumTimeForReportingInMilliseconds"
+	AgentParameterFieldReportingIntervalInMilliseconds       AgentParameterField = "ReportingIntervalInMilliseconds"
+	AgentParameterFieldSamplingIntervalInMilliseconds        AgentParameterField = "SamplingIntervalInMilliseconds"
+)
+
+func (enum AgentParameterField) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AgentParameterField) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type AggregationPeriod string
 
 // Enum values for AggregationPeriod
@@ -32,6 +52,96 @@ func (enum AggregationPeriod) MarshalValue() (string, error) {
 }
 
 func (enum AggregationPeriod) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ComputePlatform string
+
+// Enum values for ComputePlatform
+const (
+	ComputePlatformAwslambda ComputePlatform = "AWSLambda"
+	ComputePlatformDefault   ComputePlatform = "Default"
+)
+
+func (enum ComputePlatform) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ComputePlatform) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type EventPublisher string
+
+// Enum values for EventPublisher
+const (
+	EventPublisherAnomalyDetection EventPublisher = "AnomalyDetection"
+)
+
+func (enum EventPublisher) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EventPublisher) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type FeedbackType string
+
+// Enum values for FeedbackType
+const (
+	FeedbackTypeNegative FeedbackType = "Negative"
+	FeedbackTypePositive FeedbackType = "Positive"
+)
+
+func (enum FeedbackType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum FeedbackType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type MetadataField string
+
+// Enum values for MetadataField
+const (
+	MetadataFieldAgentId                                   MetadataField = "AgentId"
+	MetadataFieldAwsRequestId                              MetadataField = "AwsRequestId"
+	MetadataFieldComputePlatform                           MetadataField = "ComputePlatform"
+	MetadataFieldExecutionEnvironment                      MetadataField = "ExecutionEnvironment"
+	MetadataFieldLambdaFunctionArn                         MetadataField = "LambdaFunctionArn"
+	MetadataFieldLambdaMemoryLimitInMb                     MetadataField = "LambdaMemoryLimitInMB"
+	MetadataFieldLambdaPreviousExecutionTimeInMilliseconds MetadataField = "LambdaPreviousExecutionTimeInMilliseconds"
+	MetadataFieldLambdaRemainingTimeInMilliseconds         MetadataField = "LambdaRemainingTimeInMilliseconds"
+	MetadataFieldLambdaTimeGapBetweenInvokesInMilliseconds MetadataField = "LambdaTimeGapBetweenInvokesInMilliseconds"
+)
+
+func (enum MetadataField) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MetadataField) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type MetricType string
+
+// Enum values for MetricType
+const (
+	MetricTypeAggregatedRelativeTotalTime MetricType = "AggregatedRelativeTotalTime"
+)
+
+func (enum MetricType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MetricType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

@@ -85,7 +85,7 @@ func (s GetDistributionConfigOutput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-const opGetDistributionConfig = "GetDistributionConfig2019_03_26"
+const opGetDistributionConfig = "GetDistributionConfig2020_05_31"
 
 // GetDistributionConfigRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -99,12 +99,12 @@ const opGetDistributionConfig = "GetDistributionConfig2019_03_26"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetDistributionConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetDistributionConfig
 func (c *Client) GetDistributionConfigRequest(input *GetDistributionConfigInput) GetDistributionConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetDistributionConfig,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2019-03-26/distribution/{Id}/config",
+		HTTPPath:   "/2020-05-31/distribution/{Id}/config",
 	}
 
 	if input == nil {

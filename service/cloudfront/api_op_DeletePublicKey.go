@@ -75,7 +75,7 @@ func (s DeletePublicKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-const opDeletePublicKey = "DeletePublicKey2019_03_26"
+const opDeletePublicKey = "DeletePublicKey2020_05_31"
 
 // DeletePublicKeyRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -89,12 +89,12 @@ const opDeletePublicKey = "DeletePublicKey2019_03_26"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeletePublicKey
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeletePublicKey
 func (c *Client) DeletePublicKeyRequest(input *DeletePublicKeyInput) DeletePublicKeyRequest {
 	op := &aws.Operation{
 		Name:       opDeletePublicKey,
 		HTTPMethod: "DELETE",
-		HTTPPath:   "/2019-03-26/public-key/{Id}",
+		HTTPPath:   "/2020-05-31/public-key/{Id}",
 	}
 
 	if input == nil {

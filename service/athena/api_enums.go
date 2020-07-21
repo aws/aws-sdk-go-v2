@@ -20,6 +20,24 @@ func (enum ColumnNullable) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type DataCatalogType string
+
+// Enum values for DataCatalogType
+const (
+	DataCatalogTypeLambda DataCatalogType = "LAMBDA"
+	DataCatalogTypeGlue   DataCatalogType = "GLUE"
+	DataCatalogTypeHive   DataCatalogType = "HIVE"
+)
+
+func (enum DataCatalogType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum DataCatalogType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type EncryptionOption string
 
 // Enum values for EncryptionOption

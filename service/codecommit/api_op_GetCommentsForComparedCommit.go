@@ -85,6 +85,10 @@ const opGetCommentsForComparedCommit = "GetCommentsForComparedCommit"
 //
 // Returns information about comments made on the comparison between two commits.
 //
+// Reaction counts might include numbers from user identities who were deleted
+// after the reaction was made. For a count of reactions from active identities,
+// use GetCommentReactions.
+//
 //    // Example sending a request using GetCommentsForComparedCommitRequest.
 //    req := client.GetCommentsForComparedCommitRequest(params)
 //    resp, err := req.Send(context.TODO())

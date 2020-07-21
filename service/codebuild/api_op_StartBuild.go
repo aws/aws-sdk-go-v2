@@ -17,6 +17,11 @@ type StartBuildInput struct {
 	// ones already defined in the build project.
 	ArtifactsOverride *ProjectArtifacts `locationName:"artifactsOverride" type:"structure"`
 
+	// Contains information that defines how the build project reports the build
+	// status to the source provider. This option is only used when the source provider
+	// is GITHUB, GITHUB_ENTERPRISE, or BITBUCKET.
+	BuildStatusConfigOverride *BuildStatusConfig `locationName:"buildStatusConfigOverride" type:"structure"`
+
 	// A buildspec file declaration that overrides, for this build only, the latest
 	// one already defined in the build project.
 	//
@@ -41,6 +46,10 @@ type StartBuildInput struct {
 	// The name of a compute type for this build that overrides the one specified
 	// in the build project.
 	ComputeTypeOverride ComputeType `locationName:"computeTypeOverride" type:"string" enum:"true"`
+
+	// Specifies if session debugging is enabled for this build. For more information,
+	// see Viewing a running build in Session Manager (https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html).
+	DebugSessionEnabled *bool `locationName:"debugSessionEnabled" type:"boolean"`
 
 	// The AWS Key Management Service (AWS KMS) customer master key (CMK) that overrides
 	// the one specified in the build project. The CMK key encrypts the build output
@@ -71,7 +80,7 @@ type StartBuildInput struct {
 
 	// A unique, case sensitive identifier you provide to ensure the idempotency
 	// of the StartBuild request. The token is included in the StartBuild request
-	// and is valid for 12 hours. If you repeat the StartBuild request with the
+	// and is valid for 5 minutes. If you repeat the StartBuild request with the
 	// same token, but change a parameter, AWS CodeBuild returns a parameter mismatch
 	// error.
 	IdempotencyToken *string `locationName:"idempotencyToken" type:"string"`

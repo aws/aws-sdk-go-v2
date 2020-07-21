@@ -101,6 +101,9 @@ const opPutVoiceConnectorTermination = "PutVoiceConnectorTermination"
 //
 // Adds termination settings for the specified Amazon Chime Voice Connector.
 //
+// If emergency calling is configured for the Amazon Chime Voice Connector,
+// it must be deleted prior to turning off termination settings.
+//
 //    // Example sending a request using PutVoiceConnectorTerminationRequest.
 //    req := client.PutVoiceConnectorTerminationRequest(params)
 //    resp, err := req.Send(context.TODO())

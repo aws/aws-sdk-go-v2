@@ -13,8 +13,8 @@ import (
 type DescribeRepositoryAssociationInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) identifying the association. You can retrieve
-	// this ARN by calling ListRepositories.
+	// The Amazon Resource Name (ARN) of the RepositoryAssociation (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
+	// object. You can retrieve this ARN by calling ListRepositories.
 	//
 	// AssociationArn is a required field
 	AssociationArn *string `location:"uri" locationName:"AssociationArn" min:"1" type:"string" required:"true"`
@@ -83,7 +83,8 @@ const opDescribeRepositoryAssociation = "DescribeRepositoryAssociation"
 // DescribeRepositoryAssociationRequest returns a request value for making API operation for
 // Amazon CodeGuru Reviewer.
 //
-// Describes a repository association.
+// Returns a RepositoryAssociation (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
+// object that contains information about the requested repository association.
 //
 //    // Example sending a request using DescribeRepositoryAssociationRequest.
 //    req := client.DescribeRepositoryAssociationRequest(params)

@@ -446,6 +446,18 @@
         {"shape":"ResourceNotFound"}
       ]
     },
+    "DeleteHumanTaskUi":{
+      "name":"DeleteHumanTaskUi",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteHumanTaskUiRequest"},
+      "output":{"shape":"DeleteHumanTaskUiResponse"},
+      "errors":[
+        {"shape":"ResourceNotFound"}
+      ]
+    },
     "DeleteModel":{
       "name":"DeleteModel",
       "http":{
@@ -2994,6 +3006,7 @@
         "TransformJobName":{"shape":"TransformJobName"},
         "ModelName":{"shape":"ModelName"},
         "MaxConcurrentTransforms":{"shape":"MaxConcurrentTransforms"},
+        "ModelClientConfig":{"shape":"ModelClientConfig"},
         "MaxPayloadInMB":{"shape":"MaxPayloadInMB"},
         "BatchStrategy":{"shape":"BatchStrategy"},
         "Environment":{"shape":"TransformEnvironmentMap"},
@@ -3285,6 +3298,18 @@
       }
     },
     "DeleteFlowDefinitionResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "DeleteHumanTaskUiRequest":{
+      "type":"structure",
+      "required":["HumanTaskUiName"],
+      "members":{
+        "HumanTaskUiName":{"shape":"HumanTaskUiName"}
+      }
+    },
+    "DeleteHumanTaskUiResponse":{
       "type":"structure",
       "members":{
       }
@@ -3717,6 +3742,7 @@
       "members":{
         "HumanTaskUiArn":{"shape":"HumanTaskUiArn"},
         "HumanTaskUiName":{"shape":"HumanTaskUiName"},
+        "HumanTaskUiStatus":{"shape":"HumanTaskUiStatus"},
         "CreationTime":{"shape":"Timestamp"},
         "UiTemplate":{"shape":"UiTemplateInfo"}
       }
@@ -4071,6 +4097,7 @@
         "FailureReason":{"shape":"FailureReason"},
         "ModelName":{"shape":"ModelName"},
         "MaxConcurrentTransforms":{"shape":"MaxConcurrentTransforms"},
+        "ModelClientConfig":{"shape":"ModelClientConfig"},
         "MaxPayloadInMB":{"shape":"MaxPayloadInMB"},
         "BatchStrategy":{"shape":"BatchStrategy"},
         "Environment":{"shape":"TransformEnvironmentMap"},
@@ -4850,6 +4877,13 @@
       "min":1,
       "pattern":"^[a-z0-9](-*[a-z0-9])*"
     },
+    "HumanTaskUiStatus":{
+      "type":"string",
+      "enum":[
+        "Active",
+        "Deleting"
+      ]
+    },
     "HumanTaskUiSummaries":{
       "type":"list",
       "member":{"shape":"HumanTaskUiSummary"}
@@ -5230,6 +5264,16 @@
       "member":{"shape":"IntegerParameterRange"},
       "max":20,
       "min":0
+    },
+    "InvocationsMaxRetries":{
+      "type":"integer",
+      "max":3,
+      "min":0
+    },
+    "InvocationsTimeoutInSeconds":{
+      "type":"integer",
+      "max":3600,
+      "min":1
     },
     "JobReferenceCode":{
       "type":"string",
@@ -6280,6 +6324,13 @@
       "required":["S3ModelArtifacts"],
       "members":{
         "S3ModelArtifacts":{"shape":"S3Uri"}
+      }
+    },
+    "ModelClientConfig":{
+      "type":"structure",
+      "members":{
+        "InvocationsTimeoutInSeconds":{"shape":"InvocationsTimeoutInSeconds"},
+        "InvocationsMaxRetries":{"shape":"InvocationsMaxRetries"}
       }
     },
     "ModelName":{
@@ -7477,7 +7528,8 @@
       "members":{
         "UiTemplate":{"shape":"UiTemplate"},
         "Task":{"shape":"RenderableTask"},
-        "RoleArn":{"shape":"RoleArn"}
+        "RoleArn":{"shape":"RoleArn"},
+        "HumanTaskUiArn":{"shape":"HumanTaskUiArn"}
       }
     },
     "RenderUiTemplateResponse":{
@@ -8178,7 +8230,7 @@
     },
     "TaskTimeLimitInSeconds":{
       "type":"integer",
-      "max":28800,
+      "max":604800,
       "min":30
     },
     "TaskTitle":{
@@ -8831,7 +8883,8 @@
     "UiConfig":{
       "type":"structure",
       "members":{
-        "UiTemplateS3Uri":{"shape":"S3Uri"}
+        "UiTemplateS3Uri":{"shape":"S3Uri"},
+        "HumanTaskUiArn":{"shape":"HumanTaskUiArn"}
       }
     },
     "UiTemplate":{

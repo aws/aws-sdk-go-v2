@@ -16,7 +16,7 @@ type UpdateFieldLevelEncryptionProfileInput struct {
 	// Request to update a field-level encryption profile.
 	//
 	// FieldLevelEncryptionProfileConfig is a required field
-	FieldLevelEncryptionProfileConfig *FieldLevelEncryptionProfileConfig `locationName:"FieldLevelEncryptionProfileConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
+	FieldLevelEncryptionProfileConfig *FieldLevelEncryptionProfileConfig `locationName:"FieldLevelEncryptionProfileConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2020-05-31/"`
 
 	// The ID of the field-level encryption profile request.
 	//
@@ -74,7 +74,7 @@ func (s UpdateFieldLevelEncryptionProfileInput) MarshalFields(e protocol.FieldEn
 	if s.FieldLevelEncryptionProfileConfig != nil {
 		v := s.FieldLevelEncryptionProfileConfig
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2020-05-31/"}
 		e.SetFields(protocol.PayloadTarget, "FieldLevelEncryptionProfileConfig", v, metadata)
 	}
 	return nil
@@ -112,7 +112,7 @@ func (s UpdateFieldLevelEncryptionProfileOutput) MarshalFields(e protocol.FieldE
 	return nil
 }
 
-const opUpdateFieldLevelEncryptionProfile = "UpdateFieldLevelEncryptionProfile2019_03_26"
+const opUpdateFieldLevelEncryptionProfile = "UpdateFieldLevelEncryptionProfile2020_05_31"
 
 // UpdateFieldLevelEncryptionProfileRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -126,12 +126,12 @@ const opUpdateFieldLevelEncryptionProfile = "UpdateFieldLevelEncryptionProfile20
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateFieldLevelEncryptionProfile
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateFieldLevelEncryptionProfile
 func (c *Client) UpdateFieldLevelEncryptionProfileRequest(input *UpdateFieldLevelEncryptionProfileInput) UpdateFieldLevelEncryptionProfileRequest {
 	op := &aws.Operation{
 		Name:       opUpdateFieldLevelEncryptionProfile,
 		HTTPMethod: "PUT",
-		HTTPPath:   "/2019-03-26/field-level-encryption-profile/{Id}/config",
+		HTTPPath:   "/2020-05-31/field-level-encryption-profile/{Id}/config",
 	}
 
 	if input == nil {

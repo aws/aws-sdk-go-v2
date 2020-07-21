@@ -142,6 +142,8 @@ const opCreateProduct = "CreateProduct"
 //
 // Creates a product.
 //
+// A delegated admin is authorized to invoke this command.
+//
 //    // Example sending a request using CreateProductRequest.
 //    req := client.CreateProductRequest(params)
 //    resp, err := req.Send(context.TODO())

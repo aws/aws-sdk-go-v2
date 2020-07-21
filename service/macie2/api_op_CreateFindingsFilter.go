@@ -14,8 +14,9 @@ import (
 type CreateFindingsFilterInput struct {
 	_ struct{} `type:"structure"`
 
-	// The action to perform on findings that meet the filter criteria. Valid values
-	// are:
+	// The action to perform on findings that meet the filter criteria. To suppress
+	// (automatically archive) findings that meet the criteria, set this value to
+	// ARCHIVE. Valid values are:
 	//
 	// Action is a required field
 	Action FindingsFilterAction `locationName:"action" type:"string" required:"true" enum:"true"`

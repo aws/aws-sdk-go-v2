@@ -15,22 +15,36 @@ import (
 type GetProfileInput struct {
 	_ struct{} `type:"structure"`
 
-	// The format of the profile to return. You can choose application/json or the
-	// default application/x-amzn-ion.
+	// The format of the returned profiling data. The format maps to the Accept
+	// and Content-Type headers of the HTTP request. You can specify one of the
+	// following: or the default .
+	//
+	//    <ul> <li> <p> <code>application/json</code> — standard JSON format </p>
+	//    </li> <li> <p> <code>application/x-amzn-ion</code> — the Amazon Ion
+	//    data format. For more information, see <a href="http://amzn.github.io/ion-docs/">Amazon
+	//    Ion</a>. </p> </li> </ul>
 	Accept *string `location:"header" locationName:"Accept" type:"string"`
 
-	// You must specify exactly two of the following parameters: startTime, period,
-	// and endTime.
+	// The end time of the requested profile. Specify using the ISO 8601 format.
+	// For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June
+	// 1, 2020 1:15:02 PM UTC.
+	//
+	// If you specify endTime, then you must also specify period or startTime, but
+	// not both.
 	EndTime *time.Time `location:"querystring" locationName:"endTime" type:"timestamp" timestampFormat:"iso8601"`
 
-	// The maximum depth of the graph.
+	// The maximum depth of the stacks in the code that is represented in the aggregated
+	// profile. For example, if CodeGuru Profiler finds a method A, which calls
+	// method B, which calls method C, which calls method D, then the depth is 4.
+	// If the maxDepth is set to 2, then the aggregated profile contains representations
+	// of methods A and B.
 	MaxDepth *int64 `location:"querystring" locationName:"maxDepth" min:"1" type:"integer"`
 
-	// The period of the profile to get. The time range must be in the past and
-	// not longer than one week.
+	// Used with startTime or endTime to specify the time range for the returned
+	// aggregated profile. Specify using the ISO 8601 format. For example, P1DT1H1M1S.
 	//
-	// You must specify exactly two of the following parameters: startTime, period,
-	// and endTime.
+	//    <p> To get the latest aggregated profile, specify only <code>period</code>.
+	//    </p>
 	Period *string `location:"querystring" locationName:"period" min:"1" type:"string"`
 
 	// The name of the profiling group to get.
@@ -38,10 +52,12 @@ type GetProfileInput struct {
 	// ProfilingGroupName is a required field
 	ProfilingGroupName *string `location:"uri" locationName:"profilingGroupName" min:"1" type:"string" required:"true"`
 
-	// The start time of the profile to get.
+	// The start time of the profile to get. Specify using the ISO 8601 format.
+	// For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June
+	// 1, 2020 1:15:02 PM UTC.
 	//
-	// You must specify exactly two of the following parameters: startTime, period,
-	// and endTime.
+	//    <p> If you specify <code>startTime</code>, then you must also specify
+	//    <code>period</code> or <code>endTime</code>, but not both. </p>
 	StartTime *time.Time `location:"querystring" locationName:"startTime" type:"timestamp" timestampFormat:"iso8601"`
 }
 
@@ -170,18 +186,41 @@ const opGetProfile = "GetProfile"
 // GetProfileRequest returns a request value for making API operation for
 // Amazon CodeGuru Profiler.
 //
-// Gets the aggregated profile of a profiling group for the specified time range.
-// If the requested time range does not align with the available aggregated
-// profiles, it is expanded to attain alignment. If aggregated profiles are
-// available only for part of the period requested, the profile is returned
-// from the earliest available to the latest within the requested time range.
+// Gets the aggregated profile of a profiling group for a specified time range.
+// Amazon CodeGuru Profiler collects posted agent profiles for a profiling group
+// into aggregated profiles.
 //
-// For example, if the requested time range is from 00:00 to 00:20 and the available
-// profiles are from 00:15 to 00:25, the returned profile will be from 00:15
-// to 00:20.
-//
-// You must specify exactly two of the following parameters: startTime, period,
-// and endTime.
+//    <note> <p> Because aggregated profiles expire over time <code>GetProfile</code>
+//    is not idempotent. </p> </note> <p> Specify the time range for the requested
+//    aggregated profile using 1 or 2 of the following parameters: <code>startTime</code>,
+//    <code>endTime</code>, <code>period</code>. The maximum time range allowed
+//    is 7 days. If you specify all 3 parameters, an exception is thrown. If
+//    you specify only <code>period</code>, the latest aggregated profile is
+//    returned. </p> <p> Aggregated profiles are available with aggregation
+//    periods of 5 minutes, 1 hour, and 1 day, aligned to UTC. The aggregation
+//    period of an aggregated profile determines how long it is retained. For
+//    more information, see <a href="https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AggregatedProfileTime.html">
+//    <code>AggregatedProfileTime</code> </a>. The aggregated profile's aggregation
+//    period determines how long it is retained by CodeGuru Profiler. </p> <ul>
+//    <li> <p> If the aggregation period is 5 minutes, the aggregated profile
+//    is retained for 15 days. </p> </li> <li> <p> If the aggregation period
+//    is 1 hour, the aggregated profile is retained for 60 days. </p> </li>
+//    <li> <p> If the aggregation period is 1 day, the aggregated profile is
+//    retained for 3 years. </p> </li> </ul> <p>There are two use cases for
+//    calling <code>GetProfile</code>.</p> <ol> <li> <p> If you want to return
+//    an aggregated profile that already exists, use <a href="https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ListProfileTimes.html">
+//    <code>ListProfileTimes</code> </a> to view the time ranges of existing
+//    aggregated profiles. Use them in a <code>GetProfile</code> request to
+//    return a specific, existing aggregated profile. </p> </li> <li> <p> If
+//    you want to return an aggregated profile for a time range that doesn't
+//    align with an existing aggregated profile, then CodeGuru Profiler makes
+//    a best effort to combine existing aggregated profiles from the requested
+//    time range and return them as one aggregated profile. </p> <p> If aggregated
+//    profiles do not exist for the full time range requested, then aggregated
+//    profiles for a smaller time range are returned. For example, if the requested
+//    time range is from 00:00 to 00:20, and the existing aggregated profiles
+//    are from 00:15 and 00:25, then the aggregated profiles from 00:15 to 00:20
+//    are returned. </p> </li> </ol>
 //
 //    // Example sending a request using GetProfileRequest.
 //    req := client.GetProfileRequest(params)

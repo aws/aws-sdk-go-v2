@@ -88,6 +88,9 @@ const opTagResource = "TagResource"
 // TagResourceRequest returns a request value for making API operation for
 // AWS Elemental MediaPackage VOD.
 //
+// Adds tags to the specified resource. You can specify one or more tags to
+// add.
+//
 //    // Example sending a request using TagResourceRequest.
 //    req := client.TagResourceRequest(params)
 //    resp, err := req.Send(context.TODO())

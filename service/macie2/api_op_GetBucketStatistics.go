@@ -11,7 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Specifies an account that's associated with S3 buckets to retrieve aggregated
+// Specifies an account that's associated with the S3 buckets to retrieve aggregated
 // statistical data for.
 type GetBucketStatisticsInput struct {
 	_ struct{} `type:"structure"`
@@ -44,16 +44,16 @@ type GetBucketStatisticsOutput struct {
 
 	BucketCount *int64 `locationName:"bucketCount" type:"long"`
 
-	// The total number of buckets that are publicly accessible, based on a combination
-	// of permissions settings for each bucket.
+	// Provides information about the number of S3 buckets that are publicly accessible
+	// based on a combination of permissions settings for each bucket.
 	BucketCountByEffectivePermission *BucketCountByEffectivePermission `locationName:"bucketCountByEffectivePermission" type:"structure"`
 
-	// The total number of buckets, grouped by server-side encryption type. This
-	// object also reports the total number of buckets that aren't encrypted.
+	// Provides information about the number of S3 buckets that use certain types
+	// of server-side encryption or don't encrypt objects by default.
 	BucketCountByEncryptionType *BucketCountByEncryptionType `locationName:"bucketCountByEncryptionType" type:"structure"`
 
-	// The total number of buckets that are shared with another AWS account or configured
-	// to support cross-origin resource sharing (CORS).
+	// Provides information about the number of S3 buckets that are shared with
+	// other AWS accounts.
 	BucketCountBySharedAccessType *BucketCountBySharedAccessType `locationName:"bucketCountBySharedAccessType" type:"structure"`
 
 	ClassifiableObjectCount *int64 `locationName:"classifiableObjectCount" type:"long"`

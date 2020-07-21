@@ -45,7 +45,7 @@ type UpdateAliasInput struct {
 	// read it.
 	RevisionId *string `type:"string"`
 
-	// The routing configuration (https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html)
+	// The routing configuration (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing)
 	// of the alias.
 	RoutingConfig *AliasRoutingConfiguration `type:"structure"`
 }

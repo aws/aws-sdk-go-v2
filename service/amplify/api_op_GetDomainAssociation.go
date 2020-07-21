@@ -10,16 +10,16 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for the get Domain Association request.
+// The request structure for the get domain association request.
 type GetDomainAssociationInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for an Amplify App.
+	// The unique id for an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Name of the domain.
+	// The name of the domain.
 	//
 	// DomainName is a required field
 	DomainName *string `location:"uri" locationName:"domainName" type:"string" required:"true"`
@@ -70,11 +70,12 @@ func (s GetDomainAssociationInput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-// Result structure for the get Domain Association request.
+// The result structure for the get domain association request.
 type GetDomainAssociationOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Domain Association structure.
+	// Describes the structure of a domain association, which associates a custom
+	// domain with an Amplify app.
 	//
 	// DomainAssociation is a required field
 	DomainAssociation *DomainAssociation `locationName:"domainAssociation" type:"structure" required:"true"`
@@ -101,7 +102,7 @@ const opGetDomainAssociation = "GetDomainAssociation"
 // GetDomainAssociationRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Retrieves domain info that corresponds to an appId and domainName.
+// Returns the domain information for an Amplify app.
 //
 //    // Example sending a request using GetDomainAssociationRequest.
 //    req := client.GetDomainAssociationRequest(params)

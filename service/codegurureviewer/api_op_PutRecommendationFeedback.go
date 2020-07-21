@@ -13,7 +13,8 @@ import (
 type PutRecommendationFeedbackInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) that identifies the code review.
+	// The Amazon Resource Name (ARN) of the CodeReview (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
+	// object.
 	//
 	// CodeReviewArn is a required field
 	CodeReviewArn *string `min:"1" type:"string" required:"true"`
@@ -114,7 +115,7 @@ const opPutRecommendationFeedback = "PutRecommendationFeedback"
 // PutRecommendationFeedbackRequest returns a request value for making API operation for
 // Amazon CodeGuru Reviewer.
 //
-// Stores customer feedback for a CodeGuru-Reviewer recommendation. When this
+// Stores customer feedback for a CodeGuru Reviewer recommendation. When this
 // API is called again with different reactions the previous feedback is overwritten.
 //
 //    // Example sending a request using PutRecommendationFeedbackRequest.

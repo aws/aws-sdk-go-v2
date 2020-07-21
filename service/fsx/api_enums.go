@@ -27,6 +27,36 @@ func (enum ActiveDirectoryErrorType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Describes the type of administrative action, as follows:
+//
+//    * FILE_SYSTEM_UPDATE - A file system update administrative action initiated
+//    by the user from the Amazon FSx console, API (UpdateFileSystem), or CLI
+//    (update-file-system). A
+//
+//    * STORAGE_OPTIMIZATION - Once the FILE_SYSTEM_UPDATE task to increase
+//    a file system's storage capacity completes successfully, a STORAGE_OPTIMIZATION
+//    task starts. Storage optimization is the process of migrating the file
+//    system data to the new, larger disks. You can track the storage migration
+//    progress using the ProgressPercent property. When STORAGE_OPTIMIZATION
+//    completes successfully, the parent FILE_SYSTEM_UPDATE action status changes
+//    to COMPLETED. For more information, see Managing Storage Capacity (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html).
+type AdministrativeActionType string
+
+// Enum values for AdministrativeActionType
+const (
+	AdministrativeActionTypeFileSystemUpdate    AdministrativeActionType = "FILE_SYSTEM_UPDATE"
+	AdministrativeActionTypeStorageOptimization AdministrativeActionType = "STORAGE_OPTIMIZATION"
+)
+
+func (enum AdministrativeActionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum AdministrativeActionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // The lifecycle status of the backup.
 type BackupLifecycle string
 
@@ -182,8 +212,9 @@ type FilterName string
 
 // Enum values for FilterName
 const (
-	FilterNameFileSystemId FilterName = "file-system-id"
-	FilterNameBackupType   FilterName = "backup-type"
+	FilterNameFileSystemId   FilterName = "file-system-id"
+	FilterNameBackupType     FilterName = "backup-type"
+	FilterNameFileSystemType FilterName = "file-system-type"
 )
 
 func (enum FilterName) MarshalValue() (string, error) {
@@ -264,6 +295,26 @@ func (enum ServiceLimit) MarshalValue() (string, error) {
 }
 
 func (enum ServiceLimit) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type Status string
+
+// Enum values for Status
+const (
+	StatusFailed            Status = "FAILED"
+	StatusInProgress        Status = "IN_PROGRESS"
+	StatusPending           Status = "PENDING"
+	StatusCompleted         Status = "COMPLETED"
+	StatusUpdatedOptimizing Status = "UPDATED_OPTIMIZING"
+)
+
+func (enum Status) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Status) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

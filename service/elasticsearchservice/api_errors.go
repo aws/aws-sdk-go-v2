@@ -39,6 +39,13 @@ const (
 	// of 500.
 	ErrCodeInternalException = "InternalException"
 
+	// ErrCodeInvalidPaginationTokenException for service response error code
+	// "InvalidPaginationTokenException".
+	//
+	// The request processing has failed because of invalid pagination token provided
+	// by customer. Returns an HTTP status code of 400.
+	ErrCodeInvalidPaginationTokenException = "InvalidPaginationTokenException"
+
 	// ErrCodeInvalidTypeException for service response error code
 	// "InvalidTypeException".
 	//

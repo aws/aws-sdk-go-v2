@@ -89,3 +89,36 @@ func (s ChangedBlock) MarshalFields(e protocol.FieldEncoder) error {
 	}
 	return nil
 }
+
+// Describes a tag.
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// The key of the tag.
+	Key *string `type:"string"`
+
+	// The value of the tag.
+	Value *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Tag) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Key != nil {
+		v := *s.Key
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Value != nil {
+		v := *s.Value
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}

@@ -136,7 +136,7 @@ const opBacktrackDBCluster = "BacktrackDBCluster"
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Backtrack.html)
 // in the Amazon Aurora User Guide.
 //
-// This action only applies to Aurora DB clusters.
+// This action only applies to Aurora MySQL DB clusters.
 //
 //    // Example sending a request using BacktrackDBClusterRequest.
 //    req := client.BacktrackDBClusterRequest(params)

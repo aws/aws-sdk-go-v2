@@ -342,8 +342,8 @@ type CachingConfig struct {
 
 	// The caching keys for a resolver that has caching enabled.
 	//
-	// Valid values are entries from the $context.identity and $context.arguments
-	// maps.
+	// Valid values are entries from the $context.arguments, $context.source, and
+	// $context.identity maps.
 	CachingKeys []string `locationName:"cachingKeys" type:"list"`
 
 	// The TTL in seconds for a resolver that has caching enabled.
@@ -1274,7 +1274,7 @@ type RdsHttpEndpointConfig struct {
 	// Logical database name.
 	DatabaseName *string `locationName:"databaseName" type:"string"`
 
-	// Amazon RDS cluster identifier.
+	// Amazon RDS cluster ARN.
 	DbClusterIdentifier *string `locationName:"dbClusterIdentifier" type:"string"`
 
 	// Logical schema name.

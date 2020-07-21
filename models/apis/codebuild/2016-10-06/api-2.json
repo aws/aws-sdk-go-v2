@@ -580,7 +580,8 @@
         "encryptionKey":{"shape":"NonEmptyString"},
         "exportedEnvironmentVariables":{"shape":"ExportedEnvironmentVariables"},
         "reportArns":{"shape":"BuildReportArns"},
-        "fileSystemLocations":{"shape":"ProjectFileSystemLocations"}
+        "fileSystemLocations":{"shape":"ProjectFileSystemLocations"},
+        "debugSession":{"shape":"DebugSession"}
       }
     },
     "BuildArtifacts":{
@@ -647,6 +648,13 @@
     "BuildReportArns":{
       "type":"list",
       "member":{"shape":"String"}
+    },
+    "BuildStatusConfig":{
+      "type":"structure",
+      "members":{
+        "context":{"shape":"String"},
+        "targetUrl":{"shape":"String"}
+      }
     },
     "Builds":{
       "type":"list",
@@ -765,6 +773,13 @@
     "CredentialProviderType":{
       "type":"string",
       "enum":["SECRETS_MANAGER"]
+    },
+    "DebugSession":{
+      "type":"structure",
+      "members":{
+        "sessionEnabled":{"shape":"WrapperBoolean"},
+        "sessionTarget":{"shape":"NonEmptyString"}
+      }
     },
     "DeleteProjectInput":{
       "type":"structure",
@@ -896,7 +911,8 @@
         "WINDOWS_CONTAINER",
         "LINUX_CONTAINER",
         "LINUX_GPU_CONTAINER",
-        "ARM_CONTAINER"
+        "ARM_CONTAINER",
+        "WINDOWS_SERVER_2019_CONTAINER"
       ]
     },
     "EnvironmentVariable":{
@@ -1408,6 +1424,7 @@
         "buildspec":{"shape":"String"},
         "auth":{"shape":"SourceAuth"},
         "reportBuildStatus":{"shape":"WrapperBoolean"},
+        "buildStatusConfig":{"shape":"BuildStatusConfig"},
         "insecureSsl":{"shape":"WrapperBoolean"},
         "sourceIdentifier":{"shape":"String"}
       }
@@ -1690,6 +1707,7 @@
         "buildspecOverride":{"shape":"String"},
         "insecureSslOverride":{"shape":"WrapperBoolean"},
         "reportBuildStatusOverride":{"shape":"WrapperBoolean"},
+        "buildStatusConfigOverride":{"shape":"BuildStatusConfig"},
         "environmentTypeOverride":{"shape":"EnvironmentType"},
         "imageOverride":{"shape":"NonEmptyString"},
         "computeTypeOverride":{"shape":"ComputeType"},
@@ -1703,7 +1721,8 @@
         "idempotencyToken":{"shape":"String"},
         "logsConfigOverride":{"shape":"LogsConfig"},
         "registryCredentialOverride":{"shape":"RegistryCredential"},
-        "imagePullCredentialsTypeOverride":{"shape":"ImagePullCredentialsType"}
+        "imagePullCredentialsTypeOverride":{"shape":"ImagePullCredentialsType"},
+        "debugSessionEnabled":{"shape":"WrapperBoolean"}
       }
     },
     "StartBuildOutput":{

@@ -91,6 +91,8 @@ type ClientAPI interface {
 
 	CreateMeetingRequest(*chime.CreateMeetingInput) chime.CreateMeetingRequest
 
+	CreateMeetingWithAttendeesRequest(*chime.CreateMeetingWithAttendeesInput) chime.CreateMeetingWithAttendeesRequest
+
 	CreatePhoneNumberOrderRequest(*chime.CreatePhoneNumberOrderInput) chime.CreatePhoneNumberOrderRequest
 
 	CreateProxySessionRequest(*chime.CreateProxySessionInput) chime.CreateProxySessionRequest
@@ -122,6 +124,8 @@ type ClientAPI interface {
 	DeleteRoomMembershipRequest(*chime.DeleteRoomMembershipInput) chime.DeleteRoomMembershipRequest
 
 	DeleteVoiceConnectorRequest(*chime.DeleteVoiceConnectorInput) chime.DeleteVoiceConnectorRequest
+
+	DeleteVoiceConnectorEmergencyCallingConfigurationRequest(*chime.DeleteVoiceConnectorEmergencyCallingConfigurationInput) chime.DeleteVoiceConnectorEmergencyCallingConfigurationRequest
 
 	DeleteVoiceConnectorGroupRequest(*chime.DeleteVoiceConnectorGroupInput) chime.DeleteVoiceConnectorGroupRequest
 
@@ -174,6 +178,8 @@ type ClientAPI interface {
 	GetUserSettingsRequest(*chime.GetUserSettingsInput) chime.GetUserSettingsRequest
 
 	GetVoiceConnectorRequest(*chime.GetVoiceConnectorInput) chime.GetVoiceConnectorRequest
+
+	GetVoiceConnectorEmergencyCallingConfigurationRequest(*chime.GetVoiceConnectorEmergencyCallingConfigurationInput) chime.GetVoiceConnectorEmergencyCallingConfigurationRequest
 
 	GetVoiceConnectorGroupRequest(*chime.GetVoiceConnectorGroupInput) chime.GetVoiceConnectorGroupRequest
 
@@ -228,6 +234,8 @@ type ClientAPI interface {
 	PutEventsConfigurationRequest(*chime.PutEventsConfigurationInput) chime.PutEventsConfigurationRequest
 
 	PutRetentionSettingsRequest(*chime.PutRetentionSettingsInput) chime.PutRetentionSettingsRequest
+
+	PutVoiceConnectorEmergencyCallingConfigurationRequest(*chime.PutVoiceConnectorEmergencyCallingConfigurationInput) chime.PutVoiceConnectorEmergencyCallingConfigurationRequest
 
 	PutVoiceConnectorLoggingConfigurationRequest(*chime.PutVoiceConnectorLoggingConfigurationInput) chime.PutVoiceConnectorLoggingConfigurationRequest
 

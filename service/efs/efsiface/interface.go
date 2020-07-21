@@ -81,6 +81,8 @@ type ClientAPI interface {
 
 	DescribeAccessPointsRequest(*efs.DescribeAccessPointsInput) efs.DescribeAccessPointsRequest
 
+	DescribeBackupPolicyRequest(*efs.DescribeBackupPolicyInput) efs.DescribeBackupPolicyRequest
+
 	DescribeFileSystemPolicyRequest(*efs.DescribeFileSystemPolicyInput) efs.DescribeFileSystemPolicyRequest
 
 	DescribeFileSystemsRequest(*efs.DescribeFileSystemsInput) efs.DescribeFileSystemsRequest
@@ -96,6 +98,8 @@ type ClientAPI interface {
 	ListTagsForResourceRequest(*efs.ListTagsForResourceInput) efs.ListTagsForResourceRequest
 
 	ModifyMountTargetSecurityGroupsRequest(*efs.ModifyMountTargetSecurityGroupsInput) efs.ModifyMountTargetSecurityGroupsRequest
+
+	PutBackupPolicyRequest(*efs.PutBackupPolicyInput) efs.PutBackupPolicyRequest
 
 	PutFileSystemPolicyRequest(*efs.PutFileSystemPolicyInput) efs.PutFileSystemPolicyRequest
 

@@ -31,7 +31,9 @@ type CreateAutoScalingGroupInput struct {
 	// The amount of time, in seconds, after a scaling activity completes before
 	// another scaling activity can start. The default value is 300.
 	//
-	// For more information, see Scaling Cooldowns (https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html)
+	// This setting applies when using simple scaling policies, but not when using
+	// other scaling policies or scheduled scaling. For more information, see Scaling
+	// Cooldowns for Amazon EC2 Auto Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	DefaultCooldown *int64 `type:"integer"`
 
@@ -52,7 +54,7 @@ type CreateAutoScalingGroupInput struct {
 	// For more information, see Health Check Grace Period (https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	//
-	// Conditional: This parameter is required if you are adding an ELB health check.
+	// Required if you are adding an ELB health check.
 	HealthCheckGracePeriod *int64 `type:"integer"`
 
 	// The service to use for the health checks. The valid values are EC2 and ELB.

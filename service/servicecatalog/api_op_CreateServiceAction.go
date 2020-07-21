@@ -25,7 +25,11 @@ type CreateServiceActionInput struct {
 	//
 	// Name
 	//
-	// The name of the AWS Systems Manager Document. For example, AWS-RestartEC2Instance.
+	// The name of the AWS Systems Manager document (SSM document). For example,
+	// AWS-RestartEC2Instance.
+	//
+	// If you are using a shared SSM document, you must provide the ARN instead
+	// of the name.
 	//
 	// Version
 	//

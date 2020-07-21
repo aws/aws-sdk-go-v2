@@ -327,6 +327,29 @@ func (s EventSource) String() string {
 	return awsutil.Prettify(s)
 }
 
+// These are custom parameter to be used when the target is an API Gateway REST
+// APIs.
+type HttpParameters struct {
+	_ struct{} `type:"structure"`
+
+	// The headers that need to be sent as part of request invoking the API Gateway
+	// REST API.
+	HeaderParameters map[string]string `type:"map"`
+
+	// The path parameter values to be used to populate API Gateway REST API path
+	// wildcards ("*").
+	PathParameterValues []string `type:"list"`
+
+	// The query string keys/values that need to be sent as part of request invoking
+	// the API Gateway REST API.
+	QueryStringParameters map[string]string `type:"map"`
+}
+
+// String returns the string representation
+func (s HttpParameters) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Contains the parameters needed for you to provide custom input to a target
 // based on one or more pieces of data extracted from the event.
 type InputTransformer struct {
@@ -892,6 +915,14 @@ type Target struct {
 	// tasks, see Task Definitions (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html)
 	// in the Amazon EC2 Container Service Developer Guide.
 	EcsParameters *EcsParameters `type:"structure"`
+
+	// Contains the HTTP parameters to use when the target is a API Gateway REST
+	// endpoint.
+	//
+	// If you specify an API Gateway REST API as a target, you can use this parameter
+	// to specify headers, path parameter, query string keys/values as part of your
+	// target invoking request.
+	HttpParameters *HttpParameters `type:"structure"`
 
 	// The ID of the target.
 	//

@@ -352,6 +352,30 @@ func (s AwsIotAnalyticsParameters) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
+// The display options for tile borders for visuals.
+type BorderStyle struct {
+	_ struct{} `type:"structure"`
+
+	// The option to enable display of borders for visuals.
+	Show *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s BorderStyle) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BorderStyle) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Show != nil {
+		v := *s.Show
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Show", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
 // A calculated column for a dataset.
 type CalculatedColumn struct {
 	_ struct{} `type:"structure"`
@@ -733,6 +757,17 @@ func (s CreateColumnsOperation) MarshalFields(e protocol.FieldEncoder) error {
 type CredentialPair struct {
 	_ struct{} `type:"structure"`
 
+	// A set of alternate data source parameters that you want to share for these
+	// credentials. The credentials are applied in tandem with the data source parameters
+	// when you copy a data source by using a create or update request. The API
+	// compares the DataSourceParameters structure that's in the request with the
+	// structures in the AlternateDataSourceParameters allowlist. If the structures
+	// are an exact match, the request is allowed to use the new data source with
+	// the existing credentials. If the AlternateDataSourceParameters list is null,
+	// the DataSourceParameters originally used with these Credentials is automatically
+	// allowed.
+	AlternateDataSourceParameters []DataSourceParameters `min:"1" type:"list"`
+
 	// Password.
 	//
 	// Password is a required field
@@ -752,6 +787,9 @@ func (s CredentialPair) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CredentialPair) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CredentialPair"}
+	if s.AlternateDataSourceParameters != nil && len(s.AlternateDataSourceParameters) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AlternateDataSourceParameters", 1))
+	}
 
 	if s.Password == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Password"))
@@ -766,6 +804,13 @@ func (s *CredentialPair) Validate() error {
 	if s.Username != nil && len(*s.Username) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Username", 1))
 	}
+	if s.AlternateDataSourceParameters != nil {
+		for i, v := range s.AlternateDataSourceParameters {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AlternateDataSourceParameters", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -775,6 +820,18 @@ func (s *CredentialPair) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CredentialPair) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AlternateDataSourceParameters != nil {
+		v := s.AlternateDataSourceParameters
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "AlternateDataSourceParameters", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.Password != nil {
 		v := *s.Password
 
@@ -1051,18 +1108,18 @@ func (s DashboardPublishOptions) MarshalFields(e protocol.FieldEncoder) error {
 type DashboardSearchFilter struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the value that you want to use as a filter. For example, "Name":
+	// The name of the value that you want to use as a filter, for example, "Name":
 	// "QUICKSIGHT_USER".
 	Name DashboardFilterAttribute `type:"string" enum:"true"`
 
-	// The comparison operator that you want to use as a filter. For example, "Operator":
+	// The comparison operator that you want to use as a filter, for example, "Operator":
 	// "StringEquals".
 	//
 	// Operator is a required field
 	Operator FilterOperator `type:"string" required:"true" enum:"true"`
 
 	// The value of the named item, in this case QUICKSIGHT_USER, that you want
-	// to use as a filter. For example, "Value": "arn:aws:quicksight:us-east-1:1:user/default/UserName1".
+	// to use as a filter, for example, "Value": "arn:aws:quicksight:us-east-1:1:user/default/UserName1".
 	Value *string `type:"string"`
 }
 
@@ -1469,6 +1526,63 @@ func (s DashboardVersionSummary) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The theme colors that are used for data colors in charts. The colors description
+// is a hexidecimal color code that consists of six alphanumerical characters,
+// prefixed with #, for example #37BFF5.
+type DataColorPalette struct {
+	_ struct{} `type:"structure"`
+
+	// The hexadecimal codes for the colors.
+	Colors []string `type:"list"`
+
+	// The hexadecimal code of a color that applies to charts where a lack of data
+	// is highlighted.
+	EmptyFillColor *string `type:"string"`
+
+	// The minimum and maximum hexadecimal codes that describe a color gradient.
+	MinMaxGradient []string `type:"list"`
+}
+
+// String returns the string representation
+func (s DataColorPalette) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DataColorPalette) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Colors != nil {
+		v := s.Colors
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Colors", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.EmptyFillColor != nil {
+		v := *s.EmptyFillColor
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EmptyFillColor", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MinMaxGradient != nil {
+		v := s.MinMaxGradient
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "MinMaxGradient", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // Dataset.
 type DataSet struct {
 	_ struct{} `type:"structure"`
@@ -1839,6 +1953,17 @@ func (s DataSetSummary) MarshalFields(e protocol.FieldEncoder) error {
 type DataSource struct {
 	_ struct{} `type:"structure"`
 
+	// A set of alternate data source parameters that you want to share for the
+	// credentials stored with this data source. The credentials are applied in
+	// tandem with the data source parameters when you copy a data source by using
+	// a create or update request. The API compares the DataSourceParameters structure
+	// that's in the request with the structures in the AlternateDataSourceParameters
+	// allowlist. If the structures are an exact match, the request is allowed to
+	// use the credentials from this existing data source. If the AlternateDataSourceParameters
+	// list is null, the Credentials originally used with this DataSourceParameters
+	// are automatically allowed.
+	AlternateDataSourceParameters []DataSourceParameters `min:"1" type:"list"`
+
 	// The Amazon Resource Name (ARN) of the data source.
 	Arn *string `type:"string"`
 
@@ -1887,6 +2012,18 @@ func (s DataSource) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DataSource) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AlternateDataSourceParameters != nil {
+		v := s.AlternateDataSourceParameters
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "AlternateDataSourceParameters", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
 	if s.Arn != nil {
 		v := *s.Arn
 
@@ -1958,11 +2095,18 @@ func (s DataSource) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Data source credentials.
+// Data source credentials. This is a variant type structure. For this structure
+// to be valid, only one of the attributes can be non-null.
 type DataSourceCredentials struct {
 	_ struct{} `type:"structure" sensitive:"true"`
 
-	// Credential pair.
+	// The Amazon Resource Name (ARN) of a data source that has the credential pair
+	// that you want to use. When CopySourceArn is not null, the credential pair
+	// from the data source in the ARN is used as the credentials for the DataSourceCredentials
+	// structure.
+	CopySourceArn *string `type:"string"`
+
+	// Credential pair. For more information, see CredentialPair.
 	CredentialPair *CredentialPair `type:"structure"`
 }
 
@@ -1988,6 +2132,12 @@ func (s *DataSourceCredentials) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DataSourceCredentials) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CopySourceArn != nil {
+		v := *s.CopySourceArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CopySourceArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.CredentialPair != nil {
 		v := s.CredentialPair
 
@@ -2714,7 +2864,32 @@ func (s GroupMember) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// An IAM policy assignment.
+// The display options for gutter spacing between tiles on a sheet.
+type GutterStyle struct {
+	_ struct{} `type:"structure"`
+
+	// This Boolean value controls whether to display a gutter space between sheet
+	// tiles.
+	Show *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s GutterStyle) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GutterStyle) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Show != nil {
+		v := *s.Show
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Show", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// An AWS Identity and Access Management (IAM) policy assignment.
 type IAMPolicyAssignment struct {
 	_ struct{} `type:"structure"`
 
@@ -3402,6 +3577,30 @@ func (s ManifestFileLocation) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Key", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The display options for margins around the outside edge of sheets.
+type MarginStyle struct {
+	_ struct{} `type:"structure"`
+
+	// This Boolean value controls whether to display sheet margins.
+	Show *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s MarginStyle) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s MarginStyle) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Show != nil {
+		v := *s.Show
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Show", protocol.BoolValue(v), metadata)
 	}
 	return nil
 }
@@ -4329,10 +4528,14 @@ type ResourcePermission struct {
 	// Actions is a required field
 	Actions []string `min:"1" type:"list" required:"true"`
 
-	// The Amazon Resource Name (ARN) of an Amazon QuickSight user or group, or
-	// an IAM ARN. If you are using cross-account resource sharing, this is the
-	// IAM ARN of an account root. Otherwise, it is the ARN of a QuickSight user
-	// or group. .
+	// The Amazon Resource Name (ARN) of the principal. This can be one of the following:
+	//
+	//    * The ARN of an Amazon QuickSight user, group, or namespace. (This is
+	//    most common.)
+	//
+	//    * The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight
+	//    ARN. Use this option only to share resources (templates) across AWS accounts.
+	//    (This is less common.)
 	//
 	// Principal is a required field
 	Principal *string `min:"1" type:"string" required:"true"`
@@ -4671,6 +4874,39 @@ func (s SheetControlsOption) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "VisibilityState", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// The theme display options for sheets.
+type SheetStyle struct {
+	_ struct{} `type:"structure"`
+
+	// The display options for tiles.
+	Tile *TileStyle `type:"structure"`
+
+	// The layout options for tiles.
+	TileLayout *TileLayoutStyle `type:"structure"`
+}
+
+// String returns the string representation
+func (s SheetStyle) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SheetStyle) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Tile != nil {
+		v := s.Tile
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Tile", v, metadata)
+	}
+	if s.TileLayout != nil {
+		v := s.TileLayout
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "TileLayout", v, metadata)
 	}
 	return nil
 }
@@ -5732,6 +5968,489 @@ func (s TeradataParameters) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+type Theme struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the theme.
+	Arn *string `type:"string"`
+
+	// The date and time that the theme was created.
+	CreatedTime *time.Time `type:"timestamp"`
+
+	// The date and time that the theme was last updated.
+	LastUpdatedTime *time.Time `type:"timestamp"`
+
+	// The name that the user gives to the theme.
+	Name *string `min:"1" type:"string"`
+
+	// The identifier that the user gives to the theme.
+	ThemeId *string `min:"1" type:"string"`
+
+	// The type of theme, based on how it was created. Valid values include: QUICKSIGHT
+	// and CUSTOM.
+	Type ThemeType `type:"string" enum:"true"`
+
+	// A version of a theme.
+	Version *ThemeVersion `type:"structure"`
+}
+
+// String returns the string representation
+func (s Theme) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Theme) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreatedTime != nil {
+		v := *s.CreatedTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreatedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.LastUpdatedTime != nil {
+		v := *s.LastUpdatedTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ThemeId != nil {
+		v := *s.ThemeId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ThemeId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Version != nil {
+		v := s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Version", v, metadata)
+	}
+	return nil
+}
+
+// An alias for a theme.
+type ThemeAlias struct {
+	_ struct{} `type:"structure"`
+
+	// The display name of the theme alias.
+	AliasName *string `min:"1" type:"string"`
+
+	// The Amazon Resource Name (ARN) of the theme alias.
+	Arn *string `type:"string"`
+
+	// The version number of the theme alias.
+	ThemeVersionNumber *int64 `min:"1" type:"long"`
+}
+
+// String returns the string representation
+func (s ThemeAlias) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ThemeAlias) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AliasName != nil {
+		v := *s.AliasName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AliasName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ThemeVersionNumber != nil {
+		v := *s.ThemeVersionNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ThemeVersionNumber", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// The theme configuration. This configuration contains all of the display properties
+// for a theme.
+type ThemeConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Color properties that apply to chart data colors.
+	DataColorPalette *DataColorPalette `type:"structure"`
+
+	// Display options related to sheets.
+	Sheet *SheetStyle `type:"structure"`
+
+	// Color properties that apply to the UI and to charts, excluding the colors
+	// that apply to data.
+	UIColorPalette *UIColorPalette `type:"structure"`
+}
+
+// String returns the string representation
+func (s ThemeConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ThemeConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DataColorPalette != nil {
+		v := s.DataColorPalette
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "DataColorPalette", v, metadata)
+	}
+	if s.Sheet != nil {
+		v := s.Sheet
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Sheet", v, metadata)
+	}
+	if s.UIColorPalette != nil {
+		v := s.UIColorPalette
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "UIColorPalette", v, metadata)
+	}
+	return nil
+}
+
+// Theme error.
+type ThemeError struct {
+	_ struct{} `type:"structure"`
+
+	// The error message.
+	Message *string `type:"string"`
+
+	// The type of error.
+	Type ThemeErrorType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s ThemeError) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ThemeError) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Message != nil {
+		v := *s.Message
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Message", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// The theme summary.
+type ThemeSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the resource.
+	Arn *string `type:"string"`
+
+	// The date and time that this theme was created.
+	CreatedTime *time.Time `type:"timestamp"`
+
+	// The last date and time that this theme was updated.
+	LastUpdatedTime *time.Time `type:"timestamp"`
+
+	// The latest version number for the theme.
+	LatestVersionNumber *int64 `min:"1" type:"long"`
+
+	// the display name for the theme.
+	Name *string `min:"1" type:"string"`
+
+	// The ID of the theme. This ID is unique per AWS Region for each AWS account.
+	ThemeId *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s ThemeSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ThemeSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreatedTime != nil {
+		v := *s.CreatedTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreatedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.LastUpdatedTime != nil {
+		v := *s.LastUpdatedTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastUpdatedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.LatestVersionNumber != nil {
+		v := *s.LatestVersionNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LatestVersionNumber", protocol.Int64Value(v), metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ThemeId != nil {
+		v := *s.ThemeId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ThemeId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A version of a theme.
+type ThemeVersion struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the resource.
+	Arn *string `type:"string"`
+
+	// The Amazon QuickSight-defined ID of the theme that a custom theme inherits
+	// from. All themes initially inherit from a default QuickSight theme.
+	BaseThemeId *string `min:"1" type:"string"`
+
+	// The theme configuration, which contains all the theme display properties.
+	Configuration *ThemeConfiguration `type:"structure"`
+
+	// The date and time that this theme version was created.
+	CreatedTime *time.Time `type:"timestamp"`
+
+	// The description of the theme.
+	Description *string `min:"1" type:"string"`
+
+	// Errors associated with the theme.
+	Errors []ThemeError `min:"1" type:"list"`
+
+	// The status of the theme version.
+	Status ResourceStatus `type:"string" enum:"true"`
+
+	// The version number of the theme.
+	VersionNumber *int64 `min:"1" type:"long"`
+}
+
+// String returns the string representation
+func (s ThemeVersion) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ThemeVersion) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.BaseThemeId != nil {
+		v := *s.BaseThemeId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "BaseThemeId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Configuration != nil {
+		v := s.Configuration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Configuration", v, metadata)
+	}
+	if s.CreatedTime != nil {
+		v := *s.CreatedTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreatedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Errors != nil {
+		v := s.Errors
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Errors", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.VersionNumber != nil {
+		v := *s.VersionNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VersionNumber", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// The theme version.
+type ThemeVersionSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the theme version.
+	Arn *string `type:"string"`
+
+	// The date and time that this theme version was created.
+	CreatedTime *time.Time `type:"timestamp"`
+
+	// The description of the theme version.
+	Description *string `min:"1" type:"string"`
+
+	// The status of the theme version.
+	Status ResourceStatus `type:"string" enum:"true"`
+
+	// The version number of the theme version.
+	VersionNumber *int64 `min:"1" type:"long"`
+}
+
+// String returns the string representation
+func (s ThemeVersionSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ThemeVersionSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreatedTime != nil {
+		v := *s.CreatedTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreatedTime",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.VersionNumber != nil {
+		v := *s.VersionNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VersionNumber", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// The display options for the layout of tiles on a sheet.
+type TileLayoutStyle struct {
+	_ struct{} `type:"structure"`
+
+	// The gutter settings that apply between tiles.
+	Gutter *GutterStyle `type:"structure"`
+
+	// The margin settings that apply around the outside edge of sheets.
+	Margin *MarginStyle `type:"structure"`
+}
+
+// String returns the string representation
+func (s TileLayoutStyle) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TileLayoutStyle) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Gutter != nil {
+		v := s.Gutter
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Gutter", v, metadata)
+	}
+	if s.Margin != nil {
+		v := s.Margin
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Margin", v, metadata)
+	}
+	return nil
+}
+
+// Display options related to tiles on a sheet.
+type TileStyle struct {
+	_ struct{} `type:"structure"`
+
+	// The border around a tile.
+	Border *BorderStyle `type:"structure"`
+}
+
+// String returns the string representation
+func (s TileStyle) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TileStyle) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Border != nil {
+		v := s.Border
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Border", v, metadata)
+	}
+	return nil
+}
+
 // A data transformation on a logical table. This is a variant type structure.
 // For this structure to be valid, only one of the attributes can be non-null.
 type TransformOperation struct {
@@ -5901,6 +6620,179 @@ func (s TwitterParameters) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Query", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The theme colors that apply to UI and to charts, excluding data colors. The
+// colors description is a hexidecimal color code that consists of six alphanumerical
+// characters, prefixed with #, for example #37BFF5. For more information, see
+// Using Themes in Amazon QuickSight (https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html)
+// in the Amazon QuickSight User Guide.
+type UIColorPalette struct {
+	_ struct{} `type:"structure"`
+
+	// This color is that applies to selected states and buttons.
+	Accent *string `type:"string"`
+
+	// The foreground color that applies to any text or other elements that appear
+	// over the accent color.
+	AccentForeground *string `type:"string"`
+
+	// The color that applies to error messages.
+	Danger *string `type:"string"`
+
+	// The foreground color that applies to any text or other elements that appear
+	// over the error color.
+	DangerForeground *string `type:"string"`
+
+	// The color that applies to the names of fields that are identified as dimensions.
+	Dimension *string `type:"string"`
+
+	// The foreground color that applies to any text or other elements that appear
+	// over the dimension color.
+	DimensionForeground *string `type:"string"`
+
+	// The color that applies to the names of fields that are identified as measures.
+	Measure *string `type:"string"`
+
+	// The foreground color that applies to any text or other elements that appear
+	// over the measure color.
+	MeasureForeground *string `type:"string"`
+
+	// The background color that applies to visuals and other high emphasis UI.
+	PrimaryBackground *string `type:"string"`
+
+	// The color of text and other foreground elements that appear over the primary
+	// background regions, such as grid lines, borders, table banding, icons, and
+	// so on.
+	PrimaryForeground *string `type:"string"`
+
+	// The background color that applies to the sheet background and sheet controls.
+	SecondaryBackground *string `type:"string"`
+
+	// The foreground color that applies to any sheet title, sheet control text,
+	// or UI that appears over the secondary background.
+	SecondaryForeground *string `type:"string"`
+
+	// The color that applies to success messages, for example the check mark for
+	// a successful download.
+	Success *string `type:"string"`
+
+	// The foreground color that applies to any text or other elements that appear
+	// over the success color.
+	SuccessForeground *string `type:"string"`
+
+	// This color that applies to warning and informational messages.
+	Warning *string `type:"string"`
+
+	// The foreground color that applies to any text or other elements that appear
+	// over the warning color.
+	WarningForeground *string `type:"string"`
+}
+
+// String returns the string representation
+func (s UIColorPalette) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s UIColorPalette) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Accent != nil {
+		v := *s.Accent
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Accent", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.AccentForeground != nil {
+		v := *s.AccentForeground
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AccentForeground", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Danger != nil {
+		v := *s.Danger
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Danger", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DangerForeground != nil {
+		v := *s.DangerForeground
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DangerForeground", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Dimension != nil {
+		v := *s.Dimension
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Dimension", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DimensionForeground != nil {
+		v := *s.DimensionForeground
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DimensionForeground", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Measure != nil {
+		v := *s.Measure
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Measure", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MeasureForeground != nil {
+		v := *s.MeasureForeground
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MeasureForeground", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PrimaryBackground != nil {
+		v := *s.PrimaryBackground
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PrimaryBackground", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PrimaryForeground != nil {
+		v := *s.PrimaryForeground
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "PrimaryForeground", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SecondaryBackground != nil {
+		v := *s.SecondaryBackground
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SecondaryBackground", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SecondaryForeground != nil {
+		v := *s.SecondaryForeground
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SecondaryForeground", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Success != nil {
+		v := *s.Success
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Success", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SuccessForeground != nil {
+		v := *s.SuccessForeground
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SuccessForeground", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Warning != nil {
+		v := *s.Warning
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Warning", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.WarningForeground != nil {
+		v := *s.WarningForeground
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "WarningForeground", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

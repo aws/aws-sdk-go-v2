@@ -77,7 +77,7 @@ type SendMessageInput struct {
 	// Amazon SQS continues to keep track of the message deduplication ID even after
 	// the message is received and deleted.
 	//
-	// The length of MessageDeduplicationId is 128 characters. MessageDeduplicationId
+	// The maximum length of MessageDeduplicationId is 128 characters. MessageDeduplicationId
 	// can contain alphanumeric characters (a-z, A-Z, 0-9) and punctuation (!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~).
 	//
 	// For best practices of using MessageDeduplicationId, see Using the MessageDeduplicationId
@@ -118,7 +118,7 @@ type SendMessageInput struct {
 	//
 	//    * Currently, the only supported message system attribute is AWSTraceHeader.
 	//    Its type must be String and its value must be a correctly formatted AWS
-	//    X-Ray trace string.
+	//    X-Ray trace header string.
 	//
 	//    * The size of a message system attribute doesn't count towards the total
 	//    size of a message.

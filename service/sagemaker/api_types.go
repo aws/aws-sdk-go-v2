@@ -294,40 +294,49 @@ func (s *AlgorithmValidationSpecification) Validate() error {
 	return nil
 }
 
-// Configures how labels are consolidated across human workers.
+// Configures how labels are consolidated across human workers and processes
+// output data.
 type AnnotationConsolidationConfig struct {
 	_ struct{} `type:"structure"`
 
 	// The Amazon Resource Name (ARN) of a Lambda function implements the logic
-	// for annotation consolidation.
+	// for annotation consolidation (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html)
+	// and to process output data.
 	//
-	// For the built-in bounding box, image classification, semantic segmentation,
-	// and text classification task types, Amazon SageMaker Ground Truth provides
-	// the following Lambda functions:
+	// This parameter is required for all labeling jobs. For built-in task types
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html), use
+	// one of the following Amazon SageMaker Ground Truth Lambda function ARNs for
+	// AnnotationConsolidationLambdaArn. For custom labeling workflows, see Post-annotation
+	// Lambda (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates-step3.html#sms-custom-templates-step3-postlambda).
 	//
-	//    * Bounding box - Finds the most similar boxes from different workers based
-	//    on the Jaccard index of the boxes. arn:aws:lambda:us-east-1:432418664414:function:ACS-BoundingBox
-	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-BoundingBox arn:aws:lambda:us-west-2:081040173940:function:ACS-BoundingBox
-	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-BoundingBox arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-BoundingBox
-	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-BoundingBox arn:aws:lambda:ap-south-1:565803892007:function:ACS-BoundingBox
-	//    arn:aws:lambda:eu-central-1:203001061592:function:ACS-BoundingBox arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-BoundingBox
-	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-BoundingBox arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-BoundingBox
-	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-BoundingBox
+	// Bounding box - Finds the most similar boxes from different workers based
+	// on the Jaccard index of the boxes.
 	//
-	//    * Image classification - Uses a variant of the Expectation Maximization
-	//    approach to estimate the true class of an image based on annotations from
-	//    individual workers. arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClass
-	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-ImageMultiClass arn:aws:lambda:us-west-2:081040173940:function:ACS-ImageMultiClass
-	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-ImageMultiClass arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-ImageMultiClass
+	//    * arn:aws:lambda:us-east-1:432418664414:function:ACS-BoundingBox arn:aws:lambda:us-east-2:266458841044:function:ACS-BoundingBox
+	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-BoundingBox arn:aws:lambda:eu-west-1:568282634449:function:ACS-BoundingBox
+	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-BoundingBox arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-BoundingBox
+	//    arn:aws:lambda:ap-south-1:565803892007:function:ACS-BoundingBox arn:aws:lambda:eu-central-1:203001061592:function:ACS-BoundingBox
+	//    arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-BoundingBox arn:aws:lambda:eu-west-2:487402164563:function:ACS-BoundingBox
+	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-BoundingBox arn:aws:lambda:ca-central-1:918755190332:function:ACS-BoundingBox
+	//
+	// Image classification - Uses a variant of the Expectation Maximization approach
+	// to estimate the true class of an image based on annotations from individual
+	// workers.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClass arn:aws:lambda:us-east-2:266458841044:function:ACS-ImageMultiClass
+	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-ImageMultiClass arn:aws:lambda:eu-west-1:568282634449:function:ACS-ImageMultiClass
+	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-ImageMultiClass
 	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-ImageMultiClass
 	//    arn:aws:lambda:ap-south-1:565803892007:function:ACS-ImageMultiClass arn:aws:lambda:eu-central-1:203001061592:function:ACS-ImageMultiClass
 	//    arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-ImageMultiClass
 	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-ImageMultiClass arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-ImageMultiClass
 	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-ImageMultiClass
 	//
-	//    * Multi-label image classification - Uses a variant of the Expectation
-	//    Maximization approach to estimate the true classes of an image based on
-	//    annotations from individual workers. arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClassMultiLabel
+	// Multi-label image classification - Uses a variant of the Expectation Maximization
+	// approach to estimate the true classes of an image based on annotations from
+	// individual workers.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:ACS-ImageMultiClassMultiLabel
 	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-ImageMultiClassMultiLabel
 	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-ImageMultiClassMultiLabel
 	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-ImageMultiClassMultiLabel
@@ -340,9 +349,10 @@ type AnnotationConsolidationConfig struct {
 	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-ImageMultiClassMultiLabel
 	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-ImageMultiClassMultiLabel
 	//
-	//    * Semantic segmentation - Treats each pixel in an image as a multi-class
-	//    classification and treats pixel annotations from workers as "votes" for
-	//    the correct label. arn:aws:lambda:us-east-1:432418664414:function:ACS-SemanticSegmentation
+	// Semantic segmentation - Treats each pixel in an image as a multi-class classification
+	// and treats pixel annotations from workers as "votes" for the correct label.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:ACS-SemanticSegmentation
 	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-SemanticSegmentation
 	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-SemanticSegmentation
 	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-SemanticSegmentation
@@ -355,20 +365,23 @@ type AnnotationConsolidationConfig struct {
 	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-SemanticSegmentation
 	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-SemanticSegmentation
 	//
-	//    * Text classification - Uses a variant of the Expectation Maximization
-	//    approach to estimate the true class of text based on annotations from
-	//    individual workers. arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClass
-	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClass arn:aws:lambda:us-west-2:081040173940:function:ACS-TextMultiClass
-	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-TextMultiClass arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-TextMultiClass
+	// Text classification - Uses a variant of the Expectation Maximization approach
+	// to estimate the true class of text based on annotations from individual workers.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClass arn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClass
+	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-TextMultiClass arn:aws:lambda:eu-west-1:568282634449:function:ACS-TextMultiClass
+	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-TextMultiClass
 	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-TextMultiClass
 	//    arn:aws:lambda:ap-south-1:565803892007:function:ACS-TextMultiClass arn:aws:lambda:eu-central-1:203001061592:function:ACS-TextMultiClass
 	//    arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-TextMultiClass
 	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-TextMultiClass arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-TextMultiClass
 	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-TextMultiClass
 	//
-	//    * Multi-label text classification - Uses a variant of the Expectation
-	//    Maximization approach to estimate the true classes of text based on annotations
-	//    from individual workers. arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClassMultiLabel
+	// Multi-label text classification - Uses a variant of the Expectation Maximization
+	// approach to estimate the true classes of text based on annotations from individual
+	// workers.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClassMultiLabel
 	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClassMultiLabel
 	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-TextMultiClassMultiLabel
 	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-TextMultiClassMultiLabel
@@ -381,8 +394,10 @@ type AnnotationConsolidationConfig struct {
 	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-TextMultiClassMultiLabel
 	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-TextMultiClassMultiLabel
 	//
-	//    * Named entity recognition - Groups similar selections and calculates
-	//    aggregate boundaries, resolving to most-assigned label. arn:aws:lambda:us-east-1:432418664414:function:ACS-NamedEntityRecognition
+	// Named entity recognition - Groups similar selections and calculates aggregate
+	// boundaries, resolving to most-assigned label.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:ACS-NamedEntityRecognition
 	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-NamedEntityRecognition
 	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-NamedEntityRecognition
 	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-NamedEntityRecognition
@@ -395,54 +410,70 @@ type AnnotationConsolidationConfig struct {
 	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-NamedEntityRecognition
 	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-NamedEntityRecognition
 	//
-	//    * Bounding box verification - Uses a variant of the Expectation Maximization
-	//    approach to estimate the true class of verification judgement for bounding
-	//    box labels based on annotations from individual workers. arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationBoundingBox
-	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationBoundingBox
-	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-VerificationBoundingBox
-	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-VerificationBoundingBox
-	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VerificationBoundingBox
-	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VerificationBoundingBox
-	//    arn:aws:lambda:ap-south-1:565803892007:function:ACS-VerificationBoundingBox
-	//    arn:aws:lambda:eu-central-1:203001061592:function:ACS-VerificationBoundingBox
-	//    arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VerificationBoundingBox
-	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-VerificationBoundingBox
-	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VerificationBoundingBox
-	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationBoundingBox
+	// 3D point cloud object detection - Use this task type when you want workers
+	// to classify objects in a 3D point cloud by drawing 3D cuboids around objects.
+	// For example, you can use this task type to ask workers to identify different
+	// types of objects in a point cloud, such as cars, bikes, and pedestrians.
 	//
-	//    * Semantic segmentation verification - Uses a variant of the Expectation
-	//    Maximization approach to estimate the true class of verification judgment
-	//    for semantic segmentation labels based on annotations from individual
-	//    workers. arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationSemanticSegmentation
-	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationSemanticSegmentation
-	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-VerificationSemanticSegmentation
-	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-VerificationSemanticSegmentation
-	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VerificationSemanticSegmentation
-	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VerificationSemanticSegmentation
-	//    arn:aws:lambda:ap-south-1:565803892007:function:ACS-VerificationSemanticSegmentation
-	//    arn:aws:lambda:eu-central-1:203001061592:function:ACS-VerificationSemanticSegmentation
-	//    arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VerificationSemanticSegmentation
-	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-VerificationSemanticSegmentation
-	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VerificationSemanticSegmentation
-	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationSemanticSegmentation
+	//    * arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudObjectDetection
+	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-3DPointCloudObjectDetection
+	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-3DPointCloudObjectDetection
+	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-3DPointCloudObjectDetection
+	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-3DPointCloudObjectDetection
+	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-3DPointCloudObjectDetection
+	//    arn:aws:lambda:ap-south-1:565803892007:function:ACS-3DPointCloudObjectDetection
+	//    arn:aws:lambda:eu-central-1:203001061592:function:ACS-3DPointCloudObjectDetection
+	//    arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-3DPointCloudObjectDetection
+	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-3DPointCloudObjectDetection
+	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-3DPointCloudObjectDetection
+	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-3DPointCloudObjectDetection
 	//
-	//    * Bounding box adjustment - Finds the most similar boxes from different
-	//    workers based on the Jaccard index of the adjusted annotations. arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentBoundingBox
-	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentBoundingBox
-	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentBoundingBox
-	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentBoundingBox
-	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentBoundingBox
-	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentBoundingBox
-	//    arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentBoundingBox
-	//    arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentBoundingBox
-	//    arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentBoundingBox
-	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentBoundingBox
-	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentBoundingBox
-	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentBoundingBox
+	// 3D point cloud object tracking - Use this task type when you want workers
+	// to draw 3D cuboids around objects that appear in a sequence of 3D point cloud
+	// frames. For example, you can use this task type to ask workers to track the
+	// movement of vehicles across multiple point cloud frames.
 	//
-	//    * Semantic segmentation adjustment - Treats each pixel in an image as
-	//    a multi-class classification and treats pixel adjusted annotations from
-	//    workers as "votes" for the correct label. arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentSemanticSegmentation
+	//    * arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudObjectTracking
+	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-3DPointCloudObjectTracking
+	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-3DPointCloudObjectTracking
+	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-3DPointCloudObjectTracking
+	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-3DPointCloudObjectTracking
+	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-3DPointCloudObjectTracking
+	//    arn:aws:lambda:ap-south-1:565803892007:function:ACS-3DPointCloudObjectTracking
+	//    arn:aws:lambda:eu-central-1:203001061592:function:ACS-3DPointCloudObjectTracking
+	//    arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-3DPointCloudObjectTracking
+	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-3DPointCloudObjectTracking
+	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-3DPointCloudObjectTracking
+	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-3DPointCloudObjectTracking
+	//
+	// 3D point cloud semantic segmentation - Use this task type when you want workers
+	// to create a point-level semantic segmentation masks by painting objects in
+	// a 3D point cloud using different colors where each color is assigned to one
+	// of the classes you specify.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:ACS-3DPointCloudSemanticSegmentation
+	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-3DPointCloudSemanticSegmentation
+	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-3DPointCloudSemanticSegmentation
+	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-3DPointCloudSemanticSegmentation
+	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-3DPointCloudSemanticSegmentation
+	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-3DPointCloudSemanticSegmentation
+	//    arn:aws:lambda:ap-south-1:565803892007:function:ACS-3DPointCloudSemanticSegmentation
+	//    arn:aws:lambda:eu-central-1:203001061592:function:ACS-3DPointCloudSemanticSegmentation
+	//    arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-3DPointCloudSemanticSegmentation
+	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-3DPointCloudSemanticSegmentation
+	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-3DPointCloudSemanticSegmentation
+	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-3DPointCloudSemanticSegmentation
+	//
+	// Use the following ARNs for Label Verification and Adjustment Jobs
+	//
+	// Use label verification and adjustment jobs to review and adjust labels. To
+	// learn more, see Verify and Adjust Labels (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-verification-data.html).
+	//
+	// Semantic segmentation adjustment - Treats each pixel in an image as a multi-class
+	// classification and treats pixel adjusted annotations from workers as "votes"
+	// for the correct label.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentSemanticSegmentation
 	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentSemanticSegmentation
 	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentSemanticSegmentation
 	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentSemanticSegmentation
@@ -455,7 +486,105 @@ type AnnotationConsolidationConfig struct {
 	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentSemanticSegmentation
 	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentSemanticSegmentation
 	//
-	// For more information, see Annotation Consolidation (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-annotation-consolidation.html).
+	// Semantic segmentation verification - Uses a variant of the Expectation Maximization
+	// approach to estimate the true class of verification judgment for semantic
+	// segmentation labels based on annotations from individual workers.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationSemanticSegmentation
+	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationSemanticSegmentation
+	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-VerificationSemanticSegmentation
+	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-VerificationSemanticSegmentation
+	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VerificationSemanticSegmentation
+	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VerificationSemanticSegmentation
+	//    arn:aws:lambda:ap-south-1:565803892007:function:ACS-VerificationSemanticSegmentation
+	//    arn:aws:lambda:eu-central-1:203001061592:function:ACS-VerificationSemanticSegmentation
+	//    arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VerificationSemanticSegmentation
+	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-VerificationSemanticSegmentation
+	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VerificationSemanticSegmentation
+	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationSemanticSegmentation
+	//
+	// Bounding box verification - Uses a variant of the Expectation Maximization
+	// approach to estimate the true class of verification judgement for bounding
+	// box labels based on annotations from individual workers.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:ACS-VerificationBoundingBox
+	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-VerificationBoundingBox
+	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-VerificationBoundingBox
+	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-VerificationBoundingBox
+	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-VerificationBoundingBox
+	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-VerificationBoundingBox
+	//    arn:aws:lambda:ap-south-1:565803892007:function:ACS-VerificationBoundingBox
+	//    arn:aws:lambda:eu-central-1:203001061592:function:ACS-VerificationBoundingBox
+	//    arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-VerificationBoundingBox
+	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-VerificationBoundingBox
+	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-VerificationBoundingBox
+	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-VerificationBoundingBox
+	//
+	// Bounding box adjustment - Finds the most similar boxes from different workers
+	// based on the Jaccard index of the adjusted annotations.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:ACS-AdjustmentBoundingBox
+	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-AdjustmentBoundingBox
+	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-AdjustmentBoundingBox
+	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-AdjustmentBoundingBox
+	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-AdjustmentBoundingBox
+	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-AdjustmentBoundingBox
+	//    arn:aws:lambda:ap-south-1:565803892007:function:ACS-AdjustmentBoundingBox
+	//    arn:aws:lambda:eu-central-1:203001061592:function:ACS-AdjustmentBoundingBox
+	//    arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-AdjustmentBoundingBox
+	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-AdjustmentBoundingBox
+	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-AdjustmentBoundingBox
+	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-AdjustmentBoundingBox
+	//
+	// 3D point cloud object detection adjustment - Use this task type when you
+	// want workers to adjust 3D cuboids around objects in a 3D point cloud.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:ACS-Adjustment3DPointCloudObjectDetection
+	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-Adjustment3DPointCloudObjectDetection
+	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-Adjustment3DPointCloudObjectDetection
+	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-Adjustment3DPointCloudObjectDetection
+	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-Adjustment3DPointCloudObjectDetection
+	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-Adjustment3DPointCloudObjectDetection
+	//    arn:aws:lambda:ap-south-1:565803892007:function:ACS-Adjustment3DPointCloudObjectDetection
+	//    arn:aws:lambda:eu-central-1:203001061592:function:ACS-Adjustment3DPointCloudObjectDetection
+	//    arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-Adjustment3DPointCloudObjectDetection
+	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-Adjustment3DPointCloudObjectDetection
+	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-Adjustment3DPointCloudObjectDetection
+	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudObjectDetection
+	//
+	// 3D point cloud object tracking adjustment - Use this task type when you want
+	// workers to adjust 3D cuboids around objects that appear in a sequence of
+	// 3D point cloud frames.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:ACS-Adjustment3DPointCloudObjectTracking
+	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-Adjustment3DPointCloudObjectTracking
+	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-Adjustment3DPointCloudObjectTracking
+	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-Adjustment3DPointCloudObjectTracking
+	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-Adjustment3DPointCloudObjectTracking
+	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-Adjustment3DPointCloudObjectTracking
+	//    arn:aws:lambda:ap-south-1:565803892007:function:ACS-Adjustment3DPointCloudObjectTracking
+	//    arn:aws:lambda:eu-central-1:203001061592:function:ACS-Adjustment3DPointCloudObjectTracking
+	//    arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-Adjustment3DPointCloudObjectTracking
+	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-Adjustment3DPointCloudObjectTracking
+	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-Adjustment3DPointCloudObjectTracking
+	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudObjectTracking
+	//
+	// 3D point cloud semantic segmentation adjustment - Use this task type when
+	// you want workers to adjust a point-level semantic segmentation masks using
+	// a paint tool.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:ACS-Adjustment3DPointCloudSemanticSegmentation
+	//    arn:aws:lambda:us-east-2:266458841044:function:ACS-Adjustment3DPointCloudSemanticSegmentation
+	//    arn:aws:lambda:us-west-2:081040173940:function:ACS-Adjustment3DPointCloudSemanticSegmentation
+	//    arn:aws:lambda:eu-west-1:568282634449:function:ACS-Adjustment3DPointCloudSemanticSegmentation
+	//    arn:aws:lambda:ap-northeast-1:477331159723:function:ACS-Adjustment3DPointCloudSemanticSegmentation
+	//    arn:aws:lambda:ap-southeast-2:454466003867:function:ACS-Adjustment3DPointCloudSemanticSegmentation
+	//    arn:aws:lambda:ap-south-1:565803892007:function:ACS-Adjustment3DPointCloudSemanticSegmentation
+	//    arn:aws:lambda:eu-central-1:203001061592:function:ACS-Adjustment3DPointCloudSemanticSegmentation
+	//    arn:aws:lambda:ap-northeast-2:845288260483:function:ACS-Adjustment3DPointCloudSemanticSegmentation
+	//    arn:aws:lambda:eu-west-2:487402164563:function:ACS-Adjustment3DPointCloudSemanticSegmentation
+	//    arn:aws:lambda:ap-southeast-1:377565633583:function:ACS-Adjustment3DPointCloudSemanticSegmentation
+	//    arn:aws:lambda:ca-central-1:918755190332:function:ACS-Adjustment3DPointCloudSemanticSegmentation
 	//
 	// AnnotationConsolidationLambdaArn is a required field
 	AnnotationConsolidationLambdaArn *string `type:"string" required:"true"`
@@ -2491,6 +2620,14 @@ type Filter struct {
 	//
 	// The value of Name doesn't equal Value.
 	//
+	// Exists
+	//
+	// The Name property exists.
+	//
+	// NotExists
+	//
+	// The Name property does not exist.
+	//
 	// GreaterThan
 	//
 	// The value of Name is greater than Value. Not supported for text properties.
@@ -2509,23 +2646,44 @@ type Filter struct {
 	// The value of Name is less than or equal to Value. Not supported for text
 	// properties.
 	//
-	// Contains
-	//
-	// The value of Name contains the string Value. A SearchExpression can include
-	// only one Contains operator. Only supported for text properties.
-	//
-	// Exists
-	//
-	// The Name property exists.
-	//
-	// NotExists
-	//
-	// The Name property does not exist.
-	//
 	// In
 	//
 	// The value of Name is one of the comma delimited strings in Value. Only supported
 	// for text properties.
+	//
+	// Contains
+	//
+	// The value of Name contains the string Value. Only supported for text properties.
+	//
+	// A SearchExpression can include the Contains operator multiple times when
+	// the value of Name is one of the following:
+	//
+	//    * Experiment.DisplayName
+	//
+	//    * Experiment.ExperimentName
+	//
+	//    * Experiment.Tags
+	//
+	//    * Trial.DisplayName
+	//
+	//    * Trial.TrialName
+	//
+	//    * Trial.Tags
+	//
+	//    * TrialComponent.DisplayName
+	//
+	//    * TrialComponent.TrialComponentName
+	//
+	//    * TrialComponent.Tags
+	//
+	//    * TrialComponent.InputArtifacts
+	//
+	//    * TrialComponent.OutputArtifacts
+	//
+	// A SearchExpression can include only one Contains operator for all other values
+	// of Name. In these cases, if you include multiple Contains operators in the
+	// SearchExpression, the result is the following error message: "'CONTAINS'
+	// operator usage limit of 1 exceeded."
 	Operator Operator `type:"string" enum:"true"`
 
 	// A value used with Name and Operator to determine which resources satisfy
@@ -3179,297 +3337,492 @@ type HumanTaskConfig struct {
 	// data object is sent to a human worker. Use this function to provide input
 	// to a custom labeling job.
 	//
-	// For the built-in bounding box, image classification, semantic segmentation,
-	// and text classification task types, Amazon SageMaker Ground Truth provides
-	// the following Lambda functions:
+	// For built-in task types (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html),
+	// use one of the following Amazon SageMaker Ground Truth Lambda function ARNs
+	// for PreHumanTaskLambdaArn. For custom labeling workflows, see Pre-annotation
+	// Lambda (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates-step3.html#sms-custom-templates-step3-prelambda).
 	//
-	// US East (Northern Virginia) (us-east-1):
+	// Bounding box - Finds the most similar boxes from different workers based
+	// on the Jaccard index of the boxes.
 	//
 	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-BoundingBox
 	//
-	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-ImageMultiClass
-	//
-	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-ImageMultiClassMultiLabel
-	//
-	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-SemanticSegmentation
-	//
-	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-TextMultiClass
-	//
-	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-TextMultiClassMultiLabel
-	//
-	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-NamedEntityRecognition
-	//
-	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-VerificationBoundingBox
-	//
-	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-VerificationSemanticSegmentation
-	//
-	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentBoundingBox
-	//
-	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentSemanticSegmentation
-	//
-	// US East (Ohio) (us-east-2):
-	//
 	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-BoundingBox
-	//
-	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-ImageMultiClass
-	//
-	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-ImageMultiClassMultiLabel
-	//
-	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-SemanticSegmentation
-	//
-	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-TextMultiClass
-	//
-	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-TextMultiClassMultiLabel
-	//
-	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-NamedEntityRecognition
-	//
-	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-VerificationBoundingBox
-	//
-	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-VerificationSemanticSegmentation
-	//
-	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentBoundingBox
-	//
-	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentSemanticSegmentation
-	//
-	// US West (Oregon) (us-west-2):
 	//
 	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-BoundingBox
 	//
-	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-ImageMultiClass
-	//
-	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-ImageMultiClassMultiLabel
-	//
-	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-SemanticSegmentation
-	//
-	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-TextMultiClass
-	//
-	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-TextMultiClassMultiLabel
-	//
-	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-NamedEntityRecognition
-	//
-	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-VerificationBoundingBox
-	//
-	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-VerificationSemanticSegmentation
-	//
-	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentBoundingBox
-	//
-	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentSemanticSegmentation
-	//
-	// Canada (Central) (ca-central-1):
-	//
 	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-BoundingBox
-	//
-	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-ImageMultiClass
-	//
-	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-ImageMultiClassMultiLabel
-	//
-	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-SemanticSegmentation
-	//
-	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-TextMultiClass
-	//
-	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-TextMultiClassMultiLabel
-	//
-	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-NamedEntityRecognition
-	//
-	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-VerificationBoundingBox
-	//
-	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-VerificationSemanticSegmentation
-	//
-	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentBoundingBox
-	//
-	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentSemanticSegmentation
-	//
-	// EU (Ireland) (eu-west-1):
 	//
 	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-BoundingBox
 	//
-	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-ImageMultiClass
-	//
-	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-ImageMultiClassMultiLabel
-	//
-	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-SemanticSegmentation
-	//
-	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-TextMultiClass
-	//
-	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-TextMultiClassMultiLabel
-	//
-	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-NamedEntityRecognition
-	//
-	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-VerificationBoundingBox
-	//
-	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-VerificationSemanticSegmentation
-	//
-	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentBoundingBox
-	//
-	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentSemanticSegmentation
-	//
-	// EU (London) (eu-west-2):
-	//
 	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-BoundingBox
-	//
-	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-ImageMultiClass
-	//
-	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-ImageMultiClassMultiLabel
-	//
-	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-SemanticSegmentation
-	//
-	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-TextMultiClass
-	//
-	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-TextMultiClassMultiLabel
-	//
-	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-NamedEntityRecognition
-	//
-	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-VerificationBoundingBox
-	//
-	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-VerificationSemanticSegmentation
-	//
-	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentBoundingBox
-	//
-	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentSemanticSegmentation
-	//
-	// EU Frankfurt (eu-central-1):
 	//
 	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-BoundingBox
 	//
-	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-ImageMultiClass
-	//
-	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-ImageMultiClassMultiLabel
-	//
-	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-SemanticSegmentation
-	//
-	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-TextMultiClass
-	//
-	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-TextMultiClassMultiLabel
-	//
-	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-NamedEntityRecognition
-	//
-	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-VerificationBoundingBox
-	//
-	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-VerificationSemanticSegmentation
-	//
-	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentBoundingBox
-	//
-	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentSemanticSegmentation
-	//
-	// Asia Pacific (Tokyo) (ap-northeast-1):
-	//
 	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-BoundingBox
-	//
-	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-ImageMultiClass
-	//
-	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-ImageMultiClassMultiLabel
-	//
-	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-SemanticSegmentation
-	//
-	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClass
-	//
-	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClassMultiLabel
-	//
-	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-NamedEntityRecognition
-	//
-	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VerificationBoundingBox
-	//
-	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VerificationSemanticSegmentation
-	//
-	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentBoundingBox
-	//
-	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentSemanticSegmentation
-	//
-	// Asia Pacific (Seoul) (ap-northeast-2):
 	//
 	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-BoundingBox
 	//
-	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-ImageMultiClass
-	//
-	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-ImageMultiClassMultiLabel
-	//
-	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-SemanticSegmentation
-	//
-	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-TextMultiClass
-	//
-	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-TextMultiClassMultiLabel
-	//
-	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-NamedEntityRecognition
-	//
-	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VerificationBoundingBox
-	//
-	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VerificationSemanticSegmentation
-	//
-	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentBoundingBox
-	//
-	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentSemanticSegmentation
-	//
-	// Asia Pacific (Mumbai) (ap-south-1):
-	//
 	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-BoundingBox
-	//
-	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-ImageMultiClass
-	//
-	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-ImageMultiClassMultiLabel
-	//
-	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-SemanticSegmentation
-	//
-	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-TextMultiClass
-	//
-	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-TextMultiClassMultiLabel
-	//
-	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-NamedEntityRecognition
-	//
-	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-VerificationBoundingBox
-	//
-	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-VerificationSemanticSegmentation
-	//
-	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentBoundingBox
-	//
-	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentSemanticSegmentation
-	//
-	// Asia Pacific (Singapore) (ap-southeast-1):
 	//
 	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-BoundingBox
 	//
-	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-ImageMultiClass
-	//
-	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-ImageMultiClassMultiLabel
-	//
-	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-SemanticSegmentation
-	//
-	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-TextMultiClass
-	//
-	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-TextMultiClassMultiLabel
-	//
-	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-NamedEntityRecognition
-	//
-	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VerificationBoundingBox
-	//
-	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VerificationSemanticSegmentation
-	//
-	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentBoundingBox
-	//
-	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentSemanticSegmentation
-	//
-	// Asia Pacific (Sydney) (ap-southeast-2):
-	//
 	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-BoundingBox
+	//
+	// Image classification - Uses a variant of the Expectation Maximization approach
+	// to estimate the true class of an image based on annotations from individual
+	// workers.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-ImageMultiClass
+	//
+	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-ImageMultiClass
+	//
+	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-ImageMultiClass
+	//
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-ImageMultiClass
+	//
+	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-ImageMultiClass
+	//
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-ImageMultiClass
+	//
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-ImageMultiClass
+	//
+	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-ImageMultiClass
+	//
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-ImageMultiClass
+	//
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-ImageMultiClass
+	//
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-ImageMultiClass
 	//
 	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-ImageMultiClass
 	//
+	// Multi-label image classification - Uses a variant of the Expectation Maximization
+	// approach to estimate the true classes of an image based on annotations from
+	// individual workers.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-ImageMultiClassMultiLabel
+	//
+	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-ImageMultiClassMultiLabel
+	//
+	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-ImageMultiClassMultiLabel
+	//
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-ImageMultiClassMultiLabel
+	//
+	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-ImageMultiClassMultiLabel
+	//
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-ImageMultiClassMultiLabel
+	//
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-ImageMultiClassMultiLabel
+	//
+	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-ImageMultiClassMultiLabel
+	//
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-ImageMultiClassMultiLabel
+	//
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-ImageMultiClassMultiLabel
+	//
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-ImageMultiClassMultiLabel
+	//
 	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-ImageMultiClassMultiLabel
+	//
+	// Semantic segmentation - Treats each pixel in an image as a multi-class classification
+	// and treats pixel annotations from workers as "votes" for the correct label.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-SemanticSegmentation
+	//
+	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-SemanticSegmentation
+	//
+	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-SemanticSegmentation
+	//
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-SemanticSegmentation
+	//
+	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-SemanticSegmentation
+	//
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-SemanticSegmentation
+	//
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-SemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-SemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-SemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-SemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-SemanticSegmentation
 	//
 	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-SemanticSegmentation
 	//
+	// Text classification - Uses a variant of the Expectation Maximization approach
+	// to estimate the true class of text based on annotations from individual workers.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-TextMultiClass
+	//
+	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-TextMultiClass
+	//
+	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-TextMultiClass
+	//
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-TextMultiClass
+	//
+	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-TextMultiClass
+	//
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-TextMultiClass
+	//
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-TextMultiClass
+	//
+	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClass
+	//
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-TextMultiClass
+	//
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-TextMultiClass
+	//
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-TextMultiClass
+	//
 	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-TextMultiClass
+	//
+	// Multi-label text classification - Uses a variant of the Expectation Maximization
+	// approach to estimate the true classes of text based on annotations from individual
+	// workers.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-TextMultiClassMultiLabel
+	//
+	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-TextMultiClassMultiLabel
+	//
+	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-TextMultiClassMultiLabel
+	//
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-TextMultiClassMultiLabel
+	//
+	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-TextMultiClassMultiLabel
+	//
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-TextMultiClassMultiLabel
+	//
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-TextMultiClassMultiLabel
+	//
+	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-TextMultiClassMultiLabel
+	//
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-TextMultiClassMultiLabel
+	//
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-TextMultiClassMultiLabel
+	//
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-TextMultiClassMultiLabel
 	//
 	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-TextMultiClassMultiLabel
 	//
+	// Named entity recognition - Groups similar selections and calculates aggregate
+	// boundaries, resolving to most-assigned label.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-NamedEntityRecognition
+	//
+	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-NamedEntityRecognition
+	//
+	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-NamedEntityRecognition
+	//
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-NamedEntityRecognition
+	//
+	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-NamedEntityRecognition
+	//
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-NamedEntityRecognition
+	//
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-NamedEntityRecognition
+	//
+	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-NamedEntityRecognition
+	//
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-NamedEntityRecognition
+	//
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-NamedEntityRecognition
+	//
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-NamedEntityRecognition
+	//
 	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-NamedEntityRecognition
 	//
-	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VerificationBoundingBox
+	// 3D Point Cloud Modalities
 	//
-	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VerificationSemanticSegmentation
+	// Use the following pre-annotation lambdas for 3D point cloud labeling modality
+	// tasks. See 3D Point Cloud Task types (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-task-types.html)
+	// to learn more.
+	//
+	// 3D Point Cloud Object Detection - Use this task type when you want workers
+	// to classify objects in a 3D point cloud by drawing 3D cuboids around objects.
+	// For example, you can use this task type to ask workers to identify different
+	// types of objects in a point cloud, such as cars, bikes, and pedestrians.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-3DPointCloudObjectDetection
+	//
+	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-3DPointCloudObjectDetection
+	//
+	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-3DPointCloudObjectDetection
+	//
+	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-3DPointCloudObjectDetection
+	//
+	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-3DPointCloudObjectDetection
+	//
+	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-3DPointCloudObjectDetection
+	//
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-3DPointCloudObjectDetection
+	//
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-3DPointCloudObjectDetection
+	//
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-3DPointCloudObjectDetection
+	//
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-3DPointCloudObjectDetection
+	//
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-3DPointCloudObjectDetection
+	//
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-3DPointCloudObjectDetection
+	//
+	// 3D Point Cloud Object Tracking - Use this task type when you want workers
+	// to draw 3D cuboids around objects that appear in a sequence of 3D point cloud
+	// frames. For example, you can use this task type to ask workers to track the
+	// movement of vehicles across multiple point cloud frames.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-3DPointCloudObjectTracking
+	//
+	// 3D Point Cloud Semantic Segmentation - Use this task type when you want workers
+	// to create a point-level semantic segmentation masks by painting objects in
+	// a 3D point cloud using different colors where each color is assigned to one
+	// of the classes you specify.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-3DPointCloudSemanticSegmentation
+	//
+	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-3DPointCloudSemanticSegmentation
+	//
+	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-3DPointCloudSemanticSegmentation
+	//
+	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-3DPointCloudSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-3DPointCloudSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-3DPointCloudSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-3DPointCloudSemanticSegmentation
+	//
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-3DPointCloudSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-3DPointCloudSemanticSegmentation
+	//
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-3DPointCloudSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-3DPointCloudSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-3DPointCloudSemanticSegmentation
+	//
+	// Use the following ARNs for Label Verification and Adjustment Jobs
+	//
+	// Use label verification and adjustment jobs to review and adjust labels. To
+	// learn more, see Verify and Adjust Labels (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-verification-data.html).
+	//
+	// Bounding box verification - Uses a variant of the Expectation Maximization
+	// approach to estimate the true class of verification judgement for bounding
+	// box labels based on annotations from individual workers.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	// Bounding box adjustment - Finds the most similar boxes from different workers
+	// based on the Jaccard index of the adjusted annotations.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentBoundingBox
+	//
+	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentBoundingBox
+	//
+	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentBoundingBox
+	//
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentBoundingBox
+	//
+	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentBoundingBox
+	//
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentBoundingBox
+	//
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentBoundingBox
+	//
+	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentBoundingBox
+	//
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentBoundingBox
+	//
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentBoundingBox
+	//
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentBoundingBox
 	//
 	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentBoundingBox
 	//
+	// Semantic segmentation verification - Uses a variant of the Expectation Maximization
+	// approach to estimate the true class of verification judgment for semantic
+	// segmentation labels based on annotations from individual workers.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-VerificationSemanticSegmentation
+	//
+	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-VerificationSemanticSegmentation
+	//
+	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-VerificationSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-VerificationSemanticSegmentation
+	//
+	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-VerificationSemanticSegmentation
+	//
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-VerificationSemanticSegmentation
+	//
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-VerificationSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-VerificationSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-VerificationSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-VerificationSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-VerificationSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-VerificationSemanticSegmentation
+	//
+	// Semantic segmentation adjustment - Treats each pixel in an image as a multi-class
+	// classification and treats pixel adjusted annotations from workers as "votes"
+	// for the correct label.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-AdjustmentSemanticSegmentation
+	//
+	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-AdjustmentSemanticSegmentation
+	//
+	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-AdjustmentSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-AdjustmentSemanticSegmentation
+	//
+	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-AdjustmentSemanticSegmentation
+	//
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-AdjustmentSemanticSegmentation
+	//
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-AdjustmentSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-AdjustmentSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-AdjustmentSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-AdjustmentSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-AdjustmentSemanticSegmentation
+	//
 	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-AdjustmentSemanticSegmentation
+	//
+	// 3D point cloud object detection adjustment - Adjust 3D cuboids in a point
+	// cloud frame.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-Adjustment3DPointCloudObjectDetection
+	//
+	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-Adjustment3DPointCloudObjectDetection
+	//
+	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-Adjustment3DPointCloudObjectDetection
+	//
+	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-Adjustment3DPointCloudObjectDetection
+	//
+	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-Adjustment3DPointCloudObjectDetection
+	//
+	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-Adjustment3DPointCloudObjectDetection
+	//
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-Adjustment3DPointCloudObjectDetection
+	//
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-Adjustment3DPointCloudObjectDetection
+	//
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-Adjustment3DPointCloudObjectDetection
+	//
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-Adjustment3DPointCloudObjectDetection
+	//
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-Adjustment3DPointCloudObjectDetection
+	//
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-Adjustment3DPointCloudObjectDetection
+	//
+	// 3D point cloud object tracking adjustment - Adjust 3D cuboids across a sequence
+	// of point cloud frames.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-Adjustment3DPointCloudObjectTracking
+	//
+	// 3D point cloud semantic segmentation adjustment - Adjust semantic segmentation
+	// masks in a 3D point cloud.
+	//
+	//    * arn:aws:lambda:us-east-1:432418664414:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//
+	//    * arn:aws:lambda:us-east-2:266458841044:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//
+	//    * arn:aws:lambda:us-west-2:081040173940:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//
+	//    * arn:aws:lambda:eu-west-1:568282634449:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-northeast-1:477331159723:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-southeast-2:454466003867:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-south-1:565803892007:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//
+	//    * arn:aws:lambda:eu-central-1:203001061592:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-northeast-2:845288260483:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//
+	//    * arn:aws:lambda:eu-west-2:487402164563:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ap-southeast-1:377565633583:function:PRE-Adjustment3DPointCloudSemanticSegmentation
+	//
+	//    * arn:aws:lambda:ca-central-1:918755190332:function:PRE-Adjustment3DPointCloudSemanticSegmentation
 	//
 	// PreHumanTaskLambdaArn is a required field
 	PreHumanTaskLambdaArn *string `type:"string" required:"true"`
@@ -5131,6 +5484,10 @@ func (s *MetricDefinition) Validate() error {
 
 // Provides information about the location that is configured for storing model
 // artifacts.
+//
+// Model artifacts are the output that results from training a model, and typically
+// consist of trained parameters, a model defintion that desribes how to compute
+// inferences, and other metadata.
 type ModelArtifacts struct {
 	_ struct{} `type:"structure"`
 
@@ -5144,6 +5501,36 @@ type ModelArtifacts struct {
 // String returns the string representation
 func (s ModelArtifacts) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Configures the timeout and maximum number of retries for processing a transform
+// job invocation.
+type ModelClientConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The maximum number of retries when invocation requests are failing.
+	InvocationsMaxRetries *int64 `type:"integer"`
+
+	// The timeout value in seconds for an invocation request.
+	InvocationsTimeoutInSeconds *int64 `min:"1" type:"integer"`
+}
+
+// String returns the string representation
+func (s ModelClientConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ModelClientConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ModelClientConfig"}
+	if s.InvocationsTimeoutInSeconds != nil && *s.InvocationsTimeoutInSeconds < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("InvocationsTimeoutInSeconds", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Describes the Docker container for the model package.
@@ -7658,8 +8045,8 @@ func (s *ResourceLimits) Validate() error {
 }
 
 // The instance type and the Amazon Resource Name (ARN) of the SageMaker image
-// created on the instance. The ARN is stored as metadata in Amazon SageMaker
-// Studio notebooks.
+// created on the instance. The ARN is stored as metadata in SageMaker Studio
+// notebooks.
 type ResourceSpec struct {
 	_ struct{} `type:"structure"`
 
@@ -7738,18 +8125,22 @@ type S3DataSource struct {
 	// Depending on the value specified for the S3DataType, identifies either a
 	// key name prefix or a manifest. For example:
 	//
-	//    * A key name prefix might look like this: s3://bucketname/exampleprefix.
+	//    * A key name prefix might look like this: s3://bucketname/exampleprefix
 	//
-	//    * A manifest might look like this: s3://bucketname/example.manifest The
-	//    manifest is an S3 object which is a JSON file with the following format:
-	//    The preceding JSON matches the following s3Uris: [ {"prefix": "s3://customer_bucket/some/prefix/"},
+	//    * A manifest might look like this: s3://bucketname/example.manifest A
+	//    manifest is an S3 object which is a JSON file consisting of an array of
+	//    elements. The first element is a prefix which is followed by one or more
+	//    suffixes. SageMaker appends the suffix elements to the prefix to get a
+	//    full set of S3Uri. Note that the prefix must be a valid non-empty S3Uri
+	//    that precludes users from specifying a manifest whose individual S3Uri
+	//    is sourced from different S3 buckets. The following code example shows
+	//    a valid manifest format: [ {"prefix": "s3://customer_bucket/some/prefix/"},
 	//    "relative/path/to/custdata-1", "relative/path/custdata-2", ... "relative/path/custdata-N"
-	//    ] The preceding JSON matches the following s3Uris: s3://customer_bucket/some/prefix/relative/path/to/custdata-1
+	//    ] This JSON is equivalent to the following S3Uri list: s3://customer_bucket/some/prefix/relative/path/to/custdata-1
 	//    s3://customer_bucket/some/prefix/relative/path/custdata-2 ... s3://customer_bucket/some/prefix/relative/path/custdata-N
-	//    The complete set of s3uris in this manifest is the input data for the
-	//    channel for this datasource. The object that each s3uris points to must
-	//    be readable by the IAM role that Amazon SageMaker uses to perform tasks
-	//    on your behalf.
+	//    The complete set of S3Uri in this manifest is the input data for the channel
+	//    for this data source. The object that each S3Uri points to must be readable
+	//    by the IAM role that Amazon SageMaker uses to perform tasks on your behalf.
 	//
 	// S3Uri is a required field
 	S3Uri *string `type:"string" required:"true"`
@@ -7847,8 +8238,7 @@ func (s *ScheduleConfig) Validate() error {
 // A SearchExpression contains the following components:
 //
 //    * A list of Filter objects. Each filter defines a simple Boolean expression
-//    comprised of a resource property name, Boolean operator, and value. A
-//    SearchExpression can include only one Contains operator.
+//    comprised of a resource property name, Boolean operator, and value.
 //
 //    * A list of NestedFilter objects. Each nested filter defines a list of
 //    Boolean expressions using a list of resource properties. A nested filter
@@ -8058,17 +8448,25 @@ func (s SecondaryStatusTransition) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The sharing settings.
+// Specifies options when sharing an Amazon SageMaker Studio notebook. These
+// settings are specified as part of DefaultUserSettings when the CreateDomain
+// API is called, and as part of UserSettings when the CreateUserProfile API
+// is called.
 type SharingSettings struct {
 	_ struct{} `type:"structure"`
 
-	// The notebook output option.
+	// Whether to include the notebook cell output when sharing the notebook. The
+	// default is Disabled.
 	NotebookOutputOption NotebookOutputOption `type:"string" enum:"true"`
 
-	// The AWS Key Management Service encryption key ID.
+	// When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS)
+	// encryption key ID used to encrypt the notebook cell output in the Amazon
+	// S3 bucket.
 	S3KmsKeyId *string `type:"string"`
 
-	// The Amazon S3 output path.
+	// When NotebookOutputOption is Allowed, the Amazon S3 bucket used to save the
+	// notebook cell output. If S3OutputPath isn't specified, a default bucket is
+	// used.
 	S3OutputPath *string `type:"string"`
 }
 
@@ -8205,10 +8603,10 @@ func (s *SourceAlgorithmSpecification) Validate() error {
 type SourceIpConfig struct {
 	_ struct{} `type:"structure"`
 
-	// A list of one to four Classless Inter-Domain Routing (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)
+	// A list of one to ten Classless Inter-Domain Routing (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)
 	// (CIDR) values.
 	//
-	// Maximum: Four CIDR values
+	// Maximum: Ten CIDR values
 	//
 	// The following Length Constraints apply to individual CIDR values in the CIDR
 	// value list.
@@ -8296,6 +8694,7 @@ func (s *StoppingCondition) Validate() error {
 type SubscribedWorkteam struct {
 	_ struct{} `type:"structure"`
 
+	// Marketplace product listing ID.
 	ListingId *string `type:"string"`
 
 	// The description of the vendor from the Amazon Marketplace.
@@ -9800,9 +10199,35 @@ func (s USD) String() string {
 type UiConfig struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon S3 bucket location of the UI template. For more information about
-	// the contents of a UI template, see Creating Your Custom Labeling Task Template
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates-step2.html).
+	// The ARN of the worker task template used to render the worker UI and tools
+	// for labeling job tasks.
+	//
+	// Use this parameter when you are creating a labeling job for 3D point cloud
+	// labeling modalities. Use your labeling job task type to select one of the
+	// following ARN's and use it with this parameter when you create a labeling
+	// job. Replace aws-region with the AWS region you are creating your labeling
+	// job in.
+	//
+	// Use this HumanTaskUiArn for 3D point cloud object detection and 3D point
+	// cloud object detection adjustment labeling jobs.
+	//
+	//    * arn:aws:sagemaker:aws-region:394669845002:human-task-ui/PointCloudObjectDetection
+	//
+	// Use this HumanTaskUiArn for 3D point cloud object tracking and 3D point cloud
+	// object tracking adjustment labeling jobs.
+	//
+	//    * arn:aws:sagemaker:aws-region:394669845002:human-task-ui/PointCloudObjectTracking
+	//
+	// Use this HumanTaskUiArn for 3D point cloud semantic segmentation and 3D point
+	// cloud semantic segmentation adjustment labeling jobs.
+	//
+	//    * arn:aws:sagemaker:aws-region:394669845002:human-task-ui/PointCloudSemanticSegmentation
+	HumanTaskUiArn *string `type:"string"`
+
+	// The Amazon S3 bucket location of the UI template, or worker task template.
+	// This is the template used to render the worker UI and tools for labeling
+	// job tasks. For more information about the contents of a UI template, see
+	// Creating Your Custom Labeling Task Template (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates-step2.html).
 	UiTemplateS3Uri *string `type:"string"`
 }
 
@@ -10049,7 +10474,7 @@ type Workforce struct {
 	// to a private workforce's allow list.
 	LastUpdatedDate *time.Time `type:"timestamp"`
 
-	// A list of one to four IP address ranges (CIDRs (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html))
+	// A list of one to ten IP address ranges (CIDRs (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html))
 	// to be added to the workforce allow list.
 	SourceIpConfig *SourceIpConfig `type:"structure"`
 

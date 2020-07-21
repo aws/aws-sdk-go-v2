@@ -122,7 +122,7 @@ const opDescribeDBClusterBacktracks = "DescribeDBClusterBacktracks"
 // For more information on Amazon Aurora, see What Is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide.
 //
-// This action only applies to Aurora DB clusters.
+// This action only applies to Aurora MySQL DB clusters.
 //
 //    // Example sending a request using DescribeDBClusterBacktracksRequest.
 //    req := client.DescribeDBClusterBacktracksRequest(params)
@@ -137,6 +137,12 @@ func (c *Client) DescribeDBClusterBacktracksRequest(input *DescribeDBClusterBack
 		Name:       opDescribeDBClusterBacktracks,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "MaxRecords",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -170,6 +176,53 @@ func (r DescribeDBClusterBacktracksRequest) Send(ctx context.Context) (*Describe
 	}
 
 	return resp, nil
+}
+
+// NewDescribeDBClusterBacktracksRequestPaginator returns a paginator for DescribeDBClusterBacktracks.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.DescribeDBClusterBacktracksRequest(input)
+//   p := rds.NewDescribeDBClusterBacktracksRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewDescribeDBClusterBacktracksPaginator(req DescribeDBClusterBacktracksRequest) DescribeDBClusterBacktracksPaginator {
+	return DescribeDBClusterBacktracksPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *DescribeDBClusterBacktracksInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// DescribeDBClusterBacktracksPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeDBClusterBacktracksPaginator struct {
+	aws.Pager
+}
+
+func (p *DescribeDBClusterBacktracksPaginator) CurrentPage() *DescribeDBClusterBacktracksOutput {
+	return p.Pager.CurrentPage().(*DescribeDBClusterBacktracksOutput)
 }
 
 // DescribeDBClusterBacktracksResponse is the response type for the

@@ -168,6 +168,22 @@ func (s FailedServiceActionAssociation) String() string {
 	return awsutil.Prettify(s)
 }
 
+// A launch path object.
+type LaunchPath struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of the launch path.
+	Id *string `min:"1" type:"string"`
+
+	// The name of the launch path.
+	Name *string `type:"string"`
+}
+
+// String returns the string representation
+func (s LaunchPath) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Summary information about a product path for a user.
 type LaunchPathSummary struct {
 	_ struct{} `type:"structure"`

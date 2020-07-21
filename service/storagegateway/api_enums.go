@@ -42,6 +42,23 @@ func (enum AvailabilityMonitorTestStatus) MarshalValueBuf(b []byte) ([]byte, err
 	return append(b, enum...), nil
 }
 
+type CaseSensitivity string
+
+// Enum values for CaseSensitivity
+const (
+	CaseSensitivityClientSpecified CaseSensitivity = "ClientSpecified"
+	CaseSensitivityCaseSensitive   CaseSensitivity = "CaseSensitive"
+)
+
+func (enum CaseSensitivity) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CaseSensitivity) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ErrorCode string
 
 // Enum values for ErrorCode
@@ -157,8 +174,9 @@ func (enum HostEnvironment) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// A value that sets the access control list permission for objects in the S3
-// bucket that a file gateway puts objects into. The default value is "private".
+// A value that sets the access control list (ACL) permission for objects in
+// the S3 bucket that a file gateway puts objects into. The default value is
+// private.
 type ObjectACL string
 
 // Enum values for ObjectACL

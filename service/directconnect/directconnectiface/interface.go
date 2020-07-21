@@ -157,6 +157,12 @@ type ClientAPI interface {
 
 	DisassociateConnectionFromLagRequest(*directconnect.DisassociateConnectionFromLagInput) directconnect.DisassociateConnectionFromLagRequest
 
+	ListVirtualInterfaceTestHistoryRequest(*directconnect.ListVirtualInterfaceTestHistoryInput) directconnect.ListVirtualInterfaceTestHistoryRequest
+
+	StartBgpFailoverTestRequest(*directconnect.StartBgpFailoverTestInput) directconnect.StartBgpFailoverTestRequest
+
+	StopBgpFailoverTestRequest(*directconnect.StopBgpFailoverTestInput) directconnect.StopBgpFailoverTestRequest
+
 	TagResourceRequest(*directconnect.TagResourceInput) directconnect.TagResourceRequest
 
 	UntagResourceRequest(*directconnect.UntagResourceInput) directconnect.UntagResourceRequest

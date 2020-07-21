@@ -45,6 +45,18 @@ type UpdateMaintenanceWindowInput struct {
 	// The schedule of the maintenance window in the form of a cron or rate expression.
 	Schedule *string `min:"1" type:"string"`
 
+	// The number of days to wait after the date and time specified by a CRON expression
+	// before running the maintenance window.
+	//
+	// For example, the following cron expression schedules a maintenance window
+	// to run the third Tuesday of every month at 11:30 PM.
+	//
+	// cron(0 30 23 ? * TUE#3 *)
+	//
+	// If the schedule offset is 2, the maintenance window won't run until two days
+	// later.
+	ScheduleOffset *int64 `min:"1" type:"integer"`
+
 	// The time zone that the scheduled maintenance window executions are based
 	// on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles",
 	// "etc/UTC", or "Asia/Seoul". For more information, see the Time Zone Database
@@ -82,6 +94,9 @@ func (s *UpdateMaintenanceWindowInput) Validate() error {
 	}
 	if s.Schedule != nil && len(*s.Schedule) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Schedule", 1))
+	}
+	if s.ScheduleOffset != nil && *s.ScheduleOffset < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("ScheduleOffset", 1))
 	}
 
 	if s.WindowId == nil {
@@ -127,6 +142,10 @@ type UpdateMaintenanceWindowOutput struct {
 
 	// The schedule of the maintenance window in the form of a cron or rate expression.
 	Schedule *string `min:"1" type:"string"`
+
+	// The number of days to wait to run a maintenance window after the scheduled
+	// CRON expression date and time.
+	ScheduleOffset *int64 `min:"1" type:"integer"`
 
 	// The time zone that the scheduled maintenance window executions are based
 	// on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles",

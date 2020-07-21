@@ -58,8 +58,8 @@ const opDeleteProject = "DeleteProject"
 // Amazon Rekognition.
 //
 // Deletes an Amazon Rekognition Custom Labels project. To delete a project
-// you must first delete all versions of the model associated with the project.
-// To delete a version of a model, see DeleteProjectVersion.
+// you must first delete all models associated with the project. To delete a
+// model, see DeleteProjectVersion.
 //
 // This operation requires permissions to perform the rekognition:DeleteProject
 // action.

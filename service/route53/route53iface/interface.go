@@ -144,6 +144,8 @@ type ClientAPI interface {
 
 	ListHostedZonesByNameRequest(*route53.ListHostedZonesByNameInput) route53.ListHostedZonesByNameRequest
 
+	ListHostedZonesByVPCRequest(*route53.ListHostedZonesByVPCInput) route53.ListHostedZonesByVPCRequest
+
 	ListQueryLoggingConfigsRequest(*route53.ListQueryLoggingConfigsInput) route53.ListQueryLoggingConfigsRequest
 
 	ListResourceRecordSetsRequest(*route53.ListResourceRecordSetsInput) route53.ListResourceRecordSetsRequest

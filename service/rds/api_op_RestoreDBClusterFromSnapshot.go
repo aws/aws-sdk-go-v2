@@ -19,6 +19,8 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// The target backtrack window, in seconds. To disable backtracking, set this
 	// value to 0.
 	//
+	// Currently, Backtrack is only supported for Aurora MySQL DB clusters.
+	//
 	// Default: 0
 	//
 	// Constraints:

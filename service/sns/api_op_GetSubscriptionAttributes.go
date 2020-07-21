@@ -56,6 +56,8 @@ type GetSubscriptionAttributesOutput struct {
 	//    account system defaults.
 	//
 	//    * FilterPolicy – The filter policy JSON that is assigned to the subscription.
+	//    For more information, see Amazon SNS Message Filtering (https://docs.aws.amazon.com/sns/latest/dg/sns-message-filtering.html)
+	//    in the Amazon SNS Developer Guide.
 	//
 	//    * Owner – The AWS account ID of the subscription's owner.
 	//

@@ -40,7 +40,15 @@ type ListProfileTimesInput struct {
 	// listing profiles. Defaults to TIMESTAMP_DESCENDING.
 	OrderBy OrderBy `location:"querystring" locationName:"orderBy" type:"string" enum:"true"`
 
-	// The aggregation period.
+	// The aggregation period. This specifies the period during which an aggregation
+	// profile collects posted agent profiles for a profiling group. There are 3
+	// valid values.
+	//
+	//    * P1D — 1 day
+	//
+	//    * PT1H — 1 hour
+	//
+	//    * PT5M — 5 minutes
 	//
 	// Period is a required field
 	Period AggregationPeriod `location:"querystring" locationName:"period" type:"string" required:"true" enum:"true"`
@@ -196,7 +204,7 @@ const opListProfileTimes = "ListProfileTimes"
 // ListProfileTimesRequest returns a request value for making API operation for
 // Amazon CodeGuru Profiler.
 //
-// List the start times of the available aggregated profiles of a profiling
+// Lists the start times of the available aggregated profiles of a profiling
 // group for an aggregation period within the specified time range.
 //
 //    // Example sending a request using ListProfileTimesRequest.

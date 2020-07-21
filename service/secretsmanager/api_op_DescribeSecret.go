@@ -27,7 +27,12 @@ type DescribeSecretInput struct {
 	// a partial ARN, then those characters cause Secrets Manager to assume that
 	// you’re specifying a complete ARN. This confusion can cause unexpected results.
 	// To avoid this situation, we recommend that you don’t create secret names
-	// that end with a hyphen followed by six characters.
+	// ending with a hyphen followed by six characters.
+	//
+	// If you specify an incomplete ARN without the random suffix, and instead provide
+	// the 'friendly name', you must not include the random suffix. If you do include
+	// the random suffix added by Secrets Manager, you receive either a ResourceNotFoundException
+	// or an AccessDeniedException error, depending on your permissions.
 	//
 	// SecretId is a required field
 	SecretId *string `min:"1" type:"string" required:"true"`
@@ -60,6 +65,9 @@ type DescribeSecretOutput struct {
 
 	// The ARN of the secret.
 	ARN *string `min:"20" type:"string"`
+
+	// The date that the secret was created.
+	CreatedDate *time.Time `type:"timestamp"`
 
 	// This value exists if the secret is scheduled for deletion. Some time after
 	// the specified date and time, Secrets Manager deletes the secret and all of
@@ -135,7 +143,7 @@ const opDescribeSecret = "DescribeSecret"
 // AWS Secrets Manager.
 //
 // Retrieves the details of a secret. It does not include the encrypted fields.
-// Only those fields that are populated with a value are returned in the response.
+// Secrets Manager only returns fields populated with a value in the response.
 //
 // Minimum permissions
 //

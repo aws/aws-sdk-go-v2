@@ -56,7 +56,6 @@ const opDeleteQueue = "DeleteQueue"
 // Amazon Simple Queue Service.
 //
 // Deletes the queue specified by the QueueUrl, regardless of the queue's contents.
-// If the specified queue doesn't exist, Amazon SQS returns a successful response.
 //
 // Be careful with the DeleteQueue action: When you delete a queue, any messages
 // in the queue are no longer available.

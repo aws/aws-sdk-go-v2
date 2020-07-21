@@ -64,7 +64,7 @@ type GetTopicAttributesOutput struct {
 	//
 	//    * TopicArn – The topic's ARN.
 	//
-	//    * EffectiveDeliveryPolicy – Yhe JSON serialization of the effective
+	//    * EffectiveDeliveryPolicy – The JSON serialization of the effective
 	//    delivery policy, taking system defaults into account.
 	//
 	// The following attribute applies only to server-side-encryption (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html):

@@ -31,7 +31,9 @@ type DescribeProjectVersionsInput struct {
 
 	// A list of model version names that you want to describe. You can add up to
 	// 10 model version names to the list. If you don't specify a value, all model
-	// descriptions are returned.
+	// descriptions are returned. A version name is part of a model (ProjectVersion)
+	// ARN. For example, my-model.2020-01-21T09.10.15 is the version name in the
+	// following ARN. arn:aws:rekognition:us-east-1:123456789012:project/getting-started/version/my-model.2020-01-21T09.10.15/1234567890123.
 	VersionNames []string `min:"1" type:"list"`
 }
 

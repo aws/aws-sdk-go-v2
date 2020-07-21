@@ -49,6 +49,7 @@ type DescribeTrainingJobOutput struct {
 	// AlgorithmSpecification is a required field
 	AlgorithmSpecification *AlgorithmSpecification `type:"structure" required:"true"`
 
+	// The Amazon Resource Name (ARN) of an AutoML job.
 	AutoMLJobArn *string `min:"1" type:"string"`
 
 	// The billable time in seconds.

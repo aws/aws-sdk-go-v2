@@ -193,7 +193,7 @@ const opIndexFaces = "IndexFaces"
 // For more information, see Model Versioning in the Amazon Rekognition Developer
 // Guide.
 //
-// If you provide the optional ExternalImageID for the input image you provided,
+// If you provide the optional ExternalImageId for the input image you provided,
 // Amazon Rekognition associates this ID with all faces that it detects. When
 // you call the ListFaces operation, the response returns the external ID. You
 // can use this external image ID to create a client-side index to associate

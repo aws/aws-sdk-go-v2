@@ -13,6 +13,30 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// Details about an antenna demod decode Config used in a contact.
+type AntennaDemodDecodeDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Name of an antenna demod decode output node used in a contact.
+	OutputNode *string `locationName:"outputNode" type:"string"`
+}
+
+// String returns the string representation
+func (s AntennaDemodDecodeDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AntennaDemodDecodeDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.OutputNode != nil {
+		v := *s.OutputNode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "outputNode", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Information about how AWS Ground Station should configure an antenna for
 // downlink during a contact.
 type AntennaDownlinkConfig struct {
@@ -158,6 +182,9 @@ type AntennaUplinkConfig struct {
 	//
 	// TargetEirp is a required field
 	TargetEirp *Eirp `locationName:"targetEirp" type:"structure" required:"true"`
+
+	// Whether or not uplink transmit is disabled.
+	TransmitDisabled *bool `locationName:"transmitDisabled" type:"boolean"`
 }
 
 // String returns the string representation
@@ -206,6 +233,45 @@ func (s AntennaUplinkConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "targetEirp", v, metadata)
+	}
+	if s.TransmitDisabled != nil {
+		v := *s.TransmitDisabled
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "transmitDisabled", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// Details for certain Config object types in a contact.
+type ConfigDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Details for antenna demod decode Config in a contact.
+	AntennaDemodDecodeDetails *AntennaDemodDecodeDetails `locationName:"antennaDemodDecodeDetails" type:"structure"`
+
+	// Information about the endpoint details.
+	EndpointDetails *EndpointDetails `locationName:"endpointDetails" type:"structure"`
+}
+
+// String returns the string representation
+func (s ConfigDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ConfigDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AntennaDemodDecodeDetails != nil {
+		v := s.AntennaDemodDecodeDetails
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "antennaDemodDecodeDetails", v, metadata)
+	}
+	if s.EndpointDetails != nil {
+		v := s.EndpointDetails
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "endpointDetails", v, metadata)
 	}
 	return nil
 }
@@ -523,12 +589,48 @@ func (s ContactData) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Information about a dataflow edge used in a contact.
+type DataflowDetail struct {
+	_ struct{} `type:"structure"`
+
+	// Dataflow details for the destination side.
+	Destination *Destination `locationName:"destination" type:"structure"`
+
+	// Dataflow details for the source side.
+	Source *Source `locationName:"source" type:"structure"`
+}
+
+// String returns the string representation
+func (s DataflowDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DataflowDetail) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Destination != nil {
+		v := s.Destination
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "destination", v, metadata)
+	}
+	if s.Source != nil {
+		v := s.Source
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "source", v, metadata)
+	}
+	return nil
+}
+
 // Information about a dataflow endpoint.
 type DataflowEndpoint struct {
 	_ struct{} `type:"structure"`
 
 	// Socket address of a dataflow endpoint.
 	Address *SocketAddress `locationName:"address" type:"structure"`
+
+	// Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.
+	Mtu *int64 `locationName:"mtu" min:"1400" type:"integer"`
 
 	// Name of a dataflow endpoint.
 	Name *string `locationName:"name" min:"1" type:"string"`
@@ -545,6 +647,9 @@ func (s DataflowEndpoint) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DataflowEndpoint) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DataflowEndpoint"}
+	if s.Mtu != nil && *s.Mtu < 1400 {
+		invalidParams.Add(aws.NewErrParamMinValue("Mtu", 1400))
+	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
 	}
@@ -567,6 +672,12 @@ func (s DataflowEndpoint) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "address", v, metadata)
+	}
+	if s.Mtu != nil {
+		v := *s.Mtu
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "mtu", protocol.Int64Value(v), metadata)
 	}
 	if s.Name != nil {
 		v := *s.Name
@@ -751,6 +862,58 @@ func (s DemodulationConfig) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Dataflow details for the destination side.
+type Destination struct {
+	_ struct{} `type:"structure"`
+
+	// Additional details for a Config, if type is dataflow endpoint or antenna
+	// demod decode.
+	ConfigDetails *ConfigDetails `locationName:"configDetails" type:"structure"`
+
+	// UUID of a Config.
+	ConfigId *string `locationName:"configId" type:"string"`
+
+	// Type of a Config.
+	ConfigType ConfigCapabilityType `locationName:"configType" type:"string" enum:"true"`
+
+	// Region of a dataflow destination.
+	DataflowDestinationRegion *string `locationName:"dataflowDestinationRegion" type:"string"`
+}
+
+// String returns the string representation
+func (s Destination) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Destination) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ConfigDetails != nil {
+		v := s.ConfigDetails
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "configDetails", v, metadata)
+	}
+	if s.ConfigId != nil {
+		v := *s.ConfigId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "configId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ConfigType) > 0 {
+		v := s.ConfigType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "configType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.DataflowDestinationRegion != nil {
+		v := *s.DataflowDestinationRegion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "dataflowDestinationRegion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Object that represents EIRP.
 type Eirp struct {
 	_ struct{} `type:"structure"`
@@ -760,7 +923,7 @@ type Eirp struct {
 	// Units is a required field
 	Units EirpUnits `locationName:"units" type:"string" required:"true" enum:"true"`
 
-	// Value of an EIRP.
+	// Value of an EIRP. Valid values are between 20.0 to 50.0 dBW.
 	//
 	// Value is a required field
 	Value *float64 `locationName:"value" type:"double" required:"true"`
@@ -904,7 +1067,8 @@ type Frequency struct {
 	// Units is a required field
 	Units FrequencyUnits `locationName:"units" type:"string" required:"true" enum:"true"`
 
-	// Frequency value.
+	// Frequency value. Valid values are between 2200 to 2300 MHz and 7750 to 8400
+	// MHz for downlink and 2025 to 2120 MHz for uplink.
 	//
 	// Value is a required field
 	Value *float64 `locationName:"value" type:"double" required:"true"`
@@ -958,7 +1122,15 @@ type FrequencyBandwidth struct {
 	// Units is a required field
 	Units BandwidthUnits `locationName:"units" type:"string" required:"true" enum:"true"`
 
-	// Frequency bandwidth value.
+	// Frequency bandwidth value. AWS Ground Station currently has the following
+	// bandwidth limitations:
+	//
+	//    * For AntennaDownlinkDemodDecodeconfig, valid values are between 125 kHz
+	//    to 650 MHz.
+	//
+	//    * For AntennaDownlinkconfig, valid values are between 10 kHz to 54 MHz.
+	//
+	//    * For AntennaUplinkConfig, valid values are between 10 kHz to 54 MHz.
 	//
 	// Value is a required field
 	Value *float64 `locationName:"value" type:"double" required:"true"`
@@ -1291,21 +1463,83 @@ func (s SocketAddress) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Dataflow details for the source side.
+type Source struct {
+	_ struct{} `type:"structure"`
+
+	// Additional details for a Config, if type is dataflow endpoint or antenna
+	// demod decode.
+	ConfigDetails *ConfigDetails `locationName:"configDetails" type:"structure"`
+
+	// UUID of a Config.
+	ConfigId *string `locationName:"configId" type:"string"`
+
+	// Type of a Config.
+	ConfigType ConfigCapabilityType `locationName:"configType" type:"string" enum:"true"`
+
+	// Region of a dataflow source.
+	DataflowSourceRegion *string `locationName:"dataflowSourceRegion" type:"string"`
+}
+
+// String returns the string representation
+func (s Source) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Source) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ConfigDetails != nil {
+		v := s.ConfigDetails
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "configDetails", v, metadata)
+	}
+	if s.ConfigId != nil {
+		v := *s.ConfigId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "configId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if len(s.ConfigType) > 0 {
+		v := s.ConfigType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "configType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.DataflowSourceRegion != nil {
+		v := *s.DataflowSourceRegion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "dataflowSourceRegion", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Object that describes a spectral Config.
 type SpectrumConfig struct {
 	_ struct{} `type:"structure"`
 
-	// Bandwidth of a spectral Config.
+	// Bandwidth of a spectral Config. AWS Ground Station currently has the following
+	// bandwidth limitations:
+	//
+	//    * For AntennaDownlinkDemodDecodeconfig, valid values are between 125 kHz
+	//    to 650 MHz.
+	//
+	//    * For AntennaDownlinkconfig valid values are between 10 kHz to 54 MHz.
+	//
+	//    * For AntennaUplinkConfig, valid values are between 10 kHz to 54 MHz.
 	//
 	// Bandwidth is a required field
 	Bandwidth *FrequencyBandwidth `locationName:"bandwidth" type:"structure" required:"true"`
 
-	// Center frequency of a spectral Config.
+	// Center frequency of a spectral Config. Valid values are between 2200 to 2300
+	// MHz and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
 	//
 	// CenterFrequency is a required field
 	CenterFrequency *Frequency `locationName:"centerFrequency" type:"structure" required:"true"`
 
-	// Polarization of a spectral Config.
+	// Polarization of a spectral Config. Capturing both "RIGHT_HAND" and "LEFT_HAND"
+	// polarization requires two separate configs.
 	Polarization Polarization `locationName:"polarization" type:"string" enum:"true"`
 }
 
@@ -1467,12 +1701,14 @@ func (s UplinkEchoConfig) MarshalFields(e protocol.FieldEncoder) error {
 type UplinkSpectrumConfig struct {
 	_ struct{} `type:"structure"`
 
-	// Center frequency of an uplink spectral Config.
+	// Center frequency of an uplink spectral Config. Valid values are between 2025
+	// to 2120 MHz.
 	//
 	// CenterFrequency is a required field
 	CenterFrequency *Frequency `locationName:"centerFrequency" type:"structure" required:"true"`
 
-	// Polarization of an uplink spectral Config.
+	// Polarization of an uplink spectral Config. Capturing both "RIGHT_HAND" and
+	// "LEFT_HAND" polarization requires two separate configs.
 	Polarization Polarization `locationName:"polarization" type:"string" enum:"true"`
 }
 

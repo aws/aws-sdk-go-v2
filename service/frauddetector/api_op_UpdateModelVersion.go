@@ -4,6 +4,7 @@ package frauddetector
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -12,10 +13,13 @@ import (
 type UpdateModelVersionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The model description.
+	// The event details.
+	ExternalEventsDetail *ExternalEventsDetail `locationName:"externalEventsDetail" type:"structure"`
+
+	// The major version number.
 	//
-	// Description is a required field
-	Description *string `locationName:"description" min:"1" type:"string" required:"true"`
+	// MajorVersionNumber is a required field
+	MajorVersionNumber *string `locationName:"majorVersionNumber" type:"string" required:"true"`
 
 	// The model ID.
 	//
@@ -27,15 +31,8 @@ type UpdateModelVersionInput struct {
 	// ModelType is a required field
 	ModelType ModelTypeEnum `locationName:"modelType" type:"string" required:"true" enum:"true"`
 
-	// The model version.
-	//
-	// ModelVersionNumber is a required field
-	ModelVersionNumber *string `locationName:"modelVersionNumber" min:"1" type:"string" required:"true"`
-
-	// The new model status.
-	//
-	// Status is a required field
-	Status ModelVersionStatus `locationName:"status" type:"string" required:"true" enum:"true"`
+	// A collection of key and value pairs.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -47,11 +44,8 @@ func (s UpdateModelVersionInput) String() string {
 func (s *UpdateModelVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "UpdateModelVersionInput"}
 
-	if s.Description == nil {
-		invalidParams.Add(aws.NewErrParamRequired("Description"))
-	}
-	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
+	if s.MajorVersionNumber == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MajorVersionNumber"))
 	}
 
 	if s.ModelId == nil {
@@ -63,15 +57,17 @@ func (s *UpdateModelVersionInput) Validate() error {
 	if len(s.ModelType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ModelType"))
 	}
-
-	if s.ModelVersionNumber == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ModelVersionNumber"))
+	if s.ExternalEventsDetail != nil {
+		if err := s.ExternalEventsDetail.Validate(); err != nil {
+			invalidParams.AddNested("ExternalEventsDetail", err.(aws.ErrInvalidParams))
+		}
 	}
-	if s.ModelVersionNumber != nil && len(*s.ModelVersionNumber) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ModelVersionNumber", 1))
-	}
-	if len(s.Status) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("Status"))
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -82,6 +78,18 @@ func (s *UpdateModelVersionInput) Validate() error {
 
 type UpdateModelVersionOutput struct {
 	_ struct{} `type:"structure"`
+
+	// The model ID.
+	ModelId *string `locationName:"modelId" min:"1" type:"string"`
+
+	// The model type.
+	ModelType ModelTypeEnum `locationName:"modelType" type:"string" enum:"true"`
+
+	// The model version number of the model version updated.
+	ModelVersionNumber *string `locationName:"modelVersionNumber" type:"string"`
+
+	// The status of the updated model version.
+	Status *string `locationName:"status" type:"string"`
 }
 
 // String returns the string representation
@@ -94,12 +102,11 @@ const opUpdateModelVersion = "UpdateModelVersion"
 // UpdateModelVersionRequest returns a request value for making API operation for
 // Amazon Fraud Detector.
 //
-// Updates a model version. You can update the description and status attributes
-// using this action. You can perform the following status updates:
-//
-// Change the TRAINING_COMPLETE status to ACTIVE
-//
-// Change ACTIVE back to TRAINING_COMPLETE
+// Updates a model version. Updating a model version retrains an existing model
+// version using updated training data and produces a new minor version of the
+// model. You can update the training data set location and data access role
+// attributes using this action. This action creates and trains a new minor
+// version of the model, for example version 1.01, 1.02, 1.03.
 //
 //    // Example sending a request using UpdateModelVersionRequest.
 //    req := client.UpdateModelVersionRequest(params)

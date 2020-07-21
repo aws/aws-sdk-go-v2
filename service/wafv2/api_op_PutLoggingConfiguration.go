@@ -90,6 +90,9 @@ const opPutLoggingConfiguration = "PutLoggingConfiguration"
 // operating. If you are capturing logs for Amazon CloudFront, always create
 // the firehose in US East (N. Virginia).
 //
+// Give the data firehose a name that starts with the prefix aws-waf-logs-.
+// For example, aws-waf-logs-us-east-2-analytics.
+//
 // Do not create the data firehose using a Kinesis stream as your source.
 //
 // Associate that firehose to your web ACL using a PutLoggingConfiguration request.

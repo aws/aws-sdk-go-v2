@@ -301,6 +301,25 @@
         {"shape":"ServiceFailureException"}
       ]
     },
+    "CreateMeetingWithAttendees":{
+      "name":"CreateMeetingWithAttendees",
+      "http":{
+        "method":"POST",
+        "requestUri":"/meetings?operation=create-attendees",
+        "responseCode":201
+      },
+      "input":{"shape":"CreateMeetingWithAttendeesRequest"},
+      "output":{"shape":"CreateMeetingWithAttendeesResponse"},
+      "errors":[
+        {"shape":"BadRequestException"},
+        {"shape":"ForbiddenException"},
+        {"shape":"ResourceLimitExceededException"},
+        {"shape":"ThrottledClientException"},
+        {"shape":"UnauthorizedClientException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ServiceFailureException"}
+      ]
+    },
     "CreatePhoneNumberOrder":{
       "name":"CreatePhoneNumberOrder",
       "http":{
@@ -600,6 +619,24 @@
         {"shape":"ForbiddenException"},
         {"shape":"BadRequestException"},
         {"shape":"ConflictException"},
+        {"shape":"ThrottledClientException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ServiceFailureException"}
+      ]
+    },
+    "DeleteVoiceConnectorEmergencyCallingConfiguration":{
+      "name":"DeleteVoiceConnectorEmergencyCallingConfiguration",
+      "http":{
+        "method":"DELETE",
+        "requestUri":"/voice-connectors/{voiceConnectorId}/emergency-calling-configuration",
+        "responseCode":204
+      },
+      "input":{"shape":"DeleteVoiceConnectorEmergencyCallingConfigurationRequest"},
+      "errors":[
+        {"shape":"UnauthorizedClientException"},
+        {"shape":"NotFoundException"},
+        {"shape":"ForbiddenException"},
+        {"shape":"BadRequestException"},
         {"shape":"ThrottledClientException"},
         {"shape":"ServiceUnavailableException"},
         {"shape":"ServiceFailureException"}
@@ -1076,6 +1113,25 @@
       },
       "input":{"shape":"GetVoiceConnectorRequest"},
       "output":{"shape":"GetVoiceConnectorResponse"},
+      "errors":[
+        {"shape":"UnauthorizedClientException"},
+        {"shape":"NotFoundException"},
+        {"shape":"ForbiddenException"},
+        {"shape":"BadRequestException"},
+        {"shape":"ThrottledClientException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ServiceFailureException"}
+      ]
+    },
+    "GetVoiceConnectorEmergencyCallingConfiguration":{
+      "name":"GetVoiceConnectorEmergencyCallingConfiguration",
+      "http":{
+        "method":"GET",
+        "requestUri":"/voice-connectors/{voiceConnectorId}/emergency-calling-configuration",
+        "responseCode":200
+      },
+      "input":{"shape":"GetVoiceConnectorEmergencyCallingConfigurationRequest"},
+      "output":{"shape":"GetVoiceConnectorEmergencyCallingConfigurationResponse"},
       "errors":[
         {"shape":"UnauthorizedClientException"},
         {"shape":"NotFoundException"},
@@ -1586,6 +1642,25 @@
         {"shape":"BadRequestException"},
         {"shape":"ForbiddenException"},
         {"shape":"ConflictException"},
+        {"shape":"ThrottledClientException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"ServiceFailureException"}
+      ]
+    },
+    "PutVoiceConnectorEmergencyCallingConfiguration":{
+      "name":"PutVoiceConnectorEmergencyCallingConfiguration",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/voice-connectors/{voiceConnectorId}/emergency-calling-configuration",
+        "responseCode":200
+      },
+      "input":{"shape":"PutVoiceConnectorEmergencyCallingConfigurationRequest"},
+      "output":{"shape":"PutVoiceConnectorEmergencyCallingConfigurationResponse"},
+      "errors":[
+        {"shape":"UnauthorizedClientException"},
+        {"shape":"NotFoundException"},
+        {"shape":"ForbiddenException"},
+        {"shape":"BadRequestException"},
         {"shape":"ThrottledClientException"},
         {"shape":"ServiceUnavailableException"},
         {"shape":"ServiceFailureException"}
@@ -2233,6 +2308,10 @@
         "AlexaForBusinessRoomArn":{"shape":"SensitiveString"}
       }
     },
+    "Alpha2CountryCode":{
+      "type":"string",
+      "pattern":"[A-Z]{2}"
+    },
     "AreaCode":{
       "type":"string",
       "pattern":"^$|^[0-9]{3,3}$"
@@ -2272,7 +2351,10 @@
     },
     "AssociatePhoneNumbersWithVoiceConnectorGroupRequest":{
       "type":"structure",
-      "required":["VoiceConnectorGroupId"],
+      "required":[
+        "VoiceConnectorGroupId",
+        "E164PhoneNumbers"
+      ],
       "members":{
         "VoiceConnectorGroupId":{
           "shape":"NonEmptyString",
@@ -2291,7 +2373,10 @@
     },
     "AssociatePhoneNumbersWithVoiceConnectorRequest":{
       "type":"structure",
-      "required":["VoiceConnectorId"],
+      "required":[
+        "VoiceConnectorId",
+        "E164PhoneNumbers"
+      ],
       "members":{
         "VoiceConnectorId":{
           "shape":"NonEmptyString",
@@ -2699,6 +2784,36 @@
         "Meeting":{"shape":"Meeting"}
       }
     },
+    "CreateMeetingWithAttendeesRequest":{
+      "type":"structure",
+      "required":["ClientRequestToken"],
+      "members":{
+        "ClientRequestToken":{
+          "shape":"ClientRequestToken",
+          "idempotencyToken":true
+        },
+        "ExternalMeetingId":{"shape":"ExternalMeetingIdType"},
+        "MeetingHostId":{"shape":"ExternalUserIdType"},
+        "MediaRegion":{"shape":"String"},
+        "Tags":{"shape":"MeetingTagList"},
+        "NotificationsConfiguration":{"shape":"MeetingNotificationConfiguration"},
+        "Attendees":{"shape":"CreateMeetingWithAttendeesRequestItemList"}
+      }
+    },
+    "CreateMeetingWithAttendeesRequestItemList":{
+      "type":"list",
+      "member":{"shape":"CreateAttendeeRequestItem"},
+      "max":5,
+      "min":1
+    },
+    "CreateMeetingWithAttendeesResponse":{
+      "type":"structure",
+      "members":{
+        "Meeting":{"shape":"Meeting"},
+        "Attendees":{"shape":"AttendeeList"},
+        "Errors":{"shape":"BatchCreateAttendeeErrorList"}
+      }
+    },
     "CreatePhoneNumberOrderRequest":{
       "type":"structure",
       "required":[
@@ -2860,6 +2975,22 @@
       "type":"list",
       "member":{"shape":"Credential"}
     },
+    "DNISEmergencyCallingConfiguration":{
+      "type":"structure",
+      "required":[
+        "EmergencyPhoneNumber",
+        "CallingCountry"
+      ],
+      "members":{
+        "EmergencyPhoneNumber":{"shape":"E164PhoneNumber"},
+        "TestPhoneNumber":{"shape":"E164PhoneNumber"},
+        "CallingCountry":{"shape":"Alpha2CountryCode"}
+      }
+    },
+    "DNISEmergencyCallingConfigurationList":{
+      "type":"list",
+      "member":{"shape":"DNISEmergencyCallingConfiguration"}
+    },
     "DataRetentionInHours":{
       "type":"integer",
       "min":0
@@ -3003,6 +3134,17 @@
         }
       }
     },
+    "DeleteVoiceConnectorEmergencyCallingConfigurationRequest":{
+      "type":"structure",
+      "required":["VoiceConnectorId"],
+      "members":{
+        "VoiceConnectorId":{
+          "shape":"NonEmptyString",
+          "location":"uri",
+          "locationName":"voiceConnectorId"
+        }
+      }
+    },
     "DeleteVoiceConnectorGroupRequest":{
       "type":"structure",
       "required":["VoiceConnectorGroupId"],
@@ -3060,7 +3202,10 @@
     },
     "DeleteVoiceConnectorTerminationCredentialsRequest":{
       "type":"structure",
-      "required":["VoiceConnectorId"],
+      "required":[
+        "Usernames",
+        "VoiceConnectorId"
+      ],
       "members":{
         "VoiceConnectorId":{
           "shape":"NonEmptyString",
@@ -3107,7 +3252,10 @@
     },
     "DisassociatePhoneNumbersFromVoiceConnectorGroupRequest":{
       "type":"structure",
-      "required":["VoiceConnectorGroupId"],
+      "required":[
+        "VoiceConnectorGroupId",
+        "E164PhoneNumbers"
+      ],
       "members":{
         "VoiceConnectorGroupId":{
           "shape":"NonEmptyString",
@@ -3125,7 +3273,10 @@
     },
     "DisassociatePhoneNumbersFromVoiceConnectorRequest":{
       "type":"structure",
-      "required":["VoiceConnectorId"],
+      "required":[
+        "VoiceConnectorId",
+        "E164PhoneNumbers"
+      ],
       "members":{
         "VoiceConnectorId":{
           "shape":"NonEmptyString",
@@ -3182,6 +3333,12 @@
         "Sent",
         "Failed"
       ]
+    },
+    "EmergencyCallingConfiguration":{
+      "type":"structure",
+      "members":{
+        "DNIS":{"shape":"DNISEmergencyCallingConfigurationList"}
+      }
     },
     "ErrorCode":{
       "type":"string",
@@ -3539,6 +3696,23 @@
       "type":"structure",
       "members":{
         "UserSettings":{"shape":"UserSettings"}
+      }
+    },
+    "GetVoiceConnectorEmergencyCallingConfigurationRequest":{
+      "type":"structure",
+      "required":["VoiceConnectorId"],
+      "members":{
+        "VoiceConnectorId":{
+          "shape":"NonEmptyString",
+          "location":"uri",
+          "locationName":"voiceConnectorId"
+        }
+      }
+    },
+    "GetVoiceConnectorEmergencyCallingConfigurationResponse":{
+      "type":"structure",
+      "members":{
+        "EmergencyCallingConfiguration":{"shape":"EmergencyCallingConfiguration"}
       }
     },
     "GetVoiceConnectorGroupRequest":{
@@ -4642,6 +4816,27 @@
       "members":{
         "RetentionSettings":{"shape":"RetentionSettings"},
         "InitiateDeletionTimestamp":{"shape":"Iso8601Timestamp"}
+      }
+    },
+    "PutVoiceConnectorEmergencyCallingConfigurationRequest":{
+      "type":"structure",
+      "required":[
+        "VoiceConnectorId",
+        "EmergencyCallingConfiguration"
+      ],
+      "members":{
+        "VoiceConnectorId":{
+          "shape":"NonEmptyString",
+          "location":"uri",
+          "locationName":"voiceConnectorId"
+        },
+        "EmergencyCallingConfiguration":{"shape":"EmergencyCallingConfiguration"}
+      }
+    },
+    "PutVoiceConnectorEmergencyCallingConfigurationResponse":{
+      "type":"structure",
+      "members":{
+        "EmergencyCallingConfiguration":{"shape":"EmergencyCallingConfiguration"}
       }
     },
     "PutVoiceConnectorLoggingConfigurationRequest":{

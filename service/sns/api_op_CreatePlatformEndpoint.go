@@ -29,8 +29,9 @@ type CreatePlatformEndpointInput struct {
 	// Unique identifier created by the notification service for an app on a device.
 	// The specific name for Token will vary, depending on which notification service
 	// is being used. For example, when using APNS as the notification service,
-	// you need the device token. Alternatively, when using FCM or ADM, the device
-	// token equivalent is called the registration ID.
+	// you need the device token. Alternatively, when using GCM (Firebase Cloud
+	// Messaging) or ADM, the device token equivalent is called the registration
+	// ID.
 	//
 	// Token is a required field
 	Token *string `type:"string" required:"true"`
@@ -78,11 +79,10 @@ const opCreatePlatformEndpoint = "CreatePlatformEndpoint"
 // Amazon Simple Notification Service.
 //
 // Creates an endpoint for a device and mobile app on one of the supported push
-// notification services, such as FCM and APNS. CreatePlatformEndpoint requires
-// the PlatformApplicationArn that is returned from CreatePlatformApplication.
-// The EndpointArn that is returned when using CreatePlatformEndpoint can then
-// be used by the Publish action to send a message to a mobile app or by the
-// Subscribe action for subscription to a topic. The CreatePlatformEndpoint
+// notification services, such as GCM (Firebase Cloud Messaging) and APNS. CreatePlatformEndpoint
+// requires the PlatformApplicationArn that is returned from CreatePlatformApplication.
+// You can use the returned EndpointArn to send a message to a mobile app or
+// by the Subscribe action for subscription to a topic. The CreatePlatformEndpoint
 // action is idempotent, so if the requester already owns an endpoint with the
 // same device token and attributes, that endpoint's ARN is returned without
 // creating a new endpoint. For more information, see Using Amazon SNS Mobile

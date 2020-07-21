@@ -72,7 +72,8 @@ const opDescribePortfolioShareStatus = "DescribePortfolioShareStatus"
 // AWS Service Catalog.
 //
 // Gets the status of the specified portfolio share operation. This API can
-// only be called by the master account in the organization.
+// only be called by the master account in the organization or by a delegated
+// admin.
 //
 //    // Example sending a request using DescribePortfolioShareStatusRequest.
 //    req := client.DescribePortfolioShareStatusRequest(params)

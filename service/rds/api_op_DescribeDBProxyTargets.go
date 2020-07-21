@@ -91,10 +91,6 @@ const opDescribeDBProxyTargets = "DescribeDBProxyTargets"
 // DescribeDBProxyTargetsRequest returns a request value for making API operation for
 // Amazon Relational Database Service.
 //
-//
-// This is prerelease documentation for the RDS Database Proxy feature in preview
-// release. It is subject to change.
-//
 // Returns information about DBProxyTarget objects. This API supports pagination.
 //
 //    // Example sending a request using DescribeDBProxyTargetsRequest.

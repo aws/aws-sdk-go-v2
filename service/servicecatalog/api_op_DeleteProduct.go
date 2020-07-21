@@ -68,6 +68,8 @@ const opDeleteProduct = "DeleteProduct"
 // You cannot delete a product if it was shared with you or is associated with
 // a portfolio.
 //
+// A delegated admin is authorized to invoke this command.
+//
 //    // Example sending a request using DeleteProductRequest.
 //    req := client.DeleteProductRequest(params)
 //    resp, err := req.Send(context.TODO())

@@ -58,10 +58,19 @@ const opDescribeTrustedAdvisorCheckSummaries = "DescribeTrustedAdvisorCheckSumma
 // DescribeTrustedAdvisorCheckSummariesRequest returns a request value for making API operation for
 // AWS Support.
 //
-// Returns the summaries of the results of the Trusted Advisor checks that have
-// the specified check IDs. Check IDs can be obtained by calling DescribeTrustedAdvisorChecks.
+// Returns the results for the AWS Trusted Advisor check summaries for the check
+// IDs that you specified. You can get the check IDs by calling the DescribeTrustedAdvisorChecks
+// operation.
 //
 // The response contains an array of TrustedAdvisorCheckSummary objects.
+//
+//    * You must have a Business or Enterprise support plan to use the AWS Support
+//    API.
+//
+//    * If you call the AWS Support API from an account that does not have a
+//    Business or Enterprise support plan, the SubscriptionRequiredException
+//    error message appears. For information about changing your support plan,
+//    see AWS Support (http://aws.amazon.com/premiumsupport/).
 //
 //    // Example sending a request using DescribeTrustedAdvisorCheckSummariesRequest.
 //    req := client.DescribeTrustedAdvisorCheckSummariesRequest(params)

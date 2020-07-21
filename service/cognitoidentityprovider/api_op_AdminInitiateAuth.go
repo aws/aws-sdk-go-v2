@@ -70,7 +70,7 @@ type AdminInitiateAuthInput struct {
 	//
 	//    * For CUSTOM_AUTH: USERNAME (required), SECRET_HASH (if app client is
 	//    configured with client secret), DEVICE_KEY
-	AuthParameters map[string]string `type:"map"`
+	AuthParameters map[string]string `type:"map" sensitive:"true"`
 
 	// The app client ID.
 	//

@@ -73,6 +73,12 @@ const (
 	// The request failed because you did not complete all the prerequisite steps.
 	ErrCodePreconditionNotMetException = "PreconditionNotMetException"
 
+	// ErrCodePublicPolicyException for service response error code
+	// "PublicPolicyException".
+	//
+	// The resource policy did not prevent broad access to the secret.
+	ErrCodePublicPolicyException = "PublicPolicyException"
+
 	// ErrCodeResourceExistsException for service response error code
 	// "ResourceExistsException".
 	//

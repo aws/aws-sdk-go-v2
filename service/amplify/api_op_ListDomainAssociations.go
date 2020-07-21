@@ -10,21 +10,21 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for the list Domain Associations request.
+// The request structure for the list domain associations request.
 type ListDomainAssociationsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for an Amplify App.
+	// The unique ID for an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Maximum number of records to list in a single response.
+	// The maximum number of records to list in a single response.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
-	// Pagination token. Set to null to start listing Apps from start. If non-null
-	// pagination token is returned in a result, then pass its value in here to
-	// list more projects.
+	// A pagination token. Set to null to start listing apps from the start. If
+	// non-null, a pagination token is returned in a result. Pass its value in here
+	// to list more projects.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
 
@@ -78,17 +78,17 @@ func (s ListDomainAssociationsInput) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Result structure for the list Domain Association request.
+// The result structure for the list domain association request.
 type ListDomainAssociationsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// List of Domain Associations.
+	// A list of domain associations.
 	//
 	// DomainAssociations is a required field
 	DomainAssociations []DomainAssociation `locationName:"domainAssociations" type:"list" required:"true"`
 
-	// Pagination token. If non-null pagination token is returned in a result, then
-	// pass its value in another request to fetch more entries.
+	// A pagination token. If non-null, a pagination token is returned in a result.
+	// Pass its value in another request to retrieve more entries.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
@@ -125,7 +125,7 @@ const opListDomainAssociations = "ListDomainAssociations"
 // ListDomainAssociationsRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// List domains with an app
+// Returns the domain associations for an Amplify app.
 //
 //    // Example sending a request using ListDomainAssociationsRequest.
 //    req := client.ListDomainAssociationsRequest(params)

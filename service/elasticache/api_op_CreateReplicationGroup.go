@@ -55,22 +55,10 @@ type CreateReplicationGroupInput struct {
 	// Specifies whether a read-only replica is automatically promoted to read/write
 	// primary if the existing primary fails.
 	//
-	// If true, Multi-AZ is enabled for this replication group. If false, Multi-AZ
-	// is disabled for this replication group.
-	//
 	// AutomaticFailoverEnabled must be enabled for Redis (cluster mode enabled)
 	// replication groups.
 	//
 	// Default: false
-	//
-	// Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover
-	// on:
-	//
-	//    * Redis versions earlier than 2.8.6.
-	//
-	//    * Redis (cluster mode disabled): T1 node types.
-	//
-	//    * Redis (cluster mode enabled): T1 node types.
 	AutomaticFailoverEnabled *bool `type:"boolean"`
 
 	// The compute and memory capacity of the nodes in the node group (shard).
@@ -159,6 +147,10 @@ type CreateReplicationGroupInput struct {
 	// The ID of the KMS key used to encrypt the disk in the cluster.
 	KmsKeyId *string `type:"string"`
 
+	// A flag indicating if you have Multi-AZ enabled to enhance fault tolerance.
+	// For more information, see Minimizing Downtime: Multi-AZ (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html).
+	MultiAZEnabled *bool `type:"boolean"`
+
 	// A list of node group (shard) configuration options. Each node group (shard)
 	// configuration has the following members: PrimaryAvailabilityZone, ReplicaAvailabilityZones,
 	// ReplicaCount, and Slots.
@@ -177,7 +169,7 @@ type CreateReplicationGroupInput struct {
 	// The Amazon SNS topic owner must be the same as the cluster owner.
 	NotificationTopicArn *string `type:"string"`
 
-	// The number of nodes in the cluster.
+	// The number of clusters this replication group initially has.
 	//
 	// This parameter is not used if there is more than one node group (shard).
 	// You should use ReplicasPerNodeGroup instead.
@@ -405,11 +397,9 @@ const opCreateReplicationGroup = "CreateReplicationGroup"
 //
 // When a Redis (cluster mode disabled) replication group has been successfully
 // created, you can add one or more read replicas to it, up to a total of 5
-// read replicas. You cannot alter a Redis (cluster mode enabled) replication
-// group after it has been created. However, if you need to increase or decrease
-// the number of node groups (console: shards), you can avail yourself of ElastiCache
-// for Redis' enhanced backup and restore. For more information, see Restoring
-// From a Backup with Cluster Resizing (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-restoring.html)
+// read replicas. If you need to increase or decrease the number of node groups
+// (console: shards), you can avail yourself of ElastiCache for Redis' scaling.
+// For more information, see Scaling ElastiCache for Redis Clusters (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Scaling.html)
 // in the ElastiCache User Guide.
 //
 // This operation is valid for Redis only.

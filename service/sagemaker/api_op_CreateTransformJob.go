@@ -65,6 +65,10 @@ type CreateTransformJobInput struct {
 	// do not support HTTP chunked encoding.
 	MaxPayloadInMB *int64 `type:"integer"`
 
+	// Configures the timeout and maximum number of retries for processing a transform
+	// job invocation.
+	ModelClientConfig *ModelClientConfig `type:"structure"`
+
 	// The name of the model that you want to use for the transform job. ModelName
 	// must be the name of an existing Amazon SageMaker model within an AWS Region
 	// in an AWS account.
@@ -134,6 +138,11 @@ func (s *CreateTransformJobInput) Validate() error {
 	if s.ExperimentConfig != nil {
 		if err := s.ExperimentConfig.Validate(); err != nil {
 			invalidParams.AddNested("ExperimentConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.ModelClientConfig != nil {
+		if err := s.ModelClientConfig.Validate(); err != nil {
+			invalidParams.AddNested("ModelClientConfig", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.Tags != nil {

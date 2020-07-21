@@ -44,6 +44,7 @@ func (s *DescribeTransformJobInput) Validate() error {
 type DescribeTransformJobOutput struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Resource Name (ARN) of the AutoML transform job.
 	AutoMLJobArn *string `min:"1" type:"string"`
 
 	// Specifies the number of records to include in a mini-batch for an HTTP inference
@@ -91,6 +92,10 @@ type DescribeTransformJobOutput struct {
 
 	// The maximum payload size, in MB, used in the transform job.
 	MaxPayloadInMB *int64 `type:"integer"`
+
+	// The timeout and maximum number of retries for processing a transform job
+	// invocation.
+	ModelClientConfig *ModelClientConfig `type:"structure"`
 
 	// The name of the model used in the transform job.
 	//

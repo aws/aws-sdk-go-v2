@@ -10,24 +10,24 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for a backend environment create request.
+// The request structure for the backend environment create request.
 type CreateBackendEnvironmentInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for an Amplify App.
+	// The unique ID for an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Name of deployment artifacts.
+	// The name of deployment artifacts.
 	DeploymentArtifacts *string `locationName:"deploymentArtifacts" min:"1" type:"string"`
 
-	// Name for the backend environment.
+	// The name for the backend environment.
 	//
 	// EnvironmentName is a required field
 	EnvironmentName *string `locationName:"environmentName" min:"1" type:"string" required:"true"`
 
-	// CloudFormation stack name of backend environment.
+	// The AWS CloudFormation stack name of a backend environment.
 	StackName *string `locationName:"stackName" min:"1" type:"string"`
 }
 
@@ -97,11 +97,11 @@ func (s CreateBackendEnvironmentInput) MarshalFields(e protocol.FieldEncoder) er
 	return nil
 }
 
-// Result structure for create backend environment.
+// The result structure for the create backend environment request.
 type CreateBackendEnvironmentOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Backend environment structure for an amplify App.
+	// Describes the backend environment for an Amplify app.
 	//
 	// BackendEnvironment is a required field
 	BackendEnvironment *BackendEnvironment `locationName:"backendEnvironment" type:"structure" required:"true"`
@@ -128,7 +128,7 @@ const opCreateBackendEnvironment = "CreateBackendEnvironment"
 // CreateBackendEnvironmentRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Creates a new backend environment for an Amplify App.
+// Creates a new backend environment for an Amplify app.
 //
 //    // Example sending a request using CreateBackendEnvironmentRequest.
 //    req := client.CreateBackendEnvironmentRequest(params)

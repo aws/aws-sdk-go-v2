@@ -100,6 +100,12 @@ func (c *Client) DescribeCertificatesRequest(input *DescribeCertificatesInput) D
 		Name:       opDescribeCertificates,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "MaxRecords",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -133,6 +139,53 @@ func (r DescribeCertificatesRequest) Send(ctx context.Context) (*DescribeCertifi
 	}
 
 	return resp, nil
+}
+
+// NewDescribeCertificatesRequestPaginator returns a paginator for DescribeCertificates.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.DescribeCertificatesRequest(input)
+//   p := rds.NewDescribeCertificatesRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewDescribeCertificatesPaginator(req DescribeCertificatesRequest) DescribeCertificatesPaginator {
+	return DescribeCertificatesPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *DescribeCertificatesInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// DescribeCertificatesPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeCertificatesPaginator struct {
+	aws.Pager
+}
+
+func (p *DescribeCertificatesPaginator) CurrentPage() *DescribeCertificatesOutput {
+	return p.Pager.CurrentPage().(*DescribeCertificatesOutput)
 }
 
 // DescribeCertificatesResponse is the response type for the

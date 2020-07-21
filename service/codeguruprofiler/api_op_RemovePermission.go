@@ -10,12 +10,12 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// The structure representing the removePermissionRequest.
 type RemovePermissionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The list of actions that the users and roles can perform on the profiling
-	// group.
+	// Specifies an action group that contains the permissions to remove from a
+	// profiling group's resource-based policy. One action group is supported, agentPermissions,
+	// which grants ConfigureAgent and PostAgentProfile permissions.
 	//
 	// ActionGroup is a required field
 	ActionGroup ActionGroup `location:"uri" locationName:"actionGroup" type:"string" required:"true" enum:"true"`
@@ -25,7 +25,8 @@ type RemovePermissionInput struct {
 	// ProfilingGroupName is a required field
 	ProfilingGroupName *string `location:"uri" locationName:"profilingGroupName" min:"1" type:"string" required:"true"`
 
-	// A unique identifier for the current revision of the policy.
+	// A universally unique identifier (UUID) for the revision of the resource-based
+	// policy from which you want to remove permissions.
 	//
 	// RevisionId is a required field
 	RevisionId *string `location:"querystring" locationName:"revisionId" type:"string" required:"true"`
@@ -89,12 +90,15 @@ func (s RemovePermissionInput) MarshalFields(e protocol.FieldEncoder) error {
 type RemovePermissionOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The resource-based policy.
+	// The JSON-formatted resource-based policy on the profiling group after the
+	// specified permissions were removed.
 	//
 	// Policy is a required field
 	Policy *string `locationName:"policy" type:"string" required:"true"`
 
-	// A unique identifier for the current revision of the policy.
+	// A universally unique identifier (UUID) for the revision of the resource-based
+	// policy after the specified permissions were removed. The updated JSON-formatted
+	// policy is in the policy element of the response.
 	//
 	// RevisionId is a required field
 	RevisionId *string `locationName:"revisionId" type:"string" required:"true"`
@@ -127,7 +131,12 @@ const opRemovePermission = "RemovePermission"
 // RemovePermissionRequest returns a request value for making API operation for
 // Amazon CodeGuru Profiler.
 //
-// Removes statement for the provided action group from the policy.
+// Removes permissions from a profiling group's resource-based policy that are
+// provided using an action group. The one supported action group that can be
+// removed is agentPermission which grants ConfigureAgent and PostAgent permissions.
+// For more information, see Resource-based policies in CodeGuru Profiler (https://docs.aws.amazon.com/codeguru/latest/profiler-ug/resource-based-policies.html)
+// in the Amazon CodeGuru Profiler User Guide, ConfigureAgent (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html),
+// and PostAgentProfile (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_PostAgentProfile.html).
 //
 //    // Example sending a request using RemovePermissionRequest.
 //    req := client.RemovePermissionRequest(params)

@@ -81,6 +81,9 @@ type AmiDistributionConfiguration struct {
 	// The description of the distribution configuration.
 	Description *string `locationName:"description" min:"1" type:"string"`
 
+	// The KMS key identifier used to encrypt the distributed image.
+	KmsKeyId *string `locationName:"kmsKeyId" min:"1" type:"string"`
+
 	// Launch permissions can be used to configure which AWS accounts can use the
 	// AMI to launch instances.
 	LaunchPermission *LaunchPermissionConfiguration `locationName:"launchPermission" type:"structure"`
@@ -102,6 +105,9 @@ func (s *AmiDistributionConfiguration) Validate() error {
 	}
 	if s.Description != nil && len(*s.Description) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
+	}
+	if s.KmsKeyId != nil && len(*s.KmsKeyId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("KmsKeyId", 1))
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
@@ -132,6 +138,12 @@ func (s AmiDistributionConfiguration) MarshalFields(e protocol.FieldEncoder) err
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "kmsKeyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.LaunchPermission != nil {
 		v := s.LaunchPermission
@@ -1357,6 +1369,9 @@ type ImageRecipe struct {
 
 	// The version of the image recipe.
 	Version *string `locationName:"version" type:"string"`
+
+	// The working directory to be used during build and test workflows.
+	WorkingDirectory *string `locationName:"workingDirectory" min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -1449,6 +1464,12 @@ func (s ImageRecipe) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.WorkingDirectory != nil {
+		v := *s.WorkingDirectory
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "workingDirectory", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1838,6 +1859,9 @@ type InfrastructureConfiguration struct {
 	// The name of the infrastructure configuration.
 	Name *string `locationName:"name" type:"string"`
 
+	// The tags attached to the resource created by Image Builder.
+	ResourceTags map[string]string `locationName:"resourceTags" min:"1" type:"map"`
+
 	// The security group IDs of the infrastructure configuration.
 	SecurityGroupIds []string `locationName:"securityGroupIds" type:"list"`
 
@@ -1921,6 +1945,18 @@ func (s InfrastructureConfiguration) MarshalFields(e protocol.FieldEncoder) erro
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.ResourceTags != nil {
+		v := s.ResourceTags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "resourceTags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
 	if s.SecurityGroupIds != nil {
 		v := s.SecurityGroupIds
 
@@ -1985,6 +2021,9 @@ type InfrastructureConfigurationSummary struct {
 	// The name of the infrastructure configuration.
 	Name *string `locationName:"name" type:"string"`
 
+	// The tags attached to the image created by Image Builder.
+	ResourceTags map[string]string `locationName:"resourceTags" min:"1" type:"map"`
+
 	// The tags of the infrastructure configuration.
 	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 }
@@ -2025,6 +2064,18 @@ func (s InfrastructureConfigurationSummary) MarshalFields(e protocol.FieldEncode
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceTags != nil {
+		v := s.ResourceTags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "resourceTags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	if s.Tags != nil {
 		v := s.Tags
@@ -2116,7 +2167,9 @@ func (s InstanceBlockDeviceMapping) MarshalFields(e protocol.FieldEncoder) error
 // Describes the configuration for a launch permission. The launch permission
 // modification request is sent to the EC2 ModifyImageAttribute (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html)
 // API on behalf of the user for each Region they have selected to distribute
-// the AMI.
+// the AMI. To make an AMI public, set the launch permission authorized accounts
+// to all. See the examples for making an AMI public at EC2 ModifyImageAttribute
+// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html).
 type LaunchPermissionConfiguration struct {
 	_ struct{} `type:"structure"`
 

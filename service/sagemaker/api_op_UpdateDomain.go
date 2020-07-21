@@ -15,7 +15,7 @@ type UpdateDomainInput struct {
 	// A collection of settings.
 	DefaultUserSettings *UserSettings `type:"structure"`
 
-	// The domain ID.
+	// The ID of the domain to be updated.
 	//
 	// DomainId is a required field
 	DomainId *string `type:"string" required:"true"`
@@ -48,7 +48,7 @@ func (s *UpdateDomainInput) Validate() error {
 type UpdateDomainOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The domain Amazon Resource Name (ARN).
+	// The Amazon Resource Name (ARN) of the domain.
 	DomainArn *string `type:"string"`
 }
 
@@ -62,7 +62,7 @@ const opUpdateDomain = "UpdateDomain"
 // UpdateDomainRequest returns a request value for making API operation for
 // Amazon SageMaker Service.
 //
-// Updates a domain. Changes will impact all of the people in the domain.
+// Updates the default settings for new user profiles in the domain.
 //
 //    // Example sending a request using UpdateDomainRequest.
 //    req := client.UpdateDomainRequest(params)

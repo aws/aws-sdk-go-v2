@@ -99,6 +99,11 @@ type PutIntentInput struct {
 	// process the intent (for example, place an order with a pizzeria).
 	FulfillmentActivity *FulfillmentActivity `locationName:"fulfillmentActivity" type:"structure"`
 
+	// Configuration information required to use the AMAZON.KendraSearchIntent intent
+	// to connect to an Amazon Kendra index. For more information, see AMAZON.KendraSearchIntent
+	// (http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html).
+	KendraConfiguration *KendraConfiguration `locationName:"kendraConfiguration" type:"structure"`
+
 	// The name of the intent. The name is not case sensitive.
 	//
 	// The name can't match a built-in intent name, or a built-in intent name with
@@ -176,6 +181,11 @@ func (s *PutIntentInput) Validate() error {
 			invalidParams.AddNested("FulfillmentActivity", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.KendraConfiguration != nil {
+		if err := s.KendraConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("KendraConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.RejectionStatement != nil {
 		if err := s.RejectionStatement.Validate(); err != nil {
 			invalidParams.AddNested("RejectionStatement", err.(aws.ErrInvalidParams))
@@ -246,6 +256,12 @@ func (s PutIntentInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "fulfillmentActivity", v, metadata)
+	}
+	if s.KendraConfiguration != nil {
+		v := s.KendraConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "kendraConfiguration", v, metadata)
 	}
 	if s.ParentIntentSignature != nil {
 		v := *s.ParentIntentSignature
@@ -329,6 +345,10 @@ type PutIntentOutput struct {
 	// the intent after the user provides all of the information required by the
 	// intent.
 	FulfillmentActivity *FulfillmentActivity `locationName:"fulfillmentActivity" type:"structure"`
+
+	// Configuration information, if any, required to connect to an Amazon Kendra
+	// index and use the AMAZON.KendraSearchIntent intent.
+	KendraConfiguration *KendraConfiguration `locationName:"kendraConfiguration" type:"structure"`
 
 	// The date that the intent was updated. When you create a resource, the creation
 	// date and last update dates are the same.
@@ -415,6 +435,12 @@ func (s PutIntentOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "fulfillmentActivity", v, metadata)
+	}
+	if s.KendraConfiguration != nil {
+		v := s.KendraConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "kendraConfiguration", v, metadata)
 	}
 	if s.LastUpdatedDate != nil {
 		v := *s.LastUpdatedDate

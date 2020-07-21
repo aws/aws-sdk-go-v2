@@ -22,10 +22,10 @@ type GetModelVersionInput struct {
 	// ModelType is a required field
 	ModelType ModelTypeEnum `locationName:"modelType" type:"string" required:"true" enum:"true"`
 
-	// The model version.
+	// The model version number.
 	//
 	// ModelVersionNumber is a required field
-	ModelVersionNumber *string `locationName:"modelVersionNumber" min:"1" type:"string" required:"true"`
+	ModelVersionNumber *string `locationName:"modelVersionNumber" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -50,9 +50,6 @@ func (s *GetModelVersionInput) Validate() error {
 	if s.ModelVersionNumber == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ModelVersionNumber"))
 	}
-	if s.ModelVersionNumber != nil && len(*s.ModelVersionNumber) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ModelVersionNumber", 1))
-	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -63,8 +60,11 @@ func (s *GetModelVersionInput) Validate() error {
 type GetModelVersionOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The model version description.
-	Description *string `locationName:"description" min:"1" type:"string"`
+	// The model version ARN.
+	Arn *string `locationName:"arn" min:"1" type:"string"`
+
+	// The event details.
+	ExternalEventsDetail *ExternalEventsDetail `locationName:"externalEventsDetail" type:"structure"`
 
 	// The model ID.
 	ModelId *string `locationName:"modelId" min:"1" type:"string"`
@@ -72,11 +72,17 @@ type GetModelVersionOutput struct {
 	// The model type.
 	ModelType ModelTypeEnum `locationName:"modelType" type:"string" enum:"true"`
 
-	// The model version.
-	ModelVersionNumber *string `locationName:"modelVersionNumber" min:"1" type:"string"`
+	// The model version number.
+	ModelVersionNumber *string `locationName:"modelVersionNumber" type:"string"`
 
 	// The model version status.
 	Status *string `locationName:"status" type:"string"`
+
+	// The training data schema.
+	TrainingDataSchema *TrainingDataSchema `locationName:"trainingDataSchema" type:"structure"`
+
+	// The training data source.
+	TrainingDataSource TrainingDataSourceEnum `locationName:"trainingDataSource" type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -89,7 +95,7 @@ const opGetModelVersion = "GetModelVersion"
 // GetModelVersionRequest returns a request value for making API operation for
 // Amazon Fraud Detector.
 //
-// Gets a model version.
+// Gets the details of the specified model version.
 //
 //    // Example sending a request using GetModelVersionRequest.
 //    req := client.GetModelVersionRequest(params)

@@ -80,8 +80,9 @@ type GetParametersForImportOutput struct {
 	// ImportToken is automatically base64 encoded/decoded by the SDK.
 	ImportToken []byte `min:"1" type:"blob"`
 
-	// The identifier of the CMK to use in a subsequent ImportKeyMaterial request.
-	// This is the same CMK specified in the GetParametersForImport request.
+	// The Amazon Resource Name (key ARN (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
+	// of the CMK to use in a subsequent ImportKeyMaterial request. This is the
+	// same CMK specified in the GetParametersForImport request.
 	KeyId *string `min:"1" type:"string"`
 
 	// The time at which the import token and public key are no longer valid. After

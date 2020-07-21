@@ -49,6 +49,7 @@ type DescribeFlowDefinitionOutput struct {
 	// CreationTime is a required field
 	CreationTime *time.Time `type:"timestamp" required:"true"`
 
+	// The reason your flow definition failed.
 	FailureReason *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the flow defintion.

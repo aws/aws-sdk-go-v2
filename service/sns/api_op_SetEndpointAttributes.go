@@ -77,8 +77,8 @@ const opSetEndpointAttributes = "SetEndpointAttributes"
 // Amazon Simple Notification Service.
 //
 // Sets the attributes for an endpoint for a device on one of the supported
-// push notification services, such as FCM and APNS. For more information, see
-// Using Amazon SNS Mobile Push Notifications (https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
+// push notification services, such as GCM (Firebase Cloud Messaging) and APNS.
+// For more information, see Using Amazon SNS Mobile Push Notifications (https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
 //
 //    // Example sending a request using SetEndpointAttributesRequest.
 //    req := client.SetEndpointAttributesRequest(params)

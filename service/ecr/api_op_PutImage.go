@@ -12,6 +12,9 @@ import (
 type PutImageInput struct {
 	_ struct{} `type:"structure"`
 
+	// The image digest of the image manifest corresponding to the image.
+	ImageDigest *string `locationName:"imageDigest" type:"string"`
+
 	// The image manifest corresponding to the image to be uploaded.
 	//
 	// ImageManifest is a required field

@@ -25,7 +25,7 @@ type BatchDetectSyntaxInput struct {
 	// of UTF-8 encoded characters.
 	//
 	// TextList is a required field
-	TextList []string `type:"list" required:"true"`
+	TextList []string `type:"list" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -51,7 +51,7 @@ func (s *BatchDetectSyntaxInput) Validate() error {
 }
 
 type BatchDetectSyntaxOutput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" sensitive:"true"`
 
 	// A list containing one object for each document that contained an error. The
 	// results are sorted in ascending order by the Index field and match the order

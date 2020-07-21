@@ -4,6 +4,7 @@ package frauddetector
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -11,6 +12,9 @@ import (
 
 type BatchCreateVariableInput struct {
 	_ struct{} `type:"structure"`
+
+	// A collection of key and value pairs.
+	Tags []Tag `locationName:"tags" type:"list"`
 
 	// The list of variables for the batch create variable request.
 	//
@@ -32,6 +36,13 @@ func (s *BatchCreateVariableInput) Validate() error {
 	}
 	if s.VariableEntries != nil && len(s.VariableEntries) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("VariableEntries", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {

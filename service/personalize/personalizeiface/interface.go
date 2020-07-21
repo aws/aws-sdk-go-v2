@@ -73,6 +73,8 @@ type ClientAPI interface {
 
 	CreateEventTrackerRequest(*personalize.CreateEventTrackerInput) personalize.CreateEventTrackerRequest
 
+	CreateFilterRequest(*personalize.CreateFilterInput) personalize.CreateFilterRequest
+
 	CreateSchemaRequest(*personalize.CreateSchemaInput) personalize.CreateSchemaRequest
 
 	CreateSolutionRequest(*personalize.CreateSolutionInput) personalize.CreateSolutionRequest
@@ -86,6 +88,8 @@ type ClientAPI interface {
 	DeleteDatasetGroupRequest(*personalize.DeleteDatasetGroupInput) personalize.DeleteDatasetGroupRequest
 
 	DeleteEventTrackerRequest(*personalize.DeleteEventTrackerInput) personalize.DeleteEventTrackerRequest
+
+	DeleteFilterRequest(*personalize.DeleteFilterInput) personalize.DeleteFilterRequest
 
 	DeleteSchemaRequest(*personalize.DeleteSchemaInput) personalize.DeleteSchemaRequest
 
@@ -106,6 +110,8 @@ type ClientAPI interface {
 	DescribeEventTrackerRequest(*personalize.DescribeEventTrackerInput) personalize.DescribeEventTrackerRequest
 
 	DescribeFeatureTransformationRequest(*personalize.DescribeFeatureTransformationInput) personalize.DescribeFeatureTransformationRequest
+
+	DescribeFilterRequest(*personalize.DescribeFilterInput) personalize.DescribeFilterRequest
 
 	DescribeRecipeRequest(*personalize.DescribeRecipeInput) personalize.DescribeRecipeRequest
 
@@ -128,6 +134,8 @@ type ClientAPI interface {
 	ListDatasetsRequest(*personalize.ListDatasetsInput) personalize.ListDatasetsRequest
 
 	ListEventTrackersRequest(*personalize.ListEventTrackersInput) personalize.ListEventTrackersRequest
+
+	ListFiltersRequest(*personalize.ListFiltersInput) personalize.ListFiltersRequest
 
 	ListRecipesRequest(*personalize.ListRecipesInput) personalize.ListRecipesRequest
 

@@ -11,24 +11,31 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for create Domain Association request.
+// The request structure for the create domain association request.
 type CreateDomainAssociationInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for an Amplify App.
+	// The unique ID for an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Domain name for the Domain Association.
+	// Sets the branch patterns for automatic subdomain creation.
+	AutoSubDomainCreationPatterns []string `locationName:"autoSubDomainCreationPatterns" type:"list"`
+
+	// The required AWS Identity and Access Management (IAM) service role for the
+	// Amazon Resource Name (ARN) for automatically creating subdomains.
+	AutoSubDomainIAMRole *string `locationName:"autoSubDomainIAMRole" type:"string"`
+
+	// The domain name for the domain association.
 	//
 	// DomainName is a required field
 	DomainName *string `locationName:"domainName" type:"string" required:"true"`
 
-	// Enables automated creation of Subdomains for branches. (Currently not supported)
+	// Enables the automated creation of subdomains for branches.
 	EnableAutoSubDomain *bool `locationName:"enableAutoSubDomain" type:"boolean"`
 
-	// Setting structure for the Subdomain.
+	// The setting for the subdomain.
 	//
 	// SubDomainSettings is a required field
 	SubDomainSettings []SubDomainSetting `locationName:"subDomainSettings" type:"list" required:"true"`
@@ -75,6 +82,24 @@ func (s *CreateDomainAssociationInput) Validate() error {
 func (s CreateDomainAssociationInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
+	if s.AutoSubDomainCreationPatterns != nil {
+		v := s.AutoSubDomainCreationPatterns
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "autoSubDomainCreationPatterns", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.AutoSubDomainIAMRole != nil {
+		v := *s.AutoSubDomainIAMRole
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "autoSubDomainIAMRole", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.DomainName != nil {
 		v := *s.DomainName
 
@@ -108,11 +133,12 @@ func (s CreateDomainAssociationInput) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
-// Result structure for the create Domain Association request.
+// The result structure for the create domain association request.
 type CreateDomainAssociationOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Domain Association structure.
+	// Describes the structure of a domain association, which associates a custom
+	// domain with an Amplify app.
 	//
 	// DomainAssociation is a required field
 	DomainAssociation *DomainAssociation `locationName:"domainAssociation" type:"structure" required:"true"`
@@ -139,7 +165,8 @@ const opCreateDomainAssociation = "CreateDomainAssociation"
 // CreateDomainAssociationRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Create a new DomainAssociation on an App
+// Creates a new domain association for an Amplify app. This action associates
+// a custom domain with the Amplify app
 //
 //    // Example sending a request using CreateDomainAssociationRequest.
 //    req := client.CreateDomainAssociationRequest(params)

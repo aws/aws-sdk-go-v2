@@ -45,16 +45,23 @@ const opDescribeServices = "DescribeServices"
 // AWS Support.
 //
 // Returns the current list of AWS services and a list of service categories
-// that applies to each one. You then use service names and categories in your
-// CreateCase requests. Each AWS service has its own set of categories.
+// for each service. You then use service names and categories in your CreateCase
+// requests. Each AWS service has its own set of categories.
 //
-// The service codes and category codes correspond to the values that are displayed
-// in the Service and Category drop-down lists on the AWS Support Center Create
-// Case (https://console.aws.amazon.com/support/home#/case/create) page. The
-// values in those fields, however, do not necessarily match the service codes
-// and categories returned by the DescribeServices request. Always use the service
-// codes and categories obtained programmatically. This practice ensures that
-// you always have the most recent set of service and category codes.
+// The service codes and category codes correspond to the values that appear
+// in the Service and Category lists on the AWS Support Center Create Case (https://console.aws.amazon.com/support/home#/case/create)
+// page. The values in those fields don't necessarily match the service codes
+// and categories returned by the DescribeServices operation. Always use the
+// service codes and categories that the DescribeServices operation returns,
+// so that you have the most recent set of service and category codes.
+//
+//    * You must have a Business or Enterprise support plan to use the AWS Support
+//    API.
+//
+//    * If you call the AWS Support API from an account that does not have a
+//    Business or Enterprise support plan, the SubscriptionRequiredException
+//    error message appears. For information about changing your support plan,
+//    see AWS Support (http://aws.amazon.com/premiumsupport/).
 //
 //    // Example sending a request using DescribeServicesRequest.
 //    req := client.DescribeServicesRequest(params)

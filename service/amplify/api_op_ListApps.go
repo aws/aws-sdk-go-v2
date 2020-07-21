@@ -10,15 +10,15 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for an Amplify App list request.
+// The request structure for the list apps request.
 type ListAppsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Maximum number of records to list in a single response.
+	// The maximum number of records to list in a single response.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
-	// Pagination token. If non-null pagination token is returned in a result, then
-	// pass its value in another request to fetch more entries.
+	// A pagination token. If non-null, the pagination token is returned in a result.
+	// Pass its value in another request to retrieve more entries.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
 
@@ -59,18 +59,18 @@ func (s ListAppsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Result structure for an Amplify App list request.
+// The result structure for an Amplify app list request.
 type ListAppsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// List of Amplify Apps.
+	// A list of Amplify apps.
 	//
 	// Apps is a required field
 	Apps []App `locationName:"apps" type:"list" required:"true"`
 
-	// Pagination token. Set to null to start listing Apps from start. If non-null
-	// pagination token is returned in a result, then pass its value in here to
-	// list more projects.
+	// A pagination token. Set to null to start listing apps from start. If non-null,
+	// the pagination token is returned in a result. Pass its value in here to list
+	// more projects.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
@@ -107,7 +107,7 @@ const opListApps = "ListApps"
 // ListAppsRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Lists existing Amplify Apps.
+// Returns a list of the existing Amplify apps.
 //
 //    // Example sending a request using ListAppsRequest.
 //    req := client.ListAppsRequest(params)

@@ -67,7 +67,7 @@ type SimulatePrincipalPolicyInput struct {
 	// one permissions boundary when you pass a policy to this operation. An IAM
 	// entity can only have one permissions boundary in effect at a time. For example,
 	// if a permissions boundary is attached to an entity and you pass in a different
-	// permissions boundary policy using this parameter, then the new permission
+	// permissions boundary policy using this parameter, then the new permissions
 	// boundary policy is used for the simulation. For more information about permissions
 	// boundaries, see Permissions Boundaries for IAM Entities (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
 	// in the IAM User Guide. The policy input is specified as a string containing

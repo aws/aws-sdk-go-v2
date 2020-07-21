@@ -46,6 +46,9 @@ type CreateDetectorVersionInput struct {
 	//
 	// Rules is a required field
 	Rules []Rule `locationName:"rules" type:"list" required:"true"`
+
+	// A collection of key and value pairs.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -81,6 +84,13 @@ func (s *CreateDetectorVersionInput) Validate() error {
 		for i, v := range s.Rules {
 			if err := v.Validate(); err != nil {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Rules", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
 			}
 		}
 	}

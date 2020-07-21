@@ -119,6 +119,7 @@ const (
 	ConstraintViolationExceptionReasonCannotRegisterMasterAsDelegatedAdministrator      ConstraintViolationExceptionReason = "CANNOT_REGISTER_MASTER_AS_DELEGATED_ADMINISTRATOR"
 	ConstraintViolationExceptionReasonCannotRemoveDelegatedAdministratorFromOrg         ConstraintViolationExceptionReason = "CANNOT_REMOVE_DELEGATED_ADMINISTRATOR_FROM_ORG"
 	ConstraintViolationExceptionReasonDelegatedAdministratorExistsForThisService        ConstraintViolationExceptionReason = "DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE"
+	ConstraintViolationExceptionReasonMasterAccountMissingBusinessLicense               ConstraintViolationExceptionReason = "MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE"
 )
 
 func (enum ConstraintViolationExceptionReason) MarshalValue() (string, error) {
@@ -174,7 +175,9 @@ type EffectivePolicyType string
 
 // Enum values for EffectivePolicyType
 const (
-	EffectivePolicyTypeTagPolicy EffectivePolicyType = "TAG_POLICY"
+	EffectivePolicyTypeTagPolicy              EffectivePolicyType = "TAG_POLICY"
+	EffectivePolicyTypeBackupPolicy           EffectivePolicyType = "BACKUP_POLICY"
+	EffectivePolicyTypeAiservicesOptOutPolicy EffectivePolicyType = "AISERVICES_OPT_OUT_POLICY"
 )
 
 func (enum EffectivePolicyType) MarshalValue() (string, error) {
@@ -363,8 +366,10 @@ type PolicyType string
 
 // Enum values for PolicyType
 const (
-	PolicyTypeServiceControlPolicy PolicyType = "SERVICE_CONTROL_POLICY"
-	PolicyTypeTagPolicy            PolicyType = "TAG_POLICY"
+	PolicyTypeServiceControlPolicy   PolicyType = "SERVICE_CONTROL_POLICY"
+	PolicyTypeTagPolicy              PolicyType = "TAG_POLICY"
+	PolicyTypeBackupPolicy           PolicyType = "BACKUP_POLICY"
+	PolicyTypeAiservicesOptOutPolicy PolicyType = "AISERVICES_OPT_OUT_POLICY"
 )
 
 func (enum PolicyType) MarshalValue() (string, error) {

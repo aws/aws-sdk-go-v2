@@ -560,6 +560,122 @@ func (s Credential) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The Dialed Number Identification Service (DNIS) emergency calling configuration
+// details associated with an Amazon Chime Voice Connector's emergency calling
+// configuration.
+type DNISEmergencyCallingConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The country from which emergency calls are allowed, in ISO 3166-1 alpha-2
+	// format.
+	//
+	// CallingCountry is a required field
+	CallingCountry *string `type:"string" required:"true"`
+
+	// The DNIS phone number to route emergency calls to, in E.164 format.
+	//
+	// EmergencyPhoneNumber is a required field
+	EmergencyPhoneNumber *string `type:"string" required:"true" sensitive:"true"`
+
+	// The DNIS phone number to route test emergency calls to, in E.164 format.
+	TestPhoneNumber *string `type:"string" sensitive:"true"`
+}
+
+// String returns the string representation
+func (s DNISEmergencyCallingConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DNISEmergencyCallingConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DNISEmergencyCallingConfiguration"}
+
+	if s.CallingCountry == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CallingCountry"))
+	}
+
+	if s.EmergencyPhoneNumber == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EmergencyPhoneNumber"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DNISEmergencyCallingConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CallingCountry != nil {
+		v := *s.CallingCountry
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CallingCountry", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.EmergencyPhoneNumber != nil {
+		v := *s.EmergencyPhoneNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EmergencyPhoneNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.TestPhoneNumber != nil {
+		v := *s.TestPhoneNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "TestPhoneNumber", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// The emergency calling configuration details associated with an Amazon Chime
+// Voice Connector.
+type EmergencyCallingConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The Dialed Number Identification Service (DNIS) emergency calling configuration
+	// details.
+	DNIS []DNISEmergencyCallingConfiguration `type:"list"`
+}
+
+// String returns the string representation
+func (s EmergencyCallingConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *EmergencyCallingConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "EmergencyCallingConfiguration"}
+	if s.DNIS != nil {
+		for i, v := range s.DNIS {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "DNIS", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s EmergencyCallingConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.DNIS != nil {
+		v := s.DNIS
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "DNIS", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // The configuration that allows a bot to receive outgoing events. Can be either
 // an HTTPS endpoint or a Lambda function ARN.
 type EventsConfiguration struct {
@@ -869,7 +985,8 @@ func (s Meeting) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // The configuration for resource targets to receive notifications when Amazon
-// Chime SDK meeting and attendee events occur.
+// Chime SDK meeting and attendee events occur. The Amazon Chime SDK supports
+// resource targets located in the US East (N. Virginia) AWS Region (us-east-1).
 type MeetingNotificationConfiguration struct {
 	_ struct{} `type:"structure"`
 

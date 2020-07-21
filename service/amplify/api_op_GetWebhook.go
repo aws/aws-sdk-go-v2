@@ -10,11 +10,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for the get webhook request.
+// The request structure for the get webhook request.
 type GetWebhookInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for a webhook.
+	// The unique ID for a webhook.
 	//
 	// WebhookId is a required field
 	WebhookId *string `location:"uri" locationName:"webhookId" type:"string" required:"true"`
@@ -52,11 +52,11 @@ func (s GetWebhookInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Result structure for the get webhook request.
+// The result structure for the get webhook request.
 type GetWebhookOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Webhook structure.
+	// Describes the structure of a webhook.
 	//
 	// Webhook is a required field
 	Webhook *Webhook `locationName:"webhook" type:"structure" required:"true"`
@@ -83,7 +83,7 @@ const opGetWebhook = "GetWebhook"
 // GetWebhookRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Retrieves webhook info that corresponds to a webhookId.
+// Returns the webhook information that corresponds to a specified webhook ID.
 //
 //    // Example sending a request using GetWebhookRequest.
 //    req := client.GetWebhookRequest(params)

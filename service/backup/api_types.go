@@ -18,6 +18,9 @@ var _ = awsutil.Prettify
 type BackupJob struct {
 	_ struct{} `type:"structure"`
 
+	// The account ID that owns the backup job.
+	AccountId *string `type:"string"`
+
 	// Uniquely identifies a request to AWS Backup to back up a resource.
 	BackupJobId *string `type:"string"`
 
@@ -104,6 +107,12 @@ func (s BackupJob) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s BackupJob) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccountId != nil {
+		v := *s.AccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AccountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.BackupJobId != nil {
 		v := *s.BackupJobId
 
@@ -267,7 +276,7 @@ func (s BackupPlan) MarshalFields(e protocol.FieldEncoder) error {
 type BackupPlanInput struct {
 	_ struct{} `type:"structure"`
 
-	// The display name of a backup plan.
+	// The optional display name of a backup plan.
 	//
 	// BackupPlanName is a required field
 	BackupPlanName *string `type:"string" required:"true"`
@@ -1167,6 +1176,9 @@ func (s CopyAction) MarshalFields(e protocol.FieldEncoder) error {
 type CopyJob struct {
 	_ struct{} `type:"structure"`
 
+	// The account ID that owns the copy job.
+	AccountId *string `type:"string"`
+
 	// The size, in bytes, of a copy job.
 	BackupSizeInBytes *int64 `type:"long"`
 
@@ -1232,6 +1244,12 @@ func (s CopyJob) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s CopyJob) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccountId != nil {
+		v := *s.AccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AccountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.BackupSizeInBytes != nil {
 		v := *s.BackupSizeInBytes
 
@@ -1741,6 +1759,9 @@ func (s RecoveryPointCreator) MarshalFields(e protocol.FieldEncoder) error {
 type RestoreJobsListMember struct {
 	_ struct{} `type:"structure"`
 
+	// The account ID that owns the restore job.
+	AccountId *string `type:"string"`
+
 	// The size, in bytes, of the restored resource.
 	BackupSizeInBytes *int64 `type:"long"`
 
@@ -1775,6 +1796,11 @@ type RestoreJobsListMember struct {
 	// An ARN that uniquely identifies a recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
 	RecoveryPointArn *string `type:"string"`
 
+	// The resource type of the listed restore jobs; for example, an Amazon Elastic
+	// Block Store (Amazon EBS) volume or an Amazon Relational Database Service
+	// (Amazon RDS) database.
+	ResourceType *string `type:"string"`
+
 	// Uniquely identifies the job that restores a recovery point.
 	RestoreJobId *string `type:"string"`
 
@@ -1794,6 +1820,12 @@ func (s RestoreJobsListMember) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s RestoreJobsListMember) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccountId != nil {
+		v := *s.AccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AccountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.BackupSizeInBytes != nil {
 		v := *s.BackupSizeInBytes
 
@@ -1843,6 +1875,12 @@ func (s RestoreJobsListMember) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "RecoveryPointArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceType != nil {
+		v := *s.ResourceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ResourceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.RestoreJobId != nil {
 		v := *s.RestoreJobId

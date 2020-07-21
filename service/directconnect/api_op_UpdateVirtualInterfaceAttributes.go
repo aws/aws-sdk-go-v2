@@ -110,7 +110,9 @@ type UpdateVirtualInterfaceAttributesOutput struct {
 	// The ID of the virtual interface.
 	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string"`
 
-	// The name of the virtual interface assigned by the customer network.
+	// The name of the virtual interface assigned by the customer network. The name
+	// has a maximum of 100 characters. The following are valid characters: a-z,
+	// 0-9 and a hyphen (-).
 	VirtualInterfaceName *string `locationName:"virtualInterfaceName" type:"string"`
 
 	// The state of the virtual interface. The following are the possible values:
@@ -169,7 +171,7 @@ const opUpdateVirtualInterfaceAttributes = "UpdateVirtualInterfaceAttributes"
 // jumbo frames. Updating the connection disrupts network connectivity for all
 // virtual interfaces associated with the connection for up to 30 seconds. To
 // check whether your connection supports jumbo frames, call DescribeConnections.
-// To check whether your virtual interface supports jumbo frames, call DescribeVirtualInterfaces.
+// To check whether your virtual q interface supports jumbo frames, call DescribeVirtualInterfaces.
 //
 //    // Example sending a request using UpdateVirtualInterfaceAttributesRequest.
 //    req := client.UpdateVirtualInterfaceAttributesRequest(params)

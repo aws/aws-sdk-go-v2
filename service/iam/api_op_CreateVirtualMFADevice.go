@@ -89,8 +89,8 @@ const opCreateVirtualMFADevice = "CreateVirtualMFADevice"
 // go to Using a Virtual MFA Device (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html)
 // in the IAM User Guide.
 //
-// For information about limits on the number of MFA devices you can create,
-// see Limitations on Entities (https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html)
+// The number and size of IAM resources in an AWS account are limited. For more
+// information, see IAM and STS Quotas (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html)
 // in the IAM User Guide.
 //
 // The seed information contained in the QR code and the Base32 string should

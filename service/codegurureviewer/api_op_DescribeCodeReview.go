@@ -13,7 +13,8 @@ import (
 type DescribeCodeReviewInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the code review to describe.
+	// The Amazon Resource Name (ARN) of the CodeReview (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
+	// object.
 	//
 	// CodeReviewArn is a required field
 	CodeReviewArn *string `location:"uri" locationName:"CodeReviewArn" min:"1" type:"string" required:"true"`
@@ -82,7 +83,7 @@ const opDescribeCodeReview = "DescribeCodeReview"
 // DescribeCodeReviewRequest returns a request value for making API operation for
 // Amazon CodeGuru Reviewer.
 //
-// Returns the metadaata associated with the code review along with its status.
+// Returns the metadata associated with the code review along with its status.
 //
 //    // Example sending a request using DescribeCodeReviewRequest.
 //    req := client.DescribeCodeReviewRequest(params)

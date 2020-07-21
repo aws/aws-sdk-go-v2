@@ -14,7 +14,9 @@ type DisassociatePhoneNumbersFromVoiceConnectorInput struct {
 	_ struct{} `type:"structure"`
 
 	// List of phone numbers, in E.164 format.
-	E164PhoneNumbers []string `type:"list"`
+	//
+	// E164PhoneNumbers is a required field
+	E164PhoneNumbers []string `type:"list" required:"true"`
 
 	// The Amazon Chime Voice Connector ID.
 	//
@@ -30,6 +32,10 @@ func (s DisassociatePhoneNumbersFromVoiceConnectorInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DisassociatePhoneNumbersFromVoiceConnectorInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DisassociatePhoneNumbersFromVoiceConnectorInput"}
+
+	if s.E164PhoneNumbers == nil {
+		invalidParams.Add(aws.NewErrParamRequired("E164PhoneNumbers"))
+	}
 
 	if s.VoiceConnectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))

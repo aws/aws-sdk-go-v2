@@ -77,8 +77,9 @@ const opGetEffectivePermissionsForPath = "GetEffectivePermissionsForPath"
 // GetEffectivePermissionsForPathRequest returns a request value for making API operation for
 // AWS Lake Formation.
 //
-// Returns the permissions for a specified table or database resource located
-// at a path in Amazon S3.
+// Returns the Lake Formation permissions for a specified table or database
+// resource located at a path in Amazon S3. GetEffectivePermissionsForPath will
+// not return databases and tables if the catalog is encrypted.
 //
 //    // Example sending a request using GetEffectivePermissionsForPathRequest.
 //    req := client.GetEffectivePermissionsForPathRequest(params)

@@ -16,7 +16,9 @@ type DeleteVoiceConnectorTerminationCredentialsInput struct {
 
 	// The RFC2617 compliant username associated with the SIP credentials, in US-ASCII
 	// format.
-	Usernames []string `type:"list"`
+	//
+	// Usernames is a required field
+	Usernames []string `type:"list" required:"true"`
 
 	// The Amazon Chime Voice Connector ID.
 	//
@@ -32,6 +34,10 @@ func (s DeleteVoiceConnectorTerminationCredentialsInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DeleteVoiceConnectorTerminationCredentialsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteVoiceConnectorTerminationCredentialsInput"}
+
+	if s.Usernames == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Usernames"))
+	}
 
 	if s.VoiceConnectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))

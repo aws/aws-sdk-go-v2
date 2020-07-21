@@ -75,6 +75,23 @@ func (enum PolicyComplianceStatusType) MarshalValueBuf(b []byte) ([]byte, error)
 	return append(b, enum...), nil
 }
 
+type RemediationActionType string
+
+// Enum values for RemediationActionType
+const (
+	RemediationActionTypeRemove RemediationActionType = "REMOVE"
+	RemediationActionTypeModify RemediationActionType = "MODIFY"
+)
+
+func (enum RemediationActionType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RemediationActionType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type SecurityServiceType string
 
 // Enum values for SecurityServiceType

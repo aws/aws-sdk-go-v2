@@ -26,7 +26,12 @@ type GetResourcePolicyInput struct {
 	// a partial ARN, then those characters cause Secrets Manager to assume that
 	// you’re specifying a complete ARN. This confusion can cause unexpected results.
 	// To avoid this situation, we recommend that you don’t create secret names
-	// that end with a hyphen followed by six characters.
+	// ending with a hyphen followed by six characters.
+	//
+	// If you specify an incomplete ARN without the random suffix, and instead provide
+	// the 'friendly name', you must not include the random suffix. If you do include
+	// the random suffix added by Secrets Manager, you receive either a ResourceNotFoundException
+	// or an AccessDeniedException error, depending on your permissions.
 	//
 	// SecretId is a required field
 	SecretId *string `min:"1" type:"string" required:"true"`
@@ -84,10 +89,10 @@ const opGetResourcePolicy = "GetResourcePolicy"
 // GetResourcePolicyRequest returns a request value for making API operation for
 // AWS Secrets Manager.
 //
-// Retrieves the JSON text of the resource-based policy document that's attached
-// to the specified secret. The JSON request string input and response output
-// are shown formatted with white space and line breaks for better readability.
-// Submit your input as a single line JSON string.
+// Retrieves the JSON text of the resource-based policy document attached to
+// the specified secret. The JSON request string input and response output displays
+// formatted code with white space and line breaks for better readability. Submit
+// your input as a single line JSON string.
 //
 // Minimum permissions
 //
@@ -99,8 +104,7 @@ const opGetResourcePolicy = "GetResourcePolicy"
 //
 //    * To attach a resource policy to a secret, use PutResourcePolicy.
 //
-//    * To delete the resource-based policy that's attached to a secret, use
-//    DeleteResourcePolicy.
+//    * To delete the resource-based policy attached to a secret, use DeleteResourcePolicy.
 //
 //    * To list all of the currently available secrets, use ListSecrets.
 //

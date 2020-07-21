@@ -481,6 +481,43 @@ func (enum StackDriftStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type StackInstanceDetailedStatus string
+
+// Enum values for StackInstanceDetailedStatus
+const (
+	StackInstanceDetailedStatusPending    StackInstanceDetailedStatus = "PENDING"
+	StackInstanceDetailedStatusRunning    StackInstanceDetailedStatus = "RUNNING"
+	StackInstanceDetailedStatusSucceeded  StackInstanceDetailedStatus = "SUCCEEDED"
+	StackInstanceDetailedStatusFailed     StackInstanceDetailedStatus = "FAILED"
+	StackInstanceDetailedStatusCancelled  StackInstanceDetailedStatus = "CANCELLED"
+	StackInstanceDetailedStatusInoperable StackInstanceDetailedStatus = "INOPERABLE"
+)
+
+func (enum StackInstanceDetailedStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackInstanceDetailedStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type StackInstanceFilterName string
+
+// Enum values for StackInstanceFilterName
+const (
+	StackInstanceFilterNameDetailedStatus StackInstanceFilterName = "DETAILED_STATUS"
+)
+
+func (enum StackInstanceFilterName) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum StackInstanceFilterName) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StackInstanceStatus string
 
 // Enum values for StackInstanceStatus

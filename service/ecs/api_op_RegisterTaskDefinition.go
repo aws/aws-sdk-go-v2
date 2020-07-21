@@ -50,8 +50,11 @@ type RegisterTaskDefinitionInput struct {
 	//    (30 GB) in increments of 1024 (1 GB)
 	Cpu *string `locationName:"cpu" type:"string"`
 
-	// The Amazon Resource Name (ARN) of the task execution role that the Amazon
-	// ECS container agent and the Docker daemon can assume.
+	// The Amazon Resource Name (ARN) of the task execution role that grants the
+	// Amazon ECS container agent permission to make AWS API calls on your behalf.
+	// The task execution IAM role is required depending on the requirements of
+	// your task. For more information, see Amazon ECS task execution IAM role (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html)
+	// in the Amazon Elastic Container Service Developer Guide.
 	ExecutionRoleArn *string `locationName:"executionRoleArn" type:"string"`
 
 	// You must specify a family for a task definition, which allows you to track

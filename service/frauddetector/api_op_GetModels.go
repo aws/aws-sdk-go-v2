@@ -12,7 +12,7 @@ import (
 type GetModelsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The maximum results to return for the request.
+	// The maximum number of objects to return for the request.
 	MaxResults *int64 `locationName:"maxResults" min:"1" type:"integer"`
 
 	// The model ID.
@@ -21,7 +21,7 @@ type GetModelsInput struct {
 	// The model type.
 	ModelType ModelTypeEnum `locationName:"modelType" type:"string" enum:"true"`
 
-	// The next token for the request.
+	// The next token for the subsequent request.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
@@ -49,10 +49,10 @@ func (s *GetModelsInput) Validate() error {
 type GetModelsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The returned models.
+	// The array of models.
 	Models []Model `locationName:"models" type:"list"`
 
-	// The next token for subsequent requests.
+	// The next page token to be used in subsequent requests.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
@@ -66,8 +66,16 @@ const opGetModels = "GetModels"
 // GetModelsRequest returns a request value for making API operation for
 // Amazon Fraud Detector.
 //
-// Gets all of the models for the AWS account, or the specified model type,
-// or gets a single model for the specified model type, model ID combination.
+// Gets one or more models. Gets all models for the AWS account if no model
+// type and no model id provided. Gets all models for the AWS account and model
+// type, if the model type is specified but model id is not provided. Gets a
+// specific model if (model type, model id) tuple is specified.
+//
+// This is a paginated API. If you provide a null maxResults, this action retrieves
+// a maximum of 10 records per page. If you provide a maxResults, the value
+// must be between 1 and 10. To get the next page results, provide the pagination
+// token from the response as part of your request. A null pagination token
+// fetches the records from the beginning.
 //
 //    // Example sending a request using GetModelsRequest.
 //    req := client.GetModelsRequest(params)

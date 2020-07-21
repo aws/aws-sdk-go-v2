@@ -85,7 +85,7 @@ const opListComplianceStatus = "ListComplianceStatus"
 // ListComplianceStatusRequest returns a request value for making API operation for
 // Firewall Management Service.
 //
-// Returns an array of PolicyComplianceStatus objects in the response. Use PolicyComplianceStatus
+// Returns an array of PolicyComplianceStatus objects. Use PolicyComplianceStatus
 // to get a summary of which member accounts are protected by the specified
 // policy.
 //

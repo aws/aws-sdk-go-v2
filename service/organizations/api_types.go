@@ -451,14 +451,12 @@ type Organization struct {
 	// in the AWS Organizations User Guide.
 	Arn *string `type:"string"`
 
-	// A list of policy types that are enabled for this organization. For example,
-	// if your organization has all features enabled, then service control policies
-	// (SCPs) are included in the list.
 	//
-	// Even if a policy type is shown as available in the organization, you can
-	// separately enable and disable them at the root level by using EnablePolicyType
-	// and DisablePolicyType. Use ListRoots to see the status of a policy type in
-	// that root.
+	// Do not use. This field is deprecated and doesn't provide complete information
+	// about the policies in your organization.
+	//
+	// To determine the policies that are enabled and available for use in your
+	// organization, use the ListRoots operation instead.
 	AvailablePolicyTypes []PolicyTypeSummary `type:"list"`
 
 	// Specifies the functionality that currently is available to the organization.

@@ -99,7 +99,8 @@ type GenerateDataKeyWithoutPlaintextOutput struct {
 	// CiphertextBlob is automatically base64 encoded/decoded by the SDK.
 	CiphertextBlob []byte `min:"1" type:"blob"`
 
-	// The identifier of the CMK that encrypted the data key.
+	// The Amazon Resource Name (key ARN (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
+	// of the CMK that encrypted the data key.
 	KeyId *string `min:"1" type:"string"`
 }
 

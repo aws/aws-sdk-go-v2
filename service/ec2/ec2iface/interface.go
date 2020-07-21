@@ -184,6 +184,8 @@ type ClientAPI interface {
 
 	CreateLocalGatewayRouteTableVpcAssociationRequest(*ec2.CreateLocalGatewayRouteTableVpcAssociationInput) ec2.CreateLocalGatewayRouteTableVpcAssociationRequest
 
+	CreateManagedPrefixListRequest(*ec2.CreateManagedPrefixListInput) ec2.CreateManagedPrefixListRequest
+
 	CreateNatGatewayRequest(*ec2.CreateNatGatewayInput) ec2.CreateNatGatewayRequest
 
 	CreateNetworkAclRequest(*ec2.CreateNetworkAclInput) ec2.CreateNetworkAclRequest
@@ -279,6 +281,8 @@ type ClientAPI interface {
 	DeleteLocalGatewayRouteRequest(*ec2.DeleteLocalGatewayRouteInput) ec2.DeleteLocalGatewayRouteRequest
 
 	DeleteLocalGatewayRouteTableVpcAssociationRequest(*ec2.DeleteLocalGatewayRouteTableVpcAssociationInput) ec2.DeleteLocalGatewayRouteTableVpcAssociationRequest
+
+	DeleteManagedPrefixListRequest(*ec2.DeleteManagedPrefixListInput) ec2.DeleteManagedPrefixListRequest
 
 	DeleteNatGatewayRequest(*ec2.DeleteNatGatewayInput) ec2.DeleteNatGatewayRequest
 
@@ -467,6 +471,8 @@ type ClientAPI interface {
 	DescribeLocalGatewayVirtualInterfacesRequest(*ec2.DescribeLocalGatewayVirtualInterfacesInput) ec2.DescribeLocalGatewayVirtualInterfacesRequest
 
 	DescribeLocalGatewaysRequest(*ec2.DescribeLocalGatewaysInput) ec2.DescribeLocalGatewaysRequest
+
+	DescribeManagedPrefixListsRequest(*ec2.DescribeManagedPrefixListsInput) ec2.DescribeManagedPrefixListsRequest
 
 	DescribeMovingAddressesRequest(*ec2.DescribeMovingAddressesInput) ec2.DescribeMovingAddressesRequest
 
@@ -662,6 +668,10 @@ type ClientAPI interface {
 
 	GetLaunchTemplateDataRequest(*ec2.GetLaunchTemplateDataInput) ec2.GetLaunchTemplateDataRequest
 
+	GetManagedPrefixListAssociationsRequest(*ec2.GetManagedPrefixListAssociationsInput) ec2.GetManagedPrefixListAssociationsRequest
+
+	GetManagedPrefixListEntriesRequest(*ec2.GetManagedPrefixListEntriesInput) ec2.GetManagedPrefixListEntriesRequest
+
 	GetPasswordDataRequest(*ec2.GetPasswordDataInput) ec2.GetPasswordDataRequest
 
 	GetReservedInstancesExchangeQuoteRequest(*ec2.GetReservedInstancesExchangeQuoteInput) ec2.GetReservedInstancesExchangeQuoteRequest
@@ -721,6 +731,8 @@ type ClientAPI interface {
 	ModifyInstancePlacementRequest(*ec2.ModifyInstancePlacementInput) ec2.ModifyInstancePlacementRequest
 
 	ModifyLaunchTemplateRequest(*ec2.ModifyLaunchTemplateInput) ec2.ModifyLaunchTemplateRequest
+
+	ModifyManagedPrefixListRequest(*ec2.ModifyManagedPrefixListInput) ec2.ModifyManagedPrefixListRequest
 
 	ModifyNetworkInterfaceAttributeRequest(*ec2.ModifyNetworkInterfaceAttributeInput) ec2.ModifyNetworkInterfaceAttributeRequest
 
@@ -829,6 +841,8 @@ type ClientAPI interface {
 	ResetSnapshotAttributeRequest(*ec2.ResetSnapshotAttributeInput) ec2.ResetSnapshotAttributeRequest
 
 	RestoreAddressToClassicRequest(*ec2.RestoreAddressToClassicInput) ec2.RestoreAddressToClassicRequest
+
+	RestoreManagedPrefixListVersionRequest(*ec2.RestoreManagedPrefixListVersionInput) ec2.RestoreManagedPrefixListVersionRequest
 
 	RevokeClientVpnIngressRequest(*ec2.RevokeClientVpnIngressInput) ec2.RevokeClientVpnIngressRequest
 

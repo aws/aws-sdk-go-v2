@@ -12,13 +12,13 @@ import (
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// Removes one or more tags from the workgroup resource for the specified ARN.
+	// Specifies the ARN of the resource from which tags are to be removed.
 	//
 	// ResourceARN is a required field
 	ResourceARN *string `min:"1" type:"string" required:"true"`
 
-	// Removes the tags associated with one or more tag keys from the workgroup
-	// resource.
+	// A comma-separated list of one or more tag keys whose tags are to be removed
+	// from the specified resource.
 	//
 	// TagKeys is a required field
 	TagKeys []string `type:"list" required:"true"`
@@ -64,9 +64,7 @@ const opUntagResource = "UntagResource"
 // UntagResourceRequest returns a request value for making API operation for
 // Amazon Athena.
 //
-// Removes one or more tags from the workgroup resource. Takes as an input a
-// list of TagKey Strings separated by commas, and removes their tags at the
-// same time.
+// Removes one or more tags from a data catalog or workgroup resource.
 //
 //    // Example sending a request using UntagResourceRequest.
 //    req := client.UntagResourceRequest(params)

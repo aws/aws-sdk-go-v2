@@ -302,19 +302,19 @@ func (s AllowedMethods) MarshalFields(e protocol.FieldEncoder) error {
 // A complex type that describes how CloudFront processes requests.
 //
 // You must create at least as many cache behaviors (including the default cache
-// behavior) as you have origins if you want CloudFront to distribute objects
-// from all of the origins. Each cache behavior specifies the one origin from
-// which you want CloudFront to get objects. If you have two origins and only
-// the default cache behavior, the default cache behavior will cause CloudFront
+// behavior) as you have origins if you want CloudFront to serve objects from
+// all of the origins. Each cache behavior specifies the one origin from which
+// you want CloudFront to get objects. If you have two origins and only the
+// default cache behavior, the default cache behavior will cause CloudFront
 // to get objects from one of the origins, but the other origin is never used.
 //
-// For the current limit on the number of cache behaviors that you can add to
-// a distribution, see Amazon CloudFront Limits (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront)
-// in the AWS General Reference.
+// For the current quota (formerly known as limit) on the number of cache behaviors
+// that you can add to a distribution, see Quotas (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
+// in the Amazon CloudFront Developer Guide.
 //
-// If you don't want to specify any cache behaviors, include only an empty CacheBehaviors
-// element. Don't include an empty CacheBehavior element, or CloudFront returns
-// a MalformedXML error.
+// If you don’t want to specify any cache behaviors, include only an empty
+// CacheBehaviors element. Don’t include an empty CacheBehavior element because
+// this is invalid.
 //
 // To delete all cache behaviors in an existing distribution, update the distribution
 // configuration and include only an empty CacheBehaviors element.
@@ -323,7 +323,7 @@ func (s AllowedMethods) MarshalFields(e protocol.FieldEncoder) error {
 // configuration and specify all of the cache behaviors that you want to include
 // in the updated distribution.
 //
-// For more information about cache behaviors, see Cache Behaviors (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior)
+// For more information about cache behaviors, see Cache Behavior Settings (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior)
 // in the Amazon CloudFront Developer Guide.
 type CacheBehavior struct {
 	_ struct{} `type:"structure"`
@@ -345,12 +345,19 @@ type CacheBehavior struct {
 	// to delete objects from your origin.
 	AllowedMethods *AllowedMethods `type:"structure"`
 
+	// The unique identifier of the cache policy that is attached to this cache
+	// behavior. For more information, see CreateCachePolicy.
+	CachePolicyId *string `type:"string"`
+
 	// Whether you want CloudFront to automatically compress certain files for this
 	// cache behavior. If so, specify true; if not, specify false. For more information,
 	// see Serving Compressed Files (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html)
 	// in the Amazon CloudFront Developer Guide.
 	Compress *bool `type:"boolean"`
 
+	// This field is deprecated. We recommend that you use the DefaultTTL field
+	// in CachePolicyConfig instead of this field.
+	//
 	// The default amount of time that you want objects to stay in CloudFront caches
 	// before CloudFront forwards another request to your origin to determine whether
 	// the object has been updated. The value that you specify applies only when
@@ -358,23 +365,31 @@ type CacheBehavior struct {
 	// s-maxage, and Expires to objects. For more information, see Managing How
 	// Long Content Stays in an Edge Cache (Expiration) (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
-	DefaultTTL *int64 `type:"long"`
+	DefaultTTL *int64 `deprecated:"true" type:"long"`
 
 	// The value of ID for the field-level encryption configuration that you want
-	// CloudFront to use for encrypting specific fields of data for a cache behavior
-	// or for the default cache behavior in your distribution.
+	// CloudFront to use for encrypting specific fields of data for this cache behavior.
 	FieldLevelEncryptionId *string `type:"string"`
 
+	// This field is deprecated. We recommend that you use a cache policy or an
+	// origin request policy instead of this field.
+	//
+	// If you want to include values in the cache key, use a CachePolicy. See CreateCachePolicy.
+	//
+	// If you want to send values to the origin but not include them in the cache
+	// key, use an OriginRequestPolicy. See CreateOriginRequestPolicy.
+	//
 	// A complex type that specifies how CloudFront handles query strings, cookies,
 	// and HTTP headers.
-	//
-	// ForwardedValues is a required field
-	ForwardedValues *ForwardedValues `type:"structure" required:"true"`
+	ForwardedValues *ForwardedValues `deprecated:"true" type:"structure"`
 
 	// A complex type that contains zero or more Lambda function associations for
 	// a cache behavior.
 	LambdaFunctionAssociations *LambdaFunctionAssociations `type:"structure"`
 
+	// This field is deprecated. We recommend that you use the MaxTTL field in CachePolicyConfig
+	// instead of this field.
+	//
 	// The maximum amount of time that you want objects to stay in CloudFront caches
 	// before CloudFront forwards another request to your origin to determine whether
 	// the object has been updated. The value that you specify applies only when
@@ -382,8 +397,11 @@ type CacheBehavior struct {
 	// s-maxage, and Expires to objects. For more information, see Managing How
 	// Long Content Stays in an Edge Cache (Expiration) (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
-	MaxTTL *int64 `type:"long"`
+	MaxTTL *int64 `deprecated:"true" type:"long"`
 
+	// This field is deprecated. We recommend that you use the MinTTL field in CachePolicyConfig
+	// instead of this field.
+	//
 	// The minimum amount of time that you want objects to stay in CloudFront caches
 	// before CloudFront forwards another request to your origin to determine whether
 	// the object has been updated. For more information, see Managing How Long
@@ -393,9 +411,11 @@ type CacheBehavior struct {
 	// You must specify 0 for MinTTL if you configure CloudFront to forward all
 	// headers to your origin (under Headers, if you specify 1 for Quantity and
 	// * for Name).
-	//
-	// MinTTL is a required field
-	MinTTL *int64 `type:"long" required:"true"`
+	MinTTL *int64 `deprecated:"true" type:"long"`
+
+	// The unique identifier of the origin request policy that is attached to this
+	// cache behavior. For more information, see CreateOriginRequestPolicy.
+	OriginRequestPolicyId *string `type:"string"`
 
 	// The pattern (for example, images/*.jpg) that specifies which requests to
 	// apply the behavior to. When CloudFront receives a viewer request, the requested
@@ -424,8 +444,7 @@ type CacheBehavior struct {
 	SmoothStreaming *bool `type:"boolean"`
 
 	// The value of ID for the origin that you want CloudFront to route requests
-	// to when a request matches the path pattern either for a cache behavior or
-	// for the default cache behavior in your distribution.
+	// to when they match this cache behavior.
 	//
 	// TargetOriginId is a required field
 	TargetOriginId *string `type:"string" required:"true"`
@@ -436,14 +455,15 @@ type CacheBehavior struct {
 	// If you want to require signed URLs in requests for objects in the target
 	// origin that match the PathPattern for this cache behavior, specify true for
 	// Enabled, and specify the applicable values for Quantity and Items. For more
-	// information, see Serving Private Content through CloudFront (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
+	// information, see Serving Private Content with Signed URLs and Signed Cookies
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
 	// in the Amazon CloudFront Developer Guide.
 	//
-	// If you don't want to require signed URLs in requests for objects that match
+	// If you don’t want to require signed URLs in requests for objects that match
 	// PathPattern, specify false for Enabled and 0 for Quantity. Omit Items.
 	//
 	// To add, change, or remove one or more trusted signers, change Enabled to
-	// true (if it's currently false), change Quantity as applicable, and specify
+	// true (if it’s currently false), change Quantity as applicable, and specify
 	// all of the trusted signers that you want to include in the updated distribution.
 	//
 	// TrustedSigners is a required field
@@ -462,18 +482,17 @@ type CacheBehavior struct {
 	//    * https-only: If a viewer sends an HTTP request, CloudFront returns an
 	//    HTTP status code of 403 (Forbidden).
 	//
-	// For more information about requiring the HTTPS protocol, see Using an HTTPS
-	// Connection to Access Your Objects (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html)
+	// For more information about requiring the HTTPS protocol, see Requiring HTTPS
+	// Between Viewers and CloudFront (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html)
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// The only way to guarantee that viewers retrieve an object that was fetched
 	// from the origin using HTTPS is never to use any other protocol to fetch the
 	// object. If you have recently changed from HTTP to HTTPS, we recommend that
-	// you clear your objects' cache because cached objects are protocol agnostic.
+	// you clear your objects’ cache because cached objects are protocol agnostic.
 	// That means that an edge location will return an object from the cache regardless
 	// of whether the current request protocol matches the protocol used previously.
-	// For more information, see Managing How Long Content Stays in an Edge Cache
-	// (Expiration) (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
+	// For more information, see Managing Cache Expiration (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// ViewerProtocolPolicy is a required field
@@ -488,14 +507,6 @@ func (s CacheBehavior) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CacheBehavior) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CacheBehavior"}
-
-	if s.ForwardedValues == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ForwardedValues"))
-	}
-
-	if s.MinTTL == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MinTTL"))
-	}
 
 	if s.PathPattern == nil {
 		invalidParams.Add(aws.NewErrParamRequired("PathPattern"))
@@ -546,6 +557,12 @@ func (s CacheBehavior) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "AllowedMethods", v, metadata)
 	}
+	if s.CachePolicyId != nil {
+		v := *s.CachePolicyId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CachePolicyId", protocol.StringValue(v), metadata)
+	}
 	if s.Compress != nil {
 		v := *s.Compress
 
@@ -587,6 +604,12 @@ func (s CacheBehavior) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "MinTTL", protocol.Int64Value(v), metadata)
+	}
+	if s.OriginRequestPolicyId != nil {
+		v := *s.OriginRequestPolicyId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OriginRequestPolicyId", protocol.StringValue(v), metadata)
 	}
 	if s.PathPattern != nil {
 		v := *s.PathPattern
@@ -680,6 +703,530 @@ func (s CacheBehaviors) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// A cache policy.
+//
+// When it’s attached to a cache behavior, the cache policy determines the
+// following:
+//
+//    * The values that CloudFront includes in the cache key. These values can
+//    include HTTP headers, cookies, and URL query strings. CloudFront uses
+//    the cache key to find an object in its cache that it can return to the
+//    viewer.
+//
+//    * The default, minimum, and maximum time to live (TTL) values that you
+//    want objects to stay in the CloudFront cache.
+//
+// The headers, cookies, and query strings that are included in the cache key
+// are automatically included in requests that CloudFront sends to the origin.
+// CloudFront sends a request when it can’t find a valid object in its cache
+// that matches the request’s cache key. If you want to send values to the
+// origin but not include them in the cache key, use OriginRequestPolicy.
+type CachePolicy struct {
+	_ struct{} `type:"structure"`
+
+	// The cache policy configuration.
+	//
+	// CachePolicyConfig is a required field
+	CachePolicyConfig *CachePolicyConfig `type:"structure" required:"true"`
+
+	// The unique identifier for the cache policy.
+	//
+	// Id is a required field
+	Id *string `type:"string" required:"true"`
+
+	// The date and time when the cache policy was last modified.
+	//
+	// LastModifiedTime is a required field
+	LastModifiedTime *time.Time `type:"timestamp" required:"true"`
+}
+
+// String returns the string representation
+func (s CachePolicy) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CachePolicy) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CachePolicyConfig != nil {
+		v := s.CachePolicyConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CachePolicyConfig", v, metadata)
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	if s.LastModifiedTime != nil {
+		v := *s.LastModifiedTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastModifiedTime",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
+	}
+	return nil
+}
+
+// A cache policy configuration.
+//
+// This configuration determines the following:
+//
+//    * The values that CloudFront includes in the cache key. These values can
+//    include HTTP headers, cookies, and URL query strings. CloudFront uses
+//    the cache key to find an object in its cache that it can return to the
+//    viewer.
+//
+//    * The default, minimum, and maximum time to live (TTL) values that you
+//    want objects to stay in the CloudFront cache.
+//
+// The headers, cookies, and query strings that are included in the cache key
+// are automatically included in requests that CloudFront sends to the origin.
+// CloudFront sends a request when it can’t find a valid object in its cache
+// that matches the request’s cache key. If you want to send values to the
+// origin but not include them in the cache key, use OriginRequestPolicy.
+type CachePolicyConfig struct {
+	_ struct{} `type:"structure"`
+
+	// A comment to describe the cache policy.
+	Comment *string `type:"string"`
+
+	// The default amount of time, in seconds, that you want objects to stay in
+	// the CloudFront cache before CloudFront sends another request to the origin
+	// to see if the object has been updated. CloudFront uses this value as the
+	// object’s time to live (TTL) only when the origin does not send Cache-Control
+	// or Expires headers with the object. For more information, see Managing How
+	// Long Content Stays in an Edge Cache (Expiration) (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
+	// in the Amazon CloudFront Developer Guide.
+	//
+	// The default value for this field is 86400 seconds (one day). If the value
+	// of MinTTL is more than 86400 seconds, then the default value for this field
+	// is the same as the value of MinTTL.
+	DefaultTTL *int64 `type:"long"`
+
+	// The maximum amount of time, in seconds, that you want objects to stay in
+	// the CloudFront cache before CloudFront sends another request to the origin
+	// to see if the object has been updated. CloudFront uses this value only when
+	// the origin sends Cache-Control or Expires headers with the object. For more
+	// information, see Managing How Long Content Stays in an Edge Cache (Expiration)
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
+	// in the Amazon CloudFront Developer Guide.
+	//
+	// The default value for this field is 31536000 seconds (one year). If the value
+	// of MinTTL or DefaultTTL is more than 31536000 seconds, then the default value
+	// for this field is the same as the value of DefaultTTL.
+	MaxTTL *int64 `type:"long"`
+
+	// The minimum amount of time, in seconds, that you want objects to stay in
+	// the CloudFront cache before CloudFront sends another request to the origin
+	// to see if the object has been updated. For more information, see Managing
+	// How Long Content Stays in an Edge Cache (Expiration) (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
+	// in the Amazon CloudFront Developer Guide.
+	//
+	// MinTTL is a required field
+	MinTTL *int64 `type:"long" required:"true"`
+
+	// A unique name to identify the cache policy.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// The HTTP headers, cookies, and URL query strings to include in the cache
+	// key. The values included in the cache key are automatically included in requests
+	// that CloudFront sends to the origin.
+	ParametersInCacheKeyAndForwardedToOrigin *ParametersInCacheKeyAndForwardedToOrigin `type:"structure"`
+}
+
+// String returns the string representation
+func (s CachePolicyConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CachePolicyConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CachePolicyConfig"}
+
+	if s.MinTTL == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MinTTL"))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+	if s.ParametersInCacheKeyAndForwardedToOrigin != nil {
+		if err := s.ParametersInCacheKeyAndForwardedToOrigin.Validate(); err != nil {
+			invalidParams.AddNested("ParametersInCacheKeyAndForwardedToOrigin", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CachePolicyConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Comment != nil {
+		v := *s.Comment
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Comment", protocol.StringValue(v), metadata)
+	}
+	if s.DefaultTTL != nil {
+		v := *s.DefaultTTL
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DefaultTTL", protocol.Int64Value(v), metadata)
+	}
+	if s.MaxTTL != nil {
+		v := *s.MaxTTL
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxTTL", protocol.Int64Value(v), metadata)
+	}
+	if s.MinTTL != nil {
+		v := *s.MinTTL
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MinTTL", protocol.Int64Value(v), metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), metadata)
+	}
+	if s.ParametersInCacheKeyAndForwardedToOrigin != nil {
+		v := s.ParametersInCacheKeyAndForwardedToOrigin
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "ParametersInCacheKeyAndForwardedToOrigin", v, metadata)
+	}
+	return nil
+}
+
+// An object that determines whether any cookies in viewer requests (and if
+// so, which cookies) are included in the cache key and automatically included
+// in requests that CloudFront sends to the origin.
+type CachePolicyCookiesConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Determines whether any cookies in viewer requests are included in the cache
+	// key and automatically included in requests that CloudFront sends to the origin.
+	// Valid values are:
+	//
+	//    * none – Cookies in viewer requests are not included in the cache key
+	//    and are not automatically included in requests that CloudFront sends to
+	//    the origin. Even when this field is set to none, any cookies that are
+	//    listed in an OriginRequestPolicy are included in origin requests.
+	//
+	//    * whitelist – The cookies in viewer requests that are listed in the
+	//    CookieNames type are included in the cache key and automatically included
+	//    in requests that CloudFront sends to the origin.
+	//
+	//    * allExcept – All cookies in viewer requests that are not listed in
+	//    the CookieNames type are included in the cache key and automatically included
+	//    in requests that CloudFront sends to the origin.
+	//
+	//    * all – All cookies in viewer requests are included in the cache key
+	//    and are automatically included in requests that CloudFront sends to the
+	//    origin.
+	//
+	// CookieBehavior is a required field
+	CookieBehavior CachePolicyCookieBehavior `type:"string" required:"true" enum:"true"`
+
+	// Contains a list of cookie names.
+	Cookies *CookieNames `type:"structure"`
+}
+
+// String returns the string representation
+func (s CachePolicyCookiesConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CachePolicyCookiesConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CachePolicyCookiesConfig"}
+	if len(s.CookieBehavior) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("CookieBehavior"))
+	}
+	if s.Cookies != nil {
+		if err := s.Cookies.Validate(); err != nil {
+			invalidParams.AddNested("Cookies", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CachePolicyCookiesConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.CookieBehavior) > 0 {
+		v := s.CookieBehavior
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CookieBehavior", v, metadata)
+	}
+	if s.Cookies != nil {
+		v := s.Cookies
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Cookies", v, metadata)
+	}
+	return nil
+}
+
+// An object that determines whether any HTTP headers (and if so, which headers)
+// are included in the cache key and automatically included in requests that
+// CloudFront sends to the origin.
+type CachePolicyHeadersConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Determines whether any HTTP headers are included in the cache key and automatically
+	// included in requests that CloudFront sends to the origin. Valid values are:
+	//
+	//    * none – HTTP headers are not included in the cache key and are not
+	//    automatically included in requests that CloudFront sends to the origin.
+	//    Even when this field is set to none, any headers that are listed in an
+	//    OriginRequestPolicy are included in origin requests.
+	//
+	//    * whitelist – The HTTP headers that are listed in the Headers type are
+	//    included in the cache key and are automatically included in requests that
+	//    CloudFront sends to the origin.
+	//
+	// HeaderBehavior is a required field
+	HeaderBehavior CachePolicyHeaderBehavior `type:"string" required:"true" enum:"true"`
+
+	// Contains a list of HTTP header names.
+	Headers *Headers `type:"structure"`
+}
+
+// String returns the string representation
+func (s CachePolicyHeadersConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CachePolicyHeadersConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CachePolicyHeadersConfig"}
+	if len(s.HeaderBehavior) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("HeaderBehavior"))
+	}
+	if s.Headers != nil {
+		if err := s.Headers.Validate(); err != nil {
+			invalidParams.AddNested("Headers", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CachePolicyHeadersConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.HeaderBehavior) > 0 {
+		v := s.HeaderBehavior
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HeaderBehavior", v, metadata)
+	}
+	if s.Headers != nil {
+		v := s.Headers
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Headers", v, metadata)
+	}
+	return nil
+}
+
+// A list of cache policies.
+type CachePolicyList struct {
+	_ struct{} `type:"structure"`
+
+	// Contains the cache policies in the list.
+	Items []CachePolicySummary `locationNameList:"CachePolicySummary" type:"list"`
+
+	// The maximum number of cache policies requested.
+	//
+	// MaxItems is a required field
+	MaxItems *int64 `type:"integer" required:"true"`
+
+	// If there are more items in the list than are in this response, this element
+	// is present. It contains the value that you should use in the Marker field
+	// of a subsequent request to continue listing cache policies where you left
+	// off.
+	NextMarker *string `type:"string"`
+
+	// The total number of cache policies returned in the response.
+	//
+	// Quantity is a required field
+	Quantity *int64 `type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s CachePolicyList) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CachePolicyList) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Items != nil {
+		v := s.Items
+
+		metadata := protocol.Metadata{ListLocationName: "CachePolicySummary"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), metadata)
+	}
+	if s.NextMarker != nil {
+		v := *s.NextMarker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextMarker", protocol.StringValue(v), metadata)
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// An object that determines whether any URL query strings in viewer requests
+// (and if so, which query strings) are included in the cache key and automatically
+// included in requests that CloudFront sends to the origin.
+type CachePolicyQueryStringsConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Determines whether any URL query strings in viewer requests are included
+	// in the cache key and automatically included in requests that CloudFront sends
+	// to the origin. Valid values are:
+	//
+	//    * none – Query strings in viewer requests are not included in the cache
+	//    key and are not automatically included in requests that CloudFront sends
+	//    to the origin. Even when this field is set to none, any query strings
+	//    that are listed in an OriginRequestPolicy are included in origin requests.
+	//
+	//    * whitelist – The query strings in viewer requests that are listed in
+	//    the QueryStringNames type are included in the cache key and automatically
+	//    included in requests that CloudFront sends to the origin.
+	//
+	//    * allExcept – All query strings in viewer requests that are not listed
+	//    in the QueryStringNames type are included in the cache key and automatically
+	//    included in requests that CloudFront sends to the origin.
+	//
+	//    * all – All query strings in viewer requests are included in the cache
+	//    key and are automatically included in requests that CloudFront sends to
+	//    the origin.
+	//
+	// QueryStringBehavior is a required field
+	QueryStringBehavior CachePolicyQueryStringBehavior `type:"string" required:"true" enum:"true"`
+
+	// Contains the specific query strings in viewer requests that either are or
+	// are not included in the cache key and automatically included in requests
+	// that CloudFront sends to the origin. The behavior depends on whether the
+	// QueryStringBehavior field in the CachePolicyQueryStringsConfig type is set
+	// to whitelist (the listed query strings are included) or allExcept (the listed
+	// query strings are not included, but all other query strings are).
+	QueryStrings *QueryStringNames `type:"structure"`
+}
+
+// String returns the string representation
+func (s CachePolicyQueryStringsConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *CachePolicyQueryStringsConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "CachePolicyQueryStringsConfig"}
+	if len(s.QueryStringBehavior) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("QueryStringBehavior"))
+	}
+	if s.QueryStrings != nil {
+		if err := s.QueryStrings.Validate(); err != nil {
+			invalidParams.AddNested("QueryStrings", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CachePolicyQueryStringsConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.QueryStringBehavior) > 0 {
+		v := s.QueryStringBehavior
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "QueryStringBehavior", v, metadata)
+	}
+	if s.QueryStrings != nil {
+		v := s.QueryStrings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "QueryStrings", v, metadata)
+	}
+	return nil
+}
+
+// Contains a cache policy.
+type CachePolicySummary struct {
+	_ struct{} `type:"structure"`
+
+	// The cache policy.
+	//
+	// CachePolicy is a required field
+	CachePolicy *CachePolicy `type:"structure" required:"true"`
+
+	// The type of cache policy, either managed (created by AWS) or custom (created
+	// in this AWS account).
+	//
+	// Type is a required field
+	Type CachePolicyType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s CachePolicySummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CachePolicySummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CachePolicy != nil {
+		v := s.CachePolicy
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CachePolicy", v, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", v, metadata)
 	}
 	return nil
 }
@@ -1209,27 +1756,14 @@ func (s ContentTypeProfiles) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A complex type that specifies whether you want CloudFront to forward cookies
-// to the origin and, if so, which ones. For more information about forwarding
-// cookies to the origin, see Caching Content Based on Request Headers (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html)
-// in the Amazon CloudFront Developer Guide.
+// Contains a list of cookie names.
 type CookieNames struct {
 	_ struct{} `type:"structure"`
 
-	// A complex type that contains one Name element for each cookie that you want
-	// CloudFront to forward to the origin for this cache behavior. It must contain
-	// the same number of items that is specified in the Quantity field.
-	//
-	// When you set Forward = whitelist (in the CookiePreferences object), this
-	// field must contain at least one item.
+	// A list of cookie names.
 	Items []string `locationNameList:"Name" type:"list"`
 
-	// The number of different cookies that you want CloudFront to forward to the
-	// origin for this cache behavior. The value must equal the number of items
-	// that are in the Items field.
-	//
-	// When you set Forward = whitelist (in the CookiePreferences object), this
-	// value must be 1 or higher.
+	// The number of cookie names in the Items list.
 	//
 	// Quantity is a required field
 	Quantity *int64 `type:"integer" required:"true"`
@@ -1277,6 +1811,15 @@ func (s CookieNames) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// This field is deprecated. We recommend that you use a cache policy or an
+// origin request policy instead of this field.
+//
+// If you want to include cookies in the cache key, use CookiesConfig in a cache
+// policy. See CreateCachePolicy.
+//
+// If you want to send cookies to the origin but not include them in the cache
+// key, use CookiesConfig in an origin request policy. See CreateOriginRequestPolicy.
+//
 // A complex type that specifies whether you want CloudFront to forward cookies
 // to the origin and, if so, which ones. For more information about forwarding
 // cookies to the origin, see Caching Content Based on Cookies (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html)
@@ -1284,6 +1827,15 @@ func (s CookieNames) MarshalFields(e protocol.FieldEncoder) error {
 type CookiePreference struct {
 	_ struct{} `type:"structure"`
 
+	// This field is deprecated. We recommend that you use a cache policy or an
+	// origin request policy instead of this field.
+	//
+	// If you want to include cookies in the cache key, use CookiesConfig in a cache
+	// policy. See CreateCachePolicy.
+	//
+	// If you want to send cookies to the origin but not include them in the cache
+	// key, use CookiesConfig in an origin request policy. See CreateOriginRequestPolicy.
+	//
 	// Specifies which cookies to forward to the origin for this cache behavior:
 	// all, none, or the list of cookies specified in the WhitelistedNames complex
 	// type.
@@ -1294,6 +1846,15 @@ type CookiePreference struct {
 	// Forward is a required field
 	Forward ItemSelection `type:"string" required:"true" enum:"true"`
 
+	// This field is deprecated. We recommend that you use a cache policy or an
+	// origin request policy instead of this field.
+	//
+	// If you want to include cookies in the cache key, use CookiesConfig in a cache
+	// policy. See CreateCachePolicy.
+	//
+	// If you want to send cookies to the origin but not include them in the cache
+	// key, use CookiesConfig in an origin request policy. See CreateOriginRequestPolicy.
+	//
 	// Required if you specify whitelist for the value of Forward. A complex type
 	// that specifies how many different cookies you want CloudFront to forward
 	// to the origin for this cache behavior and, if you want to forward selected
@@ -1610,45 +2171,61 @@ func (s CustomHeaders) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A custom origin or an Amazon S3 bucket configured as a website endpoint.
+// A custom origin. A custom origin is any origin that is not an Amazon S3 bucket,
+// with one exception. An Amazon S3 bucket that is configured with static website
+// hosting (https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)
+// is a custom origin.
 type CustomOriginConfig struct {
 	_ struct{} `type:"structure"`
 
-	// The HTTP port the custom origin listens on.
+	// The HTTP port that CloudFront uses to connect to the origin. Specify the
+	// HTTP port that the origin listens on.
 	//
 	// HTTPPort is a required field
 	HTTPPort *int64 `type:"integer" required:"true"`
 
-	// The HTTPS port the custom origin listens on.
+	// The HTTPS port that CloudFront uses to connect to the origin. Specify the
+	// HTTPS port that the origin listens on.
 	//
 	// HTTPSPort is a required field
 	HTTPSPort *int64 `type:"integer" required:"true"`
 
-	// You can create a custom keep-alive timeout. All timeout units are in seconds.
-	// The default keep-alive timeout is 5 seconds, but you can configure custom
-	// timeout lengths using the CloudFront API. The minimum timeout length is 1
-	// second; the maximum is 60 seconds.
+	// Specifies how long, in seconds, CloudFront persists its connection to the
+	// origin. The minimum timeout is 1 second, the maximum is 60 seconds, and the
+	// default (if you don’t specify otherwise) is 5 seconds.
 	//
-	// If you need to increase the maximum time limit, contact the AWS Support Center
-	// (https://console.aws.amazon.com/support/home#/).
+	// For more information, see Origin Keep-alive Timeout (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginKeepaliveTimeout)
+	// in the Amazon CloudFront Developer Guide.
 	OriginKeepaliveTimeout *int64 `type:"integer"`
 
-	// The origin protocol policy to apply to your origin.
+	// Specifies the protocol (HTTP or HTTPS) that CloudFront uses to connect to
+	// the origin. Valid values are:
+	//
+	//    * http-only – CloudFront always uses HTTP to connect to the origin.
+	//
+	//    * match-viewer – CloudFront connects to the origin using the same protocol
+	//    that the viewer used to connect to CloudFront.
+	//
+	//    * https-only – CloudFront always uses HTTPS to connect to the origin.
 	//
 	// OriginProtocolPolicy is a required field
 	OriginProtocolPolicy OriginProtocolPolicy `type:"string" required:"true" enum:"true"`
 
-	// You can create a custom origin read timeout. All timeout units are in seconds.
-	// The default origin read timeout is 30 seconds, but you can configure custom
-	// timeout lengths using the CloudFront API. The minimum timeout length is 4
-	// seconds; the maximum is 60 seconds.
+	// Specifies how long, in seconds, CloudFront waits for a response from the
+	// origin. This is also known as the origin response timeout. The minimum timeout
+	// is 1 second, the maximum is 60 seconds, and the default (if you don’t specify
+	// otherwise) is 30 seconds.
 	//
-	// If you need to increase the maximum time limit, contact the AWS Support Center
-	// (https://console.aws.amazon.com/support/home#/).
+	// For more information, see Origin Response Timeout (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginResponseTimeout)
+	// in the Amazon CloudFront Developer Guide.
 	OriginReadTimeout *int64 `type:"integer"`
 
-	// The SSL/TLS protocols that you want CloudFront to use when communicating
-	// with your origin over HTTPS.
+	// Specifies the minimum SSL/TLS protocol that CloudFront uses when connecting
+	// to your origin over HTTPS. Valid values include SSLv3, TLSv1, TLSv1.1, and
+	// TLSv1.2.
+	//
+	// For more information, see Minimum Origin SSL Protocol (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginSSLProtocols)
+	// in the Amazon CloudFront Developer Guide.
 	OriginSslProtocols *OriginSslProtocols `type:"structure"`
 }
 
@@ -1724,9 +2301,10 @@ func (s CustomOriginConfig) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A complex type that describes the default cache behavior if you don't specify
-// a CacheBehavior element or if files don't match any of the values of PathPattern
-// in CacheBehavior elements. You must create exactly one default cache behavior.
+// A complex type that describes the default cache behavior if you don’t specify
+// a CacheBehavior element or if request URLs don’t match any of the values
+// of PathPattern in CacheBehavior elements. You must create exactly one default
+// cache behavior.
 type DefaultCacheBehavior struct {
 	_ struct{} `type:"structure"`
 
@@ -1747,12 +2325,19 @@ type DefaultCacheBehavior struct {
 	// to delete objects from your origin.
 	AllowedMethods *AllowedMethods `type:"structure"`
 
+	// The unique identifier of the cache policy that is attached to the default
+	// cache behavior. For more information, see CachePolicy.
+	CachePolicyId *string `type:"string"`
+
 	// Whether you want CloudFront to automatically compress certain files for this
 	// cache behavior. If so, specify true; if not, specify false. For more information,
 	// see Serving Compressed Files (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html)
 	// in the Amazon CloudFront Developer Guide.
 	Compress *bool `type:"boolean"`
 
+	// This field is deprecated. We recommend that you use the DefaultTTL field
+	// in CachePolicyConfig instead of this field.
+	//
 	// The default amount of time that you want objects to stay in CloudFront caches
 	// before CloudFront forwards another request to your origin to determine whether
 	// the object has been updated. The value that you specify applies only when
@@ -1760,23 +2345,32 @@ type DefaultCacheBehavior struct {
 	// s-maxage, and Expires to objects. For more information, see Managing How
 	// Long Content Stays in an Edge Cache (Expiration) (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
-	DefaultTTL *int64 `type:"long"`
+	DefaultTTL *int64 `deprecated:"true" type:"long"`
 
 	// The value of ID for the field-level encryption configuration that you want
-	// CloudFront to use for encrypting specific fields of data for a cache behavior
-	// or for the default cache behavior in your distribution.
+	// CloudFront to use for encrypting specific fields of data for the default
+	// cache behavior.
 	FieldLevelEncryptionId *string `type:"string"`
 
+	// This field is deprecated. We recommend that you use a cache policy or an
+	// origin request policy instead of this field.
+	//
+	// If you want to include values in the cache key, use a CachePolicy. See CreateCachePolicy.
+	//
+	// If you want to send values to the origin but not include them in the cache
+	// key, use an OriginRequestPolicy. See CreateOriginRequestPolicy.
+	//
 	// A complex type that specifies how CloudFront handles query strings, cookies,
 	// and HTTP headers.
-	//
-	// ForwardedValues is a required field
-	ForwardedValues *ForwardedValues `type:"structure" required:"true"`
+	ForwardedValues *ForwardedValues `deprecated:"true" type:"structure"`
 
 	// A complex type that contains zero or more Lambda function associations for
 	// a cache behavior.
 	LambdaFunctionAssociations *LambdaFunctionAssociations `type:"structure"`
 
+	// This field is deprecated. We recommend that you use the MaxTTL field in CachePolicyConfig
+	// instead of this field.
+	//
 	// The maximum amount of time that you want objects to stay in CloudFront caches
 	// before CloudFront forwards another request to your origin to determine whether
 	// the object has been updated. The value that you specify applies only when
@@ -1784,8 +2378,11 @@ type DefaultCacheBehavior struct {
 	// s-maxage, and Expires to objects. For more information, see Managing How
 	// Long Content Stays in an Edge Cache (Expiration) (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
-	MaxTTL *int64 `type:"long"`
+	MaxTTL *int64 `deprecated:"true" type:"long"`
 
+	// This field is deprecated. We recommend that you use the MinTTL field in CachePolicyConfig
+	// instead of this field.
+	//
 	// The minimum amount of time that you want objects to stay in CloudFront caches
 	// before CloudFront forwards another request to your origin to determine whether
 	// the object has been updated. For more information, see Managing How Long
@@ -1795,9 +2392,11 @@ type DefaultCacheBehavior struct {
 	// You must specify 0 for MinTTL if you configure CloudFront to forward all
 	// headers to your origin (under Headers, if you specify 1 for Quantity and
 	// * for Name).
-	//
-	// MinTTL is a required field
-	MinTTL *int64 `type:"long" required:"true"`
+	MinTTL *int64 `deprecated:"true" type:"long"`
+
+	// The unique identifier of the origin request policy that is attached to the
+	// default cache behavior. For more information, see OriginRequestPolicy.
+	OriginRequestPolicyId *string `type:"string"`
 
 	// Indicates whether you want to distribute media files in the Microsoft Smooth
 	// Streaming format using the origin that is associated with this cache behavior.
@@ -1807,8 +2406,7 @@ type DefaultCacheBehavior struct {
 	SmoothStreaming *bool `type:"boolean"`
 
 	// The value of ID for the origin that you want CloudFront to route requests
-	// to when a request matches the path pattern either for a cache behavior or
-	// for the default cache behavior in your distribution.
+	// to when they use the default cache behavior.
 	//
 	// TargetOriginId is a required field
 	TargetOriginId *string `type:"string" required:"true"`
@@ -1819,14 +2417,15 @@ type DefaultCacheBehavior struct {
 	// If you want to require signed URLs in requests for objects in the target
 	// origin that match the PathPattern for this cache behavior, specify true for
 	// Enabled, and specify the applicable values for Quantity and Items. For more
-	// information, see Serving Private Content through CloudFront (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
+	// information, see Serving Private Content with Signed URLs and Signed Cookies
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
 	// in the Amazon CloudFront Developer Guide.
 	//
-	// If you don't want to require signed URLs in requests for objects that match
+	// If you don’t want to require signed URLs in requests for objects that match
 	// PathPattern, specify false for Enabled and 0 for Quantity. Omit Items.
 	//
 	// To add, change, or remove one or more trusted signers, change Enabled to
-	// true (if it's currently false), change Quantity as applicable, and specify
+	// true (if it’s currently false), change Quantity as applicable, and specify
 	// all of the trusted signers that you want to include in the updated distribution.
 	//
 	// TrustedSigners is a required field
@@ -1845,18 +2444,17 @@ type DefaultCacheBehavior struct {
 	//    * https-only: If a viewer sends an HTTP request, CloudFront returns an
 	//    HTTP status code of 403 (Forbidden).
 	//
-	// For more information about requiring the HTTPS protocol, see Using an HTTPS
-	// Connection to Access Your Objects (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html)
+	// For more information about requiring the HTTPS protocol, see Requiring HTTPS
+	// Between Viewers and CloudFront (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html)
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// The only way to guarantee that viewers retrieve an object that was fetched
 	// from the origin using HTTPS is never to use any other protocol to fetch the
 	// object. If you have recently changed from HTTP to HTTPS, we recommend that
-	// you clear your objects' cache because cached objects are protocol agnostic.
+	// you clear your objects’ cache because cached objects are protocol agnostic.
 	// That means that an edge location will return an object from the cache regardless
 	// of whether the current request protocol matches the protocol used previously.
-	// For more information, see Managing How Long Content Stays in an Edge Cache
-	// (Expiration) (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
+	// For more information, see Managing Cache Expiration (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html)
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// ViewerProtocolPolicy is a required field
@@ -1871,14 +2469,6 @@ func (s DefaultCacheBehavior) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DefaultCacheBehavior) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DefaultCacheBehavior"}
-
-	if s.ForwardedValues == nil {
-		invalidParams.Add(aws.NewErrParamRequired("ForwardedValues"))
-	}
-
-	if s.MinTTL == nil {
-		invalidParams.Add(aws.NewErrParamRequired("MinTTL"))
-	}
 
 	if s.TargetOriginId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("TargetOriginId"))
@@ -1925,6 +2515,12 @@ func (s DefaultCacheBehavior) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "AllowedMethods", v, metadata)
 	}
+	if s.CachePolicyId != nil {
+		v := *s.CachePolicyId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CachePolicyId", protocol.StringValue(v), metadata)
+	}
 	if s.Compress != nil {
 		v := *s.Compress
 
@@ -1966,6 +2562,12 @@ func (s DefaultCacheBehavior) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "MinTTL", protocol.Int64Value(v), metadata)
+	}
+	if s.OriginRequestPolicyId != nil {
+		v := *s.OriginRequestPolicyId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OriginRequestPolicyId", protocol.StringValue(v), metadata)
 	}
 	if s.SmoothStreaming != nil {
 		v := *s.SmoothStreaming
@@ -2564,6 +3166,92 @@ func (s DistributionConfigWithTags) MarshalFields(e protocol.FieldEncoder) error
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Tags", v, metadata)
+	}
+	return nil
+}
+
+// A list of distribution IDs.
+type DistributionIdList struct {
+	_ struct{} `type:"structure"`
+
+	// A flag that indicates whether more distribution IDs remain to be listed.
+	// If your results were truncated, you can make a subsequent request using the
+	// Marker request field to retrieve more distribution IDs in the list.
+	//
+	// IsTruncated is a required field
+	IsTruncated *bool `type:"boolean" required:"true"`
+
+	// Contains the distribution IDs in the list.
+	Items []string `locationNameList:"DistributionId" type:"list"`
+
+	// The value provided in the Marker request field.
+	//
+	// Marker is a required field
+	Marker *string `type:"string" required:"true"`
+
+	// The maximum number of distribution IDs requested.
+	//
+	// MaxItems is a required field
+	MaxItems *int64 `type:"integer" required:"true"`
+
+	// Contains the value that you should use in the Marker field of a subsequent
+	// request to continue listing distribution IDs where you left off.
+	NextMarker *string `type:"string"`
+
+	// The total number of distribution IDs returned in the response.
+	//
+	// Quantity is a required field
+	Quantity *int64 `type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s DistributionIdList) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DistributionIdList) MarshalFields(e protocol.FieldEncoder) error {
+	if s.IsTruncated != nil {
+		v := *s.IsTruncated
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "IsTruncated", protocol.BoolValue(v), metadata)
+	}
+	if s.Items != nil {
+		v := s.Items
+
+		metadata := protocol.Metadata{ListLocationName: "DistributionId"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.StringValue(v1))
+		}
+		ls0.End()
+
+	}
+	if s.Marker != nil {
+		v := *s.Marker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Marker", protocol.StringValue(v), metadata)
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), metadata)
+	}
+	if s.NextMarker != nil {
+		v := *s.NextMarker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextMarker", protocol.StringValue(v), metadata)
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -3652,11 +4340,28 @@ func (s FieldPatterns) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// This field is deprecated. We recommend that you use a cache policy or an
+// origin request policy instead of this field.
+//
+// If you want to include values in the cache key, use a CachePolicy. See CreateCachePolicy.
+//
+// If you want to send values to the origin but not include them in the cache
+// key, use an OriginRequestPolicy. See CreateOriginRequestPolicy.
+//
 // A complex type that specifies how CloudFront handles query strings, cookies,
 // and HTTP headers.
 type ForwardedValues struct {
 	_ struct{} `type:"structure"`
 
+	// This field is deprecated. We recommend that you use a cache policy or an
+	// origin request policy instead of this field.
+	//
+	// If you want to include cookies in the cache key, use CookiesConfig in a cache
+	// policy. See CreateCachePolicy.
+	//
+	// If you want to send cookies to the origin but not include them in the cache
+	// key, use CookiesConfig in an origin request policy. See CreateOriginRequestPolicy.
+	//
 	// A complex type that specifies whether you want CloudFront to forward cookies
 	// to the origin and, if so, which ones. For more information about forwarding
 	// cookies to the origin, see How CloudFront Forwards, Caches, and Logs Cookies
@@ -3666,6 +4371,15 @@ type ForwardedValues struct {
 	// Cookies is a required field
 	Cookies *CookiePreference `type:"structure" required:"true"`
 
+	// This field is deprecated. We recommend that you use a cache policy or an
+	// origin request policy instead of this field.
+	//
+	// If you want to include headers in the cache key, use HeadersConfig in a cache
+	// policy. See CreateCachePolicy.
+	//
+	// If you want to send headers to the origin but not include them in the cache
+	// key, use HeadersConfig in an origin request policy. See CreateOriginRequestPolicy.
+	//
 	// A complex type that specifies the Headers, if any, that you want CloudFront
 	// to forward to the origin for this cache behavior (whitelisted headers). For
 	// the headers that you specify, CloudFront also caches separate versions of
@@ -3675,6 +4389,15 @@ type ForwardedValues struct {
 	// in the Amazon CloudFront Developer Guide.
 	Headers *Headers `type:"structure"`
 
+	// This field is deprecated. We recommend that you use a cache policy or an
+	// origin request policy instead of this field.
+	//
+	// If you want to include query strings in the cache key, use QueryStringsConfig
+	// in a cache policy. See CreateCachePolicy.
+	//
+	// If you want to send query strings to the origin but not include them in the
+	// cache key, use QueryStringsConfig in an origin request policy. See CreateOriginRequestPolicy.
+	//
 	// Indicates whether you want CloudFront to forward query strings to the origin
 	// that is associated with this cache behavior and cache based on the query
 	// string parameters. CloudFront behavior depends on the value of QueryString
@@ -3702,6 +4425,15 @@ type ForwardedValues struct {
 	// QueryString is a required field
 	QueryString *bool `type:"boolean" required:"true"`
 
+	// This field is deprecated. We recommend that you use a cache policy or an
+	// origin request policy instead of this field.
+	//
+	// If you want to include query strings in the cache key, use QueryStringsConfig
+	// in a cache policy. See CreateCachePolicy.
+	//
+	// If you want to send query strings to the origin but not include them in the
+	// cache key, use an QueryStringsConfig in an origin request policy. See CreateOriginRequestPolicy.
+	//
 	// A complex type that contains information about the query string parameters
 	// that you want CloudFront to use for caching for this cache behavior.
 	QueryStringCacheKeys *QueryStringCacheKeys `type:"structure"`
@@ -3868,50 +4600,14 @@ func (s GeoRestriction) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A complex type that specifies the request headers, if any, that you want
-// CloudFront to base caching on for this cache behavior.
-//
-// For the headers that you specify, CloudFront caches separate versions of
-// a specified object based on the header values in viewer requests. For example,
-// suppose viewer requests for logo.jpg contain a custom product header that
-// has a value of either acme or apex, and you configure CloudFront to cache
-// your content based on values in the product header. CloudFront forwards the
-// product header to the origin and caches the response from the origin once
-// for each header value. For more information about caching based on header
-// values, see How CloudFront Forwards and Caches Headers (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html)
-// in the Amazon CloudFront Developer Guide.
+// Contains a list of HTTP header names.
 type Headers struct {
 	_ struct{} `type:"structure"`
 
-	// A list that contains one Name element for each header that you want CloudFront
-	// to use for caching in this cache behavior. If Quantity is 0, omit Items.
+	// A list of HTTP header names.
 	Items []string `locationNameList:"Name" type:"list"`
 
-	// The number of different headers that you want CloudFront to base caching
-	// on for this cache behavior. You can configure each cache behavior in a web
-	// distribution to do one of the following:
-	//
-	//    * Forward all headers to your origin: Specify 1 for Quantity and * for
-	//    Name. CloudFront doesn't cache the objects that are associated with this
-	//    cache behavior. Instead, CloudFront sends every request to the origin.
-	//
-	//    * Forward a whitelist of headers you specify: Specify the number of headers
-	//    that you want CloudFront to base caching on. Then specify the header names
-	//    in Name elements. CloudFront caches your objects based on the values in
-	//    the specified headers.
-	//
-	//    * Forward only the default headers: Specify 0 for Quantity and omit Items.
-	//    In this configuration, CloudFront doesn't cache based on the values in
-	//    the request headers.
-	//
-	// Regardless of which option you choose, CloudFront forwards headers to your
-	// origin based on whether the origin is an S3 bucket or a custom origin. See
-	// the following documentation:
-	//
-	//    * S3 bucket: See HTTP Request Headers That CloudFront Removes or Updates
-	//    (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorS3Origin.html#request-s3-removed-headers)
-	//
-	//    * Custom origin: See HTTP Request Headers and CloudFront Behavior (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#request-custom-headers-behavior)
+	// The number of header names in the Items list.
 	//
 	// Quantity is a required field
 	Quantity *int64 `type:"integer" required:"true"`
@@ -4298,9 +4994,9 @@ type LambdaFunctionAssociation struct {
 	//    from a viewer and before it checks to see whether the requested object
 	//    is in the edge cache.
 	//
-	//    * origin-request: The function executes only when CloudFront forwards
-	//    a request to your origin. When the requested object is in the edge cache,
-	//    the function doesn't execute.
+	//    * origin-request: The function executes only when CloudFront sends a request
+	//    to your origin. When the requested object is in the edge cache, the function
+	//    doesn't execute.
 	//
 	//    * origin-response: The function executes after CloudFront receives a response
 	//    from the origin and before it caches the object in the response. When
@@ -4543,96 +5239,89 @@ func (s LoggingConfig) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// A complex type that describes the Amazon S3 bucket, HTTP server (for example,
-// a web server), Amazon MediaStore, or other server from which CloudFront gets
-// your files. This can also be an origin group, if you've created an origin
-// group. You must specify at least one origin or origin group.
+// An origin.
 //
-// For the current limit on the number of origins or origin groups that you
-// can specify for a distribution, see Amazon CloudFront Limits (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront)
-// in the AWS General Reference.
+// An origin is the location where content is stored, and from which CloudFront
+// gets content to serve to viewers. To specify an origin:
+//
+//    * Use the S3OriginConfig type to specify an Amazon S3 bucket that is not
+//    configured with static website hosting.
+//
+//    * Use the CustomOriginConfig type to specify various other kinds of content
+//    containers or HTTP servers, including: An Amazon S3 bucket that is configured
+//    with static website hosting An Elastic Load Balancing load balancer An
+//    AWS Elemental MediaPackage origin An AWS Elemental MediaStore container
+//    Any other HTTP server, running on an Amazon EC2 instance or any other
+//    kind of host
+//
+// For the current maximum number of origins that you can specify per distribution,
+// see General Quotas on Web Distributions (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html#limits-web-distributions)
+// in the Amazon CloudFront Developer Guide (quotas were formerly referred to
+// as limits).
 type Origin struct {
 	_ struct{} `type:"structure"`
 
-	// A complex type that contains names and values for the custom headers that
-	// you want.
+	// The number of times that CloudFront attempts to connect to the origin. The
+	// minimum number is 1, the maximum is 3, and the default (if you don’t specify
+	// otherwise) is 3.
+	//
+	// For a custom origin (including an Amazon S3 bucket that’s configured with
+	// static website hosting), this value also specifies the number of times that
+	// CloudFront attempts to get a response from the origin, in the case of an
+	// Origin Response Timeout (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginResponseTimeout).
+	//
+	// For more information, see Origin Connection Attempts (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#origin-connection-attempts)
+	// in the Amazon CloudFront Developer Guide.
+	ConnectionAttempts *int64 `type:"integer"`
+
+	// The number of seconds that CloudFront waits when trying to establish a connection
+	// to the origin. The minimum timeout is 1 second, the maximum is 10 seconds,
+	// and the default (if you don’t specify otherwise) is 10 seconds.
+	//
+	// For more information, see Origin Connection Timeout (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#origin-connection-timeout)
+	// in the Amazon CloudFront Developer Guide.
+	ConnectionTimeout *int64 `type:"integer"`
+
+	// A list of HTTP header names and values that CloudFront adds to requests it
+	// sends to the origin.
+	//
+	// For more information, see Adding Custom Headers to Origin Requests (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/add-origin-custom-headers.html)
+	// in the Amazon CloudFront Developer Guide.
 	CustomHeaders *CustomHeaders `type:"structure"`
 
-	// A complex type that contains information about a custom origin. If the origin
-	// is an Amazon S3 bucket, use the S3OriginConfig element instead.
+	// Use this type to specify an origin that is a content container or HTTP server,
+	// including an Amazon S3 bucket that is configured with static website hosting.
+	// To specify an Amazon S3 bucket that is not configured with static website
+	// hosting, use the S3OriginConfig type instead.
 	CustomOriginConfig *CustomOriginConfig `type:"structure"`
 
-	// Amazon S3 origins: The DNS name of the Amazon S3 bucket from which you want
-	// CloudFront to get objects for this origin, for example, myawsbucket.s3.amazonaws.com.
-	// If you set up your bucket to be configured as a website endpoint, enter the
-	// Amazon S3 static website hosting endpoint for the bucket.
+	// The domain name for the origin.
 	//
-	// For more information about specifying this value for different types of origins,
-	// see Origin Domain Name (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesDomainName)
+	// For more information, see Origin Domain Name (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesDomainName)
 	// in the Amazon CloudFront Developer Guide.
-	//
-	// Constraints for Amazon S3 origins:
-	//
-	//    * If you configured Amazon S3 Transfer Acceleration for your bucket, don't
-	//    specify the s3-accelerate endpoint for DomainName.
-	//
-	//    * The bucket name must be between 3 and 63 characters long (inclusive).
-	//
-	//    * The bucket name must contain only lowercase characters, numbers, periods,
-	//    underscores, and dashes.
-	//
-	//    * The bucket name must not contain adjacent periods.
-	//
-	// Custom Origins: The DNS domain name for the HTTP server from which you want
-	// CloudFront to get objects for this origin, for example, www.example.com.
-	//
-	// Constraints for custom origins:
-	//
-	//    * DomainName must be a valid DNS name that contains only a-z, A-Z, 0-9,
-	//    dot (.), hyphen (-), or underscore (_) characters.
-	//
-	//    * The name cannot exceed 128 characters.
 	//
 	// DomainName is a required field
 	DomainName *string `type:"string" required:"true"`
 
-	// A unique identifier for the origin or origin group. The value of Id must
-	// be unique within the distribution.
+	// A unique identifier for the origin. This value must be unique within the
+	// distribution.
 	//
-	// When you specify the value of TargetOriginId for the default cache behavior
-	// or for another cache behavior, you indicate the origin to which you want
-	// the cache behavior to route requests by specifying the value of the Id element
-	// for that origin. When a request matches the path pattern for that cache behavior,
-	// CloudFront routes the request to the specified origin. For more information,
-	// see Cache Behavior Settings (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior)
-	// in the Amazon CloudFront Developer Guide.
+	// Use this value to specify the TargetOriginId in a CacheBehavior or DefaultCacheBehavior.
 	//
 	// Id is a required field
 	Id *string `type:"string" required:"true"`
 
-	// An optional element that causes CloudFront to request your content from a
-	// directory in your Amazon S3 bucket or your custom origin. When you include
-	// the OriginPath element, specify the directory name, beginning with a /. CloudFront
-	// appends the directory name to the value of DomainName, for example, example.com/production.
-	// Do not include a / at the end of the directory name.
+	// An optional path that CloudFront appends to the origin domain name when CloudFront
+	// requests content from the origin.
 	//
-	// For example, suppose you've specified the following values for your distribution:
-	//
-	//    * DomainName: An Amazon S3 bucket named myawsbucket.
-	//
-	//    * OriginPath: /production
-	//
-	//    * CNAME: example.com
-	//
-	// When a user enters example.com/index.html in a browser, CloudFront sends
-	// a request to Amazon S3 for myawsbucket/production/index.html.
-	//
-	// When a user enters example.com/acme/index.html in a browser, CloudFront sends
-	// a request to Amazon S3 for myawsbucket/production/acme/index.html.
+	// For more information, see Origin Path (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginPath)
+	// in the Amazon CloudFront Developer Guide.
 	OriginPath *string `type:"string"`
 
-	// A complex type that contains information about the Amazon S3 origin. If the
-	// origin is a custom origin, use the CustomOriginConfig element instead.
+	// Use this type to specify an origin that is an Amazon S3 bucket that is not
+	// configured with static website hosting. To specify any other type of origin,
+	// including an Amazon S3 bucket that is configured with static website hosting,
+	// use the CustomOriginConfig type instead.
 	S3OriginConfig *S3OriginConfig `type:"structure"`
 }
 
@@ -4676,6 +5365,18 @@ func (s *Origin) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s Origin) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ConnectionAttempts != nil {
+		v := *s.ConnectionAttempts
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ConnectionAttempts", protocol.Int64Value(v), metadata)
+	}
+	if s.ConnectionTimeout != nil {
+		v := *s.ConnectionTimeout
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ConnectionTimeout", protocol.Int64Value(v), metadata)
+	}
 	if s.CustomHeaders != nil {
 		v := s.CustomHeaders
 
@@ -4720,9 +5421,8 @@ func (s Origin) MarshalFields(e protocol.FieldEncoder) error {
 type OriginCustomHeader struct {
 	_ struct{} `type:"structure"`
 
-	// The name of a header that you want CloudFront to forward to your origin.
-	// For more information, see Forwarding Custom Headers to Your Origin (Web Distributions
-	// Only) (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/forward-custom-headers.html)
+	// The name of a header that you want CloudFront to send to your origin. For
+	// more information, see Adding Custom Headers to Origin Requests (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/forward-custom-headers.html)
 	// in the Amazon CloudFront Developer Guide.
 	//
 	// HeaderName is a required field
@@ -5081,6 +5781,511 @@ func (s OriginGroups) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An origin request policy.
+//
+// When it’s attached to a cache behavior, the origin request policy determines
+// the values that CloudFront includes in requests that it sends to the origin.
+// Each request that CloudFront sends to the origin includes the following:
+//
+//    * The request body and the URL path (without the domain name) from the
+//    viewer request.
+//
+//    * The headers that CloudFront automatically includes in every origin request,
+//    including Host, User-Agent, and X-Amz-Cf-Id.
+//
+//    * All HTTP headers, cookies, and URL query strings that are specified
+//    in the cache policy or the origin request policy. These can include items
+//    from the viewer request and, in the case of headers, additional ones that
+//    are added by CloudFront.
+//
+// CloudFront sends a request when it can’t find an object in its cache that
+// matches the request. If you want to send values to the origin and also include
+// them in the cache key, use CreateCachePolicy.
+type OriginRequestPolicy struct {
+	_ struct{} `type:"structure"`
+
+	// The unique identifier for the origin request policy.
+	//
+	// Id is a required field
+	Id *string `type:"string" required:"true"`
+
+	// The date and time when the origin request policy was last modified.
+	//
+	// LastModifiedTime is a required field
+	LastModifiedTime *time.Time `type:"timestamp" required:"true"`
+
+	// The origin request policy configuration.
+	//
+	// OriginRequestPolicyConfig is a required field
+	OriginRequestPolicyConfig *OriginRequestPolicyConfig `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s OriginRequestPolicy) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OriginRequestPolicy) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.StringValue(v), metadata)
+	}
+	if s.LastModifiedTime != nil {
+		v := *s.LastModifiedTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LastModifiedTime",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
+	}
+	if s.OriginRequestPolicyConfig != nil {
+		v := s.OriginRequestPolicyConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "OriginRequestPolicyConfig", v, metadata)
+	}
+	return nil
+}
+
+// An origin request policy configuration.
+//
+// This configuration determines the values that CloudFront includes in requests
+// that it sends to the origin. Each request that CloudFront sends to the origin
+// includes the following:
+//
+//    * The request body and the URL path (without the domain name) from the
+//    viewer request.
+//
+//    * The headers that CloudFront automatically includes in every origin request,
+//    including Host, User-Agent, and X-Amz-Cf-Id.
+//
+//    * All HTTP headers, cookies, and URL query strings that are specified
+//    in the cache policy or the origin request policy. These can include items
+//    from the viewer request and, in the case of headers, additional ones that
+//    are added by CloudFront.
+//
+// CloudFront sends a request when it can’t find an object in its cache that
+// matches the request. If you want to send values to the origin and also include
+// them in the cache key, use CreateCachePolicy.
+type OriginRequestPolicyConfig struct {
+	_ struct{} `type:"structure"`
+
+	// A comment to describe the origin request policy.
+	Comment *string `type:"string"`
+
+	// The cookies from viewer requests to include in origin requests.
+	//
+	// CookiesConfig is a required field
+	CookiesConfig *OriginRequestPolicyCookiesConfig `type:"structure" required:"true"`
+
+	// The HTTP headers to include in origin requests. These can include headers
+	// from viewer requests and additional headers added by CloudFront.
+	//
+	// HeadersConfig is a required field
+	HeadersConfig *OriginRequestPolicyHeadersConfig `type:"structure" required:"true"`
+
+	// A unique name to identify the origin request policy.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// The URL query strings from viewer requests to include in origin requests.
+	//
+	// QueryStringsConfig is a required field
+	QueryStringsConfig *OriginRequestPolicyQueryStringsConfig `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s OriginRequestPolicyConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *OriginRequestPolicyConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "OriginRequestPolicyConfig"}
+
+	if s.CookiesConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CookiesConfig"))
+	}
+
+	if s.HeadersConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("HeadersConfig"))
+	}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if s.QueryStringsConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("QueryStringsConfig"))
+	}
+	if s.CookiesConfig != nil {
+		if err := s.CookiesConfig.Validate(); err != nil {
+			invalidParams.AddNested("CookiesConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.HeadersConfig != nil {
+		if err := s.HeadersConfig.Validate(); err != nil {
+			invalidParams.AddNested("HeadersConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.QueryStringsConfig != nil {
+		if err := s.QueryStringsConfig.Validate(); err != nil {
+			invalidParams.AddNested("QueryStringsConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OriginRequestPolicyConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Comment != nil {
+		v := *s.Comment
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Comment", protocol.StringValue(v), metadata)
+	}
+	if s.CookiesConfig != nil {
+		v := s.CookiesConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CookiesConfig", v, metadata)
+	}
+	if s.HeadersConfig != nil {
+		v := s.HeadersConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "HeadersConfig", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), metadata)
+	}
+	if s.QueryStringsConfig != nil {
+		v := s.QueryStringsConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "QueryStringsConfig", v, metadata)
+	}
+	return nil
+}
+
+// An object that determines whether any cookies in viewer requests (and if
+// so, which cookies) are included in requests that CloudFront sends to the
+// origin.
+type OriginRequestPolicyCookiesConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Determines whether cookies in viewer requests are included in requests that
+	// CloudFront sends to the origin. Valid values are:
+	//
+	//    * none – Cookies in viewer requests are not included in requests that
+	//    CloudFront sends to the origin. Even when this field is set to none, any
+	//    cookies that are listed in a CachePolicy are included in origin requests.
+	//
+	//    * whitelist – The cookies in viewer requests that are listed in the
+	//    CookieNames type are included in requests that CloudFront sends to the
+	//    origin.
+	//
+	//    * all – All cookies in viewer requests are included in requests that
+	//    CloudFront sends to the origin.
+	//
+	// CookieBehavior is a required field
+	CookieBehavior OriginRequestPolicyCookieBehavior `type:"string" required:"true" enum:"true"`
+
+	// Contains a list of cookie names.
+	Cookies *CookieNames `type:"structure"`
+}
+
+// String returns the string representation
+func (s OriginRequestPolicyCookiesConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *OriginRequestPolicyCookiesConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "OriginRequestPolicyCookiesConfig"}
+	if len(s.CookieBehavior) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("CookieBehavior"))
+	}
+	if s.Cookies != nil {
+		if err := s.Cookies.Validate(); err != nil {
+			invalidParams.AddNested("Cookies", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OriginRequestPolicyCookiesConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.CookieBehavior) > 0 {
+		v := s.CookieBehavior
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CookieBehavior", v, metadata)
+	}
+	if s.Cookies != nil {
+		v := s.Cookies
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Cookies", v, metadata)
+	}
+	return nil
+}
+
+// An object that determines whether any HTTP headers (and if so, which headers)
+// are included in requests that CloudFront sends to the origin.
+type OriginRequestPolicyHeadersConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Determines whether any HTTP headers are included in requests that CloudFront
+	// sends to the origin. Valid values are:
+	//
+	//    * none – HTTP headers are not included in requests that CloudFront sends
+	//    to the origin. Even when this field is set to none, any headers that are
+	//    listed in a CachePolicy are included in origin requests.
+	//
+	//    * whitelist – The HTTP headers that are listed in the Headers type are
+	//    included in requests that CloudFront sends to the origin.
+	//
+	//    * allViewer – All HTTP headers in viewer requests are included in requests
+	//    that CloudFront sends to the origin.
+	//
+	//    * allViewerAndWhitelistCloudFront – All HTTP headers in viewer requests
+	//    and the additional CloudFront headers that are listed in the Headers type
+	//    are included in requests that CloudFront sends to the origin. The additional
+	//    headers are added by CloudFront.
+	//
+	// HeaderBehavior is a required field
+	HeaderBehavior OriginRequestPolicyHeaderBehavior `type:"string" required:"true" enum:"true"`
+
+	// Contains a list of HTTP header names.
+	Headers *Headers `type:"structure"`
+}
+
+// String returns the string representation
+func (s OriginRequestPolicyHeadersConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *OriginRequestPolicyHeadersConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "OriginRequestPolicyHeadersConfig"}
+	if len(s.HeaderBehavior) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("HeaderBehavior"))
+	}
+	if s.Headers != nil {
+		if err := s.Headers.Validate(); err != nil {
+			invalidParams.AddNested("Headers", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OriginRequestPolicyHeadersConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.HeaderBehavior) > 0 {
+		v := s.HeaderBehavior
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HeaderBehavior", v, metadata)
+	}
+	if s.Headers != nil {
+		v := s.Headers
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Headers", v, metadata)
+	}
+	return nil
+}
+
+// A list of origin request policies.
+type OriginRequestPolicyList struct {
+	_ struct{} `type:"structure"`
+
+	// Contains the origin request policies in the list.
+	Items []OriginRequestPolicySummary `locationNameList:"OriginRequestPolicySummary" type:"list"`
+
+	// The maximum number of origin request policies requested.
+	//
+	// MaxItems is a required field
+	MaxItems *int64 `type:"integer" required:"true"`
+
+	// If there are more items in the list than are in this response, this element
+	// is present. It contains the value that you should use in the Marker field
+	// of a subsequent request to continue listing origin request policies where
+	// you left off.
+	NextMarker *string `type:"string"`
+
+	// The total number of origin request policies returned in the response.
+	//
+	// Quantity is a required field
+	Quantity *int64 `type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s OriginRequestPolicyList) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OriginRequestPolicyList) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Items != nil {
+		v := s.Items
+
+		metadata := protocol.Metadata{ListLocationName: "OriginRequestPolicySummary"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.MaxItems != nil {
+		v := *s.MaxItems
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "MaxItems", protocol.Int64Value(v), metadata)
+	}
+	if s.NextMarker != nil {
+		v := *s.NextMarker
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "NextMarker", protocol.StringValue(v), metadata)
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// An object that determines whether any URL query strings in viewer requests
+// (and if so, which query strings) are included in requests that CloudFront
+// sends to the origin.
+type OriginRequestPolicyQueryStringsConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Determines whether any URL query strings in viewer requests are included
+	// in requests that CloudFront sends to the origin. Valid values are:
+	//
+	//    * none – Query strings in viewer requests are not included in requests
+	//    that CloudFront sends to the origin. Even when this field is set to none,
+	//    any query strings that are listed in a CachePolicy are included in origin
+	//    requests.
+	//
+	//    * whitelist – The query strings in viewer requests that are listed in
+	//    the QueryStringNames type are included in requests that CloudFront sends
+	//    to the origin.
+	//
+	//    * all – All query strings in viewer requests are included in requests
+	//    that CloudFront sends to the origin.
+	//
+	// QueryStringBehavior is a required field
+	QueryStringBehavior OriginRequestPolicyQueryStringBehavior `type:"string" required:"true" enum:"true"`
+
+	// Contains a list of the query strings in viewer requests that are included
+	// in requests that CloudFront sends to the origin.
+	QueryStrings *QueryStringNames `type:"structure"`
+}
+
+// String returns the string representation
+func (s OriginRequestPolicyQueryStringsConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *OriginRequestPolicyQueryStringsConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "OriginRequestPolicyQueryStringsConfig"}
+	if len(s.QueryStringBehavior) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("QueryStringBehavior"))
+	}
+	if s.QueryStrings != nil {
+		if err := s.QueryStrings.Validate(); err != nil {
+			invalidParams.AddNested("QueryStrings", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OriginRequestPolicyQueryStringsConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.QueryStringBehavior) > 0 {
+		v := s.QueryStringBehavior
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "QueryStringBehavior", v, metadata)
+	}
+	if s.QueryStrings != nil {
+		v := s.QueryStrings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "QueryStrings", v, metadata)
+	}
+	return nil
+}
+
+// Contains an origin request policy.
+type OriginRequestPolicySummary struct {
+	_ struct{} `type:"structure"`
+
+	// The origin request policy.
+	//
+	// OriginRequestPolicy is a required field
+	OriginRequestPolicy *OriginRequestPolicy `type:"structure" required:"true"`
+
+	// The type of origin request policy, either managed (created by AWS) or custom
+	// (created in this AWS account).
+	//
+	// Type is a required field
+	Type OriginRequestPolicyType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s OriginRequestPolicySummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s OriginRequestPolicySummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.OriginRequestPolicy != nil {
+		v := s.OriginRequestPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "OriginRequestPolicy", v, metadata)
+	}
+	if len(s.Type) > 0 {
+		v := s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Type", v, metadata)
+	}
+	return nil
+}
+
 // A complex type that contains information about the SSL/TLS protocols that
 // CloudFront can use when establishing an HTTPS connection with your origin.
 type OriginSslProtocols struct {
@@ -5212,6 +6417,148 @@ func (s Origins) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// This object determines the values that CloudFront includes in the cache key.
+// These values can include HTTP headers, cookies, and URL query strings. CloudFront
+// uses the cache key to find an object in its cache that it can return to the
+// viewer.
+//
+// The headers, cookies, and query strings that are included in the cache key
+// are automatically included in requests that CloudFront sends to the origin.
+// CloudFront sends a request when it can’t find an object in its cache that
+// matches the request’s cache key. If you want to send values to the origin
+// but not include them in the cache key, use CreateOriginRequestPolicy.
+type ParametersInCacheKeyAndForwardedToOrigin struct {
+	_ struct{} `type:"structure"`
+
+	// An object that determines whether any cookies in viewer requests (and if
+	// so, which cookies) are included in the cache key and automatically included
+	// in requests that CloudFront sends to the origin.
+	//
+	// CookiesConfig is a required field
+	CookiesConfig *CachePolicyCookiesConfig `type:"structure" required:"true"`
+
+	// A flag that determines whether the Accept-Encoding HTTP header is included
+	// in the cache key and included in requests that CloudFront sends to the origin.
+	//
+	// If this field is true and the viewer request includes the Accept-Encoding
+	// header, then CloudFront normalizes the value of the viewer’s Accept-Encoding
+	// header to one of the following:
+	//
+	//    * Accept-Encoding: gzip (if gzip is in the viewer’s Accept-Encoding
+	//    header)
+	//
+	//    * Accept-Encoding: identity (if gzip is not in the viewer’s Accept-Encoding
+	//    header)
+	//
+	// CloudFront includes the normalized header in the cache key and includes it
+	// in requests that CloudFront sends to the origin.
+	//
+	// If this field is false, then CloudFront treats the Accept-Encoding header
+	// the same as any other HTTP header in the viewer request. By default, it’s
+	// not included in the cache key and it’s not included in origin requests.
+	// You can manually add Accept-Encoding to the headers whitelist like any other
+	// HTTP header.
+	//
+	// When this field is true, you should not whitelist the Accept-Encoding header
+	// in the cache policy or in an origin request policy attached to the same cache
+	// behavior.
+	//
+	// For more information, see Cache compressed objects (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-policy-compressed-objects)
+	// in the Amazon CloudFront Developer Guide.
+	//
+	// EnableAcceptEncodingGzip is a required field
+	EnableAcceptEncodingGzip *bool `type:"boolean" required:"true"`
+
+	// An object that determines whether any HTTP headers (and if so, which headers)
+	// are included in the cache key and automatically included in requests that
+	// CloudFront sends to the origin.
+	//
+	// HeadersConfig is a required field
+	HeadersConfig *CachePolicyHeadersConfig `type:"structure" required:"true"`
+
+	// An object that determines whether any URL query strings in viewer requests
+	// (and if so, which query strings) are included in the cache key and automatically
+	// included in requests that CloudFront sends to the origin.
+	//
+	// QueryStringsConfig is a required field
+	QueryStringsConfig *CachePolicyQueryStringsConfig `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s ParametersInCacheKeyAndForwardedToOrigin) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ParametersInCacheKeyAndForwardedToOrigin) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ParametersInCacheKeyAndForwardedToOrigin"}
+
+	if s.CookiesConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CookiesConfig"))
+	}
+
+	if s.EnableAcceptEncodingGzip == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EnableAcceptEncodingGzip"))
+	}
+
+	if s.HeadersConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("HeadersConfig"))
+	}
+
+	if s.QueryStringsConfig == nil {
+		invalidParams.Add(aws.NewErrParamRequired("QueryStringsConfig"))
+	}
+	if s.CookiesConfig != nil {
+		if err := s.CookiesConfig.Validate(); err != nil {
+			invalidParams.AddNested("CookiesConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.HeadersConfig != nil {
+		if err := s.HeadersConfig.Validate(); err != nil {
+			invalidParams.AddNested("HeadersConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.QueryStringsConfig != nil {
+		if err := s.QueryStringsConfig.Validate(); err != nil {
+			invalidParams.AddNested("QueryStringsConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ParametersInCacheKeyAndForwardedToOrigin) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CookiesConfig != nil {
+		v := s.CookiesConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "CookiesConfig", v, metadata)
+	}
+	if s.EnableAcceptEncodingGzip != nil {
+		v := *s.EnableAcceptEncodingGzip
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "EnableAcceptEncodingGzip", protocol.BoolValue(v), metadata)
+	}
+	if s.HeadersConfig != nil {
+		v := s.HeadersConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "HeadersConfig", v, metadata)
+	}
+	if s.QueryStringsConfig != nil {
+		v := s.QueryStringsConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "QueryStringsConfig", v, metadata)
 	}
 	return nil
 }
@@ -5716,6 +7063,15 @@ func (s QueryArgProfiles) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// This field is deprecated. We recommend that you use a cache policy or an
+// origin request policy instead of this field.
+//
+// If you want to include query strings in the cache key, use QueryStringsConfig
+// in a cache policy. See CreateCachePolicy.
+//
+// If you want to send query strings to the origin but not include them in the
+// cache key, use QueryStringsConfig in an origin request policy. See CreateOriginRequestPolicy.
+//
 // A complex type that contains information about the query string parameters
 // that you want CloudFront to use for caching for a cache behavior.
 type QueryStringCacheKeys struct {
@@ -5753,6 +7109,61 @@ func (s *QueryStringCacheKeys) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s QueryStringCacheKeys) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Items != nil {
+		v := s.Items
+
+		metadata := protocol.Metadata{ListLocationName: "Name"}
+		ls0 := e.List(protocol.BodyTarget, "Items", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.StringValue(v1))
+		}
+		ls0.End()
+
+	}
+	if s.Quantity != nil {
+		v := *s.Quantity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Quantity", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Contains a list of query string names.
+type QueryStringNames struct {
+	_ struct{} `type:"structure"`
+
+	// A list of query string names.
+	Items []string `locationNameList:"Name" type:"list"`
+
+	// The number of query string names in the Items list.
+	//
+	// Quantity is a required field
+	Quantity *int64 `type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s QueryStringNames) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *QueryStringNames) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "QueryStringNames"}
+
+	if s.Quantity == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Quantity"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s QueryStringNames) MarshalFields(e protocol.FieldEncoder) error {
 	if s.Items != nil {
 		v := s.Items
 
@@ -5894,7 +7305,8 @@ func (s S3Origin) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // A complex type that contains information about the Amazon S3 origin. If the
-// origin is a custom origin, use the CustomOriginConfig element instead.
+// origin is a custom origin or an S3 bucket that is configured as a website
+// endpoint, use the CustomOriginConfig element instead.
 type S3OriginConfig struct {
 	_ struct{} `type:"structure"`
 
@@ -6964,10 +8376,10 @@ func (s TrustedSigners) MarshalFields(e protocol.FieldEncoder) error {
 //    viewers that support server name indication (SNI) (https://en.wikipedia.org/wiki/Server_Name_Indication)
 //    (recommended), or all viewers including those that don’t support SNI.
 //    To accept HTTPS connections from only viewers that support SNI, set SSLSupportMethod
-//    to sni-only. This is recommended. Most browsers and clients released after
-//    2010 support SNI. To accept HTTPS connections from all viewers, including
-//    those that don’t support SNI, set SSLSupportMethod to vip. This is not
-//    recommended, and results in additional monthly charges from CloudFront.
+//    to sni-only. This is recommended. Most browsers and clients support SNI.
+//    To accept HTTPS connections from all viewers, including those that don’t
+//    support SNI, set SSLSupportMethod to vip. This is not recommended, and
+//    results in additional monthly charges from CloudFront.
 //
 //    * The minimum SSL/TLS protocol version that the distribution can use to
 //    communicate with viewers. To specify a minimum version, choose a value
@@ -7058,9 +8470,6 @@ type ViewerCertificate struct {
 	//
 	// On the CloudFront console, this setting is called Security Policy.
 	//
-	// We recommend that you specify TLSv1.2_2018 unless your viewers are using
-	// browsers or devices that don’t support TLSv1.2.
-	//
 	// When you’re using SNI only (you set SSLSupportMethod to sni-only), you
 	// must specify TLSv1 or higher.
 	//
@@ -7074,8 +8483,7 @@ type ViewerCertificate struct {
 	//
 	//    * sni-only – The distribution accepts HTTPS connections from only viewers
 	//    that support server name indication (SNI) (https://en.wikipedia.org/wiki/Server_Name_Indication).
-	//    This is recommended. Most browsers and clients released after 2010 support
-	//    SNI.
+	//    This is recommended. Most browsers and clients support SNI.
 	//
 	//    * vip – The distribution accepts HTTPS connections from all viewers
 	//    including those that don’t support SNI. This is not recommended, and

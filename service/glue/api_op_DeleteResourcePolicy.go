@@ -14,6 +14,9 @@ type DeleteResourcePolicyInput struct {
 
 	// The hash value returned when this policy was set.
 	PolicyHashCondition *string `min:"1" type:"string"`
+
+	// The ARN of the AWS Glue resource for the resource policy to be deleted.
+	ResourceArn *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -26,6 +29,9 @@ func (s *DeleteResourcePolicyInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DeleteResourcePolicyInput"}
 	if s.PolicyHashCondition != nil && len(*s.PolicyHashCondition) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("PolicyHashCondition", 1))
+	}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
 	}
 
 	if invalidParams.Len() > 0 {

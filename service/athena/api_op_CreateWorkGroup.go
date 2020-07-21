@@ -30,8 +30,7 @@ type CreateWorkGroupInput struct {
 	// Name is a required field
 	Name *string `type:"string" required:"true"`
 
-	// One or more tags, separated by commas, that you want to attach to the workgroup
-	// as you create it.
+	// A list of comma separated tags to add to the workgroup that is created.
 	Tags []Tag `type:"list"`
 }
 

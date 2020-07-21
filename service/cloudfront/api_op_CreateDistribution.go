@@ -17,7 +17,7 @@ type CreateDistributionInput struct {
 	// The distribution's configuration information.
 	//
 	// DistributionConfig is a required field
-	DistributionConfig *DistributionConfig `locationName:"DistributionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
+	DistributionConfig *DistributionConfig `locationName:"DistributionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2020-05-31/"`
 }
 
 // String returns the string representation
@@ -50,7 +50,7 @@ func (s CreateDistributionInput) MarshalFields(e protocol.FieldEncoder) error {
 	if s.DistributionConfig != nil {
 		v := s.DistributionConfig
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2020-05-31/"}
 		e.SetFields(protocol.PayloadTarget, "DistributionConfig", v, metadata)
 	}
 	return nil
@@ -66,8 +66,7 @@ type CreateDistributionOutput struct {
 	// The current version of the distribution created.
 	ETag *string `location:"header" locationName:"ETag" type:"string"`
 
-	// The fully qualified URI of the new distribution resource just created. For
-	// example: https://cloudfront.amazonaws.com/2010-11-01/distribution/EDFDVBD632BHDS5.
+	// The fully qualified URI of the new distribution resource just created.
 	Location *string `location:"header" locationName:"Location" type:"string"`
 }
 
@@ -99,7 +98,7 @@ func (s CreateDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-const opCreateDistribution = "CreateDistribution2019_03_26"
+const opCreateDistribution = "CreateDistribution2020_05_31"
 
 // CreateDistributionRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -125,12 +124,12 @@ const opCreateDistribution = "CreateDistribution2019_03_26"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateDistribution
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateDistribution
 func (c *Client) CreateDistributionRequest(input *CreateDistributionInput) CreateDistributionRequest {
 	op := &aws.Operation{
 		Name:       opCreateDistribution,
 		HTTPMethod: "POST",
-		HTTPPath:   "/2019-03-26/distribution",
+		HTTPPath:   "/2020-05-31/distribution",
 	}
 
 	if input == nil {

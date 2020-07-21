@@ -10,16 +10,16 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure used to tag resource.
+// The request structure to tag a resource with a tag key and value.
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// Resource arn used to tag resource.
+	// The Amazon Resource Name (ARN) to use to tag a resource.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `location:"uri" locationName:"resourceArn" type:"string" required:"true"`
 
-	// Tags used to tag resource.
+	// The tags used to tag the resource.
 	//
 	// Tags is a required field
 	Tags map[string]string `locationName:"tags" min:"1" type:"map" required:"true"`
@@ -76,7 +76,7 @@ func (s TagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Response for tag resource.
+// The response for the tag resource request.
 type TagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -96,7 +96,7 @@ const opTagResource = "TagResource"
 // TagResourceRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Tag resource with tag key and value.
+// Tags the resource with a tag key and value.
 //
 //    // Example sending a request using TagResourceRequest.
 //    req := client.TagResourceRequest(params)

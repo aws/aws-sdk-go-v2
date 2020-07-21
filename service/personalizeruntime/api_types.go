@@ -20,8 +20,8 @@ type PredictedItem struct {
 	// The recommended item ID.
 	ItemId *string `locationName:"itemId" type:"string"`
 
-	// A numeric representation of the model's certainty in the item's suitability.
-	// For more information on scoring logic, see how-scores-work.
+	// A numeric representation of the model's certainty that the item will be the
+	// next user selection. For more information on scoring logic, see how-scores-work.
 	Score *float64 `locationName:"score" type:"double"`
 }
 

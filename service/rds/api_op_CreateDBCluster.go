@@ -21,6 +21,8 @@ type CreateDBClusterInput struct {
 	// The target backtrack window, in seconds. To disable backtracking, set this
 	// value to 0.
 	//
+	// Currently, Backtrack is only supported for Aurora MySQL DB clusters.
+	//
 	// Default: 0
 	//
 	// Constraints:
@@ -109,6 +111,13 @@ type CreateDBClusterInput struct {
 	// information, see Publishing Database Logs to Amazon CloudWatch Logs (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 	// in the Amazon Aurora User Guide.
 	EnableCloudwatchLogsExports []string `type:"list"`
+
+	// A value that indicates whether to enable write operations to be forwarded
+	// from this cluster to the primary cluster in an Aurora global database. The
+	// resulting changes are replicated back to this cluster. This parameter only
+	// applies to DB clusters that are secondary clusters in an Aurora global database.
+	// By default, Aurora disallows write operations for secondary clusters.
+	EnableGlobalWriteForwarding *bool `type:"boolean"`
 
 	// A value that indicates whether to enable the HTTP endpoint for an Aurora
 	// Serverless DB cluster. By default, the HTTP endpoint is disabled.

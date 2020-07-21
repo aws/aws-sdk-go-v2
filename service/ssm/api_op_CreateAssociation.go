@@ -13,6 +13,12 @@ import (
 type CreateAssociationInput struct {
 	_ struct{} `type:"structure"`
 
+	// By default, when you create a new associations, the system runs it immediately
+	// after it is created and then according to the schedule you specified. Specify
+	// this option if you don't want an association to run immediately after you
+	// create it.
+	ApplyOnlyAtCronInterval *bool `type:"boolean"`
+
 	// Specify a descriptive name for the association.
 	AssociationName *string `type:"string"`
 
@@ -176,13 +182,18 @@ const opCreateAssociation = "CreateAssociation"
 // CreateAssociationRequest returns a request value for making API operation for
 // Amazon Simple Systems Manager (SSM).
 //
-// Associates the specified Systems Manager document with the specified instances
-// or targets.
-//
-// When you associate a document with one or more instances, SSM Agent running
-// on the instance processes the document and configures the instance as specified.
-// If you associate a document with an instance that already has an associated
-// document, the system returns the AssociationAlreadyExists exception.
+// A State Manager association defines the state that you want to maintain on
+// your instances. For example, an association can specify that anti-virus software
+// must be installed and running on your instances, or that certain ports must
+// be closed. For static targets, the association specifies a schedule for when
+// the configuration is reapplied. For dynamic targets, such as an AWS Resource
+// Group or an AWS Autoscaling Group, State Manager applies the configuration
+// when new instances are added to the group. The association also specifies
+// actions to take when applying the configuration. For example, an association
+// for anti-virus software might run once a day. If the software is not installed,
+// then State Manager installs it. If the software is installed, but the service
+// is not running, then the association might instruct State Manager to start
+// the service.
 //
 //    // Example sending a request using CreateAssociationRequest.
 //    req := client.CreateAssociationRequest(params)

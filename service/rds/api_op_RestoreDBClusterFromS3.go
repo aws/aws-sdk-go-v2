@@ -19,6 +19,8 @@ type RestoreDBClusterFromS3Input struct {
 	// The target backtrack window, in seconds. To disable backtracking, set this
 	// value to 0.
 	//
+	// Currently, Backtrack is only supported for Aurora MySQL DB clusters.
+	//
 	// Default: 0
 	//
 	// Constraints:
@@ -46,7 +48,7 @@ type RestoreDBClusterFromS3Input struct {
 	CopyTagsToSnapshot *bool `type:"boolean"`
 
 	// The name of the DB cluster to create from the source data in the Amazon S3
-	// bucket. This parameter is isn't case-sensitive.
+	// bucket. This parameter isn't case-sensitive.
 	//
 	// Constraints:
 	//
@@ -254,9 +256,9 @@ type RestoreDBClusterFromS3Input struct {
 
 	// The version of the database that the backup files were created from.
 	//
-	// MySQL version 5.5 and 5.6 are supported.
+	// MySQL versions 5.5, 5.6, and 5.7 are supported.
 	//
-	// Example: 5.6.22
+	// Example: 5.6.40
 	//
 	// SourceEngineVersion is a required field
 	SourceEngineVersion *string `type:"string" required:"true"`

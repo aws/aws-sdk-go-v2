@@ -48,7 +48,7 @@ const opGetEnrollmentStatus = "GetEnrollmentStatus"
 // Returns the enrollment (opt in) status of an account to the AWS Compute Optimizer
 // service.
 //
-// If the account is a master account of an organization, this operation also
+// If the account is the master account of an organization, this action also
 // confirms the enrollment status of member accounts within the organization.
 //
 //    // Example sending a request using GetEnrollmentStatusRequest.

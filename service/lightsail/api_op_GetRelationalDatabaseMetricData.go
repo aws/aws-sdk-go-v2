@@ -113,8 +113,8 @@ type GetRelationalDatabaseMetricDataInput struct {
 	Statistics []MetricStatistic `locationName:"statistics" type:"list" required:"true"`
 
 	// The unit for the metric data request. Valid units depend on the metric data
-	// being required. For the valid units with each available metric, see the metricName
-	// parameter.
+	// being requested. For the valid units with each available metric, see the
+	// metricName parameter.
 	//
 	// Unit is a required field
 	Unit MetricUnit `locationName:"unit" type:"string" required:"true" enum:"true"`
@@ -167,11 +167,10 @@ func (s *GetRelationalDatabaseMetricDataInput) Validate() error {
 type GetRelationalDatabaseMetricDataOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An object describing the result of your get relational database metric data
-	// request.
+	// An array of objects that describe the metric data returned.
 	MetricData []MetricDatapoint `locationName:"metricData" type:"list"`
 
-	// The name of the metric.
+	// The name of the metric returned.
 	MetricName RelationalDatabaseMetricName `locationName:"metricName" type:"string" enum:"true"`
 }
 
@@ -187,6 +186,10 @@ const opGetRelationalDatabaseMetricData = "GetRelationalDatabaseMetricData"
 //
 // Returns the data points of the specified metric for a database in Amazon
 // Lightsail.
+//
+// Metrics report the utilization of your resources, and the error counts generated
+// by them. Monitor and collect metric data regularly to maintain the reliability,
+// availability, and performance of your resources.
 //
 //    // Example sending a request using GetRelationalDatabaseMetricDataRequest.
 //    req := client.GetRelationalDatabaseMetricDataRequest(params)

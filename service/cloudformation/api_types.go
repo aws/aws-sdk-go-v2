@@ -612,6 +612,9 @@ type ResourceToImport struct {
 	ResourceIdentifier map[string]string `min:"1" type:"map" required:"true"`
 
 	// The type of resource to import into your stack, such as AWS::S3::Bucket.
+	// For a list of supported resource types, see Resources that support import
+	// operations (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resource-import-supported-resources.html)
+	// in the AWS CloudFormation User Guide.
 	//
 	// ResourceType is a required field
 	ResourceType *string `min:"1" type:"string" required:"true"`
@@ -1053,7 +1056,8 @@ type StackInstance struct {
 	// which drift detection has not yet been performed.
 	LastDriftCheckTimestamp *time.Time `type:"timestamp"`
 
-	// Reserved for internal use. No data returned.
+	// [Service-managed permissions] The organization root ID or organizational
+	// unit (OU) IDs that you specified for DeploymentTargets (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html).
 	OrganizationalUnitId *string `type:"string"`
 
 	// A list of parameters from the stack set template whose values have been overridden
@@ -1065,6 +1069,9 @@ type StackInstance struct {
 
 	// The ID of the stack instance.
 	StackId *string `type:"string"`
+
+	// The detailed status of the stack instance.
+	StackInstanceStatus *StackInstanceComprehensiveStatus `type:"structure"`
 
 	// The name or unique ID of the stack set that the stack instance is associated
 	// with.
@@ -1097,6 +1104,69 @@ func (s StackInstance) String() string {
 	return awsutil.Prettify(s)
 }
 
+// The detailed status of the stack instance.
+type StackInstanceComprehensiveStatus struct {
+	_ struct{} `type:"structure"`
+
+	//    * CANCELLED: The operation in the specified account and Region has been
+	//    cancelled. This is either because a user has stopped the stack set operation,
+	//    or because the failure tolerance of the stack set operation has been exceeded.
+	//
+	//    * FAILED: The operation in the specified account and Region failed. If
+	//    the stack set operation fails in enough accounts within a Region, the
+	//    failure tolerance for the stack set operation as a whole might be exceeded.
+	//
+	//    * INOPERABLE: A DeleteStackInstances operation has failed and left the
+	//    stack in an unstable state. Stacks in this state are excluded from further
+	//    UpdateStackSet operations. You might need to perform a DeleteStackInstances
+	//    operation, with RetainStacks set to true, to delete the stack instance,
+	//    and then delete the stack manually.
+	//
+	//    * PENDING: The operation in the specified account and Region has yet to
+	//    start.
+	//
+	//    * RUNNING: The operation in the specified account and Region is currently
+	//    in progress.
+	//
+	//    * SUCCEEDED: The operation in the specified account and Region completed
+	//    successfully.
+	DetailedStatus StackInstanceDetailedStatus `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s StackInstanceComprehensiveStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The status that stack instances are filtered by.
+type StackInstanceFilter struct {
+	_ struct{} `type:"structure"`
+
+	// The type of filter to apply.
+	Name StackInstanceFilterName `type:"string" enum:"true"`
+
+	// The status to filter by.
+	Values *string `min:"6" type:"string"`
+}
+
+// String returns the string representation
+func (s StackInstanceFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StackInstanceFilter) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StackInstanceFilter"}
+	if s.Values != nil && len(*s.Values) < 6 {
+		invalidParams.Add(aws.NewErrParamMinLen("Values", 6))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // The structure that contains summary information about a stack instance.
 type StackInstanceSummary struct {
 	_ struct{} `type:"structure"`
@@ -1127,7 +1197,8 @@ type StackInstanceSummary struct {
 	// which drift detection has not yet been performed.
 	LastDriftCheckTimestamp *time.Time `type:"timestamp"`
 
-	// Reserved for internal use. No data returned.
+	// [Service-managed permissions] The organization root ID or organizational
+	// unit (OU) IDs that you specified for DeploymentTargets (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html).
 	OrganizationalUnitId *string `type:"string"`
 
 	// The name of the AWS Region that the stack instance is associated with.
@@ -1135,6 +1206,9 @@ type StackInstanceSummary struct {
 
 	// The ID of the stack instance.
 	StackId *string `type:"string"`
+
+	// The detailed status of the stack instance.
+	StackInstanceStatus *StackInstanceComprehensiveStatus `type:"structure"`
 
 	// The name or unique ID of the stack set that the stack instance is associated
 	// with.
@@ -1519,7 +1593,8 @@ type StackSet struct {
 	// groups can include in their stack sets.
 	ExecutionRoleName *string `min:"1" type:"string"`
 
-	// Reserved for internal use. No data returned.
+	// [Service-managed permissions] The organization root ID or organizational
+	// unit (OU) IDs that you specified for DeploymentTargets (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html).
 	OrganizationalUnitIds []string `type:"list"`
 
 	// A list of input parameters for a stack set.
@@ -1784,8 +1859,8 @@ type StackSetOperationPreferences struct {
 	FailureTolerancePercentage *int64 `type:"integer"`
 
 	// The maximum number of accounts in which to perform this operation at one
-	// time. This is dependent on the value of FailureToleranceCount—MaxConcurrentCount
-	// is at most one more than the FailureToleranceCount .
+	// time. This is dependent on the value of FailureToleranceCount. MaxConcurrentCount
+	// is at most one more than the FailureToleranceCount.
 	//
 	// Note that this setting lets you specify the maximum for operations. For large
 	// deployments, under certain circumstances the actual number of accounts acted
@@ -1849,7 +1924,8 @@ type StackSetOperationResultSummary struct {
 	// before proceeding with stack set operations in an account
 	AccountGateResult *AccountGateResult `type:"structure"`
 
-	// Reserved for internal use. No data returned.
+	// [Service-managed permissions] The organization root ID or organizational
+	// unit (OU) IDs that you specified for DeploymentTargets (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html).
 	OrganizationalUnitId *string `type:"string"`
 
 	// The name of the AWS Region for this operation result.

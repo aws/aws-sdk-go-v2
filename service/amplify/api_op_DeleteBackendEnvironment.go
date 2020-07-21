@@ -10,16 +10,16 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for delete backend environment request.
+// The request structure for the delete backend environment request.
 type DeleteBackendEnvironmentInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id of an Amplify App.
+	// The unique ID of an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Name of a backend environment of an Amplify App.
+	// The name of a backend environment of an Amplify app.
 	//
 	// EnvironmentName is a required field
 	EnvironmentName *string `location:"uri" locationName:"environmentName" min:"1" type:"string" required:"true"`
@@ -73,11 +73,11 @@ func (s DeleteBackendEnvironmentInput) MarshalFields(e protocol.FieldEncoder) er
 	return nil
 }
 
-// Result structure of a delete backend environment result.
+// The result structure of the delete backend environment result.
 type DeleteBackendEnvironmentOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Backend environment structure for an Amplify App.
+	// Describes the backend environment for an Amplify app.
 	//
 	// BackendEnvironment is a required field
 	BackendEnvironment *BackendEnvironment `locationName:"backendEnvironment" type:"structure" required:"true"`
@@ -104,7 +104,7 @@ const opDeleteBackendEnvironment = "DeleteBackendEnvironment"
 // DeleteBackendEnvironmentRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Delete backend environment for an Amplify App.
+// Deletes a backend environment for an Amplify app.
 //
 //    // Example sending a request using DeleteBackendEnvironmentRequest.
 //    req := client.DeleteBackendEnvironmentRequest(params)

@@ -12,7 +12,7 @@ import (
 type UpdateSecretVersionStageInput struct {
 	_ struct{} `type:"structure"`
 
-	// (Optional) The secret version ID that you want to add the staging label to.
+	// (Optional) The secret version ID that you want to add the staging label.
 	// If you want to remove a label from a version, then do not specify this parameter.
 	//
 	// If the staging label is already attached to a different version of the secret,
@@ -27,9 +27,9 @@ type UpdateSecretVersionStageInput struct {
 	// the version ID does not match, then the operation fails.
 	RemoveFromVersionId *string `min:"32" type:"string"`
 
-	// Specifies the secret with the version whose list of staging labels you want
-	// to modify. You can specify either the Amazon Resource Name (ARN) or the friendly
-	// name of the secret.
+	// Specifies the secret with the version with the list of staging labels you
+	// want to modify. You can specify either the Amazon Resource Name (ARN) or
+	// the friendly name of the secret.
 	//
 	// If you specify an ARN, we generally recommend that you specify a complete
 	// ARN. You can specify a partial ARN too—for example, if you don’t include
@@ -41,7 +41,12 @@ type UpdateSecretVersionStageInput struct {
 	// a partial ARN, then those characters cause Secrets Manager to assume that
 	// you’re specifying a complete ARN. This confusion can cause unexpected results.
 	// To avoid this situation, we recommend that you don’t create secret names
-	// that end with a hyphen followed by six characters.
+	// ending with a hyphen followed by six characters.
+	//
+	// If you specify an incomplete ARN without the random suffix, and instead provide
+	// the 'friendly name', you must not include the random suffix. If you do include
+	// the random suffix added by Secrets Manager, you receive either a ResourceNotFoundException
+	// or an AccessDeniedException error, depending on your permissions.
 	//
 	// SecretId is a required field
 	SecretId *string `min:"1" type:"string" required:"true"`
@@ -90,10 +95,10 @@ func (s *UpdateSecretVersionStageInput) Validate() error {
 type UpdateSecretVersionStageOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the secret with the staging label that was modified.
+	// The ARN of the secret with the modified staging label.
 	ARN *string `min:"20" type:"string"`
 
-	// The friendly name of the secret with the staging label that was modified.
+	// The friendly name of the secret with the modified staging label.
 	Name *string `min:"1" type:"string"`
 }
 

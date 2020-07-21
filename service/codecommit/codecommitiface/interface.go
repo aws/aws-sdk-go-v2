@@ -115,6 +115,8 @@ type ClientAPI interface {
 
 	GetCommentRequest(*codecommit.GetCommentInput) codecommit.GetCommentRequest
 
+	GetCommentReactionsRequest(*codecommit.GetCommentReactionsInput) codecommit.GetCommentReactionsRequest
+
 	GetCommentsForComparedCommitRequest(*codecommit.GetCommentsForComparedCommitInput) codecommit.GetCommentsForComparedCommitRequest
 
 	GetCommentsForPullRequestRequest(*codecommit.GetCommentsForPullRequestInput) codecommit.GetCommentsForPullRequestRequest
@@ -176,6 +178,8 @@ type ClientAPI interface {
 	PostCommentForPullRequestRequest(*codecommit.PostCommentForPullRequestInput) codecommit.PostCommentForPullRequestRequest
 
 	PostCommentReplyRequest(*codecommit.PostCommentReplyInput) codecommit.PostCommentReplyRequest
+
+	PutCommentReactionRequest(*codecommit.PutCommentReactionInput) codecommit.PutCommentReactionRequest
 
 	PutFileRequest(*codecommit.PutFileInput) codecommit.PutFileRequest
 

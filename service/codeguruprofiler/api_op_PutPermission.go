@@ -14,26 +14,29 @@ import (
 type PutPermissionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The list of actions that the users and roles can perform on the profiling
-	// group.
+	// Specifies an action group that contains permissions to add to a profiling
+	// group resource. One action group is supported, agentPermissions, which grants
+	// permission to perform actions required by the profiling agent, ConfigureAgent
+	// and PostAgentProfile permissions.
 	//
 	// ActionGroup is a required field
 	ActionGroup ActionGroup `location:"uri" locationName:"actionGroup" type:"string" required:"true" enum:"true"`
 
-	// The list of role and user ARNs or the accountId that needs access (wildcards
-	// are not allowed).
+	// A list ARNs for the roles and users you want to grant access to the profiling
+	// group. Wildcards are not are supported in the ARNs.
 	//
 	// Principals is a required field
 	Principals []string `locationName:"principals" min:"1" type:"list" required:"true"`
 
-	// The name of the profiling group.
+	// The name of the profiling group to grant access to.
 	//
 	// ProfilingGroupName is a required field
 	ProfilingGroupName *string `location:"uri" locationName:"profilingGroupName" min:"1" type:"string" required:"true"`
 
-	// A unique identifier for the current revision of the policy. This is required,
-	// if a policy exists for the profiling group. This is not required when creating
-	// the policy for the first time.
+	// A universally unique identifier (UUID) for the revision of the policy you
+	// are adding to the profiling group. Do not specify this when you add permissions
+	// to a profiling group for the first time. If a policy already exists on the
+	// profiling group, you must specify the revisionId.
 	RevisionId *string `locationName:"revisionId" type:"string"`
 }
 
@@ -110,12 +113,15 @@ func (s PutPermissionInput) MarshalFields(e protocol.FieldEncoder) error {
 type PutPermissionOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The resource-based policy.
+	// The JSON-formatted resource-based policy on the profiling group that includes
+	// the added permissions.
 	//
 	// Policy is a required field
 	Policy *string `locationName:"policy" type:"string" required:"true"`
 
-	// A unique identifier for the current revision of the policy.
+	// A universally unique identifier (UUID) for the revision of the resource-based
+	// policy that includes the added permissions. The JSON-formatted policy is
+	// in the policy element of the response.
 	//
 	// RevisionId is a required field
 	RevisionId *string `locationName:"revisionId" type:"string" required:"true"`
@@ -148,8 +154,23 @@ const opPutPermission = "PutPermission"
 // PutPermissionRequest returns a request value for making API operation for
 // Amazon CodeGuru Profiler.
 //
-// Provides permission to the principals. This overwrites the existing permissions,
-// and is not additive.
+// Adds permissions to a profiling group's resource-based policy that are provided
+// using an action group. If a profiling group doesn't have a resource-based
+// policy, one is created for it using the permissions in the action group and
+// the roles and users in the principals parameter.
+//
+//    <p> The one supported action group that can be added is <code>agentPermission</code>
+//    which grants <code>ConfigureAgent</code> and <code>PostAgent</code> permissions.
+//    For more information, see <a href="https://docs.aws.amazon.com/codeguru/latest/profiler-ug/resource-based-policies.html">Resource-based
+//    policies in CodeGuru Profiler</a> in the <i>Amazon CodeGuru Profiler User
+//    Guide</i>, <a href="https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html">
+//    <code>ConfigureAgent</code> </a>, and <a href="https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_PostAgentProfile.html">
+//    <code>PostAgentProfile</code> </a>. </p> <p> The first time you call <code>PutPermission</code>
+//    on a profiling group, do not specify a <code>revisionId</code> because
+//    it doesn't have a resource-based policy. Subsequent calls must provide
+//    a <code>revisionId</code> to specify which revision of the resource-based
+//    policy to add the permissions to. </p> <p> The response contains the profiling
+//    group's JSON-formatted resource policy. </p>
 //
 //    // Example sending a request using PutPermissionRequest.
 //    req := client.PutPermissionRequest(params)

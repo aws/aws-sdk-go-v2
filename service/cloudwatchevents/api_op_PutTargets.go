@@ -124,6 +124,8 @@ const opPutTargets = "PutTargets"
 //
 //    * The default event bus of another AWS account
 //
+//    * Amazon API Gateway REST APIs
+//
 // Creating rules with built-in targets is supported only in the AWS Management
 // Console. The built-in targets are EC2 CreateSnapshot API call, EC2 RebootInstances
 // API call, EC2 StopInstances API call, and EC2 TerminateInstances API call.
@@ -134,12 +136,13 @@ const opPutTargets = "PutTargets"
 // on multiple EC2 instances with one rule, you can use the RunCommandParameters
 // field.
 //
-// To be able to make API calls against the resources that you own, Amazon CloudWatch
-// Events needs the appropriate permissions. For AWS Lambda and Amazon SNS resources,
-// EventBridge relies on resource-based policies. For EC2 instances, Kinesis
-// data streams, and AWS Step Functions state machines, EventBridge relies on
-// IAM roles that you specify in the RoleARN argument in PutTargets. For more
-// information, see Authentication and Access Control (https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html)
+// To be able to make API calls against the resources that you own, Amazon EventBridge
+// (CloudWatch Events) needs the appropriate permissions. For AWS Lambda and
+// Amazon SNS resources, EventBridge relies on resource-based policies. For
+// EC2 instances, Kinesis data streams, AWS Step Functions state machines and
+// API Gateway REST APIs, EventBridge relies on IAM roles that you specify in
+// the RoleARN argument in PutTargets. For more information, see Authentication
+// and Access Control (https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html)
 // in the Amazon EventBridge User Guide.
 //
 // If another AWS account is in the same region and has granted you permission
@@ -149,7 +152,8 @@ const opPutTargets = "PutTargets"
 // you run PutTargets. If your account sends events to another account, your
 // account is charged for each sent event. Each event sent to another account
 // is charged as a custom event. The account receiving the event is not charged.
-// For more information, see Amazon CloudWatch Pricing (https://aws.amazon.com/cloudwatch/pricing/).
+// For more information, see Amazon EventBridge (CloudWatch Events) Pricing
+// (https://aws.amazon.com/eventbridge/pricing/).
 //
 // Input, InputPath, and InputTransformer are not available with PutTarget if
 // the target is an event bus of a different AWS account.

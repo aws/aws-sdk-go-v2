@@ -12,10 +12,10 @@ import (
 type UpdateWorkforceInput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of one to four worker IP address ranges (CIDRs (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html))
+	// A list of one to ten worker IP address ranges (CIDRs (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html))
 	// that can be used to access tasks assigned to this workforce.
 	//
-	// Maximum: Four CIDR values
+	// Maximum: Ten CIDR values
 	SourceIpConfig *SourceIpConfig `type:"structure"`
 
 	// The name of the private workforce whose access you want to restrict. WorkforceName
@@ -78,7 +78,7 @@ const opUpdateWorkforce = "UpdateWorkforce"
 //
 // Restricts access to tasks assigned to workers in the specified workforce
 // to those within specific ranges of IP addresses. You specify allowed IP addresses
-// by creating a list of up to four CIDRs (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html).
+// by creating a list of up to ten CIDRs (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html).
 //
 // By default, a workforce isn't restricted to specific IP addresses. If you
 // specify a range of IP addresses, workers who attempt to access tasks using

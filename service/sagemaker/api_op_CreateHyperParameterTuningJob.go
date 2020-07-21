@@ -44,6 +44,8 @@ type CreateHyperParameterTuningJobInput struct {
 	// stopping condition.
 	TrainingJobDefinition *HyperParameterTrainingJobDefinition `type:"structure"`
 
+	// A list of the HyperParameterTrainingJobDefinition objects launched for this
+	// tuning job.
 	TrainingJobDefinitions []HyperParameterTrainingJobDefinition `min:"1" type:"list"`
 
 	// Specifies the configuration for starting the hyperparameter tuning job using

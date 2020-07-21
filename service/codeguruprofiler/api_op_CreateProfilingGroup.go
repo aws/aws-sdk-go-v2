@@ -14,22 +14,30 @@ import (
 type CreateProfilingGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The agent orchestration configuration.
+	// Specifies whether profiling is enabled or disabled for the created profiling
+	// group.
 	AgentOrchestrationConfig *AgentOrchestrationConfig `locationName:"agentOrchestrationConfig" type:"structure"`
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
-	//
-	// This parameter specifies a unique identifier for the new profiling group
-	// that helps ensure idempotency.
+	// Amazon CodeGuru Profiler uses this universally unique identifier (UUID) to
+	// prevent the accidental creation of duplicate profiling groups if there are
+	// failures and retries.
 	//
 	// ClientToken is a required field
 	ClientToken *string `location:"querystring" locationName:"clientToken" min:"1" type:"string" required:"true" idempotencyToken:"true"`
 
-	// The name of the profiling group.
+	// The compute platform of the profiling group. Use AWSLambda if your application
+	// runs on AWS Lambda. Use Default if your application runs on a compute platform
+	// that is not AWS Lambda, such an Amazon EC2 instance, an on-premises server,
+	// or a different platform. If not specified, Default is used.
+	ComputePlatform ComputePlatform `locationName:"computePlatform" type:"string" enum:"true"`
+
+	// The name of the profiling group to create.
 	//
 	// ProfilingGroupName is a required field
 	ProfilingGroupName *string `locationName:"profilingGroupName" min:"1" type:"string" required:"true"`
+
+	// A list of tags to add to the created profiling group.
+	Tags map[string]string `locationName:"tags" type:"map"`
 }
 
 // String returns the string representation
@@ -76,11 +84,29 @@ func (s CreateProfilingGroupInput) MarshalFields(e protocol.FieldEncoder) error 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "agentOrchestrationConfig", v, metadata)
 	}
+	if len(s.ComputePlatform) > 0 {
+		v := s.ComputePlatform
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "computePlatform", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.ProfilingGroupName != nil {
 		v := *s.ProfilingGroupName
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "profilingGroupName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	var ClientToken string
 	if s.ClientToken != nil {
@@ -101,7 +127,8 @@ func (s CreateProfilingGroupInput) MarshalFields(e protocol.FieldEncoder) error 
 type CreateProfilingGroupOutput struct {
 	_ struct{} `type:"structure" payload:"ProfilingGroup"`
 
-	// Information about the new profiling group
+	// The returned ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
+	// object that contains information about the created profiling group.
 	//
 	// ProfilingGroup is a required field
 	ProfilingGroup *ProfilingGroupDescription `locationName:"profilingGroup" type:"structure" required:"true"`

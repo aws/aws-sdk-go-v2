@@ -60,11 +60,19 @@ const opDescribeTrustedAdvisorChecks = "DescribeTrustedAdvisorChecks"
 // DescribeTrustedAdvisorChecksRequest returns a request value for making API operation for
 // AWS Support.
 //
-// Returns information about all available Trusted Advisor checks, including
-// name, ID, category, description, and metadata. You must specify a language
-// code; English ("en") and Japanese ("ja") are currently supported. The response
-// contains a TrustedAdvisorCheckDescription for each check. The region must
-// be set to us-east-1.
+// Returns information about all available AWS Trusted Advisor checks, including
+// the name, ID, category, description, and metadata. You must specify a language
+// code. The AWS Support API currently supports English ("en") and Japanese
+// ("ja"). The response contains a TrustedAdvisorCheckDescription object for
+// each check. You must set the AWS Region to us-east-1.
+//
+//    * You must have a Business or Enterprise support plan to use the AWS Support
+//    API.
+//
+//    * If you call the AWS Support API from an account that does not have a
+//    Business or Enterprise support plan, the SubscriptionRequiredException
+//    error message appears. For information about changing your support plan,
+//    see AWS Support (http://aws.amazon.com/premiumsupport/).
 //
 //    // Example sending a request using DescribeTrustedAdvisorChecksRequest.
 //    req := client.DescribeTrustedAdvisorChecksRequest(params)

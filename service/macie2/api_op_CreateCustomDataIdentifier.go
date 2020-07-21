@@ -11,6 +11,9 @@ import (
 )
 
 // Specifies the criteria and other settings for a new custom data identifier.
+// You can't change a custom data identifier after you create it. In Amazon
+// Macie, custom data identifiers are immutable. This ensures accurate data
+// classification results for audits or investigations.
 type CreateCustomDataIdentifierInput struct {
 	_ struct{} `type:"structure"`
 

@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon Elasticsearch Service.
 //    func myFunc(svc elasticsearchserviceiface.ClientAPI) bool {
-//        // Make svc.AddTags request
+//        // Make svc.AcceptInboundCrossClusterSearchConnection request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        elasticsearchserviceiface.ClientPI
 //    }
-//    func (m *mockClientClient) AddTags(input *elasticsearchservice.AddTagsInput) (*elasticsearchservice.AddTagsOutput, error) {
+//    func (m *mockClientClient) AcceptInboundCrossClusterSearchConnection(input *elasticsearchservice.AcceptInboundCrossClusterSearchConnectionInput) (*elasticsearchservice.AcceptInboundCrossClusterSearchConnectionOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,6 +61,8 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	AcceptInboundCrossClusterSearchConnectionRequest(*elasticsearchservice.AcceptInboundCrossClusterSearchConnectionInput) elasticsearchservice.AcceptInboundCrossClusterSearchConnectionRequest
+
 	AddTagsRequest(*elasticsearchservice.AddTagsInput) elasticsearchservice.AddTagsRequest
 
 	AssociatePackageRequest(*elasticsearchservice.AssociatePackageInput) elasticsearchservice.AssociatePackageRequest
@@ -69,11 +71,17 @@ type ClientAPI interface {
 
 	CreateElasticsearchDomainRequest(*elasticsearchservice.CreateElasticsearchDomainInput) elasticsearchservice.CreateElasticsearchDomainRequest
 
+	CreateOutboundCrossClusterSearchConnectionRequest(*elasticsearchservice.CreateOutboundCrossClusterSearchConnectionInput) elasticsearchservice.CreateOutboundCrossClusterSearchConnectionRequest
+
 	CreatePackageRequest(*elasticsearchservice.CreatePackageInput) elasticsearchservice.CreatePackageRequest
 
 	DeleteElasticsearchDomainRequest(*elasticsearchservice.DeleteElasticsearchDomainInput) elasticsearchservice.DeleteElasticsearchDomainRequest
 
 	DeleteElasticsearchServiceRoleRequest(*elasticsearchservice.DeleteElasticsearchServiceRoleInput) elasticsearchservice.DeleteElasticsearchServiceRoleRequest
+
+	DeleteInboundCrossClusterSearchConnectionRequest(*elasticsearchservice.DeleteInboundCrossClusterSearchConnectionInput) elasticsearchservice.DeleteInboundCrossClusterSearchConnectionRequest
+
+	DeleteOutboundCrossClusterSearchConnectionRequest(*elasticsearchservice.DeleteOutboundCrossClusterSearchConnectionInput) elasticsearchservice.DeleteOutboundCrossClusterSearchConnectionRequest
 
 	DeletePackageRequest(*elasticsearchservice.DeletePackageInput) elasticsearchservice.DeletePackageRequest
 
@@ -84,6 +92,10 @@ type ClientAPI interface {
 	DescribeElasticsearchDomainsRequest(*elasticsearchservice.DescribeElasticsearchDomainsInput) elasticsearchservice.DescribeElasticsearchDomainsRequest
 
 	DescribeElasticsearchInstanceTypeLimitsRequest(*elasticsearchservice.DescribeElasticsearchInstanceTypeLimitsInput) elasticsearchservice.DescribeElasticsearchInstanceTypeLimitsRequest
+
+	DescribeInboundCrossClusterSearchConnectionsRequest(*elasticsearchservice.DescribeInboundCrossClusterSearchConnectionsInput) elasticsearchservice.DescribeInboundCrossClusterSearchConnectionsRequest
+
+	DescribeOutboundCrossClusterSearchConnectionsRequest(*elasticsearchservice.DescribeOutboundCrossClusterSearchConnectionsInput) elasticsearchservice.DescribeOutboundCrossClusterSearchConnectionsRequest
 
 	DescribePackagesRequest(*elasticsearchservice.DescribePackagesInput) elasticsearchservice.DescribePackagesRequest
 
@@ -112,6 +124,8 @@ type ClientAPI interface {
 	ListTagsRequest(*elasticsearchservice.ListTagsInput) elasticsearchservice.ListTagsRequest
 
 	PurchaseReservedElasticsearchInstanceOfferingRequest(*elasticsearchservice.PurchaseReservedElasticsearchInstanceOfferingInput) elasticsearchservice.PurchaseReservedElasticsearchInstanceOfferingRequest
+
+	RejectInboundCrossClusterSearchConnectionRequest(*elasticsearchservice.RejectInboundCrossClusterSearchConnectionInput) elasticsearchservice.RejectInboundCrossClusterSearchConnectionRequest
 
 	RemoveTagsRequest(*elasticsearchservice.RemoveTagsInput) elasticsearchservice.RemoveTagsRequest
 

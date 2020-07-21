@@ -13,15 +13,19 @@ import (
 type DeleteFileSystemInput struct {
 	_ struct{} `type:"structure"`
 
-	// (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to
-	// ensure idempotent deletion. This is automatically filled on your behalf when
-	// using the AWS CLI or SDK.
+	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
+	// deletion. This is automatically filled on your behalf when using the AWS
+	// CLI or SDK.
 	ClientRequestToken *string `min:"1" type:"string" idempotencyToken:"true"`
 
 	// The ID of the file system you want to delete.
 	//
 	// FileSystemId is a required field
 	FileSystemId *string `min:"11" type:"string" required:"true"`
+
+	// The configuration object for the Amazon FSx for Lustre file system being
+	// deleted in the DeleteFileSystem operation.
+	LustreConfiguration *DeleteFileSystemLustreConfiguration `type:"structure"`
 
 	// The configuration object for the Microsoft Windows file system used in the
 	// DeleteFileSystem operation.
@@ -46,6 +50,11 @@ func (s *DeleteFileSystemInput) Validate() error {
 	if s.FileSystemId != nil && len(*s.FileSystemId) < 11 {
 		invalidParams.Add(aws.NewErrParamMinLen("FileSystemId", 11))
 	}
+	if s.LustreConfiguration != nil {
+		if err := s.LustreConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("LustreConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.WindowsConfiguration != nil {
 		if err := s.WindowsConfiguration.Validate(); err != nil {
 			invalidParams.AddNested("WindowsConfiguration", err.(aws.ErrInvalidParams))
@@ -67,6 +76,10 @@ type DeleteFileSystemOutput struct {
 
 	// The file system lifecycle for the deletion request. Should be DELETING.
 	Lifecycle FileSystemLifecycle `type:"string" enum:"true"`
+
+	// The response object for the Amazon FSx for Lustre file system being deleted
+	// in the DeleteFileSystem operation.
+	LustreResponse *DeleteFileSystemLustreResponse `type:"structure"`
 
 	// The response object for the Microsoft Windows file system used in the DeleteFileSystem
 	// operation.

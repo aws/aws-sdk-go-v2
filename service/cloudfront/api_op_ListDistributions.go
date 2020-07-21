@@ -72,7 +72,7 @@ func (s ListDistributionsOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-const opListDistributions = "ListDistributions2019_03_26"
+const opListDistributions = "ListDistributions2020_05_31"
 
 // ListDistributionsRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -86,12 +86,12 @@ const opListDistributions = "ListDistributions2019_03_26"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListDistributions
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributions
 func (c *Client) ListDistributionsRequest(input *ListDistributionsInput) ListDistributionsRequest {
 	op := &aws.Operation{
 		Name:       opListDistributions,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2019-03-26/distribution",
+		HTTPPath:   "/2020-05-31/distribution",
 		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"DistributionList.NextMarker"},

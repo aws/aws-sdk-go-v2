@@ -36,7 +36,7 @@ type CreateApprovalRuleTemplateInput struct {
 	//    Amazon Resource Name (ARN) of the IAM user or role.
 	//
 	// For more information about IAM ARNs, wildcards, and formats, see IAM Identifiers
-	// (https://docs.aws.amazon.com/iam/latest/UserGuide/reference_identifiers.html)
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html)
 	// in the IAM User Guide.
 	//
 	// ApprovalRuleTemplateContent is a required field

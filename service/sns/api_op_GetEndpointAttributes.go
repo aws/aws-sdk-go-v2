@@ -71,8 +71,8 @@ const opGetEndpointAttributes = "GetEndpointAttributes"
 // Amazon Simple Notification Service.
 //
 // Retrieves the endpoint attributes for a device on one of the supported push
-// notification services, such as FCM and APNS. For more information, see Using
-// Amazon SNS Mobile Push Notifications (https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
+// notification services, such as GCM (Firebase Cloud Messaging) and APNS. For
+// more information, see Using Amazon SNS Mobile Push Notifications (https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
 //
 //    // Example sending a request using GetEndpointAttributesRequest.
 //    req := client.GetEndpointAttributesRequest(params)

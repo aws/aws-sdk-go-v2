@@ -118,29 +118,45 @@ func (s AutoScalingGroupRecommendationOption) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Describes the destination of the recommendations export and metadata files.
+type ExportDestination struct {
+	_ struct{} `type:"structure"`
+
+	// An object that describes the destination Amazon Simple Storage Service (Amazon
+	// S3) bucket name and object keys of a recommendations export file, and its
+	// associated metadata file.
+	S3 *S3Destination `locationName:"s3" type:"structure"`
+}
+
+// String returns the string representation
+func (s ExportDestination) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Describes a filter that returns a more specific list of recommendations.
 type Filter struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the filter.
 	//
-	// Specify Finding to filter the results to a specific findings classification.
+	// Specify Finding to return recommendations with a specific findings classification
+	// (e.g., Overprovisioned).
 	//
-	// Specify RecommendationSourceType to filter the results to a specific resource
-	// type.
+	// Specify RecommendationSourceType to return recommendations of a specific
+	// resource type (e.g., AutoScalingGroup).
 	Name FilterName `locationName:"name" type:"string" enum:"true"`
 
 	// The value of the filter.
 	//
-	// If you specify the name parameter as Finding, and you're recommendations
+	// If you specify the name parameter as Finding, and you request recommendations
 	// for an instance, then the valid values are Underprovisioned, Overprovisioned,
 	// NotOptimized, or Optimized.
 	//
-	// If you specify the name parameter as Finding, and you're recommendations
+	// If you specify the name parameter as Finding, and you request recommendations
 	// for an Auto Scaling group, then the valid values are Optimized, or NotOptimized.
 	//
 	// If you specify the name parameter as RecommendationSourceType, then the valid
-	// values are EC2Instance, or AutoScalingGroup.
+	// values are Ec2Instance, or AutoScalingGroup.
 	Values []string `locationName:"values" type:"list"`
 }
 
@@ -176,7 +192,7 @@ func (s GetRecommendationError) String() string {
 type InstanceRecommendation struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS account ID of the instance recommendation.
+	// The AWS account ID of the instance.
 	AccountId *string `locationName:"accountId" type:"string"`
 
 	// The instance type of the current instance.
@@ -265,6 +281,36 @@ func (s InstanceRecommendationOption) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Describes a filter that returns a more specific list of recommendation export
+// jobs.
+//
+// This filter is used with the DescribeRecommendationExportJobs action.
+type JobFilter struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the filter.
+	//
+	// Specify ResourceType to return export jobs of a specific resource type (e.g.,
+	// Ec2Instance).
+	//
+	// Specify JobStatus to return export jobs with a specific status (e.g, Complete).
+	Name JobFilterName `locationName:"name" type:"string" enum:"true"`
+
+	// The value of the filter.
+	//
+	// If you specify the name parameter as ResourceType, the valid values are Ec2Instance
+	// or AutoScalingGroup.
+	//
+	// If you specify the name parameter as JobStatus, the valid values are Queued,
+	// InProgress, Complete, or Failed.
+	Values []string `locationName:"values" type:"list"`
+}
+
+// String returns the string representation
+func (s JobFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Describes a projected utilization metric of a recommendation option, such
 // as an Amazon EC2 instance.
 type ProjectedMetric struct {
@@ -286,6 +332,43 @@ type ProjectedMetric struct {
 
 // String returns the string representation
 func (s ProjectedMetric) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes a recommendation export job.
+//
+// Use the DescribeRecommendationExportJobs action to view your recommendation
+// export jobs.
+//
+// Use the ExportAutoScalingGroupRecommendations or ExportEC2InstanceRecommendations
+// actions to request an export of your recommendations.
+type RecommendationExportJob struct {
+	_ struct{} `type:"structure"`
+
+	// The timestamp of when the export job was created.
+	CreationTimestamp *time.Time `locationName:"creationTimestamp" type:"timestamp"`
+
+	// An object that describes the destination of the export file.
+	Destination *ExportDestination `locationName:"destination" type:"structure"`
+
+	// The reason for an export job failure.
+	FailureReason *string `locationName:"failureReason" type:"string"`
+
+	// The identification number of the export job.
+	JobId *string `locationName:"jobId" type:"string"`
+
+	// The timestamp of when the export job was last updated.
+	LastUpdatedTimestamp *time.Time `locationName:"lastUpdatedTimestamp" type:"timestamp"`
+
+	// The resource type of the exported recommendations.
+	ResourceType ResourceType `locationName:"resourceType" type:"string" enum:"true"`
+
+	// The status of the export job.
+	Status JobStatus `locationName:"status" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s RecommendationExportJob) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -347,6 +430,59 @@ type RecommendedOptionProjectedMetric struct {
 
 // String returns the string representation
 func (s RecommendedOptionProjectedMetric) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes the destination Amazon Simple Storage Service (Amazon S3) bucket
+// name and object keys of a recommendations export file, and its associated
+// metadata file.
+type S3Destination struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the Amazon S3 bucket used as the destination of an export file.
+	Bucket *string `locationName:"bucket" type:"string"`
+
+	// The Amazon S3 bucket key of an export file.
+	//
+	// The key uniquely identifies the object, or export file, in the S3 bucket.
+	Key *string `locationName:"key" type:"string"`
+
+	// The Amazon S3 bucket key of a metadata file.
+	//
+	// The key uniquely identifies the object, or metadata file, in the S3 bucket.
+	MetadataKey *string `locationName:"metadataKey" type:"string"`
+}
+
+// String returns the string representation
+func (s S3Destination) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes the destination Amazon Simple Storage Service (Amazon S3) bucket
+// name and key prefix for a recommendations export job.
+//
+// You must create the destination Amazon S3 bucket for your recommendations
+// export before you create the export job. Compute Optimizer does not create
+// the S3 bucket for you. After you create the S3 bucket, ensure that it has
+// the required permission policy to allow Compute Optimizer to write the export
+// file to it. If you plan to specify an object prefix when you create the export
+// job, you must include the object prefix in the policy that you add to the
+// S3 bucket. For more information, see Amazon S3 Bucket Policy for Compute
+// Optimizer (https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html)
+// in the Compute Optimizer user guide.
+type S3DestinationConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the Amazon S3 bucket to use as the destination for an export
+	// job.
+	Bucket *string `locationName:"bucket" type:"string"`
+
+	// The Amazon S3 bucket prefix for an export job.
+	KeyPrefix *string `locationName:"keyPrefix" type:"string"`
+}
+
+// String returns the string representation
+func (s S3DestinationConfig) String() string {
 	return awsutil.Prettify(s)
 }
 

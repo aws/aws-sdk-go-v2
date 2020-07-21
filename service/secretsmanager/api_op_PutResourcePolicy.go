@@ -12,6 +12,10 @@ import (
 type PutResourcePolicyInput struct {
 	_ struct{} `type:"structure"`
 
+	// Makes an optional API call to Zelkova to validate the Resource Policy to
+	// prevent broad access to your secret.
+	BlockPublicPolicy *bool `type:"boolean"`
+
 	// A JSON-formatted string that's constructed according to the grammar and syntax
 	// for an AWS resource-based policy. The policy in the string identifies who
 	// can access or manage this secret and its versions. For information on how
@@ -35,7 +39,12 @@ type PutResourcePolicyInput struct {
 	// a partial ARN, then those characters cause Secrets Manager to assume that
 	// you’re specifying a complete ARN. This confusion can cause unexpected results.
 	// To avoid this situation, we recommend that you don’t create secret names
-	// that end with a hyphen followed by six characters.
+	// ending with a hyphen followed by six characters.
+	//
+	// If you specify an incomplete ARN without the random suffix, and instead provide
+	// the 'friendly name', you must not include the random suffix. If you do include
+	// the random suffix added by Secrets Manager, you receive either a ResourceNotFoundException
+	// or an AccessDeniedException error, depending on your permissions.
 	//
 	// SecretId is a required field
 	SecretId *string `min:"1" type:"string" required:"true"`
@@ -73,11 +82,11 @@ func (s *PutResourcePolicyInput) Validate() error {
 type PutResourcePolicyOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the secret that the resource-based policy was retrieved for.
+	// The ARN of the secret retrieved by the resource-based policy.
 	ARN *string `min:"20" type:"string"`
 
-	// The friendly name of the secret that the resource-based policy was retrieved
-	// for.
+	// The friendly name of the secret that the retrieved by the resource-based
+	// policy.
 	Name *string `min:"1" type:"string"`
 }
 
@@ -111,7 +120,7 @@ const opPutResourcePolicy = "PutResourcePolicy"
 //
 // Related operations
 //
-//    * To retrieve the resource policy that's attached to a secret, use GetResourcePolicy.
+//    * To retrieve the resource policy attached to a secret, use GetResourcePolicy.
 //
 //    * To delete the resource-based policy that's attached to a secret, use
 //    DeleteResourcePolicy.

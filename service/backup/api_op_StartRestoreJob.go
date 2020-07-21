@@ -62,15 +62,17 @@ type StartRestoreJobInput struct {
 
 	// Starts a job to restore a recovery point for one of the following resources:
 	//
+	//    * DynamoDB for Amazon DynamoDB
+	//
 	//    * EBS for Amazon Elastic Block Store
 	//
-	//    * Storage Gateway for AWS Storage Gateway
+	//    * EC2 for Amazon Elastic Compute Cloud
+	//
+	//    * EFS for Amazon Elastic File System
 	//
 	//    * RDS for Amazon Relational Database Service
 	//
-	//    * DDB for Amazon DynamoDB
-	//
-	//    * EFS for Amazon Elastic File System
+	//    * Storage Gateway for AWS Storage Gateway
 	ResourceType *string `type:"string"`
 }
 

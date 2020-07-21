@@ -111,6 +111,12 @@ type ClientAPI interface {
 
 	ListPredictorsRequest(*forecast.ListPredictorsInput) forecast.ListPredictorsRequest
 
+	ListTagsForResourceRequest(*forecast.ListTagsForResourceInput) forecast.ListTagsForResourceRequest
+
+	TagResourceRequest(*forecast.TagResourceInput) forecast.TagResourceRequest
+
+	UntagResourceRequest(*forecast.UntagResourceInput) forecast.UntagResourceRequest
+
 	UpdateDatasetGroupRequest(*forecast.UpdateDatasetGroupInput) forecast.UpdateDatasetGroupRequest
 }
 

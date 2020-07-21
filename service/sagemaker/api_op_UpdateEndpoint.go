@@ -99,6 +99,10 @@ const opUpdateEndpoint = "UpdateEndpoint"
 // or while the UpdateEndpoint or CreateEndpoint operations are being performed
 // on the endpoint. To update an endpoint, you must create a new EndpointConfig.
 //
+// If you delete the EndpointConfig of an endpoint that is active or being created
+// or updated you may lose visibility into the instance type the endpoint is
+// using. The endpoint must be deleted in order to stop incurring charges.
+//
 //    // Example sending a request using UpdateEndpointRequest.
 //    req := client.UpdateEndpointRequest(params)
 //    resp, err := req.Send(context.TODO())

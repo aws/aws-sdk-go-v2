@@ -73,7 +73,7 @@ type ListReportsForReportGroupOutput struct {
 	// returned.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
-	// The list of returned report group ARNs.
+	// The list of report ARNs.
 	Reports []string `locationName:"reports" min:"1" type:"list"`
 }
 

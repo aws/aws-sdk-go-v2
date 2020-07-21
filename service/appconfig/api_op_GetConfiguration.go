@@ -147,7 +147,7 @@ type GetConfigurationOutput struct {
 	ConfigurationVersion *string `location:"header" locationName:"Configuration-Version" min:"1" type:"string"`
 
 	// The content of the configuration or the configuration data.
-	Content []byte `type:"blob"`
+	Content []byte `type:"blob" sensitive:"true"`
 
 	// A standard MIME type describing the format of the configuration content.
 	// For more information, see Content-Type (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17).

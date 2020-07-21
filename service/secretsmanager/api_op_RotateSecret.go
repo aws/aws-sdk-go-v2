@@ -22,9 +22,9 @@ type RotateSecretInput struct {
 	// service endpoint, then you must generate a ClientRequestToken yourself for
 	// new versions and include that value in the request.
 	//
-	// You only need to specify your own value if you are implementing your own
-	// retry logic and want to ensure that a given secret is not created twice.
-	// We recommend that you generate a UUID-type (https://wikipedia.org/wiki/Universally_unique_identifier)
+	// You only need to specify your own value if you implement your own retry logic
+	// and want to ensure that a given secret is not created twice. We recommend
+	// that you generate a UUID-type (https://wikipedia.org/wiki/Universally_unique_identifier)
 	// value to ensure uniqueness within the specified secret.
 	//
 	// Secrets Manager uses this value to prevent the accidental creation of duplicate
@@ -51,7 +51,12 @@ type RotateSecretInput struct {
 	// a partial ARN, then those characters cause Secrets Manager to assume that
 	// you’re specifying a complete ARN. This confusion can cause unexpected results.
 	// To avoid this situation, we recommend that you don’t create secret names
-	// that end with a hyphen followed by six characters.
+	// ending with a hyphen followed by six characters.
+	//
+	// If you specify an incomplete ARN without the random suffix, and instead provide
+	// the 'friendly name', you must not include the random suffix. If you do include
+	// the random suffix added by Secrets Manager, you receive either a ResourceNotFoundException
+	// or an AccessDeniedException error, depending on your permissions.
 	//
 	// SecretId is a required field
 	SecretId *string `min:"1" type:"string" required:"true"`
@@ -129,7 +134,7 @@ const opRotateSecret = "RotateSecret"
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html)
 // in the AWS Secrets Manager User Guide.
 //
-// Secrets Manager schedules the next rotation when the previous one is complete.
+// Secrets Manager schedules the next rotation when the previous one completes.
 // Secrets Manager schedules the date by adding the rotation interval (number
 // of days) to the actual date of the last rotation. The service chooses the
 // hour within that 24-hour date window randomly. The minute is also chosen
@@ -144,10 +149,9 @@ const opRotateSecret = "RotateSecret"
 //
 //    * The AWSPENDING staging label is not attached to any version of the secret.
 //
-// If instead the AWSPENDING staging label is present but is not attached to
-// the same version as AWSCURRENT then any later invocation of RotateSecret
-// assumes that a previous rotation request is still in progress and returns
-// an error.
+// If the AWSPENDING staging label is present but not attached to the same version
+// as AWSCURRENT then any later invocation of RotateSecret assumes that a previous
+// rotation request is still in progress and returns an error.
 //
 // Minimum permissions
 //

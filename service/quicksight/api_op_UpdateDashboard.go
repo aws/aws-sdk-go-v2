@@ -35,8 +35,7 @@ type UpdateDashboardInput struct {
 	//    enabled when this is set to DISABLED. This option is ENABLED by default.
 	//
 	//    * VisibilityState for SheetControlsOption - This visibility state can
-	//    be either COLLAPSED or EXPANDED. The sheet controls pane is collapsed
-	//    by default when set to true. This option is COLLAPSED by default.
+	//    be either COLLAPSED or EXPANDED. This option is COLLAPSED by default.
 	DashboardPublishOptions *DashboardPublishOptions `type:"structure"`
 
 	// The display name of the dashboard.
@@ -44,17 +43,32 @@ type UpdateDashboardInput struct {
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	// A structure that contains the parameters of the dashboard.
+	// A structure that contains the parameters of the dashboard. These are parameter
+	// overrides for a dashboard. A dashboard can have any type of parameters, and
+	// some parameters might accept multiple values.
 	Parameters *Parameters `type:"structure"`
 
-	// The template or analysis from which the dashboard is created. The SouceTemplate
-	// entity accepts the Amazon Resource Name (ARN) of the template and also references
-	// to replacement datasets for the placeholders set when creating the template.
-	// The replacement datasets need to follow the same schema as the datasets for
-	// which placeholders were created when creating the template.
+	// The entity that you are using as a source when you update the dashboard.
+	// In SourceEntity, you specify the type of object you're using as source. You
+	// can only update a dashboard from a template, so you use a SourceTemplate
+	// entity. If you need to update a dashboard from an analysis, first convert
+	// the analysis to a template by using the CreateTemplate API operation. For
+	// SourceTemplate, specify the Amazon Resource Name (ARN) of the source template.
+	// The SourceTemplate ARN can contain any AWS Account and any QuickSight-supported
+	// AWS Region.
+	//
+	// Use the DataSetReferences entity within SourceTemplate to list the replacement
+	// datasets for the placeholders listed in the original. The schema in each
+	// dataset must match its placeholder.
 	//
 	// SourceEntity is a required field
 	SourceEntity *DashboardSourceEntity `type:"structure" required:"true"`
+
+	// The Amazon Resource Name (ARN) of the theme that is being used for this dashboard.
+	// If you add a value for this field, it overrides the value that was originally
+	// associated with the entity. The theme ARN must exist in the same AWS account
+	// where you create the dashboard.
+	ThemeArn *string `type:"string"`
 
 	// A description for the first version of the dashboard being created.
 	VersionDescription *string `min:"1" type:"string"`
@@ -140,6 +154,12 @@ func (s UpdateDashboardInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "SourceEntity", v, metadata)
+	}
+	if s.ThemeArn != nil {
+		v := *s.ThemeArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ThemeArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.VersionDescription != nil {
 		v := *s.VersionDescription

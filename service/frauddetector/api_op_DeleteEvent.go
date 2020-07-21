@@ -16,6 +16,11 @@ type DeleteEventInput struct {
 	//
 	// EventId is a required field
 	EventId *string `locationName:"eventId" type:"string" required:"true"`
+
+	// The name of the event type.
+	//
+	// EventTypeName is a required field
+	EventTypeName *string `locationName:"eventTypeName" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -29,6 +34,10 @@ func (s *DeleteEventInput) Validate() error {
 
 	if s.EventId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("EventId"))
+	}
+
+	if s.EventTypeName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EventTypeName"))
 	}
 
 	if invalidParams.Len() > 0 {

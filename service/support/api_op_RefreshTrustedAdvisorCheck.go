@@ -60,26 +60,22 @@ const opRefreshTrustedAdvisorCheck = "RefreshTrustedAdvisorCheck"
 // RefreshTrustedAdvisorCheckRequest returns a request value for making API operation for
 // AWS Support.
 //
-// Requests a refresh of the Trusted Advisor check that has the specified check
-// ID. Check IDs can be obtained by calling DescribeTrustedAdvisorChecks.
+// Refreshes the AWS Trusted Advisor check that you specify using the check
+// ID. You can get the check IDs by calling the DescribeTrustedAdvisorChecks
+// operation.
 //
-// Some checks are refreshed automatically, and they cannot be refreshed by
-// using this operation. Use of the RefreshTrustedAdvisorCheck operation for
-// these checks causes an InvalidParameterValue error.
+// Some checks are refreshed automatically. If you call the RefreshTrustedAdvisorCheck
+// operation to refresh them, you might see the InvalidParameterValue error.
 //
-// The response contains a TrustedAdvisorCheckRefreshStatus object, which contains
-// these fields:
+// The response contains a TrustedAdvisorCheckRefreshStatus object.
 //
-//    * status. The refresh status of the check: none: The check is not refreshed
-//    or the non-success status exceeds the timeout enqueued: The check refresh
-//    requests has entered the refresh queue processing: The check refresh request
-//    is picked up by the rule processing engine success: The check is successfully
-//    refreshed abandoned: The check refresh has failed
+//    * You must have a Business or Enterprise support plan to use the AWS Support
+//    API.
 //
-//    * millisUntilNextRefreshable. The amount of time, in milliseconds, until
-//    the check is eligible for refresh.
-//
-//    * checkId. The unique identifier for the check.
+//    * If you call the AWS Support API from an account that does not have a
+//    Business or Enterprise support plan, the SubscriptionRequiredException
+//    error message appears. For information about changing your support plan,
+//    see AWS Support (http://aws.amazon.com/premiumsupport/).
 //
 //    // Example sending a request using RefreshTrustedAdvisorCheckRequest.
 //    req := client.RefreshTrustedAdvisorCheckRequest(params)

@@ -73,6 +73,9 @@ const opDeleteVoiceConnectorTermination = "DeleteVoiceConnectorTermination"
 //
 // Deletes the termination settings for the specified Amazon Chime Voice Connector.
 //
+// If emergency calling is configured for the Amazon Chime Voice Connector,
+// it must be deleted prior to deleting the termination settings.
+//
 //    // Example sending a request using DeleteVoiceConnectorTerminationRequest.
 //    req := client.DeleteVoiceConnectorTerminationRequest(params)
 //    resp, err := req.Send(context.TODO())
