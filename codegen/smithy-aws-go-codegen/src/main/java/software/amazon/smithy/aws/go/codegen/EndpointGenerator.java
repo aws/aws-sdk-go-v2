@@ -54,7 +54,7 @@ final class EndpointGenerator implements Runnable {
     private static final String INTERNAL_ENDPOINT_PACKAGE = "internal/endpoints";
     private static final String INTERNAL_RESOLVER_NAME = "Resolver";
     private static final String INTERNAL_RESOLVER_OPTIONS_NAME = "Options";
-    private static final String INTERNAL_ENDPOINTS_DATA_NAME = "DefaultPartitions";
+    private static final String INTERNAL_ENDPOINTS_DATA_NAME = "defaultPartitions";
     private static final List<ResolveConfigField> resolveConfigFields = ListUtils.of(
             ResolveConfigField.builder()
                     .name("DisableHTTPS")
@@ -124,7 +124,7 @@ final class EndpointGenerator implements Runnable {
             generateMiddleware(writer);
         });
         writerFactory.accept(INTERNAL_ENDPOINT_PACKAGE + "/endpoints_test.go",
-                getInternalEndpointImportPath() + "_test", (writer) -> {
+                getInternalEndpointImportPath(), (writer) -> {
                     writer.addUseImports(SmithyGoDependency.TESTING);
                     writer.openBlock("func TestRegexCompile(t *testing.T) {", "}", () -> {
                         writer.write("_ = $T", getInternalEndpointsSymbol(INTERNAL_ENDPOINTS_DATA_NAME, false).build());

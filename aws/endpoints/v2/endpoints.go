@@ -24,8 +24,10 @@ type Options struct {
 	DisableHTTPS bool
 }
 
+// Partitions is a slice of partition
 type Partitions []Partition
 
+// ResolveEndpoint resolves a service endpoint for the given region and options.
 func (ps Partitions) ResolveEndpoint(region string, opts Options) (aws.Endpoint, error) {
 	if len(ps) == 0 {
 		return aws.Endpoint{}, fmt.Errorf("no partitions found")
@@ -43,6 +45,7 @@ func (ps Partitions) ResolveEndpoint(region string, opts Options) (aws.Endpoint,
 	return ps[0].ResolveEndpoint(region, opts)
 }
 
+// Partition is an AWS partition description for a service and its' region endpoints.
 type Partition struct {
 	ID                string
 	RegionRegex       *regexp.Regexp
@@ -57,6 +60,7 @@ func (p Partition) canResolveEndpoint(region string) bool {
 	return ok || p.RegionRegex.MatchString(region)
 }
 
+// ResolveEndpoint resolves and service endpoint for the given region and options.
 func (p Partition) ResolveEndpoint(region string, options Options) (resolved aws.Endpoint, err error) {
 	if len(region) == 0 && len(p.PartitionEndpoint) != 0 {
 		region = p.PartitionEndpoint
@@ -81,13 +85,16 @@ func (p Partition) endpointForRegion(region string) (Endpoint, bool) {
 	return Endpoint{}, false
 }
 
+// Endpoints is a map of service config regions to endpoints
 type Endpoints map[string]Endpoint
 
+// CredentialScope is the credential scope of a region and service
 type CredentialScope struct {
 	Region  string
 	Service string
 }
 
+// Endpoint is a service endpoint description
 type Endpoint struct {
 	// True if the endpoint cannot be resolved for this partition/region/service
 	Unresolveable aws.Ternary
