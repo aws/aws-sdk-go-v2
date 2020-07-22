@@ -46,6 +46,7 @@ final class EndpointGenerator implements Runnable {
     public static final String MIDDLEWARE_NAME = "ResolveEndpoint";
     public static final String ADD_MIDDLEWARE_HELPER_NAME = String.format("Add%sMiddleware", MIDDLEWARE_NAME);
     public static final String RESOLVER_INTERFACE_NAME = "EndpointResolver";
+    public static final String RESOLVER_FUNC_NAME = "EndpointResolverFunc";
     public static final String RESOLVER_OPTIONS = "ResolverOptions";
     public static final String CLIENT_CONFIG_RESOLVER = "resolveDefaultEndpointConfiguration";
 
@@ -254,6 +255,18 @@ final class EndpointGenerator implements Runnable {
             writer.write("return $T()", getInternalEndpointsSymbol("New", false)
                     .build());
         });
+
+        // Generate resolver function creator
+        writer.writeDocs(String.format("%s is a helper utility that wraps a function so it satisfies the %s "
+                + "interface. This is useful when you want to add additional endpoint resolving logic, or stub out "
+                + "specific endpoints with custom values.", RESOLVER_FUNC_NAME, RESOLVER_INTERFACE_NAME));
+        writer.write("type $L func(region string, options $T) ($T, error)",
+                RESOLVER_FUNC_NAME, resolverOptionsSymbol, awsEndpointSymbol);
+
+        writer.openBlock("func (fn $L) ResolveEndpoint(region string, options $T) ($T, error) {", "}",
+                RESOLVER_FUNC_NAME, resolverOptionsSymbol, awsEndpointSymbol, () -> {
+            writer.write("return fn(region, options)");
+        }).write("");
 
         // Generate Client Options Configuration Resolver
         writer.openBlock("func $L(o $P) {", "}", CLIENT_CONFIG_RESOLVER,
