@@ -41,7 +41,7 @@ func TestClient_StreamingTraitsRequireLength_awsRestjson1Serialize(t *testing.T)
 				Blob: smithyio.ReadSeekNopCloser{ReadSeeker: bytes.NewReader([]byte("blobby blob blob"))},
 			},
 			ExpectMethod:  "POST",
-			ExpectURIPath: "/StreamingTraits",
+			ExpectURIPath: "/StreamingTraitsRequireLength",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"Content-Type": []string{"application/octet-stream"},
@@ -60,7 +60,7 @@ func TestClient_StreamingTraitsRequireLength_awsRestjson1Serialize(t *testing.T)
 				Foo: ptr.String("Foo"),
 			},
 			ExpectMethod:  "POST",
-			ExpectURIPath: "/StreamingTraits",
+			ExpectURIPath: "/StreamingTraitsRequireLength",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			ExpectHeader: http.Header{
 				"X-Foo": []string{"Foo"},
@@ -97,7 +97,7 @@ func TestClient_StreamingTraitsRequireLength_awsRestjson1Serialize(t *testing.T)
 						return nil
 					},
 				},
-				EndpointResolver: aws.EndpointResolverFunc(func(service, region string) (e aws.Endpoint, err error) {
+				EndpointResolver: EndpointResolverFunc(func(region string, options ResolverOptions) (e aws.Endpoint, err error) {
 					e.URL = server.URL
 					e.SigningRegion = "us-west-2"
 					return e, err
@@ -200,7 +200,7 @@ func TestClient_StreamingTraitsRequireLength_awsRestjson1Deserialize(t *testing.
 						return nil
 					},
 				},
-				EndpointResolver: aws.EndpointResolverFunc(func(service, region string) (e aws.Endpoint, err error) {
+				EndpointResolver: EndpointResolverFunc(func(region string, options ResolverOptions) (e aws.Endpoint, err error) {
 					e.URL = server.URL
 					e.SigningRegion = "us-west-2"
 					return e, err
