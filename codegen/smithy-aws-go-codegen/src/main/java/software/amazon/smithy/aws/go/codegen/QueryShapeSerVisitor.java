@@ -1,31 +1,16 @@
-/*
- * Copyright 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License").
- * You may not use this file except in compliance with the License.
- * A copy of the License is located at
- *
- *  http://aws.amazon.com/apache2.0
- *
- * or in the "license" file accompanying this file. This file is distributed
- * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
- * express or implied. See the License for the specific language governing
- * permissions and limitations under the License.
- */
-
 package software.amazon.smithy.aws.go.codegen;
 
 import static software.amazon.smithy.go.codegen.integration.ProtocolUtils.writeSafeMemberAccessor;
 
 import java.util.Collections;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
+import software.amazon.smithy.go.codegen.GoDependency;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.DocumentShapeSerVisitor;
@@ -38,39 +23,32 @@ import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.shapes.UnionShape;
 import software.amazon.smithy.model.traits.EnumTrait;
-import software.amazon.smithy.model.traits.JsonNameTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait.Format;
+import software.amazon.smithy.model.traits.XmlFlattenedTrait;
+import software.amazon.smithy.model.traits.XmlNameTrait;
 import software.amazon.smithy.utils.FunctionalUtils;
 
 /**
- * Visitor to generate serialization functions for shapes in AWS JSON protocol
+ * Visitor to generate serialization functions for shapes in AWS Query protocol
  * document bodies.
  *
  * This class handles function body generation for all types expected by the
  * {@code DocumentShapeSerVisitor}. No other shape type serialization is overwritten.
  *
- * Timestamps are serialized to {@link Format}.EPOCH_SECONDS by default.
+ * Timestamps are serialized to {@link Format}.DATE_TIME by default.
  */
-final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
-    private static final Format DEFAULT_TIMESTAMP_FORMAT = Format.EPOCH_SECONDS;
+final class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
+    private static final Format DEFAULT_TIMESTAMP_FORMAT = Format.DATE_TIME;
     private static final Logger LOGGER = Logger.getLogger(JsonShapeSerVisitor.class.getName());
 
     private final Predicate<MemberShape> memberFilter;
 
-    /**
-     * @param context The generation context.
-     */
-    public JsonShapeSerVisitor(GenerationContext context) {
+    public QueryShapeSerVisitor(GenerationContext context) {
         this(context, FunctionalUtils.alwaysTrue());
     }
 
-    /**
-     * @param context The generation context.
-     * @param memberFilter A filter that is applied to structure members. This is useful for
-     *     members that won't be in the body.
-     */
-    public JsonShapeSerVisitor(GenerationContext context, Predicate<MemberShape> memberFilter) {
+    public QueryShapeSerVisitor(GenerationContext context, Predicate<MemberShape> memberFilter) {
         super(context);
         this.memberFilter = memberFilter;
     }
@@ -84,42 +62,38 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
 
     @Override
     protected Map<String, String> getAdditionalSerArguments() {
-        return Collections.singletonMap("value", "smithyjson.Value");
+        return Collections.singletonMap("value", "query.Value");
     }
 
     @Override
     protected void serializeCollection(GenerationContext context, CollectionShape shape) {
         GoWriter writer = context.getWriter();
-        Shape target = context.getModel().expectShape(shape.getMember().getTarget());
+        MemberShape member = shape.getMember();
+        Shape target = context.getModel().expectShape(member.getTarget());
 
-        writer.write("array := value.Array()");
-        writer.write("defer array.Close()");
+        writer.write("array := value.Array($S)", getSerializedLocationName(member, "member"));
         writer.write("");
 
         writer.openBlock("for i := range v {", "}", () -> {
             writer.write("av := array.Value()");
 
-            // Null values in lists should be serialized as such. Enums can't be null, so we don't bother
-            // putting this in for their case.
+            // Null values should be omitted for query.
             if (!target.hasTrait(EnumTrait.class)) {
                 writer.openBlock("if vv := v[i]; vv == nil {", "}", () -> {
-                    writer.write("av.Null()");
                     writer.write("continue");
                 });
             }
 
             target.accept(getMemberSerVisitor(shape.getMember(), "v[i]", "av"));
         });
-
         writer.write("return nil");
     }
 
     @Override
     protected void serializeDocument(GenerationContext context, DocumentShape shape) {
-        // TODO: implement document serialization
-        LOGGER.warning("Document type is currently unsupported for JSON serialization.");
-        context.getWriter().writeDocs("TODO: implement document serialization.");
-        context.getWriter().write("return nil");
+        LOGGER.warning("Document type is unsupported for Query serialization.");
+        context.getWriter().write("return &smithy.SerializationError{Err: fmt.Errorf("
+                + "\"Document type is unsupported for the query protocol.\")}");
     }
 
     @Override
@@ -127,18 +101,27 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
         GoWriter writer = context.getWriter();
         Shape target = context.getModel().expectShape(shape.getValue().getTarget());
 
-        writer.write("object := value.Object()");
-        writer.write("defer object.Close()");
+        String keyLocationName = getSerializedLocationName(shape.getKey(), "key");
+        String valueLocationName = getSerializedLocationName(shape.getValue(), "value");
+        writer.write("object := value.Map($S, $S)", keyLocationName, valueLocationName);
         writer.write("");
 
-        writer.openBlock("for key := range v {", "}", () -> {
+        // Create a sorted list of the map's keys so we can have a stable body.
+        // Ideally this would be a function we dispatch to, but the lack of generics make
+        // that impractical since you can't make a function for a map[string]any
+        writer.write("keys := make([]string, 0, len(v))");
+        writer.write("for key := range v { keys = append(keys, key) }");
+        writer.addUseImports(GoDependency.standardLibraryDependency("sort", "1.14"));
+        writer.write("sort.Strings(keys)");
+        writer.write("");
+
+        writer.addUseImports(SmithyGoDependency.FMT);
+        writer.openBlock("for _, key := range keys {", "}", () -> {
             writer.write("om := object.Key(key)");
 
-            // Null values in maps should be serialized as such. Enums can't be null, so we don't bother
-            // putting this in for their case.
+            // Null values should be omitted for query.
             if (!target.hasTrait(EnumTrait.class)) {
                 writer.openBlock("if vv := v[key]; vv == nil {", "}", () -> {
-                    writer.write("om.Null()");
                     writer.write("continue");
                 });
             }
@@ -152,9 +135,8 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
     @Override
     protected void serializeStructure(GenerationContext context, StructureShape shape) {
         GoWriter writer = context.getWriter();
-
         writer.write("object := value.Object()");
-        writer.write("defer object.Close()");
+        writer.write("_ = object");
         writer.write("");
 
         // Use a TreeSet to sort the members.
@@ -164,9 +146,13 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
                 continue;
             }
             Shape target = context.getModel().expectShape(member.getTarget());
-            String serializedMemberName = getSerializedMemberName(member);
             writeSafeMemberAccessor(context, member, "v", (operand) -> {
-                writer.write("ok := object.Key($S)", serializedMemberName);
+                String locationName = getSerializedLocationName(member, member.getMemberName());
+                if (isFlattened(context, member)) {
+                    writer.write("ok := object.FlatKey($S)", locationName);
+                } else {
+                    writer.write("ok := object.Key($S)", locationName);
+                }
                 target.accept(getMemberSerVisitor(member, operand, "ok"));
             });
             writer.write("");
@@ -175,9 +161,30 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
         writer.write("return nil");
     }
 
-    private String getSerializedMemberName(MemberShape memberShape) {
-        Optional<JsonNameTrait> jsonNameTrait = memberShape.getTrait(JsonNameTrait.class);
-        return jsonNameTrait.isPresent() ? jsonNameTrait.get().getValue() : memberShape.getMemberName();
+    /**
+     * Retrieves the correct serialization location based on the member's
+     * xmlName trait or uses the default value.
+     *
+     * @param memberShape The member being serialized.
+     * @param defaultValue A default value for the location.
+     * @return The location where the member will be serialized.
+     */
+    protected String getSerializedLocationName(MemberShape memberShape, String defaultValue) {
+        return memberShape.getTrait(XmlNameTrait.class)
+                .map(XmlNameTrait::getValue)
+                .orElse(defaultValue);
+    }
+
+    /**
+     * Tells whether the contents of the member should be flattened
+     * when serialized.
+     *
+     * @param context The generation context.
+     * @param memberShape The member being serialized.
+     * @return If the member's contents should be flattened when serialized.
+     */
+    protected boolean isFlattened(GenerationContext context, MemberShape memberShape) {
+        return memberShape.hasTrait(XmlFlattenedTrait.class);
     }
 
     @Override
@@ -188,7 +195,6 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
         writer.addUseImports(SmithyGoDependency.FMT);
 
         writer.write("object := value.Object()");
-        writer.write("defer object.Close()");
         writer.write("");
 
         writer.openBlock("switch uv := v.(type) {", "}", () -> {
@@ -196,11 +202,15 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
             Set<MemberShape> members = new TreeSet<>(shape.getAllMembers().values());
             for (MemberShape member : members) {
                 Shape target = context.getModel().expectShape(member.getTarget());
-                Symbol memberSymbol = symbolProvider.toSymbol(member);
                 String exportedMemberName = symbol.getName() + symbolProvider.toMemberName(member);
 
                 writer.openBlock("case *$L:", "", exportedMemberName, () -> {
-                    writer.write("av := object.Key($S)", memberSymbol.getName());
+                    String locationName = getSerializedLocationName(member, member.getMemberName());
+                    if (isFlattened(context, member)) {
+                        writer.write("ok := object.FlatKey($S)", locationName);
+                    } else {
+                        writer.write("ok := object.Key($S)", locationName);
+                    }
                     target.accept(getMemberSerVisitor(member, "uv.Value()", "av"));
                 });
             }
