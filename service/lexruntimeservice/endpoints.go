@@ -27,6 +27,16 @@ var _ EndpointResolver = &internalendpoints.Resolver{}
 func NewDefaultEndpointResolver() *internalendpoints.Resolver {
 	return internalendpoints.New()
 }
+
+// EndpointResolverFunc is a helper utility that wraps a function so it satisfies
+// the EndpointResolver interface. This is useful when you want to add additional
+// endpoint resolving logic, or stub out specific endpoints with custom values.
+type EndpointResolverFunc func(region string, options ResolverOptions) (aws.Endpoint, error)
+
+func (fn EndpointResolverFunc) ResolveEndpoint(region string, options ResolverOptions) (aws.Endpoint, error) {
+	return fn(region, options)
+}
+
 func resolveDefaultEndpointConfiguration(o *Options) {
 	if o.EndpointResolver != nil {
 		return
