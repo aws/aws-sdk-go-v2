@@ -51,13 +51,13 @@ import software.amazon.smithy.model.traits.TimestampFormatTrait.Format;
 /**
  * Visitor to generate member values for aggregate types serialized in documents.
  */
-public class JsonMemberSerVisitor implements ShapeVisitor<Void> {
+public class DocumentMemberSerVisitor implements ShapeVisitor<Void> {
     private final GenerationContext context;
     private final String dataSource;
     private final String dataDest;
     private final Format timestampFormat;
 
-    public JsonMemberSerVisitor(
+    public DocumentMemberSerVisitor(
             GenerationContext context,
             String dataSource,
             String dataDest,
