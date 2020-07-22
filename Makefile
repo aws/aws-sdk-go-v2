@@ -92,10 +92,10 @@ ci-test-generate-validate:
 
 
 test-protocols:
-	./test_submodules.sh ~+/internal/protocoltest "go test -run NONE ./..."
+	./test_submodules.sh `pwd`/internal/protocoltest "go test -count 1 -run NONE ./..."
 
 test-services:
-	./test_submodules.sh ~+/service "go test -run NONE ./..."
+	./test_submodules.sh `pwd`/service "go test -count 1 -run NONE ./..."
 
 #######################
 # Integration Testing #
