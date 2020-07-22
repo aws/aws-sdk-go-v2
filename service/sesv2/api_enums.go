@@ -161,6 +161,7 @@ const (
 	EventTypeOpen             EventType = "OPEN"
 	EventTypeClick            EventType = "CLICK"
 	EventTypeRenderingFailure EventType = "RENDERING_FAILURE"
+	EventTypeDeliveryDelay    EventType = "DELIVERY_DELAY"
 )
 
 func (enum EventType) MarshalValue() (string, error) {

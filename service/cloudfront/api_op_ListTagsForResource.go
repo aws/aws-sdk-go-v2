@@ -77,7 +77,7 @@ func (s ListTagsForResourceOutput) MarshalFields(e protocol.FieldEncoder) error 
 	return nil
 }
 
-const opListTagsForResource = "ListTagsForResource2019_03_26"
+const opListTagsForResource = "ListTagsForResource2020_05_31"
 
 // ListTagsForResourceRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -91,12 +91,12 @@ const opListTagsForResource = "ListTagsForResource2019_03_26"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListTagsForResource
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListTagsForResource
 func (c *Client) ListTagsForResourceRequest(input *ListTagsForResourceInput) ListTagsForResourceRequest {
 	op := &aws.Operation{
 		Name:       opListTagsForResource,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2019-03-26/tagging",
+		HTTPPath:   "/2020-05-31/tagging",
 	}
 
 	if input == nil {

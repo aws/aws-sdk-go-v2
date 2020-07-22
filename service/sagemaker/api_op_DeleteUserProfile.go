@@ -62,7 +62,8 @@ const opDeleteUserProfile = "DeleteUserProfile"
 // DeleteUserProfileRequest returns a request value for making API operation for
 // Amazon SageMaker Service.
 //
-// Deletes a user profile.
+// Deletes a user profile. When a user profile is deleted, the user loses access
+// to their EFS volume, including data, notebooks, and other artifacts.
 //
 //    // Example sending a request using DeleteUserProfileRequest.
 //    req := client.DeleteUserProfileRequest(params)

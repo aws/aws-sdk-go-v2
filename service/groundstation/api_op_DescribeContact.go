@@ -61,6 +61,9 @@ type DescribeContactOutput struct {
 	// Status of a contact.
 	ContactStatus ContactStatus `locationName:"contactStatus" type:"string" enum:"true"`
 
+	// List describing source and destination details for each dataflow edge.
+	DataflowList []DataflowDetail `locationName:"dataflowList" type:"list"`
+
 	// End time of a contact.
 	EndTime *time.Time `locationName:"endTime" type:"timestamp"`
 
@@ -115,6 +118,18 @@ func (s DescribeContactOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "contactStatus", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.DataflowList != nil {
+		v := s.DataflowList
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "dataflowList", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.EndTime != nil {
 		v := *s.EndTime

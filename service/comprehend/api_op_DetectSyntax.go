@@ -23,7 +23,7 @@ type DetectSyntaxInput struct {
 	// characters.
 	//
 	// Text is a required field
-	Text *string `min:"1" type:"string" required:"true"`
+	Text *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -52,7 +52,7 @@ func (s *DetectSyntaxInput) Validate() error {
 }
 
 type DetectSyntaxOutput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" sensitive:"true"`
 
 	// A collection of syntax tokens describing the text. For each token, the response
 	// provides the text, the token type, where the text begins and ends, and the

@@ -111,6 +111,8 @@ const opCreatePortfolio = "CreatePortfolio"
 //
 // Creates a portfolio.
 //
+// A delegated admin is authorized to invoke this command.
+//
 //    // Example sending a request using CreatePortfolioRequest.
 //    req := client.CreatePortfolioRequest(params)
 //    resp, err := req.Send(context.TODO())

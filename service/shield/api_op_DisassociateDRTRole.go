@@ -32,7 +32,7 @@ const opDisassociateDRTRole = "DisassociateDRTRole"
 // DisassociateDRTRoleRequest returns a request value for making API operation for
 // AWS Shield.
 //
-// Removes the DDoS Response team's (DRT) access to your AWS account.
+// Removes the DDoS Response Team's (DRT) access to your AWS account.
 //
 // To make a DisassociateDRTRole request, you must be subscribed to the Business
 // Support plan (https://aws.amazon.com/premiumsupport/business-support/) or

@@ -22,9 +22,9 @@ import (
 //
 //    * ActivateGatewayInput$GatewayType
 //
-//    * ActivateGatewayInput$TapeDriveType
-//
 //    * ActivateGatewayInput$MediumChangerType
+//
+//    * ActivateGatewayInput$TapeDriveType
 type ActivateGatewayInput struct {
 	_ struct{} `type:"structure"`
 
@@ -36,8 +36,8 @@ type ActivateGatewayInput struct {
 	// defaults -- the arguments you pass to the ActivateGateway API call determine
 	// the actual configuration of your gateway.
 	//
-	// For more information, see https://docs.aws.amazon.com/storagegateway/latest/userguide/get-activation-key.html
-	// in the Storage Gateway User Guide.
+	// For more information, see Getting activation key (https://docs.aws.amazon.com/storagegateway/latest/userguide/get-activation-key.html)
+	// in the AWS Storage Gateway User Guide.
 	//
 	// ActivationKey is a required field
 	ActivationKey *string `min:"1" type:"string" required:"true"`
@@ -50,11 +50,11 @@ type ActivateGatewayInput struct {
 	// A value that indicates the AWS Region where you want to store your data.
 	// The gateway AWS Region specified must be the same AWS Region as the AWS Region
 	// in your Host header in the request. For more information about available
-	// AWS Regions and endpoints for AWS Storage Gateway, see Regions and Endpoints
-	// (https://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region) in the
-	// Amazon Web Services Glossary.
+	// AWS Regions and endpoints for AWS Storage Gateway, see AWS Storage Gateway
+	// endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/sg.html)
+	// in the AWS General Reference.
 	//
-	// Valid Values: See AWS Storage Gateway Regions and Endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region)
+	// Valid Values: See AWS Storage Gateway endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/sg.html)
 	// in the AWS General Reference.
 	//
 	// GatewayRegion is a required field
@@ -73,13 +73,13 @@ type ActivateGatewayInput struct {
 	// is critical to all later functions of the gateway and cannot be changed after
 	// activation. The default value is CACHED.
 	//
-	// Valid Values: "STORED", "CACHED", "VTL", "FILE_S3"
+	// Valid Values: STORED | CACHED | VTL | FILE_S3
 	GatewayType *string `min:"2" type:"string"`
 
 	// The value that indicates the type of medium changer to use for tape gateway.
 	// This field is optional.
 	//
-	// Valid Values: "STK-L700", "AWS-Gateway-VTL"
+	// Valid Values: STK-L700 | AWS-Gateway-VTL
 	MediumChangerType *string `min:"2" type:"string"`
 
 	// A list of up to 50 tags that you can assign to the gateway. Each tag is a
@@ -94,7 +94,7 @@ type ActivateGatewayInput struct {
 	// The value that indicates the type of tape drive to use for tape gateway.
 	// This field is optional.
 	//
-	// Valid Values: "IBM-ULT3580-TD5"
+	// Valid Values: IBM-ULT3580-TD5
 	TapeDriveType *string `min:"2" type:"string"`
 }
 
@@ -187,8 +187,8 @@ const opActivateGateway = "ActivateGateway"
 // process, you specify information such as the AWS Region that you want to
 // use for storing snapshots or tapes, the time zone for scheduled snapshots
 // the gateway snapshot schedule window, an activation key, and a name for your
-// gateway. The activation process also associates your gateway with your account;
-// for more information, see UpdateGatewayInformation.
+// gateway. The activation process also associates your gateway with your account.
+// For more information, see UpdateGatewayInformation.
 //
 // You must turn on the gateway VM before you can activate your gateway.
 //

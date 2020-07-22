@@ -17,7 +17,7 @@ type UpdateCloudFrontOriginAccessIdentityInput struct {
 	// The identity's configuration information.
 	//
 	// CloudFrontOriginAccessIdentityConfig is a required field
-	CloudFrontOriginAccessIdentityConfig *CloudFrontOriginAccessIdentityConfig `locationName:"CloudFrontOriginAccessIdentityConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
+	CloudFrontOriginAccessIdentityConfig *CloudFrontOriginAccessIdentityConfig `locationName:"CloudFrontOriginAccessIdentityConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2020-05-31/"`
 
 	// The identity's id.
 	//
@@ -75,7 +75,7 @@ func (s UpdateCloudFrontOriginAccessIdentityInput) MarshalFields(e protocol.Fiel
 	if s.CloudFrontOriginAccessIdentityConfig != nil {
 		v := s.CloudFrontOriginAccessIdentityConfig
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2020-05-31/"}
 		e.SetFields(protocol.PayloadTarget, "CloudFrontOriginAccessIdentityConfig", v, metadata)
 	}
 	return nil
@@ -114,7 +114,7 @@ func (s UpdateCloudFrontOriginAccessIdentityOutput) MarshalFields(e protocol.Fie
 	return nil
 }
 
-const opUpdateCloudFrontOriginAccessIdentity = "UpdateCloudFrontOriginAccessIdentity2019_03_26"
+const opUpdateCloudFrontOriginAccessIdentity = "UpdateCloudFrontOriginAccessIdentity2020_05_31"
 
 // UpdateCloudFrontOriginAccessIdentityRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -128,12 +128,12 @@ const opUpdateCloudFrontOriginAccessIdentity = "UpdateCloudFrontOriginAccessIden
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateCloudFrontOriginAccessIdentity
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateCloudFrontOriginAccessIdentity
 func (c *Client) UpdateCloudFrontOriginAccessIdentityRequest(input *UpdateCloudFrontOriginAccessIdentityInput) UpdateCloudFrontOriginAccessIdentityRequest {
 	op := &aws.Operation{
 		Name:       opUpdateCloudFrontOriginAccessIdentity,
 		HTTPMethod: "PUT",
-		HTTPPath:   "/2019-03-26/origin-access-identity/cloudfront/{Id}/config",
+		HTTPPath:   "/2020-05-31/origin-access-identity/cloudfront/{Id}/config",
 	}
 
 	if input == nil {

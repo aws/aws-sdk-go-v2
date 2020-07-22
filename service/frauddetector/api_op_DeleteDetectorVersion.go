@@ -20,7 +20,7 @@ type DeleteDetectorVersionInput struct {
 	// The ID of the detector version to delete.
 	//
 	// DetectorVersionId is a required field
-	DetectorVersionId *string `locationName:"detectorVersionId" min:"1" type:"string" required:"true"`
+	DetectorVersionId *string `locationName:"detectorVersionId" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -41,9 +41,6 @@ func (s *DeleteDetectorVersionInput) Validate() error {
 
 	if s.DetectorVersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorVersionId"))
-	}
-	if s.DetectorVersionId != nil && len(*s.DetectorVersionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DetectorVersionId", 1))
 	}
 
 	if invalidParams.Len() > 0 {

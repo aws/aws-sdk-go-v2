@@ -292,6 +292,10 @@ type Comment struct {
 	// The Amazon Resource Name (ARN) of the person who posted the comment.
 	AuthorArn *string `locationName:"authorArn" type:"string"`
 
+	// The emoji reactions to a comment, if any, submitted by the user whose credentials
+	// are associated with the call to the API.
+	CallerReactions []string `locationName:"callerReactions" type:"list"`
+
 	// A unique, client-generated idempotency token that, when provided in a request,
 	// ensures the request cannot be repeated with a changed parameter. If a request
 	// is received with the same parameters and a token is included, the request
@@ -315,6 +319,10 @@ type Comment struct {
 
 	// The date and time the comment was most recently modified, in timestamp format.
 	LastModifiedDate *time.Time `locationName:"lastModifiedDate" type:"timestamp"`
+
+	// A string to integer map that represents the number of individual users who
+	// have responded to a comment with the specified reactions.
+	ReactionCounts map[string]int64 `locationName:"reactionCounts" type:"map"`
 }
 
 // String returns the string representation
@@ -1163,6 +1171,50 @@ func (s *PutFileEntry) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Information about the reaction values provided by users on a comment.
+type ReactionForComment struct {
+	_ struct{} `type:"structure"`
+
+	// The reaction for a specified comment.
+	Reaction *ReactionValueFormats `locationName:"reaction" type:"structure"`
+
+	// The Amazon Resource Names (ARNs) of users who have provided reactions to
+	// the comment.
+	ReactionUsers []string `locationName:"reactionUsers" type:"list"`
+
+	// A numerical count of users who reacted with the specified emoji whose identities
+	// have been subsequently deleted from IAM. While these IAM users or roles no
+	// longer exist, the reactions might still appear in total reaction counts.
+	ReactionsFromDeletedUsersCount *int64 `locationName:"reactionsFromDeletedUsersCount" type:"integer"`
+}
+
+// String returns the string representation
+func (s ReactionForComment) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about the values for reactions to a comment. AWS CodeCommit supports
+// a limited set of reactions.
+type ReactionValueFormats struct {
+	_ struct{} `type:"structure"`
+
+	// The Emoji Version 1.0 graphic of the reaction. These graphics are interpreted
+	// slightly differently on different operating systems.
+	Emoji *string `locationName:"emoji" type:"string"`
+
+	// The emoji short code for the reaction. Short codes are interpreted slightly
+	// differently on different operating systems.
+	ShortCode *string `locationName:"shortCode" type:"string"`
+
+	// The Unicode codepoint for the reaction.
+	Unicode *string `locationName:"unicode" type:"string"`
+}
+
+// String returns the string representation
+func (s ReactionValueFormats) String() string {
+	return awsutil.Prettify(s)
 }
 
 // Information about a replacement content entry in the conflict of a merge

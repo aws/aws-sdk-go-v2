@@ -63,8 +63,8 @@ const opUntagResource = "UntagResource"
 // UntagResourceRequest returns a request value for making API operation for
 // Amazon CloudWatch Events.
 //
-// Removes one or more tags from the specified EventBridge resource. In CloudWatch
-// Events, rules and event buses can be tagged.
+// Removes one or more tags from the specified EventBridge resource. In Amazon
+// EventBridge (CloudWatch Events, rules and event buses can be tagged.
 //
 //    // Example sending a request using UntagResourceRequest.
 //    req := client.UntagResourceRequest(params)

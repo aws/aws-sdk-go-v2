@@ -63,13 +63,19 @@ import (
 type ClientAPI interface {
 	AssociateAdminAccountRequest(*fms.AssociateAdminAccountInput) fms.AssociateAdminAccountRequest
 
+	DeleteAppsListRequest(*fms.DeleteAppsListInput) fms.DeleteAppsListRequest
+
 	DeleteNotificationChannelRequest(*fms.DeleteNotificationChannelInput) fms.DeleteNotificationChannelRequest
 
 	DeletePolicyRequest(*fms.DeletePolicyInput) fms.DeletePolicyRequest
 
+	DeleteProtocolsListRequest(*fms.DeleteProtocolsListInput) fms.DeleteProtocolsListRequest
+
 	DisassociateAdminAccountRequest(*fms.DisassociateAdminAccountInput) fms.DisassociateAdminAccountRequest
 
 	GetAdminAccountRequest(*fms.GetAdminAccountInput) fms.GetAdminAccountRequest
+
+	GetAppsListRequest(*fms.GetAppsListInput) fms.GetAppsListRequest
 
 	GetComplianceDetailRequest(*fms.GetComplianceDetailInput) fms.GetComplianceDetailRequest
 
@@ -79,17 +85,29 @@ type ClientAPI interface {
 
 	GetProtectionStatusRequest(*fms.GetProtectionStatusInput) fms.GetProtectionStatusRequest
 
+	GetProtocolsListRequest(*fms.GetProtocolsListInput) fms.GetProtocolsListRequest
+
+	GetViolationDetailsRequest(*fms.GetViolationDetailsInput) fms.GetViolationDetailsRequest
+
+	ListAppsListsRequest(*fms.ListAppsListsInput) fms.ListAppsListsRequest
+
 	ListComplianceStatusRequest(*fms.ListComplianceStatusInput) fms.ListComplianceStatusRequest
 
 	ListMemberAccountsRequest(*fms.ListMemberAccountsInput) fms.ListMemberAccountsRequest
 
 	ListPoliciesRequest(*fms.ListPoliciesInput) fms.ListPoliciesRequest
 
+	ListProtocolsListsRequest(*fms.ListProtocolsListsInput) fms.ListProtocolsListsRequest
+
 	ListTagsForResourceRequest(*fms.ListTagsForResourceInput) fms.ListTagsForResourceRequest
+
+	PutAppsListRequest(*fms.PutAppsListInput) fms.PutAppsListRequest
 
 	PutNotificationChannelRequest(*fms.PutNotificationChannelInput) fms.PutNotificationChannelRequest
 
 	PutPolicyRequest(*fms.PutPolicyInput) fms.PutPolicyRequest
+
+	PutProtocolsListRequest(*fms.PutProtocolsListInput) fms.PutProtocolsListRequest
 
 	TagResourceRequest(*fms.TagResourceInput) fms.TagResourceRequest
 

@@ -13,7 +13,8 @@ import (
 type DescribeRecommendationFeedbackInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) that identifies the code review.
+	// The Amazon Resource Name (ARN) of the CodeReview (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
+	// object.
 	//
 	// CodeReviewArn is a required field
 	CodeReviewArn *string `location:"uri" locationName:"CodeReviewArn" min:"1" type:"string" required:"true"`
@@ -26,6 +27,11 @@ type DescribeRecommendationFeedbackInput struct {
 
 	// Optional parameter to describe the feedback for a given user. If this is
 	// not supplied, it defaults to the user making the request.
+	//
+	// The UserId is an IAM principal that can be specified as an AWS account ID
+	// or an Amazon Resource Name (ARN). For more information, see Specifying a
+	// Principal (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying)
+	// in the AWS Identity and Access Management User Guide.
 	UserId *string `location:"querystring" locationName:"UserId" min:"1" type:"string"`
 }
 

@@ -129,7 +129,9 @@ type AllocatePublicVirtualInterfaceOutput struct {
 	// The ID of the virtual interface.
 	VirtualInterfaceId *string `locationName:"virtualInterfaceId" type:"string"`
 
-	// The name of the virtual interface assigned by the customer network.
+	// The name of the virtual interface assigned by the customer network. The name
+	// has a maximum of 100 characters. The following are valid characters: a-z,
+	// 0-9 and a hyphen (-).
 	VirtualInterfaceName *string `locationName:"virtualInterfaceName" type:"string"`
 
 	// The state of the virtual interface. The following are the possible values:

@@ -24,7 +24,7 @@ type DescribeFileSystemsInput struct {
 	// (Optional) Opaque pagination token returned from a previous DescribeFileSystems
 	// operation (String). If present, specifies to continue the list from where
 	// the returning call had left off.
-	Marker *string `location:"querystring" locationName:"Marker" type:"string"`
+	Marker *string `location:"querystring" locationName:"Marker" min:"1" type:"string"`
 
 	// (Optional) Specifies the maximum number of file systems to return in the
 	// response (integer). This number is automatically set to 100. The response
@@ -42,6 +42,9 @@ func (s *DescribeFileSystemsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeFileSystemsInput"}
 	if s.CreationToken != nil && len(*s.CreationToken) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CreationToken", 1))
+	}
+	if s.Marker != nil && len(*s.Marker) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 	if s.MaxItems != nil && *s.MaxItems < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
@@ -91,11 +94,11 @@ type DescribeFileSystemsOutput struct {
 	FileSystems []FileSystemDescription `type:"list"`
 
 	// Present if provided by caller in the request (String).
-	Marker *string `type:"string"`
+	Marker *string `min:"1" type:"string"`
 
 	// Present if there are more file systems than returned in the response (String).
 	// You can use the NextMarker in the subsequent request to fetch the descriptions.
-	NextMarker *string `type:"string"`
+	NextMarker *string `min:"1" type:"string"`
 }
 
 // String returns the string representation

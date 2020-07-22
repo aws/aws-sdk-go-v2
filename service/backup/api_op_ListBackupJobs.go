@@ -14,6 +14,10 @@ import (
 type ListBackupJobsInput struct {
 	_ struct{} `type:"structure"`
 
+	// The account ID to list the jobs from. Returns only backup jobs associated
+	// with the specified account ID.
+	ByAccountId *string `location:"querystring" locationName:"accountId" type:"string"`
+
 	// Returns only backup jobs that will be stored in the specified backup vault.
 	// Backup vaults are identified by names that are unique to the account used
 	// to create them and the AWS Region where they are created. They consist of
@@ -35,6 +39,8 @@ type ListBackupJobsInput struct {
 	//    * DynamoDB for Amazon DynamoDB
 	//
 	//    * EBS for Amazon Elastic Block Store
+	//
+	//    * EC2 for Amazon Elastic Compute Cloud
 	//
 	//    * EFS for Amazon Elastic File System
 	//
@@ -78,6 +84,12 @@ func (s *ListBackupJobsInput) Validate() error {
 func (s ListBackupJobsInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
+	if s.ByAccountId != nil {
+		v := *s.ByAccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.ByBackupVaultName != nil {
 		v := *s.ByBackupVaultName
 

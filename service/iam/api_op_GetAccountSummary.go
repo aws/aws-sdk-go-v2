@@ -39,8 +39,8 @@ const opGetAccountSummary = "GetAccountSummary"
 //
 // Retrieves information about IAM entity usage and IAM quotas in the AWS account.
 //
-// For information about limitations on IAM entities, see Limitations on IAM
-// Entities (https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html)
+// The number and size of IAM resources in an AWS account are limited. For more
+// information, see IAM and STS Quotas (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html)
 // in the IAM User Guide.
 //
 //    // Example sending a request using GetAccountSummaryRequest.

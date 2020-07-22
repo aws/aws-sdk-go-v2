@@ -97,11 +97,19 @@ type ClientAPI interface {
 
 	ListUsersRequest(*connect.ListUsersInput) connect.ListUsersRequest
 
+	ResumeContactRecordingRequest(*connect.ResumeContactRecordingInput) connect.ResumeContactRecordingRequest
+
 	StartChatContactRequest(*connect.StartChatContactInput) connect.StartChatContactRequest
+
+	StartContactRecordingRequest(*connect.StartContactRecordingInput) connect.StartContactRecordingRequest
 
 	StartOutboundVoiceContactRequest(*connect.StartOutboundVoiceContactInput) connect.StartOutboundVoiceContactRequest
 
 	StopContactRequest(*connect.StopContactInput) connect.StopContactRequest
+
+	StopContactRecordingRequest(*connect.StopContactRecordingInput) connect.StopContactRecordingRequest
+
+	SuspendContactRecordingRequest(*connect.SuspendContactRecordingInput) connect.SuspendContactRecordingRequest
 
 	TagResourceRequest(*connect.TagResourceInput) connect.TagResourceRequest
 

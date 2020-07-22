@@ -18,8 +18,8 @@ type ListRepositoryAssociationsInput struct {
 	// only returns maxResults results in a single page with a nextToken response
 	// element. The remaining results of the initial request can be seen by sending
 	// another ListRepositoryAssociations request with the returned nextToken value.
-	// This value can be between 1 and 25. If this parameter is not used, ListRepositoryAssociations
-	// returns up to 25 results and a nextToken value if applicable.
+	// This value can be between 1 and 100. If this parameter is not used, ListRepositoryAssociations
+	// returns up to 100 results and a nextToken value if applicable.
 	MaxResults *int64 `location:"querystring" locationName:"MaxResults" min:"1" type:"integer"`
 
 	// List of repository names to use as a filter.
@@ -34,15 +34,33 @@ type ListRepositoryAssociationsInput struct {
 	// next items in a list and not for other programmatic purposes.
 	NextToken *string `location:"querystring" locationName:"NextToken" min:"1" type:"string"`
 
-	// List of owners to use as a filter. For GitHub, this is name of the GitHub
-	// account that was used to associate the repository. For AWS CodeCommit, it
-	// is the name of the CodeCommit account that was used to associate the repository.
+	// List of owners to use as a filter. For AWS CodeCommit, it is the name of
+	// the CodeCommit account that was used to associate the repository. For other
+	// repository source providers, such as Bitbucket, this is name of the account
+	// that was used to associate the repository.
 	Owners []string `location:"querystring" locationName:"Owner" min:"1" type:"list"`
 
 	// List of provider types to use as a filter.
 	ProviderTypes []ProviderType `location:"querystring" locationName:"ProviderType" min:"1" type:"list"`
 
-	// List of states to use as a filter.
+	// List of repository association states to use as a filter.
+	//
+	// The valid repository association states are:
+	//
+	//    * Associated: The repository association is complete.
+	//
+	//    * Associating: CodeGuru Reviewer is: Setting up pull request notifications.
+	//    This is required for pull requests to trigger a CodeGuru Reviewer review.
+	//    If your repository ProviderType is GitHub or Bitbucket, CodeGuru Reviewer
+	//    creates webhooks in your repository to trigger CodeGuru Reviewer reviews.
+	//    If you delete these webhooks, reviews of code in your repository cannot
+	//    be triggered. Setting up source code access. This is required for CodeGuru
+	//    Reviewer to securely clone code in your repository.
+	//
+	//    * Failed: The repository failed to associate or disassociate.
+	//
+	//    * Disassociating: CodeGuru Reviewer is removing the repository's pull
+	//    request notifications and source code access.
 	States []RepositoryAssociationState `location:"querystring" locationName:"State" min:"1" type:"list"`
 }
 
@@ -192,9 +210,12 @@ const opListRepositoryAssociations = "ListRepositoryAssociations"
 // ListRepositoryAssociationsRequest returns a request value for making API operation for
 // Amazon CodeGuru Reviewer.
 //
-// Lists repository associations. You can optionally filter on one or more of
-// the following recommendation properties: provider types, states, names, and
-// owners.
+// Returns a list of RepositoryAssociationSummary (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html)
+// objects that contain summary information about a repository association.
+// You can filter the returned list by ProviderType (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html#reviewer-Type-RepositoryAssociationSummary-ProviderType),
+// Name (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html#reviewer-Type-RepositoryAssociationSummary-Name),
+// State (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html#reviewer-Type-RepositoryAssociationSummary-State),
+// and Owner (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html#reviewer-Type-RepositoryAssociationSummary-Owner).
 //
 //    // Example sending a request using ListRepositoryAssociationsRequest.
 //    req := client.ListRepositoryAssociationsRequest(params)

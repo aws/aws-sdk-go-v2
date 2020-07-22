@@ -4,6 +4,7 @@ package backup
 
 import (
 	"context"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -12,6 +13,19 @@ import (
 
 type ListRestoreJobsInput struct {
 	_ struct{} `type:"structure"`
+
+	// The account ID to list the jobs from. Returns only restore jobs associated
+	// with the specified account ID.
+	ByAccountId *string `location:"querystring" locationName:"accountId" type:"string"`
+
+	// Returns only restore jobs that were created after the specified date.
+	ByCreatedAfter *time.Time `location:"querystring" locationName:"createdAfter" type:"timestamp"`
+
+	// Returns only restore jobs that were created before the specified date.
+	ByCreatedBefore *time.Time `location:"querystring" locationName:"createdBefore" type:"timestamp"`
+
+	// Returns only restore jobs associated with the specified job status.
+	ByStatus RestoreJobStatus `location:"querystring" locationName:"status" type:"string" enum:"true"`
 
 	// The maximum number of items to be returned.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
@@ -45,6 +59,32 @@ func (s *ListRestoreJobsInput) Validate() error {
 func (s ListRestoreJobsInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
+	if s.ByAccountId != nil {
+		v := *s.ByAccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "accountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ByCreatedAfter != nil {
+		v := *s.ByCreatedAfter
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "createdAfter",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
+	}
+	if s.ByCreatedBefore != nil {
+		v := *s.ByCreatedBefore
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "createdBefore",
+			protocol.TimeValue{V: v, Format: protocol.ISO8601TimeFormatName, QuotedFormatTime: false}, metadata)
+	}
+	if len(s.ByStatus) > 0 {
+		v := s.ByStatus
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.MaxResults != nil {
 		v := *s.MaxResults
 

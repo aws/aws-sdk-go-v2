@@ -87,6 +87,12 @@ func (c *Client) ListPlatformVersionsRequest(input *ListPlatformVersionsInput) L
 		Name:       opListPlatformVersions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxRecords",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -120,6 +126,53 @@ func (r ListPlatformVersionsRequest) Send(ctx context.Context) (*ListPlatformVer
 	}
 
 	return resp, nil
+}
+
+// NewListPlatformVersionsRequestPaginator returns a paginator for ListPlatformVersions.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListPlatformVersionsRequest(input)
+//   p := elasticbeanstalk.NewListPlatformVersionsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListPlatformVersionsPaginator(req ListPlatformVersionsRequest) ListPlatformVersionsPaginator {
+	return ListPlatformVersionsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListPlatformVersionsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListPlatformVersionsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListPlatformVersionsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListPlatformVersionsPaginator) CurrentPage() *ListPlatformVersionsOutput {
+	return p.Pager.CurrentPage().(*ListPlatformVersionsOutput)
 }
 
 // ListPlatformVersionsResponse is the response type for the

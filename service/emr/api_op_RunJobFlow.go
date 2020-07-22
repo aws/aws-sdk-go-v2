@@ -74,6 +74,11 @@ type RunJobFlowInput struct {
 	// in the EMR Management Guide.
 	KerberosAttributes *KerberosAttributes `type:"structure"`
 
+	// The AWS KMS customer master key (CMK) used for encrypting log files. If a
+	// value is not provided, the logs will remain encrypted by AES-256. This attribute
+	// is only available with EMR version 5.30.0 and later, excluding EMR 6.0.0.
+	LogEncryptionKmsKeyId *string `type:"string"`
+
 	// The location in Amazon S3 to write the log files of the job flow. If a value
 	// is not provided, logs are not created.
 	LogUri *string `type:"string"`

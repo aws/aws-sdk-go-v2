@@ -459,6 +459,67 @@ func (s Environment) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Information about the configuration.
+type HostedConfigurationVersionSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The application ID.
+	ApplicationId *string `type:"string"`
+
+	// The configuration profile ID.
+	ConfigurationProfileId *string `type:"string"`
+
+	// A standard MIME type describing the format of the configuration content.
+	// For more information, see Content-Type (https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17).
+	ContentType *string `min:"1" type:"string"`
+
+	// A description of the configuration.
+	Description *string `type:"string"`
+
+	// The configuration version.
+	VersionNumber *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s HostedConfigurationVersionSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HostedConfigurationVersionSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ApplicationId != nil {
+		v := *s.ApplicationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ApplicationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ConfigurationProfileId != nil {
+		v := *s.ConfigurationProfileId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ConfigurationProfileId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ContentType != nil {
+		v := *s.ContentType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ContentType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Description != nil {
+		v := *s.Description
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Description", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VersionNumber != nil {
+		v := *s.VersionNumber
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VersionNumber", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
 // Amazon CloudWatch alarms to monitor during the deployment process.
 type Monitor struct {
 	_ struct{} `type:"structure"`
@@ -520,7 +581,7 @@ type Validator struct {
 	// Lambda function.
 	//
 	// Content is a required field
-	Content *string `type:"string" required:"true"`
+	Content *string `type:"string" required:"true" sensitive:"true"`
 
 	// AppConfig supports validators of type JSON_SCHEMA and LAMBDA
 	//

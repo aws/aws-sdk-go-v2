@@ -45,13 +45,14 @@ type Backup struct {
 	SourceBackup *string `type:"string"`
 
 	// The identifier (ID) of the cluster containing the source backup from which
-	// the new backup was copied. .
+	// the new backup was copied.
 	SourceCluster *string `type:"string"`
 
-	// The AWS region that contains the source backup from which the new backup
+	// The AWS Region that contains the source backup from which the new backup
 	// was copied.
 	SourceRegion *string `type:"string"`
 
+	// The list of tags for the backup.
 	TagList []Tag `min:"1" type:"list"`
 }
 
@@ -129,6 +130,7 @@ type Cluster struct {
 	// zone.
 	SubnetMapping map[string]string `type:"map"`
 
+	// The list of tags for the cluster.
 	TagList []Tag `min:"1" type:"list"`
 
 	// The identifier (ID) of the virtual private cloud (VPC) that contains the

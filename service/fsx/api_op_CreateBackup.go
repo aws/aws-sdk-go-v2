@@ -14,9 +14,9 @@ import (
 type CreateBackupInput struct {
 	_ struct{} `type:"structure"`
 
-	// (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to
-	// ensure idempotent creation. This string is automatically filled on your behalf
-	// when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
+	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
+	// creation. This string is automatically filled on your behalf when you use
+	// the AWS Command Line Interface (AWS CLI) or an AWS SDK.
 	ClientRequestToken *string `min:"1" type:"string" idempotencyToken:"true"`
 
 	// The ID of the file system to back up.
@@ -25,7 +25,10 @@ type CreateBackupInput struct {
 	FileSystemId *string `min:"11" type:"string" required:"true"`
 
 	// The tags to apply to the backup at backup creation. The key value of the
-	// Name tag appears in the console as the backup name.
+	// Name tag appears in the console as the backup name. If you have set CopyTagsToBackups
+	// to true, and you specify one or more tags using the CreateBackup action,
+	// no existing tags on the file system are copied from the file system to the
+	// backup.
 	Tags []Tag `min:"1" type:"list"`
 }
 
@@ -82,10 +85,19 @@ const opCreateBackup = "CreateBackup"
 // CreateBackupRequest returns a request value for making API operation for
 // Amazon FSx.
 //
-// Creates a backup of an existing Amazon FSx for Windows File Server file system.
-// Creating regular backups for your file system is a best practice that complements
-// the replication that Amazon FSx for Windows File Server performs for your
-// file system. It also enables you to restore from user modification of data.
+// Creates a backup of an existing Amazon FSx file system. Creating regular
+// backups for your file system is a best practice, enabling you to restore
+// a file system from a backup if an issue arises with the original file system.
+//
+// For Amazon FSx for Lustre file systems, you can create a backup only for
+// file systems with the following configuration:
+//
+//    * a Persistent deployment type
+//
+//    * is not linked to an Amazon S3 data respository.
+//
+// For more information, see https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-backups.html
+// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-backups.html).
 //
 // If a backup with the specified client request token exists, and the parameters
 // match, this operation returns the description of the existing backup. If
@@ -105,10 +117,9 @@ const opCreateBackup = "CreateBackup"
 // created a backup, the operation returns a successful result because all the
 // parameters are the same.
 //
-// The CreateFileSystem operation returns while the backup's lifecycle state
-// is still CREATING. You can check the file system creation status by calling
-// the DescribeBackups operation, which returns the backup state along with
-// other information.
+// The CreateBackup operation returns while the backup's lifecycle state is
+// still CREATING. You can check the backup creation status by calling the DescribeBackups
+// operation, which returns the backup state along with other information.
 //
 //    // Example sending a request using CreateBackupRequest.
 //    req := client.CreateBackupRequest(params)

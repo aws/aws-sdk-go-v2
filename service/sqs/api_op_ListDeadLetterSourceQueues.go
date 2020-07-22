@@ -12,6 +12,12 @@ import (
 type ListDeadLetterSourceQueuesInput struct {
 	_ struct{} `type:"structure"`
 
+	// Maximum number of results to include in the response.
+	MaxResults *int64 `type:"integer"`
+
+	// Pagination token to request the next set of results.
+	NextToken *string `type:"string"`
+
 	// The URL of a dead-letter queue.
 	//
 	// Queue URLs and names are case-sensitive.
@@ -42,6 +48,9 @@ func (s *ListDeadLetterSourceQueuesInput) Validate() error {
 // A list of your dead letter source queues.
 type ListDeadLetterSourceQueuesOutput struct {
 	_ struct{} `type:"structure"`
+
+	// Pagination token to include in the next request.
+	NextToken *string `type:"string"`
 
 	// A list of source queue URLs that have the RedrivePolicy queue attribute configured
 	// with a dead-letter queue.
@@ -80,6 +89,12 @@ func (c *Client) ListDeadLetterSourceQueuesRequest(input *ListDeadLetterSourceQu
 		Name:       opListDeadLetterSourceQueues,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"NextToken"},
+			OutputTokens:    []string{"NextToken"},
+			LimitToken:      "MaxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -113,6 +128,53 @@ func (r ListDeadLetterSourceQueuesRequest) Send(ctx context.Context) (*ListDeadL
 	}
 
 	return resp, nil
+}
+
+// NewListDeadLetterSourceQueuesRequestPaginator returns a paginator for ListDeadLetterSourceQueues.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListDeadLetterSourceQueuesRequest(input)
+//   p := sqs.NewListDeadLetterSourceQueuesRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListDeadLetterSourceQueuesPaginator(req ListDeadLetterSourceQueuesRequest) ListDeadLetterSourceQueuesPaginator {
+	return ListDeadLetterSourceQueuesPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListDeadLetterSourceQueuesInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListDeadLetterSourceQueuesPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListDeadLetterSourceQueuesPaginator struct {
+	aws.Pager
+}
+
+func (p *ListDeadLetterSourceQueuesPaginator) CurrentPage() *ListDeadLetterSourceQueuesOutput {
+	return p.Pager.CurrentPage().(*ListDeadLetterSourceQueuesOutput)
 }
 
 // ListDeadLetterSourceQueuesResponse is the response type for the

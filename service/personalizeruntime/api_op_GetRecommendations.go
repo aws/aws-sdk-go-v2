@@ -23,6 +23,10 @@ type GetRecommendationsInput struct {
 	// a user's recommendations, such as the user's current location or device type.
 	Context map[string]string `locationName:"context" type:"map"`
 
+	// The ARN of the filter to apply to the returned recommendations. For more
+	// information, see Using Filters with Amazon Personalize.
+	FilterArn *string `locationName:"filterArn" type:"string"`
+
 	// The item ID to provide recommendations for.
 	//
 	// Required for RELATED_ITEMS recipe type.
@@ -77,6 +81,12 @@ func (s GetRecommendationsInput) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ms0.End()
 
+	}
+	if s.FilterArn != nil {
+		v := *s.FilterArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "filterArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.ItemId != nil {
 		v := *s.ItemId

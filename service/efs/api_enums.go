@@ -39,6 +39,25 @@ func (enum PerformanceMode) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type Status string
+
+// Enum values for Status
+const (
+	StatusEnabled   Status = "ENABLED"
+	StatusEnabling  Status = "ENABLING"
+	StatusDisabled  Status = "DISABLED"
+	StatusDisabling Status = "DISABLING"
+)
+
+func (enum Status) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Status) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type ThroughputMode string
 
 // Enum values for ThroughputMode

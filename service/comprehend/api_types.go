@@ -183,7 +183,7 @@ func (s ClassifierEvaluationMetrics) String() string {
 
 // Provides information about a document classifier.
 type ClassifierMetadata struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" sensitive:"true"`
 
 	// Describes the result metrics for the test data associated with an documentation
 	// classifier.
@@ -193,7 +193,7 @@ type ClassifierMetadata struct {
 	NumberOfLabels *int64 `type:"integer"`
 
 	// The number of documents in the input data that were used to test the classifier.
-	// Typically this is 10 to 20 percent of the input documents.
+	// Typically this is 10 to 20 percent of the input documents, up to 10,000 documents.
 	NumberOfTestDocuments *int64 `type:"integer"`
 
 	// The number of documents in the input data that were used to train the classifier.
@@ -236,12 +236,12 @@ type DocumentClassificationJobFilter struct {
 	JobStatus JobStatus `type:"string" enum:"true"`
 
 	// Filters the list of jobs based on the time that the job was submitted for
-	// processing. Returns only jobs submitted before the specified time. Jobs are
+	// processing. Returns only jobs submitted after the specified time. Jobs are
 	// returned in descending order, newest to oldest.
 	SubmitTimeAfter *time.Time `type:"timestamp"`
 
 	// Filters the list of jobs based on the time that the job was submitted for
-	// processing. Returns only jobs submitted after the specified time. Jobs are
+	// processing. Returns only jobs submitted before the specified time. Jobs are
 	// returned in ascending order, oldest to newest.
 	SubmitTimeBefore *time.Time `type:"timestamp"`
 }
@@ -438,7 +438,7 @@ type DocumentClassifierProperties struct {
 	// Information about the document classifier, including the number of documents
 	// used for training the classifier, the number of documents used for test the
 	// classifier, and an accuracy rating.
-	ClassifierMetadata *ClassifierMetadata `type:"structure"`
+	ClassifierMetadata *ClassifierMetadata `type:"structure" sensitive:"true"`
 
 	// The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role
 	// that grants Amazon Comprehend read access to your input data.
@@ -1051,7 +1051,7 @@ func (s *EntityRecognizerInputDataConfig) Validate() error {
 
 // Detailed information about an entity recognizer.
 type EntityRecognizerMetadata struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" sensitive:"true"`
 
 	// Entity types from the metadata of an entity recognizer.
 	EntityTypes []EntityRecognizerMetadataEntityTypesListItem `type:"list"`
@@ -1121,7 +1121,7 @@ type EntityRecognizerProperties struct {
 	Message *string `type:"string"`
 
 	// Provides information about an entity recognizer.
-	RecognizerMetadata *EntityRecognizerMetadata `type:"structure"`
+	RecognizerMetadata *EntityRecognizerMetadata `type:"structure" sensitive:"true"`
 
 	// Provides the status of the entity recognizer.
 	Status ModelStatus `type:"string" enum:"true"`

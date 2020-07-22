@@ -13,8 +13,9 @@ import (
 type TagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the resource. The Firewall Manager policy
-	// is the only AWS resource that supports tagging, so this ARN is a policy ARN.
+	// The Amazon Resource Name (ARN) of the resource to return tags for. The AWS
+	// Firewall Manager resources that support tagging are policies, applications
+	// lists, and protocols lists.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `min:"1" type:"string" required:"true"`

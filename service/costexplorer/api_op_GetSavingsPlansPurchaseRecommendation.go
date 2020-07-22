@@ -54,7 +54,7 @@ type GetSavingsPlansPurchaseRecommendationInput struct {
 	// SavingsPlansType is a required field
 	SavingsPlansType SupportedSavingsPlansType `type:"string" required:"true" enum:"true"`
 
-	// The savings plan recommendation term used to generated these recommendations.
+	// The savings plan recommendation term used to generate these recommendations.
 	//
 	// TermInYears is a required field
 	TermInYears TermInYears `type:"string" required:"true" enum:"true"`

@@ -111,9 +111,10 @@ type UpdateIntegrationOutput struct {
 	// Method requestParameters.
 	CacheKeyParameters []string `locationName:"cacheKeyParameters" type:"list"`
 
-	// An API-specific tag group of related cached parameters. To be valid values
-	// for cacheKeyParameters, these parameters must also be specified for Method
-	// requestParameters.
+	// Specifies a group of related cached parameters. By default, API Gateway uses
+	// the resource ID as the cacheNamespace. You can specify the same cacheNamespace
+	// across resources to return the same cached data for requests to different
+	// resources.
 	CacheNamespace *string `locationName:"cacheNamespace" type:"string"`
 
 	// The (id (https://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id))
@@ -217,6 +218,9 @@ type UpdateIntegrationOutput struct {
 	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
 	// milliseconds or 29 seconds.
 	TimeoutInMillis *int64 `locationName:"timeoutInMillis" type:"integer"`
+
+	// Specifies the TLS configuration for an integration.
+	TlsConfig *TlsConfig `locationName:"tlsConfig" type:"structure"`
 
 	// Specifies an API method integration type. The valid value is one of the following:
 	//
@@ -373,6 +377,12 @@ func (s UpdateIntegrationOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "timeoutInMillis", protocol.Int64Value(v), metadata)
+	}
+	if s.TlsConfig != nil {
+		v := s.TlsConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "tlsConfig", v, metadata)
 	}
 	if len(s.Type) > 0 {
 		v := s.Type

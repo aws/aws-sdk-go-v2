@@ -13,7 +13,8 @@ import (
 type DisassociateRepositoryInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) identifying the association.
+	// The Amazon Resource Name (ARN) of the RepositoryAssociation (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
+	// object.
 	//
 	// AssociationArn is a required field
 	AssociationArn *string `location:"uri" locationName:"AssociationArn" min:"1" type:"string" required:"true"`

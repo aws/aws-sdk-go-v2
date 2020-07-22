@@ -24,8 +24,7 @@ type ListCodeReviewsInput struct {
 	NextToken *string `location:"querystring" locationName:"NextToken" min:"1" type:"string"`
 
 	// List of provider types for filtering that needs to be applied before displaying
-	// the result. For example, "providerTypes=[GitHub]" will list code reviews
-	// from GitHub.
+	// the result. For example, providerTypes=[GitHub] lists code reviews from GitHub.
 	ProviderTypes []ProviderType `location:"querystring" locationName:"ProviderTypes" min:"1" type:"list"`
 
 	// List of repository names for filtering that needs to be applied before displaying
@@ -33,8 +32,17 @@ type ListCodeReviewsInput struct {
 	RepositoryNames []string `location:"querystring" locationName:"RepositoryNames" min:"1" type:"list"`
 
 	// List of states for filtering that needs to be applied before displaying the
-	// result. For example, "states=[Pending]" will list code reviews in the Pending
-	// state.
+	// result. For example, states=[Pending] lists code reviews in the Pending state.
+	//
+	// The valid code review states are:
+	//
+	//    * Completed: The code review is complete.
+	//
+	//    * Pending: The code review started and has not completed or failed.
+	//
+	//    * Failed: The code review failed.
+	//
+	//    * Deleting: The code review is being deleted.
 	States []JobState `location:"querystring" locationName:"States" min:"1" type:"list"`
 
 	// The type of code reviews to list in the response.

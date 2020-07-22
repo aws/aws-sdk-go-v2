@@ -235,7 +235,8 @@ type CapacityProvider struct {
 	Name *string `locationName:"name" type:"string"`
 
 	// The current status of the capacity provider. Only capacity providers in an
-	// ACTIVE state can be used in a cluster.
+	// ACTIVE state can be used in a cluster. When a capacity provider is successfully
+	// deleted, it will have an INACTIVE status.
 	Status CapacityProviderStatus `locationName:"status" type:"string" enum:"true"`
 
 	// The metadata that you apply to the capacity provider to help you categorize
@@ -265,6 +266,28 @@ type CapacityProvider struct {
 	//    cannot edit or delete tag keys or values with this prefix. Tags with this
 	//    prefix do not count against your tags per resource limit.
 	Tags []Tag `locationName:"tags" type:"list"`
+
+	// The update status of the capacity provider. The following are the possible
+	// states that will be returned.
+	//
+	// DELETE_IN_PROGRESS
+	//
+	// The capacity provider is in the process of being deleted.
+	//
+	// DELETE_COMPLETE
+	//
+	// The capacity provider has been successfully deleted and will have an INACTIVE
+	// status.
+	//
+	// DELETE_FAILED
+	//
+	// The capacity provider was unable to be deleted. The update status reason
+	// will provide further details about why the delete failed.
+	UpdateStatus CapacityProviderUpdateStatus `locationName:"updateStatus" type:"string" enum:"true"`
+
+	// The update status reason. This provides further details about the update
+	// status for the capacity provider.
+	UpdateStatusReason *string `locationName:"updateStatusReason" type:"string"`
 }
 
 // String returns the string representation
@@ -1072,8 +1095,9 @@ type ContainerDefinition struct {
 	// namespaced kernel parameters as well as the containers.
 	SystemControls []SystemControl `locationName:"systemControls" type:"list"`
 
-	// A list of ulimits to set in the container. This parameter maps to Ulimits
-	// in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
+	// A list of ulimits to set in the container. If a ulimit value is specified
+	// in a task definition, it will override the default values set by Docker.
+	// This parameter maps to Ulimits in the Create a container (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate)
 	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.35/)
 	// and the --ulimit option to docker run (https://docs.docker.com/engine/reference/run/).
 	// Valid naming values are displayed in the Ulimit data type. This parameter
@@ -3712,9 +3736,11 @@ type TaskDefinition struct {
 	//    (30 GB) in increments of 1024 (1 GB)
 	Cpu *string `locationName:"cpu" type:"string"`
 
-	// The Amazon Resource Name (ARN) of the task execution role that containers
-	// in this task can assume. All containers in this task are granted the permissions
-	// that are specified in this role.
+	// The Amazon Resource Name (ARN) of the task execution role that grants the
+	// Amazon ECS container agent permission to make AWS API calls on your behalf.
+	// The task execution IAM role is required depending on the requirements of
+	// your task. For more information, see Amazon ECS task execution IAM role (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html)
+	// in the Amazon Elastic Container Service Developer Guide.
 	ExecutionRoleArn *string `locationName:"executionRoleArn" type:"string"`
 
 	// The name of a family that this task definition is registered to. Up to 255
@@ -3941,8 +3967,8 @@ type TaskOverride struct {
 	// The cpu override for the task.
 	Cpu *string `locationName:"cpu" type:"string"`
 
-	// The Amazon Resource Name (ARN) of the task execution role that the Amazon
-	// ECS container agent and the Docker daemon can assume.
+	// The Amazon Resource Name (ARN) of the task execution IAM role override for
+	// the task.
 	ExecutionRoleArn *string `locationName:"executionRoleArn" type:"string"`
 
 	// The Elastic Inference accelerator override for the task.
@@ -4253,10 +4279,11 @@ func (s VersionInfo) String() string {
 	return awsutil.Prettify(s)
 }
 
-// A data volume used in a task definition. For tasks that use a Docker volume,
-// specify a DockerVolumeConfiguration. For tasks that use a bind mount host
-// volume, specify a host and optional sourcePath. For more information, see
-// Using Data Volumes in Tasks (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html).
+// A data volume used in a task definition. For tasks that use Amazon Elastic
+// File System (Amazon EFS) file storage, specify an efsVolumeConfiguration.
+// For tasks that use a Docker volume, specify a DockerVolumeConfiguration.
+// For tasks that use a bind mount host volume, specify a host and optional
+// sourcePath. For more information, see Using Data Volumes in Tasks (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html).
 type Volume struct {
 	_ struct{} `type:"structure"`
 
@@ -4267,23 +4294,15 @@ type Volume struct {
 	DockerVolumeConfiguration *DockerVolumeConfiguration `locationName:"dockerVolumeConfiguration" type:"structure"`
 
 	// This parameter is specified when you are using an Amazon Elastic File System
-	// (Amazon EFS) file storage. Amazon EFS file systems are only supported when
-	// you are using the EC2 launch type.
-	//
-	// EFSVolumeConfiguration remains in preview and is a Beta Service as defined
-	// by and subject to the Beta Service Participation Service Terms located at
-	// https://aws.amazon.com/service-terms (https://aws.amazon.com/service-terms)
-	// ("Beta Terms"). These Beta Terms apply to your participation in this preview
-	// of EFSVolumeConfiguration.
+	// file system for task storage.
 	EfsVolumeConfiguration *EFSVolumeConfiguration `locationName:"efsVolumeConfiguration" type:"structure"`
 
-	// This parameter is specified when you are using bind mount host volumes. Bind
-	// mount host volumes are supported when you are using either the EC2 or Fargate
-	// launch types. The contents of the host parameter determine whether your bind
-	// mount host volume persists on the host container instance and where it is
-	// stored. If the host parameter is empty, then the Docker daemon assigns a
-	// host path for your data volume. However, the data is not guaranteed to persist
-	// after the containers associated with it stop running.
+	// This parameter is specified when you are using bind mount host volumes. The
+	// contents of the host parameter determine whether your bind mount host volume
+	// persists on the host container instance and where it is stored. If the host
+	// parameter is empty, then the Docker daemon assigns a host path for your data
+	// volume. However, the data is not guaranteed to persist after the containers
+	// associated with it stop running.
 	//
 	// Windows containers can mount whole directories on the same drive as $env:ProgramData.
 	// Windows containers cannot mount directories on a different drive, and mount

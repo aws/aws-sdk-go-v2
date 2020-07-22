@@ -198,7 +198,7 @@ const opPutFunctionEventInvokeConfig = "PutFunctionEventInvokeConfig"
 // on a function, version, or alias. If a configuration already exists for a
 // function, version, or alias, this operation overwrites it. If you exclude
 // any settings, they are removed. To set one option without affecting existing
-// settings for other options, use PutFunctionEventInvokeConfig.
+// settings for other options, use UpdateFunctionEventInvokeConfig.
 //
 // By default, Lambda retries an asynchronous invocation twice if the function
 // returns an error. It retains events in a queue for up to six hours. When

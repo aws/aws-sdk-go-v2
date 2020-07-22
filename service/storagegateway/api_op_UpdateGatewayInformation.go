@@ -15,7 +15,7 @@ type UpdateGatewayInformationInput struct {
 	// The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that you
 	// want to use to monitor and log events in the gateway.
 	//
-	// For more information, see What Is Amazon CloudWatch Logs? (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html).
+	// For more information, see What is Amazon CloudWatch logs? (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html).
 	CloudWatchLogGroupARN *string `type:"string"`
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
@@ -59,7 +59,8 @@ func (s *UpdateGatewayInformationInput) Validate() error {
 	return nil
 }
 
-// A JSON object containing the ARN of the gateway that was updated.
+// A JSON object containing the Amazon Resource Name (ARN) of the gateway that
+// was updated.
 type UpdateGatewayInformationOutput struct {
 	_ struct{} `type:"structure"`
 

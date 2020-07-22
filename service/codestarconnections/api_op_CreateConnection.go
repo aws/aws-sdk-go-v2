@@ -19,11 +19,13 @@ type CreateConnectionInput struct {
 	// ConnectionName is a required field
 	ConnectionName *string `min:"1" type:"string" required:"true"`
 
+	// The Amazon Resource Name (ARN) of the host associated with the connection
+	// to be created.
+	HostArn *string `type:"string"`
+
 	// The name of the external provider where your third-party code repository
-	// is configured. Currently, the valid provider type is Bitbucket.
-	//
-	// ProviderType is a required field
-	ProviderType ProviderType `type:"string" required:"true" enum:"true"`
+	// is configured. The valid provider type is Bitbucket.
+	ProviderType ProviderType `type:"string" enum:"true"`
 
 	// The key-value pair to use when tagging the resource.
 	Tags []Tag `type:"list"`
@@ -43,9 +45,6 @@ func (s *CreateConnectionInput) Validate() error {
 	}
 	if s.ConnectionName != nil && len(*s.ConnectionName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ConnectionName", 1))
-	}
-	if len(s.ProviderType) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("ProviderType"))
 	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {

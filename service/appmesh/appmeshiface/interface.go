@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS App Mesh.
 //    func myFunc(svc appmeshiface.ClientAPI) bool {
-//        // Make svc.CreateMesh request
+//        // Make svc.CreateGatewayRoute request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        appmeshiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateMesh(input *appmesh.CreateMeshInput) (*appmesh.CreateMeshOutput, error) {
+//    func (m *mockClientClient) CreateGatewayRoute(input *appmesh.CreateGatewayRouteInput) (*appmesh.CreateGatewayRouteOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,9 +61,13 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	CreateGatewayRouteRequest(*appmesh.CreateGatewayRouteInput) appmesh.CreateGatewayRouteRequest
+
 	CreateMeshRequest(*appmesh.CreateMeshInput) appmesh.CreateMeshRequest
 
 	CreateRouteRequest(*appmesh.CreateRouteInput) appmesh.CreateRouteRequest
+
+	CreateVirtualGatewayRequest(*appmesh.CreateVirtualGatewayInput) appmesh.CreateVirtualGatewayRequest
 
 	CreateVirtualNodeRequest(*appmesh.CreateVirtualNodeInput) appmesh.CreateVirtualNodeRequest
 
@@ -71,9 +75,13 @@ type ClientAPI interface {
 
 	CreateVirtualServiceRequest(*appmesh.CreateVirtualServiceInput) appmesh.CreateVirtualServiceRequest
 
+	DeleteGatewayRouteRequest(*appmesh.DeleteGatewayRouteInput) appmesh.DeleteGatewayRouteRequest
+
 	DeleteMeshRequest(*appmesh.DeleteMeshInput) appmesh.DeleteMeshRequest
 
 	DeleteRouteRequest(*appmesh.DeleteRouteInput) appmesh.DeleteRouteRequest
+
+	DeleteVirtualGatewayRequest(*appmesh.DeleteVirtualGatewayInput) appmesh.DeleteVirtualGatewayRequest
 
 	DeleteVirtualNodeRequest(*appmesh.DeleteVirtualNodeInput) appmesh.DeleteVirtualNodeRequest
 
@@ -81,9 +89,13 @@ type ClientAPI interface {
 
 	DeleteVirtualServiceRequest(*appmesh.DeleteVirtualServiceInput) appmesh.DeleteVirtualServiceRequest
 
+	DescribeGatewayRouteRequest(*appmesh.DescribeGatewayRouteInput) appmesh.DescribeGatewayRouteRequest
+
 	DescribeMeshRequest(*appmesh.DescribeMeshInput) appmesh.DescribeMeshRequest
 
 	DescribeRouteRequest(*appmesh.DescribeRouteInput) appmesh.DescribeRouteRequest
+
+	DescribeVirtualGatewayRequest(*appmesh.DescribeVirtualGatewayInput) appmesh.DescribeVirtualGatewayRequest
 
 	DescribeVirtualNodeRequest(*appmesh.DescribeVirtualNodeInput) appmesh.DescribeVirtualNodeRequest
 
@@ -91,11 +103,15 @@ type ClientAPI interface {
 
 	DescribeVirtualServiceRequest(*appmesh.DescribeVirtualServiceInput) appmesh.DescribeVirtualServiceRequest
 
+	ListGatewayRoutesRequest(*appmesh.ListGatewayRoutesInput) appmesh.ListGatewayRoutesRequest
+
 	ListMeshesRequest(*appmesh.ListMeshesInput) appmesh.ListMeshesRequest
 
 	ListRoutesRequest(*appmesh.ListRoutesInput) appmesh.ListRoutesRequest
 
 	ListTagsForResourceRequest(*appmesh.ListTagsForResourceInput) appmesh.ListTagsForResourceRequest
+
+	ListVirtualGatewaysRequest(*appmesh.ListVirtualGatewaysInput) appmesh.ListVirtualGatewaysRequest
 
 	ListVirtualNodesRequest(*appmesh.ListVirtualNodesInput) appmesh.ListVirtualNodesRequest
 
@@ -107,9 +123,13 @@ type ClientAPI interface {
 
 	UntagResourceRequest(*appmesh.UntagResourceInput) appmesh.UntagResourceRequest
 
+	UpdateGatewayRouteRequest(*appmesh.UpdateGatewayRouteInput) appmesh.UpdateGatewayRouteRequest
+
 	UpdateMeshRequest(*appmesh.UpdateMeshInput) appmesh.UpdateMeshRequest
 
 	UpdateRouteRequest(*appmesh.UpdateRouteInput) appmesh.UpdateRouteRequest
+
+	UpdateVirtualGatewayRequest(*appmesh.UpdateVirtualGatewayInput) appmesh.UpdateVirtualGatewayRequest
 
 	UpdateVirtualNodeRequest(*appmesh.UpdateVirtualNodeInput) appmesh.UpdateVirtualNodeRequest
 

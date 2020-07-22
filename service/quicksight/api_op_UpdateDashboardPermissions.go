@@ -26,10 +26,10 @@ type UpdateDashboardPermissionsInput struct {
 	DashboardId *string `location:"uri" locationName:"DashboardId" min:"1" type:"string" required:"true"`
 
 	// The permissions that you want to grant on this resource.
-	GrantPermissions []ResourcePermission `min:"1" type:"list"`
+	GrantPermissions []ResourcePermission `type:"list"`
 
 	// The permissions that you want to revoke from this resource.
-	RevokePermissions []ResourcePermission `min:"1" type:"list"`
+	RevokePermissions []ResourcePermission `type:"list"`
 }
 
 // String returns the string representation
@@ -53,12 +53,6 @@ func (s *UpdateDashboardPermissionsInput) Validate() error {
 	}
 	if s.DashboardId != nil && len(*s.DashboardId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DashboardId", 1))
-	}
-	if s.GrantPermissions != nil && len(s.GrantPermissions) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("GrantPermissions", 1))
-	}
-	if s.RevokePermissions != nil && len(s.RevokePermissions) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("RevokePermissions", 1))
 	}
 	if s.GrantPermissions != nil {
 		for i, v := range s.GrantPermissions {

@@ -76,7 +76,7 @@ const opDeleteGateway = "DeleteGateway"
 // for these snapshots. You can choose to remove all remaining Amazon EBS snapshots
 // by canceling your Amazon EC2 subscription. If you prefer not to cancel your
 // Amazon EC2 subscription, you can delete your snapshots using the Amazon EC2
-// console. For more information, see the AWS Storage Gateway Detail Page (http://aws.amazon.com/storagegateway).
+// console. For more information, see the AWS Storage Gateway detail page (http://aws.amazon.com/storagegateway).
 //
 //    // Example sending a request using DeleteGatewayRequest.
 //    req := client.DeleteGatewayRequest(params)

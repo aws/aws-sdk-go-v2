@@ -28,6 +28,28 @@ type GetInstanceMetricDataInput struct {
 	// Valid instance metric names are listed below, along with the most useful
 	// statistics to include in your request, and the published unit value.
 	//
+	//    * BurstCapacityPercentage - The percentage of CPU performance available
+	//    for your instance to burst above its baseline. Your instance continuously
+	//    accrues and consumes burst capacity. Burst capacity stops accruing when
+	//    your instance's BurstCapacityPercentage reaches 100%. For more information,
+	//    see Viewing instance burst capacity in Amazon Lightsail (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-viewing-instance-burst-capacity).
+	//    Statistics: The most useful statistics are Maximum and Average. Unit:
+	//    The published unit is Percent.
+	//
+	//    * BurstCapacityTime - The available amount of time for your instance to
+	//    burst at 100% CPU utilization. Your instance continuously accrues and
+	//    consumes burst capacity. Burst capacity time stops accruing when your
+	//    instance's BurstCapacityPercentage metric reaches 100%. Burst capacity
+	//    time is consumed at the full rate only when your instance operates at
+	//    100% CPU utilization. For example, if your instance operates at 50% CPU
+	//    utilization in the burstable zone for a 5-minute period, then it consumes
+	//    CPU burst capacity minutes at a 50% rate in that period. Your instance
+	//    consumed 2 minutes and 30 seconds of CPU burst capacity minutes in the
+	//    5-minute period. For more information, see Viewing instance burst capacity
+	//    in Amazon Lightsail (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-viewing-instance-burst-capacity).
+	//    Statistics: The most useful statistics are Maximum and Average. Unit:
+	//    The published unit is Seconds.
+	//
 	//    * CPUUtilization - The percentage of allocated compute units that are
 	//    currently in use on the instance. This metric identifies the processing
 	//    power to run the applications on the instance. Tools in your operating
@@ -163,11 +185,10 @@ func (s *GetInstanceMetricDataInput) Validate() error {
 type GetInstanceMetricDataOutput struct {
 	_ struct{} `type:"structure"`
 
-	// An array of key-value pairs containing information about the results of your
-	// get instance metric data request.
+	// An array of objects that describe the metric data returned.
 	MetricData []MetricDatapoint `locationName:"metricData" type:"list"`
 
-	// The metric name to return data for.
+	// The name of the metric returned.
 	MetricName InstanceMetricName `locationName:"metricName" type:"string" enum:"true"`
 }
 
@@ -183,6 +204,10 @@ const opGetInstanceMetricData = "GetInstanceMetricData"
 //
 // Returns the data points for the specified Amazon Lightsail instance metric,
 // given an instance name.
+//
+// Metrics report the utilization of your resources, and the error counts generated
+// by them. Monitor and collect metric data regularly to maintain the reliability,
+// availability, and performance of your resources.
 //
 //    // Example sending a request using GetInstanceMetricDataRequest.
 //    req := client.GetInstanceMetricDataRequest(params)

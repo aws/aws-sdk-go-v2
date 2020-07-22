@@ -82,6 +82,10 @@ type GetMaintenanceWindowOutput struct {
 	// The schedule of the maintenance window in the form of a cron or rate expression.
 	Schedule *string `min:"1" type:"string"`
 
+	// The number of days to wait to run a maintenance window after the scheduled
+	// CRON expression date and time.
+	ScheduleOffset *int64 `min:"1" type:"integer"`
+
 	// The time zone that the scheduled maintenance window executions are based
 	// on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles",
 	// "etc/UTC", or "Asia/Seoul". For more information, see the Time Zone Database

@@ -36,7 +36,8 @@ const opGetAWSOrganizationsAccessStatus = "GetAWSOrganizationsAccessStatus"
 // AWS Service Catalog.
 //
 // Get the Access Status for AWS Organization portfolio share feature. This
-// API can only be called by the master account in the organization.
+// API can only be called by the master account in the organization or by a
+// delegated admin.
 //
 //    // Example sending a request using GetAWSOrganizationsAccessStatusRequest.
 //    req := client.GetAWSOrganizationsAccessStatusRequest(params)

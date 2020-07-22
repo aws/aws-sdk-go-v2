@@ -82,6 +82,8 @@ const opListTagsForResource = "ListTagsForResource"
 // ListTagsForResourceRequest returns a request value for making API operation for
 // AWS Elemental MediaPackage VOD.
 //
+// Returns a list of the tags assigned to the specified resource.
+//
 //    // Example sending a request using ListTagsForResourceRequest.
 //    req := client.ListTagsForResourceRequest(params)
 //    resp, err := req.Send(context.TODO())

@@ -88,10 +88,6 @@ const opModifyDBProxy = "ModifyDBProxy"
 // ModifyDBProxyRequest returns a request value for making API operation for
 // Amazon Relational Database Service.
 //
-//
-// This is prerelease documentation for the RDS Database Proxy feature in preview
-// release. It is subject to change.
-//
 // Changes the settings for an existing DB proxy.
 //
 //    // Example sending a request using ModifyDBProxyRequest.

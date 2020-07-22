@@ -10,11 +10,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure used to list tags for resource.
+// The request structure to use to list tags for a resource.
 type ListTagsForResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// Resource arn used to list tags.
+	// The Amazon Resource Name (ARN) to use to list tags.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `location:"uri" locationName:"resourceArn" type:"string" required:"true"`
@@ -52,11 +52,11 @@ func (s ListTagsForResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Response for list tags.
+// The response for the list tags for resource request.
 type ListTagsForResourceOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Tags result for response.
+	// A list of tags for the specified The Amazon Resource Name (ARN).
 	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
 }
 
@@ -87,7 +87,7 @@ const opListTagsForResource = "ListTagsForResource"
 // ListTagsForResourceRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// List tags for resource.
+// Returns a list of tags for a specified Amazon Resource Name (ARN).
 //
 //    // Example sending a request using ListTagsForResourceRequest.
 //    req := client.ListTagsForResourceRequest(params)

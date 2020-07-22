@@ -17,7 +17,7 @@ type UpdateDistributionInput struct {
 	// The distribution's configuration information.
 	//
 	// DistributionConfig is a required field
-	DistributionConfig *DistributionConfig `locationName:"DistributionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
+	DistributionConfig *DistributionConfig `locationName:"DistributionConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2020-05-31/"`
 
 	// The distribution's id.
 	//
@@ -75,7 +75,7 @@ func (s UpdateDistributionInput) MarshalFields(e protocol.FieldEncoder) error {
 	if s.DistributionConfig != nil {
 		v := s.DistributionConfig
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2020-05-31/"}
 		e.SetFields(protocol.PayloadTarget, "DistributionConfig", v, metadata)
 	}
 	return nil
@@ -114,7 +114,7 @@ func (s UpdateDistributionOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-const opUpdateDistribution = "UpdateDistribution2019_03_26"
+const opUpdateDistribution = "UpdateDistribution2020_05_31"
 
 // UpdateDistributionRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -191,12 +191,12 @@ const opUpdateDistribution = "UpdateDistribution2019_03_26"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdateDistribution
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateDistribution
 func (c *Client) UpdateDistributionRequest(input *UpdateDistributionInput) UpdateDistributionRequest {
 	op := &aws.Operation{
 		Name:       opUpdateDistribution,
 		HTTPMethod: "PUT",
-		HTTPPath:   "/2019-03-26/distribution/{Id}/config",
+		HTTPPath:   "/2020-05-31/distribution/{Id}/config",
 	}
 
 	if input == nil {

@@ -12,9 +12,10 @@ import (
 type DescribeTrustedAdvisorCheckRefreshStatusesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The IDs of the Trusted Advisor checks to get the status of. Note: Specifying
-	// the check ID of a check that is automatically refreshed causes an InvalidParameterValue
-	// error.
+	// The IDs of the Trusted Advisor checks to get the status of.
+	//
+	// If you specify the check ID of a check that is automatically refreshed, you
+	// might see an InvalidParameterValue error.
 	//
 	// CheckIds is a required field
 	CheckIds []string `locationName:"checkIds" type:"list" required:"true"`
@@ -60,12 +61,22 @@ const opDescribeTrustedAdvisorCheckRefreshStatuses = "DescribeTrustedAdvisorChec
 // DescribeTrustedAdvisorCheckRefreshStatusesRequest returns a request value for making API operation for
 // AWS Support.
 //
-// Returns the refresh status of the Trusted Advisor checks that have the specified
-// check IDs. Check IDs can be obtained by calling DescribeTrustedAdvisorChecks.
+// Returns the refresh status of the AWS Trusted Advisor checks that have the
+// specified check IDs. You can get the check IDs by calling the DescribeTrustedAdvisorChecks
+// operation.
 //
-// Some checks are refreshed automatically, and their refresh statuses cannot
-// be retrieved by using this operation. Use of the DescribeTrustedAdvisorCheckRefreshStatuses
-// operation for these checks causes an InvalidParameterValue error.
+// Some checks are refreshed automatically, and you can't return their refresh
+// statuses by using the DescribeTrustedAdvisorCheckRefreshStatuses operation.
+// If you call this operation for these checks, you might see an InvalidParameterValue
+// error.
+//
+//    * You must have a Business or Enterprise support plan to use the AWS Support
+//    API.
+//
+//    * If you call the AWS Support API from an account that does not have a
+//    Business or Enterprise support plan, the SubscriptionRequiredException
+//    error message appears. For information about changing your support plan,
+//    see AWS Support (http://aws.amazon.com/premiumsupport/).
 //
 //    // Example sending a request using DescribeTrustedAdvisorCheckRefreshStatusesRequest.
 //    req := client.DescribeTrustedAdvisorCheckRefreshStatusesRequest(params)

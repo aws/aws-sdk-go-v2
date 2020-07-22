@@ -28,7 +28,11 @@ type CreateReplicationInstanceInput struct {
 	// AWS Region, for example: us-east-1d
 	AvailabilityZone *string `type:"string"`
 
-	// A list of DNS name servers supported for the replication instance.
+	// A list of custom DNS name servers supported for the replication instance
+	// to access your on-premise source or target database. This list overrides
+	// the default name servers supported by the replication instance. You can specify
+	// a comma-separated list of internet addresses for up to four on-premise DNS
+	// name servers. For example: "1.1.1.1,2.2.2.2,3.3.3.3,4.4.4.4"
 	DnsNameServers *string `type:"string"`
 
 	// The engine version number of the replication instance.
@@ -67,11 +71,13 @@ type CreateReplicationInstanceInput struct {
 	// represents an instance with a private IP address. The default value is true.
 	PubliclyAccessible *bool `type:"boolean"`
 
-	// The compute and memory capacity of the replication instance as specified
-	// by the replication instance class.
+	// The compute and memory capacity of the replication instance as defined for
+	// the specified replication instance class. For example to specify the instance
+	// class dms.c4.large, set this parameter to "dms.c4.large".
 	//
-	// Valid Values: dms.t2.micro | dms.t2.small | dms.t2.medium | dms.t2.large
-	// | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge | dms.c4.4xlarge
+	// For more information on the settings and capacities for the available replication
+	// instance classes, see Selecting the right AWS DMS replication instance for
+	// your migration (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth).
 	//
 	// ReplicationInstanceClass is a required field
 	ReplicationInstanceClass *string `type:"string" required:"true"`
@@ -81,7 +87,7 @@ type CreateReplicationInstanceInput struct {
 	//
 	// Constraints:
 	//
-	//    * Must contain from 1 to 63 alphanumeric characters or hyphens.
+	//    * Must contain 1-63 alphanumeric characters or hyphens.
 	//
 	//    * First character must be a letter.
 	//

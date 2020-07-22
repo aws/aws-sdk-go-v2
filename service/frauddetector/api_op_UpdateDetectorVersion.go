@@ -24,7 +24,7 @@ type UpdateDetectorVersionInput struct {
 	// The detector version ID.
 	//
 	// DetectorVersionId is a required field
-	DetectorVersionId *string `locationName:"detectorVersionId" min:"1" type:"string" required:"true"`
+	DetectorVersionId *string `locationName:"detectorVersionId" type:"string" required:"true"`
 
 	// The Amazon SageMaker model endpoints to include in the detector version.
 	//
@@ -75,9 +75,6 @@ func (s *UpdateDetectorVersionInput) Validate() error {
 	if s.DetectorVersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorVersionId"))
 	}
-	if s.DetectorVersionId != nil && len(*s.DetectorVersionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DetectorVersionId", 1))
-	}
 
 	if s.ExternalModelEndpoints == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ExternalModelEndpoints"))
@@ -122,8 +119,8 @@ const opUpdateDetectorVersion = "UpdateDetectorVersion"
 // Amazon Fraud Detector.
 //
 // Updates a detector version. The detector version attributes that you can
-// update include models, external model endpoints, rules, and description.
-// You can only update a DRAFT detector version.
+// update include models, external model endpoints, rules, rule execution mode,
+// and description. You can only update a DRAFT detector version.
 //
 //    // Example sending a request using UpdateDetectorVersionRequest.
 //    req := client.UpdateDetectorVersionRequest(params)

@@ -17,6 +17,9 @@ type ModifyDBSnapshotAttributeInput struct {
 	// To manage authorization for other AWS accounts to copy or restore a manual
 	// DB snapshot, set this value to restore.
 	//
+	// To view the list of attributes available to modify, use the DescribeDBSnapshotAttributes
+	// API action.
+	//
 	// AttributeName is a required field
 	AttributeName *string `type:"string" required:"true"`
 
@@ -97,16 +100,18 @@ const opModifyDBSnapshotAttribute = "ModifyDBSnapshotAttribute"
 // the AttributeName and use the ValuesToAdd parameter to add a list of IDs
 // of the AWS accounts that are authorized to restore the manual DB snapshot.
 // Uses the value all to make the manual DB snapshot public, which means it
-// can be copied or restored by all AWS accounts. Do not add the all value for
-// any manual DB snapshots that contain private information that you don't want
-// available to all AWS accounts. If the manual DB snapshot is encrypted, it
-// can be shared, but only by specifying a list of authorized AWS account IDs
-// for the ValuesToAdd parameter. You can't use all as a value for that parameter
-// in this case.
+// can be copied or restored by all AWS accounts.
+//
+// Don't add the all value for any manual DB snapshots that contain private
+// information that you don't want available to all AWS accounts.
+//
+// If the manual DB snapshot is encrypted, it can be shared, but only by specifying
+// a list of authorized AWS account IDs for the ValuesToAdd parameter. You can't
+// use all as a value for that parameter in this case.
 //
 // To view which AWS accounts have access to copy or restore a manual DB snapshot,
 // or whether a manual DB snapshot public or private, use the DescribeDBSnapshotAttributes
-// API action.
+// API action. The accounts are returned as values for the restore attribute.
 //
 //    // Example sending a request using ModifyDBSnapshotAttributeRequest.
 //    req := client.ModifyDBSnapshotAttributeRequest(params)

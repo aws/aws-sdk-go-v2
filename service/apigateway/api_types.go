@@ -1326,9 +1326,10 @@ type Integration struct {
 	// Method requestParameters.
 	CacheKeyParameters []string `locationName:"cacheKeyParameters" type:"list"`
 
-	// An API-specific tag group of related cached parameters. To be valid values
-	// for cacheKeyParameters, these parameters must also be specified for Method
-	// requestParameters.
+	// Specifies a group of related cached parameters. By default, API Gateway uses
+	// the resource ID as the cacheNamespace. You can specify the same cacheNamespace
+	// across resources to return the same cached data for requests to different
+	// resources.
 	CacheNamespace *string `locationName:"cacheNamespace" type:"string"`
 
 	// The (id (https://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id))
@@ -1432,6 +1433,9 @@ type Integration struct {
 	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
 	// milliseconds or 29 seconds.
 	TimeoutInMillis *int64 `locationName:"timeoutInMillis" type:"integer"`
+
+	// Specifies the TLS configuration for an integration.
+	TlsConfig *TlsConfig `locationName:"tlsConfig" type:"structure"`
 
 	// Specifies an API method integration type. The valid value is one of the following:
 	//
@@ -1588,6 +1592,12 @@ func (s Integration) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "timeoutInMillis", protocol.Int64Value(v), metadata)
+	}
+	if s.TlsConfig != nil {
+		v := s.TlsConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "tlsConfig", v, metadata)
 	}
 	if len(s.Type) > 0 {
 		v := s.Type
@@ -3173,6 +3183,36 @@ func (s ThrottleSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "rateLimit", protocol.Float64Value(v), metadata)
+	}
+	return nil
+}
+
+type TlsConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies whether or not API Gateway skips verification that the certificate
+	// for an integration endpoint is issued by a supported certificate authority
+	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-supported-certificate-authorities-for-http-endpoints.html).
+	// This isn’t recommended, but it enables you to use certificates that are
+	// signed by private certificate authorities, or certificates that are self-signed.
+	// If enabled, API Gateway still performs basic certificate validation, which
+	// includes checking the certificate's expiration date, hostname, and presence
+	// of a root certificate authority. Supported only for HTTP and HTTP_PROXY integrations.
+	InsecureSkipVerification *bool `locationName:"insecureSkipVerification" type:"boolean"`
+}
+
+// String returns the string representation
+func (s TlsConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TlsConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.InsecureSkipVerification != nil {
+		v := *s.InsecureSkipVerification
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "insecureSkipVerification", protocol.BoolValue(v), metadata)
 	}
 	return nil
 }

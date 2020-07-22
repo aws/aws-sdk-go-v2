@@ -552,8 +552,7 @@ type ConfigureShard struct {
 	//
 	// The minimum number of replicas in a shard or replication group is:
 	//
-	//    * Redis (cluster mode disabled) If Multi-AZ with Automatic Failover is
-	//    enabled: 1 If Multi-AZ with Automatic Failover is not enable: 0
+	//    * Redis (cluster mode disabled) If Multi-AZ: 1 If Multi-AZ: 0
 	//
 	//    * Redis (cluster mode enabled): 0 (though you will not be able to failover
 	//    to a replica if your primary node fails)
@@ -863,7 +862,8 @@ type NodeGroup struct {
 	// The keyspace for this node group (shard).
 	Slots *string `type:"string"`
 
-	// The current state of this replication group - creating, available, etc.
+	// The current state of this replication group - creating, available, modifying,
+	// deleting.
 	Status *string `type:"string"`
 }
 
@@ -1262,17 +1262,7 @@ type ReplicationGroup struct {
 	// The date the auth token was last modified
 	AuthTokenLastModifiedDate *time.Time `type:"timestamp"`
 
-	// Indicates the status of Multi-AZ with automatic failover for this Redis replication
-	// group.
-	//
-	// Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover
-	// on:
-	//
-	//    * Redis versions earlier than 2.8.6.
-	//
-	//    * Redis (cluster mode disabled): T1 node types.
-	//
-	//    * Redis (cluster mode enabled): T1 node types.
+	// Indicates the status of automatic failover for this Redis replication group.
 	AutomaticFailover AutomaticFailoverStatus `type:"string" enum:"true"`
 
 	// The name of the compute and memory capacity node type for each node in the
@@ -1302,6 +1292,10 @@ type ReplicationGroup struct {
 
 	// The names of all the cache clusters that are part of this replication group.
 	MemberClusters []string `locationNameList:"ClusterId" type:"list"`
+
+	// A flag indicating if you have Multi-AZ enabled to enhance fault tolerance.
+	// For more information, see Minimizing Downtime: Multi-AZ (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html)
+	MultiAZ MultiAZStatus `type:"string" enum:"true"`
 
 	// A list of node groups in this replication group. For Redis (cluster mode
 	// disabled) replication groups, this is a single-element list. For Redis (cluster
@@ -1369,17 +1363,7 @@ type ReplicationGroupPendingModifiedValues struct {
 	// The auth token status
 	AuthTokenStatus AuthTokenUpdateStatus `type:"string" enum:"true"`
 
-	// Indicates the status of Multi-AZ with automatic failover for this Redis replication
-	// group.
-	//
-	// Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover
-	// on:
-	//
-	//    * Redis versions earlier than 2.8.6.
-	//
-	//    * Redis (cluster mode disabled): T1 node types.
-	//
-	//    * Redis (cluster mode enabled): T1 node types.
+	// Indicates the status of automatic failover for this Redis replication group.
 	AutomaticFailoverStatus PendingAutomaticFailoverStatus `type:"string" enum:"true"`
 
 	// The primary cluster ID that is applied immediately (if --apply-immediately
@@ -1686,17 +1670,8 @@ type Snapshot struct {
 	// This parameter is currently disabled.
 	AutoMinorVersionUpgrade *bool `type:"boolean"`
 
-	// Indicates the status of Multi-AZ with automatic failover for the source Redis
-	// replication group.
-	//
-	// Amazon ElastiCache for Redis does not support Multi-AZ with automatic failover
-	// on:
-	//
-	//    * Redis versions earlier than 2.8.6.
-	//
-	//    * Redis (cluster mode disabled): T1 node types.
-	//
-	//    * Redis (cluster mode enabled): T1 node types.
+	// Indicates the status of automatic failover for the source Redis replication
+	// group.
 	AutomaticFailover AutomaticFailoverStatus `type:"string" enum:"true"`
 
 	// The date and time when the source cluster was created.

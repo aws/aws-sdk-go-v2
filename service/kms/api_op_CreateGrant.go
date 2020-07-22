@@ -12,9 +12,10 @@ import (
 type CreateGrantInput struct {
 	_ struct{} `type:"structure"`
 
-	// Allows a cryptographic operation only when the encryption context matches
-	// or includes the encryption context specified in this structure. For more
-	// information about encryption context, see Encryption Context (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
+	// Allows a cryptographic operation (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
+	// only when the encryption context matches or includes the encryption context
+	// specified in this structure. For more information about encryption context,
+	// see Encryption Context (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
 	// in the AWS Key Management Service Developer Guide .
 	Constraints *GrantConstraints `type:"structure"`
 
@@ -153,8 +154,8 @@ const opCreateGrant = "CreateGrant"
 // principal to use the CMK when the conditions specified in the grant are met.
 // When setting permissions, grants are an alternative to key policies.
 //
-// To create a grant that allows a cryptographic operation only when the request
-// includes a particular encryption context (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context),
+// To create a grant that allows a cryptographic operation (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
+// only when the request includes a particular encryption context (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context),
 // use the Constraints parameter. For details, see GrantConstraints.
 //
 // You can create grants on symmetric and asymmetric CMKs. However, if the grant

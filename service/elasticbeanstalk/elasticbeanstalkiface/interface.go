@@ -9,6 +9,9 @@
 package elasticbeanstalkiface
 
 import (
+	"context"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk"
 )
 
@@ -65,6 +68,8 @@ type ClientAPI interface {
 
 	ApplyEnvironmentManagedActionRequest(*elasticbeanstalk.ApplyEnvironmentManagedActionInput) elasticbeanstalk.ApplyEnvironmentManagedActionRequest
 
+	AssociateEnvironmentOperationsRoleRequest(*elasticbeanstalk.AssociateEnvironmentOperationsRoleInput) elasticbeanstalk.AssociateEnvironmentOperationsRoleRequest
+
 	CheckDNSAvailabilityRequest(*elasticbeanstalk.CheckDNSAvailabilityInput) elasticbeanstalk.CheckDNSAvailabilityRequest
 
 	ComposeEnvironmentsRequest(*elasticbeanstalk.ComposeEnvironmentsInput) elasticbeanstalk.ComposeEnvironmentsRequest
@@ -117,6 +122,8 @@ type ClientAPI interface {
 
 	DescribePlatformVersionRequest(*elasticbeanstalk.DescribePlatformVersionInput) elasticbeanstalk.DescribePlatformVersionRequest
 
+	DisassociateEnvironmentOperationsRoleRequest(*elasticbeanstalk.DisassociateEnvironmentOperationsRoleInput) elasticbeanstalk.DisassociateEnvironmentOperationsRoleRequest
+
 	ListAvailableSolutionStacksRequest(*elasticbeanstalk.ListAvailableSolutionStacksInput) elasticbeanstalk.ListAvailableSolutionStacksRequest
 
 	ListPlatformBranchesRequest(*elasticbeanstalk.ListPlatformBranchesInput) elasticbeanstalk.ListPlatformBranchesRequest
@@ -150,6 +157,12 @@ type ClientAPI interface {
 	UpdateTagsForResourceRequest(*elasticbeanstalk.UpdateTagsForResourceInput) elasticbeanstalk.UpdateTagsForResourceRequest
 
 	ValidateConfigurationSettingsRequest(*elasticbeanstalk.ValidateConfigurationSettingsInput) elasticbeanstalk.ValidateConfigurationSettingsRequest
+
+	WaitUntilEnvironmentExists(context.Context, *elasticbeanstalk.DescribeEnvironmentsInput, ...aws.WaiterOption) error
+
+	WaitUntilEnvironmentTerminated(context.Context, *elasticbeanstalk.DescribeEnvironmentsInput, ...aws.WaiterOption) error
+
+	WaitUntilEnvironmentUpdated(context.Context, *elasticbeanstalk.DescribeEnvironmentsInput, ...aws.WaiterOption) error
 }
 
 var _ ClientAPI = (*elasticbeanstalk.Client)(nil)

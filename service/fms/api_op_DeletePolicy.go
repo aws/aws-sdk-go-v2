@@ -41,8 +41,8 @@ type DeletePolicyInput struct {
 	// If you don't specify tags or accounts, all resources are in scope.
 	DeleteAllPolicyResources *bool `type:"boolean"`
 
-	// The ID of the policy that you want to delete. PolicyId is returned by PutPolicy
-	// and by ListPolicies.
+	// The ID of the policy that you want to delete. You can retrieve this ID from
+	// PutPolicy and ListPolicies.
 	//
 	// PolicyId is a required field
 	PolicyId *string `min:"36" type:"string" required:"true"`

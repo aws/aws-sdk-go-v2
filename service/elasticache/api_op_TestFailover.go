@@ -99,7 +99,7 @@ const opTestFailover = "TestFailover"
 //    in the ElastiCache User Guide DescribeEvents (https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeEvents.html)
 //    in the ElastiCache API Reference
 //
-// Also see, Testing Multi-AZ with Automatic Failover (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html#auto-failover-test)
+// Also see, Testing Multi-AZ (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html#auto-failover-test)
 // in the ElastiCache User Guide.
 //
 //    // Example sending a request using TestFailoverRequest.

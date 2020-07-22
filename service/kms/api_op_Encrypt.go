@@ -21,9 +21,9 @@ type EncryptInput struct {
 	EncryptionAlgorithm EncryptionAlgorithmSpec `type:"string" enum:"true"`
 
 	// Specifies the encryption context that will be used to encrypt the data. An
-	// encryption context is valid only for cryptographic operations with a symmetric
-	// CMK. The standard asymmetric encryption algorithms that AWS KMS uses do not
-	// support an encryption context.
+	// encryption context is valid only for cryptographic operations (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
+	// with a symmetric CMK. The standard asymmetric encryption algorithms that
+	// AWS KMS uses do not support an encryption context.
 	//
 	// An encryption context is a collection of non-secret key-value pairs that
 	// represents additional authenticated data. When you use an encryption context
@@ -112,7 +112,8 @@ type EncryptOutput struct {
 	// The encryption algorithm that was used to encrypt the plaintext.
 	EncryptionAlgorithm EncryptionAlgorithmSpec `type:"string" enum:"true"`
 
-	// The ID of the key used during encryption.
+	// The Amazon Resource Name (key ARN (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
+	// of the CMK that was used to encrypt the plaintext.
 	KeyId *string `min:"1" type:"string"`
 }
 
@@ -133,11 +134,12 @@ const opEncrypt = "Encrypt"
 //    identifier or database password, or other sensitive information.
 //
 //    * You can use the Encrypt operation to move encrypted data from one AWS
-//    region to another. In the first region, generate a data key and use the
-//    plaintext key to encrypt the data. Then, in the new region, call the Encrypt
-//    method on same plaintext data key. Now, you can safely move the encrypted
-//    data and encrypted data key to the new region, and decrypt in the new
-//    region when necessary.
+//    Region to another. For example, in Region A, generate a data key and use
+//    the plaintext key to encrypt your data. Then, in Region A, use the Encrypt
+//    operation to encrypt the plaintext data key under a CMK in Region B. Now,
+//    you can move the encrypted data and the encrypted data key to Region B.
+//    When necessary, you can decrypt the encrypted data key and the encrypted
+//    data entirely within in Region B.
 //
 // You don't need to use the Encrypt operation to encrypt a data key. The GenerateDataKey
 // and GenerateDataKeyPair operations return a plaintext data key and an encrypted

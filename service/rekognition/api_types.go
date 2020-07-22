@@ -63,6 +63,29 @@ func (s *Asset) Validate() error {
 	return nil
 }
 
+// Metadata information about an audio stream. An array of AudioMetadata objects
+// for the audio streams found in a stored video is returned by GetSegmentDetection.
+type AudioMetadata struct {
+	_ struct{} `type:"structure"`
+
+	// The audio codec used to encode or decode the audio stream.
+	Codec *string `type:"string"`
+
+	// The duration of the audio stream in milliseconds.
+	DurationMillis *int64 `type:"long"`
+
+	// The number of audio channels in the segement.
+	NumberOfChannels *int64 `type:"long"`
+
+	// The sample rate for the audio stream.
+	SampleRate *int64 `type:"long"`
+}
+
+// String returns the string representation
+func (s AudioMetadata) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Indicates whether or not the face has a beard, and the confidence level in
 // the determination.
 type Beard struct {
@@ -738,7 +761,9 @@ type HumanLoopConfig struct {
 	// Sets attributes of the input data.
 	DataAttributes *HumanLoopDataAttributes `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the flow definition.
+	// The Amazon Resource Name (ARN) of the flow definition. You can create a flow
+	// definition by using the Amazon Sagemaker CreateFlowDefinition (https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateFlowDefinition.html)
+	// Operation.
 	//
 	// FlowDefinitionArn is a required field
 	FlowDefinitionArn *string `type:"string" required:"true"`
@@ -1366,6 +1391,87 @@ func (s *S3Object) Validate() error {
 	return nil
 }
 
+// A technical cue or shot detection segment detected in a video. An array of
+// SegmentDetection objects containing all segments detected in a stored video
+// is returned by GetSegmentDetection.
+type SegmentDetection struct {
+	_ struct{} `type:"structure"`
+
+	// The duration of the detected segment in milliseconds.
+	DurationMillis *int64 `type:"long"`
+
+	// The duration of the timecode for the detected segment in SMPTE format.
+	DurationSMPTE *string `type:"string"`
+
+	// The frame-accurate SMPTE timecode, from the start of a video, for the end
+	// of a detected segment. EndTimecode is in HH:MM:SS:fr format (and ;fr for
+	// drop frame-rates).
+	EndTimecodeSMPTE *string `type:"string"`
+
+	// The end time of the detected segment, in milliseconds, from the start of
+	// the video.
+	EndTimestampMillis *int64 `type:"long"`
+
+	// If the segment is a shot detection, contains information about the shot detection.
+	ShotSegment *ShotSegment `type:"structure"`
+
+	// The frame-accurate SMPTE timecode, from the start of a video, for the start
+	// of a detected segment. StartTimecode is in HH:MM:SS:fr format (and ;fr for
+	// drop frame-rates).
+	StartTimecodeSMPTE *string `type:"string"`
+
+	// The start time of the detected segment in milliseconds from the start of
+	// the video.
+	StartTimestampMillis *int64 `type:"long"`
+
+	// If the segment is a technical cue, contains information about the technical
+	// cue.
+	TechnicalCueSegment *TechnicalCueSegment `type:"structure"`
+
+	// The type of the segment. Valid values are TECHNICAL_CUE and SHOT.
+	Type SegmentType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s SegmentDetection) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about the type of a segment requested in a call to StartSegmentDetection.
+// An array of SegmentTypeInfo objects is returned by the response from GetSegmentDetection.
+type SegmentTypeInfo struct {
+	_ struct{} `type:"structure"`
+
+	// The version of the model used to detect segments.
+	ModelVersion *string `type:"string"`
+
+	// The type of a segment (technical cue or shot detection).
+	Type SegmentType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s SegmentTypeInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about a shot detection segment detected in a video. For more
+// information, see SegmentDetection.
+type ShotSegment struct {
+	_ struct{} `type:"structure"`
+
+	// The confidence that Amazon Rekognition Video has in the accuracy of the detected
+	// segment.
+	Confidence *float64 `min:"50" type:"float"`
+
+	// An Identifier for a shot detection segment detected in a video
+	Index *int64 `type:"long"`
+}
+
+// String returns the string representation
+func (s ShotSegment) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Indicates whether or not the face is smiling, and the confidence level in
 // the determination.
 type Smile struct {
@@ -1381,6 +1487,111 @@ type Smile struct {
 // String returns the string representation
 func (s Smile) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Filters applied to the technical cue or shot detection segments. For more
+// information, see StartSegmentDetection.
+type StartSegmentDetectionFilters struct {
+	_ struct{} `type:"structure"`
+
+	// Filters that are specific to shot detections.
+	ShotFilter *StartShotDetectionFilter `type:"structure"`
+
+	// Filters that are specific to technical cues.
+	TechnicalCueFilter *StartTechnicalCueDetectionFilter `type:"structure"`
+}
+
+// String returns the string representation
+func (s StartSegmentDetectionFilters) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StartSegmentDetectionFilters) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StartSegmentDetectionFilters"}
+	if s.ShotFilter != nil {
+		if err := s.ShotFilter.Validate(); err != nil {
+			invalidParams.AddNested("ShotFilter", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.TechnicalCueFilter != nil {
+		if err := s.TechnicalCueFilter.Validate(); err != nil {
+			invalidParams.AddNested("TechnicalCueFilter", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Filters for the shot detection segments returned by GetSegmentDetection.
+// For more information, see StartSegmentDetectionFilters.
+type StartShotDetectionFilter struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the minimum confidence that Amazon Rekognition Video must have
+	// in order to return a detected segment. Confidence represents how certain
+	// Amazon Rekognition is that a segment is correctly identified. 0 is the lowest
+	// confidence. 100 is the highest confidence. Amazon Rekognition Video doesn't
+	// return any segments with a confidence level lower than this specified value.
+	//
+	// If you don't specify MinSegmentConfidence, the GetSegmentDetection returns
+	// segments with confidence values greater than or equal to 50 percent.
+	MinSegmentConfidence *float64 `min:"50" type:"float"`
+}
+
+// String returns the string representation
+func (s StartShotDetectionFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StartShotDetectionFilter) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StartShotDetectionFilter"}
+	if s.MinSegmentConfidence != nil && *s.MinSegmentConfidence < 50 {
+		invalidParams.Add(aws.NewErrParamMinValue("MinSegmentConfidence", 50))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Filters for the technical segments returned by GetSegmentDetection. For more
+// information, see StartSegmentDetectionFilters.
+type StartTechnicalCueDetectionFilter struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the minimum confidence that Amazon Rekognition Video must have
+	// in order to return a detected segment. Confidence represents how certain
+	// Amazon Rekognition is that a segment is correctly identified. 0 is the lowest
+	// confidence. 100 is the highest confidence. Amazon Rekognition Video doesn't
+	// return any segments with a confidence level lower than this specified value.
+	//
+	// If you don't specify MinSegmentConfidence, GetSegmentDetection returns segments
+	// with confidence values greater than or equal to 50 percent.
+	MinSegmentConfidence *float64 `min:"50" type:"float"`
+}
+
+// String returns the string representation
+func (s StartTechnicalCueDetectionFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StartTechnicalCueDetectionFilter) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StartTechnicalCueDetectionFilter"}
+	if s.MinSegmentConfidence != nil && *s.MinSegmentConfidence < 50 {
+		invalidParams.Add(aws.NewErrParamMinValue("MinSegmentConfidence", 50))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // Set of optional parameters that let you set the criteria text must meet to
@@ -1520,6 +1731,23 @@ type Sunglasses struct {
 
 // String returns the string representation
 func (s Sunglasses) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Information about a technical cue segment. For more information, see SegmentDetection.
+type TechnicalCueSegment struct {
+	_ struct{} `type:"structure"`
+
+	// The confidence that Amazon Rekognition Video has in the accuracy of the detected
+	// segment.
+	Confidence *float64 `min:"50" type:"float"`
+
+	// The type of the technical cue.
+	Type TechnicalCueType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s TechnicalCueSegment) String() string {
 	return awsutil.Prettify(s)
 }
 

@@ -1091,9 +1091,7 @@ type ServiceChange struct {
 
 	// A complex type that contains information about the Route 53 DNS records that
 	// you want AWS Cloud Map to create when you register an instance.
-	//
-	// DnsConfig is a required field
-	DnsConfig *DnsConfigChange `type:"structure" required:"true"`
+	DnsConfig *DnsConfigChange `type:"structure"`
 
 	// Public DNS and HTTP namespaces only. A complex type that contains settings
 	// for an optional health check. If you specify settings for a health check,
@@ -1165,10 +1163,6 @@ func (s ServiceChange) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *ServiceChange) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "ServiceChange"}
-
-	if s.DnsConfig == nil {
-		invalidParams.Add(aws.NewErrParamRequired("DnsConfig"))
-	}
 	if s.DnsConfig != nil {
 		if err := s.DnsConfig.Validate(); err != nil {
 			invalidParams.AddNested("DnsConfig", err.(aws.ErrInvalidParams))
@@ -1383,4 +1377,47 @@ type ServiceSummary struct {
 // String returns the string representation
 func (s ServiceSummary) String() string {
 	return awsutil.Prettify(s)
+}
+
+// A custom key-value pair associated with a resource.
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// The key identifier, or name, of the tag.
+	//
+	// Key is a required field
+	Key *string `min:"1" type:"string" required:"true"`
+
+	// The string value that's associated with the key of the tag. You can set the
+	// value of a tag to an empty string, but you can't set the value of a tag to
+	// null.
+	//
+	// Value is a required field
+	Value *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }

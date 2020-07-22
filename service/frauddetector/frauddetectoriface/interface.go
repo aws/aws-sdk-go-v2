@@ -67,6 +67,8 @@ type ClientAPI interface {
 
 	CreateDetectorVersionRequest(*frauddetector.CreateDetectorVersionInput) frauddetector.CreateDetectorVersionRequest
 
+	CreateModelRequest(*frauddetector.CreateModelInput) frauddetector.CreateModelRequest
+
 	CreateModelVersionRequest(*frauddetector.CreateModelVersionInput) frauddetector.CreateModelVersionRequest
 
 	CreateRuleRequest(*frauddetector.CreateRuleInput) frauddetector.CreateRuleRequest
@@ -79,7 +81,7 @@ type ClientAPI interface {
 
 	DeleteEventRequest(*frauddetector.DeleteEventInput) frauddetector.DeleteEventRequest
 
-	DeleteRuleVersionRequest(*frauddetector.DeleteRuleVersionInput) frauddetector.DeleteRuleVersionRequest
+	DeleteRuleRequest(*frauddetector.DeleteRuleInput) frauddetector.DeleteRuleRequest
 
 	DescribeDetectorRequest(*frauddetector.DescribeDetectorInput) frauddetector.DescribeDetectorRequest
 
@@ -89,7 +91,17 @@ type ClientAPI interface {
 
 	GetDetectorsRequest(*frauddetector.GetDetectorsInput) frauddetector.GetDetectorsRequest
 
+	GetEntityTypesRequest(*frauddetector.GetEntityTypesInput) frauddetector.GetEntityTypesRequest
+
+	GetEventPredictionRequest(*frauddetector.GetEventPredictionInput) frauddetector.GetEventPredictionRequest
+
+	GetEventTypesRequest(*frauddetector.GetEventTypesInput) frauddetector.GetEventTypesRequest
+
 	GetExternalModelsRequest(*frauddetector.GetExternalModelsInput) frauddetector.GetExternalModelsRequest
+
+	GetKMSEncryptionKeyRequest(*frauddetector.GetKMSEncryptionKeyInput) frauddetector.GetKMSEncryptionKeyRequest
+
+	GetLabelsRequest(*frauddetector.GetLabelsInput) frauddetector.GetLabelsRequest
 
 	GetModelVersionRequest(*frauddetector.GetModelVersionInput) frauddetector.GetModelVersionRequest
 
@@ -103,13 +115,25 @@ type ClientAPI interface {
 
 	GetVariablesRequest(*frauddetector.GetVariablesInput) frauddetector.GetVariablesRequest
 
+	ListTagsForResourceRequest(*frauddetector.ListTagsForResourceInput) frauddetector.ListTagsForResourceRequest
+
 	PutDetectorRequest(*frauddetector.PutDetectorInput) frauddetector.PutDetectorRequest
+
+	PutEntityTypeRequest(*frauddetector.PutEntityTypeInput) frauddetector.PutEntityTypeRequest
+
+	PutEventTypeRequest(*frauddetector.PutEventTypeInput) frauddetector.PutEventTypeRequest
 
 	PutExternalModelRequest(*frauddetector.PutExternalModelInput) frauddetector.PutExternalModelRequest
 
-	PutModelRequest(*frauddetector.PutModelInput) frauddetector.PutModelRequest
+	PutKMSEncryptionKeyRequest(*frauddetector.PutKMSEncryptionKeyInput) frauddetector.PutKMSEncryptionKeyRequest
+
+	PutLabelRequest(*frauddetector.PutLabelInput) frauddetector.PutLabelRequest
 
 	PutOutcomeRequest(*frauddetector.PutOutcomeInput) frauddetector.PutOutcomeRequest
+
+	TagResourceRequest(*frauddetector.TagResourceInput) frauddetector.TagResourceRequest
+
+	UntagResourceRequest(*frauddetector.UntagResourceInput) frauddetector.UntagResourceRequest
 
 	UpdateDetectorVersionRequest(*frauddetector.UpdateDetectorVersionInput) frauddetector.UpdateDetectorVersionRequest
 
@@ -117,7 +141,11 @@ type ClientAPI interface {
 
 	UpdateDetectorVersionStatusRequest(*frauddetector.UpdateDetectorVersionStatusInput) frauddetector.UpdateDetectorVersionStatusRequest
 
+	UpdateModelRequest(*frauddetector.UpdateModelInput) frauddetector.UpdateModelRequest
+
 	UpdateModelVersionRequest(*frauddetector.UpdateModelVersionInput) frauddetector.UpdateModelVersionRequest
+
+	UpdateModelVersionStatusRequest(*frauddetector.UpdateModelVersionStatusInput) frauddetector.UpdateModelVersionStatusRequest
 
 	UpdateRuleMetadataRequest(*frauddetector.UpdateRuleMetadataInput) frauddetector.UpdateRuleMetadataRequest
 

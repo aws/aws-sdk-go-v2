@@ -172,6 +172,12 @@ func (c *Client) DescribeDBClusterSnapshotsRequest(input *DescribeDBClusterSnaps
 		Name:       opDescribeDBClusterSnapshots,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "MaxRecords",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -205,6 +211,53 @@ func (r DescribeDBClusterSnapshotsRequest) Send(ctx context.Context) (*DescribeD
 	}
 
 	return resp, nil
+}
+
+// NewDescribeDBClusterSnapshotsRequestPaginator returns a paginator for DescribeDBClusterSnapshots.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.DescribeDBClusterSnapshotsRequest(input)
+//   p := rds.NewDescribeDBClusterSnapshotsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewDescribeDBClusterSnapshotsPaginator(req DescribeDBClusterSnapshotsRequest) DescribeDBClusterSnapshotsPaginator {
+	return DescribeDBClusterSnapshotsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *DescribeDBClusterSnapshotsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// DescribeDBClusterSnapshotsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeDBClusterSnapshotsPaginator struct {
+	aws.Pager
+}
+
+func (p *DescribeDBClusterSnapshotsPaginator) CurrentPage() *DescribeDBClusterSnapshotsOutput {
+	return p.Pager.CurrentPage().(*DescribeDBClusterSnapshotsOutput)
 }
 
 // DescribeDBClusterSnapshotsResponse is the response type for the

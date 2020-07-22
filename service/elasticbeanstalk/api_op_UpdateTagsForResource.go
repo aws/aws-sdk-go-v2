@@ -22,14 +22,16 @@ type UpdateTagsForResourceInput struct {
 	// ResourceArn is a required field
 	ResourceArn *string `type:"string" required:"true"`
 
-	// A list of tags to add or update.
+	// A list of tags to add or update. If a key of an existing tag is added, the
+	// tag's value is updated.
 	//
-	// If a key of an existing tag is added, the tag's value is updated.
+	// Specify at least one of these parameters: TagsToAdd, TagsToRemove.
 	TagsToAdd []Tag `type:"list"`
 
-	// A list of tag keys to remove.
+	// A list of tag keys to remove. If a tag key doesn't exist, it is silently
+	// ignored.
 	//
-	// If a tag key doesn't exist, it is silently ignored.
+	// Specify at least one of these parameters: TagsToAdd, TagsToRemove.
 	TagsToRemove []string `type:"list"`
 }
 

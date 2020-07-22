@@ -13,11 +13,15 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// Information about an AWS CodeCommit repository.
+// Information about an AWS CodeCommit repository. The CodeCommit repository
+// must be in the same AWS Region and AWS account where its CodeGuru Reviewer
+// code reviews are configured.
 type CodeCommitRepository struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the AWS CodeCommit repository.
+	// The name of the AWS CodeCommit repository. For more information, see repositoryName
+	// (https://docs.aws.amazon.com/codecommit/latest/APIReference/API_GetRepository.html#CodeCommit-GetRepository-request-repositoryName)
+	// in the AWS CodeCommit API Reference.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
@@ -60,7 +64,8 @@ func (s CodeCommitRepository) MarshalFields(e protocol.FieldEncoder) error {
 type CodeReview struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the code review to describe.
+	// The Amazon Resource Name (ARN) of the CodeReview (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
+	// object.
 	CodeReviewArn *string `min:"1" type:"string"`
 
 	// The time, in milliseconds since the epoch, when the code review was created.
@@ -76,10 +81,13 @@ type CodeReview struct {
 	// The name of the code review.
 	Name *string `min:"1" type:"string"`
 
-	// The owner of the repository.
+	// The owner of the repository. For an AWS CodeCommit repository, this is the
+	// AWS account ID of the account that owns the repository. For a GitHub or Bitbucket
+	// repository, this is the username for the account that owns the repository.
 	Owner *string `min:"1" type:"string"`
 
-	// The provider type of the repository association.
+	// The type of repository that contains the reviewed code (for example, GitHub
+	// or Bitbucket).
 	ProviderType ProviderType `type:"string" enum:"true"`
 
 	// The pull request ID for the code review.
@@ -91,7 +99,15 @@ type CodeReview struct {
 	// The type of the source code for the code review.
 	SourceCodeType *SourceCodeType `type:"structure"`
 
-	// The state of the code review.
+	// The valid code review states are:
+	//
+	//    * Completed: The code review is complete.
+	//
+	//    * Pending: The code review started and has not completed or failed.
+	//
+	//    * Failed: The code review failed.
+	//
+	//    * Deleting: The code review is being deleted.
 	State JobState `type:"string" enum:"true"`
 
 	// The reason for the state of the code review.
@@ -195,7 +211,8 @@ func (s CodeReview) MarshalFields(e protocol.FieldEncoder) error {
 type CodeReviewSummary struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) of the code review to describe.
+	// The Amazon Resource Name (ARN) of the CodeReview (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
+	// object.
 	CodeReviewArn *string `min:"1" type:"string"`
 
 	// The time, in milliseconds since the epoch, when the code review was created.
@@ -211,7 +228,9 @@ type CodeReviewSummary struct {
 	// The name of the code review.
 	Name *string `min:"1" type:"string"`
 
-	// The owner of the repository.
+	// The owner of the repository. For an AWS CodeCommit repository, this is the
+	// AWS account ID of the account that owns the repository. For a GitHub or Bitbucket
+	// repository, this is the username for the account that owns the repository.
 	Owner *string `min:"1" type:"string"`
 
 	// The provider type of the repository association.
@@ -224,6 +243,16 @@ type CodeReviewSummary struct {
 	RepositoryName *string `min:"1" type:"string"`
 
 	// The state of the code review.
+	//
+	// The valid code review states are:
+	//
+	//    * Completed: The code review is complete.
+	//
+	//    * Pending: The code review started and has not completed or failed.
+	//
+	//    * Failed: The code review failed.
+	//
+	//    * Deleting: The code review is being deleted.
 	State JobState `type:"string" enum:"true"`
 
 	// The type of the code review.
@@ -312,10 +341,10 @@ func (s CodeReviewSummary) MarshalFields(e protocol.FieldEncoder) error {
 type CommitDiffSourceCodeType struct {
 	_ struct{} `type:"structure"`
 
-	// Destination Commit SHA
+	// The SHA of the destination commit.
 	DestinationCommit *string `min:"6" type:"string"`
 
-	// Source Commit SHA.
+	// The SHA of the source commit.
 	SourceCommit *string `min:"6" type:"string"`
 }
 
@@ -348,7 +377,17 @@ type Metrics struct {
 	// Total number of recommendations found in the code review.
 	FindingsCount *int64 `type:"long"`
 
-	// Lines of code metered in the code review.
+	// Lines of code metered in the code review. For the initial code review pull
+	// request and all subsequent revisions, this includes all lines of code in
+	// the files added to the pull request. In subsequent revisions, for files that
+	// already existed in the pull request, this includes only the changed lines
+	// of code. In both cases, this does not include non-code lines such as comments
+	// and import statements. For example, if you submit a pull request containing
+	// 5 files, each with 500 lines of code, and in a subsequent revision you added
+	// a new file with 200 lines of code, and also modified a total of 25 lines
+	// across the initial 5 files, MeteredLinesOfCodeCount includes the first 5
+	// files (5 * 500 = 2,500 lines), the new file (200 lines) and the 25 changed
+	// lines of code for a total of 2,725 lines of code.
 	MeteredLinesOfCodeCount *int64 `type:"long"`
 }
 
@@ -381,7 +420,17 @@ type MetricsSummary struct {
 	// Total number of recommendations found in the code review.
 	FindingsCount *int64 `type:"long"`
 
-	// Lines of code metered in the code review.
+	// Lines of code metered in the code review. For the initial code review pull
+	// request and all subsequent revisions, this includes all lines of code in
+	// the files added to the pull request. In subsequent revisions, for files that
+	// already existed in the pull request, this includes only the changed lines
+	// of code. In both cases, this does not include non-code lines such as comments
+	// and import statements. For example, if you submit a pull request containing
+	// 5 files, each with 500 lines of code, and in a subsequent revision you added
+	// a new file with 200 lines of code, and also modified a total of 25 lines
+	// across the initial 5 files, MeteredLinesOfCodeCount includes the first 5
+	// files (5 * 500 = 2,500 lines), the new file (200 lines) and the 25 changed
+	// lines of code for a total of 2,725 lines of code.
 	MeteredLinesOfCodeCount *int64 `type:"long"`
 }
 
@@ -411,7 +460,8 @@ func (s MetricsSummary) MarshalFields(e protocol.FieldEncoder) error {
 type RecommendationFeedback struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) that identifies the code review.
+	// The Amazon Resource Name (ARN) of the CodeReview (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
+	// object.
 	CodeReviewArn *string `min:"1" type:"string"`
 
 	// The time at which the feedback was created.
@@ -428,7 +478,12 @@ type RecommendationFeedback struct {
 	// Later on it can be used to collect the feedback.
 	RecommendationId *string `min:"1" type:"string"`
 
-	// The user principal that made the API call.
+	// The ID of the user that made the API call.
+	//
+	// The UserId is an IAM principal that can be specified as an AWS account ID
+	// or an Amazon Resource Name (ARN). For more information, see Specifying a
+	// Principal (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying)
+	// in the AWS Identity and Access Management User Guide.
 	UserId *string `min:"1" type:"string"`
 }
 
@@ -497,7 +552,12 @@ type RecommendationFeedbackSummary struct {
 	// Later on it can be used to collect the feedback.
 	RecommendationId *string `min:"1" type:"string"`
 
-	// The identifier for the user that gave the feedback.
+	// The ID of the user that gave the feedback.
+	//
+	// The UserId is an IAM principal that can be specified as an AWS account ID
+	// or an Amazon Resource Name (ARN). For more information, see Specifying a
+	// Principal (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying)
+	// in the AWS Identity and Access Management User Guide.
 	UserId *string `min:"1" type:"string"`
 }
 
@@ -545,7 +605,7 @@ type RecommendationSummary struct {
 
 	// Last line where the recommendation is applicable in the source commit or
 	// source branch. For a single line comment the start line and end line values
-	// will be the same.
+	// are the same.
 	EndLine *int64 `type:"integer"`
 
 	// Name of the file on which a recommendation is provided.
@@ -600,15 +660,21 @@ func (s RecommendationSummary) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information about a repository.
+// Information about an associated AWS CodeCommit repository or an associated
+// repository that is managed by AWS CodeStar Connections (for example, Bitbucket).
+// This Repository object is not used if your source code is in an associated
+// GitHub repository.
 type Repository struct {
 	_ struct{} `type:"structure"`
 
-	// Information about a Bitbucket Cloud repository.
+	// Information about a Bitbucket repository.
 	Bitbucket *ThirdPartySourceRepository `type:"structure"`
 
 	// Information about an AWS CodeCommit repository.
 	CodeCommit *CodeCommitRepository `type:"structure"`
+
+	// Information about a GitHub Enterprise Server repository.
+	GitHubEnterpriseServer *ThirdPartySourceRepository `type:"structure"`
 }
 
 // String returns the string representation
@@ -627,6 +693,11 @@ func (s *Repository) Validate() error {
 	if s.CodeCommit != nil {
 		if err := s.CodeCommit.Validate(); err != nil {
 			invalidParams.AddNested("CodeCommit", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.GitHubEnterpriseServer != nil {
+		if err := s.GitHubEnterpriseServer.Validate(); err != nil {
+			invalidParams.AddNested("GitHubEnterpriseServer", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -650,10 +721,18 @@ func (s Repository) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "CodeCommit", v, metadata)
 	}
+	if s.GitHubEnterpriseServer != nil {
+		v := s.GitHubEnterpriseServer
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "GitHubEnterpriseServer", v, metadata)
+	}
 	return nil
 }
 
-// Information about a repository association.
+// Information about a repository association. The DescribeRepositoryAssociation
+// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_DescribeRepositoryAssociation.html)
+// operation returns a RepositoryAssociation object.
 type RepositoryAssociation struct {
 	_ struct{} `type:"structure"`
 
@@ -663,7 +742,10 @@ type RepositoryAssociation struct {
 	// The ID of the repository association.
 	AssociationId *string `min:"1" type:"string"`
 
-	// The Amazon Resource Name (ARN) identifying the repository connection.
+	// The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection.
+	// Its format is arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id.
+	// For more information, see Connection (https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html)
+	// in the AWS CodeStar Connections API Reference.
 	ConnectionArn *string `type:"string"`
 
 	// The time, in milliseconds since the epoch, when the repository association
@@ -677,13 +759,32 @@ type RepositoryAssociation struct {
 	// The name of the repository.
 	Name *string `min:"1" type:"string"`
 
-	// The owner of the repository.
+	// The owner of the repository. For an AWS CodeCommit repository, this is the
+	// AWS account ID of the account that owns the repository. For a GitHub or Bitbucket
+	// repository, this is the username for the account that owns the repository.
 	Owner *string `min:"1" type:"string"`
 
 	// The provider type of the repository association.
 	ProviderType ProviderType `type:"string" enum:"true"`
 
 	// The state of the repository association.
+	//
+	// The valid repository association states are:
+	//
+	//    * Associated: The repository association is complete.
+	//
+	//    * Associating: CodeGuru Reviewer is: Setting up pull request notifications.
+	//    This is required for pull requests to trigger a CodeGuru Reviewer review.
+	//    If your repository ProviderType is GitHub or Bitbucket, CodeGuru Reviewer
+	//    creates webhooks in your repository to trigger CodeGuru Reviewer reviews.
+	//    If you delete these webhooks, reviews of code in your repository cannot
+	//    be triggered. Setting up source code access. This is required for CodeGuru
+	//    Reviewer to securely clone code in your repository.
+	//
+	//    * Failed: The repository failed to associate or disassociate.
+	//
+	//    * Disassociating: CodeGuru Reviewer is removing the repository's pull
+	//    request notifications and source code access.
 	State RepositoryAssociationState `type:"string" enum:"true"`
 
 	// A description of why the repository association is in the current state.
@@ -762,17 +863,23 @@ func (s RepositoryAssociation) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information about a repository association.
+// Summary information about a repository association. The ListRepositoryAssociations
+// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html)
+// operation returns a list of RepositoryAssociationSummary objects.
 type RepositoryAssociationSummary struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) identifying the repository association.
+	// The Amazon Resource Name (ARN) of the RepositoryAssociation (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
+	// object.
 	AssociationArn *string `min:"1" type:"string"`
 
 	// The repository association ID.
 	AssociationId *string `min:"1" type:"string"`
 
-	// The Amazon Resource Name (ARN) identifying the repository connection.
+	// The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection.
+	// Its format is arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id.
+	// For more information, see Connection (https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html)
+	// in the AWS CodeStar Connections API Reference.
 	ConnectionArn *string `type:"string"`
 
 	// The time, in milliseconds since the epoch, since the repository association
@@ -782,7 +889,9 @@ type RepositoryAssociationSummary struct {
 	// The name of the repository association.
 	Name *string `min:"1" type:"string"`
 
-	// The owner of the repository association.
+	// The owner of the repository. For an AWS CodeCommit repository, this is the
+	// AWS account ID of the account that owns the repository. For a GitHub or Bitbucket
+	// repository, this is the username for the account that owns the repository.
 	Owner *string `min:"1" type:"string"`
 
 	// The provider type of the repository association.
@@ -790,21 +899,22 @@ type RepositoryAssociationSummary struct {
 
 	// The state of the repository association.
 	//
-	// Associated
+	// The valid repository association states are:
 	//
-	// Amazon CodeGuru Reviewer is associated with the repository.
+	//    * Associated: The repository association is complete.
 	//
-	// Associating
+	//    * Associating: CodeGuru Reviewer is: Setting up pull request notifications.
+	//    This is required for pull requests to trigger a CodeGuru Reviewer review.
+	//    If your repository ProviderType is GitHub or Bitbucket, CodeGuru Reviewer
+	//    creates webhooks in your repository to trigger CodeGuru Reviewer reviews.
+	//    If you delete these webhooks, reviews of code in your repository cannot
+	//    be triggered. Setting up source code access. This is required for CodeGuru
+	//    Reviewer to securely clone code in your repository.
 	//
-	// The association is in progress.
+	//    * Failed: The repository failed to associate or disassociate.
 	//
-	// Failed
-	//
-	// The association failed.
-	//
-	// Disassociating
-	//
-	// Amazon CodeGuru Reviewer is in the process of disassociating with the repository.
+	//    * Disassociating: CodeGuru Reviewer is removing the repository's pull
+	//    request notifications and source code access.
 	State RepositoryAssociationState `type:"string" enum:"true"`
 }
 
@@ -891,12 +1001,14 @@ func (s SourceCodeType) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Information about a third party source repository connected through CodeStar
-// Connections.
+// Information about a third-party source repository connected to CodeGuru Reviewer.
 type ThirdPartySourceRepository struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) identifying the repository connection.
+	// The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection.
+	// Its format is arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id.
+	// For more information, see Connection (https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html)
+	// in the AWS CodeStar Connections API Reference.
 	//
 	// ConnectionArn is a required field
 	ConnectionArn *string `type:"string" required:"true"`
@@ -906,7 +1018,8 @@ type ThirdPartySourceRepository struct {
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	// The username of the owner of the repository.
+	// The owner of the repository. For a GitHub, GitHub Enterprise, or Bitbucket
+	// repository, this is the username for the account that owns the repository.
 	//
 	// Owner is a required field
 	Owner *string `min:"1" type:"string" required:"true"`

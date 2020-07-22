@@ -26,14 +26,14 @@ func (s GetClassificationExportConfigurationInput) MarshalFields(e protocol.Fiel
 	return nil
 }
 
-// Provides information about the current configuration settings for exporting
+// Provides information about the current configuration settings for storing
 // data classification results.
 type GetClassificationExportConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies where to export data classification results to, and the encryption
+	// Specifies where to store data classification results, and the encryption
 	// settings to use when storing results in that location. Currently, you can
-	// export classification results only to an S3 bucket.
+	// store classification results only in an S3 bucket.
 	Configuration *ClassificationExportConfiguration `locationName:"configuration" type:"structure"`
 }
 
@@ -58,7 +58,7 @@ const opGetClassificationExportConfiguration = "GetClassificationExportConfigura
 // GetClassificationExportConfigurationRequest returns a request value for making API operation for
 // Amazon Macie 2.
 //
-// Retrieves the configuration settings for exporting data classification results.
+// Retrieves the configuration settings for storing data classification results.
 //
 //    // Example sending a request using GetClassificationExportConfigurationRequest.
 //    req := client.GetClassificationExportConfigurationRequest(params)

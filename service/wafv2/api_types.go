@@ -532,6 +532,72 @@ func (s FirewallManagerStatement) String() string {
 	return awsutil.Prettify(s)
 }
 
+// The configuration for inspecting IP addresses in an HTTP header that you
+// specify, instead of using the IP address that's reported by the web request
+// origin. Commonly, this is the X-Forwarded-For (XFF) header, but you can specify
+// any header name.
+//
+// If the specified header isn't present in the request, AWS WAF doesn't apply
+// the rule to the web request at all.
+//
+// This configuration is used for GeoMatchStatement and RateBasedStatement.
+// For IPSetReferenceStatement, use IPSetForwardedIPConfig instead.
+//
+// AWS WAF only evaluates the first IP address found in the specified HTTP header.
+type ForwardedIPConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The match status to assign to the web request if the request doesn't have
+	// a valid IP address in the specified position.
+	//
+	// If the specified header isn't present in the request, AWS WAF doesn't apply
+	// the rule to the web request at all.
+	//
+	// You can specify the following fallback behaviors:
+	//
+	//    * MATCH - Treat the web request as matching the rule statement. AWS WAF
+	//    applies the rule action to the request.
+	//
+	//    * NO_MATCH - Treat the web request as not matching the rule statement.
+	//
+	// FallbackBehavior is a required field
+	FallbackBehavior FallbackBehavior `type:"string" required:"true" enum:"true"`
+
+	// The name of the HTTP header to use for the IP address. For example, to use
+	// the X-Forwarded-For (XFF) header, set this to X-Forwarded-For.
+	//
+	// If the specified header isn't present in the request, AWS WAF doesn't apply
+	// the rule to the web request at all.
+	//
+	// HeaderName is a required field
+	HeaderName *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s ForwardedIPConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ForwardedIPConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ForwardedIPConfig"}
+	if len(s.FallbackBehavior) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("FallbackBehavior"))
+	}
+
+	if s.HeaderName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("HeaderName"))
+	}
+	if s.HeaderName != nil && len(*s.HeaderName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("HeaderName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 //
 // This is the latest version of AWS WAF, named AWS WAFV2, released in November,
 // 2019. For information, including how to migrate your AWS WAF resources from
@@ -544,6 +610,15 @@ type GeoMatchStatement struct {
 	// An array of two-character country codes, for example, [ "US", "CN" ], from
 	// the alpha-2 country ISO codes of the ISO 3166 international standard.
 	CountryCodes []CountryCode `min:"1" type:"list"`
+
+	// The configuration for inspecting IP addresses in an HTTP header that you
+	// specify, instead of using the IP address that's reported by the web request
+	// origin. Commonly, this is the X-Forwarded-For (XFF) header, but you can specify
+	// any header name.
+	//
+	// If the specified header isn't present in the request, AWS WAF doesn't apply
+	// the rule to the web request at all.
+	ForwardedIPConfig *ForwardedIPConfig `type:"structure"`
 }
 
 // String returns the string representation
@@ -556,6 +631,11 @@ func (s *GeoMatchStatement) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GeoMatchStatement"}
 	if s.CountryCodes != nil && len(s.CountryCodes) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("CountryCodes", 1))
+	}
+	if s.ForwardedIPConfig != nil {
+		if err := s.ForwardedIPConfig.Validate(); err != nil {
+			invalidParams.AddNested("ForwardedIPConfig", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -706,6 +786,93 @@ func (s IPSet) String() string {
 	return awsutil.Prettify(s)
 }
 
+// The configuration for inspecting IP addresses in an HTTP header that you
+// specify, instead of using the IP address that's reported by the web request
+// origin. Commonly, this is the X-Forwarded-For (XFF) header, but you can specify
+// any header name.
+//
+// If the specified header isn't present in the request, AWS WAF doesn't apply
+// the rule to the web request at all.
+//
+// This configuration is used only for IPSetReferenceStatement. For GeoMatchStatement
+// and RateBasedStatement, use ForwardedIPConfig instead.
+type IPSetForwardedIPConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The match status to assign to the web request if the request doesn't have
+	// a valid IP address in the specified position.
+	//
+	// If the specified header isn't present in the request, AWS WAF doesn't apply
+	// the rule to the web request at all.
+	//
+	// You can specify the following fallback behaviors:
+	//
+	//    * MATCH - Treat the web request as matching the rule statement. AWS WAF
+	//    applies the rule action to the request.
+	//
+	//    * NO_MATCH - Treat the web request as not matching the rule statement.
+	//
+	// FallbackBehavior is a required field
+	FallbackBehavior FallbackBehavior `type:"string" required:"true" enum:"true"`
+
+	// The name of the HTTP header to use for the IP address. For example, to use
+	// the X-Forwarded-For (XFF) header, set this to X-Forwarded-For.
+	//
+	// If the specified header isn't present in the request, AWS WAF doesn't apply
+	// the rule to the web request at all.
+	//
+	// HeaderName is a required field
+	HeaderName *string `min:"1" type:"string" required:"true"`
+
+	// The position in the header to search for the IP address. The header can contain
+	// IP addresses of the original client and also of proxies. For example, the
+	// header value could be 10.1.1.1, 127.0.0.0, 10.10.10.10 where the first IP
+	// address identifies the original client and the rest identify proxies that
+	// the request went through.
+	//
+	// The options for this setting are the following:
+	//
+	//    * FIRST - Inspect the first IP address in the list of IP addresses in
+	//    the header. This is usually the client's original IP.
+	//
+	//    * LAST - Inspect the last IP address in the list of IP addresses in the
+	//    header.
+	//
+	//    * ANY - Inspect all IP addresses in the header for a match. If the header
+	//    contains more than 10 IP addresses, AWS WAF inspects the last 10.
+	//
+	// Position is a required field
+	Position ForwardedIPPosition `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s IPSetForwardedIPConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *IPSetForwardedIPConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "IPSetForwardedIPConfig"}
+	if len(s.FallbackBehavior) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("FallbackBehavior"))
+	}
+
+	if s.HeaderName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("HeaderName"))
+	}
+	if s.HeaderName != nil && len(*s.HeaderName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("HeaderName", 1))
+	}
+	if len(s.Position) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Position"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 //
 // This is the latest version of AWS WAF, named AWS WAFV2, released in November,
 // 2019. For information, including how to migrate your AWS WAF resources from
@@ -727,6 +894,15 @@ type IPSetReferenceStatement struct {
 	//
 	// ARN is a required field
 	ARN *string `min:"20" type:"string" required:"true"`
+
+	// The configuration for inspecting IP addresses in an HTTP header that you
+	// specify, instead of using the IP address that's reported by the web request
+	// origin. Commonly, this is the X-Forwarded-For (XFF) header, but you can specify
+	// any header name.
+	//
+	// If the specified header isn't present in the request, AWS WAF doesn't apply
+	// the rule to the web request at all.
+	IPSetForwardedIPConfig *IPSetForwardedIPConfig `type:"structure"`
 }
 
 // String returns the string representation
@@ -743,6 +919,11 @@ func (s *IPSetReferenceStatement) Validate() error {
 	}
 	if s.ARN != nil && len(*s.ARN) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("ARN", 20))
+	}
+	if s.IPSetForwardedIPConfig != nil {
+		if err := s.IPSetForwardedIPConfig.Validate(); err != nil {
+			invalidParams.AddNested("IPSetForwardedIPConfig", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1168,14 +1349,32 @@ func (s QueryString) String() string {
 type RateBasedStatement struct {
 	_ struct{} `type:"structure"`
 
-	// Setting that indicates how to aggregate the request counts. Currently, you
-	// must set this to IP. The request counts are aggregated on IP addresses.
+	// Setting that indicates how to aggregate the request counts. The options are
+	// the following:
+	//
+	//    * IP - Aggregate the request counts on the IP address from the web request
+	//    origin.
+	//
+	//    * FORWARDED_IP - Aggregate the request counts on the first IP address
+	//    in an HTTP header. If you use this, configure the ForwardedIPConfig, to
+	//    specify the header to use.
 	//
 	// AggregateKeyType is a required field
 	AggregateKeyType RateBasedStatementAggregateKeyType `type:"string" required:"true" enum:"true"`
 
+	// The configuration for inspecting IP addresses in an HTTP header that you
+	// specify, instead of using the IP address that's reported by the web request
+	// origin. Commonly, this is the X-Forwarded-For (XFF) header, but you can specify
+	// any header name.
+	//
+	// If the specified header isn't present in the request, AWS WAF doesn't apply
+	// the rule to the web request at all.
+	//
+	// This is required if AggregateKeyType is set to FORWARDED_IP.
+	ForwardedIPConfig *ForwardedIPConfig `type:"structure"`
+
 	// The limit on requests per 5-minute period for a single originating IP address.
-	// If the statement includes a ScopDownStatement, this limit is applied only
+	// If the statement includes a ScopeDownStatement, this limit is applied only
 	// to the requests that match the statement.
 	//
 	// Limit is a required field
@@ -1204,6 +1403,11 @@ func (s *RateBasedStatement) Validate() error {
 	}
 	if s.Limit != nil && *s.Limit < 100 {
 		invalidParams.Add(aws.NewErrParamMinValue("Limit", 100))
+	}
+	if s.ForwardedIPConfig != nil {
+		if err := s.ForwardedIPConfig.Validate(); err != nil {
+			invalidParams.AddNested("ForwardedIPConfig", err.(aws.ErrInvalidParams))
+		}
 	}
 	if s.ScopeDownStatement != nil {
 		if err := s.ScopeDownStatement.Validate(); err != nil {
@@ -2281,11 +2485,18 @@ func (s *Statement) Validate() error {
 // 2019. For information, including how to migrate your AWS WAF resources from
 // the prior release, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 //
-// A collection of key:value pairs associated with an AWS resource. The key:value
-// pair can be anything you define. Typically, the tag key represents a category
-// (such as "environment") and the tag value represents a specific value within
-// that category (such as "test," "development," or "production"). You can add
-// up to 50 tags to each AWS resource.
+// A tag associated with an AWS resource. Tags are key:value pairs that you
+// can use to categorize and manage your resources, for purposes like billing
+// or other management. Typically, the tag key represents a category, such as
+// "environment", and the tag value represents a specific value within that
+// category, such as "test," "development," or "production". Or you might set
+// the tag key to "customer" and the value to the customer name or ID. You can
+// specify one or more tags to add to each AWS resource, up to 50 tags for a
+// resource.
+//
+// You can tag the AWS resources that you manage through AWS WAF: web ACLs,
+// rule groups, IP sets, and regex pattern sets. You can't manage or view tags
+// through the AWS WAF console.
 type Tag struct {
 	_ struct{} `type:"structure"`
 
@@ -2334,7 +2545,18 @@ func (s *Tag) Validate() error {
 // 2019. For information, including how to migrate your AWS WAF resources from
 // the prior release, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 //
-// The collection of tagging definitions for an AWS resource.
+// The collection of tagging definitions for an AWS resource. Tags are key:value
+// pairs that you can use to categorize and manage your resources, for purposes
+// like billing or other management. Typically, the tag key represents a category,
+// such as "environment", and the tag value represents a specific value within
+// that category, such as "test," "development," or "production". Or you might
+// set the tag key to "customer" and the value to the customer name or ID. You
+// can specify one or more tags to add to each AWS resource, up to 50 tags for
+// a resource.
+//
+// You can tag the AWS resources that you manage through AWS WAF: web ACLs,
+// rule groups, IP sets, and regex pattern sets. You can't manage or view tags
+// through the AWS WAF console.
 type TagInfoForResource struct {
 	_ struct{} `type:"structure"`
 
@@ -2470,6 +2692,10 @@ func (s *TextTransformation) Validate() error {
 // In a GetSampledRequests request, the StartTime and EndTime objects specify
 // the time range for which you want AWS WAF to return a sample of web requests.
 //
+// You must specify the times in Coordinated Universal Time (UTC) format. UTC
+// format includes the special designator, Z. For example, "2016-09-27T14:50Z".
+// You can specify any time range in the previous three hours.
+//
 // In a GetSampledRequests response, the StartTime and EndTime objects specify
 // the time range for which AWS WAF actually returned a sample of web requests.
 // AWS WAF gets the specified number of requests from among the first 5,000
@@ -2481,17 +2707,19 @@ type TimeWindow struct {
 	_ struct{} `type:"structure"`
 
 	// The end of the time range from which you want GetSampledRequests to return
-	// a sample of the requests that your AWS resource received. Specify the date
-	// and time in the following format: "2016-09-27T14:50Z". You can specify any
-	// time range in the previous three hours.
+	// a sample of the requests that your AWS resource received. You must specify
+	// the times in Coordinated Universal Time (UTC) format. UTC format includes
+	// the special designator, Z. For example, "2016-09-27T14:50Z". You can specify
+	// any time range in the previous three hours.
 	//
 	// EndTime is a required field
 	EndTime *time.Time `type:"timestamp" required:"true"`
 
 	// The beginning of the time range from which you want GetSampledRequests to
-	// return a sample of the requests that your AWS resource received. Specify
-	// the date and time in the following format: "2016-09-27T14:50Z". You can specify
-	// any time range in the previous three hours.
+	// return a sample of the requests that your AWS resource received. You must
+	// specify the times in Coordinated Universal Time (UTC) format. UTC format
+	// includes the special designator, Z. For example, "2016-09-27T14:50Z". You
+	// can specify any time range in the previous three hours.
 	//
 	// StartTime is a required field
 	StartTime *time.Time `type:"timestamp" required:"true"`
@@ -2554,10 +2782,11 @@ type VisibilityConfig struct {
 	// CloudWatchMetricsEnabled is a required field
 	CloudWatchMetricsEnabled *bool `type:"boolean" required:"true"`
 
-	// A name of the CloudWatch metric. The name can contain only alphanumeric characters
-	// (A-Z, a-z, 0-9), with length from one to 128 characters. It can't contain
-	// whitespace or metric names reserved for AWS WAF, for example "All" and "Default_Action."
-	// You can't change a MetricName after you create a VisibilityConfig.
+	// A name of the CloudWatch metric. The name can contain only the characters:
+	// A-Z, a-z, 0-9, - (hyphen), and _ (underscore). The name can be from one to
+	// 128 characters long. It can't contain whitespace or metric names reserved
+	// for AWS WAF, for example "All" and "Default_Action." You can't change a MetricName
+	// after you create a VisibilityConfig.
 	//
 	// MetricName is a required field
 	MetricName *string `min:"1" type:"string" required:"true"`

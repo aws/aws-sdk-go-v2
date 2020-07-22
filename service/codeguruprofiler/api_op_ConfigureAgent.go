@@ -14,8 +14,41 @@ import (
 type ConfigureAgentInput struct {
 	_ struct{} `type:"structure"`
 
+	// A universally unique identifier (UUID) for a profiling instance. For example,
+	// if the profiling instance is an Amazon EC2 instance, it is the instance ID.
+	// If it is an AWS Fargate container, it is the container's task ID.
 	FleetInstanceId *string `locationName:"fleetInstanceId" min:"1" type:"string"`
 
+	// Metadata captured about the compute platform the agent is running on. It
+	// includes information about sampling and reporting. The valid fields are:
+	//
+	//    * COMPUTE_PLATFORM - The compute platform on which the agent is running
+	//
+	//    * AGENT_ID - The ID for an agent instance.
+	//
+	//    * AWS_REQUEST_ID - The AWS request ID of a Lambda invocation.
+	//
+	//    * EXECUTION_ENVIRONMENT - The execution environment a Lambda function
+	//    is running on.
+	//
+	//    * LAMBDA_FUNCTION_ARN - The Amazon Resource Name (ARN) that is used to
+	//    invoke a Lambda function.
+	//
+	//    * LAMBDA_MEMORY_LIMIT_IN_MB - The memory allocated to a Lambda function.
+	//
+	//    * LAMBDA_REMAINING_TIME_IN_MILLISECONDS - The time in milliseconds before
+	//    execution of a Lambda function times out.
+	//
+	//    * LAMBDA_TIME_GAP_BETWEEN_INVOKES_IN_MILLISECONDS - The time in milliseconds
+	//    between two invocations of a Lambda function.
+	//
+	//    * LAMBDA_PREVIOUS_EXECUTION_TIME_IN_MILLISECONDS - The time in milliseconds
+	//    for the previous Lambda invocation.
+	Metadata map[string]string `locationName:"metadata" type:"map"`
+
+	// The name of the profiling group for which the configured agent is collecting
+	// profiling data.
+	//
 	// ProfilingGroupName is a required field
 	ProfilingGroupName *string `location:"uri" locationName:"profilingGroupName" min:"1" type:"string" required:"true"`
 }
@@ -55,6 +88,18 @@ func (s ConfigureAgentInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "fleetInstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
+	if s.Metadata != nil {
+		v := s.Metadata
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "metadata", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
 	if s.ProfilingGroupName != nil {
 		v := *s.ProfilingGroupName
 
@@ -68,6 +113,10 @@ func (s ConfigureAgentInput) MarshalFields(e protocol.FieldEncoder) error {
 type ConfigureAgentOutput struct {
 	_ struct{} `type:"structure" payload:"Configuration"`
 
+	// An AgentConfiguration (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AgentConfiguration.html)
+	// object that specifies if an agent profiles or not and for how long to return
+	// profiling data.
+	//
 	// Configuration is a required field
 	Configuration *AgentConfiguration `locationName:"configuration" type:"structure" required:"true"`
 }
@@ -92,6 +141,10 @@ const opConfigureAgent = "ConfigureAgent"
 
 // ConfigureAgentRequest returns a request value for making API operation for
 // Amazon CodeGuru Profiler.
+//
+// Used by profiler agents to report their current state and to receive remote
+// configuration updates. For example, ConfigureAgent can be used to tell and
+// agent whether to profile or not and for how long to return profiling data.
 //
 //    // Example sending a request using ConfigureAgentRequest.
 //    req := client.ConfigureAgentRequest(params)

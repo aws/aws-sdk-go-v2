@@ -60,7 +60,7 @@ const opAssociateDRTRole = "AssociateDRTRole"
 // AssociateDRTRoleRequest returns a request value for making API operation for
 // AWS Shield.
 //
-// Authorizes the DDoS Response team (DRT), using the specified role, to access
+// Authorizes the DDoS Response Team (DRT), using the specified role, to access
 // your AWS account to assist with DDoS attack mitigation during potential attacks.
 // This enables the DRT to inspect your AWS WAF configuration and create or
 // update AWS WAF rules and web ACLs.

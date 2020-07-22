@@ -10,11 +10,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for get App request.
+// The request structure for the get app request.
 type GetAppInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for an Amplify App.
+	// The unique ID for an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
@@ -58,8 +58,8 @@ func (s GetAppInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetAppOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Amplify App represents different branches of a repository for building, deploying,
-	// and hosting.
+	// Represents the different branches of a repository for building, deploying,
+	// and hosting an Amplify app.
 	//
 	// App is a required field
 	App *App `locationName:"app" type:"structure" required:"true"`
@@ -86,7 +86,7 @@ const opGetApp = "GetApp"
 // GetAppRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Retrieves an existing Amplify App by appId.
+// Returns an existing Amplify app by appID.
 //
 //    // Example sending a request using GetAppRequest.
 //    req := client.GetAppRequest(params)

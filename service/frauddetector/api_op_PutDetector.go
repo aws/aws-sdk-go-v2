@@ -4,6 +4,7 @@ package frauddetector
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -19,6 +20,14 @@ type PutDetectorInput struct {
 	//
 	// DetectorId is a required field
 	DetectorId *string `locationName:"detectorId" min:"1" type:"string" required:"true"`
+
+	// The name of the event type.
+	//
+	// EventTypeName is a required field
+	EventTypeName *string `locationName:"eventTypeName" min:"1" type:"string" required:"true"`
+
+	// A collection of key and value pairs.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -38,6 +47,20 @@ func (s *PutDetectorInput) Validate() error {
 	}
 	if s.DetectorId != nil && len(*s.DetectorId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("DetectorId", 1))
+	}
+
+	if s.EventTypeName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("EventTypeName"))
+	}
+	if s.EventTypeName != nil && len(*s.EventTypeName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("EventTypeName", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {

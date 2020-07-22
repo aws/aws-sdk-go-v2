@@ -42,7 +42,9 @@ type GetMetricDataInput struct {
 	Groupings []Grouping `type:"list"`
 
 	// The metrics to retrieve. Specify the name, unit, and statistic for each metric.
-	// The following historical metrics are available:
+	// The following historical metrics are available. For a description of each
+	// metric, see Historical Metrics Definitions (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html)
+	// in the Amazon Connect Administrator Guide.
 	//
 	// ABANDON_TIME
 	//

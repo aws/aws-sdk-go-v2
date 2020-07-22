@@ -101,6 +101,9 @@ const opPutVoiceConnectorOrigination = "PutVoiceConnectorOrigination"
 //
 // Adds origination settings for the specified Amazon Chime Voice Connector.
 //
+// If emergency calling is configured for the Amazon Chime Voice Connector,
+// it must be deleted prior to turning off origination settings.
+//
 //    // Example sending a request using PutVoiceConnectorOriginationRequest.
 //    req := client.PutVoiceConnectorOriginationRequest(params)
 //    resp, err := req.Send(context.TODO())

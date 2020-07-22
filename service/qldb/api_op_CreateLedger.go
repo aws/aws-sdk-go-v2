@@ -27,6 +27,10 @@ type CreateLedgerInput struct {
 	// The name of the ledger that you want to create. The name must be unique among
 	// all of your ledgers in the current AWS Region.
 	//
+	// Naming constraints for ledger names are defined in Quotas in Amazon QLDB
+	// (https://docs.aws.amazon.com/qldb/latest/developerguide/limits.html#limits.naming)
+	// in the Amazon QLDB Developer Guide.
+	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 

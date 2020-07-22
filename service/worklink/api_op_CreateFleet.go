@@ -24,6 +24,9 @@ type CreateFleetInput struct {
 	// The option to optimize for better performance by routing traffic through
 	// the closest AWS Region to users, which may be outside of your home Region.
 	OptimizeForEndUserLocation *bool `type:"boolean"`
+
+	// The tags to add to the resource. A tag is a key-value pair.
+	Tags map[string]string `min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -40,6 +43,9 @@ func (s *CreateFleetInput) Validate() error {
 	}
 	if s.FleetName != nil && len(*s.FleetName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("FleetName", 1))
+	}
+	if s.Tags != nil && len(s.Tags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -70,13 +76,25 @@ func (s CreateFleetInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "OptimizeForEndUserLocation", protocol.BoolValue(v), metadata)
 	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
+	}
 	return nil
 }
 
 type CreateFleetOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The ARN of the fleet.
+	// The Amazon Resource Name (ARN) of the fleet.
 	FleetArn *string `min:"20" type:"string"`
 }
 

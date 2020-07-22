@@ -4,6 +4,7 @@ package frauddetector
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -23,7 +24,7 @@ type CreateRuleInput struct {
 	// The rule expression.
 	//
 	// Expression is a required field
-	Expression *string `locationName:"expression" min:"1" type:"string" required:"true"`
+	Expression *string `locationName:"expression" min:"1" type:"string" required:"true" sensitive:"true"`
 
 	// The language of the rule.
 	//
@@ -39,6 +40,9 @@ type CreateRuleInput struct {
 	//
 	// RuleId is a required field
 	RuleId *string `locationName:"ruleId" min:"1" type:"string" required:"true"`
+
+	// A collection of key and value pairs.
+	Tags []Tag `locationName:"tags" type:"list"`
 }
 
 // String returns the string representation
@@ -82,6 +86,13 @@ func (s *CreateRuleInput) Validate() error {
 	}
 	if s.RuleId != nil && len(*s.RuleId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("RuleId", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {

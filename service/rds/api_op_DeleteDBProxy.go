@@ -54,10 +54,6 @@ const opDeleteDBProxy = "DeleteDBProxy"
 // DeleteDBProxyRequest returns a request value for making API operation for
 // Amazon Relational Database Service.
 //
-//
-// This is prerelease documentation for the RDS Database Proxy feature in preview
-// release. It is subject to change.
-//
 // Deletes an existing proxy.
 //
 //    // Example sending a request using DeleteDBProxyRequest.

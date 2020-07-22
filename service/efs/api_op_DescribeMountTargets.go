@@ -27,7 +27,7 @@ type DescribeMountTargetsInput struct {
 	// (Optional) Opaque pagination token returned from a previous DescribeMountTargets
 	// operation (String). If present, it specifies to continue the list from where
 	// the previous returning call left off.
-	Marker *string `location:"querystring" locationName:"Marker" type:"string"`
+	Marker *string `location:"querystring" locationName:"Marker" min:"1" type:"string"`
 
 	// (Optional) Maximum number of mount targets to return in the response. Currently,
 	// this number is automatically set to 10, and other values are ignored. The
@@ -37,7 +37,7 @@ type DescribeMountTargetsInput struct {
 	// (Optional) ID of the mount target that you want to have described (String).
 	// It must be included in your request if FileSystemId is not included. Accepts
 	// either a mount target ID or ARN as input.
-	MountTargetId *string `location:"querystring" locationName:"MountTargetId" type:"string"`
+	MountTargetId *string `location:"querystring" locationName:"MountTargetId" min:"13" type:"string"`
 }
 
 // String returns the string representation
@@ -48,8 +48,14 @@ func (s DescribeMountTargetsInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DescribeMountTargetsInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DescribeMountTargetsInput"}
+	if s.Marker != nil && len(*s.Marker) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
+	}
 	if s.MaxItems != nil && *s.MaxItems < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
+	}
+	if s.MountTargetId != nil && len(*s.MountTargetId) < 13 {
+		invalidParams.Add(aws.NewErrParamMinLen("MountTargetId", 13))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -100,7 +106,7 @@ type DescribeMountTargetsOutput struct {
 
 	// If the request included the Marker, the response returns that value in this
 	// field.
-	Marker *string `type:"string"`
+	Marker *string `min:"1" type:"string"`
 
 	// Returns the file system's mount targets as an array of MountTargetDescription
 	// objects.
@@ -109,7 +115,7 @@ type DescribeMountTargetsOutput struct {
 	// If a value is present, there are more mount targets to return. In a subsequent
 	// request, you can provide Marker in your request with this value to retrieve
 	// the next set of mount targets.
-	NextMarker *string `type:"string"`
+	NextMarker *string `min:"1" type:"string"`
 }
 
 // String returns the string representation

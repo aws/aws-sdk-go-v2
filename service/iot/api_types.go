@@ -14,11 +14,11 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// Details of abort criteria to abort the job.
+// The criteria that determine when and how a job abort takes place.
 type AbortConfig struct {
 	_ struct{} `type:"structure"`
 
-	// The list of abort criteria to define rules to abort the job.
+	// The list of criteria that determine when and how to abort the job.
 	//
 	// CriteriaList is a required field
 	CriteriaList []AbortCriteria `locationName:"criteriaList" min:"1" type:"list" required:"true"`
@@ -70,27 +70,28 @@ func (s AbortConfig) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Details of abort criteria to define rules to abort the job.
+// The criteria that determine when and how a job abort takes place.
 type AbortCriteria struct {
 	_ struct{} `type:"structure"`
 
-	// The type of abort action to initiate a job abort.
+	// The type of job action to take to initiate the job abort.
 	//
 	// Action is a required field
 	Action AbortAction `locationName:"action" type:"string" required:"true" enum:"true"`
 
-	// The type of job execution failure to define a rule to initiate a job abort.
+	// The type of job execution failures that can initiate a job abort.
 	//
 	// FailureType is a required field
 	FailureType JobExecutionFailureType `locationName:"failureType" type:"string" required:"true" enum:"true"`
 
-	// Minimum number of executed things before evaluating an abort rule.
+	// The minimum number of things which must receive job execution notifications
+	// before the job can be aborted.
 	//
 	// MinNumberOfExecutedThings is a required field
 	MinNumberOfExecutedThings *int64 `locationName:"minNumberOfExecutedThings" min:"1" type:"integer" required:"true"`
 
-	// The threshold as a percentage of the total number of executed things that
-	// will initiate a job abort.
+	// The minimum percentage of job execution failures that must occur to initiate
+	// the job abort.
 	//
 	// AWS IoT supports up to two digits after the decimal (for example, 10.9 and
 	// 10.99, but not 10.999).
@@ -1762,9 +1763,160 @@ func (s AuthorizerSummary) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The criteria that determine when and how a job abort takes place.
+type AwsJobAbortConfig struct {
+	_ struct{} `type:"structure"`
+
+	// The list of criteria that determine when and how to abort the job.
+	//
+	// AbortCriteriaList is a required field
+	AbortCriteriaList []AwsJobAbortCriteria `locationName:"abortCriteriaList" min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s AwsJobAbortConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AwsJobAbortConfig) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AwsJobAbortConfig"}
+
+	if s.AbortCriteriaList == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AbortCriteriaList"))
+	}
+	if s.AbortCriteriaList != nil && len(s.AbortCriteriaList) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AbortCriteriaList", 1))
+	}
+	if s.AbortCriteriaList != nil {
+		for i, v := range s.AbortCriteriaList {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AbortCriteriaList", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsJobAbortConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AbortCriteriaList != nil {
+		v := s.AbortCriteriaList
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "abortCriteriaList", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// The criteria that determine when and how a job abort takes place.
+type AwsJobAbortCriteria struct {
+	_ struct{} `type:"structure"`
+
+	// The type of job action to take to initiate the job abort.
+	//
+	// Action is a required field
+	Action AwsJobAbortCriteriaAbortAction `locationName:"action" type:"string" required:"true" enum:"true"`
+
+	// The type of job execution failures that can initiate a job abort.
+	//
+	// FailureType is a required field
+	FailureType AwsJobAbortCriteriaFailureType `locationName:"failureType" type:"string" required:"true" enum:"true"`
+
+	// The minimum number of things which must receive job execution notifications
+	// before the job can be aborted.
+	//
+	// MinNumberOfExecutedThings is a required field
+	MinNumberOfExecutedThings *int64 `locationName:"minNumberOfExecutedThings" min:"1" type:"integer" required:"true"`
+
+	// The minimum percentage of job execution failures that must occur to initiate
+	// the job abort.
+	//
+	// AWS IoT supports up to two digits after the decimal (for example, 10.9 and
+	// 10.99, but not 10.999).
+	//
+	// ThresholdPercentage is a required field
+	ThresholdPercentage *float64 `locationName:"thresholdPercentage" type:"double" required:"true"`
+}
+
+// String returns the string representation
+func (s AwsJobAbortCriteria) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AwsJobAbortCriteria) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AwsJobAbortCriteria"}
+	if len(s.Action) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
+	}
+	if len(s.FailureType) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("FailureType"))
+	}
+
+	if s.MinNumberOfExecutedThings == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MinNumberOfExecutedThings"))
+	}
+	if s.MinNumberOfExecutedThings != nil && *s.MinNumberOfExecutedThings < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("MinNumberOfExecutedThings", 1))
+	}
+
+	if s.ThresholdPercentage == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ThresholdPercentage"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsJobAbortCriteria) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Action) > 0 {
+		v := s.Action
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "action", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if len(s.FailureType) > 0 {
+		v := s.FailureType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "failureType", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.MinNumberOfExecutedThings != nil {
+		v := *s.MinNumberOfExecutedThings
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "minNumberOfExecutedThings", protocol.Int64Value(v), metadata)
+	}
+	if s.ThresholdPercentage != nil {
+		v := *s.ThresholdPercentage
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "thresholdPercentage", protocol.Float64Value(v), metadata)
+	}
+	return nil
+}
+
 // Configuration for the rollout of OTA updates.
 type AwsJobExecutionsRolloutConfig struct {
 	_ struct{} `type:"structure"`
+
+	// The rate of increase for a job rollout. This parameter allows you to define
+	// an exponential rate increase for a job rollout.
+	ExponentialRate *AwsJobExponentialRolloutRate `locationName:"exponentialRate" type:"structure"`
 
 	// The maximum number of OTA update job executions started per minute.
 	MaximumPerMinute *int64 `locationName:"maximumPerMinute" min:"1" type:"integer"`
@@ -1781,6 +1933,11 @@ func (s *AwsJobExecutionsRolloutConfig) Validate() error {
 	if s.MaximumPerMinute != nil && *s.MaximumPerMinute < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaximumPerMinute", 1))
 	}
+	if s.ExponentialRate != nil {
+		if err := s.ExponentialRate.Validate(); err != nil {
+			invalidParams.AddNested("ExponentialRate", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1790,11 +1947,102 @@ func (s *AwsJobExecutionsRolloutConfig) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s AwsJobExecutionsRolloutConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ExponentialRate != nil {
+		v := s.ExponentialRate
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "exponentialRate", v, metadata)
+	}
 	if s.MaximumPerMinute != nil {
 		v := *s.MaximumPerMinute
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "maximumPerMinute", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// The rate of increase for a job rollout. This parameter allows you to define
+// an exponential rate increase for a job rollout.
+type AwsJobExponentialRolloutRate struct {
+	_ struct{} `type:"structure"`
+
+	// The minimum number of things that will be notified of a pending job, per
+	// minute, at the start of the job rollout. This is the initial rate of the
+	// rollout.
+	//
+	// BaseRatePerMinute is a required field
+	BaseRatePerMinute *int64 `locationName:"baseRatePerMinute" min:"1" type:"integer" required:"true"`
+
+	// The rate of increase for a job rollout. The number of things notified is
+	// multiplied by this factor.
+	//
+	// IncrementFactor is a required field
+	IncrementFactor *float64 `locationName:"incrementFactor" type:"double" required:"true"`
+
+	// The criteria to initiate the increase in rate of rollout for a job.
+	//
+	// AWS IoT supports up to one digit after the decimal (for example, 1.5, but
+	// not 1.55).
+	//
+	// RateIncreaseCriteria is a required field
+	RateIncreaseCriteria *AwsJobRateIncreaseCriteria `locationName:"rateIncreaseCriteria" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s AwsJobExponentialRolloutRate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AwsJobExponentialRolloutRate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AwsJobExponentialRolloutRate"}
+
+	if s.BaseRatePerMinute == nil {
+		invalidParams.Add(aws.NewErrParamRequired("BaseRatePerMinute"))
+	}
+	if s.BaseRatePerMinute != nil && *s.BaseRatePerMinute < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("BaseRatePerMinute", 1))
+	}
+
+	if s.IncrementFactor == nil {
+		invalidParams.Add(aws.NewErrParamRequired("IncrementFactor"))
+	}
+
+	if s.RateIncreaseCriteria == nil {
+		invalidParams.Add(aws.NewErrParamRequired("RateIncreaseCriteria"))
+	}
+	if s.RateIncreaseCriteria != nil {
+		if err := s.RateIncreaseCriteria.Validate(); err != nil {
+			invalidParams.AddNested("RateIncreaseCriteria", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsJobExponentialRolloutRate) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BaseRatePerMinute != nil {
+		v := *s.BaseRatePerMinute
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "baseRatePerMinute", protocol.Int64Value(v), metadata)
+	}
+	if s.IncrementFactor != nil {
+		v := *s.IncrementFactor
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "incrementFactor", protocol.Float64Value(v), metadata)
+	}
+	if s.RateIncreaseCriteria != nil {
+		v := s.RateIncreaseCriteria
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "rateIncreaseCriteria", v, metadata)
 	}
 	return nil
 }
@@ -1822,6 +2070,89 @@ func (s AwsJobPresignedUrlConfig) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "expiresInSec", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// The criteria to initiate the increase in rate of rollout for a job.
+type AwsJobRateIncreaseCriteria struct {
+	_ struct{} `type:"structure"`
+
+	// When this number of things have been notified, it will initiate an increase
+	// in the rollout rate.
+	NumberOfNotifiedThings *int64 `locationName:"numberOfNotifiedThings" min:"1" type:"integer"`
+
+	// When this number of things have succeeded in their job execution, it will
+	// initiate an increase in the rollout rate.
+	NumberOfSucceededThings *int64 `locationName:"numberOfSucceededThings" min:"1" type:"integer"`
+}
+
+// String returns the string representation
+func (s AwsJobRateIncreaseCriteria) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AwsJobRateIncreaseCriteria) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AwsJobRateIncreaseCriteria"}
+	if s.NumberOfNotifiedThings != nil && *s.NumberOfNotifiedThings < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("NumberOfNotifiedThings", 1))
+	}
+	if s.NumberOfSucceededThings != nil && *s.NumberOfSucceededThings < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("NumberOfSucceededThings", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsJobRateIncreaseCriteria) MarshalFields(e protocol.FieldEncoder) error {
+	if s.NumberOfNotifiedThings != nil {
+		v := *s.NumberOfNotifiedThings
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "numberOfNotifiedThings", protocol.Int64Value(v), metadata)
+	}
+	if s.NumberOfSucceededThings != nil {
+		v := *s.NumberOfSucceededThings
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "numberOfSucceededThings", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Specifies the amount of time each device has to finish its execution of the
+// job. A timer is started when the job execution status is set to IN_PROGRESS.
+// If the job execution status is not set to another terminal state before the
+// timer expires, it will be automatically set to TIMED_OUT.
+type AwsJobTimeoutConfig struct {
+	_ struct{} `type:"structure"`
+
+	// Specifies the amount of time, in minutes, this device has to finish execution
+	// of this job. The timeout interval can be anywhere between 1 minute and 7
+	// days (1 to 10080 minutes). The in progress timer can't be updated and will
+	// apply to all job executions for the job. Whenever a job execution remains
+	// in the IN_PROGRESS status for longer than this interval, the job execution
+	// will fail and switch to the terminal TIMED_OUT status.
+	InProgressTimeoutInMinutes *int64 `locationName:"inProgressTimeoutInMinutes" type:"long"`
+}
+
+// String returns the string representation
+func (s AwsJobTimeoutConfig) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsJobTimeoutConfig) MarshalFields(e protocol.FieldEncoder) error {
+	if s.InProgressTimeoutInMinutes != nil {
+		v := *s.InProgressTimeoutInMinutes
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "inProgressTimeoutInMinutes", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }

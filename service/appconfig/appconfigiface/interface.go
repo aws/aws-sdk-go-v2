@@ -69,6 +69,8 @@ type ClientAPI interface {
 
 	CreateEnvironmentRequest(*appconfig.CreateEnvironmentInput) appconfig.CreateEnvironmentRequest
 
+	CreateHostedConfigurationVersionRequest(*appconfig.CreateHostedConfigurationVersionInput) appconfig.CreateHostedConfigurationVersionRequest
+
 	DeleteApplicationRequest(*appconfig.DeleteApplicationInput) appconfig.DeleteApplicationRequest
 
 	DeleteConfigurationProfileRequest(*appconfig.DeleteConfigurationProfileInput) appconfig.DeleteConfigurationProfileRequest
@@ -76,6 +78,8 @@ type ClientAPI interface {
 	DeleteDeploymentStrategyRequest(*appconfig.DeleteDeploymentStrategyInput) appconfig.DeleteDeploymentStrategyRequest
 
 	DeleteEnvironmentRequest(*appconfig.DeleteEnvironmentInput) appconfig.DeleteEnvironmentRequest
+
+	DeleteHostedConfigurationVersionRequest(*appconfig.DeleteHostedConfigurationVersionInput) appconfig.DeleteHostedConfigurationVersionRequest
 
 	GetApplicationRequest(*appconfig.GetApplicationInput) appconfig.GetApplicationRequest
 
@@ -89,6 +93,8 @@ type ClientAPI interface {
 
 	GetEnvironmentRequest(*appconfig.GetEnvironmentInput) appconfig.GetEnvironmentRequest
 
+	GetHostedConfigurationVersionRequest(*appconfig.GetHostedConfigurationVersionInput) appconfig.GetHostedConfigurationVersionRequest
+
 	ListApplicationsRequest(*appconfig.ListApplicationsInput) appconfig.ListApplicationsRequest
 
 	ListConfigurationProfilesRequest(*appconfig.ListConfigurationProfilesInput) appconfig.ListConfigurationProfilesRequest
@@ -98,6 +104,8 @@ type ClientAPI interface {
 	ListDeploymentsRequest(*appconfig.ListDeploymentsInput) appconfig.ListDeploymentsRequest
 
 	ListEnvironmentsRequest(*appconfig.ListEnvironmentsInput) appconfig.ListEnvironmentsRequest
+
+	ListHostedConfigurationVersionsRequest(*appconfig.ListHostedConfigurationVersionsInput) appconfig.ListHostedConfigurationVersionsRequest
 
 	ListTagsForResourceRequest(*appconfig.ListTagsForResourceInput) appconfig.ListTagsForResourceRequest
 

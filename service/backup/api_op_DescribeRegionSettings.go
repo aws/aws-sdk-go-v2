@@ -60,11 +60,11 @@ const opDescribeRegionSettings = "DescribeRegionSettings"
 // DescribeRegionSettingsRequest returns a request value for making API operation for
 // AWS Backup.
 //
-// Returns the current service opt-in settings for the region. If the service
-// has a value set to true, AWS Backup will attempt to protect that service's
-// resources in this region, when included in an on-demand backup or scheduled
-// backup plan. If the value is set to false for a service, AWS Backup will
-// not attempt to protect that service's resources in this region.
+// Returns the current service opt-in settings for the Region. If the service
+// has a value set to true, AWS Backup attempts to protect that service's resources
+// in this Region, when included in an on-demand backup or scheduled backup
+// plan. If the value is set to false for a service, AWS Backup does not attempt
+// to protect that service's resources in this Region.
 //
 //    // Example sending a request using DescribeRegionSettingsRequest.
 //    req := client.DescribeRegionSettingsRequest(params)

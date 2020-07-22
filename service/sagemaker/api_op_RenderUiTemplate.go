@@ -12,6 +12,12 @@ import (
 type RenderUiTemplateInput struct {
 	_ struct{} `type:"structure"`
 
+	// The HumanTaskUiArn of the worker UI that you want to render. Do not provide
+	// a HumanTaskUiArn if you use the UiTemplate parameter.
+	//
+	// See a list of available Human Ui Amazon Resource Names (ARNs) in UiConfig.
+	HumanTaskUiArn *string `type:"string"`
+
 	// The Amazon Resource Name (ARN) that has access to the S3 objects that are
 	// used by the template.
 	//

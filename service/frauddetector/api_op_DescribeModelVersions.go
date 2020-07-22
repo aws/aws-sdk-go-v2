@@ -21,8 +21,8 @@ type DescribeModelVersionsInput struct {
 	// The model type.
 	ModelType ModelTypeEnum `locationName:"modelType" type:"string" enum:"true"`
 
-	// The model version.
-	ModelVersionNumber *string `locationName:"modelVersionNumber" min:"1" type:"string"`
+	// The model version number.
+	ModelVersionNumber *string `locationName:"modelVersionNumber" type:"string"`
 
 	// The next token from the previous results.
 	NextToken *string `locationName:"nextToken" type:"string"`
@@ -41,9 +41,6 @@ func (s *DescribeModelVersionsInput) Validate() error {
 	}
 	if s.ModelId != nil && len(*s.ModelId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("ModelId", 1))
-	}
-	if s.ModelVersionNumber != nil && len(*s.ModelVersionNumber) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("ModelVersionNumber", 1))
 	}
 
 	if invalidParams.Len() > 0 {

@@ -65,6 +65,8 @@ type ClientAPI interface {
 
 	GetThingShadowRequest(*iotdataplane.GetThingShadowInput) iotdataplane.GetThingShadowRequest
 
+	ListNamedShadowsForThingRequest(*iotdataplane.ListNamedShadowsForThingInput) iotdataplane.ListNamedShadowsForThingRequest
+
 	PublishRequest(*iotdataplane.PublishInput) iotdataplane.PublishRequest
 
 	UpdateThingShadowRequest(*iotdataplane.UpdateThingShadowInput) iotdataplane.UpdateThingShadowRequest

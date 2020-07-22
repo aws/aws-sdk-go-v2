@@ -327,6 +327,23 @@ func (enum Reason) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type SegmentType string
+
+// Enum values for SegmentType
+const (
+	SegmentTypeTechnicalCue SegmentType = "TECHNICAL_CUE"
+	SegmentTypeShot         SegmentType = "SHOT"
+)
+
+func (enum SegmentType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SegmentType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type StreamProcessorStatus string
 
 // Enum values for StreamProcessorStatus
@@ -343,6 +360,24 @@ func (enum StreamProcessorStatus) MarshalValue() (string, error) {
 }
 
 func (enum StreamProcessorStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TechnicalCueType string
+
+// Enum values for TechnicalCueType
+const (
+	TechnicalCueTypeColorBars   TechnicalCueType = "ColorBars"
+	TechnicalCueTypeEndCredits  TechnicalCueType = "EndCredits"
+	TechnicalCueTypeBlackFrames TechnicalCueType = "BlackFrames"
+)
+
+func (enum TechnicalCueType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TechnicalCueType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

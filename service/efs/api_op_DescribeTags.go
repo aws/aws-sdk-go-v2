@@ -21,7 +21,7 @@ type DescribeTagsInput struct {
 	// (Optional) An opaque pagination token returned from a previous DescribeTags
 	// operation (String). If present, it specifies to continue the list from where
 	// the previous call left off.
-	Marker *string `location:"querystring" locationName:"Marker" type:"string"`
+	Marker *string `location:"querystring" locationName:"Marker" min:"1" type:"string"`
 
 	// (Optional) The maximum number of file system tags to return in the response.
 	// Currently, this number is automatically set to 100, and other values are
@@ -41,6 +41,9 @@ func (s *DescribeTagsInput) Validate() error {
 
 	if s.FileSystemId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FileSystemId"))
+	}
+	if s.Marker != nil && len(*s.Marker) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Marker", 1))
 	}
 	if s.MaxItems != nil && *s.MaxItems < 1 {
 		invalidParams.Add(aws.NewErrParamMinValue("MaxItems", 1))
@@ -82,12 +85,12 @@ type DescribeTagsOutput struct {
 
 	// If the request included a Marker, the response returns that value in this
 	// field.
-	Marker *string `type:"string"`
+	Marker *string `min:"1" type:"string"`
 
 	// If a value is present, there are more tags to return. In a subsequent request,
 	// you can provide the value of NextMarker as the value of the Marker parameter
 	// in your next request to retrieve the next set of tags.
-	NextMarker *string `type:"string"`
+	NextMarker *string `min:"1" type:"string"`
 
 	// Returns tags associated with the file system as an array of Tag objects.
 	//

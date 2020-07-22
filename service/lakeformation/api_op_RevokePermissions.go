@@ -19,7 +19,7 @@ type RevokePermissionsInput struct {
 	CatalogId *string `min:"1" type:"string"`
 
 	// The permissions revoked to the principal on the resource. For information
-	// about permissions, see Security and Access Control to Metadata and Data (https://docs-aws.amazon.com/michigan/latest/dg/security-data-access.html).
+	// about permissions, see Security and Access Control to Metadata and Data (https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html).
 	//
 	// Permissions is a required field
 	Permissions []Permission `type:"list" required:"true"`

@@ -160,18 +160,8 @@ func (s AdminAccount) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// For the affected resource:
-//
-//    * The name of the operation that was invoked most recently and produced
-//    the finding (api).
-//
-//    * The first date and time when any operation was invoked and produced
-//    the finding (firstSeen).
-//
-//    * The most recent date and time when the specified operation was invoked
-//    and produced the finding (lastSeen).
-//
-// All date and time values are in UTC and extended ISO 8601 format.
+// Provides information about an API operation that an entity invoked for an
+// affected resource.
 type ApiCallDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -220,7 +210,10 @@ func (s ApiCallDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Reserved for future use.
+// Provides information about an identity that performed an action on an affected
+// resource by using temporary security credentials. The credentials were obtained
+// using the AssumeRole operation of the AWS Security Token Service (AWS STS)
+// API.
 type AssumedRole struct {
 	_ struct{} `type:"structure"`
 
@@ -232,8 +225,8 @@ type AssumedRole struct {
 
 	PrincipalId *string `locationName:"principalId" type:"string"`
 
-	// Provides information about a session that was created for an entity who performed
-	// an action by using temporary security credentials.
+	// Provides information about a session that was created for an entity that
+	// performed an action by using temporary security credentials.
 	SessionContext *SessionContext `locationName:"sessionContext" type:"structure"`
 }
 
@@ -277,7 +270,9 @@ func (s AssumedRole) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Reserved for future use.
+// Provides information about an AWS account and entity that performed an action
+// on an affected resource. The action was performed using the credentials for
+// an AWS account other than your own account.
 type AwsAccount struct {
 	_ struct{} `type:"structure"`
 
@@ -308,7 +303,8 @@ func (s AwsAccount) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Reserved for future use.
+// Provides information about an AWS service that performed an action on an
+// affected resource.
 type AwsService struct {
 	_ struct{} `type:"structure"`
 
@@ -446,8 +442,8 @@ func (s BlockPublicAccess) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The total number of buckets that are publicly accessible, based on a combination
-// of permissions settings for each bucket.
+// Provides information about the number of S3 buckets that are publicly accessible
+// based on a combination of permissions settings for each bucket.
 type BucketCountByEffectivePermission struct {
 	_ struct{} `type:"structure"`
 
@@ -486,8 +482,8 @@ func (s BucketCountByEffectivePermission) MarshalFields(e protocol.FieldEncoder)
 	return nil
 }
 
-// The total number of buckets, grouped by server-side encryption type. This
-// object also reports the total number of buckets that aren't encrypted.
+// Provides information about the number of S3 buckets that use certain types
+// of server-side encryption or don't encrypt objects by default.
 type BucketCountByEncryptionType struct {
 	_ struct{} `type:"structure"`
 
@@ -526,8 +522,8 @@ func (s BucketCountByEncryptionType) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// The total number of buckets that are shared with another AWS account or configured
-// to support cross-origin resource sharing (CORS).
+// Provides information about the number of S3 buckets that are shared with
+// other AWS accounts.
 type BucketCountBySharedAccessType struct {
 	_ struct{} `type:"structure"`
 
@@ -716,6 +712,9 @@ type BucketMetadata struct {
 
 	ObjectCount *int64 `locationName:"objectCount" type:"long"`
 
+	// The total number of objects that are in the bucket, grouped by server-side
+	// encryption type. This includes a grouping that reports the total number of
+	// objects that aren't encrypted.
 	ObjectCountByEncryptionType *ObjectCountByEncryptionType `locationName:"objectCountByEncryptionType" type:"structure"`
 
 	// Provides information about permissions settings that determine whether an
@@ -854,8 +853,7 @@ func (s BucketMetadata) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// The account-level and bucket-level permissions settings for an S3 bucket,
-// or the bucket that contains an object.
+// The account-level and bucket-level permissions settings for an S3 bucket.
 type BucketPermissionConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -928,8 +926,7 @@ type BucketPublicAccess struct {
 
 	EffectivePermission EffectivePermission `locationName:"effectivePermission" type:"string" enum:"true"`
 
-	// The account-level and bucket-level permissions settings for an S3 bucket,
-	// or the bucket that contains an object.
+	// The account-level and bucket-level permissions settings for an S3 bucket.
 	PermissionConfiguration *BucketPermissionConfiguration `locationName:"permissionConfiguration" type:"structure"`
 }
 
@@ -999,7 +996,7 @@ type ClassificationDetails struct {
 	JobId *string `locationName:"jobId" type:"string"`
 
 	// Provides detailed information about a sensitive data finding, including the
-	// types and number of occurrences of the data that was found.
+	// types and number of occurrences of the sensitive data that was found.
 	Result *ClassificationResult `locationName:"result" type:"structure"`
 }
 
@@ -1037,14 +1034,14 @@ func (s ClassificationDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies where to export data classification results to, and the encryption
+// Specifies where to store data classification results, and the encryption
 // settings to use when storing results in that location. Currently, you can
-// export classification results only to an S3 bucket.
+// store classification results only in an S3 bucket.
 type ClassificationExportConfiguration struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies an S3 bucket to export data classification results to, and the
-	// encryption settings to use when storing results in that bucket.
+	// Specifies an S3 bucket to store data classification results in, and the encryption
+	// settings to use when storing results in that bucket.
 	S3Destination *S3Destination `locationName:"s3Destination" type:"structure"`
 }
 
@@ -1080,7 +1077,7 @@ func (s ClassificationExportConfiguration) MarshalFields(e protocol.FieldEncoder
 }
 
 // Provides detailed information about a sensitive data finding, including the
-// types and number of occurrences of the data that was found.
+// types and number of occurrences of the sensitive data that was found.
 type ClassificationResult struct {
 	_ struct{} `type:"structure"`
 
@@ -1316,7 +1313,9 @@ func (s CustomDataIdentifierSummary) MarshalFields(e protocol.FieldEncoder) erro
 type CustomDataIdentifiers struct {
 	_ struct{} `type:"structure"`
 
-	// Reserved for future use.
+	// Provides information about custom data identifiers that produced a sensitive
+	// data finding, and the number of occurrences of the data that each identifier
+	// detected.
 	Detections []CustomDetection `locationName:"detections" type:"list"`
 
 	TotalCount *int64 `locationName:"totalCount" type:"long"`
@@ -1391,6 +1390,8 @@ func (s CustomDetection) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies that a classification job runs once a day, every day. This is an
+// empty object.
 type DailySchedule struct {
 	_ struct{} `type:"structure"`
 }
@@ -1406,7 +1407,7 @@ func (s DailySchedule) MarshalFields(e protocol.FieldEncoder) error {
 }
 
 // Provides information about sensitive data that was detected by managed data
-// identifiers and produced a finding.
+// identifiers and produced a sensitive data finding.
 type DefaultDetection struct {
 	_ struct{} `type:"structure"`
 
@@ -1437,6 +1438,8 @@ func (s DefaultDetection) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Provides information about the domain name of the device that an entity used
+// to perform an action on an affected resource.
 type DomainDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -1459,7 +1462,10 @@ func (s DomainDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Reserved for future use.
+// Provides information about an identity that performed an action on an affected
+// resource by using temporary security credentials. The credentials were obtained
+// using the GetFederationToken operation of the AWS Security Token Service
+// (AWS STS) API.
 type FederatedUser struct {
 	_ struct{} `type:"structure"`
 
@@ -1471,8 +1477,8 @@ type FederatedUser struct {
 
 	PrincipalId *string `locationName:"principalId" type:"string"`
 
-	// Provides information about a session that was created for an entity who performed
-	// an action by using temporary security credentials.
+	// Provides information about a session that was created for an entity that
+	// performed an action by using temporary security credentials.
 	SessionContext *SessionContext `locationName:"sessionContext" type:"structure"`
 }
 
@@ -1541,7 +1547,7 @@ type Finding struct {
 
 	Partition *string `locationName:"partition" type:"string"`
 
-	// Provides detailed information about a policy finding.
+	// Provides the details of a policy finding.
 	PolicyDetails *PolicyDetails `locationName:"policyDetails" type:"structure"`
 
 	Region *string `locationName:"region" type:"string"`
@@ -1689,20 +1695,12 @@ func (s Finding) MarshalFields(e protocol.FieldEncoder) error {
 type FindingAction struct {
 	_ struct{} `type:"structure"`
 
+	// The type of action that occurred for the resource and produced the policy
+	// finding:
 	ActionType FindingActionType `locationName:"actionType" type:"string" enum:"true"`
 
-	// For the affected resource:
-	//
-	//    * The name of the operation that was invoked most recently and produced
-	//    the finding (api).
-	//
-	//    * The first date and time when any operation was invoked and produced
-	//    the finding (firstSeen).
-	//
-	//    * The most recent date and time when the specified operation was invoked
-	//    and produced the finding (lastSeen).
-	//
-	// All date and time values are in UTC and extended ISO 8601 format.
+	// Provides information about an API operation that an entity invoked for an
+	// affected resource.
 	ApiCallDetails *ApiCallDetails `locationName:"apiCallDetails" type:"structure"`
 }
 
@@ -1728,15 +1726,21 @@ func (s FindingAction) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Provides information about an entity who performed an action that produced
+// Provides information about an entity that performed an action that produced
 // a policy finding for a resource.
 type FindingActor struct {
 	_ struct{} `type:"structure"`
 
+	// Provides information about the domain name of the device that an entity used
+	// to perform an action on an affected resource.
 	DomainDetails *DomainDetails `locationName:"domainDetails" type:"structure"`
 
+	// Provides information about the IP address of the device that an entity used
+	// to perform an action on an affected resource.
 	IpAddressDetails *IpAddressDetails `locationName:"ipAddressDetails" type:"structure"`
 
+	// Provides information about the type and other characteristics of an entity
+	// that performed an action on an affected resource.
 	UserIdentity *UserIdentity `locationName:"userIdentity" type:"structure"`
 }
 
@@ -1800,8 +1804,8 @@ func (s FindingCriteria) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies criteria for sorting the results of a query for information about
-// findings.
+// Specifies criteria for sorting the results of a query that retrieves aggregated
+// statistical data about findings.
 type FindingStatisticsSortCriteria struct {
 	_ struct{} `type:"structure"`
 
@@ -1837,6 +1841,11 @@ func (s FindingStatisticsSortCriteria) MarshalFields(e protocol.FieldEncoder) er
 type FindingsFilterListItem struct {
 	_ struct{} `type:"structure"`
 
+	// The action to perform on findings that meet the filter criteria. To suppress
+	// (automatically archive) findings that meet the criteria, set this value to
+	// ARCHIVE. Valid values are:
+	Action FindingsFilterAction `locationName:"action" type:"string" enum:"true"`
+
 	Arn *string `locationName:"arn" type:"string"`
 
 	Id *string `locationName:"id" type:"string"`
@@ -1856,6 +1865,12 @@ func (s FindingsFilterListItem) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s FindingsFilterListItem) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Action) > 0 {
+		v := s.Action
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "action", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
 	if s.Arn != nil {
 		v := *s.Arn
 
@@ -1889,8 +1904,8 @@ func (s FindingsFilterListItem) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Provides a group of results for a query that retrieved information about
-// findings.
+// Provides a group of results for a query that retrieved aggregated statistical
+// data about findings.
 type GroupCount struct {
 	_ struct{} `type:"structure"`
 
@@ -1921,7 +1936,8 @@ func (s GroupCount) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Reserved for future use.
+// Provides information about an AWS Identity and Access Management (IAM) user
+// who performed an action on an affected resource.
 type IamUser struct {
 	_ struct{} `type:"structure"`
 
@@ -2019,21 +2035,24 @@ func (s Invitation) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Provides information about the IP address of the device that an entity used
+// to perform an action on an affected resource.
 type IpAddressDetails struct {
 	_ struct{} `type:"structure"`
 
 	IpAddressV4 *string `locationName:"ipAddressV4" type:"string"`
 
-	// Reserved for future use.
+	// Provides information about the city that an IP address originated from.
 	IpCity *IpCity `locationName:"ipCity" type:"structure"`
 
-	// Reserved for future use.
+	// Provides information about the country that an IP address originated from.
 	IpCountry *IpCountry `locationName:"ipCountry" type:"structure"`
 
-	// Reserved for future use.
+	// Provides geographic coordinates that indicate where a specified IP address
+	// originated from.
 	IpGeoLocation *IpGeoLocation `locationName:"ipGeoLocation" type:"structure"`
 
-	// Reserved for future use.
+	// Provides information about the registered owner of an IP address.
 	IpOwner *IpOwner `locationName:"ipOwner" type:"structure"`
 }
 
@@ -2077,7 +2096,7 @@ func (s IpAddressDetails) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Reserved for future use.
+// Provides information about the city that an IP address originated from.
 type IpCity struct {
 	_ struct{} `type:"structure"`
 
@@ -2100,7 +2119,7 @@ func (s IpCity) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Reserved for future use.
+// Provides information about the country that an IP address originated from.
 type IpCountry struct {
 	_ struct{} `type:"structure"`
 
@@ -2131,7 +2150,8 @@ func (s IpCountry) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Reserved for future use.
+// Provides geographic coordinates that indicate where a specified IP address
+// originated from.
 type IpGeoLocation struct {
 	_ struct{} `type:"structure"`
 
@@ -2162,7 +2182,7 @@ func (s IpGeoLocation) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Reserved for future use.
+// Provides information about the registered owner of an IP address.
 type IpOwner struct {
 	_ struct{} `type:"structure"`
 
@@ -2213,12 +2233,14 @@ func (s IpOwner) MarshalFields(e protocol.FieldEncoder) error {
 type JobScheduleFrequency struct {
 	_ struct{} `type:"structure"`
 
+	// Specifies that a classification job runs once a day, every day. This is an
+	// empty object.
 	DailySchedule *DailySchedule `locationName:"dailySchedule" type:"structure"`
 
-	// Run the job once a month, on a specific day of the month. This value can
-	// be an integer from 1 through 30.
+	// Specifies a monthly recurrence pattern for running a classification job.
 	MonthlySchedule *MonthlySchedule `locationName:"monthlySchedule" type:"structure"`
 
+	// Specifies a weekly recurrence pattern for running a classification job.
 	WeeklySchedule *WeeklySchedule `locationName:"weeklySchedule" type:"structure"`
 }
 
@@ -2250,8 +2272,8 @@ func (s JobScheduleFrequency) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies one or more conditions that determine which objects a classification
-// job analyzes.
+// Specifies a property- or tag-based condition that defines criteria for including
+// or excluding objects from a classification job.
 type JobScopeTerm struct {
 	_ struct{} `type:"structure"`
 
@@ -2286,7 +2308,8 @@ func (s JobScopeTerm) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Reserved for future use.
+// Specifies one or more property- and tag-based conditions that define criteria
+// for including or excluding objects from a classification job.
 type JobScopingBlock struct {
 	_ struct{} `type:"structure"`
 
@@ -2326,7 +2349,7 @@ type JobSummary struct {
 
 	JobId *string `locationName:"jobId" type:"string"`
 
-	// The current status of a classification job. Valid values are:
+	// The current status of a classification job. Possible values are:
 	JobStatus JobStatus `locationName:"jobStatus" type:"string" enum:"true"`
 
 	// The schedule for running a classification job. Valid values are:
@@ -2640,8 +2663,7 @@ func (s Member) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Run the job once a month, on a specific day of the month. This value can
-// be an integer from 1 through 30.
+// Specifies a monthly recurrence pattern for running a classification job.
 type MonthlySchedule struct {
 	_ struct{} `type:"structure"`
 
@@ -2664,6 +2686,9 @@ func (s MonthlySchedule) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The total number of objects that are in the bucket, grouped by server-side
+// encryption type. This includes a grouping that reports the total number of
+// objects that aren't encrypted.
 type ObjectCountByEncryptionType struct {
 	_ struct{} `type:"structure"`
 
@@ -2710,7 +2735,7 @@ func (s ObjectCountByEncryptionType) MarshalFields(e protocol.FieldEncoder) erro
 	return nil
 }
 
-// Provides detailed information about a policy finding.
+// Provides the details of a policy finding.
 type PolicyDetails struct {
 	_ struct{} `type:"structure"`
 
@@ -2718,7 +2743,7 @@ type PolicyDetails struct {
 	// a policy finding.
 	Action *FindingAction `locationName:"action" type:"structure"`
 
-	// Provides information about an entity who performed an action that produced
+	// Provides information about an entity that performed an action that produced
 	// a policy finding for a resource.
 	Actor *FindingActor `locationName:"actor" type:"structure"`
 }
@@ -2846,7 +2871,9 @@ type S3Bucket struct {
 	// S3 bucket is publicly accessible.
 	PublicAccess *BucketPublicAccess `locationName:"publicAccess" type:"structure"`
 
-	// Reserved for future use.
+	// Provides information about the tags that are associated with an S3 bucket
+	// or object. Each tag consists of a required tag key and an associated tag
+	// value.
 	Tags []KeyValuePair `locationName:"tags" type:"list"`
 }
 
@@ -2978,8 +3005,8 @@ func (s S3BucketOwner) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Specifies an S3 bucket to export data classification results to, and the
-// encryption settings to use when storing results in that bucket.
+// Specifies an S3 bucket to store data classification results in, and the encryption
+// settings to use when storing results in that bucket.
 type S3Destination struct {
 	_ struct{} `type:"structure"`
 
@@ -3045,6 +3072,9 @@ type S3JobDefinition struct {
 
 	BucketDefinitions []S3BucketDefinitionForJob `locationName:"bucketDefinitions" type:"list"`
 
+	// Specifies one or more property- and tag-based conditions that refine the
+	// scope of a classification job. These conditions define criteria that determine
+	// which objects a job analyzes.
 	Scoping *Scoping `locationName:"scoping" type:"structure"`
 }
 
@@ -3100,10 +3130,12 @@ type S3Object struct {
 
 	Size *int64 `locationName:"size" type:"long"`
 
-	// The storage class of the S3 bucket or object. Valid values are:
+	// The storage class of the S3 bucket or object. Possible values are:
 	StorageClass StorageClass `locationName:"storageClass" type:"string" enum:"true"`
 
-	// Reserved for future use.
+	// Provides information about the tags that are associated with an S3 bucket
+	// or object. Each tag consists of a required tag key and an associated tag
+	// value.
 	Tags []KeyValuePair `locationName:"tags" type:"list"`
 
 	VersionId *string `locationName:"versionId" type:"string"`
@@ -3198,13 +3230,18 @@ func (s S3Object) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies one or more property- and tag-based conditions that refine the
+// scope of a classification job. These conditions define criteria that determine
+// which objects a job analyzes.
 type Scoping struct {
 	_ struct{} `type:"structure"`
 
-	// Reserved for future use.
+	// Specifies one or more property- and tag-based conditions that define criteria
+	// for including or excluding objects from a classification job.
 	Excludes *JobScopingBlock `locationName:"excludes" type:"structure"`
 
-	// Reserved for future use.
+	// Specifies one or more property- and tag-based conditions that define criteria
+	// for including or excluding objects from a classification job.
 	Includes *JobScopingBlock `locationName:"includes" type:"structure"`
 }
 
@@ -3235,9 +3272,13 @@ func (s Scoping) MarshalFields(e protocol.FieldEncoder) error {
 type SensitiveDataItem struct {
 	_ struct{} `type:"structure"`
 
+	// The category of sensitive data that was detected and produced the finding.
+	// Possible values are:
 	Category SensitiveDataItemCategory `locationName:"category" type:"string" enum:"true"`
 
-	// Reserved for future use.
+	// Provides information about sensitive data that was detected by managed data
+	// identifiers and produced a sensitive data finding, and the number of occurrences
+	// of each type of sensitive data that was detected.
 	Detections []DefaultDetection `locationName:"detections" type:"list"`
 
 	TotalCount *int64 `locationName:"totalCount" type:"long"`
@@ -3282,8 +3323,8 @@ func (s SensitiveDataItem) MarshalFields(e protocol.FieldEncoder) error {
 type ServerSideEncryption struct {
 	_ struct{} `type:"structure"`
 
-	// The server-side encryption algorithm that's used when storing the S3 bucket
-	// or object. Valid values are:
+	// The type of server-side encryption that's used to encrypt objects in the
+	// S3 bucket. Valid values are:
 	EncryptionType EncryptionType `locationName:"encryptionType" type:"string" enum:"true"`
 
 	KmsMasterKeyId *string `locationName:"kmsMasterKeyId" type:"string"`
@@ -3350,8 +3391,8 @@ func (s ServiceLimit) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Provides information about a session that was created for an entity who performed
-// an action by using temporary security credentials.
+// Provides information about a session that was created for an entity that
+// performed an action by using temporary security credentials.
 type SessionContext struct {
 	_ struct{} `type:"structure"`
 
@@ -3479,7 +3520,7 @@ func (s SessionIssuer) MarshalFields(e protocol.FieldEncoder) error {
 type Severity struct {
 	_ struct{} `type:"structure"`
 
-	// The textual representation of the finding's severity. Valid values are:
+	// The textual representation of the finding's severity. Possible values are:
 	Description SeverityDescription `locationName:"description" type:"string" enum:"true"`
 
 	Score *int64 `locationName:"score" type:"long"`
@@ -3852,7 +3893,7 @@ type UsageStatisticsFilter struct {
 	_ struct{} `type:"structure"`
 
 	// The field to use to filter the results of a query for account quotas and
-	// usage data.
+	// usage data:
 	Key UsageStatisticsFilterKey `locationName:"key" type:"string" enum:"true"`
 
 	Values []string `locationName:"values" type:"list"`
@@ -3892,7 +3933,7 @@ type UsageStatisticsSortBy struct {
 	_ struct{} `type:"structure"`
 
 	// The field to use to sort the results of a query for account quotas and usage
-	// data.
+	// data. Valid values are:
 	Key UsageStatisticsSortKey `locationName:"key" type:"string" enum:"true"`
 
 	OrderBy OrderBy `locationName:"orderBy" type:"string" enum:"true"`
@@ -3963,28 +4004,43 @@ func (s UsageTotal) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Provides information about the type and other characteristics of an entity
+// that performed an action on an affected resource.
 type UserIdentity struct {
 	_ struct{} `type:"structure"`
 
-	// Reserved for future use.
+	// Provides information about an identity that performed an action on an affected
+	// resource by using temporary security credentials. The credentials were obtained
+	// using the AssumeRole operation of the AWS Security Token Service (AWS STS)
+	// API.
 	AssumedRole *AssumedRole `locationName:"assumedRole" type:"structure"`
 
-	// Reserved for future use.
+	// Provides information about an AWS account and entity that performed an action
+	// on an affected resource. The action was performed using the credentials for
+	// an AWS account other than your own account.
 	AwsAccount *AwsAccount `locationName:"awsAccount" type:"structure"`
 
-	// Reserved for future use.
+	// Provides information about an AWS service that performed an action on an
+	// affected resource.
 	AwsService *AwsService `locationName:"awsService" type:"structure"`
 
-	// Reserved for future use.
+	// Provides information about an identity that performed an action on an affected
+	// resource by using temporary security credentials. The credentials were obtained
+	// using the GetFederationToken operation of the AWS Security Token Service
+	// (AWS STS) API.
 	FederatedUser *FederatedUser `locationName:"federatedUser" type:"structure"`
 
-	// Reserved for future use.
+	// Provides information about an AWS Identity and Access Management (IAM) user
+	// who performed an action on an affected resource.
 	IamUser *IamUser `locationName:"iamUser" type:"structure"`
 
-	// Reserved for future use.
+	// Provides information about an AWS account and entity that performed an action
+	// on an affected resource. The action was performed using the credentials for
+	// your AWS account.
 	Root *UserIdentityRoot `locationName:"root" type:"structure"`
 
-	// Reserved for future use.
+	// The type of entity that performed the action on the affected resource. Possible
+	// values are:
 	Type UserIdentityType `locationName:"type" type:"string" enum:"true"`
 }
 
@@ -4040,7 +4096,9 @@ func (s UserIdentity) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Reserved for future use.
+// Provides information about an AWS account and entity that performed an action
+// on an affected resource. The action was performed using the credentials for
+// your AWS account.
 type UserIdentityRoot struct {
 	_ struct{} `type:"structure"`
 
@@ -4079,6 +4137,7 @@ func (s UserIdentityRoot) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Specifies a weekly recurrence pattern for running a classification job.
 type WeeklySchedule struct {
 	_ struct{} `type:"structure"`
 

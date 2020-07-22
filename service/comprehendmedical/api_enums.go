@@ -221,6 +221,7 @@ const (
 	RelationshipTypeTestValue       RelationshipType = "TEST_VALUE"
 	RelationshipTypeTestUnits       RelationshipType = "TEST_UNITS"
 	RelationshipTypeDirection       RelationshipType = "DIRECTION"
+	RelationshipTypeSystemOrganSite RelationshipType = "SYSTEM_ORGAN_SITE"
 )
 
 func (enum RelationshipType) MarshalValue() (string, error) {

@@ -67,6 +67,8 @@ type ClientAPI interface {
 
 	AssociateHealthCheckRequest(*shield.AssociateHealthCheckInput) shield.AssociateHealthCheckRequest
 
+	AssociateProactiveEngagementDetailsRequest(*shield.AssociateProactiveEngagementDetailsInput) shield.AssociateProactiveEngagementDetailsRequest
+
 	CreateProtectionRequest(*shield.CreateProtectionInput) shield.CreateProtectionRequest
 
 	CreateSubscriptionRequest(*shield.CreateSubscriptionInput) shield.CreateSubscriptionRequest
@@ -85,11 +87,15 @@ type ClientAPI interface {
 
 	DescribeSubscriptionRequest(*shield.DescribeSubscriptionInput) shield.DescribeSubscriptionRequest
 
+	DisableProactiveEngagementRequest(*shield.DisableProactiveEngagementInput) shield.DisableProactiveEngagementRequest
+
 	DisassociateDRTLogBucketRequest(*shield.DisassociateDRTLogBucketInput) shield.DisassociateDRTLogBucketRequest
 
 	DisassociateDRTRoleRequest(*shield.DisassociateDRTRoleInput) shield.DisassociateDRTRoleRequest
 
 	DisassociateHealthCheckRequest(*shield.DisassociateHealthCheckInput) shield.DisassociateHealthCheckRequest
+
+	EnableProactiveEngagementRequest(*shield.EnableProactiveEngagementInput) shield.EnableProactiveEngagementRequest
 
 	GetSubscriptionStateRequest(*shield.GetSubscriptionStateInput) shield.GetSubscriptionStateRequest
 

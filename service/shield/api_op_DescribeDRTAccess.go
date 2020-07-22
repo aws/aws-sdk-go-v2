@@ -40,7 +40,7 @@ const opDescribeDRTAccess = "DescribeDRTAccess"
 // AWS Shield.
 //
 // Returns the current role and list of Amazon S3 log buckets used by the DDoS
-// Response team (DRT) to access your AWS account while assisting with attack
+// Response Team (DRT) to access your AWS account while assisting with attack
 // mitigation.
 //
 //    // Example sending a request using DescribeDRTAccessRequest.

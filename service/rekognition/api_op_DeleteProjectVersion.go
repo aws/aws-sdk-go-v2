@@ -57,11 +57,12 @@ const opDeleteProjectVersion = "DeleteProjectVersion"
 // DeleteProjectVersionRequest returns a request value for making API operation for
 // Amazon Rekognition.
 //
-// Deletes a version of a model.
+// Deletes an Amazon Rekognition Custom Labels model.
 //
-// You must first stop the model before you can delete it. To check if a model
-// is running, use the Status field returned from DescribeProjectVersions. To
-// stop a running model call StopProjectVersion.
+// You can't delete a model if it is running or if it is training. To check
+// the status of a model, use the Status field returned from DescribeProjectVersions.
+// To stop a running model call StopProjectVersion. If the model is training,
+// wait until it finishes.
 //
 // This operation requires permissions to perform the rekognition:DeleteProjectVersion
 // action.

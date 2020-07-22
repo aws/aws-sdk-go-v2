@@ -167,6 +167,8 @@ const (
 	ModelVersionStatusActive               ModelVersionStatus = "ACTIVE"
 	ModelVersionStatusInactivateInProgress ModelVersionStatus = "INACTIVATE_IN_PROGRESS"
 	ModelVersionStatusInactive             ModelVersionStatus = "INACTIVE"
+	ModelVersionStatusDeleteRequested      ModelVersionStatus = "DELETE_REQUESTED"
+	ModelVersionStatusDeleteInProgress     ModelVersionStatus = "DELETE_IN_PROGRESS"
 	ModelVersionStatusError                ModelVersionStatus = "ERROR"
 )
 
@@ -192,6 +194,22 @@ func (enum RuleExecutionMode) MarshalValue() (string, error) {
 }
 
 func (enum RuleExecutionMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type TrainingDataSourceEnum string
+
+// Enum values for TrainingDataSourceEnum
+const (
+	TrainingDataSourceEnumExternalEvents TrainingDataSourceEnum = "EXTERNAL_EVENTS"
+)
+
+func (enum TrainingDataSourceEnum) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum TrainingDataSourceEnum) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

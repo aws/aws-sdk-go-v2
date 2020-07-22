@@ -442,9 +442,10 @@ type Featurization struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the schema attribute that specifies the data field to be featurized.
-	// Only the target field of the TARGET_TIME_SERIES dataset type is supported.
-	// For example, for the RETAIL domain, the target is demand, and for the CUSTOM
-	// domain, the target is target_value.
+	// Amazon Forecast supports the target field of the TARGET_TIME_SERIES and the
+	// RELATED_TIME_SERIES datasets. For example, for the RETAIL domain, the target
+	// is demand, and for the CUSTOM domain, the target is target_value. For more
+	// information, see howitworks-missing-values.
 	//
 	// AttributeName is a required field
 	AttributeName *string `min:"1" type:"string" required:"true"`
@@ -494,8 +495,8 @@ func (s *Featurization) Validate() error {
 // You define featurization using the FeaturizationConfig object. You specify
 // an array of transformations, one for each field that you want to featurize.
 // You then include the FeaturizationConfig object in your CreatePredictor request.
-// Amazon Forecast applies the featurization to the TARGET_TIME_SERIES dataset
-// before model training.
+// Amazon Forecast applies the featurization to the TARGET_TIME_SERIES and RELATED_TIME_SERIES
+// datasets before model training.
 //
 // You can create multiple featurization configurations. For example, you might
 // call the CreatePredictor operation twice by specifying different featurization
@@ -504,7 +505,7 @@ type FeaturizationConfig struct {
 	_ struct{} `type:"structure"`
 
 	// An array of featurization (transformation) information for the fields of
-	// a dataset. Only a single featurization is supported.
+	// a dataset.
 	Featurizations []Featurization `min:"1" type:"list"`
 
 	// An array of dimension (field) names that specify how to group the generated
@@ -572,8 +573,7 @@ func (s *FeaturizationConfig) Validate() error {
 
 // Provides information about the method that featurizes (transforms) a dataset
 // field. The method is part of the FeaturizationPipeline of the Featurization
-// object. If you don't specify FeaturizationMethodParameters, Amazon Forecast
-// uses default parameters.
+// object.
 //
 // The following is an example of how you specify a FeaturizationMethod object.
 //
@@ -581,7 +581,8 @@ func (s *FeaturizationConfig) Validate() error {
 //
 // "FeaturizationMethodName": "filling",
 //
-// "FeaturizationMethodParameters": {"aggregation": "avg", "backfill": "nan"}
+// "FeaturizationMethodParameters": {"aggregation": "sum", "middlefill": "zero",
+// "backfill": "zero"}
 //
 // }
 type FeaturizationMethod struct {
@@ -592,17 +593,30 @@ type FeaturizationMethod struct {
 	// FeaturizationMethodName is a required field
 	FeaturizationMethodName FeaturizationMethodName `type:"string" required:"true" enum:"true"`
 
-	// The method parameters (key-value pairs). Specify these parameters to override
-	// the default values. The following list shows the parameters and their valid
-	// values. Bold signifies the default value.
+	// The method parameters (key-value pairs), which are a map of override parameters.
+	// Specify these parameters to override the default values. Related Time Series
+	// attributes do not accept aggregation parameters.
+	//
+	// The following list shows the parameters and their valid values for the "filling"
+	// featurization method for a Target Time Series dataset. Bold signifies the
+	// default value.
 	//
 	//    * aggregation: sum, avg, first, min, max
 	//
 	//    * frontfill: none
 	//
-	//    * middlefill: zero, nan (not a number)
+	//    * middlefill: zero, nan (not a number), value, median, mean, min, max
 	//
-	//    * backfill: zero, nan
+	//    * backfill: zero, nan, value, median, mean, min, max
+	//
+	// The following list shows the parameters and their valid values for a Related
+	// Time Series featurization method (there are no defaults):
+	//
+	//    * middlefill: zero, value, median, mean, min, max
+	//
+	//    * backfill: zero, value, median, mean, min, max
+	//
+	//    * futurefill: zero, value, median, mean, min, max
 	FeaturizationMethodParameters map[string]string `min:"1" type:"map"`
 }
 
@@ -1157,7 +1171,7 @@ type Schema struct {
 	_ struct{} `type:"structure"`
 
 	// An array of attributes specifying the name and type of each field in a dataset.
-	Attributes []SchemaAttribute `type:"list"`
+	Attributes []SchemaAttribute `min:"1" type:"list"`
 }
 
 // String returns the string representation
@@ -1168,6 +1182,9 @@ func (s Schema) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *Schema) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "Schema"}
+	if s.Attributes != nil && len(s.Attributes) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Attributes", 1))
+	}
 	if s.Attributes != nil {
 		for i, v := range s.Attributes {
 			if err := v.Validate(); err != nil {
@@ -1255,6 +1272,35 @@ func (s Statistics) String() string {
 // all data in the datasets should belong to the same country as the calendar.
 // For the holiday calendar data, see the Jollyday (http://jollyday.sourceforge.net/data.html)
 // web site.
+//
+// India and Korea's holidays are not included in the Jollyday library, but
+// both are supported by Amazon Forecast. Their holidays are:
+//
+// "IN" - INDIA
+//
+//    * JANUARY 26 - REPUBLIC DAY
+//
+//    * AUGUST 15 - INDEPENDENCE DAY
+//
+//    * OCTOBER 2 GANDHI'S BIRTHDAY
+//
+// "KR" - KOREA
+//
+//    * JANUARY 1 - NEW YEAR
+//
+//    * MARCH 1 - INDEPENDENCE MOVEMENT DAY
+//
+//    * MAY 5 - CHILDREN'S DAY
+//
+//    * JUNE 6 - MEMORIAL DAY
+//
+//    * AUGUST 15 - LIBERATION DAY
+//
+//    * OCTOBER 3 - NATIONAL FOUNDATION DAY
+//
+//    * OCTOBER 9 - HANGEUL DAY
+//
+//    * DECEMBER 25 - CHRISTMAS DAY
 type SupplementaryFeature struct {
 	_ struct{} `type:"structure"`
 
@@ -1265,15 +1311,69 @@ type SupplementaryFeature struct {
 
 	// One of the following 2 letter country codes:
 	//
+	//    * "AR" - ARGENTINA
+	//
+	//    * "AT" - AUSTRIA
+	//
 	//    * "AU" - AUSTRALIA
+	//
+	//    * "BE" - BELGIUM
+	//
+	//    * "BR" - BRAZIL
+	//
+	//    * "CA" - CANADA
+	//
+	//    * "CN" - CHINA
+	//
+	//    * "CZ" - CZECH REPUBLIC
+	//
+	//    * "DK" - DENMARK
+	//
+	//    * "EC" - ECUADOR
+	//
+	//    * "FI" - FINLAND
+	//
+	//    * "FR" - FRANCE
 	//
 	//    * "DE" - GERMANY
 	//
+	//    * "HU" - HUNGARY
+	//
+	//    * "IE" - IRELAND
+	//
+	//    * "IN" - INDIA
+	//
+	//    * "IT" - ITALY
+	//
 	//    * "JP" - JAPAN
 	//
-	//    * "US" - UNITED_STATES
+	//    * "KR" - KOREA
 	//
-	//    * "UK" - UNITED_KINGDOM
+	//    * "LU" - LUXEMBOURG
+	//
+	//    * "MX" - MEXICO
+	//
+	//    * "NL" - NETHERLANDS
+	//
+	//    * "NO" - NORWAY
+	//
+	//    * "PL" - POLAND
+	//
+	//    * "PT" - PORTUGAL
+	//
+	//    * "RU" - RUSSIA
+	//
+	//    * "ZA" - SOUTH AFRICA
+	//
+	//    * "ES" - SPAIN
+	//
+	//    * "SE" - SWEDEN
+	//
+	//    * "CH" - SWITZERLAND
+	//
+	//    * "US" - UNITED STATES
+	//
+	//    * "UK" - UNITED KINGDOM
 	//
 	// Value is a required field
 	Value *string `type:"string" required:"true"`
@@ -1293,6 +1393,77 @@ func (s *SupplementaryFeature) Validate() error {
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if s.Value == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The optional metadata that you apply to a resource to help you categorize
+// and organize them. Each tag consists of a key and an optional value, both
+// of which you define.
+//
+// The following basic restrictions apply to tags:
+//
+//    * Maximum number of tags per resource - 50.
+//
+//    * For each resource, each tag key must be unique, and each tag key can
+//    have only one value.
+//
+//    * Maximum key length - 128 Unicode characters in UTF-8.
+//
+//    * Maximum value length - 256 Unicode characters in UTF-8.
+//
+//    * If your tagging schema is used across multiple services and resources,
+//    remember that other services may have restrictions on allowed characters.
+//    Generally allowed characters are: letters, numbers, and spaces representable
+//    in UTF-8, and the following characters: + - = . _ : / @.
+//
+//    * Tag keys and values are case sensitive.
+//
+//    * Do not use aws:, AWS:, or any upper or lowercase combination of such
+//    as a prefix for keys as it is reserved for AWS use. You cannot edit or
+//    delete tag keys with this prefix. Values can have this prefix. If a tag
+//    value has aws as its prefix but the key does not, then Forecast considers
+//    it to be a user tag and will count against the limit of 50 tags. Tags
+//    with only the key prefix of aws do not count against your tags per resource
+//    limit.
+type Tag struct {
+	_ struct{} `type:"structure"`
+
+	// One part of a key-value pair that makes up a tag. A key is a general label
+	// that acts like a category for more specific tag values.
+	//
+	// Key is a required field
+	Key *string `min:"1" type:"string" required:"true"`
+
+	// The optional part of a key-value pair that makes up a tag. A value acts as
+	// a descriptor within a tag category (key).
+	//
+	// Value is a required field
+	Value *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s Tag) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Tag) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Tag"}
+
+	if s.Key == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Key"))
+	}
+	if s.Key != nil && len(*s.Key) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Key", 1))
 	}
 
 	if s.Value == nil {

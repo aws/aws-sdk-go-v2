@@ -27,8 +27,8 @@ type DecreaseReplicaCountInput struct {
 	//
 	// The minimum number of replicas in a shard or replication group is:
 	//
-	//    * Redis (cluster mode disabled) If Multi-AZ with Automatic Failover is
-	//    enabled: 1 If Multi-AZ with Automatic Failover is not enabled: 0
+	//    * Redis (cluster mode disabled) If Multi-AZ is enabled: 1 If Multi-AZ
+	//    is not enabled: 0
 	//
 	//    * Redis (cluster mode enabled): 0 (though you will not be able to failover
 	//    to a replica if your primary node fails)

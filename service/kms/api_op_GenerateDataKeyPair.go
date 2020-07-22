@@ -32,7 +32,8 @@ type GenerateDataKeyPairInput struct {
 	GrantTokens []string `type:"list"`
 
 	// Specifies the symmetric CMK that encrypts the private key in the data key
-	// pair. You cannot specify an asymmetric CMKs.
+	// pair. You cannot specify an asymmetric CMK or a CMK in a custom key store.
+	// To get the type and origin of your CMK, use the DescribeKey operation.
 	//
 	// To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name,
 	// or alias ARN. When using an alias name, prefix it with "alias/". To specify
@@ -93,7 +94,8 @@ func (s *GenerateDataKeyPairInput) Validate() error {
 type GenerateDataKeyPairOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The identifier of the CMK that encrypted the private key.
+	// The Amazon Resource Name (key ARN (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
+	// of the CMK that encrypted the private key.
 	KeyId *string `min:"1" type:"string"`
 
 	// The type of data key pair that was generated.
@@ -143,7 +145,8 @@ const opGenerateDataKeyPair = "GenerateDataKeyPair"
 //
 // To generate a data key pair, you must specify a symmetric customer master
 // key (CMK) to encrypt the private key in a data key pair. You cannot use an
-// asymmetric CMK. To get the type of your CMK, use the DescribeKey operation.
+// asymmetric CMK or a CMK in a custom key store. To get the type and origin
+// of your CMK, use the DescribeKey operation.
 //
 // If you are using the data key pair to encrypt data, or for any operation
 // where you don't immediately need a private key, consider using the GenerateDataKeyPairWithoutPlaintext

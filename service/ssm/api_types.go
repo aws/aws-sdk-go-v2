@@ -119,6 +119,12 @@ func (s Association) String() string {
 type AssociationDescription struct {
 	_ struct{} `type:"structure"`
 
+	// By default, when you create a new associations, the system runs it immediately
+	// after it is created and then according to the schedule you specified. Specify
+	// this option if you don't want an association to run immediately after you
+	// create it.
+	ApplyOnlyAtCronInterval *bool `type:"boolean"`
+
 	// The association ID.
 	AssociationId *string `type:"string"`
 
@@ -496,6 +502,12 @@ func (s *AssociationStatus) Validate() error {
 // Information about the association version.
 type AssociationVersionInfo struct {
 	_ struct{} `type:"structure"`
+
+	// By default, when you create a new associations, the system runs it immediately
+	// after it is created and then according to the schedule you specified. Specify
+	// this option if you don't want an association to run immediately after you
+	// create it.
+	ApplyOnlyAtCronInterval *bool `type:"boolean"`
 
 	// The ID created by the system when the association was created.
 	AssociationId *string `type:"string"`
@@ -1560,6 +1572,12 @@ func (s CompliantSummary) String() string {
 // Describes the association of a Systems Manager SSM document and an instance.
 type CreateAssociationBatchRequestEntry struct {
 	_ struct{} `type:"structure"`
+
+	// By default, when you create a new associations, the system runs it immediately
+	// after it is created and then according to the schedule you specified. Specify
+	// this option if you don't want an association to run immediately after you
+	// create it.
+	ApplyOnlyAtCronInterval *bool `type:"boolean"`
 
 	// Specify a descriptive name for the association.
 	AssociationName *string `type:"string"`
@@ -3266,6 +3284,10 @@ type MaintenanceWindowIdentity struct {
 
 	// The schedule of the maintenance window in the form of a cron or rate expression.
 	Schedule *string `min:"1" type:"string"`
+
+	// The number of days to wait to run a maintenance window after the scheduled
+	// CRON expression date and time.
+	ScheduleOffset *int64 `min:"1" type:"integer"`
 
 	// The time zone that the scheduled maintenance window executions are based
 	// on, in Internet Assigned Numbers Authority (IANA) format.

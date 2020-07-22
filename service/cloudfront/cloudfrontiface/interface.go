@@ -26,7 +26,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // CloudFront.
 //    func myFunc(svc cloudfrontiface.ClientAPI) bool {
-//        // Make svc.CreateCloudFrontOriginAccessIdentity request
+//        // Make svc.CreateCachePolicy request
 //    }
 //
 //    func main() {
@@ -46,7 +46,7 @@ import (
 //    type mockClientClient struct {
 //        cloudfrontiface.ClientPI
 //    }
-//    func (m *mockClientClient) CreateCloudFrontOriginAccessIdentity(input *cloudfront.CreateCloudFrontOriginAccessIdentityInput) (*cloudfront.CreateCloudFrontOriginAccessIdentityOutput, error) {
+//    func (m *mockClientClient) CreateCachePolicy(input *cloudfront.CreateCachePolicyInput) (*cloudfront.CreateCachePolicyOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -64,6 +64,8 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	CreateCachePolicyRequest(*cloudfront.CreateCachePolicyInput) cloudfront.CreateCachePolicyRequest
+
 	CreateCloudFrontOriginAccessIdentityRequest(*cloudfront.CreateCloudFrontOriginAccessIdentityInput) cloudfront.CreateCloudFrontOriginAccessIdentityRequest
 
 	CreateDistributionRequest(*cloudfront.CreateDistributionInput) cloudfront.CreateDistributionRequest
@@ -76,11 +78,15 @@ type ClientAPI interface {
 
 	CreateInvalidationRequest(*cloudfront.CreateInvalidationInput) cloudfront.CreateInvalidationRequest
 
+	CreateOriginRequestPolicyRequest(*cloudfront.CreateOriginRequestPolicyInput) cloudfront.CreateOriginRequestPolicyRequest
+
 	CreatePublicKeyRequest(*cloudfront.CreatePublicKeyInput) cloudfront.CreatePublicKeyRequest
 
 	CreateStreamingDistributionRequest(*cloudfront.CreateStreamingDistributionInput) cloudfront.CreateStreamingDistributionRequest
 
 	CreateStreamingDistributionWithTagsRequest(*cloudfront.CreateStreamingDistributionWithTagsInput) cloudfront.CreateStreamingDistributionWithTagsRequest
+
+	DeleteCachePolicyRequest(*cloudfront.DeleteCachePolicyInput) cloudfront.DeleteCachePolicyRequest
 
 	DeleteCloudFrontOriginAccessIdentityRequest(*cloudfront.DeleteCloudFrontOriginAccessIdentityInput) cloudfront.DeleteCloudFrontOriginAccessIdentityRequest
 
@@ -90,9 +96,15 @@ type ClientAPI interface {
 
 	DeleteFieldLevelEncryptionProfileRequest(*cloudfront.DeleteFieldLevelEncryptionProfileInput) cloudfront.DeleteFieldLevelEncryptionProfileRequest
 
+	DeleteOriginRequestPolicyRequest(*cloudfront.DeleteOriginRequestPolicyInput) cloudfront.DeleteOriginRequestPolicyRequest
+
 	DeletePublicKeyRequest(*cloudfront.DeletePublicKeyInput) cloudfront.DeletePublicKeyRequest
 
 	DeleteStreamingDistributionRequest(*cloudfront.DeleteStreamingDistributionInput) cloudfront.DeleteStreamingDistributionRequest
+
+	GetCachePolicyRequest(*cloudfront.GetCachePolicyInput) cloudfront.GetCachePolicyRequest
+
+	GetCachePolicyConfigRequest(*cloudfront.GetCachePolicyConfigInput) cloudfront.GetCachePolicyConfigRequest
 
 	GetCloudFrontOriginAccessIdentityRequest(*cloudfront.GetCloudFrontOriginAccessIdentityInput) cloudfront.GetCloudFrontOriginAccessIdentityRequest
 
@@ -112,6 +124,10 @@ type ClientAPI interface {
 
 	GetInvalidationRequest(*cloudfront.GetInvalidationInput) cloudfront.GetInvalidationRequest
 
+	GetOriginRequestPolicyRequest(*cloudfront.GetOriginRequestPolicyInput) cloudfront.GetOriginRequestPolicyRequest
+
+	GetOriginRequestPolicyConfigRequest(*cloudfront.GetOriginRequestPolicyConfigInput) cloudfront.GetOriginRequestPolicyConfigRequest
+
 	GetPublicKeyRequest(*cloudfront.GetPublicKeyInput) cloudfront.GetPublicKeyRequest
 
 	GetPublicKeyConfigRequest(*cloudfront.GetPublicKeyConfigInput) cloudfront.GetPublicKeyConfigRequest
@@ -120,9 +136,15 @@ type ClientAPI interface {
 
 	GetStreamingDistributionConfigRequest(*cloudfront.GetStreamingDistributionConfigInput) cloudfront.GetStreamingDistributionConfigRequest
 
+	ListCachePoliciesRequest(*cloudfront.ListCachePoliciesInput) cloudfront.ListCachePoliciesRequest
+
 	ListCloudFrontOriginAccessIdentitiesRequest(*cloudfront.ListCloudFrontOriginAccessIdentitiesInput) cloudfront.ListCloudFrontOriginAccessIdentitiesRequest
 
 	ListDistributionsRequest(*cloudfront.ListDistributionsInput) cloudfront.ListDistributionsRequest
+
+	ListDistributionsByCachePolicyIdRequest(*cloudfront.ListDistributionsByCachePolicyIdInput) cloudfront.ListDistributionsByCachePolicyIdRequest
+
+	ListDistributionsByOriginRequestPolicyIdRequest(*cloudfront.ListDistributionsByOriginRequestPolicyIdInput) cloudfront.ListDistributionsByOriginRequestPolicyIdRequest
 
 	ListDistributionsByWebACLIdRequest(*cloudfront.ListDistributionsByWebACLIdInput) cloudfront.ListDistributionsByWebACLIdRequest
 
@@ -131,6 +153,8 @@ type ClientAPI interface {
 	ListFieldLevelEncryptionProfilesRequest(*cloudfront.ListFieldLevelEncryptionProfilesInput) cloudfront.ListFieldLevelEncryptionProfilesRequest
 
 	ListInvalidationsRequest(*cloudfront.ListInvalidationsInput) cloudfront.ListInvalidationsRequest
+
+	ListOriginRequestPoliciesRequest(*cloudfront.ListOriginRequestPoliciesInput) cloudfront.ListOriginRequestPoliciesRequest
 
 	ListPublicKeysRequest(*cloudfront.ListPublicKeysInput) cloudfront.ListPublicKeysRequest
 
@@ -142,6 +166,8 @@ type ClientAPI interface {
 
 	UntagResourceRequest(*cloudfront.UntagResourceInput) cloudfront.UntagResourceRequest
 
+	UpdateCachePolicyRequest(*cloudfront.UpdateCachePolicyInput) cloudfront.UpdateCachePolicyRequest
+
 	UpdateCloudFrontOriginAccessIdentityRequest(*cloudfront.UpdateCloudFrontOriginAccessIdentityInput) cloudfront.UpdateCloudFrontOriginAccessIdentityRequest
 
 	UpdateDistributionRequest(*cloudfront.UpdateDistributionInput) cloudfront.UpdateDistributionRequest
@@ -149,6 +175,8 @@ type ClientAPI interface {
 	UpdateFieldLevelEncryptionConfigRequest(*cloudfront.UpdateFieldLevelEncryptionConfigInput) cloudfront.UpdateFieldLevelEncryptionConfigRequest
 
 	UpdateFieldLevelEncryptionProfileRequest(*cloudfront.UpdateFieldLevelEncryptionProfileInput) cloudfront.UpdateFieldLevelEncryptionProfileRequest
+
+	UpdateOriginRequestPolicyRequest(*cloudfront.UpdateOriginRequestPolicyInput) cloudfront.UpdateOriginRequestPolicyRequest
 
 	UpdatePublicKeyRequest(*cloudfront.UpdatePublicKeyInput) cloudfront.UpdatePublicKeyRequest
 

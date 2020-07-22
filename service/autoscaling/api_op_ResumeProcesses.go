@@ -19,24 +19,27 @@ type ResumeProcessesInput struct {
 	// AutoScalingGroupName is a required field
 	AutoScalingGroupName *string `min:"1" type:"string" required:"true"`
 
-	// One or more of the following processes. If you omit this parameter, all processes
-	// are specified.
+	// One or more of the following processes:
 	//
 	//    * Launch
 	//
 	//    * Terminate
 	//
-	//    * HealthCheck
-	//
-	//    * ReplaceUnhealthy
-	//
-	//    * AZRebalance
+	//    * AddToLoadBalancer
 	//
 	//    * AlarmNotification
 	//
+	//    * AZRebalance
+	//
+	//    * HealthCheck
+	//
+	//    * InstanceRefresh
+	//
+	//    * ReplaceUnhealthy
+	//
 	//    * ScheduledActions
 	//
-	//    * AddToLoadBalancer
+	// If you omit this parameter, all processes are specified.
 	ScalingProcesses []string `type:"list"`
 }
 

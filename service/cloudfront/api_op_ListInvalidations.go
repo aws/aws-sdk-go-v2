@@ -100,7 +100,7 @@ func (s ListInvalidationsOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-const opListInvalidations = "ListInvalidations2019_03_26"
+const opListInvalidations = "ListInvalidations2020_05_31"
 
 // ListInvalidationsRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -114,12 +114,12 @@ const opListInvalidations = "ListInvalidations2019_03_26"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListInvalidations
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListInvalidations
 func (c *Client) ListInvalidationsRequest(input *ListInvalidationsInput) ListInvalidationsRequest {
 	op := &aws.Operation{
 		Name:       opListInvalidations,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2019-03-26/distribution/{DistributionId}/invalidation",
+		HTTPPath:   "/2020-05-31/distribution/{DistributionId}/invalidation",
 		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"InvalidationList.NextMarker"},

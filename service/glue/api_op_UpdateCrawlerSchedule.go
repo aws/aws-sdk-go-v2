@@ -17,10 +17,10 @@ type UpdateCrawlerScheduleInput struct {
 	// CrawlerName is a required field
 	CrawlerName *string `min:"1" type:"string" required:"true"`
 
-	// The updated cron expression used to specify the schedule. For more information,
-	// see Time-Based Schedules for Jobs and Crawlers (http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).
-	// For example, to run something every day at 12:15 UTC, specify cron(15 12
-	// * * ? *).
+	// The updated cron expression used to specify the schedule (see Time-Based
+	// Schedules for Jobs and Crawlers (https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).
+	// For example, to run something every day at 12:15 UTC, you would specify:
+	// cron(15 12 * * ? *).
 	Schedule *string `type:"string"`
 }
 

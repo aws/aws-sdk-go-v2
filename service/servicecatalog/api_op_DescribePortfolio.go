@@ -77,6 +77,8 @@ const opDescribePortfolio = "DescribePortfolio"
 //
 // Gets information about the specified portfolio.
 //
+// A delegated admin is authorized to invoke this command.
+//
 //    // Example sending a request using DescribePortfolioRequest.
 //    req := client.DescribePortfolioRequest(params)
 //    resp, err := req.Send(context.TODO())

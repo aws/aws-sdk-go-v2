@@ -248,7 +248,7 @@ type ModifyDBInstanceInput struct {
 	// SQL Server (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html)
 	// in the Amazon RDS User Guide.
 	//
-	// For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate
+	// For Oracle DB instances, Amazon RDS can use Kerberos authentication to authenticate
 	// users that connect to the DB instance. For more information, see Using Kerberos
 	// Authentication with Amazon RDS for Oracle (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html)
 	// in the Amazon RDS User Guide.
@@ -487,10 +487,16 @@ type ModifyDBInstanceInput struct {
 	// Valid Values: 0 - 15
 	PromotionTier *int64 `type:"integer"`
 
-	// A value that indicates whether the DB instance is publicly accessible. When
-	// the DB instance is publicly accessible, it is an Internet-facing instance
-	// with a publicly resolvable DNS name, which resolves to a public IP address.
-	// When the DB instance isn't publicly accessible, it is an internal instance
+	// A value that indicates whether the DB instance is publicly accessible.
+	//
+	// When the DB instance is publicly accessible, its DNS endpoint resolves to
+	// the private IP address from within the DB instance's VPC, and to the public
+	// IP address from outside of the DB instance's VPC. Access to the DB instance
+	// is ultimately controlled by the security group it uses, and that public access
+	// is not permitted if the security group assigned to the DB instance doesn't
+	// permit it.
+	//
+	// When the DB instance isn't publicly accessible, it is an internal DB instance
 	// with a DNS name that resolves to a private IP address.
 	//
 	// PubliclyAccessible only applies to DB instances in a VPC. The DB instance

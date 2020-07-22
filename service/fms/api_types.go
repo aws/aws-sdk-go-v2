@@ -13,6 +13,210 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// An individual AWS Firewall Manager application.
+type App struct {
+	_ struct{} `type:"structure"`
+
+	// The application's name.
+	//
+	// AppName is a required field
+	AppName *string `min:"1" type:"string" required:"true"`
+
+	// The application's port number, for example 80.
+	//
+	// Port is a required field
+	Port *int64 `type:"long" required:"true"`
+
+	// The IP protocol name or number. The name can be one of tcp, udp, or icmp.
+	// For information on possible numbers, see Protocol Numbers (https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml).
+	//
+	// Protocol is a required field
+	Protocol *string `min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s App) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *App) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "App"}
+
+	if s.AppName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AppName"))
+	}
+	if s.AppName != nil && len(*s.AppName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("AppName", 1))
+	}
+
+	if s.Port == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Port"))
+	}
+
+	if s.Protocol == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Protocol"))
+	}
+	if s.Protocol != nil && len(*s.Protocol) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Protocol", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// An AWS Firewall Manager applications list.
+type AppsListData struct {
+	_ struct{} `type:"structure"`
+
+	// An array of applications in the AWS Firewall Manager applications list.
+	//
+	// AppsList is a required field
+	AppsList []App `type:"list" required:"true"`
+
+	// The time that the AWS Firewall Manager applications list was created.
+	CreateTime *time.Time `type:"timestamp"`
+
+	// The time that the AWS Firewall Manager applications list was last updated.
+	LastUpdateTime *time.Time `type:"timestamp"`
+
+	// The ID of the AWS Firewall Manager applications list.
+	ListId *string `min:"36" type:"string"`
+
+	// The name of the AWS Firewall Manager applications list.
+	//
+	// ListName is a required field
+	ListName *string `min:"1" type:"string" required:"true"`
+
+	// A unique identifier for each update to the list. When you update the list,
+	// the update token must match the token of the current version of the application
+	// list. You can retrieve the update token by getting the list.
+	ListUpdateToken *string `min:"1" type:"string"`
+
+	// A map of previous version numbers to their corresponding App object arrays.
+	PreviousAppsList map[string][]App `type:"map"`
+}
+
+// String returns the string representation
+func (s AppsListData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *AppsListData) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "AppsListData"}
+
+	if s.AppsList == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AppsList"))
+	}
+	if s.ListId != nil && len(*s.ListId) < 36 {
+		invalidParams.Add(aws.NewErrParamMinLen("ListId", 36))
+	}
+
+	if s.ListName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ListName"))
+	}
+	if s.ListName != nil && len(*s.ListName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ListName", 1))
+	}
+	if s.ListUpdateToken != nil && len(*s.ListUpdateToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ListUpdateToken", 1))
+	}
+	if s.AppsList != nil {
+		for i, v := range s.AppsList {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "AppsList", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Details of the AWS Firewall Manager applications list.
+type AppsListDataSummary struct {
+	_ struct{} `type:"structure"`
+
+	// An array of App objects in the AWS Firewall Manager applications list.
+	AppsList []App `type:"list"`
+
+	// The Amazon Resource Name (ARN) of the applications list.
+	ListArn *string `min:"1" type:"string"`
+
+	// The ID of the applications list.
+	ListId *string `min:"36" type:"string"`
+
+	// The name of the applications list.
+	ListName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s AppsListDataSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Violations for an EC2 instance resource.
+type AwsEc2InstanceViolation struct {
+	_ struct{} `type:"structure"`
+
+	// Violations for network interfaces associated with the EC2 instance.
+	AwsEc2NetworkInterfaceViolations []AwsEc2NetworkInterfaceViolation `type:"list"`
+
+	// The resource ID of the EC2 instance.
+	ViolationTarget *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsEc2InstanceViolation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Violations for network interfaces associated with an EC2 instance.
+type AwsEc2NetworkInterfaceViolation struct {
+	_ struct{} `type:"structure"`
+
+	// List of security groups that violate the rules specified in the master security
+	// group of the AWS Firewall Manager policy.
+	ViolatingSecurityGroups []string `type:"list"`
+
+	// The resource ID of the network interface.
+	ViolationTarget *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsEc2NetworkInterfaceViolation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Details of the rule violation in a security group when compared to the master
+// security group of the AWS Firewall Manager policy.
+type AwsVPCSecurityGroupViolation struct {
+	_ struct{} `type:"structure"`
+
+	// List of rules specified in the security group of the AWS Firewall Manager
+	// policy that partially match the ViolationTarget rule.
+	PartialMatches []PartialMatch `type:"list"`
+
+	// Remediation options for the rule specified in the ViolationTarget.
+	PossibleSecurityGroupRemediationActions []SecurityGroupRemediationAction `type:"list"`
+
+	// The security group rule that is being evaluated.
+	ViolationTarget *string `type:"string"`
+
+	// A description of the security group that violates the policy.
+	ViolationTargetDescription *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsVPCSecurityGroupViolation) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Details of the resource that is not protected by the policy.
 type ComplianceViolator struct {
 	_ struct{} `type:"structure"`
@@ -57,6 +261,24 @@ type EvaluationResult struct {
 
 // String returns the string representation
 func (s EvaluationResult) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The reference rule that partially matches the ViolationTarget rule and violation
+// reason.
+type PartialMatch struct {
+	_ struct{} `type:"structure"`
+
+	// The reference rule from the master security group of the AWS Firewall Manager
+	// policy.
+	Reference *string `type:"string"`
+
+	// The violation reason.
+	TargetViolationReasons []string `type:"list"`
+}
+
+// String returns the string representation
+func (s PartialMatch) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -123,7 +345,7 @@ type Policy struct {
 	// The ID of the AWS Firewall Manager policy.
 	PolicyId *string `min:"36" type:"string"`
 
-	// The friendly name of the AWS Firewall Manager policy.
+	// The name of the AWS Firewall Manager policy.
 	//
 	// PolicyName is a required field
 	PolicyName *string `min:"1" type:"string" required:"true"`
@@ -286,7 +508,7 @@ type PolicyComplianceStatus struct {
 	// The ID of the AWS Firewall Manager policy.
 	PolicyId *string `min:"36" type:"string"`
 
-	// The friendly name of the AWS Firewall Manager policy.
+	// The name of the AWS Firewall Manager policy.
 	PolicyName *string `min:"1" type:"string"`
 
 	// The AWS account that created the AWS Firewall Manager policy.
@@ -308,7 +530,7 @@ type PolicySummary struct {
 	// The ID of the specified policy.
 	PolicyId *string `min:"36" type:"string"`
 
-	// The friendly name of the specified policy.
+	// The name of the specified policy.
 	PolicyName *string `min:"1" type:"string"`
 
 	// Indicates if the policy should be automatically applied to new resources.
@@ -332,6 +554,92 @@ type PolicySummary struct {
 
 // String returns the string representation
 func (s PolicySummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// An AWS Firewall Manager protocols list.
+type ProtocolsListData struct {
+	_ struct{} `type:"structure"`
+
+	// The time that the AWS Firewall Manager protocols list was created.
+	CreateTime *time.Time `type:"timestamp"`
+
+	// The time that the AWS Firewall Manager protocols list was last updated.
+	LastUpdateTime *time.Time `type:"timestamp"`
+
+	// The ID of the AWS Firewall Manager protocols list.
+	ListId *string `min:"36" type:"string"`
+
+	// The name of the AWS Firewall Manager protocols list.
+	//
+	// ListName is a required field
+	ListName *string `min:"1" type:"string" required:"true"`
+
+	// A unique identifier for each update to the list. When you update the list,
+	// the update token must match the token of the current version of the application
+	// list. You can retrieve the update token by getting the list.
+	ListUpdateToken *string `min:"1" type:"string"`
+
+	// A map of previous version numbers to their corresponding protocol arrays.
+	PreviousProtocolsList map[string][]string `type:"map"`
+
+	// An array of protocols in the AWS Firewall Manager protocols list.
+	//
+	// ProtocolsList is a required field
+	ProtocolsList []string `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s ProtocolsListData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ProtocolsListData) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ProtocolsListData"}
+	if s.ListId != nil && len(*s.ListId) < 36 {
+		invalidParams.Add(aws.NewErrParamMinLen("ListId", 36))
+	}
+
+	if s.ListName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ListName"))
+	}
+	if s.ListName != nil && len(*s.ListName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ListName", 1))
+	}
+	if s.ListUpdateToken != nil && len(*s.ListUpdateToken) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ListUpdateToken", 1))
+	}
+
+	if s.ProtocolsList == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ProtocolsList"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Details of the AWS Firewall Manager protocols list.
+type ProtocolsListDataSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the specified protocols list.
+	ListArn *string `min:"1" type:"string"`
+
+	// The ID of the specified protocols list.
+	ListId *string `min:"36" type:"string"`
+
+	// The name of the specified protocols list.
+	ListName *string `min:"1" type:"string"`
+
+	// An array of protocols in the AWS Firewall Manager protocols list.
+	ProtocolsList []string `type:"list"`
+}
+
+// String returns the string representation
+func (s ProtocolsListDataSummary) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -377,6 +685,78 @@ func (s *ResourceTag) Validate() error {
 	return nil
 }
 
+// Violation detail based on resource type.
+type ResourceViolation struct {
+	_ struct{} `type:"structure"`
+
+	// Violation details for an EC2 instance.
+	AwsEc2InstanceViolation *AwsEc2InstanceViolation `type:"structure"`
+
+	// Violation details for network interface.
+	AwsEc2NetworkInterfaceViolation *AwsEc2NetworkInterfaceViolation `type:"structure"`
+
+	// Violation details for security groups.
+	AwsVPCSecurityGroupViolation *AwsVPCSecurityGroupViolation `type:"structure"`
+}
+
+// String returns the string representation
+func (s ResourceViolation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Remediation option for the rule specified in the ViolationTarget.
+type SecurityGroupRemediationAction struct {
+	_ struct{} `type:"structure"`
+
+	// Brief description of the action that will be performed.
+	Description *string `type:"string"`
+
+	// Indicates if the current action is the default action.
+	IsDefaultAction *bool `type:"boolean"`
+
+	// The remediation action that will be performed.
+	RemediationActionType RemediationActionType `type:"string" enum:"true"`
+
+	// The final state of the rule specified in the ViolationTarget after it is
+	// remediated.
+	RemediationResult *SecurityGroupRuleDescription `type:"structure"`
+}
+
+// String returns the string representation
+func (s SecurityGroupRemediationAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes a set of permissions for a security group rule.
+type SecurityGroupRuleDescription struct {
+	_ struct{} `type:"structure"`
+
+	// The start of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6
+	// type number. A value of -1 indicates all ICMP/ICMPv6 types.
+	FromPort *int64 `type:"long"`
+
+	// The IPv4 ranges for the security group rule.
+	IPV4Range *string `type:"string"`
+
+	// The IPv6 ranges for the security group rule.
+	IPV6Range *string `type:"string"`
+
+	// The ID of the prefix list for the security group rule.
+	PrefixListId *string `min:"1" type:"string"`
+
+	// The IP protocol name (tcp, udp, icmp, icmpv6) or number.
+	Protocol *string `type:"string"`
+
+	// The end of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6
+	// code. A value of -1 indicates all ICMP/ICMPv6 codes.
+	ToPort *int64 `type:"long"`
+}
+
+// String returns the string representation
+func (s SecurityGroupRuleDescription) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Details about the security service that is being used to protect the resources.
 type SecurityServicePolicyData struct {
 	_ struct{} `type:"structure"`
@@ -384,7 +764,7 @@ type SecurityServicePolicyData struct {
 	// Details about the service that are specific to the service type, in JSON
 	// format. For service type SHIELD_ADVANCED, this is an empty string.
 	//
-	//    * Example: WAFV2 "ManagedServiceData": "{\"type\":\"WAFV2\",\"defaultAction\":{\"type\":\"ALLOW\"},\"preProcessRuleGroups\":[{\"managedRuleGroupIdentifier\":null,\"ruleGroupArn\":\"rulegrouparn\",\"overrideAction\":{\"type\":\"COUNT\"},\"excludedRules\":[{\"name\":\"EntityName\"}],\"ruleGroupType\":\"RuleGroup\"}],\"postProcessRuleGroups\":[{\"managedRuleGroupIdentifier\":{\"managedRuleGroupName\":\"AWSManagedRulesAdminProtectionRuleSet\",\"vendor\":\"AWS\"},\"ruleGroupArn\":\"rulegrouparn\",\"overrideAction\":{\"type\":\"NONE\"},\"excludedRules\":[],\"ruleGroupType\":\"ManagedRuleGroup\"}],\"overrideCustomerWebACLAssociation\":false}"
+	//    * Example: WAFV2 "ManagedServiceData": "{\"type\":\"WAFV2\",\"defaultAction\":{\"type\":\"ALLOW\"},\"preProcessRuleGroups\":[{\"managedRuleGroupIdentifier\":null,\"ruleGroupArn\":\"rulegrouparn\",\"overrideAction\":{\"type\":\"COUNT\"},\"excludeRules\":[{\"name\":\"EntityName\"}],\"ruleGroupType\":\"RuleGroup\"}],\"postProcessRuleGroups\":[{\"managedRuleGroupIdentifier\":{\"managedRuleGroupName\":\"AWSManagedRulesAdminProtectionRuleSet\",\"vendorName\":\"AWS\"},\"ruleGroupArn\":\"rulegrouparn\",\"overrideAction\":{\"type\":\"NONE\"},\"excludeRules\":[],\"ruleGroupType\":\"ManagedRuleGroup\"}],\"overrideCustomerWebACLAssociation\":false}"
 	//
 	//    * Example: WAF Classic "ManagedServiceData": "{\"type\": \"WAF\", \"ruleGroups\":
 	//    [{\"id\": \"12345678-1bcd-9012-efga-0987654321ab\", \"overrideAction\"
@@ -483,4 +863,47 @@ func (s *Tag) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Violations for a resource based on the specified AWS Firewall Manager policy
+// and AWS account.
+type ViolationDetail struct {
+	_ struct{} `type:"structure"`
+
+	// The AWS account that the violation details were requested for.
+	//
+	// MemberAccount is a required field
+	MemberAccount *string `min:"1" type:"string" required:"true"`
+
+	// The ID of the AWS Firewall Manager policy that the violation details were
+	// requested for.
+	//
+	// PolicyId is a required field
+	PolicyId *string `min:"36" type:"string" required:"true"`
+
+	// Brief description for the requested resource.
+	ResourceDescription *string `type:"string"`
+
+	// The resource ID that the violation details were requested for.
+	//
+	// ResourceId is a required field
+	ResourceId *string `min:"1" type:"string" required:"true"`
+
+	// The ResourceTag objects associated with the resource.
+	ResourceTags []Tag `type:"list"`
+
+	// The resource type that the violation details were requested for.
+	//
+	// ResourceType is a required field
+	ResourceType *string `min:"1" type:"string" required:"true"`
+
+	// List of violations for the requested resource.
+	//
+	// ResourceViolations is a required field
+	ResourceViolations []ResourceViolation `type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s ViolationDetail) String() string {
+	return awsutil.Prettify(s)
 }

@@ -21,8 +21,9 @@ func (s DescribeEmergencyContactSettingsInput) String() string {
 type DescribeEmergencyContactSettingsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// A list of email addresses that the DRT can use to contact you during a suspected
-	// attack.
+	// A list of email addresses and phone numbers that the DDoS Response Team (DRT)
+	// can use to contact you if you have proactive engagement enabled, for escalations
+	// to the DRT and to initiate proactive customer support.
 	EmergencyContactList []EmergencyContact `type:"list"`
 }
 
@@ -36,8 +37,9 @@ const opDescribeEmergencyContactSettings = "DescribeEmergencyContactSettings"
 // DescribeEmergencyContactSettingsRequest returns a request value for making API operation for
 // AWS Shield.
 //
-// Lists the email addresses that the DRT can use to contact you during a suspected
-// attack.
+// A list of email addresses and phone numbers that the DDoS Response Team (DRT)
+// can use to contact you if you have proactive engagement enabled, for escalations
+// to the DRT and to initiate proactive customer support.
 //
 //    // Example sending a request using DescribeEmergencyContactSettingsRequest.
 //    req := client.DescribeEmergencyContactSettingsRequest(params)

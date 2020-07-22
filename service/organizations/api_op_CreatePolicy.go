@@ -12,13 +12,8 @@ import (
 type CreatePolicyInput struct {
 	_ struct{} `type:"structure"`
 
-	// The policy content to add to the new policy. For example, if you create a
-	// service control policy (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
-	// (SCP), this string must be JSON text that specifies the permissions that
-	// admins in attached accounts can delegate to their users, groups, and roles.
-	// For more information about the SCP syntax, see Service Control Policy Syntax
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html)
-	// in the AWS Organizations User Guide.
+	// The policy text content to add to the new policy. The text that you supply
+	// must adhere to the rules of the policy type you specify in the Type parameter.
 	//
 	// Content is a required field
 	Content *string `min:"1" type:"string" required:"true"`
@@ -37,10 +32,15 @@ type CreatePolicyInput struct {
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
 
-	// The type of policy to create.
+	// The type of policy to create. You can specify one of the following values:
 	//
-	// In the current release, the only type of policy that you can create is a
-	// service control policy (SCP).
+	//    * AISERVICES_OPT_OUT_POLICY (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
+	//
+	//    * BACKUP_POLICY (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
+	//
+	//    * SERVICE_CONTROL_POLICY (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
+	//
+	//    * TAG_POLICY (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
 	//
 	// Type is a required field
 	Type PolicyType `type:"string" required:"true" enum:"true"`

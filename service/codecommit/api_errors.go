@@ -113,7 +113,8 @@ const (
 	// ErrCodeBranchNameExistsException for service response error code
 	// "BranchNameExistsException".
 	//
-	// The specified branch name already exists.
+	// Cannot create the branch with the specified name because the commit conflicts
+	// with an existing branch with the same name. Branch names must be unique.
 	ErrCodeBranchNameExistsException = "BranchNameExistsException"
 
 	// ErrCodeBranchNameIsTagNameException for service response error code
@@ -622,6 +623,19 @@ const (
 	// OPEN to CLOSED.
 	ErrCodeInvalidPullRequestStatusUpdateException = "InvalidPullRequestStatusUpdateException"
 
+	// ErrCodeInvalidReactionUserArnException for service response error code
+	// "InvalidReactionUserArnException".
+	//
+	// The Amazon Resource Name (ARN) of the user or identity is not valid.
+	ErrCodeInvalidReactionUserArnException = "InvalidReactionUserArnException"
+
+	// ErrCodeInvalidReactionValueException for service response error code
+	// "InvalidReactionValueException".
+	//
+	// The value of the reaction is not valid. For more information, see the AWS
+	// CodeCommit User Guide (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html).
+	ErrCodeInvalidReactionValueException = "InvalidReactionValueException"
+
 	// ErrCodeInvalidReferenceNameException for service response error code
 	// "InvalidReferenceNameException".
 	//
@@ -1008,6 +1022,19 @@ const (
 	// The commit cannot be created because one or more files specified in the commit
 	// reference both a file and a folder.
 	ErrCodePutFileEntryConflictException = "PutFileEntryConflictException"
+
+	// ErrCodeReactionLimitExceededException for service response error code
+	// "ReactionLimitExceededException".
+	//
+	// The number of reactions has been exceeded. Reactions are limited to one reaction
+	// per user for each individual comment ID.
+	ErrCodeReactionLimitExceededException = "ReactionLimitExceededException"
+
+	// ErrCodeReactionValueRequiredException for service response error code
+	// "ReactionValueRequiredException".
+	//
+	// A reaction value is required.
+	ErrCodeReactionValueRequiredException = "ReactionValueRequiredException"
 
 	// ErrCodeReferenceDoesNotExistException for service response error code
 	// "ReferenceDoesNotExistException".

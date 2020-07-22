@@ -103,7 +103,8 @@ type GenerateDataKeyOutput struct {
 	// CiphertextBlob is automatically base64 encoded/decoded by the SDK.
 	CiphertextBlob []byte `min:"1" type:"blob"`
 
-	// The identifier of the CMK that encrypted the data key.
+	// The Amazon Resource Name (key ARN (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
+	// of the CMK that encrypted the data key.
 	KeyId *string `min:"1" type:"string"`
 
 	// The plaintext data key. When you use the HTTP API or the AWS CLI, the value
@@ -125,27 +126,20 @@ const opGenerateDataKey = "GenerateDataKey"
 // GenerateDataKeyRequest returns a request value for making API operation for
 // AWS Key Management Service.
 //
-// Generates a unique symmetric data key. This operation returns a plaintext
-// copy of the data key and a copy that is encrypted under a customer master
-// key (CMK) that you specify. You can use the plaintext key to encrypt your
-// data outside of AWS KMS and store the encrypted data key with the encrypted
-// data.
+// Generates a unique symmetric data key for client-side encryption. This operation
+// returns a plaintext copy of the data key and a copy that is encrypted under
+// a customer master key (CMK) that you specify. You can use the plaintext key
+// to encrypt your data outside of AWS KMS and store the encrypted data key
+// with the encrypted data.
 //
 // GenerateDataKey returns a unique data key for each request. The bytes in
-// the key are not related to the caller or CMK that is used to encrypt the
-// data key.
+// the plaintext key are not related to the caller or the CMK.
 //
 // To generate a data key, specify the symmetric CMK that will be used to encrypt
 // the data key. You cannot use an asymmetric CMK to generate data keys. To
-// get the type of your CMK, use the DescribeKey operation.
-//
-// You must also specify the length of the data key. Use either the KeySpec
-// or NumberOfBytes parameters (but not both). For 128-bit and 256-bit data
-// keys, use the KeySpec parameter.
-//
-// If the operation succeeds, the plaintext copy of the data key is in the Plaintext
-// field of the response, and the encrypted copy of the data key in the CiphertextBlob
-// field.
+// get the type of your CMK, use the DescribeKey operation. You must also specify
+// the length of the data key. Use either the KeySpec or NumberOfBytes parameters
+// (but not both). For 128-bit and 256-bit data keys, use the KeySpec parameter.
 //
 // To get only an encrypted copy of the data key, use GenerateDataKeyWithoutPlaintext.
 // To generate an asymmetric data key pair, use the GenerateDataKeyPair or GenerateDataKeyPairWithoutPlaintext
@@ -162,24 +156,32 @@ const opGenerateDataKey = "GenerateDataKey"
 // For details, see How Key State Affects Use of a Customer Master Key (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
 // in the AWS Key Management Service Developer Guide.
 //
+// How to use your data key
+//
 // We recommend that you use the following pattern to encrypt data locally in
-// your application:
+// your application. You can write your own code or use a client-side encryption
+// library, such as the AWS Encryption SDK (https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/),
+// the Amazon DynamoDB Encryption Client (https://docs.aws.amazon.com/dynamodb-encryption-client/latest/devguide/),
+// or Amazon S3 client-side encryption (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html)
+// to do these tasks for you.
 //
-// Use the GenerateDataKey operation to get a data encryption key.
+// To encrypt data outside of AWS KMS:
 //
-// Use the plaintext data key (returned in the Plaintext field of the response)
-// to encrypt data locally, then erase the plaintext data key from memory.
+// Use the GenerateDataKey operation to get a data key.
 //
-// Store the encrypted data key (returned in the CiphertextBlob field of the
-// response) alongside the locally encrypted data.
+// Use the plaintext data key (in the Plaintext field of the response) to encrypt
+// your data outside of AWS KMS. Then erase the plaintext data key from memory.
 //
-// To decrypt data locally:
+// Store the encrypted data key (in the CiphertextBlob field of the response)
+// with the encrypted data.
+//
+// To decrypt data outside of AWS KMS:
 //
 // Use the Decrypt operation to decrypt the encrypted data key. The operation
 // returns a plaintext copy of the data key.
 //
-// Use the plaintext data key to decrypt data locally, then erase the plaintext
-// data key from memory.
+// Use the plaintext data key to decrypt data outside of AWS KMS, then erase
+// the plaintext data key from memory.
 //
 //    // Example sending a request using GenerateDataKeyRequest.
 //    req := client.GenerateDataKeyRequest(params)

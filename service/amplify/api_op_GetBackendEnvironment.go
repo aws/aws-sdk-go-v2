@@ -10,16 +10,16 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for get backend environment request.
+// The request structure for the get backend environment request.
 type GetBackendEnvironmentInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for an Amplify App.
+	// The unique id for an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Name for the backend environment.
+	// The name for the backend environment.
 	//
 	// EnvironmentName is a required field
 	EnvironmentName *string `location:"uri" locationName:"environmentName" min:"1" type:"string" required:"true"`
@@ -73,11 +73,11 @@ func (s GetBackendEnvironmentInput) MarshalFields(e protocol.FieldEncoder) error
 	return nil
 }
 
-// Result structure for get backend environment result.
+// The result structure for the get backend environment result.
 type GetBackendEnvironmentOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Backend environment structure for an an Amplify App.
+	// Describes the backend environment for an Amplify app.
 	//
 	// BackendEnvironment is a required field
 	BackendEnvironment *BackendEnvironment `locationName:"backendEnvironment" type:"structure" required:"true"`
@@ -104,7 +104,7 @@ const opGetBackendEnvironment = "GetBackendEnvironment"
 // GetBackendEnvironmentRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Retrieves a backend environment for an Amplify App.
+// Returns a backend environment for an Amplify app.
 //
 //    // Example sending a request using GetBackendEnvironmentRequest.
 //    req := client.GetBackendEnvironmentRequest(params)

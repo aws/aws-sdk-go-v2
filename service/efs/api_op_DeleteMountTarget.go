@@ -17,7 +17,7 @@ type DeleteMountTargetInput struct {
 	// The ID of the mount target to delete (String).
 	//
 	// MountTargetId is a required field
-	MountTargetId *string `location:"uri" locationName:"MountTargetId" type:"string" required:"true"`
+	MountTargetId *string `location:"uri" locationName:"MountTargetId" min:"13" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -31,6 +31,9 @@ func (s *DeleteMountTargetInput) Validate() error {
 
 	if s.MountTargetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("MountTargetId"))
+	}
+	if s.MountTargetId != nil && len(*s.MountTargetId) < 13 {
+		invalidParams.Add(aws.NewErrParamMinLen("MountTargetId", 13))
 	}
 
 	if invalidParams.Len() > 0 {

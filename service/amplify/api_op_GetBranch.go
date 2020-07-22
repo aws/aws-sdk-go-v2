@@ -10,16 +10,16 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for get branch request.
+// The request structure for the get branch request.
 type GetBranchInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for an Amplify App.
+	// The unique ID for an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Name for the branch.
+	// The name for the branch.
 	//
 	// BranchName is a required field
 	BranchName *string `location:"uri" locationName:"branchName" min:"1" type:"string" required:"true"`
@@ -76,7 +76,7 @@ func (s GetBranchInput) MarshalFields(e protocol.FieldEncoder) error {
 type GetBranchOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Branch for an Amplify App, which maps to a 3rd party repository branch.
+	// The branch for an Amplify app, which maps to a third-party repository branch.
 	//
 	// Branch is a required field
 	Branch *Branch `locationName:"branch" type:"structure" required:"true"`
@@ -103,7 +103,7 @@ const opGetBranch = "GetBranch"
 // GetBranchRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Retrieves a branch for an Amplify App.
+// Returns a branch for an Amplify app.
 //
 //    // Example sending a request using GetBranchRequest.
 //    req := client.GetBranchRequest(params)

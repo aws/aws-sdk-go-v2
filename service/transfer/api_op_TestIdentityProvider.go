@@ -30,6 +30,9 @@ type TestIdentityProviderInput struct {
 	//    * File Transfer Protocol (FTP)
 	ServerProtocol Protocol `type:"string" enum:"true"`
 
+	// The source IP address of the user account to be tested.
+	SourceIp *string `type:"string"`
+
 	// The name of the user account to be tested.
 	//
 	// UserName is a required field

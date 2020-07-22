@@ -72,7 +72,7 @@ const opDescribeUploadBuffer = "DescribeUploadBuffer"
 // AWS Storage Gateway.
 //
 // Returns information about the upload buffer of a gateway. This operation
-// is supported for the stored volume, cached volume and tape gateway types.
+// is supported for the stored volume, cached volume, and tape gateway types.
 //
 // The response includes disk IDs that are configured as upload buffer space,
 // and it includes the amount of upload buffer space allocated and used.

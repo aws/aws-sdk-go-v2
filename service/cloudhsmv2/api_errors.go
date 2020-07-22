@@ -38,5 +38,8 @@ const (
 
 	// ErrCodeCloudHsmTagException for service response error code
 	// "CloudHsmTagException".
+	//
+	// The request was rejected because of a tagging failure. Verify the tag conditions
+	// in all applicable policies, and then retry the request.
 	ErrCodeCloudHsmTagException = "CloudHsmTagException"
 )

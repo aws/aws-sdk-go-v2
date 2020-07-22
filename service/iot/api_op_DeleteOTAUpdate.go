@@ -18,10 +18,10 @@ type DeleteOTAUpdateInput struct {
 	DeleteStream *bool `location:"querystring" locationName:"deleteStream" type:"boolean"`
 
 	// Specifies if the AWS Job associated with the OTA update should be deleted
-	// with the OTA update is deleted.
+	// when the OTA update is deleted.
 	ForceDeleteAWSJob *bool `location:"querystring" locationName:"forceDeleteAWSJob" type:"boolean"`
 
-	// The OTA update ID to delete.
+	// The ID of the OTA update to delete.
 	//
 	// OtaUpdateId is a required field
 	OtaUpdateId *string `location:"uri" locationName:"otaUpdateId" min:"1" type:"string" required:"true"`

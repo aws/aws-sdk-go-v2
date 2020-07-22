@@ -10,31 +10,31 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for the list artifacts request.
+// Describes the request structure for the list artifacts request.
 type ListArtifactsInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for an Amplify App.
+	// The unique ID for an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Name for a branch, part of an Amplify App.
+	// The name of a branch that is part of an Amplify app.
 	//
 	// BranchName is a required field
 	BranchName *string `location:"uri" locationName:"branchName" min:"1" type:"string" required:"true"`
 
-	// Unique Id for an Job.
+	// The unique ID for a job.
 	//
 	// JobId is a required field
 	JobId *string `location:"uri" locationName:"jobId" type:"string" required:"true"`
 
-	// Maximum number of records to list in a single response.
+	// The maximum number of records to list in a single response.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
-	// Pagination token. Set to null to start listing artifacts from start. If non-null
-	// pagination token is returned in a result, then pass its value in here to
-	// list more artifacts.
+	// A pagination token. Set to null to start listing artifacts from start. If
+	// a non-null pagination token is returned in a result, pass its value in here
+	// to list more artifacts.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
 
@@ -111,17 +111,17 @@ func (s ListArtifactsInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Result structure for the list artifacts request.
+// The result structure for the list artifacts request.
 type ListArtifactsOutput struct {
 	_ struct{} `type:"structure"`
 
-	// List of artifacts.
+	// A list of artifacts.
 	//
 	// Artifacts is a required field
 	Artifacts []Artifact `locationName:"artifacts" type:"list" required:"true"`
 
-	// Pagination token. If non-null pagination token is returned in a result, then
-	// pass its value in another request to fetch more entries.
+	// A pagination token. If a non-null pagination token is returned in a result,
+	// pass its value in another request to retrieve more entries.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
@@ -158,7 +158,7 @@ const opListArtifacts = "ListArtifacts"
 // ListArtifactsRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// List artifacts with an app, a branch, a job and an artifact type.
+// Returns a list of artifacts for a specified app, branch, and job.
 //
 //    // Example sending a request using ListArtifactsRequest.
 //    req := client.ListArtifactsRequest(params)

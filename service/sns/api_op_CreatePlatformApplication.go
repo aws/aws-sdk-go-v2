@@ -26,7 +26,7 @@ type CreatePlatformApplicationInput struct {
 	Name *string `type:"string" required:"true"`
 
 	// The following platforms are supported: ADM (Amazon Device Messaging), APNS
-	// (Apple Push Notification Service), APNS_SANDBOX, and FCM (Firebase Cloud
+	// (Apple Push Notification Service), APNS_SANDBOX, and GCM (Firebase Cloud
 	// Messaging).
 	//
 	// Platform is a required field
@@ -79,22 +79,33 @@ const opCreatePlatformApplication = "CreatePlatformApplication"
 // Amazon Simple Notification Service.
 //
 // Creates a platform application object for one of the supported push notification
-// services, such as APNS and FCM, to which devices and mobile apps may register.
-// You must specify PlatformPrincipal and PlatformCredential attributes when
-// using the CreatePlatformApplication action. The PlatformPrincipal is received
-// from the notification service. For APNS/APNS_SANDBOX, PlatformPrincipal is
-// "SSL certificate". For FCM, PlatformPrincipal is not applicable. For ADM,
-// PlatformPrincipal is "client id". The PlatformCredential is also received
-// from the notification service. For WNS, PlatformPrincipal is "Package Security
-// Identifier". For MPNS, PlatformPrincipal is "TLS certificate". For Baidu,
-// PlatformPrincipal is "API key".
+// services, such as APNS and GCM (Firebase Cloud Messaging), to which devices
+// and mobile apps may register. You must specify PlatformPrincipal and PlatformCredential
+// attributes when using the CreatePlatformApplication action.
 //
-// For APNS/APNS_SANDBOX, PlatformCredential is "private key". For FCM, PlatformCredential
-// is "API key". For ADM, PlatformCredential is "client secret". For WNS, PlatformCredential
-// is "secret key". For MPNS, PlatformCredential is "private key". For Baidu,
-// PlatformCredential is "secret key". The PlatformApplicationArn that is returned
-// when using CreatePlatformApplication is then used as an attribute for the
-// CreatePlatformEndpoint action.
+// PlatformPrincipal and PlatformCredential are received from the notification
+// service.
+//
+//    * For ADM, PlatformPrincipal is client id and PlatformCredential is client
+//    secret.
+//
+//    * For Baidu, PlatformPrincipal is API key and PlatformCredential is secret
+//    key.
+//
+//    * For APNS and APNS_SANDBOX, PlatformPrincipal is SSL certificate and
+//    PlatformCredential is private key.
+//
+//    * For GCM (Firebase Cloud Messaging), there is no PlatformPrincipal and
+//    the PlatformCredential is API key.
+//
+//    * For MPNS, PlatformPrincipal is TLS certificate and PlatformCredential
+//    is private key.
+//
+//    * For WNS, PlatformPrincipal is Package Security Identifier and PlatformCredential
+//    is secret key.
+//
+// You can use the returned PlatformApplicationArn as an attribute for the CreatePlatformEndpoint
+// action.
 //
 //    // Example sending a request using CreatePlatformApplicationRequest.
 //    req := client.CreatePlatformApplicationRequest(params)

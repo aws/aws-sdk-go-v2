@@ -2,6 +2,27 @@
 
 package autoscaling
 
+type InstanceRefreshStatus string
+
+// Enum values for InstanceRefreshStatus
+const (
+	InstanceRefreshStatusPending    InstanceRefreshStatus = "Pending"
+	InstanceRefreshStatusInProgress InstanceRefreshStatus = "InProgress"
+	InstanceRefreshStatusSuccessful InstanceRefreshStatus = "Successful"
+	InstanceRefreshStatusFailed     InstanceRefreshStatus = "Failed"
+	InstanceRefreshStatusCancelling InstanceRefreshStatus = "Cancelling"
+	InstanceRefreshStatusCancelled  InstanceRefreshStatus = "Cancelled"
+)
+
+func (enum InstanceRefreshStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InstanceRefreshStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type LifecycleState string
 
 // Enum values for LifecycleState
@@ -65,6 +86,22 @@ func (enum MetricType) MarshalValue() (string, error) {
 }
 
 func (enum MetricType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type RefreshStrategy string
+
+// Enum values for RefreshStrategy
+const (
+	RefreshStrategyRolling RefreshStrategy = "Rolling"
+)
+
+func (enum RefreshStrategy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum RefreshStrategy) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

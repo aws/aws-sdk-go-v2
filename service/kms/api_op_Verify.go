@@ -120,8 +120,8 @@ func (s *VerifyInput) Validate() error {
 type VerifyOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The unique identifier for the asymmetric CMK that was used to verify the
-	// signature.
+	// The Amazon Resource Name (key ARN (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
+	// of the asymmetric CMK that was used to verify the signature.
 	KeyId *string `min:"1" type:"string"`
 
 	// A Boolean value that indicates whether the signature was verified. A value

@@ -23,6 +23,10 @@ type PutPlaybackConfigurationInput struct {
 	// The configuration for Avail Suppression.
 	AvailSuppression *AvailSuppression `type:"structure"`
 
+	// The configuration for bumpers. Bumpers are short audio or video clips that
+	// play at the start or before the end of an ad break.
+	Bumper *Bumper `type:"structure"`
+
 	// The configuration for using a content delivery network (CDN), like Amazon
 	// CloudFront, for content and ad segment management.
 	CdnConfiguration *CdnConfiguration `type:"structure"`
@@ -94,6 +98,12 @@ func (s PutPlaybackConfigurationInput) MarshalFields(e protocol.FieldEncoder) er
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "AvailSuppression", v, metadata)
 	}
+	if s.Bumper != nil {
+		v := s.Bumper
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Bumper", v, metadata)
+	}
 	if s.CdnConfiguration != nil {
 		v := s.CdnConfiguration
 
@@ -164,6 +174,10 @@ type PutPlaybackConfigurationOutput struct {
 
 	AvailSuppression *AvailSuppression `type:"structure"`
 
+	// The configuration for bumpers. Bumpers are short audio or video clips that
+	// play at the start or before the end of an ad break.
+	Bumper *Bumper `type:"structure"`
+
 	// The configuration for using a content delivery network (CDN), like Amazon
 	// CloudFront, for content and ad segment management.
 	CdnConfiguration *CdnConfiguration `type:"structure"`
@@ -212,6 +226,12 @@ func (s PutPlaybackConfigurationOutput) MarshalFields(e protocol.FieldEncoder) e
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "AvailSuppression", v, metadata)
+	}
+	if s.Bumper != nil {
+		v := s.Bumper
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Bumper", v, metadata)
 	}
 	if s.CdnConfiguration != nil {
 		v := s.CdnConfiguration

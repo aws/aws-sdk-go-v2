@@ -17,7 +17,7 @@ type UpdateClassificationJobInput struct {
 	// JobId is a required field
 	JobId *string `location:"uri" locationName:"jobId" type:"string" required:"true"`
 
-	// The current status of a classification job. Valid values are:
+	// The current status of a classification job. Possible values are:
 	//
 	// JobStatus is a required field
 	JobStatus JobStatus `locationName:"jobStatus" type:"string" required:"true" enum:"true"`

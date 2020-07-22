@@ -19,27 +19,27 @@ type SetPlatformApplicationAttributesInput struct {
 	// the following:
 	//
 	//    * PlatformCredential – The credential received from the notification
-	//    service. For APNS/APNS_SANDBOX, PlatformCredential is private key. For
-	//    FCM, PlatformCredential is "API key". For ADM, PlatformCredential is "client
-	//    secret".
+	//    service. For APNS and APNS_SANDBOX, PlatformCredential is private key.
+	//    For GCM (Firebase Cloud Messaging), PlatformCredential is API key. For
+	//    ADM, PlatformCredential is client secret.
 	//
 	//    * PlatformPrincipal – The principal received from the notification service.
-	//    For APNS/APNS_SANDBOX, PlatformPrincipal is SSL certificate. For FCM,
-	//    PlatformPrincipal is not applicable. For ADM, PlatformPrincipal is "client
-	//    id".
+	//    For APNS and APNS_SANDBOX, PlatformPrincipal is SSL certificate. For GCM
+	//    (Firebase Cloud Messaging), there is no PlatformPrincipal. For ADM, PlatformPrincipal
+	//    is client id.
 	//
 	//    * EventEndpointCreated – Topic ARN to which EndpointCreated event notifications
-	//    should be sent.
+	//    are sent.
 	//
 	//    * EventEndpointDeleted – Topic ARN to which EndpointDeleted event notifications
-	//    should be sent.
+	//    are sent.
 	//
 	//    * EventEndpointUpdated – Topic ARN to which EndpointUpdate event notifications
-	//    should be sent.
+	//    are sent.
 	//
 	//    * EventDeliveryFailure – Topic ARN to which DeliveryFailure event notifications
-	//    should be sent upon Direct Publish delivery failure (permanent) to one
-	//    of the application's endpoints.
+	//    are sent upon Direct Publish delivery failure (permanent) to one of the
+	//    application's endpoints.
 	//
 	//    * SuccessFeedbackRoleArn – IAM role ARN used to give Amazon SNS write
 	//    access to use CloudWatch Logs on your behalf.
@@ -97,8 +97,8 @@ const opSetPlatformApplicationAttributes = "SetPlatformApplicationAttributes"
 // Amazon Simple Notification Service.
 //
 // Sets the attributes of the platform application object for the supported
-// push notification services, such as APNS and FCM. For more information, see
-// Using Amazon SNS Mobile Push Notifications (https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
+// push notification services, such as APNS and GCM (Firebase Cloud Messaging).
+// For more information, see Using Amazon SNS Mobile Push Notifications (https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
 // For information on configuring attributes for message delivery status, see
 // Using Amazon SNS Application Attributes for Message Delivery Status (https://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html).
 //

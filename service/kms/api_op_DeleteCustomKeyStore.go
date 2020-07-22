@@ -62,12 +62,12 @@ const opDeleteCustomKeyStore = "DeleteCustomKeyStore"
 // The custom key store that you delete cannot contain any AWS KMS customer
 // master keys (CMKs) (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys).
 // Before deleting the key store, verify that you will never need to use any
-// of the CMKs in the key store for any cryptographic operations. Then, use
-// ScheduleKeyDeletion to delete the AWS KMS customer master keys (CMKs) from
-// the key store. When the scheduled waiting period expires, the ScheduleKeyDeletion
-// operation deletes the CMKs. Then it makes a best effort to delete the key
-// material from the associated cluster. However, you might need to manually
-// delete the orphaned key material (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-orphaned-key)
+// of the CMKs in the key store for any cryptographic operations (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations).
+// Then, use ScheduleKeyDeletion to delete the AWS KMS customer master keys
+// (CMKs) from the key store. When the scheduled waiting period expires, the
+// ScheduleKeyDeletion operation deletes the CMKs. Then it makes a best effort
+// to delete the key material from the associated cluster. However, you might
+// need to manually delete the orphaned key material (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-orphaned-key)
 // from the cluster and its backups.
 //
 // After all CMKs are deleted from AWS KMS, use DisconnectCustomKeyStore to

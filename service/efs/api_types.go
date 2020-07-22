@@ -127,6 +127,54 @@ func (s AccessPointDescription) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// The backup policy for the file system, showing the curent status. If ENABLED,
+// the file system is being backed up.
+type BackupPolicy struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the status of the file system's backup policy.
+	//
+	//    * ENABLED - EFS is automatically backing up the file system.
+	//
+	//    * ENABLING - EFS is turning on automatic backups for the file system.
+	//
+	//    * DISABLED - automatic back ups are turned off for the file system.
+	//
+	//    * DISABLED - EFS is turning off automatic backups for the file system.
+	//
+	// Status is a required field
+	Status Status `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s BackupPolicy) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BackupPolicy) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BackupPolicy"}
+	if len(s.Status) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Status"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BackupPolicy) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
 // Required if the RootDirectory > Path specified does not exist. Specifies
 // the POSIX IDs and permissions to apply to the access point's RootDirectory
 // > Path. If the access point root directory does not exist, EFS creates it
@@ -224,6 +272,10 @@ type FileSystemDescription struct {
 	// A Boolean value that, if true, indicates that the file system is encrypted.
 	Encrypted *bool `type:"boolean"`
 
+	// The Amazon Resource Name (ARN) for the EFS file system, in the format arn:aws:elasticfilesystem:region:account-id:file-system/file-system-id
+	// . Example with sample data: arn:aws:elasticfilesystem:us-west-2:1111333322228888:file-system/fs-01234567
+	FileSystemArn *string `type:"string"`
+
 	// The ID of the file system, assigned by Amazon EFS.
 	//
 	// FileSystemId is a required field
@@ -231,7 +283,7 @@ type FileSystemDescription struct {
 
 	// The ID of an AWS Key Management Service (AWS KMS) customer master key (CMK)
 	// that was used to protect the encrypted file system.
-	KmsKeyId *string `min:"1" type:"string"`
+	KmsKeyId *string `type:"string"`
 
 	// The lifecycle phase of the file system.
 	//
@@ -320,6 +372,12 @@ func (s FileSystemDescription) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Encrypted", protocol.BoolValue(v), metadata)
+	}
+	if s.FileSystemArn != nil {
+		v := *s.FileSystemArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "FileSystemArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.FileSystemId != nil {
 		v := *s.FileSystemId
@@ -508,7 +566,7 @@ type MountTargetDescription struct {
 	FileSystemId *string `type:"string" required:"true"`
 
 	// Address at which the file system can be mounted by using the mount target.
-	IpAddress *string `type:"string"`
+	IpAddress *string `min:"7" type:"string"`
 
 	// Lifecycle state of the mount target.
 	//
@@ -518,7 +576,7 @@ type MountTargetDescription struct {
 	// System-assigned mount target ID.
 	//
 	// MountTargetId is a required field
-	MountTargetId *string `type:"string" required:"true"`
+	MountTargetId *string `min:"13" type:"string" required:"true"`
 
 	// The ID of the network interface that Amazon EFS created when it created the
 	// mount target.
@@ -530,7 +588,10 @@ type MountTargetDescription struct {
 	// The ID of the mount target's subnet.
 	//
 	// SubnetId is a required field
-	SubnetId *string `type:"string" required:"true"`
+	SubnetId *string `min:"15" type:"string" required:"true"`
+
+	// The Virtual Private Cloud (VPC) ID that the mount target is configured in.
+	VpcId *string `type:"string"`
 }
 
 // String returns the string representation
@@ -593,6 +654,12 @@ func (s MountTargetDescription) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SubnetId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VpcId != nil {
+		v := *s.VpcId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VpcId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

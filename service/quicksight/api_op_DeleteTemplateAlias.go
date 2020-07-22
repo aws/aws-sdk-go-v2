@@ -13,9 +13,10 @@ import (
 type DeleteTemplateAliasInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name for the template alias. If you name a specific alias, you delete
-	// the version that the alias points to. You can specify the latest version
-	// of the template by providing the keyword $LATEST in the AliasName parameter.
+	// The name for the template alias. To delete a specific alias, you delete the
+	// version that the alias points to. You can specify the alias name, or specify
+	// the latest version of the template by providing the keyword $LATEST in the
+	// AliasName parameter.
 	//
 	// AliasName is a required field
 	AliasName *string `location:"uri" locationName:"AliasName" min:"1" type:"string" required:"true"`
@@ -98,7 +99,7 @@ type DeleteTemplateAliasOutput struct {
 	// The name for the template alias.
 	AliasName *string `min:"1" type:"string"`
 
-	// The Amazon Resource Name (ARN) of the resource.
+	// The Amazon Resource Name (ARN) of the template you want to delete.
 	Arn *string `type:"string"`
 
 	// The AWS request ID for this operation.

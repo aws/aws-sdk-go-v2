@@ -1815,6 +1815,103 @@ func (s HostedZoneLimit) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// A complex type that identifies a hosted zone that a specified Amazon VPC
+// is associated with and the owner of the hosted zone. If there is a value
+// for OwningAccount, there is no value for OwningService, and vice versa.
+type HostedZoneOwner struct {
+	_ struct{} `type:"structure"`
+
+	// If the hosted zone was created by an AWS account, or was created by an AWS
+	// service that creates hosted zones using the current account, OwningAccount
+	// contains the account ID of that account. For example, when you use AWS Cloud
+	// Map to create a hosted zone, Cloud Map creates the hosted zone using the
+	// current AWS account.
+	OwningAccount *string `type:"string"`
+
+	// If an AWS service uses its own account to create a hosted zone and associate
+	// the specified VPC with that hosted zone, OwningService contains an abbreviation
+	// that identifies the service. For example, if Amazon Elastic File System (Amazon
+	// EFS) created a hosted zone and associated a VPC with the hosted zone, the
+	// value of OwningService is efs.amazonaws.com.
+	OwningService *string `type:"string"`
+}
+
+// String returns the string representation
+func (s HostedZoneOwner) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HostedZoneOwner) MarshalFields(e protocol.FieldEncoder) error {
+	if s.OwningAccount != nil {
+		v := *s.OwningAccount
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OwningAccount", protocol.StringValue(v), metadata)
+	}
+	if s.OwningService != nil {
+		v := *s.OwningService
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "OwningService", protocol.StringValue(v), metadata)
+	}
+	return nil
+}
+
+// In the response to a ListHostedZonesByVPC request, the HostedZoneSummaries
+// element contains one HostedZoneSummary element for each hosted zone that
+// the specified Amazon VPC is associated with. Each HostedZoneSummary element
+// contains the hosted zone name and ID, and information about who owns the
+// hosted zone.
+type HostedZoneSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The Route 53 hosted zone ID of a private hosted zone that the specified VPC
+	// is associated with.
+	//
+	// HostedZoneId is a required field
+	HostedZoneId *string `type:"string" required:"true"`
+
+	// The name of the private hosted zone, such as example.com.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// The owner of a private hosted zone that the specified VPC is associated with.
+	// The owner can be either an AWS account or an AWS service.
+	//
+	// Owner is a required field
+	Owner *HostedZoneOwner `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s HostedZoneSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HostedZoneSummary) MarshalFields(e protocol.FieldEncoder) error {
+	if s.HostedZoneId != nil {
+		v := *s.HostedZoneId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HostedZoneId", protocol.StringValue(v), metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.StringValue(v), metadata)
+	}
+	if s.Owner != nil {
+		v := s.Owner
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Owner", v, metadata)
+	}
+	return nil
+}
+
 // If a health check or hosted zone was created by another service, LinkedService
 // is a complex type that describes the service that created the resource. When
 // a resource is created by another service, you can't edit or delete it using

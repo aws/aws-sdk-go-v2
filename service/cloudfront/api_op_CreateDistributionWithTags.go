@@ -17,7 +17,7 @@ type CreateDistributionWithTagsInput struct {
 	// The distribution's configuration information.
 	//
 	// DistributionConfigWithTags is a required field
-	DistributionConfigWithTags *DistributionConfigWithTags `locationName:"DistributionConfigWithTags" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
+	DistributionConfigWithTags *DistributionConfigWithTags `locationName:"DistributionConfigWithTags" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2020-05-31/"`
 }
 
 // String returns the string representation
@@ -50,7 +50,7 @@ func (s CreateDistributionWithTagsInput) MarshalFields(e protocol.FieldEncoder) 
 	if s.DistributionConfigWithTags != nil {
 		v := s.DistributionConfigWithTags
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2020-05-31/"}
 		e.SetFields(protocol.PayloadTarget, "DistributionConfigWithTags", v, metadata)
 	}
 	return nil
@@ -66,8 +66,7 @@ type CreateDistributionWithTagsOutput struct {
 	// The current version of the distribution created.
 	ETag *string `location:"header" locationName:"ETag" type:"string"`
 
-	// The fully qualified URI of the new distribution resource just created. For
-	// example: https://cloudfront.amazonaws.com/2010-11-01/distribution/EDFDVBD632BHDS5.
+	// The fully qualified URI of the new distribution resource just created.
 	Location *string `location:"header" locationName:"Location" type:"string"`
 }
 
@@ -99,7 +98,7 @@ func (s CreateDistributionWithTagsOutput) MarshalFields(e protocol.FieldEncoder)
 	return nil
 }
 
-const opCreateDistributionWithTags = "CreateDistributionWithTags2019_03_26"
+const opCreateDistributionWithTags = "CreateDistributionWithTags2020_05_31"
 
 // CreateDistributionWithTagsRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -113,12 +112,12 @@ const opCreateDistributionWithTags = "CreateDistributionWithTags2019_03_26"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateDistributionWithTags
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateDistributionWithTags
 func (c *Client) CreateDistributionWithTagsRequest(input *CreateDistributionWithTagsInput) CreateDistributionWithTagsRequest {
 	op := &aws.Operation{
 		Name:       opCreateDistributionWithTags,
 		HTTPMethod: "POST",
-		HTTPPath:   "/2019-03-26/distribution?WithTags",
+		HTTPPath:   "/2020-05-31/distribution?WithTags",
 	}
 
 	if input == nil {

@@ -10,11 +10,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for the delete webhook request.
+// The request structure for the delete webhook request.
 type DeleteWebhookInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for a webhook.
+	// The unique ID for a webhook.
 	//
 	// WebhookId is a required field
 	WebhookId *string `location:"uri" locationName:"webhookId" type:"string" required:"true"`
@@ -52,11 +52,11 @@ func (s DeleteWebhookInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Result structure for the delete webhook request.
+// The result structure for the delete webhook request.
 type DeleteWebhookOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Webhook structure.
+	// Describes a webhook that connects repository events to an Amplify app.
 	//
 	// Webhook is a required field
 	Webhook *Webhook `locationName:"webhook" type:"structure" required:"true"`

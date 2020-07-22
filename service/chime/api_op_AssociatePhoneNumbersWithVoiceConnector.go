@@ -14,7 +14,9 @@ type AssociatePhoneNumbersWithVoiceConnectorInput struct {
 	_ struct{} `type:"structure"`
 
 	// List of phone numbers, in E.164 format.
-	E164PhoneNumbers []string `type:"list"`
+	//
+	// E164PhoneNumbers is a required field
+	E164PhoneNumbers []string `type:"list" required:"true"`
 
 	// If true, associates the provided phone numbers with the provided Amazon Chime
 	// Voice Connector and removes any previously existing associations. If false,
@@ -35,6 +37,10 @@ func (s AssociatePhoneNumbersWithVoiceConnectorInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *AssociatePhoneNumbersWithVoiceConnectorInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "AssociatePhoneNumbersWithVoiceConnectorInput"}
+
+	if s.E164PhoneNumbers == nil {
+		invalidParams.Add(aws.NewErrParamRequired("E164PhoneNumbers"))
+	}
 
 	if s.VoiceConnectorId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("VoiceConnectorId"))

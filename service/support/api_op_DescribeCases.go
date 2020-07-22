@@ -27,12 +27,12 @@ type DescribeCasesInput struct {
 	// The ID displayed for a case in the AWS Support Center user interface.
 	DisplayId *string `locationName:"displayId" type:"string"`
 
-	// Specifies whether communications should be included in the DescribeCases
-	// results. The default is true.
+	// Specifies whether to include communications in the DescribeCases response.
+	// By default, communications are incuded.
 	IncludeCommunications *bool `locationName:"includeCommunications" type:"boolean"`
 
-	// Specifies whether resolved support cases should be included in the DescribeCases
-	// results. The default is false.
+	// Specifies whether to include resolved support cases in the DescribeCases
+	// response. By default, resolved cases aren't included.
 	IncludeResolvedCases *bool `locationName:"includeResolvedCases" type:"boolean"`
 
 	// The ISO 639-1 code for the language in which AWS provides support. AWS Support
@@ -65,8 +65,9 @@ func (s *DescribeCasesInput) Validate() error {
 	return nil
 }
 
-// Returns an array of CaseDetails objects and a nextToken that defines a point
-// for pagination in the result set.
+// Returns an array of CaseDetails (https://docs.aws.amazon.com/awssupport/latest/APIReference/API_CaseDetails.html)
+// objects and a nextToken that defines a point for pagination in the result
+// set.
 type DescribeCasesOutput struct {
 	_ struct{} `type:"structure"`
 
@@ -88,20 +89,28 @@ const opDescribeCases = "DescribeCases"
 // AWS Support.
 //
 // Returns a list of cases that you specify by passing one or more case IDs.
-// In addition, you can filter the cases by date by setting values for the afterTime
-// and beforeTime request parameters. You can set values for the includeResolvedCases
-// and includeCommunications request parameters to control how much information
-// is returned.
-//
-// Case data is available for 12 months after creation. If a case was created
-// more than 12 months ago, a request for data might cause an error.
+// You can use the afterTime and beforeTime parameters to filter the cases by
+// date. You can set values for the includeResolvedCases and includeCommunications
+// parameters to specify how much information to return.
 //
 // The response returns the following in JSON format:
 //
-//    * One or more CaseDetails data types.
+//    * One or more CaseDetails (https://docs.aws.amazon.com/awssupport/latest/APIReference/API_CaseDetails.html)
+//    data types.
 //
 //    * One or more nextToken values, which specify where to paginate the returned
 //    records represented by the CaseDetails objects.
+//
+// Case data is available for 12 months after creation. If a case was created
+// more than 12 months ago, a request might return an error.
+//
+//    * You must have a Business or Enterprise support plan to use the AWS Support
+//    API.
+//
+//    * If you call the AWS Support API from an account that does not have a
+//    Business or Enterprise support plan, the SubscriptionRequiredException
+//    error message appears. For information about changing your support plan,
+//    see AWS Support (http://aws.amazon.com/premiumsupport/).
 //
 //    // Example sending a request using DescribeCasesRequest.
 //    req := client.DescribeCasesRequest(params)

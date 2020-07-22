@@ -484,3 +484,21 @@ func (enum Unit) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
+
+type VoiceRecordingTrack string
+
+// Enum values for VoiceRecordingTrack
+const (
+	VoiceRecordingTrackFromAgent VoiceRecordingTrack = "FROM_AGENT"
+	VoiceRecordingTrackToAgent   VoiceRecordingTrack = "TO_AGENT"
+	VoiceRecordingTrackAll       VoiceRecordingTrack = "ALL"
+)
+
+func (enum VoiceRecordingTrack) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VoiceRecordingTrack) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}

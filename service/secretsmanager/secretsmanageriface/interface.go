@@ -96,6 +96,8 @@ type ClientAPI interface {
 	UpdateSecretRequest(*secretsmanager.UpdateSecretInput) secretsmanager.UpdateSecretRequest
 
 	UpdateSecretVersionStageRequest(*secretsmanager.UpdateSecretVersionStageInput) secretsmanager.UpdateSecretVersionStageRequest
+
+	ValidateResourcePolicyRequest(*secretsmanager.ValidateResourcePolicyInput) secretsmanager.ValidateResourcePolicyRequest
 }
 
 var _ ClientAPI = (*secretsmanager.Client)(nil)

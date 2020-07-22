@@ -2722,6 +2722,10 @@ func ExampleClient_ModifyDBInstanceRequest_shared00() {
 				fmt.Println(rds.ErrCodeDomainNotFoundFault, aerr.Error())
 			case rds.ErrCodeBackupPolicyNotFoundFault:
 				fmt.Println(rds.ErrCodeBackupPolicyNotFoundFault, aerr.Error())
+			case rds.ErrCodeKMSKeyNotAccessibleFault:
+				fmt.Println(rds.ErrCodeKMSKeyNotAccessibleFault, aerr.Error())
+			case rds.ErrCodeInvalidDBClusterStateFault:
+				fmt.Println(rds.ErrCodeInvalidDBClusterStateFault, aerr.Error())
 			default:
 				fmt.Println(aerr.Error())
 			}

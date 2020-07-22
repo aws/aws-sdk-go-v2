@@ -81,10 +81,6 @@ const opDescribeDBProxies = "DescribeDBProxies"
 // DescribeDBProxiesRequest returns a request value for making API operation for
 // Amazon Relational Database Service.
 //
-//
-// This is prerelease documentation for the RDS Database Proxy feature in preview
-// release. It is subject to change.
-//
 // Returns information about DB proxies.
 //
 //    // Example sending a request using DescribeDBProxiesRequest.

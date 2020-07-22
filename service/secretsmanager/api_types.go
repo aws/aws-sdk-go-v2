@@ -12,6 +12,35 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// Allows you to filter your list of secrets.
+type Filter struct {
+	_ struct{} `type:"structure"`
+
+	// Filters your list of secrets by a specific key.
+	Key FilterNameStringType `type:"string" enum:"true"`
+
+	// Filters your list of secrets by a specific value.
+	Values []string `min:"1" type:"list"`
+}
+
+// String returns the string representation
+func (s Filter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Filter) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Filter"}
+	if s.Values != nil && len(s.Values) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Values", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // A structure that defines the rotation configuration for the secret.
 type RotationRulesType struct {
 	_ struct{} `type:"structure"`
@@ -59,7 +88,10 @@ type SecretListEntry struct {
 	// in the AWS Secrets Manager User Guide.
 	ARN *string `min:"20" type:"string"`
 
-	// The date and time on which this secret was deleted. Not present on active
+	// The date and time when a secret was created.
+	CreatedDate *time.Time `type:"timestamp"`
+
+	// The date and time the deletion of the secret occurred. Not present on active
 	// secrets. The secret can be recovered until the number of days in the recovery
 	// window has passed, as specified in the RecoveryWindowInDays parameter of
 	// the DeleteSecret operation.
@@ -68,10 +100,10 @@ type SecretListEntry struct {
 	// The user-provided description of the secret.
 	Description *string `type:"string"`
 
-	// The ARN or alias of the AWS KMS customer master key (CMK) that's used to
-	// encrypt the SecretString and SecretBinary fields in each version of the secret.
-	// If you don't provide a key, then Secrets Manager defaults to encrypting the
-	// secret fields with the default KMS CMK (the one named awssecretsmanager)
+	// The ARN or alias of the AWS KMS customer master key (CMK) used to encrypt
+	// the SecretString and SecretBinary fields in each version of the secret. If
+	// you don't provide a key, then Secrets Manager defaults to encrypting the
+	// secret fields with the default KMS CMK, the key named awssecretsmanager,
 	// for this account.
 	KmsKeyId *string `type:"string"`
 
@@ -97,24 +129,24 @@ type SecretListEntry struct {
 	// Indicates whether automatic, scheduled rotation is enabled for this secret.
 	RotationEnabled *bool `type:"boolean"`
 
-	// The ARN of an AWS Lambda function that's invoked by Secrets Manager to rotate
-	// and expire the secret either automatically per the schedule or manually by
-	// a call to RotateSecret.
+	// The ARN of an AWS Lambda function invoked by Secrets Manager to rotate and
+	// expire the secret either automatically per the schedule or manually by a
+	// call to RotateSecret.
 	RotationLambdaARN *string `type:"string"`
 
 	// A structure that defines the rotation configuration for the secret.
 	RotationRules *RotationRulesType `type:"structure"`
 
 	// A list of all of the currently assigned SecretVersionStage staging labels
-	// and the SecretVersionId that each is attached to. Staging labels are used
-	// to keep track of the different versions during the rotation process.
+	// and the SecretVersionId attached to each one. Staging labels are used to
+	// keep track of the different versions during the rotation process.
 	//
 	// A version that does not have any SecretVersionStage is considered deprecated
 	// and subject to deletion. Such versions are not included in this list.
 	SecretVersionsToStages map[string][]string `type:"map"`
 
-	// The list of user-defined tags that are associated with the secret. To add
-	// tags to a secret, use TagResource. To remove tags, use UntagResource.
+	// The list of user-defined tags associated with the secret. To add tags to
+	// a secret, use TagResource. To remove tags, use UntagResource.
 	Tags []Tag `type:"list"`
 }
 
@@ -154,7 +186,7 @@ type Tag struct {
 	// The key identifier, or name, of the tag.
 	Key *string `min:"1" type:"string"`
 
-	// The string value that's associated with the key of the tag.
+	// The string value associated with the key of the tag.
 	Value *string `type:"string"`
 }
 
@@ -174,4 +206,21 @@ func (s *Tag) Validate() error {
 		return invalidParams
 	}
 	return nil
+}
+
+// Displays errors that occurred during validation of the resource policy.
+type ValidationErrorsEntry struct {
+	_ struct{} `type:"structure"`
+
+	// Checks the name of the policy.
+	CheckName *string `min:"1" type:"string"`
+
+	// Displays error messages if validation encounters problems during validation
+	// of the resource policy.
+	ErrorMessage *string `type:"string"`
+}
+
+// String returns the string representation
+func (s ValidationErrorsEntry) String() string {
+	return awsutil.Prettify(s)
 }

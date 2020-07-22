@@ -79,8 +79,14 @@ const opCreatePortfolioShare = "CreatePortfolioShare"
 //
 // Shares the specified portfolio with the specified account or organization
 // node. Shares to an organization node can only be created by the master account
-// of an Organization. AWSOrganizationsAccess must be enabled in order to create
-// a portfolio share to an organization node.
+// of an organization or by a delegated administrator. You can share portfolios
+// to an organization, an organizational unit, or a specific account.
+//
+// Note that if a delegated admin is de-registered, they can no longer create
+// portfolio shares.
+//
+// AWSOrganizationsAccess must be enabled in order to create a portfolio share
+// to an organization node.
 //
 //    // Example sending a request using CreatePortfolioShareRequest.
 //    req := client.CreatePortfolioShareRequest(params)

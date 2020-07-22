@@ -194,6 +194,8 @@ const opCreateConstraint = "CreateConstraint"
 //
 // Creates a constraint.
 //
+// A delegated admin is authorized to invoke this command.
+//
 //    // Example sending a request using CreateConstraintRequest.
 //    req := client.CreateConstraintRequest(params)
 //    resp, err := req.Send(context.TODO())

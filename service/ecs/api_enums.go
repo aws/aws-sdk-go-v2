@@ -60,7 +60,8 @@ type CapacityProviderStatus string
 
 // Enum values for CapacityProviderStatus
 const (
-	CapacityProviderStatusActive CapacityProviderStatus = "ACTIVE"
+	CapacityProviderStatusActive   CapacityProviderStatus = "ACTIVE"
+	CapacityProviderStatusInactive CapacityProviderStatus = "INACTIVE"
 )
 
 func (enum CapacityProviderStatus) MarshalValue() (string, error) {
@@ -68,6 +69,24 @@ func (enum CapacityProviderStatus) MarshalValue() (string, error) {
 }
 
 func (enum CapacityProviderStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type CapacityProviderUpdateStatus string
+
+// Enum values for CapacityProviderUpdateStatus
+const (
+	CapacityProviderUpdateStatusDeleteInProgress CapacityProviderUpdateStatus = "DELETE_IN_PROGRESS"
+	CapacityProviderUpdateStatusDeleteComplete   CapacityProviderUpdateStatus = "DELETE_COMPLETE"
+	CapacityProviderUpdateStatusDeleteFailed     CapacityProviderUpdateStatus = "DELETE_FAILED"
+)
+
+func (enum CapacityProviderUpdateStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum CapacityProviderUpdateStatus) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

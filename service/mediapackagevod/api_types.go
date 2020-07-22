@@ -104,6 +104,63 @@ func (s AssetShallow) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// CDN Authorization credentials
+type Authorization struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) for the secret in AWS Secrets Manager that
+	// is used for CDN authorization.
+	//
+	// CdnIdentifierSecret is a required field
+	CdnIdentifierSecret *string `locationName:"cdnIdentifierSecret" type:"string" required:"true"`
+
+	// The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage
+	// to communicate with AWS Secrets Manager.
+	//
+	// SecretsRoleArn is a required field
+	SecretsRoleArn *string `locationName:"secretsRoleArn" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s Authorization) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Authorization) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Authorization"}
+
+	if s.CdnIdentifierSecret == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CdnIdentifierSecret"))
+	}
+
+	if s.SecretsRoleArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SecretsRoleArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Authorization) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CdnIdentifierSecret != nil {
+		v := *s.CdnIdentifierSecret
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "cdnIdentifierSecret", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.SecretsRoleArn != nil {
+		v := *s.SecretsRoleArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "secretsRoleArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // A CMAF encryption configuration.
 type CmafEncryption struct {
 	_ struct{} `type:"structure"`
@@ -939,6 +996,9 @@ type PackagingGroup struct {
 	// The ARN of the PackagingGroup.
 	Arn *string `locationName:"arn" type:"string"`
 
+	// CDN Authorization credentials
+	Authorization *Authorization `locationName:"authorization" type:"structure"`
+
 	// The fully qualified domain name for Assets in the PackagingGroup.
 	DomainName *string `locationName:"domainName" type:"string"`
 
@@ -961,6 +1021,12 @@ func (s PackagingGroup) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Authorization != nil {
+		v := s.Authorization
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "authorization", v, metadata)
 	}
 	if s.DomainName != nil {
 		v := *s.DomainName

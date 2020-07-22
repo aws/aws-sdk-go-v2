@@ -68,7 +68,7 @@ const opDeleteCustomDataIdentifier = "DeleteCustomDataIdentifier"
 // DeleteCustomDataIdentifierRequest returns a request value for making API operation for
 // Amazon Macie 2.
 //
-// Deletes a custom data identifier.
+// Soft deletes a custom data identifier.
 //
 //    // Example sending a request using DeleteCustomDataIdentifierRequest.
 //    req := client.DeleteCustomDataIdentifierRequest(params)

@@ -43,8 +43,7 @@ type PutLifecycleHookInput struct {
 	//
 	//    * autoscaling:EC2_INSTANCE_TERMINATING
 	//
-	// Conditional: This parameter is required for new lifecycle hooks, but optional
-	// when updating existing hooks.
+	// Required for new lifecycle hooks, but optional when updating existing hooks.
 	LifecycleTransition *string `type:"string"`
 
 	// Additional information that you want to include any time Amazon EC2 Auto
@@ -70,8 +69,7 @@ type PutLifecycleHookInput struct {
 	// the specified notification target, for example, an Amazon SNS topic or an
 	// Amazon SQS queue.
 	//
-	// Conditional: This parameter is required for new lifecycle hooks, but optional
-	// when updating existing hooks.
+	// Required for new lifecycle hooks, but optional when updating existing hooks.
 	RoleARN *string `min:"1" type:"string"`
 }
 

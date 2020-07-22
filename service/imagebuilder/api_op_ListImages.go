@@ -153,7 +153,7 @@ const opListImages = "ListImages"
 // ListImagesRequest returns a request value for making API operation for
 // EC2 Image Builder.
 //
-// Returns the list of image build versions for the specified semantic version.
+// Returns the list of images that you have access to.
 //
 //    // Example sending a request using ListImagesRequest.
 //    req := client.ListImagesRequest(params)

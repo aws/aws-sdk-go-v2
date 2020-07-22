@@ -20,7 +20,7 @@ type GetDetectorVersionInput struct {
 	// The detector version ID.
 	//
 	// DetectorVersionId is a required field
-	DetectorVersionId *string `locationName:"detectorVersionId" min:"1" type:"string" required:"true"`
+	DetectorVersionId *string `locationName:"detectorVersionId" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -42,9 +42,6 @@ func (s *GetDetectorVersionInput) Validate() error {
 	if s.DetectorVersionId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("DetectorVersionId"))
 	}
-	if s.DetectorVersionId != nil && len(*s.DetectorVersionId) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("DetectorVersionId", 1))
-	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -54,6 +51,9 @@ func (s *GetDetectorVersionInput) Validate() error {
 
 type GetDetectorVersionOutput struct {
 	_ struct{} `type:"structure"`
+
+	// The detector version ARN.
+	Arn *string `locationName:"arn" min:"1" type:"string"`
 
 	// The timestamp when the detector version was created.
 	CreatedTime *string `locationName:"createdTime" type:"string"`
@@ -65,7 +65,7 @@ type GetDetectorVersionOutput struct {
 	DetectorId *string `locationName:"detectorId" min:"1" type:"string"`
 
 	// The detector version ID.
-	DetectorVersionId *string `locationName:"detectorVersionId" min:"1" type:"string"`
+	DetectorVersionId *string `locationName:"detectorVersionId" type:"string"`
 
 	// The Amazon SageMaker model endpoints included in the detector version.
 	ExternalModelEndpoints []string `locationName:"externalModelEndpoints" type:"list"`

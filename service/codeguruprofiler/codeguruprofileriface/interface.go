@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon CodeGuru Profiler.
 //    func myFunc(svc codeguruprofileriface.ClientAPI) bool {
-//        // Make svc.ConfigureAgent request
+//        // Make svc.AddNotificationChannels request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        codeguruprofileriface.ClientPI
 //    }
-//    func (m *mockClientClient) ConfigureAgent(input *codeguruprofiler.ConfigureAgentInput) (*codeguruprofiler.ConfigureAgentOutput, error) {
+//    func (m *mockClientClient) AddNotificationChannels(input *codeguruprofiler.AddNotificationChannelsInput) (*codeguruprofiler.AddNotificationChannelsOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,6 +61,10 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	AddNotificationChannelsRequest(*codeguruprofiler.AddNotificationChannelsInput) codeguruprofiler.AddNotificationChannelsRequest
+
+	BatchGetFrameMetricDataRequest(*codeguruprofiler.BatchGetFrameMetricDataInput) codeguruprofiler.BatchGetFrameMetricDataRequest
+
 	ConfigureAgentRequest(*codeguruprofiler.ConfigureAgentInput) codeguruprofiler.ConfigureAgentRequest
 
 	CreateProfilingGroupRequest(*codeguruprofiler.CreateProfilingGroupInput) codeguruprofiler.CreateProfilingGroupRequest
@@ -69,19 +73,37 @@ type ClientAPI interface {
 
 	DescribeProfilingGroupRequest(*codeguruprofiler.DescribeProfilingGroupInput) codeguruprofiler.DescribeProfilingGroupRequest
 
+	GetFindingsReportAccountSummaryRequest(*codeguruprofiler.GetFindingsReportAccountSummaryInput) codeguruprofiler.GetFindingsReportAccountSummaryRequest
+
+	GetNotificationConfigurationRequest(*codeguruprofiler.GetNotificationConfigurationInput) codeguruprofiler.GetNotificationConfigurationRequest
+
 	GetPolicyRequest(*codeguruprofiler.GetPolicyInput) codeguruprofiler.GetPolicyRequest
 
 	GetProfileRequest(*codeguruprofiler.GetProfileInput) codeguruprofiler.GetProfileRequest
+
+	GetRecommendationsRequest(*codeguruprofiler.GetRecommendationsInput) codeguruprofiler.GetRecommendationsRequest
+
+	ListFindingsReportsRequest(*codeguruprofiler.ListFindingsReportsInput) codeguruprofiler.ListFindingsReportsRequest
 
 	ListProfileTimesRequest(*codeguruprofiler.ListProfileTimesInput) codeguruprofiler.ListProfileTimesRequest
 
 	ListProfilingGroupsRequest(*codeguruprofiler.ListProfilingGroupsInput) codeguruprofiler.ListProfilingGroupsRequest
 
+	ListTagsForResourceRequest(*codeguruprofiler.ListTagsForResourceInput) codeguruprofiler.ListTagsForResourceRequest
+
 	PostAgentProfileRequest(*codeguruprofiler.PostAgentProfileInput) codeguruprofiler.PostAgentProfileRequest
 
 	PutPermissionRequest(*codeguruprofiler.PutPermissionInput) codeguruprofiler.PutPermissionRequest
 
+	RemoveNotificationChannelRequest(*codeguruprofiler.RemoveNotificationChannelInput) codeguruprofiler.RemoveNotificationChannelRequest
+
 	RemovePermissionRequest(*codeguruprofiler.RemovePermissionInput) codeguruprofiler.RemovePermissionRequest
+
+	SubmitFeedbackRequest(*codeguruprofiler.SubmitFeedbackInput) codeguruprofiler.SubmitFeedbackRequest
+
+	TagResourceRequest(*codeguruprofiler.TagResourceInput) codeguruprofiler.TagResourceRequest
+
+	UntagResourceRequest(*codeguruprofiler.UntagResourceInput) codeguruprofiler.UntagResourceRequest
 
 	UpdateProfilingGroupRequest(*codeguruprofiler.UpdateProfilingGroupInput) codeguruprofiler.UpdateProfilingGroupRequest
 }

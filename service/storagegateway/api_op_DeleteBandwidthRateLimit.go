@@ -18,7 +18,7 @@ type DeleteBandwidthRateLimitInput struct {
 	// One of the BandwidthType values that indicates the gateway bandwidth rate
 	// limit to delete.
 	//
-	// Valid Values: Upload, Download, All.
+	// Valid Values: Upload | Download | All
 	//
 	// BandwidthType is a required field
 	BandwidthType *string `min:"3" type:"string" required:"true"`

@@ -83,7 +83,7 @@ func (s GetFieldLevelEncryptionOutput) MarshalFields(e protocol.FieldEncoder) er
 	return nil
 }
 
-const opGetFieldLevelEncryption = "GetFieldLevelEncryption2019_03_26"
+const opGetFieldLevelEncryption = "GetFieldLevelEncryption2020_05_31"
 
 // GetFieldLevelEncryptionRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -97,12 +97,12 @@ const opGetFieldLevelEncryption = "GetFieldLevelEncryption2019_03_26"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetFieldLevelEncryption
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetFieldLevelEncryption
 func (c *Client) GetFieldLevelEncryptionRequest(input *GetFieldLevelEncryptionInput) GetFieldLevelEncryptionRequest {
 	op := &aws.Operation{
 		Name:       opGetFieldLevelEncryption,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2019-03-26/field-level-encryption/{Id}",
+		HTTPPath:   "/2020-05-31/field-level-encryption/{Id}",
 	}
 
 	if input == nil {

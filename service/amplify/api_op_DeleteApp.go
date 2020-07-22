@@ -10,11 +10,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for an Amplify App delete request.
+// Describes the request structure for the delete app request.
 type DeleteAppInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for an Amplify App.
+	// The unique ID for an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
@@ -55,12 +55,12 @@ func (s DeleteAppInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Result structure for an Amplify App delete request.
+// The result structure for the delete app request.
 type DeleteAppOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Amplify App represents different branches of a repository for building, deploying,
-	// and hosting.
+	// Represents the different branches of a repository for building, deploying,
+	// and hosting an Amplify app.
 	//
 	// App is a required field
 	App *App `locationName:"app" type:"structure" required:"true"`
@@ -87,7 +87,7 @@ const opDeleteApp = "DeleteApp"
 // DeleteAppRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Delete an existing Amplify App by appId.
+// Deletes an existing Amplify app specified by an app ID.
 //
 //    // Example sending a request using DeleteAppRequest.
 //    req := client.DeleteAppRequest(params)

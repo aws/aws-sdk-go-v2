@@ -75,7 +75,7 @@ func (s DeleteFieldLevelEncryptionProfileOutput) MarshalFields(e protocol.FieldE
 	return nil
 }
 
-const opDeleteFieldLevelEncryptionProfile = "DeleteFieldLevelEncryptionProfile2019_03_26"
+const opDeleteFieldLevelEncryptionProfile = "DeleteFieldLevelEncryptionProfile2020_05_31"
 
 // DeleteFieldLevelEncryptionProfileRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -89,12 +89,12 @@ const opDeleteFieldLevelEncryptionProfile = "DeleteFieldLevelEncryptionProfile20
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteFieldLevelEncryptionProfile
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteFieldLevelEncryptionProfile
 func (c *Client) DeleteFieldLevelEncryptionProfileRequest(input *DeleteFieldLevelEncryptionProfileInput) DeleteFieldLevelEncryptionProfileRequest {
 	op := &aws.Operation{
 		Name:       opDeleteFieldLevelEncryptionProfile,
 		HTTPMethod: "DELETE",
-		HTTPPath:   "/2019-03-26/field-level-encryption-profile/{Id}",
+		HTTPPath:   "/2020-05-31/field-level-encryption-profile/{Id}",
 	}
 
 	if input == nil {

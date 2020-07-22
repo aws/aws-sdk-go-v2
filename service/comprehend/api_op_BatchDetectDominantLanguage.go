@@ -17,7 +17,7 @@ type BatchDetectDominantLanguageInput struct {
 	// and must contain fewer than 5,000 bytes of UTF-8 encoded characters.
 	//
 	// TextList is a required field
-	TextList []string `type:"list" required:"true"`
+	TextList []string `type:"list" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -40,7 +40,7 @@ func (s *BatchDetectDominantLanguageInput) Validate() error {
 }
 
 type BatchDetectDominantLanguageOutput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" sensitive:"true"`
 
 	// A list containing one object for each document that contained an error. The
 	// results are sorted in ascending order by the Index field and match the order

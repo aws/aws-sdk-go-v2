@@ -129,12 +129,27 @@ type BusinessReportContentRange struct {
 	_ struct{} `type:"structure"`
 
 	// The interval of the content range.
-	Interval BusinessReportInterval `type:"string" enum:"true"`
+	//
+	// Interval is a required field
+	Interval BusinessReportInterval `type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
 func (s BusinessReportContentRange) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BusinessReportContentRange) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BusinessReportContentRange"}
+	if len(s.Interval) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Interval"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // The recurrence of the reports.
@@ -1489,6 +1504,8 @@ type SkillDetails struct {
 	// The date when the skill was released.
 	ReleaseDate *string `type:"string"`
 
+	// This member has been deprecated.
+	//
 	// The list of reviews for the skill, including Key and Value pair.
 	Reviews map[string]string `type:"map"`
 

@@ -10,11 +10,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for the get artifact request.
+// Returns the request structure for the get artifact request.
 type GetArtifactUrlInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for a artifact.
+	// The unique ID for an artifact.
 	//
 	// ArtifactId is a required field
 	ArtifactId *string `location:"uri" locationName:"artifactId" type:"string" required:"true"`
@@ -52,16 +52,16 @@ func (s GetArtifactUrlInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Result structure for the get artifact request.
+// Returns the result structure for the get artifact request.
 type GetArtifactUrlOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for a artifact.
+	// The unique ID for an artifact.
 	//
 	// ArtifactId is a required field
 	ArtifactId *string `locationName:"artifactId" type:"string" required:"true"`
 
-	// Presigned url for the artifact.
+	// The presigned URL for the artifact.
 	//
 	// ArtifactUrl is a required field
 	ArtifactUrl *string `locationName:"artifactUrl" type:"string" required:"true"`
@@ -94,7 +94,7 @@ const opGetArtifactUrl = "GetArtifactUrl"
 // GetArtifactUrlRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Retrieves artifact info that corresponds to a artifactId.
+// Returns the artifact info that corresponds to an artifact id.
 //
 //    // Example sending a request using GetArtifactUrlRequest.
 //    req := client.GetArtifactUrlRequest(params)

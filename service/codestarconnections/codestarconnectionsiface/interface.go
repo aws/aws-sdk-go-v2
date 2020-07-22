@@ -63,11 +63,19 @@ import (
 type ClientAPI interface {
 	CreateConnectionRequest(*codestarconnections.CreateConnectionInput) codestarconnections.CreateConnectionRequest
 
+	CreateHostRequest(*codestarconnections.CreateHostInput) codestarconnections.CreateHostRequest
+
 	DeleteConnectionRequest(*codestarconnections.DeleteConnectionInput) codestarconnections.DeleteConnectionRequest
+
+	DeleteHostRequest(*codestarconnections.DeleteHostInput) codestarconnections.DeleteHostRequest
 
 	GetConnectionRequest(*codestarconnections.GetConnectionInput) codestarconnections.GetConnectionRequest
 
+	GetHostRequest(*codestarconnections.GetHostInput) codestarconnections.GetHostRequest
+
 	ListConnectionsRequest(*codestarconnections.ListConnectionsInput) codestarconnections.ListConnectionsRequest
+
+	ListHostsRequest(*codestarconnections.ListHostsInput) codestarconnections.ListHostsRequest
 
 	ListTagsForResourceRequest(*codestarconnections.ListTagsForResourceInput) codestarconnections.ListTagsForResourceRequest
 

@@ -23,9 +23,22 @@ const (
 	// There was an internal failure in the AppConfig service.
 	ErrCodeInternalServerException = "InternalServerException"
 
+	// ErrCodePayloadTooLargeException for service response error code
+	// "PayloadTooLargeException".
+	//
+	// The configuration size is too large.
+	ErrCodePayloadTooLargeException = "PayloadTooLargeException"
+
 	// ErrCodeResourceNotFoundException for service response error code
 	// "ResourceNotFoundException".
 	//
 	// The requested resource could not be found.
 	ErrCodeResourceNotFoundException = "ResourceNotFoundException"
+
+	// ErrCodeServiceQuotaExceededException for service response error code
+	// "ServiceQuotaExceededException".
+	//
+	// The number of hosted configuration versions exceeds the limit for the AppConfig
+	// configuration store. Delete one or more versions and try again.
+	ErrCodeServiceQuotaExceededException = "ServiceQuotaExceededException"
 )

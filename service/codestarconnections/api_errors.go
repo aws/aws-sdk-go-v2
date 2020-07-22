@@ -15,4 +15,10 @@ const (
 	//
 	// Resource not found. Verify the connection resource ARN and try again.
 	ErrCodeResourceNotFoundException = "ResourceNotFoundException"
+
+	// ErrCodeResourceUnavailableException for service response error code
+	// "ResourceUnavailableException".
+	//
+	// Resource not found. Verify the ARN for the host resource and try again.
+	ErrCodeResourceUnavailableException = "ResourceUnavailableException"
 )

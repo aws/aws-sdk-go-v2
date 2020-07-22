@@ -10,21 +10,21 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for create webhook request.
+// The request structure for the create webhook request.
 type CreateWebhookInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for an Amplify App.
+	// The unique ID for an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Name for a branch, part of an Amplify App.
+	// The name for a branch that is part of an Amplify app.
 	//
 	// BranchName is a required field
 	BranchName *string `locationName:"branchName" min:"1" type:"string" required:"true"`
 
-	// Description for a webhook.
+	// The description for a webhook.
 	Description *string `locationName:"description" type:"string"`
 }
 
@@ -82,11 +82,11 @@ func (s CreateWebhookInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Result structure for the create webhook request.
+// The result structure for the create webhook request.
 type CreateWebhookOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Webhook structure.
+	// Describes a webhook that connects repository events to an Amplify app.
 	//
 	// Webhook is a required field
 	Webhook *Webhook `locationName:"webhook" type:"structure" required:"true"`
@@ -113,7 +113,7 @@ const opCreateWebhook = "CreateWebhook"
 // CreateWebhookRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Create a new webhook on an App.
+// Creates a new webhook on an Amplify app.
 //
 //    // Example sending a request using CreateWebhookRequest.
 //    req := client.CreateWebhookRequest(params)

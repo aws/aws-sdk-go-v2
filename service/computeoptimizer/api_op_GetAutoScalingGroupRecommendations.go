@@ -12,7 +12,11 @@ import (
 type GetAutoScalingGroupRecommendationsInput struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS account IDs for which to return Auto Scaling group recommendations.
+	// The IDs of the AWS accounts for which to return Auto Scaling group recommendations.
+	//
+	// If your account is the master account of an organization, use this parameter
+	// to specify the member accounts for which you want to return Auto Scaling
+	// group recommendations.
 	//
 	// Only one account ID can be specified per request.
 	AccountIds []string `locationName:"accountIds" type:"list"`
@@ -26,10 +30,10 @@ type GetAutoScalingGroupRecommendationsInput struct {
 	Filters []Filter `locationName:"filters" type:"list"`
 
 	// The maximum number of Auto Scaling group recommendations to return with a
-	// single call.
+	// single request.
 	//
-	// To retrieve the remaining results, make another call with the returned NextToken
-	// value.
+	// To retrieve the remaining results, make another request with the returned
+	// NextToken value.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
 	// The token to advance to the next page of Auto Scaling group recommendations.

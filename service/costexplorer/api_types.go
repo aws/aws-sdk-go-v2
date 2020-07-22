@@ -287,6 +287,10 @@ type CurrentInstance struct {
 	// this instance.
 	CurrencyCode *string `type:"string"`
 
+	// The name you've given an instance. This field will show as blank if you haven't
+	// given the instance a name.
+	InstanceName *string `type:"string"`
+
 	// Current On Demand cost of operating this instance on a monthly basis.
 	MonthlyCost *string `type:"string"`
 
@@ -1150,7 +1154,7 @@ func (s RightsizingRecommendation) String() string {
 // to view recommendations for instances within the same instance families or
 // across different instance families. You can also choose to view your estimated
 // savings associated with recommendations with consideration of existing Savings
-// Plans or RI benefits, or niether.
+// Plans or RI benefits, or neither.
 type RightsizingRecommendationConfiguration struct {
 	_ struct{} `type:"structure"`
 
@@ -1193,7 +1197,7 @@ func (s *RightsizingRecommendationConfiguration) Validate() error {
 type RightsizingRecommendationMetadata struct {
 	_ struct{} `type:"structure"`
 
-	// The time stamp for when Amazon Web Services made this recommendation.
+	// The timestamp for when Amazon Web Services made this recommendation.
 	GenerationTimestamp *string `type:"string"`
 
 	// How many days of previous usage that Amazon Web Services considers when making
@@ -1220,7 +1224,7 @@ type RightsizingRecommendationSummary struct {
 	SavingsCurrencyCode *string `type:"string"`
 
 	// Savings percentage based on the recommended modifications, relative to the
-	// total On Demand costs associated with these instances.
+	// total On-Demand costs associated with these instances.
 	SavingsPercentage *string `type:"string"`
 
 	// Total number of instance recommendations.

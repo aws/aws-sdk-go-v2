@@ -32,8 +32,9 @@ type GenerateDataKeyPairWithoutPlaintextInput struct {
 	GrantTokens []string `type:"list"`
 
 	// Specifies the CMK that encrypts the private key in the data key pair. You
-	// must specify a symmetric CMK. You cannot use an asymmetric CMK. To get the
-	// type of your CMK, use the DescribeKey operation.
+	// must specify a symmetric CMK. You cannot use an asymmetric CMK or a CMK in
+	// a custom key store. To get the type and origin of your CMK, use the DescribeKey
+	// operation.
 	//
 	// To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name,
 	// or alias ARN. When using an alias name, prefix it with "alias/".
@@ -93,25 +94,8 @@ func (s *GenerateDataKeyPairWithoutPlaintextInput) Validate() error {
 type GenerateDataKeyPairWithoutPlaintextOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies the CMK that encrypted the private key in the data key pair. You
-	// must specify a symmetric CMK. You cannot use an asymmetric CMK. To get the
-	// type of your CMK, use the DescribeKey operation.
-	//
-	// To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name,
-	// or alias ARN. When using an alias name, prefix it with "alias/".
-	//
-	// For example:
-	//
-	//    * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	//    * Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	//    * Alias name: alias/ExampleAlias
-	//
-	//    * Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
-	//
-	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey. To
-	// get the alias name and alias ARN, use ListAliases.
+	// The Amazon Resource Name (key ARN (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
+	// of the CMK that encrypted the private key.
 	KeyId *string `min:"1" type:"string"`
 
 	// The type of data key pair that was generated.
@@ -146,8 +130,8 @@ const opGenerateDataKeyPairWithoutPlaintext = "GenerateDataKeyPairWithoutPlainte
 //
 // To generate a data key pair, you must specify a symmetric customer master
 // key (CMK) to encrypt the private key in the data key pair. You cannot use
-// an asymmetric CMK. To get the type of your CMK, use the KeySpec field in
-// the DescribeKey response.
+// an asymmetric CMK or a CMK in a custom key store. To get the type and origin
+// of your CMK, use the KeySpec field in the DescribeKey response.
 //
 // You can use the public key that GenerateDataKeyPairWithoutPlaintext returns
 // to encrypt data or verify a signature outside of AWS KMS. Then, store the

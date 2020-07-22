@@ -58,9 +58,10 @@ const opDeleteDomain = "DeleteDomain"
 // DeleteDomainRequest returns a request value for making API operation for
 // Amazon SageMaker Service.
 //
-// Used to delete a domain. Use with caution. If RetentionPolicy is set to Delete,
-// all of the members of the domain will lose access to their EFS volume, including
-// data, notebooks, and other artifacts.
+// Used to delete a domain. If you onboarded with IAM mode, you will need to
+// delete your domain to onboard again using SSO. Use with caution. All of the
+// members of the domain will lose access to their EFS volume, including data,
+// notebooks, and other artifacts.
 //
 //    // Example sending a request using DeleteDomainRequest.
 //    req := client.DeleteDomainRequest(params)

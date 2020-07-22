@@ -14,9 +14,10 @@ import (
 type UpdateMacieSessionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The frequency with which Amazon Macie publishes findings for an account.
-	// This includes adding findings to AWS Security Hub and exporting finding events
-	// to Amazon CloudWatch. Valid values are:
+	// The frequency with which Amazon Macie publishes updates to policy findings
+	// for an account. This includes publishing updates to AWS Security Hub and
+	// Amazon EventBridge (formerly called Amazon CloudWatch Events). Valid values
+	// are:
 	FindingPublishingFrequency FindingPublishingFrequency `locationName:"findingPublishingFrequency" type:"string" enum:"true"`
 
 	// The status of an Amazon Macie account. Valid values are:

@@ -784,6 +784,23 @@ func (enum Framework) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type HumanTaskUiStatus string
+
+// Enum values for HumanTaskUiStatus
+const (
+	HumanTaskUiStatusActive   HumanTaskUiStatus = "Active"
+	HumanTaskUiStatusDeleting HumanTaskUiStatus = "Deleting"
+)
+
+func (enum HumanTaskUiStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum HumanTaskUiStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type HyperParameterScalingType string
 
 // Enum values for HyperParameterScalingType

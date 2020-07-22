@@ -29,9 +29,9 @@ type DecryptInput struct {
 	EncryptionAlgorithm EncryptionAlgorithmSpec `type:"string" enum:"true"`
 
 	// Specifies the encryption context to use when decrypting the data. An encryption
-	// context is valid only for cryptographic operations with a symmetric CMK.
-	// The standard asymmetric encryption algorithms that AWS KMS uses do not support
-	// an encryption context.
+	// context is valid only for cryptographic operations (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
+	// with a symmetric CMK. The standard asymmetric encryption algorithms that
+	// AWS KMS uses do not support an encryption context.
 	//
 	// An encryption context is a collection of non-secret key-value pairs that
 	// represents additional authenticated data. When you use an encryption context
@@ -110,7 +110,8 @@ type DecryptOutput struct {
 	// The encryption algorithm that was used to decrypt the ciphertext.
 	EncryptionAlgorithm EncryptionAlgorithmSpec `type:"string" enum:"true"`
 
-	// The ARN of the customer master key that was used to perform the decryption.
+	// The Amazon Resource Name (key ARN (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
+	// of the CMK that was used to decrypt the ciphertext.
 	KeyId *string `min:"1" type:"string"`
 
 	// Decrypted plaintext data. When you use the HTTP API or the AWS CLI, the value

@@ -42,9 +42,10 @@ type GetSampledRequestsInput struct {
 	Scope Scope `type:"string" required:"true" enum:"true"`
 
 	// The start date and time and the end date and time of the range for which
-	// you want GetSampledRequests to return a sample of requests. Specify the date
-	// and time in the following format: "2016-09-27T14:50Z". You can specify any
-	// time range in the previous three hours.
+	// you want GetSampledRequests to return a sample of requests. You must specify
+	// the times in Coordinated Universal Time (UTC) format. UTC format includes
+	// the special designator, Z. For example, "2016-09-27T14:50Z". You can specify
+	// any time range in the previous three hours.
 	//
 	// TimeWindow is a required field
 	TimeWindow *TimeWindow `type:"structure" required:"true"`
@@ -119,7 +120,8 @@ type GetSampledRequestsOutput struct {
 	// Usually, TimeWindow is the time range that you specified in the GetSampledRequests
 	// request. However, if your AWS resource received more than 5,000 requests
 	// during the time range that you specified in the request, GetSampledRequests
-	// returns the time range for the first 5,000 requests.
+	// returns the time range for the first 5,000 requests. Times are in Coordinated
+	// Universal Time (UTC) format.
 	TimeWindow *TimeWindow `type:"structure"`
 }
 

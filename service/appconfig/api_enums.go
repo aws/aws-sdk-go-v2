@@ -2,6 +2,22 @@
 
 package appconfig
 
+type BytesMeasure string
+
+// Enum values for BytesMeasure
+const (
+	BytesMeasureKilobytes BytesMeasure = "KILOBYTES"
+)
+
+func (enum BytesMeasure) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum BytesMeasure) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type DeploymentEventType string
 
 // Enum values for DeploymentEventType

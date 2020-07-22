@@ -138,6 +138,8 @@ type ClientAPI interface {
 
 	DeleteFlowDefinitionRequest(*sagemaker.DeleteFlowDefinitionInput) sagemaker.DeleteFlowDefinitionRequest
 
+	DeleteHumanTaskUiRequest(*sagemaker.DeleteHumanTaskUiInput) sagemaker.DeleteHumanTaskUiRequest
+
 	DeleteModelRequest(*sagemaker.DeleteModelInput) sagemaker.DeleteModelRequest
 
 	DeleteModelPackageRequest(*sagemaker.DeleteModelPackageInput) sagemaker.DeleteModelPackageRequest

@@ -15,7 +15,7 @@ type CreateSnapshotFromVolumeRecoveryPointInput struct {
 
 	// Textual description of the snapshot that appears in the Amazon EC2 console,
 	// Elastic Block Store snapshots panel in the Description field, and in the
-	// AWS Storage Gateway snapshot Details pane, Description field
+	// AWS Storage Gateway snapshot Details pane, Description field.
 	//
 	// SnapshotDescription is a required field
 	SnapshotDescription *string `min:"1" type:"string" required:"true"`
@@ -112,7 +112,9 @@ const opCreateSnapshotFromVolumeRecoveryPoint = "CreateSnapshotFromVolumeRecover
 // a volume from a snapshot.
 //
 // To list or delete a snapshot, you must use the Amazon EC2 API. For more information,
-// in Amazon Elastic Compute Cloud API Reference.
+// see DescribeSnapshots (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html)
+// or DeleteSnapshot (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html)
+// in the Amazon Elastic Compute Cloud API Reference.
 //
 //    // Example sending a request using CreateSnapshotFromVolumeRecoveryPointRequest.
 //    req := client.CreateSnapshotFromVolumeRecoveryPointRequest(params)

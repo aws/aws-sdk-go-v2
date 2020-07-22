@@ -107,8 +107,7 @@ const opListClassificationJobs = "ListClassificationJobs"
 // ListClassificationJobsRequest returns a request value for making API operation for
 // Amazon Macie 2.
 //
-// Retrieves information about the status and settings for one or more classification
-// jobs.
+// Retrieves a subset of information about one or more classification jobs.
 //
 //    // Example sending a request using ListClassificationJobsRequest.
 //    req := client.ListClassificationJobsRequest(params)
@@ -123,6 +122,12 @@ func (c *Client) ListClassificationJobsRequest(input *ListClassificationJobsInpu
 		Name:       opListClassificationJobs,
 		HTTPMethod: "POST",
 		HTTPPath:   "/jobs/list",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -156,6 +161,53 @@ func (r ListClassificationJobsRequest) Send(ctx context.Context) (*ListClassific
 	}
 
 	return resp, nil
+}
+
+// NewListClassificationJobsRequestPaginator returns a paginator for ListClassificationJobs.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.ListClassificationJobsRequest(input)
+//   p := macie2.NewListClassificationJobsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewListClassificationJobsPaginator(req ListClassificationJobsRequest) ListClassificationJobsPaginator {
+	return ListClassificationJobsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *ListClassificationJobsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// ListClassificationJobsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type ListClassificationJobsPaginator struct {
+	aws.Pager
+}
+
+func (p *ListClassificationJobsPaginator) CurrentPage() *ListClassificationJobsOutput {
+	return p.Pager.CurrentPage().(*ListClassificationJobsOutput)
 }
 
 // ListClassificationJobsResponse is the response type for the

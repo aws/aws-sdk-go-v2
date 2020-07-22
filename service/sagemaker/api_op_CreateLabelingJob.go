@@ -38,7 +38,14 @@ type CreateLabelingJobInput struct {
 	// The S3 URL of the file that defines the categories used to label the data
 	// objects.
 	//
-	// The file is a JSON structure in the following format:
+	// For 3D point cloud task types, see Create a Labeling Category Configuration
+	// File for 3D Point Cloud Labeling Jobs (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-label-category-config.html).
+	//
+	// For all other built-in task types (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html)
+	// and custom tasks (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates.html),
+	// your label category configuration file must be a JSON file in the following
+	// format. Identify the labels you want to use by replacing label_1, label_2,...,label_n
+	// with your label categories.
 	//
 	// {
 	//
@@ -48,13 +55,13 @@ type CreateLabelingJobInput struct {
 	//
 	// {
 	//
-	// "label": "label 1"
+	// "label": "label_1"
 	//
 	// },
 	//
 	// {
 	//
-	// "label": "label 2"
+	// "label": "label_2"
 	//
 	// },
 	//
@@ -62,7 +69,7 @@ type CreateLabelingJobInput struct {
 	//
 	// {
 	//
-	// "label": "label n"
+	// "label": "label_n"
 	//
 	// }
 	//

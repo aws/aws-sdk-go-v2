@@ -14,6 +14,9 @@ import (
 type CreateNFSFileShareInput struct {
 	_ struct{} `type:"structure"`
 
+	// Refresh cache information.
+	CacheAttributes *CacheAttributes `type:"structure"`
+
 	// The list of clients that are allowed to access the file gateway. The list
 	// must contain either valid IP addresses or valid CIDR blocks.
 	ClientList []string `min:"1" type:"list"`
@@ -25,9 +28,15 @@ type CreateNFSFileShareInput struct {
 	ClientToken *string `min:"5" type:"string" required:"true"`
 
 	// The default storage class for objects put into an Amazon S3 bucket by the
-	// file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA, or S3_ONEZONE_IA.
-	// If this field is not populated, the default value S3_STANDARD is used. Optional.
+	// file gateway. The default value is S3_INTELLIGENT_TIERING. Optional.
+	//
+	// Valid Values: S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
 	DefaultStorageClass *string `min:"5" type:"string"`
+
+	// The name of the file share. Optional.
+	//
+	// FileShareName must be set if an S3 prefix name is set in LocationARN.
+	FileShareName *string `min:"1" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the file gateway on which you want to create
 	// a file share.
@@ -37,18 +46,24 @@ type CreateNFSFileShareInput struct {
 
 	// A value that enables guessing of the MIME type for uploaded objects based
 	// on file extensions. Set this value to true to enable MIME type guessing,
-	// and otherwise to false. The default value is true.
+	// otherwise set to false. The default value is true.
+	//
+	// Valid Values: true | false
 	GuessMIMETypeEnabled *bool `type:"boolean"`
 
-	// True to use Amazon S3 server-side encryption with your own AWS KMS key, or
-	// false to use a key managed by Amazon S3. Optional.
+	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS
+	// key, or false to use a key managed by Amazon S3. Optional.
+	//
+	// Valid Values: true | false
 	KMSEncrypted *bool `type:"boolean"`
 
-	// The Amazon Resource Name (ARN) AWS KMS key used for Amazon S3 server-side
-	// encryption. This value can only be set when KMSEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
+	// for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric
+	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string `min:"7" type:"string"`
 
-	// The ARN of the backed storage used for storing file data.
+	// The ARN of the backend storage used for storing file data. A prefix name
+	// can be added to the S3 bucket name. It must end with a "/".
 	//
 	// LocationARN is a required field
 	LocationARN *string `min:"16" type:"string" required:"true"`
@@ -56,22 +71,27 @@ type CreateNFSFileShareInput struct {
 	// File share default values. Optional.
 	NFSFileShareDefaults *NFSFileShareDefaults `type:"structure"`
 
-	// A value that sets the access control list permission for objects in the S3
-	// bucket that a file gateway puts objects into. The default value is "private".
+	// A value that sets the access control list (ACL) permission for objects in
+	// the S3 bucket that a file gateway puts objects into. The default value is
+	// private.
 	ObjectACL ObjectACL `type:"string" enum:"true"`
 
-	// A value that sets the write status of a file share. This value is true if
-	// the write status is read-only, and otherwise false.
+	// A value that sets the write status of a file share. Set this value to true
+	// to set the write status to read-only, otherwise set to false.
+	//
+	// Valid Values: true | false
 	ReadOnly *bool `type:"boolean"`
 
 	// A value that sets who pays the cost of the request and the cost associated
 	// with data download from the S3 bucket. If this value is set to true, the
-	// requester pays the costs. Otherwise the S3 bucket owner pays. However, the
+	// requester pays the costs; otherwise, the S3 bucket owner pays. However, the
 	// S3 bucket owner always pays the cost of storing data.
 	//
 	// RequesterPays is a configuration for the S3 bucket that backs the file share,
 	// so make sure that the configuration on the file share is the same as the
 	// S3 bucket configuration.
+	//
+	// Valid Values: true | false
 	RequesterPays *bool `type:"boolean"`
 
 	// The ARN of the AWS Identity and Access Management (IAM) role that a file
@@ -80,13 +100,15 @@ type CreateNFSFileShareInput struct {
 	// Role is a required field
 	Role *string `min:"20" type:"string" required:"true"`
 
-	// A value that maps a user to anonymous user. Valid options are the following:
+	// A value that maps a user to anonymous user.
 	//
-	//    * RootSquash - Only root is mapped to anonymous user.
+	// Valid values are the following:
 	//
-	//    * NoSquash - No one is mapped to anonymous user
+	//    * RootSquash: Only root is mapped to anonymous user.
 	//
-	//    * AllSquash - Everyone is mapped to anonymous user.
+	//    * NoSquash: No one is mapped to anonymous user.
+	//
+	//    * AllSquash: Everyone is mapped to anonymous user.
 	Squash *string `min:"5" type:"string"`
 
 	// A list of up to 50 tags that can be assigned to the NFS file share. Each
@@ -119,6 +141,9 @@ func (s *CreateNFSFileShareInput) Validate() error {
 	}
 	if s.DefaultStorageClass != nil && len(*s.DefaultStorageClass) < 5 {
 		invalidParams.Add(aws.NewErrParamMinLen("DefaultStorageClass", 5))
+	}
+	if s.FileShareName != nil && len(*s.FileShareName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("FileShareName", 1))
 	}
 
 	if s.GatewayARN == nil {
@@ -193,8 +218,8 @@ const opCreateNFSFileShare = "CreateNFSFileShare"
 // to enable you to create a file share. Make sure AWS STS is activated in the
 // AWS Region you are creating your file gateway in. If AWS STS is not activated
 // in the AWS Region, activate it. For information about how to activate AWS
-// STS, see Activating and Deactivating AWS STS in an AWS Region in the AWS
-// Identity and Access Management User Guide.
+// STS, see Activating and deactivating AWS STS in an AWS Region (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
+// in the AWS Identity and Access Management User Guide.
 //
 // File gateway does not support creating hard or symbolic links on a file share.
 //

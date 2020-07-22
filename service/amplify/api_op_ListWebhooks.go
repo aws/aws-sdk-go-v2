@@ -10,21 +10,21 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for the list webhooks request.
+// The request structure for the list webhooks request.
 type ListWebhooksInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for an Amplify App.
+	// The unique ID for an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Maximum number of records to list in a single response.
+	// The maximum number of records to list in a single response.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
-	// Pagination token. Set to null to start listing webhooks from start. If non-null
-	// pagination token is returned in a result, then pass its value in here to
-	// list more webhooks.
+	// A pagination token. Set to null to start listing webhooks from the start.
+	// If non-null,the pagination token is returned in a result. Pass its value
+	// in here to list more webhooks.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
 
@@ -78,15 +78,15 @@ func (s ListWebhooksInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Result structure for the list webhooks request.
+// The result structure for the list webhooks request.
 type ListWebhooksOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Pagination token. If non-null pagination token is returned in a result, then
-	// pass its value in another request to fetch more entries.
+	// A pagination token. If non-null, the pagination token is returned in a result.
+	// Pass its value in another request to retrieve more entries.
 	NextToken *string `locationName:"nextToken" type:"string"`
 
-	// List of webhooks.
+	// A list of webhooks.
 	//
 	// Webhooks is a required field
 	Webhooks []Webhook `locationName:"webhooks" type:"list" required:"true"`
@@ -125,7 +125,7 @@ const opListWebhooks = "ListWebhooks"
 // ListWebhooksRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// List webhooks with an app.
+// Returns a list of webhooks for an Amplify app.
 //
 //    // Example sending a request using ListWebhooksRequest.
 //    req := client.ListWebhooksRequest(params)

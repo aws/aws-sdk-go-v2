@@ -66,8 +66,9 @@ type PutAlarmInput struct {
 	//
 	// The following metrics are available for each resource type:
 	//
-	//    * Instances: CPUUtilization, NetworkIn, NetworkOut, StatusCheckFailed,
-	//    StatusCheckFailed_Instance, and StatusCheckFailed_System.
+	//    * Instances: BurstCapacityPercentage, BurstCapacityTime, CPUUtilization,
+	//    NetworkIn, NetworkOut, StatusCheckFailed, StatusCheckFailed_Instance,
+	//    and StatusCheckFailed_System.
 	//
 	//    * Load balancers: ClientTLSNegotiationErrorCount, HealthyHostCount, UnhealthyHostCount,
 	//    HTTPCode_LB_4XX_Count, HTTPCode_LB_5XX_Count, HTTPCode_Instance_2XX_Count,
@@ -76,6 +77,9 @@ type PutAlarmInput struct {
 	//
 	//    * Relational databases: CPUUtilization, DatabaseConnections, DiskQueueDepth,
 	//    FreeStorageSpace, NetworkReceiveThroughput, and NetworkTransmitThroughput.
+	//
+	// For more information about these metrics, see Metrics available in Lightsail
+	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-resource-health-metrics#available-metrics).
 	//
 	// MetricName is a required field
 	MetricName MetricName `locationName:"metricName" type:"string" required:"true" enum:"true"`

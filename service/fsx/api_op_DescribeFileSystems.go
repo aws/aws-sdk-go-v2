@@ -13,19 +13,18 @@ import (
 type DescribeFileSystemsInput struct {
 	_ struct{} `type:"structure"`
 
-	// (Optional) IDs of the file systems whose descriptions you want to retrieve
-	// (String).
+	// IDs of the file systems whose descriptions you want to retrieve (String).
 	FileSystemIds []string `type:"list"`
 
-	// (Optional) Maximum number of file systems to return in the response (integer).
-	// This parameter value must be greater than 0. The number of items that Amazon
-	// FSx returns is the minimum of the MaxResults parameter specified in the request
+	// Maximum number of file systems to return in the response (integer). This
+	// parameter value must be greater than 0. The number of items that Amazon FSx
+	// returns is the minimum of the MaxResults parameter specified in the request
 	// and the service's internal maximum number of items per page.
 	MaxResults *int64 `min:"1" type:"integer"`
 
-	// (Optional) Opaque pagination token returned from a previous DescribeFileSystems
-	// operation (String). If a token present, the action continues the list from
-	// where the returning call left off.
+	// Opaque pagination token returned from a previous DescribeFileSystems operation
+	// (String). If a token present, the action continues the list from where the
+	// returning call left off.
 	NextToken *string `min:"1" type:"string"`
 }
 

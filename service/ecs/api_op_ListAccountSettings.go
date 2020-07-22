@@ -27,7 +27,7 @@ type ListAccountSettingsInput struct {
 	// returns up to 10 results and a nextToken value if applicable.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
-	// The resource name you want to list the account settings for.
+	// The name of the account setting you want to list the settings for.
 	Name SettingName `locationName:"name" type:"string" enum:"true"`
 
 	// The nextToken value returned from a ListAccountSettings request indicating

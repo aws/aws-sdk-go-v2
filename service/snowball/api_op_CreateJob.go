@@ -24,6 +24,9 @@ type CreateJobInput struct {
 	// Photos 2016-08-11.
 	Description *string `min:"1" type:"string"`
 
+	// Defines the device configuration for an AWS Snowcone job.
+	DeviceConfiguration *DeviceConfiguration `type:"structure"`
+
 	// The forwarding address ID for a job. This field is not supported in most
 	// regions.
 	ForwardingAddressId *string `min:"40" type:"string"`
@@ -79,6 +82,10 @@ type CreateJobInput struct {
 	// Snowballs come with 80 TB in storage capacity.
 	SnowballCapacityPreference SnowballCapacity `type:"string" enum:"true"`
 
+	// The type of AWS Snowball device to use for this job.
+	//
+	// For cluster jobs, AWS Snowball currently supports only the EDGE device type.
+	//
 	// The type of AWS Snowball device to use for this job. Currently, the only
 	// supported device type for cluster jobs is EDGE.
 	//

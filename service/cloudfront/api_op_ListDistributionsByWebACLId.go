@@ -102,7 +102,7 @@ func (s ListDistributionsByWebACLIdOutput) MarshalFields(e protocol.FieldEncoder
 	return nil
 }
 
-const opListDistributionsByWebACLId = "ListDistributionsByWebACLId2019_03_26"
+const opListDistributionsByWebACLId = "ListDistributionsByWebACLId2020_05_31"
 
 // ListDistributionsByWebACLIdRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -116,12 +116,12 @@ const opListDistributionsByWebACLId = "ListDistributionsByWebACLId2019_03_26"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListDistributionsByWebACLId
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListDistributionsByWebACLId
 func (c *Client) ListDistributionsByWebACLIdRequest(input *ListDistributionsByWebACLIdInput) ListDistributionsByWebACLIdRequest {
 	op := &aws.Operation{
 		Name:       opListDistributionsByWebACLId,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2019-03-26/distributionsByWebACLId/{WebACLId}",
+		HTTPPath:   "/2020-05-31/distributionsByWebACLId/{WebACLId}",
 	}
 
 	if input == nil {

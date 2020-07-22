@@ -9,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 )
 
-// To be written.
 type AddCommunicationToCaseInput struct {
 	_ struct{} `type:"structure"`
 
@@ -71,14 +70,18 @@ const opAddCommunicationToCase = "AddCommunicationToCase"
 // AddCommunicationToCaseRequest returns a request value for making API operation for
 // AWS Support.
 //
-// Adds additional customer communication to an AWS Support case. You use the
-// caseId value to identify the case to add communication to. You can list a
-// set of email addresses to copy on the communication using the ccEmailAddresses
-// value. The communicationBody value contains the text of the communication.
+// Adds additional customer communication to an AWS Support case. Use the caseId
+// parameter to identify the case to which to add communication. You can list
+// a set of email addresses to copy on the communication by using the ccEmailAddresses
+// parameter. The communicationBody value contains the text of the communication.
 //
-// The response indicates the success or failure of the request.
+//    * You must have a Business or Enterprise support plan to use the AWS Support
+//    API.
 //
-// This operation implements a subset of the features of the AWS Support Center.
+//    * If you call the AWS Support API from an account that does not have a
+//    Business or Enterprise support plan, the SubscriptionRequiredException
+//    error message appears. For information about changing your support plan,
+//    see AWS Support (http://aws.amazon.com/premiumsupport/).
 //
 //    // Example sending a request using AddCommunicationToCaseRequest.
 //    req := client.AddCommunicationToCaseRequest(params)

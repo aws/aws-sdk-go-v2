@@ -23,6 +23,10 @@ type CopyBackupToRegionInput struct {
 	// DestinationRegion is a required field
 	DestinationRegion *string `type:"string" required:"true"`
 
+	// Tags to apply to the destination backup during creation. If you specify tags,
+	// only these tags will be applied to the destination backup. If you do not
+	// specify tags, the service copies tags from the source backup to the destination
+	// backup.
 	TagList []Tag `min:"1" type:"list"`
 }
 

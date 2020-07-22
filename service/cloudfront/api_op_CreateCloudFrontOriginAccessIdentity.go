@@ -22,7 +22,7 @@ type CreateCloudFrontOriginAccessIdentityInput struct {
 	// The current configuration information for the identity.
 	//
 	// CloudFrontOriginAccessIdentityConfig is a required field
-	CloudFrontOriginAccessIdentityConfig *CloudFrontOriginAccessIdentityConfig `locationName:"CloudFrontOriginAccessIdentityConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
+	CloudFrontOriginAccessIdentityConfig *CloudFrontOriginAccessIdentityConfig `locationName:"CloudFrontOriginAccessIdentityConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2020-05-31/"`
 }
 
 // String returns the string representation
@@ -55,7 +55,7 @@ func (s CreateCloudFrontOriginAccessIdentityInput) MarshalFields(e protocol.Fiel
 	if s.CloudFrontOriginAccessIdentityConfig != nil {
 		v := s.CloudFrontOriginAccessIdentityConfig
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2020-05-31/"}
 		e.SetFields(protocol.PayloadTarget, "CloudFrontOriginAccessIdentityConfig", v, metadata)
 	}
 	return nil
@@ -71,8 +71,7 @@ type CreateCloudFrontOriginAccessIdentityOutput struct {
 	// The current version of the origin access identity created.
 	ETag *string `location:"header" locationName:"ETag" type:"string"`
 
-	// The fully qualified URI of the new origin access identity just created. For
-	// example: https://cloudfront.amazonaws.com/2010-11-01/origin-access-identity/cloudfront/E74FTE3AJFJ256A.
+	// The fully qualified URI of the new origin access identity just created.
 	Location *string `location:"header" locationName:"Location" type:"string"`
 }
 
@@ -104,7 +103,7 @@ func (s CreateCloudFrontOriginAccessIdentityOutput) MarshalFields(e protocol.Fie
 	return nil
 }
 
-const opCreateCloudFrontOriginAccessIdentity = "CreateCloudFrontOriginAccessIdentity2019_03_26"
+const opCreateCloudFrontOriginAccessIdentity = "CreateCloudFrontOriginAccessIdentity2020_05_31"
 
 // CreateCloudFrontOriginAccessIdentityRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -123,12 +122,12 @@ const opCreateCloudFrontOriginAccessIdentity = "CreateCloudFrontOriginAccessIden
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/CreateCloudFrontOriginAccessIdentity
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateCloudFrontOriginAccessIdentity
 func (c *Client) CreateCloudFrontOriginAccessIdentityRequest(input *CreateCloudFrontOriginAccessIdentityInput) CreateCloudFrontOriginAccessIdentityRequest {
 	op := &aws.Operation{
 		Name:       opCreateCloudFrontOriginAccessIdentity,
 		HTTPMethod: "POST",
-		HTTPPath:   "/2019-03-26/origin-access-identity/cloudfront",
+		HTTPPath:   "/2020-05-31/origin-access-identity/cloudfront",
 	}
 
 	if input == nil {

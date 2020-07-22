@@ -11,63 +11,70 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for update App request.
+// The request structure for the update app request.
 type UpdateAppInput struct {
 	_ struct{} `type:"structure"`
 
-	// Personal Access token for 3rd party source control system for an Amplify
-	// App, used to create webhook and read-only deploy key. Token is not stored.
-	AccessToken *string `locationName:"accessToken" min:"1" type:"string"`
+	// The personal access token for a third-party source control system for an
+	// Amplify app. The token is used to create webhook and a read-only deploy key.
+	// The token is not stored.
+	AccessToken *string `locationName:"accessToken" min:"1" type:"string" sensitive:"true"`
 
-	// Unique Id for an Amplify App.
+	// The unique ID for an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Automated branch creation branchConfig for the Amplify App.
+	// The automated branch creation configuration for the Amplify app.
 	AutoBranchCreationConfig *AutoBranchCreationConfig `locationName:"autoBranchCreationConfig" type:"structure"`
 
-	// Automated branch creation glob patterns for the Amplify App.
+	// Describes the automated branch creation glob patterns for the Amplify app.
 	AutoBranchCreationPatterns []string `locationName:"autoBranchCreationPatterns" type:"list"`
 
-	// Basic Authorization credentials for an Amplify App.
-	BasicAuthCredentials *string `locationName:"basicAuthCredentials" type:"string"`
+	// The basic authorization credentials for an Amplify app.
+	BasicAuthCredentials *string `locationName:"basicAuthCredentials" type:"string" sensitive:"true"`
 
-	// BuildSpec for an Amplify App.
+	// The build specification (build spec) for an Amplify app.
 	BuildSpec *string `locationName:"buildSpec" min:"1" type:"string"`
 
-	// Custom redirect / rewrite rules for an Amplify App.
+	// The custom redirect and rewrite rules for an Amplify app.
 	CustomRules []CustomRule `locationName:"customRules" type:"list"`
 
-	// Description for an Amplify App.
+	// The description for an Amplify app.
 	Description *string `locationName:"description" type:"string"`
 
-	// Enables automated branch creation for the Amplify App.
+	// Enables automated branch creation for the Amplify app.
 	EnableAutoBranchCreation *bool `locationName:"enableAutoBranchCreation" type:"boolean"`
 
-	// Enables Basic Authorization for an Amplify App.
+	// Enables basic authorization for an Amplify app.
 	EnableBasicAuth *bool `locationName:"enableBasicAuth" type:"boolean"`
 
-	// Enables branch auto-building for an Amplify App.
+	// Enables branch auto-building for an Amplify app.
 	EnableBranchAutoBuild *bool `locationName:"enableBranchAutoBuild" type:"boolean"`
 
-	// Environment Variables for an Amplify App.
+	// Automatically disconnects a branch in the Amplify Console when you delete
+	// a branch from your Git repository.
+	EnableBranchAutoDeletion *bool `locationName:"enableBranchAutoDeletion" type:"boolean"`
+
+	// The environment variables for an Amplify app.
 	EnvironmentVariables map[string]string `locationName:"environmentVariables" type:"map"`
 
-	// IAM service role for an Amplify App.
+	// The AWS Identity and Access Management (IAM) service role for an Amplify
+	// app.
 	IamServiceRoleArn *string `locationName:"iamServiceRoleArn" min:"1" type:"string"`
 
-	// Name for an Amplify App.
+	// The name for an Amplify app.
 	Name *string `locationName:"name" min:"1" type:"string"`
 
-	// OAuth token for 3rd party source control system for an Amplify App, used
-	// to create webhook and read-only deploy key. OAuth token is not stored.
-	OauthToken *string `locationName:"oauthToken" type:"string"`
+	// The OAuth token for a third-party source control system for an Amplify app.
+	// The token is used to create a webhook and a read-only deploy key. The OAuth
+	// token is not stored.
+	OauthToken *string `locationName:"oauthToken" type:"string" sensitive:"true"`
 
-	// Platform for an Amplify App.
+	// The platform for an Amplify app.
 	Platform Platform `locationName:"platform" type:"string" enum:"true"`
 
-	// Repository for an Amplify App
+	// The name of the repository for an Amplify app
 	Repository *string `locationName:"repository" type:"string"`
 }
 
@@ -193,6 +200,12 @@ func (s UpdateAppInput) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "enableBranchAutoBuild", protocol.BoolValue(v), metadata)
 	}
+	if s.EnableBranchAutoDeletion != nil {
+		v := *s.EnableBranchAutoDeletion
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "enableBranchAutoDeletion", protocol.BoolValue(v), metadata)
+	}
 	if s.EnvironmentVariables != nil {
 		v := s.EnvironmentVariables
 
@@ -244,11 +257,11 @@ func (s UpdateAppInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Result structure for an Amplify App update request.
+// The result structure for an Amplify app update request.
 type UpdateAppOutput struct {
 	_ struct{} `type:"structure"`
 
-	// App structure for the updated App.
+	// Represents the updated Amplify app.
 	//
 	// App is a required field
 	App *App `locationName:"app" type:"structure" required:"true"`
@@ -275,7 +288,7 @@ const opUpdateApp = "UpdateApp"
 // UpdateAppRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Updates an existing Amplify App.
+// Updates an existing Amplify app.
 //
 //    // Example sending a request using UpdateAppRequest.
 //    req := client.UpdateAppRequest(params)

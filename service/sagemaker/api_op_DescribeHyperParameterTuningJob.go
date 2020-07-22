@@ -13,7 +13,7 @@ import (
 type DescribeHyperParameterTuningJobInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the tuning job to describe.
+	// The name of the tuning job.
 	//
 	// HyperParameterTuningJobName is a required field
 	HyperParameterTuningJobName *string `min:"1" type:"string" required:"true"`
@@ -101,6 +101,8 @@ type DescribeHyperParameterTuningJobOutput struct {
 	// of the training jobs that this tuning job launches.
 	TrainingJobDefinition *HyperParameterTrainingJobDefinition `type:"structure"`
 
+	// A list of the HyperParameterTrainingJobDefinition objects launched for this
+	// tuning job.
 	TrainingJobDefinitions []HyperParameterTrainingJobDefinition `min:"1" type:"list"`
 
 	// The TrainingJobStatusCounters object that specifies the number of training

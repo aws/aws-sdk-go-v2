@@ -10,16 +10,16 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for delete branch request.
+// The request structure for the delete branch request.
 type DeleteBranchInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for an Amplify App.
+	// The unique ID for an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Name for the branch.
+	// The name for the branch.
 	//
 	// BranchName is a required field
 	BranchName *string `location:"uri" locationName:"branchName" min:"1" type:"string" required:"true"`
@@ -73,11 +73,11 @@ func (s DeleteBranchInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Result structure for delete branch request.
+// The result structure for the delete branch request.
 type DeleteBranchOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Branch structure for an Amplify App.
+	// The branch for an Amplify app, which maps to a third-party repository branch.
 	//
 	// Branch is a required field
 	Branch *Branch `locationName:"branch" type:"structure" required:"true"`
@@ -104,7 +104,7 @@ const opDeleteBranch = "DeleteBranch"
 // DeleteBranchRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Deletes a branch for an Amplify App.
+// Deletes a branch for an Amplify app.
 //
 //    // Example sending a request using DeleteBranchRequest.
 //    req := client.DeleteBranchRequest(params)

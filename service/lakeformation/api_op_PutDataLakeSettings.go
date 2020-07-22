@@ -18,7 +18,8 @@ type PutDataLakeSettingsInput struct {
 	// Formation environment.
 	CatalogId *string `min:"1" type:"string"`
 
-	// A list of AWS Lake Formation principals.
+	// A structure representing a list of AWS Lake Formation principals designated
+	// as data lake administrators.
 	//
 	// DataLakeSettings is a required field
 	DataLakeSettings *DataLakeSettings `type:"structure" required:"true"`
@@ -65,7 +66,13 @@ const opPutDataLakeSettings = "PutDataLakeSettings"
 // PutDataLakeSettingsRequest returns a request value for making API operation for
 // AWS Lake Formation.
 //
-// The AWS Lake Formation principal.
+// Sets the list of data lake administrators who have admin privileges on all
+// resources managed by Lake Formation. For more information on admin privileges,
+// see Granting Lake Formation Permissions (https://docs.aws.amazon.com/lake-formation/latest/dg/lake-formation-permissions.html).
+//
+// This API replaces the current list of data lake admins with the new list
+// being passed. To add an admin, fetch the current list and add the new admin
+// to that list and pass that list in this API.
 //
 //    // Example sending a request using PutDataLakeSettingsRequest.
 //    req := client.PutDataLakeSettingsRequest(params)

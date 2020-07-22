@@ -73,24 +73,27 @@ type DescribeSMBSettingsOutput struct {
 	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string `min:"50" type:"string"`
 
-	// This value is true if a password for the guest user “smbguest” is set,
-	// and otherwise false.
+	// This value is true if a password for the guest user smbguest is set, otherwise
+	// false.
+	//
+	// Valid Values: true | false
 	SMBGuestPasswordSet *bool `type:"boolean"`
 
 	// The type of security strategy that was specified for file gateway.
 	//
-	// ClientSpecified: if you use this option, requests are established based on
-	// what is negotiated by the client. This option is recommended when you want
-	// to maximize compatibility across different clients in your environment.
+	//    * ClientSpecified: If you use this option, requests are established based
+	//    on what is negotiated by the client. This option is recommended when you
+	//    want to maximize compatibility across different clients in your environment.
 	//
-	// MandatorySigning: if you use this option, file gateway only allows connections
-	// from SMBv2 or SMBv3 clients that have signing enabled. This option works
-	// with SMB clients on Microsoft Windows Vista, Windows Server 2008 or newer.
+	//    * MandatorySigning: If you use this option, file gateway only allows connections
+	//    from SMBv2 or SMBv3 clients that have signing enabled. This option works
+	//    with SMB clients on Microsoft Windows Vista, Windows Server 2008 or newer.
 	//
-	// MandatoryEncryption: if you use this option, file gateway only allows connections
-	// from SMBv3 clients that have encryption enabled. This option is highly recommended
-	// for environments that handle sensitive data. This option works with SMB clients
-	// on Microsoft Windows 8, Windows Server 2012 or newer.
+	//    * MandatoryEncryption: If you use this option, file gateway only allows
+	//    connections from SMBv3 clients that have encryption enabled. This option
+	//    is highly recommended for environments that handle sensitive data. This
+	//    option works with SMB clients on Microsoft Windows 8, Windows Server 2012
+	//    or newer.
 	SMBSecurityStrategy SMBSecurityStrategy `type:"string" enum:"true"`
 }
 

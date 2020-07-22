@@ -88,6 +88,9 @@ const opUntagResource = "UntagResource"
 // UntagResourceRequest returns a request value for making API operation for
 // AWS Elemental MediaPackage VOD.
 //
+// Removes tags from the specified resource. You can specify one or more tags
+// to remove.
+//
 //    // Example sending a request using UntagResourceRequest.
 //    req := client.UntagResourceRequest(params)
 //    resp, err := req.Send(context.TODO())

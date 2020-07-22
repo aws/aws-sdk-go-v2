@@ -12,11 +12,29 @@ import (
 
 type GetResourcePolicyInput struct {
 	_ struct{} `type:"structure"`
+
+	// The ARN of the AWS Glue resource for the resource policy to be retrieved.
+	// For more information about AWS Glue resource ARNs, see the AWS Glue ARN string
+	// pattern (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id)
+	ResourceArn *string `min:"1" type:"string"`
 }
 
 // String returns the string representation
 func (s GetResourcePolicyInput) String() string {
 	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GetResourcePolicyInput) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GetResourcePolicyInput"}
+	if s.ResourceArn != nil && len(*s.ResourceArn) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceArn", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 type GetResourcePolicyOutput struct {

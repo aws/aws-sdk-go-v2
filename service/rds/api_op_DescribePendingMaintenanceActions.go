@@ -106,6 +106,12 @@ func (c *Client) DescribePendingMaintenanceActionsRequest(input *DescribePending
 		Name:       opDescribePendingMaintenanceActions,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "MaxRecords",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -139,6 +145,53 @@ func (r DescribePendingMaintenanceActionsRequest) Send(ctx context.Context) (*De
 	}
 
 	return resp, nil
+}
+
+// NewDescribePendingMaintenanceActionsRequestPaginator returns a paginator for DescribePendingMaintenanceActions.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.DescribePendingMaintenanceActionsRequest(input)
+//   p := rds.NewDescribePendingMaintenanceActionsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewDescribePendingMaintenanceActionsPaginator(req DescribePendingMaintenanceActionsRequest) DescribePendingMaintenanceActionsPaginator {
+	return DescribePendingMaintenanceActionsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *DescribePendingMaintenanceActionsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// DescribePendingMaintenanceActionsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribePendingMaintenanceActionsPaginator struct {
+	aws.Pager
+}
+
+func (p *DescribePendingMaintenanceActionsPaginator) CurrentPage() *DescribePendingMaintenanceActionsOutput {
+	return p.Pager.CurrentPage().(*DescribePendingMaintenanceActionsOutput)
 }
 
 // DescribePendingMaintenanceActionsResponse is the response type for the

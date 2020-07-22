@@ -1,3 +1,22 @@
+Release v0.24.0 (2020-07-21)
+===
+
+Announcements
+---
+* Since February 2020 the team for the AWS SDK for Go have been working to reimagine and modernize the SDK to take advantage of exciting new developments within AWS. We have been working towards supporting the [Smithy](https://awslabs.github.io/smithy) protocol agnostic modeling language. While implementing support we have taken the opportunity to make significant changes to our client interfaces, middleware, and configuration.
+* This release will mark the final release using the current SDK design. Starting with the next release we will remove clients using the former design, and will re-introduce clients in subsequent releases as we add support for their protocols and customizations. 
+* We encourage our community of users to provide feedback, bug reports, and feature requests via [Github Issues](https://github.com/aws/aws-sdk-go-v2/issues/new/choose) as we introduce the new clients and design over the next set of releases. 
+
+Services
+---
+* Synced the V2 SDK with latest AWS service API definitions.
+
+SDK Bugs
+---
+* `service/dynamodb/expression: fix empty expression returned when unset ([#562](https://github.com/aws/aws-sdk-go-v2/pull/562))
+  * Fixes a big in the expression builder that returns an empty string expression value when the expression has not been set.
+  * Fixes [#554](https://github.com/aws/aws-sdk-go-v2/issues/554)
+
 Release v0.23.0 (2020-05-28)
 ===
 

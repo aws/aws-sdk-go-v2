@@ -12,6 +12,27 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
+// Contains metadata for a column in a table.
+type Column struct {
+	_ struct{} `type:"structure"`
+
+	// Optional information about the column.
+	Comment *string `type:"string"`
+
+	// The name of the column.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// The data type of the column.
+	Type *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Column) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Information about the columns in a query execution result.
 type ColumnInfo struct {
 	_ struct{} `type:"structure"`
@@ -55,6 +76,87 @@ type ColumnInfo struct {
 
 // String returns the string representation
 func (s ColumnInfo) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Contains information about a data catalog in an AWS account.
+type DataCatalog struct {
+	_ struct{} `type:"structure"`
+
+	// An optional description of the data catalog.
+	Description *string `min:"1" type:"string"`
+
+	// The name of the data catalog. The catalog name must be unique for the AWS
+	// account and can use a maximum of 128 alphanumeric, underscore, at sign, or
+	// hyphen characters.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// Specifies the Lambda function or functions to use for the data catalog. This
+	// is a mapping whose values depend on the catalog type.
+	//
+	//    * For the HIVE data catalog type, use the following syntax. The metadata-function
+	//    parameter is required. The sdk-version parameter is optional and defaults
+	//    to the currently supported version. metadata-function=lambda_arn, sdk-version=version_number
+	//
+	//    * For the LAMBDA data catalog type, use one of the following sets of required
+	//    parameters, but not both. If you have one Lambda function that processes
+	//    metadata and another for reading the actual data, use the following syntax.
+	//    Both parameters are required. metadata-function=lambda_arn, record-function=lambda_arn
+	//    If you have a composite Lambda function that processes both metadata and
+	//    data, use the following syntax to specify your Lambda function. function=lambda_arn
+	//
+	//    * The GLUE type has no parameters.
+	Parameters map[string]string `type:"map"`
+
+	// The type of data catalog: LAMBDA for a federated catalog, GLUE for AWS Glue
+	// Catalog, or HIVE for an external hive metastore.
+	//
+	// Type is a required field
+	Type DataCatalogType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s DataCatalog) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The summary information for the data catalog, which includes its name and
+// type.
+type DataCatalogSummary struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the data catalog.
+	CatalogName *string `min:"1" type:"string"`
+
+	// The data catalog type.
+	Type DataCatalogType `type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s DataCatalogSummary) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Contains metadata information for a database in a data catalog.
+type Database struct {
+	_ struct{} `type:"structure"`
+
+	// An optional description of the database.
+	Description *string `min:"1" type:"string"`
+
+	// The name of the database.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// A set of custom key/value pairs.
+	Parameters map[string]string `type:"map"`
+}
+
+// String returns the string representation
+func (s Database) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -188,11 +290,14 @@ func (s QueryExecution) String() string {
 	return awsutil.Prettify(s)
 }
 
-// The database in which the query execution occurs.
+// The database and data catalog context in which the query execution occurs.
 type QueryExecutionContext struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the database.
+	// The name of the data catalog used in the query execution.
+	Catalog *string `min:"1" type:"string"`
+
+	// The name of the database used in the query execution.
 	Database *string `min:"1" type:"string"`
 }
 
@@ -204,6 +309,9 @@ func (s QueryExecutionContext) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *QueryExecutionContext) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "QueryExecutionContext"}
+	if s.Catalog != nil && len(*s.Catalog) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Catalog", 1))
+	}
 	if s.Database != nil && len(*s.Database) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Database", 1))
 	}
@@ -273,6 +381,10 @@ type QueryExecutionStatus struct {
 	// indicates that the query completed without errors. FAILED indicates that
 	// the query experienced an error and did not complete processing. CANCELLED
 	// indicates that a user input interrupted query execution.
+	//
+	// Athena automatically retries your queries in cases of certain transient errors.
+	// As a result, you may see the query state transition from RUNNING or FAILED
+	// to QUEUED.
 	State QueryExecutionState `type:"string" enum:"true"`
 
 	// Further detail about the status of the query.
@@ -391,7 +503,7 @@ func (s *ResultConfigurationUpdates) Validate() error {
 }
 
 // The metadata and rows that comprise a query result set. The metadata describes
-// the column structure and data types.
+// the column structure and data types. To return a ResultSet object, use GetQueryResults.
 type ResultSet struct {
 	_ struct{} `type:"structure"`
 
@@ -409,7 +521,7 @@ func (s ResultSet) String() string {
 }
 
 // The metadata that describes the column structure and data types of a table
-// of query results.
+// of query results. To return a ResultSetMetadata object, use GetQueryResults.
 type ResultSetMetadata struct {
 	_ struct{} `type:"structure"`
 
@@ -435,16 +547,50 @@ func (s Row) String() string {
 	return awsutil.Prettify(s)
 }
 
-// A tag that you can add to a resource. A tag is a label that you assign to
-// an AWS Athena resource (a workgroup). Each tag consists of a key and an optional
-// value, both of which you define. Tags enable you to categorize workgroups
-// in Athena, for example, by purpose, owner, or environment. Use a consistent
-// set of tag keys to make it easier to search and filter workgroups in your
-// account. The maximum tag key length is 128 Unicode characters in UTF-8. The
-// maximum tag value length is 256 Unicode characters in UTF-8. You can use
-// letters and numbers representable in UTF-8, and the following characters:
-// + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be
-// unique per resource.
+// Contains metadata for a table.
+type TableMetadata struct {
+	_ struct{} `type:"structure"`
+
+	// A list of the columns in the table.
+	Columns []Column `type:"list"`
+
+	// The time that the table was created.
+	CreateTime *time.Time `type:"timestamp"`
+
+	// The last time the table was accessed.
+	LastAccessTime *time.Time `type:"timestamp"`
+
+	// The name of the table.
+	//
+	// Name is a required field
+	Name *string `min:"1" type:"string" required:"true"`
+
+	// A set of custom key/value pairs for table properties.
+	Parameters map[string]string `type:"map"`
+
+	// A list of the partition keys in the table.
+	PartitionKeys []Column `type:"list"`
+
+	// The type of table. In Athena, only EXTERNAL_TABLE is supported.
+	TableType *string `type:"string"`
+}
+
+// String returns the string representation
+func (s TableMetadata) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A label that you assign to a resource. In Athena, a resource can be a workgroup
+// or data catalog. Each tag consists of a key and an optional value, both of
+// which you define. For example, you can use tags to categorize Athena workgroups
+// or data catalogs by purpose, owner, or environment. Use a consistent set
+// of tag keys to make it easier to search and filter workgroups or data catalogs
+// in your account. For best practices, see Tagging Best Practices (https://aws.amazon.com/answers/account-management/aws-tagging-strategies/).
+// Tag keys can be from 1 to 128 UTF-8 Unicode characters, and tag values can
+// be from 0 to 256 UTF-8 Unicode characters. Tags can use letters and numbers
+// representable in UTF-8, and the following characters: + - = . _ : / @. Tag
+// keys and values are case-sensitive. Tag keys must be unique per resource.
+// If you specify more than one tag, separate them by commas.
 type Tag struct {
 	_ struct{} `type:"structure"`
 

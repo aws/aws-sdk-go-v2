@@ -95,7 +95,8 @@ type RegisterInstanceInput struct {
 	//
 	// You can add up to 30 custom attributes. For each key-value pair, the maximum
 	// length of the attribute name is 255 characters, and the maximum length of
-	// the attribute value is 1,024 characters.
+	// the attribute value is 1,024 characters. Total size of all provided attributes
+	// (sum of all keys and values) must not exceed 5,000 characters.
 	//
 	// Attributes is a required field
 	Attributes map[string]string `type:"map" required:"true"`

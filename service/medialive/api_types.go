@@ -3485,6 +3485,9 @@ type EncoderSettings struct {
 	// Settings for caption decriptions
 	CaptionDescriptions []CaptionDescription `locationName:"captionDescriptions" type:"list"`
 
+	// Feature Activations
+	FeatureActivations *FeatureActivations `locationName:"featureActivations" type:"structure"`
+
 	// Configuration settings that apply to the event as a whole.
 	GlobalConfiguration *GlobalConfiguration `locationName:"globalConfiguration" type:"structure"`
 
@@ -3631,6 +3634,12 @@ func (s EncoderSettings) MarshalFields(e protocol.FieldEncoder) error {
 		ls0.End()
 
 	}
+	if s.FeatureActivations != nil {
+		v := s.FeatureActivations
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "featureActivations", v, metadata)
+	}
 	if s.GlobalConfiguration != nil {
 		v := s.GlobalConfiguration
 
@@ -3672,6 +3681,33 @@ func (s EncoderSettings) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	return nil
+}
+
+// Feature Activations
+type FeatureActivations struct {
+	_ struct{} `type:"structure"`
+
+	// Enables the Input Prepare feature. You can create Input Prepare actions in
+	// the schedule only if this feature is enabled.If you disable the feature on
+	// an existing schedule, make sure that you first delete all input prepare actions
+	// from the schedule.
+	InputPrepareScheduleActions FeatureActivationsInputPrepareScheduleActions `locationName:"inputPrepareScheduleActions" type:"string" enum:"true"`
+}
+
+// String returns the string representation
+func (s FeatureActivations) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s FeatureActivations) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.InputPrepareScheduleActions) > 0 {
+		v := s.InputPrepareScheduleActions
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "inputPrepareScheduleActions", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
 	return nil
 }
@@ -7219,6 +7255,81 @@ func (s InputLossBehavior) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "repeatFrameMsec", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Action to prepare an input for a future immediate input switch.
+type InputPrepareScheduleActionSettings struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the input attachment that should be prepared by this action.
+	// If no name is provided, the action will stop the most recent prepare (if
+	// any) when activated.
+	//
+	// InputAttachmentNameReference is a required field
+	InputAttachmentNameReference *string `locationName:"inputAttachmentNameReference" type:"string" required:"true"`
+
+	// Settings to let you create a clip of the file input, in order to set up the
+	// input to ingest only a portion of the file.
+	InputClippingSettings *InputClippingSettings `locationName:"inputClippingSettings" type:"structure"`
+
+	// The value for the variable portion of the URL for the dynamic input, for
+	// this instance of the input. Each time you use the same dynamic input in an
+	// input switch action, you can provide a different value, in order to connect
+	// the input to a different content source.
+	UrlPath []string `locationName:"urlPath" type:"list"`
+}
+
+// String returns the string representation
+func (s InputPrepareScheduleActionSettings) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *InputPrepareScheduleActionSettings) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "InputPrepareScheduleActionSettings"}
+
+	if s.InputAttachmentNameReference == nil {
+		invalidParams.Add(aws.NewErrParamRequired("InputAttachmentNameReference"))
+	}
+	if s.InputClippingSettings != nil {
+		if err := s.InputClippingSettings.Validate(); err != nil {
+			invalidParams.AddNested("InputClippingSettings", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s InputPrepareScheduleActionSettings) MarshalFields(e protocol.FieldEncoder) error {
+	if s.InputAttachmentNameReference != nil {
+		v := *s.InputAttachmentNameReference
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "inputAttachmentNameReference", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.InputClippingSettings != nil {
+		v := s.InputClippingSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "inputClippingSettings", v, metadata)
+	}
+	if s.UrlPath != nil {
+		v := s.UrlPath
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "urlPath", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
 	}
 	return nil
 }
@@ -11528,6 +11639,9 @@ type ScheduleActionSettings struct {
 	// Action to insert HLS metadata
 	HlsTimedMetadataSettings *HlsTimedMetadataScheduleActionSettings `locationName:"hlsTimedMetadataSettings" type:"structure"`
 
+	// Action to prepare an input for a future immediate input switch
+	InputPrepareSettings *InputPrepareScheduleActionSettings `locationName:"inputPrepareSettings" type:"structure"`
+
 	// Action to switch the input
 	InputSwitchSettings *InputSwitchScheduleActionSettings `locationName:"inputSwitchSettings" type:"structure"`
 
@@ -11566,6 +11680,11 @@ func (s *ScheduleActionSettings) Validate() error {
 	if s.HlsTimedMetadataSettings != nil {
 		if err := s.HlsTimedMetadataSettings.Validate(); err != nil {
 			invalidParams.AddNested("HlsTimedMetadataSettings", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.InputPrepareSettings != nil {
+		if err := s.InputPrepareSettings.Validate(); err != nil {
+			invalidParams.AddNested("InputPrepareSettings", err.(aws.ErrInvalidParams))
 		}
 	}
 	if s.InputSwitchSettings != nil {
@@ -11618,6 +11737,12 @@ func (s ScheduleActionSettings) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "hlsTimedMetadataSettings", v, metadata)
+	}
+	if s.InputPrepareSettings != nil {
+		v := s.InputPrepareSettings
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "inputPrepareSettings", v, metadata)
 	}
 	if s.InputSwitchSettings != nil {
 		v := s.InputSwitchSettings

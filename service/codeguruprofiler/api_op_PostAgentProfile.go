@@ -14,14 +14,31 @@ import (
 type PostAgentProfileInput struct {
 	_ struct{} `type:"structure" payload:"AgentProfile"`
 
+	// The submitted profiling data.
+	//
 	// AgentProfile is a required field
 	AgentProfile []byte `locationName:"agentProfile" type:"blob" required:"true"`
 
+	// The format of the submitted profiling data. The format maps to the Accept
+	// and Content-Type headers of the HTTP request. You can specify one of the
+	// following: or the default .
+	//
+	//    <ul> <li> <p> <code>application/json</code> — standard JSON format </p>
+	//    </li> <li> <p> <code>application/x-amzn-ion</code> — the Amazon Ion
+	//    data format. For more information, see <a href="http://amzn.github.io/ion-docs/">Amazon
+	//    Ion</a>. </p> </li> </ul>
+	//
 	// ContentType is a required field
 	ContentType *string `location:"header" locationName:"Content-Type" type:"string" required:"true"`
 
+	// Amazon CodeGuru Profiler uses this universally unique identifier (UUID) to
+	// prevent the accidental submission of duplicate profiling data if there are
+	// failures and retries.
 	ProfileToken *string `location:"querystring" locationName:"profileToken" min:"1" type:"string" idempotencyToken:"true"`
 
+	// The name of the profiling group with the aggregated profile that receives
+	// the submitted profiling data.
+	//
 	// ProfilingGroupName is a required field
 	ProfilingGroupName *string `location:"uri" locationName:"profilingGroupName" min:"1" type:"string" required:"true"`
 }
@@ -114,6 +131,10 @@ const opPostAgentProfile = "PostAgentProfile"
 
 // PostAgentProfileRequest returns a request value for making API operation for
 // Amazon CodeGuru Profiler.
+//
+// Submits profiling data to an aggregated profile of a profiling group. To
+// get an aggregated profile that is created with this profiling data, use GetProfile
+// (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_GetProfile.html).
 //
 //    // Example sending a request using PostAgentProfileRequest.
 //    req := client.PostAgentProfileRequest(params)

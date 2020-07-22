@@ -415,6 +415,22 @@ func (enum MarketType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type OnDemandProvisioningAllocationStrategy string
+
+// Enum values for OnDemandProvisioningAllocationStrategy
+const (
+	OnDemandProvisioningAllocationStrategyLowestPrice OnDemandProvisioningAllocationStrategy = "lowest-price"
+)
+
+func (enum OnDemandProvisioningAllocationStrategy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OnDemandProvisioningAllocationStrategy) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type RepoUpgradeOnBoot string
 
 // Enum values for RepoUpgradeOnBoot
@@ -445,6 +461,22 @@ func (enum ScaleDownBehavior) MarshalValue() (string, error) {
 }
 
 func (enum ScaleDownBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type SpotProvisioningAllocationStrategy string
+
+// Enum values for SpotProvisioningAllocationStrategy
+const (
+	SpotProvisioningAllocationStrategyCapacityOptimized SpotProvisioningAllocationStrategy = "capacity-optimized"
+)
+
+func (enum SpotProvisioningAllocationStrategy) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum SpotProvisioningAllocationStrategy) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

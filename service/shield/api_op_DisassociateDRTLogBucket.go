@@ -54,7 +54,7 @@ const opDisassociateDRTLogBucket = "DisassociateDRTLogBucket"
 // DisassociateDRTLogBucketRequest returns a request value for making API operation for
 // AWS Shield.
 //
-// Removes the DDoS Response team's (DRT) access to the specified Amazon S3
+// Removes the DDoS Response Team's (DRT) access to the specified Amazon S3
 // bucket containing your AWS WAF logs.
 //
 // To make a DisassociateDRTLogBucket request, you must be subscribed to the

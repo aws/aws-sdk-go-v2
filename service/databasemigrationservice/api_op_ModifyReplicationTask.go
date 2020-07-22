@@ -60,7 +60,7 @@ type ModifyReplicationTaskInput struct {
 	//
 	// Constraints:
 	//
-	//    * Must contain from 1 to 255 alphanumeric characters or hyphens.
+	//    * Must contain 1-255 alphanumeric characters or hyphens.
 	//
 	//    * First character must be a letter.
 	//
@@ -79,7 +79,7 @@ type ModifyReplicationTaskInput struct {
 	// Supplemental information that the task requires to migrate the data for certain
 	// source and target endpoints. For more information, see Specifying Supplemental
 	// Data for Task Settings (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html)
-	// in the AWS Database Migration User Guide.
+	// in the AWS Database Migration Service User Guide.
 	TaskData *string `type:"string"`
 }
 

@@ -207,11 +207,9 @@ type ClusterMetadata struct {
 	//    * In the US, you have access to one-day shipping and two-day shipping.
 	ShippingOption ShippingOption `type:"string" enum:"true"`
 
-	// The type of AWS Snowball device to use for this cluster. Currently, the only
-	// supported device type for cluster jobs is EDGE.
+	// The type of AWS Snowball device to use for this cluster.
 	//
-	// For more information, see Snowball Edge Device Options (https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html)
-	// in the Snowball Edge Developer Guide.
+	// For cluster jobs, AWS Snowball currently supports only the EDGE device type.
 	SnowballType SnowballType `type:"string" enum:"true"`
 
 	// The tax documents required in your AWS Region.
@@ -267,6 +265,19 @@ type DataTransfer struct {
 
 // String returns the string representation
 func (s DataTransfer) String() string {
+	return awsutil.Prettify(s)
+}
+
+// The container for SnowconeDeviceConfiguration.
+type DeviceConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Returns information about the device configuration for an AWS Snowcone job.
+	SnowconeDeviceConfiguration *SnowconeDeviceConfiguration `type:"structure"`
+}
+
+// String returns the string representation
+func (s DeviceConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -436,6 +447,9 @@ type JobMetadata struct {
 
 	// The description of the job, provided at job creation.
 	Description *string `min:"1" type:"string"`
+
+	// The container for SnowconeDeviceConfiguration.
+	DeviceConfiguration *DeviceConfiguration `type:"structure"`
 
 	// The ID of the address that you want a job shipped to, after it will be shipped
 	// to its primary address. This field is not supported in most regions.
@@ -726,6 +740,19 @@ func (s ShippingDetails) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Specifies the device configuration for an AWS Snowcone job.
+type SnowconeDeviceConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Configures the wireless connection for the AWS Snowcone device.
+	WirelessConnection *WirelessConnection `type:"structure"`
+}
+
+// String returns the string representation
+func (s SnowconeDeviceConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
 // The tax documents required in your AWS Region.
 type TaxDocuments struct {
 	_ struct{} `type:"structure"`
@@ -736,5 +763,18 @@ type TaxDocuments struct {
 
 // String returns the string representation
 func (s TaxDocuments) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Configures the wireless connection on an AWS Snowcone device.
+type WirelessConnection struct {
+	_ struct{} `type:"structure"`
+
+	// Enables the Wi-Fi adapter on an AWS Snowcone device.
+	IsWifiEnabled *bool `type:"boolean"`
+}
+
+// String returns the string representation
+func (s WirelessConnection) String() string {
 	return awsutil.Prettify(s)
 }

@@ -10,17 +10,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for update webhook request.
+// The request structure for the update webhook request.
 type UpdateWebhookInput struct {
 	_ struct{} `type:"structure"`
 
-	// Name for a branch, part of an Amplify App.
+	// The name for a branch that is part of an Amplify app.
 	BranchName *string `locationName:"branchName" min:"1" type:"string"`
 
-	// Description for a webhook.
+	// The description for a webhook.
 	Description *string `locationName:"description" type:"string"`
 
-	// Unique Id for a webhook.
+	// The unique ID for a webhook.
 	//
 	// WebhookId is a required field
 	WebhookId *string `location:"uri" locationName:"webhookId" type:"string" required:"true"`
@@ -73,11 +73,11 @@ func (s UpdateWebhookInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Result structure for the update webhook request.
+// The result structure for the update webhook request.
 type UpdateWebhookOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Webhook structure.
+	// Describes a webhook that connects repository events to an Amplify app.
 	//
 	// Webhook is a required field
 	Webhook *Webhook `locationName:"webhook" type:"structure" required:"true"`
@@ -104,7 +104,7 @@ const opUpdateWebhook = "UpdateWebhook"
 // UpdateWebhookRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Update a webhook.
+// Updates a webhook.
 //
 //    // Example sending a request using UpdateWebhookRequest.
 //    req := client.UpdateWebhookRequest(params)

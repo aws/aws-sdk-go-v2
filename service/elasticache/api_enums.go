@@ -89,6 +89,23 @@ func (enum ChangeType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type MultiAZStatus string
+
+// Enum values for MultiAZStatus
+const (
+	MultiAZStatusEnabled  MultiAZStatus = "enabled"
+	MultiAZStatusDisabled MultiAZStatus = "disabled"
+)
+
+func (enum MultiAZStatus) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum MultiAZStatus) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type NodeUpdateInitiatedBy string
 
 // Enum values for NodeUpdateInitiatedBy

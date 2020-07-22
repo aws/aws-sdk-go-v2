@@ -10,21 +10,21 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for delete job request.
+// The request structure for the delete job request.
 type DeleteJobInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for an Amplify App.
+	// The unique ID for an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Name for the branch, for the Job.
+	// The name for the branch, for the job.
 	//
 	// BranchName is a required field
 	BranchName *string `location:"uri" locationName:"branchName" min:"1" type:"string" required:"true"`
 
-	// Unique Id for the Job.
+	// The unique ID for the job.
 	//
 	// JobId is a required field
 	JobId *string `location:"uri" locationName:"jobId" type:"string" required:"true"`
@@ -88,11 +88,11 @@ func (s DeleteJobInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Result structure for the delete job request.
+// The result structure for the delete job request.
 type DeleteJobOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Structure for the summary of a Job.
+	// Describes the summary for an execution job for an Amplify app.
 	//
 	// JobSummary is a required field
 	JobSummary *JobSummary `locationName:"jobSummary" type:"structure" required:"true"`
@@ -119,7 +119,7 @@ const opDeleteJob = "DeleteJob"
 // DeleteJobRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Delete a job, for an Amplify branch, part of Amplify App.
+// Deletes a job for a branch of an Amplify app.
 //
 //    // Example sending a request using DeleteJobRequest.
 //    req := client.DeleteJobRequest(params)

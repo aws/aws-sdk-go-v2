@@ -12,15 +12,19 @@ import (
 type GetRecommendationSummariesInput struct {
 	_ struct{} `type:"structure"`
 
-	// The AWS account IDs for which to return recommendation summaries.
+	// The IDs of the AWS accounts for which to return recommendation summaries.
+	//
+	// If your account is the master account of an organization, use this parameter
+	// to specify the member accounts for which you want to return recommendation
+	// summaries.
 	//
 	// Only one account ID can be specified per request.
 	AccountIds []string `locationName:"accountIds" type:"list"`
 
-	// The maximum number of recommendation summaries to return with a single call.
+	// The maximum number of recommendation summaries to return with a single request.
 	//
-	// To retrieve the remaining results, make another call with the returned NextToken
-	// value.
+	// To retrieve the remaining results, make another request with the returned
+	// NextToken value.
 	MaxResults *int64 `locationName:"maxResults" type:"integer"`
 
 	// The token to advance to the next page of recommendation summaries.

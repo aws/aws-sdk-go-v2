@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // AWS Compute Optimizer.
 //    func myFunc(svc computeoptimizeriface.ClientAPI) bool {
-//        // Make svc.GetAutoScalingGroupRecommendations request
+//        // Make svc.DescribeRecommendationExportJobs request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        computeoptimizeriface.ClientPI
 //    }
-//    func (m *mockClientClient) GetAutoScalingGroupRecommendations(input *computeoptimizer.GetAutoScalingGroupRecommendationsInput) (*computeoptimizer.GetAutoScalingGroupRecommendationsOutput, error) {
+//    func (m *mockClientClient) DescribeRecommendationExportJobs(input *computeoptimizer.DescribeRecommendationExportJobsInput) (*computeoptimizer.DescribeRecommendationExportJobsOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,6 +61,12 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	DescribeRecommendationExportJobsRequest(*computeoptimizer.DescribeRecommendationExportJobsInput) computeoptimizer.DescribeRecommendationExportJobsRequest
+
+	ExportAutoScalingGroupRecommendationsRequest(*computeoptimizer.ExportAutoScalingGroupRecommendationsInput) computeoptimizer.ExportAutoScalingGroupRecommendationsRequest
+
+	ExportEC2InstanceRecommendationsRequest(*computeoptimizer.ExportEC2InstanceRecommendationsInput) computeoptimizer.ExportEC2InstanceRecommendationsRequest
+
 	GetAutoScalingGroupRecommendationsRequest(*computeoptimizer.GetAutoScalingGroupRecommendationsInput) computeoptimizer.GetAutoScalingGroupRecommendationsRequest
 
 	GetEC2InstanceRecommendationsRequest(*computeoptimizer.GetEC2InstanceRecommendationsInput) computeoptimizer.GetEC2InstanceRecommendationsRequest

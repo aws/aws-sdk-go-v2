@@ -14,6 +14,8 @@ import (
 type UpdateProfilingGroupInput struct {
 	_ struct{} `type:"structure"`
 
+	// Specifies whether profiling is enabled or disabled for a profiling group.
+	//
 	// AgentOrchestrationConfig is a required field
 	AgentOrchestrationConfig *AgentOrchestrationConfig `locationName:"agentOrchestrationConfig" type:"structure" required:"true"`
 
@@ -77,7 +79,8 @@ func (s UpdateProfilingGroupInput) MarshalFields(e protocol.FieldEncoder) error 
 type UpdateProfilingGroupOutput struct {
 	_ struct{} `type:"structure" payload:"ProfilingGroup"`
 
-	// Updated information about the profiling group.
+	// A ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
+	// that contains information about the returned updated profiling group.
 	//
 	// ProfilingGroup is a required field
 	ProfilingGroup *ProfilingGroupDescription `locationName:"profilingGroup" type:"structure" required:"true"`

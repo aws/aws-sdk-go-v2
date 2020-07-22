@@ -18,7 +18,7 @@ type ImportRestApiInput struct {
 
 	// [Required] The POST request body containing external API definitions. Currently,
 	// only OpenAPI definition JSON/YAML files are supported. The maximum size of
-	// the API definition file is 2MB.
+	// the API definition file is 6MB.
 	//
 	// Body is a required field
 	Body []byte `locationName:"body" type:"blob" required:"true"`

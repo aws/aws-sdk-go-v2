@@ -150,6 +150,27 @@ func (enum ESWarmPartitionInstanceType) MarshalValueBuf(b []byte) ([]byte, error
 	return append(b, enum...), nil
 }
 
+type InboundCrossClusterSearchConnectionStatusCode string
+
+// Enum values for InboundCrossClusterSearchConnectionStatusCode
+const (
+	InboundCrossClusterSearchConnectionStatusCodePendingAcceptance InboundCrossClusterSearchConnectionStatusCode = "PENDING_ACCEPTANCE"
+	InboundCrossClusterSearchConnectionStatusCodeApproved          InboundCrossClusterSearchConnectionStatusCode = "APPROVED"
+	InboundCrossClusterSearchConnectionStatusCodeRejecting         InboundCrossClusterSearchConnectionStatusCode = "REJECTING"
+	InboundCrossClusterSearchConnectionStatusCodeRejected          InboundCrossClusterSearchConnectionStatusCode = "REJECTED"
+	InboundCrossClusterSearchConnectionStatusCodeDeleting          InboundCrossClusterSearchConnectionStatusCode = "DELETING"
+	InboundCrossClusterSearchConnectionStatusCodeDeleted           InboundCrossClusterSearchConnectionStatusCode = "DELETED"
+)
+
+func (enum InboundCrossClusterSearchConnectionStatusCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum InboundCrossClusterSearchConnectionStatusCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Type of Log File, it can be one of the following:
 //    * INDEX_SLOW_LOGS: Index slow logs contain insert requests that took more
 //    time than configured index query log threshold to execute.
@@ -198,6 +219,29 @@ func (enum OptionState) MarshalValue() (string, error) {
 }
 
 func (enum OptionState) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type OutboundCrossClusterSearchConnectionStatusCode string
+
+// Enum values for OutboundCrossClusterSearchConnectionStatusCode
+const (
+	OutboundCrossClusterSearchConnectionStatusCodePendingAcceptance OutboundCrossClusterSearchConnectionStatusCode = "PENDING_ACCEPTANCE"
+	OutboundCrossClusterSearchConnectionStatusCodeValidating        OutboundCrossClusterSearchConnectionStatusCode = "VALIDATING"
+	OutboundCrossClusterSearchConnectionStatusCodeValidationFailed  OutboundCrossClusterSearchConnectionStatusCode = "VALIDATION_FAILED"
+	OutboundCrossClusterSearchConnectionStatusCodeProvisioning      OutboundCrossClusterSearchConnectionStatusCode = "PROVISIONING"
+	OutboundCrossClusterSearchConnectionStatusCodeActive            OutboundCrossClusterSearchConnectionStatusCode = "ACTIVE"
+	OutboundCrossClusterSearchConnectionStatusCodeRejected          OutboundCrossClusterSearchConnectionStatusCode = "REJECTED"
+	OutboundCrossClusterSearchConnectionStatusCodeDeleting          OutboundCrossClusterSearchConnectionStatusCode = "DELETING"
+	OutboundCrossClusterSearchConnectionStatusCodeDeleted           OutboundCrossClusterSearchConnectionStatusCode = "DELETED"
+)
+
+func (enum OutboundCrossClusterSearchConnectionStatusCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum OutboundCrossClusterSearchConnectionStatusCode) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

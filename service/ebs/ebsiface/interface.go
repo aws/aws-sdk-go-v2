@@ -23,7 +23,7 @@ import (
 //    // myFunc uses an SDK service client to make a request to
 //    // Amazon EBS.
 //    func myFunc(svc ebsiface.ClientAPI) bool {
-//        // Make svc.GetSnapshotBlock request
+//        // Make svc.CompleteSnapshot request
 //    }
 //
 //    func main() {
@@ -43,7 +43,7 @@ import (
 //    type mockClientClient struct {
 //        ebsiface.ClientPI
 //    }
-//    func (m *mockClientClient) GetSnapshotBlock(input *ebs.GetSnapshotBlockInput) (*ebs.GetSnapshotBlockOutput, error) {
+//    func (m *mockClientClient) CompleteSnapshot(input *ebs.CompleteSnapshotInput) (*ebs.CompleteSnapshotOutput, error) {
 //        // mock response/functionality
 //    }
 //
@@ -61,11 +61,17 @@ import (
 // and waiters. Its suggested to use the pattern above for testing, or using
 // tooling to generate mocks to satisfy the interfaces.
 type ClientAPI interface {
+	CompleteSnapshotRequest(*ebs.CompleteSnapshotInput) ebs.CompleteSnapshotRequest
+
 	GetSnapshotBlockRequest(*ebs.GetSnapshotBlockInput) ebs.GetSnapshotBlockRequest
 
 	ListChangedBlocksRequest(*ebs.ListChangedBlocksInput) ebs.ListChangedBlocksRequest
 
 	ListSnapshotBlocksRequest(*ebs.ListSnapshotBlocksInput) ebs.ListSnapshotBlocksRequest
+
+	PutSnapshotBlockRequest(*ebs.PutSnapshotBlockInput) ebs.PutSnapshotBlockRequest
+
+	StartSnapshotRequest(*ebs.StartSnapshotInput) ebs.StartSnapshotRequest
 }
 
 var _ ClientAPI = (*ebs.Client)(nil)

@@ -429,6 +429,8 @@ const (
 	AudioCodecAc3         AudioCodec = "AC3"
 	AudioCodecEac3        AudioCodec = "EAC3"
 	AudioCodecEac3Atmos   AudioCodec = "EAC3_ATMOS"
+	AudioCodecVorbis      AudioCodec = "VORBIS"
+	AudioCodecOpus        AudioCodec = "OPUS"
 	AudioCodecPassthrough AudioCodec = "PASSTHROUGH"
 )
 
@@ -661,7 +663,8 @@ func (enum Av1FramerateControl) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// When set to INTERPOLATE, produces smoother motion during frame rate conversion.
+// Optional. Specify how the transcoder performs framerate conversion. The default
+// behavior is to use duplicate drop conversion.
 type Av1FramerateConversionAlgorithm string
 
 // Enum values for Av1FramerateConversionAlgorithm
@@ -1363,6 +1366,7 @@ const (
 	ContainerTypeMp4  ContainerType = "MP4"
 	ContainerTypeMpd  ContainerType = "MPD"
 	ContainerTypeMxf  ContainerType = "MXF"
+	ContainerTypeWebm ContainerType = "WEBM"
 	ContainerTypeRaw  ContainerType = "RAW"
 )
 
@@ -2543,7 +2547,8 @@ func (enum H264FramerateControl) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// When set to INTERPOLATE, produces smoother motion during frame rate conversion.
+// Optional. Specify how the transcoder performs framerate conversion. The default
+// behavior is to use duplicate drop conversion.
 type H264FramerateConversionAlgorithm string
 
 // Enum values for H264FramerateConversionAlgorithm
@@ -2630,9 +2635,13 @@ func (enum H264InterlaceMode) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Using the API, enable ParFollowSource if you want the service to use the
-// pixel aspect ratio from the input. Using the console, do this by choosing
-// Follow source for Pixel aspect ratio.
+// Optional. Specify how the service determines the pixel aspect ratio (PAR)
+// for this output. The default behavior, Follow source (INITIALIZE_FROM_SOURCE),
+// uses the PAR from your input video for your output. To specify a different
+// PAR in the console, choose any value other than Follow source. To specify
+// a different PAR by editing the JSON job specification, choose SPECIFIED.
+// When you choose SPECIFIED for this setting, you must also specify values
+// for the parNumerator and parDenominator settings.
 type H264ParControl string
 
 // Enum values for H264ParControl
@@ -2650,9 +2659,9 @@ func (enum H264ParControl) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Use Quality tuning level (H264QualityTuningLevel) to specifiy whether to
-// use fast single-pass, high-quality singlepass, or high-quality multipass
-// video encoding.
+// Optional. Use Quality tuning level (qualityTuningLevel) to choose how you
+// want to trade off encoding speed for output video quality. The default behavior
+// is faster, lower quality, single-pass encoding.
 type H264QualityTuningLevel string
 
 // Enum values for H264QualityTuningLevel
@@ -2994,7 +3003,7 @@ func (enum H265FlickerAdaptiveQuantization) MarshalValueBuf(b []byte) ([]byte, e
 // a frame rate from the dropdown list or choose Custom. The framerates shown
 // in the dropdown list are decimal approximations of fractions. If you choose
 // Custom, specify your frame rate as a fraction. If you are creating your transcoding
-// job sepecification as a JSON file without the console, use FramerateControl
+// job specification as a JSON file without the console, use FramerateControl
 // to specify which value the service uses for the frame rate for this output.
 // Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate
 // from the input. Choose SPECIFIED if you want the service to use the frame
@@ -3016,7 +3025,8 @@ func (enum H265FramerateControl) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// When set to INTERPOLATE, produces smoother motion during frame rate conversion.
+// Optional. Specify how the transcoder performs framerate conversion. The default
+// behavior is to use duplicate drop conversion.
 type H265FramerateConversionAlgorithm string
 
 // Enum values for H265FramerateConversionAlgorithm
@@ -3104,9 +3114,13 @@ func (enum H265InterlaceMode) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Using the API, enable ParFollowSource if you want the service to use the
-// pixel aspect ratio from the input. Using the console, do this by choosing
-// Follow source for Pixel aspect ratio.
+// Optional. Specify how the service determines the pixel aspect ratio (PAR)
+// for this output. The default behavior, Follow source (INITIALIZE_FROM_SOURCE),
+// uses the PAR from your input video for your output. To specify a different
+// PAR in the console, choose any value other than Follow source. To specify
+// a different PAR by editing the JSON job specification, choose SPECIFIED.
+// When you choose SPECIFIED for this setting, you must also specify values
+// for the parNumerator and parDenominator settings.
 type H265ParControl string
 
 // Enum values for H265ParControl
@@ -3124,9 +3138,9 @@ func (enum H265ParControl) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Use Quality tuning level (H265QualityTuningLevel) to specifiy whether to
-// use fast single-pass, high-quality singlepass, or high-quality multipass
-// video encoding.
+// Optional. Use Quality tuning level (qualityTuningLevel) to choose how you
+// want to trade off encoding speed for output video quality. The default behavior
+// is faster, lower quality, single-pass encoding.
 type H265QualityTuningLevel string
 
 // Enum values for H265QualityTuningLevel
@@ -3784,7 +3798,7 @@ func (enum ImscStylePassthrough) MarshalValueBuf(b []byte) ([]byte, error) {
 }
 
 // Enable Deblock (InputDeblockFilter) to produce smoother motion in the output.
-// Default is disabled. Only manaully controllable for MPEG2 and uncompressed
+// Default is disabled. Only manually controllable for MPEG2 and uncompressed
 // video inputs.
 type InputDeblockFilter string
 
@@ -4881,7 +4895,7 @@ func (enum Mpeg2DynamicSubGop) MarshalValueBuf(b []byte) ([]byte, error) {
 // a frame rate from the dropdown list or choose Custom. The framerates shown
 // in the dropdown list are decimal approximations of fractions. If you choose
 // Custom, specify your frame rate as a fraction. If you are creating your transcoding
-// job sepecification as a JSON file without the console, use FramerateControl
+// job specification as a JSON file without the console, use FramerateControl
 // to specify which value the service uses for the frame rate for this output.
 // Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate
 // from the input. Choose SPECIFIED if you want the service to use the frame
@@ -4903,7 +4917,8 @@ func (enum Mpeg2FramerateControl) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// When set to INTERPOLATE, produces smoother motion during frame rate conversion.
+// Optional. Specify how the transcoder performs framerate conversion. The default
+// behavior is to use duplicate drop conversion.
 type Mpeg2FramerateConversionAlgorithm string
 
 // Enum values for Mpeg2FramerateConversionAlgorithm
@@ -4995,9 +5010,13 @@ func (enum Mpeg2IntraDcPrecision) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Using the API, enable ParFollowSource if you want the service to use the
-// pixel aspect ratio from the input. Using the console, do this by choosing
-// Follow source for Pixel aspect ratio.
+// Optional. Specify how the service determines the pixel aspect ratio (PAR)
+// for this output. The default behavior, Follow source (INITIALIZE_FROM_SOURCE),
+// uses the PAR from your input video for your output. To specify a different
+// PAR in the console, choose any value other than Follow source. To specify
+// a different PAR by editing the JSON job specification, choose SPECIFIED.
+// When you choose SPECIFIED for this setting, you must also specify values
+// for the parNumerator and parDenominator settings.
 type Mpeg2ParControl string
 
 // Enum values for Mpeg2ParControl
@@ -5015,8 +5034,9 @@ func (enum Mpeg2ParControl) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Use Quality tuning level (Mpeg2QualityTuningLevel) to specifiy whether to
-// use single-pass or multipass video encoding.
+// Optional. Use Quality tuning level (qualityTuningLevel) to choose how you
+// want to trade off encoding speed for output video quality. The default behavior
+// is faster, lower quality, single-pass encoding.
 type Mpeg2QualityTuningLevel string
 
 // Enum values for Mpeg2QualityTuningLevel
@@ -5233,6 +5253,28 @@ func (enum MxfAfdSignaling) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+// Optional. When you set Noise reducer (noiseReducer) to Temporal (TEMPORAL),
+// you can optionally use this setting to apply additional sharpening. The default
+// behavior, Auto (AUTO) allows the transcoder to determine whether to apply
+// filtering, depending on input type and quality.
+type NoiseFilterPostTemporalSharpening string
+
+// Enum values for NoiseFilterPostTemporalSharpening
+const (
+	NoiseFilterPostTemporalSharpeningDisabled NoiseFilterPostTemporalSharpening = "DISABLED"
+	NoiseFilterPostTemporalSharpeningEnabled  NoiseFilterPostTemporalSharpening = "ENABLED"
+	NoiseFilterPostTemporalSharpeningAuto     NoiseFilterPostTemporalSharpening = "AUTO"
+)
+
+func (enum NoiseFilterPostTemporalSharpening) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum NoiseFilterPostTemporalSharpening) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 // Use Noise reducer filter (NoiseReducerFilter) to select one of the following
 // spatial image filtering functions. To use this setting, you must also enable
 // Noise reducer (NoiseReducer). * Bilateral preserves edges while reducing
@@ -5399,7 +5441,7 @@ func (enum ProresCodecProfile) MarshalValueBuf(b []byte) ([]byte, error) {
 // a frame rate from the dropdown list or choose Custom. The framerates shown
 // in the dropdown list are decimal approximations of fractions. If you choose
 // Custom, specify your frame rate as a fraction. If you are creating your transcoding
-// job sepecification as a JSON file without the console, use FramerateControl
+// job specification as a JSON file without the console, use FramerateControl
 // to specify which value the service uses for the frame rate for this output.
 // Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate
 // from the input. Choose SPECIFIED if you want the service to use the frame
@@ -5421,7 +5463,8 @@ func (enum ProresFramerateControl) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// When set to INTERPOLATE, produces smoother motion during frame rate conversion.
+// Optional. Specify how the transcoder performs framerate conversion. The default
+// behavior is to use duplicate drop conversion.
 type ProresFramerateConversionAlgorithm string
 
 // Enum values for ProresFramerateConversionAlgorithm
@@ -5470,11 +5513,13 @@ func (enum ProresInterlaceMode) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
-// Use (ProresParControl) to specify how the service determines the pixel aspect
-// ratio. Set to Follow source (INITIALIZE_FROM_SOURCE) to use the pixel aspect
-// ratio from the input. To specify a different pixel aspect ratio: Using the
-// console, choose it from the dropdown menu. Using the API, set ProresParControl
-// to (SPECIFIED) and provide for (ParNumerator) and (ParDenominator).
+// Optional. Specify how the service determines the pixel aspect ratio (PAR)
+// for this output. The default behavior, Follow source (INITIALIZE_FROM_SOURCE),
+// uses the PAR from your input video for your output. To specify a different
+// PAR in the console, choose any value other than Follow source. To specify
+// a different PAR by editing the JSON job specification, choose SPECIFIED.
+// When you choose SPECIFIED for this setting, you must also specify values
+// for the parNumerator and parDenominator settings.
 type ProresParControl string
 
 // Enum values for ProresParControl
@@ -5929,6 +5974,8 @@ const (
 	VideoCodecH265         VideoCodec = "H_265"
 	VideoCodecMpeg2        VideoCodec = "MPEG2"
 	VideoCodecProres       VideoCodec = "PRORES"
+	VideoCodecVp8          VideoCodec = "VP8"
+	VideoCodecVp9          VideoCodec = "VP9"
 )
 
 func (enum VideoCodec) MarshalValue() (string, error) {
@@ -5965,6 +6012,249 @@ func (enum VideoTimecodeInsertion) MarshalValue() (string, error) {
 }
 
 func (enum VideoTimecodeInsertion) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// If you are using the console, use the Framerate setting to specify the frame
+// rate for this output. If you want to keep the same frame rate as the input
+// video, choose Follow source. If you want to do frame rate conversion, choose
+// a frame rate from the dropdown list or choose Custom. The framerates shown
+// in the dropdown list are decimal approximations of fractions. If you choose
+// Custom, specify your frame rate as a fraction. If you are creating your transcoding
+// job specification as a JSON file without the console, use FramerateControl
+// to specify which value the service uses for the frame rate for this output.
+// Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate
+// from the input. Choose SPECIFIED if you want the service to use the frame
+// rate you specify in the settings FramerateNumerator and FramerateDenominator.
+type Vp8FramerateControl string
+
+// Enum values for Vp8FramerateControl
+const (
+	Vp8FramerateControlInitializeFromSource Vp8FramerateControl = "INITIALIZE_FROM_SOURCE"
+	Vp8FramerateControlSpecified            Vp8FramerateControl = "SPECIFIED"
+)
+
+func (enum Vp8FramerateControl) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Vp8FramerateControl) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Optional. Specify how the transcoder performs framerate conversion. The default
+// behavior is to use Drop duplicate (DUPLICATE_DROP) conversion. When you choose
+// Interpolate (INTERPOLATE) instead, the conversion produces smoother motion.
+type Vp8FramerateConversionAlgorithm string
+
+// Enum values for Vp8FramerateConversionAlgorithm
+const (
+	Vp8FramerateConversionAlgorithmDuplicateDrop Vp8FramerateConversionAlgorithm = "DUPLICATE_DROP"
+	Vp8FramerateConversionAlgorithmInterpolate   Vp8FramerateConversionAlgorithm = "INTERPOLATE"
+)
+
+func (enum Vp8FramerateConversionAlgorithm) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Vp8FramerateConversionAlgorithm) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Optional. Specify how the service determines the pixel aspect ratio (PAR)
+// for this output. The default behavior, Follow source (INITIALIZE_FROM_SOURCE),
+// uses the PAR from your input video for your output. To specify a different
+// PAR in the console, choose any value other than Follow source. To specify
+// a different PAR by editing the JSON job specification, choose SPECIFIED.
+// When you choose SPECIFIED for this setting, you must also specify values
+// for the parNumerator and parDenominator settings.
+type Vp8ParControl string
+
+// Enum values for Vp8ParControl
+const (
+	Vp8ParControlInitializeFromSource Vp8ParControl = "INITIALIZE_FROM_SOURCE"
+	Vp8ParControlSpecified            Vp8ParControl = "SPECIFIED"
+)
+
+func (enum Vp8ParControl) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Vp8ParControl) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Optional. Use Quality tuning level (qualityTuningLevel) to choose how you
+// want to trade off encoding speed for output video quality. The default behavior
+// is faster, lower quality, multi-pass encoding.
+type Vp8QualityTuningLevel string
+
+// Enum values for Vp8QualityTuningLevel
+const (
+	Vp8QualityTuningLevelMultiPass   Vp8QualityTuningLevel = "MULTI_PASS"
+	Vp8QualityTuningLevelMultiPassHq Vp8QualityTuningLevel = "MULTI_PASS_HQ"
+)
+
+func (enum Vp8QualityTuningLevel) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Vp8QualityTuningLevel) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// With the VP8 codec, you can use only the variable bitrate (VBR) rate control
+// mode.
+type Vp8RateControlMode string
+
+// Enum values for Vp8RateControlMode
+const (
+	Vp8RateControlModeVbr Vp8RateControlMode = "VBR"
+)
+
+func (enum Vp8RateControlMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Vp8RateControlMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// If you are using the console, use the Framerate setting to specify the frame
+// rate for this output. If you want to keep the same frame rate as the input
+// video, choose Follow source. If you want to do frame rate conversion, choose
+// a frame rate from the dropdown list or choose Custom. The framerates shown
+// in the dropdown list are decimal approximations of fractions. If you choose
+// Custom, specify your frame rate as a fraction. If you are creating your transcoding
+// job specification as a JSON file without the console, use FramerateControl
+// to specify which value the service uses for the frame rate for this output.
+// Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate
+// from the input. Choose SPECIFIED if you want the service to use the frame
+// rate you specify in the settings FramerateNumerator and FramerateDenominator.
+type Vp9FramerateControl string
+
+// Enum values for Vp9FramerateControl
+const (
+	Vp9FramerateControlInitializeFromSource Vp9FramerateControl = "INITIALIZE_FROM_SOURCE"
+	Vp9FramerateControlSpecified            Vp9FramerateControl = "SPECIFIED"
+)
+
+func (enum Vp9FramerateControl) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Vp9FramerateControl) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Optional. Specify how the transcoder performs framerate conversion. The default
+// behavior is to use Drop duplicate (DUPLICATE_DROP) conversion. When you choose
+// Interpolate (INTERPOLATE) instead, the conversion produces smoother motion.
+type Vp9FramerateConversionAlgorithm string
+
+// Enum values for Vp9FramerateConversionAlgorithm
+const (
+	Vp9FramerateConversionAlgorithmDuplicateDrop Vp9FramerateConversionAlgorithm = "DUPLICATE_DROP"
+	Vp9FramerateConversionAlgorithmInterpolate   Vp9FramerateConversionAlgorithm = "INTERPOLATE"
+)
+
+func (enum Vp9FramerateConversionAlgorithm) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Vp9FramerateConversionAlgorithm) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Optional. Specify how the service determines the pixel aspect ratio (PAR)
+// for this output. The default behavior, Follow source (INITIALIZE_FROM_SOURCE),
+// uses the PAR from your input video for your output. To specify a different
+// PAR in the console, choose any value other than Follow source. To specify
+// a different PAR by editing the JSON job specification, choose SPECIFIED.
+// When you choose SPECIFIED for this setting, you must also specify values
+// for the parNumerator and parDenominator settings.
+type Vp9ParControl string
+
+// Enum values for Vp9ParControl
+const (
+	Vp9ParControlInitializeFromSource Vp9ParControl = "INITIALIZE_FROM_SOURCE"
+	Vp9ParControlSpecified            Vp9ParControl = "SPECIFIED"
+)
+
+func (enum Vp9ParControl) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Vp9ParControl) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Optional. Use Quality tuning level (qualityTuningLevel) to choose how you
+// want to trade off encoding speed for output video quality. The default behavior
+// is faster, lower quality, multi-pass encoding.
+type Vp9QualityTuningLevel string
+
+// Enum values for Vp9QualityTuningLevel
+const (
+	Vp9QualityTuningLevelMultiPass   Vp9QualityTuningLevel = "MULTI_PASS"
+	Vp9QualityTuningLevelMultiPassHq Vp9QualityTuningLevel = "MULTI_PASS_HQ"
+)
+
+func (enum Vp9QualityTuningLevel) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Vp9QualityTuningLevel) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// With the VP9 codec, you can use only the variable bitrate (VBR) rate control
+// mode.
+type Vp9RateControlMode string
+
+// Enum values for Vp9RateControlMode
+const (
+	Vp9RateControlModeVbr Vp9RateControlMode = "VBR"
+)
+
+func (enum Vp9RateControlMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum Vp9RateControlMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+// Optional. Ignore this setting unless Nagra support directs you to specify
+// a value. When you don't specify a value here, the Nagra NexGuard library
+// uses its default value.
+type WatermarkingStrength string
+
+// Enum values for WatermarkingStrength
+const (
+	WatermarkingStrengthLightest  WatermarkingStrength = "LIGHTEST"
+	WatermarkingStrengthLighter   WatermarkingStrength = "LIGHTER"
+	WatermarkingStrengthDefault   WatermarkingStrength = "DEFAULT"
+	WatermarkingStrengthStronger  WatermarkingStrength = "STRONGER"
+	WatermarkingStrengthStrongest WatermarkingStrength = "STRONGEST"
+)
+
+func (enum WatermarkingStrength) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum WatermarkingStrength) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

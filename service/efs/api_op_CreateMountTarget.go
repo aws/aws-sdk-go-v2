@@ -19,7 +19,7 @@ type CreateMountTargetInput struct {
 	FileSystemId *string `type:"string" required:"true"`
 
 	// Valid IPv4 address within the address range of the specified subnet.
-	IpAddress *string `type:"string"`
+	IpAddress *string `min:"7" type:"string"`
 
 	// Up to five VPC security group IDs, of the form sg-xxxxxxxx. These must be
 	// for the same VPC as subnet specified.
@@ -28,7 +28,7 @@ type CreateMountTargetInput struct {
 	// The ID of the subnet to add the mount target in.
 	//
 	// SubnetId is a required field
-	SubnetId *string `type:"string" required:"true"`
+	SubnetId *string `min:"15" type:"string" required:"true"`
 }
 
 // String returns the string representation
@@ -43,9 +43,15 @@ func (s *CreateMountTargetInput) Validate() error {
 	if s.FileSystemId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("FileSystemId"))
 	}
+	if s.IpAddress != nil && len(*s.IpAddress) < 7 {
+		invalidParams.Add(aws.NewErrParamMinLen("IpAddress", 7))
+	}
 
 	if s.SubnetId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("SubnetId"))
+	}
+	if s.SubnetId != nil && len(*s.SubnetId) < 15 {
+		invalidParams.Add(aws.NewErrParamMinLen("SubnetId", 15))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -112,7 +118,7 @@ type CreateMountTargetOutput struct {
 	FileSystemId *string `type:"string" required:"true"`
 
 	// Address at which the file system can be mounted by using the mount target.
-	IpAddress *string `type:"string"`
+	IpAddress *string `min:"7" type:"string"`
 
 	// Lifecycle state of the mount target.
 	//
@@ -122,7 +128,7 @@ type CreateMountTargetOutput struct {
 	// System-assigned mount target ID.
 	//
 	// MountTargetId is a required field
-	MountTargetId *string `type:"string" required:"true"`
+	MountTargetId *string `min:"13" type:"string" required:"true"`
 
 	// The ID of the network interface that Amazon EFS created when it created the
 	// mount target.
@@ -134,7 +140,10 @@ type CreateMountTargetOutput struct {
 	// The ID of the mount target's subnet.
 	//
 	// SubnetId is a required field
-	SubnetId *string `type:"string" required:"true"`
+	SubnetId *string `min:"15" type:"string" required:"true"`
+
+	// The Virtual Private Cloud (VPC) ID that the mount target is configured in.
+	VpcId *string `type:"string"`
 }
 
 // String returns the string representation
@@ -197,6 +206,12 @@ func (s CreateMountTargetOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SubnetId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VpcId != nil {
+		v := *s.VpcId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VpcId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

@@ -4,6 +4,7 @@ package alexaforbusiness
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -22,6 +23,9 @@ type CreateSkillGroupInput struct {
 	//
 	// SkillGroupName is a required field
 	SkillGroupName *string `min:"1" type:"string" required:"true"`
+
+	// The tags for the skill group.
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -44,6 +48,13 @@ func (s *CreateSkillGroupInput) Validate() error {
 	}
 	if s.SkillGroupName != nil && len(*s.SkillGroupName) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SkillGroupName", 1))
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
 	}
 
 	if invalidParams.Len() > 0 {

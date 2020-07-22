@@ -38,6 +38,11 @@ const opDisableAWSOrganizationsAccess = "DisableAWSOrganizationsAccess"
 // with your organization structure if it changes after calling this API. This
 // API can only be called by the master account in the organization.
 //
+// This API can't be invoked if there are active delegated administrators in
+// the organization.
+//
+// Note that a delegated administrator is not authorized to invoke DisableAWSOrganizationsAccess.
+//
 //    // Example sending a request using DisableAWSOrganizationsAccessRequest.
 //    req := client.DisableAWSOrganizationsAccessRequest(params)
 //    resp, err := req.Send(context.TODO())

@@ -61,12 +61,11 @@ const opGetExternalModels = "GetExternalModels"
 // Amazon Fraud Detector.
 //
 // Gets the details for one or more Amazon SageMaker models that have been imported
-// into the service. This is a paginated API. If you provide a null maxSizePerPage,
+// into the service. This is a paginated API. If you provide a null maxResults,
 // this actions retrieves a maximum of 10 records per page. If you provide a
-// maxSizePerPage, the value must be between 5 and 10. To get the next page
-// results, provide the pagination token from the GetExternalModelsResult as
-// part of your request. A null pagination token fetches the records from the
-// beginning.
+// maxResults, the value must be between 5 and 10. To get the next page results,
+// provide the pagination token from the GetExternalModelsResult as part of
+// your request. A null pagination token fetches the records from the beginning.
 //
 //    // Example sending a request using GetExternalModelsRequest.
 //    req := client.GetExternalModelsRequest(params)

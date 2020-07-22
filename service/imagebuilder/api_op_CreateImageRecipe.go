@@ -55,6 +55,9 @@ type CreateImageRecipeInput struct {
 
 	// The tags of the image recipe.
 	Tags map[string]string `locationName:"tags" min:"1" type:"map"`
+
+	// The working directory to be used during build and test workflows.
+	WorkingDirectory *string `locationName:"workingDirectory" min:"1" type:"string"`
 }
 
 // String returns the string representation
@@ -99,6 +102,9 @@ func (s *CreateImageRecipeInput) Validate() error {
 	}
 	if s.Tags != nil && len(s.Tags) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
+	}
+	if s.WorkingDirectory != nil && len(*s.WorkingDirectory) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("WorkingDirectory", 1))
 	}
 	if s.BlockDeviceMappings != nil {
 		for i, v := range s.BlockDeviceMappings {
@@ -196,6 +202,12 @@ func (s CreateImageRecipeInput) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ms0.End()
 
+	}
+	if s.WorkingDirectory != nil {
+		v := *s.WorkingDirectory
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "workingDirectory", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

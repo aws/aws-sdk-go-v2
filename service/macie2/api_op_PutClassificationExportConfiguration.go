@@ -10,15 +10,15 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Specifies where to export data classification results to, and the encryption
+// Specifies where to store data classification results, and the encryption
 // settings to use when storing results in that location. Currently, you can
-// export classification results only to an S3 bucket.
+// store classification results only in an S3 bucket.
 type PutClassificationExportConfigurationInput struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies where to export data classification results to, and the encryption
+	// Specifies where to store data classification results, and the encryption
 	// settings to use when storing results in that location. Currently, you can
-	// export classification results only to an S3 bucket.
+	// store classification results only in an S3 bucket.
 	//
 	// Configuration is a required field
 	Configuration *ClassificationExportConfiguration `locationName:"configuration" type:"structure" required:"true"`
@@ -61,14 +61,14 @@ func (s PutClassificationExportConfigurationInput) MarshalFields(e protocol.Fiel
 	return nil
 }
 
-// Provides information about updated settings for exporting data classification
+// Provides information about updated settings for storing data classification
 // results.
 type PutClassificationExportConfigurationOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Specifies where to export data classification results to, and the encryption
+	// Specifies where to store data classification results, and the encryption
 	// settings to use when storing results in that location. Currently, you can
-	// export classification results only to an S3 bucket.
+	// store classification results only in an S3 bucket.
 	Configuration *ClassificationExportConfiguration `locationName:"configuration" type:"structure"`
 }
 
@@ -93,7 +93,7 @@ const opPutClassificationExportConfiguration = "PutClassificationExportConfigura
 // PutClassificationExportConfigurationRequest returns a request value for making API operation for
 // Amazon Macie 2.
 //
-// Creates or updates the configuration settings for exporting data classification
+// Creates or updates the configuration settings for storing data classification
 // results.
 //
 //    // Example sending a request using PutClassificationExportConfigurationRequest.

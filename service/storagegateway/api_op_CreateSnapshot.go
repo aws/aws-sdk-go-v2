@@ -20,7 +20,7 @@ type CreateSnapshotInput struct {
 
 	// Textual description of the snapshot that appears in the Amazon EC2 console,
 	// Elastic Block Store snapshots panel in the Description field, and in the
-	// AWS Storage Gateway snapshot Details pane, Description field
+	// AWS Storage Gateway snapshot Details pane, Description field.
 	//
 	// SnapshotDescription is a required field
 	SnapshotDescription *string `min:"1" type:"string" required:"true"`
@@ -103,12 +103,11 @@ const opCreateSnapshot = "CreateSnapshot"
 // Initiates a snapshot of a volume.
 //
 // AWS Storage Gateway provides the ability to back up point-in-time snapshots
-// of your data to Amazon Simple Storage Service (Amazon S3) for durable off-site
-// recovery, as well as import the data to an Amazon Elastic Block Store (EBS)
-// volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your
-// gateway volume on a scheduled or ad hoc basis. This API enables you to take
-// an ad hoc snapshot. For more information, see Editing a Snapshot Schedule
-// (https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot).
+// of your data to Amazon Simple Storage (Amazon S3) for durable off-site recovery,
+// as well as import the data to an Amazon Elastic Block Store (EBS) volume
+// in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway
+// volume on a scheduled or ad hoc basis. This API enables you to take ad-hoc
+// snapshot. For more information, see Editing a snapshot schedule (https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot).
 //
 // In the CreateSnapshot request you identify the volume by providing its Amazon
 // Resource Name (ARN). You must also provide description for the snapshot.
@@ -120,7 +119,9 @@ const opCreateSnapshot = "CreateSnapshot"
 // cached volume gateway type.
 //
 // To list or delete a snapshot, you must use the Amazon EC2 API. For more information,
-// see DescribeSnapshots or DeleteSnapshot in the EC2 API reference (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Operations.html).
+// see DescribeSnapshots (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html)
+// or DeleteSnapshot (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html)
+// in the Amazon Elastic Compute Cloud API Reference.
 //
 // Volume and snapshot IDs are changing to a longer length ID format. For more
 // information, see the important note on the Welcome (https://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html)

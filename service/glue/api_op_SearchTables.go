@@ -25,6 +25,15 @@ type SearchTablesInput struct {
 	// A continuation token, included if this is a continuation call.
 	NextToken *string `type:"string"`
 
+	// Allows you to specify that you want to search the tables shared with your
+	// account. The allowable values are FOREIGN or ALL.
+	//
+	//    * If set to FOREIGN, will search the tables shared with your account.
+	//
+	//    * If set to ALL, will search the tables shared with your account, as well
+	//    as the tables in yor local account.
+	ResourceShareType ResourceShareType `type:"string" enum:"true"`
+
 	// A string used for a text search.
 	//
 	// Specifying a value in quotes filters based on an exact match to the value.

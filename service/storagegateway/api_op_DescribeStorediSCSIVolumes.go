@@ -56,7 +56,7 @@ type DescribeStorediSCSIVolumesOutput struct {
 	//
 	//    * NetworkInterfacePort: The port used to communicate with iSCSI targets.
 	//
-	//    * PreservedExistingData: Indicates if when the stored volume was created,
+	//    * PreservedExistingData: Indicates when the stored volume was created,
 	//    existing data on the underlying local disk was preserved.
 	//
 	//    * SourceSnapshotId: If the stored volume was created from a snapshot,
@@ -89,7 +89,7 @@ type DescribeStorediSCSIVolumesOutput struct {
 	//    of the volume.
 	//
 	//    * VolumeType: One of the enumeration values describing the type of the
-	//    volume. Currently, on STORED volumes are supported.
+	//    volume. Currently, only STORED volumes are supported.
 	StorediSCSIVolumes []StorediSCSIVolume `type:"list"`
 }
 
@@ -105,7 +105,7 @@ const opDescribeStorediSCSIVolumes = "DescribeStorediSCSIVolumes"
 //
 // Returns the description of the gateway volumes specified in the request.
 // The list of gateway volumes in the request must be from one gateway. In the
-// response AWS Storage Gateway returns volume information sorted by volume
+// response, AWS Storage Gateway returns volume information sorted by volume
 // ARNs. This operation is only supported in stored volume gateway type.
 //
 //    // Example sending a request using DescribeStorediSCSIVolumesRequest.

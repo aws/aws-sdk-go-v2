@@ -10,16 +10,16 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for the delete Domain Association request.
+// The request structure for the delete domain association request.
 type DeleteDomainAssociationInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for an Amplify App.
+	// The unique id for an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Name of the domain.
+	// The name of the domain.
 	//
 	// DomainName is a required field
 	DomainName *string `location:"uri" locationName:"domainName" type:"string" required:"true"`
@@ -73,8 +73,8 @@ func (s DeleteDomainAssociationInput) MarshalFields(e protocol.FieldEncoder) err
 type DeleteDomainAssociationOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Structure for Domain Association, which associates a custom domain with an
-	// Amplify App.
+	// Describes a domain association that associates a custom domain with an Amplify
+	// app.
 	//
 	// DomainAssociation is a required field
 	DomainAssociation *DomainAssociation `locationName:"domainAssociation" type:"structure" required:"true"`
@@ -101,7 +101,7 @@ const opDeleteDomainAssociation = "DeleteDomainAssociation"
 // DeleteDomainAssociationRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Deletes a DomainAssociation.
+// Deletes a domain association for an Amplify app.
 //
 //    // Example sending a request using DeleteDomainAssociationRequest.
 //    req := client.DeleteDomainAssociationRequest(params)

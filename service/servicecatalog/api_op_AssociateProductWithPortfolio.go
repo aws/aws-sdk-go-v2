@@ -83,6 +83,8 @@ const opAssociateProductWithPortfolio = "AssociateProductWithPortfolio"
 //
 // Associates the specified product with the specified portfolio.
 //
+// A delegated admin is authorized to invoke this command.
+//
 //    // Example sending a request using AssociateProductWithPortfolioRequest.
 //    req := client.AssociateProductWithPortfolioRequest(params)
 //    resp, err := req.Send(context.TODO())

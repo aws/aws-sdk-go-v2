@@ -135,8 +135,12 @@ const opGetBlock = "GetBlock"
 // GetBlockRequest returns a request value for making API operation for
 // Amazon QLDB.
 //
-// Returns a journal block object at a specified address in a ledger. Also returns
+// Returns a block object at a specified address in a journal. Also returns
 // a proof of the specified block for verification if DigestTipAddress is provided.
+//
+// For information about the data contents in a block, see Journal contents
+// (https://docs.aws.amazon.com/qldb/latest/developerguide/journal-contents.html)
+// in the Amazon QLDB Developer Guide.
 //
 // If the specified ledger doesn't exist or is in DELETING status, then throws
 // ResourceNotFoundException.

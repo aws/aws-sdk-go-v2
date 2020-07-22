@@ -10,16 +10,16 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure used to untag resource.
+// The request structure for the untag resource request.
 type UntagResourceInput struct {
 	_ struct{} `type:"structure"`
 
-	// Resource arn used to untag resource.
+	// The Amazon Resource Name (ARN) to use to untag a resource.
 	//
 	// ResourceArn is a required field
 	ResourceArn *string `location:"uri" locationName:"resourceArn" type:"string" required:"true"`
 
-	// Tag keys used to untag resource.
+	// The tag keys to use to untag a resource.
 	//
 	// TagKeys is a required field
 	TagKeys []string `location:"querystring" locationName:"tagKeys" min:"1" type:"list" required:"true"`
@@ -76,7 +76,7 @@ func (s UntagResourceInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Response for untag resource.
+// The response for the untag resource request.
 type UntagResourceOutput struct {
 	_ struct{} `type:"structure"`
 }
@@ -96,7 +96,7 @@ const opUntagResource = "UntagResource"
 // UntagResourceRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Untag resource with resourceArn.
+// Untags a resource with a specified Amazon Resource Name (ARN).
 //
 //    // Example sending a request using UntagResourceRequest.
 //    req := client.UntagResourceRequest(params)

@@ -30,10 +30,23 @@ type SetTopicAttributesInput struct {
 	//
 	// The following attribute applies only to server-side-encryption (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html):
 	//
-	//    * KmsMasterKeyId - The ID of an AWS-managed customer master key (CMK)
+	//    * KmsMasterKeyId – The ID of an AWS-managed customer master key (CMK)
 	//    for Amazon SNS or a custom CMK. For more information, see Key Terms (https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms).
 	//    For more examples, see KeyId (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters)
 	//    in the AWS Key Management Service API Reference.
+	//
+	// The following attribute applies only to FIFO topics:
+	//
+	//    * ContentBasedDeduplication – Enables content-based deduplication. Amazon
+	//    SNS uses a SHA-256 hash to generate the MessageDeduplicationId using the
+	//    body of the message (but not the attributes of the message).
+	//
+	//    * When ContentBasedDeduplication is in effect, messages with identical
+	//    content sent within the deduplication interval are treated as duplicates
+	//    and only one copy of the message is delivered.
+	//
+	//    * If the queue has ContentBasedDeduplication set, your MessageDeduplicationId
+	//    overrides the generated one.
 	//
 	// AttributeName is a required field
 	AttributeName *string `type:"string" required:"true"`

@@ -104,6 +104,12 @@ func (c *Client) DescribeDBClusterParameterGroupsRequest(input *DescribeDBCluste
 		Name:       opDescribeDBClusterParameterGroups,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "MaxRecords",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -137,6 +143,53 @@ func (r DescribeDBClusterParameterGroupsRequest) Send(ctx context.Context) (*Des
 	}
 
 	return resp, nil
+}
+
+// NewDescribeDBClusterParameterGroupsRequestPaginator returns a paginator for DescribeDBClusterParameterGroups.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.DescribeDBClusterParameterGroupsRequest(input)
+//   p := rds.NewDescribeDBClusterParameterGroupsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewDescribeDBClusterParameterGroupsPaginator(req DescribeDBClusterParameterGroupsRequest) DescribeDBClusterParameterGroupsPaginator {
+	return DescribeDBClusterParameterGroupsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *DescribeDBClusterParameterGroupsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// DescribeDBClusterParameterGroupsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeDBClusterParameterGroupsPaginator struct {
+	aws.Pager
+}
+
+func (p *DescribeDBClusterParameterGroupsPaginator) CurrentPage() *DescribeDBClusterParameterGroupsOutput {
+	return p.Pager.CurrentPage().(*DescribeDBClusterParameterGroupsOutput)
 }
 
 // DescribeDBClusterParameterGroupsResponse is the response type for the

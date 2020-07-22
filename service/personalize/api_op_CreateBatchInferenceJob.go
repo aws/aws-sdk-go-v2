@@ -12,6 +12,10 @@ import (
 type CreateBatchInferenceJobInput struct {
 	_ struct{} `type:"structure"`
 
+	// The ARN of the filter to apply to the batch inference job. For more information
+	// on using filters, see Using Filters with Amazon Personalize.
+	FilterArn *string `locationName:"filterArn" type:"string"`
+
 	// The Amazon S3 path that leads to the input file to base your recommendations
 	// on. The input material must be in JSON format.
 	//

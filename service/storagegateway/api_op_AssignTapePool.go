@@ -18,7 +18,7 @@ type AssignTapePoolInput struct {
 	// is archived directly into the storage class (S3 Glacier or S3 Glacier Deep
 	// Archive) that corresponds to the pool.
 	//
-	// Valid values: "GLACIER", "DEEP_ARCHIVE"
+	// Valid Values: GLACIER | DEEP_ARCHIVE
 	//
 	// PoolId is a required field
 	PoolId *string `min:"1" type:"string" required:"true"`
@@ -83,7 +83,7 @@ const opAssignTapePool = "AssignTapePool"
 // into the S3 storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds
 // to the pool.
 //
-// Valid values: "GLACIER", "DEEP_ARCHIVE"
+// Valid Values: GLACIER | DEEP_ARCHIVE
 //
 //    // Example sending a request using AssignTapePoolRequest.
 //    req := client.AssignTapePoolRequest(params)

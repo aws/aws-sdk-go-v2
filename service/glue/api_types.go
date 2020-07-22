@@ -118,6 +118,100 @@ func (s BatchStopJobRunSuccessfulSubmission) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Defines a binary column statistics data.
+type BinaryColumnStatisticsData struct {
+	_ struct{} `type:"structure"`
+
+	// Average length of the column.
+	//
+	// AverageLength is a required field
+	AverageLength *float64 `type:"double" required:"true"`
+
+	// Maximum length of the column.
+	//
+	// MaximumLength is a required field
+	MaximumLength *int64 `type:"long" required:"true"`
+
+	// Number of nulls.
+	//
+	// NumberOfNulls is a required field
+	NumberOfNulls *int64 `type:"long" required:"true"`
+}
+
+// String returns the string representation
+func (s BinaryColumnStatisticsData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BinaryColumnStatisticsData) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BinaryColumnStatisticsData"}
+
+	if s.AverageLength == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AverageLength"))
+	}
+
+	if s.MaximumLength == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MaximumLength"))
+	}
+
+	if s.NumberOfNulls == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NumberOfNulls"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Defines a boolean column statistics.
+type BooleanColumnStatisticsData struct {
+	_ struct{} `type:"structure"`
+
+	// Number of false value.
+	//
+	// NumberOfFalses is a required field
+	NumberOfFalses *int64 `type:"long" required:"true"`
+
+	// Number of nulls.
+	//
+	// NumberOfNulls is a required field
+	NumberOfNulls *int64 `type:"long" required:"true"`
+
+	// Number of true value.
+	//
+	// NumberOfTrues is a required field
+	NumberOfTrues *int64 `type:"long" required:"true"`
+}
+
+// String returns the string representation
+func (s BooleanColumnStatisticsData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *BooleanColumnStatisticsData) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "BooleanColumnStatisticsData"}
+
+	if s.NumberOfFalses == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NumberOfFalses"))
+	}
+
+	if s.NumberOfNulls == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NumberOfNulls"))
+	}
+
+	if s.NumberOfTrues == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NumberOfTrues"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Specifies a table definition in the AWS Glue Data Catalog.
 type CatalogEntry struct {
 	_ struct{} `type:"structure"`
@@ -460,6 +554,186 @@ func (s *Column) Validate() error {
 	return nil
 }
 
+// Defines a column containing error.
+type ColumnError struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the column.
+	ColumnName *string `min:"1" type:"string"`
+
+	// The error message occurred during operation.
+	Error *ErrorDetail `type:"structure"`
+}
+
+// String returns the string representation
+func (s ColumnError) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Defines a column statistics.
+type ColumnStatistics struct {
+	_ struct{} `type:"structure"`
+
+	// The analyzed time of the column statistics.
+	//
+	// AnalyzedTime is a required field
+	AnalyzedTime *time.Time `type:"timestamp" required:"true"`
+
+	// The name of the column.
+	//
+	// ColumnName is a required field
+	ColumnName *string `min:"1" type:"string" required:"true"`
+
+	// The type of the column.
+	//
+	// ColumnType is a required field
+	ColumnType *string `type:"string" required:"true"`
+
+	// The statistics of the column.
+	//
+	// StatisticsData is a required field
+	StatisticsData *ColumnStatisticsData `type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s ColumnStatistics) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ColumnStatistics) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ColumnStatistics"}
+
+	if s.AnalyzedTime == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AnalyzedTime"))
+	}
+
+	if s.ColumnName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ColumnName"))
+	}
+	if s.ColumnName != nil && len(*s.ColumnName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ColumnName", 1))
+	}
+
+	if s.ColumnType == nil {
+		invalidParams.Add(aws.NewErrParamRequired("ColumnType"))
+	}
+
+	if s.StatisticsData == nil {
+		invalidParams.Add(aws.NewErrParamRequired("StatisticsData"))
+	}
+	if s.StatisticsData != nil {
+		if err := s.StatisticsData.Validate(); err != nil {
+			invalidParams.AddNested("StatisticsData", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Defines a column statistics data.
+type ColumnStatisticsData struct {
+	_ struct{} `type:"structure"`
+
+	// Binary Column Statistics Data.
+	BinaryColumnStatisticsData *BinaryColumnStatisticsData `type:"structure"`
+
+	// Boolean Column Statistics Data.
+	BooleanColumnStatisticsData *BooleanColumnStatisticsData `type:"structure"`
+
+	// Date Column Statistics Data.
+	DateColumnStatisticsData *DateColumnStatisticsData `type:"structure"`
+
+	// Decimal Column Statistics Data.
+	DecimalColumnStatisticsData *DecimalColumnStatisticsData `type:"structure"`
+
+	// Double Column Statistics Data.
+	DoubleColumnStatisticsData *DoubleColumnStatisticsData `type:"structure"`
+
+	// Long Column Statistics Data.
+	LongColumnStatisticsData *LongColumnStatisticsData `type:"structure"`
+
+	// String Column Statistics Data.
+	StringColumnStatisticsData *StringColumnStatisticsData `type:"structure"`
+
+	// The name of the column.
+	//
+	// Type is a required field
+	Type ColumnStatisticsType `type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s ColumnStatisticsData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *ColumnStatisticsData) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "ColumnStatisticsData"}
+	if len(s.Type) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Type"))
+	}
+	if s.BinaryColumnStatisticsData != nil {
+		if err := s.BinaryColumnStatisticsData.Validate(); err != nil {
+			invalidParams.AddNested("BinaryColumnStatisticsData", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.BooleanColumnStatisticsData != nil {
+		if err := s.BooleanColumnStatisticsData.Validate(); err != nil {
+			invalidParams.AddNested("BooleanColumnStatisticsData", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.DateColumnStatisticsData != nil {
+		if err := s.DateColumnStatisticsData.Validate(); err != nil {
+			invalidParams.AddNested("DateColumnStatisticsData", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.DecimalColumnStatisticsData != nil {
+		if err := s.DecimalColumnStatisticsData.Validate(); err != nil {
+			invalidParams.AddNested("DecimalColumnStatisticsData", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.DoubleColumnStatisticsData != nil {
+		if err := s.DoubleColumnStatisticsData.Validate(); err != nil {
+			invalidParams.AddNested("DoubleColumnStatisticsData", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.LongColumnStatisticsData != nil {
+		if err := s.LongColumnStatisticsData.Validate(); err != nil {
+			invalidParams.AddNested("LongColumnStatisticsData", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.StringColumnStatisticsData != nil {
+		if err := s.StringColumnStatisticsData.Validate(); err != nil {
+			invalidParams.AddNested("StringColumnStatisticsData", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Defines a column containing error.
+type ColumnStatisticsError struct {
+	_ struct{} `type:"structure"`
+
+	// The ColumnStatistics of the column.
+	ColumnStatistics *ColumnStatistics `type:"structure"`
+
+	// The error message occurred during operation.
+	Error *ErrorDetail `type:"structure"`
+}
+
+// String returns the string representation
+func (s ColumnStatisticsError) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Defines a condition under which a trigger fires.
 type Condition struct {
 	_ struct{} `type:"structure"`
@@ -601,8 +875,7 @@ type Connection struct {
 	//    to which a Kafka client will connect to and bootstrap itself.
 	ConnectionProperties map[string]string `type:"map"`
 
-	// The type of the connection. Currently, only JDBC is supported; SFTP is not
-	// supported.
+	// The type of the connection. Currently, SFTP is not supported.
 	ConnectionType ConnectionType `type:"string" enum:"true"`
 
 	// The time that this connection definition was created.
@@ -815,7 +1088,7 @@ type Crawler struct {
 
 	// Crawler configuration information. This versioned JSON string allows users
 	// to specify aspects of a crawler's behavior. For more information, see Configuring
-	// a Crawler (http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html).
+	// a Crawler (https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html).
 	Configuration *string `type:"string"`
 
 	// If the crawler is running, contains the total time elapsed since the last
@@ -1279,6 +1552,9 @@ func (s *DataLakePrincipal) Validate() error {
 type Database struct {
 	_ struct{} `type:"structure"`
 
+	// The ID of the Data Catalog in which the database resides.
+	CatalogId *string `min:"1" type:"string"`
+
 	// Creates a set of default permissions on the table for principals.
 	CreateTableDefaultPermissions []PrincipalPermissions `type:"list"`
 
@@ -1299,11 +1575,47 @@ type Database struct {
 
 	// These key-value pairs define parameters and properties of the database.
 	Parameters map[string]string `type:"map"`
+
+	// A DatabaseIdentifier structure that describes a target database for resource
+	// linking.
+	TargetDatabase *DatabaseIdentifier `type:"structure"`
 }
 
 // String returns the string representation
 func (s Database) String() string {
 	return awsutil.Prettify(s)
+}
+
+// A structure that describes a target database for resource linking.
+type DatabaseIdentifier struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the Data Catalog in which the database resides.
+	CatalogId *string `min:"1" type:"string"`
+
+	// The name of the catalog database.
+	DatabaseName *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s DatabaseIdentifier) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DatabaseIdentifier) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DatabaseIdentifier"}
+	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
+	}
+	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // The structure used to create or update a database.
@@ -1329,6 +1641,10 @@ type DatabaseInput struct {
 	//
 	// These key-value pairs define parameters and properties of the database.
 	Parameters map[string]string `type:"map"`
+
+	// A DatabaseIdentifier structure that describes a target database for resource
+	// linking.
+	TargetDatabase *DatabaseIdentifier `type:"structure"`
 }
 
 // String returns the string representation
@@ -1355,6 +1671,149 @@ func (s *DatabaseInput) Validate() error {
 				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "CreateTableDefaultPermissions", i), err.(aws.ErrInvalidParams))
 			}
 		}
+	}
+	if s.TargetDatabase != nil {
+		if err := s.TargetDatabase.Validate(); err != nil {
+			invalidParams.AddNested("TargetDatabase", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Defines a date column statistics data.
+type DateColumnStatisticsData struct {
+	_ struct{} `type:"structure"`
+
+	// Maximum value of the column.
+	MaximumValue *time.Time `type:"timestamp"`
+
+	// Minimum value of the column.
+	MinimumValue *time.Time `type:"timestamp"`
+
+	// Number of distinct values.
+	//
+	// NumberOfDistinctValues is a required field
+	NumberOfDistinctValues *int64 `type:"long" required:"true"`
+
+	// Number of nulls.
+	//
+	// NumberOfNulls is a required field
+	NumberOfNulls *int64 `type:"long" required:"true"`
+}
+
+// String returns the string representation
+func (s DateColumnStatisticsData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DateColumnStatisticsData) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DateColumnStatisticsData"}
+
+	if s.NumberOfDistinctValues == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NumberOfDistinctValues"))
+	}
+
+	if s.NumberOfNulls == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NumberOfNulls"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Defines a decimal column statistics data.
+type DecimalColumnStatisticsData struct {
+	_ struct{} `type:"structure"`
+
+	// Maximum value of the column.
+	MaximumValue *DecimalNumber `type:"structure"`
+
+	// Minimum value of the column.
+	MinimumValue *DecimalNumber `type:"structure"`
+
+	// Number of distinct values.
+	//
+	// NumberOfDistinctValues is a required field
+	NumberOfDistinctValues *int64 `type:"long" required:"true"`
+
+	// Number of nulls.
+	//
+	// NumberOfNulls is a required field
+	NumberOfNulls *int64 `type:"long" required:"true"`
+}
+
+// String returns the string representation
+func (s DecimalColumnStatisticsData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DecimalColumnStatisticsData) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DecimalColumnStatisticsData"}
+
+	if s.NumberOfDistinctValues == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NumberOfDistinctValues"))
+	}
+
+	if s.NumberOfNulls == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NumberOfNulls"))
+	}
+	if s.MaximumValue != nil {
+		if err := s.MaximumValue.Validate(); err != nil {
+			invalidParams.AddNested("MaximumValue", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.MinimumValue != nil {
+		if err := s.MinimumValue.Validate(); err != nil {
+			invalidParams.AddNested("MinimumValue", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// Contains a numeric value in decimal format.
+type DecimalNumber struct {
+	_ struct{} `type:"structure"`
+
+	// The scale that determines where the decimal point falls in the unscaled value.
+	//
+	// Scale is a required field
+	Scale *int64 `type:"integer" required:"true"`
+
+	// The unscaled numeric value.
+	//
+	// UnscaledValue is automatically base64 encoded/decoded by the SDK.
+	//
+	// UnscaledValue is a required field
+	UnscaledValue []byte `type:"blob" required:"true"`
+}
+
+// String returns the string representation
+func (s DecimalNumber) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DecimalNumber) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DecimalNumber"}
+
+	if s.Scale == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Scale"))
+	}
+
+	if s.UnscaledValue == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UnscaledValue"))
 	}
 
 	if invalidParams.Len() > 0 {
@@ -1540,12 +1999,75 @@ func (s DevEndpointCustomLibraries) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Defines a double column statistics data.
+type DoubleColumnStatisticsData struct {
+	_ struct{} `type:"structure"`
+
+	// Maximum value of the column.
+	MaximumValue *float64 `type:"double"`
+
+	// Minimum value of the column.
+	MinimumValue *float64 `type:"double"`
+
+	// Number of distinct values.
+	//
+	// NumberOfDistinctValues is a required field
+	NumberOfDistinctValues *int64 `type:"long" required:"true"`
+
+	// Number of nulls.
+	//
+	// NumberOfNulls is a required field
+	NumberOfNulls *int64 `type:"long" required:"true"`
+}
+
+// String returns the string representation
+func (s DoubleColumnStatisticsData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *DoubleColumnStatisticsData) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "DoubleColumnStatisticsData"}
+
+	if s.NumberOfDistinctValues == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NumberOfDistinctValues"))
+	}
+
+	if s.NumberOfNulls == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NumberOfNulls"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Specifies an Amazon DynamoDB table to crawl.
 type DynamoDBTarget struct {
 	_ struct{} `type:"structure"`
 
 	// The name of the DynamoDB table to crawl.
 	Path *string `type:"string"`
+
+	// Indicates whether to scan all the records, or to sample rows from the table.
+	// Scanning all the records can take a long time when the table is not a high
+	// throughput table.
+	//
+	// A value of true means to scan all records, while a value of false means to
+	// sample the records. If no value is specified, the value defaults to true.
+	ScanAll *bool `locationName:"scanAll" type:"boolean"`
+
+	// The percentage of the configured read capacity units to use by the AWS Glue
+	// crawler. Read capacity units is a term defined by DynamoDB, and is a numeric
+	// value that acts as rate limiter for the number of reads that can be performed
+	// on that table per second.
+	//
+	// The valid values are null or a value between 0.1 to 1.5. A null value is
+	// used when user does not provide a value, and defaults to 0.5 of the configured
+	// Read Capacity Unit (for provisioned tables), or 0.25 of the max configured
+	// Read Capacity Unit (for tables using on-demand mode).
+	ScanRate *float64 `locationName:"scanRate" type:"double"`
 }
 
 // String returns the string representation
@@ -1830,8 +2352,7 @@ func (s FindMatchesTaskRunProperties) String() string {
 type GetConnectionsFilter struct {
 	_ struct{} `type:"structure"`
 
-	// The type of connections to return. Currently, only JDBC is supported; SFTP
-	// is not supported.
+	// The type of connections to return. Currently, SFTP is not supported.
 	ConnectionType ConnectionType `type:"string" enum:"true"`
 
 	// A criteria string that must match the criteria recorded in the connection
@@ -1841,6 +2362,28 @@ type GetConnectionsFilter struct {
 
 // String returns the string representation
 func (s GetConnectionsFilter) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A structure for returning a resource policy.
+type GluePolicy struct {
+	_ struct{} `type:"structure"`
+
+	// The date and time at which the policy was created.
+	CreateTime *time.Time `type:"timestamp"`
+
+	// Contains the hash value associated with this policy.
+	PolicyHash *string `min:"1" type:"string"`
+
+	// Contains the requested policy document, in JSON format.
+	PolicyInJson *string `min:"2" type:"string"`
+
+	// The date and time at which the policy was last updated.
+	UpdateTime *time.Time `type:"timestamp"`
+}
+
+// String returns the string representation
+func (s GluePolicy) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -1915,11 +2458,11 @@ type GrokClassifier struct {
 	CreationTime *time.Time `type:"timestamp"`
 
 	// Optional custom grok patterns defined by this classifier. For more information,
-	// see custom patterns in Writing Custom Classifiers (http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html).
+	// see custom patterns in Writing Custom Classifiers (https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html).
 	CustomPatterns *string `type:"string"`
 
 	// The grok pattern applied to a data store by this classifier. For more information,
-	// see built-in patterns in Writing Custom Classifiers (http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html).
+	// see built-in patterns in Writing Custom Classifiers (https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html).
 	//
 	// GrokPattern is a required field
 	GrokPattern *string `min:"1" type:"string" required:"true"`
@@ -1966,7 +2509,7 @@ type JdbcTarget struct {
 	ConnectionName *string `type:"string"`
 
 	// A list of glob patterns used to exclude from the crawl. For more information,
-	// see Catalog Tables with a Crawler (http://docs.aws.amazon.com/glue/latest/dg/add-crawler.html).
+	// see Catalog Tables with a Crawler (https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html).
 	Exclusions []string `type:"list"`
 
 	// The path of the JDBC target.
@@ -2598,6 +3141,50 @@ func (s *Location) Validate() error {
 	return nil
 }
 
+// Defines a long column statistics data.
+type LongColumnStatisticsData struct {
+	_ struct{} `type:"structure"`
+
+	// Maximum value of the column.
+	MaximumValue *int64 `type:"long"`
+
+	// Minimum value of the column.
+	MinimumValue *int64 `type:"long"`
+
+	// Number of distinct values.
+	//
+	// NumberOfDistinctValues is a required field
+	NumberOfDistinctValues *int64 `type:"long" required:"true"`
+
+	// Number of nulls.
+	//
+	// NumberOfNulls is a required field
+	NumberOfNulls *int64 `type:"long" required:"true"`
+}
+
+// String returns the string representation
+func (s LongColumnStatisticsData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *LongColumnStatisticsData) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "LongColumnStatisticsData"}
+
+	if s.NumberOfDistinctValues == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NumberOfDistinctValues"))
+	}
+
+	if s.NumberOfNulls == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NumberOfNulls"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // A structure for a machine learning transform.
 type MLTransform struct {
 	_ struct{} `type:"structure"`
@@ -2862,6 +3449,9 @@ func (s *Order) Validate() error {
 // Represents a slice of table data.
 type Partition struct {
 	_ struct{} `type:"structure"`
+
+	// The ID of the Data Catalog in which the partition resides.
+	CatalogId *string `min:"1" type:"string"`
 
 	// The time at which the partition was created.
 	CreationTime *time.Time `type:"timestamp"`
@@ -3172,7 +3762,7 @@ type S3Target struct {
 	_ struct{} `type:"structure"`
 
 	// A list of glob patterns used to exclude from the crawl. For more information,
-	// see Catalog Tables with a Crawler (http://docs.aws.amazon.com/glue/latest/dg/add-crawler.html).
+	// see Catalog Tables with a Crawler (https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html).
 	Exclusions []string `type:"list"`
 
 	// The path to the Amazon S3 target.
@@ -3188,10 +3778,10 @@ func (s S3Target) String() string {
 type Schedule struct {
 	_ struct{} `type:"structure"`
 
-	// A cron expression used to specify the schedule. For more information, see
-	// Time-Based Schedules for Jobs and Crawlers (http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).
-	// For example, to run something every day at 12:15 UTC, specify cron(15 12
-	// * * ? *).
+	// A cron expression used to specify the schedule (see Time-Based Schedules
+	// for Jobs and Crawlers (https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).
+	// For example, to run something every day at 12:15 UTC, you would specify:
+	// cron(15 12 * * ? *).
 	ScheduleExpression *string `type:"string"`
 
 	// The state of the schedule.
@@ -3464,9 +4054,68 @@ func (s *StorageDescriptor) Validate() error {
 	return nil
 }
 
+// Defines a string column statistics data.
+type StringColumnStatisticsData struct {
+	_ struct{} `type:"structure"`
+
+	// Average value of the column.
+	//
+	// AverageLength is a required field
+	AverageLength *float64 `type:"double" required:"true"`
+
+	// Maximum value of the column.
+	//
+	// MaximumLength is a required field
+	MaximumLength *int64 `type:"long" required:"true"`
+
+	// Number of distinct values.
+	//
+	// NumberOfDistinctValues is a required field
+	NumberOfDistinctValues *int64 `type:"long" required:"true"`
+
+	// Number of nulls.
+	//
+	// NumberOfNulls is a required field
+	NumberOfNulls *int64 `type:"long" required:"true"`
+}
+
+// String returns the string representation
+func (s StringColumnStatisticsData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *StringColumnStatisticsData) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "StringColumnStatisticsData"}
+
+	if s.AverageLength == nil {
+		invalidParams.Add(aws.NewErrParamRequired("AverageLength"))
+	}
+
+	if s.MaximumLength == nil {
+		invalidParams.Add(aws.NewErrParamRequired("MaximumLength"))
+	}
+
+	if s.NumberOfDistinctValues == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NumberOfDistinctValues"))
+	}
+
+	if s.NumberOfNulls == nil {
+		invalidParams.Add(aws.NewErrParamRequired("NumberOfNulls"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
 // Represents a collection of related data organized in columns and rows.
 type Table struct {
 	_ struct{} `type:"structure"`
+
+	// The ID of the Data Catalog in which the table resides.
+	CatalogId *string `min:"1" type:"string"`
 
 	// The time when the table definition was created in the Data Catalog.
 	CreateTime *time.Time `type:"timestamp"`
@@ -3522,6 +4171,9 @@ type Table struct {
 	// The type of this table (EXTERNAL_TABLE, VIRTUAL_VIEW, etc.).
 	TableType *string `type:"string"`
 
+	// A TableIdentifier structure that describes a target table for resource linking.
+	TargetTable *TableIdentifier `type:"structure"`
+
 	// The last time that the table was updated.
 	UpdateTime *time.Time `type:"timestamp"`
 
@@ -3551,6 +4203,44 @@ type TableError struct {
 // String returns the string representation
 func (s TableError) String() string {
 	return awsutil.Prettify(s)
+}
+
+// A structure that describes a target table for resource linking.
+type TableIdentifier struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the Data Catalog in which the table resides.
+	CatalogId *string `min:"1" type:"string"`
+
+	// The name of the catalog database that contains the target table.
+	DatabaseName *string `min:"1" type:"string"`
+
+	// The name of the target table.
+	Name *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s TableIdentifier) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *TableIdentifier) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "TableIdentifier"}
+	if s.CatalogId != nil && len(*s.CatalogId) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CatalogId", 1))
+	}
+	if s.DatabaseName != nil && len(*s.DatabaseName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("DatabaseName", 1))
+	}
+	if s.Name != nil && len(*s.Name) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
 }
 
 // A structure used to define a table.
@@ -3598,6 +4288,9 @@ type TableInput struct {
 	// The type of this table (EXTERNAL_TABLE, VIRTUAL_VIEW, etc.).
 	TableType *string `type:"string"`
 
+	// A TableIdentifier structure that describes a target table for resource linking.
+	TargetTable *TableIdentifier `type:"structure"`
+
 	// If the table is a view, the expanded text of the view; otherwise null.
 	ViewExpandedText *string `type:"string"`
 
@@ -3633,6 +4326,11 @@ func (s *TableInput) Validate() error {
 	if s.StorageDescriptor != nil {
 		if err := s.StorageDescriptor.Validate(); err != nil {
 			invalidParams.AddNested("StorageDescriptor", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.TargetTable != nil {
+		if err := s.TargetTable.Validate(); err != nil {
+			invalidParams.AddNested("TargetTable", err.(aws.ErrInvalidParams))
 		}
 	}
 
@@ -4248,11 +4946,17 @@ func (s *UpdateXMLClassifierRequest) Validate() error {
 type UserDefinedFunction struct {
 	_ struct{} `type:"structure"`
 
+	// The ID of the Data Catalog in which the function resides.
+	CatalogId *string `min:"1" type:"string"`
+
 	// The Java class that contains the function code.
 	ClassName *string `min:"1" type:"string"`
 
 	// The time at which the function was created.
 	CreateTime *time.Time `type:"timestamp"`
+
+	// The name of the catalog database that contains the function.
+	DatabaseName *string `min:"1" type:"string"`
 
 	// The name of the function.
 	FunctionName *string `min:"1" type:"string"`

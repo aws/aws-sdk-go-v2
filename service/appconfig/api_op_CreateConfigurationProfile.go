@@ -40,9 +40,7 @@ type CreateConfigurationProfileInput struct {
 
 	// The ARN of an IAM role with permission to access the configuration at the
 	// specified LocationUri.
-	//
-	// RetrievalRoleArn is a required field
-	RetrievalRoleArn *string `min:"20" type:"string" required:"true"`
+	RetrievalRoleArn *string `min:"20" type:"string"`
 
 	// Metadata to assign to the configuration profile. Tags help organize and categorize
 	// your AppConfig resources. Each tag consists of a key and an optional value,
@@ -78,10 +76,6 @@ func (s *CreateConfigurationProfileInput) Validate() error {
 	}
 	if s.Name != nil && len(*s.Name) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Name", 1))
-	}
-
-	if s.RetrievalRoleArn == nil {
-		invalidParams.Add(aws.NewErrParamRequired("RetrievalRoleArn"))
 	}
 	if s.RetrievalRoleArn != nil && len(*s.RetrievalRoleArn) < 20 {
 		invalidParams.Add(aws.NewErrParamMinLen("RetrievalRoleArn", 20))

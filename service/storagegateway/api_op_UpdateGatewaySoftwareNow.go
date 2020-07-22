@@ -74,9 +74,9 @@ const opUpdateGatewaySoftwareNow = "UpdateGatewaySoftwareNow"
 // A software update forces a system restart of your gateway. You can minimize
 // the chance of any disruption to your applications by increasing your iSCSI
 // Initiators' timeouts. For more information about increasing iSCSI Initiator
-// timeouts for Windows and Linux, see Customizing Your Windows iSCSI Settings
+// timeouts for Windows and Linux, see Customizing your Windows iSCSI settings
 // (https://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorWindowsClient.html#CustomizeWindowsiSCSISettings)
-// and Customizing Your Linux iSCSI Settings (https://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorRedHatClient.html#CustomizeLinuxiSCSISettings),
+// and Customizing your Linux iSCSI settings (https://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorRedHatClient.html#CustomizeLinuxiSCSISettings),
 // respectively.
 //
 //    // Example sending a request using UpdateGatewaySoftwareNowRequest.

@@ -72,7 +72,7 @@ const opListPolicies = "ListPolicies"
 // ListPoliciesRequest returns a request value for making API operation for
 // Firewall Management Service.
 //
-// Returns an array of PolicySummary objects in the response.
+// Returns an array of PolicySummary objects.
 //
 //    // Example sending a request using ListPoliciesRequest.
 //    req := client.ListPoliciesRequest(params)

@@ -25,7 +25,7 @@ type UpdatePublicKeyInput struct {
 	// Request to update public key information.
 	//
 	// PublicKeyConfig is a required field
-	PublicKeyConfig *PublicKeyConfig `locationName:"PublicKeyConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2019-03-26/"`
+	PublicKeyConfig *PublicKeyConfig `locationName:"PublicKeyConfig" type:"structure" required:"true" xmlURI:"http://cloudfront.amazonaws.com/doc/2020-05-31/"`
 }
 
 // String returns the string representation
@@ -74,7 +74,7 @@ func (s UpdatePublicKeyInput) MarshalFields(e protocol.FieldEncoder) error {
 	if s.PublicKeyConfig != nil {
 		v := s.PublicKeyConfig
 
-		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2019-03-26/"}
+		metadata := protocol.Metadata{XMLNamespaceURI: "http://cloudfront.amazonaws.com/doc/2020-05-31/"}
 		e.SetFields(protocol.PayloadTarget, "PublicKeyConfig", v, metadata)
 	}
 	return nil
@@ -112,7 +112,7 @@ func (s UpdatePublicKeyOutput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-const opUpdatePublicKey = "UpdatePublicKey2019_03_26"
+const opUpdatePublicKey = "UpdatePublicKey2020_05_31"
 
 // UpdatePublicKeyRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -127,12 +127,12 @@ const opUpdatePublicKey = "UpdatePublicKey2019_03_26"
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/UpdatePublicKey
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdatePublicKey
 func (c *Client) UpdatePublicKeyRequest(input *UpdatePublicKeyInput) UpdatePublicKeyRequest {
 	op := &aws.Operation{
 		Name:       opUpdatePublicKey,
 		HTTPMethod: "PUT",
-		HTTPPath:   "/2019-03-26/public-key/{Id}/config",
+		HTTPPath:   "/2020-05-31/public-key/{Id}/config",
 	}
 
 	if input == nil {

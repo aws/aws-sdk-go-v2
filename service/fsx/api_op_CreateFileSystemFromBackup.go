@@ -20,10 +20,13 @@ type CreateFileSystemFromBackupInput struct {
 	// BackupId is a required field
 	BackupId *string `min:"12" type:"string" required:"true"`
 
-	// (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to
-	// ensure idempotent creation. This string is automatically filled on your behalf
-	// when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
+	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
+	// creation. This string is automatically filled on your behalf when you use
+	// the AWS Command Line Interface (AWS CLI) or an AWS SDK.
 	ClientRequestToken *string `min:"1" type:"string" idempotencyToken:"true"`
+
+	// The Lustre configuration for the file system being created.
+	LustreConfiguration *CreateFileSystemLustreConfiguration `type:"structure"`
 
 	// A list of IDs for the security groups that apply to the specified network
 	// interfaces created for file system access. These security groups apply to
@@ -95,6 +98,11 @@ func (s *CreateFileSystemFromBackupInput) Validate() error {
 	if s.Tags != nil && len(s.Tags) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Tags", 1))
 	}
+	if s.LustreConfiguration != nil {
+		if err := s.LustreConfiguration.Validate(); err != nil {
+			invalidParams.AddNested("LustreConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.Tags != nil {
 		for i, v := range s.Tags {
 			if err := v.Validate(); err != nil {
@@ -132,8 +140,7 @@ const opCreateFileSystemFromBackup = "CreateFileSystemFromBackup"
 // CreateFileSystemFromBackupRequest returns a request value for making API operation for
 // Amazon FSx.
 //
-// Creates a new Amazon FSx file system from an existing Amazon FSx for Windows
-// File Server backup.
+// Creates a new Amazon FSx file system from an existing Amazon FSx backup.
 //
 // If a file system with the specified client request token exists and the parameters
 // match, this operation returns the description of the file system. If a client

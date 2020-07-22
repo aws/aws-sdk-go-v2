@@ -101,6 +101,11 @@ type GetServiceLastAccessedDetailsOutput struct {
 	// JobStatus is a required field
 	JobStatus JobStatusType `type:"string" required:"true" enum:"true"`
 
+	// The type of job. Service jobs return information about when each service
+	// was last accessed. Action jobs also include information about when tracked
+	// actions within the service were last accessed.
+	JobType AccessAdvisorUsageGranularityType `type:"string" enum:"true"`
+
 	// When IsTruncated is true, this element is present and contains the value
 	// to use for the Marker parameter in a subsequent pagination request.
 	Marker *string `type:"string"`
@@ -159,6 +164,15 @@ const opGetServiceLastAccessedDetails = "GetServiceLastAccessedDetails"
 //    to attempt to access the service
 //
 // By default, the list is sorted by service namespace.
+//
+// If you specified ACTION_LEVEL granularity when you generated the report,
+// this operation returns service and action last accessed data. This includes
+// the most recent access attempt for each tracked action within a service.
+// Otherwise, this operation returns only service data.
+//
+// For more information about service and action last accessed data, see Reducing
+// Permissions Using Service Last Accessed Data (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html)
+// in the IAM User Guide.
 //
 //    // Example sending a request using GetServiceLastAccessedDetailsRequest.
 //    req := client.GetServiceLastAccessedDetailsRequest(params)

@@ -65,7 +65,7 @@ type InitiateAuthInput struct {
 	//
 	//    * For CUSTOM_AUTH: USERNAME (required), SECRET_HASH (if app client is
 	//    configured with client secret), DEVICE_KEY
-	AuthParameters map[string]string `type:"map"`
+	AuthParameters map[string]string `type:"map" sensitive:"true"`
 
 	// The app client ID.
 	//
@@ -244,6 +244,7 @@ func (c *Client) InitiateAuthRequest(input *InitiateAuthInput) InitiateAuthReque
 	}
 
 	req := c.newRequest(op, input, &InitiateAuthOutput{})
+	req.Config.Credentials = aws.AnonymousCredentials
 
 	return InitiateAuthRequest{Request: req, Input: input, Copy: c.InitiateAuthRequest}
 }

@@ -63,8 +63,6 @@ import (
 type ClientAPI interface {
 	AcceptInvitationRequest(*macie2.AcceptInvitationInput) macie2.AcceptInvitationRequest
 
-	ArchiveFindingsRequest(*macie2.ArchiveFindingsInput) macie2.ArchiveFindingsRequest
-
 	BatchGetCustomDataIdentifiersRequest(*macie2.BatchGetCustomDataIdentifiersInput) macie2.BatchGetCustomDataIdentifiersRequest
 
 	CreateClassificationJobRequest(*macie2.CreateClassificationJobInput) macie2.CreateClassificationJobRequest
@@ -152,8 +150,6 @@ type ClientAPI interface {
 	TagResourceRequest(*macie2.TagResourceInput) macie2.TagResourceRequest
 
 	TestCustomDataIdentifierRequest(*macie2.TestCustomDataIdentifierInput) macie2.TestCustomDataIdentifierRequest
-
-	UnarchiveFindingsRequest(*macie2.UnarchiveFindingsInput) macie2.UnarchiveFindingsRequest
 
 	UntagResourceRequest(*macie2.UntagResourceInput) macie2.UntagResourceRequest
 

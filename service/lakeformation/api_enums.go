@@ -75,6 +75,7 @@ const (
 	PermissionDrop               Permission = "DROP"
 	PermissionDelete             Permission = "DELETE"
 	PermissionInsert             Permission = "INSERT"
+	PermissionDescribe           Permission = "DESCRIBE"
 	PermissionCreateDatabase     Permission = "CREATE_DATABASE"
 	PermissionCreateTable        Permission = "CREATE_TABLE"
 	PermissionDataLocationAccess Permission = "DATA_LOCATION_ACCESS"

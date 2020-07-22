@@ -95,7 +95,13 @@ type ClientAPI interface {
 
 	ListServicesRequest(*servicediscovery.ListServicesInput) servicediscovery.ListServicesRequest
 
+	ListTagsForResourceRequest(*servicediscovery.ListTagsForResourceInput) servicediscovery.ListTagsForResourceRequest
+
 	RegisterInstanceRequest(*servicediscovery.RegisterInstanceInput) servicediscovery.RegisterInstanceRequest
+
+	TagResourceRequest(*servicediscovery.TagResourceInput) servicediscovery.TagResourceRequest
+
+	UntagResourceRequest(*servicediscovery.UntagResourceInput) servicediscovery.UntagResourceRequest
 
 	UpdateInstanceCustomHealthStatusRequest(*servicediscovery.UpdateInstanceCustomHealthStatusInput) servicediscovery.UpdateInstanceCustomHealthStatusRequest
 

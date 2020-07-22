@@ -47,7 +47,7 @@ type ModifyEndpointInput struct {
 	// Settings in JSON format for the target Elasticsearch endpoint. For more information
 	// about the available settings, see Extra Connection Attributes When Using
 	// Elasticsearch as a Target for AWS DMS (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration)
-	// in the AWS Database Migration User Guide.
+	// in the AWS Database Migration Service User Guide.
 	ElasticsearchSettings *ElasticsearchSettings `type:"structure"`
 
 	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
@@ -66,7 +66,7 @@ type ModifyEndpointInput struct {
 	// The type of engine for the endpoint. Valid values, depending on the EndpointType,
 	// include "mysql", "oracle", "postgres", "mariadb", "aurora", "aurora-postgresql",
 	// "redshift", "s3", "db2", "azuredb", "sybase", "dynamodb", "mongodb", "kinesis",
-	// "kafka", "elasticsearch", "documentdb", and "sqlserver".
+	// "kafka", "elasticsearch", "documentdb", "sqlserver", and "neptune".
 	EngineName *string `type:"string"`
 
 	// The external table definition.
@@ -79,13 +79,13 @@ type ModifyEndpointInput struct {
 	// Settings in JSON format for the target Apache Kafka endpoint. For more information
 	// about the available settings, see Using Apache Kafka as a Target for AWS
 	// Database Migration Service (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html)
-	// in the AWS Database Migration User Guide.
+	// in the AWS Database Migration Service User Guide.
 	KafkaSettings *KafkaSettings `type:"structure"`
 
 	// Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams.
 	// For more information about the available settings, see Using Amazon Kinesis
 	// Data Streams as a Target for AWS Database Migration Service (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html)
-	// in the AWS Database Migration User Guide.
+	// in the AWS Database Migration Service User Guide.
 	KinesisSettings *KinesisSettings `type:"structure"`
 
 	// Settings in JSON format for the source MongoDB endpoint. For more information
@@ -95,8 +95,8 @@ type ModifyEndpointInput struct {
 	MongoDbSettings *MongoDbSettings `type:"structure"`
 
 	// Settings in JSON format for the target Amazon Neptune endpoint. For more
-	// information about the available settings, see https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings)
+	// information about the available settings, see Specifying Endpoint Settings
+	// for Amazon Neptune as a Target (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings)
 	// in the AWS Database Migration Service User Guide.
 	NeptuneSettings *NeptuneSettings `type:"structure"`
 

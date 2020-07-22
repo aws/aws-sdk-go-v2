@@ -173,10 +173,11 @@ type EnvironmentType string
 
 // Enum values for EnvironmentType
 const (
-	EnvironmentTypeWindowsContainer  EnvironmentType = "WINDOWS_CONTAINER"
-	EnvironmentTypeLinuxContainer    EnvironmentType = "LINUX_CONTAINER"
-	EnvironmentTypeLinuxGpuContainer EnvironmentType = "LINUX_GPU_CONTAINER"
-	EnvironmentTypeArmContainer      EnvironmentType = "ARM_CONTAINER"
+	EnvironmentTypeWindowsContainer           EnvironmentType = "WINDOWS_CONTAINER"
+	EnvironmentTypeLinuxContainer             EnvironmentType = "LINUX_CONTAINER"
+	EnvironmentTypeLinuxGpuContainer          EnvironmentType = "LINUX_GPU_CONTAINER"
+	EnvironmentTypeArmContainer               EnvironmentType = "ARM_CONTAINER"
+	EnvironmentTypeWindowsServer2019Container EnvironmentType = "WINDOWS_SERVER_2019_CONTAINER"
 )
 
 func (enum EnvironmentType) MarshalValue() (string, error) {

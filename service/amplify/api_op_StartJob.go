@@ -11,39 +11,40 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for Start job request.
+// The request structure for the start job request.
 type StartJobInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for an Amplify App.
+	// The unique ID for an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Name for the branch, for the Job.
+	// The branch name for the job.
 	//
 	// BranchName is a required field
 	BranchName *string `location:"uri" locationName:"branchName" min:"1" type:"string" required:"true"`
 
-	// Commit Id from 3rd party repository provider for the Job.
+	// The commit ID from a third-party repository provider for the job.
 	CommitId *string `locationName:"commitId" type:"string"`
 
-	// Commit message from 3rd party repository provider for the Job.
+	// The commit message from a third-party repository provider for the job.
 	CommitMessage *string `locationName:"commitMessage" type:"string"`
 
-	// Commit date / time for the Job.
+	// The commit date and time for the job.
 	CommitTime *time.Time `locationName:"commitTime" type:"timestamp"`
 
-	// Unique Id for an existing job. Required for "RETRY" JobType.
+	// The unique ID for an existing job. This is required if the value of jobType
+	// is RETRY.
 	JobId *string `locationName:"jobId" type:"string"`
 
-	// Descriptive reason for starting this job.
+	// A descriptive reason for starting this job.
 	JobReason *string `locationName:"jobReason" type:"string"`
 
-	// Type for the Job. Available JobTypes are: \n "RELEASE": Start a new job with
-	// the latest change from the specified branch. Only available for apps that
-	// have connected to a repository. "RETRY": Retry an existing job. JobId is
-	// required for this type of job.
+	// Describes the type for the job. The job type RELEASE starts a new job with
+	// the latest change from the specified branch. This value is available only
+	// for apps that are connected to a repository. The job type RETRY retries an
+	// existing job. If the job type value is RETRY, the jobId is also required.
 	//
 	// JobType is a required field
 	JobType JobType `locationName:"jobType" type:"string" required:"true" enum:"true"`
@@ -137,11 +138,11 @@ func (s StartJobInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Result structure for run job request.
+// The result structure for the run job request.
 type StartJobOutput struct {
 	_ struct{} `type:"structure"`
 
-	// Summary for the Job.
+	// The summary for the job.
 	//
 	// JobSummary is a required field
 	JobSummary *JobSummary `locationName:"jobSummary" type:"structure" required:"true"`
@@ -168,7 +169,7 @@ const opStartJob = "StartJob"
 // StartJobRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Starts a new job for a branch, part of an Amplify App.
+// Starts a new job for a branch of an Amplify app.
 //
 //    // Example sending a request using StartJobRequest.
 //    req := client.StartJobRequest(params)

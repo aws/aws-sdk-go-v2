@@ -14,9 +14,9 @@ import (
 type CreateFileSystemInput struct {
 	_ struct{} `type:"structure"`
 
-	// (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to
-	// ensure idempotent creation. This string is automatically filled on your behalf
-	// when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
+	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
+	// creation. This string is automatically filled on your behalf when you use
+	// the AWS Command Line Interface (AWS CLI) or an AWS SDK.
 	ClientRequestToken *string `min:"1" type:"string" idempotencyToken:"true"`
 
 	// The type of Amazon FSx file system to create, either WINDOWS or LUSTRE.
@@ -69,7 +69,7 @@ type CreateFileSystemInput struct {
 	//    * Set to HDD to use hard disk drive storage. HDD is supported on SINGLE_AZ_2
 	//    and MULTI_AZ_1 Windows file system deployment types.
 	//
-	// Default value is SSD. For more information, see Storage Type Options (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-tco.html#saz-maz-storage-type)
+	// Default value is SSD. For more information, see Storage Type Options (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options)
 	// in the Amazon FSx for Windows User Guide.
 	StorageType StorageType `type:"string" enum:"true"`
 

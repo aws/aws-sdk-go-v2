@@ -12,8 +12,8 @@ import (
 type UpdateEnrollmentStatusInput struct {
 	_ struct{} `type:"structure"`
 
-	// Indicates whether to enroll member accounts within the organization, if the
-	// account is a master account of an organization.
+	// Indicates whether to enroll member accounts of the organization if the your
+	// account is the master account of an organization.
 	IncludeMemberAccounts *bool `locationName:"includeMemberAccounts" type:"boolean"`
 
 	// The new enrollment status of the account.
@@ -68,8 +68,8 @@ const opUpdateEnrollmentStatus = "UpdateEnrollmentStatus"
 // Updates the enrollment (opt in) status of an account to the AWS Compute Optimizer
 // service.
 //
-// If the account is a master account of an organization, this operation can
-// also enroll member accounts within the organization.
+// If the account is a master account of an organization, this action can also
+// be used to enroll member accounts within the organization.
 //
 //    // Example sending a request using UpdateEnrollmentStatusRequest.
 //    req := client.UpdateEnrollmentStatusRequest(params)

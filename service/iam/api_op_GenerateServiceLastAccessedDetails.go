@@ -18,6 +18,14 @@ type GenerateServiceLastAccessedDetailsInput struct {
 	//
 	// Arn is a required field
 	Arn *string `min:"20" type:"string" required:"true"`
+
+	// The level of detail that you want to generate. You can specify whether you
+	// want to generate information about the last attempt to access services or
+	// actions. If you specify service-level granularity, this operation generates
+	// only service data. If you specify action-level granularity, it generates
+	// service and action data. If you don't include this optional parameter, the
+	// operation generates service data.
+	Granularity AccessAdvisorUsageGranularityType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
@@ -110,8 +118,8 @@ const opGenerateServiceLastAccessedDetails = "GenerateServiceLastAccessedDetails
 // see Evaluating Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics)
 // in the IAM User Guide.
 //
-// For more information about service last accessed data, see Reducing Policy
-// Scope by Viewing User Activity (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html)
+// For more information about service and action last accessed data, see Reducing
+// Permissions Using Service Last Accessed Data (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html)
 // in the IAM User Guide.
 //
 //    // Example sending a request using GenerateServiceLastAccessedDetailsRequest.

@@ -114,10 +114,10 @@ type FleetSummary struct {
 	// The time when the fleet was created.
 	CreatedTime *time.Time `type:"timestamp"`
 
-	// The name to display.
+	// The name of the fleet to display.
 	DisplayName *string `type:"string"`
 
-	// The ARN of the fleet.
+	// The Amazon Resource Name (ARN) of the fleet.
 	FleetArn *string `min:"20" type:"string"`
 
 	// The name of the fleet.
@@ -128,6 +128,9 @@ type FleetSummary struct {
 
 	// The time when the fleet was last updated.
 	LastUpdatedTime *time.Time `type:"timestamp"`
+
+	// The tags attached to the resource. A tag is a key-value pair.
+	Tags map[string]string `min:"1" type:"map"`
 }
 
 // String returns the string representation
@@ -180,6 +183,18 @@ func (s FleetSummary) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "LastUpdatedTime",
 			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "Tags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	return nil
 }

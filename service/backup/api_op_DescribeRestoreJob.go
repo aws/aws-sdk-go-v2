@@ -55,6 +55,9 @@ func (s DescribeRestoreJobInput) MarshalFields(e protocol.FieldEncoder) error {
 type DescribeRestoreJobOutput struct {
 	_ struct{} `type:"structure"`
 
+	// Returns the account ID that owns the restore job.
+	AccountId *string `type:"string"`
+
 	// The size, in bytes, of the restored resource.
 	BackupSizeInBytes *int64 `type:"long"`
 
@@ -90,6 +93,9 @@ type DescribeRestoreJobOutput struct {
 	// An ARN that uniquely identifies a recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
 	RecoveryPointArn *string `type:"string"`
 
+	// Returns metadata associated with a restore job listed by resource type.
+	ResourceType *string `type:"string"`
+
 	// Uniquely identifies the job that restores a recovery point.
 	RestoreJobId *string `type:"string"`
 
@@ -97,7 +103,7 @@ type DescribeRestoreJobOutput struct {
 	// to restore a recovery point.
 	Status RestoreJobStatus `type:"string" enum:"true"`
 
-	// A detailed message explaining the status of a job to restore a recovery point.
+	// A message showing the status of a job to restore a recovery point.
 	StatusMessage *string `type:"string"`
 }
 
@@ -108,6 +114,12 @@ func (s DescribeRestoreJobOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeRestoreJobOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccountId != nil {
+		v := *s.AccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AccountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.BackupSizeInBytes != nil {
 		v := *s.BackupSizeInBytes
 
@@ -157,6 +169,12 @@ func (s DescribeRestoreJobOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "RecoveryPointArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceType != nil {
+		v := *s.ResourceType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ResourceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	if s.RestoreJobId != nil {
 		v := *s.RestoreJobId

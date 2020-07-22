@@ -13,7 +13,8 @@ import (
 type ListRecommendationFeedbackInput struct {
 	_ struct{} `type:"structure"`
 
-	// The Amazon Resource Name (ARN) that identifies the code review.
+	// The Amazon Resource Name (ARN) of the CodeReview (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
+	// object.
 	//
 	// CodeReviewArn is a required field
 	CodeReviewArn *string `location:"uri" locationName:"CodeReviewArn" min:"1" type:"string" required:"true"`
@@ -28,14 +29,16 @@ type ListRecommendationFeedbackInput struct {
 	// unchanged.
 	NextToken *string `location:"querystring" locationName:"NextToken" min:"1" type:"string"`
 
-	// Filter on recommendationIds that need to be applied before displaying the
-	// result. This can be used to query all the recommendation feedback for a given
-	// recommendation.
+	// Used to query the recommendation feedback for a given recommendation.
 	RecommendationIds []string `location:"querystring" locationName:"RecommendationIds" min:"1" type:"list"`
 
-	// Filter on userIds that need to be applied before displaying the result. This
-	// can be used to query all the recommendation feedback for a code review from
-	// a given user.
+	// An AWS user's account ID or Amazon Resource Name (ARN). Use this ID to query
+	// the recommendation feedback for a code review from that user.
+	//
+	// The UserId is an IAM principal that can be specified as an AWS account ID
+	// or an Amazon Resource Name (ARN). For more information, see Specifying a
+	// Principal (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying)
+	// in the AWS Identity and Access Management User Guide.
 	UserIds []string `location:"querystring" locationName:"UserIds" min:"1" type:"list"`
 }
 
@@ -131,7 +134,7 @@ type ListRecommendationFeedbackOutput struct {
 	// unchanged.
 	NextToken *string `min:"1" type:"string"`
 
-	// Recommendation feedback summaries corresponding to the code reivew ARN.
+	// Recommendation feedback summaries corresponding to the code review ARN.
 	RecommendationFeedbackSummaries []RecommendationFeedbackSummary `type:"list"`
 }
 
@@ -168,9 +171,9 @@ const opListRecommendationFeedback = "ListRecommendationFeedback"
 // ListRecommendationFeedbackRequest returns a request value for making API operation for
 // Amazon CodeGuru Reviewer.
 //
-// Lists the customer feedback for a CodeGuru Reviewer recommendation for all
-// users. This API will be used from the console to extract the previously given
-// feedback by the user to pre-populate the feedback emojis for all recommendations.
+// Returns a list of RecommendationFeedbackSummary (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RecommendationFeedbackSummary.html)
+// objects that contain customer recommendation feedback for all CodeGuru Reviewer
+// users.
 //
 //    // Example sending a request using ListRecommendationFeedbackRequest.
 //    req := client.ListRecommendationFeedbackRequest(params)

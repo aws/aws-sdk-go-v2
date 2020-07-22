@@ -14,6 +14,9 @@ import (
 type GetThingShadowInput struct {
 	_ struct{} `type:"structure"`
 
+	// The name of the shadow.
+	ShadowName *string `location:"querystring" locationName:"name" min:"1" type:"string"`
+
 	// The name of the thing.
 	//
 	// ThingName is a required field
@@ -28,6 +31,9 @@ func (s GetThingShadowInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *GetThingShadowInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "GetThingShadowInput"}
+	if s.ShadowName != nil && len(*s.ShadowName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ShadowName", 1))
+	}
 
 	if s.ThingName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ThingName"))
@@ -51,6 +57,12 @@ func (s GetThingShadowInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.PathTarget, "thingName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ShadowName != nil {
+		v := *s.ShadowName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -84,7 +96,7 @@ const opGetThingShadow = "GetThingShadow"
 // GetThingShadowRequest returns a request value for making API operation for
 // AWS IoT Data Plane.
 //
-// Gets the thing shadow for the specified thing.
+// Gets the shadow for the specified thing.
 //
 // For more information, see GetThingShadow (http://docs.aws.amazon.com/iot/latest/developerguide/API_GetThingShadow.html)
 // in the AWS IoT Developer Guide.

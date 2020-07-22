@@ -86,6 +86,10 @@ const opListPortfolioAccess = "ListPortfolioAccess"
 //
 // Lists the account IDs that have access to the specified portfolio.
 //
+// A delegated admin can list the accounts that have access to the shared portfolio.
+// Note that if a delegated admin is de-registered, they can no longer perform
+// this operation.
+//
 //    // Example sending a request using ListPortfolioAccessRequest.
 //    req := client.ListPortfolioAccessRequest(params)
 //    resp, err := req.Send(context.TODO())

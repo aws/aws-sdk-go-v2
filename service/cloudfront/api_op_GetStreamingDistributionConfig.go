@@ -84,7 +84,7 @@ func (s GetStreamingDistributionConfigOutput) MarshalFields(e protocol.FieldEnco
 	return nil
 }
 
-const opGetStreamingDistributionConfig = "GetStreamingDistributionConfig2019_03_26"
+const opGetStreamingDistributionConfig = "GetStreamingDistributionConfig2020_05_31"
 
 // GetStreamingDistributionConfigRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -98,12 +98,12 @@ const opGetStreamingDistributionConfig = "GetStreamingDistributionConfig2019_03_
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/GetStreamingDistributionConfig
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetStreamingDistributionConfig
 func (c *Client) GetStreamingDistributionConfigRequest(input *GetStreamingDistributionConfigInput) GetStreamingDistributionConfigRequest {
 	op := &aws.Operation{
 		Name:       opGetStreamingDistributionConfig,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2019-03-26/streaming-distribution/{Id}/config",
+		HTTPPath:   "/2020-05-31/streaming-distribution/{Id}/config",
 	}
 
 	if input == nil {

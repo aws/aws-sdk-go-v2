@@ -10,24 +10,24 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for create a new deployment.
+// The request structure for the create a new deployment request.
 type CreateDeploymentInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for an Amplify App.
+	// The unique ID for an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Name for the branch, for the Job.
+	// The name for the branch, for the job.
 	//
 	// BranchName is a required field
 	BranchName *string `location:"uri" locationName:"branchName" min:"1" type:"string" required:"true"`
 
-	// Optional file map that contains file name as the key and file content md5
-	// hash as the value. If this argument is provided, the service will generate
-	// different upload url per file. Otherwise, the service will only generate
-	// a single upload url for the zipped files.
+	// An optional file map that contains the file name as the key and the file
+	// content md5 hash as the value. If this argument is provided, the service
+	// will generate a unique upload URL per file. Otherwise, the service will only
+	// generate a single upload URL for the zipped files.
 	FileMap map[string]string `locationName:"fileMap" type:"map"`
 }
 
@@ -91,20 +91,21 @@ func (s CreateDeploymentInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Result structure for create a new deployment.
+// The result structure for the create a new deployment request.
 type CreateDeploymentOutput struct {
 	_ struct{} `type:"structure"`
 
-	// When the fileMap argument is provided in the request, the fileUploadUrls
-	// will contain a map of file names to upload url.
+	// When the fileMap argument is provided in the request, fileUploadUrls will
+	// contain a map of file names to upload URLs.
 	//
 	// FileUploadUrls is a required field
 	FileUploadUrls map[string]string `locationName:"fileUploadUrls" type:"map" required:"true"`
 
-	// The jobId for this deployment, will supply to start deployment api.
+	// The job ID for this deployment. will supply to start deployment api.
 	JobId *string `locationName:"jobId" type:"string"`
 
-	// When the fileMap argument is NOT provided. This zipUploadUrl will be returned.
+	// When the fileMap argument is not provided in the request, this zipUploadUrl
+	// is returned.
 	//
 	// ZipUploadUrl is a required field
 	ZipUploadUrl *string `locationName:"zipUploadUrl" type:"string" required:"true"`
@@ -149,7 +150,8 @@ const opCreateDeployment = "CreateDeployment"
 // CreateDeploymentRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Create a deployment for manual deploy apps. (Apps are not connected to repository)
+// Creates a deployment for a manually deployed Amplify app. Manually deployed
+// apps are not connected to a repository.
 //
 //    // Example sending a request using CreateDeploymentRequest.
 //    req := client.CreateDeploymentRequest(params)

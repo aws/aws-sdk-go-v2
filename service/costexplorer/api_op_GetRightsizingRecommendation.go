@@ -16,7 +16,7 @@ type GetRightsizingRecommendationInput struct {
 	// to view recommendations for instances within the same instance families or
 	// across different instance families. You can also choose to view your estimated
 	// savings associated with recommendations with consideration of existing Savings
-	// Plans or RI benefits, or niether.
+	// Plans or RI benefits, or neither.
 	Configuration *RightsizingRecommendationConfiguration `type:"structure"`
 
 	// Use Expression to filter by cost or by usage. There are two patterns:
@@ -100,7 +100,7 @@ type GetRightsizingRecommendationOutput struct {
 	// to view recommendations for instances within the same instance families or
 	// across different instance families. You can also choose to view your estimated
 	// savings associated with recommendations with consideration of existing Savings
-	// Plans or RI benefits, or niether.
+	// Plans or RI benefits, or neither.
 	Configuration *RightsizingRecommendationConfiguration `type:"structure"`
 
 	// Information regarding this specific recommendation set.
@@ -126,12 +126,13 @@ const opGetRightsizingRecommendation = "GetRightsizingRecommendation"
 // GetRightsizingRecommendationRequest returns a request value for making API operation for
 // AWS Cost Explorer Service.
 //
-// Creates recommendations that helps you save cost by identifying idle and
-// underutilized Amazon EC2 instances.
+// Creates recommendations that help you save cost by identifying idle and underutilized
+// Amazon EC2 instances.
 //
 // Recommendations are generated to either downsize or terminate instances,
 // along with providing savings detail and metrics. For details on calculation
-// and function, see Optimizing Your Cost with Rightsizing Recommendations (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-what-is.html).
+// and function, see Optimizing Your Cost with Rightsizing Recommendations (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-rightsizing.html)
+// in the AWS Billing and Cost Management User Guide.
 //
 //    // Example sending a request using GetRightsizingRecommendationRequest.
 //    req := client.GetRightsizingRecommendationRequest(params)

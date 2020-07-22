@@ -13,7 +13,8 @@ import (
 type DescribeHumanTaskUiInput struct {
 	_ struct{} `type:"structure"`
 
-	// The name of the human task user interface you want information about.
+	// The name of the human task user interface (worker task template) you want
+	// information about.
 	//
 	// HumanTaskUiName is a required field
 	HumanTaskUiName *string `min:"1" type:"string" required:"true"`
@@ -49,15 +50,20 @@ type DescribeHumanTaskUiOutput struct {
 	// CreationTime is a required field
 	CreationTime *time.Time `type:"timestamp" required:"true"`
 
-	// The Amazon Resource Name (ARN) of the human task user interface.
+	// The Amazon Resource Name (ARN) of the human task user interface (worker task
+	// template).
 	//
 	// HumanTaskUiArn is a required field
 	HumanTaskUiArn *string `type:"string" required:"true"`
 
-	// The name of the human task user interface.
+	// The name of the human task user interface (worker task template).
 	//
 	// HumanTaskUiName is a required field
 	HumanTaskUiName *string `min:"1" type:"string" required:"true"`
+
+	// The status of the human task user interface (worker task template). Valid
+	// values are listed below.
+	HumanTaskUiStatus HumanTaskUiStatus `type:"string" enum:"true"`
 
 	// Container for user interface template information.
 	//
@@ -75,7 +81,8 @@ const opDescribeHumanTaskUi = "DescribeHumanTaskUi"
 // DescribeHumanTaskUiRequest returns a request value for making API operation for
 // Amazon SageMaker Service.
 //
-// Returns information about the requested human task user interface.
+// Returns information about the requested human task user interface (worker
+// task template).
 //
 //    // Example sending a request using DescribeHumanTaskUiRequest.
 //    req := client.DescribeHumanTaskUiRequest(params)

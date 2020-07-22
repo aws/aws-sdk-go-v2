@@ -73,8 +73,8 @@ const opNotifyWhenUploaded = "NotifyWhenUploaded"
 // event targets such as Amazon SNS or AWS Lambda function. This operation is
 // only supported for file gateways.
 //
-// For more information, see Getting File Upload Notification in the Storage
-// Gateway User Guide (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-upload-notification).
+// For more information, see Getting file upload notification (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-upload-notification)
+// in the AWS Storage Gateway User Guide.
 //
 //    // Example sending a request using NotifyWhenUploadedRequest.
 //    req := client.NotifyWhenUploadedRequest(params)

@@ -117,8 +117,7 @@ type AutoScalingGroup struct {
 	// CreatedTime is a required field
 	CreatedTime *time.Time `type:"timestamp" required:"true"`
 
-	// The amount of time, in seconds, after a scaling activity completes before
-	// another scaling activity can start.
+	// The duration of the default cooldown period, in seconds.
 	//
 	// DefaultCooldown is a required field
 	DefaultCooldown *int64 `type:"integer" required:"true"`
@@ -447,15 +446,13 @@ type Ebs struct {
 	// see Amazon EBS Volume Types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html)
 	// in the Amazon EC2 User Guide for Linux Instances.
 	//
-	// Conditional: This parameter is required when the volume type is io1. (Not
-	// used with standard, gp2, st1, or sc1 volumes.)
+	// Required when the volume type is io1. (Not used with standard, gp2, st1,
+	// or sc1 volumes.)
 	Iops *int64 `min:"100" type:"integer"`
 
 	// The snapshot ID of the volume to use.
 	//
-	// Conditional: This parameter is optional if you specify a volume size. If
-	// you specify both SnapshotId and VolumeSize, VolumeSize must be equal or greater
-	// than the size of the snapshot.
+	// You must specify either a VolumeSize or a SnapshotId.
 	SnapshotId *string `min:"1" type:"string"`
 
 	// The volume size, in Gibibytes (GiB).
@@ -467,7 +464,9 @@ type Ebs struct {
 	// Default: If you create a volume from a snapshot and you don't specify a volume
 	// size, the default is the snapshot size.
 	//
-	// At least one of VolumeSize or SnapshotId is required.
+	// You must specify either a VolumeSize or a SnapshotId. If you specify both
+	// SnapshotId and VolumeSize, the volume size must be equal or greater than
+	// the size of the snapshot.
 	VolumeSize *int64 `min:"1" type:"integer"`
 
 	// The volume type, which can be standard for Magnetic, io1 for Provisioned
@@ -658,7 +657,61 @@ func (s InstanceMonitoring) String() string {
 	return awsutil.Prettify(s)
 }
 
-// Describes an instances distribution for an Auto Scaling group with MixedInstancesPolicy.
+// Describes an instance refresh for an Auto Scaling group.
+type InstanceRefresh struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the Auto Scaling group.
+	AutoScalingGroupName *string `min:"1" type:"string"`
+
+	// The date and time at which the instance refresh ended.
+	EndTime *time.Time `type:"timestamp"`
+
+	// The instance refresh ID.
+	InstanceRefreshId *string `min:"1" type:"string"`
+
+	// The number of instances remaining to update before the instance refresh is
+	// complete.
+	InstancesToUpdate *int64 `type:"integer"`
+
+	// The percentage of the instance refresh that is complete. For each instance
+	// replacement, Amazon EC2 Auto Scaling tracks the instance's health status
+	// and warm-up time. When the instance's health status changes to healthy and
+	// the specified warm-up time passes, the instance is considered updated and
+	// added to the percentage complete.
+	PercentageComplete *int64 `type:"integer"`
+
+	// The date and time at which the instance refresh began.
+	StartTime *time.Time `type:"timestamp"`
+
+	// The current status for the instance refresh operation:
+	//
+	//    * Pending - The request was created, but the operation has not started.
+	//
+	//    * InProgress - The operation is in progress.
+	//
+	//    * Successful - The operation completed successfully.
+	//
+	//    * Failed - The operation failed to complete. You can troubleshoot using
+	//    the status reason and the scaling activities.
+	//
+	//    * Cancelling - An ongoing operation is being cancelled. Cancellation does
+	//    not roll back any replacements that have already been completed, but it
+	//    prevents new replacements from being started.
+	//
+	//    * Cancelled - The operation is cancelled.
+	Status InstanceRefreshStatus `type:"string" enum:"true"`
+
+	// Provides more details about the current status of the instance refresh.
+	StatusReason *string `min:"1" type:"string"`
+}
+
+// String returns the string representation
+func (s InstanceRefresh) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Describes an instances distribution for an Auto Scaling group with a MixedInstancesPolicy.
 //
 // The instances distribution specifies the distribution of On-Demand Instances
 // and Spot Instances, the maximum price to pay for Spot Instances, and how
@@ -1385,7 +1438,8 @@ func (s MetricGranularityType) String() string {
 // You can create a mixed instances policy for a new Auto Scaling group, or
 // you can create it for an existing group by updating the group to specify
 // MixedInstancesPolicy as the top-level parameter instead of a launch configuration
-// or template. For more information, see CreateAutoScalingGroup and UpdateAutoScalingGroup.
+// or launch template. For more information, see CreateAutoScalingGroup and
+// UpdateAutoScalingGroup.
 type MixedInstancesPolicy struct {
 	_ struct{} `type:"structure"`
 
@@ -1397,7 +1451,7 @@ type MixedInstancesPolicy struct {
 
 	// The launch template and instance types (overrides).
 	//
-	// This parameter must be specified when creating a mixed instances policy.
+	// Required when creating a mixed instances policy.
 	LaunchTemplate *LaunchTemplate `type:"structure"`
 }
 
@@ -1477,7 +1531,9 @@ type PredefinedMetricSpecification struct {
 	// a resource label unless the metric type is ALBRequestCountPerTarget and there
 	// is a target group attached to the Auto Scaling group.
 	//
-	// The format is app/load-balancer-name/load-balancer-id/targetgroup/target-group-name/target-group-id
+	// Elastic Load Balancing sends data about your load balancers to Amazon CloudWatch.
+	// CloudWatch collects the data and specifies the format to use to access the
+	// data. The format is app/load-balancer-name/load-balancer-id/targetgroup/target-group-name/target-group-id
 	// , where
 	//
 	//    * app/load-balancer-name/load-balancer-id is the final portion of the
@@ -1485,6 +1541,12 @@ type PredefinedMetricSpecification struct {
 	//
 	//    * targetgroup/target-group-name/target-group-id is the final portion of
 	//    the target group ARN.
+	//
+	// To find the ARN for an Application Load Balancer, use the DescribeLoadBalancers
+	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html)
+	// API operation. To find the ARN for the target group, use the DescribeTargetGroups
+	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html)
+	// API operation.
 	ResourceLabel *string `min:"1" type:"string"`
 }
 
@@ -1530,6 +1592,8 @@ type ProcessType struct {
 	//
 	//    * HealthCheck
 	//
+	//    * InstanceRefresh
+	//
 	//    * ReplaceUnhealthy
 	//
 	//    * ScheduledActions
@@ -1543,12 +1607,35 @@ func (s ProcessType) String() string {
 	return awsutil.Prettify(s)
 }
 
+// Describes information used to start an instance refresh.
+type RefreshPreferences struct {
+	_ struct{} `type:"structure"`
+
+	// The number of seconds until a newly launched instance is configured and ready
+	// to use. During this time, Amazon EC2 Auto Scaling does not immediately move
+	// on to the next replacement. The default is to use the value for the health
+	// check grace period defined for the group.
+	InstanceWarmup *int64 `type:"integer"`
+
+	// The amount of capacity in the Auto Scaling group that must remain healthy
+	// during an instance refresh to allow the operation to continue, as a percentage
+	// of the desired capacity of the Auto Scaling group (rounded up to the nearest
+	// integer). The default is 90.
+	MinHealthyPercentage *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s RefreshPreferences) String() string {
+	return awsutil.Prettify(s)
+}
+
 // Describes a scaling policy.
 type ScalingPolicy struct {
 	_ struct{} `type:"structure"`
 
-	// The adjustment type, which specifies how ScalingAdjustment is interpreted.
-	// The valid values are ChangeInCapacity, ExactCapacity, and PercentChangeInCapacity.
+	// Specifies how the scaling adjustment is interpreted (either an absolute number
+	// or a percentage). The valid values are ChangeInCapacity, ExactCapacity, and
+	// PercentChangeInCapacity.
 	AdjustmentType *string `min:"1" type:"string"`
 
 	// The CloudWatch alarms related to the policy.
@@ -1557,8 +1644,7 @@ type ScalingPolicy struct {
 	// The name of the Auto Scaling group.
 	AutoScalingGroupName *string `min:"1" type:"string"`
 
-	// The amount of time, in seconds, after a scaling activity completes before
-	// any further dynamic scaling activities can start.
+	// The duration of the policy's cooldown period, in seconds.
 	Cooldown *int64 `type:"integer"`
 
 	// Indicates whether the policy is enabled (true) or disabled (false).
@@ -1572,10 +1658,7 @@ type ScalingPolicy struct {
 	// Maximum, and Average.
 	MetricAggregationType *string `min:"1" type:"string"`
 
-	// The minimum number of instances to scale. If the value of AdjustmentType
-	// is PercentChangeInCapacity, the scaling policy changes the DesiredCapacity
-	// of the Auto Scaling group by at least this many instances. Otherwise, the
-	// error is ValidationError.
+	// The minimum value to scale by when the adjustment type is PercentChangeInCapacity.
 	MinAdjustmentMagnitude *int64 `type:"integer"`
 
 	// Available for backward compatibility. Use MinAdjustmentMagnitude instead.
@@ -1587,7 +1670,17 @@ type ScalingPolicy struct {
 	// The name of the scaling policy.
 	PolicyName *string `min:"1" type:"string"`
 
-	// The policy type. The valid values are SimpleScaling, StepScaling, and TargetTrackingScaling.
+	// One of the following policy types:
+	//
+	//    * TargetTrackingScaling
+	//
+	//    * StepScaling
+	//
+	//    * SimpleScaling (default)
+	//
+	// For more information, see Target Tracking Scaling Policies (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html)
+	// and Step and Simple Scaling Policies (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html)
+	// in the Amazon EC2 Auto Scaling User Guide.
 	PolicyType *string `min:"1" type:"string"`
 
 	// The amount by which to scale, based on the specified adjustment type. A positive

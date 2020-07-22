@@ -22,7 +22,7 @@ type CreateSecretInput struct {
 	// for you and includes it as the value for this parameter in the request. If
 	// you don't use the SDK and instead generate a raw HTTP request to the Secrets
 	// Manager service endpoint, then you must generate a ClientRequestToken yourself
-	// for the new version and include that value in the request.
+	// for the new version and include the value in the request.
 	//
 	// This value helps ensure idempotency. Secrets Manager uses this value to prevent
 	// the accidental creation of duplicate versions if there are failures and retries
@@ -32,9 +32,9 @@ type CreateSecretInput struct {
 	//    * If the ClientRequestToken value isn't already associated with a version
 	//    of the secret then a new version of the secret is created.
 	//
-	//    * If a version with this value already exists and that version's SecretString
+	//    * If a version with this value already exists and the version SecretString
 	//    and SecretBinary values are the same as those in the request, then the
-	//    request is ignored (the operation is idempotent).
+	//    request is ignored.
 	//
 	//    * If a version with this value already exists and that version's SecretString
 	//    and SecretBinary values are different from those in the request then the
@@ -61,9 +61,9 @@ type CreateSecretInput struct {
 	// you automatically the first time it needs to encrypt a version's SecretString
 	// or SecretBinary fields.
 	//
-	// You can use the account's default CMK to encrypt and decrypt only if you
-	// call this operation using credentials from the same account that owns the
-	// secret. If the secret is in a different account, then you must create a custom
+	// You can use the account default CMK to encrypt and decrypt only if you call
+	// this operation using credentials from the same account that owns the secret.
+	// If the secret resides in a different account, then you must create a custom
 	// CMK and specify the ARN in this field.
 	KmsKeyId *string `type:"string"`
 
@@ -72,10 +72,10 @@ type CreateSecretInput struct {
 	// The secret name must be ASCII letters, digits, or the following characters
 	// : /_+=.@-
 	//
-	// Don't end your secret name with a hyphen followed by six characters. If you
-	// do so, you risk confusion and unexpected results when searching for a secret
-	// by partial ARN. This is because Secrets Manager automatically adds a hyphen
-	// and six random characters at the end of the ARN.
+	// Do not end your secret name with a hyphen followed by six characters. If
+	// you do so, you risk confusion and unexpected results when searching for a
+	// secret by partial ARN. Secrets Manager automatically adds a hyphen and six
+	// random characters at the end of the ARN.
 	//
 	// Name is a required field
 	Name *string `min:"1" type:"string" required:"true"`
@@ -111,7 +111,7 @@ type CreateSecretInput struct {
 	// JSON for Parameters (https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
 	// in the AWS CLI User Guide. For example:
 	//
-	// [{"username":"bob"},{"password":"abc123xyz456"}]
+	// {"username":"bob","password":"abc123xyz456"}
 	//
 	// If your command-line tool or SDK requires quotation marks around the parameter,
 	// you should use single quotes to avoid confusion with the double quotes required
@@ -152,14 +152,14 @@ type CreateSecretInput struct {
 	//
 	//    * Tag keys and values are case sensitive.
 	//
-	//    * Do not use the aws: prefix in your tag names or values because it is
-	//    reserved for AWS use. You can't edit or delete tag names or values with
-	//    this prefix. Tags with this prefix do not count against your tags per
-	//    secret limit.
+	//    * Do not use the aws: prefix in your tag names or values because AWS reserves
+	//    it for AWS use. You can't edit or delete tag names or values with this
+	//    prefix. Tags with this prefix do not count against your tags per secret
+	//    limit.
 	//
-	//    * If your tagging schema will be used across multiple services and resources,
-	//    remember that other services might have restrictions on allowed characters.
-	//    Generally allowed characters are: letters, spaces, and numbers representable
+	//    * If you use your tagging schema across multiple services and resources,
+	//    remember other services might have restrictions on allowed characters.
+	//    Generally allowed characters: letters, spaces, and numbers representable
 	//    in UTF-8, plus the following special characters: + - = . _ : / @.
 	Tags []Tag `type:"list"`
 }
@@ -212,8 +212,8 @@ type CreateSecretOutput struct {
 	// The friendly name of the secret that you just created.
 	Name *string `min:"1" type:"string"`
 
-	// The unique identifier that's associated with the version of the secret you
-	// just created.
+	// The unique identifier associated with the version of the secret you just
+	// created.
 	VersionId *string `min:"32" type:"string"`
 }
 
@@ -236,7 +236,7 @@ const opCreateSecret = "CreateSecret"
 // labels" that identify where the version is in the rotation cycle. The SecretVersionsToStages
 // field of the secret contains the mapping of staging labels to the active
 // versions of the secret. Versions without a staging label are considered deprecated
-// and are not included in the list.
+// and not included in the list.
 //
 // You provide the secret data to be encrypted by putting text in either the
 // SecretString parameter or binary data in the SecretBinary parameter, but
@@ -244,20 +244,19 @@ const opCreateSecret = "CreateSecret"
 // also creates an initial secret version and automatically attaches the staging
 // label AWSCURRENT to the new version.
 //
-//    * If you call an operation that needs to encrypt or decrypt the SecretString
-//    or SecretBinary for a secret in the same account as the calling user and
-//    that secret doesn't specify a AWS KMS encryption key, Secrets Manager
-//    uses the account's default AWS managed customer master key (CMK) with
-//    the alias aws/secretsmanager. If this key doesn't already exist in your
-//    account then Secrets Manager creates it for you automatically. All users
-//    and roles in the same AWS account automatically have access to use the
-//    default CMK. Note that if an Secrets Manager API call results in AWS having
-//    to create the account's AWS-managed CMK, it can result in a one-time significant
-//    delay in returning the result.
+//    * If you call an operation to encrypt or decrypt the SecretString or SecretBinary
+//    for a secret in the same account as the calling user and that secret doesn't
+//    specify a AWS KMS encryption key, Secrets Manager uses the account's default
+//    AWS managed customer master key (CMK) with the alias aws/secretsmanager.
+//    If this key doesn't already exist in your account then Secrets Manager
+//    creates it for you automatically. All users and roles in the same AWS
+//    account automatically have access to use the default CMK. Note that if
+//    an Secrets Manager API call results in AWS creating the account's AWS-managed
+//    CMK, it can result in a one-time significant delay in returning the result.
 //
-//    * If the secret is in a different AWS account from the credentials calling
-//    an API that requires encryption or decryption of the secret value then
-//    you must create and use a custom AWS KMS CMK because you can't access
+//    * If the secret resides in a different AWS account from the credentials
+//    calling an API that requires encryption or decryption of the secret value
+//    then you must create and use a custom AWS KMS CMK because you can't access
 //    the default CMK for the account using credentials from a different AWS
 //    account. Store the ARN of the CMK in the secret when you create the secret
 //    or when you update it by including it in the KMSKeyId. If you call an
@@ -274,10 +273,10 @@ const opCreateSecret = "CreateSecret"
 //
 //    * kms:GenerateDataKey - needed only if you use a customer-managed AWS
 //    KMS key to encrypt the secret. You do not need this permission to use
-//    the account's default AWS managed CMK for Secrets Manager.
+//    the account default AWS managed CMK for Secrets Manager.
 //
 //    * kms:Decrypt - needed only if you use a customer-managed AWS KMS key
-//    to encrypt the secret. You do not need this permission to use the account's
+//    to encrypt the secret. You do not need this permission to use the account
 //    default AWS managed CMK for Secrets Manager.
 //
 //    * secretsmanager:TagResource - needed only if you include the Tags parameter.

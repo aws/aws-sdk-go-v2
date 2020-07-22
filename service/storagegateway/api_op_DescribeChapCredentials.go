@@ -43,7 +43,7 @@ func (s *DescribeChapCredentialsInput) Validate() error {
 	return nil
 }
 
-// A JSON object containing a .
+// A JSON object containing the following fields:
 type DescribeChapCredentialsOutput struct {
 	_ struct{} `type:"structure"`
 

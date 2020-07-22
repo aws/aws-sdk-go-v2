@@ -55,6 +55,9 @@ func (s DescribeBackupJobInput) MarshalFields(e protocol.FieldEncoder) error {
 type DescribeBackupJobOutput struct {
 	_ struct{} `type:"structure"`
 
+	// Returns the account ID that owns the backup job.
+	AccountId *string `type:"string"`
+
 	// Uniquely identifies a request to AWS Backup to back up a resource.
 	BackupJobId *string `type:"string"`
 
@@ -76,8 +79,8 @@ type DescribeBackupJobOutput struct {
 	BytesTransferred *int64 `type:"long"`
 
 	// The date and time that a job to create a backup job is completed, in Unix
-	// format and Coordinated Universal Time (UTC). The value of CreationDate is
-	// accurate to milliseconds. For example, the value 1516925490.087 represents
+	// format and Coordinated Universal Time (UTC). The value of CompletionDate
+	// is accurate to milliseconds. For example, the value 1516925490.087 represents
 	// Friday, January 26, 2018 12:11:30.087 AM.
 	CompletionDate *time.Time `type:"timestamp"`
 
@@ -141,6 +144,12 @@ func (s DescribeBackupJobOutput) String() string {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s DescribeBackupJobOutput) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccountId != nil {
+		v := *s.AccountId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AccountId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
 	if s.BackupJobId != nil {
 		v := *s.BackupJobId
 

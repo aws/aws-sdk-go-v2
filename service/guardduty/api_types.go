@@ -3,6 +3,8 @@
 package guardduty
 
 import (
+	"time"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
@@ -10,6 +12,41 @@ import (
 
 var _ aws.Config
 var _ = awsutil.Prettify
+
+// Contains information on the current access control policies for the bucket.
+type AccessControlList struct {
+	_ struct{} `type:"structure"`
+
+	// A value that indicates whether public read access for the bucket is enabled
+	// through an Access Control List (ACL).
+	AllowsPublicReadAccess *bool `locationName:"allowsPublicReadAccess" type:"boolean"`
+
+	// A value that indicates whether public write access for the bucket is enabled
+	// through an Access Control List (ACL).
+	AllowsPublicWriteAccess *bool `locationName:"allowsPublicWriteAccess" type:"boolean"`
+}
+
+// String returns the string representation
+func (s AccessControlList) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AccessControlList) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AllowsPublicReadAccess != nil {
+		v := *s.AllowsPublicReadAccess
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "allowsPublicReadAccess", protocol.BoolValue(v), metadata)
+	}
+	if s.AllowsPublicWriteAccess != nil {
+		v := *s.AllowsPublicWriteAccess
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "allowsPublicWriteAccess", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
 
 // Contains information about the access keys.
 type AccessKeyDetails struct {
@@ -119,6 +156,30 @@ func (s AccountDetail) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "email", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Contains information about the account level permissions on the S3 bucket.
+type AccountLevelPermissions struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the S3 Block Public Access settings of the bucket's parent account.
+	BlockPublicAccess *BlockPublicAccess `locationName:"blockPublicAccess" type:"structure"`
+}
+
+// String returns the string representation
+func (s AccountLevelPermissions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AccountLevelPermissions) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BlockPublicAccess != nil {
+		v := s.BlockPublicAccess
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "blockPublicAccess", v, metadata)
 	}
 	return nil
 }
@@ -273,6 +334,137 @@ func (s AwsApiCallAction) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "serviceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Contains information on how the bucker owner's S3 Block Public Access settings
+// are being applied to the S3 bucket. See S3 Block Public Access (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html)
+// for more information.
+type BlockPublicAccess struct {
+	_ struct{} `type:"structure"`
+
+	// Indicates if S3 Block Public Access is set to BlockPublicAcls.
+	BlockPublicAcls *bool `locationName:"blockPublicAcls" type:"boolean"`
+
+	// Indicates if S3 Block Public Access is set to BlockPublicPolicy.
+	BlockPublicPolicy *bool `locationName:"blockPublicPolicy" type:"boolean"`
+
+	// Indicates if S3 Block Public Access is set to IgnorePublicAcls.
+	IgnorePublicAcls *bool `locationName:"ignorePublicAcls" type:"boolean"`
+
+	// Indicates if S3 Block Public Access is set to RestrictPublicBuckets.
+	RestrictPublicBuckets *bool `locationName:"restrictPublicBuckets" type:"boolean"`
+}
+
+// String returns the string representation
+func (s BlockPublicAccess) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BlockPublicAccess) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BlockPublicAcls != nil {
+		v := *s.BlockPublicAcls
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "blockPublicAcls", protocol.BoolValue(v), metadata)
+	}
+	if s.BlockPublicPolicy != nil {
+		v := *s.BlockPublicPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "blockPublicPolicy", protocol.BoolValue(v), metadata)
+	}
+	if s.IgnorePublicAcls != nil {
+		v := *s.IgnorePublicAcls
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ignorePublicAcls", protocol.BoolValue(v), metadata)
+	}
+	if s.RestrictPublicBuckets != nil {
+		v := *s.RestrictPublicBuckets
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "restrictPublicBuckets", protocol.BoolValue(v), metadata)
+	}
+	return nil
+}
+
+// Contains information about the bucket level permissions for the S3 bucket.
+type BucketLevelPermissions struct {
+	_ struct{} `type:"structure"`
+
+	// Contains information on how Access Control Policies are applied to the bucket.
+	AccessControlList *AccessControlList `locationName:"accessControlList" type:"structure"`
+
+	// Contains information on which account level S3 Block Public Access settings
+	// are applied to the S3 bucket.
+	BlockPublicAccess *BlockPublicAccess `locationName:"blockPublicAccess" type:"structure"`
+
+	// Contains information on the bucket policies for the S3 bucket.
+	BucketPolicy *BucketPolicy `locationName:"bucketPolicy" type:"structure"`
+}
+
+// String returns the string representation
+func (s BucketLevelPermissions) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BucketLevelPermissions) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccessControlList != nil {
+		v := s.AccessControlList
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "accessControlList", v, metadata)
+	}
+	if s.BlockPublicAccess != nil {
+		v := s.BlockPublicAccess
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "blockPublicAccess", v, metadata)
+	}
+	if s.BucketPolicy != nil {
+		v := s.BucketPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "bucketPolicy", v, metadata)
+	}
+	return nil
+}
+
+// Contains information on the current bucket policies for the S3 bucket.
+type BucketPolicy struct {
+	_ struct{} `type:"structure"`
+
+	// A value that indicates whether public read access for the bucket is enabled
+	// through a bucket policy.
+	AllowsPublicReadAccess *bool `locationName:"allowsPublicReadAccess" type:"boolean"`
+
+	// A value that indicates whether public write access for the bucket is enabled
+	// through a bucket policy.
+	AllowsPublicWriteAccess *bool `locationName:"allowsPublicWriteAccess" type:"boolean"`
+}
+
+// String returns the string representation
+func (s BucketPolicy) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s BucketPolicy) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AllowsPublicReadAccess != nil {
+		v := *s.AllowsPublicReadAccess
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "allowsPublicReadAccess", protocol.BoolValue(v), metadata)
+	}
+	if s.AllowsPublicWriteAccess != nil {
+		v := *s.AllowsPublicWriteAccess
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "allowsPublicWriteAccess", protocol.BoolValue(v), metadata)
 	}
 	return nil
 }
@@ -489,6 +681,42 @@ func (s Country) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "countryName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Contains information on the server side encryption method used in the S3
+// bucket. See S3 Server-Side Encryption (https://docs.aws.amazon.com/AmazonS3/atest/dev/serv-side-encryption.html)
+// for more information.
+type DefaultServerSideEncryption struct {
+	_ struct{} `type:"structure"`
+
+	// The type of encryption used for objects within the S3 bucket.
+	EncryptionType *string `locationName:"encryptionType" type:"string"`
+
+	// The Amazon Resource Name (ARN) of the KMS encryption key. Only available
+	// if the bucket EncryptionType is aws:kms.
+	KmsMasterKeyArn *string `locationName:"kmsMasterKeyArn" type:"string"`
+}
+
+// String returns the string representation
+func (s DefaultServerSideEncryption) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s DefaultServerSideEncryption) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EncryptionType != nil {
+		v := *s.EncryptionType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "encryptionType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.KmsMasterKeyArn != nil {
+		v := *s.KmsMasterKeyArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "kmsMasterKeyArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -1607,6 +1835,64 @@ func (s Organization) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Contains information on the owner of the bucket.
+type Owner struct {
+	_ struct{} `type:"structure"`
+
+	// The canonical user ID of the bucket owner. For information about locating
+	// your canonical user ID see Finding Your Account Canonical User ID. (https://docs.aws.amazon.com/general/latest/gr/acct-identifiers.html#FindingCanonicalId)
+	Id *string `locationName:"id" type:"string"`
+}
+
+// String returns the string representation
+func (s Owner) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Owner) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Contains information about how permissions are configured for the S3 bucket.
+type PermissionConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// Contains information about the account level permissions on the S3 bucket.
+	AccountLevelPermissions *AccountLevelPermissions `locationName:"accountLevelPermissions" type:"structure"`
+
+	// Contains information about the bucket level permissions for the S3 bucket.
+	BucketLevelPermissions *BucketLevelPermissions `locationName:"bucketLevelPermissions" type:"structure"`
+}
+
+// String returns the string representation
+func (s PermissionConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PermissionConfiguration) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccountLevelPermissions != nil {
+		v := s.AccountLevelPermissions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "accountLevelPermissions", v, metadata)
+	}
+	if s.BucketLevelPermissions != nil {
+		v := s.BucketLevelPermissions
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "bucketLevelPermissions", v, metadata)
+	}
+	return nil
+}
+
 // Contains information about the PORT_PROBE action described in the finding.
 type PortProbeAction struct {
 	_ struct{} `type:"structure"`
@@ -1755,6 +2041,40 @@ func (s ProductCode) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Describes the public access policies that apply to the S3 bucket.
+type PublicAccess struct {
+	_ struct{} `type:"structure"`
+
+	// Describes the effective permission on this bucket after factoring all attached
+	// policies.
+	EffectivePermission *string `locationName:"effectivePermission" type:"string"`
+
+	// Contains information about how permissions are configured for the S3 bucket.
+	PermissionConfiguration *PermissionConfiguration `locationName:"permissionConfiguration" type:"structure"`
+}
+
+// String returns the string representation
+func (s PublicAccess) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PublicAccess) MarshalFields(e protocol.FieldEncoder) error {
+	if s.EffectivePermission != nil {
+		v := *s.EffectivePermission
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "effectivePermission", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PermissionConfiguration != nil {
+		v := s.PermissionConfiguration
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "permissionConfiguration", v, metadata)
+	}
+	return nil
+}
+
 // Contains information about the remote IP address of the connection.
 type RemoteIpDetails struct {
 	_ struct{} `type:"structure"`
@@ -1863,6 +2183,9 @@ type Resource struct {
 
 	// The type of AWS resource.
 	ResourceType *string `locationName:"resourceType" type:"string"`
+
+	// Contains information on the S3 bucket.
+	S3BucketDetails []S3BucketDetail `locationName:"s3BucketDetails" type:"list"`
 }
 
 // String returns the string representation
@@ -1889,6 +2212,111 @@ func (s Resource) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "resourceType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.S3BucketDetails != nil {
+		v := s.S3BucketDetails
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "s3BucketDetails", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+type S3BucketDetail struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the S3 bucket.
+	Arn *string `locationName:"arn" type:"string"`
+
+	// The date and time the bucket was created at.
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp"`
+
+	// Describes the server side encryption method used in the S3 bucket.
+	DefaultServerSideEncryption *DefaultServerSideEncryption `locationName:"defaultServerSideEncryption" type:"structure"`
+
+	// The name of the S3 bucket.
+	Name *string `locationName:"name" type:"string"`
+
+	// The owner of the S3 bucket.
+	Owner *Owner `locationName:"owner" type:"structure"`
+
+	// Describes the public access policies that apply to the S3 bucket.
+	PublicAccess *PublicAccess `locationName:"publicAccess" type:"structure"`
+
+	// All tags attached to the S3 bucket
+	Tags []Tag `locationName:"tags" type:"list"`
+
+	// Describes whether the bucket is a source or destination bucket.
+	Type *string `locationName:"type" type:"string"`
+}
+
+// String returns the string representation
+func (s S3BucketDetail) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s S3BucketDetail) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreatedAt != nil {
+		v := *s.CreatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.DefaultServerSideEncryption != nil {
+		v := s.DefaultServerSideEncryption
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "defaultServerSideEncryption", v, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Owner != nil {
+		v := s.Owner
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "owner", v, metadata)
+	}
+	if s.PublicAccess != nil {
+		v := s.PublicAccess
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "publicAccess", v, metadata)
+	}
+	if s.Tags != nil {
+		v := s.Tags
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "tags", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Type != nil {
+		v := *s.Type
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "type", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

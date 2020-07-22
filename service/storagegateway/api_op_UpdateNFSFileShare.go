@@ -13,13 +13,17 @@ import (
 type UpdateNFSFileShareInput struct {
 	_ struct{} `type:"structure"`
 
+	// Refresh cache information.
+	CacheAttributes *CacheAttributes `type:"structure"`
+
 	// The list of clients that are allowed to access the file gateway. The list
 	// must contain either valid IP addresses or valid CIDR blocks.
 	ClientList []string `min:"1" type:"list"`
 
 	// The default storage class for objects put into an Amazon S3 bucket by the
-	// file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA, or S3_ONEZONE_IA.
-	// If this field is not populated, the default value S3_STANDARD is used. Optional.
+	// file gateway. The default value is S3_INTELLIGENT_TIERING. Optional.
+	//
+	// Valid Values: S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
 	DefaultStorageClass *string `min:"5" type:"string"`
 
 	// The Amazon Resource Name (ARN) of the file share to be updated.
@@ -27,47 +31,64 @@ type UpdateNFSFileShareInput struct {
 	// FileShareARN is a required field
 	FileShareARN *string `min:"50" type:"string" required:"true"`
 
+	// The name of the file share. Optional.
+	//
+	// FileShareName must be set if an S3 prefix name is set in LocationARN.
+	FileShareName *string `min:"1" type:"string"`
+
 	// A value that enables guessing of the MIME type for uploaded objects based
 	// on file extensions. Set this value to true to enable MIME type guessing,
-	// and otherwise to false. The default value is true.
+	// otherwise set to false. The default value is true.
+	//
+	// Valid Values: true | false
 	GuessMIMETypeEnabled *bool `type:"boolean"`
 
-	// True to use Amazon S3 server-side encryption with your own AWS KMS key, or
-	// false to use a key managed by Amazon S3. Optional.
+	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS
+	// key, or false to use a key managed by Amazon S3. Optional.
+	//
+	// Valid Values: true | false
 	KMSEncrypted *bool `type:"boolean"`
 
-	// The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server-side
-	// encryption. This value can only be set when KMSEncrypted is true. Optional.
+	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
+	// for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric
+	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string `min:"7" type:"string"`
 
 	// The default values for the file share. Optional.
 	NFSFileShareDefaults *NFSFileShareDefaults `type:"structure"`
 
-	// A value that sets the access control list permission for objects in the S3
-	// bucket that a file gateway puts objects into. The default value is "private".
+	// A value that sets the access control list (ACL) permission for objects in
+	// the S3 bucket that a file gateway puts objects into. The default value is
+	// private.
 	ObjectACL ObjectACL `type:"string" enum:"true"`
 
-	// A value that sets the write status of a file share. This value is true if
-	// the write status is read-only, and otherwise false.
+	// A value that sets the write status of a file share. Set this value to true
+	// to set the write status to read-only, otherwise set to false.
+	//
+	// Valid Values: true | false
 	ReadOnly *bool `type:"boolean"`
 
 	// A value that sets who pays the cost of the request and the cost associated
 	// with data download from the S3 bucket. If this value is set to true, the
-	// requester pays the costs. Otherwise the S3 bucket owner pays. However, the
+	// requester pays the costs; otherwise, the S3 bucket owner pays. However, the
 	// S3 bucket owner always pays the cost of storing data.
 	//
 	// RequesterPays is a configuration for the S3 bucket that backs the file share,
 	// so make sure that the configuration on the file share is the same as the
 	// S3 bucket configuration.
+	//
+	// Valid Values: true | false
 	RequesterPays *bool `type:"boolean"`
 
-	// The user mapped to anonymous user. Valid options are the following:
+	// The user mapped to anonymous user.
 	//
-	//    * RootSquash - Only root is mapped to anonymous user.
+	// Valid values are the following:
 	//
-	//    * NoSquash - No one is mapped to anonymous user
+	//    * RootSquash: Only root is mapped to anonymous user.
 	//
-	//    * AllSquash - Everyone is mapped to anonymous user.
+	//    * NoSquash: No one is mapped to anonymous user.
+	//
+	//    * AllSquash: Everyone is mapped to anonymous user.
 	Squash *string `min:"5" type:"string"`
 }
 
@@ -91,6 +112,9 @@ func (s *UpdateNFSFileShareInput) Validate() error {
 	}
 	if s.FileShareARN != nil && len(*s.FileShareARN) < 50 {
 		invalidParams.Add(aws.NewErrParamMinLen("FileShareARN", 50))
+	}
+	if s.FileShareName != nil && len(*s.FileShareName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("FileShareName", 1))
 	}
 	if s.KMSKey != nil && len(*s.KMSKey) < 7 {
 		invalidParams.Add(aws.NewErrParamMinLen("KMSKey", 7))

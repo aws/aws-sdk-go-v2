@@ -76,7 +76,7 @@ func (s DeleteCloudFrontOriginAccessIdentityOutput) MarshalFields(e protocol.Fie
 	return nil
 }
 
-const opDeleteCloudFrontOriginAccessIdentity = "DeleteCloudFrontOriginAccessIdentity2019_03_26"
+const opDeleteCloudFrontOriginAccessIdentity = "DeleteCloudFrontOriginAccessIdentity2020_05_31"
 
 // DeleteCloudFrontOriginAccessIdentityRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -90,12 +90,12 @@ const opDeleteCloudFrontOriginAccessIdentity = "DeleteCloudFrontOriginAccessIden
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/DeleteCloudFrontOriginAccessIdentity
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteCloudFrontOriginAccessIdentity
 func (c *Client) DeleteCloudFrontOriginAccessIdentityRequest(input *DeleteCloudFrontOriginAccessIdentityInput) DeleteCloudFrontOriginAccessIdentityRequest {
 	op := &aws.Operation{
 		Name:       opDeleteCloudFrontOriginAccessIdentity,
 		HTTPMethod: "DELETE",
-		HTTPPath:   "/2019-03-26/origin-access-identity/cloudfront/{Id}",
+		HTTPPath:   "/2020-05-31/origin-access-identity/cloudfront/{Id}",
 	}
 
 	if input == nil {

@@ -14,8 +14,8 @@ import (
 type StreamJournalToKinesisInput struct {
 	_ struct{} `type:"structure"`
 
-	// The exclusive date and time that specifies when the stream ends. If you keep
-	// this parameter blank, the stream runs indefinitely until you cancel it.
+	// The exclusive date and time that specifies when the stream ends. If you don't
+	// define this parameter, the stream runs indefinitely until you cancel it.
 	//
 	// The ExclusiveEndTime must be in ISO 8601 date and time format and in Universal
 	// Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z
@@ -54,10 +54,8 @@ type StreamJournalToKinesisInput struct {
 	// names can help identify and indicate the purpose of a stream.
 	//
 	// Your stream name must be unique among other active streams for a given ledger.
-	// If you try to create a stream with the same name and configuration of an
-	// active, existing stream for the same ledger, QLDB simply returns the existing
-	// stream. Stream names have the same naming constraints as ledger names, as
-	// defined in Quotas in Amazon QLDB (https://docs.aws.amazon.com/qldb/latest/developerguide/limits.html#limits.naming)
+	// Stream names have the same naming constraints as ledger names, as defined
+	// in Quotas in Amazon QLDB (https://docs.aws.amazon.com/qldb/latest/developerguide/limits.html#limits.naming)
 	// in the Amazon QLDB Developer Guide.
 	//
 	// StreamName is a required field
@@ -202,10 +200,9 @@ const opStreamJournalToKinesis = "StreamJournalToKinesis"
 // StreamJournalToKinesisRequest returns a request value for making API operation for
 // Amazon QLDB.
 //
-// Creates a stream for a given Amazon QLDB ledger that delivers the journal
-// data to a specified Amazon Kinesis Data Streams resource. The stream captures
-// every document revision that is committed to your journal and sends it to
-// the Kinesis data stream.
+// Creates a journal stream for a given Amazon QLDB ledger. The stream captures
+// every document revision that is committed to the ledger's journal and delivers
+// the data to a specified Amazon Kinesis Data Streams resource.
 //
 //    // Example sending a request using StreamJournalToKinesisRequest.
 //    req := client.StreamJournalToKinesisRequest(params)

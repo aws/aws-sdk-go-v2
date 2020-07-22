@@ -14,7 +14,7 @@ type UpdateVTLDeviceTypeInput struct {
 
 	// The type of medium changer you want to select.
 	//
-	// Valid Values: "STK-L700", "AWS-Gateway-VTL"
+	// Valid Values: STK-L700 | AWS-Gateway-VTL
 	//
 	// DeviceType is a required field
 	DeviceType *string `min:"2" type:"string" required:"true"`

@@ -72,10 +72,13 @@ type ModifyReplicationInstanceInput struct {
 	// ReplicationInstanceArn is a required field
 	ReplicationInstanceArn *string `type:"string" required:"true"`
 
-	// The compute and memory capacity of the replication instance.
+	// The compute and memory capacity of the replication instance as defined for
+	// the specified replication instance class. For example to specify the instance
+	// class dms.c4.large, set this parameter to "dms.c4.large".
 	//
-	// Valid Values: dms.t2.micro | dms.t2.small | dms.t2.medium | dms.t2.large
-	// | dms.c4.large | dms.c4.xlarge | dms.c4.2xlarge | dms.c4.4xlarge
+	// For more information on the settings and capacities for the available replication
+	// instance classes, see Selecting the right AWS DMS replication instance for
+	// your migration (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth).
 	ReplicationInstanceClass *string `type:"string"`
 
 	// The replication instance identifier. This parameter is stored as a lowercase

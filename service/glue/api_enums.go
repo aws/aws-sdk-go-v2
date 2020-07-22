@@ -36,6 +36,28 @@ func (enum CloudWatchEncryptionMode) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type ColumnStatisticsType string
+
+// Enum values for ColumnStatisticsType
+const (
+	ColumnStatisticsTypeBoolean ColumnStatisticsType = "BOOLEAN"
+	ColumnStatisticsTypeDate    ColumnStatisticsType = "DATE"
+	ColumnStatisticsTypeDecimal ColumnStatisticsType = "DECIMAL"
+	ColumnStatisticsTypeDouble  ColumnStatisticsType = "DOUBLE"
+	ColumnStatisticsTypeLong    ColumnStatisticsType = "LONG"
+	ColumnStatisticsTypeString  ColumnStatisticsType = "STRING"
+	ColumnStatisticsTypeBinary  ColumnStatisticsType = "BINARY"
+)
+
+func (enum ColumnStatisticsType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ColumnStatisticsType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type Comparator string
 
 // Enum values for Comparator
@@ -178,6 +200,23 @@ func (enum DeleteBehavior) MarshalValue() (string, error) {
 }
 
 func (enum DeleteBehavior) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type EnableHybridValues string
+
+// Enum values for EnableHybridValues
+const (
+	EnableHybridValuesTrue  EnableHybridValues = "TRUE"
+	EnableHybridValuesFalse EnableHybridValues = "FALSE"
+)
+
+func (enum EnableHybridValues) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum EnableHybridValues) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }
@@ -363,6 +402,23 @@ func (enum PrincipalType) MarshalValue() (string, error) {
 }
 
 func (enum PrincipalType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ResourceShareType string
+
+// Enum values for ResourceShareType
+const (
+	ResourceShareTypeForeign ResourceShareType = "FOREIGN"
+	ResourceShareTypeAll     ResourceShareType = "ALL"
+)
+
+func (enum ResourceShareType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ResourceShareType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

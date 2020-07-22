@@ -15,7 +15,9 @@ type GetCurrentMetricDataInput struct {
 	_ struct{} `type:"structure"`
 
 	// The metrics to retrieve. Specify the name and unit for each metric. The following
-	// metrics are available:
+	// metrics are available. For a description of each metric, see Real-time Metrics
+	// Definitions (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html)
+	// in the Amazon Connect Administrator Guide.
 	//
 	// AGENTS_AFTER_CONTACT_WORK
 	//

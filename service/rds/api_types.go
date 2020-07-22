@@ -221,10 +221,6 @@ func (s CloudwatchLogsExportConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-//
-// This is prerelease documentation for the RDS Database Proxy feature in preview
-// release. It is subject to change.
-//
 // Specifies the settings that control the size and behavior of the connection
 // pool associated with a DBProxyTargetGroup.
 type ConnectionPoolConfiguration struct {
@@ -244,8 +240,6 @@ type ConnectionPoolConfiguration struct {
 	// has identical settings such as time zone and character set. For multiple
 	// statements, use semicolons as the separator. You can also include multiple
 	// variables in a single SET statement, such as SET x=1, y=2.
-	//
-	// InitQuery is not currently supported for PostgreSQL.
 	//
 	// Default: no initialization query
 	InitQuery *string `type:"string"`
@@ -285,10 +279,6 @@ func (s ConnectionPoolConfiguration) String() string {
 	return awsutil.Prettify(s)
 }
 
-//
-// This is prerelease documentation for the RDS Database Proxy feature in preview
-// release. It is subject to change.
-//
 // Displays the settings that control the size and behavior of the connection
 // pool associated with a DBProxyTarget.
 type ConnectionPoolConfigurationInfo struct {
@@ -305,8 +295,6 @@ type ConnectionPoolConfigurationInfo struct {
 	// is empty by default. For multiple statements, use semicolons as the separator.
 	// You can also include multiple variables in a single SET statement, such as
 	// SET x=1, y=2.
-	//
-	// InitQuery is not currently supported for PostgreSQL.
 	InitQuery *string `type:"string"`
 
 	// The maximum size of the connection pool for each target in a target group.
@@ -513,6 +501,17 @@ type DBCluster struct {
 
 	// Indicates the database engine version.
 	EngineVersion *string `type:"string"`
+
+	// Specifies whether you have requested to enable write forwarding for a secondary
+	// cluster in an Aurora global database. Because write forwarding takes time
+	// to enable, check the value of GlobalWriteForwardingStatus to confirm that
+	// the request has completed before using the write forwarding feature for this
+	// cluster.
+	GlobalWriteForwardingRequested *bool `type:"boolean"`
+
+	// Specifies whether a secondary cluster in an Aurora global database has write
+	// forwarding enabled, not enabled, or is in the process of enabling it.
+	GlobalWriteForwardingStatus WriteForwardingStatus `type:"string" enum:"true"`
 
 	// Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
 	HostedZoneId *string `type:"string"`
@@ -991,9 +990,17 @@ type DBEngineVersion struct {
 	// of the CreateDBInstance action.
 	SupportedTimezones []Timezone `locationNameList:"Timezone" type:"list"`
 
+	// A value that indicates whether you can use Aurora global databases with a
+	// specific DB engine version.
+	SupportsGlobalDatabases *bool `type:"boolean"`
+
 	// A value that indicates whether the engine version supports exporting the
 	// log types specified by ExportableLogTypes to CloudWatch Logs.
 	SupportsLogExportsToCloudwatchLogs *bool `type:"boolean"`
+
+	// A value that indicates whether you can use Aurora parallel query with a specific
+	// DB engine version.
+	SupportsParallelQuery *bool `type:"boolean"`
 
 	// Indicates whether the database engine version supports read replicas.
 	SupportsReadReplica *bool `type:"boolean"`
@@ -1222,10 +1229,19 @@ type DBInstance struct {
 	// in the Amazon Aurora User Guide.
 	PromotionTier *int64 `type:"integer"`
 
-	// Specifies the accessibility options for the DB instance. A value of true
-	// specifies an Internet-facing instance with a publicly resolvable DNS name,
-	// which resolves to a public IP address. A value of false specifies an internal
-	// instance with a DNS name that resolves to a private IP address.
+	// Specifies the accessibility options for the DB instance.
+	//
+	// When the DB instance is publicly accessible, its DNS endpoint resolves to
+	// the private IP address from within the DB instance's VPC, and to the public
+	// IP address from outside of the DB instance's VPC. Access to the DB instance
+	// is ultimately controlled by the security group it uses, and that public access
+	// is not permitted if the security group assigned to the DB instance doesn't
+	// permit it.
+	//
+	// When the DB instance isn't publicly accessible, it is an internal DB instance
+	// with a DNS name that resolves to a private IP address.
+	//
+	// For more information, see CreateDBInstance.
 	PubliclyAccessible *bool `type:"boolean"`
 
 	// Contains one or more identifiers of Aurora DB clusters to which the RDS DB
@@ -1495,10 +1511,6 @@ func (s DBParameterGroupStatus) String() string {
 	return awsutil.Prettify(s)
 }
 
-//
-// This is prerelease documentation for the RDS Database Proxy feature in preview
-// release. It is subject to change.
-//
 // The data structure representing a proxy managed by the RDS Proxy.
 //
 // This data type is used as a response element in the DescribeDBProxies action.
@@ -1573,10 +1585,6 @@ func (s DBProxy) String() string {
 	return awsutil.Prettify(s)
 }
 
-//
-// This is prerelease documentation for the RDS Database Proxy feature in preview
-// release. It is subject to change.
-//
 // Contains the details for an RDS Proxy target. It represents an RDS DB instance
 // or Aurora DB cluster that the proxy can connect to. One or more targets are
 // associated with an RDS Proxy target group.
@@ -1617,10 +1625,6 @@ func (s DBProxyTarget) String() string {
 	return awsutil.Prettify(s)
 }
 
-//
-// This is prerelease documentation for the RDS Database Proxy feature in preview
-// release. It is subject to change.
-//
 // Represents a set of RDS DB instances, Aurora DB clusters, or both that a
 // proxy can connect to. Currently, each target group is associated with exactly
 // one RDS DB instance or Aurora DB cluster.
@@ -1765,8 +1769,8 @@ type DBSnapshot struct {
 	// accounts is enabled, and otherwise false.
 	IAMDatabaseAuthenticationEnabled *bool `type:"boolean"`
 
-	// Specifies the time when the snapshot was taken, in Universal Coordinated
-	// Time (UTC).
+	// Specifies the time in Coordinated Universal Time (UTC) when the DB instance,
+	// from which the snapshot was taken, was created.
 	InstanceCreateTime *time.Time `type:"timestamp"`
 
 	// Specifies the Provisioned IOPS (I/O operations per second) value of the DB
@@ -1796,8 +1800,7 @@ type DBSnapshot struct {
 	// class of the DB instance when the DB snapshot was created.
 	ProcessorFeatures []ProcessorFeature `locationNameList:"ProcessorFeature" type:"list"`
 
-	// Provides the time when the snapshot was taken, in Universal Coordinated Time
-	// (UTC).
+	// Specifies when the snapshot was taken in Coodinated Universal Time (UTC).
 	SnapshotCreateTime *time.Time `type:"timestamp"`
 
 	// Provides the type of the DB snapshot.
@@ -2335,6 +2338,10 @@ type GlobalClusterMember struct {
 	// The Amazon Resource Name (ARN) for each Aurora cluster.
 	DBClusterArn *string `type:"string"`
 
+	// Specifies whether a secondary cluster in an Aurora global database has write
+	// forwarding enabled, not enabled, or is in the process of enabling it.
+	GlobalWriteForwardingStatus WriteForwardingStatus `type:"string" enum:"true"`
+
 	// Specifies whether the Aurora cluster is the primary cluster (that is, has
 	// read-write capability) for the Aurora global database with which it is associated.
 	IsWriter *bool `type:"boolean"`
@@ -2789,6 +2796,13 @@ type OrderableDBInstanceOption struct {
 	// Indicates whether a DB instance is Multi-AZ capable.
 	MultiAZCapable *bool `type:"boolean"`
 
+	// Whether a DB instance supports RDS on Outposts.
+	//
+	// For more information about RDS on Outposts, see Amazon RDS on AWS Outposts
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html)
+	// in the Amazon RDS User Guide.
+	OutpostCapable *bool `type:"boolean"`
+
 	// Indicates whether a DB instance can have a read replica.
 	ReadReplicaCapable *bool `type:"boolean"`
 
@@ -2805,6 +2819,10 @@ type OrderableDBInstanceOption struct {
 	// Indicates whether a DB instance supports Enhanced Monitoring at intervals
 	// from 1 to 60 seconds.
 	SupportsEnhancedMonitoring *bool `type:"boolean"`
+
+	// A value that indicates whether you can use Aurora global databases with a
+	// specific combination of other DB engine attributes.
+	SupportsGlobalDatabases *bool `type:"boolean"`
 
 	// Indicates whether a DB instance supports IAM database authentication.
 	SupportsIAMDatabaseAuthentication *bool `type:"boolean"`
@@ -2831,6 +2849,23 @@ type OrderableDBInstanceOption struct {
 
 // String returns the string representation
 func (s OrderableDBInstanceOption) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A data type that represents an Outpost.
+//
+// For more information about RDS on Outposts, see Amazon RDS on AWS Outposts
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html)
+// in the Amazon RDS User Guide.
+type Outpost struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the Outpost.
+	Arn *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Outpost) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -3347,8 +3382,8 @@ func (s SourceRegion) String() string {
 	return awsutil.Prettify(s)
 }
 
-// This data type is used as a response element in the DescribeDBSubnetGroups
-// action.
+// This data type is used as a response element for the DescribeDBSubnetGroups
+// operation.
 type Subnet struct {
 	_ struct{} `type:"structure"`
 
@@ -3358,10 +3393,17 @@ type Subnet struct {
 	// type.
 	SubnetAvailabilityZone *AvailabilityZone `type:"structure"`
 
-	// Specifies the identifier of the subnet.
+	// The identifier of the subnet.
 	SubnetIdentifier *string `type:"string"`
 
-	// Specifies the status of the subnet.
+	// If the subnet is associated with an Outpost, this value specifies the Outpost.
+	//
+	// For more information about RDS on Outposts, see Amazon RDS on AWS Outposts
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html)
+	// in the Amazon RDS User Guide.
+	SubnetOutpost *Outpost `type:"structure"`
+
+	// The status of the subnet.
 	SubnetStatus *string `type:"string"`
 }
 
@@ -3392,10 +3434,6 @@ func (s Tag) String() string {
 	return awsutil.Prettify(s)
 }
 
-//
-// This is prerelease documentation for the RDS Database Proxy feature in preview
-// release. It is subject to change.
-//
 // Information about the connection health of an RDS Proxy target.
 type TargetHealth struct {
 	_ struct{} `type:"structure"`
@@ -3461,10 +3499,6 @@ func (s UpgradeTarget) String() string {
 	return awsutil.Prettify(s)
 }
 
-//
-// This is prerelease documentation for the RDS Database Proxy feature in preview
-// release. It is subject to change.
-//
 // Specifies the details of authentication used by a proxy to log in as a specific
 // database user.
 type UserAuthConfig struct {
@@ -3496,10 +3530,6 @@ func (s UserAuthConfig) String() string {
 	return awsutil.Prettify(s)
 }
 
-//
-// This is prerelease documentation for the RDS Database Proxy feature in preview
-// release. It is subject to change.
-//
 // Returns the details of authentication used by a proxy to log in as a specific
 // database user.
 type UserAuthConfigInfo struct {

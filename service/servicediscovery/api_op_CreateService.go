@@ -4,6 +4,7 @@ package servicediscovery
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -67,6 +68,11 @@ type CreateServiceInput struct {
 
 	// The ID of the namespace that you want to use to create the service.
 	NamespaceId *string `type:"string"`
+
+	// The tags to add to the service. Each tag consists of a key and an optional
+	// value, both of which you define. Tag keys can have a maximum character length
+	// of 128 characters, and tag values can have a maximum length of 256 characters.
+	Tags []Tag `type:"list"`
 }
 
 // String returns the string representation
@@ -94,6 +100,13 @@ func (s *CreateServiceInput) Validate() error {
 	if s.HealthCheckCustomConfig != nil {
 		if err := s.HealthCheckCustomConfig.Validate(); err != nil {
 			invalidParams.AddNested("HealthCheckCustomConfig", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 

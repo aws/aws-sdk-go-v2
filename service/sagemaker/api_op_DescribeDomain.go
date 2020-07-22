@@ -98,7 +98,7 @@ const opDescribeDomain = "DescribeDomain"
 // DescribeDomainRequest returns a request value for making API operation for
 // Amazon SageMaker Service.
 //
-// The desciption of the domain.
+// The description of the domain.
 //
 //    // Example sending a request using DescribeDomainRequest.
 //    req := client.DescribeDomainRequest(params)

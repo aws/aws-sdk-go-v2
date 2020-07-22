@@ -34,7 +34,7 @@ type PutSecretValueInput struct {
 	//    or SecretBinary values are the same as those in the request then the request
 	//    is ignored (the operation is idempotent).
 	//
-	//    * If a version with this value already exists and that version's SecretString
+	//    * If a version with this value already exists and the version of the SecretString
 	//    and SecretBinary values are different from those in the request then the
 	//    request fails because you cannot modify an existing secret version. You
 	//    can only create new versions to store new secret values.
@@ -69,7 +69,12 @@ type PutSecretValueInput struct {
 	// a partial ARN, then those characters cause Secrets Manager to assume that
 	// you’re specifying a complete ARN. This confusion can cause unexpected results.
 	// To avoid this situation, we recommend that you don’t create secret names
-	// that end with a hyphen followed by six characters.
+	// ending with a hyphen followed by six characters.
+	//
+	// If you specify an incomplete ARN without the random suffix, and instead provide
+	// the 'friendly name', you must not include the random suffix. If you do include
+	// the random suffix added by Secrets Manager, you receive either a ResourceNotFoundException
+	// or an AccessDeniedException error, depending on your permissions.
 	//
 	// SecretId is a required field
 	SecretId *string `min:"1" type:"string" required:"true"`
@@ -197,20 +202,19 @@ const opPutSecretValue = "PutSecretValue"
 //    However, if the secret data is different, then the operation fails because
 //    you cannot modify an existing version; you can only create new ones.
 //
-//    * If you call an operation that needs to encrypt or decrypt the SecretString
-//    or SecretBinary for a secret in the same account as the calling user and
-//    that secret doesn't specify a AWS KMS encryption key, Secrets Manager
-//    uses the account's default AWS managed customer master key (CMK) with
-//    the alias aws/secretsmanager. If this key doesn't already exist in your
-//    account then Secrets Manager creates it for you automatically. All users
-//    and roles in the same AWS account automatically have access to use the
-//    default CMK. Note that if an Secrets Manager API call results in AWS having
-//    to create the account's AWS-managed CMK, it can result in a one-time significant
-//    delay in returning the result.
+//    * If you call an operation to encrypt or decrypt the SecretString or SecretBinary
+//    for a secret in the same account as the calling user and that secret doesn't
+//    specify a AWS KMS encryption key, Secrets Manager uses the account's default
+//    AWS managed customer master key (CMK) with the alias aws/secretsmanager.
+//    If this key doesn't already exist in your account then Secrets Manager
+//    creates it for you automatically. All users and roles in the same AWS
+//    account automatically have access to use the default CMK. Note that if
+//    an Secrets Manager API call results in AWS creating the account's AWS-managed
+//    CMK, it can result in a one-time significant delay in returning the result.
 //
-//    * If the secret is in a different AWS account from the credentials calling
-//    an API that requires encryption or decryption of the secret value then
-//    you must create and use a custom AWS KMS CMK because you can't access
+//    * If the secret resides in a different AWS account from the credentials
+//    calling an API that requires encryption or decryption of the secret value
+//    then you must create and use a custom AWS KMS CMK because you can't access
 //    the default CMK for the account using credentials from a different AWS
 //    account. Store the ARN of the CMK in the secret when you create the secret
 //    or when you update it by including it in the KMSKeyId. If you call an

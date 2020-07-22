@@ -54,7 +54,8 @@ func (s *CancelKeyDeletionInput) Validate() error {
 type CancelKeyDeletionOutput struct {
 	_ struct{} `type:"structure"`
 
-	// The unique identifier of the master key for which deletion is canceled.
+	// The Amazon Resource Name (key ARN (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
+	// of the CMK whose deletion is canceled.
 	KeyId *string `min:"1" type:"string"`
 }
 

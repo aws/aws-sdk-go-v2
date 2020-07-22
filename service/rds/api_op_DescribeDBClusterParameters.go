@@ -116,6 +116,12 @@ func (c *Client) DescribeDBClusterParametersRequest(input *DescribeDBClusterPara
 		Name:       opDescribeDBClusterParameters,
 		HTTPMethod: "POST",
 		HTTPPath:   "/",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"Marker"},
+			OutputTokens:    []string{"Marker"},
+			LimitToken:      "MaxRecords",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -149,6 +155,53 @@ func (r DescribeDBClusterParametersRequest) Send(ctx context.Context) (*Describe
 	}
 
 	return resp, nil
+}
+
+// NewDescribeDBClusterParametersRequestPaginator returns a paginator for DescribeDBClusterParameters.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.DescribeDBClusterParametersRequest(input)
+//   p := rds.NewDescribeDBClusterParametersRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewDescribeDBClusterParametersPaginator(req DescribeDBClusterParametersRequest) DescribeDBClusterParametersPaginator {
+	return DescribeDBClusterParametersPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *DescribeDBClusterParametersInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// DescribeDBClusterParametersPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type DescribeDBClusterParametersPaginator struct {
+	aws.Pager
+}
+
+func (p *DescribeDBClusterParametersPaginator) CurrentPage() *DescribeDBClusterParametersOutput {
+	return p.Pager.CurrentPage().(*DescribeDBClusterParametersOutput)
 }
 
 // DescribeDBClusterParametersResponse is the response type for the

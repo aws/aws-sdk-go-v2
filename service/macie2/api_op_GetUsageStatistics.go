@@ -126,6 +126,12 @@ func (c *Client) GetUsageStatisticsRequest(input *GetUsageStatisticsInput) GetUs
 		Name:       opGetUsageStatistics,
 		HTTPMethod: "POST",
 		HTTPPath:   "/usage/statistics",
+		Paginator: &aws.Paginator{
+			InputTokens:     []string{"nextToken"},
+			OutputTokens:    []string{"nextToken"},
+			LimitToken:      "maxResults",
+			TruncationToken: "",
+		},
 	}
 
 	if input == nil {
@@ -159,6 +165,53 @@ func (r GetUsageStatisticsRequest) Send(ctx context.Context) (*GetUsageStatistic
 	}
 
 	return resp, nil
+}
+
+// NewGetUsageStatisticsRequestPaginator returns a paginator for GetUsageStatistics.
+// Use Next method to get the next page, and CurrentPage to get the current
+// response page from the paginator. Next will return false, if there are
+// no more pages, or an error was encountered.
+//
+// Note: This operation can generate multiple requests to a service.
+//
+//   // Example iterating over pages.
+//   req := client.GetUsageStatisticsRequest(input)
+//   p := macie2.NewGetUsageStatisticsRequestPaginator(req)
+//
+//   for p.Next(context.TODO()) {
+//       page := p.CurrentPage()
+//   }
+//
+//   if err := p.Err(); err != nil {
+//       return err
+//   }
+//
+func NewGetUsageStatisticsPaginator(req GetUsageStatisticsRequest) GetUsageStatisticsPaginator {
+	return GetUsageStatisticsPaginator{
+		Pager: aws.Pager{
+			NewRequest: func(ctx context.Context) (*aws.Request, error) {
+				var inCpy *GetUsageStatisticsInput
+				if req.Input != nil {
+					tmp := *req.Input
+					inCpy = &tmp
+				}
+
+				newReq := req.Copy(inCpy)
+				newReq.SetContext(ctx)
+				return newReq.Request, nil
+			},
+		},
+	}
+}
+
+// GetUsageStatisticsPaginator is used to paginate the request. This can be done by
+// calling Next and CurrentPage.
+type GetUsageStatisticsPaginator struct {
+	aws.Pager
+}
+
+func (p *GetUsageStatisticsPaginator) CurrentPage() *GetUsageStatisticsOutput {
+	return p.Pager.CurrentPage().(*GetUsageStatisticsOutput)
 }
 
 // GetUsageStatisticsResponse is the response type for the

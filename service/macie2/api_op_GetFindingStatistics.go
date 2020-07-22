@@ -11,7 +11,7 @@ import (
 )
 
 // Specifies criteria for filtering, grouping, sorting, and paginating the results
-// of a query for information about findings.
+// of a query that retrieves aggregated statistical data about findings.
 type GetFindingStatisticsInput struct {
 	_ struct{} `type:"structure"`
 
@@ -24,8 +24,8 @@ type GetFindingStatisticsInput struct {
 
 	Size *int64 `locationName:"size" type:"integer"`
 
-	// Specifies criteria for sorting the results of a query for information about
-	// findings.
+	// Specifies criteria for sorting the results of a query that retrieves aggregated
+	// statistical data about findings.
 	SortCriteria *FindingStatisticsSortCriteria `locationName:"sortCriteria" type:"structure"`
 }
 

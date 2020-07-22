@@ -4,6 +4,7 @@ package lambda
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -28,6 +29,9 @@ type CreateFunctionInput struct {
 
 	// Environment variables that are accessible from function code during execution.
 	Environment *Environment `type:"structure"`
+
+	// Connection settings for an Amazon EFS file system.
+	FileSystemConfigs []FileSystemConfig `type:"list"`
 
 	// The name of the Lambda function.
 	//
@@ -141,6 +145,13 @@ func (s *CreateFunctionInput) Validate() error {
 			invalidParams.AddNested("Code", err.(aws.ErrInvalidParams))
 		}
 	}
+	if s.FileSystemConfigs != nil {
+		for i, v := range s.FileSystemConfigs {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "FileSystemConfigs", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -175,6 +186,18 @@ func (s CreateFunctionInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Environment", v, metadata)
+	}
+	if s.FileSystemConfigs != nil {
+		v := s.FileSystemConfigs
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "FileSystemConfigs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.FunctionName != nil {
 		v := *s.FunctionName
@@ -282,6 +305,9 @@ type CreateFunctionOutput struct {
 	// The function's environment variables.
 	Environment *EnvironmentResponse `type:"structure"`
 
+	// Connection settings for an Amazon EFS file system.
+	FileSystemConfigs []FileSystemConfig `type:"list"`
+
 	// The function's Amazon Resource Name (ARN).
 	FunctionArn *string `type:"string"`
 
@@ -388,6 +414,18 @@ func (s CreateFunctionOutput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Environment", v, metadata)
+	}
+	if s.FileSystemConfigs != nil {
+		v := s.FileSystemConfigs
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "FileSystemConfigs", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.FunctionArn != nil {
 		v := *s.FunctionArn

@@ -47,7 +47,7 @@ func (s AttachmentDetails) String() string {
 }
 
 // A JSON-formatted object that contains the metadata for a support case. It
-// is contained the response from a DescribeCases request. CaseDetails contains
+// is contained in the response from a DescribeCases request. CaseDetails contains
 // the following fields:
 //
 //    * caseId. The AWS Support case ID requested or returned in the call. The
@@ -64,10 +64,10 @@ func (s AttachmentDetails) String() string {
 //    Language parameters must be passed explicitly for operations that take
 //    them.
 //
+//    * nextToken. A resumption point for pagination.
+//
 //    * recentCommunications. One or more Communication objects. Fields of these
 //    objects are attachments, body, caseId, submittedBy, and timeCreated.
-//
-//    * nextToken. A resumption point for pagination.
 //
 //    * serviceCode. The identifier for the AWS service that corresponds to
 //    the service code defined in the call to DescribeServices.
@@ -141,7 +141,7 @@ type CaseDetails struct {
 	// The email address of the account that submitted the case.
 	SubmittedBy *string `locationName:"submittedBy" type:"string"`
 
-	// The time that the case was case created in the AWS Support Center.
+	// The time that the case was created in the AWS Support Center.
 	TimeCreated *string `locationName:"timeCreated" type:"string"`
 }
 
@@ -241,7 +241,8 @@ func (s Service) String() string {
 
 // A code and name pair that represents the severity level of a support case.
 // The available values depend on the support plan for the account. For more
-// information, see Choosing a Severity (https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity).
+// information, see Choosing a severity (https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity)
+// in the AWS Support User Guide.
 type SeverityLevel struct {
 	_ struct{} `type:"structure"`
 
@@ -267,7 +268,8 @@ type SeverityLevel struct {
 	//
 	//    * critical: Business-critical system down
 	//
-	// For more information, see Choosing a Severity (https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity)
+	// For more information, see Choosing a severity (https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity)
+	// in the AWS Support User Guide.
 	Name *string `locationName:"name" type:"string"`
 }
 

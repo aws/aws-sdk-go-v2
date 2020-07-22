@@ -10,20 +10,20 @@ import (
 	"github.com/aws/aws-sdk-go-v2/private/protocol"
 )
 
-// Request structure for list branches request.
+// The request structure for the list branches request.
 type ListBranchesInput struct {
 	_ struct{} `type:"structure"`
 
-	// Unique Id for an Amplify App.
+	// The unique ID for an Amplify app.
 	//
 	// AppId is a required field
 	AppId *string `location:"uri" locationName:"appId" min:"1" type:"string" required:"true"`
 
-	// Maximum number of records to list in a single response.
+	// The maximum number of records to list in a single response.
 	MaxResults *int64 `location:"querystring" locationName:"maxResults" min:"1" type:"integer"`
 
-	// Pagination token. Set to null to start listing branches from start. If a
-	// non-null pagination token is returned in a result, then pass its value in
+	// A pagination token. Set to null to start listing branches from the start.
+	// If a non-null pagination token is returned in a result, pass its value in
 	// here to list more branches.
 	NextToken *string `location:"querystring" locationName:"nextToken" type:"string"`
 }
@@ -78,17 +78,17 @@ func (s ListBranchesInput) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
-// Result structure for list branches request.
+// The result structure for the list branches request.
 type ListBranchesOutput struct {
 	_ struct{} `type:"structure"`
 
-	// List of branches for an Amplify App.
+	// A list of branches for an Amplify app.
 	//
 	// Branches is a required field
 	Branches []Branch `locationName:"branches" type:"list" required:"true"`
 
-	// Pagination token. If non-null pagination token is returned in a result, then
-	// pass its value in another request to fetch more entries.
+	// A pagination token. If a non-null pagination token is returned in a result,
+	// pass its value in another request to retrieve more entries.
 	NextToken *string `locationName:"nextToken" type:"string"`
 }
 
@@ -125,7 +125,7 @@ const opListBranches = "ListBranches"
 // ListBranchesRequest returns a request value for making API operation for
 // AWS Amplify.
 //
-// Lists branches for an Amplify App.
+// Lists the branches of an Amplify app.
 //
 //    // Example sending a request using ListBranchesRequest.
 //    req := client.ListBranchesRequest(params)

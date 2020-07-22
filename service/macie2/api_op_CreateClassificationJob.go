@@ -11,6 +11,9 @@ import (
 )
 
 // Specifies the scope, schedule, and other settings for a classification job.
+// You can't delete or change the settings for a classification job after you
+// create it. In Amazon Macie, classification jobs are immutable. This ensures
+// accurate data classification results for audits or investigations.
 type CreateClassificationJobInput struct {
 	_ struct{} `type:"structure"`
 

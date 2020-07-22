@@ -13,22 +13,22 @@ import (
 type DescribeBackupsInput struct {
 	_ struct{} `type:"structure"`
 
-	// (Optional) IDs of the backups you want to retrieve (String). This overrides
-	// any filters. If any IDs are not found, BackupNotFound will be thrown.
+	// IDs of the backups you want to retrieve (String). This overrides any filters.
+	// If any IDs are not found, BackupNotFound will be thrown.
 	BackupIds []string `type:"list"`
 
-	// (Optional) Filters structure. Supported names are file-system-id and backup-type.
+	// Filters structure. Supported names are file-system-id and backup-type.
 	Filters []Filter `type:"list"`
 
-	// (Optional) Maximum number of backups to return in the response (integer).
-	// This parameter value must be greater than 0. The number of items that Amazon
-	// FSx returns is the minimum of the MaxResults parameter specified in the request
-	// and the service's internal maximum number of items per page.
+	// Maximum number of backups to return in the response (integer). This parameter
+	// value must be greater than 0. The number of items that Amazon FSx returns
+	// is the minimum of the MaxResults parameter specified in the request and the
+	// service's internal maximum number of items per page.
 	MaxResults *int64 `min:"1" type:"integer"`
 
-	// (Optional) Opaque pagination token returned from a previous DescribeBackups
-	// operation (String). If a token present, the action continues the list from
-	// where the returning call left off.
+	// Opaque pagination token returned from a previous DescribeBackups operation
+	// (String). If a token present, the action continues the list from where the
+	// returning call left off.
 	NextToken *string `min:"1" type:"string"`
 }
 
@@ -75,10 +75,9 @@ const opDescribeBackups = "DescribeBackups"
 // DescribeBackupsRequest returns a request value for making API operation for
 // Amazon FSx.
 //
-// Returns the description of specific Amazon FSx for Windows File Server backups,
-// if a BackupIds value is provided for that backup. Otherwise, it returns all
-// backups owned by your AWS account in the AWS Region of the endpoint that
-// you're calling.
+// Returns the description of specific Amazon FSx backups, if a BackupIds value
+// is provided for that backup. Otherwise, it returns all backups owned by your
+// AWS account in the AWS Region of the endpoint that you're calling.
 //
 // When retrieving all backups, you can optionally specify the MaxResults parameter
 // to limit the number of backups in a response. If more backups remain, Amazon

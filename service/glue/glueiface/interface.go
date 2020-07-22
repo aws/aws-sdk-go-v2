@@ -117,6 +117,10 @@ type ClientAPI interface {
 
 	DeleteClassifierRequest(*glue.DeleteClassifierInput) glue.DeleteClassifierRequest
 
+	DeleteColumnStatisticsForPartitionRequest(*glue.DeleteColumnStatisticsForPartitionInput) glue.DeleteColumnStatisticsForPartitionRequest
+
+	DeleteColumnStatisticsForTableRequest(*glue.DeleteColumnStatisticsForTableInput) glue.DeleteColumnStatisticsForTableRequest
+
 	DeleteConnectionRequest(*glue.DeleteConnectionInput) glue.DeleteConnectionRequest
 
 	DeleteCrawlerRequest(*glue.DeleteCrawlerInput) glue.DeleteCrawlerRequest
@@ -150,6 +154,10 @@ type ClientAPI interface {
 	GetClassifierRequest(*glue.GetClassifierInput) glue.GetClassifierRequest
 
 	GetClassifiersRequest(*glue.GetClassifiersInput) glue.GetClassifiersRequest
+
+	GetColumnStatisticsForPartitionRequest(*glue.GetColumnStatisticsForPartitionInput) glue.GetColumnStatisticsForPartitionRequest
+
+	GetColumnStatisticsForTableRequest(*glue.GetColumnStatisticsForTableInput) glue.GetColumnStatisticsForTableRequest
 
 	GetConnectionRequest(*glue.GetConnectionInput) glue.GetConnectionRequest
 
@@ -198,6 +206,8 @@ type ClientAPI interface {
 	GetPartitionsRequest(*glue.GetPartitionsInput) glue.GetPartitionsRequest
 
 	GetPlanRequest(*glue.GetPlanInput) glue.GetPlanRequest
+
+	GetResourcePoliciesRequest(*glue.GetResourcePoliciesInput) glue.GetResourcePoliciesRequest
 
 	GetResourcePolicyRequest(*glue.GetResourcePolicyInput) glue.GetResourcePolicyRequest
 
@@ -286,6 +296,10 @@ type ClientAPI interface {
 	UntagResourceRequest(*glue.UntagResourceInput) glue.UntagResourceRequest
 
 	UpdateClassifierRequest(*glue.UpdateClassifierInput) glue.UpdateClassifierRequest
+
+	UpdateColumnStatisticsForPartitionRequest(*glue.UpdateColumnStatisticsForPartitionInput) glue.UpdateColumnStatisticsForPartitionRequest
+
+	UpdateColumnStatisticsForTableRequest(*glue.UpdateColumnStatisticsForTableInput) glue.UpdateColumnStatisticsForTableRequest
 
 	UpdateConnectionRequest(*glue.UpdateConnectionInput) glue.UpdateConnectionRequest
 

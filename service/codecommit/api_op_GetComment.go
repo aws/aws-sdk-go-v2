@@ -57,6 +57,10 @@ const opGetComment = "GetComment"
 //
 // Returns the content of a comment made on a change, file, or commit in a repository.
 //
+// Reaction counts might include numbers from user identities who were deleted
+// after the reaction was made. For a count of reactions from active identities,
+// use GetCommentReactions.
+//
 //    // Example sending a request using GetCommentRequest.
 //    req := client.GetCommentRequest(params)
 //    resp, err := req.Send(context.TODO())

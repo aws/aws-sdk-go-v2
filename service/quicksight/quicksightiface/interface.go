@@ -81,6 +81,10 @@ type ClientAPI interface {
 
 	CreateTemplateAliasRequest(*quicksight.CreateTemplateAliasInput) quicksight.CreateTemplateAliasRequest
 
+	CreateThemeRequest(*quicksight.CreateThemeInput) quicksight.CreateThemeRequest
+
+	CreateThemeAliasRequest(*quicksight.CreateThemeAliasInput) quicksight.CreateThemeAliasRequest
+
 	DeleteDashboardRequest(*quicksight.DeleteDashboardInput) quicksight.DeleteDashboardRequest
 
 	DeleteDataSetRequest(*quicksight.DeleteDataSetInput) quicksight.DeleteDataSetRequest
@@ -96,6 +100,10 @@ type ClientAPI interface {
 	DeleteTemplateRequest(*quicksight.DeleteTemplateInput) quicksight.DeleteTemplateRequest
 
 	DeleteTemplateAliasRequest(*quicksight.DeleteTemplateAliasInput) quicksight.DeleteTemplateAliasRequest
+
+	DeleteThemeRequest(*quicksight.DeleteThemeInput) quicksight.DeleteThemeRequest
+
+	DeleteThemeAliasRequest(*quicksight.DeleteThemeAliasInput) quicksight.DeleteThemeAliasRequest
 
 	DeleteUserRequest(*quicksight.DeleteUserInput) quicksight.DeleteUserRequest
 
@@ -124,6 +132,12 @@ type ClientAPI interface {
 	DescribeTemplateAliasRequest(*quicksight.DescribeTemplateAliasInput) quicksight.DescribeTemplateAliasRequest
 
 	DescribeTemplatePermissionsRequest(*quicksight.DescribeTemplatePermissionsInput) quicksight.DescribeTemplatePermissionsRequest
+
+	DescribeThemeRequest(*quicksight.DescribeThemeInput) quicksight.DescribeThemeRequest
+
+	DescribeThemeAliasRequest(*quicksight.DescribeThemeAliasInput) quicksight.DescribeThemeAliasRequest
+
+	DescribeThemePermissionsRequest(*quicksight.DescribeThemePermissionsInput) quicksight.DescribeThemePermissionsRequest
 
 	DescribeUserRequest(*quicksight.DescribeUserInput) quicksight.DescribeUserRequest
 
@@ -154,6 +168,12 @@ type ClientAPI interface {
 	ListTemplateVersionsRequest(*quicksight.ListTemplateVersionsInput) quicksight.ListTemplateVersionsRequest
 
 	ListTemplatesRequest(*quicksight.ListTemplatesInput) quicksight.ListTemplatesRequest
+
+	ListThemeAliasesRequest(*quicksight.ListThemeAliasesInput) quicksight.ListThemeAliasesRequest
+
+	ListThemeVersionsRequest(*quicksight.ListThemeVersionsInput) quicksight.ListThemeVersionsRequest
+
+	ListThemesRequest(*quicksight.ListThemesInput) quicksight.ListThemesRequest
 
 	ListUserGroupsRequest(*quicksight.ListUserGroupsInput) quicksight.ListUserGroupsRequest
 
@@ -190,6 +210,12 @@ type ClientAPI interface {
 	UpdateTemplateAliasRequest(*quicksight.UpdateTemplateAliasInput) quicksight.UpdateTemplateAliasRequest
 
 	UpdateTemplatePermissionsRequest(*quicksight.UpdateTemplatePermissionsInput) quicksight.UpdateTemplatePermissionsRequest
+
+	UpdateThemeRequest(*quicksight.UpdateThemeInput) quicksight.UpdateThemeRequest
+
+	UpdateThemeAliasRequest(*quicksight.UpdateThemeAliasInput) quicksight.UpdateThemeAliasRequest
+
+	UpdateThemePermissionsRequest(*quicksight.UpdateThemePermissionsInput) quicksight.UpdateThemePermissionsRequest
 
 	UpdateUserRequest(*quicksight.UpdateUserInput) quicksight.UpdateUserRequest
 }

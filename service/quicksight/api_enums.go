@@ -135,6 +135,8 @@ type DataSourceErrorInfoType string
 
 // Enum values for DataSourceErrorInfoType
 const (
+	DataSourceErrorInfoTypeAccessDenied              DataSourceErrorInfoType = "ACCESS_DENIED"
+	DataSourceErrorInfoTypeCopySourceNotFound        DataSourceErrorInfoType = "COPY_SOURCE_NOT_FOUND"
 	DataSourceErrorInfoTypeTimeout                   DataSourceErrorInfoType = "TIMEOUT"
 	DataSourceErrorInfoTypeEngineVersionNotSupported DataSourceErrorInfoType = "ENGINE_VERSION_NOT_SUPPORTED"
 	DataSourceErrorInfoTypeUnknownHost               DataSourceErrorInfoType = "UNKNOWN_HOST"
@@ -526,6 +528,40 @@ func (enum TextQualifier) MarshalValue() (string, error) {
 }
 
 func (enum TextQualifier) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ThemeErrorType string
+
+// Enum values for ThemeErrorType
+const (
+	ThemeErrorTypeInternalFailure ThemeErrorType = "INTERNAL_FAILURE"
+)
+
+func (enum ThemeErrorType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ThemeErrorType) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type ThemeType string
+
+// Enum values for ThemeType
+const (
+	ThemeTypeQuicksight ThemeType = "QUICKSIGHT"
+	ThemeTypeCustom     ThemeType = "CUSTOM"
+	ThemeTypeAll        ThemeType = "ALL"
+)
+
+func (enum ThemeType) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum ThemeType) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

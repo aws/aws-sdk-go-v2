@@ -417,6 +417,486 @@ func (s FileAccessLog) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object that represents a gateway route returned by a describe operation.
+type GatewayRouteData struct {
+	_ struct{} `type:"structure"`
+
+	// GatewayRouteName is a required field
+	GatewayRouteName *string `locationName:"gatewayRouteName" min:"1" type:"string" required:"true"`
+
+	// MeshName is a required field
+	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
+
+	// An object that represents metadata for a resource.
+	//
+	// Metadata is a required field
+	Metadata *ResourceMetadata `locationName:"metadata" type:"structure" required:"true"`
+
+	// An object that represents a gateway route specification. Specify one gateway
+	// route type.
+	//
+	// Spec is a required field
+	Spec *GatewayRouteSpec `locationName:"spec" type:"structure" required:"true"`
+
+	// An object that represents the current status of a gateway route.
+	//
+	// Status is a required field
+	Status *GatewayRouteStatus `locationName:"status" type:"structure" required:"true"`
+
+	// VirtualGatewayName is a required field
+	VirtualGatewayName *string `locationName:"virtualGatewayName" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GatewayRouteData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GatewayRouteData) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GatewayRouteName != nil {
+		v := *s.GatewayRouteName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "gatewayRouteName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MeshName != nil {
+		v := *s.MeshName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Metadata != nil {
+		v := s.Metadata
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "metadata", v, metadata)
+	}
+	if s.Spec != nil {
+		v := s.Spec
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "spec", v, metadata)
+	}
+	if s.Status != nil {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "status", v, metadata)
+	}
+	if s.VirtualGatewayName != nil {
+		v := *s.VirtualGatewayName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "virtualGatewayName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object that represents a gateway route returned by a list operation.
+type GatewayRouteRef struct {
+	_ struct{} `type:"structure"`
+
+	// Arn is a required field
+	Arn *string `locationName:"arn" type:"string" required:"true"`
+
+	// CreatedAt is a required field
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" required:"true"`
+
+	// GatewayRouteName is a required field
+	GatewayRouteName *string `locationName:"gatewayRouteName" min:"1" type:"string" required:"true"`
+
+	// LastUpdatedAt is a required field
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" required:"true"`
+
+	// MeshName is a required field
+	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
+
+	// MeshOwner is a required field
+	MeshOwner *string `locationName:"meshOwner" min:"12" type:"string" required:"true"`
+
+	// ResourceOwner is a required field
+	ResourceOwner *string `locationName:"resourceOwner" min:"12" type:"string" required:"true"`
+
+	// Version is a required field
+	Version *int64 `locationName:"version" type:"long" required:"true"`
+
+	// VirtualGatewayName is a required field
+	VirtualGatewayName *string `locationName:"virtualGatewayName" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GatewayRouteRef) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GatewayRouteRef) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreatedAt != nil {
+		v := *s.CreatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.GatewayRouteName != nil {
+		v := *s.GatewayRouteName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "gatewayRouteName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LastUpdatedAt != nil {
+		v := *s.LastUpdatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.MeshName != nil {
+		v := *s.MeshName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MeshOwner != nil {
+		v := *s.MeshOwner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "meshOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceOwner != nil {
+		v := *s.ResourceOwner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "version", protocol.Int64Value(v), metadata)
+	}
+	if s.VirtualGatewayName != nil {
+		v := *s.VirtualGatewayName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "virtualGatewayName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object that represents a gateway route specification. Specify one gateway
+// route type.
+type GatewayRouteSpec struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents a gRPC gateway route.
+	GrpcRoute *GrpcGatewayRoute `locationName:"grpcRoute" type:"structure"`
+
+	// An object that represents an HTTP gateway route.
+	Http2Route *HttpGatewayRoute `locationName:"http2Route" type:"structure"`
+
+	// An object that represents an HTTP gateway route.
+	HttpRoute *HttpGatewayRoute `locationName:"httpRoute" type:"structure"`
+}
+
+// String returns the string representation
+func (s GatewayRouteSpec) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GatewayRouteSpec) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GatewayRouteSpec"}
+	if s.GrpcRoute != nil {
+		if err := s.GrpcRoute.Validate(); err != nil {
+			invalidParams.AddNested("GrpcRoute", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Http2Route != nil {
+		if err := s.Http2Route.Validate(); err != nil {
+			invalidParams.AddNested("Http2Route", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.HttpRoute != nil {
+		if err := s.HttpRoute.Validate(); err != nil {
+			invalidParams.AddNested("HttpRoute", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GatewayRouteSpec) MarshalFields(e protocol.FieldEncoder) error {
+	if s.GrpcRoute != nil {
+		v := s.GrpcRoute
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "grpcRoute", v, metadata)
+	}
+	if s.Http2Route != nil {
+		v := s.Http2Route
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "http2Route", v, metadata)
+	}
+	if s.HttpRoute != nil {
+		v := s.HttpRoute
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "httpRoute", v, metadata)
+	}
+	return nil
+}
+
+// An object that represents the current status of a gateway route.
+type GatewayRouteStatus struct {
+	_ struct{} `type:"structure"`
+
+	// Status is a required field
+	Status GatewayRouteStatusCode `locationName:"status" type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s GatewayRouteStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GatewayRouteStatus) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// An object that represents a gateway route target.
+type GatewayRouteTarget struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents the virtual service that traffic is routed to.
+	//
+	// VirtualService is a required field
+	VirtualService *GatewayRouteVirtualService `locationName:"virtualService" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s GatewayRouteTarget) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GatewayRouteTarget) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GatewayRouteTarget"}
+
+	if s.VirtualService == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VirtualService"))
+	}
+	if s.VirtualService != nil {
+		if err := s.VirtualService.Validate(); err != nil {
+			invalidParams.AddNested("VirtualService", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GatewayRouteTarget) MarshalFields(e protocol.FieldEncoder) error {
+	if s.VirtualService != nil {
+		v := s.VirtualService
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "virtualService", v, metadata)
+	}
+	return nil
+}
+
+// An object that represents the virtual service that traffic is routed to.
+type GatewayRouteVirtualService struct {
+	_ struct{} `type:"structure"`
+
+	// VirtualServiceName is a required field
+	VirtualServiceName *string `locationName:"virtualServiceName" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s GatewayRouteVirtualService) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GatewayRouteVirtualService) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GatewayRouteVirtualService"}
+
+	if s.VirtualServiceName == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VirtualServiceName"))
+	}
+	if s.VirtualServiceName != nil && len(*s.VirtualServiceName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("VirtualServiceName", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GatewayRouteVirtualService) MarshalFields(e protocol.FieldEncoder) error {
+	if s.VirtualServiceName != nil {
+		v := *s.VirtualServiceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "virtualServiceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object that represents a gRPC gateway route.
+type GrpcGatewayRoute struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents the action to take if a match is determined.
+	//
+	// Action is a required field
+	Action *GrpcGatewayRouteAction `locationName:"action" type:"structure" required:"true"`
+
+	// An object that represents the criteria for determining a request match.
+	//
+	// Match is a required field
+	Match *GrpcGatewayRouteMatch `locationName:"match" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s GrpcGatewayRoute) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GrpcGatewayRoute) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GrpcGatewayRoute"}
+
+	if s.Action == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
+	}
+
+	if s.Match == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Match"))
+	}
+	if s.Action != nil {
+		if err := s.Action.Validate(); err != nil {
+			invalidParams.AddNested("Action", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GrpcGatewayRoute) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Action != nil {
+		v := s.Action
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "action", v, metadata)
+	}
+	if s.Match != nil {
+		v := s.Match
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "match", v, metadata)
+	}
+	return nil
+}
+
+// An object that represents the action to take if a match is determined.
+type GrpcGatewayRouteAction struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents a gateway route target.
+	//
+	// Target is a required field
+	Target *GatewayRouteTarget `locationName:"target" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s GrpcGatewayRouteAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *GrpcGatewayRouteAction) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "GrpcGatewayRouteAction"}
+
+	if s.Target == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Target"))
+	}
+	if s.Target != nil {
+		if err := s.Target.Validate(); err != nil {
+			invalidParams.AddNested("Target", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GrpcGatewayRouteAction) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Target != nil {
+		v := s.Target
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "target", v, metadata)
+	}
+	return nil
+}
+
+// An object that represents the criteria for determining a request match.
+type GrpcGatewayRouteMatch struct {
+	_ struct{} `type:"structure"`
+
+	ServiceName *string `locationName:"serviceName" type:"string"`
+}
+
+// String returns the string representation
+func (s GrpcGatewayRouteMatch) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GrpcGatewayRouteMatch) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ServiceName != nil {
+		v := *s.ServiceName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "serviceName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // An object that represents a retry policy. Specify at least one value for
 // at least one of the types of RetryEvents, a value for maxRetries, and a value
 // for perRetryTimeout.
@@ -541,6 +1021,9 @@ type GrpcRoute struct {
 	// at least one of the types of RetryEvents, a value for maxRetries, and a value
 	// for perRetryTimeout.
 	RetryPolicy *GrpcRetryPolicy `locationName:"retryPolicy" type:"structure"`
+
+	// An object that represents types of timeouts.
+	Timeout *GrpcTimeout `locationName:"timeout" type:"structure"`
 }
 
 // String returns the string representation
@@ -600,6 +1083,12 @@ func (s GrpcRoute) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "retryPolicy", v, metadata)
+	}
+	if s.Timeout != nil {
+		v := s.Timeout
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "timeout", v, metadata)
 	}
 	return nil
 }
@@ -875,6 +1364,39 @@ func (s GrpcRouteMetadataMatchMethod) MarshalFields(e protocol.FieldEncoder) err
 	return nil
 }
 
+// An object that represents types of timeouts.
+type GrpcTimeout struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents a duration of time.
+	Idle *Duration `locationName:"idle" type:"structure"`
+
+	// An object that represents a duration of time.
+	PerRequest *Duration `locationName:"perRequest" type:"structure"`
+}
+
+// String returns the string representation
+func (s GrpcTimeout) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s GrpcTimeout) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Idle != nil {
+		v := s.Idle
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "idle", v, metadata)
+	}
+	if s.PerRequest != nil {
+		v := s.PerRequest
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "perRequest", v, metadata)
+	}
+	return nil
+}
+
 // An object that represents the method and value to match with the header value
 // sent in a request. Specify one match method.
 type HeaderMatchMethod struct {
@@ -1082,6 +1604,154 @@ func (s HealthCheckPolicy) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object that represents an HTTP gateway route.
+type HttpGatewayRoute struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents the action to take if a match is determined.
+	//
+	// Action is a required field
+	Action *HttpGatewayRouteAction `locationName:"action" type:"structure" required:"true"`
+
+	// An object that represents the criteria for determining a request match.
+	//
+	// Match is a required field
+	Match *HttpGatewayRouteMatch `locationName:"match" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s HttpGatewayRoute) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HttpGatewayRoute) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HttpGatewayRoute"}
+
+	if s.Action == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Action"))
+	}
+
+	if s.Match == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Match"))
+	}
+	if s.Action != nil {
+		if err := s.Action.Validate(); err != nil {
+			invalidParams.AddNested("Action", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Match != nil {
+		if err := s.Match.Validate(); err != nil {
+			invalidParams.AddNested("Match", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HttpGatewayRoute) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Action != nil {
+		v := s.Action
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "action", v, metadata)
+	}
+	if s.Match != nil {
+		v := s.Match
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "match", v, metadata)
+	}
+	return nil
+}
+
+// An object that represents the action to take if a match is determined.
+type HttpGatewayRouteAction struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents a gateway route target.
+	//
+	// Target is a required field
+	Target *GatewayRouteTarget `locationName:"target" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s HttpGatewayRouteAction) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HttpGatewayRouteAction) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HttpGatewayRouteAction"}
+
+	if s.Target == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Target"))
+	}
+	if s.Target != nil {
+		if err := s.Target.Validate(); err != nil {
+			invalidParams.AddNested("Target", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HttpGatewayRouteAction) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Target != nil {
+		v := s.Target
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "target", v, metadata)
+	}
+	return nil
+}
+
+// An object that represents the criteria for determining a request match.
+type HttpGatewayRouteMatch struct {
+	_ struct{} `type:"structure"`
+
+	// Prefix is a required field
+	Prefix *string `locationName:"prefix" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s HttpGatewayRouteMatch) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *HttpGatewayRouteMatch) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "HttpGatewayRouteMatch"}
+
+	if s.Prefix == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Prefix"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HttpGatewayRouteMatch) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Prefix != nil {
+		v := *s.Prefix
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "prefix", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // An object that represents a retry policy. Specify at least one value for
 // at least one of the types of RetryEvents, a value for maxRetries, and a value
 // for perRetryTimeout.
@@ -1190,6 +1860,9 @@ type HttpRoute struct {
 	// at least one of the types of RetryEvents, a value for maxRetries, and a value
 	// for perRetryTimeout.
 	RetryPolicy *HttpRetryPolicy `locationName:"retryPolicy" type:"structure"`
+
+	// An object that represents types of timeouts.
+	Timeout *HttpTimeout `locationName:"timeout" type:"structure"`
 }
 
 // String returns the string representation
@@ -1249,6 +1922,12 @@ func (s HttpRoute) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "retryPolicy", v, metadata)
+	}
+	if s.Timeout != nil {
+		v := s.Timeout
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "timeout", v, metadata)
 	}
 	return nil
 }
@@ -1450,6 +2129,39 @@ func (s HttpRouteMatch) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An object that represents types of timeouts.
+type HttpTimeout struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents a duration of time.
+	Idle *Duration `locationName:"idle" type:"structure"`
+
+	// An object that represents a duration of time.
+	PerRequest *Duration `locationName:"perRequest" type:"structure"`
+}
+
+// String returns the string representation
+func (s HttpTimeout) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s HttpTimeout) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Idle != nil {
+		v := s.Idle
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "idle", v, metadata)
+	}
+	if s.PerRequest != nil {
+		v := s.PerRequest
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "perRequest", v, metadata)
+	}
+	return nil
+}
+
 // An object that represents a listener for a virtual node.
 type Listener struct {
 	_ struct{} `type:"structure"`
@@ -1461,6 +2173,9 @@ type Listener struct {
 	//
 	// PortMapping is a required field
 	PortMapping *PortMapping `locationName:"portMapping" type:"structure" required:"true"`
+
+	// An object that represents timeouts for different protocols.
+	Timeout *ListenerTimeout `locationName:"timeout" type:"structure"`
 
 	// An object that represents the Transport Layer Security (TLS) properties for
 	// a listener.
@@ -1515,11 +2230,68 @@ func (s Listener) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "portMapping", v, metadata)
 	}
+	if s.Timeout != nil {
+		v := s.Timeout
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "timeout", v, metadata)
+	}
 	if s.Tls != nil {
 		v := s.Tls
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "tls", v, metadata)
+	}
+	return nil
+}
+
+// An object that represents timeouts for different protocols.
+type ListenerTimeout struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents types of timeouts.
+	Grpc *GrpcTimeout `locationName:"grpc" type:"structure"`
+
+	// An object that represents types of timeouts.
+	Http *HttpTimeout `locationName:"http" type:"structure"`
+
+	// An object that represents types of timeouts.
+	Http2 *HttpTimeout `locationName:"http2" type:"structure"`
+
+	// An object that represents types of timeouts.
+	Tcp *TcpTimeout `locationName:"tcp" type:"structure"`
+}
+
+// String returns the string representation
+func (s ListenerTimeout) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s ListenerTimeout) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Grpc != nil {
+		v := s.Grpc
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "grpc", v, metadata)
+	}
+	if s.Http != nil {
+		v := s.Http
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "http", v, metadata)
+	}
+	if s.Http2 != nil {
+		v := s.Http2
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "http2", v, metadata)
+	}
+	if s.Tcp != nil {
+		v := s.Tcp
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "tcp", v, metadata)
 	}
 	return nil
 }
@@ -2667,6 +3439,9 @@ type TcpRoute struct {
 	//
 	// Action is a required field
 	Action *TcpRouteAction `locationName:"action" type:"structure" required:"true"`
+
+	// An object that represents types of timeouts.
+	Timeout *TcpTimeout `locationName:"timeout" type:"structure"`
 }
 
 // String returns the string representation
@@ -2700,6 +3475,12 @@ func (s TcpRoute) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "action", v, metadata)
+	}
+	if s.Timeout != nil {
+		v := s.Timeout
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "timeout", v, metadata)
 	}
 	return nil
 }
@@ -2754,6 +3535,30 @@ func (s TcpRouteAction) MarshalFields(e protocol.FieldEncoder) error {
 		}
 		ls0.End()
 
+	}
+	return nil
+}
+
+// An object that represents types of timeouts.
+type TcpTimeout struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents a duration of time.
+	Idle *Duration `locationName:"idle" type:"structure"`
+}
+
+// String returns the string representation
+func (s TcpTimeout) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s TcpTimeout) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Idle != nil {
+		v := s.Idle
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "idle", v, metadata)
 	}
 	return nil
 }
@@ -2935,6 +3740,1179 @@ func (s *TlsValidationContextTrust) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s TlsValidationContextTrust) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Acm != nil {
+		v := s.Acm
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "acm", v, metadata)
+	}
+	if s.File != nil {
+		v := s.File
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "file", v, metadata)
+	}
+	return nil
+}
+
+// The access log configuration for a virtual gateway.
+type VirtualGatewayAccessLog struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents an access log file.
+	File *VirtualGatewayFileAccessLog `locationName:"file" type:"structure"`
+}
+
+// String returns the string representation
+func (s VirtualGatewayAccessLog) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualGatewayAccessLog) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualGatewayAccessLog"}
+	if s.File != nil {
+		if err := s.File.Validate(); err != nil {
+			invalidParams.AddNested("File", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualGatewayAccessLog) MarshalFields(e protocol.FieldEncoder) error {
+	if s.File != nil {
+		v := s.File
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "file", v, metadata)
+	}
+	return nil
+}
+
+// An object that represents the default properties for a backend.
+type VirtualGatewayBackendDefaults struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents a client policy.
+	ClientPolicy *VirtualGatewayClientPolicy `locationName:"clientPolicy" type:"structure"`
+}
+
+// String returns the string representation
+func (s VirtualGatewayBackendDefaults) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualGatewayBackendDefaults) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualGatewayBackendDefaults"}
+	if s.ClientPolicy != nil {
+		if err := s.ClientPolicy.Validate(); err != nil {
+			invalidParams.AddNested("ClientPolicy", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualGatewayBackendDefaults) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ClientPolicy != nil {
+		v := s.ClientPolicy
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "clientPolicy", v, metadata)
+	}
+	return nil
+}
+
+// An object that represents a client policy.
+type VirtualGatewayClientPolicy struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents a Transport Layer Security (TLS) client policy.
+	Tls *VirtualGatewayClientPolicyTls `locationName:"tls" type:"structure"`
+}
+
+// String returns the string representation
+func (s VirtualGatewayClientPolicy) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualGatewayClientPolicy) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualGatewayClientPolicy"}
+	if s.Tls != nil {
+		if err := s.Tls.Validate(); err != nil {
+			invalidParams.AddNested("Tls", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualGatewayClientPolicy) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Tls != nil {
+		v := s.Tls
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "tls", v, metadata)
+	}
+	return nil
+}
+
+// An object that represents a Transport Layer Security (TLS) client policy.
+type VirtualGatewayClientPolicyTls struct {
+	_ struct{} `type:"structure"`
+
+	Enforce *bool `locationName:"enforce" type:"boolean"`
+
+	Ports []int64 `locationName:"ports" type:"list"`
+
+	// An object that represents a Transport Layer Security (TLS) validation context.
+	//
+	// Validation is a required field
+	Validation *VirtualGatewayTlsValidationContext `locationName:"validation" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s VirtualGatewayClientPolicyTls) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualGatewayClientPolicyTls) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualGatewayClientPolicyTls"}
+
+	if s.Validation == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Validation"))
+	}
+	if s.Validation != nil {
+		if err := s.Validation.Validate(); err != nil {
+			invalidParams.AddNested("Validation", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualGatewayClientPolicyTls) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Enforce != nil {
+		v := *s.Enforce
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "enforce", protocol.BoolValue(v), metadata)
+	}
+	if s.Ports != nil {
+		v := s.Ports
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ports", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.Int64Value(v1))
+		}
+		ls0.End()
+
+	}
+	if s.Validation != nil {
+		v := s.Validation
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "validation", v, metadata)
+	}
+	return nil
+}
+
+// An object that represents a virtual gateway returned by a describe operation.
+type VirtualGatewayData struct {
+	_ struct{} `type:"structure"`
+
+	// MeshName is a required field
+	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
+
+	// An object that represents metadata for a resource.
+	//
+	// Metadata is a required field
+	Metadata *ResourceMetadata `locationName:"metadata" type:"structure" required:"true"`
+
+	// An object that represents the specification of a service mesh resource.
+	//
+	// Spec is a required field
+	Spec *VirtualGatewaySpec `locationName:"spec" type:"structure" required:"true"`
+
+	// An object that represents the status of the mesh resource.
+	//
+	// Status is a required field
+	Status *VirtualGatewayStatus `locationName:"status" type:"structure" required:"true"`
+
+	// VirtualGatewayName is a required field
+	VirtualGatewayName *string `locationName:"virtualGatewayName" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s VirtualGatewayData) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualGatewayData) MarshalFields(e protocol.FieldEncoder) error {
+	if s.MeshName != nil {
+		v := *s.MeshName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Metadata != nil {
+		v := s.Metadata
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "metadata", v, metadata)
+	}
+	if s.Spec != nil {
+		v := s.Spec
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "spec", v, metadata)
+	}
+	if s.Status != nil {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "status", v, metadata)
+	}
+	if s.VirtualGatewayName != nil {
+		v := *s.VirtualGatewayName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "virtualGatewayName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object that represents an access log file.
+type VirtualGatewayFileAccessLog struct {
+	_ struct{} `type:"structure"`
+
+	// Path is a required field
+	Path *string `locationName:"path" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s VirtualGatewayFileAccessLog) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualGatewayFileAccessLog) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualGatewayFileAccessLog"}
+
+	if s.Path == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Path"))
+	}
+	if s.Path != nil && len(*s.Path) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("Path", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualGatewayFileAccessLog) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Path != nil {
+		v := *s.Path
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "path", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object that represents the health check policy for a virtual gateway's
+// listener.
+type VirtualGatewayHealthCheckPolicy struct {
+	_ struct{} `type:"structure"`
+
+	// HealthyThreshold is a required field
+	HealthyThreshold *int64 `locationName:"healthyThreshold" min:"2" type:"integer" required:"true"`
+
+	// IntervalMillis is a required field
+	IntervalMillis *int64 `locationName:"intervalMillis" min:"5000" type:"long" required:"true"`
+
+	Path *string `locationName:"path" type:"string"`
+
+	Port *int64 `locationName:"port" min:"1" type:"integer"`
+
+	// Protocol is a required field
+	Protocol VirtualGatewayPortProtocol `locationName:"protocol" type:"string" required:"true" enum:"true"`
+
+	// TimeoutMillis is a required field
+	TimeoutMillis *int64 `locationName:"timeoutMillis" min:"2000" type:"long" required:"true"`
+
+	// UnhealthyThreshold is a required field
+	UnhealthyThreshold *int64 `locationName:"unhealthyThreshold" min:"2" type:"integer" required:"true"`
+}
+
+// String returns the string representation
+func (s VirtualGatewayHealthCheckPolicy) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualGatewayHealthCheckPolicy) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualGatewayHealthCheckPolicy"}
+
+	if s.HealthyThreshold == nil {
+		invalidParams.Add(aws.NewErrParamRequired("HealthyThreshold"))
+	}
+	if s.HealthyThreshold != nil && *s.HealthyThreshold < 2 {
+		invalidParams.Add(aws.NewErrParamMinValue("HealthyThreshold", 2))
+	}
+
+	if s.IntervalMillis == nil {
+		invalidParams.Add(aws.NewErrParamRequired("IntervalMillis"))
+	}
+	if s.IntervalMillis != nil && *s.IntervalMillis < 5000 {
+		invalidParams.Add(aws.NewErrParamMinValue("IntervalMillis", 5000))
+	}
+	if s.Port != nil && *s.Port < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Port", 1))
+	}
+	if len(s.Protocol) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Protocol"))
+	}
+
+	if s.TimeoutMillis == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TimeoutMillis"))
+	}
+	if s.TimeoutMillis != nil && *s.TimeoutMillis < 2000 {
+		invalidParams.Add(aws.NewErrParamMinValue("TimeoutMillis", 2000))
+	}
+
+	if s.UnhealthyThreshold == nil {
+		invalidParams.Add(aws.NewErrParamRequired("UnhealthyThreshold"))
+	}
+	if s.UnhealthyThreshold != nil && *s.UnhealthyThreshold < 2 {
+		invalidParams.Add(aws.NewErrParamMinValue("UnhealthyThreshold", 2))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualGatewayHealthCheckPolicy) MarshalFields(e protocol.FieldEncoder) error {
+	if s.HealthyThreshold != nil {
+		v := *s.HealthyThreshold
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "healthyThreshold", protocol.Int64Value(v), metadata)
+	}
+	if s.IntervalMillis != nil {
+		v := *s.IntervalMillis
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "intervalMillis", protocol.Int64Value(v), metadata)
+	}
+	if s.Path != nil {
+		v := *s.Path
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "path", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Port != nil {
+		v := *s.Port
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "port", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Protocol) > 0 {
+		v := s.Protocol
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "protocol", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.TimeoutMillis != nil {
+		v := *s.TimeoutMillis
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "timeoutMillis", protocol.Int64Value(v), metadata)
+	}
+	if s.UnhealthyThreshold != nil {
+		v := *s.UnhealthyThreshold
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "unhealthyThreshold", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// An object that represents a listener for a virtual gateway.
+type VirtualGatewayListener struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents the health check policy for a virtual gateway's
+	// listener.
+	HealthCheck *VirtualGatewayHealthCheckPolicy `locationName:"healthCheck" type:"structure"`
+
+	// An object that represents a port mapping.
+	//
+	// PortMapping is a required field
+	PortMapping *VirtualGatewayPortMapping `locationName:"portMapping" type:"structure" required:"true"`
+
+	// An object that represents the Transport Layer Security (TLS) properties for
+	// a listener.
+	Tls *VirtualGatewayListenerTls `locationName:"tls" type:"structure"`
+}
+
+// String returns the string representation
+func (s VirtualGatewayListener) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualGatewayListener) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualGatewayListener"}
+
+	if s.PortMapping == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PortMapping"))
+	}
+	if s.HealthCheck != nil {
+		if err := s.HealthCheck.Validate(); err != nil {
+			invalidParams.AddNested("HealthCheck", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.PortMapping != nil {
+		if err := s.PortMapping.Validate(); err != nil {
+			invalidParams.AddNested("PortMapping", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tls != nil {
+		if err := s.Tls.Validate(); err != nil {
+			invalidParams.AddNested("Tls", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualGatewayListener) MarshalFields(e protocol.FieldEncoder) error {
+	if s.HealthCheck != nil {
+		v := s.HealthCheck
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "healthCheck", v, metadata)
+	}
+	if s.PortMapping != nil {
+		v := s.PortMapping
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "portMapping", v, metadata)
+	}
+	if s.Tls != nil {
+		v := s.Tls
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "tls", v, metadata)
+	}
+	return nil
+}
+
+// An object that represents the Transport Layer Security (TLS) properties for
+// a listener.
+type VirtualGatewayListenerTls struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents a listener's Transport Layer Security (TLS) certificate.
+	//
+	// Certificate is a required field
+	Certificate *VirtualGatewayListenerTlsCertificate `locationName:"certificate" type:"structure" required:"true"`
+
+	// Mode is a required field
+	Mode VirtualGatewayListenerTlsMode `locationName:"mode" type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s VirtualGatewayListenerTls) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualGatewayListenerTls) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualGatewayListenerTls"}
+
+	if s.Certificate == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Certificate"))
+	}
+	if len(s.Mode) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Mode"))
+	}
+	if s.Certificate != nil {
+		if err := s.Certificate.Validate(); err != nil {
+			invalidParams.AddNested("Certificate", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualGatewayListenerTls) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Certificate != nil {
+		v := s.Certificate
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "certificate", v, metadata)
+	}
+	if len(s.Mode) > 0 {
+		v := s.Mode
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "mode", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// An object that represents an AWS Certicate Manager (ACM) certificate.
+type VirtualGatewayListenerTlsAcmCertificate struct {
+	_ struct{} `type:"structure"`
+
+	// CertificateArn is a required field
+	CertificateArn *string `locationName:"certificateArn" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s VirtualGatewayListenerTlsAcmCertificate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualGatewayListenerTlsAcmCertificate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualGatewayListenerTlsAcmCertificate"}
+
+	if s.CertificateArn == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CertificateArn"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualGatewayListenerTlsAcmCertificate) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CertificateArn != nil {
+		v := *s.CertificateArn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "certificateArn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object that represents a listener's Transport Layer Security (TLS) certificate.
+type VirtualGatewayListenerTlsCertificate struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents an AWS Certicate Manager (ACM) certificate.
+	Acm *VirtualGatewayListenerTlsAcmCertificate `locationName:"acm" type:"structure"`
+
+	// An object that represents a local file certificate. The certificate must
+	// meet specific requirements and you must have proxy authorization enabled.
+	// For more information, see Transport Layer Security (TLS) (https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites).
+	File *VirtualGatewayListenerTlsFileCertificate `locationName:"file" type:"structure"`
+}
+
+// String returns the string representation
+func (s VirtualGatewayListenerTlsCertificate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualGatewayListenerTlsCertificate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualGatewayListenerTlsCertificate"}
+	if s.Acm != nil {
+		if err := s.Acm.Validate(); err != nil {
+			invalidParams.AddNested("Acm", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.File != nil {
+		if err := s.File.Validate(); err != nil {
+			invalidParams.AddNested("File", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualGatewayListenerTlsCertificate) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Acm != nil {
+		v := s.Acm
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "acm", v, metadata)
+	}
+	if s.File != nil {
+		v := s.File
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "file", v, metadata)
+	}
+	return nil
+}
+
+// An object that represents a local file certificate. The certificate must
+// meet specific requirements and you must have proxy authorization enabled.
+// For more information, see Transport Layer Security (TLS) (https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites).
+type VirtualGatewayListenerTlsFileCertificate struct {
+	_ struct{} `type:"structure"`
+
+	// CertificateChain is a required field
+	CertificateChain *string `locationName:"certificateChain" min:"1" type:"string" required:"true"`
+
+	// PrivateKey is a required field
+	PrivateKey *string `locationName:"privateKey" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s VirtualGatewayListenerTlsFileCertificate) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualGatewayListenerTlsFileCertificate) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualGatewayListenerTlsFileCertificate"}
+
+	if s.CertificateChain == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CertificateChain"))
+	}
+	if s.CertificateChain != nil && len(*s.CertificateChain) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateChain", 1))
+	}
+
+	if s.PrivateKey == nil {
+		invalidParams.Add(aws.NewErrParamRequired("PrivateKey"))
+	}
+	if s.PrivateKey != nil && len(*s.PrivateKey) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("PrivateKey", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualGatewayListenerTlsFileCertificate) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CertificateChain != nil {
+		v := *s.CertificateChain
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "certificateChain", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.PrivateKey != nil {
+		v := *s.PrivateKey
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "privateKey", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object that represents logging information.
+type VirtualGatewayLogging struct {
+	_ struct{} `type:"structure"`
+
+	// The access log configuration for a virtual gateway.
+	AccessLog *VirtualGatewayAccessLog `locationName:"accessLog" type:"structure"`
+}
+
+// String returns the string representation
+func (s VirtualGatewayLogging) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualGatewayLogging) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualGatewayLogging"}
+	if s.AccessLog != nil {
+		if err := s.AccessLog.Validate(); err != nil {
+			invalidParams.AddNested("AccessLog", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualGatewayLogging) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AccessLog != nil {
+		v := s.AccessLog
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "accessLog", v, metadata)
+	}
+	return nil
+}
+
+// An object that represents a port mapping.
+type VirtualGatewayPortMapping struct {
+	_ struct{} `type:"structure"`
+
+	// Port is a required field
+	Port *int64 `locationName:"port" min:"1" type:"integer" required:"true"`
+
+	// Protocol is a required field
+	Protocol VirtualGatewayPortProtocol `locationName:"protocol" type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s VirtualGatewayPortMapping) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualGatewayPortMapping) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualGatewayPortMapping"}
+
+	if s.Port == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Port"))
+	}
+	if s.Port != nil && *s.Port < 1 {
+		invalidParams.Add(aws.NewErrParamMinValue("Port", 1))
+	}
+	if len(s.Protocol) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("Protocol"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualGatewayPortMapping) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Port != nil {
+		v := *s.Port
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "port", protocol.Int64Value(v), metadata)
+	}
+	if len(s.Protocol) > 0 {
+		v := s.Protocol
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "protocol", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// An object that represents a virtual gateway returned by a list operation.
+type VirtualGatewayRef struct {
+	_ struct{} `type:"structure"`
+
+	// Arn is a required field
+	Arn *string `locationName:"arn" type:"string" required:"true"`
+
+	// CreatedAt is a required field
+	CreatedAt *time.Time `locationName:"createdAt" type:"timestamp" required:"true"`
+
+	// LastUpdatedAt is a required field
+	LastUpdatedAt *time.Time `locationName:"lastUpdatedAt" type:"timestamp" required:"true"`
+
+	// MeshName is a required field
+	MeshName *string `locationName:"meshName" min:"1" type:"string" required:"true"`
+
+	// MeshOwner is a required field
+	MeshOwner *string `locationName:"meshOwner" min:"12" type:"string" required:"true"`
+
+	// ResourceOwner is a required field
+	ResourceOwner *string `locationName:"resourceOwner" min:"12" type:"string" required:"true"`
+
+	// Version is a required field
+	Version *int64 `locationName:"version" type:"long" required:"true"`
+
+	// VirtualGatewayName is a required field
+	VirtualGatewayName *string `locationName:"virtualGatewayName" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s VirtualGatewayRef) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualGatewayRef) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Arn != nil {
+		v := *s.Arn
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CreatedAt != nil {
+		v := *s.CreatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "createdAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.LastUpdatedAt != nil {
+		v := *s.LastUpdatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "lastUpdatedAt",
+			protocol.TimeValue{V: v, Format: protocol.UnixTimeFormatName, QuotedFormatTime: true}, metadata)
+	}
+	if s.MeshName != nil {
+		v := *s.MeshName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "meshName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.MeshOwner != nil {
+		v := *s.MeshOwner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "meshOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ResourceOwner != nil {
+		v := *s.ResourceOwner
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "resourceOwner", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "version", protocol.Int64Value(v), metadata)
+	}
+	if s.VirtualGatewayName != nil {
+		v := *s.VirtualGatewayName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "virtualGatewayName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object that represents the specification of a service mesh resource.
+type VirtualGatewaySpec struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents the default properties for a backend.
+	BackendDefaults *VirtualGatewayBackendDefaults `locationName:"backendDefaults" type:"structure"`
+
+	// Listeners is a required field
+	Listeners []VirtualGatewayListener `locationName:"listeners" type:"list" required:"true"`
+
+	// An object that represents logging information.
+	Logging *VirtualGatewayLogging `locationName:"logging" type:"structure"`
+}
+
+// String returns the string representation
+func (s VirtualGatewaySpec) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualGatewaySpec) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualGatewaySpec"}
+
+	if s.Listeners == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Listeners"))
+	}
+	if s.BackendDefaults != nil {
+		if err := s.BackendDefaults.Validate(); err != nil {
+			invalidParams.AddNested("BackendDefaults", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Listeners != nil {
+		for i, v := range s.Listeners {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Listeners", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.Logging != nil {
+		if err := s.Logging.Validate(); err != nil {
+			invalidParams.AddNested("Logging", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualGatewaySpec) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BackendDefaults != nil {
+		v := s.BackendDefaults
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "backendDefaults", v, metadata)
+	}
+	if s.Listeners != nil {
+		v := s.Listeners
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "listeners", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Logging != nil {
+		v := s.Logging
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "logging", v, metadata)
+	}
+	return nil
+}
+
+// An object that represents the status of the mesh resource.
+type VirtualGatewayStatus struct {
+	_ struct{} `type:"structure"`
+
+	// Status is a required field
+	Status VirtualGatewayStatusCode `locationName:"status" type:"string" required:"true" enum:"true"`
+}
+
+// String returns the string representation
+func (s VirtualGatewayStatus) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualGatewayStatus) MarshalFields(e protocol.FieldEncoder) error {
+	if len(s.Status) > 0 {
+		v := s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "status", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	return nil
+}
+
+// An object that represents a Transport Layer Security (TLS) validation context.
+type VirtualGatewayTlsValidationContext struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents a Transport Layer Security (TLS) validation context
+	// trust.
+	//
+	// Trust is a required field
+	Trust *VirtualGatewayTlsValidationContextTrust `locationName:"trust" type:"structure" required:"true"`
+}
+
+// String returns the string representation
+func (s VirtualGatewayTlsValidationContext) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualGatewayTlsValidationContext) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualGatewayTlsValidationContext"}
+
+	if s.Trust == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Trust"))
+	}
+	if s.Trust != nil {
+		if err := s.Trust.Validate(); err != nil {
+			invalidParams.AddNested("Trust", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualGatewayTlsValidationContext) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Trust != nil {
+		v := s.Trust
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "trust", v, metadata)
+	}
+	return nil
+}
+
+// An object that represents a TLS validation context trust for an AWS Certicate
+// Manager (ACM) certificate.
+type VirtualGatewayTlsValidationContextAcmTrust struct {
+	_ struct{} `type:"structure"`
+
+	// CertificateAuthorityArns is a required field
+	CertificateAuthorityArns []string `locationName:"certificateAuthorityArns" min:"1" type:"list" required:"true"`
+}
+
+// String returns the string representation
+func (s VirtualGatewayTlsValidationContextAcmTrust) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualGatewayTlsValidationContextAcmTrust) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualGatewayTlsValidationContextAcmTrust"}
+
+	if s.CertificateAuthorityArns == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CertificateAuthorityArns"))
+	}
+	if s.CertificateAuthorityArns != nil && len(s.CertificateAuthorityArns) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateAuthorityArns", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualGatewayTlsValidationContextAcmTrust) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CertificateAuthorityArns != nil {
+		v := s.CertificateAuthorityArns
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "certificateAuthorityArns", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// An object that represents a Transport Layer Security (TLS) validation context
+// trust for a local file.
+type VirtualGatewayTlsValidationContextFileTrust struct {
+	_ struct{} `type:"structure"`
+
+	// CertificateChain is a required field
+	CertificateChain *string `locationName:"certificateChain" min:"1" type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s VirtualGatewayTlsValidationContextFileTrust) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualGatewayTlsValidationContextFileTrust) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualGatewayTlsValidationContextFileTrust"}
+
+	if s.CertificateChain == nil {
+		invalidParams.Add(aws.NewErrParamRequired("CertificateChain"))
+	}
+	if s.CertificateChain != nil && len(*s.CertificateChain) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("CertificateChain", 1))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualGatewayTlsValidationContextFileTrust) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CertificateChain != nil {
+		v := *s.CertificateChain
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "certificateChain", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An object that represents a Transport Layer Security (TLS) validation context
+// trust.
+type VirtualGatewayTlsValidationContextTrust struct {
+	_ struct{} `type:"structure"`
+
+	// An object that represents a TLS validation context trust for an AWS Certicate
+	// Manager (ACM) certificate.
+	Acm *VirtualGatewayTlsValidationContextAcmTrust `locationName:"acm" type:"structure"`
+
+	// An object that represents a Transport Layer Security (TLS) validation context
+	// trust for a local file.
+	File *VirtualGatewayTlsValidationContextFileTrust `locationName:"file" type:"structure"`
+}
+
+// String returns the string representation
+func (s VirtualGatewayTlsValidationContextTrust) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VirtualGatewayTlsValidationContextTrust) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VirtualGatewayTlsValidationContextTrust"}
+	if s.Acm != nil {
+		if err := s.Acm.Validate(); err != nil {
+			invalidParams.AddNested("Acm", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.File != nil {
+		if err := s.File.Validate(); err != nil {
+			invalidParams.AddNested("File", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VirtualGatewayTlsValidationContextTrust) MarshalFields(e protocol.FieldEncoder) error {
 	if s.Acm != nil {
 		v := s.Acm
 

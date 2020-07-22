@@ -74,6 +74,8 @@ type ClientAPI interface {
 
 	BatchPutScheduledUpdateGroupActionRequest(*autoscaling.BatchPutScheduledUpdateGroupActionInput) autoscaling.BatchPutScheduledUpdateGroupActionRequest
 
+	CancelInstanceRefreshRequest(*autoscaling.CancelInstanceRefreshInput) autoscaling.CancelInstanceRefreshRequest
+
 	CompleteLifecycleActionRequest(*autoscaling.CompleteLifecycleActionInput) autoscaling.CompleteLifecycleActionRequest
 
 	CreateAutoScalingGroupRequest(*autoscaling.CreateAutoScalingGroupInput) autoscaling.CreateAutoScalingGroupRequest
@@ -105,6 +107,8 @@ type ClientAPI interface {
 	DescribeAutoScalingInstancesRequest(*autoscaling.DescribeAutoScalingInstancesInput) autoscaling.DescribeAutoScalingInstancesRequest
 
 	DescribeAutoScalingNotificationTypesRequest(*autoscaling.DescribeAutoScalingNotificationTypesInput) autoscaling.DescribeAutoScalingNotificationTypesRequest
+
+	DescribeInstanceRefreshesRequest(*autoscaling.DescribeInstanceRefreshesInput) autoscaling.DescribeInstanceRefreshesRequest
 
 	DescribeLaunchConfigurationsRequest(*autoscaling.DescribeLaunchConfigurationsInput) autoscaling.DescribeLaunchConfigurationsRequest
 
@@ -165,6 +169,8 @@ type ClientAPI interface {
 	SetInstanceHealthRequest(*autoscaling.SetInstanceHealthInput) autoscaling.SetInstanceHealthRequest
 
 	SetInstanceProtectionRequest(*autoscaling.SetInstanceProtectionInput) autoscaling.SetInstanceProtectionRequest
+
+	StartInstanceRefreshRequest(*autoscaling.StartInstanceRefreshInput) autoscaling.StartInstanceRefreshRequest
 
 	SuspendProcessesRequest(*autoscaling.SuspendProcessesInput) autoscaling.SuspendProcessesRequest
 

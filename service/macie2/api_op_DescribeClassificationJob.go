@@ -69,7 +69,7 @@ type DescribeClassificationJobOutput struct {
 
 	JobId *string `locationName:"jobId" type:"string"`
 
-	// The current status of a classification job. Valid values are:
+	// The current status of a classification job. Possible values are:
 	JobStatus JobStatus `locationName:"jobStatus" type:"string" enum:"true"`
 
 	// The schedule for running a classification job. Valid values are:

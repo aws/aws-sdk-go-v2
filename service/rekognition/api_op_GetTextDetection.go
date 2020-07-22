@@ -12,7 +12,7 @@ import (
 type GetTextDetectionInput struct {
 	_ struct{} `type:"structure"`
 
-	// Job identifier for the label detection operation for which you want results
+	// Job identifier for the text detection operation for which you want results
 	// returned. You get the job identifer from an initial call to StartTextDetection.
 	//
 	// JobId is a required field

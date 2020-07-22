@@ -12,17 +12,28 @@ import (
 type DetectEntitiesInput struct {
 	_ struct{} `type:"structure"`
 
+	// The Amazon Resource Name of an endpoint that is associated with a custom
+	// entity recognition model. Provide an endpoint if you want to detect entities
+	// by using your own custom model instead of the default model that is used
+	// by Amazon Comprehend.
+	//
+	// If you specify an endpoint, Amazon Comprehend uses the language of your custom
+	// model, and it ignores any language code that you provide in your request.
+	EndpointArn *string `type:"string"`
+
 	// The language of the input documents. You can specify any of the primary languages
 	// supported by Amazon Comprehend. All documents must be in the same language.
 	//
-	// LanguageCode is a required field
-	LanguageCode LanguageCode `type:"string" required:"true" enum:"true"`
+	// If your request includes the endpoint for a custom entity recognition model,
+	// Amazon Comprehend uses the language of your custom model, and it ignores
+	// any language code that you specify here.
+	LanguageCode LanguageCode `type:"string" enum:"true"`
 
 	// A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8
 	// encoded characters.
 	//
 	// Text is a required field
-	Text *string `min:"1" type:"string" required:"true"`
+	Text *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -33,9 +44,6 @@ func (s DetectEntitiesInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *DetectEntitiesInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "DetectEntitiesInput"}
-	if len(s.LanguageCode) == 0 {
-		invalidParams.Add(aws.NewErrParamRequired("LanguageCode"))
-	}
 
 	if s.Text == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Text"))
@@ -51,12 +59,16 @@ func (s *DetectEntitiesInput) Validate() error {
 }
 
 type DetectEntitiesOutput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" sensitive:"true"`
 
 	// A collection of entities identified in the input text. For each entity, the
 	// response provides the entity text, entity type, where the entity text begins
 	// and ends, and the level of confidence that Amazon Comprehend has in the detection.
-	// For a list of entity types, see how-entities.
+	//
+	// If your request uses a custom entity recognition model, Amazon Comprehend
+	// detects the entities that the model is trained to recognize. Otherwise, it
+	// detects the default entity types. For a list of default entity types, see
+	// how-entities.
 	Entities []Entity `type:"list"`
 }
 

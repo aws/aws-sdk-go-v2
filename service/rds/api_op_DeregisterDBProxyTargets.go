@@ -60,10 +60,6 @@ const opDeregisterDBProxyTargets = "DeregisterDBProxyTargets"
 // DeregisterDBProxyTargetsRequest returns a request value for making API operation for
 // Amazon Relational Database Service.
 //
-//
-// This is prerelease documentation for the RDS Database Proxy feature in preview
-// release. It is subject to change.
-//
 // Remove the association between one or more DBProxyTarget data structures
 // and a DBProxyTargetGroup.
 //

@@ -4,6 +4,7 @@ package frauddetector
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -12,8 +13,9 @@ import (
 type CreateModelVersionInput struct {
 	_ struct{} `type:"structure"`
 
-	// The model version description.
-	Description *string `locationName:"description" min:"1" type:"string"`
+	// Details for the external events data used for model version training. Required
+	// if trainingDataSource is EXTERNAL_EVENTS.
+	ExternalEventsDetail *ExternalEventsDetail `locationName:"externalEventsDetail" type:"structure"`
 
 	// The model ID.
 	//
@@ -24,6 +26,19 @@ type CreateModelVersionInput struct {
 	//
 	// ModelType is a required field
 	ModelType ModelTypeEnum `locationName:"modelType" type:"string" required:"true" enum:"true"`
+
+	// A collection of key and value pairs.
+	Tags []Tag `locationName:"tags" type:"list"`
+
+	// The training data schema.
+	//
+	// TrainingDataSchema is a required field
+	TrainingDataSchema *TrainingDataSchema `locationName:"trainingDataSchema" type:"structure" required:"true"`
+
+	// The training data source location in Amazon S3.
+	//
+	// TrainingDataSource is a required field
+	TrainingDataSource TrainingDataSourceEnum `locationName:"trainingDataSource" type:"string" required:"true" enum:"true"`
 }
 
 // String returns the string representation
@@ -34,9 +49,6 @@ func (s CreateModelVersionInput) String() string {
 // Validate inspects the fields of the type to determine if they are valid.
 func (s *CreateModelVersionInput) Validate() error {
 	invalidParams := aws.ErrInvalidParams{Context: "CreateModelVersionInput"}
-	if s.Description != nil && len(*s.Description) < 1 {
-		invalidParams.Add(aws.NewErrParamMinLen("Description", 1))
-	}
 
 	if s.ModelId == nil {
 		invalidParams.Add(aws.NewErrParamRequired("ModelId"))
@@ -46,6 +58,30 @@ func (s *CreateModelVersionInput) Validate() error {
 	}
 	if len(s.ModelType) == 0 {
 		invalidParams.Add(aws.NewErrParamRequired("ModelType"))
+	}
+
+	if s.TrainingDataSchema == nil {
+		invalidParams.Add(aws.NewErrParamRequired("TrainingDataSchema"))
+	}
+	if len(s.TrainingDataSource) == 0 {
+		invalidParams.Add(aws.NewErrParamRequired("TrainingDataSource"))
+	}
+	if s.ExternalEventsDetail != nil {
+		if err := s.ExternalEventsDetail.Validate(); err != nil {
+			invalidParams.AddNested("ExternalEventsDetail", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
+	if s.TrainingDataSchema != nil {
+		if err := s.TrainingDataSchema.Validate(); err != nil {
+			invalidParams.AddNested("TrainingDataSchema", err.(aws.ErrInvalidParams))
+		}
 	}
 
 	if invalidParams.Len() > 0 {
@@ -63,7 +99,7 @@ type CreateModelVersionOutput struct {
 	// The model type.
 	ModelType ModelTypeEnum `locationName:"modelType" type:"string" enum:"true"`
 
-	// The version of the model.
+	// The model version number of the model version created.
 	ModelVersionNumber *string `locationName:"modelVersionNumber" min:"1" type:"string"`
 
 	// The model version status.
@@ -80,7 +116,7 @@ const opCreateModelVersion = "CreateModelVersion"
 // CreateModelVersionRequest returns a request value for making API operation for
 // Amazon Fraud Detector.
 //
-// Creates a version of the model using the specified model type.
+// Creates a version of the model using the specified model type and model id.
 //
 //    // Example sending a request using CreateModelVersionRequest.
 //    req := client.CreateModelVersionRequest(params)

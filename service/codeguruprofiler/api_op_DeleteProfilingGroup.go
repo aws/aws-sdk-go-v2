@@ -14,7 +14,7 @@ import (
 type DeleteProfilingGroupInput struct {
 	_ struct{} `type:"structure"`
 
-	// The profiling group name to delete.
+	// The name of the profiling group to delete.
 	//
 	// ProfilingGroupName is a required field
 	ProfilingGroupName *string `location:"uri" locationName:"profilingGroupName" min:"1" type:"string" required:"true"`

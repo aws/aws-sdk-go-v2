@@ -128,6 +128,73 @@ func (s AvailabilityZone) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// Provides details about an auto scaling group.
+type AwsAutoScalingAutoScalingGroupDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The datetime when the auto scaling group was created.
+	CreatedTime *string `type:"string"`
+
+	// The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before
+	// it checks the health status of an EC2 instance that has come into service.
+	HealthCheckGracePeriod *int64 `type:"integer"`
+
+	// The service to use for the health checks.
+	HealthCheckType *string `type:"string"`
+
+	// The name of the launch configuration.
+	LaunchConfigurationName *string `type:"string"`
+
+	// The list of load balancers associated with the group.
+	LoadBalancerNames []string `type:"list"`
+}
+
+// String returns the string representation
+func (s AwsAutoScalingAutoScalingGroupDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsAutoScalingAutoScalingGroupDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CreatedTime != nil {
+		v := *s.CreatedTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreatedTime", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.HealthCheckGracePeriod != nil {
+		v := *s.HealthCheckGracePeriod
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HealthCheckGracePeriod", protocol.Int64Value(v), metadata)
+	}
+	if s.HealthCheckType != nil {
+		v := *s.HealthCheckType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "HealthCheckType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LaunchConfigurationName != nil {
+		v := *s.LaunchConfigurationName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "LaunchConfigurationName", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.LoadBalancerNames != nil {
+		v := s.LoadBalancerNames
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "LoadBalancerNames", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
 // A distribution configuration.
 type AwsCloudFrontDistributionDetails struct {
 	_ struct{} `type:"structure"`
@@ -1305,6 +1372,207 @@ func (s AwsEc2SecurityGroupUserIdGroupPair) MarshalFields(e protocol.FieldEncode
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "VpcPeeringConnectionId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// An attachment to an AWS EC2 volume.
+type AwsEc2VolumeAttachment struct {
+	_ struct{} `type:"structure"`
+
+	// The datetime when the attachment initiated.
+	AttachTime *string `type:"string"`
+
+	// Whether the EBS volume is deleted when the EC2 instance is terminated.
+	DeleteOnTermination *bool `type:"boolean"`
+
+	// The identifier of the EC2 instance.
+	InstanceId *string `type:"string"`
+
+	// The attachment state of the volume.
+	Status *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsEc2VolumeAttachment) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsEc2VolumeAttachment) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AttachTime != nil {
+		v := *s.AttachTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AttachTime", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.DeleteOnTermination != nil {
+		v := *s.DeleteOnTermination
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DeleteOnTermination", protocol.BoolValue(v), metadata)
+	}
+	if s.InstanceId != nil {
+		v := *s.InstanceId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "InstanceId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Details about an EC2 volume.
+type AwsEc2VolumeDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The volume attachments.
+	Attachments []AwsEc2VolumeAttachment `type:"list"`
+
+	// The datetime when the volume was created.
+	CreateTime *string `type:"string"`
+
+	// Whether the volume is encrypted.
+	Encrypted *bool `type:"boolean"`
+
+	// The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK)
+	// that was used to protect the volume encryption key for the volume.
+	KmsKeyId *string `type:"string"`
+
+	// The size of the volume, in GiBs.
+	Size *int64 `type:"integer"`
+
+	// The snapshot from which the volume was created.
+	SnapshotId *string `type:"string"`
+
+	// The volume state.
+	Status *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsEc2VolumeDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsEc2VolumeDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Attachments != nil {
+		v := s.Attachments
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Attachments", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.CreateTime != nil {
+		v := *s.CreateTime
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CreateTime", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Encrypted != nil {
+		v := *s.Encrypted
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Encrypted", protocol.BoolValue(v), metadata)
+	}
+	if s.KmsKeyId != nil {
+		v := *s.KmsKeyId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "KmsKeyId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Size != nil {
+		v := *s.Size
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Size", protocol.Int64Value(v), metadata)
+	}
+	if s.SnapshotId != nil {
+		v := *s.SnapshotId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "SnapshotId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Status != nil {
+		v := *s.Status
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Status", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// Details about an EC2 VPC.
+type AwsEc2VpcDetails struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the IPv4 CIDR blocks associated with the VPC.
+	CidrBlockAssociationSet []CidrBlockAssociation `type:"list"`
+
+	// The identifier of the set of Dynamic Host Configuration Protocol (DHCP) options
+	// that are associated with the VPC. If the default options are associated with
+	// the VPC, then this is default.
+	DhcpOptionsId *string `type:"string"`
+
+	// Information about the IPv6 CIDR blocks associated with the VPC.
+	Ipv6CidrBlockAssociationSet []Ipv6CidrBlockAssociation `type:"list"`
+
+	// The current state of the VPC.
+	State *string `type:"string"`
+}
+
+// String returns the string representation
+func (s AwsEc2VpcDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s AwsEc2VpcDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.CidrBlockAssociationSet != nil {
+		v := s.CidrBlockAssociationSet
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "CidrBlockAssociationSet", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.DhcpOptionsId != nil {
+		v := *s.DhcpOptionsId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "DhcpOptionsId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Ipv6CidrBlockAssociationSet != nil {
+		v := s.Ipv6CidrBlockAssociationSet
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Ipv6CidrBlockAssociationSet", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.State != nil {
+		v := *s.State
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "State", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -3100,6 +3368,10 @@ type AwsSecurityFinding struct {
 	// The details of network-related information about a finding.
 	Network *Network `type:"structure"`
 
+	// Provides information about a network path that is relevant to a finding.
+	// Each entry under NetworkPath represents a component of that path.
+	NetworkPath []NetworkPathComponent `type:"list"`
+
 	// A user-defined note added to a finding.
 	Note *Note `type:"structure"`
 
@@ -3177,6 +3449,9 @@ type AwsSecurityFinding struct {
 
 	// Indicates the veracity of a finding.
 	VerificationState VerificationState `type:"string" enum:"true"`
+
+	// Provides a list of vulnerabilities associated with the findings.
+	Vulnerabilities []Vulnerability `type:"list"`
 
 	// Provides information about the status of the investigation into a finding.
 	Workflow *Workflow `type:"structure"`
@@ -3272,6 +3547,13 @@ func (s *AwsSecurityFinding) Validate() error {
 			}
 		}
 	}
+	if s.Vulnerabilities != nil {
+		for i, v := range s.Vulnerabilities {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Vulnerabilities", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3358,6 +3640,18 @@ func (s AwsSecurityFinding) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "Network", v, metadata)
+	}
+	if s.NetworkPath != nil {
+		v := s.NetworkPath
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "NetworkPath", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.Note != nil {
 		v := s.Note
@@ -3496,6 +3790,18 @@ func (s AwsSecurityFinding) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "VerificationState", protocol.QuotedValue{ValueMarshaler: v}, metadata)
+	}
+	if s.Vulnerabilities != nil {
+		v := s.Vulnerabilities
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Vulnerabilities", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	if s.Workflow != nil {
 		v := s.Workflow
@@ -5235,6 +5541,48 @@ func (s BatchUpdateFindingsUnprocessedFinding) MarshalFields(e protocol.FieldEnc
 	return nil
 }
 
+// An IPv4 CIDR block association.
+type CidrBlockAssociation struct {
+	_ struct{} `type:"structure"`
+
+	// The association ID for the IPv4 CIDR block.
+	AssociationId *string `type:"string"`
+
+	// The IPv4 CIDR block.
+	CidrBlock *string `type:"string"`
+
+	// Information about the state of the IPv4 CIDR block.
+	CidrBlockState *string `type:"string"`
+}
+
+// String returns the string representation
+func (s CidrBlockAssociation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s CidrBlockAssociation) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AssociationId != nil {
+		v := *s.AssociationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AssociationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CidrBlock != nil {
+		v := *s.CidrBlock
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CidrBlock", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CidrBlockState != nil {
+		v := *s.CidrBlockState
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CidrBlockState", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // Contains finding details that are specific to control-based findings. Only
 // returned for findings generated from controls.
 type Compliance struct {
@@ -5369,6 +5717,48 @@ func (s ContainerDetails) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// CVSS scores from the advisory related to the vulnerability.
+type Cvss struct {
+	_ struct{} `type:"structure"`
+
+	// The base CVSS score.
+	BaseScore *float64 `type:"double"`
+
+	// The base scoring vector for the CVSS score.
+	BaseVector *string `type:"string"`
+
+	// The version of CVSS for the CVSS score.
+	Version *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Cvss) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Cvss) MarshalFields(e protocol.FieldEncoder) error {
+	if s.BaseScore != nil {
+		v := *s.BaseScore
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "BaseScore", protocol.Float64Value(v), metadata)
+	}
+	if s.BaseVector != nil {
+		v := *s.BaseVector
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "BaseVector", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -5732,6 +6122,48 @@ func (s IpFilter) MarshalFields(e protocol.FieldEncoder) error {
 	return nil
 }
 
+// An IPV6 CIDR block association.
+type Ipv6CidrBlockAssociation struct {
+	_ struct{} `type:"structure"`
+
+	// The association ID for the IPv6 CIDR block.
+	AssociationId *string `type:"string"`
+
+	// Information about the state of the CIDR block.
+	CidrBlockState *string `type:"string"`
+
+	// The IPv6 CIDR block.
+	Ipv6CidrBlock *string `type:"string"`
+}
+
+// String returns the string representation
+func (s Ipv6CidrBlockAssociation) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Ipv6CidrBlockAssociation) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AssociationId != nil {
+		v := *s.AssociationId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "AssociationId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.CidrBlockState != nil {
+		v := *s.CidrBlockState
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "CidrBlockState", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Ipv6CidrBlock != nil {
+		v := *s.Ipv6CidrBlock
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Ipv6CidrBlock", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
 // A keyword filter for querying findings.
 type KeywordFilter struct {
 	_ struct{} `type:"structure"`
@@ -5997,6 +6429,9 @@ type Network struct {
 	// The direction of network traffic associated with a finding.
 	Direction NetworkDirection `type:"string" enum:"true"`
 
+	// The range of open ports that is present on the network.
+	OpenPortRange *PortRange `type:"structure"`
+
 	// The protocol of network-related information about a finding.
 	Protocol *string `type:"string"`
 
@@ -6054,6 +6489,12 @@ func (s Network) MarshalFields(e protocol.FieldEncoder) error {
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Direction", protocol.QuotedValue{ValueMarshaler: v}, metadata)
 	}
+	if s.OpenPortRange != nil {
+		v := s.OpenPortRange
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "OpenPortRange", v, metadata)
+	}
 	if s.Protocol != nil {
 		v := *s.Protocol
 
@@ -6089,6 +6530,147 @@ func (s Network) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "SourcePort", protocol.Int64Value(v), metadata)
+	}
+	return nil
+}
+
+// Details about a network path component that occurs before or after the current
+// component.
+type NetworkHeader struct {
+	_ struct{} `type:"structure"`
+
+	// Information about the destination of the component.
+	Destination *NetworkPathComponentDetails `type:"structure"`
+
+	// The protocol used for the component.
+	Protocol *string `type:"string"`
+
+	// Information about the origin of the component.
+	Source *NetworkPathComponentDetails `type:"structure"`
+}
+
+// String returns the string representation
+func (s NetworkHeader) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s NetworkHeader) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Destination != nil {
+		v := s.Destination
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Destination", v, metadata)
+	}
+	if s.Protocol != nil {
+		v := *s.Protocol
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Protocol", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Source != nil {
+		v := s.Source
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Source", v, metadata)
+	}
+	return nil
+}
+
+// Information about a network path component.
+type NetworkPathComponent struct {
+	_ struct{} `type:"structure"`
+
+	// The identifier of a component in the network path.
+	ComponentId *string `type:"string"`
+
+	// The type of component.
+	ComponentType *string `type:"string"`
+
+	// Information about the component that comes after the current component in
+	// the network path.
+	Egress *NetworkHeader `type:"structure"`
+
+	// Information about the component that comes before the current node in the
+	// network path.
+	Ingress *NetworkHeader `type:"structure"`
+}
+
+// String returns the string representation
+func (s NetworkPathComponent) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s NetworkPathComponent) MarshalFields(e protocol.FieldEncoder) error {
+	if s.ComponentId != nil {
+		v := *s.ComponentId
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ComponentId", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ComponentType != nil {
+		v := *s.ComponentType
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "ComponentType", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Egress != nil {
+		v := s.Egress
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Egress", v, metadata)
+	}
+	if s.Ingress != nil {
+		v := s.Ingress
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Ingress", v, metadata)
+	}
+	return nil
+}
+
+// Information about the destination of the next component in the network path.
+type NetworkPathComponentDetails struct {
+	_ struct{} `type:"structure"`
+
+	// The IP addresses of the destination.
+	Address []string `type:"list"`
+
+	// A list of port ranges for the destination.
+	PortRanges []PortRange `type:"list"`
+}
+
+// String returns the string representation
+func (s NetworkPathComponentDetails) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s NetworkPathComponentDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Address != nil {
+		v := s.Address
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Address", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.PortRanges != nil {
+		v := s.PortRanges
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "PortRanges", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
 	}
 	return nil
 }
@@ -6259,6 +6841,39 @@ func (s NumberFilter) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Lte", protocol.Float64Value(v), metadata)
+	}
+	return nil
+}
+
+// A range of ports.
+type PortRange struct {
+	_ struct{} `type:"structure"`
+
+	// The first port in the port range.
+	Begin *int64 `type:"integer"`
+
+	// The last port in the port range.
+	End *int64 `type:"integer"`
+}
+
+// String returns the string representation
+func (s PortRange) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s PortRange) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Begin != nil {
+		v := *s.Begin
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Begin", protocol.Int64Value(v), metadata)
+	}
+	if s.End != nil {
+		v := *s.End
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "End", protocol.Int64Value(v), metadata)
 	}
 	return nil
 }
@@ -6686,6 +7301,9 @@ func (s Resource) MarshalFields(e protocol.FieldEncoder) error {
 type ResourceDetails struct {
 	_ struct{} `type:"structure"`
 
+	// Details for an autoscaling group.
+	AwsAutoScalingAutoScalingGroup *AwsAutoScalingAutoScalingGroupDetails `type:"structure"`
+
 	// Details about a CloudFront distribution.
 	AwsCloudFrontDistribution *AwsCloudFrontDistributionDetails `type:"structure"`
 
@@ -6700,6 +7318,12 @@ type ResourceDetails struct {
 
 	// Details for an EC2 security group.
 	AwsEc2SecurityGroup *AwsEc2SecurityGroupDetails `type:"structure"`
+
+	// Details for an EC2 volume.
+	AwsEc2Volume *AwsEc2VolumeDetails `type:"structure"`
+
+	// Details for an EC2 VPC.
+	AwsEc2Vpc *AwsEc2VpcDetails `type:"structure"`
 
 	// Details for an Elasticsearch domain.
 	AwsElasticsearchDomain *AwsElasticsearchDomainDetails `type:"structure"`
@@ -6778,6 +7402,12 @@ func (s *ResourceDetails) Validate() error {
 
 // MarshalFields encodes the AWS API shape using the passed in protocol encoder.
 func (s ResourceDetails) MarshalFields(e protocol.FieldEncoder) error {
+	if s.AwsAutoScalingAutoScalingGroup != nil {
+		v := s.AwsAutoScalingAutoScalingGroup
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "AwsAutoScalingAutoScalingGroup", v, metadata)
+	}
 	if s.AwsCloudFrontDistribution != nil {
 		v := s.AwsCloudFrontDistribution
 
@@ -6807,6 +7437,18 @@ func (s ResourceDetails) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "AwsEc2SecurityGroup", v, metadata)
+	}
+	if s.AwsEc2Volume != nil {
+		v := s.AwsEc2Volume
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "AwsEc2Volume", v, metadata)
+	}
+	if s.AwsEc2Vpc != nil {
+		v := s.AwsEc2Vpc
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "AwsEc2Vpc", v, metadata)
 	}
 	if s.AwsElasticsearchDomain != nil {
 		v := s.AwsElasticsearchDomain
@@ -7082,6 +7724,66 @@ func (s SeverityUpdate) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Product", protocol.Float64Value(v), metadata)
+	}
+	return nil
+}
+
+// Information about a software package.
+type SoftwarePackage struct {
+	_ struct{} `type:"structure"`
+
+	// The architecture used for the software package.
+	Architecture *string `type:"string"`
+
+	// The epoch of the software package.
+	Epoch *string `type:"string"`
+
+	// The name of the software package.
+	Name *string `type:"string"`
+
+	// The release of the software package.
+	Release *string `type:"string"`
+
+	// The version of the software package.
+	Version *string `type:"string"`
+}
+
+// String returns the string representation
+func (s SoftwarePackage) String() string {
+	return awsutil.Prettify(s)
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s SoftwarePackage) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Architecture != nil {
+		v := *s.Architecture
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Architecture", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Epoch != nil {
+		v := *s.Epoch
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Epoch", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Release != nil {
+		v := *s.Release
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Release", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Version != nil {
+		v := *s.Version
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Version", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -7568,6 +8270,196 @@ func (s ThreatIntelIndicator) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "Value", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	return nil
+}
+
+// A vulnerability associated with a finding.
+type Vulnerability struct {
+	_ struct{} `type:"structure"`
+
+	// CVSS scores from the advisory related to the vulnerability.
+	Cvss []Cvss `type:"list"`
+
+	// The identifier of the vulnerability.
+	//
+	// Id is a required field
+	Id *string `type:"string" required:"true"`
+
+	// A list of URLs that provide additional information about the vulnerability.
+	ReferenceUrls []string `type:"list"`
+
+	// List of vulnerabilities that are related to this vulnerability.
+	RelatedVulnerabilities []string `type:"list"`
+
+	// Information about the vendor that generates the vulnerability report.
+	Vendor *VulnerabilityVendor `type:"structure"`
+
+	// List of software packages that have the vulnerability.
+	VulnerablePackages []SoftwarePackage `type:"list"`
+}
+
+// String returns the string representation
+func (s Vulnerability) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *Vulnerability) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "Vulnerability"}
+
+	if s.Id == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Id"))
+	}
+	if s.Vendor != nil {
+		if err := s.Vendor.Validate(); err != nil {
+			invalidParams.AddNested("Vendor", err.(aws.ErrInvalidParams))
+		}
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s Vulnerability) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Cvss != nil {
+		v := s.Cvss
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "Cvss", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	if s.Id != nil {
+		v := *s.Id
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Id", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.ReferenceUrls != nil {
+		v := s.ReferenceUrls
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "ReferenceUrls", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.RelatedVulnerabilities != nil {
+		v := s.RelatedVulnerabilities
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "RelatedVulnerabilities", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddValue(protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ls0.End()
+
+	}
+	if s.Vendor != nil {
+		v := s.Vendor
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "Vendor", v, metadata)
+	}
+	if s.VulnerablePackages != nil {
+		v := s.VulnerablePackages
+
+		metadata := protocol.Metadata{}
+		ls0 := e.List(protocol.BodyTarget, "VulnerablePackages", metadata)
+		ls0.Start()
+		for _, v1 := range v {
+			ls0.ListAddFields(v1)
+		}
+		ls0.End()
+
+	}
+	return nil
+}
+
+// A vendor that generates a vulnerability report.
+type VulnerabilityVendor struct {
+	_ struct{} `type:"structure"`
+
+	// The name of the vendor.
+	//
+	// Name is a required field
+	Name *string `type:"string" required:"true"`
+
+	// The URL of the vulnerability advisory.
+	Url *string `type:"string"`
+
+	// The datetime when the vulnerability advisory was created.
+	VendorCreatedAt *string `type:"string"`
+
+	// The severity that the vendor assigned to the vulnerability.
+	VendorSeverity *string `type:"string"`
+
+	// The datetime when the vulnerability advisory was last updated.
+	VendorUpdatedAt *string `type:"string"`
+}
+
+// String returns the string representation
+func (s VulnerabilityVendor) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VulnerabilityVendor) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VulnerabilityVendor"}
+
+	if s.Name == nil {
+		invalidParams.Add(aws.NewErrParamRequired("Name"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// MarshalFields encodes the AWS API shape using the passed in protocol encoder.
+func (s VulnerabilityVendor) MarshalFields(e protocol.FieldEncoder) error {
+	if s.Name != nil {
+		v := *s.Name
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Url != nil {
+		v := *s.Url
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "Url", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VendorCreatedAt != nil {
+		v := *s.VendorCreatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VendorCreatedAt", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VendorSeverity != nil {
+		v := *s.VendorSeverity
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VendorSeverity", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.VendorUpdatedAt != nil {
+		v := *s.VendorUpdatedAt
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.BodyTarget, "VendorUpdatedAt", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }

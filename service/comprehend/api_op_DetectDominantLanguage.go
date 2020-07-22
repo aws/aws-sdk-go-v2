@@ -16,7 +16,7 @@ type DetectDominantLanguageInput struct {
 	// must contain fewer that 5,000 bytes of UTF-8 encoded characters.
 	//
 	// Text is a required field
-	Text *string `min:"1" type:"string" required:"true"`
+	Text *string `min:"1" type:"string" required:"true" sensitive:"true"`
 }
 
 // String returns the string representation
@@ -42,7 +42,7 @@ func (s *DetectDominantLanguageInput) Validate() error {
 }
 
 type DetectDominantLanguageOutput struct {
-	_ struct{} `type:"structure"`
+	_ struct{} `type:"structure" sensitive:"true"`
 
 	// The languages that Amazon Comprehend detected in the input text. For each
 	// language, the response returns the RFC 5646 language code and the level of

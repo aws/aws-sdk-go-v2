@@ -45,6 +45,9 @@ type UpdateInfrastructureConfigurationInput struct {
 	// The logging configuration of the infrastructure configuration.
 	Logging *Logging `locationName:"logging" type:"structure"`
 
+	// The tags attached to the resource created by Image Builder.
+	ResourceTags map[string]string `locationName:"resourceTags" min:"1" type:"map"`
+
 	// The security group IDs to associate with the instance used to customize your
 	// EC2 AMI.
 	SecurityGroupIds []string `locationName:"securityGroupIds" type:"list"`
@@ -92,6 +95,9 @@ func (s *UpdateInfrastructureConfigurationInput) Validate() error {
 	}
 	if s.KeyPair != nil && len(*s.KeyPair) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("KeyPair", 1))
+	}
+	if s.ResourceTags != nil && len(s.ResourceTags) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ResourceTags", 1))
 	}
 	if s.SubnetId != nil && len(*s.SubnetId) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("SubnetId", 1))
@@ -165,6 +171,18 @@ func (s UpdateInfrastructureConfigurationInput) MarshalFields(e protocol.FieldEn
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "logging", v, metadata)
+	}
+	if s.ResourceTags != nil {
+		v := s.ResourceTags
+
+		metadata := protocol.Metadata{}
+		ms0 := e.Map(protocol.BodyTarget, "resourceTags", metadata)
+		ms0.Start()
+		for k1, v1 := range v {
+			ms0.MapSetValue(k1, protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v1)})
+		}
+		ms0.End()
+
 	}
 	if s.SecurityGroupIds != nil {
 		v := s.SecurityGroupIds

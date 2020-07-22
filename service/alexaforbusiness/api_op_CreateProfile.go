@@ -4,6 +4,7 @@ package alexaforbusiness
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -45,6 +46,9 @@ type CreateProfileInput struct {
 
 	// Whether room profile setup is enabled.
 	SetupModeDisabled *bool `type:"boolean"`
+
+	// The tags for the profile.
+	Tags []Tag `type:"list"`
 
 	// The temperature unit to be used by devices in the profile.
 	//
@@ -109,6 +113,13 @@ func (s *CreateProfileInput) Validate() error {
 	if s.MeetingRoomConfiguration != nil {
 		if err := s.MeetingRoomConfiguration.Validate(); err != nil {
 			invalidParams.AddNested("MeetingRoomConfiguration", err.(aws.ErrInvalidParams))
+		}
+	}
+	if s.Tags != nil {
+		for i, v := range s.Tags {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Tags", i), err.(aws.ErrInvalidParams))
+			}
 		}
 	}
 

@@ -67,8 +67,8 @@ const opDisableKey = "DisableKey"
 // AWS Key Management Service.
 //
 // Sets the state of a customer master key (CMK) to disabled, thereby preventing
-// its use for cryptographic operations. You cannot perform this operation on
-// a CMK in a different AWS account.
+// its use for cryptographic operations (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations).
+// You cannot perform this operation on a CMK in a different AWS account.
 //
 // For more information about how key state affects the use of a CMK, see How
 // Key State Affects the Use of a Customer Master Key (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)

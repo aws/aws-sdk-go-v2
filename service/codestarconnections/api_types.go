@@ -10,12 +10,12 @@ import (
 var _ aws.Config
 var _ = awsutil.Prettify
 
-// The AWS::CodeStarConnections::Connection resource can be used to connect
-// external source providers with services like AWS CodePipeline.
+// A resource that is used to connect third-party source providers with services
+// like AWS CodePipeline.
 //
-// Note: A connection created through CloudFormation is in `PENDING` status
-// by default. You can make its status `AVAILABLE` by editing the connection
-// in the CodePipeline console.
+// Note: A connection created through CloudFormation, the CLI, or the SDK is
+// in `PENDING` status by default. You can make its status `AVAILABLE` by updating
+// the connection in the console.
 type Connection struct {
 	_ struct{} `type:"structure"`
 
@@ -32,18 +32,61 @@ type Connection struct {
 	// The current status of the connection.
 	ConnectionStatus ConnectionStatus `type:"string" enum:"true"`
 
+	// The Amazon Resource Name (ARN) of the host associated with the connection.
+	HostArn *string `type:"string"`
+
 	// The identifier of the external provider where your third-party code repository
 	// is configured. For Bitbucket, this is the account ID of the owner of the
 	// Bitbucket repository.
 	OwnerAccountId *string `min:"12" type:"string"`
 
 	// The name of the external provider where your third-party code repository
-	// is configured. Currently, the valid provider type is Bitbucket.
+	// is configured. The valid provider type is Bitbucket.
 	ProviderType ProviderType `type:"string" enum:"true"`
 }
 
 // String returns the string representation
 func (s Connection) String() string {
+	return awsutil.Prettify(s)
+}
+
+// A resource that represents the infrastructure where a third-party provider
+// is installed. The host is used when you create connections to an installed
+// third-party provider type, such as GitHub Enterprise Server. You create one
+// host for all connections to that provider.
+//
+// A host created through the CLI or the SDK is in `PENDING` status by default.
+// You can make its status `AVAILABLE` by setting up the host in the console.
+type Host struct {
+	_ struct{} `type:"structure"`
+
+	// The Amazon Resource Name (ARN) of the host.
+	HostArn *string `type:"string"`
+
+	// The name of the host.
+	Name *string `min:"1" type:"string"`
+
+	// The endpoint of the infrastructure where your provider type is installed.
+	ProviderEndpoint *string `min:"1" type:"string"`
+
+	// The name of the installed provider to be associated with your connection.
+	// The host resource represents the infrastructure where your provider type
+	// is installed. The valid provider type is GitHub Enterprise Server.
+	ProviderType ProviderType `type:"string" enum:"true"`
+
+	// The status of the host, such as PENDING, AVAILABLE, VPC_CONFIG_DELETING,
+	// VPC_CONFIG_INITIALIZING, and VPC_CONFIG_FAILED_INITIALIZATION.
+	Status *string `type:"string"`
+
+	// The status description for the host.
+	StatusMessage *string `type:"string"`
+
+	// The VPC configuration provisioned for the host.
+	VpcConfiguration *VpcConfiguration `type:"structure"`
+}
+
+// String returns the string representation
+func (s Host) String() string {
 	return awsutil.Prettify(s)
 }
 
@@ -82,6 +125,69 @@ func (s *Tag) Validate() error {
 
 	if s.Value == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Value"))
+	}
+
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	}
+	return nil
+}
+
+// The VPC configuration provisioned for the host.
+type VpcConfiguration struct {
+	_ struct{} `type:"structure"`
+
+	// The ID of the security group or security groups associated with the Amazon
+	// VPC connected to the infrastructure where your provider type is installed.
+	//
+	// SecurityGroupIds is a required field
+	SecurityGroupIds []string `min:"1" type:"list" required:"true"`
+
+	// The ID of the subnet or subnets associated with the Amazon VPC connected
+	// to the infrastructure where your provider type is installed.
+	//
+	// SubnetIds is a required field
+	SubnetIds []string `min:"1" type:"list" required:"true"`
+
+	// The value of the Transport Layer Security (TLS) certificate associated with
+	// the infrastructure where your provider type is installed.
+	TlsCertificate *string `min:"1" type:"string"`
+
+	// The ID of the Amazon VPC connected to the infrastructure where your provider
+	// type is installed.
+	//
+	// VpcId is a required field
+	VpcId *string `type:"string" required:"true"`
+}
+
+// String returns the string representation
+func (s VpcConfiguration) String() string {
+	return awsutil.Prettify(s)
+}
+
+// Validate inspects the fields of the type to determine if they are valid.
+func (s *VpcConfiguration) Validate() error {
+	invalidParams := aws.ErrInvalidParams{Context: "VpcConfiguration"}
+
+	if s.SecurityGroupIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SecurityGroupIds"))
+	}
+	if s.SecurityGroupIds != nil && len(s.SecurityGroupIds) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SecurityGroupIds", 1))
+	}
+
+	if s.SubnetIds == nil {
+		invalidParams.Add(aws.NewErrParamRequired("SubnetIds"))
+	}
+	if s.SubnetIds != nil && len(s.SubnetIds) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("SubnetIds", 1))
+	}
+	if s.TlsCertificate != nil && len(*s.TlsCertificate) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("TlsCertificate", 1))
+	}
+
+	if s.VpcId == nil {
+		invalidParams.Add(aws.NewErrParamRequired("VpcId"))
 	}
 
 	if invalidParams.Len() > 0 {

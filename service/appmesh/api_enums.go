@@ -36,6 +36,24 @@ func (enum EgressFilterType) MarshalValueBuf(b []byte) ([]byte, error) {
 	return append(b, enum...), nil
 }
 
+type GatewayRouteStatusCode string
+
+// Enum values for GatewayRouteStatusCode
+const (
+	GatewayRouteStatusCodeActive   GatewayRouteStatusCode = "ACTIVE"
+	GatewayRouteStatusCodeDeleted  GatewayRouteStatusCode = "DELETED"
+	GatewayRouteStatusCodeInactive GatewayRouteStatusCode = "INACTIVE"
+)
+
+func (enum GatewayRouteStatusCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum GatewayRouteStatusCode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
 type GrpcRetryPolicyEvent string
 
 // Enum values for GrpcRetryPolicyEvent
@@ -182,6 +200,60 @@ func (enum TcpRetryPolicyEvent) MarshalValue() (string, error) {
 }
 
 func (enum TcpRetryPolicyEvent) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type VirtualGatewayListenerTlsMode string
+
+// Enum values for VirtualGatewayListenerTlsMode
+const (
+	VirtualGatewayListenerTlsModeDisabled   VirtualGatewayListenerTlsMode = "DISABLED"
+	VirtualGatewayListenerTlsModePermissive VirtualGatewayListenerTlsMode = "PERMISSIVE"
+	VirtualGatewayListenerTlsModeStrict     VirtualGatewayListenerTlsMode = "STRICT"
+)
+
+func (enum VirtualGatewayListenerTlsMode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VirtualGatewayListenerTlsMode) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type VirtualGatewayPortProtocol string
+
+// Enum values for VirtualGatewayPortProtocol
+const (
+	VirtualGatewayPortProtocolGrpc  VirtualGatewayPortProtocol = "grpc"
+	VirtualGatewayPortProtocolHttp  VirtualGatewayPortProtocol = "http"
+	VirtualGatewayPortProtocolHttp2 VirtualGatewayPortProtocol = "http2"
+)
+
+func (enum VirtualGatewayPortProtocol) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VirtualGatewayPortProtocol) MarshalValueBuf(b []byte) ([]byte, error) {
+	b = b[0:0]
+	return append(b, enum...), nil
+}
+
+type VirtualGatewayStatusCode string
+
+// Enum values for VirtualGatewayStatusCode
+const (
+	VirtualGatewayStatusCodeActive   VirtualGatewayStatusCode = "ACTIVE"
+	VirtualGatewayStatusCodeDeleted  VirtualGatewayStatusCode = "DELETED"
+	VirtualGatewayStatusCodeInactive VirtualGatewayStatusCode = "INACTIVE"
+)
+
+func (enum VirtualGatewayStatusCode) MarshalValue() (string, error) {
+	return string(enum), nil
+}
+
+func (enum VirtualGatewayStatusCode) MarshalValueBuf(b []byte) ([]byte, error) {
 	b = b[0:0]
 	return append(b, enum...), nil
 }

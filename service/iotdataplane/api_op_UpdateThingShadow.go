@@ -19,6 +19,9 @@ type UpdateThingShadowInput struct {
 	// Payload is a required field
 	Payload []byte `locationName:"payload" type:"blob" required:"true"`
 
+	// The name of the shadow.
+	ShadowName *string `location:"querystring" locationName:"name" min:"1" type:"string"`
+
 	// The name of the thing.
 	//
 	// ThingName is a required field
@@ -36,6 +39,9 @@ func (s *UpdateThingShadowInput) Validate() error {
 
 	if s.Payload == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Payload"))
+	}
+	if s.ShadowName != nil && len(*s.ShadowName) < 1 {
+		invalidParams.Add(aws.NewErrParamMinLen("ShadowName", 1))
 	}
 
 	if s.ThingName == nil {
@@ -65,6 +71,12 @@ func (s UpdateThingShadowInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetStream(protocol.PayloadTarget, "payload", protocol.BytesStream(v), metadata)
+	}
+	if s.ShadowName != nil {
+		v := *s.ShadowName
+
+		metadata := protocol.Metadata{}
+		e.SetValue(protocol.QueryTarget, "name", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
 	}
 	return nil
 }
@@ -98,7 +110,7 @@ const opUpdateThingShadow = "UpdateThingShadow"
 // UpdateThingShadowRequest returns a request value for making API operation for
 // AWS IoT Data Plane.
 //
-// Updates the thing shadow for the specified thing.
+// Updates the shadow for the specified thing.
 //
 // For more information, see UpdateThingShadow (http://docs.aws.amazon.com/iot/latest/developerguide/API_UpdateThingShadow.html)
 // in the AWS IoT Developer Guide.

@@ -72,7 +72,7 @@ func (s ListFieldLevelEncryptionConfigsOutput) MarshalFields(e protocol.FieldEnc
 	return nil
 }
 
-const opListFieldLevelEncryptionConfigs = "ListFieldLevelEncryptionConfigs2019_03_26"
+const opListFieldLevelEncryptionConfigs = "ListFieldLevelEncryptionConfigs2020_05_31"
 
 // ListFieldLevelEncryptionConfigsRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -87,12 +87,12 @@ const opListFieldLevelEncryptionConfigs = "ListFieldLevelEncryptionConfigs2019_0
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListFieldLevelEncryptionConfigs
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListFieldLevelEncryptionConfigs
 func (c *Client) ListFieldLevelEncryptionConfigsRequest(input *ListFieldLevelEncryptionConfigsInput) ListFieldLevelEncryptionConfigsRequest {
 	op := &aws.Operation{
 		Name:       opListFieldLevelEncryptionConfigs,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2019-03-26/field-level-encryption",
+		HTTPPath:   "/2020-05-31/field-level-encryption",
 	}
 
 	if input == nil {

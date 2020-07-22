@@ -72,7 +72,7 @@ func (s ListCloudFrontOriginAccessIdentitiesOutput) MarshalFields(e protocol.Fie
 	return nil
 }
 
-const opListCloudFrontOriginAccessIdentities = "ListCloudFrontOriginAccessIdentities2019_03_26"
+const opListCloudFrontOriginAccessIdentities = "ListCloudFrontOriginAccessIdentities2020_05_31"
 
 // ListCloudFrontOriginAccessIdentitiesRequest returns a request value for making API operation for
 // Amazon CloudFront.
@@ -86,12 +86,12 @@ const opListCloudFrontOriginAccessIdentities = "ListCloudFrontOriginAccessIdenti
 //        fmt.Println(resp)
 //    }
 //
-// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2019-03-26/ListCloudFrontOriginAccessIdentities
+// Please also see https://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListCloudFrontOriginAccessIdentities
 func (c *Client) ListCloudFrontOriginAccessIdentitiesRequest(input *ListCloudFrontOriginAccessIdentitiesInput) ListCloudFrontOriginAccessIdentitiesRequest {
 	op := &aws.Operation{
 		Name:       opListCloudFrontOriginAccessIdentities,
 		HTTPMethod: "GET",
-		HTTPPath:   "/2019-03-26/origin-access-identity/cloudfront",
+		HTTPPath:   "/2020-05-31/origin-access-identity/cloudfront",
 		Paginator: &aws.Paginator{
 			InputTokens:     []string{"Marker"},
 			OutputTokens:    []string{"CloudFrontOriginAccessIdentityList.NextMarker"},

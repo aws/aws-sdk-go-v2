@@ -13,6 +13,9 @@ import (
 type CreatePackagingGroupInput struct {
 	_ struct{} `type:"structure"`
 
+	// CDN Authorization credentials
+	Authorization *Authorization `locationName:"authorization" type:"structure"`
+
 	// Id is a required field
 	Id *string `locationName:"id" type:"string" required:"true"`
 
@@ -32,6 +35,11 @@ func (s *CreatePackagingGroupInput) Validate() error {
 	if s.Id == nil {
 		invalidParams.Add(aws.NewErrParamRequired("Id"))
 	}
+	if s.Authorization != nil {
+		if err := s.Authorization.Validate(); err != nil {
+			invalidParams.AddNested("Authorization", err.(aws.ErrInvalidParams))
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -43,6 +51,12 @@ func (s *CreatePackagingGroupInput) Validate() error {
 func (s CreatePackagingGroupInput) MarshalFields(e protocol.FieldEncoder) error {
 	e.SetValue(protocol.HeaderTarget, "Content-Type", protocol.StringValue("application/json"), protocol.Metadata{})
 
+	if s.Authorization != nil {
+		v := s.Authorization
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "authorization", v, metadata)
+	}
 	if s.Id != nil {
 		v := *s.Id
 
@@ -69,6 +83,9 @@ type CreatePackagingGroupOutput struct {
 
 	Arn *string `locationName:"arn" type:"string"`
 
+	// CDN Authorization credentials
+	Authorization *Authorization `locationName:"authorization" type:"structure"`
+
 	DomainName *string `locationName:"domainName" type:"string"`
 
 	Id *string `locationName:"id" type:"string"`
@@ -89,6 +106,12 @@ func (s CreatePackagingGroupOutput) MarshalFields(e protocol.FieldEncoder) error
 
 		metadata := protocol.Metadata{}
 		e.SetValue(protocol.BodyTarget, "arn", protocol.QuotedValue{ValueMarshaler: protocol.StringValue(v)}, metadata)
+	}
+	if s.Authorization != nil {
+		v := s.Authorization
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "authorization", v, metadata)
 	}
 	if s.DomainName != nil {
 		v := *s.DomainName

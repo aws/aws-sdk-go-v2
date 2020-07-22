@@ -17,11 +17,20 @@ type CreateOTAUpdateInput struct {
 	// A list of additional OTA update parameters which are name-value pairs.
 	AdditionalParameters map[string]string `locationName:"additionalParameters" type:"map"`
 
+	// The criteria that determine when and how a job abort takes place.
+	AwsJobAbortConfig *AwsJobAbortConfig `locationName:"awsJobAbortConfig" type:"structure"`
+
 	// Configuration for the rollout of OTA updates.
 	AwsJobExecutionsRolloutConfig *AwsJobExecutionsRolloutConfig `locationName:"awsJobExecutionsRolloutConfig" type:"structure"`
 
 	// Configuration information for pre-signed URLs.
 	AwsJobPresignedUrlConfig *AwsJobPresignedUrlConfig `locationName:"awsJobPresignedUrlConfig" type:"structure"`
+
+	// Specifies the amount of time each device has to finish its execution of the
+	// job. A timer is started when the job execution status is set to IN_PROGRESS.
+	// If the job execution status is not set to another terminal state before the
+	// timer expires, it will be automatically set to TIMED_OUT.
+	AwsJobTimeoutConfig *AwsJobTimeoutConfig `locationName:"awsJobTimeoutConfig" type:"structure"`
 
 	// The description of the OTA update.
 	Description *string `locationName:"description" type:"string"`
@@ -41,7 +50,8 @@ type CreateOTAUpdateInput struct {
 	// can choose the protocol.
 	Protocols []Protocol `locationName:"protocols" min:"1" type:"list"`
 
-	// The IAM role that allows access to the AWS IoT Jobs service.
+	// The IAM role that grants AWS IoT access to the Amazon S3, AWS IoT jobs and
+	// AWS Code Signing resources to create an OTA update job.
 	//
 	// RoleArn is a required field
 	RoleArn *string `locationName:"roleArn" min:"20" type:"string" required:"true"`
@@ -57,7 +67,7 @@ type CreateOTAUpdateInput struct {
 	// by all things originally in the group. Valid values: CONTINUOUS | SNAPSHOT.
 	TargetSelection TargetSelection `locationName:"targetSelection" type:"string" enum:"true"`
 
-	// The targeted devices to receive OTA updates.
+	// The devices targeted to receive OTA updates.
 	//
 	// Targets is a required field
 	Targets []string `locationName:"targets" min:"1" type:"list" required:"true"`
@@ -102,6 +112,11 @@ func (s *CreateOTAUpdateInput) Validate() error {
 	if s.Targets != nil && len(s.Targets) < 1 {
 		invalidParams.Add(aws.NewErrParamMinLen("Targets", 1))
 	}
+	if s.AwsJobAbortConfig != nil {
+		if err := s.AwsJobAbortConfig.Validate(); err != nil {
+			invalidParams.AddNested("AwsJobAbortConfig", err.(aws.ErrInvalidParams))
+		}
+	}
 	if s.AwsJobExecutionsRolloutConfig != nil {
 		if err := s.AwsJobExecutionsRolloutConfig.Validate(); err != nil {
 			invalidParams.AddNested("AwsJobExecutionsRolloutConfig", err.(aws.ErrInvalidParams))
@@ -144,6 +159,12 @@ func (s CreateOTAUpdateInput) MarshalFields(e protocol.FieldEncoder) error {
 		ms0.End()
 
 	}
+	if s.AwsJobAbortConfig != nil {
+		v := s.AwsJobAbortConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "awsJobAbortConfig", v, metadata)
+	}
 	if s.AwsJobExecutionsRolloutConfig != nil {
 		v := s.AwsJobExecutionsRolloutConfig
 
@@ -155,6 +176,12 @@ func (s CreateOTAUpdateInput) MarshalFields(e protocol.FieldEncoder) error {
 
 		metadata := protocol.Metadata{}
 		e.SetFields(protocol.BodyTarget, "awsJobPresignedUrlConfig", v, metadata)
+	}
+	if s.AwsJobTimeoutConfig != nil {
+		v := s.AwsJobTimeoutConfig
+
+		metadata := protocol.Metadata{}
+		e.SetFields(protocol.BodyTarget, "awsJobTimeoutConfig", v, metadata)
 	}
 	if s.Description != nil {
 		v := *s.Description

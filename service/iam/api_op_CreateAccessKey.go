@@ -67,8 +67,8 @@ const opCreateAccessKey = "CreateAccessKey"
 // to manage AWS account root user credentials. This is true even if the AWS
 // account has no associated users.
 //
-// For information about limits on the number of keys you can create, see Limitations
-// on IAM Entities (https://docs.aws.amazon.com/IAM/latest/UserGuide/LimitationsOnEntities.html)
+// The number and size of IAM resources in an AWS account are limited. For more
+// information, see IAM and STS Quotas (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html)
 // in the IAM User Guide.
 //
 // To ensure the security of your AWS account, the secret access key is accessible

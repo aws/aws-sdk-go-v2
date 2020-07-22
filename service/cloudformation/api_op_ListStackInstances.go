@@ -4,6 +4,7 @@ package cloudformation
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
@@ -11,6 +12,9 @@ import (
 
 type ListStackInstancesInput struct {
 	_ struct{} `type:"structure"`
+
+	// The status that stack instances are filtered by.
+	Filters []StackInstanceFilter `type:"list"`
 
 	// The maximum number of results to be returned with a single call. If the number
 	// of available results exceeds this maximum, the response includes a NextToken
@@ -56,6 +60,13 @@ func (s *ListStackInstancesInput) Validate() error {
 	if s.StackSetName == nil {
 		invalidParams.Add(aws.NewErrParamRequired("StackSetName"))
 	}
+	if s.Filters != nil {
+		for i, v := range s.Filters {
+			if err := v.Validate(); err != nil {
+				invalidParams.AddNested(fmt.Sprintf("%s[%v]", "Filters", i), err.(aws.ErrInvalidParams))
+			}
+		}
+	}
 
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -89,7 +100,7 @@ const opListStackInstances = "ListStackInstances"
 //
 // Returns summary information about stack instances that are associated with
 // the specified stack set. You can filter for stack instances that are associated
-// with a specific AWS account name or Region.
+// with a specific AWS account name or Region, or that have a specific status.
 //
 //    // Example sending a request using ListStackInstancesRequest.
 //    req := client.ListStackInstancesRequest(params)
