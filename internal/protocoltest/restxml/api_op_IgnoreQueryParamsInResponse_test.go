@@ -10,7 +10,6 @@ import (
 	"github.com/awslabs/smithy-go/ptr"
 	smithyrand "github.com/awslabs/smithy-go/rand"
 	smithytesting "github.com/awslabs/smithy-go/testing"
-	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"io"
 	"net/http"
@@ -86,8 +85,8 @@ func TestClient_IgnoreQueryParamsInResponse_awsRestxmlDeserialize(t *testing.T) 
 			if result == nil {
 				t.Fatalf("expect not nil result")
 			}
-			if diff := cmp.Diff(c.ExpectResult, result, cmpopts.IgnoreUnexported(middleware.Metadata{})); len(diff) != 0 {
-				t.Errorf("expect c.ExpectResult value match:\n%s", diff)
+			if err := smithytesting.CompareValues(c.ExpectResult, result, cmpopts.IgnoreUnexported(middleware.Metadata{})); err != nil {
+				t.Errorf("expect c.ExpectResult value match:\n%v", err)
 			}
 		})
 	}

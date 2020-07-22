@@ -10,7 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/types"
 	"github.com/awslabs/smithy-go/middleware"
 	"github.com/awslabs/smithy-go/ptr"
-	"github.com/google/go-cmp/cmp"
+	smithytesting "github.com/awslabs/smithy-go/testing"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"io"
 	"net/http"
@@ -105,8 +105,8 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsAwsjson11Deserialize(t *te
 			if !errors.As(err, &actualErr) {
 				t.Fatalf("expect *types.InvalidGreeting result error, got %T", err)
 			}
-			if diff := cmp.Diff(c.ExpectError, actualErr, cmpopts.IgnoreUnexported(middleware.Metadata{})); len(diff) != 0 {
-				t.Errorf("expect c.ExpectError value match:\n%s", diff)
+			if err := smithytesting.CompareValues(c.ExpectError, actualErr, cmpopts.IgnoreUnexported(middleware.Metadata{})); err != nil {
+				t.Errorf("expect c.ExpectError value match:\n%v", err)
 			}
 		})
 	}
@@ -215,8 +215,8 @@ func TestClient_GreetingWithErrors_ComplexError_awsAwsjson11Deserialize(t *testi
 			if !errors.As(err, &actualErr) {
 				t.Fatalf("expect *types.ComplexError result error, got %T", err)
 			}
-			if diff := cmp.Diff(c.ExpectError, actualErr, cmpopts.IgnoreUnexported(middleware.Metadata{})); len(diff) != 0 {
-				t.Errorf("expect c.ExpectError value match:\n%s", diff)
+			if err := smithytesting.CompareValues(c.ExpectError, actualErr, cmpopts.IgnoreUnexported(middleware.Metadata{})); err != nil {
+				t.Errorf("expect c.ExpectError value match:\n%v", err)
 			}
 		})
 	}
@@ -407,8 +407,8 @@ func TestClient_GreetingWithErrors_FooError_awsAwsjson11Deserialize(t *testing.T
 			if !errors.As(err, &actualErr) {
 				t.Fatalf("expect *types.FooError result error, got %T", err)
 			}
-			if diff := cmp.Diff(c.ExpectError, actualErr, cmpopts.IgnoreUnexported(middleware.Metadata{})); len(diff) != 0 {
-				t.Errorf("expect c.ExpectError value match:\n%s", diff)
+			if err := smithytesting.CompareValues(c.ExpectError, actualErr, cmpopts.IgnoreUnexported(middleware.Metadata{})); err != nil {
+				t.Errorf("expect c.ExpectError value match:\n%v", err)
 			}
 		})
 	}
