@@ -17,7 +17,6 @@ package software.amazon.smithy.aws.go.codegen;
 
 import java.util.Set;
 import java.util.TreeSet;
-import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolTestGenerator;
@@ -26,9 +25,7 @@ import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestRequest
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestResponseErrorGenerator;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestResponseGenerator;
 import software.amazon.smithy.go.codegen.integration.IdempotencyTokenMiddlewareGenerator;
-import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
-import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.utils.SetUtils;
 
 /**
@@ -59,13 +56,12 @@ final class AwsProtocolUtils {
                         .name(AddAwsConfigFields.ENDPOINT_RESOLVER_CONFIG_NAME)
                         .value(writer -> {
                             writer.addUseImports(AwsGoDependency.AWS_CORE);
-                            writer.openBlock("aws.EndpointResolverFunc("
-                                            + "func(service, region string) (e aws.Endpoint, err error) {",
-                                    "}),", () -> {
-                                        writer.write("e.URL = server.URL");
-                                        writer.write("e.SigningRegion = \"us-west-2\"");
-                                        writer.write("return e, err");
-                                    });
+                            writer.openBlock("$L(func(region string, options $L) (e aws.Endpoint, err error) {", "}),",
+                                    EndpointGenerator.RESOLVER_FUNC_NAME, EndpointGenerator.RESOLVER_OPTIONS, () -> {
+                                writer.write("e.URL = server.URL");
+                                writer.write("e.SigningRegion = \"us-west-2\"");
+                                writer.write("return e, err");
+                            });
                         })
                         .build(),
                 HttpProtocolUnitTestGenerator.ConfigValue.builder()
