@@ -18,14 +18,14 @@ import (
 	"time"
 )
 
-type awsRestxml_deserializeOpQueryIdempotencyTokenAutoFill struct {
+type awsRestxml_deserializeOpXmlNamespaces struct {
 }
 
-func (*awsRestxml_deserializeOpQueryIdempotencyTokenAutoFill) ID() string {
+func (*awsRestxml_deserializeOpXmlNamespaces) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *awsRestxml_deserializeOpQueryIdempotencyTokenAutoFill) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestxml_deserializeOpXmlNamespaces) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -39,15 +39,15 @@ func (m *awsRestxml_deserializeOpQueryIdempotencyTokenAutoFill) HandleDeserializ
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorQueryIdempotencyTokenAutoFill(response)
+		return out, metadata, awsRestxml_deserializeOpErrorXmlNamespaces(response)
 	}
-	output := &QueryIdempotencyTokenAutoFillOutput{}
+	output := &XmlNamespacesOutput{}
 	out.Result = output
 
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorQueryIdempotencyTokenAutoFill(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorXmlNamespaces(response *smithyhttp.Response) error {
 	defer response.Body.Close()
 
 	var errorBuffer bytes.Buffer
@@ -71,14 +71,14 @@ func awsRestxml_deserializeOpErrorQueryIdempotencyTokenAutoFill(response *smithy
 	}
 }
 
-type awsRestxml_deserializeOpNullAndEmptyHeadersClient struct {
+type awsRestxml_deserializeOpIgnoreQueryParamsInResponse struct {
 }
 
-func (*awsRestxml_deserializeOpNullAndEmptyHeadersClient) ID() string {
+func (*awsRestxml_deserializeOpIgnoreQueryParamsInResponse) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *awsRestxml_deserializeOpNullAndEmptyHeadersClient) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestxml_deserializeOpIgnoreQueryParamsInResponse) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -92,20 +92,15 @@ func (m *awsRestxml_deserializeOpNullAndEmptyHeadersClient) HandleDeserialize(ct
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorNullAndEmptyHeadersClient(response)
+		return out, metadata, awsRestxml_deserializeOpErrorIgnoreQueryParamsInResponse(response)
 	}
-	output := &NullAndEmptyHeadersClientOutput{}
+	output := &IgnoreQueryParamsInResponseOutput{}
 	out.Result = output
-
-	err = awsRestxml_deserializeHttpBindingsNullAndEmptyHeadersClientOutput(output, response)
-	if err != nil {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
-	}
 
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorNullAndEmptyHeadersClient(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorIgnoreQueryParamsInResponse(response *smithyhttp.Response) error {
 	defer response.Body.Close()
 
 	var errorBuffer bytes.Buffer
@@ -129,43 +124,14 @@ func awsRestxml_deserializeOpErrorNullAndEmptyHeadersClient(response *smithyhttp
 	}
 }
 
-func awsRestxml_deserializeHttpBindingsNullAndEmptyHeadersClientOutput(v *NullAndEmptyHeadersClientOutput, response *smithyhttp.Response) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization for nil %T", v)
-	}
-
-	if headerValues := response.Header.Values("X-A"); len(headerValues) != 0 {
-		headerValues[0] = strings.TrimSpace(headerValues[0])
-		v.A = ptr.String(headerValues[0])
-	}
-
-	if headerValues := response.Header.Values("X-B"); len(headerValues) != 0 {
-		headerValues[0] = strings.TrimSpace(headerValues[0])
-		v.B = ptr.String(headerValues[0])
-	}
-
-	if headerValues := response.Header.Values("X-C"); len(headerValues) != 0 {
-		var list []*string
-		for _, headerValuesVal := range headerValues {
-			for _, headerValuesValPart := range strings.Split(headerValuesVal, ",") {
-				headerValuesValPart = strings.TrimSpace(headerValuesValPart)
-				list = append(list, ptr.String(headerValuesValPart))
-			}
-		}
-		v.C = list
-	}
-
-	return nil
+type awsRestxml_deserializeOpHttpRequestWithLabelsAndTimestampFormat struct {
 }
 
-type awsRestxml_deserializeOpHttpRequestWithGreedyLabelInPath struct {
-}
-
-func (*awsRestxml_deserializeOpHttpRequestWithGreedyLabelInPath) ID() string {
+func (*awsRestxml_deserializeOpHttpRequestWithLabelsAndTimestampFormat) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *awsRestxml_deserializeOpHttpRequestWithGreedyLabelInPath) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestxml_deserializeOpHttpRequestWithLabelsAndTimestampFormat) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -179,404 +145,15 @@ func (m *awsRestxml_deserializeOpHttpRequestWithGreedyLabelInPath) HandleDeseria
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorHttpRequestWithGreedyLabelInPath(response)
+		return out, metadata, awsRestxml_deserializeOpErrorHttpRequestWithLabelsAndTimestampFormat(response)
 	}
-	output := &HttpRequestWithGreedyLabelInPathOutput{}
+	output := &HttpRequestWithLabelsAndTimestampFormatOutput{}
 	out.Result = output
 
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorHttpRequestWithGreedyLabelInPath(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	// TODO: implement error message / code deser
-	switch errorCode {
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
-type awsRestxml_deserializeOpXmlLists struct {
-}
-
-func (*awsRestxml_deserializeOpXmlLists) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpXmlLists) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorXmlLists(response)
-	}
-	output := &XmlListsOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-func awsRestxml_deserializeOpErrorXmlLists(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	// TODO: implement error message / code deser
-	switch errorCode {
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
-type awsRestxml_deserializeOpHttpPayloadTraits struct {
-}
-
-func (*awsRestxml_deserializeOpHttpPayloadTraits) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpHttpPayloadTraits) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorHttpPayloadTraits(response)
-	}
-	output := &HttpPayloadTraitsOutput{}
-	out.Result = output
-
-	err = awsRestxml_deserializeHttpBindingsHttpPayloadTraitsOutput(output, response)
-	if err != nil {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
-	}
-
-	return out, metadata, err
-}
-
-func awsRestxml_deserializeOpErrorHttpPayloadTraits(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	// TODO: implement error message / code deser
-	switch errorCode {
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
-func awsRestxml_deserializeHttpBindingsHttpPayloadTraitsOutput(v *HttpPayloadTraitsOutput, response *smithyhttp.Response) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization for nil %T", v)
-	}
-
-	if headerValues := response.Header.Values("X-Foo"); len(headerValues) != 0 {
-		headerValues[0] = strings.TrimSpace(headerValues[0])
-		v.Foo = ptr.String(headerValues[0])
-	}
-
-	return nil
-}
-
-type awsRestxml_deserializeOpAllQueryStringTypes struct {
-}
-
-func (*awsRestxml_deserializeOpAllQueryStringTypes) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpAllQueryStringTypes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorAllQueryStringTypes(response)
-	}
-	output := &AllQueryStringTypesOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-func awsRestxml_deserializeOpErrorAllQueryStringTypes(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	// TODO: implement error message / code deser
-	switch errorCode {
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
-type awsRestxml_deserializeOpEmptyInputAndEmptyOutput struct {
-}
-
-func (*awsRestxml_deserializeOpEmptyInputAndEmptyOutput) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpEmptyInputAndEmptyOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorEmptyInputAndEmptyOutput(response)
-	}
-	output := &EmptyInputAndEmptyOutputOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-func awsRestxml_deserializeOpErrorEmptyInputAndEmptyOutput(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	// TODO: implement error message / code deser
-	switch errorCode {
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
-type awsRestxml_deserializeOpXmlAttributesOnPayload struct {
-}
-
-func (*awsRestxml_deserializeOpXmlAttributesOnPayload) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpXmlAttributesOnPayload) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorXmlAttributesOnPayload(response)
-	}
-	output := &XmlAttributesOnPayloadOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-func awsRestxml_deserializeOpErrorXmlAttributesOnPayload(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	// TODO: implement error message / code deser
-	switch errorCode {
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
-type awsRestxml_deserializeOpFlattenedXmlMap struct {
-}
-
-func (*awsRestxml_deserializeOpFlattenedXmlMap) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpFlattenedXmlMap) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorFlattenedXmlMap(response)
-	}
-	output := &FlattenedXmlMapOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-func awsRestxml_deserializeOpErrorFlattenedXmlMap(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	// TODO: implement error message / code deser
-	switch errorCode {
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
-type awsRestxml_deserializeOpConstantQueryString struct {
-}
-
-func (*awsRestxml_deserializeOpConstantQueryString) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpConstantQueryString) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorConstantQueryString(response)
-	}
-	output := &ConstantQueryStringOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-func awsRestxml_deserializeOpErrorConstantQueryString(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorHttpRequestWithLabelsAndTimestampFormat(response *smithyhttp.Response) error {
 	defer response.Body.Close()
 
 	var errorBuffer bytes.Buffer
@@ -730,278 +307,6 @@ func awsRestxml_deserializeHttpBindingsTimestampFormatHeadersOutput(v *Timestamp
 	return nil
 }
 
-type awsRestxml_deserializeOpNoInputAndNoOutput struct {
-}
-
-func (*awsRestxml_deserializeOpNoInputAndNoOutput) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpNoInputAndNoOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorNoInputAndNoOutput(response)
-	}
-	output := &NoInputAndNoOutputOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-func awsRestxml_deserializeOpErrorNoInputAndNoOutput(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	// TODO: implement error message / code deser
-	switch errorCode {
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
-type awsRestxml_deserializeOpGreetingWithErrors struct {
-}
-
-func (*awsRestxml_deserializeOpGreetingWithErrors) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpGreetingWithErrors) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGreetingWithErrors(response)
-	}
-	output := &GreetingWithErrorsOutput{}
-	out.Result = output
-
-	err = awsRestxml_deserializeHttpBindingsGreetingWithErrorsOutput(output, response)
-	if err != nil {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
-	}
-
-	return out, metadata, err
-}
-
-func awsRestxml_deserializeOpErrorGreetingWithErrors(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	// TODO: implement error message / code deser
-	switch errorCode {
-	case "ComplexError":
-		return awsRestxml_deserializeErrorComplexError(response, errorBody)
-
-	case "InvalidGreeting":
-		return awsRestxml_deserializeErrorInvalidGreeting(response, errorBody)
-
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
-func awsRestxml_deserializeHttpBindingsGreetingWithErrorsOutput(v *GreetingWithErrorsOutput, response *smithyhttp.Response) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization for nil %T", v)
-	}
-
-	if headerValues := response.Header.Values("X-Greeting"); len(headerValues) != 0 {
-		headerValues[0] = strings.TrimSpace(headerValues[0])
-		v.Greeting = ptr.String(headerValues[0])
-	}
-
-	return nil
-}
-
-type awsRestxml_deserializeOpSimpleScalarProperties struct {
-}
-
-func (*awsRestxml_deserializeOpSimpleScalarProperties) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpSimpleScalarProperties) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorSimpleScalarProperties(response)
-	}
-	output := &SimpleScalarPropertiesOutput{}
-	out.Result = output
-
-	err = awsRestxml_deserializeHttpBindingsSimpleScalarPropertiesOutput(output, response)
-	if err != nil {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
-	}
-
-	return out, metadata, err
-}
-
-func awsRestxml_deserializeOpErrorSimpleScalarProperties(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	// TODO: implement error message / code deser
-	switch errorCode {
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
-func awsRestxml_deserializeHttpBindingsSimpleScalarPropertiesOutput(v *SimpleScalarPropertiesOutput, response *smithyhttp.Response) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization for nil %T", v)
-	}
-
-	if headerValues := response.Header.Values("X-Foo"); len(headerValues) != 0 {
-		headerValues[0] = strings.TrimSpace(headerValues[0])
-		v.Foo = ptr.String(headerValues[0])
-	}
-
-	return nil
-}
-
-type awsRestxml_deserializeOpHttpPayloadTraitsWithMediaType struct {
-}
-
-func (*awsRestxml_deserializeOpHttpPayloadTraitsWithMediaType) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpHttpPayloadTraitsWithMediaType) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorHttpPayloadTraitsWithMediaType(response)
-	}
-	output := &HttpPayloadTraitsWithMediaTypeOutput{}
-	out.Result = output
-
-	err = awsRestxml_deserializeHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(output, response)
-	if err != nil {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
-	}
-
-	return out, metadata, err
-}
-
-func awsRestxml_deserializeOpErrorHttpPayloadTraitsWithMediaType(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	// TODO: implement error message / code deser
-	switch errorCode {
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
-func awsRestxml_deserializeHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(v *HttpPayloadTraitsWithMediaTypeOutput, response *smithyhttp.Response) error {
-	if v == nil {
-		return fmt.Errorf("unsupported deserialization for nil %T", v)
-	}
-
-	if headerValues := response.Header.Values("X-Foo"); len(headerValues) != 0 {
-		headerValues[0] = strings.TrimSpace(headerValues[0])
-		v.Foo = ptr.String(headerValues[0])
-	}
-
-	return nil
-}
-
 type awsRestxml_deserializeOpXmlMaps struct {
 }
 
@@ -1055,165 +360,6 @@ func awsRestxml_deserializeOpErrorXmlMaps(response *smithyhttp.Response) error {
 	}
 }
 
-type awsRestxml_deserializeOpHttpPayloadWithXmlNamespaceAndPrefix struct {
-}
-
-func (*awsRestxml_deserializeOpHttpPayloadWithXmlNamespaceAndPrefix) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpHttpPayloadWithXmlNamespaceAndPrefix) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorHttpPayloadWithXmlNamespaceAndPrefix(response)
-	}
-	output := &HttpPayloadWithXmlNamespaceAndPrefixOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-func awsRestxml_deserializeOpErrorHttpPayloadWithXmlNamespaceAndPrefix(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	// TODO: implement error message / code deser
-	switch errorCode {
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
-type awsRestxml_deserializeOpHttpPayloadWithXmlName struct {
-}
-
-func (*awsRestxml_deserializeOpHttpPayloadWithXmlName) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpHttpPayloadWithXmlName) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorHttpPayloadWithXmlName(response)
-	}
-	output := &HttpPayloadWithXmlNameOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-func awsRestxml_deserializeOpErrorHttpPayloadWithXmlName(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	// TODO: implement error message / code deser
-	switch errorCode {
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
-type awsRestxml_deserializeOpHttpRequestWithLabels struct {
-}
-
-func (*awsRestxml_deserializeOpHttpRequestWithLabels) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpHttpRequestWithLabels) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorHttpRequestWithLabels(response)
-	}
-	output := &HttpRequestWithLabelsOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-func awsRestxml_deserializeOpErrorHttpRequestWithLabels(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	// TODO: implement error message / code deser
-	switch errorCode {
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
 type awsRestxml_deserializeOpHttpPayloadWithXmlNamespace struct {
 }
 
@@ -1244,6 +390,59 @@ func (m *awsRestxml_deserializeOpHttpPayloadWithXmlNamespace) HandleDeserialize(
 }
 
 func awsRestxml_deserializeOpErrorHttpPayloadWithXmlNamespace(response *smithyhttp.Response) error {
+	defer response.Body.Close()
+
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	// TODO: implement error message / code deser
+	switch errorCode {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsRestxml_deserializeOpXmlAttributes struct {
+}
+
+func (*awsRestxml_deserializeOpXmlAttributes) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpXmlAttributes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorXmlAttributes(response)
+	}
+	output := &XmlAttributesOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorXmlAttributes(response *smithyhttp.Response) error {
 	defer response.Body.Close()
 
 	var errorBuffer bytes.Buffer
@@ -1435,14 +634,14 @@ func awsRestxml_deserializeHttpBindingsNullAndEmptyHeadersServerOutput(v *NullAn
 	return nil
 }
 
-type awsRestxml_deserializeOpFlattenedXmlMapWithXmlName struct {
+type awsRestxml_deserializeOpEmptyInputAndEmptyOutput struct {
 }
 
-func (*awsRestxml_deserializeOpFlattenedXmlMapWithXmlName) ID() string {
+func (*awsRestxml_deserializeOpEmptyInputAndEmptyOutput) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *awsRestxml_deserializeOpFlattenedXmlMapWithXmlName) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestxml_deserializeOpEmptyInputAndEmptyOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -1456,15 +655,15 @@ func (m *awsRestxml_deserializeOpFlattenedXmlMapWithXmlName) HandleDeserialize(c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorFlattenedXmlMapWithXmlName(response)
+		return out, metadata, awsRestxml_deserializeOpErrorEmptyInputAndEmptyOutput(response)
 	}
-	output := &FlattenedXmlMapWithXmlNameOutput{}
+	output := &EmptyInputAndEmptyOutputOutput{}
 	out.Result = output
 
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorFlattenedXmlMapWithXmlName(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorEmptyInputAndEmptyOutput(response *smithyhttp.Response) error {
 	defer response.Body.Close()
 
 	var errorBuffer bytes.Buffer
@@ -1488,14 +687,14 @@ func awsRestxml_deserializeOpErrorFlattenedXmlMapWithXmlName(response *smithyhtt
 	}
 }
 
-type awsRestxml_deserializeOpXmlAttributes struct {
+type awsRestxml_deserializeOpNullAndEmptyHeadersClient struct {
 }
 
-func (*awsRestxml_deserializeOpXmlAttributes) ID() string {
+func (*awsRestxml_deserializeOpNullAndEmptyHeadersClient) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *awsRestxml_deserializeOpXmlAttributes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestxml_deserializeOpNullAndEmptyHeadersClient) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -1509,15 +708,20 @@ func (m *awsRestxml_deserializeOpXmlAttributes) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorXmlAttributes(response)
+		return out, metadata, awsRestxml_deserializeOpErrorNullAndEmptyHeadersClient(response)
 	}
-	output := &XmlAttributesOutput{}
+	output := &NullAndEmptyHeadersClientOutput{}
 	out.Result = output
+
+	err = awsRestxml_deserializeHttpBindingsNullAndEmptyHeadersClientOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
 
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorXmlAttributes(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorNullAndEmptyHeadersClient(response *smithyhttp.Response) error {
 	defer response.Body.Close()
 
 	var errorBuffer bytes.Buffer
@@ -1541,67 +745,43 @@ func awsRestxml_deserializeOpErrorXmlAttributes(response *smithyhttp.Response) e
 	}
 }
 
-type awsRestxml_deserializeOpHttpPayloadWithStructure struct {
-}
-
-func (*awsRestxml_deserializeOpHttpPayloadWithStructure) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpHttpPayloadWithStructure) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
+func awsRestxml_deserializeHttpBindingsNullAndEmptyHeadersClientOutput(v *NullAndEmptyHeadersClientOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
 
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	if headerValues := response.Header.Values("X-A"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.A = ptr.String(headerValues[0])
 	}
 
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorHttpPayloadWithStructure(response)
+	if headerValues := response.Header.Values("X-B"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.B = ptr.String(headerValues[0])
 	}
-	output := &HttpPayloadWithStructureOutput{}
-	out.Result = output
 
-	return out, metadata, err
-}
-
-func awsRestxml_deserializeOpErrorHttpPayloadWithStructure(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	// TODO: implement error message / code deser
-	switch errorCode {
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
+	if headerValues := response.Header.Values("X-C"); len(headerValues) != 0 {
+		var list []*string
+		for _, headerValuesVal := range headerValues {
+			for _, headerValuesValPart := range strings.Split(headerValuesVal, ",") {
+				headerValuesValPart = strings.TrimSpace(headerValuesValPart)
+				list = append(list, ptr.String(headerValuesValPart))
+			}
 		}
-		return genericError
-
+		v.C = list
 	}
+
+	return nil
 }
 
-type awsRestxml_deserializeOpXmlTimestamps struct {
+type awsRestxml_deserializeOpHttpRequestWithLabels struct {
 }
 
-func (*awsRestxml_deserializeOpXmlTimestamps) ID() string {
+func (*awsRestxml_deserializeOpHttpRequestWithLabels) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *awsRestxml_deserializeOpXmlTimestamps) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestxml_deserializeOpHttpRequestWithLabels) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -1615,280 +795,15 @@ func (m *awsRestxml_deserializeOpXmlTimestamps) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorXmlTimestamps(response)
+		return out, metadata, awsRestxml_deserializeOpErrorHttpRequestWithLabels(response)
 	}
-	output := &XmlTimestampsOutput{}
+	output := &HttpRequestWithLabelsOutput{}
 	out.Result = output
 
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorXmlTimestamps(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	// TODO: implement error message / code deser
-	switch errorCode {
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
-type awsRestxml_deserializeOpConstantAndVariableQueryString struct {
-}
-
-func (*awsRestxml_deserializeOpConstantAndVariableQueryString) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpConstantAndVariableQueryString) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorConstantAndVariableQueryString(response)
-	}
-	output := &ConstantAndVariableQueryStringOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-func awsRestxml_deserializeOpErrorConstantAndVariableQueryString(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	// TODO: implement error message / code deser
-	switch errorCode {
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
-type awsRestxml_deserializeOpNoInputAndOutput struct {
-}
-
-func (*awsRestxml_deserializeOpNoInputAndOutput) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpNoInputAndOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorNoInputAndOutput(response)
-	}
-	output := &NoInputAndOutputOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-func awsRestxml_deserializeOpErrorNoInputAndOutput(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	// TODO: implement error message / code deser
-	switch errorCode {
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
-type awsRestxml_deserializeOpXmlMapsXmlName struct {
-}
-
-func (*awsRestxml_deserializeOpXmlMapsXmlName) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpXmlMapsXmlName) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorXmlMapsXmlName(response)
-	}
-	output := &XmlMapsXmlNameOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-func awsRestxml_deserializeOpErrorXmlMapsXmlName(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	// TODO: implement error message / code deser
-	switch errorCode {
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
-type awsRestxml_deserializeOpXmlNamespaces struct {
-}
-
-func (*awsRestxml_deserializeOpXmlNamespaces) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpXmlNamespaces) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorXmlNamespaces(response)
-	}
-	output := &XmlNamespacesOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-func awsRestxml_deserializeOpErrorXmlNamespaces(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	// TODO: implement error message / code deser
-	switch errorCode {
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
-type awsRestxml_deserializeOpIgnoreQueryParamsInResponse struct {
-}
-
-func (*awsRestxml_deserializeOpIgnoreQueryParamsInResponse) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestxml_deserializeOpIgnoreQueryParamsInResponse) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorIgnoreQueryParamsInResponse(response)
-	}
-	output := &IgnoreQueryParamsInResponseOutput{}
-	out.Result = output
-
-	return out, metadata, err
-}
-
-func awsRestxml_deserializeOpErrorIgnoreQueryParamsInResponse(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorHttpRequestWithLabels(response *smithyhttp.Response) error {
 	defer response.Body.Close()
 
 	var errorBuffer bytes.Buffer
@@ -1965,6 +880,165 @@ func awsRestxml_deserializeOpErrorOmitsNullSerializesEmptyString(response *smith
 	}
 }
 
+type awsRestxml_deserializeOpXmlEnums struct {
+}
+
+func (*awsRestxml_deserializeOpXmlEnums) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpXmlEnums) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorXmlEnums(response)
+	}
+	output := &XmlEnumsOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorXmlEnums(response *smithyhttp.Response) error {
+	defer response.Body.Close()
+
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	// TODO: implement error message / code deser
+	switch errorCode {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsRestxml_deserializeOpNoInputAndOutput struct {
+}
+
+func (*awsRestxml_deserializeOpNoInputAndOutput) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpNoInputAndOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorNoInputAndOutput(response)
+	}
+	output := &NoInputAndOutputOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorNoInputAndOutput(response *smithyhttp.Response) error {
+	defer response.Body.Close()
+
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	// TODO: implement error message / code deser
+	switch errorCode {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsRestxml_deserializeOpHttpPayloadWithXmlNamespaceAndPrefix struct {
+}
+
+func (*awsRestxml_deserializeOpHttpPayloadWithXmlNamespaceAndPrefix) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpHttpPayloadWithXmlNamespaceAndPrefix) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorHttpPayloadWithXmlNamespaceAndPrefix(response)
+	}
+	output := &HttpPayloadWithXmlNamespaceAndPrefixOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorHttpPayloadWithXmlNamespaceAndPrefix(response *smithyhttp.Response) error {
+	defer response.Body.Close()
+
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	// TODO: implement error message / code deser
+	switch errorCode {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsRestxml_deserializeOpRecursiveShapes struct {
 }
 
@@ -2018,14 +1092,14 @@ func awsRestxml_deserializeOpErrorRecursiveShapes(response *smithyhttp.Response)
 	}
 }
 
-type awsRestxml_deserializeOpHttpRequestWithLabelsAndTimestampFormat struct {
+type awsRestxml_deserializeOpXmlBlobs struct {
 }
 
-func (*awsRestxml_deserializeOpHttpRequestWithLabelsAndTimestampFormat) ID() string {
+func (*awsRestxml_deserializeOpXmlBlobs) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *awsRestxml_deserializeOpHttpRequestWithLabelsAndTimestampFormat) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestxml_deserializeOpXmlBlobs) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -2039,15 +1113,192 @@ func (m *awsRestxml_deserializeOpHttpRequestWithLabelsAndTimestampFormat) Handle
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorHttpRequestWithLabelsAndTimestampFormat(response)
+		return out, metadata, awsRestxml_deserializeOpErrorXmlBlobs(response)
 	}
-	output := &HttpRequestWithLabelsAndTimestampFormatOutput{}
+	output := &XmlBlobsOutput{}
 	out.Result = output
 
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorHttpRequestWithLabelsAndTimestampFormat(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorXmlBlobs(response *smithyhttp.Response) error {
+	defer response.Body.Close()
+
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	// TODO: implement error message / code deser
+	switch errorCode {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsRestxml_deserializeOpSimpleScalarProperties struct {
+}
+
+func (*awsRestxml_deserializeOpSimpleScalarProperties) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpSimpleScalarProperties) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorSimpleScalarProperties(response)
+	}
+	output := &SimpleScalarPropertiesOutput{}
+	out.Result = output
+
+	err = awsRestxml_deserializeHttpBindingsSimpleScalarPropertiesOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorSimpleScalarProperties(response *smithyhttp.Response) error {
+	defer response.Body.Close()
+
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	// TODO: implement error message / code deser
+	switch errorCode {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestxml_deserializeHttpBindingsSimpleScalarPropertiesOutput(v *SimpleScalarPropertiesOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("X-Foo"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.Foo = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+
+type awsRestxml_deserializeOpXmlLists struct {
+}
+
+func (*awsRestxml_deserializeOpXmlLists) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpXmlLists) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorXmlLists(response)
+	}
+	output := &XmlListsOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorXmlLists(response *smithyhttp.Response) error {
+	defer response.Body.Close()
+
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	// TODO: implement error message / code deser
+	switch errorCode {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsRestxml_deserializeOpFlattenedXmlMap struct {
+}
+
+func (*awsRestxml_deserializeOpFlattenedXmlMap) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpFlattenedXmlMap) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorFlattenedXmlMap(response)
+	}
+	output := &FlattenedXmlMapOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorFlattenedXmlMap(response *smithyhttp.Response) error {
 	defer response.Body.Close()
 
 	var errorBuffer bytes.Buffer
@@ -2297,14 +1548,14 @@ func awsRestxml_deserializeHttpBindingsInputAndOutputWithHeadersOutput(v *InputA
 	return nil
 }
 
-type awsRestxml_deserializeOpXmlEnums struct {
+type awsRestxml_deserializeOpHttpRequestWithGreedyLabelInPath struct {
 }
 
-func (*awsRestxml_deserializeOpXmlEnums) ID() string {
+func (*awsRestxml_deserializeOpHttpRequestWithGreedyLabelInPath) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *awsRestxml_deserializeOpXmlEnums) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestxml_deserializeOpHttpRequestWithGreedyLabelInPath) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -2318,15 +1569,15 @@ func (m *awsRestxml_deserializeOpXmlEnums) HandleDeserialize(ctx context.Context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorXmlEnums(response)
+		return out, metadata, awsRestxml_deserializeOpErrorHttpRequestWithGreedyLabelInPath(response)
 	}
-	output := &XmlEnumsOutput{}
+	output := &HttpRequestWithGreedyLabelInPathOutput{}
 	out.Result = output
 
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorXmlEnums(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorHttpRequestWithGreedyLabelInPath(response *smithyhttp.Response) error {
 	defer response.Body.Close()
 
 	var errorBuffer bytes.Buffer
@@ -2350,14 +1601,14 @@ func awsRestxml_deserializeOpErrorXmlEnums(response *smithyhttp.Response) error 
 	}
 }
 
-type awsRestxml_deserializeOpXmlBlobs struct {
+type awsRestxml_deserializeOpXmlMapsXmlName struct {
 }
 
-func (*awsRestxml_deserializeOpXmlBlobs) ID() string {
+func (*awsRestxml_deserializeOpXmlMapsXmlName) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *awsRestxml_deserializeOpXmlBlobs) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestxml_deserializeOpXmlMapsXmlName) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -2371,15 +1622,764 @@ func (m *awsRestxml_deserializeOpXmlBlobs) HandleDeserialize(ctx context.Context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorXmlBlobs(response)
+		return out, metadata, awsRestxml_deserializeOpErrorXmlMapsXmlName(response)
 	}
-	output := &XmlBlobsOutput{}
+	output := &XmlMapsXmlNameOutput{}
 	out.Result = output
 
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorXmlBlobs(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorXmlMapsXmlName(response *smithyhttp.Response) error {
+	defer response.Body.Close()
+
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	// TODO: implement error message / code deser
+	switch errorCode {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsRestxml_deserializeOpHttpPayloadWithStructure struct {
+}
+
+func (*awsRestxml_deserializeOpHttpPayloadWithStructure) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpHttpPayloadWithStructure) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorHttpPayloadWithStructure(response)
+	}
+	output := &HttpPayloadWithStructureOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorHttpPayloadWithStructure(response *smithyhttp.Response) error {
+	defer response.Body.Close()
+
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	// TODO: implement error message / code deser
+	switch errorCode {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsRestxml_deserializeOpConstantAndVariableQueryString struct {
+}
+
+func (*awsRestxml_deserializeOpConstantAndVariableQueryString) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpConstantAndVariableQueryString) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorConstantAndVariableQueryString(response)
+	}
+	output := &ConstantAndVariableQueryStringOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorConstantAndVariableQueryString(response *smithyhttp.Response) error {
+	defer response.Body.Close()
+
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	// TODO: implement error message / code deser
+	switch errorCode {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsRestxml_deserializeOpXmlTimestamps struct {
+}
+
+func (*awsRestxml_deserializeOpXmlTimestamps) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpXmlTimestamps) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorXmlTimestamps(response)
+	}
+	output := &XmlTimestampsOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorXmlTimestamps(response *smithyhttp.Response) error {
+	defer response.Body.Close()
+
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	// TODO: implement error message / code deser
+	switch errorCode {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsRestxml_deserializeOpConstantQueryString struct {
+}
+
+func (*awsRestxml_deserializeOpConstantQueryString) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpConstantQueryString) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorConstantQueryString(response)
+	}
+	output := &ConstantQueryStringOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorConstantQueryString(response *smithyhttp.Response) error {
+	defer response.Body.Close()
+
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	// TODO: implement error message / code deser
+	switch errorCode {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsRestxml_deserializeOpHttpPayloadTraits struct {
+}
+
+func (*awsRestxml_deserializeOpHttpPayloadTraits) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpHttpPayloadTraits) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorHttpPayloadTraits(response)
+	}
+	output := &HttpPayloadTraitsOutput{}
+	out.Result = output
+
+	err = awsRestxml_deserializeHttpBindingsHttpPayloadTraitsOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorHttpPayloadTraits(response *smithyhttp.Response) error {
+	defer response.Body.Close()
+
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	// TODO: implement error message / code deser
+	switch errorCode {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestxml_deserializeHttpBindingsHttpPayloadTraitsOutput(v *HttpPayloadTraitsOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("X-Foo"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.Foo = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+
+type awsRestxml_deserializeOpQueryIdempotencyTokenAutoFill struct {
+}
+
+func (*awsRestxml_deserializeOpQueryIdempotencyTokenAutoFill) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpQueryIdempotencyTokenAutoFill) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorQueryIdempotencyTokenAutoFill(response)
+	}
+	output := &QueryIdempotencyTokenAutoFillOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorQueryIdempotencyTokenAutoFill(response *smithyhttp.Response) error {
+	defer response.Body.Close()
+
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	// TODO: implement error message / code deser
+	switch errorCode {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsRestxml_deserializeOpFlattenedXmlMapWithXmlName struct {
+}
+
+func (*awsRestxml_deserializeOpFlattenedXmlMapWithXmlName) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpFlattenedXmlMapWithXmlName) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorFlattenedXmlMapWithXmlName(response)
+	}
+	output := &FlattenedXmlMapWithXmlNameOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorFlattenedXmlMapWithXmlName(response *smithyhttp.Response) error {
+	defer response.Body.Close()
+
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	// TODO: implement error message / code deser
+	switch errorCode {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsRestxml_deserializeOpXmlAttributesOnPayload struct {
+}
+
+func (*awsRestxml_deserializeOpXmlAttributesOnPayload) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpXmlAttributesOnPayload) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorXmlAttributesOnPayload(response)
+	}
+	output := &XmlAttributesOnPayloadOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorXmlAttributesOnPayload(response *smithyhttp.Response) error {
+	defer response.Body.Close()
+
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	// TODO: implement error message / code deser
+	switch errorCode {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsRestxml_deserializeOpAllQueryStringTypes struct {
+}
+
+func (*awsRestxml_deserializeOpAllQueryStringTypes) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpAllQueryStringTypes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorAllQueryStringTypes(response)
+	}
+	output := &AllQueryStringTypesOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorAllQueryStringTypes(response *smithyhttp.Response) error {
+	defer response.Body.Close()
+
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	// TODO: implement error message / code deser
+	switch errorCode {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsRestxml_deserializeOpNoInputAndNoOutput struct {
+}
+
+func (*awsRestxml_deserializeOpNoInputAndNoOutput) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpNoInputAndNoOutput) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorNoInputAndNoOutput(response)
+	}
+	output := &NoInputAndNoOutputOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorNoInputAndNoOutput(response *smithyhttp.Response) error {
+	defer response.Body.Close()
+
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	// TODO: implement error message / code deser
+	switch errorCode {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsRestxml_deserializeOpGreetingWithErrors struct {
+}
+
+func (*awsRestxml_deserializeOpGreetingWithErrors) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpGreetingWithErrors) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorGreetingWithErrors(response)
+	}
+	output := &GreetingWithErrorsOutput{}
+	out.Result = output
+
+	err = awsRestxml_deserializeHttpBindingsGreetingWithErrorsOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorGreetingWithErrors(response *smithyhttp.Response) error {
+	defer response.Body.Close()
+
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	// TODO: implement error message / code deser
+	switch errorCode {
+	case "ComplexError":
+		return awsRestxml_deserializeErrorComplexError(response, errorBody)
+
+	case "InvalidGreeting":
+		return awsRestxml_deserializeErrorInvalidGreeting(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestxml_deserializeHttpBindingsGreetingWithErrorsOutput(v *GreetingWithErrorsOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("X-Greeting"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.Greeting = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+
+type awsRestxml_deserializeOpHttpPayloadTraitsWithMediaType struct {
+}
+
+func (*awsRestxml_deserializeOpHttpPayloadTraitsWithMediaType) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpHttpPayloadTraitsWithMediaType) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorHttpPayloadTraitsWithMediaType(response)
+	}
+	output := &HttpPayloadTraitsWithMediaTypeOutput{}
+	out.Result = output
+
+	err = awsRestxml_deserializeHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorHttpPayloadTraitsWithMediaType(response *smithyhttp.Response) error {
+	defer response.Body.Close()
+
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	// TODO: implement error message / code deser
+	switch errorCode {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestxml_deserializeHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(v *HttpPayloadTraitsWithMediaTypeOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("X-Foo"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.Foo = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+
+type awsRestxml_deserializeOpHttpPayloadWithXmlName struct {
+}
+
+func (*awsRestxml_deserializeOpHttpPayloadWithXmlName) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpHttpPayloadWithXmlName) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorHttpPayloadWithXmlName(response)
+	}
+	output := &HttpPayloadWithXmlNameOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorHttpPayloadWithXmlName(response *smithyhttp.Response) error {
 	defer response.Body.Close()
 
 	var errorBuffer bytes.Buffer

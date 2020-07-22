@@ -6,11 +6,11 @@ import (
 	"bytes"
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
+	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
 	"github.com/awslabs/smithy-go/ptr"
 	smithyrand "github.com/awslabs/smithy-go/rand"
 	smithytesting "github.com/awslabs/smithy-go/testing"
-	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"io"
 	"io/ioutil"
@@ -38,7 +38,7 @@ func TestClient_StreamingTraits_awsRestjson1Serialize(t *testing.T) {
 		"RestJsonStreamingTraitsWithBlob": {
 			Params: &StreamingTraitsInput{
 				Foo:  ptr.String("Foo"),
-				Blob: []byte("blobby blob blob"),
+				Blob: smithyio.ReadSeekNopCloser{ReadSeeker: bytes.NewReader([]byte("blobby blob blob"))},
 			},
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/StreamingTraits",
@@ -153,7 +153,7 @@ func TestClient_StreamingTraits_awsRestjson1Deserialize(t *testing.T) {
 			Body: []byte(`blobby blob blob`),
 			ExpectResult: &StreamingTraitsOutput{
 				Foo:  ptr.String("Foo"),
-				Blob: []byte("blobby blob blob"),
+				Blob: smithyio.ReadSeekNopCloser{ReadSeeker: bytes.NewReader([]byte("blobby blob blob"))},
 			},
 		},
 		// Serializes an empty blob in the HTTP payload
@@ -214,8 +214,8 @@ func TestClient_StreamingTraits_awsRestjson1Deserialize(t *testing.T) {
 			if result == nil {
 				t.Fatalf("expect not nil result")
 			}
-			if diff := cmp.Diff(c.ExpectResult, result, cmpopts.IgnoreUnexported(middleware.Metadata{})); len(diff) != 0 {
-				t.Errorf("expect c.ExpectResult value match:\n%s", diff)
+			if err := smithytesting.CompareValues(c.ExpectResult, result, cmpopts.IgnoreUnexported(middleware.Metadata{})); err != nil {
+				t.Errorf("expect c.ExpectResult value match:\n%v", err)
 			}
 		})
 	}
