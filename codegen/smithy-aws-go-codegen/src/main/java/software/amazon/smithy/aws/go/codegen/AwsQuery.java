@@ -2,8 +2,12 @@ package software.amazon.smithy.aws.go.codegen;
 
 import java.util.Set;
 import software.amazon.smithy.aws.traits.protocols.AwsQueryTrait;
+import software.amazon.smithy.go.codegen.GoDependency;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.HttpRpcProtocolGenerator;
+import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
+import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.ShapeId;
@@ -28,13 +32,36 @@ final class AwsQuery extends HttpRpcProtocolGenerator {
 
     @Override
     protected void generateDocumentBodyShapeSerializers(GenerationContext context, Set<Shape> shapes) {
-
+        QueryShapeSerVisitor visitor = new QueryShapeSerVisitor(context);
+        shapes.forEach(shape -> shape.accept(visitor));
     }
 
     @Override
     protected void serializeInputDocument(GenerationContext context, OperationShape operation) {
         GoWriter writer = context.getWriter();
-        writer.write("_ = input");
+        StructureShape input = ProtocolUtils.expectInput(context.getModel(), operation);
+        String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(input, getProtocolName());
+        writer.addUseImports(AwsGoDependency.AWS_QUERY_PROTOCOL);
+
+        writer.write("bodyEncoder := query.NewEncoder()");
+        writer.write("body := bodyEncoder.Object()");
+        writer.write("body.Key(\"Action\").String($S)", operation.getId().getName());
+        writer.write("body.Key(\"Version\").String($S)", context.getService().getVersion());
+        writer.write("");
+
+        if (input.members().size() != 0) {
+            writer.openBlock("if err := $L(input, bodyEncoder.Value); err != nil {", "}", functionName, () -> {
+                writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
+            }).write("");
+        } else {
+            writer.write("_ = input");
+        }
+
+        writer.addUseImports(SmithyGoDependency.BYTES);
+        writer.openBlock("if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {",
+                "}", () -> {
+            writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
+        });
     }
 
     @Override
