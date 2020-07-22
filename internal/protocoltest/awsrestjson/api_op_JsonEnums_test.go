@@ -107,7 +107,7 @@ func TestClient_JsonEnums_awsRestjson1Serialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: aws.EndpointResolverFunc(func(service, region string) (e aws.Endpoint, err error) {
+				EndpointResolver: EndpointResolverFunc(func(region string, options ResolverOptions) (e aws.Endpoint, err error) {
 					e.URL = server.URL
 					e.SigningRegion = "us-west-2"
 					return e, err
@@ -228,7 +228,7 @@ func TestClient_JsonEnums_awsRestjson1Deserialize(t *testing.T) {
 						return nil
 					},
 				},
-				EndpointResolver: aws.EndpointResolverFunc(func(service, region string) (e aws.Endpoint, err error) {
+				EndpointResolver: EndpointResolverFunc(func(region string, options ResolverOptions) (e aws.Endpoint, err error) {
 					e.URL = server.URL
 					e.SigningRegion = "us-west-2"
 					return e, err
