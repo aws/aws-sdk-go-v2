@@ -19,7 +19,7 @@ import software.amazon.smithy.model.shapes.StructureShape;
  *
  * @see HttpRpcProtocolGenerator
  */
-final class AwsQuery extends HttpRpcProtocolGenerator {
+class AwsQuery extends HttpRpcProtocolGenerator {
 
     @Override
     public ShapeId getProtocol() {
