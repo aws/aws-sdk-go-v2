@@ -18,14 +18,14 @@ import (
 	"strings"
 )
 
-type awsRestjson1_deserializeOpGetSession struct {
+type awsRestjson1_deserializeOpPostContent struct {
 }
 
-func (*awsRestjson1_deserializeOpGetSession) ID() string {
+func (*awsRestjson1_deserializeOpPostContent) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *awsRestjson1_deserializeOpGetSession) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestjson1_deserializeOpPostContent) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -39,428 +39,17 @@ func (m *awsRestjson1_deserializeOpGetSession) HandleDeserialize(ctx context.Con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorGetSession(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorPostContent(response)
 	}
-	output := &GetSessionOutput{}
+	output := &PostContentOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
-
-	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
-
-	decoder := json.NewDecoder(body)
-	decoder.UseNumber()
-
-	err = awsRestjson1_deserializeDocumentGetSessionOutput(&output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-	}
-
-	return out, metadata, err
-}
-
-func awsRestjson1_deserializeOpErrorGetSession(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	code := response.Header.Get("X-Amzn-ErrorType")
-	if len(code) != 0 {
-		errorCode = restjson.SanitizeErrorCode(code)
-	}
-
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
-
-	body := io.TeeReader(errorBody, ringBuffer)
-	decoder := json.NewDecoder(body)
-	decoder.UseNumber()
-
-	code, message, err := restjson.GetErrorInfo(decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-	}
-
-	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
-		errorCode = restjson.SanitizeErrorCode(code)
-	}
-	if len(message) != 0 {
-		errorMessage = message
-	}
-
-	switch errorCode {
-	case "BadRequestException":
-		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
-
-	case "InternalFailureException":
-		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
-
-	case "LimitExceededException":
-		return awsRestjson1_deserializeErrorLimitExceededException(response, errorBody)
-
-	case "NotFoundException":
-		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
-
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
-func awsRestjson1_deserializeDocumentGetSessionOutput(v **GetSessionOutput, decoder *json.Decoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
-		return nil
-	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
-	}
-
-	var sv *GetSessionOutput
-	if *v == nil {
-		sv = &GetSessionOutput{}
-	} else {
-		sv = *v
-	}
-
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
-		case "dialogAction":
-			if err := awsRestjson1_deserializeDocumentDialogAction(&sv.DialogAction, decoder); err != nil {
-				return err
-			}
-
-		case "recentIntentSummaryView":
-			if err := awsRestjson1_deserializeDocumentIntentSummaryList(&sv.RecentIntentSummaryView, decoder); err != nil {
-				return err
-			}
-
-		case "sessionAttributes":
-			if err := awsRestjson1_deserializeDocumentStringMap(&sv.SessionAttributes, decoder); err != nil {
-				return err
-			}
-
-		case "sessionId":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
-				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", val)
-				}
-				sv.SessionId = &jtv
-			}
-
-		default:
-			err := restjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
-
-		}
-	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
-	*v = sv
-	return nil
-}
-
-type awsRestjson1_deserializeOpDeleteSession struct {
-}
-
-func (*awsRestjson1_deserializeOpDeleteSession) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestjson1_deserializeOpDeleteSession) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorDeleteSession(response)
-	}
-	output := &DeleteSessionOutput{}
-	out.Result = output
-
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
-
-	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
-
-	decoder := json.NewDecoder(body)
-	decoder.UseNumber()
-
-	err = awsRestjson1_deserializeDocumentDeleteSessionOutput(&output, decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-	}
-
-	return out, metadata, err
-}
-
-func awsRestjson1_deserializeOpErrorDeleteSession(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
-	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
-
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	code := response.Header.Get("X-Amzn-ErrorType")
-	if len(code) != 0 {
-		errorCode = restjson.SanitizeErrorCode(code)
-	}
-
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
-
-	body := io.TeeReader(errorBody, ringBuffer)
-	decoder := json.NewDecoder(body)
-	decoder.UseNumber()
-
-	code, message, err := restjson.GetErrorInfo(decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-	}
-
-	errorBody.Seek(0, io.SeekStart)
-	if len(code) != 0 {
-		errorCode = restjson.SanitizeErrorCode(code)
-	}
-	if len(message) != 0 {
-		errorMessage = message
-	}
-
-	switch errorCode {
-	case "BadRequestException":
-		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
-
-	case "ConflictException":
-		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
-
-	case "InternalFailureException":
-		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
-
-	case "LimitExceededException":
-		return awsRestjson1_deserializeErrorLimitExceededException(response, errorBody)
-
-	case "NotFoundException":
-		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
-
-	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
-
-	}
-}
-
-func awsRestjson1_deserializeDocumentDeleteSessionOutput(v **DeleteSessionOutput, decoder *json.Decoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
-		return nil
-	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
-	}
-
-	var sv *DeleteSessionOutput
-	if *v == nil {
-		sv = &DeleteSessionOutput{}
-	} else {
-		sv = *v
-	}
-
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
-		case "botAlias":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
-				if !ok {
-					return fmt.Errorf("expected BotAlias to be of type string, got %T instead", val)
-				}
-				sv.BotAlias = &jtv
-			}
-
-		case "botName":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
-				if !ok {
-					return fmt.Errorf("expected BotName to be of type string, got %T instead", val)
-				}
-				sv.BotName = &jtv
-			}
-
-		case "sessionId":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
-				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", val)
-				}
-				sv.SessionId = &jtv
-			}
-
-		case "userId":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
-				if !ok {
-					return fmt.Errorf("expected UserId to be of type string, got %T instead", val)
-				}
-				sv.UserId = &jtv
-			}
-
-		default:
-			err := restjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
-
-		}
-	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
-	*v = sv
-	return nil
-}
-
-type awsRestjson1_deserializeOpPutSession struct {
-}
-
-func (*awsRestjson1_deserializeOpPutSession) ID() string {
-	return "OperationDeserializer"
-}
-
-func (m *awsRestjson1_deserializeOpPutSession) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
-	}
-
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorPutSession(response)
-	}
-	output := &PutSessionOutput{}
-	out.Result = output
-
-	err = awsRestjson1_deserializeHttpBindingsPutSessionOutput(output, response)
+	err = awsRestjson1_deserializeHttpBindingsPostContentOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeDocumentPutSessionOutput(output, response.Body)
+	err = awsRestjson1_deserializeDocumentPostContentOutput(output, response.Body)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -468,7 +57,7 @@ func (m *awsRestjson1_deserializeOpPutSession) HandleDeserialize(ctx context.Con
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorPutSession(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorPostContent(response *smithyhttp.Response) error {
 	defer response.Body.Close()
 
 	var errorBuffer bytes.Buffer
@@ -529,11 +118,20 @@ func awsRestjson1_deserializeOpErrorPutSession(response *smithyhttp.Response) er
 	case "NotFoundException":
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
+	case "RequestTimeoutException":
+		return awsRestjson1_deserializeErrorRequestTimeoutException(response, errorBody)
+
+	case "UnsupportedMediaTypeException":
+		return awsRestjson1_deserializeErrorUnsupportedMediaTypeException(response, errorBody)
+
 	case "BadGatewayException":
 		return awsRestjson1_deserializeErrorBadGatewayException(response, errorBody)
 
 	case "DependencyFailedException":
 		return awsRestjson1_deserializeErrorDependencyFailedException(response, errorBody)
+
+	case "LoopDetectedException":
+		return awsRestjson1_deserializeErrorLoopDetectedException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -545,7 +143,7 @@ func awsRestjson1_deserializeOpErrorPutSession(response *smithyhttp.Response) er
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsPutSessionOutput(v *PutSessionOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeHttpBindingsPostContentOutput(v *PostContentOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -558,6 +156,11 @@ func awsRestjson1_deserializeHttpBindingsPutSessionOutput(v *PutSessionOutput, r
 	if headerValues := response.Header.Values("x-amz-lex-dialog-state"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.DialogState = types.DialogState(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amz-lex-input-transcript"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.InputTranscript = ptr.String(headerValues[0])
 	}
 
 	if headerValues := response.Header.Values("x-amz-lex-intent-name"); len(headerValues) != 0 {
@@ -573,6 +176,11 @@ func awsRestjson1_deserializeHttpBindingsPutSessionOutput(v *PutSessionOutput, r
 	if headerValues := response.Header.Values("x-amz-lex-message-format"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.MessageFormat = types.MessageFormatType(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amz-lex-sentiment"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.SentimentResponse = ptr.String(headerValues[0])
 	}
 
 	if headerValues := response.Header.Values("x-amz-lex-session-attributes"); len(headerValues) != 0 {
@@ -597,7 +205,7 @@ func awsRestjson1_deserializeHttpBindingsPutSessionOutput(v *PutSessionOutput, r
 
 	return nil
 }
-func awsRestjson1_deserializeDocumentPutSessionOutput(v *PutSessionOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeDocumentPostContentOutput(v *PostContentOutput, body io.ReadCloser) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
@@ -880,14 +488,14 @@ func awsRestjson1_deserializeDocumentPostTextOutput(v **PostTextOutput, decoder 
 	return nil
 }
 
-type awsRestjson1_deserializeOpPostContent struct {
+type awsRestjson1_deserializeOpDeleteSession struct {
 }
 
-func (*awsRestjson1_deserializeOpPostContent) ID() string {
+func (*awsRestjson1_deserializeOpDeleteSession) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *awsRestjson1_deserializeOpPostContent) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *awsRestjson1_deserializeOpDeleteSession) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
@@ -901,17 +509,428 @@ func (m *awsRestjson1_deserializeOpPostContent) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorPostContent(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorDeleteSession(response)
 	}
-	output := &PostContentOutput{}
+	output := &DeleteSessionOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsPostContentOutput(output, response)
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	defer response.Body.Close()
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+
+	err = awsRestjson1_deserializeDocumentDeleteSessionOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorDeleteSession(response *smithyhttp.Response) error {
+	defer response.Body.Close()
+
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch errorCode {
+	case "BadRequestException":
+		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
+
+	case "ConflictException":
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case "InternalFailureException":
+		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
+
+	case "LimitExceededException":
+		return awsRestjson1_deserializeErrorLimitExceededException(response, errorBody)
+
+	case "NotFoundException":
+		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeDocumentDeleteSessionOutput(v **DeleteSessionOutput, decoder *json.Decoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	startToken, err := decoder.Token()
+	if err == io.EOF {
+		return nil
+	}
+	if err != nil {
+		return err
+	}
+	if startToken == nil {
+		return nil
+	}
+	if t, ok := startToken.(json.Delim); !ok || t != '{' {
+		return fmt.Errorf("expect `{` as start token")
+	}
+
+	var sv *DeleteSessionOutput
+	if *v == nil {
+		sv = &DeleteSessionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for decoder.More() {
+		t, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		switch t {
+		case "botAlias":
+			val, err := decoder.Token()
+			if err != nil {
+				return err
+			}
+			if val != nil {
+				jtv, ok := val.(string)
+				if !ok {
+					return fmt.Errorf("expected BotAlias to be of type string, got %T instead", val)
+				}
+				sv.BotAlias = &jtv
+			}
+
+		case "botName":
+			val, err := decoder.Token()
+			if err != nil {
+				return err
+			}
+			if val != nil {
+				jtv, ok := val.(string)
+				if !ok {
+					return fmt.Errorf("expected BotName to be of type string, got %T instead", val)
+				}
+				sv.BotName = &jtv
+			}
+
+		case "sessionId":
+			val, err := decoder.Token()
+			if err != nil {
+				return err
+			}
+			if val != nil {
+				jtv, ok := val.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", val)
+				}
+				sv.SessionId = &jtv
+			}
+
+		case "userId":
+			val, err := decoder.Token()
+			if err != nil {
+				return err
+			}
+			if val != nil {
+				jtv, ok := val.(string)
+				if !ok {
+					return fmt.Errorf("expected UserId to be of type string, got %T instead", val)
+				}
+				sv.UserId = &jtv
+			}
+
+		default:
+			err := restjson.DiscardUnknownField(decoder)
+			if err != nil {
+				return err
+			}
+
+		}
+	}
+	endToken, err := decoder.Token()
+	if err != nil {
+		return err
+	}
+	if t, ok := endToken.(json.Delim); !ok || t != '}' {
+		return fmt.Errorf("expect `}` as end token")
+	}
+
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpGetSession struct {
+}
+
+func (*awsRestjson1_deserializeOpGetSession) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpGetSession) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorGetSession(response)
+	}
+	output := &GetSessionOutput{}
+	out.Result = output
+
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	defer response.Body.Close()
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+
+	err = awsRestjson1_deserializeDocumentGetSessionOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorGetSession(response *smithyhttp.Response) error {
+	defer response.Body.Close()
+
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch errorCode {
+	case "BadRequestException":
+		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
+
+	case "InternalFailureException":
+		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
+
+	case "LimitExceededException":
+		return awsRestjson1_deserializeErrorLimitExceededException(response, errorBody)
+
+	case "NotFoundException":
+		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeDocumentGetSessionOutput(v **GetSessionOutput, decoder *json.Decoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	startToken, err := decoder.Token()
+	if err == io.EOF {
+		return nil
+	}
+	if err != nil {
+		return err
+	}
+	if startToken == nil {
+		return nil
+	}
+	if t, ok := startToken.(json.Delim); !ok || t != '{' {
+		return fmt.Errorf("expect `{` as start token")
+	}
+
+	var sv *GetSessionOutput
+	if *v == nil {
+		sv = &GetSessionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for decoder.More() {
+		t, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		switch t {
+		case "dialogAction":
+			if err := awsRestjson1_deserializeDocumentDialogAction(&sv.DialogAction, decoder); err != nil {
+				return err
+			}
+
+		case "recentIntentSummaryView":
+			if err := awsRestjson1_deserializeDocumentIntentSummaryList(&sv.RecentIntentSummaryView, decoder); err != nil {
+				return err
+			}
+
+		case "sessionAttributes":
+			if err := awsRestjson1_deserializeDocumentStringMap(&sv.SessionAttributes, decoder); err != nil {
+				return err
+			}
+
+		case "sessionId":
+			val, err := decoder.Token()
+			if err != nil {
+				return err
+			}
+			if val != nil {
+				jtv, ok := val.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", val)
+				}
+				sv.SessionId = &jtv
+			}
+
+		default:
+			err := restjson.DiscardUnknownField(decoder)
+			if err != nil {
+				return err
+			}
+
+		}
+	}
+	endToken, err := decoder.Token()
+	if err != nil {
+		return err
+	}
+	if t, ok := endToken.(json.Delim); !ok || t != '}' {
+		return fmt.Errorf("expect `}` as end token")
+	}
+
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpPutSession struct {
+}
+
+func (*awsRestjson1_deserializeOpPutSession) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpPutSession) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorPutSession(response)
+	}
+	output := &PutSessionOutput{}
+	out.Result = output
+
+	err = awsRestjson1_deserializeHttpBindingsPutSessionOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeDocumentPostContentOutput(output, response.Body)
+	err = awsRestjson1_deserializeDocumentPutSessionOutput(output, response.Body)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -919,7 +938,7 @@ func (m *awsRestjson1_deserializeOpPostContent) HandleDeserialize(ctx context.Co
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorPostContent(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorPutSession(response *smithyhttp.Response) error {
 	defer response.Body.Close()
 
 	var errorBuffer bytes.Buffer
@@ -980,20 +999,11 @@ func awsRestjson1_deserializeOpErrorPostContent(response *smithyhttp.Response) e
 	case "NotFoundException":
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
-	case "RequestTimeoutException":
-		return awsRestjson1_deserializeErrorRequestTimeoutException(response, errorBody)
-
-	case "UnsupportedMediaTypeException":
-		return awsRestjson1_deserializeErrorUnsupportedMediaTypeException(response, errorBody)
-
 	case "BadGatewayException":
 		return awsRestjson1_deserializeErrorBadGatewayException(response, errorBody)
 
 	case "DependencyFailedException":
 		return awsRestjson1_deserializeErrorDependencyFailedException(response, errorBody)
-
-	case "LoopDetectedException":
-		return awsRestjson1_deserializeErrorLoopDetectedException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -1005,7 +1015,7 @@ func awsRestjson1_deserializeOpErrorPostContent(response *smithyhttp.Response) e
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsPostContentOutput(v *PostContentOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeHttpBindingsPutSessionOutput(v *PutSessionOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -1018,11 +1028,6 @@ func awsRestjson1_deserializeHttpBindingsPostContentOutput(v *PostContentOutput,
 	if headerValues := response.Header.Values("x-amz-lex-dialog-state"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.DialogState = types.DialogState(headerValues[0])
-	}
-
-	if headerValues := response.Header.Values("x-amz-lex-input-transcript"); len(headerValues) != 0 {
-		headerValues[0] = strings.TrimSpace(headerValues[0])
-		v.InputTranscript = ptr.String(headerValues[0])
 	}
 
 	if headerValues := response.Header.Values("x-amz-lex-intent-name"); len(headerValues) != 0 {
@@ -1038,11 +1043,6 @@ func awsRestjson1_deserializeHttpBindingsPostContentOutput(v *PostContentOutput,
 	if headerValues := response.Header.Values("x-amz-lex-message-format"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.MessageFormat = types.MessageFormatType(headerValues[0])
-	}
-
-	if headerValues := response.Header.Values("x-amz-lex-sentiment"); len(headerValues) != 0 {
-		headerValues[0] = strings.TrimSpace(headerValues[0])
-		v.SentimentResponse = ptr.String(headerValues[0])
 	}
 
 	if headerValues := response.Header.Values("x-amz-lex-session-attributes"); len(headerValues) != 0 {
@@ -1067,7 +1067,7 @@ func awsRestjson1_deserializeHttpBindingsPostContentOutput(v *PostContentOutput,
 
 	return nil
 }
-func awsRestjson1_deserializeDocumentPostContentOutput(v *PostContentOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeDocumentPutSessionOutput(v *PutSessionOutput, body io.ReadCloser) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
