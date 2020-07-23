@@ -53,6 +53,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     @Override
     protected void writeErrorMessageCodeDeserializer(GenerationContext context) {
         context.getWriter().writeDocs("TODO: implement error message / code deser");
+        context.getWriter().write("_ = errorBody");
     }
 
     @Override

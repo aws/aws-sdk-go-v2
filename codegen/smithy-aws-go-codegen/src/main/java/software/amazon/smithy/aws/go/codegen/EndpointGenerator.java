@@ -241,7 +241,7 @@ final class EndpointGenerator implements Runnable {
         writer.write("");
 
         // Generate Resolver Interface
-        writer.writeDocs(String.format("%s interface for resolving service endpoints", RESOLVER_INTERFACE_NAME));
+        writer.writeDocs(String.format("%s interface for resolving service endpoints.", RESOLVER_INTERFACE_NAME));
         writer.openBlock("type $L interface {", "}", RESOLVER_INTERFACE_NAME, () -> {
             writer.write("ResolveEndpoint(region string, options $T) ($T, error)", resolverOptionsSymbol,
                     awsEndpointSymbol);
@@ -421,7 +421,8 @@ final class EndpointGenerator implements Runnable {
             // Resolve the hostnameTemplate to use for this service in this partition.
             String hostnameTemplate = serviceDefaults.expectStringMember("hostname").getValue();
             hostnameTemplate = hostnameTemplate.replace("{service}", endpointPrefix);
-            hostnameTemplate = hostnameTemplate.replace("{dnsSuffix}", config.expectStringMember("dnsSuffix").getValue());
+            hostnameTemplate = hostnameTemplate.replace("{dnsSuffix}",
+                    config.expectStringMember("dnsSuffix").getValue());
 
             this.defaults = serviceDefaults.withMember("hostname", hostnameTemplate);
 
