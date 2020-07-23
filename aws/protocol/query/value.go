@@ -17,11 +17,19 @@ type Value struct {
 }
 
 func newValue(values url.Values, key string, flat bool) Value {
-	return Value{values, key, flat, httpbinding.NewQueryValue(values, key, false)}
+	return Value{
+		values:     values,
+		key:        key,
+		flat:       flat,
+		QueryValue: httpbinding.NewQueryValue(values, key, false),
+	}
 }
 
 func newBaseValue(values url.Values) Value {
-	return Value{values, "", false, httpbinding.NewQueryValue(nil, "", false)}
+	return Value{
+		values:     values,
+		QueryValue: httpbinding.NewQueryValue(nil, "", false),
+	}
 }
 
 // Array returns a new Array encoder.

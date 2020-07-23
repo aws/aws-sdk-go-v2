@@ -55,16 +55,22 @@ final class AwsQuery extends HttpRpcProtocolGenerator {
         writer.write("body.Key(\"Version\").String($S)", context.getService().getVersion());
         writer.write("");
 
-        if (input.members().size() != 0) {
+        if (!input.members().isEmpty()) {
             writer.openBlock("if err := $L(input, bodyEncoder.Value); err != nil {", "}", functionName, () -> {
                 writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
             }).write("");
         } else {
             writer.write("_ = input");
+            writer.write("");
         }
 
+        writer.write("encodedBody, err := bodyEncoder.Encode()");
+        writer.openBlock("if err != nil {", "}", () -> {
+            writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
+        }).write("");
+
         writer.addUseImports(SmithyGoDependency.BYTES);
-        writer.openBlock("if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {",
+        writer.openBlock("if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {",
                 "}", () -> {
             writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
         });

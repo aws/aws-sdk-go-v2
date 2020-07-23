@@ -56,7 +56,8 @@ final class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
     private DocumentMemberSerVisitor getMemberSerVisitor(MemberShape member, String source, String dest) {
         // Get the timestamp format to be used, defaulting to epoch seconds.
         Format format = member.getMemberTrait(getContext().getModel(), TimestampFormatTrait.class)
-                .map(TimestampFormatTrait::getFormat).orElse(DEFAULT_TIMESTAMP_FORMAT);
+                .map(TimestampFormatTrait::getFormat)
+                .orElse(DEFAULT_TIMESTAMP_FORMAT);
         return new DocumentMemberSerVisitor(getContext(), source, dest, format);
     }
 
@@ -149,11 +150,11 @@ final class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
             writeSafeMemberAccessor(context, member, "v", (operand) -> {
                 String locationName = getSerializedLocationName(member, member.getMemberName());
                 if (isFlattened(context, member)) {
-                    writer.write("ok := object.FlatKey($S)", locationName);
+                    writer.write("objectKey := object.FlatKey($S)", locationName);
                 } else {
-                    writer.write("ok := object.Key($S)", locationName);
+                    writer.write("objectKey := object.Key($S)", locationName);
                 }
-                target.accept(getMemberSerVisitor(member, operand, "ok"));
+                target.accept(getMemberSerVisitor(member, operand, "objectKey"));
             });
             writer.write("");
         }
@@ -207,11 +208,11 @@ final class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
                 writer.openBlock("case *$L:", "", exportedMemberName, () -> {
                     String locationName = getSerializedLocationName(member, member.getMemberName());
                     if (isFlattened(context, member)) {
-                        writer.write("ok := object.FlatKey($S)", locationName);
+                        writer.write("objectKey := object.FlatKey($S)", locationName);
                     } else {
-                        writer.write("ok := object.Key($S)", locationName);
+                        writer.write("objectKey := object.Key($S)", locationName);
                     }
-                    target.accept(getMemberSerVisitor(member, "uv.Value()", "av"));
+                    target.accept(getMemberSerVisitor(member, "uv.Value()", "objectKey"));
                 });
             }
 
