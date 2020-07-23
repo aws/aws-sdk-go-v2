@@ -22,6 +22,7 @@ import static software.amazon.smithy.go.codegen.integration.ProtocolUtils.writeS
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import software.amazon.smithy.codegen.core.CodegenException;
@@ -365,7 +366,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         Symbol shapeSymbol = symbolProvider.toSymbol(shape);
         String funcName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, getProtocolName());
 
-        for (MemberShape memberShape : shape.members()) {
+        for (MemberShape memberShape : new TreeSet<>(shape.members())) {
             if (!filterMemberShapes.test(memberShape)) {
                 continue;
             }
