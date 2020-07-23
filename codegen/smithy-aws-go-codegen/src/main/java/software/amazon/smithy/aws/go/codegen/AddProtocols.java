@@ -25,7 +25,8 @@ public class AddProtocols implements GoIntegration {
                 new AwsJsonRpc1_0(),
                 new AwsJsonRpc1_1(),
                 new AwsRestXml(),
-                new AwsQuery()
+                new AwsQuery(),
+                new Ec2Query()
         );
     }
 }

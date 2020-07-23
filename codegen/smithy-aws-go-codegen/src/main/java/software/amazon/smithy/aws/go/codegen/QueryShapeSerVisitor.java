@@ -38,7 +38,7 @@ import software.amazon.smithy.utils.FunctionalUtils;
  *
  * Timestamps are serialized to {@link Format}.DATE_TIME by default.
  */
-final class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
+class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
     private static final Format DEFAULT_TIMESTAMP_FORMAT = Format.DATE_TIME;
     private static final Logger LOGGER = Logger.getLogger(JsonShapeSerVisitor.class.getName());
 
