@@ -25,6 +25,7 @@ func (c *Client) QueryMaps(ctx context.Context, params *QueryMapsInput, optFns .
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opQueryMaps(options.Region), middleware.Before)
+	addawsAwsquery_serdeOpQueryMapsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -58,6 +59,11 @@ type QueryMapsInput struct {
 type QueryMapsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsAwsquery_serdeOpQueryMapsMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsAwsquery_serializeOpQueryMaps{}, middleware.After)
+	stack.Deserialize.Add(&awsAwsquery_deserializeOpQueryMaps{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opQueryMaps(region string) awsmiddleware.RegisterServiceMetadata {

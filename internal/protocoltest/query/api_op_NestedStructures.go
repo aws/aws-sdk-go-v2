@@ -25,6 +25,7 @@ func (c *Client) NestedStructures(ctx context.Context, params *NestedStructuresI
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opNestedStructures(options.Region), middleware.Before)
+	addawsAwsquery_serdeOpNestedStructuresMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -52,6 +53,11 @@ type NestedStructuresInput struct {
 type NestedStructuresOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsAwsquery_serdeOpNestedStructuresMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsAwsquery_serializeOpNestedStructures{}, middleware.After)
+	stack.Deserialize.Add(&awsAwsquery_deserializeOpNestedStructures{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opNestedStructures(region string) awsmiddleware.RegisterServiceMetadata {
