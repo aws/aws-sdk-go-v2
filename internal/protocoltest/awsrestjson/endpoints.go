@@ -16,7 +16,7 @@ import (
 // ResolverOptions is the service endpoint resolver options
 type ResolverOptions = internalendpoints.Options
 
-// EndpointResolver interface for resolving service endpoints
+// EndpointResolver interface for resolving service endpoints.
 type EndpointResolver interface {
 	ResolveEndpoint(region string, options ResolverOptions) (aws.Endpoint, error)
 }

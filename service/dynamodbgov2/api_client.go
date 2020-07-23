@@ -63,7 +63,7 @@ type Options struct {
 	// The credentials object to use when signing requests.
 	Credentials aws.CredentialsProvider
 
-	// THe endpoint options to be used when attempting to resolve an endpoint.
+	// The endpoint options to be used when attempting to resolve an endpoint.
 	EndpointOptions ResolverOptions
 
 	// The service endpoint resolver.
