@@ -25,6 +25,7 @@ func (c *Client) SimpleInputParams(ctx context.Context, params *SimpleInputParam
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSimpleInputParams(options.Region), middleware.Before)
+	addawsAwsquery_serdeOpSimpleInputParamsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -58,6 +59,11 @@ type SimpleInputParamsInput struct {
 type SimpleInputParamsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsAwsquery_serdeOpSimpleInputParamsMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsAwsquery_serializeOpSimpleInputParams{}, middleware.After)
+	stack.Deserialize.Add(&awsAwsquery_deserializeOpSimpleInputParams{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opSimpleInputParams(region string) awsmiddleware.RegisterServiceMetadata {
