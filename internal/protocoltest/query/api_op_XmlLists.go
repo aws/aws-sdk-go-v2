@@ -43,6 +43,7 @@ func (c *Client) XmlLists(ctx context.Context, params *XmlListsInput, optFns ...
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opXmlLists(options.Region), middleware.Before)
+	addawsAwsquery_serdeOpXmlListsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -82,6 +83,11 @@ type XmlListsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsAwsquery_serdeOpXmlListsMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsAwsquery_serializeOpXmlLists{}, middleware.After)
+	stack.Deserialize.Add(&awsAwsquery_deserializeOpXmlLists{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opXmlLists(region string) awsmiddleware.RegisterServiceMetadata {
