@@ -58,7 +58,7 @@ public final class AwsEndpointGenerator implements GoIntegration {
                                 .name("EndpointOptions")
                                 .type(SymbolUtils.createValueSymbolBuilder(EndpointGenerator.RESOLVER_OPTIONS)
                                         .build())
-                                .documentation("THe endpoint options to be used when attempting "
+                                .documentation("The endpoint options to be used when attempting "
                                         + "to resolve an endpoint.")
                                 .build()
                 ))

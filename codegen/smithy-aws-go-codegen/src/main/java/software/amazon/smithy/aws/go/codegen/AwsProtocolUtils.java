@@ -19,6 +19,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
+import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolTestGenerator;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestGenerator;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestRequestGenerator;
@@ -32,7 +33,8 @@ import software.amazon.smithy.utils.SetUtils;
  * Utility methods for generating AWS protocols.
  */
 final class AwsProtocolUtils {
-    private AwsProtocolUtils() {}
+    private AwsProtocolUtils() {
+    }
 
     /**
      * Generates HTTP protocol tests with all required AWS-specific configuration set.
@@ -79,7 +81,8 @@ final class AwsProtocolUtils {
         ));
 
         // TODO can this check be replaced with a lookup into the runtime plugins?
-        if (IdempotencyTokenMiddlewareGenerator.hasOperationsWithIdempotencyToken(context.getModel(), context.getService())) {
+        if (IdempotencyTokenMiddlewareGenerator.hasOperationsWithIdempotencyToken(context.getModel(),
+                context.getService())) {
             configValues.add(
                     HttpProtocolUnitTestGenerator.ConfigValue.builder()
                             .name(IdempotencyTokenMiddlewareGenerator.IDEMPOTENCY_CONFIG_NAME)

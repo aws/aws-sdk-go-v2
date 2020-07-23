@@ -46,7 +46,7 @@ type Options struct {
 	// modify this list for per operation behavior.
 	APIOptions []APIOptionFunc
 
-	// THe endpoint options to be used when attempting to resolve an endpoint.
+	// The endpoint options to be used when attempting to resolve an endpoint.
 	EndpointOptions ResolverOptions
 
 	// The service endpoint resolver.
