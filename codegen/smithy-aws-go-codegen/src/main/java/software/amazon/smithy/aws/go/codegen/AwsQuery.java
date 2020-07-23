@@ -2,7 +2,6 @@ package software.amazon.smithy.aws.go.codegen;
 
 import java.util.Set;
 import software.amazon.smithy.aws.traits.protocols.AwsQueryTrait;
-import software.amazon.smithy.go.codegen.GoDependency;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.HttpRpcProtocolGenerator;
@@ -13,6 +12,13 @@ import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.model.shapes.StructureShape;
 
+/**
+ * Handles generating the aws query protocol for services.
+ *
+ * @inheritDoc
+ *
+ * @see HttpRpcProtocolGenerator
+ */
 final class AwsQuery extends HttpRpcProtocolGenerator {
 
     @Override
