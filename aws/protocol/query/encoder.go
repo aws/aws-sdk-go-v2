@@ -13,15 +13,14 @@ type Encoder struct {
 // NewEncoder returns a new Query body encoder
 func NewEncoder() *Encoder {
 	values := url.Values{}
-	return &Encoder{values, newBaseValue(values)}
+	return &Encoder{
+		values: values,
+		Value:  newBaseValue(values),
+	}
 }
 
-// String returns the string output of the Query encoder
-func (e Encoder) String() string {
-	return e.values.Encode()
-}
-
-// Bytes returns the []byte slice of the Query encoder
-func (e Encoder) Bytes() []byte {
-	return []byte(e.values.Encode())
+// Encode returns the []byte slice representing the current
+// state of the Query encoder.
+func (e Encoder) Encode() ([]byte, error) {
+	return []byte(e.values.Encode()), nil
 }
