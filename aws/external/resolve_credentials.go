@@ -241,7 +241,7 @@ func resolveEC2RoleCredentials(cfg *aws.Config, configs Configs) error {
 func resolveCredsFromSource(cfg *aws.Config, envConfig *EnvConfig, sharedCfg *SharedConfig, configs Configs) (err error) {
 	switch sharedCfg.CredentialSource {
 	case credSourceEc2Metadata:
-		err = resolveEC2RoleCredentials(cfg, configs)
+		return resolveEC2RoleCredentials(cfg, configs)
 
 	case credSourceEnvironment:
 		cfg.Credentials = aws.StaticCredentialsProvider{Value: envConfig.Credentials}
