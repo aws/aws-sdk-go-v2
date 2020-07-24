@@ -84,17 +84,26 @@ func findFile(fileName string, dir bool) (string, error) {
 }
 
 // execAt runs the given Cmd with is working directory set to path.
-func execAt(cmd *exec.Cmd, path string) (out []byte, err error) {
+func execAt(cmd *exec.Cmd, path string) ([]byte, error) {
 	originalWd, err := os.Getwd()
 	if err != nil {
-		return nil, fmt.Errorf("couldn't run cmd: %v", err)
+		return nil, fmt.Errorf("couldn't run cmd %s: %v", cmd.String(), err)
 	}
 
 	err = os.Chdir(path)
 	if err != nil {
-		return nil, fmt.Errorf("couldn't run cmd: %v", err)
+		return nil, fmt.Errorf("couldn't run cmd %s: %v", cmd.String(), err)
 	}
-	defer func() { err = os.Chdir(originalWd) }()
 
-	return cmd.Output()
+	out, err := cmd.Output()
+	if err != nil {
+		return nil, fmt.Errorf("couldn't run cmd %s: %v: %s", cmd.String(), err, string(out))
+	}
+
+	err = os.Chdir(originalWd)
+	if err != nil {
+		return nil, fmt.Errorf("couldn't run cmd %s: %v", cmd.String(), err)
+	}
+
+	return out, nil
 }

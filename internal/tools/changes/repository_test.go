@@ -24,6 +24,30 @@ func TestNewRepository(t *testing.T) {
 	}
 }
 
+func TestRepository_Modules(t *testing.T) {
+	repo := getRepository(t)
+
+	mods, err := repo.Modules()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	wantMods := []string{
+		"internal/tools/changes/testdata/modules/a",
+		"internal/tools/changes/testdata/modules/b",
+		"internal/tools/changes/testdata/modules/nested/c/d",
+		"internal/tools/changes/testdata/modules/nested/c",
+	}
+
+	if diff := cmp.Diff(mods, wantMods); diff != "" {
+		t.Errorf("expect modules to match:\n%v", diff)
+	}
+}
+
+func TestRepository_DoRelease(t *testing.T) {
+
+}
+
 func TestRepository_UpdateChangelog(t *testing.T) {
 	repo := getRepository(t)
 
@@ -62,16 +86,16 @@ func TestRepository_UpdateChangelog(t *testing.T) {
 }
 
 func TestRepository_discoverVersions(t *testing.T) {
-	testVersionSelector := func(r *Repository, mod string) (string, error) {
+	testVersionSelector := func(r *Repository, mod string) (string, VersionIncrement, error) {
 		switch mod {
 		case "a":
-			return "v1.0.0", nil
+			return "v1.0.0", NewModule, nil
 		case "b":
-			return "v1.2.3", nil
+			return "v1.2.3", PatchBump, nil
 		case "c/v2":
-			return "v2.0.0", nil
+			return "v2.0.0", NoBump, nil
 		default:
-			return "", errors.New("couldn't get version")
+			return "", NoBump, errors.New("couldn't get version")
 		}
 	}
 
@@ -80,6 +104,7 @@ func TestRepository_discoverVersions(t *testing.T) {
 		selector      VersionSelector
 		wantEnclosure VersionEnclosure
 		wantErr       string
+		wantBumps     map[string]VersionBump
 	}{
 		"two modules": {
 			modules:  []string{"a", "b"},
@@ -90,6 +115,10 @@ func TestRepository_discoverVersions(t *testing.T) {
 					"a": {"a", sdkRepo + "/" + "a", "v1.0.0"},
 					"b": {"b", sdkRepo + "/" + "b", "v1.2.3"},
 				},
+			},
+			wantBumps: map[string]VersionBump{
+				"a": {To: "v1.0.0"},
+				"b": {To: "v1.2.3"},
 			},
 		},
 		"three modules": {
@@ -103,6 +132,11 @@ func TestRepository_discoverVersions(t *testing.T) {
 					"c/v2": {"c/v2", sdkRepo + "/" + "c/v2", "v2.0.0"},
 				},
 			},
+			wantBumps: map[string]VersionBump{
+				"a": {To: "v1.0.0"},
+				"b": {To: "v1.2.3"},
+				// c is NoBump
+			},
 		},
 		"error": {
 			modules:  []string{"a", "b", "error"},
@@ -115,7 +149,7 @@ func TestRepository_discoverVersions(t *testing.T) {
 		repo := getRepository(t)
 
 		t.Run(id, func(t *testing.T) {
-			enc, err := repo.discoverVersions(tt.modules, tt.selector)
+			enc, bumps, err := repo.discoverVersions(tt.modules, tt.selector)
 
 			if tt.wantErr != "" {
 				if err == nil {
@@ -130,6 +164,10 @@ func TestRepository_discoverVersions(t *testing.T) {
 			if diff := cmp.Diff(enc, tt.wantEnclosure); diff != "" {
 				t.Errorf("expect enclosures to match:\n%v", diff)
 			}
+
+			if diff := cmp.Diff(bumps, tt.wantBumps); diff != "" {
+				t.Errorf("expect bumps to match:\n%v", diff)
+			}
 		})
 	}
 }
@@ -138,13 +176,17 @@ func TestRepository_DiscoverVersions(t *testing.T) {
 	t.Run("no changes", func(t *testing.T) {
 		repo := getRepository(t)
 
-		enc, err := repo.DiscoverVersions(ReleaseVersionSelector)
+		enc, bumps, err := repo.DiscoverVersions(ReleaseVersionSelector)
 		if err != nil {
 			t.Fatal(err)
 		}
 
 		if diff := cmp.Diff(enc, repo.Metadata.CurrentVersions); diff != "" {
 			t.Errorf("expect enclosures to match:\n%v", diff)
+		}
+
+		if len(bumps) != 0 {
+			t.Errorf("expected 0 version bumps, got %d", len(bumps))
 		}
 	})
 
@@ -161,7 +203,7 @@ func TestRepository_DiscoverVersions(t *testing.T) {
 			},
 		}
 
-		enc, err := repo.DiscoverVersions(ReleaseVersionSelector)
+		enc, _, err := repo.DiscoverVersions(ReleaseVersionSelector)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -179,7 +221,7 @@ func TestRepository_DiscoverVersions(t *testing.T) {
 		// simulate new module by removing "a" from CurrentVersions
 		delete(repo.Metadata.CurrentVersions.ModuleVersions, modPrefix+"a")
 
-		enc, err := repo.DiscoverVersions(ReleaseVersionSelector)
+		enc, _, err := repo.DiscoverVersions(ReleaseVersionSelector)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -191,15 +233,6 @@ func TestRepository_DiscoverVersions(t *testing.T) {
 			t.Errorf("expect enclosures to match:\n%v", diff)
 		}
 	})
-}
-
-func TestDevelopmentVersionSelector(t *testing.T) {
-	repo := getRepository(t)
-
-	_, err := DevelopmentVersionSelector(repo, modPrefix+"a")
-	if err != nil {
-		t.Fatal(err)
-	}
 }
 
 func getRepository(t *testing.T) *Repository {

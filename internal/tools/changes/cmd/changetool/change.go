@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/internal/tools/changes"
 	"os"
+	"path/filepath"
 	"strconv"
 )
 
@@ -14,6 +15,7 @@ var changeParams = struct {
 	changeType  changes.ChangeType
 	description string
 	similar     bool
+	wildcard    bool
 }{}
 
 var addFlags *flag.FlagSet
@@ -34,6 +36,7 @@ func init() {
 	addFlags.StringVar(&changeParams.module, "module", "", "sets the change's module")
 	addFlags.Var(&changeParams.changeType, "type", "sets the change's type")
 	addFlags.StringVar(&changeParams.description, "description", "", "sets the change's description")
+	addFlags.BoolVar(&changeParams.wildcard, "wildcard", false, "allows for the entry of a wildcard change (e.g. services/*")
 	addFlags.Usage = func() {
 		fmt.Printf("%s change add [-module=<module>] [-type=<type>] [-description=<description>]\n", os.Args[0])
 		addFlags.PrintDefaults()
@@ -84,6 +87,10 @@ func changeSubcmd(args []string) error {
 			return err
 		}
 
+		if changeParams.wildcard {
+			return addCmdWildcard(metadata, changeParams.module, changeParams.changeType, changeParams.description, "")
+		}
+
 		return addCmd(metadata, changeParams.module, changeParams.changeType, changeParams.description)
 	case "ls", "list":
 		err = lsFlags.Parse(args[1:])
@@ -124,6 +131,53 @@ func changeSubcmd(args []string) error {
 		changeUsage()
 		return errors.New("invalid usage")
 	}
+}
+
+func addCmdWildcard(metadata *changes.Metadata, module string, changeType changes.ChangeType, description string, resolveTo string) error {
+	if module == "" {
+		return errors.New("couldn't add wildcard change: a module must be provided with --module")
+	}
+
+	repo, err := changes.NewRepository(filepath.Join(metadata.ChangePath, ".."))
+	if err != nil {
+		return fmt.Errorf("couldn't add wildcard change: %v", err)
+	}
+
+	mods, err := repo.Modules()
+	if err != nil {
+		return err
+	}
+
+	affectedModules, err := changes.MatchWildcardModules(mods, module)
+	fmt.Println(affectedModules)
+
+	template, err := changes.ChangeToTemplate(changes.Change{
+		Module:          module,
+		AffectedModules: affectedModules,
+	})
+	if err != nil {
+		return fmt.Errorf("failed to create change: %v", err)
+	}
+
+	filledTemplate, err := editTemplate(template)
+	if err != nil {
+		return fmt.Errorf("failed to create change: %v", err)
+	}
+
+	changes, err := changes.TemplateToChanges(filledTemplate)
+	if err != nil {
+		return fmt.Errorf("failed to create change: %v", err)
+	}
+
+	if len(changes) != 1 {
+		return fmt.Errorf("failed to create change: expected template to create 1 change, got %d changes", len(changes))
+	}
+
+	change := changes[0]
+
+	// TODO: move some logic into TemplateToChanges
+
+	return metadata.AddChange(change)
 }
 
 func addCmd(metadata *changes.Metadata, module string, changeType changes.ChangeType, description string) error {

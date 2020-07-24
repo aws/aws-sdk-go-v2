@@ -79,6 +79,15 @@ func (m *Metadata) AddChanges(changes []*Change) error {
 	return nil
 }
 
+func (m *Metadata) addDependencyUpdateChange(modules []string) error {
+	change, err := NewWildcardChange("/...", DependencyChangeType, dependencyUpdateMessage, modules)
+	if err != nil {
+		return err
+	}
+
+	return m.AddChange(change)
+}
+
 // GetChangeById returns the pending Change with the given id.
 func (m *Metadata) GetChangeById(id string) (*Change, error) {
 	_, c, err := m.getChange(id)
@@ -104,7 +113,7 @@ func (m *Metadata) GetChanges(module string) []*Change {
 	var changes []*Change
 
 	for _, c := range m.Changes {
-		if module == c.Module {
+		if c.matches(module) {
 			changes = append(changes, c)
 		}
 	}

@@ -6,19 +6,23 @@ import (
 	"flag"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/internal/tools/changes"
+	"log"
 	"os"
 )
 
 var releaseParams = struct {
-	repo     string
-	selector changes.VersionSelector
+	repo      string
+	releaseID string
+	selector  changes.VersionSelector
+	pretty    bool
 }{}
 
 var updatePendingFlags *flag.FlagSet
 var staticVersionsFlags *flag.FlagSet
+var createReleaseFlags *flag.FlagSet
 
 func releaseUsage() {
-	var sets = []*flag.FlagSet{updatePendingFlags, staticVersionsFlags}
+	var sets = []*flag.FlagSet{updatePendingFlags, staticVersionsFlags, createReleaseFlags}
 
 	for _, f := range sets {
 		f.Usage()
@@ -35,10 +39,19 @@ func init() {
 
 	staticVersionsFlags = flag.NewFlagSet("static-versions", flag.ExitOnError)
 	staticVersionsFlags.StringVar(&releaseParams.repo, "repo", "", "path to the SDK git repository")
+	staticVersionsFlags.BoolVar(&releaseParams.pretty, "pretty", false, "print indented JSON output")
 	staticVersionsFlags.Var(&releaseParams.selector, "selector", "sets versioning strategy: release, development, or tags")
 	staticVersionsFlags.Usage = func() {
 		fmt.Printf("%s release static-versions\n", os.Args[0])
 		staticVersionsFlags.PrintDefaults()
+	}
+
+	createReleaseFlags = flag.NewFlagSet("create", flag.ExitOnError)
+	createReleaseFlags.StringVar(&releaseParams.repo, "repo", "", "path to the SDK git repository")
+	createReleaseFlags.StringVar(&releaseParams.releaseID, "id", "", "the ID of the release (e.g. 2020-07-17)")
+	createReleaseFlags.Usage = func() {
+		fmt.Printf("%s release create [-repo=<repo>]\n", os.Args[0])
+		createReleaseFlags.PrintDefaults()
 	}
 }
 
@@ -68,18 +81,61 @@ func releaseSubcmd(args []string) error {
 			return err
 		}
 
-		return staticVersionsCmd(releaseParams.repo, releaseParams.selector)
+		return staticVersionsCmd(releaseParams.repo, releaseParams.selector, releaseParams.pretty)
 	case "create":
-		repo, err := changes.NewRepository(args[1])
+		err := createReleaseFlags.Parse(args[1:])
+		repo, err := changes.NewRepository(releaseParams.repo)
 		if err != nil {
 			return fmt.Errorf("couldn't load repository: %v", err)
 		}
 
-		fmt.Println(repo.DoRelease())
+		err = repo.DoRelease(releaseParams.releaseID)
+		if err != nil {
+			return err
+		}
+
+		log.Printf("successfully created release %s\n", releaseParams.releaseID)
 
 		return nil
 	case "test":
+		release := changes.Release{
+			ID:            "2020-07-23",
+			SchemaVersion: 1,
+			VersionBumps:  map[string]changes.VersionBump{},
+			Changes: []changes.Change{
+				{
+					ID:              "1234",
+					SchemaVersion:   1,
+					Module:          "services/...",
+					Type:            "feature",
+					Description:     "test",
+					AffectedModules: []string{"services/a"},
+				},
+				{
+					ID:            "1234",
+					SchemaVersion: 1,
+					Module:        "services/a",
+					Type:          "feature",
+					Description:   "Some interesting description of a change.",
+				},
+				{
+					ID:            "1234",
+					SchemaVersion: 1,
+					Module:        "services/a",
+					Type:          "feature",
+					Description:   "Some interesting description of a change.",
+				},
+				{
+					ID:            "1234",
+					SchemaVersion: 1,
+					Module:        "core/a",
+					Type:          "feature",
+					Description:   "Some interesting description of a change.",
+				},
+			},
+		}
 
+		fmt.Println(release.RenderChangelog())
 		return nil
 	default:
 		releaseUsage()
@@ -97,7 +153,7 @@ func updatePendingCmd(repo *changes.Repository) error {
 	return nil
 }
 
-func staticVersionsCmd(repoPath string, selector changes.VersionSelector) error {
+func staticVersionsCmd(repoPath string, selector changes.VersionSelector, pretty bool) error {
 	repo, err := changes.NewRepository(repoPath)
 	if err != nil {
 		return fmt.Errorf("couldn't load repository: %v", err)
@@ -108,7 +164,12 @@ func staticVersionsCmd(repoPath string, selector changes.VersionSelector) error 
 		return err
 	}
 
-	out, err := json.Marshal(enclosure)
+	var out []byte
+	if pretty {
+		out, err = json.MarshalIndent(enclosure, "", "  ")
+	} else {
+		out, err = json.Marshal(enclosure)
+	}
 	if err != nil {
 		return err
 	}

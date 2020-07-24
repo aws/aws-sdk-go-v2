@@ -17,6 +17,8 @@ const (
 	NoBump    VersionIncrement = iota // NoBump indicates the module's version should not change.
 	PatchBump                         // PatchBump indicates the module's version should be incremented by a patch version bump.
 	MinorBump                         // MinorBump indicates the module's version should be incremented by a minor version bump.
+	MajorBump                         // MajorBump indicates the module's major version should be incremented from v0 to v1.
+	NewModule                         // NewModule indicates that a new modules has been discovered and will be assigned a default version.
 )
 
 // Version is the version of a Go module.
@@ -24,6 +26,13 @@ type Version struct {
 	Module     string // Module is the repo relative module path of the Go module.
 	ImportPath string // ImportPath is the full module import path.
 	Version    string // Version is a valid Go module semantic version, which can potentially be a pseudo-version.
+	ModuleHash string // ModuleHash is
+}
+
+// VersionBump describes a version increment to a module.
+type VersionBump struct {
+	From string
+	To   string
 }
 
 // VersionEnclosure is a set of versions for Go modules in a given repository.
@@ -35,7 +44,7 @@ type VersionEnclosure struct {
 
 // isValid returns nil if the ModuleVersions contained in the VersionEnclosure v accurately reflect the latest tagged versions.
 // Otherwise, isValid returns an error.
-func (v VersionEnclosure) isValid(repoPath string) error {
+func (v *VersionEnclosure) isValid(repoPath string) error {
 	for m, encVer := range v.ModuleVersions {
 		gitVer, err := taggedVersion(repoPath, m, false)
 		if err != nil {
@@ -48,6 +57,44 @@ func (v VersionEnclosure) isValid(repoPath string) error {
 	}
 
 	return nil
+}
+
+func (v *VersionEnclosure) bump(module string, incr VersionIncrement) (VersionBump, error) {
+	if _, ok := v.ModuleVersions[module]; !ok {
+		return VersionBump{}, fmt.Errorf("the VersionEnclosure doesn't contain module %s", module)
+	}
+
+	ver := v.ModuleVersions[module]
+	oldVer := ver.Version
+	nextVer, err := nextVersion(oldVer, incr)
+	if err != nil {
+		return VersionBump{}, fmt.Errorf("couldn't bump module %s's version: %v", module, err)
+	}
+
+	ver.Version = nextVer
+
+	v.ModuleVersions[module] = ver
+
+	return VersionBump{
+		From: oldVer,
+		To:   nextVer,
+	}, nil
+}
+
+// EnclosureDiff returns a slice of all modules that differ between the two enclosures. A module that differs either has
+// a different ModuleHash in one VersionEnclosure, or exists in the new enclosure but not the old.
+func EnclosureDiff(old, new VersionEnclosure) []string {
+	var diff []string
+
+	for m, v := range new.ModuleVersions {
+		if oldV, ok := old.ModuleVersions[m]; !ok {
+			diff = append(diff, m)
+		} else if v.ModuleHash != oldV.ModuleHash {
+			diff = append(diff, m)
+		}
+	}
+
+	return diff
 }
 
 func versionIncrement(changes []Change) VersionIncrement {
@@ -98,7 +145,7 @@ func nextVersion(version string, bumpType VersionIncrement) (string, error) {
 	return fmt.Sprintf("%s.%d.%d", parts[0], minor, patch), nil
 }
 
-func tagRepo(repoPath, mod, version string) error {
+func tagRepo(repoPath, releaseID, mod, version string) error {
 	if mod == rootModule {
 		mod = ""
 	} else {
@@ -107,8 +154,8 @@ func tagRepo(repoPath, mod, version string) error {
 
 	tag := mod + version
 
-	fmt.Println("tagging", tag)
-	cmd := exec.Command("git", "tag", tag)
+	msg := fmt.Sprintf("\"release %s module %s version %s\"", releaseID, mod, version)
+	cmd := exec.Command("git", "tag", "-a", tag, "-m", msg)
 	_, err := execAt(cmd, repoPath)
 	if err != nil {
 		return err
@@ -145,7 +192,6 @@ func push(repoPath string) error {
 
 	cmd = exec.Command("git", "push") // TODO does git push --tags already do this?
 	_, err = execAt(cmd, repoPath)
-
 	return err
 }
 

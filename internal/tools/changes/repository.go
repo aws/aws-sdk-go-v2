@@ -2,6 +2,7 @@ package changes
 
 import (
 	"fmt"
+	"log"
 	"path/filepath"
 )
 
@@ -9,7 +10,8 @@ import (
 type Repository struct {
 	RootPath string    // RootPath is the path to the root of the repository.
 	Metadata *Metadata // Metadata is the repository's .changes metadata.
-	modules  []string  // modules contains the shortened module path of all modules in the repository. modules is lazily loaded by Modules()
+
+	modules []string // modules contains the shortened module path of all modules in the repository. modules is lazily loaded by Modules()
 }
 
 // NewRepository loads the repository at the given path.
@@ -41,27 +43,22 @@ func (r *Repository) Modules() ([]string, error) {
 	return mods, err
 }
 
-func (r *Repository) DoRelease() error {
-	if err := r.Metadata.CurrentVersions.isValid(r.RootPath); err != nil {
-		return fmt.Errorf("couldn't create a release: %v", err)
-	}
+func (r *Repository) DoRelease(releaseID string) error {
+	//if err := r.Metadata.CurrentVersions.isValid(r.RootPath); err != nil {
+	//	return fmt.Errorf("couldn't create a release: %v", err)
+	//}
 
 	enc, bumps, err := r.DiscoverVersions(ReleaseVersionSelector)
 	if err != nil {
-		return err
+		return fmt.Errorf("couldn't do release: %v", err)
 	}
 
-	err = r.resolveDependencies(&enc, bumps)
+	err = r.resolveDependencies(&enc, bumps) // update all dependencies on SDK modules to their latest versions.
 	if err != nil {
 		return err
 	}
 
-	rel, err := r.Metadata.CreateRelease("2020-07-13", bumps, false)
-	if err != nil {
-		return err
-	}
-
-	err = r.UpdateChangelog(rel, false)
+	rel, err := r.Metadata.CreateRelease(releaseID, bumps, false)
 	if err != nil {
 		return err
 	}
@@ -71,26 +68,24 @@ func (r *Repository) DoRelease() error {
 		return err
 	}
 
-	for _, m := range rel.AffectedModules() {
-		if m == rootModule {
-			continue
-		}
-
-		err = r.UpdateModuleChangelog(rel, m, false)
-		if err != nil {
-			return err
-		}
+	err = r.UpdateAllChangelogs(rel, false)
+	if err != nil {
+		return err
 	}
 
-	// TODO commit changelogs and go.mod files, maybe keep track in the Repo struct
+	return r.tagAndPush(releaseID, bumps)
+}
 
-	err = commit(r.RootPath, []string{"CHANGELOG.md", ".changes", "services"})
+func (r *Repository) tagAndPush(releaseID string, bumps map[string]VersionBump) error {
+	//err := commit(r.RootPath, []string{"\\*.md", ".changes", "\\*.mod"})
+	err := commit(r.RootPath, []string{"CHANGELOG.md", ".changes", "services"})
 	if err != nil {
 		return err
 	}
 
 	for mod, bump := range bumps {
-		err = tagRepo(r.RootPath, mod, bump.To)
+		log.Printf("tagging module %s: %s -> %s\n", mod, bump.From, bump.To)
+		err = tagRepo(r.RootPath, releaseID, mod, bump.To)
 		if err != nil {
 			return err
 		}
@@ -99,94 +94,65 @@ func (r *Repository) DoRelease() error {
 	return push(r.RootPath)
 }
 
-// dependencies returns a map between a module and all modules that depend on that module.
-func (r *Repository) dependencies() (map[string][]string, error) {
-	modules, err := r.Modules()
-	if err != nil {
-		return nil, err
-	}
-
-	deps := map[string][]string{}
-
-	for _, m := range modules {
-		mDeps, err := listDependencies(filepath.Join(r.RootPath, m))
-		if err != nil {
-			return nil, err
-		}
-
-		fmt.Println(m, mDeps)
-		for _, d := range mDeps {
-			if depList, ok := deps[d]; ok {
-				deps[d] = append(depList, m)
-			} else {
-				deps[d] = []string{m}
-			}
-		}
-	}
-
-	return deps, nil
-}
-
 func (r *Repository) resolveDependencies(enc *VersionEnclosure, bumps map[string]VersionBump) error {
-	seen := make(map[string]struct{})
-	deps, err := r.dependencies()
+	mods, err := r.Modules()
+	if err != nil {
+		return fmt.Errorf("couldn't resolve dependencies: %v", err)
+	}
+
+	depGraph, err := moduleGraph(r.RootPath, mods)
 	if err != nil {
 		return err
 	}
 
-	fmt.Println(deps)
+	updates := depGraph.dependencyUpdates(AffectedModules(r.Metadata.Changes))
+	if len(updates) == 0 {
+		return nil
+	}
 
-	updatedModules := AffectedModules(r.Metadata.Changes)
-
-	for len(updatedModules) > 0 {
-		m := updatedModules[0]
-		seen[m] = struct{}{}
-
+	var depMods []string
+	for m, _ := range updates {
 		if _, ok := bumps[m]; !ok {
-			changes, err := NewChanges([]string{m}, DependencyChangeType, "Updated SDK dependencies to the latest versions.")
+			depMods = append(depMods, m) // TODO: clean up logic
+
+			bumps[m], err = enc.bump(m, PatchBump)
 			if err != nil {
 				return err
 			}
-			if len(changes) != 1 {
-				return fmt.Errorf("expected len(changes) to be 1, got %d", len(changes))
-			}
+		}
+	}
 
-			err = r.Metadata.AddChange(changes[0])
-			if err != nil {
-				return err // TODO Wrap errs
-			}
+	err = r.Metadata.addDependencyUpdateChange(depMods)
+	if err != nil {
+		return err
+	}
 
-			// TODO: consolidate this logic?
-			oldVer := r.Metadata.CurrentVersions.ModuleVersions[m].Version
-			nextVer, err := nextVersion(oldVer, PatchBump)
-			if err != nil {
-				return err
-			}
+	for m, deps := range updates {
+		err = updateDependencies(r.RootPath, m, deps, enc)
+		if err != nil {
+			return err
+		}
+	}
 
-			bumps[m] = VersionBump{
-				From: oldVer,
-				To:   nextVer,
-			}
+	return nil
+}
 
-			encVer := enc.ModuleVersions[m]
-			encVer.Version = nextVer
+func (r *Repository) UpdateAllChangelogs(release *Release, pending bool) error {
+	err := r.UpdateChangelog(release, pending)
+	if err != nil {
+		return err
+	}
 
-			enc.ModuleVersions[m] = encVer
+	for _, m := range release.AffectedModules() {
+		if m == rootModule {
+			// skip updating the root module, since this would overwrite the top level consolidated CHANGELOG
+			continue
 		}
 
-		for _, d := range deps[m] {
-			if _, ok := seen[d]; !ok {
-				err = UpdateDependencies(r.RootPath, d, m, enc.ModuleVersions[m].Version)
-				if err != nil {
-					return err
-				}
-
-				fmt.Printf("updating %s modfile to depend on %s\n", d, m)
-				updatedModules = append(updatedModules, d)
-			}
+		err = r.UpdateModuleChangelog(release, m, pending)
+		if err != nil {
+			return err
 		}
-
-		updatedModules = updatedModules[1:]
 	}
 
 	return nil
@@ -195,28 +161,21 @@ func (r *Repository) resolveDependencies(enc *VersionEnclosure, bumps map[string
 // UpdateChangelog generates a new CHANGELOG entry for the given release. If pending is true, the contents of
 // CHANGELOG_PENDING.md will be replaced with the new entry. Otherwise, the entry will be prepended to CHANGELOG.md.
 func (r *Repository) UpdateChangelog(release *Release, pending bool) error {
-	id := release.ID
 	fileName := "CHANGELOG.md"
 	if pending {
-		id = "pending"
 		fileName = "CHANGELOG_PENDING.md"
 	}
 
-	entry := fmt.Sprintf("# Release %s\n", id)
-	for _, module := range release.AffectedModules() {
-		moduleEntry, err := release.RenderChangelogForModule(module, "#")
-		if err != nil {
-			return fmt.Errorf("couldn't update changelog: %v", err)
-		}
-
-		entry += moduleEntry
+	entry, err := release.RenderChangelog()
+	if err != nil {
+		return err
 	}
 
 	return writeFile([]byte(entry), filepath.Join(r.RootPath, fileName), !pending)
 }
 
 func (r *Repository) UpdateModuleChangelog(release *Release, module string, pending bool) error {
-	entry, err := release.RenderChangelogForModule(module, "")
+	entry, err := release.RenderChangelogForModule(module, false)
 	if err != nil {
 		return err
 	}
@@ -246,36 +205,12 @@ func (r *Repository) InitializeVersions() error {
 	return r.Metadata.SaveEnclosure(enc)
 }
 
-// VersionSelector is a function that decides what version of a Go module should be passed to code generation.
-type VersionSelector func(r *Repository, module string) (string, VersionIncrement, error)
-
-// Set parses the input s and correspondingly sets the appropriate VersionSelector.
-func (v *VersionSelector) Set(s string) error {
-	switch s {
-	case "release":
-		*v = ReleaseVersionSelector
-	case "development":
-		*v = DevelopmentVersionSelector
-	case "tags":
-		*v = TaggedVersionSelector
-	default:
-		return fmt.Errorf("unknown version selector: %s", s)
-	}
-
-	return nil
-}
-
-// String returns an empty string to satisfy the flag.Value interface.
-func (v *VersionSelector) String() string {
-	return ""
-}
-
 // DiscoverVersions creates a VersionEnclosure containing all Go modules in the Repository. The version of each module
 // is determined by the provided VersionSelector.
 func (r *Repository) DiscoverVersions(selector VersionSelector) (VersionEnclosure, map[string]VersionBump, error) {
 	modules, packages, err := discoverModules(r.RootPath)
 	if err != nil {
-		return VersionEnclosure{}, nil, err
+		return VersionEnclosure{}, nil, fmt.Errorf("failed to discover versions: %v", err)
 	}
 
 	enc, bumps, err := r.discoverVersions(modules, selector)
@@ -299,14 +234,20 @@ func (r *Repository) discoverVersions(modules []string, selector VersionSelector
 	for _, m := range modules {
 		v, incr, err := selector(r, m)
 		if err != nil {
-			return VersionEnclosure{}, nil, err
+			return VersionEnclosure{}, nil, fmt.Errorf("failed to discover version of module %s: %v", m, err)
 		}
 
 		if v != "" {
+			modHash, err := goChecksum(r.RootPath, m, v)
+			if err != nil {
+				return VersionEnclosure{}, nil, fmt.Errorf("failed to discover version of module %s: %v", m, err)
+			}
+
 			enclosure.ModuleVersions[m] = Version{
 				Module:     m,
 				ImportPath: lengthenModPath(m),
 				Version:    v,
+				ModuleHash: modHash,
 			}
 		}
 
@@ -319,55 +260,4 @@ func (r *Repository) discoverVersions(modules []string, selector VersionSelector
 	}
 
 	return enclosure, bumps, nil
-}
-
-// ReleaseVersionSelector returns a version for the given module suitable for use during the release process.
-// A version will be returned based upon what type of version bump the Change metadata for the given module requires.
-// ReleaseVersionSelector will properly version modules that are not present in the versions.json file by checking git
-// tags for an existing version, or by providing a default version suitable for the module's major version.
-func ReleaseVersionSelector(r *Repository, module string) (string, VersionIncrement, error) {
-	incr := versionIncrement(r.Metadata.GetChanges(module))
-
-	currentVersion := r.Metadata.CurrentVersions.ModuleVersions[module].Version
-	if currentVersion != "" {
-		v, err := nextVersion(currentVersion, incr)
-		return v, incr, err
-	}
-
-	v, err := taggedVersion(r.RootPath, module, false)
-	if err != nil {
-		return "", NoBump, fmt.Errorf("couldn't find current version of %s: %v", module, err)
-	}
-	if v == "" {
-		// there aren't version git tags for this module
-		v, err = defaultVersion(module)
-		return v, PatchBump, err // TODO: PatchBump? or something like ModuleDiscovered
-	}
-
-	// the module isn't in versions.json, but does have git tags
-	v, err = nextVersion(v, incr)
-	return v, incr, err
-}
-
-// TaggedVersionSelector returns the greatest version of module tagged in the git repository.
-func TaggedVersionSelector(r *Repository, module string) (string, VersionIncrement, error) {
-	v, err := taggedVersion(r.RootPath, module, false)
-	return v, NoBump, err
-}
-
-// DevelopmentVersionSelector returns a commit hash based version if the module has associated pending Changes, otherwise
-// returns the latest version from the repo's metadata version enclosure.
-func DevelopmentVersionSelector(r *Repository, module string) (string, VersionIncrement, error) {
-	incr := versionIncrement(r.Metadata.GetChanges(module))
-
-	if incr != NoBump {
-		v, err := pseudoVersion(r.RootPath, module)
-		return v, incr, err
-	}
-
-	if v, ok := r.Metadata.CurrentVersions.ModuleVersions[module]; ok {
-		return v.Version, incr, nil
-	}
-
-	return "", NoBump, fmt.Errorf("couldn't select version for module %s: module has no changes and no versions.json version", module)
 }

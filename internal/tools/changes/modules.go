@@ -7,6 +7,8 @@ import (
 	"golang.org/x/mod/modfile"
 	"golang.org/x/mod/module"
 	"golang.org/x/mod/semver"
+	"golang.org/x/mod/sumdb/dirhash"
+	"golang.org/x/mod/zip"
 	"io"
 	"io/ioutil"
 	"os"
@@ -15,7 +17,10 @@ import (
 	"strings"
 )
 
-const sdkRepo = "github.com/aws/aws-sdk-go-v2"
+//var sdkRepo = "github.com/aws/aws-sdk-go-v2"
+
+var sdkRepo = "github.com/aggagen/test"
+
 const rootModule = "/"
 
 // GetCurrentModule returns a shortened module path (from the root of the repository to the module, not a full import
@@ -84,7 +89,7 @@ func discoverModules(root string) ([]string, map[string]string, error) {
 			}
 
 			for _, p := range modPackages {
-				packages[p] = mod
+				packages[p] = shortenModPath(mod)
 			}
 
 			modules = append(modules, shortenModPath(mod))
@@ -102,22 +107,24 @@ func discoverModules(root string) ([]string, map[string]string, error) {
 	return modules, packages, nil
 }
 
-func UpdateDependencies(repoPath, mod, dependency, version string) error {
+func updateDependencies(repoPath, mod string, dependencies []string, enc *VersionEnclosure) error {
 	goModPath := filepath.Join(repoPath, mod, "go.mod")
 
 	modFile, err := getModFile(goModPath)
 	if err != nil {
-		return fmt.Errorf("couldn't update %s's dependency on %s: %v", mod, dependency, err)
+		return fmt.Errorf("couldn't update %s's dependencies: %v", mod, err)
 	}
 
-	err = modFile.AddRequire(lengthenModPath(dependency), version)
-	if err != nil {
-		return fmt.Errorf("couldn't update %s's dependency on %s: %v", mod, dependency, err)
+	for _, dep := range dependencies {
+		err = modFile.AddRequire(lengthenModPath(dep), enc.ModuleVersions[dep].Version)
+		if err != nil {
+			return fmt.Errorf("couldn't update %s's dependency on %s: %v", mod, dep, err)
+		}
 	}
 
 	out, err := modFile.Format()
 	if err != nil {
-		return fmt.Errorf("couldn't update %s's dependency on %s: %v", mod, dependency, err)
+		return fmt.Errorf("couldn't update %s's dependencies: %v", mod, err)
 	}
 
 	return writeFile(out, goModPath, false)
@@ -169,7 +176,7 @@ func listPackages(path string) ([]string, error) {
 	cmd := exec.Command("go", "list", "-json", "./...")
 	out, err := execAt(cmd, path)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to list packages: %v", err)
 	}
 
 	return parseGoList(out)
@@ -268,4 +275,23 @@ func commitHash(repoPath string) (string, error) {
 	}
 
 	return strings.Trim(string(output), "\n"), nil // clean up git show output and return
+}
+
+func goChecksum(repoPath, mod, version string) (string, error) {
+	tmpfile, err := ioutil.TempFile("", "modfile-zip")
+	if err != nil {
+		return "", err
+	}
+
+	defer os.Remove(tmpfile.Name())
+
+	err = zip.CreateFromDir(tmpfile, module.Version{
+		Path:    lengthenModPath(mod),
+		Version: version,
+	}, filepath.Join(repoPath, mod))
+	if err != nil {
+		return "", err
+	}
+
+	return dirhash.HashZip(tmpfile.Name(), dirhash.DefaultHash)
 }
