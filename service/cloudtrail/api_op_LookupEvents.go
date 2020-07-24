@@ -190,7 +190,7 @@ func (r LookupEventsRequest) Send(ctx context.Context) (*LookupEventsResponse, e
 	return resp, nil
 }
 
-// NewLookupEventsRequestPaginator returns a paginator for LookupEvents.
+// NewLookupEventsPaginator returns a paginator for LookupEvents.
 // Use Next method to get the next page, and CurrentPage to get the current
 // response page from the paginator. Next will return false, if there are
 // no more pages, or an error was encountered.
@@ -199,7 +199,7 @@ func (r LookupEventsRequest) Send(ctx context.Context) (*LookupEventsResponse, e
 //
 //   // Example iterating over pages.
 //   req := client.LookupEventsRequest(input)
-//   p := cloudtrail.NewLookupEventsRequestPaginator(req)
+//   p := cloudtrail.NewLookupEventsPaginator(req)
 //
 //   for p.Next(context.TODO()) {
 //       page := p.CurrentPage()
