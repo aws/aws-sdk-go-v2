@@ -13,8 +13,10 @@ import (
 type ChangeType string
 
 const (
-	FeatureChangeType ChangeType = "feature" // FeatureChangeType is a constant change type for a new feature.
-	BugFixChangeType  ChangeType = "bugfix"  // BugFixChangeType is a constant change type for a bug fix.
+	// FeatureChangeType is a constant change type for a new feature.
+	FeatureChangeType ChangeType = "feature"
+	// BugFixChangeType is a constant change type for a bug fix.
+	BugFixChangeType  ChangeType = "bugfix"
 )
 
 // ParseChangeType attempts to parse the given string v into a ChangeType, returning an error if the string is invalid.
@@ -114,7 +116,7 @@ func NewChanges(modules []string, changeType ChangeType, description string) ([]
 
 	for _, module := range modules {
 		changes = append(changes, Change{
-			ID:            generateId(module, changeType),
+			ID:            generateID(module, changeType),
 			SchemaVersion: SchemaVersion,
 			Module:        module,
 			Type:          changeType,
@@ -152,7 +154,7 @@ func ChangeToTemplate(change Change) ([]byte, error) {
 	return append(templateBytes, []byte(changeTemplateSuffix)...), nil
 }
 
-func generateId(module string, changeType ChangeType) string {
+func generateID(module string, changeType ChangeType) string {
 	module = strings.ReplaceAll(module, "/", ".")
 
 	return fmt.Sprintf("%s-%s-%v", module, changeType, time.Now().UnixNano())

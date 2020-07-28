@@ -222,7 +222,7 @@ func rmCmd(metadata *changes.Metadata, id string) error {
 		return fmt.Errorf("failed to remove change: %v", err)
 	}
 
-	err = metadata.RemoveChangeById(change.ID)
+	err = metadata.RemoveChangeByID(change.ID)
 	if err != nil {
 		return fmt.Errorf("failed to remove change: %v", err)
 	}
@@ -238,10 +238,10 @@ func selectChange(metadata *changes.Metadata, id string) (changes.Change, error)
 	index, err := strconv.Atoi(id)
 	if err == nil {
 		if index < 0 || index >= len(metadata.Changes) {
-			return changes.Change{}, fmt.Errorf("failed to get change with index %d: index out of range\n", index)
+			return changes.Change{}, fmt.Errorf("failed to get change with index %d: index out of range", index)
 		}
 		return metadata.Changes[index], nil
 	}
 
-	return metadata.GetChangeById(id)
+	return metadata.GetChangeByID(id)
 }

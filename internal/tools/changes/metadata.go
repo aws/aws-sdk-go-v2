@@ -71,8 +71,8 @@ func (m *Metadata) AddChanges(changes []Change) error {
 	return nil
 }
 
-// GetChangeById returns the pending Change with the given id.
-func (m *Metadata) GetChangeById(id string) (Change, error) {
+// GetChangeByID returns the pending Change with the given id.
+func (m *Metadata) GetChangeByID(id string) (Change, error) {
 	_, c, err := m.getChange(id)
 	return c, err
 }
@@ -87,7 +87,7 @@ func (m *Metadata) getChange(id string) (int, Change, error) {
 	return 0, Change{}, fmt.Errorf("couldn't find change with id %s", id)
 }
 
-// ListChanges returns all pending Changes with a module matching the given module. If module is empty, returns all Changes.
+// GetChanges returns all pending Changes with a module matching the given module. If module is empty, returns all Changes.
 func (m *Metadata) GetChanges(module string) []Change {
 	if module == "" {
 		return m.Changes
@@ -113,25 +113,25 @@ func (m *Metadata) SaveChange(c Change) error {
 func (m *Metadata) UpdateChangeFromTemplate(oldChange Change, template []byte) ([]Change, error) {
 	newChanges, err := TemplateToChanges(template)
 	if err != nil {
-		return nil, fmt.Errorf("failed to modify change: %v\n", err)
+		return nil, fmt.Errorf("failed to modify change: %v", err)
 	}
 
 	err = m.AddChanges(newChanges)
 	if err != nil {
-		return nil, fmt.Errorf("failed to modify change: %v\n", err)
+		return nil, fmt.Errorf("failed to modify change: %v", err)
 	}
 
-	err = m.RemoveChangeById(oldChange.ID)
+	err = m.RemoveChangeByID(oldChange.ID)
 	if err != nil {
-		return nil, fmt.Errorf("failed to remove old change with id %s: %v\n", oldChange.ID, err)
+		return nil, fmt.Errorf("failed to remove old change with id %s: %v", oldChange.ID, err)
 	}
 
 	return newChanges, nil
 }
 
-// RemoveChangeById removes the Change with the specified id from the Metadata's Changes and also removes the Change
+// RemoveChangeByID removes the Change with the specified id from the Metadata's Changes and also removes the Change
 // from the .changes/next-release directory.
-func (m *Metadata) RemoveChangeById(id string) error {
+func (m *Metadata) RemoveChangeByID(id string) error {
 	i, _, err := m.getChange(id)
 	if err != nil {
 		return fmt.Errorf("failed to remove change: %v", err)
@@ -155,7 +155,7 @@ func (m *Metadata) ClearChanges() error {
 	}
 
 	for _, id := range ids {
-		err := m.RemoveChangeById(id)
+		err := m.RemoveChangeByID(id)
 		if err != nil {
 			return err
 		}
