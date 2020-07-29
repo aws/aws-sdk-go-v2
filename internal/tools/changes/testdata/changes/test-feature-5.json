@@ -1,0 +1,7 @@
+{
+  "ID": "test-feature-5",
+  "SchemaVersion": 1,
+  "Module": "test",
+  "Type": "feature",
+  "Description": "testing multiline *rich change* entry with _two lines_ of text."
+}

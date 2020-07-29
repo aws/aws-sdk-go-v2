@@ -1,0 +1,7 @@
+{
+  "ID": "test-feature-1",
+  "SchemaVersion": 1,
+  "Module": "test",
+  "Type": "feature",
+  "Description": "test description"
+}
