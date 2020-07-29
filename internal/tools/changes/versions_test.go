@@ -322,10 +322,14 @@ func (c *MockGit) Tags(prefix string) ([]string, error) {
 	return ret, nil
 }
 
-func (c *MockGit) Commit(unstagedPaths []string) error {
+func (c *MockGit) Commit(unstagedPaths []string, message string) error {
 	return nil
 }
 
 func (c *MockGit) Push() error {
 	return nil
+}
+
+func (c *MockGit) CommitHash() (string, error) {
+	return "1234567abcde", nil
 }

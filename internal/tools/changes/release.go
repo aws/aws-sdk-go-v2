@@ -28,7 +28,7 @@ const changelogModule = `{{- if .TopLevel -}}
 ## Release {{.ReleaseID}}
 * ` + "`" + `{{.Module}}` + "`" + `{{with .Version}} - {{.}}{{end}}{{end -}}
 {{range $key, $section := .Sections}}{{range $section}}
-  * {{ $key.HeaderTitle }}{{.Description}}{{end}}{{end}}{{if not .TopLevel}}
+  * {{ $key.ChangelogPrefix }}{{.Description}}{{end}}{{end}}{{if not .TopLevel}}
 {{end}}`
 
 var changelogTemplate *template.Template
@@ -97,6 +97,7 @@ const rootChangelogTemplateContents = `# Release {{.ID}}
 {{end -}}
 {{end}}`
 
+// RenderChangelog generates a top level CHANGELOG.md for the Release r.
 func (r *Release) RenderChangelog() (string, error) {
 	buff := new(bytes.Buffer)
 
@@ -127,6 +128,8 @@ func (r *Release) wildcards(prefix string) []Change {
 	return changes
 }
 
+// splitSections groups entries (including wildcard Changes and module Changelog entries) into three groups: Announcements,
+// Services, and Core SDK modules.
 func (r *Release) splitSections() ([]string, []string, []string, error) {
 	const servicePrefix = "service/"
 
@@ -165,16 +168,19 @@ func (r *Release) splitSections() ([]string, []string, []string, error) {
 	return announcements, services, core, nil
 }
 
+// AnnouncementsSection returns a list of Changelog bullet entries that should be included under the Announcements header.
 func (r *Release) AnnouncementsSection() ([]string, error) {
 	announcements, _, _, err := r.splitSections()
 	return announcements, err
 }
 
+// ServiceSection returns a list of Changelog bullet entries that should be included under the Service Clients header.
 func (r *Release) ServiceSection() ([]string, error) {
 	_, services, _, err := r.splitSections()
 	return services, err
 }
 
+// CoreSection returns a list of Changelog bullet entries that should be included under the Core SDK header.
 func (r *Release) CoreSection() ([]string, error) {
 	_, _, core, err := r.splitSections()
 	return core, err

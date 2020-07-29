@@ -91,9 +91,19 @@ func TestDefaultVersion(t *testing.T) {
 }
 
 func TestPseudoVersion(t *testing.T) {
-	_, err := pseudoVersion(".", "internal/tools/changes")
+	v, err := pseudoVersion(&MockGit{
+		tags: []string{
+			"internal/tools/changes/v0.1.2",
+		},
+	}, "internal/tools/changes")
 	if err != nil {
 		t.Fatal(err)
+	}
+
+	wantVer := "v0.1.3-0.1234567abcde"
+
+	if v != wantVer {
+		t.Errorf("wanted version %s, got %s", wantVer, v)
 	}
 }
 
@@ -146,22 +156,6 @@ func TestFormatPseudoVersion(t *testing.T) {
 				t.Errorf("expected pseudo-version to be %s, got %s", tt.wantVersion, pseudoV)
 			}
 		})
-	}
-}
-
-func TestCommitHash(t *testing.T) {
-	commitHash, err := commitHash(".")
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	parts := strings.Split(commitHash, "-")
-	if len(parts) != 2 {
-		t.Errorf("expected commit hash to have 2 parts separated by '-', got %s", commitHash)
-	}
-
-	if len(parts[1]) != 12 {
-		t.Errorf("expected commit hash length to be 12, got %d", len(parts[1]))
 	}
 }
 

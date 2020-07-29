@@ -14,10 +14,14 @@ import (
 type ChangeType string
 
 const (
-	FeatureChangeType      ChangeType = "feature"      // FeatureChangeType is a constant change type for a new feature.
-	BugFixChangeType       ChangeType = "bugfix"       // BugFixChangeType is a constant change type for a bug fix.
-	DependencyChangeType   ChangeType = "dependency"   // DependencyChangeType is a constant change type for a dependency update.
-	AnnouncementChangeType ChangeType = "announcement" // AnnouncementChangeType is a constant change type for an SDK announcement.
+	// FeatureChangeType is a constant change type for a new feature.
+	FeatureChangeType ChangeType = "feature"
+	// BugFixChangeType is a constant change type for a bug fix.
+	BugFixChangeType ChangeType = "bugfix"
+	// DependencyChangeType is a constant change type for a dependency update.
+	DependencyChangeType ChangeType = "dependency"
+	// AnnouncementChangeType is a constant change type for an SDK announcement.
+	AnnouncementChangeType ChangeType = "announcement"
 )
 
 const dependencyUpdateMessage = "Updated SDK dependencies to their latest versions."
@@ -38,8 +42,8 @@ func ParseChangeType(v string) (ChangeType, error) {
 	}
 }
 
-// HeaderTitle returns the CHANGELOG header the ChangeType should be grouped under.
-func (c ChangeType) HeaderTitle() string {
+// ChangelogPrefix returns the CHANGELOG header the ChangeType should be grouped under.
+func (c ChangeType) ChangelogPrefix() string {
 	switch c {
 	case FeatureChangeType:
 		return "Feature: "
@@ -48,7 +52,7 @@ func (c ChangeType) HeaderTitle() string {
 	case DependencyChangeType:
 		return "Dependency Update: "
 	case AnnouncementChangeType:
-		return "" // Announcements do not have a Header prefix.
+		return "" // Announcements do not have a Changelog prefix.
 	default:
 		panic("unknown change type: " + string(c))
 	}
@@ -154,7 +158,7 @@ func NewChanges(modules []string, changeType ChangeType, description string) ([]
 		module = shortenModPath(module)
 
 		changes = append(changes, Change{
-			ID:            generateId(module, changeType),
+			ID:            generateID(module, changeType),
 			SchemaVersion: SchemaVersion,
 			Module:        module,
 			Type:          changeType,
@@ -171,11 +175,12 @@ func NewChanges(modules []string, changeType ChangeType, description string) ([]
 	return changes, nil
 }
 
+// NewWildcardChange creates a wildcard Change.
 func NewWildcardChange(module string, changeType ChangeType, description string, affectedModules []string) (Change, error) {
 	module = shortenModPath(module)
 
 	change := Change{
-		ID:              generateId(module, changeType),
+		ID:              generateID(module, changeType),
 		SchemaVersion:   SchemaVersion,
 		Module:          module,
 		Type:            changeType,
@@ -198,6 +203,7 @@ func modIsWildcard(mod string) bool {
 	return strings.Contains(mod, "...")
 }
 
+// matches returns whether the Change c affects the given module.
 func (c Change) matches(module string) bool {
 	if !c.isWildcard() {
 		return module == c.Module
@@ -207,10 +213,12 @@ func (c Change) matches(module string) bool {
 	return strings.HasPrefix(module, prefix)
 }
 
+// String returns a string representation of a Change suitable to be included in a Changelog.
 func (c Change) String() string {
-	return fmt.Sprintf("* %s%s", c.Type.HeaderTitle(), c.Description)
+	return fmt.Sprintf("* %s%s", c.Type.ChangelogPrefix(), c.Description)
 }
 
+// MatchWildcardModules filters modules, returning only the modules that match the given wildcard.
 func MatchWildcardModules(modules []string, wildcard string) ([]string, error) {
 	var matches []string
 
@@ -297,7 +305,7 @@ func AffectedModules(changes []Change) []string {
 	return modules
 }
 
-func generateId(module string, changeType ChangeType) string {
+func generateID(module string, changeType ChangeType) string {
 	module = strings.ReplaceAll(module, "...", "wildcard")
 	module = strings.ReplaceAll(module, "/", ".")
 

@@ -12,6 +12,7 @@ import (
 	"strings"
 )
 
+// WriteJSON marshals the given data as JSON and writes it to the specified location.
 func WriteJSON(data interface{}, root, dir, name string) error {
 	filePath := filepath.Join(root, dir, name+".json")
 	changeBytes, err := json.MarshalIndent(data, "", " ")
@@ -22,6 +23,8 @@ func WriteJSON(data interface{}, root, dir, name string) error {
 	return WriteFile(changeBytes, filePath, false)
 }
 
+// WriteFile writes the given bytes to the file at path, creating one if necessary. If appendTo is true, then the data
+// will be prepended to the top of the file.
 func WriteFile(data []byte, path string, appendTo bool) error {
 	if appendTo {
 		exists, err := FileExists(path, false)
@@ -42,6 +45,8 @@ func WriteFile(data []byte, path string, appendTo bool) error {
 	return ioutil.WriteFile(path, data, 0644)
 }
 
+// FileExists returns whether or not a file exists at the specified path. If dir is true, FileExists checks for the existence
+// of the specified directory.
 func FileExists(path string, dir bool) (bool, error) {
 	if f, err := os.Stat(path); err == nil {
 		if f.IsDir() != dir {
@@ -56,7 +61,7 @@ func FileExists(path string, dir bool) (bool, error) {
 	}
 }
 
-// findFile recursively searches upwards from the current directory to the filesystem root for the specified file.
+// FindFile recursively searches upwards from the current directory to the filesystem root for the specified file.
 func FindFile(fileName string, dir bool) (string, error) {
 	currPath, err := os.Getwd()
 	if err != nil {

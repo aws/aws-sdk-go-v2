@@ -45,6 +45,8 @@ func NewRepository(path string) (*Repository, error) {
 	return repo, nil
 }
 
+// Modules returns all Go modules under the given Repository. The list of module names returns are shortened to be relative
+// to the root of the repository.
 func (r *Repository) Modules() ([]string, error) {
 	if r.modules != nil {
 		return r.modules, nil
@@ -59,10 +61,12 @@ func (r *Repository) Modules() ([]string, error) {
 	return mods, err
 }
 
+// DoRelease runs the automated release process, consuming the given Repository's Metadata, updating module's go.mod files,
+// creating a release JSON file, committing changes, tagging the repository, and pushing.
 func (r *Repository) DoRelease(releaseID string) error {
-	//if err := r.Metadata.CurrentVersions.isValid(r.RootPath); err != nil {
-	//	return fmt.Errorf("couldn't create a release: %v", err)
-	//}
+	if err := r.Metadata.CurrentVersions.isValid(r.git); err != nil {
+		return fmt.Errorf("couldn't create a release: %v", err)
+	}
 
 	enc, bumps, err := r.DiscoverVersions(ReleaseVersionSelector)
 	if err != nil {
@@ -93,7 +97,7 @@ func (r *Repository) DoRelease(releaseID string) error {
 }
 
 func (r *Repository) tagAndPush(releaseID string, bumps map[string]VersionBump) error {
-	err := r.git.Commit([]string{"."})
+	err := r.git.Commit([]string{"."}, fmt.Sprintf("release %s", releaseID))
 	if err != nil {
 		return err
 	}
@@ -145,7 +149,7 @@ func (r *Repository) updateEnclosure(enc *VersionEnclosure, bumps map[string]Ver
 	}
 
 	var depMods []string
-	for m, _ := range updates {
+	for m := range updates {
 		if _, ok := bumps[m]; !ok {
 			depMods = append(depMods, m)
 
@@ -164,6 +168,7 @@ func (r *Repository) updateEnclosure(enc *VersionEnclosure, bumps map[string]Ver
 	return updates, nil
 }
 
+// UpdateAllChangelogs generates changelog entries for both the top level CHANGELOG.md and per-module CHANGELOG.md files.
 func (r *Repository) UpdateAllChangelogs(release *Release, pending bool) error {
 	err := r.UpdateChangelog(release, pending)
 	if err != nil {
@@ -196,6 +201,7 @@ func (r *Repository) UpdateChangelog(release *Release, pending bool) error {
 	return util.WriteFile([]byte(entry), filepath.Join(r.RootPath, "CHANGELOG.md"), !pending)
 }
 
+// UpdateModuleChangelog generates a changelog entry for the specified module, updating the module's CHANGELOG.md file.
 func (r *Repository) UpdateModuleChangelog(release *Release, module string, pending bool) error {
 	entry, err := release.RenderChangelogForModule(module, false)
 	if err != nil {
@@ -249,16 +255,10 @@ func (r *Repository) discoverVersions(modules []string, selector VersionSelector
 		}
 
 		if v != "" {
-			//modHash, err := goChecksum(r.RootPath, m, v)
-			//if err != nil {
-			//	return VersionEnclosure{}, nil, fmt.Errorf("failed to discover version of module %s: %v", m, err)
-			//}
-
 			enclosure.ModuleVersions[m] = Version{
 				Module:     m,
 				ImportPath: lengthenModPath(m),
 				Version:    v,
-				//ModuleHash: modHash,
 			}
 		}
 

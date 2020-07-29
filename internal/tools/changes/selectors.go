@@ -66,7 +66,7 @@ func DevelopmentVersionSelector(r *Repository, module string) (string, VersionIn
 	incr := versionIncrement(r.Metadata.GetChanges(module))
 
 	if incr != NoBump {
-		v, err := pseudoVersion(r.RootPath, module)
+		v, err := pseudoVersion(r.git, module)
 		return v, incr, err
 	}
 

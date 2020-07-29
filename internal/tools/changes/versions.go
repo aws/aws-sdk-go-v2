@@ -15,11 +15,16 @@ import (
 type VersionIncrement int
 
 const (
-	NoBump    VersionIncrement = iota // NoBump indicates the module's version should not change.
-	PatchBump                         // PatchBump indicates the module's version should be incremented by a patch version bump.
-	MinorBump                         // MinorBump indicates the module's version should be incremented by a minor version bump.
-	MajorBump                         // MajorBump indicates the module's major version should be incremented from v0 to v1.
-	NewModule                         // NewModule indicates that a new modules has been discovered and will be assigned a default version.
+	// NoBump indicates the module's version should not change.
+	NoBump VersionIncrement = iota
+	// PatchBump indicates the module's version should be incremented by a patch version bump.
+	PatchBump
+	// MinorBump indicates the module's version should be incremented by a minor version bump.
+	MinorBump
+	// MajorBump indicates the module's major version should be incremented from v0 to v1.
+	MajorBump
+	// NewModule indicates that a new modules has been discovered and will be assigned a default version.
+	NewModule
 )
 
 // Version is the version of a Go module.
@@ -32,8 +37,8 @@ type Version struct {
 
 // VersionBump describes a version increment to a module.
 type VersionBump struct {
-	From string
-	To   string
+	From string // From is the old module version
+	To   string // To is the new module version
 }
 
 // VersionEnclosure is a set of versions for Go modules in a given repository.
@@ -142,10 +147,10 @@ func nextVersion(version string, bumpType VersionIncrement) (string, error) {
 	case NoBump:
 		return version, nil
 	case PatchBump:
-		patch += 1
+		patch++
 	case MinorBump:
 		patch = 0
-		minor += 1
+		minor++
 	case MajorBump:
 		if major != 0 {
 			return "", errors.New("major increment can only be applied to v0")

@@ -6,17 +6,18 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/util"
 	"io"
-	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
 )
 
+// Client is a wrapper around the go list command.
 type Client struct {
-	RootPath       string
-	ShortenModPath func(string) string
+	RootPath       string              // RootPath is the path to the root of a multi-module git repository.
+	ShortenModPath func(string) string // ShortenModPath shortens a module's import path to be a relative path from the RootPath.
 }
 
+// ModuleClient gets dependency and package information about go modules.
 type ModuleClient interface {
 	Dependencies(mod string) ([]string, error)
 	Packages(mod string) ([]string, error)
@@ -29,13 +30,11 @@ func (c Client) path(mod string) string {
 	return filepath.Join(parts...)
 }
 
+// Dependencies returns a list of all modules that the module mod depends on.
 func (c Client) Dependencies(mod string) ([]string, error) {
 	mod = c.ShortenModPath(mod)
 
 	cmd := exec.Command("go", "list", "-json", "-m", "all")
-	cmd.Env = os.Environ()
-	cmd.Env = append(cmd.Env, "GOSUMDB=off")
-
 	out, err := util.ExecAt(cmd, c.path(mod))
 	if err != nil {
 		return nil, err
@@ -71,7 +70,7 @@ func (c Client) parseGoModuleList(output []byte) ([]string, error) {
 	return modules, nil
 }
 
-// ListPackages returns a slice of packages that are part of the module mod.
+// Packages returns a slice of packages that are part of the module mod.
 func (c Client) Packages(mod string) ([]string, error) {
 	mod = c.ShortenModPath(mod)
 

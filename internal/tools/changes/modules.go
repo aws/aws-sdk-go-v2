@@ -12,14 +12,11 @@ import (
 	"golang.org/x/mod/zip"
 	"io/ioutil"
 	"os"
-	"os/exec"
 	"path/filepath"
 	"strings"
 )
 
 var sdkRepo = "github.com/aws/aws-sdk-go-v2"
-
-//var sdkRepo = "github.com/aggagen/test"
 
 const rootModule = "/"
 
@@ -146,13 +143,13 @@ func defaultVersion(mod string) (string, error) {
 	return fmt.Sprintf("%s.0.0", major), nil
 }
 
-func pseudoVersion(repoPath, mod string) (string, error) {
-	commitHash, err := commitHash(repoPath)
+func pseudoVersion(git git.VcsClient, mod string) (string, error) {
+	commitHash, err := git.CommitHash()
 	if err != nil {
 		return "", fmt.Errorf("couldn't make pseudo-version: %v", err)
 	}
 
-	tagVer, err := taggedVersion(git.Client{RepoPath: repoPath}, mod, true) // TODO: use actual repo git client
+	tagVer, err := taggedVersion(git, mod, true)
 	if err != nil {
 		return "", fmt.Errorf("couldn't make pseudo-version: %v", err)
 	}
@@ -184,21 +181,6 @@ func formatPseudoVersion(commitHash, taggedVersion string) (string, error) {
 	}
 
 	return fmt.Sprintf("%s-0.%s", taggedVersion, commitHash), nil
-}
-
-// commitHash returns a timestamp and commit hash for the HEAD commit of the given repository, formatted in the way
-// expected for a go.mod file pseudo-version.
-func commitHash(repoPath string) (string, error) {
-	cmd := exec.Command("git", "show", "--quiet", "--abbrev=12", "--date=format-local:%Y%m%d%H%M%S", "--format=%cd-%h")
-	cmd.Env = os.Environ()
-	cmd.Env = append(cmd.Env, "TZ=UTC")
-
-	output, err := util.ExecAt(cmd, repoPath)
-	if err != nil {
-		return "", fmt.Errorf("couldn't make pseudo-version: %v", err)
-	}
-
-	return strings.Trim(string(output), "\n"), nil // clean up git show output and return
 }
 
 func goChecksum(repoPath, mod, version string) (string, error) {

@@ -110,7 +110,7 @@ func TestMetadata_AddChange(t *testing.T) {
 
 	m2 := getMetadata(t)
 
-	c, err := m2.GetChangeById("test-change-123456")
+	c, err := m2.GetChangeByID("test-change-123456")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -123,7 +123,7 @@ func TestMetadata_AddChange(t *testing.T) {
 		t.Errorf("Expected SchemaVersion %d, got %d", SchemaVersion, c.SchemaVersion)
 	}
 
-	err = m.RemoveChangeById("test-change-123456")
+	err = m.RemoveChangeByID("test-change-123456")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -147,12 +147,12 @@ func TestMetadata_AddChanges(t *testing.T) {
 	}
 
 	for _, c := range changes {
-		_, err := m.GetChangeById(c.ID)
+		_, err := m.GetChangeByID(c.ID)
 		if err != nil {
 			t.Error(err)
 		}
 
-		err = m.RemoveChangeById(c.ID)
+		err = m.RemoveChangeByID(c.ID)
 		if err != nil {
 			t.Error(err)
 		}
@@ -190,12 +190,12 @@ func TestMetadata_GetChangeById(t *testing.T) {
 	m := getMetadata(t)
 	m.Changes = getMockChanges(t)
 
-	_, err := m.GetChangeById("invalid-id")
+	_, err := m.GetChangeByID("invalid-id")
 	if err == nil {
 		t.Errorf("Expected non-nil err, got nil")
 	}
 
-	c, err := m.GetChangeById("test-feature-1")
+	c, err := m.GetChangeByID("test-feature-1")
 	if err != nil {
 		t.Fatalf("expected nil err, got %v", err)
 	}
