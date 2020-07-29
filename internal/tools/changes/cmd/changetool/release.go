@@ -17,12 +17,11 @@ var releaseParams = struct {
 	pretty    bool
 }{}
 
-var updatePendingFlags *flag.FlagSet
 var staticVersionsFlags *flag.FlagSet
 var createReleaseFlags *flag.FlagSet
 
 func releaseUsage() {
-	var sets = []*flag.FlagSet{updatePendingFlags, staticVersionsFlags, createReleaseFlags}
+	var sets = []*flag.FlagSet{staticVersionsFlags, createReleaseFlags}
 
 	for _, f := range sets {
 		f.Usage()
@@ -30,13 +29,6 @@ func releaseUsage() {
 }
 
 func init() {
-	updatePendingFlags = flag.NewFlagSet("update-pending", flag.ExitOnError)
-	updatePendingFlags.StringVar(&releaseParams.repo, "repo", "", "path to the SDK git repository")
-	updatePendingFlags.Usage = func() {
-		fmt.Printf("%s release update-pending <repo>\n", os.Args[0])
-		updatePendingFlags.PrintDefaults()
-	}
-
 	staticVersionsFlags = flag.NewFlagSet("static-versions", flag.ExitOnError)
 	staticVersionsFlags.StringVar(&releaseParams.repo, "repo", "", "path to the SDK git repository")
 	staticVersionsFlags.BoolVar(&releaseParams.pretty, "pretty", false, "print indented JSON output")
@@ -63,18 +55,6 @@ func releaseSubcmd(args []string) error {
 	subCmd := args[0]
 
 	switch subCmd {
-	case "update-pending":
-		err := updatePendingFlags.Parse(args[1:])
-		if err != nil {
-			return err
-		}
-
-		repo, err := changes.NewRepository(releaseParams.repo)
-		if err != nil {
-			return fmt.Errorf("couldn't load repository: %v", err)
-		}
-
-		return updatePendingCmd(repo)
 	case "static-versions":
 		err := staticVersionsFlags.Parse(args[1:])
 		if err != nil {
@@ -141,16 +121,6 @@ func releaseSubcmd(args []string) error {
 		releaseUsage()
 		return errors.New("invalid usage")
 	}
-}
-
-func updatePendingCmd(repo *changes.Repository) error {
-	err := repo.UpdatePendingChangelog()
-	if err != nil {
-		return fmt.Errorf("failed to update CHANGELOG_PENDING: %v", err)
-	}
-
-	fmt.Println("successfully updated CHANGELOG_PENDING")
-	return nil
 }
 
 func staticVersionsCmd(repoPath string, selector changes.VersionSelector, pretty bool) error {
