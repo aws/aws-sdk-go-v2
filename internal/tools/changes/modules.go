@@ -51,6 +51,14 @@ func shortenModPath(modulePath string) string {
 	return strings.TrimPrefix(modulePath, sdkRepo+"/")
 }
 
+func lengthenModPath(modulePath string) string {
+	if modulePath == RootModule {
+		return sdkRepo
+	}
+
+	return sdkRepo + "/" + modulePath
+}
+
 // discoverModules returns a list of all modules and a map between all packages and their providing module.
 func discoverModules(root string) ([]string, map[string]string, error) {
 	var modules []string
@@ -79,6 +87,9 @@ func discoverModules(root string) ([]string, map[string]string, error) {
 			}
 
 			modules = append(modules, shortenModPath(mod))
+		} else if info.Name() == "testdata" && path != "testdata" {
+			// skip testdata directory unless it is the root directory.
+			return filepath.SkipDir
 		}
 
 		return nil
@@ -182,8 +193,5 @@ func commitHash(repoPath string) (string, error) {
 		return "", fmt.Errorf("couldn't make pseudo-version: %v", err)
 	}
 
-	commitHash := string(output)
-	commitHash = strings.Trim(commitHash, "\n") // clean up git show output
-
-	return commitHash, nil
+	return strings.Trim(string(output), "\n"), nil // clean up git show output and return
 }

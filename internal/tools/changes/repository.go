@@ -91,31 +91,9 @@ func (v *VersionSelector) Set(s string) error {
 	return nil
 }
 
+// String returns an empty string to satisfy the flag.Value interface.
 func (v *VersionSelector) String() string {
 	return ""
-}
-
-func (r *Repository) discoverVersions(modules []string, selector VersionSelector) (VersionEnclosure, error) {
-	enclosure := VersionEnclosure{
-		SchemaVersion:  SchemaVersion,
-		ModuleVersions: map[string]Version{},
-	}
-
-	for _, m := range modules {
-		v, err := selector(r, m)
-		if err != nil {
-			return VersionEnclosure{}, err
-		}
-
-		if v != "" {
-			enclosure.ModuleVersions[m] = Version{
-				Module:  m,
-				Version: v,
-			}
-		}
-	}
-
-	return enclosure, nil
 }
 
 // DiscoverVersions creates a VersionEnclosure containing all Go modules in the Repository. The version of each module
@@ -134,6 +112,30 @@ func (r *Repository) DiscoverVersions(selector VersionSelector) (VersionEnclosur
 	enc.Packages = packages
 
 	return enc, nil
+}
+
+func (r *Repository) discoverVersions(modules []string, selector VersionSelector) (VersionEnclosure, error) {
+	enclosure := VersionEnclosure{
+		SchemaVersion:  SchemaVersion,
+		ModuleVersions: map[string]Version{},
+	}
+
+	for _, m := range modules {
+		v, err := selector(r, m)
+		if err != nil {
+			return VersionEnclosure{}, err
+		}
+
+		if v != "" {
+			enclosure.ModuleVersions[m] = Version{
+				Module:     m,
+				ImportPath: lengthenModPath(m),
+				Version:    v,
+			}
+		}
+	}
+
+	return enclosure, nil
 }
 
 // ReleaseVersionSelector returns a version for the given module suitable for use during the release process.

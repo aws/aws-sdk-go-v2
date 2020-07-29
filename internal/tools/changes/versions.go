@@ -20,15 +20,16 @@ const (
 
 // Version is the version of a Go module.
 type Version struct {
-	Module  string // Module is the full module path of the Go module.
-	Version string // Version is a valid Go module semantic version, which can potentially be a pseudo-version.
+	Module     string // Module is the repo relative module path of the Go module.
+	ImportPath string // ImportPath is the full module import path.
+	Version    string // Version is a valid Go module semantic version, which can potentially be a pseudo-version.
 }
 
 // VersionEnclosure is a set of versions for Go modules in a given repository.
 type VersionEnclosure struct {
-	SchemaVersion  string             // SchemaVersion is the version of the library's types used to create this VersionEnclosure
-	ModuleVersions map[string]Version // ModuleVersions is a mapping between full module paths and their corresponding Version.
-	Packages       map[string]string  // Packages maps each package in the repo to the module that provides the package.
+	SchemaVersion  int                // SchemaVersion is the version of the library's types used to create this VersionEnclosure
+	ModuleVersions map[string]Version // ModuleVersions is a mapping between shortened module paths and their corresponding Version.
+	Packages       map[string]string  // Packages maps each package in the repo to the shortened module path that provides the package.
 }
 
 // isValid checks whether the ModuleVersions contained in the VersionEnclosure v accurately reflect the latest tagged versions.

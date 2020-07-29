@@ -11,6 +11,8 @@ import (
 	"testing"
 )
 
+const modPrefix = "internal/tools/changes/testdata/modules/"
+
 func TestNewRepository(t *testing.T) {
 	repo, err := NewRepository("testdata")
 	if err != nil {
@@ -85,8 +87,8 @@ func TestRepository_discoverVersions(t *testing.T) {
 			wantEnclosure: VersionEnclosure{
 				SchemaVersion: SchemaVersion,
 				ModuleVersions: map[string]Version{
-					"a": {"a", "v1.0.0"},
-					"b": {"b", "v1.2.3"},
+					"a": {"a", sdkRepo + "/" + "a", "v1.0.0"},
+					"b": {"b", sdkRepo + "/" + "b", "v1.2.3"},
 				},
 			},
 		},
@@ -96,9 +98,9 @@ func TestRepository_discoverVersions(t *testing.T) {
 			wantEnclosure: VersionEnclosure{
 				SchemaVersion: SchemaVersion,
 				ModuleVersions: map[string]Version{
-					"a":    {"a", "v1.0.0"},
-					"b":    {"b", "v1.2.3"},
-					"c/v2": {"c/v2", "v2.0.0"},
+					"a":    {"a", sdkRepo + "/" + "a", "v1.0.0"},
+					"b":    {"b", sdkRepo + "/" + "b", "v1.2.3"},
+					"c/v2": {"c/v2", sdkRepo + "/" + "c/v2", "v2.0.0"},
 				},
 			},
 		},
@@ -153,7 +155,7 @@ func TestRepository_DiscoverVersions(t *testing.T) {
 			{
 				ID:            "test-change",
 				SchemaVersion: SchemaVersion,
-				Module:        "internal/tools/changes/testdata/modules/a",
+				Module:        modPrefix + "a",
 				Type:          FeatureChangeType,
 				Description:   "this is a test change",
 			},
@@ -165,7 +167,7 @@ func TestRepository_DiscoverVersions(t *testing.T) {
 		}
 
 		wantEnc := repo.Metadata.CurrentVersions
-		wantEnc.ModuleVersions["internal/tools/changes/testdata/modules/a"] = Version{"internal/tools/changes/testdata/modules/a", "v0.1.0"}
+		wantEnc.ModuleVersions[modPrefix+"a"] = Version{modPrefix + "a", sdkRepo + "/" + modPrefix + "a", "v0.1.0"}
 
 		if diff := cmp.Diff(enc, repo.Metadata.CurrentVersions); diff != "" {
 			t.Errorf("expect enclosures to match:\n%v", diff)
@@ -175,7 +177,7 @@ func TestRepository_DiscoverVersions(t *testing.T) {
 	t.Run("new module", func(t *testing.T) {
 		repo := getRepository(t)
 		// simulate new module by removing "a" from CurrentVersions
-		delete(repo.Metadata.CurrentVersions.ModuleVersions, "internal/tools/changes/testdata/modules/a")
+		delete(repo.Metadata.CurrentVersions.ModuleVersions, modPrefix+"a")
 
 		enc, err := repo.DiscoverVersions(ReleaseVersionSelector)
 		if err != nil {
@@ -183,7 +185,7 @@ func TestRepository_DiscoverVersions(t *testing.T) {
 		}
 
 		wantEnc := repo.Metadata.CurrentVersions
-		wantEnc.ModuleVersions["internal/tools/changes/testdata/modules/a"] = Version{"internal/tools/changes/testdata/modules/a", "v0.0.0"}
+		wantEnc.ModuleVersions[modPrefix+"a"] = Version{modPrefix + "a", sdkRepo + "/" + modPrefix + "a", "v0.0.0"}
 
 		if diff := cmp.Diff(enc, repo.Metadata.CurrentVersions); diff != "" {
 			t.Errorf("expect enclosures to match:\n%v", diff)
@@ -194,7 +196,7 @@ func TestRepository_DiscoverVersions(t *testing.T) {
 func TestDevelopmentVersionSelector(t *testing.T) {
 	repo := getRepository(t)
 
-	_, err := DevelopmentVersionSelector(repo, "internal/tools/changes/testdata/modules/a")
+	_, err := DevelopmentVersionSelector(repo, modPrefix+"a")
 	if err != nil {
 		t.Fatal(err)
 	}
