@@ -13,6 +13,7 @@ func TestRelease_AffectedModules(t *testing.T) {
 			[]Change{
 				{
 					Module: "test",
+					Type:   FeatureChangeType,
 				},
 			},
 			[]string{"test"},
@@ -21,9 +22,11 @@ func TestRelease_AffectedModules(t *testing.T) {
 			[]Change{
 				{
 					Module: "test",
+					Type:   FeatureChangeType,
 				},
 				{
 					Module: "test",
+					Type:   FeatureChangeType,
 				},
 			},
 			[]string{"test"},
@@ -32,9 +35,11 @@ func TestRelease_AffectedModules(t *testing.T) {
 			[]Change{
 				{
 					Module: "test",
+					Type:   FeatureChangeType,
 				},
 				{
 					Module: "other",
+					Type:   BugFixChangeType,
 				},
 			},
 			[]string{"test", "other"},

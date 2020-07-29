@@ -1,6 +1,7 @@
-package changes
+package util
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -11,19 +12,19 @@ import (
 	"strings"
 )
 
-func writeJSON(data interface{}, root, dir, name string) error {
+func WriteJSON(data interface{}, root, dir, name string) error {
 	filePath := filepath.Join(root, dir, name+".json")
 	changeBytes, err := json.MarshalIndent(data, "", " ")
 	if err != nil {
 		return err
 	}
 
-	return writeFile(changeBytes, filePath, false)
+	return WriteFile(changeBytes, filePath, false)
 }
 
-func writeFile(data []byte, path string, appendTo bool) error {
+func WriteFile(data []byte, path string, appendTo bool) error {
 	if appendTo {
-		exists, err := fileExists(path, false)
+		exists, err := FileExists(path, false)
 		if err != nil {
 			return err
 		}
@@ -41,7 +42,7 @@ func writeFile(data []byte, path string, appendTo bool) error {
 	return ioutil.WriteFile(path, data, 0644)
 }
 
-func fileExists(path string, dir bool) (bool, error) {
+func FileExists(path string, dir bool) (bool, error) {
 	if f, err := os.Stat(path); err == nil {
 		if f.IsDir() != dir {
 			return false, nil
@@ -56,7 +57,7 @@ func fileExists(path string, dir bool) (bool, error) {
 }
 
 // findFile recursively searches upwards from the current directory to the filesystem root for the specified file.
-func findFile(fileName string, dir bool) (string, error) {
+func FindFile(fileName string, dir bool) (string, error) {
 	currPath, err := os.Getwd()
 	if err != nil {
 		return "", fmt.Errorf("failed to find file: %v", err)
@@ -68,7 +69,7 @@ func findFile(fileName string, dir bool) (string, error) {
 		}
 
 		targetFilepath := filepath.Join(currPath, fileName)
-		found, err := fileExists(targetFilepath, dir)
+		found, err := FileExists(targetFilepath, dir)
 		if err != nil {
 			return "", fmt.Errorf("failed to find file: %v", err)
 		}
@@ -83,8 +84,8 @@ func findFile(fileName string, dir bool) (string, error) {
 	}
 }
 
-// execAt runs the given Cmd with is working directory set to path.
-func execAt(cmd *exec.Cmd, path string) ([]byte, error) {
+// ExecAt runs the given Cmd with is working directory set to path.
+func ExecAt(cmd *exec.Cmd, path string) ([]byte, error) {
 	originalWd, err := os.Getwd()
 	if err != nil {
 		return nil, fmt.Errorf("couldn't run cmd %s: %v", cmd.String(), err)
@@ -95,9 +96,13 @@ func execAt(cmd *exec.Cmd, path string) ([]byte, error) {
 		return nil, fmt.Errorf("couldn't run cmd %s: %v", cmd.String(), err)
 	}
 
-	out, err := cmd.Output()
+	var stdout, stderr bytes.Buffer
+	cmd.Stdout = &stdout
+	cmd.Stderr = &stderr
+
+	err = cmd.Run()
 	if err != nil {
-		return nil, fmt.Errorf("couldn't run cmd %s: %v: %s", cmd.String(), err, string(out))
+		return nil, fmt.Errorf("couldn't run cmd %s: %v: %s", cmd.String(), err, stderr.String())
 	}
 
 	err = os.Chdir(originalWd)
@@ -105,5 +110,5 @@ func execAt(cmd *exec.Cmd, path string) ([]byte, error) {
 		return nil, fmt.Errorf("couldn't run cmd %s: %v", cmd.String(), err)
 	}
 
-	return out, nil
+	return stdout.Bytes(), nil
 }

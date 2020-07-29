@@ -42,13 +42,13 @@ func ParseChangeType(v string) (ChangeType, error) {
 func (c ChangeType) HeaderTitle() string {
 	switch c {
 	case FeatureChangeType:
-		return "Feature"
+		return "Feature: "
 	case BugFixChangeType:
-		return "Bug Fix"
+		return "Bug Fix: "
 	case DependencyChangeType:
-		return "Dependency Update"
+		return "Dependency Update: "
 	case AnnouncementChangeType:
-		return "Announcement"
+		return "" // Announcements do not have a Header prefix.
 	default:
 		panic("unknown change type: " + string(c))
 	}
@@ -208,7 +208,7 @@ func (c Change) matches(module string) bool {
 }
 
 func (c Change) String() string {
-	return fmt.Sprintf("* %s: %s", c.Type.HeaderTitle(), c.Description)
+	return fmt.Sprintf("* %s%s", c.Type.HeaderTitle(), c.Description)
 }
 
 func MatchWildcardModules(modules []string, wildcard string) ([]string, error) {

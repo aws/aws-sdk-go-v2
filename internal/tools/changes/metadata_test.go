@@ -1,6 +1,7 @@
 package changes
 
 import (
+	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/util"
 	"github.com/google/go-cmp/cmp"
 	"io/ioutil"
 	"os"
@@ -9,13 +10,15 @@ import (
 	"testing"
 )
 
-var tmpDir string
+var tmpDir string // tmpDir is a temporary directory metadata tests use.
 
 func TestMain(m *testing.M) {
-	cleanup, err := setupTmpChanges()
+	dirName, cleanup, err := setupTmpChanges()
 	if err != nil {
 		panic(err)
 	}
+
+	tmpDir = dirName
 
 	code := m.Run()
 
@@ -27,36 +30,36 @@ func TestMain(m *testing.M) {
 	os.Exit(code)
 }
 
-func setupTmpChanges() (cleanup func() error, err error) {
+func setupTmpChanges() (name string, cleanup func() error, err error) {
 	// testdata already has .changes, but make a temporary .changes directory so that we can easily cleanup after
 	// tests have run.
-	tmpDir, err = ioutil.TempDir("", "changes-test")
+	dirName, err := ioutil.TempDir("", "changes-test")
 	if err != nil {
-		return nil, err
+		return "", nil, err
 	}
 
-	err = os.MkdirAll(filepath.Join(tmpDir, metadataDir, pendingDir), 0755)
+	err = os.MkdirAll(filepath.Join(dirName, metadataDir, pendingDir), 0755)
 	if err != nil {
-		return nil, err
+		return "", nil, err
 	}
 
-	err = os.Mkdir(filepath.Join(tmpDir, metadataDir, releaseDir), 0755)
+	err = os.Mkdir(filepath.Join(dirName, metadataDir, releaseDir), 0755)
 	if err != nil {
-		return nil, err
+		return "", nil, err
 	}
 
 	// create empty versions.json
-	err = writeJSON(VersionEnclosure{
+	err = util.WriteJSON(VersionEnclosure{
 		SchemaVersion:  SchemaVersion,
 		ModuleVersions: map[string]Version{},
 		Packages:       map[string]string{},
-	}, tmpDir, metadataDir, "versions")
+	}, dirName, metadataDir, "versions")
 	if err != nil {
-		return nil, err
+		return "", nil, err
 	}
 
-	return func() error {
-		return os.RemoveAll(tmpDir)
+	return dirName, func() error {
+		return os.RemoveAll(dirName)
 	}, nil
 }
 

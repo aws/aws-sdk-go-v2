@@ -1,15 +1,15 @@
 package changes
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/git"
+	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/golist"
+	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/util"
 	"golang.org/x/mod/modfile"
 	"golang.org/x/mod/module"
 	"golang.org/x/mod/semver"
 	"golang.org/x/mod/sumdb/dirhash"
 	"golang.org/x/mod/zip"
-	"io"
 	"io/ioutil"
 	"os"
 	"os/exec"
@@ -17,16 +17,16 @@ import (
 	"strings"
 )
 
-//var sdkRepo = "github.com/aws/aws-sdk-go-v2"
+var sdkRepo = "github.com/aws/aws-sdk-go-v2"
 
-var sdkRepo = "github.com/aggagen/test"
+//var sdkRepo = "github.com/aggagen/test"
 
 const rootModule = "/"
 
 // GetCurrentModule returns a shortened module path (from the root of the repository to the module, not a full import
 // path) for the Go module containing the current directory.
 func GetCurrentModule() (string, error) {
-	path, err := findFile("go.mod", false)
+	path, err := util.FindFile("go.mod", false)
 	if err != nil {
 		return "", err
 	}
@@ -66,7 +66,7 @@ func lengthenModPath(modulePath string) string {
 }
 
 // discoverModules returns a list of all modules and a map between all packages and their providing module.
-func discoverModules(root string) ([]string, map[string]string, error) {
+func discoverModules(golist golist.ModuleClient, root string) ([]string, map[string]string, error) {
 	var modules []string
 	packages := map[string]string{}
 
@@ -81,18 +81,18 @@ func discoverModules(root string) ([]string, map[string]string, error) {
 				return err
 			}
 
-			mod := modFile.Module.Mod.String()
+			mod := shortenModPath(modFile.Module.Mod.String())
 
-			modPackages, err := listPackages(filepath.Dir(path))
+			modPackages, err := golist.Packages(mod)
 			if err != nil {
 				return err
 			}
 
 			for _, p := range modPackages {
-				packages[p] = shortenModPath(mod)
+				packages[p] = mod
 			}
 
-			modules = append(modules, shortenModPath(mod))
+			modules = append(modules, mod)
 		} else if info.Name() == "testdata" && path != "testdata" {
 			// skip testdata directory unless it is the root directory.
 			return filepath.SkipDir
@@ -127,83 +127,7 @@ func updateDependencies(repoPath, mod string, dependencies []string, enc *Versio
 		return fmt.Errorf("couldn't update %s's dependencies: %v", mod, err)
 	}
 
-	return writeFile(out, goModPath, false)
-}
-
-func listDependencies(path string) ([]string, error) {
-	cmd := exec.Command("go", "list", "-json", "-m", "all")
-	cmd.Env = os.Environ()
-	cmd.Env = append(cmd.Env, "GOSUMDB=off")
-
-	out, err := execAt(cmd, path)
-	if err != nil {
-		return nil, err
-	}
-
-	return parseGoModuleList(out)
-}
-
-// goModule is a package as output by the `go list` command.
-type goModule struct {
-	Path string // Path is the module's import path.
-	Main bool   // Main indicates whether the module is the main module.
-}
-
-func parseGoModuleList(output []byte) ([]string, error) {
-	var modules []string
-	dec := json.NewDecoder(bytes.NewReader(output))
-
-	for {
-		var p goModule
-		if err := dec.Decode(&p); err != nil {
-			if err == io.EOF {
-				break
-			}
-			return nil, err
-		}
-
-		if !p.Main && strings.HasPrefix(p.Path, sdkRepo) {
-			modules = append(modules, shortenModPath(p.Path))
-		}
-	}
-
-	return modules, nil
-}
-
-// listPackages returns a slice of packages that are part of the module whose go.mod file is in the directory specified
-// by path.
-func listPackages(path string) ([]string, error) {
-	cmd := exec.Command("go", "list", "-json", "./...")
-	out, err := execAt(cmd, path)
-	if err != nil {
-		return nil, fmt.Errorf("failed to list packages: %v", err)
-	}
-
-	return parseGoList(out)
-}
-
-// goPackage is a package as output by the `go list` command.
-type goPackage struct {
-	ImportPath string // ImportPath is the package's import path.
-}
-
-func parseGoList(output []byte) ([]string, error) {
-	var packages []string
-	dec := json.NewDecoder(bytes.NewReader(output))
-
-	for {
-		var p goPackage
-		if err := dec.Decode(&p); err != nil {
-			if err == io.EOF {
-				break
-			}
-			return nil, err
-		}
-
-		packages = append(packages, p.ImportPath)
-	}
-
-	return packages, nil
+	return util.WriteFile(out, goModPath, false)
 }
 
 // defaultVersion returns a default version for the given module based on its import path. If a version suffix /vX is
@@ -228,7 +152,7 @@ func pseudoVersion(repoPath, mod string) (string, error) {
 		return "", fmt.Errorf("couldn't make pseudo-version: %v", err)
 	}
 
-	tagVer, err := taggedVersion(repoPath, mod, true)
+	tagVer, err := taggedVersion(git.Client{RepoPath: repoPath}, mod, true) // TODO: use actual repo git client
 	if err != nil {
 		return "", fmt.Errorf("couldn't make pseudo-version: %v", err)
 	}
@@ -269,7 +193,7 @@ func commitHash(repoPath string) (string, error) {
 	cmd.Env = os.Environ()
 	cmd.Env = append(cmd.Env, "TZ=UTC")
 
-	output, err := execAt(cmd, repoPath)
+	output, err := util.ExecAt(cmd, repoPath)
 	if err != nil {
 		return "", fmt.Errorf("couldn't make pseudo-version: %v", err)
 	}

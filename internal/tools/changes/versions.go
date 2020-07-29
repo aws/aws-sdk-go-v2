@@ -1,10 +1,11 @@
 package changes
 
 import (
+	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/git"
 	"golang.org/x/mod/module"
 	"golang.org/x/mod/semver"
-	"os/exec"
 	"sort"
 	"strconv"
 	"strings"
@@ -26,7 +27,7 @@ type Version struct {
 	Module     string // Module is the repo relative module path of the Go module.
 	ImportPath string // ImportPath is the full module import path.
 	Version    string // Version is a valid Go module semantic version, which can potentially be a pseudo-version.
-	ModuleHash string // ModuleHash is
+	ModuleHash string // ModuleHash is the Go module checksum of the the Version's module.
 }
 
 // VersionBump describes a version increment to a module.
@@ -44,9 +45,9 @@ type VersionEnclosure struct {
 
 // isValid returns nil if the ModuleVersions contained in the VersionEnclosure v accurately reflect the latest tagged versions.
 // Otherwise, isValid returns an error.
-func (v *VersionEnclosure) isValid(repoPath string) error {
+func (v *VersionEnclosure) isValid(git git.VcsClient) error {
 	for m, encVer := range v.ModuleVersions {
-		gitVer, err := taggedVersion(repoPath, m, false)
+		gitVer, err := taggedVersion(git, m, false)
 		if err != nil {
 			return err
 		}
@@ -122,6 +123,11 @@ func nextVersion(version string, bumpType VersionIncrement) (string, error) {
 		return "", fmt.Errorf("expected 3 semver parts, got %d", len(parts))
 	}
 
+	major, err := strconv.Atoi(strings.TrimPrefix(parts[0], "v"))
+	if err != nil {
+		return "", err
+	}
+
 	minor, err := strconv.Atoi(parts[1])
 	if err != nil {
 		return "", err
@@ -140,63 +146,45 @@ func nextVersion(version string, bumpType VersionIncrement) (string, error) {
 	case MinorBump:
 		patch = 0
 		minor += 1
+	case MajorBump:
+		if major != 0 {
+			return "", errors.New("major increment can only be applied to v0")
+		}
+
+		major = 1
+		minor = 0
+		patch = 0
 	}
 
-	return fmt.Sprintf("%s.%d.%d", parts[0], minor, patch), nil
+	return fmt.Sprintf("v%d.%d.%d", major, minor, patch), nil
 }
 
-func tagRepo(repoPath, releaseID, mod, version string) error {
-	if mod == rootModule {
-		mod = ""
-	} else {
-		mod += "/"
+func tagRepo(git git.VcsClient, releaseID, mod, version string) error {
+	path, major, ok := module.SplitPathVersion(mod)
+	if !ok {
+		return fmt.Errorf("couldn't split module path: %s", mod)
 	}
 
-	tag := mod + version
+	major = strings.TrimLeft(major, "/")
+	if !strings.HasPrefix(version, major) {
+		return fmt.Errorf("version %s does not match module %s's major version", version, mod)
+	}
+
+	if path == rootModule || path == "" {
+		path = ""
+	} else {
+		path += "/"
+	}
+
+	tag := path + version
 
 	msg := fmt.Sprintf("\"release %s module %s version %s\"", releaseID, mod, version)
-	cmd := exec.Command("git", "tag", "-a", tag, "-m", msg)
-	_, err := execAt(cmd, repoPath)
-	if err != nil {
-		return err
-	}
 
-	return nil
-}
-
-func commit(repoPath string, unstagedPaths []string) error {
-	if repoPath == "" {
-		repoPath = "."
-	}
-
-	for _, p := range unstagedPaths {
-		cmd := exec.Command("git", "add", p)
-		_, err := execAt(cmd, repoPath)
-		if err != nil {
-			return err
-		}
-	}
-
-	cmd := exec.Command("git", "commit", "-m", "'release commit'")
-	_, err := execAt(cmd, repoPath)
-
-	return err
-}
-
-func push(repoPath string) error {
-	cmd := exec.Command("git", "push", "--tags")
-	_, err := execAt(cmd, repoPath)
-	if err != nil {
-		return err
-	}
-
-	cmd = exec.Command("git", "push") // TODO does git push --tags already do this?
-	_, err = execAt(cmd, repoPath)
-	return err
+	return git.Tag(tag, msg)
 }
 
 // taggedVersion returns the latest tagged version of the given module in the specified repository.
-func taggedVersion(repoPath, mod string, includePrereleases bool) (string, error) {
+func taggedVersion(git git.VcsClient, mod string, includePrereleases bool) (string, error) {
 	path, major, ok := module.SplitPathVersion(mod)
 	if !ok {
 		return "", fmt.Errorf("couldn't split module path: %s", mod)
@@ -209,19 +197,19 @@ func taggedVersion(repoPath, mod string, includePrereleases bool) (string, error
 
 	if major == "" {
 		// if there is no major version suffix, then the latest version could be v1 or v0.
-		versions, err = versionTags(repoPath, path, "v1", includePrereleases)
+		versions, err = versionTags(git, path, "v1", includePrereleases)
 		if err != nil {
 			return "", err
 		}
 
 		if len(versions) == 0 {
-			versions, err = versionTags(repoPath, path, "v0", includePrereleases)
+			versions, err = versionTags(git, path, "v0", includePrereleases)
 			if err != nil {
 				return "", err
 			}
 		}
 	} else {
-		versions, err = versionTags(repoPath, path, major, includePrereleases)
+		versions, err = versionTags(git, path, major, includePrereleases)
 		if err != nil {
 			return "", err
 		}
@@ -235,33 +223,38 @@ func taggedVersion(repoPath, mod string, includePrereleases bool) (string, error
 }
 
 // versionTags gets all semantic version git tags for the given module major version, ignoring prerelease versions.
-func versionTags(repoPath, mod, major string, includePrereleases bool) ([]string, error) {
+func versionTags(git git.VcsClient, mod, major string, includePrereleases bool) ([]string, error) {
 	if mod == rootModule {
 		mod = ""
 	} else {
 		mod += "/"
 	}
 
-	cmd := exec.Command("git", "tag", "--sort=-v:refname", "-l", mod+major+"*")
-	output, err := execAt(cmd, repoPath)
+	versions, err := git.Tags(mod + major)
 	if err != nil {
 		return nil, err
 	}
 
-	var versions []string
-
-	for _, v := range strings.Split(string(output), "\n") {
-		v = strings.TrimPrefix(v, mod)
-		prerelease := semver.Prerelease(v) != ""
-
-		if (semver.IsValid(v) && semver.Build(v) == "") && (!prerelease || includePrereleases) {
-			versions = append(versions, strings.TrimPrefix(v, mod))
-		}
-	}
+	versions = filterVersions(versions, mod, includePrereleases)
 
 	sort.Slice(versions, func(i, j int) bool {
 		return semver.Compare(versions[i], versions[j]) > 0
 	})
 
 	return versions, nil
+}
+
+func filterVersions(versions []string, mod string, includePrereleases bool) []string {
+	var filtered []string
+
+	for _, v := range versions {
+		v = strings.TrimPrefix(v, mod)
+		prerelease := semver.Prerelease(v) != ""
+
+		if (semver.IsValid(v) && semver.Build(v) == "") && (!prerelease || includePrereleases) {
+			filtered = append(filtered, v)
+		}
+	}
+
+	return filtered
 }

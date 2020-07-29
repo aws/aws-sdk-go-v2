@@ -28,7 +28,7 @@ const changelogModule = `{{- if .TopLevel -}}
 ## Release {{.ReleaseID}}
 * ` + "`" + `{{.Module}}` + "`" + `{{with .Version}} - {{.}}{{end}}{{end -}}
 {{range $key, $section := .Sections}}{{range $section}}
-  * {{ $key.HeaderTitle }}: {{.Description}}{{end}}{{end}}{{if not .TopLevel}}
+  * {{ $key.HeaderTitle }}{{.Description}}{{end}}{{end}}{{if not .TopLevel}}
 {{end}}`
 
 var changelogTemplate *template.Template
@@ -50,7 +50,6 @@ func init() {
 
 // RenderChangelogForModule returns a new markdown section of a module's CHANGELOG based on the Changes in the Release.
 func (r *Release) RenderChangelogForModule(module string, topLevel bool) (string, error) {
-	// todo headerPrefix is obsolete
 	sections := map[ChangeType][]Change{}
 
 	for _, c := range r.Changes {
@@ -90,16 +89,13 @@ const rootChangelogTemplateContents = `# Release {{.ID}}
 {{with .AnnouncementsSection}}## Announcements
 {{range .}}{{.}}
 {{end -}}
-{{end}}
-{{with .ServiceSection}}## Service Client Highlights
+{{end}}{{with .ServiceSection}}## Service Client Highlights
 {{range .}}{{.}}
 {{end -}}
-{{end}}
-{{with .CoreSection}}## Core SDK Highlights
+{{end}}{{with .CoreSection}}## Core SDK Highlights
 {{range .}}{{.}}
 {{end -}}
-{{end}}
-`
+{{end}}`
 
 func (r *Release) RenderChangelog() (string, error) {
 	buff := new(bytes.Buffer)
@@ -132,7 +128,7 @@ func (r *Release) wildcards(prefix string) []Change {
 }
 
 func (r *Release) splitSections() ([]string, []string, []string, error) {
-	const servicePrefix = "services/"
+	const servicePrefix = "service/"
 
 	var announcements []string
 	var services []string
@@ -162,7 +158,7 @@ func (r *Release) splitSections() ([]string, []string, []string, error) {
 		if strings.HasPrefix(m, servicePrefix) {
 			services = append(services, entry)
 		} else {
-			core = append(services, entry)
+			core = append(core, entry)
 		}
 	}
 

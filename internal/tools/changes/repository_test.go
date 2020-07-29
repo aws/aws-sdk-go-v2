@@ -3,10 +3,13 @@ package changes
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
+	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/golist"
 	"github.com/google/go-cmp/cmp"
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 	"testing"
 )
@@ -45,43 +48,125 @@ func TestRepository_Modules(t *testing.T) {
 }
 
 func TestRepository_DoRelease(t *testing.T) {
+	repo, cleanup := tmpRepository(t)
+	defer cleanup()
 
+	// setup repo with changes
+	err := repo.Metadata.AddChanges([]Change{
+		{
+			ID:            "test-change-1",
+			SchemaVersion: SchemaVersion,
+			Module:        "a",
+			Type:          FeatureChangeType,
+			Description:   "a feature change",
+		},
+		{
+			ID:            "test-change-2",
+			SchemaVersion: SchemaVersion,
+			Module:        "service/...",
+			Type:          BugFixChangeType,
+			Description:   "all services wildcard bugfix",
+			AffectedModules: []string{
+				"service/c",
+				"service/d",
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	err = repo.DoRelease("test-release")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	assertFileContains(t, filepath.Join(repo.RootPath, "a", "go.mod"), []string{"require github.com/aws/aws-sdk-go-v2/service/c v0.1.3"})
+	assertFileContains(t, filepath.Join(repo.RootPath, "b", "go.mod"), []string{"require github.com/aws/aws-sdk-go-v2/a v1.1.0"})
+
+	assertFileContains(t, filepath.Join(repo.RootPath, "CHANGELOG.md"), []string{
+		"* [a](a/CHANGELOG.md) - v1.1.0\n  * Feature: a feature change",
+		"Service Client Highlights\n* Bug Fix: all services wildcard bugfix",
+		"Dependency Update: Updated SDK dependencies to their latest versions.",
+	})
+
+	assertFileContains(t, filepath.Join(repo.RootPath, "a", "CHANGELOG.md"), []string{
+		"* Feature: a feature change",
+	})
+
+	assertFileContains(t, filepath.Join(repo.RootPath, "service", "d", "CHANGELOG.md"), []string{
+		"* Bug Fix: all services wildcard bugfix",
+		"v1.100.101",
+	})
+}
+
+func TestRepository_TagAndPush(t *testing.T) {
+	repo := getRepository(t)
+	gitClient := &MockGit{}
+	repo.git = gitClient
+
+	bumps := map[string]VersionBump{
+		"a": {
+			From: "v1.0.0",
+			To:   "v1.0.1",
+		},
+		"b": {
+			From: "v0.0.0",
+			To:   "v1.0.0",
+		},
+		"c/v2": {
+			To: "v2.0.0",
+		},
+	}
+
+	wantTags := []string{"a/v1.0.1", "b/v1.0.0", "c/v2.0.0"}
+
+	err := repo.tagAndPush("test-release", bumps)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	sort.Strings(gitClient.tags)
+
+	if diff := cmp.Diff(gitClient.tags, wantTags); diff != "" {
+		t.Errorf("expect tags to match:\n%v", diff)
+	}
 }
 
 func TestRepository_UpdateChangelog(t *testing.T) {
 	repo := getRepository(t)
 
-	for _, changelogType := range []string{"pending", "regular"} {
-		cases := getTestChangelogCases(t, changelogType)
-		for id, tt := range cases {
-			pending := false
-			fileName := filepath.Join("testdata", "CHANGELOG.md")
-			if changelogType == "pending" {
-				pending = true
-				fileName = filepath.Join("testdata", "CHANGELOG_PENDING.md")
+	dir, err := ioutil.TempDir("", "tmp-changelog-test")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	repo.RootPath = dir
+
+	cases := getTestChangelogCases(t)
+	for _, tt := range cases {
+		t.Run(tt.release.ID, func(t *testing.T) {
+			err = repo.UpdateChangelog(tt.release, false)
+			if err != nil {
+				t.Fatal(err)
 			}
 
-			t.Run(id+changelogType, func(t *testing.T) {
-				err := repo.UpdateChangelog(tt.release, pending)
-				if err != nil {
-					t.Fatal(err)
-				}
+			changelog, err := ioutil.ReadFile(filepath.Join(dir, "CHANGELOG.md"))
+			if err != nil {
+				t.Fatal(err)
+			}
 
-				changelog, err := ioutil.ReadFile(fileName)
-				if err != nil {
-					t.Fatal(err)
-				}
+			if diff := cmp.Diff(string(changelog), tt.changelog); diff != "" {
+				t.Errorf("expect changelogs to match:\n%v", diff)
+			}
 
-				if diff := cmp.Diff(string(changelog), tt.changelog); diff != "" {
-					t.Errorf("expect changelogs to match:\n%v", diff)
-				}
+			err = os.Remove(filepath.Join(dir, "CHANGELOG.md"))
+		})
+	}
 
-				err = os.Remove(fileName)
-				if err != nil {
-					t.Fatal(err)
-				}
-			})
-		}
+	err = os.RemoveAll(dir)
+	if err != nil {
+		t.Fatal(err)
 	}
 }
 
@@ -112,8 +197,8 @@ func TestRepository_discoverVersions(t *testing.T) {
 			wantEnclosure: VersionEnclosure{
 				SchemaVersion: SchemaVersion,
 				ModuleVersions: map[string]Version{
-					"a": {"a", sdkRepo + "/" + "a", "v1.0.0"},
-					"b": {"b", sdkRepo + "/" + "b", "v1.2.3"},
+					"a": {"a", sdkRepo + "/" + "a", "v1.0.0", ""},
+					"b": {"b", sdkRepo + "/" + "b", "v1.2.3", ""},
 				},
 			},
 			wantBumps: map[string]VersionBump{
@@ -127,9 +212,9 @@ func TestRepository_discoverVersions(t *testing.T) {
 			wantEnclosure: VersionEnclosure{
 				SchemaVersion: SchemaVersion,
 				ModuleVersions: map[string]Version{
-					"a":    {"a", sdkRepo + "/" + "a", "v1.0.0"},
-					"b":    {"b", sdkRepo + "/" + "b", "v1.2.3"},
-					"c/v2": {"c/v2", sdkRepo + "/" + "c/v2", "v2.0.0"},
+					"a":    {"a", sdkRepo + "/" + "a", "v1.0.0", ""},
+					"b":    {"b", sdkRepo + "/" + "b", "v1.2.3", ""},
+					"c/v2": {"c/v2", sdkRepo + "/" + "c/v2", "v2.0.0", ""},
 				},
 			},
 			wantBumps: map[string]VersionBump{
@@ -159,14 +244,14 @@ func TestRepository_discoverVersions(t *testing.T) {
 				if !strings.Contains(err.Error(), tt.wantErr) {
 					t.Errorf("expected err to contain %s, got %v", tt.wantErr, err)
 				}
-			}
+			} else {
+				if diff := cmp.Diff(enc, tt.wantEnclosure); diff != "" {
+					t.Errorf("expect enclosures to match:\n%v", diff)
+				}
 
-			if diff := cmp.Diff(enc, tt.wantEnclosure); diff != "" {
-				t.Errorf("expect enclosures to match:\n%v", diff)
-			}
-
-			if diff := cmp.Diff(bumps, tt.wantBumps); diff != "" {
-				t.Errorf("expect bumps to match:\n%v", diff)
+				if diff := cmp.Diff(bumps, tt.wantBumps); diff != "" {
+					t.Errorf("expect bumps to match:\n%v", diff)
+				}
 			}
 		})
 	}
@@ -209,7 +294,7 @@ func TestRepository_DiscoverVersions(t *testing.T) {
 		}
 
 		wantEnc := repo.Metadata.CurrentVersions
-		wantEnc.ModuleVersions[modPrefix+"a"] = Version{modPrefix + "a", sdkRepo + "/" + modPrefix + "a", "v0.1.0"}
+		wantEnc.ModuleVersions[modPrefix+"a"] = Version{modPrefix + "a", sdkRepo + "/" + modPrefix + "a", "v0.1.0", ""}
 
 		if diff := cmp.Diff(enc, repo.Metadata.CurrentVersions); diff != "" {
 			t.Errorf("expect enclosures to match:\n%v", diff)
@@ -227,7 +312,7 @@ func TestRepository_DiscoverVersions(t *testing.T) {
 		}
 
 		wantEnc := repo.Metadata.CurrentVersions
-		wantEnc.ModuleVersions[modPrefix+"a"] = Version{modPrefix + "a", sdkRepo + "/" + modPrefix + "a", "v0.0.0"}
+		wantEnc.ModuleVersions[modPrefix+"a"] = Version{modPrefix + "a", sdkRepo + "/" + modPrefix + "a", "v0.0.0", ""}
 
 		if diff := cmp.Diff(enc, repo.Metadata.CurrentVersions); diff != "" {
 			t.Errorf("expect enclosures to match:\n%v", diff)
@@ -243,7 +328,88 @@ func getRepository(t *testing.T) *Repository {
 		panic(err)
 	}
 
+	repo.golist = golist.Client{
+		RootPath: filepath.Join("testdata", "modules"),
+		ShortenModPath: func(mod string) string {
+			return strings.TrimPrefix(mod, "internal/tools/changes/testdata/modules/")
+		},
+	}
+
+	repo.Logf = nil // suppress logging
+
 	return repo
+}
+
+func tmpRepository(t *testing.T) (*Repository, func() error) {
+	t.Helper()
+
+	dirName, cleanup, err := setupTmpChanges()
+	if err != nil {
+		panic(err)
+	}
+
+	repo, err := NewRepository(dirName)
+	if err != nil {
+		panic(err)
+	}
+
+	repo.Logf = nil
+
+	repo.git = &MockGit{
+		tags: []string{"a/v1.0.0", "b/v1.2.3", "service/c/v0.1.2", "service/d/v1.100.100"},
+	}
+	repo.golist = &mockGolist{
+		dependencies: map[string][]string{
+			"a":         {"service/c"},
+			"b":         {"a"},
+			"service/c": {"a", "b"},
+		},
+	}
+
+	mods := []string{"a", "b", "newmod", "service/c", "service/d"}
+	for _, m := range mods {
+		err = addModuleToTmpRepo(t, dirName, m)
+		if err != nil {
+			panic(err)
+		}
+	}
+
+	return repo, cleanup
+}
+
+func addModuleToTmpRepo(t *testing.T, dir, mod string) error {
+	t.Helper()
+
+	const goMod = `module %s
+
+go 1.14
+`
+
+	err := os.MkdirAll(filepath.Join(dir, mod), 0755)
+	if err != nil {
+		return err
+	}
+
+	data := fmt.Sprintf(goMod, mod)
+
+	return ioutil.WriteFile(filepath.Join(dir, mod, "go.mod"), []byte(data), 0755)
+}
+
+func assertFileContains(t *testing.T, path string, substrings []string) bool {
+	data, err := ioutil.ReadFile(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	for _, s := range substrings {
+		if !strings.Contains(string(data), s) {
+			fmt.Println(string(data))
+			t.Errorf("expected file %s to contain %s", path, s)
+			return false
+		}
+	}
+
+	return true
 }
 
 type changelogCase struct {
@@ -251,12 +417,12 @@ type changelogCase struct {
 	changelog string
 }
 
-func getTestChangelogCases(t *testing.T, changelogType string) map[string]changelogCase {
+func getTestChangelogCases(t *testing.T) []changelogCase {
 	t.Helper()
 	const releasesTestDir = "releases"
 	const changelogsTestDir = "changelogs"
 
-	cases := map[string]changelogCase{}
+	var cases []changelogCase
 
 	files, err := ioutil.ReadDir(filepath.Join("testdata", releasesTestDir))
 	if err != nil {
@@ -275,12 +441,12 @@ func getTestChangelogCases(t *testing.T, changelogType string) map[string]change
 			t.Fatal(err)
 		}
 
-		changelog, err := ioutil.ReadFile(filepath.Join("testdata", changelogsTestDir, changelogType, release.ID+".md"))
+		changelog, err := ioutil.ReadFile(filepath.Join("testdata", changelogsTestDir, release.ID+".md"))
 		if err != nil {
 			t.Fatal(err)
 		}
 
-		cases[release.ID] = changelogCase{&release, string(changelog)}
+		cases = append(cases, changelogCase{&release, string(changelog)})
 	}
 
 	return cases

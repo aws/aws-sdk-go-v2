@@ -1,8 +1,8 @@
 package changes
 
 import (
+	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/golist"
 	"github.com/google/go-cmp/cmp"
-	"io/ioutil"
 	"path/filepath"
 	"strings"
 	"testing"
@@ -31,7 +31,14 @@ func TestDiscoverModules(t *testing.T) {
 		wantMods[i] = prefix + wantMods[i]
 	}
 
-	mods, _, err := discoverModules(filepath.Join("testdata", "modules"))
+	goclient := golist.Client{
+		RootPath: filepath.Join("testdata", "modules"),
+		ShortenModPath: func(mod string) string {
+			return strings.TrimPrefix(mod, "internal/tools/changes/testdata/modules/")
+		},
+	}
+
+	mods, _, err := discoverModules(goclient, filepath.Join("testdata", "modules"))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -80,27 +87,6 @@ func TestDefaultVersion(t *testing.T) {
 				t.Errorf("expected version to be %s, got %s", tt.wantVersion, v)
 			}
 		})
-	}
-}
-
-func TestParseGoList(t *testing.T) {
-	out, err := ioutil.ReadFile(filepath.Join("testdata", "golist.json"))
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	packages, err := parseGoList(out)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	wantPackages := []string{
-		"github.com/aws/aws-sdk-go-v2/internal/tools/changes",
-		"github.com/aws/aws-sdk-go-v2/internal/tools/changes/cmd/changetool",
-	}
-
-	if diff := cmp.Diff(wantPackages, packages); diff != "" {
-		t.Errorf("expect packages to match:\n%v", diff)
 	}
 }
 
@@ -177,4 +163,17 @@ func TestCommitHash(t *testing.T) {
 	if len(parts[1]) != 12 {
 		t.Errorf("expected commit hash length to be 12, got %d", len(parts[1]))
 	}
+}
+
+type mockGolist struct {
+	dependencies map[string][]string
+	packages     map[string][]string
+}
+
+func (c *mockGolist) Dependencies(mod string) ([]string, error) {
+	return c.dependencies[mod], nil
+}
+
+func (c *mockGolist) Packages(mod string) ([]string, error) {
+	return c.packages[mod], nil
 }

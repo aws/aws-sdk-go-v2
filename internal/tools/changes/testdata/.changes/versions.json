@@ -23,9 +23,9 @@
   }
  },
  "Packages": {
-  "github.com/aws/aws-sdk-go-v2/internal/tools/changes/testdata/modules/a": "github.com/aws/aws-sdk-go-v2/internal/tools/changes/testdata/modules/a",
-  "github.com/aws/aws-sdk-go-v2/internal/tools/changes/testdata/modules/b": "github.com/aws/aws-sdk-go-v2/internal/tools/changes/testdata/modules/b",
-  "github.com/aws/aws-sdk-go-v2/internal/tools/changes/testdata/modules/nested/c": "github.com/aws/aws-sdk-go-v2/internal/tools/changes/testdata/modules/nested/c",
-  "github.com/aws/aws-sdk-go-v2/internal/tools/changes/testdata/modules/nested/c/d": "github.com/aws/aws-sdk-go-v2/internal/tools/changes/testdata/modules/nested/c/d"
+  "github.com/aws/aws-sdk-go-v2/internal/tools/changes/testdata/modules/a": "internal/tools/changes/testdata/modules/a",
+  "github.com/aws/aws-sdk-go-v2/internal/tools/changes/testdata/modules/b": "internal/tools/changes/testdata/modules/b",
+  "github.com/aws/aws-sdk-go-v2/internal/tools/changes/testdata/modules/nested/c": "internal/tools/changes/testdata/modules/nested/c",
+  "github.com/aws/aws-sdk-go-v2/internal/tools/changes/testdata/modules/nested/c/d": "internal/tools/changes/testdata/modules/nested/c/d"
  }
 }

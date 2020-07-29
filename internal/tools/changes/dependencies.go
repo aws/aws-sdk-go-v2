@@ -1,16 +1,18 @@
 package changes
 
-import "path/filepath"
+import (
+	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/golist"
+)
 
 // ModuleGraph is a mapping between modules in a repository and a list of modules within the same repository that depend on that module.
 type ModuleGraph map[string][]string
 
 // moduleGraph returns a map between each given module in modules and a slice of modules within the repository that depend on that module.
-func moduleGraph(repoRoot string, modules []string) (ModuleGraph, error) {
+func moduleGraph(golist golist.ModuleClient, modules []string) (ModuleGraph, error) {
 	deps := map[string][]string{}
 
 	for _, m := range modules {
-		mDeps, err := listDependencies(filepath.Join(repoRoot, m))
+		mDeps, err := golist.Dependencies(m)
 		if err != nil {
 			return nil, err
 		}

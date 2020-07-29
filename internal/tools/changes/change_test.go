@@ -1,7 +1,6 @@
 package changes
 
 import (
-	"bytes"
 	"github.com/google/go-cmp/cmp"
 	"strings"
 	"testing"
@@ -92,9 +91,13 @@ func TestChangeToTemplate(t *testing.T) {
 - test
 type: feature
 description: test description
+affected_modules: []
 
 # type may be one of "feature" or "bugfix".
-# multiple modules may be listed. A change metadata file will be created for each module.`
+# multiple modules may be listed. A change metadata file will be created for each module.
+
+# affected_modules should not be provided unless you are creating a wildcard change (by passing
+# the wildcard and module flag to the add command).`
 
 	template, err := ChangeToTemplate(Change{
 		ID:          "test-feature-1",
@@ -106,8 +109,8 @@ description: test description
 		t.Fatalf("expected nil err, got %v", err)
 	}
 
-	if bytes.Compare(template, []byte(wantTemplate)) != 0 {
-		t.Errorf("expected template \"%s\", got \"%s\"", wantTemplate, string(template))
+	if diff := cmp.Diff(template, []byte(wantTemplate)); len(diff) != 0 {
+		t.Errorf("expect templates to match:\n%v", diff)
 	}
 }
 

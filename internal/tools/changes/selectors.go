@@ -39,7 +39,7 @@ func ReleaseVersionSelector(r *Repository, module string) (string, VersionIncrem
 		return v, incr, err
 	}
 
-	v, err := taggedVersion(r.RootPath, module, false)
+	v, err := taggedVersion(r.git, module, false)
 	if err != nil {
 		return "", NoBump, fmt.Errorf("couldn't find current version of %s: %v", module, err)
 	}
@@ -56,7 +56,7 @@ func ReleaseVersionSelector(r *Repository, module string) (string, VersionIncrem
 
 // TaggedVersionSelector returns the greatest version of module tagged in the git repository.
 func TaggedVersionSelector(r *Repository, module string) (string, VersionIncrement, error) {
-	v, err := taggedVersion(r.RootPath, module, false)
+	v, err := taggedVersion(r.git, module, false)
 	return v, NoBump, err
 }
 

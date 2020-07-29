@@ -2,31 +2,74 @@ package changes
 
 import (
 	"github.com/google/go-cmp/cmp"
-	"strings"
 	"testing"
 )
 
 func TestModuleGraph(t *testing.T) {
-	repo := getRepository(t)
-	oldSdk := sdkRepo
-	defer func() { sdkRepo = oldSdk }()
-	sdkRepo = strings.TrimSuffix(sdkRepo+"/"+modPrefix, "/modules/")
-
-	repoMods, err := repo.Modules()
-	if err != nil {
-		t.Fatal(err)
+	var cases = map[string]struct {
+		dependencies map[string][]string
+		modules      []string
+		wantGraph    ModuleGraph
+	}{
+		"simple": {
+			map[string][]string{
+				"a": {"b"},
+			},
+			[]string{"a", "b"},
+			ModuleGraph{
+				"b": []string{"a"},
+			},
+		},
+		"cyclical": {
+			map[string][]string{
+				"a": {"b"},
+				"b": {"a"},
+			},
+			[]string{"a", "b"},
+			ModuleGraph{
+				"a": []string{"b"},
+				"b": []string{"a"},
+			},
+		},
+		"chain": {
+			map[string][]string{
+				"a": {"b"},
+				"b": {"c"},
+				"c": {"d"},
+			},
+			[]string{"a", "b", "c", "d"},
+			ModuleGraph{
+				"d": []string{"c"},
+				"c": []string{"b"},
+				"b": []string{"a"},
+			},
+		},
+		"two groups": {
+			map[string][]string{
+				"a": {"b"},
+				"c": {"d"},
+			},
+			[]string{"a", "b", "c", "d"},
+			ModuleGraph{
+				"b": []string{"a"},
+				"d": []string{"c"},
+			},
+		},
 	}
 
-	graph, err := moduleGraph(repo.RootPath, repoMods)
-	if err != nil {
-		t.Fatal(err)
-	}
+	for id, tt := range cases {
+		t.Run(id, func(t *testing.T) {
+			goClient := mockGolist{dependencies: tt.dependencies}
 
-	wantGraph := ModuleGraph{
-		"a": []string{"b"},
-	}
-	if diff := cmp.Diff(graph, wantGraph); diff != "" {
-		t.Errorf("expect dependencies to match:\n%v", diff)
+			graph, err := moduleGraph(&goClient, tt.modules)
+			if err != nil {
+				t.Fatal(err)
+			}
+
+			if diff := cmp.Diff(graph, tt.wantGraph); diff != "" {
+				t.Errorf("expect dependencies to match:\n%v", diff)
+			}
+		})
 	}
 }
 

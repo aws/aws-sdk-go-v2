@@ -27,14 +27,14 @@
       "Description": "this is a test"
     },
     {
-      "ID": "test-feature-1593193458080838000",
+      "ID": "test-feature-1593193458080838001",
       "SchemaVersion": 1,
       "Module": "test",
       "Type": "feature",
       "Description": "this is another feature"
     },
     {
-      "ID": "test-feature-1593193458080838000",
+      "ID": "test-feature-1593193458080838002",
       "SchemaVersion": 1,
       "Module": "test",
       "Type": "bugfix",
