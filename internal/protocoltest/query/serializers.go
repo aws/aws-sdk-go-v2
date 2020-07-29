@@ -50,7 +50,13 @@ func (m *awsAwsquery_serializeOpEmptyInputAndEmptyOutput) HandleSerialize(ctx co
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
-	if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {
+
+	encodedBody, err := bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -96,7 +102,13 @@ func (m *awsAwsquery_serializeOpFlattenedXmlMap) HandleSerialize(ctx context.Con
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
-	if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {
+
+	encodedBody, err := bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -142,7 +154,13 @@ func (m *awsAwsquery_serializeOpFlattenedXmlMapWithXmlName) HandleSerialize(ctx 
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
-	if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {
+
+	encodedBody, err := bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -188,7 +206,13 @@ func (m *awsAwsquery_serializeOpGreetingWithErrors) HandleSerialize(ctx context.
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
-	if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {
+
+	encodedBody, err := bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -234,7 +258,13 @@ func (m *awsAwsquery_serializeOpIgnoresWrappingXmlName) HandleSerialize(ctx cont
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
-	if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {
+
+	encodedBody, err := bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -283,7 +313,12 @@ func (m *awsAwsquery_serializeOpNestedStructures) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {
+	encodedBody, err := bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -329,7 +364,13 @@ func (m *awsAwsquery_serializeOpNoInputAndNoOutput) HandleSerialize(ctx context.
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
-	if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {
+
+	encodedBody, err := bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -375,7 +416,13 @@ func (m *awsAwsquery_serializeOpNoInputAndOutput) HandleSerialize(ctx context.Co
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
-	if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {
+
+	encodedBody, err := bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -424,7 +471,12 @@ func (m *awsAwsquery_serializeOpQueryIdempotencyTokenAutoFill) HandleSerialize(c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {
+	encodedBody, err := bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -473,7 +525,12 @@ func (m *awsAwsquery_serializeOpQueryLists) HandleSerialize(ctx context.Context,
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {
+	encodedBody, err := bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -522,7 +579,12 @@ func (m *awsAwsquery_serializeOpQueryMaps) HandleSerialize(ctx context.Context, 
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {
+	encodedBody, err := bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -571,7 +633,12 @@ func (m *awsAwsquery_serializeOpQueryTimestamps) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {
+	encodedBody, err := bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -617,7 +684,13 @@ func (m *awsAwsquery_serializeOpRecursiveXmlShapes) HandleSerialize(ctx context.
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
-	if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {
+
+	encodedBody, err := bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -666,7 +739,12 @@ func (m *awsAwsquery_serializeOpSimpleInputParams) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {
+	encodedBody, err := bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -712,7 +790,13 @@ func (m *awsAwsquery_serializeOpSimpleScalarXmlProperties) HandleSerialize(ctx c
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
-	if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {
+
+	encodedBody, err := bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -758,7 +842,13 @@ func (m *awsAwsquery_serializeOpXmlBlobs) HandleSerialize(ctx context.Context, i
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
-	if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {
+
+	encodedBody, err := bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -804,7 +894,13 @@ func (m *awsAwsquery_serializeOpXmlEnums) HandleSerialize(ctx context.Context, i
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
-	if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {
+
+	encodedBody, err := bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -850,7 +946,13 @@ func (m *awsAwsquery_serializeOpXmlLists) HandleSerialize(ctx context.Context, i
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
-	if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {
+
+	encodedBody, err := bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -896,7 +998,13 @@ func (m *awsAwsquery_serializeOpXmlMaps) HandleSerialize(ctx context.Context, in
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
-	if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {
+
+	encodedBody, err := bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -942,7 +1050,13 @@ func (m *awsAwsquery_serializeOpXmlMapsXmlName) HandleSerialize(ctx context.Cont
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
-	if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {
+
+	encodedBody, err := bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -988,7 +1102,13 @@ func (m *awsAwsquery_serializeOpXmlNamespaces) HandleSerialize(ctx context.Conte
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
-	if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {
+
+	encodedBody, err := bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1034,7 +1154,13 @@ func (m *awsAwsquery_serializeOpXmlTimestamps) HandleSerialize(ctx context.Conte
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
-	if request, err = request.SetStream(bytes.NewReader(bodyEncoder.Bytes())); err != nil {
+
+	encodedBody, err := bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1124,20 +1250,20 @@ func awsAwsquery_serializeDocumentStructArg(v *types.StructArg, value query.Valu
 	_ = object
 
 	if v.OtherArg != nil {
-		ok := object.Key("OtherArg")
-		ok.Boolean(*v.OtherArg)
+		objectKey := object.Key("OtherArg")
+		objectKey.Boolean(*v.OtherArg)
 	}
 
 	if v.RecursiveArg != nil {
-		ok := object.Key("RecursiveArg")
-		if err := awsAwsquery_serializeDocumentStructArg(v.RecursiveArg, ok); err != nil {
+		objectKey := object.Key("RecursiveArg")
+		if err := awsAwsquery_serializeDocumentStructArg(v.RecursiveArg, objectKey); err != nil {
 			return err
 		}
 	}
 
 	if v.StringArg != nil {
-		ok := object.Key("StringArg")
-		ok.String(*v.StringArg)
+		objectKey := object.Key("StringArg")
+		objectKey.String(*v.StringArg)
 	}
 
 	return nil
@@ -1163,8 +1289,8 @@ func awsAwsquery_serializeDocumentGreetingStruct(v *types.GreetingStruct, value 
 	_ = object
 
 	if v.Hi != nil {
-		ok := object.Key("hi")
-		ok.String(*v.Hi)
+		objectKey := object.Key("hi")
+		objectKey.String(*v.Hi)
 	}
 
 	return nil
@@ -1242,8 +1368,8 @@ func awsAwsquery_serializeDocumentNestedStructuresInput(v *NestedStructuresInput
 	_ = object
 
 	if v.Nested != nil {
-		ok := object.Key("Nested")
-		if err := awsAwsquery_serializeDocumentStructArg(v.Nested, ok); err != nil {
+		objectKey := object.Key("Nested")
+		if err := awsAwsquery_serializeDocumentStructArg(v.Nested, objectKey); err != nil {
 			return err
 		}
 	}
@@ -1270,8 +1396,8 @@ func awsAwsquery_serializeDocumentQueryIdempotencyTokenAutoFillInput(v *QueryIde
 	_ = object
 
 	if v.Token != nil {
-		ok := object.Key("token")
-		ok.String(*v.Token)
+		objectKey := object.Key("token")
+		objectKey.String(*v.Token)
 	}
 
 	return nil
@@ -1282,36 +1408,36 @@ func awsAwsquery_serializeDocumentQueryListsInput(v *QueryListsInput, value quer
 	_ = object
 
 	if v.ComplexListArg != nil {
-		ok := object.Key("ComplexListArg")
-		if err := awsAwsquery_serializeDocumentGreetingList(v.ComplexListArg, ok); err != nil {
+		objectKey := object.Key("ComplexListArg")
+		if err := awsAwsquery_serializeDocumentGreetingList(v.ComplexListArg, objectKey); err != nil {
 			return err
 		}
 	}
 
 	if v.FlattenedListArg != nil {
-		ok := object.FlatKey("FlattenedListArg")
-		if err := awsAwsquery_serializeDocumentStringList(v.FlattenedListArg, ok); err != nil {
+		objectKey := object.FlatKey("FlattenedListArg")
+		if err := awsAwsquery_serializeDocumentStringList(v.FlattenedListArg, objectKey); err != nil {
 			return err
 		}
 	}
 
 	if v.FlattenedListArgWithXmlName != nil {
-		ok := object.FlatKey("Hi")
-		if err := awsAwsquery_serializeDocumentListWithXmlName(v.FlattenedListArgWithXmlName, ok); err != nil {
+		objectKey := object.FlatKey("Hi")
+		if err := awsAwsquery_serializeDocumentListWithXmlName(v.FlattenedListArgWithXmlName, objectKey); err != nil {
 			return err
 		}
 	}
 
 	if v.ListArg != nil {
-		ok := object.Key("ListArg")
-		if err := awsAwsquery_serializeDocumentStringList(v.ListArg, ok); err != nil {
+		objectKey := object.Key("ListArg")
+		if err := awsAwsquery_serializeDocumentStringList(v.ListArg, objectKey); err != nil {
 			return err
 		}
 	}
 
 	if v.ListArgWithXmlNameMember != nil {
-		ok := object.Key("ListArgWithXmlNameMember")
-		if err := awsAwsquery_serializeDocumentListWithXmlName(v.ListArgWithXmlNameMember, ok); err != nil {
+		objectKey := object.Key("ListArgWithXmlNameMember")
+		if err := awsAwsquery_serializeDocumentListWithXmlName(v.ListArgWithXmlNameMember, objectKey); err != nil {
 			return err
 		}
 	}
@@ -1324,50 +1450,50 @@ func awsAwsquery_serializeDocumentQueryMapsInput(v *QueryMapsInput, value query.
 	_ = object
 
 	if v.ComplexMapArg != nil {
-		ok := object.Key("ComplexMapArg")
-		if err := awsAwsquery_serializeDocumentComplexMap(v.ComplexMapArg, ok); err != nil {
+		objectKey := object.Key("ComplexMapArg")
+		if err := awsAwsquery_serializeDocumentComplexMap(v.ComplexMapArg, objectKey); err != nil {
 			return err
 		}
 	}
 
 	if v.FlattenedMap != nil {
-		ok := object.FlatKey("FlattenedMap")
-		if err := awsAwsquery_serializeDocumentStringMap(v.FlattenedMap, ok); err != nil {
+		objectKey := object.FlatKey("FlattenedMap")
+		if err := awsAwsquery_serializeDocumentStringMap(v.FlattenedMap, objectKey); err != nil {
 			return err
 		}
 	}
 
 	if v.FlattenedMapWithXmlName != nil {
-		ok := object.FlatKey("Hi")
-		if err := awsAwsquery_serializeDocumentMapWithXmlName(v.FlattenedMapWithXmlName, ok); err != nil {
+		objectKey := object.FlatKey("Hi")
+		if err := awsAwsquery_serializeDocumentMapWithXmlName(v.FlattenedMapWithXmlName, objectKey); err != nil {
 			return err
 		}
 	}
 
 	if v.MapArg != nil {
-		ok := object.Key("MapArg")
-		if err := awsAwsquery_serializeDocumentStringMap(v.MapArg, ok); err != nil {
+		objectKey := object.Key("MapArg")
+		if err := awsAwsquery_serializeDocumentStringMap(v.MapArg, objectKey); err != nil {
 			return err
 		}
 	}
 
 	if v.MapOfLists != nil {
-		ok := object.Key("MapOfLists")
-		if err := awsAwsquery_serializeDocumentMapOfLists(v.MapOfLists, ok); err != nil {
+		objectKey := object.Key("MapOfLists")
+		if err := awsAwsquery_serializeDocumentMapOfLists(v.MapOfLists, objectKey); err != nil {
 			return err
 		}
 	}
 
 	if v.MapWithXmlMemberName != nil {
-		ok := object.Key("MapWithXmlMemberName")
-		if err := awsAwsquery_serializeDocumentMapWithXmlName(v.MapWithXmlMemberName, ok); err != nil {
+		objectKey := object.Key("MapWithXmlMemberName")
+		if err := awsAwsquery_serializeDocumentMapWithXmlName(v.MapWithXmlMemberName, objectKey); err != nil {
 			return err
 		}
 	}
 
 	if v.RenamedMapArg != nil {
-		ok := object.Key("Foo")
-		if err := awsAwsquery_serializeDocumentStringMap(v.RenamedMapArg, ok); err != nil {
+		objectKey := object.Key("Foo")
+		if err := awsAwsquery_serializeDocumentStringMap(v.RenamedMapArg, objectKey); err != nil {
 			return err
 		}
 	}
@@ -1380,18 +1506,18 @@ func awsAwsquery_serializeDocumentQueryTimestampsInput(v *QueryTimestampsInput, 
 	_ = object
 
 	if v.EpochMember != nil {
-		ok := object.Key("epochMember")
-		ok.Double(smithytime.FormatEpochSeconds(*v.EpochMember))
+		objectKey := object.Key("epochMember")
+		objectKey.Double(smithytime.FormatEpochSeconds(*v.EpochMember))
 	}
 
 	if v.EpochTarget != nil {
-		ok := object.Key("epochTarget")
-		ok.Double(smithytime.FormatEpochSeconds(*v.EpochTarget))
+		objectKey := object.Key("epochTarget")
+		objectKey.Double(smithytime.FormatEpochSeconds(*v.EpochTarget))
 	}
 
 	if v.NormalFormat != nil {
-		ok := object.Key("normalFormat")
-		ok.String(smithytime.FormatDateTime(*v.NormalFormat))
+		objectKey := object.Key("normalFormat")
+		objectKey.String(smithytime.FormatDateTime(*v.NormalFormat))
 	}
 
 	return nil
@@ -1409,38 +1535,38 @@ func awsAwsquery_serializeDocumentSimpleInputParamsInput(v *SimpleInputParamsInp
 	_ = object
 
 	if v.Bam != nil {
-		ok := object.Key("Bam")
-		ok.Integer(*v.Bam)
+		objectKey := object.Key("Bam")
+		objectKey.Integer(*v.Bam)
 	}
 
 	if v.Bar != nil {
-		ok := object.Key("Bar")
-		ok.String(*v.Bar)
+		objectKey := object.Key("Bar")
+		objectKey.String(*v.Bar)
 	}
 
 	if v.Baz != nil {
-		ok := object.Key("Baz")
-		ok.Boolean(*v.Baz)
+		objectKey := object.Key("Baz")
+		objectKey.Boolean(*v.Baz)
 	}
 
 	if v.Boo != nil {
-		ok := object.Key("Boo")
-		ok.Double(*v.Boo)
+		objectKey := object.Key("Boo")
+		objectKey.Double(*v.Boo)
 	}
 
 	if v.Foo != nil {
-		ok := object.Key("Foo")
-		ok.String(*v.Foo)
+		objectKey := object.Key("Foo")
+		objectKey.String(*v.Foo)
 	}
 
 	if len(v.FooEnum) > 0 {
-		ok := object.Key("FooEnum")
-		ok.String(string(v.FooEnum))
+		objectKey := object.Key("FooEnum")
+		objectKey.String(string(v.FooEnum))
 	}
 
 	if v.Qux != nil {
-		ok := object.Key("Qux")
-		ok.Base64EncodeBytes(v.Qux)
+		objectKey := object.Key("Qux")
+		objectKey.Base64EncodeBytes(v.Qux)
 	}
 
 	return nil
