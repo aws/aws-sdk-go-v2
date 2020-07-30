@@ -2,6 +2,7 @@ package query
 
 import (
 	"github.com/awslabs/smithy-go/httpbinding"
+	"math/big"
 	"net/url"
 )
 
@@ -13,7 +14,7 @@ type Value struct {
 	key string
 	// Whether the value should be flattened or not if it's a flattenable type.
 	flat bool
-	httpbinding.QueryValue
+	queryValue httpbinding.QueryValue
 }
 
 func newValue(values url.Values, key string, flat bool) Value {
@@ -21,14 +22,14 @@ func newValue(values url.Values, key string, flat bool) Value {
 		values:     values,
 		key:        key,
 		flat:       flat,
-		QueryValue: httpbinding.NewQueryValue(values, key, false),
+		queryValue: httpbinding.NewQueryValue(values, key, false),
 	}
 }
 
 func newBaseValue(values url.Values) Value {
 	return Value{
 		values:     values,
-		QueryValue: httpbinding.NewQueryValue(nil, "", false),
+		queryValue: httpbinding.NewQueryValue(nil, "", false),
 	}
 }
 
@@ -50,5 +51,55 @@ func (qv Value) Map(keyLocationName string, valueLocationName string) *Map {
 // Base64EncodeBytes encodes v as a base64 query string value.
 // This is intended to enable compatibility with the JSON encoder.
 func (qv Value) Base64EncodeBytes(v []byte) {
-	qv.Blob(v)
+	qv.queryValue.Blob(v)
+}
+
+// Boolean encodes v as a query string value
+func (qv Value) Boolean(v bool) {
+	qv.queryValue.Boolean(v)
+}
+
+// String encodes v as a query string value
+func (qv Value) String(v string) {
+	qv.queryValue.String(v)
+}
+
+// Byte encodes v as a query string value
+func (qv Value) Byte(v int8) {
+	qv.queryValue.Byte(v)
+}
+
+// Short encodes v as a query string value
+func (qv Value) Short(v int16) {
+	qv.queryValue.Short(v)
+}
+
+// Integer encodes v as a query string value
+func (qv Value) Integer(v int32) {
+	qv.queryValue.Integer(v)
+}
+
+// Long encodes v as a query string value
+func (qv Value) Long(v int64) {
+	qv.queryValue.Long(v)
+}
+
+// Float encodes v as a query string value
+func (qv Value) Float(v float32) {
+	qv.queryValue.Float(v)
+}
+
+// Double encodes v as a query string value
+func (qv Value) Double(v float64) {
+	qv.queryValue.Double(v)
+}
+
+// BigInteger encodes v as a query string value
+func (qv Value) BigInteger(v *big.Int) {
+	qv.queryValue.BigInteger(v)
+}
+
+// BigDecimal encodes v as a query string value
+func (qv Value) BigDecimal(v *big.Float) {
+	qv.queryValue.BigDecimal(v)
 }
