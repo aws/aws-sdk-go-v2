@@ -49,7 +49,9 @@ final class AwsQuery extends HttpRpcProtocolGenerator {
         String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(input, getProtocolName());
         writer.addUseImports(AwsGoDependency.AWS_QUERY_PROTOCOL);
 
-        writer.write("bodyEncoder := query.NewEncoder()");
+        writer.addUseImports(SmithyGoDependency.BYTES);
+        writer.write("bodyWriter := bytes.NewBuffer(nil)");
+        writer.write("bodyEncoder := query.NewEncoder(bodyWriter)");
         writer.write("body := bodyEncoder.Object()");
         writer.write("body.Key(\"Action\").String($S)", operation.getId().getName());
         writer.write("body.Key(\"Version\").String($S)", context.getService().getVersion());
@@ -64,13 +66,12 @@ final class AwsQuery extends HttpRpcProtocolGenerator {
             writer.write("");
         }
 
-        writer.write("encodedBody, err := bodyEncoder.Encode()");
+        writer.write("err = bodyEncoder.Encode()");
         writer.openBlock("if err != nil {", "}", () -> {
             writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
         }).write("");
 
-        writer.addUseImports(SmithyGoDependency.BYTES);
-        writer.openBlock("if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {",
+        writer.openBlock("if request, err = request.SetStream(bodyWriter); err != nil {",
                 "}", () -> {
             writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
         });
