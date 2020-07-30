@@ -44,19 +44,20 @@ func (m *awsAwsquery_serializeOpEmptyInputAndEmptyOutput) HandleSerialize(ctx co
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
 
-	bodyEncoder := query.NewEncoder()
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
 	body := bodyEncoder.Object()
 	body.Key("Action").String("EmptyInputAndEmptyOutput")
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
 
-	encodedBody, err := bodyEncoder.Encode()
+	err = bodyEncoder.Encode()
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
+	if request, err = request.SetStream(bodyWriter); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -96,19 +97,20 @@ func (m *awsAwsquery_serializeOpFlattenedXmlMap) HandleSerialize(ctx context.Con
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
 
-	bodyEncoder := query.NewEncoder()
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
 	body := bodyEncoder.Object()
 	body.Key("Action").String("FlattenedXmlMap")
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
 
-	encodedBody, err := bodyEncoder.Encode()
+	err = bodyEncoder.Encode()
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
+	if request, err = request.SetStream(bodyWriter); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -148,19 +150,20 @@ func (m *awsAwsquery_serializeOpFlattenedXmlMapWithXmlName) HandleSerialize(ctx 
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
 
-	bodyEncoder := query.NewEncoder()
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
 	body := bodyEncoder.Object()
 	body.Key("Action").String("FlattenedXmlMapWithXmlName")
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
 
-	encodedBody, err := bodyEncoder.Encode()
+	err = bodyEncoder.Encode()
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
+	if request, err = request.SetStream(bodyWriter); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -200,19 +203,20 @@ func (m *awsAwsquery_serializeOpGreetingWithErrors) HandleSerialize(ctx context.
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
 
-	bodyEncoder := query.NewEncoder()
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
 	body := bodyEncoder.Object()
 	body.Key("Action").String("GreetingWithErrors")
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
 
-	encodedBody, err := bodyEncoder.Encode()
+	err = bodyEncoder.Encode()
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
+	if request, err = request.SetStream(bodyWriter); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -252,19 +256,20 @@ func (m *awsAwsquery_serializeOpIgnoresWrappingXmlName) HandleSerialize(ctx cont
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
 
-	bodyEncoder := query.NewEncoder()
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
 	body := bodyEncoder.Object()
 	body.Key("Action").String("IgnoresWrappingXmlName")
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
 
-	encodedBody, err := bodyEncoder.Encode()
+	err = bodyEncoder.Encode()
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
+	if request, err = request.SetStream(bodyWriter); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -304,7 +309,8 @@ func (m *awsAwsquery_serializeOpNestedStructures) HandleSerialize(ctx context.Co
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
 
-	bodyEncoder := query.NewEncoder()
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
 	body := bodyEncoder.Object()
 	body.Key("Action").String("NestedStructures")
 	body.Key("Version").String("2020-01-08")
@@ -313,12 +319,12 @@ func (m *awsAwsquery_serializeOpNestedStructures) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	encodedBody, err := bodyEncoder.Encode()
+	err = bodyEncoder.Encode()
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
+	if request, err = request.SetStream(bodyWriter); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -358,19 +364,20 @@ func (m *awsAwsquery_serializeOpNoInputAndNoOutput) HandleSerialize(ctx context.
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
 
-	bodyEncoder := query.NewEncoder()
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
 	body := bodyEncoder.Object()
 	body.Key("Action").String("NoInputAndNoOutput")
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
 
-	encodedBody, err := bodyEncoder.Encode()
+	err = bodyEncoder.Encode()
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
+	if request, err = request.SetStream(bodyWriter); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -410,19 +417,20 @@ func (m *awsAwsquery_serializeOpNoInputAndOutput) HandleSerialize(ctx context.Co
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
 
-	bodyEncoder := query.NewEncoder()
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
 	body := bodyEncoder.Object()
 	body.Key("Action").String("NoInputAndOutput")
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
 
-	encodedBody, err := bodyEncoder.Encode()
+	err = bodyEncoder.Encode()
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
+	if request, err = request.SetStream(bodyWriter); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -462,7 +470,8 @@ func (m *awsAwsquery_serializeOpQueryIdempotencyTokenAutoFill) HandleSerialize(c
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
 
-	bodyEncoder := query.NewEncoder()
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
 	body := bodyEncoder.Object()
 	body.Key("Action").String("QueryIdempotencyTokenAutoFill")
 	body.Key("Version").String("2020-01-08")
@@ -471,12 +480,12 @@ func (m *awsAwsquery_serializeOpQueryIdempotencyTokenAutoFill) HandleSerialize(c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	encodedBody, err := bodyEncoder.Encode()
+	err = bodyEncoder.Encode()
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
+	if request, err = request.SetStream(bodyWriter); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -516,7 +525,8 @@ func (m *awsAwsquery_serializeOpQueryLists) HandleSerialize(ctx context.Context,
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
 
-	bodyEncoder := query.NewEncoder()
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
 	body := bodyEncoder.Object()
 	body.Key("Action").String("QueryLists")
 	body.Key("Version").String("2020-01-08")
@@ -525,12 +535,12 @@ func (m *awsAwsquery_serializeOpQueryLists) HandleSerialize(ctx context.Context,
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	encodedBody, err := bodyEncoder.Encode()
+	err = bodyEncoder.Encode()
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
+	if request, err = request.SetStream(bodyWriter); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -570,7 +580,8 @@ func (m *awsAwsquery_serializeOpQueryMaps) HandleSerialize(ctx context.Context, 
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
 
-	bodyEncoder := query.NewEncoder()
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
 	body := bodyEncoder.Object()
 	body.Key("Action").String("QueryMaps")
 	body.Key("Version").String("2020-01-08")
@@ -579,12 +590,12 @@ func (m *awsAwsquery_serializeOpQueryMaps) HandleSerialize(ctx context.Context, 
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	encodedBody, err := bodyEncoder.Encode()
+	err = bodyEncoder.Encode()
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
+	if request, err = request.SetStream(bodyWriter); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -624,7 +635,8 @@ func (m *awsAwsquery_serializeOpQueryTimestamps) HandleSerialize(ctx context.Con
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
 
-	bodyEncoder := query.NewEncoder()
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
 	body := bodyEncoder.Object()
 	body.Key("Action").String("QueryTimestamps")
 	body.Key("Version").String("2020-01-08")
@@ -633,12 +645,12 @@ func (m *awsAwsquery_serializeOpQueryTimestamps) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	encodedBody, err := bodyEncoder.Encode()
+	err = bodyEncoder.Encode()
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
+	if request, err = request.SetStream(bodyWriter); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -678,19 +690,20 @@ func (m *awsAwsquery_serializeOpRecursiveXmlShapes) HandleSerialize(ctx context.
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
 
-	bodyEncoder := query.NewEncoder()
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
 	body := bodyEncoder.Object()
 	body.Key("Action").String("RecursiveXmlShapes")
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
 
-	encodedBody, err := bodyEncoder.Encode()
+	err = bodyEncoder.Encode()
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
+	if request, err = request.SetStream(bodyWriter); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -730,7 +743,8 @@ func (m *awsAwsquery_serializeOpSimpleInputParams) HandleSerialize(ctx context.C
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
 
-	bodyEncoder := query.NewEncoder()
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
 	body := bodyEncoder.Object()
 	body.Key("Action").String("SimpleInputParams")
 	body.Key("Version").String("2020-01-08")
@@ -739,12 +753,12 @@ func (m *awsAwsquery_serializeOpSimpleInputParams) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	encodedBody, err := bodyEncoder.Encode()
+	err = bodyEncoder.Encode()
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
+	if request, err = request.SetStream(bodyWriter); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -784,19 +798,20 @@ func (m *awsAwsquery_serializeOpSimpleScalarXmlProperties) HandleSerialize(ctx c
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
 
-	bodyEncoder := query.NewEncoder()
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
 	body := bodyEncoder.Object()
 	body.Key("Action").String("SimpleScalarXmlProperties")
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
 
-	encodedBody, err := bodyEncoder.Encode()
+	err = bodyEncoder.Encode()
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
+	if request, err = request.SetStream(bodyWriter); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -836,19 +851,20 @@ func (m *awsAwsquery_serializeOpXmlBlobs) HandleSerialize(ctx context.Context, i
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
 
-	bodyEncoder := query.NewEncoder()
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
 	body := bodyEncoder.Object()
 	body.Key("Action").String("XmlBlobs")
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
 
-	encodedBody, err := bodyEncoder.Encode()
+	err = bodyEncoder.Encode()
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
+	if request, err = request.SetStream(bodyWriter); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -888,19 +904,20 @@ func (m *awsAwsquery_serializeOpXmlEnums) HandleSerialize(ctx context.Context, i
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
 
-	bodyEncoder := query.NewEncoder()
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
 	body := bodyEncoder.Object()
 	body.Key("Action").String("XmlEnums")
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
 
-	encodedBody, err := bodyEncoder.Encode()
+	err = bodyEncoder.Encode()
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
+	if request, err = request.SetStream(bodyWriter); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -940,19 +957,20 @@ func (m *awsAwsquery_serializeOpXmlLists) HandleSerialize(ctx context.Context, i
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
 
-	bodyEncoder := query.NewEncoder()
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
 	body := bodyEncoder.Object()
 	body.Key("Action").String("XmlLists")
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
 
-	encodedBody, err := bodyEncoder.Encode()
+	err = bodyEncoder.Encode()
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
+	if request, err = request.SetStream(bodyWriter); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -992,19 +1010,20 @@ func (m *awsAwsquery_serializeOpXmlMaps) HandleSerialize(ctx context.Context, in
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
 
-	bodyEncoder := query.NewEncoder()
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
 	body := bodyEncoder.Object()
 	body.Key("Action").String("XmlMaps")
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
 
-	encodedBody, err := bodyEncoder.Encode()
+	err = bodyEncoder.Encode()
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
+	if request, err = request.SetStream(bodyWriter); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1044,19 +1063,20 @@ func (m *awsAwsquery_serializeOpXmlMapsXmlName) HandleSerialize(ctx context.Cont
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
 
-	bodyEncoder := query.NewEncoder()
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
 	body := bodyEncoder.Object()
 	body.Key("Action").String("XmlMapsXmlName")
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
 
-	encodedBody, err := bodyEncoder.Encode()
+	err = bodyEncoder.Encode()
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
+	if request, err = request.SetStream(bodyWriter); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1096,19 +1116,20 @@ func (m *awsAwsquery_serializeOpXmlNamespaces) HandleSerialize(ctx context.Conte
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
 
-	bodyEncoder := query.NewEncoder()
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
 	body := bodyEncoder.Object()
 	body.Key("Action").String("XmlNamespaces")
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
 
-	encodedBody, err := bodyEncoder.Encode()
+	err = bodyEncoder.Encode()
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
+	if request, err = request.SetStream(bodyWriter); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1148,19 +1169,20 @@ func (m *awsAwsquery_serializeOpXmlTimestamps) HandleSerialize(ctx context.Conte
 	}
 	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
 
-	bodyEncoder := query.NewEncoder()
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
 	body := bodyEncoder.Object()
 	body.Key("Action").String("XmlTimestamps")
 	body.Key("Version").String("2020-01-08")
 
 	_ = input
 
-	encodedBody, err := bodyEncoder.Encode()
+	err = bodyEncoder.Encode()
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(encodedBody)); err != nil {
+	if request, err = request.SetStream(bodyWriter); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
