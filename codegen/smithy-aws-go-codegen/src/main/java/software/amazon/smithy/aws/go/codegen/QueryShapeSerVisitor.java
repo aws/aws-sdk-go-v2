@@ -72,12 +72,13 @@ final class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
         MemberShape member = shape.getMember();
         Shape target = context.getModel().expectShape(member.getTarget());
 
+        // If the list is empty, exit early to avoid extra effort.
+        writer.write("if len(v) == 0 { return nil }");
+
         writer.write("array := value.Array($S)", getSerializedLocationName(member, "member"));
         writer.write("");
 
         writer.openBlock("for i := range v {", "}", () -> {
-            writer.write("av := array.Value()");
-
             // Null values should be omitted for query.
             if (!target.hasTrait(EnumTrait.class)) {
                 writer.openBlock("if vv := v[i]; vv == nil {", "}", () -> {
@@ -85,6 +86,7 @@ final class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
                 });
             }
 
+            writer.write("av := array.Value()");
             target.accept(getMemberSerVisitor(shape.getMember(), "v[i]", "av"));
         });
         writer.write("return nil");
@@ -100,8 +102,11 @@ final class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
     @Override
     protected void serializeMap(GenerationContext context, MapShape shape) {
         GoWriter writer = context.getWriter();
-        Shape target = context.getModel().expectShape(shape.getValue().getTarget());
 
+        // If the map is empty, exit early to avoid extra effort.
+        writer.write("if len(v) == 0 { return nil }");
+
+        Shape target = context.getModel().expectShape(shape.getValue().getTarget());
         String keyLocationName = getSerializedLocationName(shape.getKey(), "key");
         String valueLocationName = getSerializedLocationName(shape.getValue(), "value");
         writer.write("object := value.Map($S, $S)", keyLocationName, valueLocationName);
@@ -118,8 +123,6 @@ final class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
 
         writer.addUseImports(SmithyGoDependency.FMT);
         writer.openBlock("for _, key := range keys {", "}", () -> {
-            writer.write("om := object.Key(key)");
-
             // Null values should be omitted for query.
             if (!target.hasTrait(EnumTrait.class)) {
                 writer.openBlock("if vv := v[key]; vv == nil {", "}", () -> {
@@ -127,6 +130,7 @@ final class QueryShapeSerVisitor extends DocumentShapeSerVisitor {
                 });
             }
 
+            writer.write("om := object.Key(key)");
             target.accept(getMemberSerVisitor(shape.getValue(), "v[key]", "om"));
         });
 
