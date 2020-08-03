@@ -2,6 +2,7 @@ package query
 
 import (
 	"bytes"
+	"fmt"
 	smithytesting "github.com/awslabs/smithy-go/testing"
 	"testing"
 )
@@ -72,4 +73,48 @@ func TestEncodeFlatMap(t *testing.T) {
 		t.Fatal(err)
 	}
 	smithytesting.AssertURLFormEqual(t, []byte(`map.1.key=bar&map.1.value=baz&map.2.key=foo&map.2.value=bin`), buff.Bytes())
+}
+
+// limitedWriter exists to isolate WriteString to ensure that any writer
+// can actually be used
+type limitedWriter struct {
+	writer *bytes.Buffer
+}
+
+func (lw limitedWriter) Write(v []byte) (int, error) {
+	return lw.writer.Write(v)
+}
+
+func TestEncodeHandlesBareIoWriter(t *testing.T) {
+	buff := limitedWriter{writer: bytes.NewBuffer(nil)}
+	encoder := NewEncoder(buff)
+	encoder.Object().Key("foo").String("bar")
+	if err := encoder.Encode(); err != nil {
+		t.Fatal(err)
+	}
+	smithytesting.AssertURLFormEqual(t, []byte(`foo=bar`), buff.writer.Bytes())
+}
+
+// stringWriter exists to ensure that WriteString is called when
+// available.
+type stringWriter struct {
+	writer *bytes.Buffer
+}
+
+func (w stringWriter) Write(v []byte) (int, error)  {
+	return 0, fmt.Errorf("the WriteString method should be used when available")
+}
+
+func (w stringWriter) WriteString(v string) (int, error) {
+	return w.writer.WriteString(v)
+}
+
+func TestEncodeUsesWriteString(t *testing.T) {
+	buff := stringWriter{writer: bytes.NewBuffer(nil)}
+	encoder := NewEncoder(buff)
+	encoder.Object().Key("foo").String("bar")
+	if err := encoder.Encode(); err != nil {
+		t.Fatal(err)
+	}
+	smithytesting.AssertURLFormEqual(t, []byte(`foo=bar`), buff.writer.Bytes())
 }
