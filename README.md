@@ -7,7 +7,7 @@
 
 Check out the [Issues] and [Projects] for design and updates being made to the SDK. The v2 SDK requires a minimum version of `Go 1.13`.
 
-We'll be expanding out the [Issues] and [Projects] sections with additional changes to the SDK based on your feedback, and SDK's core's improvements. Check the the SDK's [CHANGE_LOG] for information about the latest updates to the SDK.
+We'll be expanding out the [Issues] and [Projects] sections with additional changes to the SDK based on your feedback, and SDK's core's improvements. Check the the SDK's [CHANGELOG] for information about the latest updates to the SDK.
 
 Jump To:
 * [Project Status](_#Project-Status_)
@@ -102,7 +102,7 @@ Please use these community resources for getting help. We use the GitHub issues
 for tracking bugs and feature requests.
 
 * Ask a question on [StackOverflow](http://stackoverflow.com/) and tag it with the [`aws-sdk-go`](http://stackoverflow.com/questions/tagged/aws-sdk-go) tag.
-* Come join the AWS SDK for Go community chat on [gitter](https://gitter.im/aws/aws-sdk-go).
+* Come join the AWS SDK for Go community chat on [gitter][Gitter channel].
 * Open a support ticket with [AWS Support](http://docs.aws.amazon.com/awssupport/latest/user/getting-started.html).
 * If you think you may have found a bug, please open an [issue](https://github.com/aws/aws-sdk-go-v2/issues/new/choose).
 
@@ -111,7 +111,7 @@ This SDK implements AWS service APIs. For general issues regarding the AWS servi
 ### Opening Issues
 
 If you encounter a bug with the AWS SDK for Go we would like to hear about it.
-Search the [existing issues](https://github.com/aws/aws-sdk-go-v2/issues) and see
+Search the [existing issues][Issues] and see
 if others are also experiencing the issue before opening a new issue. Please
 include the version of AWS SDK for Go, Go language, and OS you’re using. Please
 also include reproduction case when appropriate.
@@ -133,13 +133,6 @@ The v2 SDK will use GitHub [Issues] to track feature requests and issues with th
 
 ## Resources
 
-[Developer guide](https://docs.aws.amazon.com/sdk-for-go/v2/developer-guide/welcome.html/) - This document
-is a general introduction on how to configure and make requests with the SDK.
-If this is your first time using the SDK, this documentation and the API
-documentation will help you get started. This document focuses on the syntax
-and behavior of the SDK. The [Service Developer Guide](https://aws.amazon.com/documentation/) 
-will help you get started using specific AWS services.
-
 [SDK API Reference Documentation](https://docs.aws.amazon.com/sdk-for-go/v2/api/) - Use this
 document to look up all API operation input and output parameters for AWS
 services supported by the SDK. The API reference also includes documentation of
@@ -158,13 +151,14 @@ features and AWS services.
 
 [Forum](https://forums.aws.amazon.com/forum.jspa?forumID=293) - Ask questions, get help, and give feedback
 
-[Issues](https://github.com/aws/aws-sdk-go-v2/issues) - Report issues, submit pull requests, and get involved
-  (see [Apache 2.0 License][sdk-license])
+[Issues] - Report issues, submit pull requests, and get involved
+  (see [Apache 2.0 License][license])
 
 [Dep]: https://github.com/golang/dep
 [Issues]: https://github.com/aws/aws-sdk-go-v2/issues
 [Projects]: https://github.com/aws/aws-sdk-go-v2/projects
-[CHANGE_LOG]: https://github.com/aws/aws-sdk-go-v2/blob/master/CHANGELOG.md
+[CHANGELOG]: https://github.com/aws/aws-sdk-go-v2/blob/master/CHANGELOG.md
 [Amazon DynamoDB]: https://aws.amazon.com/dynamodb/
 [Gitter channel]: https://gitter.im/aws/aws-sdk-go-v2
 [design]: https://github.com/aws/aws-sdk-go-v2/blob/master/DESIGN.md  
+[license]: http://aws.amazon.com/apache2.0/
