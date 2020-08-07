@@ -241,7 +241,7 @@ func resolveEC2RoleCredentials(cfg *aws.Config, configs Configs) error {
 func resolveCredsFromSource(cfg *aws.Config, envConfig *EnvConfig, sharedCfg *SharedConfig, configs Configs) (err error) {
 	switch sharedCfg.CredentialSource {
 	case credSourceEc2Metadata:
-		err = resolveEC2RoleCredentials(cfg, configs)
+		return resolveEC2RoleCredentials(cfg, configs)
 
 	case credSourceEnvironment:
 		cfg.Credentials = aws.StaticCredentialsProvider{Value: envConfig.Credentials}
@@ -250,7 +250,7 @@ func resolveCredsFromSource(cfg *aws.Config, envConfig *EnvConfig, sharedCfg *Sh
 		if len(envConfig.ContainerCredentialsRelativePath) == 0 {
 			return awserr.New(ErrCodeSharedConfig, "EcsContainer was specified as the credential_source, but 'AWS_CONTAINER_CREDENTIALS_RELATIVE_URI' was not set", nil)
 		}
-		return resolveHTTPCredProvider(cfg, ecsContainerURI(envConfig.ContainerCredentialsRelativePath), envConfig.ContainerAuthorizationToken, nil)
+		return resolveHTTPCredProvider(cfg, ecsContainerURI(envConfig.ContainerCredentialsRelativePath), envConfig.ContainerAuthorizationToken, configs)
 
 	default:
 		return awserr.New(ErrCodeSharedConfig, "credential source values must be EcsContainer, Ec2InstanceMetadata, or Environment", nil)
