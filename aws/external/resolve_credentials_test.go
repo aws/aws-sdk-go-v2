@@ -14,6 +14,8 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
+	"github.com/aws/aws-sdk-go-v2/aws/ec2rolecreds"
+	"github.com/aws/aws-sdk-go-v2/aws/endpointcreds"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 )
@@ -487,5 +489,84 @@ func TestAssumeRole_ExtendedDuration(t *testing.T) {
 	}
 	if e, a := "AssumeRoleProvider", creds.Source; !strings.Contains(a, e) {
 		t.Errorf("expect %v, to be in %v", e, a)
+	}
+}
+
+type mockEC2RoleCredentialProviderOptions func() (func(*ec2rolecreds.ProviderOptions), bool, error)
+
+func (m mockEC2RoleCredentialProviderOptions) GetEC2RoleCredentialProviderOptions() (func(*ec2rolecreds.ProviderOptions), bool, error) {
+	return m()
+}
+
+type mockEndpointCredentialProviderOptions func() (func(*endpointcreds.ProviderOptions), bool, error)
+
+func (m mockEndpointCredentialProviderOptions) GetEndpointCredentialProviderOptions() (func(*endpointcreds.ProviderOptions), bool, error) {
+	return m()
+}
+
+func Test_resolveCredsFromSource(t *testing.T) {
+	type args struct {
+		cfg       *aws.Config
+		envConfig *EnvConfig
+		sharedCfg *SharedConfig
+		configs   Configs
+	}
+	tests := map[string]struct {
+		args    args
+		wantErr bool
+	}{
+		"returns credSourceEc2Metadata errors": {
+			args: args{
+				cfg: &aws.Config{},
+				sharedCfg: &SharedConfig{
+					CredentialSource: credSourceEc2Metadata,
+				},
+				configs: []Config{
+					mockEC2RoleCredentialProviderOptions(func() (func(*ec2rolecreds.ProviderOptions), bool, error) {
+						return nil, false, fmt.Errorf("some resolve error")
+					}),
+				},
+			},
+			wantErr: true,
+		},
+		"returns empty container path error for credSourceECSContainer": {
+			args: args{
+				cfg: &aws.Config{},
+				sharedCfg: &SharedConfig{
+					CredentialSource: credSourceECSContainer,
+				},
+				envConfig: &EnvConfig{},
+				configs: []Config{
+					mockEC2RoleCredentialProviderOptions(func() (func(*ec2rolecreds.ProviderOptions), bool, error) {
+						return nil, false, fmt.Errorf("some resolver error")
+					}),
+				},
+			},
+			wantErr: true,
+		},
+		"returns credSourceECSContainer errors": {
+			args: args{
+				cfg: &aws.Config{},
+				sharedCfg: &SharedConfig{
+					CredentialSource: credSourceECSContainer,
+				},
+				envConfig: &EnvConfig{
+					ContainerCredentialsRelativePath: "some/path",
+				},
+				configs: []Config{
+					mockEndpointCredentialProviderOptions(func() (func(*endpointcreds.ProviderOptions), bool, error) {
+						return nil, false, fmt.Errorf("some resolver error")
+					}),
+				},
+			},
+			wantErr: true,
+		},
+	}
+	for name, tt := range tests {
+		t.Run(name, func(t *testing.T) {
+			if err := resolveCredsFromSource(tt.args.cfg, tt.args.envConfig, tt.args.sharedCfg, tt.args.configs); (err != nil) != tt.wantErr {
+				t.Errorf("resolveCredsFromSource() error = %v, wantErr %v", err, tt.wantErr)
+			}
+		})
 	}
 }
