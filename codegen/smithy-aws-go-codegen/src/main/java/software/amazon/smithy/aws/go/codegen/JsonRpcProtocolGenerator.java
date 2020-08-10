@@ -107,10 +107,6 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
         shapes.forEach(shape -> shape.accept(visitor));
     }
 
-    @Override
-    protected void writeErrorMessageCodeDeserializer(GenerationContext context) {
-        writeJsonErrorMessageCodeDeserializer(context);
-    }
 
     @Override
     protected void deserializeError(GenerationContext context, StructureShape shape) {
@@ -130,5 +126,10 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
     @Override
     public void generateProtocolTests(GenerationContext context) {
         AwsProtocolUtils.generateHttpProtocolTests(context);
+    }
+
+    @Override
+    protected void writeErrorMessageCodeDeserializer(GenerationContext context) {
+        writeJsonErrorMessageCodeDeserializer(context);
     }
 }

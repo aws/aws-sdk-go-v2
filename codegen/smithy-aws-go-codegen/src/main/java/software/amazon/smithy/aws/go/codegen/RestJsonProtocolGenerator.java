@@ -293,8 +293,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         Symbol symbol = context.getSymbolProvider().toSymbol(shape);
 
         writer.write("output := &$T{}", symbol);
-        writer.write("_ = output");
-        writer.write("");
+        writer.insertTrailingNewline();
 
         // TODO: filter on error document body contains
         if (isShapeWithResponseBindings(context.getModel(), shape, Location.DOCUMENT)) {
