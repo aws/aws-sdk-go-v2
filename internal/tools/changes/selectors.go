@@ -46,7 +46,7 @@ func ReleaseVersionSelector(r *Repository, module string) (string, VersionIncrem
 	if v == "" {
 		// there aren't version git tags for this module
 		v, err = defaultVersion(module)
-		return v, NewModule, err // TODO: PatchBump? or something like ModuleDiscovered
+		return v, NewModule, err
 	}
 
 	// the module isn't in versions.json, but does have git tags

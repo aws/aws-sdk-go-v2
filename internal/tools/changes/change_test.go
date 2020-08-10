@@ -91,7 +91,6 @@ func TestChangeToTemplate(t *testing.T) {
 - test
 type: feature
 description: test description
-affected_modules: []
 
 # type may be one of "feature" or "bugfix".
 # multiple modules may be listed. A change metadata file will be created for each module.

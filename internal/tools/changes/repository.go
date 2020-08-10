@@ -14,9 +14,10 @@ type Repository struct {
 	RootPath string    // RootPath is the path to the root of the repository.
 	Metadata *Metadata // Metadata is the repository's .changes metadata.
 
+	// Logf is a logging function. If nil, Repository will not log anything.
 	Logf func(string, ...interface{})
 
-	modules []string // modules contains the shortened module path of all modules in the repository. modules is lazily loaded by Modules()
+	modules []string // modules contains the shortened module path of all modules in the repository. modules is lazily loaded by Modules().
 
 	git    git.VcsClient
 	golist golist.ModuleClient
@@ -36,8 +37,9 @@ func NewRepository(path string) (*Repository, error) {
 			RepoPath: path,
 		},
 		golist: golist.Client{
-			RootPath:       path,
-			ShortenModPath: shortenModPath,
+			RootPath:        path,
+			ShortenModPath:  shortenModPath,
+			LengthenModPath: lengthenModPath,
 		},
 		Logf: log.Printf,
 	}
@@ -52,7 +54,7 @@ func (r *Repository) Modules() ([]string, error) {
 		return r.modules, nil
 	}
 
-	mods, _, err := discoverModules(r.golist, r.RootPath)
+	mods, err := discoverModules(r.RootPath)
 	if err != nil {
 		return nil, err
 	}
@@ -70,30 +72,34 @@ func (r *Repository) DoRelease(releaseID string) error {
 
 	enc, bumps, err := r.DiscoverVersions(ReleaseVersionSelector)
 	if err != nil {
-		return fmt.Errorf("couldn't do release: %v", err)
+		return fmt.Errorf("couldn't discover versions for release: %v", err)
 	}
 
 	err = r.resolveDependencies(&enc, bumps) // update all dependencies on SDK modules to their latest versions.
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to resolve dependencies: %v", err)
 	}
 
 	rel, err := r.Metadata.CreateRelease(releaseID, bumps, false)
 	if err != nil {
-		return err
-	}
-
-	err = r.Metadata.SaveEnclosure(enc)
-	if err != nil {
-		return err
+		return fmt.Errorf("failed to create release metadata: %v", err)
 	}
 
 	err = r.UpdateAllChangelogs(rel, false)
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to update changelogs: %v", err)
 	}
 
-	return r.tagAndPush(releaseID, bumps)
+	err = r.updateVersionFiles(enc)
+	if err != nil {
+		return fmt.Errorf("failed to update version files: %v", err)
+	}
+
+	err = r.tagAndPush(releaseID, bumps)
+	if err != nil {
+		return fmt.Errorf("failed to tag and push to repo: %v", err)
+	}
+	return nil
 }
 
 func (r *Repository) tagAndPush(releaseID string, bumps map[string]VersionBump) error {
@@ -225,7 +231,12 @@ func (r *Repository) InitializeVersions() error {
 // DiscoverVersions creates a VersionEnclosure containing all Go modules in the Repository. The version of each module
 // is determined by the provided VersionSelector.
 func (r *Repository) DiscoverVersions(selector VersionSelector) (VersionEnclosure, map[string]VersionBump, error) {
-	modules, packages, err := discoverModules(r.golist, r.RootPath)
+	modules, err := discoverModules(r.RootPath)
+	if err != nil {
+		return VersionEnclosure{}, nil, fmt.Errorf("failed to discover versions: %v", err)
+	}
+
+	packages, err := packages(r.golist, modules)
 	if err != nil {
 		return VersionEnclosure{}, nil, fmt.Errorf("failed to discover versions: %v", err)
 	}
@@ -271,6 +282,104 @@ func (r *Repository) discoverVersions(modules []string, selector VersionSelector
 	}
 
 	return enclosure, bumps, nil
+}
+
+// ModuleHashes computes and returns a mapping between shortened module names and their corresponding Go module checksum.
+// Since the version of a module is used to compute the Go checksum (i.e. two modules with the same directory contents
+// have a different checksum if their versions are different), the versions of the given VersionEnclosure will be used
+// for this purpose.
+func (r *Repository) ModuleHashes(enc VersionEnclosure) (map[string]string, error) {
+	modules, err := r.Modules()
+	if err != nil {
+		return nil, fmt.Errorf("couldn't compute module hashes: %v", err)
+	}
+
+	hashes := map[string]string{}
+
+	for _, m := range modules {
+		hash, err := r.golist.Checksum(m, enc.ModuleVersions[m].Version)
+		if err != nil {
+			return nil, fmt.Errorf("couldn't compute module hashes: %v", err)
+		}
+
+		hashes[m] = hash
+	}
+
+	return hashes, nil
+}
+
+// updateVersionFiles updates versions.json and all existing version.go files using the given VersionEnclosure.
+func (r *Repository) updateVersionFiles(enc VersionEnclosure) error {
+	err := r.UpdateVersionFiles(enc)
+	if err != nil {
+		return err
+	}
+
+	hashes, err := r.ModuleHashes(enc)
+	if err != nil {
+		return err
+	}
+
+	// update hashes after modifying module contents (e.g. version.go, CHANGELOG.md, and go.mod files)
+	err = enc.updateHashes(hashes)
+	if err != nil {
+		return err
+	}
+
+	return r.Metadata.SaveEnclosure(enc)
+}
+
+// Tidy runs go mod tidy on all modules in the repository.
+func (r *Repository) Tidy() error {
+	modules, err := r.Modules()
+	if err != nil {
+		return fmt.Errorf("couldn't tidy modules: %v", err)
+	}
+
+	for _, m := range modules {
+		err = r.golist.Tidy(m)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+// UpdateVersionFiles updates the version.go file with the version present in the VersionEnclosure enc. If version.go
+// does not exist for a module, UpdateVersionFiles does not create one.
+func (r *Repository) UpdateVersionFiles(enc VersionEnclosure) error {
+	const versionGoFile = "version.go"
+	const prefix = "const ModuleVersion = "
+	const template = `const ModuleVersion = "%s"`
+
+	modules, err := r.Modules()
+	if err != nil {
+		return fmt.Errorf("couldn't update version.go files: %v", err)
+	}
+
+	for _, m := range modules {
+		v := enc.ModuleVersions[m].Version
+		if v == "" {
+			return fmt.Errorf("couldn't update version.go file for module %s: version is empty", m)
+		}
+
+		path := filepath.Join(r.RootPath, modToPath(m), versionGoFile)
+
+		exists, err := util.FileExists(path, false)
+		if err != nil {
+			return fmt.Errorf("couldn't determine if %s exists for module %s: %v", versionGoFile, m, err)
+		}
+
+		if exists {
+			err = util.ReplaceLine(path, prefix, fmt.Sprintf(template, v))
+			if err != nil {
+				return fmt.Errorf("couldn't update %s for module %s: %v", versionGoFile, m, err)
+			}
+		}
+	}
+
+	return nil
 }
 
 func (r *Repository) logf(format string, a ...interface{}) {

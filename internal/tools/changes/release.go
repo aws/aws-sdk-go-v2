@@ -116,11 +116,11 @@ func (r *Release) AffectedModules() []string {
 }
 
 // wildcards returns a sorted list of wildcards Changes whose Module begin with the given prefix.
-func (r *Release) wildcards(prefix string) []Change {
+func (r *Release) wildcards() []Change {
 	var changes []Change
 
 	for _, c := range r.Changes {
-		if c.isWildcard() && strings.HasPrefix(c.Module, prefix) {
+		if c.isWildcard() {
 			changes = append(changes, c)
 		}
 	}
@@ -137,10 +137,10 @@ func (r *Release) splitSections() ([]string, []string, []string, error) {
 	var services []string
 	var core []string
 
-	for _, c := range r.wildcards("") {
+	for _, c := range r.wildcards() {
 		if c.Type == AnnouncementChangeType {
 			announcements = append(announcements, c.String())
-		} else if strings.HasPrefix(c.Module, servicePrefix+"...") {
+		} else if strings.HasPrefix(c.Module, servicePrefix) {
 			services = append(services, c.String())
 		} else {
 			core = append(core, c.String())

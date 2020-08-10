@@ -312,7 +312,7 @@ func TestRepository_DiscoverVersions(t *testing.T) {
 		}
 
 		wantEnc := repo.Metadata.CurrentVersions
-		wantEnc.ModuleVersions[modPrefix+"a"] = Version{modPrefix + "a", sdkRepo + "/" + modPrefix + "a", "v0.0.0", ""}
+		wantEnc.ModuleVersions[modPrefix+"a"] = Version{modPrefix + "a", sdkRepo + "/" + modPrefix + "a", "v0.1.0", ""}
 
 		if diff := cmp.Diff(enc, repo.Metadata.CurrentVersions); diff != "" {
 			t.Errorf("expect enclosures to match:\n%v", diff)
@@ -331,7 +331,10 @@ func getRepository(t *testing.T) *Repository {
 	repo.golist = golist.Client{
 		RootPath: filepath.Join("testdata", "modules"),
 		ShortenModPath: func(mod string) string {
-			return strings.TrimPrefix(mod, "internal/tools/changes/testdata/modules/")
+			return strings.TrimPrefix(mod, modPrefix)
+		},
+		LengthenModPath: func(mod string) string {
+			return sdkRepo + "/" + modPrefix + mod
 		},
 	}
 

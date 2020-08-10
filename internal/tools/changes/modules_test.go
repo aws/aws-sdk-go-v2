@@ -38,7 +38,7 @@ func TestDiscoverModules(t *testing.T) {
 		},
 	}
 
-	mods, _, err := discoverModules(goclient, filepath.Join("testdata", "modules"))
+	mods, err := discoverModules(goclient.RootPath)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -56,7 +56,7 @@ func TestDefaultVersion(t *testing.T) {
 	}{
 		"v0": {
 			mod:         "example.com/module",
-			wantVersion: "v0.0.0",
+			wantVersion: "v0.1.0",
 		},
 		"v2": {
 			mod:         "example.com/module/v2",
@@ -170,4 +170,12 @@ func (c *mockGolist) Dependencies(mod string) ([]string, error) {
 
 func (c *mockGolist) Packages(mod string) ([]string, error) {
 	return c.packages[mod], nil
+}
+
+func (c *mockGolist) Checksum(mod, version string) (string, error) {
+	return "01234567abcdef", nil
+}
+
+func (c *mockGolist) Tidy(mod string) error {
+	return nil
 }

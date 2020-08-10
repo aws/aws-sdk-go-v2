@@ -30,7 +30,7 @@ func releaseUsage() {
 
 func init() {
 	staticVersionsFlags = flag.NewFlagSet("static-versions", flag.ExitOnError)
-	staticVersionsFlags.StringVar(&releaseParams.repo, "repo", "", "path to the SDK git repository")
+	staticVersionsFlags.StringVar(&releaseParams.repo, "repo", ".", "path to the SDK git repository")
 	staticVersionsFlags.BoolVar(&releaseParams.pretty, "pretty", false, "print indented JSON output")
 	staticVersionsFlags.Var(&releaseParams.selector, "selector", "sets versioning strategy: release, development, or tags")
 	staticVersionsFlags.Usage = func() {
@@ -39,7 +39,7 @@ func init() {
 	}
 
 	createReleaseFlags = flag.NewFlagSet("create", flag.ExitOnError)
-	createReleaseFlags.StringVar(&releaseParams.repo, "repo", "", "path to the SDK git repository")
+	createReleaseFlags.StringVar(&releaseParams.repo, "repo", ".", "path to the SDK git repository")
 	createReleaseFlags.StringVar(&releaseParams.releaseID, "id", "", "the ID of the release (e.g. 2020-07-17)")
 	createReleaseFlags.Usage = func() {
 		fmt.Printf("%s release create [-repo=<repo>]\n", os.Args[0])
@@ -76,46 +76,6 @@ func releaseSubcmd(args []string) error {
 
 		log.Printf("successfully created release %s\n", releaseParams.releaseID)
 
-		return nil
-	case "test":
-		release := changes.Release{
-			ID:            "2020-07-23",
-			SchemaVersion: 1,
-			VersionBumps:  map[string]changes.VersionBump{},
-			Changes: []changes.Change{
-				{
-					ID:              "1234",
-					SchemaVersion:   1,
-					Module:          "services/...",
-					Type:            "feature",
-					Description:     "test",
-					AffectedModules: []string{"services/a"},
-				},
-				{
-					ID:            "1234",
-					SchemaVersion: 1,
-					Module:        "services/a",
-					Type:          "feature",
-					Description:   "Some interesting description of a change.",
-				},
-				{
-					ID:            "1234",
-					SchemaVersion: 1,
-					Module:        "services/a",
-					Type:          "feature",
-					Description:   "Some interesting description of a change.",
-				},
-				{
-					ID:            "1234",
-					SchemaVersion: 1,
-					Module:        "core/a",
-					Type:          "feature",
-					Description:   "Some interesting description of a change.",
-				},
-			},
-		}
-
-		fmt.Println(release.RenderChangelog())
 		return nil
 	default:
 		releaseUsage()

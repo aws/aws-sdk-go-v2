@@ -18,11 +18,7 @@ func moduleGraph(golist golist.ModuleClient, modules []string) (ModuleGraph, err
 		}
 
 		for _, d := range mDeps {
-			if depList, ok := deps[d]; ok {
-				deps[d] = append(depList, m)
-			} else {
-				deps[d] = []string{m}
-			}
+			deps[d] = append(deps[d], m)
 		}
 	}
 
@@ -32,8 +28,8 @@ func moduleGraph(golist golist.ModuleClient, modules []string) (ModuleGraph, err
 // dependencyUpdates traverses the given module dependency graph, returning a mapping between each module that needs to have
 // its dependencies updated and a list of the dependency modules that must be updated.
 func (graph ModuleGraph) dependencyUpdates(updatedModules []string) map[string][]string {
-	seen := make(map[string]struct{}) // keeps track of which modules have been visited
-	updates := map[string][]string{}  // updates stores a list of necessary dependency updates to return.
+	seen := map[string]struct{}{}    // keeps track of which modules have been visited
+	updates := map[string][]string{} // updates stores a list of necessary dependency updates to return.
 
 	// perform a breadth first search through module dependency graph, updating each module that depends on an updated module.
 	for len(updatedModules) > 0 {
@@ -49,7 +45,7 @@ func (graph ModuleGraph) dependencyUpdates(updatedModules []string) map[string][
 			updates[d] = append(updates[d], m)
 
 			if _, ok := seen[d]; !ok {
-				// add the dependency module to the recursive search if we haven't already encountered it.
+				// add the dependency module to the search if we haven't already encountered it.
 				updatedModules = append(updatedModules, d)
 			}
 		}

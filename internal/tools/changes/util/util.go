@@ -89,30 +89,42 @@ func FindFile(fileName string, dir bool) (string, error) {
 	}
 }
 
+// ReplaceLine replaces any line in the file at the given path that begins with linePrefix with the given replacement
+// string.
+func ReplaceLine(path, linePrefix, replacement string) error {
+	data, err := ioutil.ReadFile(path)
+	if err != nil {
+		return fmt.Errorf("couldn't replace file's line: %v", err)
+	}
+
+	lines := strings.Split(string(data), "\n")
+	for i, l := range lines {
+		if strings.HasPrefix(l, linePrefix) {
+			lines[i] = replacement
+		}
+	}
+
+	output := strings.Join(lines, "\n")
+
+	err = ioutil.WriteFile(path, []byte(output), 0644)
+	if err != nil {
+		return fmt.Errorf("failed to write replacement file: %v")
+	}
+
+	return nil
+}
+
 // ExecAt runs the given Cmd with is working directory set to path.
 func ExecAt(cmd *exec.Cmd, path string) ([]byte, error) {
-	originalWd, err := os.Getwd()
-	if err != nil {
-		return nil, fmt.Errorf("couldn't run cmd %s: %v", cmd.String(), err)
-	}
-
-	err = os.Chdir(path)
-	if err != nil {
-		return nil, fmt.Errorf("couldn't run cmd %s: %v", cmd.String(), err)
-	}
-
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr
 
-	err = cmd.Run()
+	cmd.Dir = path
+
+	err := cmd.Run()
 	if err != nil {
 		return nil, fmt.Errorf("couldn't run cmd %s: %v: %s", cmd.String(), err, stderr.String())
-	}
-
-	err = os.Chdir(originalWd)
-	if err != nil {
-		return nil, fmt.Errorf("couldn't run cmd %s: %v", cmd.String(), err)
 	}
 
 	return stdout.Bytes(), nil

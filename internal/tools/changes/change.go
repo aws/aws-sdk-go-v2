@@ -128,7 +128,7 @@ type changeTemplate struct {
 	Modules         []string
 	Type            ChangeType
 	Description     string
-	AffectedModules []string `yaml:"affected_modules"`
+	AffectedModules []string `yaml:"affected_modules,omitempty"`
 }
 
 // Change represents a change to a single Go module.
@@ -196,11 +196,12 @@ func NewWildcardChange(module string, changeType ChangeType, description string,
 }
 
 func (c Change) isWildcard() bool {
-	return modIsWildcard(c.Module)
+	return ModIsWildcard(c.Module)
 }
 
-func modIsWildcard(mod string) bool {
-	return strings.Contains(mod, "...")
+// ModIsWildcard returns whether the given module ends in the wildcard pattern.
+func ModIsWildcard(mod string) bool {
+	return strings.HasSuffix(mod, "...")
 }
 
 // matches returns whether the Change c affects the given module.
@@ -209,8 +210,12 @@ func (c Change) matches(module string) bool {
 		return module == c.Module
 	}
 
-	prefix := strings.TrimSuffix(c.Module, "/...")
+	prefix := trimWildcard(c.Module)
 	return strings.HasPrefix(module, prefix)
+}
+
+func trimWildcard(mod string) string {
+	return strings.TrimSuffix(mod, "/...")
 }
 
 // String returns a string representation of a Change suitable to be included in a Changelog.
@@ -222,7 +227,7 @@ func (c Change) String() string {
 func MatchWildcardModules(modules []string, wildcard string) ([]string, error) {
 	var matches []string
 
-	prefix := strings.TrimSuffix(wildcard, "/...")
+	prefix := trimWildcard(wildcard)
 
 	for _, m := range modules {
 		if strings.HasPrefix(m, prefix) {

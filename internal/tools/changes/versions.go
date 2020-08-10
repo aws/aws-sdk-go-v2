@@ -87,16 +87,27 @@ func (v *VersionEnclosure) bump(module string, incr VersionIncrement) (VersionBu
 	}, nil
 }
 
-// EnclosureDiff returns a slice of all modules that differ between the two enclosures. A module that differs either has
-// a different ModuleHash in one VersionEnclosure, or exists in the new enclosure but not the old.
-func EnclosureDiff(old, new VersionEnclosure) []string {
+func (v *VersionEnclosure) updateHashes(hashes map[string]string) error {
+	for mod, hash := range hashes {
+		if ver, ok := v.ModuleVersions[mod]; ok {
+			ver.ModuleHash = hash
+			v.ModuleVersions[mod] = ver
+		} else {
+			return fmt.Errorf("module %s is contained in hashes, but not enclosure", mod)
+		}
+	}
+
+	return nil
+}
+
+// HashDiff returns all modules whose hash provided in hashes differs from the has present in VersionEnclosure v. hashes
+// is a map between shortened module names and their Go checksum.
+func (v *VersionEnclosure) HashDiff(hashes map[string]string) []string {
 	var diff []string
 
-	for m, v := range new.ModuleVersions {
-		if oldV, ok := old.ModuleVersions[m]; !ok {
-			diff = append(diff, m)
-		} else if v.ModuleHash != oldV.ModuleHash {
-			diff = append(diff, m)
+	for mod, hash := range hashes {
+		if v.ModuleVersions[mod].ModuleHash != hash {
+			diff = append(diff, mod)
 		}
 	}
 
