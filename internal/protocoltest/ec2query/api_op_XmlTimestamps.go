@@ -26,6 +26,7 @@ func (c *Client) XmlTimestamps(ctx context.Context, params *XmlTimestampsInput, 
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opXmlTimestamps(options.Region), middleware.Before)
+	addawsEc2query_serdeOpXmlTimestampsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -57,6 +58,11 @@ type XmlTimestampsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsEc2query_serdeOpXmlTimestampsMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsEc2query_serializeOpXmlTimestamps{}, middleware.After)
+	stack.Deserialize.Add(&awsEc2query_deserializeOpXmlTimestamps{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opXmlTimestamps(region string) awsmiddleware.RegisterServiceMetadata {
