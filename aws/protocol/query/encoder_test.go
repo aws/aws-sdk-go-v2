@@ -7,72 +7,73 @@ import (
 	"testing"
 )
 
-func TestEncodeObject(t *testing.T) {
-	buff := bytes.NewBuffer(nil)
-	encoder := NewEncoder(buff)
-	encoder.Object().Key("foo").String("bar")
-	if err := encoder.Encode(); err != nil {
-		t.Fatal(err)
+func TestEncode(t *testing.T) {
+	cases := map[string]struct{
+		Encode func(*Encoder) error
+		Expect []byte
+	} {
+		"object": {
+			Encode: func(e *Encoder) error {
+				e.Object().Key("foo").String("bar")
+				return e.Encode()
+			},
+			Expect: []byte(`foo=bar`),
+		},
+		"nested object": {
+			Encode: func(e *Encoder) error {
+				e.Object().Key("foo").Object().Key("bar").String("baz")
+				return e.Encode()
+			},
+			Expect: []byte(`foo.bar=baz`),
+		},
+		"list": {
+			Encode: func(e *Encoder) error {
+				list := e.Object().Key("list").Array("spam")
+				list.Value().String("spam")
+				list.Value().String("eggs")
+				return e.Encode()
+			},
+			Expect: []byte(`list.spam.1=spam&list.spam.2=eggs`),
+		},
+		"flat list": {
+			Encode: func(e *Encoder) error {
+				list := e.Object().FlatKey("list").Array("spam")
+				list.Value().String("spam")
+				list.Value().String("eggs")
+				return e.Encode()
+			},
+			Expect: []byte(`list.1=spam&list.2=eggs`),
+		},
+		"map": {
+			Encode: func(e *Encoder) error {
+				mapValue := e.Object().Key("map").Map("key", "value")
+				mapValue.Key("bar").String("baz")
+				mapValue.Key("foo").String("bin")
+				return e.Encode()
+			},
+			Expect: []byte(`map.entry.1.key=bar&map.entry.1.value=baz&map.entry.2.key=foo&map.entry.2.value=bin`),
+		},
+		"flat map": {
+			Encode: func(e *Encoder) error {
+				mapValue := e.Object().FlatKey("map").Map("key", "value")
+				mapValue.Key("bar").String("baz")
+				mapValue.Key("foo").String("bin")
+				return e.Encode()
+			},
+			Expect: []byte(`map.1.key=bar&map.1.value=baz&map.2.key=foo&map.2.value=bin`),
+		},
 	}
-	smithytesting.AssertURLFormEqual(t, []byte(`foo=bar`), buff.Bytes())
-}
 
-func TestEncodeNestedObject(t *testing.T) {
-	buff := bytes.NewBuffer(nil)
-	encoder := NewEncoder(buff)
-	encoder.Object().Key("foo").Object().Key("bar").String("baz")
-	if err := encoder.Encode(); err != nil {
-		t.Fatal(err)
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			var buff bytes.Buffer
+			encoder := NewEncoder(&buff)
+			if err := c.Encode(encoder); err != nil {
+				t.Fatalf("failed to encode, %v", err)
+			}
+			smithytesting.AssertURLFormEqual(t, c.Expect, buff.Bytes())
+		})
 	}
-	smithytesting.AssertURLFormEqual(t, []byte(`foo.bar=baz`), buff.Bytes())
-}
-
-func TestEncodeList(t *testing.T) {
-	buff := bytes.NewBuffer(nil)
-	encoder := NewEncoder(buff)
-	list := encoder.Object().Key("list").Array("spam")
-	list.Value().String("spam")
-	list.Value().String("eggs")
-	if err := encoder.Encode(); err != nil {
-		t.Fatal(err)
-	}
-	smithytesting.AssertURLFormEqual(t, []byte(`list.spam.1=spam&list.spam.2=eggs`), buff.Bytes())
-}
-
-func TestEncodeFlatList(t *testing.T) {
-	buff := bytes.NewBuffer(nil)
-	encoder := NewEncoder(buff)
-	list := encoder.Object().FlatKey("list").Array("spam")
-	list.Value().String("spam")
-	list.Value().String("eggs")
-	if err := encoder.Encode(); err != nil {
-		t.Fatal(err)
-	}
-	smithytesting.AssertURLFormEqual(t, []byte(`list.1=spam&list.2=eggs`), buff.Bytes())
-}
-
-func TestEncodeMap(t *testing.T) {
-	buff := bytes.NewBuffer(nil)
-	encoder := NewEncoder(buff)
-	mapValue := encoder.Object().Key("map").Map("key", "value")
-	mapValue.Key("bar").String("baz")
-	mapValue.Key("foo").String("bin")
-	if err := encoder.Encode(); err != nil {
-		t.Fatal(err)
-	}
-	smithytesting.AssertURLFormEqual(t, []byte(`map.entry.1.key=bar&map.entry.1.value=baz&map.entry.2.key=foo&map.entry.2.value=bin`), buff.Bytes())
-}
-
-func TestEncodeFlatMap(t *testing.T) {
-	buff := bytes.NewBuffer(nil)
-	encoder := NewEncoder(buff)
-	mapValue := encoder.Object().FlatKey("map").Map("key", "value")
-	mapValue.Key("bar").String("baz")
-	mapValue.Key("foo").String("bin")
-	if err := encoder.Encode(); err != nil {
-		t.Fatal(err)
-	}
-	smithytesting.AssertURLFormEqual(t, []byte(`map.1.key=bar&map.1.value=baz&map.2.key=foo&map.2.value=bin`), buff.Bytes())
 }
 
 // limitedWriter exists to isolate WriteString to ensure that any writer
