@@ -25,6 +25,7 @@ func (c *Client) QueryLists(ctx context.Context, params *QueryListsInput, optFns
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opQueryLists(options.Region), middleware.Before)
+	addawsEc2query_serdeOpQueryListsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -55,6 +56,11 @@ type QueryListsInput struct {
 type QueryListsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+}
+
+func addawsEc2query_serdeOpQueryListsMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsEc2query_serializeOpQueryLists{}, middleware.After)
+	stack.Deserialize.Add(&awsEc2query_deserializeOpQueryLists{}, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opQueryLists(region string) awsmiddleware.RegisterServiceMetadata {
