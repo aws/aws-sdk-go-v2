@@ -5,6 +5,7 @@ dist: bionic
 os:
     - linux
 go:
+    - 1.15.x
     - 1.14.x
     - tip
 
