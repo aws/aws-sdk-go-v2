@@ -27,12 +27,14 @@ func (m *mockBody) Read(p []byte) (int, error) {
 }
 
 type mockOutput struct {
-	_       struct{}          `type:"structure"`
-	String  *string           `type:"string"`
-	Integer *int64            `type:"integer"`
-	Nested  *mockNestedStruct `type:"structure"`
-	List    []*mockListElem   `locationName:"List" locationNameList:"Elem" type:"list"`
-	Closed  *mockClosedTags   `type:"structure"`
+	_               struct{}          `type:"structure"`
+	String          *string           `type:"string"`
+	Integer         *int64            `type:"integer"`
+	Bool            *bool             `type:"bool"`
+	SelfClosingBool *bool             `type:"bool"`
+	Nested          *mockNestedStruct `type:"structure"`
+	List            []*mockListElem   `locationName:"List" locationNameList:"Elem" type:"list"`
+	Closed          *mockClosedTags   `type:"structure"`
 }
 type mockNestedStruct struct {
 	_            struct{} `type:"structure"`
@@ -60,6 +62,8 @@ func TestUnmarshal(t *testing.T) {
 <MockResponse xmlns="http://xmlns.example.com">
 	<String>string value</String>
 	<Integer>123</Integer>
+	<Bool>true</Bool>
+	<SelfClosingBool/>
 	<Closed xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:attrval="attr value"/>
 	<Nested>
 		<NestedString>nested string value</NestedString>
@@ -76,8 +80,10 @@ func TestUnmarshal(t *testing.T) {
 </MockResponse>`
 
 	expect := mockOutput{
-		String:  aws.String("string value"),
-		Integer: aws.Int64(123),
+		String:          aws.String("string value"),
+		Integer:         aws.Int64(123),
+		Bool:            aws.Bool(true),
+		SelfClosingBool: aws.Bool(false),
 		Closed: &mockClosedTags{
 			Attr: aws.String("attr value"),
 		},

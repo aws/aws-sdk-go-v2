@@ -249,11 +249,13 @@ func parseScalar(r reflect.Value, node *XMLNode, tag reflect.StructTag) error {
 		}
 		r.Set(reflect.ValueOf(b))
 	case bool:
-		v, err := strconv.ParseBool(node.Text)
-		if err != nil {
-			return err
+		if len(node.Text) != 0 {
+			v, err := strconv.ParseBool(node.Text)
+			if err != nil {
+				return err
+			}
+			r.Set(reflect.ValueOf(v))
 		}
-		r.Set(reflect.ValueOf(v))
 	case int64:
 		v, err := strconv.ParseInt(node.Text, 10, 64)
 		if err != nil {
