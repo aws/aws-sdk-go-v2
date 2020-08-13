@@ -16,7 +16,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/aws/stscreds"
-	"github.com/aws/aws-sdk-go-v2/service/rds/rdsutils"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 	"github.com/go-sql-driver/mysql"
 )
@@ -67,7 +66,7 @@ func ExampleConnectionStringBuilder() {
 	v.Add("allowCleartextPasswords", "true")
 	endpoint := fmt.Sprintf("%s:%d", *endpointPtr, *portPtr)
 
-	b := rdsutils.NewConnectionStringBuilder(endpoint, *regionPtr, *userPtr, *dbNamePtr, provider)
+	b := NewConnectionStringBuilder(endpoint, *regionPtr, *userPtr, *dbNamePtr, provider)
 	connectStr, err := b.WithTCPFormat().WithParams(v).Build(context.Background())
 
 	const dbType = "mysql"

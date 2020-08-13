@@ -5,11 +5,11 @@ import (
 	"io"
 	"os"
 	"runtime"
+	"sort"
 	"strings"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/private/util"
 )
 
 // ZeroReader is a io.Reader which will always write zeros to the byte slice provided.
@@ -65,11 +65,6 @@ func (r *ReadCloser) Read(b []byte) (int, error) {
 func (r *ReadCloser) Close() error {
 	r.Closed = true
 	return nil
-}
-
-// SortedKeys returns a sorted slice of keys of a map.
-func SortedKeys(m map[string]interface{}) []string {
-	return util.SortedKeys(m)
 }
 
 // A FakeContext provides a simple stub implementation of a Context
@@ -157,4 +152,15 @@ func getEnvs(envs []string) map[string]string {
 		}
 	}
 	return extraEnvs
+}
+
+// sortedKeys returns a sorted slice of keys of a map.
+func sortedKeys(m map[string]interface{}) []string {
+	i, sorted := 0, make([]string, len(m))
+	for k := range m {
+		sorted[i] = k
+		i++
+	}
+	sort.Strings(sorted)
+	return sorted
 }
