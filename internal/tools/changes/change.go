@@ -18,6 +18,8 @@ const (
 	FeatureChangeType ChangeType = "feature"
 	// BugFixChangeType is a constant change type for a bug fix.
 	BugFixChangeType ChangeType = "bugfix"
+	// MajorChangeType is a constant change type for a major version updates (from v0 => v1).
+	MajorChangeType ChangeType = "major"
 	// DependencyChangeType is a constant change type for a dependency update.
 	DependencyChangeType ChangeType = "dependency"
 	// AnnouncementChangeType is a constant change type for an SDK announcement.
@@ -33,6 +35,8 @@ func ParseChangeType(v string) (ChangeType, error) {
 		return FeatureChangeType, nil
 	case string(BugFixChangeType):
 		return BugFixChangeType, nil
+	case string(MajorChangeType):
+		return MajorChangeType, nil
 	case string(DependencyChangeType):
 		return DependencyChangeType, nil
 	case string(AnnouncementChangeType):
@@ -49,6 +53,8 @@ func (c ChangeType) ChangelogPrefix() string {
 		return "Feature: "
 	case BugFixChangeType:
 		return "Bug Fix: "
+	case MajorChangeType:
+		return "v1 Release: "
 	case DependencyChangeType:
 		return "Dependency Update: "
 	case AnnouncementChangeType:
@@ -65,6 +71,8 @@ func (c ChangeType) VersionIncrement() VersionIncrement {
 		return MinorBump
 	case BugFixChangeType:
 		return PatchBump
+	case MajorChangeType:
+		return MajorBump
 	case DependencyChangeType:
 		return PatchBump
 	case AnnouncementChangeType:
@@ -118,7 +126,7 @@ func (c *ChangeType) UnmarshalYAML(unmarshal func(interface{}) error) error {
 }
 
 const changeTemplateSuffix = `
-# type may be one of "feature" or "bugfix".
+# type may be one of "feature", "bugfix", "announcement", "dependency", or "major".
 # multiple modules may be listed. A change metadata file will be created for each module.
 
 # affected_modules should not be provided unless you are creating a wildcard change (by passing

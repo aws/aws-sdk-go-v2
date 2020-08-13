@@ -16,6 +16,8 @@ func TestParseChangeType(t *testing.T) {
 		"feature-case":  {"FEATURE", FeatureChangeType, ""},
 		"bugfix":        {"bugfix", BugFixChangeType, ""},
 		"bugfix-case":   {"BugFix", BugFixChangeType, ""},
+		"major":         {"major", MajorChangeType, ""},
+		"major-case":    {"mAjOr", MajorChangeType, ""},
 		"invalid":       {"not-a-type", "", "unknown change type: not-a-type"},
 		"invalid-empty": {"", "", "unknown change type:"},
 	}
@@ -92,7 +94,7 @@ func TestChangeToTemplate(t *testing.T) {
 type: feature
 description: test description
 
-# type may be one of "feature" or "bugfix".
+# type may be one of "feature", "bugfix", "announcement", "dependency", or "major".
 # multiple modules may be listed. A change metadata file will be created for each module.
 
 # affected_modules should not be provided unless you are creating a wildcard change (by passing
