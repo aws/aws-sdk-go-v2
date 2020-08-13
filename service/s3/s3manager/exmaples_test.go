@@ -1,3 +1,5 @@
+// +build disabled
+
 package s3manager_test
 
 import (
@@ -7,7 +9,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
 )
 
 // ExampleNewUploader_overrideReadSeekerProvider gives an example
@@ -19,12 +20,12 @@ func ExampleNewUploader_overrideReadSeekerProvider() {
 		panic(fmt.Sprintf("failed to load SDK config: %v", err))
 	}
 
-	uploader := s3manager.NewUploader(cfg, func(u *s3manager.Uploader) {
+	uploader := NewUploader(cfg, func(u *Uploader) {
 		// Define a strategy that will buffer 25 MiB in memory
-		u.BufferProvider = s3manager.NewBufferedReadSeekerWriteToPool(25 * 1024 * 1024)
+		u.BufferProvider = NewBufferedReadSeekerWriteToPool(25 * 1024 * 1024)
 	})
 
-	_, err = uploader.Upload(&s3manager.UploadInput{
+	_, err = uploader.Upload(&UploadInput{
 		Bucket: aws.String("examplebucket"),
 		Key:    aws.String("largeobject"),
 		Body:   bytes.NewReader([]byte("large_multi_part_upload")),

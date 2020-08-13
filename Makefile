@@ -8,19 +8,17 @@ LINTIGNOREDEPS='vendor/.+\.go'
 LINTIGNOREPKGCOMMENT='service/[^/]+/doc_custom.go:.+package comment should be of the form'
 LINTIGNOREENDPOINTS='aws/endpoints/defaults.go:.+(method|const) .+ should be '
 LINTIGNORESINGLEFIGHT='internal/sync/singleflight/singleflight.go:.+error should be the last type'
-LINTIGNOREPROTO="service/smithyprototype/.+\.go:.+don't use underscores in Go names"
 UNIT_TEST_TAGS="example codegen awsinclude"
 ALL_TAGS="example codegen awsinclude integration perftest sdktool"
 
 # SDK's Core and client packages that are compatable with Go 1.9+.
-SDK_CORE_PKGS=./aws/... ./private/... ./internal/...
+SDK_CORE_PKGS=./aws/... ./internal/...
 SDK_CLIENT_PKGS=./service/...
 SDK_COMPA_PKGS=${SDK_CORE_PKGS} ${SDK_CLIENT_PKGS}
 
 # SDK additional packages that are used for development of the SDK.
 SDK_EXAMPLES_PKGS=./example/...
-SDK_MODELS_PKGS=./models/...
-SDK_ALL_PKGS=${SDK_COMPA_PKGS} ${SDK_EXAMPLES_PKGS} ${SDK_MODELS_PKGS}
+SDK_ALL_PKGS=${SDK_COMPA_PKGS} ${SDK_EXAMPLES_PKGS}
 
 
 all: generate unit
@@ -28,40 +26,22 @@ all: generate unit
 ###################
 # Code Generation #
 ###################
-generate: cleanup-models gen-test gen-endpoints gen-services gen-external-asserts
+generate: gen-services gen-external-asserts
 
 smithy-generate:
 	cd codegen && ./gradlew clean build -Plog-tests
-
-gen-test: gen-protocol-test gen-codegen-test
 
 #gen-codegen-test:
 #	@echo "Generating SDK API tests"
 #	go generate ./private/model/api/codegentest/service
 
 gen-services:
-	@echo "Generating SDK clients"
-	go generate ./service
-
-gen-protocol-test:
-	@echo "Generating SDK protocol tests"
-	go generate ./private/protocol/...
-
-gen-endpoints:
-	@echo "Generating SDK endpoints"
-	go generate ./models/endpoints
-
-gen-codegen-test:
-	@echo "Generating SDK API tests"
-	go generate ./private/model/api/codegentest/service
+	@echo "TODO: Wire Up Smithy Client Generation"
+	#go generate ./service
 
 gen-external-asserts:
 	@echo "Generating SDK external package implementor assertions"
 	go generate ./aws/external
-
-cleanup-models:
-	@echo "Cleaning up stale model versions"
-	@./cleanup_models.sh
 
 ###################
 # Unit/CI Testing #
@@ -158,8 +138,7 @@ lint:
 	-e ${LINTIGNOREINFLECTS3UPLOAD} \
 	-e ${LINTIGNOREPKGCOMMENT} \
 	-e ${LINTIGNOREENDPOINTS} \
-	-e ${LINTIGNORESINGLEFIGHT} \
-	-e ${LINTIGNOREPROTO}`; \
+	-e ${LINTIGNORESINGLEFIGHT}`; \
 	echo "$$dolint"; \
 	if [ "$$dolint" != "" ]; then exit 1; fi
 

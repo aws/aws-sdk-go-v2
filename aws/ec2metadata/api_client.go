@@ -1,3 +1,5 @@
+// +build disabled
+
 // Package ec2metadata provides the client for making API calls to the
 // EC2 Instance Metadata service.
 //

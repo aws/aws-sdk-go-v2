@@ -12,7 +12,6 @@ import (
 	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 )
 
 // Logger returns a Logger which will write log messages to stdout, and
@@ -42,11 +41,9 @@ func (l defaultLogger) Log(args ...interface{}) {
 // existing service client.
 func Config() aws.Config {
 	return aws.Config{
-		EndpointResolver: endpoints.NewDefaultResolver(),
-		Credentials:      aws.AnonymousCredentials,
-		HTTPClient:       HTTPClient(),
-		Logger:           Logger(),
-		Handlers:         Handlers(),
+		Credentials: aws.AnonymousCredentials,
+		HTTPClient:  HTTPClient(),
+		Logger:      Logger(),
 	}
 }
 
@@ -55,30 +52,4 @@ func Config() aws.Config {
 // Does not use http.DefaultClient nor http.DefaultTransport.
 func HTTPClient() aws.HTTPClient {
 	return aws.NewBuildableHTTPClient()
-}
-
-// Handlers returns the default request handlers.
-//
-// Generally you shouldn't need to use this method directly, but
-// is available if you need to reset the request handlers of an
-// existing service client.
-func Handlers() aws.Handlers {
-	var handlers aws.Handlers
-
-	handlers.Validate.PushBackNamed(ValidateEndpointHandler)
-	handlers.Validate.PushBackNamed(ValidateParametersHandler)
-	handlers.Validate.AfterEachFn = aws.HandlerListStopOnError
-	handlers.Build.PushBackNamed(SDKVersionUserAgentHandler)
-	handlers.Build.PushBackNamed(AddHostExecEnvUserAgentHander)
-	handlers.Build.PushFrontNamed(RequestInvocationIDHeaderHandler)
-	handlers.Build.AfterEachFn = aws.HandlerListStopOnError
-	handlers.Sign.PushBackNamed(BuildContentLengthHandler)
-	handlers.Sign.PushFrontNamed(RetryMetricHeaderHandler)
-	handlers.Send.PushBackNamed(ValidateReqSigHandler)
-	handlers.Send.PushBackNamed(SendHandler)
-	handlers.Send.PushBackNamed(AttemptClockSkewHandler)
-	handlers.ShouldRetry.PushBackNamed(RetryableCheckHandler)
-	handlers.ValidateResponse.PushBackNamed(ValidateResponseHandler)
-
-	return handlers
 }

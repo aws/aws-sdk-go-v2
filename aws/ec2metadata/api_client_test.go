@@ -1,3 +1,5 @@
+// +build disabled
+
 package ec2metadata_test
 
 import (

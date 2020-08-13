@@ -1,3 +1,5 @@
+// +build disabled
+
 /*
 Package expression provides types and functions to create Amazon DynamoDB
 Expression strings, ExpressionAttributeNames maps, and ExpressionAttributeValues

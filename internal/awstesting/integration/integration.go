@@ -1,4 +1,4 @@
-// +build integration
+// +build integration,disabled
 
 // Package integration performs initialization and validation for integration
 // tests.

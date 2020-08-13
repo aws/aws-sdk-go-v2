@@ -9,7 +9,6 @@ import (
 func init() {
 	config = defaults.Config()
 	config.Region = "mock-region"
-	config.EndpointResolver = aws.ResolveWithEndpointURL("https://endpoint")
 	config.Credentials = aws.StaticCredentialsProvider{
 		Value: aws.Credentials{
 			AccessKeyID: "AKID", SecretAccessKey: "SECRET", SessionToken: "SESSION",

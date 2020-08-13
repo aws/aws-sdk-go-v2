@@ -1,4 +1,4 @@
-// +build go1.13
+// +build go1.13,disabled
 
 package s3manager_test
 
@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
 )
 
 // ExampleNewUploader_overrideTransport gives an example
@@ -32,9 +31,9 @@ func ExampleNewUploader_overrideTransport() {
 		panic(fmt.Sprintf("failed to load SDK config: %v", err))
 	}
 
-	uploader := s3manager.NewUploader(cfg)
+	uploader := NewUploader(cfg)
 
-	_, err = uploader.Upload(&s3manager.UploadInput{
+	_, err = uploader.Upload(&UploadInput{
 		Bucket: aws.String("examplebucket"),
 		Key:    aws.String("largeobject"),
 		Body:   bytes.NewReader([]byte("large_multi_part_upload")),
