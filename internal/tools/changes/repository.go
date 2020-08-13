@@ -246,6 +246,16 @@ func (r *Repository) DiscoverVersions(selector VersionSelector) (VersionEnclosur
 		return VersionEnclosure{}, nil, fmt.Errorf("failed to discover versions: %v", err)
 	}
 
+	hashes, err := r.ModuleHashes(enc)
+	if err != nil {
+		return VersionEnclosure{}, nil, fmt.Errorf("failed to discover versions: %v", err)
+	}
+
+	err = enc.updateHashes(hashes)
+	if err != nil {
+		return VersionEnclosure{}, nil, fmt.Errorf("failed to discover versions: %v", err)
+	}
+
 	enc.Packages = packages
 
 	return enc, bumps, nil

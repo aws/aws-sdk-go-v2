@@ -108,7 +108,7 @@ func ReplaceLine(path, linePrefix, replacement string) error {
 
 	err = ioutil.WriteFile(path, []byte(output), 0644)
 	if err != nil {
-		return fmt.Errorf("failed to write replacement file: %v")
+		return fmt.Errorf("failed to write replacement file: %v", err)
 	}
 
 	return nil

@@ -162,7 +162,7 @@ func NewChanges(modules []string, changeType ChangeType, description string) ([]
 			SchemaVersion: SchemaVersion,
 			Module:        module,
 			Type:          changeType,
-			Description:   description,
+			Description:   cleanDescription(description),
 		})
 	}
 
@@ -184,7 +184,7 @@ func NewWildcardChange(module string, changeType ChangeType, description string,
 		SchemaVersion:   SchemaVersion,
 		Module:          module,
 		Type:            changeType,
-		Description:     description,
+		Description:     cleanDescription(description),
 		AffectedModules: affectedModules,
 	}
 
@@ -193,6 +193,19 @@ func NewWildcardChange(module string, changeType ChangeType, description string,
 	}
 
 	return change, nil
+}
+
+func cleanDescription(description string) string {
+	description = strings.TrimLeft(description, "* ")
+	description = strings.TrimSpace(description)
+
+	return description
+}
+
+// IndentedDescription returns the Change's Description with each line except for the first prefixed with the given string.
+func (c Change) IndentedDescription(indent string) string {
+	desc := strings.ReplaceAll(c.Description, "\n", "\n"+indent)
+	return strings.TrimSpace(desc)
 }
 
 func (c Change) isWildcard() bool {

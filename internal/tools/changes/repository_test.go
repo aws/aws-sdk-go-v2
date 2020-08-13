@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/golist"
 	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -42,8 +43,8 @@ func TestRepository_Modules(t *testing.T) {
 		"internal/tools/changes/testdata/modules/nested/c",
 	}
 
-	if diff := cmp.Diff(mods, wantMods); diff != "" {
-		t.Errorf("expect modules to match:\n%v", diff)
+	if diff := cmp.Diff(wantMods, mods); diff != "" {
+		t.Errorf("expect modules to match (-want, +got):\n%v", diff)
 	}
 }
 
@@ -85,7 +86,7 @@ func TestRepository_DoRelease(t *testing.T) {
 	assertFileContains(t, filepath.Join(repo.RootPath, "b", "go.mod"), []string{"require github.com/aws/aws-sdk-go-v2/a v1.1.0"})
 
 	assertFileContains(t, filepath.Join(repo.RootPath, "CHANGELOG.md"), []string{
-		"* [a](a/CHANGELOG.md) - v1.1.0\n  * Feature: a feature change",
+		"* [a](a/CHANGELOG.md#Release-test-release) - v1.1.0\n  * Feature: a feature change",
 		"Service Client Highlights\n* Bug Fix: all services wildcard bugfix",
 		"Dependency Update: Updated SDK dependencies to their latest versions.",
 	})
@@ -128,8 +129,8 @@ func TestRepository_TagAndPush(t *testing.T) {
 
 	sort.Strings(gitClient.tags)
 
-	if diff := cmp.Diff(gitClient.tags, wantTags); diff != "" {
-		t.Errorf("expect tags to match:\n%v", diff)
+	if diff := cmp.Diff(wantTags, gitClient.tags); diff != "" {
+		t.Errorf("expect tags to match (-want, +got):\n%v", diff)
 	}
 }
 
@@ -156,8 +157,8 @@ func TestRepository_UpdateChangelog(t *testing.T) {
 				t.Fatal(err)
 			}
 
-			if diff := cmp.Diff(string(changelog), tt.changelog); diff != "" {
-				t.Errorf("expect changelogs to match:\n%v", diff)
+			if diff := cmp.Diff(tt.changelog, string(changelog)); diff != "" {
+				t.Errorf("expect changelogs to match (-want, +got):\n%v", diff)
 			}
 
 			err = os.Remove(filepath.Join(dir, "CHANGELOG.md"))
@@ -245,12 +246,12 @@ func TestRepository_discoverVersions(t *testing.T) {
 					t.Errorf("expected err to contain %s, got %v", tt.wantErr, err)
 				}
 			} else {
-				if diff := cmp.Diff(enc, tt.wantEnclosure); diff != "" {
-					t.Errorf("expect enclosures to match:\n%v", diff)
+				if diff := cmp.Diff(tt.wantEnclosure, enc); diff != "" {
+					t.Errorf("expect enclosures to match (-want, +got):\n%v", diff)
 				}
 
-				if diff := cmp.Diff(bumps, tt.wantBumps); diff != "" {
-					t.Errorf("expect bumps to match:\n%v", diff)
+				if diff := cmp.Diff(tt.wantBumps, bumps); diff != "" {
+					t.Errorf("expect bumps to match (-want, +got):\n%v", diff)
 				}
 			}
 		})
@@ -266,8 +267,8 @@ func TestRepository_DiscoverVersions(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		if diff := cmp.Diff(enc, repo.Metadata.CurrentVersions); diff != "" {
-			t.Errorf("expect enclosures to match:\n%v", diff)
+		if diff := cmp.Diff(repo.Metadata.CurrentVersions, enc, cmpopts.IgnoreFields(Version{}, "ModuleHash")); diff != "" {
+			t.Errorf("expect enclosures to match (-want +got):\n%v", diff)
 		}
 
 		if len(bumps) != 0 {
@@ -296,8 +297,8 @@ func TestRepository_DiscoverVersions(t *testing.T) {
 		wantEnc := repo.Metadata.CurrentVersions
 		wantEnc.ModuleVersions[modPrefix+"a"] = Version{modPrefix + "a", sdkRepo + "/" + modPrefix + "a", "v0.1.0", ""}
 
-		if diff := cmp.Diff(enc, repo.Metadata.CurrentVersions); diff != "" {
-			t.Errorf("expect enclosures to match:\n%v", diff)
+		if diff := cmp.Diff(repo.Metadata.CurrentVersions, enc, cmpopts.IgnoreFields(Version{}, "ModuleHash")); diff != "" {
+			t.Errorf("expect enclosures to match (-want +got):\n%v", diff)
 		}
 	})
 
@@ -314,8 +315,8 @@ func TestRepository_DiscoverVersions(t *testing.T) {
 		wantEnc := repo.Metadata.CurrentVersions
 		wantEnc.ModuleVersions[modPrefix+"a"] = Version{modPrefix + "a", sdkRepo + "/" + modPrefix + "a", "v0.1.0", ""}
 
-		if diff := cmp.Diff(enc, repo.Metadata.CurrentVersions); diff != "" {
-			t.Errorf("expect enclosures to match:\n%v", diff)
+		if diff := cmp.Diff(repo.Metadata.CurrentVersions, enc, cmpopts.IgnoreFields(Version{}, "ModuleHash")); diff != "" {
+			t.Errorf("expect enclosures to match (-want +got):\n%v", diff)
 		}
 	})
 }
@@ -406,7 +407,6 @@ func assertFileContains(t *testing.T, path string, substrings []string) bool {
 
 	for _, s := range substrings {
 		if !strings.Contains(string(data), s) {
-			fmt.Println(string(data))
 			t.Errorf("expected file %s to contain %s", path, s)
 			return false
 		}

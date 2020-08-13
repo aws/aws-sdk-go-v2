@@ -23,12 +23,17 @@ type changelogModuleEntry struct {
 	ReleaseID string
 }
 
+func (e changelogModuleEntry) Link() string {
+	anchor := "Release-" + strings.ReplaceAll(e.ReleaseID, " ", "-")
+	return fmt.Sprintf("[%s](%s/CHANGELOG.md#%s)", e.Module, e.Module, anchor)
+}
+
 const changelogModule = `{{- if .TopLevel -}}
-* [{{.Module}}]({{.Module}}/CHANGELOG.md){{with .Version}} - {{.}}{{end}}{{else -}}
+* {{.Link}}{{with .Version}} - {{.}}{{end}}{{else -}}
 ## Release {{.ReleaseID}}
 * ` + "`" + `{{.Module}}` + "`" + `{{with .Version}} - {{.}}{{end}}{{end -}}
 {{range $key, $section := .Sections}}{{range $section}}
-  * {{ $key.ChangelogPrefix }}{{.Description}}{{end}}{{end}}{{if not .TopLevel}}
+  * {{ $key.ChangelogPrefix }}{{.IndentedDescription "  "}}{{end}}{{end}}{{if not .TopLevel}}
 {{end}}`
 
 var changelogTemplate *template.Template

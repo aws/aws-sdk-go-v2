@@ -54,7 +54,7 @@ func (c Client) Commit(unstagedPaths []string, message string) error {
 		}
 	}
 
-	cmd := exec.Command("git", "commit", "-m", fmt.Sprintf(`"%s"`, message))
+	cmd := exec.Command("git", "commit", "-m", message)
 	_, err := util.ExecAt(cmd, c.RepoPath)
 
 	return err

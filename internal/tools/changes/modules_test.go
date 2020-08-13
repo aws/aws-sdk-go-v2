@@ -44,7 +44,7 @@ func TestDiscoverModules(t *testing.T) {
 	}
 
 	if diff := cmp.Diff(wantMods, mods); diff != "" {
-		t.Errorf("expect modules to match:\n%v", diff)
+		t.Errorf("expect modules to match (-want, +got):\n%v", diff)
 	}
 }
 

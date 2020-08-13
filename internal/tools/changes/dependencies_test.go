@@ -66,8 +66,8 @@ func TestModuleGraph(t *testing.T) {
 				t.Fatal(err)
 			}
 
-			if diff := cmp.Diff(graph, tt.wantGraph); diff != "" {
-				t.Errorf("expect dependencies to match:\n%v", diff)
+			if diff := cmp.Diff(tt.wantGraph, graph); diff != "" {
+				t.Errorf("expect dependencies to match (-want, +got):\n%v", diff)
 			}
 		})
 	}
@@ -133,8 +133,8 @@ func TestModuleGraph_DependencyUpdates(t *testing.T) {
 		t.Run(id, func(t *testing.T) {
 			updates := tt.modGraph.dependencyUpdates(tt.updatedModules)
 
-			if diff := cmp.Diff(updates, tt.wantUpdates); diff != "" {
-				t.Errorf("expect dependencies to match:\n%v", diff)
+			if diff := cmp.Diff(tt.wantUpdates, updates); diff != "" {
+				t.Errorf("expect dependencies to match (-want, +got):\n%v", diff)
 			}
 		})
 	}

@@ -179,8 +179,8 @@ func TestVersionTags(t *testing.T) {
 				t.Fatal(err)
 			}
 
-			if diff := cmp.Diff(tags, tt.wantTags); diff != "" {
-				t.Errorf("expect tags to match:\n%v", diff)
+			if diff := cmp.Diff(tt.wantTags, tags); diff != "" {
+				t.Errorf("expect tags to match (-want, +got):\n%v", diff)
 			}
 		})
 	}
@@ -221,8 +221,8 @@ func TestTagRepo(t *testing.T) {
 					t.Errorf("expected err to contain %s, got %v", tt.wantErr, err)
 				}
 			} else {
-				if diff := cmp.Diff(gitClient.tags, []string{tt.wantTag}); diff != "" {
-					t.Errorf("expect tags to match:\n%v", diff)
+				if diff := cmp.Diff([]string{tt.wantTag}, gitClient.tags); diff != "" {
+					t.Errorf("expect tags to match (-want, +got):\n%v", diff)
 				}
 			}
 		})
@@ -296,8 +296,8 @@ func TestVersionEnclosure_Bump(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if diff := cmp.Diff(bump, wantBump); diff != "" {
-		t.Errorf("expect bumps to match:\n%v", diff)
+	if diff := cmp.Diff(wantBump, bump); diff != "" {
+		t.Errorf("expect bumps to match (-want, +got):\n%v", diff)
 	}
 }
 

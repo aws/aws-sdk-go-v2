@@ -78,7 +78,7 @@ func TestNewChanges(t *testing.T) {
 					}
 
 					if diff := cmp.Diff(want, c); diff != "" {
-						t.Errorf("expect changes to match:\n%v", diff)
+						t.Errorf("expect changes to match (-want, +got):\n%v", diff)
 					}
 				}
 			}
@@ -108,8 +108,8 @@ description: test description
 		t.Fatalf("expected nil err, got %v", err)
 	}
 
-	if diff := cmp.Diff(template, []byte(wantTemplate)); len(diff) != 0 {
-		t.Errorf("expect templates to match:\n%v", diff)
+	if diff := cmp.Diff([]byte(wantTemplate), template); len(diff) != 0 {
+		t.Errorf("expect templates to match (-want, +got):\n%v", diff)
 	}
 }
 
@@ -142,7 +142,7 @@ description: test description
 	}
 
 	if diff := cmp.Diff(want, change); diff != "" {
-		t.Errorf("expect changes to match:\n%v", diff)
+		t.Errorf("expect changes to match (-want, +got):\n%v", diff)
 	}
 }
 
