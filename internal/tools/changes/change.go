@@ -231,8 +231,13 @@ func (c Change) matches(module string) bool {
 		return module == c.Module
 	}
 
-	prefix := trimWildcard(c.Module)
-	return strings.HasPrefix(module, prefix)
+	for _, m := range c.AffectedModules {
+		if m == module {
+			return true
+		}
+	}
+
+	return false
 }
 
 func trimWildcard(mod string) string {
