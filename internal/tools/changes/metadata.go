@@ -3,6 +3,7 @@ package changes
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/util"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -16,12 +17,14 @@ const SchemaVersion = 1
 const metadataDir = ".changes"
 const pendingDir = "next-release"
 const releaseDir = "releases"
+const versionsFile = "versions.json"
 
 // Metadata is a representation of the change metadata stored in a .changes directory.
 type Metadata struct {
-	ChangePath string     // ChangePath is the relative path from the current directory to .changes
-	Changes    []Change   // Changes holds all pending change metadata in the .changes/next-release directory
-	Releases   []*Release // Releases contains all releases in the .changes/releases directory
+	ChangePath      string           // ChangePath is the relative path from the current directory to .changes
+	Changes         []Change         // Changes holds all pending change metadata in the .changes/next-release directory
+	Releases        []*Release       // Releases contains all releases in the .changes/releases directory
+	CurrentVersions VersionEnclosure // CurrentVersions is the .changes/versions.json enclosure of current module versions
 }
 
 // LoadMetadata loads the .changes directory at the given path.
@@ -31,9 +34,15 @@ func LoadMetadata(path string) (*Metadata, error) {
 		return nil, err
 	}
 
+	v, err := loadVersions(filepath.Join(path, versionsFile))
+	if err != nil {
+		return nil, err
+	}
+
 	return &Metadata{
-		ChangePath: path,
-		Changes:    changes,
+		ChangePath:      path,
+		Changes:         changes,
+		CurrentVersions: v,
 	}, nil
 }
 
@@ -71,6 +80,15 @@ func (m *Metadata) AddChanges(changes []Change) error {
 	return nil
 }
 
+func (m *Metadata) addDependencyUpdateChange(modules []string) error {
+	change, err := NewWildcardChange("/...", DependencyChangeType, dependencyUpdateMessage, modules)
+	if err != nil {
+		return err
+	}
+
+	return m.AddChange(change)
+}
+
 // GetChangeByID returns the pending Change with the given id.
 func (m *Metadata) GetChangeByID(id string) (Change, error) {
 	_, c, err := m.getChange(id)
@@ -96,7 +114,7 @@ func (m *Metadata) GetChanges(module string) []Change {
 	var changes []Change
 
 	for _, c := range m.Changes {
-		if module == c.Module {
+		if c.matches(module) {
 			changes = append(changes, c)
 		}
 	}
@@ -106,7 +124,7 @@ func (m *Metadata) GetChanges(module string) []Change {
 // SaveChange saves the given change to the .changes/next-release directory.
 func (m *Metadata) SaveChange(c Change) error {
 	c.SchemaVersion = SchemaVersion
-	return writeJSON(c, m.ChangePath, pendingDir, c.ID)
+	return util.WriteJSON(c, m.ChangePath, pendingDir, c.ID)
 }
 
 // UpdateChangeFromTemplate removes oldChange and creates a new Change from the given template.
@@ -169,15 +187,18 @@ func (m *Metadata) ClearChanges() error {
 // the Metadata and delete change files in .changes/next-release. A release file will also be created in
 // .changes/releases. If dryRun is true, CreateRelease will return a Release, but not modify change or release files.
 func (m *Metadata) CreateRelease(id string, bumps map[string]VersionBump, dryRun bool) (*Release, error) {
+	changes := make([]Change, len(m.Changes))
+	copy(changes, m.Changes)
+
 	release := &Release{
 		ID:            id,
 		SchemaVersion: SchemaVersion,
 		VersionBumps:  bumps,
-		Changes:       m.Changes,
+		Changes:       changes,
 	}
 
 	if !dryRun {
-		if err := writeJSON(release, m.ChangePath, releaseDir, id); err != nil {
+		if err := util.WriteJSON(release, m.ChangePath, releaseDir, id); err != nil {
 			return nil, err
 		}
 
@@ -192,10 +213,21 @@ func (m *Metadata) deleteChangeFile(id string) error {
 	return os.Remove(filepath.Join(m.ChangePath, pendingDir, id+".json"))
 }
 
+// SaveEnclosure updates the Metadata's enclosure and updates the versions.json file.
+func (m *Metadata) SaveEnclosure(enc VersionEnclosure) error {
+	err := util.WriteJSON(enc, m.ChangePath, "", "versions")
+	if err != nil {
+		return err
+	}
+
+	m.CurrentVersions = enc
+	return nil
+}
+
 // GetChangesPath searches upward from the current directory for a .changes directory, returning a relative path from
 // the current directory to the .changes directory.
 func GetChangesPath() (string, error) {
-	return findFile(metadataDir, true)
+	return util.FindFile(metadataDir, true)
 }
 
 // loadChanges unmarshals and returns all Changes in the given directory.
@@ -234,4 +266,19 @@ func loadChanges(changesDir string) ([]Change, error) {
 	})
 
 	return changes, nil
+}
+
+func loadVersions(path string) (VersionEnclosure, error) {
+	versionsData, err := ioutil.ReadFile(path)
+	if err != nil {
+		return VersionEnclosure{}, fmt.Errorf("couldn't load version enclosure at %s: %v", path, err)
+	}
+
+	var enclosure VersionEnclosure
+	err = json.Unmarshal(versionsData, &enclosure)
+	if err != nil {
+		return VersionEnclosure{}, fmt.Errorf("couldn't load version enclosure at %s: %v", path, err)
+	}
+
+	return enclosure, nil
 }

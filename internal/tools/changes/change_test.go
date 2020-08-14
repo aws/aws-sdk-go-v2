@@ -1,7 +1,6 @@
 package changes
 
 import (
-	"bytes"
 	"github.com/google/go-cmp/cmp"
 	"strings"
 	"testing"
@@ -17,6 +16,8 @@ func TestParseChangeType(t *testing.T) {
 		"feature-case":  {"FEATURE", FeatureChangeType, ""},
 		"bugfix":        {"bugfix", BugFixChangeType, ""},
 		"bugfix-case":   {"BugFix", BugFixChangeType, ""},
+		"major":         {"major", MajorChangeType, ""},
+		"major-case":    {"mAjOr", MajorChangeType, ""},
 		"invalid":       {"not-a-type", "", "unknown change type: not-a-type"},
 		"invalid-empty": {"", "", "unknown change type:"},
 	}
@@ -79,7 +80,7 @@ func TestNewChanges(t *testing.T) {
 					}
 
 					if diff := cmp.Diff(want, c); diff != "" {
-						t.Errorf("expect changes to match:\n%v", diff)
+						t.Errorf("expect changes to match (-want, +got):\n%v", diff)
 					}
 				}
 			}
@@ -93,8 +94,11 @@ func TestChangeToTemplate(t *testing.T) {
 type: feature
 description: test description
 
-# type may be one of "feature" or "bugfix".
-# multiple modules may be listed. A change metadata file will be created for each module.`
+# type may be one of "feature", "bugfix", "announcement", "dependency", or "major".
+# multiple modules may be listed. A change metadata file will be created for each module.
+
+# affected_modules should not be provided unless you are creating a wildcard change (by passing
+# the wildcard and module flag to the add command).`
 
 	template, err := ChangeToTemplate(Change{
 		ID:          "test-feature-1",
@@ -106,8 +110,8 @@ description: test description
 		t.Fatalf("expected nil err, got %v", err)
 	}
 
-	if bytes.Compare(template, []byte(wantTemplate)) != 0 {
-		t.Errorf("expected template \"%s\", got \"%s\"", wantTemplate, string(template))
+	if diff := cmp.Diff([]byte(wantTemplate), template); len(diff) != 0 {
+		t.Errorf("expect templates to match (-want, +got):\n%v", diff)
 	}
 }
 
@@ -140,7 +144,7 @@ description: test description
 	}
 
 	if diff := cmp.Diff(want, change); diff != "" {
-		t.Errorf("expect changes to match:\n%v", diff)
+		t.Errorf("expect changes to match (-want, +got):\n%v", diff)
 	}
 }
 

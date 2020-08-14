@@ -1,11 +1,14 @@
 package main
 
 import (
+	"encoding/json"
 	"errors"
 	"flag"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/internal/tools/changes"
+	"io/ioutil"
 	"os"
+	"path/filepath"
 	"strconv"
 )
 
@@ -13,6 +16,7 @@ var changeParams = struct {
 	module      string
 	changeType  changes.ChangeType
 	description string
+	compareTo   string
 	similar     bool
 }{}
 
@@ -34,6 +38,7 @@ func init() {
 	addFlags.StringVar(&changeParams.module, "module", "", "sets the change's module")
 	addFlags.Var(&changeParams.changeType, "type", "sets the change's type")
 	addFlags.StringVar(&changeParams.description, "description", "", "sets the change's description")
+	addFlags.StringVar(&changeParams.compareTo, "compare-to", "", "specifies a path to a version enclosure to compare current module hashes to in order to resolve a wildcard.")
 	addFlags.Usage = func() {
 		fmt.Printf("%s change add [-module=<module>] [-type=<type>] [-description=<description>]\n", os.Args[0])
 		addFlags.PrintDefaults()
@@ -84,6 +89,10 @@ func changeSubcmd(args []string) error {
 			return err
 		}
 
+		if changes.ModIsWildcard(changeParams.module) {
+			return addCmdWildcard(metadata, changeParams.module, changeParams.changeType, changeParams.description, changeParams.compareTo)
+		}
+
 		return addCmd(metadata, changeParams.module, changeParams.changeType, changeParams.description)
 	case "ls", "list":
 		err = lsFlags.Parse(args[1:])
@@ -124,6 +133,78 @@ func changeSubcmd(args []string) error {
 		changeUsage()
 		return errors.New("invalid usage")
 	}
+}
+
+func addCmdWildcard(metadata *changes.Metadata, module string, changeType changes.ChangeType, description string, compareTo string) error {
+	if module == "" {
+		return errors.New("couldn't add wildcard change: a module must be provided with --module")
+	}
+
+	repo, err := changes.NewRepository(filepath.Join(metadata.ChangePath, ".."))
+	if err != nil {
+		return fmt.Errorf("couldn't add wildcard change: %v", err)
+	}
+
+	mods, err := repo.Modules()
+	if err != nil {
+		return err
+	}
+
+	var affectedModules []string
+	if compareTo != "" {
+		data, err := ioutil.ReadFile(compareTo)
+		if err != nil {
+			return err
+		}
+
+		var enc changes.VersionEnclosure
+		err = json.Unmarshal(data, &enc)
+		if err != nil {
+			return err
+		}
+
+		hashes, err := repo.ModuleHashes(enc)
+		if err != nil {
+			return err
+		}
+
+		affectedModules = enc.HashDiff(hashes)
+	} else {
+		affectedModules, err = changes.MatchWildcardModules(mods, module)
+		if err != nil {
+			return err
+		}
+	}
+
+	template, err := changes.ChangeToTemplate(changes.Change{
+		Module:          module,
+		Type:            changeType,
+		Description:     description,
+		AffectedModules: affectedModules,
+	})
+	if err != nil {
+		return fmt.Errorf("failed to create change: %v", err)
+	}
+
+	filledTemplate, err := editTemplate(template)
+	if err != nil {
+		return fmt.Errorf("failed to create change: %v", err)
+	}
+
+	changes, err := changes.TemplateToChanges(filledTemplate)
+	if err != nil {
+		return fmt.Errorf("failed to create change: %v", err)
+	}
+
+	if len(changes) != 1 {
+		return fmt.Errorf("failed to create change: expected template to create 1 change, got %d changes", len(changes))
+	}
+
+	change := changes[0]
+
+	// TODO: move some logic into TemplateToChanges
+
+	return metadata.AddChange(change)
 }
 
 func addCmd(metadata *changes.Metadata, module string, changeType changes.ChangeType, description string) error {

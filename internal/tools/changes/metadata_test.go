@@ -1,6 +1,7 @@
 package changes
 
 import (
+	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/util"
 	"github.com/google/go-cmp/cmp"
 	"io/ioutil"
 	"os"
@@ -9,36 +10,57 @@ import (
 	"testing"
 )
 
-var tmpDir string
+var tmpDir string // tmpDir is a temporary directory metadata tests use.
 
 func TestMain(m *testing.M) {
-	var err error
-
-	// testdata already has .changes, but make a temporary .changes directory so that we can easily cleanup after
-	// tests have run.
-	tmpDir, err = ioutil.TempDir("", "changes-test")
+	dirName, cleanup, err := setupTmpChanges()
 	if err != nil {
 		panic(err)
 	}
 
-	err = os.MkdirAll(filepath.Join(tmpDir, metadataDir, pendingDir), 0755)
-	if err != nil {
-		panic(err)
-	}
-
-	err = os.Mkdir(filepath.Join(tmpDir, metadataDir, releaseDir), 0755)
-	if err != nil {
-		panic(err)
-	}
+	tmpDir = dirName
 
 	code := m.Run()
 
-	err = os.RemoveAll(tmpDir)
+	err = cleanup()
 	if err != nil {
 		panic(err)
 	}
 
 	os.Exit(code)
+}
+
+func setupTmpChanges() (name string, cleanup func() error, err error) {
+	// testdata already has .changes, but make a temporary .changes directory so that we can easily cleanup after
+	// tests have run.
+	dirName, err := ioutil.TempDir("", "changes-test")
+	if err != nil {
+		return "", nil, err
+	}
+
+	err = os.MkdirAll(filepath.Join(dirName, metadataDir, pendingDir), 0755)
+	if err != nil {
+		return "", nil, err
+	}
+
+	err = os.Mkdir(filepath.Join(dirName, metadataDir, releaseDir), 0755)
+	if err != nil {
+		return "", nil, err
+	}
+
+	// create empty versions.json
+	err = util.WriteJSON(VersionEnclosure{
+		SchemaVersion:  SchemaVersion,
+		ModuleVersions: map[string]Version{},
+		Packages:       map[string]string{},
+	}, dirName, metadataDir, "versions")
+	if err != nil {
+		return "", nil, err
+	}
+
+	return dirName, func() error {
+		return os.RemoveAll(dirName)
+	}, nil
 }
 
 func TestLoadMetadata(t *testing.T) {
@@ -88,7 +110,7 @@ func TestMetadata_AddChange(t *testing.T) {
 
 	m2 := getMetadata(t)
 
-	c, err := m2.GetChangeById("test-change-123456")
+	c, err := m2.GetChangeByID("test-change-123456")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -101,7 +123,7 @@ func TestMetadata_AddChange(t *testing.T) {
 		t.Errorf("Expected SchemaVersion %d, got %d", SchemaVersion, c.SchemaVersion)
 	}
 
-	err = m.RemoveChangeById("test-change-123456")
+	err = m.RemoveChangeByID("test-change-123456")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -125,12 +147,12 @@ func TestMetadata_AddChanges(t *testing.T) {
 	}
 
 	for _, c := range changes {
-		_, err := m.GetChangeById(c.ID)
+		_, err := m.GetChangeByID(c.ID)
 		if err != nil {
 			t.Error(err)
 		}
 
-		err = m.RemoveChangeById(c.ID)
+		err = m.RemoveChangeByID(c.ID)
 		if err != nil {
 			t.Error(err)
 		}
@@ -168,12 +190,12 @@ func TestMetadata_GetChangeById(t *testing.T) {
 	m := getMetadata(t)
 	m.Changes = getMockChanges(t)
 
-	_, err := m.GetChangeById("invalid-id")
+	_, err := m.GetChangeByID("invalid-id")
 	if err == nil {
 		t.Errorf("Expected non-nil err, got nil")
 	}
 
-	c, err := m.GetChangeById("test-feature-1")
+	c, err := m.GetChangeByID("test-feature-1")
 	if err != nil {
 		t.Fatalf("expected nil err, got %v", err)
 	}
@@ -327,7 +349,11 @@ func TestGetChangesPath(t *testing.T) {
 func getMetadata(t *testing.T) *Metadata {
 	t.Helper()
 
-	m, _ := LoadMetadata(filepath.Join(tmpDir, metadataDir))
+	m, err := LoadMetadata(filepath.Join(tmpDir, metadataDir))
+	if err != nil {
+		panic(err)
+	}
+
 	return m
 }
 
