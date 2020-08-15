@@ -196,6 +196,9 @@ func AddProfileCredentials(c *Credentials) (bool, error) {
 	return out, err
 }
 
+// AddProfileConfig method to Add a profile in .aws/config , if success it will return true
+// Need to pass the *CredentialsConfig  type  as argument , it composite  the  profile,region,output fields
+// if success it will return true
 func AddProfileConfig(c *CredentialsConfig) (bool, error) {
 
 	var out bool
@@ -277,9 +280,12 @@ func AddProfileConfig(c *CredentialsConfig) (bool, error) {
 	return out, err
 }
 
+// DeleteProfileCredentials method to delete a profile in .aws/config
+// Need to pass the profile name as argument
+// if success it will return true
+
 func DeleteProfileConfig(p string) (bool, error) {
 
-	// config := map[string]string{}
 	var profile string
 	var region string
 	var output string
@@ -325,14 +331,11 @@ func DeleteProfileConfig(p string) (bool, error) {
 					log.Println(err)
 				}
 
-				// config[values] = profile
-
 				if Getval.Has("region") {
 					region = fmt.Sprintf("region = %v", Getval.String("region"))
 					if _, err := f.WriteString(region + "\n"); err != nil {
 						log.Println(err)
 					}
-					// config[values+"_region"] = region
 
 				}
 				if Getval.Has("output") {
@@ -340,8 +343,6 @@ func DeleteProfileConfig(p string) (bool, error) {
 					if _, err := f.WriteString(output + "\n\n"); err != nil {
 						log.Println(err)
 					}
-
-					// config[values+"_output"] = output
 
 				}
 				out = true
