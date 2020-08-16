@@ -4,8 +4,18 @@ import (
 	"testing"
 )
 
+func CreateIfNotExist(name string) error {
+    file, err := os.OpenFile(name, os.O_RDONLY|os.O_CREATE, 0644)
+    if err != nil {
+        return err
+    }
+    return file.Close()
+}
+
 func TestAddProfileCredentials(t *testing.T) {
 	t.Run("TestAddProfileCredentials1", func(t *testing.T) {
+		path := DefaultSharedCredentialsFilename()
+		CreateIfNotExist(path)
 		AccessIdTest := "AccessIdTest"
 		SecretKeyTest := "SecretKeyTest"
 		ProfileTest := "Addfirsttest"
@@ -31,6 +41,8 @@ func TestDeleteProfileCredentials(t *testing.T) {
 
 func TestAddProfileConfig(t *testing.T) {
 	t.Run("TestAddProfileConfig", func(t *testing.T) {
+		path := DefaultSharedConfigFilename()
+		CreateIfNotExist(path)
 		ProfiletTest := "firstconfig"
 		RegionTest := "us-east-1"
 		OutputTest := "json"
