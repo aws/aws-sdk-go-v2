@@ -40,7 +40,7 @@ func TestAddProfileCredentials(t *testing.T) {
 
 }
 func TestDeleteProfileCredentials(t *testing.T) {
-	t.Run("TestDeleteprofile", func(t *testing.T) {
+	t.Run("TestDeleteProfileCredentials", func(t *testing.T) {
 		got, _ := DeleteProfileCredentials("Addfirsttest")
 		want := true
 		if got != want {
@@ -68,7 +68,7 @@ func TestAddProfileConfig(t *testing.T) {
 }
 
 func TestDeleteProfileConfig(t *testing.T) {
-	t.Run("TestDeleteprofile", func(t *testing.T) {
+	t.Run("TestDeleteprofileconfig", func(t *testing.T) {
 		got, _ := DeleteProfileConfig("firstconfig")
 		want := true
 		if got != want {
