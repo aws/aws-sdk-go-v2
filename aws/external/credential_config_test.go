@@ -67,13 +67,13 @@ func TestAddProfileConfig(t *testing.T) {
 
 }
 
-func TestDeleteProfileConfig(t *testing.T) {
-	t.Run("TestDeleteprofileconfig", func(t *testing.T) {
-		got, _ := DeleteProfileConfig("firstconfig")
-		want := true
-		if got != want {
-			t.Errorf("Got: %v - want: %v", got, want)
-		}
-	})
+// func TestDeleteProfileConfig(t *testing.T) {
+// 	t.Run("TestDeleteprofileconfig", func(t *testing.T) {
+// 		got, _ := DeleteProfileConfig("firstconfig")
+// 		want := true
+// 		if got != want {
+// 			t.Errorf("Got: %v - want: %v", got, want)
+// 		}
+// 	})
 
-}
+// }
