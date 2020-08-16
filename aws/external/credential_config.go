@@ -51,14 +51,7 @@ func DeleteProfileCredentials(p string) (bool, error) {
 	path := DefaultSharedCredentialsFilename()
 
 	// file backup
-	readbkp, err := ioutil.ReadFile(path)
-	if err != nil {
-		panic(err)
-	}
-	err = ioutil.WriteFile(path+".bkp", []byte(string(readbkp)), 0644)
-	if err != nil {
-		panic(err)
-	}
+	BackupConfig(path)
 
 	sec, err := ini.OpenFile(path)
 	if err != nil {
@@ -122,14 +115,7 @@ func AddProfileCredentials(c *Credentials) (bool, error) {
 	path := DefaultSharedCredentialsFilename()
 
 	// file backup
-	readbkp, err := ioutil.ReadFile(path)
-	if err != nil {
-		panic(err)
-	}
-	err = ioutil.WriteFile(path+".bkp", []byte(string(readbkp)), 0644)
-	if err != nil {
-		panic(err)
-	}
+	BackupConfig(path)
 
 	if c.Profile == nil {
 		defaultsprofile := "default"
@@ -210,14 +196,7 @@ func AddProfileConfig(c *CredentialsConfig) (bool, error) {
 	path := DefaultSharedConfigFilename()
 
 	// file backup
-	readbkp, err := ioutil.ReadFile(path)
-	if err != nil {
-		panic(err)
-	}
-	err = ioutil.WriteFile(path+".bkp", []byte(string(readbkp)), 0644)
-	if err != nil {
-		panic(err)
-	}
+	BackupConfig(path)
 
 	if c.Profile == nil {
 		defaultsprofile := "default"
@@ -318,7 +297,6 @@ func DeleteProfileConfig(p string) (bool, error) {
 		}
 
 		for _, values := range ProfileList {
-
 			if values != p {
 				f, err := os.OpenFile(path, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
 				if err != nil {
@@ -349,10 +327,32 @@ func DeleteProfileConfig(p string) (bool, error) {
 				out = true
 
 			}
+			f, err := os.OpenFile(path, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
+			if err != nil {
+				log.Println(err)
+			}
+			defer f.Close()
+			out = true
 
 		}
 
 	}
 
 	return out, err
+}
+
+func BackupConfig(path string) bool {
+	var out bool
+	readbkp, err := ioutil.ReadFile(path)
+	if err != nil {
+		fmt.Println("file not exist")
+	}
+	err = ioutil.WriteFile(path+".bkp", []byte(string(readbkp)), 0644)
+	if err != nil {
+		fmt.Println("Error when creating backupfile")
+	} else {
+		out = true
+	}
+
+	return out
 }

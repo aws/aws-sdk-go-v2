@@ -3,26 +3,25 @@ package external
 import (
 	"fmt"
 	"os"
-	"path"
 	"testing"
+	"path/filepath"
+
 )
 
 // create config file if not exist
 
-func CreateIfNotExist(filepath string) bool {
-
-	dir, _ := path.Split(filepath)
+func CreateIfNotExist(fpath string) bool {
+	dir, _ := filepath.Split(fpath)
 	var out bool
-
 	if _, err := os.Stat(dir); os.IsNotExist(err) {
 		os.MkdirAll(dir, 0755)
-		file, _ := os.OpenFile(filepath, os.O_RDONLY|os.O_CREATE, 0644)
-		if err != nil {
-			fmt.Println("Config file available")
-		}
-		file.Close()
-		out = true
 	}
+	file, err := os.OpenFile(fpath, os.O_RDONLY|os.O_CREATE, 0644)
+	if err != nil {
+		fmt.Println("Error when Reading")
+	}
+	file.Close()
+	out = true
 	return out
 }
 
@@ -40,9 +39,6 @@ func TestAddProfileCredentials(t *testing.T) {
 			t.Errorf("Got: %v - want: %v", got, want)
 		}
 	})
-
-}
-func TestDeleteProfileCredentials(t *testing.T) {
 	t.Run("TestDeleteProfileCredentials", func(t *testing.T) {
 		got, _ := DeleteProfileCredentials("Addfirsttest1")
 		want := true
@@ -52,6 +48,17 @@ func TestDeleteProfileCredentials(t *testing.T) {
 	})
 
 }
+
+// func TestDeleteProfileCredentials(t *testing.T) {
+// 	t.Run("TestDeleteProfileCredentials", func(t *testing.T) {
+// 		got, _ := DeleteProfileCredentials("Addfirsttest1")
+// 		want := true
+// 		if got != want {
+// 			t.Errorf("Got: %v - want: %v", got, want)
+// 		}
+// 	})
+
+// }
 
 func TestAddProfileConfig(t *testing.T) {
 	t.Run("TestAddProfileConfig", func(t *testing.T) {
@@ -67,10 +74,6 @@ func TestAddProfileConfig(t *testing.T) {
 			t.Errorf("Got: %v - want: %v", got, want)
 		}
 	})
-
-}
-
-func TestDeleteProfileConfig(t *testing.T) {
 	t.Run("TestDeleteprofileconfig", func(t *testing.T) {
 		got, _ := DeleteProfileConfig("firstconfig1")
 		want := true
@@ -80,3 +83,14 @@ func TestDeleteProfileConfig(t *testing.T) {
 	})
 
 }
+
+// func TestDeleteProfileConfig(t *testing.T) {
+// 	t.Run("TestDeleteprofileconfig", func(t *testing.T) {
+// 		got, _ := DeleteProfileConfig("firstconfig1")
+// 		want := true
+// 		if got != want {
+// 			t.Errorf("Got: %v - want: %v", got, want)
+// 		}
+// 	})
+
+// }
