@@ -1,3 +1,4 @@
+// AWS local Credentials configuration in Go SDK, Can also able to add or remove with profilename
 package external
 
 import (
