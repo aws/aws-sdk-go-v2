@@ -1,15 +1,16 @@
 package external
 
 import (
+	"os"
 	"testing"
 )
 
 func CreateIfNotExist(name string) error {
-    file, err := os.OpenFile(name, os.O_RDONLY|os.O_CREATE, 0644)
-    if err != nil {
-        return err
-    }
-    return file.Close()
+	file, err := os.OpenFile(name, os.O_RDONLY|os.O_CREATE, 0644)
+	if err != nil {
+		return err
+	}
+	return file.Close()
 }
 
 func TestAddProfileCredentials(t *testing.T) {
