@@ -1,6 +1,7 @@
 package external
 
 import (
+	"fmt"
 	"os"
 	"path"
 	"testing"
@@ -8,25 +9,27 @@ import (
 
 // create config file if not exist
 
-func CreateIfNotExist(filepath string) error {
+func CreateIfNotExist(filepath string) bool {
 
 	dir, _ := path.Split(filepath)
+	var out bool
 
 	if _, err := os.Stat(dir); os.IsNotExist(err) {
 		os.MkdirAll(dir, 0755)
+		file, _ := os.OpenFile(filepath, os.O_RDONLY|os.O_CREATE, 0644)
+		if err != nil {
+			fmt.Println("Config file available")
+		}
+		file.Close()
+		out = true
 	}
-
-	file, err := os.OpenFile(filepath, os.O_RDONLY|os.O_CREATE, 0644)
-	if err != nil {
-		return err
-	}
-	return file.Close()
+	return out
 }
 
 func TestAddProfileCredentials(t *testing.T) {
 	t.Run("TestAddProfileCredentials1", func(t *testing.T) {
-		// path := DefaultSharedCredentialsFilename()
-		// CreateIfNotExist(path)
+		path := DefaultSharedCredentialsFilename()
+		CreateIfNotExist(path)
 		AccessIdTest := "AccessIdTest"
 		SecretKeyTest := "SecretKeyTest"
 		ProfileTest := "Addfirsttest1"
@@ -52,8 +55,8 @@ func TestDeleteProfileCredentials(t *testing.T) {
 
 func TestAddProfileConfig(t *testing.T) {
 	t.Run("TestAddProfileConfig", func(t *testing.T) {
-		// path := DefaultSharedConfigFilename()
-		// CreateIfNotExist(path)
+		path := DefaultSharedConfigFilename()
+		CreateIfNotExist(path)
 		ProfiletTest := "firstconfig1"
 		RegionTest := "us-east-1"
 		OutputTest := "json"
