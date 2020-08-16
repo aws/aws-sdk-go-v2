@@ -1,4 +1,4 @@
-// AWS local Credentials configuration in Go SDK, Can also able to add or remove with profilename
+// Package external AWS local Credentials configuration in Go SDK, Can also able to add or remove with profilename
 package external
 
 import (
@@ -11,6 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/ini"
 )
 
+// Credentials composite  the  profile,accesskey,secretkey,,sessiontoken fields
 type Credentials struct {
 
 	// profile name which we need, if not mentioned it will create in default profile
@@ -20,7 +21,7 @@ type Credentials struct {
 	// see Using Temporary Security Credentials to Request Access to AWS Resources
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html)
 	// in the AWS IAM User Guide.
-	AccessKeyId *string `type:"string" required:"true"`
+	AccessKeyID *string `type:"string" required:"true"`
 
 	// The key that is used to sign the request. For more information, see Using
 	// Temporary Security Credentials to Request Access to AWS Resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html)
@@ -34,6 +35,7 @@ type Credentials struct {
 	// contains filtered or unexported fields
 }
 
+// CredentialsConfig composite  the  profile,region,output fields
 type CredentialsConfig struct {
 	Profile *string `type:"string"`
 	Region  *string `type:"string" required:"true"`
@@ -58,27 +60,27 @@ func DeleteProfileCredentials(p string) (bool, error) {
 		fmt.Println("Not able to Read the credential file")
 
 	}
-	Getvalues, is_available := sec.GetSection(p)
+	Getvalues, isAvailable := sec.GetSection(p)
 
-	if is_available == false {
+	if isAvailable == false {
 		fmt.Println("profile is not available: ", p)
 
 	} else {
 		profile := fmt.Sprintf("[%v]", p)
 		creds = append(creds, profile)
 		if Getvalues.Has("aws_access_key_id") {
-			access_id := fmt.Sprintf("aws_access_key_id = %v", Getvalues.String("aws_access_key_id"))
-			creds = append(creds, access_id)
+			accessID := fmt.Sprintf("aws_access_key_id = %v", Getvalues.String("aws_access_key_id"))
+			creds = append(creds, accessID)
 
 		}
 		if Getvalues.Has("aws_secret_access_key") {
-			secret_key := fmt.Sprintf("aws_secret_access_key = %v", Getvalues.String("aws_secret_access_key"))
-			creds = append(creds, secret_key)
+			secretKey := fmt.Sprintf("aws_secret_access_key = %v", Getvalues.String("aws_secret_access_key"))
+			creds = append(creds, secretKey)
 
 		}
 		if Getvalues.Has("aws_session_token") {
-			session_token := fmt.Sprintf("aws_session_token = %v", Getvalues.String("aws_session_token"))
-			creds = append(creds, session_token)
+			sessionToken := fmt.Sprintf("aws_session_token = %v", Getvalues.String("aws_session_token"))
+			creds = append(creds, sessionToken)
 
 		}
 
@@ -108,9 +110,9 @@ func AddProfileCredentials(c *Credentials) (bool, error) {
 
 	var out bool
 	var profile string
-	var access_id string
-	var secret_key string
-	var session_token string
+	var accessID string
+	var secretKey string
+	var sessionToken string
 
 	path := DefaultSharedCredentialsFilename()
 
@@ -127,21 +129,21 @@ func AddProfileCredentials(c *Credentials) (bool, error) {
 		fmt.Println("Not able to Read the credential file")
 
 	}
-	_, is_available := sec.GetSection(*c.Profile)
+	_, isAvailable := sec.GetSection(*c.Profile)
 
-	if is_available == true {
+	if isAvailable == true {
 		fmt.Println("profile is already confiured: ", *c.Profile)
 
 	} else {
 
 		profile = fmt.Sprintf("[%v]", *c.Profile)
 
-		if c.AccessKeyId != nil {
-			access_id = fmt.Sprintf("aws_access_key_id = %v", *c.AccessKeyId)
+		if c.AccessKeyID != nil {
+			accessID = fmt.Sprintf("aws_access_key_id = %v", *c.AccessKeyID)
 
 		}
 		if c.SecretAccessKey != nil {
-			secret_key = fmt.Sprintf("aws_secret_access_key = %v", *c.SecretAccessKey)
+			secretKey = fmt.Sprintf("aws_secret_access_key = %v", *c.SecretAccessKey)
 
 		}
 		if c.SessionToken == nil {
@@ -150,7 +152,7 @@ func AddProfileCredentials(c *Credentials) (bool, error) {
 			if err != nil {
 				panic(err)
 			} else {
-				newContents := fmt.Sprintf("%v\n%v\n%v", profile, access_id, secret_key)
+				newContents := fmt.Sprintf("%v\n%v\n%v", profile, accessID, secretKey)
 
 				Contents := fmt.Sprintf("%v\n%v", string(read), newContents)
 				err = ioutil.WriteFile(path, []byte(Contents), 0644)
@@ -161,12 +163,12 @@ func AddProfileCredentials(c *Credentials) (bool, error) {
 			}
 
 		} else {
-			session_token = fmt.Sprintf("aws_session_token = %v", *c.SessionToken)
+			sessionToken = fmt.Sprintf("aws_session_token = %v", *c.SessionToken)
 			read, err := ioutil.ReadFile(path)
 			if err != nil {
 				panic(err)
 			} else {
-				newContents := fmt.Sprintf("%v\n%v\n%v\n%v", profile, access_id, secret_key, session_token)
+				newContents := fmt.Sprintf("%v\n%v\n%v\n%v", profile, accessID, secretKey, sessionToken)
 
 				Contents := fmt.Sprintf("%v\n%v", string(read), newContents)
 				err = ioutil.WriteFile(path, []byte(Contents), 0644)
@@ -210,8 +212,8 @@ func AddProfileConfig(c *CredentialsConfig) (bool, error) {
 		fmt.Println("Not able to Read the config file")
 
 	}
-	_, is_available := sec.GetSection(profile)
-	if is_available == true {
+	_, isAvailable := sec.GetSection(profile)
+	if isAvailable == true {
 		fmt.Println("profile is already confiured: ", *c.Profile)
 
 	} else {
@@ -260,10 +262,9 @@ func AddProfileConfig(c *CredentialsConfig) (bool, error) {
 	return out, err
 }
 
-// DeleteProfileCredentials method to delete a profile in .aws/config
+// DeleteProfileConfig method to delete a profile in .aws/config
 // Need to pass the profile name as argument
 // if success it will return true
-
 func DeleteProfileConfig(p string) (bool, error) {
 
 	var profile string
@@ -284,9 +285,9 @@ func DeleteProfileConfig(p string) (bool, error) {
 		p = fmt.Sprintf("profile %v", p)
 	}
 
-	_, is_available := sec.GetSection(p)
+	_, isAvailable := sec.GetSection(p)
 
-	if is_available == false {
+	if isAvailable == false {
 		fmt.Println("profile is not available: ", p)
 
 	} else {
@@ -341,6 +342,7 @@ func DeleteProfileConfig(p string) (bool, error) {
 	return out, err
 }
 
+//BackupConfig it will take back when performing operation config.bkp credentials.bkp
 func BackupConfig(path string) bool {
 	var out bool
 	readbkp, err := ioutil.ReadFile(path)

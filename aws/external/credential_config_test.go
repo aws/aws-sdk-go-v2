@@ -3,9 +3,8 @@ package external
 import (
 	"fmt"
 	"os"
-	"testing"
 	"path/filepath"
-
+	"testing"
 )
 
 // create config file if not exist
@@ -29,10 +28,10 @@ func TestAddProfileCredentials(t *testing.T) {
 	t.Run("TestAddProfileCredentials1", func(t *testing.T) {
 		path := DefaultSharedCredentialsFilename()
 		CreateIfNotExist(path)
-		AccessIdTest := "AccessIdTest"
+		AccessIDTest := "AccessIDTest"
 		SecretKeyTest := "SecretKeyTest"
 		ProfileTest := "Addfirsttest1"
-		c := &Credentials{Profile: &ProfileTest, AccessKeyId: &AccessIdTest, SecretAccessKey: &SecretKeyTest}
+		c := &Credentials{Profile: &ProfileTest, AccessKeyID: &AccessIDTest, SecretAccessKey: &SecretKeyTest}
 		got, _ := AddProfileCredentials(c)
 		want := true
 		if got != want {
