@@ -13,8 +13,8 @@ import (
 
 // UserAgent is an interface for modifying the User-Agent of a request.
 type UserAgent interface {
-	AddComponent(name string)
-	AddVersionedComponent(name, version string)
+	AddKey(name string)
+	AddKeyValue(name, version string)
 }
 
 // RequestUserAgent is a build middleware that set the User-Agent for the request.
@@ -28,41 +28,66 @@ type RequestUserAgent struct {
 //   aws-sdk-go/2.3.4 GOOS/linux GOARCH/amd64 GO/go1.14
 func NewRequestUserAgent() *RequestUserAgent {
 	uab := httpbinding.NewUserAgentBuilder()
-	uab.AddVersionedComponent(aws.SDKName, aws.SDKVersion)
-	uab.AddVersionedComponent("GOOS", runtime.GOOS)
-	uab.AddVersionedComponent("GOARCH", runtime.GOARCH)
-	uab.AddVersionedComponent("GO", runtime.Version())
+	uab.AddKeyValue(aws.SDKName, aws.SDKVersion)
+	uab.AddKeyValue("GOOS", runtime.GOOS)
+	uab.AddKeyValue("GOARCH", runtime.GOARCH)
+	uab.AddKeyValue("GO", runtime.Version())
 	return &RequestUserAgent{uab: uab}
 }
 
-// AddToRequestUserAgent retrieves the RequestUserAgent from the provided stack, or initializes
-func AddToRequestUserAgent(stack *middleware.Stack, callback func(UserAgent) error) error {
+// AddUserAgentKey retrieves the RequestUserAgent from the provided stack, or initializes
+func AddUserAgentKey(callback func(interface {
+	AddKey(string)
+}) error) func(*middleware.Stack) error {
+	return func(stack *middleware.Stack) error {
+		requestUserAgent, err := getOrAddRequestUserAgent(stack)
+		if err != nil {
+			return err
+		}
+		return callback(requestUserAgent)
+	}
+}
+
+// AddUserAgentKeyValue retrieves the RequestUserAgent from the provided stack, or initializes
+func AddUserAgentKeyValue(callback func(interface {
+	AddKeyValue(string, string)
+}) error) func(*middleware.Stack) error {
+	return func(stack *middleware.Stack) error {
+		requestUserAgent, err := getOrAddRequestUserAgent(stack)
+		if err != nil {
+			return err
+		}
+		return callback(requestUserAgent)
+	}
+}
+
+func getOrAddRequestUserAgent(stack *middleware.Stack) (*RequestUserAgent, error) {
 	id := (&RequestUserAgent{}).ID()
 	bm, ok := stack.Build.Get(id)
 	if !ok {
 		bm = NewRequestUserAgent()
 		err := stack.Build.Add(bm, middleware.After)
 		if err != nil {
-			return err
+			return nil, err
 		}
 	}
 
 	requestUserAgent, ok := bm.(*RequestUserAgent)
 	if !ok {
-		return fmt.Errorf("%T for %s middleware did not match expected type", bm, id)
+		return nil, fmt.Errorf("%T for %s middleware did not match expected type", bm, id)
 	}
 
-	return callback(requestUserAgent)
+	return requestUserAgent, nil
 }
 
-// AddComponent adds the component identified by name to the User-Agent string.
-func (u *RequestUserAgent) AddComponent(name string) {
-	u.uab.AddComponent(name)
+// AddKey adds the component identified by name to the User-Agent string.
+func (u *RequestUserAgent) AddKey(key string) {
+	u.uab.AddKey(key)
 }
 
-// AddVersionedComponent adds the componenet identified by the given name and version to the User-Agent string.
-func (u *RequestUserAgent) AddVersionedComponent(name, version string) {
-	u.uab.AddVersionedComponent(name, version)
+// AddKeyValue adds the key identified by the given name and value to the User-Agent string.
+func (u *RequestUserAgent) AddKeyValue(key, value string) {
+	u.uab.AddKeyValue(key, value)
 }
 
 // ID the name of the middleware.
