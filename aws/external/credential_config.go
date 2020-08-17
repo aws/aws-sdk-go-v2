@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/internal/ini"
@@ -40,6 +41,23 @@ type CredentialsConfig struct {
 	Profile *string `type:"string"`
 	Region  *string `type:"string" required:"true"`
 	Output  *string `type:"string"`
+}
+
+// create config file if not exist
+
+func CreateIfNotExist(fpath string) bool {
+	dir, _ := filepath.Split(fpath)
+	var out bool
+	if _, err := os.Stat(dir); os.IsNotExist(err) {
+		os.MkdirAll(dir, 0755)
+	}
+	file, err := os.OpenFile(fpath, os.O_RDONLY|os.O_CREATE, 0644)
+	if err != nil {
+		fmt.Println("Error when Reading")
+	}
+	file.Close()
+	out = true
+	return out
 }
 
 // DeleteProfileCredentials method to delete a profile in .aws/credentials
@@ -115,6 +133,8 @@ func AddProfileCredentials(c *Credentials) (bool, error) {
 	var sessionToken string
 
 	path := DefaultSharedCredentialsFilename()
+
+	CreateIfNotExist(path)
 
 	// file backup
 	BackupConfig(path)
@@ -196,6 +216,8 @@ func AddProfileConfig(c *CredentialsConfig) (bool, error) {
 	var output string
 
 	path := DefaultSharedConfigFilename()
+
+	CreateIfNotExist(path)
 
 	// file backup
 	BackupConfig(path)

@@ -1,28 +1,9 @@
 package external
 
 import (
-	"fmt"
-	"os"
-	"path/filepath"
 	"testing"
 )
 
-// create config file if not exist
-
-func CreateIfNotExist(fpath string) bool {
-	dir, _ := filepath.Split(fpath)
-	var out bool
-	if _, err := os.Stat(dir); os.IsNotExist(err) {
-		os.MkdirAll(dir, 0755)
-	}
-	file, err := os.OpenFile(fpath, os.O_RDONLY|os.O_CREATE, 0644)
-	if err != nil {
-		fmt.Println("Error when Reading")
-	}
-	file.Close()
-	out = true
-	return out
-}
 
 func TestAddProfileCredentials(t *testing.T) {
 	t.Run("TestAddProfileCredentials1", func(t *testing.T) {
