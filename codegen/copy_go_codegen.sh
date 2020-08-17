@@ -13,7 +13,9 @@ do
 
 	echo "Copying ${MOD} to ${DST}"
 
-	rm -rf ${DST}
-	mkdir -p ${DST}
+	rm ${DST}/*.go
+	rm -rf ${DST}/types
+	rm -rf ${DST}/internal/endpoints
+	mkdir -p ${DST} 2>/dev/null
 	cp -r . ${DST}
 done
