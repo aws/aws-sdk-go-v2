@@ -11,7 +11,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws/middleware"
 	smithymiddleware "github.com/awslabs/smithy-go/middleware"
-	smithyHTTP "github.com/awslabs/smithy-go/transport/http"
+	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 type mockBuildHandler func(context.Context, smithymiddleware.BuildInput) (smithymiddleware.BuildOutput, smithymiddleware.Metadata, error)
@@ -23,12 +23,12 @@ func (f mockBuildHandler) HandleBuild(ctx context.Context, in smithymiddleware.B
 func TestRequestInvocationIDMiddleware(t *testing.T) {
 	mid := middleware.RequestInvocationIDMiddleware{}
 
-	in := smithymiddleware.BuildInput{Request: &smithyHTTP.Request{Request: &http.Request{Header: make(http.Header)}}}
+	in := smithymiddleware.BuildInput{Request: &smithyhttp.Request{Request: &http.Request{Header: make(http.Header)}}}
 	ctx := context.Background()
 	_, _, err := mid.HandleBuild(ctx, in, mockBuildHandler(func(ctx context.Context, input smithymiddleware.BuildInput) (
 		out smithymiddleware.BuildOutput, metadata smithymiddleware.Metadata, err error,
 	) {
-		req := in.Request.(*smithyHTTP.Request)
+		req := in.Request.(*smithyhttp.Request)
 
 		value := req.Header.Get("amz-sdk-invocation-id")
 
@@ -78,7 +78,7 @@ func TestAttemptClockSkewHandler(t *testing.T) {
 		"failed response": {
 			Next: mockDeserializeHandler(func(ctx context.Context, in smithymiddleware.DeserializeInput,
 			) (out smithymiddleware.DeserializeOutput, m smithymiddleware.Metadata, err error) {
-				out.RawResponse = &smithyHTTP.Response{
+				out.RawResponse = &smithyhttp.Response{
 					Response: &http.Response{
 						StatusCode: 0,
 						Header:     http.Header{},
@@ -90,7 +90,7 @@ func TestAttemptClockSkewHandler(t *testing.T) {
 		"no date header response": {
 			Next: mockDeserializeHandler(func(ctx context.Context, in smithymiddleware.DeserializeInput,
 			) (out smithymiddleware.DeserializeOutput, m smithymiddleware.Metadata, err error) {
-				out.RawResponse = &smithyHTTP.Response{
+				out.RawResponse = &smithyhttp.Response{
 					Response: &http.Response{
 						StatusCode: 200,
 						Header:     http.Header{},
@@ -102,7 +102,7 @@ func TestAttemptClockSkewHandler(t *testing.T) {
 		"invalid date header response": {
 			Next: mockDeserializeHandler(func(ctx context.Context, in smithymiddleware.DeserializeInput,
 			) (out smithymiddleware.DeserializeOutput, m smithymiddleware.Metadata, err error) {
-				out.RawResponse = &smithyHTTP.Response{
+				out.RawResponse = &smithyhttp.Response{
 					Response: &http.Response{
 						StatusCode: 200,
 						Header: http.Header{
@@ -116,7 +116,7 @@ func TestAttemptClockSkewHandler(t *testing.T) {
 		"date response": {
 			Next: mockDeserializeHandler(func(ctx context.Context, in smithymiddleware.DeserializeInput,
 			) (out smithymiddleware.DeserializeOutput, m smithymiddleware.Metadata, err error) {
-				out.RawResponse = &smithyHTTP.Response{
+				out.RawResponse = &smithyhttp.Response{
 					Response: &http.Response{
 						StatusCode: 200,
 						Header: http.Header{
