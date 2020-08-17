@@ -3,6 +3,7 @@ package middleware
 import (
 	"context"
 	"fmt"
+	"os"
 	"runtime"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -10,6 +11,9 @@ import (
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
+
+const execEnvVar = `AWS_EXECUTION_ENV`
+const execEnvUAKey = `exec-env`
 
 // UserAgent is an interface for modifying the User-Agent of a request.
 type UserAgent interface {
@@ -32,10 +36,13 @@ func NewRequestUserAgent() *RequestUserAgent {
 	uab.AddKeyValue("GOOS", runtime.GOOS)
 	uab.AddKeyValue("GOARCH", runtime.GOARCH)
 	uab.AddKeyValue("GO", runtime.Version())
+	if ev := os.Getenv(execEnvVar); len(ev) > 0 {
+		uab.AddKeyValue(execEnvUAKey, ev)
+	}
 	return &RequestUserAgent{uab: uab}
 }
 
-// AddUserAgentKey retrieves the RequestUserAgent from the provided stack, or initializes
+// AddUserAgentKey retrieves a RequestUserAgent from the provided stack, or initializes one.
 func AddUserAgentKey(callback func(interface {
 	AddKey(string)
 }) error) func(*middleware.Stack) error {
@@ -48,7 +55,7 @@ func AddUserAgentKey(callback func(interface {
 	}
 }
 
-// AddUserAgentKeyValue retrieves the RequestUserAgent from the provided stack, or initializes
+// AddUserAgentKeyValue retrieves a RequestUserAgent from the provided stack, or initializes one.
 func AddUserAgentKeyValue(callback func(interface {
 	AddKeyValue(string, string)
 }) error) func(*middleware.Stack) error {
