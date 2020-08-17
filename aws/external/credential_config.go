@@ -43,8 +43,7 @@ type CredentialsConfig struct {
 	Output  *string `type:"string"`
 }
 
-// create config file if not exist
-
+// CreateIfNotExist is to create config file if not exist
 func CreateIfNotExist(fpath string) bool {
 	dir, _ := filepath.Split(fpath)
 	var out bool
