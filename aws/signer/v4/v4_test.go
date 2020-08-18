@@ -211,14 +211,14 @@ func TestBuildCanonicalRequest(t *testing.T) {
 
 func TestSigner_SignHTTP_NoReplaceRequestBody(t *testing.T) {
 	creds := aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION")
-	req, seekerBody := buildRequest("dynamodb", "us-east-1", "{}")
+	req, bodyHash := buildRequest("dynamodb", "us-east-1", "{}")
 	req.Body = ioutil.NopCloser(bytes.NewReader([]byte{}))
 
 	s := NewSigner(creds)
 
 	origBody := req.Body
 
-	err := s.SignHTTP(context.Background(), req, seekerBody, "dynamodb", "us-east-1", time.Now())
+	err := s.SignHTTP(context.Background(), req, bodyHash, "dynamodb", "us-east-1", time.Now())
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
