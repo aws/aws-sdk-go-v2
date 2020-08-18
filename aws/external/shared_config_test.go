@@ -9,7 +9,6 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/ini"
 	"github.com/awslabs/smithy-go/ptr"
 )
@@ -141,7 +140,7 @@ func TestNewSharedConfig(t *testing.T) {
 			Profile:   "profile_name",
 			Err: SharedConfigLoadError{
 				Filename: filepath.Join("testdata", "shared_config_invalid_ini"),
-				Err:      awserr.New("INIParseError", "", nil),
+				Err:      fmt.Errorf("INI parse error"),
 			},
 		},
 		9: {

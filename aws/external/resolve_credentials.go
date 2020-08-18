@@ -5,7 +5,6 @@ import (
 	"net/url"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/processcreds"
 )
 
@@ -151,27 +150,27 @@ func processCredentials(cfg *aws.Config, sharedConfig *SharedConfig, configs Con
 }
 
 func resolveLocalHTTPCredProvider(cfg *aws.Config, endpointURL, authToken string, configs Configs) error {
-	var errMsg string
+	var resolveError error
 
 	parsed, err := url.Parse(endpointURL)
 	if err != nil {
-		errMsg = fmt.Sprintf("invalid URL, %v", err)
+		resolveError = fmt.Errorf("invalid URL, %w", err)
 	} else {
 		host := parsed.Hostname()
 		if len(host) == 0 {
-			errMsg = "unable to parse host from local HTTP cred provider URL"
+			resolveError = fmt.Errorf("unable to parse host from local HTTP cred provider URL")
 		} else if isLoopback, loopbackErr := isLoopbackHost(host); loopbackErr != nil {
-			errMsg = fmt.Sprintf("failed to resolve host %q, %v", host, loopbackErr)
+			resolveError = fmt.Errorf("failed to resolve host %q, %v", host, loopbackErr)
 		} else if !isLoopback {
-			errMsg = fmt.Sprintf("invalid endpoint host, %q, only loopback hosts are allowed.", host)
+			resolveError = fmt.Errorf("invalid endpoint host, %q, only loopback hosts are allowed", host)
 		}
 	}
 
-	if len(errMsg) > 0 {
+	if resolveError != nil {
 		if cfg.Logger != nil {
-			cfg.Logger.Log("Ignoring, HTTP credential provider", errMsg, err)
+			cfg.Logger.Log("Ignoring, HTTP credential provider", resolveError.Error())
 		}
-		return awserr.New("CredentialsEndpointError", errMsg, err)
+		return fmt.Errorf("container credentials failure: %w", resolveError)
 	}
 
 	return resolveHTTPCredProvider(cfg, endpointURL, authToken, configs)
@@ -187,12 +186,12 @@ func resolveCredsFromSource(cfg *aws.Config, envConfig *EnvConfig, sharedCfg *Sh
 
 	case credSourceECSContainer:
 		if len(envConfig.ContainerCredentialsRelativePath) == 0 {
-			return awserr.New(ErrCodeSharedConfig, "EcsContainer was specified as the credential_source, but 'AWS_CONTAINER_CREDENTIALS_RELATIVE_URI' was not set", nil)
+			return fmt.Errorf("EcsContainer was specified as the credential_source, but 'AWS_CONTAINER_CREDENTIALS_RELATIVE_URI' was not set")
 		}
 		return resolveHTTPCredProvider(cfg, ecsContainerURI(envConfig.ContainerCredentialsRelativePath), envConfig.ContainerAuthorizationToken, configs)
 
 	default:
-		return awserr.New(ErrCodeSharedConfig, "credential source values must be EcsContainer, Ec2InstanceMetadata, or Environment", nil)
+		return fmt.Errorf("credential_source values must be EcsContainer, Ec2InstanceMetadata, or Environment")
 	}
 
 	return nil
@@ -237,29 +236,4 @@ func getAWSConfigSources(configs Configs) (*EnvConfig, *SharedConfig, Configs) {
 	}
 
 	return envConfig, sharedConfig, other
-}
-
-// AssumeRoleTokenProviderNotSetError is an error returned when creating a
-// session when the MFAToken option is not set when shared config is configured
-// load assume a role with an MFA token.
-type AssumeRoleTokenProviderNotSetError struct{}
-
-// Code is the short id of the error.
-func (e AssumeRoleTokenProviderNotSetError) Code() string {
-	return "AssumeRoleTokenProviderNotSetError"
-}
-
-// Message is the description of the error
-func (e AssumeRoleTokenProviderNotSetError) Message() string {
-	return fmt.Sprintf("assume role with MFA enabled, but AssumeRoleTokenProvider session option not set.")
-}
-
-// OrigErr is the underlying error that caused the failure.
-func (e AssumeRoleTokenProviderNotSetError) OrigErr() error {
-	return nil
-}
-
-// Error satisfies the error interface.
-func (e AssumeRoleTokenProviderNotSetError) Error() string {
-	return awserr.SprintError(e.Code(), e.Message(), "", nil)
 }

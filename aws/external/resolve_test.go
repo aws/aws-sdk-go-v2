@@ -7,7 +7,6 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 )
@@ -17,7 +16,7 @@ func TestResolveCustomCABundle(t *testing.T) {
 		WithCustomCABundle(awstesting.TLSBundleCA),
 	}
 
-	cfg := defaults.Config()
+	cfg := aws.Config{}
 	if err := ResolveCustomCABundle(&cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -56,7 +55,7 @@ func TestResolveCustomCABundle_ValidCA(t *testing.T) {
 		WithCustomCABundle(caPEM),
 	}
 
-	cfg := defaults.Config()
+	cfg := aws.Config{}
 	if err := ResolveCustomCABundle(&cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -141,24 +140,6 @@ func TestResolveCredentialsProvider(t *testing.T) {
 	}
 	if e, a := "valid", creds.Source; e != a {
 		t.Errorf("expect %v creds, got %v", e, a)
-	}
-}
-
-func TestEnableEndpointDiscovery(t *testing.T) {
-	configs := Configs{
-		WithEnableEndpointDiscovery(true),
-		WithEnableEndpointDiscovery(false),
-	}
-
-	cfg := unit.Config()
-
-	err := ResolveEnableEndpointDiscovery(&cfg, configs)
-	if err != nil {
-		t.Fatalf("expected no error, got %v", err)
-	}
-
-	if e, a := true, cfg.EnableEndpointDiscovery; e != a {
-		t.Errorf("expected %v, got %v", e, a)
 	}
 }
 

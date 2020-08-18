@@ -21,7 +21,6 @@ var DefaultAWSConfigResolvers = []AWSConfigResolver{
 	// TODO: Add Stack Mutator Resolver
 	// TODO: Add endpoint resolver concept
 	ResolveCustomCABundle,
-	ResolveEnableEndpointDiscovery,
 
 	ResolveRegion,
 	// TODO: Add back EC2 Region Resolver Support
