@@ -86,7 +86,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/sdkio"
 )
 
@@ -95,45 +94,24 @@ const (
 	// returned credentials Value with.
 	ProviderName = `ProcessProvider`
 
-	// ErrCodeProcessProviderParse error parsing process output
-	ErrCodeProcessProviderParse = "ProcessProviderParseError"
-
-	// ErrCodeProcessProviderVersion version error in output
-	ErrCodeProcessProviderVersion = "ProcessProviderVersionError"
-
-	// ErrCodeProcessProviderRequired required attribute missing in output
-	ErrCodeProcessProviderRequired = "ProcessProviderRequiredError"
-
-	// ErrCodeProcessProviderExecution execution of command failed
-	ErrCodeProcessProviderExecution = "ProcessProviderExecutionError"
-
-	// errMsgProcessProviderTimeout process took longer than allowed
-	errMsgProcessProviderTimeout = "credential process timed out"
-
-	// errMsgProcessProviderProcess process error
-	errMsgProcessProviderProcess = "error in credential_process"
-
-	// errMsgProcessProviderParse problem parsing output
-	errMsgProcessProviderParse = "parse failed of credential_process output"
-
-	// errMsgProcessProviderVersion version error in output
-	errMsgProcessProviderVersion = "wrong version in process output (not 1)"
-
-	// errMsgProcessProviderMissKey missing access key id in output
-	errMsgProcessProviderMissKey = "missing AccessKeyId in process output"
-
-	// errMsgProcessProviderMissSecret missing secret acess key in output
-	errMsgProcessProviderMissSecret = "missing SecretAccessKey in process output"
-
-	// errMsgProcessProviderPrepareCmd prepare of command failed
-	errMsgProcessProviderPrepareCmd = "failed to prepare command"
-
-	// errMsgProcessProviderEmptyCmd command must not be empty
-	errMsgProcessProviderEmptyCmd = "command must not be empty"
-
 	// DefaultTimeout default limit on time a process can run.
 	DefaultTimeout = time.Duration(1) * time.Minute
 )
+
+// ProviderError is an error indicating failure initializing or executing the process credentials provider
+type ProviderError struct {
+	Err error
+}
+
+// Error returns the error message
+func (e *ProviderError) Error() string {
+	return fmt.Sprintf("process provider error: %v", e.Err)
+}
+
+// Unwrap returns the underlying error
+func (e *ProviderError) Unwrap() error {
+	return e.Err
+}
 
 // Provider satisfies the credentials.Provider interface, and is a
 // client to retrieve credentials from a process.
@@ -209,31 +187,19 @@ func (p *Provider) retrieveFn() (aws.Credentials, error) {
 	// Serialize and validate response
 	resp := &credentialProcessResponse{}
 	if err = json.Unmarshal(out, resp); err != nil {
-		return aws.Credentials{Source: ProviderName}, awserr.New(
-			ErrCodeProcessProviderParse,
-			fmt.Sprintf("%s: %s", errMsgProcessProviderParse, string(out)),
-			err)
+		return aws.Credentials{Source: ProviderName}, &ProviderError{Err: fmt.Errorf("parse failed of credential_process output: %s, error: %w", out, err)}
 	}
 
 	if resp.Version != 1 {
-		return aws.Credentials{Source: ProviderName}, awserr.New(
-			ErrCodeProcessProviderVersion,
-			errMsgProcessProviderVersion,
-			nil)
+		return aws.Credentials{Source: ProviderName}, &ProviderError{Err: fmt.Errorf("wrong version in process output (not 1)")}
 	}
 
 	if len(resp.AccessKeyID) == 0 {
-		return aws.Credentials{Source: ProviderName}, awserr.New(
-			ErrCodeProcessProviderRequired,
-			errMsgProcessProviderMissKey,
-			nil)
+		return aws.Credentials{Source: ProviderName}, &ProviderError{Err: fmt.Errorf("missing AccessKeyId in process output")}
 	}
 
 	if len(resp.SecretAccessKey) == 0 {
-		return aws.Credentials{Source: ProviderName}, awserr.New(
-			ErrCodeProcessProviderRequired,
-			errMsgProcessProviderMissSecret,
-			nil)
+		return aws.Credentials{Source: ProviderName}, &ProviderError{Err: fmt.Errorf("missing SecretAccessKey in process output")}
 	}
 
 	creds := aws.Credentials{
@@ -268,13 +234,7 @@ func (p *Provider) prepareCommand() (context.Context, context.CancelFunc, error)
 
 		// check for empty command because it succeeds
 		if len(strings.TrimSpace(p.originalCommand[0])) < 1 {
-			return nil, nil, awserr.New(
-				ErrCodeProcessProviderExecution,
-				fmt.Sprintf(
-					"%s: %s",
-					errMsgProcessProviderPrepareCmd,
-					errMsgProcessProviderEmptyCmd),
-				nil)
+			return nil, nil, &ProviderError{Err: fmt.Errorf("failed to prepare command: command must not be empty")}
 		}
 	}
 
@@ -312,9 +272,9 @@ func (p *Provider) executeCredentialProcess() ([]byte, error) {
 		}
 		select {
 		case <-ctx.Done():
-			return output.Bytes(), awserr.New(ErrCodeProcessProviderExecution, errMsgProcessProviderTimeout, execError)
+			return output.Bytes(), &ProviderError{Err: fmt.Errorf("credential process timed out: %w", execError)}
 		default:
-			return output.Bytes(), awserr.New(ErrCodeProcessProviderExecution, errMsgProcessProviderProcess, execError)
+			return output.Bytes(), &ProviderError{Err: fmt.Errorf("error in credential_process: %w", execError)}
 		}
 	}
 
