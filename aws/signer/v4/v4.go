@@ -6,9 +6,8 @@
 // Standalone Signer
 //
 // Generally using the signer outside of the SDK should not require any additional
-// logic when using Go v1.5 or higher. The signer does this by taking advantage
-// of the URL.EscapedPath method. If your request URI requires additional escaping
-// you many need to use the URL.Opaque to define what the raw URI should be sent
+//  The signer does this by taking advantageof the URL.EscapedPath method. If your request URI requires
+// additional escaping you many need to use the URL.Opaque to define what the raw URI should be sent
 // to the service as.
 //
 // The signer will first check the URL.Opaque field, and use its value if set.
@@ -23,9 +22,7 @@
 // not work correctly.
 //
 // If URL.Opaque is not set the signer will fallback to the URL.EscapedPath()
-// method and using the returned value. If you're using Go v1.4 you must set
-// URL.Opaque if the URI path needs escaping. If URL.Opaque is not set with
-// Go v1.5 the signer will fallback to URL.Path.
+// method and using the returned value.
 //
 // AWS v4 signature validation requires that the canonical string's URI path
 // element must be the URI escaped form of the HTTP request's path.
@@ -41,14 +38,6 @@
 // and will help prevent signature validation errors. This can be done by setting
 // the URL.Opaque or URL.RawPath. The SDK will use URL.Opaque first and then
 // call URL.EscapedPath() if Opaque is not set.
-//
-// If signing a request intended for HTTP2 server, and you're using Go 1.6.2
-// through 1.7.4 you should use the URL.RawPath as the pre-escaped form of the
-// request URL. https://github.com/golang/go/issues/16847 points to a bug in
-// Go pre 1.8 that fails to make HTTP2 requests using absolute URL in the HTTP
-// message. URL.Opaque generally will force Go to make requests with absolute URL.
-// URL.RawPath does not do this, but RawPath must be a valid escaping of Path
-// or url.EscapedPath will ignore the RawPath escaping.
 //
 // Test `TestStandaloneSign` provides a complete example of using the signer
 // outside of the SDK and pre-escaping the URI path.
@@ -150,7 +139,7 @@ type httpSigner struct {
 }
 
 func (s *httpSigner) Build() (signedRequest, error) {
-	req := s.Request.Clone(s.Request.Context())
+	req := s.Request
 
 	query := req.URL.Query()
 	headers := req.Header
@@ -162,7 +151,7 @@ func (s *httpSigner) Build() (signedRequest, error) {
 		sort.Strings(query[key])
 	}
 
-	aws.SanitizeHostForHeader(req)
+	v4Internal.SanitizeHostForHeader(req)
 
 	credentialScope := s.buildCredentialScope()
 	credentialStr := s.Credentials.AccessKeyID + "/" + credentialScope
@@ -270,7 +259,7 @@ func (v4 *Signer) PresignHTTP(ctx context.Context, r *http.Request, payloadHash 
 	}
 
 	signer := &httpSigner{
-		Request:                r,
+		Request:                r.Clone(r.Context()),
 		PayloadHash:            payloadHash,
 		ServiceName:            service,
 		Region:                 region,

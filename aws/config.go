@@ -38,17 +38,6 @@ type Config struct {
 	// standard out.
 	Logger Logger
 
-	// DisableEndpointHostPrefix will disable the SDK's behavior of prefixing
-	// request endpoint hosts with modeled information.
-	//
-	// Disabling this feature is useful when you want to use local endpoints
-	// for testing that do not support the modeled host prefix pattern.
-	DisableEndpointHostPrefix bool
-
-	// EnableEndpointDiscovery will allow for endpoint discovery on operations that
-	// have the definition in its model. By default, endpoint discovery is off.
-	EnableEndpointDiscovery bool
-
 	// ConfigSources are the sources that were used to construct the Config.
 	// Allows for additional configuration to be loaded by clients.
 	ConfigSources []interface{}

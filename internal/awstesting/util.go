@@ -5,7 +5,6 @@ import (
 	"io"
 	"os"
 	"runtime"
-	"sort"
 	"strings"
 	"time"
 
@@ -152,15 +151,4 @@ func getEnvs(envs []string) map[string]string {
 		}
 	}
 	return extraEnvs
-}
-
-// sortedKeys returns a sorted slice of keys of a map.
-func sortedKeys(m map[string]interface{}) []string {
-	i, sorted := 0, make([]string, len(m))
-	for k := range m {
-		sorted[i] = k
-		i++
-	}
-	sort.Strings(sorted)
-	return sorted
 }

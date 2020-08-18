@@ -88,7 +88,7 @@ func (r AttemptMiddleware) HandleFinalize(ctx context.Context, in smithymiddle.F
 		}
 
 		if maxAttempts > 0 && attemptNum >= maxAttempts {
-			err = &aws.MaxAttemptsError{
+			err = &MaxAttemptsError{
 				Attempt: attemptNum,
 				Err:     reqErr,
 			}
