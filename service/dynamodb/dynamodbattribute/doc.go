@@ -1,3 +1,5 @@
+// +build disabled
+
 // Package dynamodbattribute provides marshaling and unmarshaling utilities to
 // convert between Go types and dynamodb.AttributeValues.
 //
