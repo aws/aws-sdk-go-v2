@@ -6,7 +6,6 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/aws-sdk-go-v2/internal/sync/singleflight"
 )
@@ -105,8 +104,7 @@ func (p *SafeCredentialsProvider) Retrieve(ctx context.Context) (Credentials, er
 	case res := <-resCh:
 		return res.Val.(Credentials), res.Err
 	case <-ctx.Done():
-		return Credentials{}, awserr.New("RequestCanceled",
-			"request context canceled", ctx.Err())
+		return Credentials{}, &RequestCanceledError{Err: ctx.Err()}
 	}
 }
 

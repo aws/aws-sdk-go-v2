@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/mock"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 )
 
 func examplePEMReader() io.Reader {
@@ -19,7 +19,7 @@ func examplePEMReader() io.Reader {
 }
 
 func ExampleCookieSigner_Sign() {
-	privKey := mock.RSAPrivateKey
+	privKey := unit.RSAPrivateKey
 	cookieSigner := NewCookieSigner("keyID", privKey)
 
 	// Use the signer to sign the URL
@@ -60,7 +60,7 @@ func ExampleCookieSigner_SignWithPolicy() {
 		},
 	}
 
-	privKey := mock.RSAPrivateKey
+	privKey := unit.RSAPrivateKey
 
 	// Key ID that represents the key pair associated with the private key
 	keyID := "privateKeyID"
@@ -85,7 +85,7 @@ func ExampleCookieSigner_SignWithPolicy() {
 }
 
 func ExampleCookieOptions() {
-	privKey := mock.RSAPrivateKey
+	privKey := unit.RSAPrivateKey
 
 	// Create the CookieSigner with options set. These options can be set
 	// directly with cookieSigner.Opts. These values can be overridden on
