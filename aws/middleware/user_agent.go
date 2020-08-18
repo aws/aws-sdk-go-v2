@@ -43,28 +43,26 @@ func NewRequestUserAgent() *RequestUserAgent {
 }
 
 // AddUserAgentKey retrieves a RequestUserAgent from the provided stack, or initializes one.
-func AddUserAgentKey(callback func(interface {
-	AddKey(string)
-}) error) func(*middleware.Stack) error {
+func AddUserAgentKey(key string) func(*middleware.Stack) error {
 	return func(stack *middleware.Stack) error {
 		requestUserAgent, err := getOrAddRequestUserAgent(stack)
 		if err != nil {
 			return err
 		}
-		return callback(requestUserAgent)
+		requestUserAgent.AddKey(key)
+		return nil
 	}
 }
 
 // AddUserAgentKeyValue retrieves a RequestUserAgent from the provided stack, or initializes one.
-func AddUserAgentKeyValue(callback func(interface {
-	AddKeyValue(string, string)
-}) error) func(*middleware.Stack) error {
+func AddUserAgentKeyValue(key, value string) func(*middleware.Stack) error {
 	return func(stack *middleware.Stack) error {
 		requestUserAgent, err := getOrAddRequestUserAgent(stack)
 		if err != nil {
 			return err
 		}
-		return callback(requestUserAgent)
+		requestUserAgent.AddKeyValue(key, value)
+		return nil
 	}
 }
 

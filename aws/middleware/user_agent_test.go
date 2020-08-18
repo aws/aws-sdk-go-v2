@@ -135,10 +135,7 @@ func TestAddUserAgentKey(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	err = AddUserAgentKey(func(i interface{ AddKey(string) }) error {
-		i.AddKey("foo")
-		return nil
-	})(stack)
+	err = AddUserAgentKey("foo")(stack)
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -167,10 +164,7 @@ func TestAddUserAgentKeyValue(t *testing.T) {
 		t.Fatalf("expect no error, got %v", err)
 	}
 
-	err = AddUserAgentKeyValue(func(i interface{ AddKeyValue(string, string) }) error {
-		i.AddKeyValue("foo", "bar")
-		return nil
-	})(stack)
+	err = AddUserAgentKeyValue("foo", "bar")(stack)
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
