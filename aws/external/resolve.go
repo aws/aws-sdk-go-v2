@@ -7,8 +7,6 @@ import (
 	"net/http"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 )
 
 // ResolveDefaultAWSConfig will write default configuration values into the cfg
@@ -17,7 +15,7 @@ import (
 // This should be used as the first resolver in the slice of resolvers when
 // resolving external configuration.
 func ResolveDefaultAWSConfig(cfg *aws.Config, configs Configs) error {
-	*cfg = defaults.Config()
+	*cfg = aws.Config{}
 	return nil
 }
 
@@ -57,8 +55,7 @@ func ResolveCustomCABundle(cfg *aws.Config, configs Configs) error {
 			tr.TLSClientConfig.RootCAs = x509.NewCertPool()
 		}
 		if !tr.TLSClientConfig.RootCAs.AppendCertsFromPEM(pemCerts) {
-			appendErr = awserr.New("LoadCustomCABundleError",
-				"failed to load custom CA bundle PEM file", nil)
+			appendErr = fmt.Errorf("failed to load custom CA bundle PEM file")
 		}
 	})
 	if appendErr != nil {
@@ -85,23 +82,6 @@ func ResolveRegion(cfg *aws.Config, configs Configs) error {
 	}
 
 	cfg.Region = v
-	return nil
-}
-
-// ResolveEnableEndpointDiscovery will configure the AWS config for Endpoint Discovery
-// based on the first value discovered from the provided slice of configs.
-func ResolveEnableEndpointDiscovery(cfg *aws.Config, configs Configs) error {
-	endpointDiscovery, found, err := GetEnableEndpointDiscovery(configs)
-	if err != nil {
-		return err
-	}
-
-	if !found {
-		return nil
-	}
-
-	cfg.EnableEndpointDiscovery = endpointDiscovery
-
 	return nil
 }
 

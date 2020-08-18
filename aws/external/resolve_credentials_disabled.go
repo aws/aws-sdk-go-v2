@@ -2,6 +2,8 @@
 
 package external
 
+import "fmt"
+
 func resolveHTTPCredProvider(cfg *aws.Config, url, authToken string, configs Configs) error {
 	cfgCopy := cfg.Copy()
 
@@ -95,7 +97,7 @@ func credsFromAssumeRole(cfg *aws.Config, sharedCfg *SharedConfig, configs Confi
 		if !found {
 			// AssumeRole Token provider is required if doing Assume Role
 			// with MFA.
-			return AssumeRoleTokenProviderNotSetError{}
+			return fmt.Errorf("")
 		}
 	}
 
