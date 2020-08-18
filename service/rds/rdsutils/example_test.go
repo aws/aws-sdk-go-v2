@@ -1,4 +1,4 @@
-// +build example,exclude
+// +build example,exclude,disabled
 
 package rdsutils_test
 

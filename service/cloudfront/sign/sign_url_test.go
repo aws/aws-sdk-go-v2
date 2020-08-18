@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/mock"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 )
 
 var testSignTime = time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC)
@@ -50,7 +50,7 @@ var testSignURL = []struct {
 
 // TODO Sign URL RMTP
 func TestSignURL(t *testing.T) {
-	privKey := mock.RSAPrivateKey
+	privKey := unit.RSAPrivateKey
 
 	s := NewURLSigner("KeyID", privKey)
 
