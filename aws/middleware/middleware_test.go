@@ -15,18 +15,12 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-type mockBuildHandler func(context.Context, smithymiddleware.BuildInput) (smithymiddleware.BuildOutput, smithymiddleware.Metadata, error)
-
-func (f mockBuildHandler) HandleBuild(ctx context.Context, in smithymiddleware.BuildInput) (smithymiddleware.BuildOutput, smithymiddleware.Metadata, error) {
-	return f(ctx, in)
-}
-
 func TestRequestInvocationIDMiddleware(t *testing.T) {
 	mid := middleware.RequestInvocationIDMiddleware{}
 
 	in := smithymiddleware.BuildInput{Request: &smithyhttp.Request{Request: &http.Request{Header: make(http.Header)}}}
 	ctx := context.Background()
-	_, _, err := mid.HandleBuild(ctx, in, mockBuildHandler(func(ctx context.Context, input smithymiddleware.BuildInput) (
+	_, _, err := mid.HandleBuild(ctx, in, smithymiddleware.BuildHandlerFunc(func(ctx context.Context, input smithymiddleware.BuildInput) (
 		out smithymiddleware.BuildOutput, metadata smithymiddleware.Metadata, err error,
 	) {
 		req := in.Request.(*smithyhttp.Request)
@@ -58,23 +52,17 @@ func TestRequestInvocationIDMiddleware(t *testing.T) {
 	}
 }
 
-type mockDeserializeHandler func(ctx context.Context, in smithymiddleware.DeserializeInput) (smithymiddleware.DeserializeOutput, smithymiddleware.Metadata, error)
-
-func (m mockDeserializeHandler) HandleDeserialize(ctx context.Context, in smithymiddleware.DeserializeInput) (smithymiddleware.DeserializeOutput, smithymiddleware.Metadata, error) {
-	return m(ctx, in)
-}
-
 func TestAttemptClockSkewHandler(t *testing.T) {
 	cases := map[string]struct {
-		Next       mockDeserializeHandler
+		Next       smithymiddleware.DeserializeHandlerFunc
 		Expect     middleware.ResponseMetadata
 		ResponseAt func() time.Time
 	}{
 		"no response": {
-			Next: mockDeserializeHandler(func(ctx context.Context, in smithymiddleware.DeserializeInput,
+			Next: func(ctx context.Context, in smithymiddleware.DeserializeInput,
 			) (out smithymiddleware.DeserializeOutput, m smithymiddleware.Metadata, err error) {
 				return out, m, err
-			}),
+			},
 			ResponseAt: func() time.Time {
 				return time.Date(2020, 1, 2, 3, 4, 5, 0, time.UTC)
 			},
@@ -83,7 +71,7 @@ func TestAttemptClockSkewHandler(t *testing.T) {
 			},
 		},
 		"failed response": {
-			Next: mockDeserializeHandler(func(ctx context.Context, in smithymiddleware.DeserializeInput,
+			Next: func(ctx context.Context, in smithymiddleware.DeserializeInput,
 			) (out smithymiddleware.DeserializeOutput, m smithymiddleware.Metadata, err error) {
 				out.RawResponse = &smithyhttp.Response{
 					Response: &http.Response{
@@ -92,7 +80,7 @@ func TestAttemptClockSkewHandler(t *testing.T) {
 					},
 				}
 				return out, m, err
-			}),
+			},
 			ResponseAt: func() time.Time {
 				return time.Date(2020, 6, 7, 8, 9, 10, 0, time.UTC)
 			},
@@ -101,7 +89,7 @@ func TestAttemptClockSkewHandler(t *testing.T) {
 			},
 		},
 		"no date header response": {
-			Next: mockDeserializeHandler(func(ctx context.Context, in smithymiddleware.DeserializeInput,
+			Next: func(ctx context.Context, in smithymiddleware.DeserializeInput,
 			) (out smithymiddleware.DeserializeOutput, m smithymiddleware.Metadata, err error) {
 				out.RawResponse = &smithyhttp.Response{
 					Response: &http.Response{
@@ -110,7 +98,7 @@ func TestAttemptClockSkewHandler(t *testing.T) {
 					},
 				}
 				return out, m, err
-			}),
+			},
 			ResponseAt: func() time.Time {
 				return time.Date(2020, 11, 12, 13, 14, 15, 0, time.UTC)
 			},
@@ -119,7 +107,7 @@ func TestAttemptClockSkewHandler(t *testing.T) {
 			},
 		},
 		"invalid date header response": {
-			Next: mockDeserializeHandler(func(ctx context.Context, in smithymiddleware.DeserializeInput,
+			Next: func(ctx context.Context, in smithymiddleware.DeserializeInput,
 			) (out smithymiddleware.DeserializeOutput, m smithymiddleware.Metadata, err error) {
 				out.RawResponse = &smithyhttp.Response{
 					Response: &http.Response{
@@ -130,7 +118,7 @@ func TestAttemptClockSkewHandler(t *testing.T) {
 					},
 				}
 				return out, m, err
-			}),
+			},
 			ResponseAt: func() time.Time {
 				return time.Date(2020, 1, 2, 16, 17, 18, 0, time.UTC)
 			},
@@ -139,7 +127,7 @@ func TestAttemptClockSkewHandler(t *testing.T) {
 			},
 		},
 		"date response": {
-			Next: mockDeserializeHandler(func(ctx context.Context, in smithymiddleware.DeserializeInput,
+			Next: func(ctx context.Context, in smithymiddleware.DeserializeInput,
 			) (out smithymiddleware.DeserializeOutput, m smithymiddleware.Metadata, err error) {
 				out.RawResponse = &smithyhttp.Response{
 					Response: &http.Response{
@@ -150,7 +138,7 @@ func TestAttemptClockSkewHandler(t *testing.T) {
 					},
 				}
 				return out, m, err
-			}),
+			},
 			ResponseAt: func() time.Time {
 				return time.Date(2020, 3, 5, 22, 25, 17, 0, time.UTC)
 			},
