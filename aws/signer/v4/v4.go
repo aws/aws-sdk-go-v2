@@ -219,7 +219,16 @@ func (s *httpSigner) Build() (signedRequest, error) {
 	}, nil
 }
 
-// SignHTTP takes the provided http.Request, payload hash, service, region, and time and signs using SigV4.
+// SignHTTP signs AWS v4 requests with the provided payload hash, service name, region the
+// request is made to, and time the request is signed at. The signTime allows
+// you to specify that a request is signed for the future, and cannot be
+// used until then.
+//
+// Sign differs from Presign in that it will sign the request using HTTP
+// header values. This type of signing is intended for http.Request values that
+// will not be shared, or are shared in a way the header values on the request
+// will not be lost.
+//
 // The passed in request will be modified in place.
 func (v4 Signer) SignHTTP(ctx context.Context, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error {
 	credentials, err := v4.Credentials.Retrieve(ctx)
@@ -245,13 +254,30 @@ func (v4 Signer) SignHTTP(ctx context.Context, r *http.Request, payloadHash stri
 
 	v4.logHTTPSigningInfo(signedRequest)
 
-	*r = *signedRequest.Request
-
 	return nil
 }
 
-// PresignHTTP takes the provided http.Request, payload hash, service, region, and time and presigns using SigV4
-// Returns the presigned URL along with the headers that were signed with the request.
+// PresignHTTP signs AWS v4 requests with the payload hash, service name, region
+// the request is made to, and time the request is signed at. The signTime
+// allows you to specify that a request is signed for the future, and cannot
+// be used until then.
+//
+// Returns the signed URL and the map of HTTP headers that were included in the signature or an
+// error if signing the request failed. For presigned requests these headers
+// and their values must be included on the HTTP request when it is made. This
+// is helpful to know what header values need to be shared with the party the
+// presigned request will be distributed to.
+//
+// PresignHTTP differs from SignHTTP in that it will sign the request using query string
+// instead of header values. This allows you to share the Presigned Request's
+// URL with third parties, or distribute it throughout your system with minimal
+// dependencies.
+//
+// PresignHTTP also takes an exp value which is the duration the
+// signed request will be valid after the signing time. This is allows you to
+// set when the request will expire.
+//
+// This method does not modify the provided request.
 func (v4 *Signer) PresignHTTP(ctx context.Context, r *http.Request, payloadHash string, service string, region string, expireTime time.Duration, signingTime time.Time) (signedURI string, signedHeaders http.Header, err error) {
 	credentials, err := v4.Credentials.Retrieve(ctx)
 	if err != nil {
