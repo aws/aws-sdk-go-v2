@@ -28,6 +28,8 @@ func (c *Client) GetSession(ctx context.Context, params *GetSessionInput, optFns
 	retry.AddRetryMiddlewares(stack, options)
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetSessionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSession(options.Region), middleware.Before)
 

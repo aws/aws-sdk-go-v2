@@ -213,9 +213,6 @@ func TestClient_InputAndOutputWithHeaders_awsRestjson1Serialize(t *testing.T) {
 			smithytesting.AssertHasHeader(t, c.ExpectHeader, actualReq.Header)
 			smithytesting.AssertHasHeaderKeys(t, c.RequireHeader, actualReq.Header)
 			smithytesting.AssertNotHaveHeaderKeys(t, c.ForbidHeader, actualReq.Header)
-			if actualReq.Body != nil {
-				defer actualReq.Body.Close()
-			}
 			if c.BodyAssert != nil {
 				if err := c.BodyAssert(actualReq.Body); err != nil {
 					t.Errorf("expect body equal, got %v", err)

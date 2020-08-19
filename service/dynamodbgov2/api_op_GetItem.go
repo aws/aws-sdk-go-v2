@@ -34,6 +34,8 @@ func (c *Client) GetItem(ctx context.Context, params *GetItemInput, optFns ...fu
 	retry.AddRetryMiddlewares(stack, options)
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetItemValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetItem(options.Region), middleware.Before)
 

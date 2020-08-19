@@ -64,6 +64,8 @@ func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*
 	retry.AddRetryMiddlewares(stack, options)
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpQueryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opQuery(options.Region), middleware.Before)
 
