@@ -38,6 +38,7 @@ func (c *Client) UpdateTimeToLive(ctx context.Context, params *UpdateTimeToLiveI
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsjson10_serdeOpUpdateTimeToLiveMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -47,7 +48,6 @@ func (c *Client) UpdateTimeToLive(ctx context.Context, params *UpdateTimeToLiveI
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpUpdateTimeToLiveValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTimeToLive(options.Region), middleware.Before)
-	addawsAwsjson10_serdeOpUpdateTimeToLiveMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

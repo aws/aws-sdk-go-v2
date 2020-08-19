@@ -20,6 +20,7 @@ func (c *Client) DescribeEndpoints(ctx context.Context, params *DescribeEndpoint
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsjson10_serdeOpDescribeEndpointsMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -28,7 +29,6 @@ func (c *Client) DescribeEndpoints(ctx context.Context, params *DescribeEndpoint
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEndpoints(options.Region), middleware.Before)
-	addawsAwsjson10_serdeOpDescribeEndpointsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

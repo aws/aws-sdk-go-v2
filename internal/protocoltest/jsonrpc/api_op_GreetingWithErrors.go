@@ -30,6 +30,7 @@ func (c *Client) GreetingWithErrors(ctx context.Context, params *GreetingWithErr
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsjson11_serdeOpGreetingWithErrorsMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -38,7 +39,6 @@ func (c *Client) GreetingWithErrors(ctx context.Context, params *GreetingWithErr
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGreetingWithErrors(options.Region), middleware.Before)
-	addawsAwsjson11_serdeOpGreetingWithErrorsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

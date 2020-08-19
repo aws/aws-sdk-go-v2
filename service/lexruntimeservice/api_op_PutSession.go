@@ -24,6 +24,7 @@ func (c *Client) PutSession(ctx context.Context, params *PutSessionInput, optFns
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestjson1_serdeOpPutSessionMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -33,7 +34,6 @@ func (c *Client) PutSession(ctx context.Context, params *PutSessionInput, optFns
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpPutSessionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutSession(options.Region), middleware.Before)
-	addawsRestjson1_serdeOpPutSessionMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

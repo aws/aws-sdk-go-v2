@@ -21,6 +21,7 @@ func (c *Client) ListTables(ctx context.Context, params *ListTablesInput, optFns
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsjson10_serdeOpListTablesMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -29,7 +30,6 @@ func (c *Client) ListTables(ctx context.Context, params *ListTablesInput, optFns
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListTables(options.Region), middleware.Before)
-	addawsAwsjson10_serdeOpListTablesMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

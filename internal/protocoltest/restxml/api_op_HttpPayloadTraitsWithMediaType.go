@@ -19,13 +19,13 @@ func (c *Client) HttpPayloadTraitsWithMediaType(ctx context.Context, params *Htt
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestxml_serdeOpHttpPayloadTraitsWithMediaTypeMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadTraitsWithMediaType(options.Region), middleware.Before)
-	addawsRestxml_serdeOpHttpPayloadTraitsWithMediaTypeMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

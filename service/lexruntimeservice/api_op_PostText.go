@@ -62,6 +62,7 @@ func (c *Client) PostText(ctx context.Context, params *PostTextInput, optFns ...
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestjson1_serdeOpPostTextMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -71,7 +72,6 @@ func (c *Client) PostText(ctx context.Context, params *PostTextInput, optFns ...
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpPostTextValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPostText(options.Region), middleware.Before)
-	addawsRestjson1_serdeOpPostTextMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -18,13 +18,13 @@ func (c *Client) OmitsNullSerializesEmptyString(ctx context.Context, params *Omi
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestjson1_serdeOpOmitsNullSerializesEmptyStringMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opOmitsNullSerializesEmptyString(options.Region), middleware.Before)
-	addawsRestjson1_serdeOpOmitsNullSerializesEmptyStringMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

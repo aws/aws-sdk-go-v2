@@ -28,13 +28,13 @@ func (c *Client) QueryTimestamps(ctx context.Context, params *QueryTimestampsInp
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsquery_serdeOpQueryTimestampsMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opQueryTimestamps(options.Region), middleware.Before)
-	addawsAwsquery_serdeOpQueryTimestampsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

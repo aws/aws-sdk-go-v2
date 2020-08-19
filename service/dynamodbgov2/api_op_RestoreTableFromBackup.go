@@ -37,6 +37,7 @@ func (c *Client) RestoreTableFromBackup(ctx context.Context, params *RestoreTabl
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsjson10_serdeOpRestoreTableFromBackupMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -46,7 +47,6 @@ func (c *Client) RestoreTableFromBackup(ctx context.Context, params *RestoreTabl
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpRestoreTableFromBackupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreTableFromBackup(options.Region), middleware.Before)
-	addawsAwsjson10_serdeOpRestoreTableFromBackupMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

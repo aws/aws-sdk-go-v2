@@ -42,6 +42,7 @@ func (c *Client) Scan(ctx context.Context, params *ScanInput, optFns ...func(*Op
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsjson10_serdeOpScanMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -51,7 +52,6 @@ func (c *Client) Scan(ctx context.Context, params *ScanInput, optFns ...func(*Op
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpScanValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opScan(options.Region), middleware.Before)
-	addawsAwsjson10_serdeOpScanMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

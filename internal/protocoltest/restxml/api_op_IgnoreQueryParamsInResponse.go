@@ -20,13 +20,13 @@ func (c *Client) IgnoreQueryParamsInResponse(ctx context.Context, params *Ignore
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestxml_serdeOpIgnoreQueryParamsInResponseMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opIgnoreQueryParamsInResponse(options.Region), middleware.Before)
-	addawsRestxml_serdeOpIgnoreQueryParamsInResponseMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

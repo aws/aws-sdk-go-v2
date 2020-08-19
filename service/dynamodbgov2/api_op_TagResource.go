@@ -26,6 +26,7 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsjson10_serdeOpTagResourceMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -35,7 +36,6 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpTagResourceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTagResource(options.Region), middleware.Before)
-	addawsAwsjson10_serdeOpTagResourceMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

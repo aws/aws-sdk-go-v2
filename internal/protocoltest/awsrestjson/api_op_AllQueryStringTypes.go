@@ -20,13 +20,13 @@ func (c *Client) AllQueryStringTypes(ctx context.Context, params *AllQueryString
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestjson1_serdeOpAllQueryStringTypesMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAllQueryStringTypes(options.Region), middleware.Before)
-	addawsRestjson1_serdeOpAllQueryStringTypesMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
