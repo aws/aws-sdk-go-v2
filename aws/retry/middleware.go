@@ -62,7 +62,7 @@ func (r AttemptMiddleware) HandleFinalize(ctx context.Context, in smithymiddle.F
 
 		attemptCtx := setRetryMetadata(ctx, retryMetadata{
 			AttemptNum:       attemptNum,
-			AttemptTime:      sdk.NowTime(),
+			AttemptTime:      sdk.NowTime().UTC(),
 			MaxAttempts:      maxAttempts,
 			AttemptClockSkew: attemptClockSkew,
 		})
