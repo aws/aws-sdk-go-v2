@@ -47,7 +47,7 @@ final class XmlShapeSerVisitor extends DocumentShapeSerVisitor {
         // Get the timestamp format to be used, defaulting to date-time format.
         TimestampFormatTrait.Format format = member.getMemberTrait(getContext().getModel(), TimestampFormatTrait.class)
                 .map(TimestampFormatTrait::getFormat).orElse(DEFAULT_TIMESTAMP_FORMAT);
-        return new DocumentMemberSerVisitor(getContext(), source, dest, format);
+        return new DocumentMemberSerVisitor(getContext(), member, source, dest, format);
     }
 
 
