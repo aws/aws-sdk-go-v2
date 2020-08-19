@@ -30,6 +30,7 @@ import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.TriConsumer;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
+import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.node.Node;
 import software.amazon.smithy.model.node.ObjectNode;
@@ -156,8 +157,10 @@ final class EndpointGenerator implements Runnable {
         writer.openBlock("func $L(stack $P, options $T) {", "}", ADD_MIDDLEWARE_HELPER_NAME, stackSymbol,
                 optionsSymbol, () -> {
                     writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
-                    writer.openBlock("stack.Serialize.Add(&$T{", "}, middleware.After)",
-                            middleware.getMiddlewareSymbol(), () -> {
+                    writer.openBlock("stack.Serialize.Insert(&$T{", "}, $S, middleware.Before)",
+                            middleware.getMiddlewareSymbol(),
+                            ProtocolUtils.OPERATION_SERIALIZER_MIDDLEWARE_ID,
+                            () -> {
                                 writer.write("Resolver: options.GetEndpointResolver(),");
                                 writer.write("Options: options.GetEndpointOptions(),");
                             });
