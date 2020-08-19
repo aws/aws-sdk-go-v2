@@ -20,6 +20,7 @@ func (c *Client) KitchenSinkOperation(ctx context.Context, params *KitchenSinkOp
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsjson11_serdeOpKitchenSinkOperationMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -28,7 +29,6 @@ func (c *Client) KitchenSinkOperation(ctx context.Context, params *KitchenSinkOp
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opKitchenSinkOperation(options.Region), middleware.Before)
-	addawsAwsjson11_serdeOpKitchenSinkOperationMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

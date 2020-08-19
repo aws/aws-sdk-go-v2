@@ -60,6 +60,7 @@ func (c *Client) TransactWriteItems(ctx context.Context, params *TransactWriteIt
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsjson10_serdeOpTransactWriteItemsMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -70,7 +71,6 @@ func (c *Client) TransactWriteItems(ctx context.Context, params *TransactWriteIt
 	addIdempotencyToken_opTransactWriteItemsMiddleware(stack, options)
 	addOpTransactWriteItemsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTransactWriteItems(options.Region), middleware.Before)
-	addawsAwsjson10_serdeOpTransactWriteItemsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

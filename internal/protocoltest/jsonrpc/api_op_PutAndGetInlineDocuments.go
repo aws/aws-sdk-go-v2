@@ -19,6 +19,7 @@ func (c *Client) PutAndGetInlineDocuments(ctx context.Context, params *PutAndGet
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsjson11_serdeOpPutAndGetInlineDocumentsMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -27,7 +28,6 @@ func (c *Client) PutAndGetInlineDocuments(ctx context.Context, params *PutAndGet
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutAndGetInlineDocuments(options.Region), middleware.Before)
-	addawsAwsjson11_serdeOpPutAndGetInlineDocumentsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

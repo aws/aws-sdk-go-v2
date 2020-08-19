@@ -19,13 +19,13 @@ func (c *Client) NestedStructures(ctx context.Context, params *NestedStructuresI
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsEc2query_serdeOpNestedStructuresMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opNestedStructures(options.Region), middleware.Before)
-	addawsEc2query_serdeOpNestedStructuresMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

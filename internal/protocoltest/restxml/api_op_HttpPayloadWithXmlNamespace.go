@@ -19,13 +19,13 @@ func (c *Client) HttpPayloadWithXmlNamespace(ctx context.Context, params *HttpPa
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestxml_serdeOpHttpPayloadWithXmlNamespaceMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadWithXmlNamespace(options.Region), middleware.Before)
-	addawsRestxml_serdeOpHttpPayloadWithXmlNamespaceMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

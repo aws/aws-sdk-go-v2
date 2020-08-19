@@ -19,13 +19,13 @@ func (c *Client) RecursiveShapes(ctx context.Context, params *RecursiveShapesInp
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestjson1_serdeOpRecursiveShapesMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRecursiveShapes(options.Region), middleware.Before)
-	addawsRestjson1_serdeOpRecursiveShapesMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

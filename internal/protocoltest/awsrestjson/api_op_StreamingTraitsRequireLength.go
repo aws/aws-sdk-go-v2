@@ -21,13 +21,13 @@ func (c *Client) StreamingTraitsRequireLength(ctx context.Context, params *Strea
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestjson1_serdeOpStreamingTraitsRequireLengthMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStreamingTraitsRequireLength(options.Region), middleware.Before)
-	addawsRestjson1_serdeOpStreamingTraitsRequireLengthMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

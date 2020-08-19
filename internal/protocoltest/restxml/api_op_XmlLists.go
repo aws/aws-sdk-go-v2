@@ -37,13 +37,13 @@ func (c *Client) XmlLists(ctx context.Context, params *XmlListsInput, optFns ...
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestxml_serdeOpXmlListsMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opXmlLists(options.Region), middleware.Before)
-	addawsRestxml_serdeOpXmlListsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

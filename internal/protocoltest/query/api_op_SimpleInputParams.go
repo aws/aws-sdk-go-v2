@@ -19,13 +19,13 @@ func (c *Client) SimpleInputParams(ctx context.Context, params *SimpleInputParam
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsquery_serdeOpSimpleInputParamsMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSimpleInputParams(options.Region), middleware.Before)
-	addawsAwsquery_serdeOpSimpleInputParamsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

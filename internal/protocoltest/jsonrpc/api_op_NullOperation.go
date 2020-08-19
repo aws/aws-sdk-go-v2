@@ -18,6 +18,7 @@ func (c *Client) NullOperation(ctx context.Context, params *NullOperationInput, 
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsjson11_serdeOpNullOperationMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -26,7 +27,6 @@ func (c *Client) NullOperation(ctx context.Context, params *NullOperationInput, 
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opNullOperation(options.Region), middleware.Before)
-	addawsAwsjson11_serdeOpNullOperationMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

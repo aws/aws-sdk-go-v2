@@ -18,13 +18,13 @@ func (c *Client) MediaTypeHeader(ctx context.Context, params *MediaTypeHeaderInp
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestjson1_serdeOpMediaTypeHeaderMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opMediaTypeHeader(options.Region), middleware.Before)
-	addawsRestjson1_serdeOpMediaTypeHeaderMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

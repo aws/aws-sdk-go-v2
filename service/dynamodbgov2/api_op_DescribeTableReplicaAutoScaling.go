@@ -23,6 +23,7 @@ func (c *Client) DescribeTableReplicaAutoScaling(ctx context.Context, params *De
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsjson10_serdeOpDescribeTableReplicaAutoScalingMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -32,7 +33,6 @@ func (c *Client) DescribeTableReplicaAutoScaling(ctx context.Context, params *De
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpDescribeTableReplicaAutoScalingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTableReplicaAutoScaling(options.Region), middleware.Before)
-	addawsAwsjson10_serdeOpDescribeTableReplicaAutoScalingMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -26,6 +26,7 @@ func (c *Client) DescribeTable(ctx context.Context, params *DescribeTableInput, 
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsjson10_serdeOpDescribeTableMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -35,7 +36,6 @@ func (c *Client) DescribeTable(ctx context.Context, params *DescribeTableInput, 
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpDescribeTableValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTable(options.Region), middleware.Before)
-	addawsAwsjson10_serdeOpDescribeTableMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

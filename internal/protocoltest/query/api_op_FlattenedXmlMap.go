@@ -19,13 +19,13 @@ func (c *Client) FlattenedXmlMap(ctx context.Context, params *FlattenedXmlMapInp
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsquery_serdeOpFlattenedXmlMapMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opFlattenedXmlMap(options.Region), middleware.Before)
-	addawsAwsquery_serdeOpFlattenedXmlMapMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

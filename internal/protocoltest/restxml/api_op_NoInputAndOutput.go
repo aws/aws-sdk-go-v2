@@ -20,13 +20,13 @@ func (c *Client) NoInputAndOutput(ctx context.Context, params *NoInputAndOutputI
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestxml_serdeOpNoInputAndOutputMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opNoInputAndOutput(options.Region), middleware.Before)
-	addawsRestxml_serdeOpNoInputAndOutputMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

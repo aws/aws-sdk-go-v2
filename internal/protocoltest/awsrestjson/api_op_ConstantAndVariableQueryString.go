@@ -20,13 +20,13 @@ func (c *Client) ConstantAndVariableQueryString(ctx context.Context, params *Con
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestjson1_serdeOpConstantAndVariableQueryStringMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opConstantAndVariableQueryString(options.Region), middleware.Before)
-	addawsRestjson1_serdeOpConstantAndVariableQueryStringMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

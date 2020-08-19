@@ -30,13 +30,13 @@ func (c *Client) JsonLists(ctx context.Context, params *JsonListsInput, optFns .
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestjson1_serdeOpJsonListsMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opJsonLists(options.Region), middleware.Before)
-	addawsRestjson1_serdeOpJsonListsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

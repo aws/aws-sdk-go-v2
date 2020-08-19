@@ -20,13 +20,13 @@ func (c *Client) JsonTimestamps(ctx context.Context, params *JsonTimestampsInput
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestjson1_serdeOpJsonTimestampsMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opJsonTimestamps(options.Region), middleware.Before)
-	addawsRestjson1_serdeOpJsonTimestampsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
