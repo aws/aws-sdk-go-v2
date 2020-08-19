@@ -21,6 +21,7 @@ import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
+import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.model.shapes.BigDecimalShape;
 import software.amazon.smithy.model.shapes.BigIntegerShape;
 import software.amazon.smithy.model.shapes.BlobShape;
@@ -56,14 +57,17 @@ public class DocumentMemberSerVisitor implements ShapeVisitor<Void> {
     private final String dataSource;
     private final String dataDest;
     private final Format timestampFormat;
+    private final MemberShape member;
 
     public DocumentMemberSerVisitor(
             GenerationContext context,
+            MemberShape member,
             String dataSource,
             String dataDest,
             Format timestampFormat
     ) {
         this.context = context;
+        this.member = member;
         this.dataSource = dataSource;
         this.dataDest = dataDest;
         this.timestampFormat = timestampFormat;
@@ -158,7 +162,12 @@ public class DocumentMemberSerVisitor implements ShapeVisitor<Void> {
     }
 
     private String conditionallyDereference(Shape shape, String dataSource) {
-        return CodegenUtils.isShapePassByReference(shape) ? "*" + dataSource : dataSource;
+        boolean shouldDereference = CodegenUtils.isShapePassByReference(shape);
+        if (context.getModel().expectShape(member.getContainer()).isUnionShape()) {
+            Shape target = context.getModel().expectShape(member.getTarget());
+            shouldDereference &= ProtocolUtils.usesScalarWhenUnionValue(target);
+        }
+        return shouldDereference ? "*" + dataSource : dataSource;
     }
 
     @Override
