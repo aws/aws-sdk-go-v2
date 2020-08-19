@@ -23,6 +23,7 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsjson10_serdeOpUntagResourceMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -32,7 +33,6 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpUntagResourceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUntagResource(options.Region), middleware.Before)
-	addawsAwsjson10_serdeOpUntagResourceMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

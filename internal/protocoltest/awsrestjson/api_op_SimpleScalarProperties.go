@@ -17,13 +17,13 @@ func (c *Client) SimpleScalarProperties(ctx context.Context, params *SimpleScala
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestjson1_serdeOpSimpleScalarPropertiesMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSimpleScalarProperties(options.Region), middleware.Before)
-	addawsRestjson1_serdeOpSimpleScalarPropertiesMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

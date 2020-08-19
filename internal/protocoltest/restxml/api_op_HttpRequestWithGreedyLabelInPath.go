@@ -17,6 +17,7 @@ func (c *Client) HttpRequestWithGreedyLabelInPath(ctx context.Context, params *H
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestxml_serdeOpHttpRequestWithGreedyLabelInPathMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -24,7 +25,6 @@ func (c *Client) HttpRequestWithGreedyLabelInPath(ctx context.Context, params *H
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpHttpRequestWithGreedyLabelInPathValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpRequestWithGreedyLabelInPath(options.Region), middleware.Before)
-	addawsRestxml_serdeOpHttpRequestWithGreedyLabelInPathMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

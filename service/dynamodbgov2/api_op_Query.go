@@ -56,6 +56,7 @@ func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsjson10_serdeOpQueryMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -65,7 +66,6 @@ func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpQueryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opQuery(options.Region), middleware.Before)
-	addawsAwsjson10_serdeOpQueryMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

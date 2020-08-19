@@ -28,6 +28,7 @@ func (c *Client) UpdateContinuousBackups(ctx context.Context, params *UpdateCont
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsjson10_serdeOpUpdateContinuousBackupsMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -37,7 +38,6 @@ func (c *Client) UpdateContinuousBackups(ctx context.Context, params *UpdateCont
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpUpdateContinuousBackupsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateContinuousBackups(options.Region), middleware.Before)
-	addawsAwsjson10_serdeOpUpdateContinuousBackupsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

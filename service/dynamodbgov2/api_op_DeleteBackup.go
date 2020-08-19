@@ -21,6 +21,7 @@ func (c *Client) DeleteBackup(ctx context.Context, params *DeleteBackupInput, op
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsjson10_serdeOpDeleteBackupMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -30,7 +31,6 @@ func (c *Client) DeleteBackup(ctx context.Context, params *DeleteBackupInput, op
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpDeleteBackupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBackup(options.Region), middleware.Before)
-	addawsAwsjson10_serdeOpDeleteBackupMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -19,13 +19,13 @@ func (c *Client) XmlAttributesOnPayload(ctx context.Context, params *XmlAttribut
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestxml_serdeOpXmlAttributesOnPayloadMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opXmlAttributesOnPayload(options.Region), middleware.Before)
-	addawsRestxml_serdeOpXmlAttributesOnPayloadMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

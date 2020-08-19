@@ -21,13 +21,13 @@ func (c *Client) StreamingTraitsWithMediaType(ctx context.Context, params *Strea
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestjson1_serdeOpStreamingTraitsWithMediaTypeMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStreamingTraitsWithMediaType(options.Region), middleware.Before)
-	addawsRestjson1_serdeOpStreamingTraitsWithMediaTypeMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

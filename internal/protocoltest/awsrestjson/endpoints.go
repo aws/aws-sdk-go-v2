@@ -94,10 +94,10 @@ type ResolveEndpointMiddlewareOptions interface {
 }
 
 func AddResolveEndpointMiddleware(stack *middleware.Stack, options ResolveEndpointMiddlewareOptions) {
-	stack.Serialize.Add(&ResolveEndpoint{
+	stack.Serialize.Insert(&ResolveEndpoint{
 		Resolver: options.GetEndpointResolver(),
 		Options:  options.GetEndpointOptions(),
-	}, middleware.After)
+	}, "OperationSerializer", middleware.Before)
 }
 
 func RemoveResolveEndpointMiddleware(stack *middleware.Stack) error {

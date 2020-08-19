@@ -20,6 +20,7 @@ func (c *Client) HttpRequestWithLabels(ctx context.Context, params *HttpRequestW
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestjson1_serdeOpHttpRequestWithLabelsMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -27,7 +28,6 @@ func (c *Client) HttpRequestWithLabels(ctx context.Context, params *HttpRequestW
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpHttpRequestWithLabelsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpRequestWithLabels(options.Region), middleware.Before)
-	addawsRestjson1_serdeOpHttpRequestWithLabelsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

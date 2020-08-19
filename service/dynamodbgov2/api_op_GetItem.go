@@ -26,6 +26,7 @@ func (c *Client) GetItem(ctx context.Context, params *GetItemInput, optFns ...fu
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsjson10_serdeOpGetItemMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -35,7 +36,6 @@ func (c *Client) GetItem(ctx context.Context, params *GetItemInput, optFns ...fu
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpGetItemValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetItem(options.Region), middleware.Before)
-	addawsAwsjson10_serdeOpGetItemMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
