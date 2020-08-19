@@ -140,7 +140,7 @@ func TestNewSharedConfig(t *testing.T) {
 			Profile:   "profile_name",
 			Err: SharedConfigLoadError{
 				Filename: filepath.Join("testdata", "shared_config_invalid_ini"),
-				Err:      fmt.Errorf("INI parse error"),
+				Err:      fmt.Errorf("invalid state"),
 			},
 		},
 		9: {

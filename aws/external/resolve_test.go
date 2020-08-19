@@ -16,7 +16,9 @@ func TestResolveCustomCABundle(t *testing.T) {
 		WithCustomCABundle(awstesting.TLSBundleCA),
 	}
 
-	cfg := aws.Config{}
+	cfg := aws.Config{
+		HTTPClient: aws.NewBuildableHTTPClient(),
+	}
 	if err := ResolveCustomCABundle(&cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -55,7 +57,9 @@ func TestResolveCustomCABundle_ValidCA(t *testing.T) {
 		WithCustomCABundle(caPEM),
 	}
 
-	cfg := aws.Config{}
+	cfg := aws.Config{
+		HTTPClient: aws.NewBuildableHTTPClient(),
+	}
 	if err := ResolveCustomCABundle(&cfg, configs); err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
