@@ -97,6 +97,9 @@ test-protocols:
 test-services:
 	./test_submodules.sh `pwd`/service "go test -count 1 -run NONE ./..."
 
+mod_replace_local:
+	./mod_replace_local_submodules.sh `pwd` `pwd` `pwd`/../smithy-go
+
 #######################
 # Integration Testing #
 #######################
