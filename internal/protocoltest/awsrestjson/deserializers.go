@@ -713,7 +713,6 @@ func (m *awsRestjson1_deserializeOpHttpPayloadWithStructure) HandleDeserialize(c
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
 	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
@@ -1216,7 +1215,6 @@ func (m *awsRestjson1_deserializeOpIgnoreQueryParamsInResponse) HandleDeserializ
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
 	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
@@ -1379,7 +1377,6 @@ func (m *awsRestjson1_deserializeOpInlineDocument) HandleDeserialize(ctx context
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
 	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
@@ -1547,7 +1544,6 @@ func (m *awsRestjson1_deserializeOpInlineDocumentAsPayload) HandleDeserialize(ct
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
 	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
@@ -1985,7 +1981,6 @@ func (m *awsRestjson1_deserializeOpJsonBlobs) HandleDeserialize(ctx context.Cont
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
 	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
@@ -2141,7 +2136,6 @@ func (m *awsRestjson1_deserializeOpJsonEnums) HandleDeserialize(ctx context.Cont
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
 	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
@@ -2345,7 +2339,6 @@ func (m *awsRestjson1_deserializeOpJsonLists) HandleDeserialize(ctx context.Cont
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
 	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
@@ -2535,7 +2528,6 @@ func (m *awsRestjson1_deserializeOpJsonMaps) HandleDeserialize(ctx context.Conte
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
 	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
@@ -2690,7 +2682,6 @@ func (m *awsRestjson1_deserializeOpJsonTimestamps) HandleDeserialize(ctx context
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
 	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
@@ -3564,7 +3555,6 @@ func (m *awsRestjson1_deserializeOpRecursiveShapes) HandleDeserialize(ctx contex
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
 	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
@@ -3724,7 +3714,6 @@ func (m *awsRestjson1_deserializeOpSimpleScalarProperties) HandleDeserialize(ctx
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
 	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()

@@ -48,7 +48,6 @@ func (m *awsRestjson1_deserializeOpDeleteSession) HandleDeserialize(ctx context.
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
 	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
@@ -265,7 +264,6 @@ func (m *awsRestjson1_deserializeOpGetSession) HandleDeserialize(ctx context.Con
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
 	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
@@ -649,7 +647,6 @@ func (m *awsRestjson1_deserializeOpPostText) HandleDeserialize(ctx context.Conte
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
 	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
