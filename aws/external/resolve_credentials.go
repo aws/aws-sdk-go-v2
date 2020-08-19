@@ -237,3 +237,13 @@ func getAWSConfigSources(configs Configs) (*EnvConfig, *SharedConfig, Configs) {
 
 	return envConfig, sharedConfig, other
 }
+
+// AssumeRoleTokenProviderNotSetError is an error returned when creating a
+// session when the MFAToken option is not set when shared config is configured
+// load assume a role with an MFA token.
+type AssumeRoleTokenProviderNotSetError struct{}
+
+// Error is the error message
+func (e AssumeRoleTokenProviderNotSetError) Error() string {
+	return fmt.Sprintf("assume role with MFA enabled, but AssumeRoleTokenProvider session option not set.")
+}
