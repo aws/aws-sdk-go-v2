@@ -8,14 +8,6 @@ import (
 	"github.com/awslabs/smithy-go/middleware"
 )
 
-type mockInitalizeHandler func(context.Context, middleware.InitializeInput) (middleware.InitializeOutput, middleware.Metadata, error)
-
-func (m mockInitalizeHandler) HandleInitialize(
-	ctx context.Context, in middleware.InitializeInput,
-) (middleware.InitializeOutput, middleware.Metadata, error) {
-	return m(ctx, in)
-}
-
 func TestServiceMetadataProvider(t *testing.T) {
 	m := RegisterServiceMetadata{
 		ServiceName:    "Foo",
@@ -26,7 +18,7 @@ func TestServiceMetadataProvider(t *testing.T) {
 		OperationName:  "FooOp",
 	}
 
-	_, _, err := m.HandleInitialize(context.Background(), middleware.InitializeInput{}, mockInitalizeHandler(func(
+	_, _, err := m.HandleInitialize(context.Background(), middleware.InitializeInput{}, middleware.InitializeHandlerFunc(func(
 		ctx context.Context, input middleware.InitializeInput,
 	) (o middleware.InitializeOutput, m middleware.Metadata, err error) {
 		t.Helper()

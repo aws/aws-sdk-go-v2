@@ -13,7 +13,7 @@ import (
 
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/awslabs/smithy-go/middleware"
-	smithyHTTP "github.com/awslabs/smithy-go/transport/http"
+	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 func TestComputePayloadHashMiddleware(t *testing.T) {
@@ -47,7 +47,7 @@ func TestComputePayloadHashMiddleware(t *testing.T) {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
 			c := &computePayloadSHA256Middleware{}
 
-			next := buildHandlerFunc(func(ctx context.Context, in middleware.BuildInput) (out middleware.BuildOutput, metadata middleware.Metadata, err error) {
+			next := middleware.BuildHandlerFunc(func(ctx context.Context, in middleware.BuildInput) (out middleware.BuildOutput, metadata middleware.Metadata, err error) {
 				value, ok := ctx.Value(payloadHashKey{}).(string)
 				if !ok {
 					t.Fatalf("expected payload hash value to be on context")
@@ -59,7 +59,7 @@ func TestComputePayloadHashMiddleware(t *testing.T) {
 				return out, metadata, err
 			})
 
-			stream, err := smithyHTTP.NewStackRequest().(*smithyHTTP.Request).SetStream(tt.content)
+			stream, err := smithyhttp.NewStackRequest().(*smithyhttp.Request).SetStream(tt.content)
 			if err != nil {
 				t.Fatalf("expected no error, got %v", err)
 			}
@@ -121,7 +121,7 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 				}),
 			}
 
-			next := finalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
+			next := middleware.FinalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
 				return out, metadata, err
 			})
 
@@ -131,7 +131,7 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 				ctx = context.WithValue(ctx, payloadHashKey{}, tt.hash)
 			}
 
-			_, _, err := c.HandleFinalize(ctx, middleware.FinalizeInput{Request: &smithyHTTP.Request{Request: &http.Request{}}}, next)
+			_, _, err := c.HandleFinalize(ctx, middleware.FinalizeInput{Request: &smithyhttp.Request{Request: &http.Request{}}}, next)
 			if err != nil && tt.expectedErr == nil {
 				t.Errorf("expected no error, got %v", err)
 			} else if err != nil && tt.expectedErr != nil {
@@ -166,18 +166,6 @@ func (s *semiSeekable) Seek(offset int64, whence int) (int64, error) {
 
 func (*semiSeekable) Read(p []byte) (n int, err error) {
 	return 0, io.EOF
-}
-
-type buildHandlerFunc func(ctx context.Context, in middleware.BuildInput) (middleware.BuildOutput, middleware.Metadata, error)
-
-func (f buildHandlerFunc) HandleBuild(ctx context.Context, in middleware.BuildInput) (middleware.BuildOutput, middleware.Metadata, error) {
-	return f(ctx, in)
-}
-
-type finalizeHandlerFunc func(ctx context.Context, in middleware.FinalizeInput) (middleware.FinalizeOutput, middleware.Metadata, error)
-
-func (f finalizeHandlerFunc) HandleFinalize(ctx context.Context, in middleware.FinalizeInput) (middleware.FinalizeOutput, middleware.Metadata, error) {
-	return f(ctx, in)
 }
 
 var (

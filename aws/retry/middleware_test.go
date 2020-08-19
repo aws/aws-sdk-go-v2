@@ -15,12 +15,6 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
-type mockFinalizeHandler func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error)
-
-func (f mockFinalizeHandler) HandleFinalize(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
-	return f(ctx, in)
-}
-
 func TestMetricsHeaderMiddleware(t *testing.T) {
 	cases := []struct {
 		input          middleware.FinalizeInput
@@ -67,7 +61,7 @@ func TestMetricsHeaderMiddleware(t *testing.T) {
 	for i, tt := range cases {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
 			ctx := tt.ctx
-			_, _, err := retryMiddleware.HandleFinalize(ctx, tt.input, mockFinalizeHandler(func(ctx context.Context, in middleware.FinalizeInput) (
+			_, _, err := retryMiddleware.HandleFinalize(ctx, tt.input, middleware.FinalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (
 				out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 			) {
 				req := in.Request.(*smithyhttp.Request)
@@ -144,7 +138,7 @@ func TestAttemptMiddleware(t *testing.T) {
 	}{
 		"no error single attempt": {
 			Next: func(retries *[]retryMetadata) middleware.FinalizeHandler {
-				return mockFinalizeHandler(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
+				return middleware.FinalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
 					m, ok := getRetryMetadata(ctx)
 					if ok {
 						*retries = append(*retries, m)
@@ -168,7 +162,7 @@ func TestAttemptMiddleware(t *testing.T) {
 					mockRetryableError{b: true},
 					nil,
 				}
-				return mockFinalizeHandler(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
+				return middleware.FinalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
 					m, ok := getRetryMetadata(ctx)
 					if ok {
 						*retries = append(*retries, m)
@@ -208,7 +202,7 @@ func TestAttemptMiddleware(t *testing.T) {
 					mockRetryableError{b: true},
 					mockRetryableError{b: true},
 				}
-				return mockFinalizeHandler(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
+				return middleware.FinalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
 					if num >= len(reqsErrs) {
 						err = fmt.Errorf("more requests then expected")
 					} else {
@@ -223,7 +217,7 @@ func TestAttemptMiddleware(t *testing.T) {
 		"stops on rewind error": {
 			Request: testRequest{DisableRewind: true},
 			Next: func(retries *[]retryMetadata) middleware.FinalizeHandler {
-				return mockFinalizeHandler(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
+				return middleware.FinalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
 					m, ok := getRetryMetadata(ctx)
 					if ok {
 						*retries = append(*retries, m)
@@ -242,7 +236,7 @@ func TestAttemptMiddleware(t *testing.T) {
 		},
 		"stops on non-retryable errors": {
 			Next: func(retries *[]retryMetadata) middleware.FinalizeHandler {
-				return mockFinalizeHandler(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
+				return middleware.FinalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
 					m, ok := getRetryMetadata(ctx)
 					if ok {
 						*retries = append(*retries, m)
