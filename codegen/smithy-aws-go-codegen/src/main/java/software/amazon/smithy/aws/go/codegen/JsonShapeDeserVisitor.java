@@ -26,13 +26,17 @@ import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
+import software.amazon.smithy.go.codegen.SymbolUtils;
+import software.amazon.smithy.go.codegen.UnionGenerator;
 import software.amazon.smithy.go.codegen.integration.DocumentShapeDeserVisitor;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
+import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.model.shapes.CollectionShape;
 import software.amazon.smithy.model.shapes.DocumentShape;
 import software.amazon.smithy.model.shapes.MapShape;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.Shape;
+import software.amazon.smithy.model.shapes.SimpleShape;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.shapes.UnionShape;
 import software.amazon.smithy.model.traits.JsonNameTrait;
@@ -217,10 +221,58 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
     @Override
     protected void deserializeUnion(GenerationContext context, UnionShape shape) {
         GoWriter writer = context.getWriter();
-        // TODO: implement union deserialization
-        // The tricky part is going to be accumulating bytes for unknown members.
-        LOGGER.warning("Union type is currently unsupported for JSON deserialization.");
-        context.getWriter().writeDocs("TODO: implement union serialization.");
+        SymbolProvider symbolProvider = context.getSymbolProvider();
+        Symbol symbol = symbolProvider.toSymbol(shape);
+        writeJsonTokenizerStartStub(writer, shape);
+
+        writer.write("var uv $P", symbol);
+
+        writer.write("t, err := decoder.Token()");
+        writer.write("if err != nil { return err }");
+        writer.openBlock("switch t {", "}", () -> {
+            Set<MemberShape> members = new TreeSet<>(shape.members());
+            for (MemberShape member : members) {
+                if (!memberFilter.test(member)) {
+                    continue;
+                }
+
+                Shape target = context.getModel().expectShape(member.getTarget());
+                Symbol targetSymbol = symbolProvider.toSymbol(member);
+
+                Symbol memberSymbol = SymbolUtils.createValueSymbolBuilder(
+                        symbolProvider.toMemberName(member),
+                        symbol.getNamespace()
+                ).build();
+
+                writer.openBlock("case $S:", "", member.getMemberName(), () -> {
+                    writer.write("var mv $P", targetSymbol);
+                    target.accept(getMemberDeserVisitor(member, "mv"));
+
+                    if (!ProtocolUtils.usesScalarWhenUnionValue(target)) {
+                        writer.write("uv = &$T{Value: *mv}", memberSymbol);
+                    } else {
+                        writer.write("uv = &$T{Value: mv}", memberSymbol);
+                    }
+                });
+            }
+
+            writer.openBlock("default:", "", () -> {
+                // This is the function to take a value and convert it to the union type.
+                Symbol unknownMemberSymbol = SymbolUtils.createValueSymbolBuilder(
+                        UnionGenerator.UNKNOWN_MEMBER_NAME,
+                        symbol.getNamespace()
+                ).build();
+                writer.addUseImports(AwsGoDependency.AWS_REST_JSON_PROTOCOL);
+                writer.write("tagString, ok := t.(string)");
+                writer.write("if !ok { return fmt.Errorf(\"expected string key, found %T\", t) }");
+                writer.write("value, err := restjson.CollectUnknownField(decoder)");
+                writer.write("if err != nil { return err }");
+                writer.write("uv = &$T{Tag: tagString, Value: value}", unknownMemberSymbol);
+            });
+        });
+
+        writeJsonTokenizerEndStub(writer, shape);
+        writer.write("*v = uv");
         writer.write("return nil");
     }
 

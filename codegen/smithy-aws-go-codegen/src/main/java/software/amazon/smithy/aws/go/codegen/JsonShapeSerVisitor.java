@@ -28,6 +28,7 @@ import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
+import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.DocumentShapeSerVisitor;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
 import software.amazon.smithy.model.shapes.CollectionShape;
@@ -79,7 +80,7 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
         // Get the timestamp format to be used, defaulting to epoch seconds.
         Format format = member.getMemberTrait(getContext().getModel(), TimestampFormatTrait.class)
                 .map(TimestampFormatTrait::getFormat).orElse(DEFAULT_TIMESTAMP_FORMAT);
-        return new DocumentMemberSerVisitor(getContext(), source, dest, format);
+        return new DocumentMemberSerVisitor(getContext(), member, source, dest, format);
     }
 
     @Override
@@ -196,17 +197,18 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
             Set<MemberShape> members = new TreeSet<>(shape.getAllMembers().values());
             for (MemberShape member : members) {
                 Shape target = context.getModel().expectShape(member.getTarget());
-                Symbol memberSymbol = symbolProvider.toSymbol(member);
-                String exportedMemberName = symbol.getName() + symbolProvider.toMemberName(member);
+                Symbol memberSymbol = SymbolUtils.createValueSymbolBuilder(
+                        symbolProvider.toMemberName(member),
+                        symbol.getNamespace()
+                ).build();
 
-                writer.openBlock("case *$L:", "", exportedMemberName, () -> {
-                    writer.write("av := object.Key($S)", memberSymbol.getName());
-                    target.accept(getMemberSerVisitor(member, "uv.Value()", "av"));
+                writer.openBlock("case *$T:", "", memberSymbol, () -> {
+                    writer.write("av := object.Key($S)", member.getMemberName());
+                    target.accept(getMemberSerVisitor(member, "uv.Value", "av"));
                 });
             }
 
             // Handle unknown union values
-            writer.openBlock("case *$LUnknown:", "", symbol.getName(), () -> writer.write("fallthrough"));
             writer.openBlock("default:", "", () -> {
                 writer.write("return fmt.Errorf(\"attempted to serialize unknown member type %T"
                         + " for union %T\", uv, v)");
