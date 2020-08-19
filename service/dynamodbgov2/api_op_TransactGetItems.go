@@ -39,6 +39,7 @@ func (c *Client) TransactGetItems(ctx context.Context, params *TransactGetItemsI
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsjson10_serdeOpTransactGetItemsMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -48,7 +49,6 @@ func (c *Client) TransactGetItems(ctx context.Context, params *TransactGetItemsI
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpTransactGetItemsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTransactGetItems(options.Region), middleware.Before)
-	addawsAwsjson10_serdeOpTransactGetItemsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -19,13 +19,13 @@ func (c *Client) JsonMaps(ctx context.Context, params *JsonMapsInput, optFns ...
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestjson1_serdeOpJsonMapsMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opJsonMaps(options.Region), middleware.Before)
-	addawsRestjson1_serdeOpJsonMapsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -78,6 +78,7 @@ func (c *Client) PutItem(ctx context.Context, params *PutItemInput, optFns ...fu
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsjson10_serdeOpPutItemMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -87,7 +88,6 @@ func (c *Client) PutItem(ctx context.Context, params *PutItemInput, optFns ...fu
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpPutItemValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutItem(options.Region), middleware.Before)
-	addawsAwsjson10_serdeOpPutItemMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -20,6 +20,7 @@ func (c *Client) UpdateContributorInsights(ctx context.Context, params *UpdateCo
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsjson10_serdeOpUpdateContributorInsightsMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -29,7 +30,6 @@ func (c *Client) UpdateContributorInsights(ctx context.Context, params *UpdateCo
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpUpdateContributorInsightsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateContributorInsights(options.Region), middleware.Before)
-	addawsAwsjson10_serdeOpUpdateContributorInsightsMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

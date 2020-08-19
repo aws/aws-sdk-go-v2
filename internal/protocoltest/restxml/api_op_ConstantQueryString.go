@@ -21,6 +21,7 @@ func (c *Client) ConstantQueryString(ctx context.Context, params *ConstantQueryS
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestxml_serdeOpConstantQueryStringMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -28,7 +29,6 @@ func (c *Client) ConstantQueryString(ctx context.Context, params *ConstantQueryS
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpConstantQueryStringValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opConstantQueryString(options.Region), middleware.Before)
-	addawsRestxml_serdeOpConstantQueryStringMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

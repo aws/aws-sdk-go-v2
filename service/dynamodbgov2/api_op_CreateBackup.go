@@ -43,6 +43,7 @@ func (c *Client) CreateBackup(ctx context.Context, params *CreateBackupInput, op
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsjson10_serdeOpCreateBackupMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -52,7 +53,6 @@ func (c *Client) CreateBackup(ctx context.Context, params *CreateBackupInput, op
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpCreateBackupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBackup(options.Region), middleware.Before)
-	addawsAwsjson10_serdeOpCreateBackupMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -19,13 +19,13 @@ func (c *Client) TimestampFormatHeaders(ctx context.Context, params *TimestampFo
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestjson1_serdeOpTimestampFormatHeadersMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTimestampFormatHeaders(options.Region), middleware.Before)
-	addawsRestjson1_serdeOpTimestampFormatHeadersMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

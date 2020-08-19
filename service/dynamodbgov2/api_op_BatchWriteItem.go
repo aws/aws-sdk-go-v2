@@ -71,6 +71,7 @@ func (c *Client) BatchWriteItem(ctx context.Context, params *BatchWriteItemInput
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsAwsjson10_serdeOpBatchWriteItemMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -80,7 +81,6 @@ func (c *Client) BatchWriteItem(ctx context.Context, params *BatchWriteItemInput
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpBatchWriteItemValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchWriteItem(options.Region), middleware.Before)
-	addawsAwsjson10_serdeOpBatchWriteItemMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -19,6 +19,7 @@ func (c *Client) DeleteSession(ctx context.Context, params *DeleteSessionInput, 
 	for _, fn := range optFns {
 		fn(&options)
 	}
+	addawsRestjson1_serdeOpDeleteSessionMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -28,7 +29,6 @@ func (c *Client) DeleteSession(ctx context.Context, params *DeleteSessionInput, 
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	addOpDeleteSessionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSession(options.Region), middleware.Before)
-	addawsRestjson1_serdeOpDeleteSessionMiddlewares(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
