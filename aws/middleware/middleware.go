@@ -61,10 +61,6 @@ func (a AttemptClockSkewMiddleware) HandleDeserialize(ctx context.Context, in mi
 
 	switch resp := out.RawResponse.(type) {
 	case *smithyHTTP.Response:
-		//if resp == nil || resp.Response == nil {
-		//	break
-		//}
-
 		respDateHeader := resp.Header.Get("Date")
 		if len(respDateHeader) == 0 {
 			break
