@@ -1,7 +1,9 @@
 package software.amazon.smithy.aws.go.codegen;
 
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
+import software.amazon.smithy.go.codegen.integration.HttpProtocolUtils;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
+import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.utils.ListUtils;
 
 import java.util.List;
@@ -16,6 +18,17 @@ public class AddProtocols implements GoIntegration {
     @Override
     public byte getOrder() {
         return -10;
+    }
+
+    @Override
+    public List<RuntimeClientPlugin> getClientPlugins() {
+        List<RuntimeClientPlugin> plugins = HttpProtocolUtils.getCloseResponseClientPlugins((model, service) -> {
+            // All AWS protocols are HTTP based currently. When protocol is added that is not it must be
+            // excluded if the service is configured for that protocol.
+            return true;
+        });
+
+        return plugins;
     }
 
     @Override
