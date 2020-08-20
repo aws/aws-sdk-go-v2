@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 )
 
@@ -14,11 +13,11 @@ func TestAddWithErrorCodes(t *testing.T) {
 		Expect bool
 	}{
 		"retryable": {
-			Err:    awserr.New("Error1", "err", nil),
+			Err:    &mockErrorCodeError{code: "Error1"},
 			Expect: true,
 		},
 		"not retryable": {
-			Err:    awserr.New("Error3", "err", nil),
+			Err:    &mockErrorCodeError{code: "Error3"},
 			Expect: false,
 		},
 	}

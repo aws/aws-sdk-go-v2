@@ -1,3 +1,5 @@
+// +build disabled
+
 package expression_test
 
 import (
@@ -8,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb/expression"
 )
 
 // Using Projection Expression
@@ -25,14 +26,14 @@ func ExampleBuilder_WithProjection() {
 	svc := dynamodb.New(cfg)
 
 	// Construct the Key condition builder
-	keyCond := expression.Key("Artist").Equal(expression.Value("No One You Know"))
+	keyCond := Key("Artist").Equal(Value("No One You Know"))
 
 	// Create the project expression builder with a names list.
-	proj := expression.NamesList(expression.Name("SongTitle"))
+	proj := NamesList(Name("SongTitle"))
 
 	// Combine the key condition, and projection together as a DynamoDB expression
 	// builder.
-	expr, err := expression.NewBuilder().
+	expr, err := NewBuilder().
 		WithKeyCondition(keyCond).
 		WithProjection(proj).
 		Build()
@@ -88,14 +89,14 @@ func ExampleBuilder_WithKeyCondition() {
 	svc := dynamodb.New(cfg)
 
 	// Construct the Key condition builder
-	keyCond := expression.Key("Artist").Equal(expression.Value("No One You Know"))
+	keyCond := Key("Artist").Equal(Value("No One You Know"))
 
 	// Create the project expression builder with a names list.
-	proj := expression.NamesList(expression.Name("SongTitle"))
+	proj := NamesList(Name("SongTitle"))
 
 	// Combine the key condition, and projection together as a DynamoDB expression
 	// builder.
-	expr, err := expression.NewBuilder().
+	expr, err := NewBuilder().
 		WithKeyCondition(keyCond).
 		WithProjection(proj).
 		Build()
@@ -152,16 +153,16 @@ func ExampleBuilder_WithFilter() {
 	svc := dynamodb.New(cfg)
 
 	// Construct the filter builder with a name and value.
-	filt := expression.Name("Artist").Equal(expression.Value("No One You Know"))
+	filt := Name("Artist").Equal(Value("No One You Know"))
 
 	// Create the names list projection of names to project.
-	proj := expression.NamesList(
-		expression.Name("AlbumTitle"),
-		expression.Name("SongTitle"),
+	proj := NamesList(
+		Name("AlbumTitle"),
+		Name("SongTitle"),
 	)
 
 	// Using the filter and projections create a DynamoDB expression from the two.
-	expr, err := expression.NewBuilder().
+	expr, err := NewBuilder().
 		WithFilter(filt).
 		WithProjection(proj).
 		Build()
@@ -217,16 +218,16 @@ func ExampleBuilder_WithUpdate() {
 	svc := dynamodb.New(cfg)
 
 	// Create an update to set two fields in the table.
-	update := expression.Set(
-		expression.Name("Year"),
-		expression.Value(2015),
+	update := Set(
+		Name("Year"),
+		Value(2015),
 	).Set(
-		expression.Name("AlbumTitle"),
-		expression.Value("Louder Than Ever"),
+		Name("AlbumTitle"),
+		Value("Louder Than Ever"),
 	)
 
 	// Create the DynamoDB expression from the Update.
-	expr, err := expression.NewBuilder().
+	expr, err := NewBuilder().
 		WithUpdate(update).
 		Build()
 
@@ -290,10 +291,10 @@ func ExampleBuilder_WithCondition() {
 	svc := dynamodb.New(cfg)
 
 	// Create a condition where the Rating field must be less than 7.
-	cond := expression.Name("Rating").LessThan(expression.Value(7))
+	cond := Name("Rating").LessThan(Value(7))
 
 	// Create a DynamoDB expression from the condition.
-	expr, err := expression.NewBuilder().
+	expr, err := NewBuilder().
 		WithCondition(cond).
 		Build()
 	if err != nil {

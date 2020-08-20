@@ -1,4 +1,4 @@
-// +build example,skip
+// +build example,skip,disabled
 
 package main
 

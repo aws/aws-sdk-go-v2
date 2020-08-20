@@ -3,12 +3,10 @@ package retry_test
 import (
 	"fmt"
 	"net"
-	"net/http"
 	"net/url"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 )
 
@@ -42,9 +40,34 @@ func (m mockCanceledError) Error() string {
 
 type mockStatusCodeError struct{ code int }
 
-func (m mockStatusCodeError) StatusCode() int { return m.code }
+func (m mockStatusCodeError) HTTPStatusCode() int { return m.code }
 func (m mockStatusCodeError) Error() string {
 	return fmt.Sprintf("status code error, %v", m.code)
+}
+
+type mockConnectionError struct{ err error }
+
+func (m *mockConnectionError) ConnectionError() bool {
+	return true
+}
+func (m *mockConnectionError) Error() string {
+	return fmt.Sprintf("request error: %v", m.err)
+}
+func (m *mockConnectionError) Unwrap() error {
+	return m.err
+}
+
+type mockErrorCodeError struct {
+	code string
+	err  error
+}
+
+func (m *mockErrorCodeError) ErrorCode() string { return m.code }
+func (m *mockErrorCodeError) Error() string {
+	return fmt.Sprintf("%v: mock error", m.code)
+}
+func (m *mockErrorCodeError) Unwrap() error {
+	return m.err
 }
 
 func TestRetryConnectionErrors(t *testing.T) {
@@ -61,10 +84,9 @@ func TestRetryConnectionErrors(t *testing.T) {
 			Retryable: aws.TrueTernary,
 			Err:       fmt.Errorf("connection reset"),
 		},
-		"awserr connection reset": {
+		"wrapped connection reset": {
 			Retryable: aws.TrueTernary,
-			Err: awserr.New(aws.ErrCodeSerialization, "some error",
-				fmt.Errorf("connection reset")),
+			Err:       fmt.Errorf("some error: %w", fmt.Errorf("connection reset")),
 		},
 		"url.Error connection refused": {
 			Retryable: aws.TrueTernary,
@@ -81,33 +103,25 @@ func TestRetryConnectionErrors(t *testing.T) {
 		},
 		"some other error": {
 			Retryable: aws.UnknownTernary,
-			Err: awserr.New(aws.ErrCodeSerialization, "some error",
-				fmt.Errorf("something bad")),
+			Err:       fmt.Errorf("some error: %w", fmt.Errorf("something bad")),
 		},
 		"request send error": {
 			Retryable: aws.TrueTernary,
-			Err: awserr.New(aws.ErrCodeSerialization, "some error",
-				&aws.RequestSendError{Err: &url.Error{
-					Err: fmt.Errorf("another error"),
-				}}),
+			Err: fmt.Errorf("some error: %w", &mockConnectionError{err: &url.Error{
+				Err: fmt.Errorf("another error"),
+			}}),
 		},
 		"temporary error": {
 			Retryable: aws.TrueTernary,
-			Err: awserr.New(aws.ErrCodeSerialization, "some error",
-				mockTemporaryError{b: true},
-			),
+			Err:       &mockErrorCodeError{code: "SomeCode", err: mockTemporaryError{b: true}},
 		},
 		"timeout error": {
 			Retryable: aws.TrueTernary,
-			Err: awserr.New(aws.ErrCodeSerialization, "some error",
-				mockTimeoutError{b: true},
-			),
+			Err:       fmt.Errorf("some error: %w", mockTimeoutError{b: true}),
 		},
 		"timeout false error": {
 			Retryable: aws.UnknownTernary,
-			Err: awserr.New(aws.ErrCodeSerialization, "some error",
-				mockTimeoutError{b: false},
-			),
+			Err:       fmt.Errorf("some error: %w", mockTimeoutError{b: false}),
 		},
 		"net.OpError dial": {
 			Retryable: aws.TrueTernary,
@@ -151,16 +165,17 @@ func TestRetryHTTPStatusCodes(t *testing.T) {
 			Expect: aws.TrueTernary,
 		},
 		"response error": {
-			Err: fmt.Errorf("some error, %w", &aws.HTTPResponseError{
-				Response: &http.Response{StatusCode: 502},
+			Err: fmt.Errorf("some error, %w", &mockErrorCodeError{
+				code: "SomeCode",
+				err:  &mockStatusCodeError{code: 502},
 			}),
 			Expect: aws.TrueTernary,
 		},
 	}
 
 	r := retry.RetryableHTTPStatusCode{Codes: map[int]struct{}{
-		500: struct{}{},
-		502: struct{}{},
+		500: {},
+		502: {},
 	}}
 
 	for name, c := range cases {
@@ -178,14 +193,14 @@ func TestRetryErrorCodes(t *testing.T) {
 		Expect aws.Ternary
 	}{
 		"retryable code": {
-			Err: &aws.MaxAttemptsError{
-				Err: awserr.New("ErrorCode1", "some error", nil),
+			Err: &retry.MaxAttemptsError{
+				Err: &mockErrorCodeError{code: "ErrorCode1"},
 			},
 			Expect: aws.TrueTernary,
 		},
 		"not retryable code": {
-			Err: &aws.MaxAttemptsError{
-				Err: awserr.New("SomeErroCode", "some error", nil),
+			Err: &retry.MaxAttemptsError{
+				Err: &mockErrorCodeError{code: "SomeErroCode"},
 			},
 			Expect: aws.UnknownTernary,
 		},
@@ -196,8 +211,8 @@ func TestRetryErrorCodes(t *testing.T) {
 	}
 
 	r := retry.RetryableErrorCode{Codes: map[string]struct{}{
-		"ErrorCode1": struct{}{},
-		"ErrorCode2": struct{}{},
+		"ErrorCode1": {},
+		"ErrorCode2": {},
 	}}
 
 	for name, c := range cases {

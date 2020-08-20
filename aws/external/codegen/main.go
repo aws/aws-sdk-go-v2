@@ -16,14 +16,13 @@ const (
 )
 
 var implAsserts = map[string][]string{
-	"SharedConfigProfileProvider":     {envConfigType, `WithSharedConfigProfile("")`},
-	"SharedConfigFilesProvider":       {envConfigType, "WithSharedConfigFiles([]string{})"},
-	"CustomCABundleProvider":          {envConfigType, "WithCustomCABundle([]byte{})"},
-	"RegionProvider":                  {envConfigType, sharedConfigType, `WithRegion("")`, "&WithEC2MetadataRegion{}"},
-	"MFATokenFuncProvider":            {`WithMFATokenFunc(func() (string, error) { return "", nil })`},
-	"EnableEndpointDiscoveryProvider": {envConfigType, sharedConfigType, "WithEnableEndpointDiscovery(true)"},
-	"CredentialsProviderProvider":     {`WithCredentialsProvider{aws.NewStaticCredentialsProvider("", "", "")}`},
-	"DefaultRegionProvider":           {`WithDefaultRegion("")`},
+	"SharedConfigProfileProvider": {envConfigType, `WithSharedConfigProfile("")`},
+	"SharedConfigFilesProvider":   {envConfigType, "WithSharedConfigFiles([]string{})"},
+	"CustomCABundleProvider":      {envConfigType, "WithCustomCABundle([]byte{})"},
+	"RegionProvider":              {envConfigType, sharedConfigType, `WithRegion("")` /*"&WithEC2MetadataRegion{}"*/},
+	"MFATokenFuncProvider":        {`WithMFATokenFunc(func() (string, error) { return "", nil })`},
+	"CredentialsProviderProvider": {`WithCredentialsProvider{aws.NewStaticCredentialsProvider("", "", "")}`},
+	"DefaultRegionProvider":       {`WithDefaultRegion("")`},
 }
 
 var tplProviderTests = template.Must(template.New("tplProviderTests").Funcs(map[string]interface{}{

@@ -1,3 +1,5 @@
+// +build disabled
+
 package endpointcreds_test
 
 import (

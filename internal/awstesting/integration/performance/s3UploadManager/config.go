@@ -1,4 +1,4 @@
-// +build integration,perftest
+// +build integration,perftest,disabled
 
 package main
 

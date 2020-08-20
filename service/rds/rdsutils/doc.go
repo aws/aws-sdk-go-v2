@@ -1,3 +1,5 @@
+// +build disabled
+
 // Package rdsutils is used to generate authentication tokens used to
 // connect to a givent Amazon Relational Database Service (RDS) database.
 //

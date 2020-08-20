@@ -18,13 +18,12 @@ var DefaultConfigLoaders = []ConfigLoader{
 // This will setup the AWS configuration's Region,
 var DefaultAWSConfigResolvers = []AWSConfigResolver{
 	ResolveDefaultAWSConfig,
-	ResolveHandlersFunc,
-	ResolveEndpointResolverFunc,
+	// TODO: Add Stack Mutator Resolver
+	// TODO: Add endpoint resolver concept
 	ResolveCustomCABundle,
-	ResolveEnableEndpointDiscovery,
 
 	ResolveRegion,
-	ResolveEC2Region,
+	// TODO: Add back EC2 Region Resolver Support
 	ResolveDefaultRegion,
 
 	ResolveCredentials,
