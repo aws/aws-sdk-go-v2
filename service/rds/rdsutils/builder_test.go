@@ -1,3 +1,5 @@
+// +build disabled
+
 package rdsutils_test
 
 import (
@@ -8,7 +10,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/service/rds/rdsutils"
 )
 
 func TestConnectionStringBuilder(t *testing.T) {
@@ -18,7 +19,7 @@ func TestConnectionStringBuilder(t *testing.T) {
 		region   string
 		dbName   string
 		values   url.Values
-		format   rdsutils.ConnectionFormat
+		format   ConnectionFormat
 
 		expectedErr          error
 		expectedConnectRegex string
@@ -28,8 +29,8 @@ func TestConnectionStringBuilder(t *testing.T) {
 			endpoint:             "foo.bar",
 			region:               "region",
 			dbName:               "name",
-			format:               rdsutils.NoConnectionFormat,
-			expectedErr:          rdsutils.ErrNoConnectionFormat,
+			format:               NoConnectionFormat,
+			expectedErr:          ErrNoConnectionFormat,
 			expectedConnectRegex: "",
 		},
 		{
@@ -37,7 +38,7 @@ func TestConnectionStringBuilder(t *testing.T) {
 			endpoint:             "foo.bar",
 			region:               "region",
 			dbName:               "name",
-			format:               rdsutils.TCPFormat,
+			format:               TCPFormat,
 			expectedConnectRegex: `^foo:foo.bar\?Action=connect\&DBUser=foo.*\@tcp\(foo.bar\)/name`,
 		},
 	}
@@ -45,7 +46,7 @@ func TestConnectionStringBuilder(t *testing.T) {
 	credProvider := aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION")
 	signer := v4.NewSigner(credProvider)
 	for _, c := range cases {
-		b := rdsutils.NewConnectionStringBuilder(c.endpoint, c.region, c.user, c.dbName, signer)
+		b := NewConnectionStringBuilder(c.endpoint, c.region, c.user, c.dbName, signer)
 		connectStr, err := b.WithFormat(c.format).Build(context.Background())
 
 		if e, a := c.expectedErr, err; e != a {

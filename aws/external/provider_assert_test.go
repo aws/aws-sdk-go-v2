@@ -22,13 +22,6 @@ var (
 	_ DefaultRegionProvider = WithDefaultRegion("")
 )
 
-// EnableEndpointDiscoveryProvider implementor assertions
-var (
-	_ EnableEndpointDiscoveryProvider = &EnvConfig{}
-	_ EnableEndpointDiscoveryProvider = &SharedConfig{}
-	_ EnableEndpointDiscoveryProvider = WithEnableEndpointDiscovery(true)
-)
-
 // MFATokenFuncProvider implementor assertions
 var (
 	_ MFATokenFuncProvider = WithMFATokenFunc(func() (string, error) { return "", nil })
@@ -39,7 +32,6 @@ var (
 	_ RegionProvider = &EnvConfig{}
 	_ RegionProvider = &SharedConfig{}
 	_ RegionProvider = WithRegion("")
-	_ RegionProvider = &WithEC2MetadataRegion{}
 )
 
 // SharedConfigFilesProvider implementor assertions

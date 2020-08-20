@@ -1,4 +1,4 @@
-// +build integration
+// +build integration,disabled
 
 package s3manager_test
 
@@ -14,7 +14,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
 )
 
 var integBuf12MB = make([]byte, 1024*1024*12)
@@ -22,8 +21,8 @@ var integMD512MB = fmt.Sprintf("%x", md5.Sum(integBuf12MB))
 
 func TestInteg_UploadConcurrently(t *testing.T) {
 	key := "12mb-1"
-	mgr := s3manager.NewUploader(integCfg)
-	out, err := mgr.Upload(&s3manager.UploadInput{
+	mgr := NewUploader(integCfg)
+	out, err := mgr.Upload(&UploadInput{
 		Bucket: bucketName,
 		Key:    &key,
 		Body:   bytes.NewReader(integBuf12MB),
@@ -57,10 +56,10 @@ func TestInteg_UploadFailCleanup(t *testing.T) {
 	})
 
 	key := "12mb-leave"
-	mgr := s3manager.NewUploaderWithClient(svc, func(u *s3manager.Uploader) {
+	mgr := NewUploaderWithClient(svc, func(u *Uploader) {
 		u.LeavePartsOnError = false
 	})
-	_, err := mgr.Upload(&s3manager.UploadInput{
+	_, err := mgr.Upload(&UploadInput{
 		Bucket: bucketName,
 		Key:    &key,
 		Body:   bytes.NewReader(integBuf12MB),
@@ -75,7 +74,7 @@ func TestInteg_UploadFailCleanup(t *testing.T) {
 	}
 
 	uploadID := ""
-	merr := err.(s3manager.MultiUploadFailure)
+	merr := err.(MultiUploadFailure)
 	if uploadID = merr.UploadID(); len(uploadID) == 0 {
 		t.Errorf("expect upload ID to not be empty, but was")
 	}

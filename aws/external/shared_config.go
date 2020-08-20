@@ -1,6 +1,7 @@
 package external
 
 import (
+	"errors"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -8,7 +9,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/ini"
 )
 
@@ -252,7 +252,8 @@ func loadSharedConfigIniFiles(filenames []string) ([]sharedConfigFile, error) {
 	var errs SharedConfigNotExistErrors
 	for _, filename := range filenames {
 		sections, err := ini.OpenFile(filename)
-		if aerr, ok := err.(awserr.Error); ok && aerr.Code() == ini.ErrCodeUnableToReadFile {
+		var v *ini.UnableToReadFile
+		if ok := errors.As(err, &v); ok {
 			errs = append(errs,
 				SharedConfigFileNotExistError{Filename: filename, Err: err},
 			)
@@ -435,7 +436,7 @@ func (c *SharedConfig) validateCredentialType() error {
 		len(c.CredentialProcess) != 0,
 		len(c.WebIdentityTokenFile) != 0,
 	) {
-		return awserr.New(ErrCodeSharedConfig, "only source profile or credential source can be specified, not both", nil)
+		return fmt.Errorf("only source profile or credential source can be specified, not both")
 	}
 
 	return nil
@@ -488,8 +489,8 @@ type SharedConfigLoadError struct {
 	Err      error
 }
 
-// Cause is the underlying error that caused the failure.
-func (e SharedConfigLoadError) Cause() error {
+// Unwrap retunrs the underlying error that caused the failure.
+func (e SharedConfigLoadError) Unwrap() error {
 	return e.Err
 }
 
@@ -505,8 +506,8 @@ type SharedConfigFileNotExistError struct {
 	Err      error
 }
 
-// Cause is the underlying error that caused the failure.
-func (e SharedConfigFileNotExistError) Cause() error {
+// Unwrap returns the underlying error that caused the failure.
+func (e SharedConfigFileNotExistError) Unwrap() error {
 	return e.Err
 }
 
@@ -522,8 +523,8 @@ type SharedConfigProfileNotExistError struct {
 	Err      error
 }
 
-// Cause is the underlying error that caused the failure.
-func (e SharedConfigProfileNotExistError) Cause() error {
+// Unwrap returns the underlying error that caused the failure.
+func (e SharedConfigProfileNotExistError) Unwrap() error {
 	return e.Err
 }
 
@@ -538,6 +539,11 @@ type SharedConfigAssumeRoleError struct {
 	Profile string
 	RoleARN string
 	Err     error
+}
+
+// Unwrap returns the underlying error that caused the failure.
+func (e SharedConfigAssumeRoleError) Unwrap() error {
+	return e.Err
 }
 
 func (e SharedConfigAssumeRoleError) Error() string {
@@ -555,27 +561,12 @@ type CredentialRequiresARNError struct {
 	Profile string
 }
 
-// Code is the short id of the error.
-func (e CredentialRequiresARNError) Code() string {
-	return "CredentialRequiresARNError"
-}
-
-// Message is the description of the error
-func (e CredentialRequiresARNError) Message() string {
+// Error satisfies the error interface.
+func (e CredentialRequiresARNError) Error() string {
 	return fmt.Sprintf(
 		"credential type %s requires role_arn, profile %s",
 		e.Type, e.Profile,
 	)
-}
-
-// OrigErr is the underlying error that caused the failure.
-func (e CredentialRequiresARNError) OrigErr() error {
-	return nil
-}
-
-// Error satisfies the error interface.
-func (e CredentialRequiresARNError) Error() string {
-	return awserr.SprintError(e.Code(), e.Message(), "", nil)
 }
 
 func userHomeDir() string {

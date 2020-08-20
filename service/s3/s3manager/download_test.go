@@ -1,3 +1,5 @@
+// +build disabled
+
 package s3manager_test
 
 import (
@@ -24,7 +26,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/sdkio"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
 	"github.com/aws/aws-sdk-go-v2/service/s3/internal/s3testing"
-	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
 )
 
 func dlLoggingSvc(data []byte) (*s3.Client, *[]string, *[]string) {
@@ -202,7 +203,7 @@ func dlLoggingSvcWithErrReader(cases []testErrReader) (*s3.Client, *[]string) {
 func TestDownloadOrder(t *testing.T) {
 	s, names, ranges := dlLoggingSvc(buf12MB)
 
-	d := s3manager.NewDownloaderWithClient(s, func(d *s3manager.Downloader) {
+	d := NewDownloaderWithClient(s, func(d *Downloader) {
 		d.Concurrency = 1
 	})
 	w := &aws.WriteAtBuffer{}
@@ -240,7 +241,7 @@ func TestDownloadOrder(t *testing.T) {
 func TestDownloadZero(t *testing.T) {
 	s, names, ranges := dlLoggingSvc([]byte{})
 
-	d := s3manager.NewDownloaderWithClient(s)
+	d := NewDownloaderWithClient(s)
 	w := &aws.WriteAtBuffer{}
 	n, err := d.Download(w, &s3.GetObjectInput{
 		Bucket: aws.String("bucket"),
@@ -267,7 +268,7 @@ func TestDownloadZero(t *testing.T) {
 func TestDownloadSetPartSize(t *testing.T) {
 	s, names, ranges := dlLoggingSvc([]byte{1, 2, 3})
 
-	d := s3manager.NewDownloaderWithClient(s, func(d *s3manager.Downloader) {
+	d := NewDownloaderWithClient(s, func(d *Downloader) {
 		d.Concurrency = 1
 		d.PartSize = 1
 	})
@@ -309,7 +310,7 @@ func TestDownloadError(t *testing.T) {
 		}
 	})
 
-	d := s3manager.NewDownloaderWithClient(s, func(d *s3manager.Downloader) {
+	d := NewDownloaderWithClient(s, func(d *Downloader) {
 		d.Concurrency = 1
 		d.PartSize = 1
 	})
@@ -342,7 +343,7 @@ func TestDownloadError(t *testing.T) {
 func TestDownloadNonChunk(t *testing.T) {
 	s, names := dlLoggingSvcNoChunk(buf2MB)
 
-	d := s3manager.NewDownloaderWithClient(s, func(d *s3manager.Downloader) {
+	d := NewDownloaderWithClient(s, func(d *Downloader) {
 		d.Concurrency = 1
 	})
 	w := &aws.WriteAtBuffer{}
@@ -374,7 +375,7 @@ func TestDownloadNonChunk(t *testing.T) {
 func TestDownloadNoContentRangeLength(t *testing.T) {
 	s, names := dlLoggingSvcNoContentRangeLength(buf2MB, []int{200, 416})
 
-	d := s3manager.NewDownloaderWithClient(s, func(d *s3manager.Downloader) {
+	d := NewDownloaderWithClient(s, func(d *Downloader) {
 		d.Concurrency = 1
 	})
 	w := &aws.WriteAtBuffer{}
@@ -406,7 +407,7 @@ func TestDownloadNoContentRangeLength(t *testing.T) {
 func TestDownloadContentRangeTotalAny(t *testing.T) {
 	s, names := dlLoggingSvcContentRangeTotalAny(buf2MB, []int{200, 416})
 
-	d := s3manager.NewDownloaderWithClient(s, func(d *s3manager.Downloader) {
+	d := NewDownloaderWithClient(s, func(d *Downloader) {
 		d.Concurrency = 1
 	})
 	w := &aws.WriteAtBuffer{}
@@ -441,7 +442,7 @@ func TestDownloadPartBodyRetry_SuccessRetry(t *testing.T) {
 		{Buf: []byte("123"), Len: 3, Err: io.EOF},
 	})
 
-	d := s3manager.NewDownloaderWithClient(s, func(d *s3manager.Downloader) {
+	d := NewDownloaderWithClient(s, func(d *Downloader) {
 		d.Concurrency = 1
 	})
 
@@ -471,7 +472,7 @@ func TestDownloadPartBodyRetry_SuccessNoRetry(t *testing.T) {
 		{Buf: []byte("abc"), Len: 3, Err: io.EOF},
 	})
 
-	d := s3manager.NewDownloaderWithClient(s, func(d *s3manager.Downloader) {
+	d := NewDownloaderWithClient(s, func(d *Downloader) {
 		d.Concurrency = 1
 	})
 
@@ -501,7 +502,7 @@ func TestDownloadPartBodyRetry_FailRetry(t *testing.T) {
 		{Buf: []byte("ab"), Len: 3, Err: io.ErrUnexpectedEOF},
 	})
 
-	d := s3manager.NewDownloaderWithClient(s, func(d *s3manager.Downloader) {
+	d := NewDownloaderWithClient(s, func(d *Downloader) {
 		d.Concurrency = 1
 	})
 
@@ -530,7 +531,7 @@ func TestDownloadPartBodyRetry_FailRetry(t *testing.T) {
 }
 
 func TestDownloadWithContextCanceled(t *testing.T) {
-	d := s3manager.NewDownloader(unit.Config())
+	d := NewDownloader(unit.Config())
 
 	params := s3.GetObjectInput{
 		Bucket: aws.String("Bucket"),
@@ -561,7 +562,7 @@ func TestDownloadWithContextCanceled(t *testing.T) {
 func TestDownload_WithRange(t *testing.T) {
 	s, names, ranges := dlLoggingSvc([]byte{0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
 
-	d := s3manager.NewDownloaderWithClient(s, func(d *s3manager.Downloader) {
+	d := NewDownloaderWithClient(s, func(d *Downloader) {
 		d.Concurrency = 10 // should be ignored
 		d.PartSize = 1     // should be ignored
 	})
@@ -601,7 +602,7 @@ func TestDownload_WithFailure(t *testing.T) {
 	svc.Handlers.Send.PushBack(func(r *aws.Request) {
 		if first {
 			first = false
-			body := bytes.NewReader(make([]byte, s3manager.DefaultDownloadPartSize))
+			body := bytes.NewReader(make([]byte, DefaultDownloadPartSize))
 			r.HTTPResponse = &http.Response{
 				StatusCode:    http.StatusOK,
 				Status:        http.StatusText(http.StatusOK),
@@ -626,7 +627,7 @@ func TestDownload_WithFailure(t *testing.T) {
 	})
 
 	start := time.Now()
-	d := s3manager.NewDownloaderWithClient(svc, func(d *s3manager.Downloader) {
+	d := NewDownloaderWithClient(svc, func(d *Downloader) {
 		d.Concurrency = 2
 	})
 
@@ -656,20 +657,20 @@ func TestDownloadBufferStrategy(t *testing.T) {
 		expectedSize int64
 	}{
 		"no strategy": {
-			partSize:     s3manager.DefaultDownloadPartSize,
+			partSize:     DefaultDownloadPartSize,
 			expectedSize: 10 * sdkio.MebiByte,
 		},
 		"partSize modulo bufferSize == 0": {
 			partSize: 5 * sdkio.MebiByte,
 			strategy: &recordedWriterReadFromProvider{
-				WriterReadFromProvider: s3manager.NewPooledBufferedWriterReadFromProvider(int(sdkio.MebiByte)), // 1 MiB
+				WriterReadFromProvider: NewPooledBufferedWriterReadFromProvider(int(sdkio.MebiByte)), // 1 MiB
 			},
 			expectedSize: 10 * sdkio.MebiByte, // 10 MiB
 		},
 		"partSize modulo bufferSize > 0": {
 			partSize: 5 * 1024 * 1204, // 5 MiB
 			strategy: &recordedWriterReadFromProvider{
-				WriterReadFromProvider: s3manager.NewPooledBufferedWriterReadFromProvider(2 * int(sdkio.MebiByte)), // 2 MiB
+				WriterReadFromProvider: NewPooledBufferedWriterReadFromProvider(2 * int(sdkio.MebiByte)), // 2 MiB
 			},
 			expectedSize: 10 * sdkio.MebiByte, // 10 MiB
 		},
@@ -682,7 +683,7 @@ func TestDownloadBufferStrategy(t *testing.T) {
 
 		svc, _, _ := dlLoggingSvc(expected)
 
-		d := s3manager.NewDownloaderWithClient(svc, func(d *s3manager.Downloader) {
+		d := NewDownloaderWithClient(svc, func(d *Downloader) {
 			d.PartSize = tCase.partSize
 			if tCase.strategy != nil {
 				d.BufferProvider = tCase.strategy
@@ -742,10 +743,10 @@ func TestDownloadBufferStrategy_Errors(t *testing.T) {
 
 	svc, _, _ := dlLoggingSvc(expected)
 	strat := &recordedWriterReadFromProvider{
-		WriterReadFromProvider: s3manager.NewPooledBufferedWriterReadFromProvider(int(2 * sdkio.MebiByte)),
+		WriterReadFromProvider: NewPooledBufferedWriterReadFromProvider(int(2 * sdkio.MebiByte)),
 	}
 
-	d := s3manager.NewDownloaderWithClient(svc, func(d *s3manager.Downloader) {
+	d := NewDownloaderWithClient(svc, func(d *Downloader) {
 		d.PartSize = 5 * sdkio.MebiByte
 		d.BufferProvider = strat
 		d.Concurrency = 1
@@ -809,10 +810,10 @@ func TestDownloadBufferStrategy_Errors(t *testing.T) {
 type recordedWriterReadFromProvider struct {
 	callbacksVended   uint32
 	callbacksExecuted uint32
-	s3manager.WriterReadFromProvider
+	WriterReadFromProvider
 }
 
-func (r *recordedWriterReadFromProvider) GetReadFrom(writer io.Writer) (s3manager.WriterReadFrom, func()) {
+func (r *recordedWriterReadFromProvider) GetReadFrom(writer io.Writer) (WriterReadFrom, func()) {
 	w, cleanup := r.WriterReadFromProvider.GetReadFrom(writer)
 
 	atomic.AddUint32(&r.callbacksVended, 1)

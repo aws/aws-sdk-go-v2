@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -14,7 +15,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/aws/processcreds"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
@@ -213,8 +213,12 @@ func TestProcessProviderBadCommand(t *testing.T) {
 
 	creds := processcreds.NewProvider("/bad/process")
 	_, err := creds.Retrieve(context.Background())
-	if err.(awserr.Error).Code() != processcreds.ErrCodeProcessProviderExecution {
-		t.Errorf("expected %v, got %v", processcreds.ErrCodeProcessProviderExecution, err)
+	var pe *processcreds.ProviderError
+	if ok := errors.As(err, &pe); !ok {
+		t.Fatalf("expect error to be of type %T", pe)
+	}
+	if e, a := "error in credential_process", pe.Error(); !strings.Contains(a, e) {
+		t.Errorf("expected %v, got %v", e, a)
 	}
 }
 
@@ -224,10 +228,13 @@ func TestProcessProviderMoreEmptyCommands(t *testing.T) {
 
 	provider := processcreds.NewProvider("")
 	_, err := provider.Retrieve(context.Background())
-	if err.(awserr.Error).Code() != processcreds.ErrCodeProcessProviderExecution {
-		t.Errorf("expected %v, got %v", processcreds.ErrCodeProcessProviderExecution, err)
+	var pe *processcreds.ProviderError
+	if ok := errors.As(err, &pe); !ok {
+		t.Fatalf("expect error to be of type %T", pe)
 	}
-
+	if e, a := "failed to prepare command", pe.Error(); !strings.Contains(a, e) {
+		t.Errorf("expected %v, got %v", e, a)
+	}
 }
 
 func TestProcessProviderExpectErrors(t *testing.T) {
@@ -242,8 +249,12 @@ func TestProcessProviderExpectErrors(t *testing.T) {
 				[]string{"testdata", "malformed.json"},
 				string(os.PathSeparator))))
 	_, err := provider.Retrieve(context.Background())
-	if err.(awserr.Error).Code() != processcreds.ErrCodeProcessProviderParse {
-		t.Errorf("expected %v, got %v", processcreds.ErrCodeProcessProviderParse, err)
+	var pe *processcreds.ProviderError
+	if ok := errors.As(err, &pe); !ok {
+		t.Fatalf("expect error to be of type %T", pe)
+	}
+	if e, a := "parse failed of credential_process output", pe.Error(); !strings.Contains(a, e) {
+		t.Errorf("expected %v, got %v", e, a)
 	}
 
 	provider = processcreds.NewProvider(
@@ -253,8 +264,11 @@ func TestProcessProviderExpectErrors(t *testing.T) {
 				[]string{"testdata", "wrongversion.json"},
 				string(os.PathSeparator))))
 	_, err = provider.Retrieve(context.Background())
-	if err.(awserr.Error).Code() != processcreds.ErrCodeProcessProviderVersion {
-		t.Errorf("expected %v, got %v", processcreds.ErrCodeProcessProviderVersion, err)
+	if ok := errors.As(err, &pe); !ok {
+		t.Fatalf("expect error to be of type %T", pe)
+	}
+	if e, a := "wrong version in process output", pe.Error(); !strings.Contains(a, e) {
+		t.Errorf("expected %v, got %v", e, a)
 	}
 
 	provider = processcreds.NewProvider(
@@ -265,8 +279,11 @@ func TestProcessProviderExpectErrors(t *testing.T) {
 				[]string{"testdata", "missingkey.json"},
 				string(os.PathSeparator))))
 	_, err = provider.Retrieve(context.Background())
-	if err.(awserr.Error).Code() != processcreds.ErrCodeProcessProviderRequired {
-		t.Errorf("expected %v, got %v", processcreds.ErrCodeProcessProviderRequired, err)
+	if ok := errors.As(err, &pe); !ok {
+		t.Fatalf("expect error to be of type %T", pe)
+	}
+	if e, a := "missing AccessKeyId", pe.Error(); !strings.Contains(a, e) {
+		t.Errorf("expected %v, got %v", e, a)
 	}
 
 	provider = processcreds.NewProvider(
@@ -277,10 +294,12 @@ func TestProcessProviderExpectErrors(t *testing.T) {
 				[]string{"testdata", "missingsecret.json"},
 				string(os.PathSeparator))))
 	_, err = provider.Retrieve(context.Background())
-	if err.(awserr.Error).Code() != processcreds.ErrCodeProcessProviderRequired {
-		t.Errorf("expected %v, got %v", processcreds.ErrCodeProcessProviderRequired, err)
+	if ok := errors.As(err, &pe); !ok {
+		t.Fatalf("expect error to be of type %T", pe)
 	}
-
+	if e, a := "missing SecretAccessKey", pe.Error(); !strings.Contains(a, e) {
+		t.Errorf("expected %v, got %v", e, a)
+	}
 }
 
 func TestProcessProviderTimeout(t *testing.T) {
@@ -296,10 +315,14 @@ func TestProcessProviderTimeout(t *testing.T) {
 	provider := processcreds.NewProvider(command, func(options *processcreds.ProviderOptions) {
 		options.Timeout = time.Duration(1) * time.Second
 	})
-	if _, err := provider.Retrieve(context.Background()); err == nil || err.(awserr.Error).Code() != processcreds.ErrCodeProcessProviderExecution || err.(awserr.Error).Message() != "credential process timed out" {
-		t.Errorf("expected %v, got %v", processcreds.ErrCodeProcessProviderExecution, err)
+	_, err := provider.Retrieve(context.Background())
+	var pe *processcreds.ProviderError
+	if ok := errors.As(err, &pe); !ok {
+		t.Fatalf("expect error to be of type %T", pe)
 	}
-
+	if e, a := "credential process timed out", pe.Error(); !strings.Contains(a, e) {
+		t.Errorf("expected %v, got %v", e, a)
+	}
 }
 
 func TestProcessProviderWithLongSessionToken(t *testing.T) {

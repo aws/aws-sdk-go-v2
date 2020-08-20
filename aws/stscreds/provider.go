@@ -1,3 +1,5 @@
+// +build disabled
+
 /*
 Package stscreds are credential Providers to retrieve STS AWS credentials.
 

@@ -47,7 +47,7 @@ type AttemptClockSkewMiddleware struct{}
 
 // ID is the middleware identifier
 func (a AttemptClockSkewMiddleware) ID() string {
-	return "AttemptClockSkewMiddlware"
+	return "AttemptClockSkewMiddleware"
 }
 
 // HandleDeserialize calculates response metadata and clock skew

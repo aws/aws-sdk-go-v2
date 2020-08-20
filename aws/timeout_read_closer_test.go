@@ -1,10 +1,7 @@
 package aws
 
 import (
-	"bytes"
 	"io"
-	"io/ioutil"
-	"net/http"
 	"testing"
 	"time"
 )
@@ -54,26 +51,5 @@ func TestTimeoutReadCloserSameDuration(t *testing.T) {
 	_, err := reader.Read(b)
 	if err != nil {
 		t.Log(err)
-	}
-}
-
-func TestWithResponseReadTimeout(t *testing.T) {
-	r := Request{
-		Retryer: NoOpRetryer{},
-		HTTPResponse: &http.Response{
-			Body: ioutil.NopCloser(bytes.NewReader(nil)),
-		},
-	}
-	r.ApplyOptions(WithResponseReadTimeout(time.Second))
-	err := r.Send()
-	if err != nil {
-		t.Error(err)
-	}
-	v, ok := r.HTTPResponse.Body.(*timeoutReadCloser)
-	if !ok {
-		t.Fatalf("Expected the body to be a timeoutReadCloser, got %T", r.HTTPResponse.Body)
-	}
-	if v.duration != time.Second {
-		t.Errorf("Expected %v, but receive %v\n", time.Second, v.duration)
 	}
 }

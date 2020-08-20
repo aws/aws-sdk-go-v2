@@ -56,31 +56,3 @@ func (r *timeoutReadCloser) Read(b []byte) (int, error) {
 func (r *timeoutReadCloser) Close() error {
 	return r.reader.Close()
 }
-
-const (
-	// HandlerResponseTimeout is what we use to signify the name of the
-	// response timeout handler.
-	HandlerResponseTimeout = "ResponseTimeoutHandler"
-)
-
-// WithResponseReadTimeout is a request option that will wrap the body in a timeout read closer.
-// This will allow for per read timeouts. If a timeout occurred, we will return the
-// ErrCodeResponseTimeout.
-//
-//     svc.PutObjectWithContext(ctx, params, request.WithTimeoutReadCloser(30 * time.Second)
-func WithResponseReadTimeout(duration time.Duration) Option {
-	return func(r *Request) {
-		var timeoutHandler = NamedHandler{
-			HandlerResponseTimeout,
-			func(req *Request) {
-				req.HTTPResponse.Body = &timeoutReadCloser{
-					reader:   req.HTTPResponse.Body,
-					duration: duration,
-				}
-			}}
-
-		// remove the handler so we are not stomping over any new durations.
-		r.Handlers.Send.RemoveByName(HandlerResponseTimeout)
-		r.Handlers.Send.PushBackNamed(timeoutHandler)
-	}
-}

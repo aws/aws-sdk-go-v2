@@ -1,3 +1,5 @@
+// +build disabled
+
 // Package s3manageriface provides an interface for the s3manager package
 package s3manageriface
 

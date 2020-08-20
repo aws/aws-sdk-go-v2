@@ -1,3 +1,5 @@
+// +build disabled
+
 package rdsutils_test
 
 import (
@@ -7,7 +9,6 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/service/rds/rdsutils"
 )
 
 func TestBuildAuthToken(t *testing.T) {
@@ -34,8 +35,8 @@ func TestBuildAuthToken(t *testing.T) {
 	provider := aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION")
 	var i interface{} = v4.NewSigner(provider)
 	for _, c := range cases {
-		if signer, ok := i.(rdsutils.HTTPV4Signer); ok {
-			url, err := rdsutils.BuildAuthToken(context.Background(), c.endpoint, c.region, c.user, signer)
+		if signer, ok := i.(HTTPV4Signer); ok {
+			url, err := BuildAuthToken(context.Background(), c.endpoint, c.region, c.user, signer)
 			if err != nil {
 				t.Errorf("expect no error, got %v", err)
 			}
