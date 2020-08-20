@@ -1,5 +1,3 @@
-// +build !disabled
-
 package external
 
 import (

@@ -17,7 +17,7 @@ SDK_CLIENT_PKGS=./service/...
 SDK_COMPA_PKGS=${SDK_CORE_PKGS} ${SDK_CLIENT_PKGS}
 
 # SDK additional packages that are used for development of the SDK.
-SDK_EXAMPLES_PKGS=./example/...
+SDK_EXAMPLES_PKGS=
 SDK_ALL_PKGS=${SDK_COMPA_PKGS} ${SDK_EXAMPLES_PKGS}
 
 
