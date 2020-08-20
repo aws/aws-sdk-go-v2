@@ -3,13 +3,17 @@
 package restxml
 
 import (
+	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/httpbinding"
 	"github.com/awslabs/smithy-go/middleware"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	smithyxml "github.com/awslabs/smithy-go/xml"
+	"time"
 )
 
 type awsRestxml_serializeOpAllQueryStringTypes struct {
@@ -266,7 +270,7 @@ func (m *awsRestxml_serializeOpConstantQueryString) HandleSerialize(ctx context.
 		request.URL.RawQuery = opQuery
 	}
 
-	request.Method = "GET"
+	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -382,6 +386,23 @@ func (m *awsRestxml_serializeOpFlattenedXmlMap) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "FlattenedXmlMapInputOutput",
+		},
+		Attr: rootAttr,
+	}
+	if err := awsRestxml_serializeDocumentFlattenedXmlMapInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -394,6 +415,24 @@ func awsRestxml_serializeHttpBindingsFlattenedXmlMapInput(v *FlattenedXmlMapInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeDocumentFlattenedXmlMapInput(v *FlattenedXmlMapInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.MyMap != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "myMap",
+			},
+			Attr: rootAttr,
+		}
+		el := value.FlattenedElement(root)
+		if err := awsRestxml_serializeDocumentFooEnumMap(v.MyMap, el); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -432,6 +471,23 @@ func (m *awsRestxml_serializeOpFlattenedXmlMapWithXmlName) HandleSerialize(ctx c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "FlattenedXmlMapWithXmlNameInputOutput",
+		},
+		Attr: rootAttr,
+	}
+	if err := awsRestxml_serializeDocumentFlattenedXmlMapWithXmlNameInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -444,6 +500,24 @@ func awsRestxml_serializeHttpBindingsFlattenedXmlMapWithXmlNameInput(v *Flattene
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeDocumentFlattenedXmlMapWithXmlNameInput(v *FlattenedXmlMapWithXmlNameInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.MyMap != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "KVP",
+			},
+			Attr: rootAttr,
+		}
+		el := value.FlattenedElement(root)
+		if err := awsRestxml_serializeDocumentFlattenedXmlMapWithXmlNameInputOutputMap(v.MyMap, el); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -482,6 +556,10 @@ func (m *awsRestxml_serializeOpGreetingWithErrors) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	if err := awsRestxml_serializeHttpBindingsHttpPayloadTraitsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -492,6 +570,12 @@ func (m *awsRestxml_serializeOpGreetingWithErrors) HandleSerialize(ctx context.C
 func awsRestxml_serializeHttpBindingsGreetingWithErrorsInput(v *GreetingWithErrorsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Foo != nil {
+		if len(*v.Foo) > 0 {
+			encoder.SetHeader("X-Foo").String(*v.Foo)
+		}
 	}
 
 	return nil
@@ -534,6 +618,17 @@ func (m *awsRestxml_serializeOpHttpPayloadTraits) HandleSerialize(ctx context.Co
 
 	if err := awsRestxml_serializeHttpBindingsHttpPayloadTraitsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if input.Blob != nil {
+		if !restEncoder.HasHeader("Content-Type") {
+			restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+		}
+
+		payload := bytes.NewReader(input.Blob)
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -596,6 +691,17 @@ func (m *awsRestxml_serializeOpHttpPayloadTraitsWithMediaType) HandleSerialize(c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	if input.Blob != nil {
+		if !restEncoder.HasHeader("Content-Type") {
+			restEncoder.SetHeader("Content-Type").String("text/plain")
+		}
+
+		payload := bytes.NewReader(input.Blob)
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -652,6 +758,28 @@ func (m *awsRestxml_serializeOpHttpPayloadWithStructure) HandleSerialize(ctx con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	if input.Nested != nil {
+		if !restEncoder.HasHeader("Content-Type") {
+			restEncoder.SetHeader("Content-Type").String("application/xml")
+		}
+
+		xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+		payloadRootAttr := []smithyxml.Attr{}
+		payloadRoot := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "NestedPayload",
+			},
+			Attr: payloadRootAttr,
+		}
+		if err := awsRestxml_serializeDocumentNestedPayload(input.Nested, xmlEncoder.RootElement(payloadRoot)); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+		payload := bytes.NewReader(xmlEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -700,6 +828,28 @@ func (m *awsRestxml_serializeOpHttpPayloadWithXmlName) HandleSerialize(ctx conte
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if input.Nested != nil {
+		if !restEncoder.HasHeader("Content-Type") {
+			restEncoder.SetHeader("Content-Type").String("application/xml")
+		}
+
+		xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+		payloadRootAttr := []smithyxml.Attr{}
+		payloadRoot := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Hello",
+			},
+			Attr: payloadRootAttr,
+		}
+		if err := awsRestxml_serializeDocumentPayloadWithXmlName(input.Nested, xmlEncoder.RootElement(payloadRoot)); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+		payload := bytes.NewReader(xmlEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -752,6 +902,29 @@ func (m *awsRestxml_serializeOpHttpPayloadWithXmlNamespace) HandleSerialize(ctx 
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	if input.Nested != nil {
+		if !restEncoder.HasHeader("Content-Type") {
+			restEncoder.SetHeader("Content-Type").String("application/xml")
+		}
+
+		xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+		payloadRootAttr := []smithyxml.Attr{}
+		payloadRootAttr = append(payloadRootAttr, smithyxml.NewNamespaceAttribute("", "http://foo.com"))
+		payloadRoot := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "PayloadWithXmlNamespace",
+			},
+			Attr: payloadRootAttr,
+		}
+		if err := awsRestxml_serializeDocumentPayloadWithXmlNamespace(input.Nested, xmlEncoder.RootElement(payloadRoot)); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+		payload := bytes.NewReader(xmlEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -802,6 +975,29 @@ func (m *awsRestxml_serializeOpHttpPayloadWithXmlNamespaceAndPrefix) HandleSeria
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	if input.Nested != nil {
+		if !restEncoder.HasHeader("Content-Type") {
+			restEncoder.SetHeader("Content-Type").String("application/xml")
+		}
+
+		xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+		payloadRootAttr := []smithyxml.Attr{}
+		payloadRootAttr = append(payloadRootAttr, smithyxml.NewNamespaceAttribute("baz", "http://foo.com"))
+		payloadRoot := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "PayloadWithXmlNamespaceAndPrefix",
+			},
+			Attr: payloadRootAttr,
+		}
+		if err := awsRestxml_serializeDocumentPayloadWithXmlNamespaceAndPrefix(input.Nested, xmlEncoder.RootElement(payloadRoot)); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+		payload := bytes.NewReader(xmlEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -812,6 +1008,21 @@ func (m *awsRestxml_serializeOpHttpPayloadWithXmlNamespaceAndPrefix) HandleSeria
 func awsRestxml_serializeHttpBindingsHttpPayloadWithXmlNamespaceAndPrefixInput(v *HttpPayloadWithXmlNamespaceAndPrefixInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Foo != nil {
+		if len(*v.Foo) > 0 {
+			encoder.SetHeader("X-Foo").String(*v.Foo)
+		}
+	}
+
+	if v.FooMap != nil {
+		hv := encoder.Headers("X-Foo-")
+		for mapKey, mapVal := range v.FooMap {
+			if mapVal != nil && len(*mapVal) > 0 {
+				hv.AddHeader(mapKey).String(*mapVal)
+			}
+		}
 	}
 
 	return nil
@@ -880,6 +1091,54 @@ func awsRestxml_serializeHttpBindingsHttpPrefixHeadersInput(v *HttpPrefixHeaders
 			if mapVal != nil && len(*mapVal) > 0 {
 				hv.AddHeader(mapKey).String(*mapVal)
 			}
+		}
+	}
+
+	if v.Boolean != nil {
+		if err := encoder.SetURI("boolean").Boolean(*v.Boolean); err != nil {
+			return err
+		}
+	}
+
+	if v.Double != nil {
+		if err := encoder.SetURI("double").Double(*v.Double); err != nil {
+			return err
+		}
+	}
+
+	if v.Float != nil {
+		if err := encoder.SetURI("float").Float(*v.Float); err != nil {
+			return err
+		}
+	}
+
+	if v.Integer != nil {
+		if err := encoder.SetURI("integer").Integer(*v.Integer); err != nil {
+			return err
+		}
+	}
+
+	if v.Long != nil {
+		if err := encoder.SetURI("long").Long(*v.Long); err != nil {
+			return err
+		}
+	}
+
+	if v.Short != nil {
+		if err := encoder.SetURI("short").Short(*v.Short); err != nil {
+			return err
+		}
+	}
+
+	if v.String_ != nil {
+		if err := encoder.SetURI("string").String(*v.String_); err != nil {
+			return err
+		}
+	}
+
+	if v.Timestamp != nil {
+		if err := encoder.SetURI("timestamp").String(smithytime.FormatDateTime(*v.Timestamp)); err != nil {
+			return err
 		}
 	}
 
@@ -952,14 +1211,14 @@ func awsRestxml_serializeHttpBindingsHttpRequestWithGreedyLabelInPathInput(v *Ht
 	return nil
 }
 
-type awsRestxml_serializeOpHttpRequestWithLabels struct {
+type awsRestxml_serializeOpInputAndOutputWithHeaders struct {
 }
 
-func (*awsRestxml_serializeOpHttpRequestWithLabels) ID() string {
+func (*awsRestxml_serializeOpInputAndOutputWithHeaders) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsRestxml_serializeOpHttpRequestWithLabels) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsRestxml_serializeOpInputAndOutputWithHeaders) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	request, ok := in.Request.(*smithyhttp.Request)
@@ -967,13 +1226,13 @@ func (m *awsRestxml_serializeOpHttpRequestWithLabels) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
-	input, ok := in.Parameters.(*HttpRequestWithLabelsInput)
+	input, ok := in.Parameters.(*InputAndOutputWithHeadersInput)
 	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/HttpRequestWithLabels/{string}/{short}/{integer}/{long}/{float}/{double}/{boolean}/{timestamp}")
+	opPath, opQuery := httpbinding.SplitURI("/InputAndOutputWithHeaders")
 	request.URL.Path = opPath
 	if len(request.URL.RawQuery) > 0 {
 		request.URL.RawQuery = "&" + opQuery
@@ -981,13 +1240,13 @@ func (m *awsRestxml_serializeOpHttpRequestWithLabels) HandleSerialize(ctx contex
 		request.URL.RawQuery = opQuery
 	}
 
-	request.Method = "GET"
+	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsHttpRequestWithLabelsInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeHttpBindingsInputAndOutputWithHeadersInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -998,57 +1257,99 @@ func (m *awsRestxml_serializeOpHttpRequestWithLabels) HandleSerialize(ctx contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsHttpRequestWithLabelsInput(v *HttpRequestWithLabelsInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeHttpBindingsInputAndOutputWithHeadersInput(v *InputAndOutputWithHeadersInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Boolean != nil {
-		if err := encoder.SetURI("boolean").Boolean(*v.Boolean); err != nil {
-			return err
+	if v.HeaderBooleanList != nil {
+		for i := range v.HeaderBooleanList {
+			if v.HeaderBooleanList[i] != nil {
+				encoder.AddHeader("X-BooleanList").Boolean(*v.HeaderBooleanList[i])
+			}
 		}
 	}
 
-	if v.Double != nil {
-		if err := encoder.SetURI("double").Double(*v.Double); err != nil {
-			return err
+	if v.HeaderByte != nil {
+		encoder.SetHeader("X-Byte").Byte(*v.HeaderByte)
+	}
+
+	if v.HeaderDouble != nil {
+		encoder.SetHeader("X-Double").Double(*v.HeaderDouble)
+	}
+
+	if len(v.HeaderEnum) > 0 {
+		encoder.SetHeader("X-Enum").String(string(v.HeaderEnum))
+	}
+
+	if v.HeaderEnumList != nil {
+		for i := range v.HeaderEnumList {
+			if len(v.HeaderEnumList[i]) > 0 {
+				encoder.AddHeader("X-EnumList").String(string(v.HeaderEnumList[i]))
+			}
 		}
 	}
 
-	if v.Float != nil {
-		if err := encoder.SetURI("float").Float(*v.Float); err != nil {
-			return err
+	if v.HeaderFalseBool != nil {
+		encoder.SetHeader("X-Boolean2").Boolean(*v.HeaderFalseBool)
+	}
+
+	if v.HeaderFloat != nil {
+		encoder.SetHeader("X-Float").Float(*v.HeaderFloat)
+	}
+
+	if v.HeaderInteger != nil {
+		encoder.SetHeader("X-Integer").Integer(*v.HeaderInteger)
+	}
+
+	if v.HeaderIntegerList != nil {
+		for i := range v.HeaderIntegerList {
+			if v.HeaderIntegerList[i] != nil {
+				encoder.AddHeader("X-IntegerList").Integer(*v.HeaderIntegerList[i])
+			}
 		}
 	}
 
-	if v.Integer != nil {
-		if err := encoder.SetURI("integer").Integer(*v.Integer); err != nil {
-			return err
+	if v.HeaderLong != nil {
+		encoder.SetHeader("X-Long").Long(*v.HeaderLong)
+	}
+
+	if v.HeaderShort != nil {
+		encoder.SetHeader("X-Short").Short(*v.HeaderShort)
+	}
+
+	if v.HeaderString != nil {
+		if len(*v.HeaderString) > 0 {
+			encoder.SetHeader("X-String").String(*v.HeaderString)
 		}
 	}
 
-	if v.Long != nil {
-		if err := encoder.SetURI("long").Long(*v.Long); err != nil {
-			return err
+	if v.HeaderStringList != nil {
+		for i := range v.HeaderStringList {
+			if v.HeaderStringList[i] != nil && len(*v.HeaderStringList[i]) > 0 {
+				encoder.AddHeader("X-StringList").String(*v.HeaderStringList[i])
+			}
 		}
 	}
 
-	if v.Short != nil {
-		if err := encoder.SetURI("short").Short(*v.Short); err != nil {
-			return err
+	if v.HeaderStringSet != nil {
+		for i := range v.HeaderStringSet {
+			if v.HeaderStringSet[i] != nil && len(*v.HeaderStringSet[i]) > 0 {
+				encoder.AddHeader("X-StringSet").String(*v.HeaderStringSet[i])
+			}
 		}
 	}
 
-	if v.String_ != nil {
-		if err := encoder.SetURI("string").String(*v.String_); err != nil {
-			return err
+	if v.HeaderTimestampList != nil {
+		for i := range v.HeaderTimestampList {
+			if v.HeaderTimestampList[i] != nil {
+				encoder.AddHeader("X-TimestampList").String(smithytime.FormatHTTPDate(*v.HeaderTimestampList[i]))
+			}
 		}
 	}
 
-	if v.Timestamp != nil {
-		if err := encoder.SetURI("timestamp").String(smithytime.FormatDateTime(*v.Timestamp)); err != nil {
-			return err
-		}
+	if v.HeaderTrueBool != nil {
+		encoder.SetHeader("X-Boolean1").Boolean(*v.HeaderTrueBool)
 	}
 
 	return nil
@@ -1251,94 +1552,8 @@ func awsRestxml_serializeHttpBindingsInputAndOutputWithHeadersInput(v *InputAndO
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.HeaderBooleanList != nil {
-		for i := range v.HeaderBooleanList {
-			if v.HeaderBooleanList[i] != nil {
-				encoder.AddHeader("X-BooleanList").Boolean(*v.HeaderBooleanList[i])
-			}
-		}
-	}
-
-	if v.HeaderByte != nil {
-		encoder.SetHeader("X-Byte").Byte(*v.HeaderByte)
-	}
-
-	if v.HeaderDouble != nil {
-		encoder.SetHeader("X-Double").Double(*v.HeaderDouble)
-	}
-
-	if len(v.HeaderEnum) > 0 {
-		encoder.SetHeader("X-Enum").String(string(v.HeaderEnum))
-	}
-
-	if v.HeaderEnumList != nil {
-		for i := range v.HeaderEnumList {
-			if len(v.HeaderEnumList[i]) > 0 {
-				encoder.AddHeader("X-EnumList").String(string(v.HeaderEnumList[i]))
-			}
-		}
-	}
-
-	if v.HeaderFalseBool != nil {
-		encoder.SetHeader("X-Boolean2").Boolean(*v.HeaderFalseBool)
-	}
-
-	if v.HeaderFloat != nil {
-		encoder.SetHeader("X-Float").Float(*v.HeaderFloat)
-	}
-
-	if v.HeaderInteger != nil {
-		encoder.SetHeader("X-Integer").Integer(*v.HeaderInteger)
-	}
-
-	if v.HeaderIntegerList != nil {
-		for i := range v.HeaderIntegerList {
-			if v.HeaderIntegerList[i] != nil {
-				encoder.AddHeader("X-IntegerList").Integer(*v.HeaderIntegerList[i])
-			}
-		}
-	}
-
-	if v.HeaderLong != nil {
-		encoder.SetHeader("X-Long").Long(*v.HeaderLong)
-	}
-
-	if v.HeaderShort != nil {
-		encoder.SetHeader("X-Short").Short(*v.HeaderShort)
-	}
-
-	if v.HeaderString != nil {
-		if len(*v.HeaderString) > 0 {
-			encoder.SetHeader("X-String").String(*v.HeaderString)
-		}
-	}
-
-	if v.HeaderStringList != nil {
-		for i := range v.HeaderStringList {
-			if v.HeaderStringList[i] != nil && len(*v.HeaderStringList[i]) > 0 {
-				encoder.AddHeader("X-StringList").String(*v.HeaderStringList[i])
-			}
-		}
-	}
-
-	if v.HeaderStringSet != nil {
-		for i := range v.HeaderStringSet {
-			if v.HeaderStringSet[i] != nil && len(*v.HeaderStringSet[i]) > 0 {
-				encoder.AddHeader("X-StringSet").String(*v.HeaderStringSet[i])
-			}
-		}
-	}
-
-	if v.HeaderTimestampList != nil {
-		for i := range v.HeaderTimestampList {
-			if v.HeaderTimestampList[i] != nil {
-				encoder.AddHeader("X-TimestampList").String(smithytime.FormatHTTPDate(*v.HeaderTimestampList[i]))
-			}
-		}
-	}
-
-	if v.HeaderTrueBool != nil {
-		encoder.SetHeader("X-Boolean1").Boolean(*v.HeaderTrueBool)
+	if v.Token != nil {
+		encoder.SetQuery("token").String(*v.Token)
 	}
 
 	return nil
@@ -1621,7 +1836,7 @@ func (m *awsRestxml_serializeOpOmitsNullSerializesEmptyString) HandleSerialize(c
 		request.URL.RawQuery = opQuery
 	}
 
-	request.Method = "GET"
+	request.Method = "PUT"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -1747,6 +1962,23 @@ func (m *awsRestxml_serializeOpRecursiveShapes) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "RecursiveShapesInputOutput",
+		},
+		Attr: rootAttr,
+	}
+	if err := awsRestxml_serializeDocumentRecursiveShapesInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1759,6 +1991,24 @@ func awsRestxml_serializeHttpBindingsRecursiveShapesInput(v *RecursiveShapesInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeDocumentRecursiveShapesInput(v *RecursiveShapesInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Nested != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "nested",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentRecursiveShapesInputOutputNested1(v.Nested, el); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -1801,6 +2051,23 @@ func (m *awsRestxml_serializeOpSimpleScalarProperties) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "SimpleScalarPropertiesInputOutput",
+		},
+		Attr: rootAttr,
+	}
+	if err := awsRestxml_serializeDocumentSimpleScalarPropertiesInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1819,6 +2086,110 @@ func awsRestxml_serializeHttpBindingsSimpleScalarPropertiesInput(v *SimpleScalar
 		}
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeDocumentSimpleScalarPropertiesInput(v *SimpleScalarPropertiesInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.ByteValue != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "byteValue",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Byte(*v.ByteValue)
+	}
+	if v.DoubleValue != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "DoubleDribble",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Double(*v.DoubleValue)
+	}
+	if v.FalseBooleanValue != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "falseBooleanValue",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(*v.FalseBooleanValue)
+	}
+	if v.FloatValue != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "floatValue",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Float(*v.FloatValue)
+	}
+	if v.IntegerValue != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "integerValue",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Integer(*v.IntegerValue)
+	}
+	if v.LongValue != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "longValue",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Long(*v.LongValue)
+	}
+	if v.ShortValue != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "shortValue",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Short(*v.ShortValue)
+	}
+	if v.StringValue != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "stringValue",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.StringValue)
+	}
+	if v.TrueBooleanValue != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "trueBooleanValue",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(*v.TrueBooleanValue)
+	}
 	return nil
 }
 
@@ -1933,9 +2304,31 @@ func (m *awsRestxml_serializeOpXmlAttributes) HandleSerialize(ctx context.Contex
 		request.URL.RawQuery = opQuery
 	}
 
-	request.Method = "PUT"
+	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	if input.Attr != nil {
+		var av string
+		av = *input.Attr
+		rootAttr = append(rootAttr, smithyxml.NewAttribute("test", av))
+	}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "XmlAttributesInputOutput",
+		},
+		Attr: rootAttr,
+	}
+	if err := awsRestxml_serializeDocumentXmlAttributesInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1951,6 +2344,22 @@ func awsRestxml_serializeHttpBindingsXmlAttributesInput(v *XmlAttributesInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeDocumentXmlAttributesInput(v *XmlAttributesInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Foo != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "foo",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Foo)
+	}
 	return nil
 }
 
@@ -1987,6 +2396,33 @@ func (m *awsRestxml_serializeOpXmlAttributesOnPayload) HandleSerialize(ctx conte
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if input.Payload != nil {
+		if !restEncoder.HasHeader("Content-Type") {
+			restEncoder.SetHeader("Content-Type").String("application/xml")
+		}
+
+		xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+		payloadRootAttr := []smithyxml.Attr{}
+		if input.Payload.Attr != nil {
+			var av string
+			av = *input.Payload.Attr
+			payloadRootAttr = append(payloadRootAttr, smithyxml.NewAttribute("test", av))
+		}
+		payloadRoot := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "XmlAttributesInputOutput",
+			},
+			Attr: payloadRootAttr,
+		}
+		if err := awsRestxml_serializeDocumentXmlAttributesInputOutput(input.Payload, xmlEncoder.RootElement(payloadRoot)); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+		payload := bytes.NewReader(xmlEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -2039,6 +2475,23 @@ func (m *awsRestxml_serializeOpXmlBlobs) HandleSerialize(ctx context.Context, in
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "XmlBlobsInputOutput",
+		},
+		Attr: rootAttr,
+	}
+	if err := awsRestxml_serializeDocumentXmlBlobsInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2051,6 +2504,22 @@ func awsRestxml_serializeHttpBindingsXmlBlobsInput(v *XmlBlobsInput, encoder *ht
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeDocumentXmlBlobsInput(v *XmlBlobsInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Data != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "data",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Base64EncodeBytes(v.Data)
+	}
 	return nil
 }
 
@@ -2089,6 +2558,23 @@ func (m *awsRestxml_serializeOpXmlEnums) HandleSerialize(ctx context.Context, in
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "XmlEnumsInputOutput",
+		},
+		Attr: rootAttr,
+	}
+	if err := awsRestxml_serializeDocumentXmlEnumsInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2101,6 +2587,83 @@ func awsRestxml_serializeHttpBindingsXmlEnumsInput(v *XmlEnumsInput, encoder *ht
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeDocumentXmlEnumsInput(v *XmlEnumsInput, value smithyxml.Value) error {
+	defer value.Close()
+	if len(v.FooEnum1) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "fooEnum1",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.FooEnum1))
+	}
+	if len(v.FooEnum2) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "fooEnum2",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.FooEnum2))
+	}
+	if len(v.FooEnum3) > 0 {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "fooEnum3",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(string(v.FooEnum3))
+	}
+	if v.FooEnumList != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "fooEnumList",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentFooEnumList(v.FooEnumList, el); err != nil {
+			return err
+		}
+	}
+	if v.FooEnumMap != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "fooEnumMap",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentFooEnumMap(v.FooEnumMap, el); err != nil {
+			return err
+		}
+	}
+	if v.FooEnumSet != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "fooEnumSet",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentFooEnumSet(v.FooEnumSet, el); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -2139,6 +2702,23 @@ func (m *awsRestxml_serializeOpXmlLists) HandleSerialize(ctx context.Context, in
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "XmlListsInputOutput",
+		},
+		Attr: rootAttr,
+	}
+	if err := awsRestxml_serializeDocumentXmlListsInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2151,6 +2731,154 @@ func awsRestxml_serializeHttpBindingsXmlListsInput(v *XmlListsInput, encoder *ht
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeDocumentXmlListsInput(v *XmlListsInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.BooleanList != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "booleanList",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentBooleanList(v.BooleanList, el); err != nil {
+			return err
+		}
+	}
+	if v.EnumList != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "enumList",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentFooEnumList(v.EnumList, el); err != nil {
+			return err
+		}
+	}
+	if v.FlattenedList != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "flattenedList",
+			},
+			Attr: rootAttr,
+		}
+		el := value.FlattenedElement(root)
+		if err := awsRestxml_serializeDocumentRenamedListMembers(v.FlattenedList, el); err != nil {
+			return err
+		}
+	}
+	if v.FlattenedList2 != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "customName",
+			},
+			Attr: rootAttr,
+		}
+		el := value.FlattenedElement(root)
+		if err := awsRestxml_serializeDocumentRenamedListMembers(v.FlattenedList2, el); err != nil {
+			return err
+		}
+	}
+	if v.IntegerList != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "integerList",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentIntegerList(v.IntegerList, el); err != nil {
+			return err
+		}
+	}
+	if v.NestedStringList != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "nestedStringList",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentNestedStringList(v.NestedStringList, el); err != nil {
+			return err
+		}
+	}
+	if v.RenamedListMembers != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "renamed",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentRenamedListMembers(v.RenamedListMembers, el); err != nil {
+			return err
+		}
+	}
+	if v.StringList != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "stringList",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentStringList(v.StringList, el); err != nil {
+			return err
+		}
+	}
+	if v.StringSet != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "stringSet",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentStringSet(v.StringSet, el); err != nil {
+			return err
+		}
+	}
+	if v.StructureList != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "myStructureList",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentStructureList(v.StructureList, el); err != nil {
+			return err
+		}
+	}
+	if v.TimestampList != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "timestampList",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentTimestampList(v.TimestampList, el); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -2189,6 +2917,23 @@ func (m *awsRestxml_serializeOpXmlMaps) HandleSerialize(ctx context.Context, in 
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "XmlMapsInputOutput",
+		},
+		Attr: rootAttr,
+	}
+	if err := awsRestxml_serializeDocumentXmlMapsInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2201,6 +2946,24 @@ func awsRestxml_serializeHttpBindingsXmlMapsInput(v *XmlMapsInput, encoder *http
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeDocumentXmlMapsInput(v *XmlMapsInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.MyMap != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "myMap",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentXmlMapsInputOutputMap(v.MyMap, el); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -2239,6 +3002,23 @@ func (m *awsRestxml_serializeOpXmlMapsXmlName) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "XmlMapsXmlNameInputOutput",
+		},
+		Attr: rootAttr,
+	}
+	if err := awsRestxml_serializeDocumentXmlMapsXmlNameInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2251,6 +3031,24 @@ func awsRestxml_serializeHttpBindingsXmlMapsXmlNameInput(v *XmlMapsXmlNameInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeDocumentXmlMapsXmlNameInput(v *XmlMapsXmlNameInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.MyMap != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "myMap",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentXmlMapsXmlNameInputOutputMap(v.MyMap, el); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -2289,6 +3087,24 @@ func (m *awsRestxml_serializeOpXmlNamespaces) HandleSerialize(ctx context.Contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	rootAttr = append(rootAttr, smithyxml.NewNamespaceAttribute("", "http://foo.com"))
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "XmlNamespacesInputOutput",
+		},
+		Attr: rootAttr,
+	}
+	if err := awsRestxml_serializeDocumentXmlNamespacesInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2301,6 +3117,24 @@ func awsRestxml_serializeHttpBindingsXmlNamespacesInput(v *XmlNamespacesInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeDocumentXmlNamespacesInput(v *XmlNamespacesInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Nested != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "nested",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentXmlNamespaceNested(v.Nested, el); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -2339,6 +3173,23 @@ func (m *awsRestxml_serializeOpXmlTimestamps) HandleSerialize(ctx context.Contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "XmlTimestampsInputOutput",
+		},
+		Attr: rootAttr,
+	}
+	if err := awsRestxml_serializeDocumentXmlTimestampsInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2351,5 +3202,619 @@ func awsRestxml_serializeHttpBindingsXmlTimestampsInput(v *XmlTimestampsInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeDocumentXmlTimestampsInput(v *XmlTimestampsInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.DateTime != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "dateTime",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(smithytime.FormatDateTime(*v.DateTime))
+	}
+	if v.EpochSeconds != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "epochSeconds",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Double(smithytime.FormatEpochSeconds(*v.EpochSeconds))
+	}
+	if v.HttpDate != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "httpDate",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(smithytime.FormatHTTPDate(*v.HttpDate))
+	}
+	if v.Normal != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "normal",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(smithytime.FormatDateTime(*v.Normal))
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentFlattenedXmlMapWithXmlNameInputOutputMap(v map[string]*string, value smithyxml.Value) error {
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	m := value.Map()
+	for key := range v {
+		entry := m.Entry()
+		if vv := v[key]; vv == nil {
+			entry.Close()
+			continue
+		}
+		keyElementAttr := []smithyxml.Attr{}
+		keyElement := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "K",
+			},
+			Attr: keyElementAttr,
+		}
+		entry.MemberElement(keyElement).String(*&key)
+		valueElementAttr := []smithyxml.Attr{}
+		valueElement := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "V",
+			},
+			Attr: valueElementAttr,
+		}
+		entry.MemberElement(valueElement).String(*v[key])
+		entry.Close()
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentNestedPayload(v *types.NestedPayload, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Greeting != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "greeting",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Greeting)
+	}
+	if v.Name != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "name",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Name)
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentPayloadWithXmlName(v *types.PayloadWithXmlName, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Name != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "name",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Name)
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentPayloadWithXmlNamespace(v *types.PayloadWithXmlNamespace, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Name != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "name",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Name)
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentPayloadWithXmlNamespaceAndPrefix(v *types.PayloadWithXmlNamespaceAndPrefix, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Name != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "name",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Name)
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentRecursiveShapesInputOutputNested1(v *types.RecursiveShapesInputOutputNested1, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Foo != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "foo",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Foo)
+	}
+	if v.Nested != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "nested",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentRecursiveShapesInputOutputNested2(v.Nested, el); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentRecursiveShapesInputOutputNested2(v *types.RecursiveShapesInputOutputNested2, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bar != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "bar",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bar)
+	}
+	if v.RecursiveMember != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "recursiveMember",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentRecursiveShapesInputOutputNested1(v.RecursiveMember, el); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentRenamedListMembers(v []*string, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	customMemberNameAttr := []smithyxml.Attr{}
+	customMemberName := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "item",
+		},
+		Attr: customMemberNameAttr,
+	}
+	array = value.ArrayWithCustomName(customMemberName)
+	for i := range v {
+		if vv := v[i]; vv == nil {
+			am := array.Member()
+			am.Close()
+			continue
+		}
+		am := array.Member()
+		am.String(*v[i])
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentStructureList(v []*types.StructureListMember, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	customMemberNameAttr := []smithyxml.Attr{}
+	customMemberName := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "item",
+		},
+		Attr: customMemberNameAttr,
+	}
+	array = value.ArrayWithCustomName(customMemberName)
+	for i := range v {
+		if vv := v[i]; vv == nil {
+			am := array.Member()
+			am.Close()
+			continue
+		}
+		am := array.Member()
+		if err := awsRestxml_serializeDocumentStructureListMember(v[i], am); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentStructureListMember(v *types.StructureListMember, value smithyxml.Value) error {
+	defer value.Close()
+	if v.A != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "value",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.A)
+	}
+	if v.B != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "other",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.B)
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentXmlAttributesInputOutput(v *types.XmlAttributesInputOutput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Foo != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "foo",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Foo)
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentXmlMapsInputOutputMap(v map[string]*types.GreetingStruct, value smithyxml.Value) error {
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	m := value.Map()
+	for key := range v {
+		entry := m.Entry()
+		if vv := v[key]; vv == nil {
+			entry.Close()
+			continue
+		}
+		keyElementAttr := []smithyxml.Attr{}
+		keyElement := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "key",
+			},
+			Attr: keyElementAttr,
+		}
+		entry.MemberElement(keyElement).String(*&key)
+		valueElementAttr := []smithyxml.Attr{}
+		valueElement := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "value",
+			},
+			Attr: valueElementAttr,
+		}
+		if err := awsRestxml_serializeDocumentGreetingStruct(v[key], entry.MemberElement(valueElement)); err != nil {
+			return err
+		}
+		entry.Close()
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentXmlMapsXmlNameInputOutputMap(v map[string]*types.GreetingStruct, value smithyxml.Value) error {
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	m := value.Map()
+	for key := range v {
+		entry := m.Entry()
+		if vv := v[key]; vv == nil {
+			entry.Close()
+			continue
+		}
+		keyElementAttr := []smithyxml.Attr{}
+		keyElement := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Attribute",
+			},
+			Attr: keyElementAttr,
+		}
+		entry.MemberElement(keyElement).String(*&key)
+		valueElementAttr := []smithyxml.Attr{}
+		valueElement := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Setting",
+			},
+			Attr: valueElementAttr,
+		}
+		if err := awsRestxml_serializeDocumentGreetingStruct(v[key], entry.MemberElement(valueElement)); err != nil {
+			return err
+		}
+		entry.Close()
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentXmlNamespacedList(v []*string, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	customMemberNameAttr := []smithyxml.Attr{}
+	customMemberNameAttr = append(customMemberNameAttr, smithyxml.NewNamespaceAttribute("", "http://bux.com"))
+	customMemberName := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "member",
+		},
+		Attr: customMemberNameAttr,
+	}
+	array = value.ArrayWithCustomName(customMemberName)
+	for i := range v {
+		if vv := v[i]; vv == nil {
+			am := array.Member()
+			am.Close()
+			continue
+		}
+		am := array.Member()
+		am.String(*v[i])
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentXmlNamespaceNested(v *types.XmlNamespaceNested, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Foo != nil {
+		rootAttr := []smithyxml.Attr{}
+		rootAttr = append(rootAttr, smithyxml.NewNamespaceAttribute("baz", "http://baz.com"))
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "foo",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Foo)
+	}
+	if v.Values != nil {
+		rootAttr := []smithyxml.Attr{}
+		rootAttr = append(rootAttr, smithyxml.NewNamespaceAttribute("", "http://qux.com"))
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "values",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentXmlNamespacedList(v.Values, el); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentBooleanList(v []*bool, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	array = value.Array()
+	for i := range v {
+		if vv := v[i]; vv == nil {
+			am := array.Member()
+			am.Close()
+			continue
+		}
+		am := array.Member()
+		am.Boolean(*v[i])
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentFooEnumList(v []types.FooEnum, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	array = value.Array()
+	for i := range v {
+		am := array.Member()
+		am.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentFooEnumMap(v map[string]types.FooEnum, value smithyxml.Value) error {
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	m := value.Map()
+	for key := range v {
+		entry := m.Entry()
+		keyElementAttr := []smithyxml.Attr{}
+		keyElement := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "key",
+			},
+			Attr: keyElementAttr,
+		}
+		entry.MemberElement(keyElement).String(*&key)
+		valueElementAttr := []smithyxml.Attr{}
+		valueElement := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "value",
+			},
+			Attr: valueElementAttr,
+		}
+		entry.MemberElement(valueElement).String(string(v[key]))
+		entry.Close()
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentFooEnumSet(v []types.FooEnum, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	array = value.Array()
+	for i := range v {
+		am := array.Member()
+		am.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentGreetingStruct(v *types.GreetingStruct, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Hi != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "hi",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Hi)
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentIntegerList(v []*int32, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	array = value.Array()
+	for i := range v {
+		if vv := v[i]; vv == nil {
+			am := array.Member()
+			am.Close()
+			continue
+		}
+		am := array.Member()
+		am.Integer(*v[i])
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentNestedStringList(v [][]*string, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	array = value.Array()
+	for i := range v {
+		if vv := v[i]; vv == nil {
+			am := array.Member()
+			am.Close()
+			continue
+		}
+		am := array.Member()
+		if err := awsRestxml_serializeDocumentStringList(v[i], am); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentStringList(v []*string, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	array = value.Array()
+	for i := range v {
+		if vv := v[i]; vv == nil {
+			am := array.Member()
+			am.Close()
+			continue
+		}
+		am := array.Member()
+		am.String(*v[i])
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentStringSet(v []*string, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	array = value.Array()
+	for i := range v {
+		if vv := v[i]; vv == nil {
+			am := array.Member()
+			am.Close()
+			continue
+		}
+		am := array.Member()
+		am.String(*v[i])
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentTimestampList(v []*time.Time, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	array = value.Array()
+	for i := range v {
+		if vv := v[i]; vv == nil {
+			am := array.Member()
+			am.Close()
+			continue
+		}
+		am := array.Member()
+		am.String(smithytime.FormatDateTime(*v[i]))
+	}
 	return nil
 }
