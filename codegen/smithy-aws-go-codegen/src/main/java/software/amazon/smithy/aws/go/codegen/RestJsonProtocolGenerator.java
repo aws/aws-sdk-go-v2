@@ -234,7 +234,6 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
         writer.addUseImports(SmithyGoDependency.IO);
         writer.write("body := io.TeeReader(response.Body, ringBuffer)");
-        writer.write("defer response.Body.Close()");
         writer.write("");
 
         writer.addUseImports(SmithyGoDependency.JSON);

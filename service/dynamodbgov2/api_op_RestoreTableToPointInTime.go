@@ -54,6 +54,8 @@ func (c *Client) RestoreTableToPointInTime(ctx context.Context, params *RestoreT
 	retry.AddRetryMiddlewares(stack, options)
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRestoreTableToPointInTimeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreTableToPointInTime(options.Region), middleware.Before)
 
