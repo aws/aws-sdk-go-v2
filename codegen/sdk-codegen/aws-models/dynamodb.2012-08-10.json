@@ -2694,7 +2694,7 @@
           "error": "com.amazonaws.dynamodb#InvalidEndpointException"
         },
         "aws.api#service": {
-          "sdkId": "DynamoDB GoV2",
+          "sdkId": "DynamoDB",
           "arnNamespace": "dynamodb",
           "cloudFormationName": "DynamoDB",
           "cloudTrailEventSource": "v20120810.dynamodb.amazonaws.com"

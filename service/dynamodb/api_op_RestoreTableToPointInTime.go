@@ -118,9 +118,9 @@ func addawsAwsjson10_serdeOpRestoreTableToPointInTimeMiddlewares(stack *middlewa
 func newServiceMetadataMiddleware_opRestoreTableToPointInTime(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:         region,
-		ServiceName:    "DynamoDB GoV2",
-		ServiceID:      "dynamodbgov2",
-		EndpointPrefix: "dynamodbgov2",
+		ServiceName:    "DynamoDB",
+		ServiceID:      "dynamodb",
+		EndpointPrefix: "dynamodb",
 		SigningName:    "dynamodb",
 		OperationName:  "RestoreTableToPointInTime",
 	}
