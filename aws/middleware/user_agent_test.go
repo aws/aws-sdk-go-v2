@@ -95,16 +95,8 @@ func TestRequestUserAgent_HandleBuild(t *testing.T) {
 
 	for name, tt := range cases {
 		t.Run(name, func(t *testing.T) {
-			environ := os.Environ()
-			os.Clearenv()
-			defer func() {
-				os.Clearenv()
-				for _, v := range environ {
-					split := strings.SplitN(v, "=", 2)
-					key, value := split[0], split[1]
-					os.Setenv(key, value)
-				}
-			}()
+			restoreEnv := clearEnv()
+			defer restoreEnv()
 			for k, v := range tt.Env {
 				os.Setenv(k, v)
 			}
@@ -119,7 +111,23 @@ func TestRequestUserAgent_HandleBuild(t *testing.T) {
 	}
 }
 
+func clearEnv() func() {
+	environ := os.Environ()
+	os.Clearenv()
+	return func() {
+		os.Clearenv()
+		for _, v := range environ {
+			split := strings.SplitN(v, "=", 2)
+			key, value := split[0], split[1]
+			os.Setenv(key, value)
+		}
+	}
+}
+
 func TestAddUserAgentKey(t *testing.T) {
+	restoreEnv := clearEnv()
+	defer restoreEnv()
+
 	b := newRequestUserAgent()
 	stack := middleware.NewStack("testStack", smithyhttp.NewStackRequest)
 	err := stack.Build.Add(b, middleware.After)
@@ -149,6 +157,9 @@ func TestAddUserAgentKey(t *testing.T) {
 }
 
 func TestAddUserAgentKeyValue(t *testing.T) {
+	restoreEnv := clearEnv()
+	defer restoreEnv()
+
 	b := newRequestUserAgent()
 	stack := middleware.NewStack("testStack", smithyhttp.NewStackRequest)
 	err := stack.Build.Add(b, middleware.After)
@@ -178,6 +189,9 @@ func TestAddUserAgentKeyValue(t *testing.T) {
 }
 
 func TestAddUserAgentKey_AddToStack(t *testing.T) {
+	restoreEnv := clearEnv()
+	defer restoreEnv()
+
 	stack := middleware.NewStack("testStack", smithyhttp.NewStackRequest)
 	bi := middleware.BuildInput{Request: &smithyhttp.Request{Request: &http.Request{Header: map[string][]string{}}}}
 	stack.Build.Add(middleware.BuildMiddlewareFunc("testInit", func(ctx context.Context, input middleware.BuildInput, handler middleware.BuildHandler) (o middleware.BuildOutput, m middleware.Metadata, err error) {
@@ -204,6 +218,9 @@ func TestAddUserAgentKey_AddToStack(t *testing.T) {
 }
 
 func TestAddUserAgentKeyValue_AddToStack(t *testing.T) {
+	restoreEnv := clearEnv()
+	defer restoreEnv()
+
 	stack := middleware.NewStack("testStack", smithyhttp.NewStackRequest)
 	bi := middleware.BuildInput{Request: &smithyhttp.Request{Request: &http.Request{Header: map[string][]string{}}}}
 	stack.Build.Add(middleware.BuildMiddlewareFunc("testInit", func(ctx context.Context, input middleware.BuildInput, handler middleware.BuildHandler) (o middleware.BuildOutput, m middleware.Metadata, err error) {
