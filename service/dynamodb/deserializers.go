@@ -16,6 +16,7 @@ import (
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
+	"strings"
 )
 
 type awsAwsjson10_deserializeOpBatchGetItem struct {
@@ -56,7 +57,7 @@ func (m *awsAwsjson10_deserializeOpBatchGetItem) HandleDeserialize(ctx context.C
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -91,7 +92,7 @@ func awsAwsjson10_deserializeOpErrorBatchGetItem(response *smithyhttp.Response) 
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -104,20 +105,20 @@ func awsAwsjson10_deserializeOpErrorBatchGetItem(response *smithyhttp.Response) 
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "ProvisionedThroughputExceededException":
+	case strings.EqualFold("ProvisionedThroughputExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorProvisionedThroughputExceededException(response, errorBody)
 
-	case "RequestLimitExceeded":
+	case strings.EqualFold("RequestLimitExceeded", errorCode):
 		return awsAwsjson10_deserializeErrorRequestLimitExceeded(response, errorBody)
 
-	case "ResourceNotFoundException":
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -168,7 +169,7 @@ func (m *awsAwsjson10_deserializeOpBatchWriteItem) HandleDeserialize(ctx context
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -203,7 +204,7 @@ func awsAwsjson10_deserializeOpErrorBatchWriteItem(response *smithyhttp.Response
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -216,23 +217,23 @@ func awsAwsjson10_deserializeOpErrorBatchWriteItem(response *smithyhttp.Response
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "ItemCollectionSizeLimitExceededException":
+	case strings.EqualFold("ItemCollectionSizeLimitExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorItemCollectionSizeLimitExceededException(response, errorBody)
 
-	case "ProvisionedThroughputExceededException":
+	case strings.EqualFold("ProvisionedThroughputExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorProvisionedThroughputExceededException(response, errorBody)
 
-	case "RequestLimitExceeded":
+	case strings.EqualFold("RequestLimitExceeded", errorCode):
 		return awsAwsjson10_deserializeErrorRequestLimitExceeded(response, errorBody)
 
-	case "ResourceNotFoundException":
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -283,7 +284,7 @@ func (m *awsAwsjson10_deserializeOpCreateBackup) HandleDeserialize(ctx context.C
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -318,7 +319,7 @@ func awsAwsjson10_deserializeOpErrorCreateBackup(response *smithyhttp.Response) 
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -331,26 +332,26 @@ func awsAwsjson10_deserializeOpErrorCreateBackup(response *smithyhttp.Response) 
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "BackupInUseException":
+	switch {
+	case strings.EqualFold("BackupInUseException", errorCode):
 		return awsAwsjson10_deserializeErrorBackupInUseException(response, errorBody)
 
-	case "ContinuousBackupsUnavailableException":
+	case strings.EqualFold("ContinuousBackupsUnavailableException", errorCode):
 		return awsAwsjson10_deserializeErrorContinuousBackupsUnavailableException(response, errorBody)
 
-	case "InternalServerError":
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "LimitExceededException":
+	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorLimitExceededException(response, errorBody)
 
-	case "TableInUseException":
+	case strings.EqualFold("TableInUseException", errorCode):
 		return awsAwsjson10_deserializeErrorTableInUseException(response, errorBody)
 
-	case "TableNotFoundException":
+	case strings.EqualFold("TableNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorTableNotFoundException(response, errorBody)
 
 	default:
@@ -401,7 +402,7 @@ func (m *awsAwsjson10_deserializeOpCreateGlobalTable) HandleDeserialize(ctx cont
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -436,7 +437,7 @@ func awsAwsjson10_deserializeOpErrorCreateGlobalTable(response *smithyhttp.Respo
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -449,20 +450,20 @@ func awsAwsjson10_deserializeOpErrorCreateGlobalTable(response *smithyhttp.Respo
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "GlobalTableAlreadyExistsException":
+	switch {
+	case strings.EqualFold("GlobalTableAlreadyExistsException", errorCode):
 		return awsAwsjson10_deserializeErrorGlobalTableAlreadyExistsException(response, errorBody)
 
-	case "InternalServerError":
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "LimitExceededException":
+	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorLimitExceededException(response, errorBody)
 
-	case "TableNotFoundException":
+	case strings.EqualFold("TableNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorTableNotFoundException(response, errorBody)
 
 	default:
@@ -513,7 +514,7 @@ func (m *awsAwsjson10_deserializeOpCreateTable) HandleDeserialize(ctx context.Co
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -548,7 +549,7 @@ func awsAwsjson10_deserializeOpErrorCreateTable(response *smithyhttp.Response) e
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -561,17 +562,17 @@ func awsAwsjson10_deserializeOpErrorCreateTable(response *smithyhttp.Response) e
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "LimitExceededException":
+	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorLimitExceededException(response, errorBody)
 
-	case "ResourceInUseException":
+	case strings.EqualFold("ResourceInUseException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceInUseException(response, errorBody)
 
 	default:
@@ -622,7 +623,7 @@ func (m *awsAwsjson10_deserializeOpDeleteBackup) HandleDeserialize(ctx context.C
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -657,7 +658,7 @@ func awsAwsjson10_deserializeOpErrorDeleteBackup(response *smithyhttp.Response) 
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -670,20 +671,20 @@ func awsAwsjson10_deserializeOpErrorDeleteBackup(response *smithyhttp.Response) 
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "BackupInUseException":
+	switch {
+	case strings.EqualFold("BackupInUseException", errorCode):
 		return awsAwsjson10_deserializeErrorBackupInUseException(response, errorBody)
 
-	case "BackupNotFoundException":
+	case strings.EqualFold("BackupNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorBackupNotFoundException(response, errorBody)
 
-	case "InternalServerError":
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "LimitExceededException":
+	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorLimitExceededException(response, errorBody)
 
 	default:
@@ -734,7 +735,7 @@ func (m *awsAwsjson10_deserializeOpDeleteItem) HandleDeserialize(ctx context.Con
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -769,7 +770,7 @@ func awsAwsjson10_deserializeOpErrorDeleteItem(response *smithyhttp.Response) er
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -782,29 +783,29 @@ func awsAwsjson10_deserializeOpErrorDeleteItem(response *smithyhttp.Response) er
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "ConditionalCheckFailedException":
+	switch {
+	case strings.EqualFold("ConditionalCheckFailedException", errorCode):
 		return awsAwsjson10_deserializeErrorConditionalCheckFailedException(response, errorBody)
 
-	case "InternalServerError":
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "ItemCollectionSizeLimitExceededException":
+	case strings.EqualFold("ItemCollectionSizeLimitExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorItemCollectionSizeLimitExceededException(response, errorBody)
 
-	case "ProvisionedThroughputExceededException":
+	case strings.EqualFold("ProvisionedThroughputExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorProvisionedThroughputExceededException(response, errorBody)
 
-	case "RequestLimitExceeded":
+	case strings.EqualFold("RequestLimitExceeded", errorCode):
 		return awsAwsjson10_deserializeErrorRequestLimitExceeded(response, errorBody)
 
-	case "ResourceNotFoundException":
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
-	case "TransactionConflictException":
+	case strings.EqualFold("TransactionConflictException", errorCode):
 		return awsAwsjson10_deserializeErrorTransactionConflictException(response, errorBody)
 
 	default:
@@ -855,7 +856,7 @@ func (m *awsAwsjson10_deserializeOpDeleteTable) HandleDeserialize(ctx context.Co
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -890,7 +891,7 @@ func awsAwsjson10_deserializeOpErrorDeleteTable(response *smithyhttp.Response) e
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -903,20 +904,20 @@ func awsAwsjson10_deserializeOpErrorDeleteTable(response *smithyhttp.Response) e
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "LimitExceededException":
+	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorLimitExceededException(response, errorBody)
 
-	case "ResourceInUseException":
+	case strings.EqualFold("ResourceInUseException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceInUseException(response, errorBody)
 
-	case "ResourceNotFoundException":
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -967,7 +968,7 @@ func (m *awsAwsjson10_deserializeOpDescribeBackup) HandleDeserialize(ctx context
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1002,7 +1003,7 @@ func awsAwsjson10_deserializeOpErrorDescribeBackup(response *smithyhttp.Response
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1015,14 +1016,14 @@ func awsAwsjson10_deserializeOpErrorDescribeBackup(response *smithyhttp.Response
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "BackupNotFoundException":
+	switch {
+	case strings.EqualFold("BackupNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorBackupNotFoundException(response, errorBody)
 
-	case "InternalServerError":
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
 	default:
@@ -1073,7 +1074,7 @@ func (m *awsAwsjson10_deserializeOpDescribeContinuousBackups) HandleDeserialize(
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1108,7 +1109,7 @@ func awsAwsjson10_deserializeOpErrorDescribeContinuousBackups(response *smithyht
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1121,14 +1122,14 @@ func awsAwsjson10_deserializeOpErrorDescribeContinuousBackups(response *smithyht
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "TableNotFoundException":
+	case strings.EqualFold("TableNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorTableNotFoundException(response, errorBody)
 
 	default:
@@ -1179,7 +1180,7 @@ func (m *awsAwsjson10_deserializeOpDescribeContributorInsights) HandleDeserializ
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1214,7 +1215,7 @@ func awsAwsjson10_deserializeOpErrorDescribeContributorInsights(response *smithy
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1227,11 +1228,11 @@ func awsAwsjson10_deserializeOpErrorDescribeContributorInsights(response *smithy
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "ResourceNotFoundException":
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -1282,7 +1283,7 @@ func (m *awsAwsjson10_deserializeOpDescribeEndpoints) HandleDeserialize(ctx cont
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1317,7 +1318,7 @@ func awsAwsjson10_deserializeOpErrorDescribeEndpoints(response *smithyhttp.Respo
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1330,7 +1331,7 @@ func awsAwsjson10_deserializeOpErrorDescribeEndpoints(response *smithyhttp.Respo
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1379,7 +1380,7 @@ func (m *awsAwsjson10_deserializeOpDescribeGlobalTable) HandleDeserialize(ctx co
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1414,7 +1415,7 @@ func awsAwsjson10_deserializeOpErrorDescribeGlobalTable(response *smithyhttp.Res
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1427,14 +1428,14 @@ func awsAwsjson10_deserializeOpErrorDescribeGlobalTable(response *smithyhttp.Res
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "GlobalTableNotFoundException":
+	switch {
+	case strings.EqualFold("GlobalTableNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorGlobalTableNotFoundException(response, errorBody)
 
-	case "InternalServerError":
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
 	default:
@@ -1485,7 +1486,7 @@ func (m *awsAwsjson10_deserializeOpDescribeGlobalTableSettings) HandleDeserializ
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1520,7 +1521,7 @@ func awsAwsjson10_deserializeOpErrorDescribeGlobalTableSettings(response *smithy
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1533,14 +1534,14 @@ func awsAwsjson10_deserializeOpErrorDescribeGlobalTableSettings(response *smithy
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "GlobalTableNotFoundException":
+	switch {
+	case strings.EqualFold("GlobalTableNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorGlobalTableNotFoundException(response, errorBody)
 
-	case "InternalServerError":
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
 	default:
@@ -1591,7 +1592,7 @@ func (m *awsAwsjson10_deserializeOpDescribeLimits) HandleDeserialize(ctx context
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1626,7 +1627,7 @@ func awsAwsjson10_deserializeOpErrorDescribeLimits(response *smithyhttp.Response
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1639,11 +1640,11 @@ func awsAwsjson10_deserializeOpErrorDescribeLimits(response *smithyhttp.Response
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
 	default:
@@ -1694,7 +1695,7 @@ func (m *awsAwsjson10_deserializeOpDescribeTable) HandleDeserialize(ctx context.
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1729,7 +1730,7 @@ func awsAwsjson10_deserializeOpErrorDescribeTable(response *smithyhttp.Response)
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1742,14 +1743,14 @@ func awsAwsjson10_deserializeOpErrorDescribeTable(response *smithyhttp.Response)
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "ResourceNotFoundException":
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -1800,7 +1801,7 @@ func (m *awsAwsjson10_deserializeOpDescribeTableReplicaAutoScaling) HandleDeseri
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1835,7 +1836,7 @@ func awsAwsjson10_deserializeOpErrorDescribeTableReplicaAutoScaling(response *sm
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1848,11 +1849,11 @@ func awsAwsjson10_deserializeOpErrorDescribeTableReplicaAutoScaling(response *sm
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "ResourceNotFoundException":
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -1903,7 +1904,7 @@ func (m *awsAwsjson10_deserializeOpDescribeTimeToLive) HandleDeserialize(ctx con
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1938,7 +1939,7 @@ func awsAwsjson10_deserializeOpErrorDescribeTimeToLive(response *smithyhttp.Resp
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1951,14 +1952,14 @@ func awsAwsjson10_deserializeOpErrorDescribeTimeToLive(response *smithyhttp.Resp
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "ResourceNotFoundException":
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -2009,7 +2010,7 @@ func (m *awsAwsjson10_deserializeOpGetItem) HandleDeserialize(ctx context.Contex
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2044,7 +2045,7 @@ func awsAwsjson10_deserializeOpErrorGetItem(response *smithyhttp.Response) error
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2057,20 +2058,20 @@ func awsAwsjson10_deserializeOpErrorGetItem(response *smithyhttp.Response) error
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "ProvisionedThroughputExceededException":
+	case strings.EqualFold("ProvisionedThroughputExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorProvisionedThroughputExceededException(response, errorBody)
 
-	case "RequestLimitExceeded":
+	case strings.EqualFold("RequestLimitExceeded", errorCode):
 		return awsAwsjson10_deserializeErrorRequestLimitExceeded(response, errorBody)
 
-	case "ResourceNotFoundException":
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -2121,7 +2122,7 @@ func (m *awsAwsjson10_deserializeOpListBackups) HandleDeserialize(ctx context.Co
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2156,7 +2157,7 @@ func awsAwsjson10_deserializeOpErrorListBackups(response *smithyhttp.Response) e
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2169,11 +2170,11 @@ func awsAwsjson10_deserializeOpErrorListBackups(response *smithyhttp.Response) e
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
 	default:
@@ -2224,7 +2225,7 @@ func (m *awsAwsjson10_deserializeOpListContributorInsights) HandleDeserialize(ct
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2259,7 +2260,7 @@ func awsAwsjson10_deserializeOpErrorListContributorInsights(response *smithyhttp
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2272,11 +2273,11 @@ func awsAwsjson10_deserializeOpErrorListContributorInsights(response *smithyhttp
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "ResourceNotFoundException":
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -2327,7 +2328,7 @@ func (m *awsAwsjson10_deserializeOpListGlobalTables) HandleDeserialize(ctx conte
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2362,7 +2363,7 @@ func awsAwsjson10_deserializeOpErrorListGlobalTables(response *smithyhttp.Respon
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2375,11 +2376,11 @@ func awsAwsjson10_deserializeOpErrorListGlobalTables(response *smithyhttp.Respon
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
 	default:
@@ -2430,7 +2431,7 @@ func (m *awsAwsjson10_deserializeOpListTables) HandleDeserialize(ctx context.Con
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2465,7 +2466,7 @@ func awsAwsjson10_deserializeOpErrorListTables(response *smithyhttp.Response) er
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2478,11 +2479,11 @@ func awsAwsjson10_deserializeOpErrorListTables(response *smithyhttp.Response) er
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
 	default:
@@ -2533,7 +2534,7 @@ func (m *awsAwsjson10_deserializeOpListTagsOfResource) HandleDeserialize(ctx con
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2568,7 +2569,7 @@ func awsAwsjson10_deserializeOpErrorListTagsOfResource(response *smithyhttp.Resp
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2581,14 +2582,14 @@ func awsAwsjson10_deserializeOpErrorListTagsOfResource(response *smithyhttp.Resp
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "ResourceNotFoundException":
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -2639,7 +2640,7 @@ func (m *awsAwsjson10_deserializeOpPutItem) HandleDeserialize(ctx context.Contex
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2674,7 +2675,7 @@ func awsAwsjson10_deserializeOpErrorPutItem(response *smithyhttp.Response) error
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2687,29 +2688,29 @@ func awsAwsjson10_deserializeOpErrorPutItem(response *smithyhttp.Response) error
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "ConditionalCheckFailedException":
+	switch {
+	case strings.EqualFold("ConditionalCheckFailedException", errorCode):
 		return awsAwsjson10_deserializeErrorConditionalCheckFailedException(response, errorBody)
 
-	case "InternalServerError":
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "ItemCollectionSizeLimitExceededException":
+	case strings.EqualFold("ItemCollectionSizeLimitExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorItemCollectionSizeLimitExceededException(response, errorBody)
 
-	case "ProvisionedThroughputExceededException":
+	case strings.EqualFold("ProvisionedThroughputExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorProvisionedThroughputExceededException(response, errorBody)
 
-	case "RequestLimitExceeded":
+	case strings.EqualFold("RequestLimitExceeded", errorCode):
 		return awsAwsjson10_deserializeErrorRequestLimitExceeded(response, errorBody)
 
-	case "ResourceNotFoundException":
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
-	case "TransactionConflictException":
+	case strings.EqualFold("TransactionConflictException", errorCode):
 		return awsAwsjson10_deserializeErrorTransactionConflictException(response, errorBody)
 
 	default:
@@ -2760,7 +2761,7 @@ func (m *awsAwsjson10_deserializeOpQuery) HandleDeserialize(ctx context.Context,
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2795,7 +2796,7 @@ func awsAwsjson10_deserializeOpErrorQuery(response *smithyhttp.Response) error {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2808,20 +2809,20 @@ func awsAwsjson10_deserializeOpErrorQuery(response *smithyhttp.Response) error {
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "ProvisionedThroughputExceededException":
+	case strings.EqualFold("ProvisionedThroughputExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorProvisionedThroughputExceededException(response, errorBody)
 
-	case "RequestLimitExceeded":
+	case strings.EqualFold("RequestLimitExceeded", errorCode):
 		return awsAwsjson10_deserializeErrorRequestLimitExceeded(response, errorBody)
 
-	case "ResourceNotFoundException":
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -2872,7 +2873,7 @@ func (m *awsAwsjson10_deserializeOpRestoreTableFromBackup) HandleDeserialize(ctx
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2907,7 +2908,7 @@ func awsAwsjson10_deserializeOpErrorRestoreTableFromBackup(response *smithyhttp.
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2920,26 +2921,26 @@ func awsAwsjson10_deserializeOpErrorRestoreTableFromBackup(response *smithyhttp.
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "BackupInUseException":
+	switch {
+	case strings.EqualFold("BackupInUseException", errorCode):
 		return awsAwsjson10_deserializeErrorBackupInUseException(response, errorBody)
 
-	case "BackupNotFoundException":
+	case strings.EqualFold("BackupNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorBackupNotFoundException(response, errorBody)
 
-	case "InternalServerError":
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "LimitExceededException":
+	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorLimitExceededException(response, errorBody)
 
-	case "TableAlreadyExistsException":
+	case strings.EqualFold("TableAlreadyExistsException", errorCode):
 		return awsAwsjson10_deserializeErrorTableAlreadyExistsException(response, errorBody)
 
-	case "TableInUseException":
+	case strings.EqualFold("TableInUseException", errorCode):
 		return awsAwsjson10_deserializeErrorTableInUseException(response, errorBody)
 
 	default:
@@ -2990,7 +2991,7 @@ func (m *awsAwsjson10_deserializeOpRestoreTableToPointInTime) HandleDeserialize(
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3025,7 +3026,7 @@ func awsAwsjson10_deserializeOpErrorRestoreTableToPointInTime(response *smithyht
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3038,29 +3039,29 @@ func awsAwsjson10_deserializeOpErrorRestoreTableToPointInTime(response *smithyht
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "InvalidRestoreTimeException":
+	case strings.EqualFold("InvalidRestoreTimeException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidRestoreTimeException(response, errorBody)
 
-	case "LimitExceededException":
+	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorLimitExceededException(response, errorBody)
 
-	case "PointInTimeRecoveryUnavailableException":
+	case strings.EqualFold("PointInTimeRecoveryUnavailableException", errorCode):
 		return awsAwsjson10_deserializeErrorPointInTimeRecoveryUnavailableException(response, errorBody)
 
-	case "TableAlreadyExistsException":
+	case strings.EqualFold("TableAlreadyExistsException", errorCode):
 		return awsAwsjson10_deserializeErrorTableAlreadyExistsException(response, errorBody)
 
-	case "TableInUseException":
+	case strings.EqualFold("TableInUseException", errorCode):
 		return awsAwsjson10_deserializeErrorTableInUseException(response, errorBody)
 
-	case "TableNotFoundException":
+	case strings.EqualFold("TableNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorTableNotFoundException(response, errorBody)
 
 	default:
@@ -3111,7 +3112,7 @@ func (m *awsAwsjson10_deserializeOpScan) HandleDeserialize(ctx context.Context, 
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3146,7 +3147,7 @@ func awsAwsjson10_deserializeOpErrorScan(response *smithyhttp.Response) error {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3159,20 +3160,20 @@ func awsAwsjson10_deserializeOpErrorScan(response *smithyhttp.Response) error {
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "ProvisionedThroughputExceededException":
+	case strings.EqualFold("ProvisionedThroughputExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorProvisionedThroughputExceededException(response, errorBody)
 
-	case "RequestLimitExceeded":
+	case strings.EqualFold("RequestLimitExceeded", errorCode):
 		return awsAwsjson10_deserializeErrorRequestLimitExceeded(response, errorBody)
 
-	case "ResourceNotFoundException":
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -3223,7 +3224,7 @@ func (m *awsAwsjson10_deserializeOpTagResource) HandleDeserialize(ctx context.Co
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3258,7 +3259,7 @@ func awsAwsjson10_deserializeOpErrorTagResource(response *smithyhttp.Response) e
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3271,20 +3272,20 @@ func awsAwsjson10_deserializeOpErrorTagResource(response *smithyhttp.Response) e
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "LimitExceededException":
+	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorLimitExceededException(response, errorBody)
 
-	case "ResourceInUseException":
+	case strings.EqualFold("ResourceInUseException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceInUseException(response, errorBody)
 
-	case "ResourceNotFoundException":
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -3335,7 +3336,7 @@ func (m *awsAwsjson10_deserializeOpTransactGetItems) HandleDeserialize(ctx conte
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3370,7 +3371,7 @@ func awsAwsjson10_deserializeOpErrorTransactGetItems(response *smithyhttp.Respon
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3383,23 +3384,23 @@ func awsAwsjson10_deserializeOpErrorTransactGetItems(response *smithyhttp.Respon
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "ProvisionedThroughputExceededException":
+	case strings.EqualFold("ProvisionedThroughputExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorProvisionedThroughputExceededException(response, errorBody)
 
-	case "RequestLimitExceeded":
+	case strings.EqualFold("RequestLimitExceeded", errorCode):
 		return awsAwsjson10_deserializeErrorRequestLimitExceeded(response, errorBody)
 
-	case "ResourceNotFoundException":
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
-	case "TransactionCanceledException":
+	case strings.EqualFold("TransactionCanceledException", errorCode):
 		return awsAwsjson10_deserializeErrorTransactionCanceledException(response, errorBody)
 
 	default:
@@ -3450,7 +3451,7 @@ func (m *awsAwsjson10_deserializeOpTransactWriteItems) HandleDeserialize(ctx con
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3485,7 +3486,7 @@ func awsAwsjson10_deserializeOpErrorTransactWriteItems(response *smithyhttp.Resp
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3498,29 +3499,29 @@ func awsAwsjson10_deserializeOpErrorTransactWriteItems(response *smithyhttp.Resp
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "IdempotentParameterMismatchException":
+	switch {
+	case strings.EqualFold("IdempotentParameterMismatchException", errorCode):
 		return awsAwsjson10_deserializeErrorIdempotentParameterMismatchException(response, errorBody)
 
-	case "InternalServerError":
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "ProvisionedThroughputExceededException":
+	case strings.EqualFold("ProvisionedThroughputExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorProvisionedThroughputExceededException(response, errorBody)
 
-	case "RequestLimitExceeded":
+	case strings.EqualFold("RequestLimitExceeded", errorCode):
 		return awsAwsjson10_deserializeErrorRequestLimitExceeded(response, errorBody)
 
-	case "ResourceNotFoundException":
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
-	case "TransactionCanceledException":
+	case strings.EqualFold("TransactionCanceledException", errorCode):
 		return awsAwsjson10_deserializeErrorTransactionCanceledException(response, errorBody)
 
-	case "TransactionInProgressException":
+	case strings.EqualFold("TransactionInProgressException", errorCode):
 		return awsAwsjson10_deserializeErrorTransactionInProgressException(response, errorBody)
 
 	default:
@@ -3571,7 +3572,7 @@ func (m *awsAwsjson10_deserializeOpUntagResource) HandleDeserialize(ctx context.
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3606,7 +3607,7 @@ func awsAwsjson10_deserializeOpErrorUntagResource(response *smithyhttp.Response)
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3619,20 +3620,20 @@ func awsAwsjson10_deserializeOpErrorUntagResource(response *smithyhttp.Response)
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "LimitExceededException":
+	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorLimitExceededException(response, errorBody)
 
-	case "ResourceInUseException":
+	case strings.EqualFold("ResourceInUseException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceInUseException(response, errorBody)
 
-	case "ResourceNotFoundException":
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -3683,7 +3684,7 @@ func (m *awsAwsjson10_deserializeOpUpdateContinuousBackups) HandleDeserialize(ct
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3718,7 +3719,7 @@ func awsAwsjson10_deserializeOpErrorUpdateContinuousBackups(response *smithyhttp
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3731,17 +3732,17 @@ func awsAwsjson10_deserializeOpErrorUpdateContinuousBackups(response *smithyhttp
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "ContinuousBackupsUnavailableException":
+	switch {
+	case strings.EqualFold("ContinuousBackupsUnavailableException", errorCode):
 		return awsAwsjson10_deserializeErrorContinuousBackupsUnavailableException(response, errorBody)
 
-	case "InternalServerError":
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "TableNotFoundException":
+	case strings.EqualFold("TableNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorTableNotFoundException(response, errorBody)
 
 	default:
@@ -3792,7 +3793,7 @@ func (m *awsAwsjson10_deserializeOpUpdateContributorInsights) HandleDeserialize(
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3827,7 +3828,7 @@ func awsAwsjson10_deserializeOpErrorUpdateContributorInsights(response *smithyht
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3840,11 +3841,11 @@ func awsAwsjson10_deserializeOpErrorUpdateContributorInsights(response *smithyht
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "ResourceNotFoundException":
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -3895,7 +3896,7 @@ func (m *awsAwsjson10_deserializeOpUpdateGlobalTable) HandleDeserialize(ctx cont
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3930,7 +3931,7 @@ func awsAwsjson10_deserializeOpErrorUpdateGlobalTable(response *smithyhttp.Respo
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3943,23 +3944,23 @@ func awsAwsjson10_deserializeOpErrorUpdateGlobalTable(response *smithyhttp.Respo
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "GlobalTableNotFoundException":
+	switch {
+	case strings.EqualFold("GlobalTableNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorGlobalTableNotFoundException(response, errorBody)
 
-	case "InternalServerError":
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "ReplicaAlreadyExistsException":
+	case strings.EqualFold("ReplicaAlreadyExistsException", errorCode):
 		return awsAwsjson10_deserializeErrorReplicaAlreadyExistsException(response, errorBody)
 
-	case "ReplicaNotFoundException":
+	case strings.EqualFold("ReplicaNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorReplicaNotFoundException(response, errorBody)
 
-	case "TableNotFoundException":
+	case strings.EqualFold("TableNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorTableNotFoundException(response, errorBody)
 
 	default:
@@ -4010,7 +4011,7 @@ func (m *awsAwsjson10_deserializeOpUpdateGlobalTableSettings) HandleDeserialize(
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4045,7 +4046,7 @@ func awsAwsjson10_deserializeOpErrorUpdateGlobalTableSettings(response *smithyht
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4058,26 +4059,26 @@ func awsAwsjson10_deserializeOpErrorUpdateGlobalTableSettings(response *smithyht
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "GlobalTableNotFoundException":
+	switch {
+	case strings.EqualFold("GlobalTableNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorGlobalTableNotFoundException(response, errorBody)
 
-	case "IndexNotFoundException":
+	case strings.EqualFold("IndexNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorIndexNotFoundException(response, errorBody)
 
-	case "InternalServerError":
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "LimitExceededException":
+	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorLimitExceededException(response, errorBody)
 
-	case "ReplicaNotFoundException":
+	case strings.EqualFold("ReplicaNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorReplicaNotFoundException(response, errorBody)
 
-	case "ResourceInUseException":
+	case strings.EqualFold("ResourceInUseException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceInUseException(response, errorBody)
 
 	default:
@@ -4128,7 +4129,7 @@ func (m *awsAwsjson10_deserializeOpUpdateItem) HandleDeserialize(ctx context.Con
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4163,7 +4164,7 @@ func awsAwsjson10_deserializeOpErrorUpdateItem(response *smithyhttp.Response) er
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4176,29 +4177,29 @@ func awsAwsjson10_deserializeOpErrorUpdateItem(response *smithyhttp.Response) er
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "ConditionalCheckFailedException":
+	switch {
+	case strings.EqualFold("ConditionalCheckFailedException", errorCode):
 		return awsAwsjson10_deserializeErrorConditionalCheckFailedException(response, errorBody)
 
-	case "InternalServerError":
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "ItemCollectionSizeLimitExceededException":
+	case strings.EqualFold("ItemCollectionSizeLimitExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorItemCollectionSizeLimitExceededException(response, errorBody)
 
-	case "ProvisionedThroughputExceededException":
+	case strings.EqualFold("ProvisionedThroughputExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorProvisionedThroughputExceededException(response, errorBody)
 
-	case "RequestLimitExceeded":
+	case strings.EqualFold("RequestLimitExceeded", errorCode):
 		return awsAwsjson10_deserializeErrorRequestLimitExceeded(response, errorBody)
 
-	case "ResourceNotFoundException":
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
-	case "TransactionConflictException":
+	case strings.EqualFold("TransactionConflictException", errorCode):
 		return awsAwsjson10_deserializeErrorTransactionConflictException(response, errorBody)
 
 	default:
@@ -4249,7 +4250,7 @@ func (m *awsAwsjson10_deserializeOpUpdateTable) HandleDeserialize(ctx context.Co
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4284,7 +4285,7 @@ func awsAwsjson10_deserializeOpErrorUpdateTable(response *smithyhttp.Response) e
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4297,20 +4298,20 @@ func awsAwsjson10_deserializeOpErrorUpdateTable(response *smithyhttp.Response) e
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "LimitExceededException":
+	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorLimitExceededException(response, errorBody)
 
-	case "ResourceInUseException":
+	case strings.EqualFold("ResourceInUseException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceInUseException(response, errorBody)
 
-	case "ResourceNotFoundException":
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -4361,7 +4362,7 @@ func (m *awsAwsjson10_deserializeOpUpdateTableReplicaAutoScaling) HandleDeserial
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4396,7 +4397,7 @@ func awsAwsjson10_deserializeOpErrorUpdateTableReplicaAutoScaling(response *smit
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4409,17 +4410,17 @@ func awsAwsjson10_deserializeOpErrorUpdateTableReplicaAutoScaling(response *smit
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "LimitExceededException":
+	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorLimitExceededException(response, errorBody)
 
-	case "ResourceInUseException":
+	case strings.EqualFold("ResourceInUseException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceInUseException(response, errorBody)
 
-	case "ResourceNotFoundException":
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -4470,7 +4471,7 @@ func (m *awsAwsjson10_deserializeOpUpdateTimeToLive) HandleDeserialize(ctx conte
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return out, metadata, &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4505,7 +4506,7 @@ func awsAwsjson10_deserializeOpErrorUpdateTimeToLive(response *smithyhttp.Respon
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4518,20 +4519,20 @@ func awsAwsjson10_deserializeOpErrorUpdateTimeToLive(response *smithyhttp.Respon
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "InternalServerError":
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
-	case "InvalidEndpointException":
+	case strings.EqualFold("InvalidEndpointException", errorCode):
 		return awsAwsjson10_deserializeErrorInvalidEndpointException(response, errorBody)
 
-	case "LimitExceededException":
+	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorLimitExceededException(response, errorBody)
 
-	case "ResourceInUseException":
+	case strings.EqualFold("ResourceInUseException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceInUseException(response, errorBody)
 
-	case "ResourceNotFoundException":
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	default:
@@ -4559,7 +4560,7 @@ func awsAwsjson10_deserializeErrorBackupInUseException(response *smithyhttp.Resp
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4583,7 +4584,7 @@ func awsAwsjson10_deserializeErrorBackupNotFoundException(response *smithyhttp.R
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4607,7 +4608,7 @@ func awsAwsjson10_deserializeErrorConditionalCheckFailedException(response *smit
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4631,7 +4632,7 @@ func awsAwsjson10_deserializeErrorContinuousBackupsUnavailableException(response
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4655,7 +4656,7 @@ func awsAwsjson10_deserializeErrorGlobalTableAlreadyExistsException(response *sm
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4679,7 +4680,7 @@ func awsAwsjson10_deserializeErrorGlobalTableNotFoundException(response *smithyh
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4703,7 +4704,7 @@ func awsAwsjson10_deserializeErrorIdempotentParameterMismatchException(response 
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4727,7 +4728,7 @@ func awsAwsjson10_deserializeErrorIndexNotFoundException(response *smithyhttp.Re
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4751,7 +4752,7 @@ func awsAwsjson10_deserializeErrorInternalServerError(response *smithyhttp.Respo
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4775,7 +4776,7 @@ func awsAwsjson10_deserializeErrorInvalidEndpointException(response *smithyhttp.
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4799,7 +4800,7 @@ func awsAwsjson10_deserializeErrorInvalidRestoreTimeException(response *smithyht
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4823,7 +4824,7 @@ func awsAwsjson10_deserializeErrorItemCollectionSizeLimitExceededException(respo
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4847,7 +4848,7 @@ func awsAwsjson10_deserializeErrorLimitExceededException(response *smithyhttp.Re
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4871,7 +4872,7 @@ func awsAwsjson10_deserializeErrorPointInTimeRecoveryUnavailableException(respon
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4895,7 +4896,7 @@ func awsAwsjson10_deserializeErrorProvisionedThroughputExceededException(respons
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4919,7 +4920,7 @@ func awsAwsjson10_deserializeErrorReplicaAlreadyExistsException(response *smithy
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4943,7 +4944,7 @@ func awsAwsjson10_deserializeErrorReplicaNotFoundException(response *smithyhttp.
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4967,7 +4968,7 @@ func awsAwsjson10_deserializeErrorRequestLimitExceeded(response *smithyhttp.Resp
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4991,7 +4992,7 @@ func awsAwsjson10_deserializeErrorResourceInUseException(response *smithyhttp.Re
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -5015,7 +5016,7 @@ func awsAwsjson10_deserializeErrorResourceNotFoundException(response *smithyhttp
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -5039,7 +5040,7 @@ func awsAwsjson10_deserializeErrorTableAlreadyExistsException(response *smithyht
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -5063,7 +5064,7 @@ func awsAwsjson10_deserializeErrorTableInUseException(response *smithyhttp.Respo
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -5087,7 +5088,7 @@ func awsAwsjson10_deserializeErrorTableNotFoundException(response *smithyhttp.Re
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -5111,7 +5112,7 @@ func awsAwsjson10_deserializeErrorTransactionCanceledException(response *smithyh
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -5135,7 +5136,7 @@ func awsAwsjson10_deserializeErrorTransactionConflictException(response *smithyh
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -5159,7 +5160,7 @@ func awsAwsjson10_deserializeErrorTransactionInProgressException(response *smith
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
