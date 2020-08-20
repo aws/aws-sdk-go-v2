@@ -3,8 +3,8 @@ package awsutil_test
 import (
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/awslabs/smithy-go/ptr"
 )
 
 func TestDeepEqual(t *testing.T) {
@@ -16,15 +16,15 @@ func TestDeepEqual(t *testing.T) {
 	}{
 		{"a", "a", true},
 		{"a", "b", false},
-		{"a", aws.String(""), false},
+		{"a", ptr.String(""), false},
 		{"a", nil, false},
-		{"a", aws.String("a"), true},
+		{"a", ptr.String("a"), true},
 		{(*bool)(nil), (*bool)(nil), true},
 		{(*bool)(nil), (*string)(nil), false},
 		{nil, nil, true},
 		{StringAlias("abc"), "abc", true},
 		{StringAlias("abc"), "efg", false},
-		{StringAlias("abc"), aws.String("abc"), true},
+		{StringAlias("abc"), ptr.String("abc"), true},
 		{"abc", StringAlias("abc"), true},
 		{StringAlias("abc"), StringAlias("abc"), true},
 		{StringAlias("abc"), StringAlias("efg"), false},

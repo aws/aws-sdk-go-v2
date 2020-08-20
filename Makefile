@@ -8,19 +8,17 @@ LINTIGNOREDEPS='vendor/.+\.go'
 LINTIGNOREPKGCOMMENT='service/[^/]+/doc_custom.go:.+package comment should be of the form'
 LINTIGNOREENDPOINTS='aws/endpoints/defaults.go:.+(method|const) .+ should be '
 LINTIGNORESINGLEFIGHT='internal/sync/singleflight/singleflight.go:.+error should be the last type'
-LINTIGNOREPROTO="service/smithyprototype/.+\.go:.+don't use underscores in Go names"
 UNIT_TEST_TAGS="example codegen awsinclude"
 ALL_TAGS="example codegen awsinclude integration perftest sdktool"
 
 # SDK's Core and client packages that are compatable with Go 1.9+.
-SDK_CORE_PKGS=./aws/... ./private/... ./internal/...
+SDK_CORE_PKGS=./aws/... ./internal/...
 SDK_CLIENT_PKGS=./service/...
 SDK_COMPA_PKGS=${SDK_CORE_PKGS} ${SDK_CLIENT_PKGS}
 
 # SDK additional packages that are used for development of the SDK.
-SDK_EXAMPLES_PKGS=./example/...
-SDK_MODELS_PKGS=./models/...
-SDK_ALL_PKGS=${SDK_COMPA_PKGS} ${SDK_EXAMPLES_PKGS} ${SDK_MODELS_PKGS}
+SDK_EXAMPLES_PKGS=
+SDK_ALL_PKGS=${SDK_COMPA_PKGS} ${SDK_EXAMPLES_PKGS}
 
 
 all: generate unit
@@ -28,37 +26,22 @@ all: generate unit
 ###################
 # Code Generation #
 ###################
-generate: cleanup-models gen-test gen-endpoints gen-services gen-external-asserts
+generate: gen-services gen-external-asserts
 
-gen-test: gen-protocol-test gen-codegen-test
+smithy-generate:
+	cd codegen && ./gradlew clean build -Plog-tests
 
 #gen-codegen-test:
 #	@echo "Generating SDK API tests"
 #	go generate ./private/model/api/codegentest/service
 
 gen-services:
-	@echo "Generating SDK clients"
-	go generate ./service
-
-gen-protocol-test:
-	@echo "Generating SDK protocol tests"
-	go generate ./private/protocol/...
-
-gen-endpoints:
-	@echo "Generating SDK endpoints"
-	go generate ./models/endpoints
-
-gen-codegen-test:
-	@echo "Generating SDK API tests"
-	go generate ./private/model/api/codegentest/service
+	@echo "TODO: Wire Up Smithy Client Generation"
+	#go generate ./service
 
 gen-external-asserts:
 	@echo "Generating SDK external package implementor assertions"
 	go generate ./aws/external
-
-cleanup-models:
-	@echo "Cleaning up stale model versions"
-	@./cleanup_models.sh
 
 ###################
 # Unit/CI Testing #
@@ -66,7 +49,7 @@ cleanup-models:
 build:
 	go build -o /dev/null -tags ${ALL_TAGS} ${SDK_ALL_PKGS}
 
-unit: verify build
+unit: verify build test-protocols test-services
 	@echo "go test SDK and vendor packages"
 	@go test -tags ${UNIT_TEST_TAGS} ${SDK_ALL_PKGS}
 
@@ -74,16 +57,28 @@ unit-with-race-cover: verify build
 	@echo "go test SDK and vendor packages"
 	@go test -tags ${UNIT_TEST_TAGS} -race -cpu=1,2,4 ${SDK_ALL_PKGS}
 
-ci-test: generate unit-with-race-cover ci-test-generate-validate
+ci-test: generate unit-with-race-cover ci-test-generate-validate test-protocols test-services
+
+ci-test-no-generate: unit-with-race-cover test-protocols test-services
 
 ci-test-generate-validate:
 	@echo "CI test validate no generated code changes"
 	git update-index --assume-unchanged go.mod go.sum
 	git add . -A
 	gitstatus=`git diff --cached --ignore-space-change`; \
-	git update-index --no-assume-unchanged go.mod go.sum
 	echo "$$gitstatus"; \
-	if [ "$$gitstatus" != "" ]; then echo "$$gitstatus"; exit 1; fi
+	if [ "$$gitstatus" != "" ] && [ "$$gitstatus" != "skipping validation" ]; then echo "$$gitstatus"; exit 1; fi
+	git update-index --no-assume-unchanged go.mod go.sum
+
+
+test-protocols:
+	./test_submodules.sh `pwd`/internal/protocoltest "go test -count 1 -run NONE ./..."
+
+test-services:
+	./test_submodules.sh `pwd`/service "go test -count 1 -run NONE ./..."
+
+mod_replace_local:
+	./mod_replace_local_submodules.sh `pwd` `pwd` `pwd`/../smithy-go
 
 #######################
 # Integration Testing #
@@ -109,21 +104,14 @@ cleanup-integ-buckets:
 ###################
 # Sandbox Testing #
 ###################
-sandbox-tests: sandbox-test-go1.12 sandbox-test-go1.13 sandbox-test-gotip
+sandbox-tests: sandbox-test-go1.14 sandbox-test-gotip
 
-sandbox-build-go1.13:
-	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.13 -t "aws-sdk-go-v2-1.13" .
-sandbox-go1.13: sandbox-build-go1.13
-	docker run -i -t aws-sdk-go-v2-1.13 bash
-sandbox-test-go1.13: sandbox-build-go1.13
-	docker run -t aws-sdk-go-v2-1.13
-
-sandbox-build-go1.12:
-	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.12 -t "aws-sdk-go-v2-1.12" .
-sandbox-go1.12: sandbox-build-go1.12
-	docker run -i -t aws-sdk-go-v2-1.12 bash
-sandbox-test-go1.12: sandbox-build-go1.12
-	docker run -t aws-sdk-go-v2-1.12
+sandbox-build-go1.14:
+	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.14 -t "aws-sdk-go-v2-1.14" .
+sandbox-go1.14: sandbox-build-go1.14
+	docker run -i -t aws-sdk-go-v2-1.14 bash
+sandbox-test-go1.14: sandbox-build-go1.14
+	docker run -t aws-sdk-go-v2-1.14
 
 sandbox-build-gotip:
 	@echo "Run make update-aws-golang-tip, if this test fails because missing aws-golang:tip container"
@@ -153,8 +141,7 @@ lint:
 	-e ${LINTIGNOREINFLECTS3UPLOAD} \
 	-e ${LINTIGNOREPKGCOMMENT} \
 	-e ${LINTIGNOREENDPOINTS} \
-	-e ${LINTIGNORESINGLEFIGHT} \
-	-e ${LINTIGNOREPROTO}`; \
+	-e ${LINTIGNORESINGLEFIGHT}`; \
 	echo "$$dolint"; \
 	if [ "$$dolint" != "" ]; then exit 1; fi
 

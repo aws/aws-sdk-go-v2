@@ -33,4 +33,7 @@ const (
 
 	// ShortTimeFormat is the shorten time format used in the credential scope
 	ShortTimeFormat = "20060102"
+
+	// ContentSHAKey is the SHA256 of request body
+	ContentSHAKey = "X-Amz-Content-Sha256"
 )

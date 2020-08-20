@@ -3,16 +3,9 @@ package external
 import (
 	"fmt"
 	"net/url"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
-	"github.com/aws/aws-sdk-go-v2/aws/ec2metadata"
-	"github.com/aws/aws-sdk-go-v2/aws/ec2rolecreds"
-	"github.com/aws/aws-sdk-go-v2/aws/endpointcreds"
 	"github.com/aws/aws-sdk-go-v2/aws/processcreds"
-	"github.com/aws/aws-sdk-go-v2/aws/stscreds"
-	"github.com/aws/aws-sdk-go-v2/service/sts"
 )
 
 const (
@@ -157,183 +150,49 @@ func processCredentials(cfg *aws.Config, sharedConfig *SharedConfig, configs Con
 }
 
 func resolveLocalHTTPCredProvider(cfg *aws.Config, endpointURL, authToken string, configs Configs) error {
-	var errMsg string
+	var resolveError error
 
 	parsed, err := url.Parse(endpointURL)
 	if err != nil {
-		errMsg = fmt.Sprintf("invalid URL, %v", err)
+		resolveError = fmt.Errorf("invalid URL, %w", err)
 	} else {
 		host := parsed.Hostname()
 		if len(host) == 0 {
-			errMsg = "unable to parse host from local HTTP cred provider URL"
+			resolveError = fmt.Errorf("unable to parse host from local HTTP cred provider URL")
 		} else if isLoopback, loopbackErr := isLoopbackHost(host); loopbackErr != nil {
-			errMsg = fmt.Sprintf("failed to resolve host %q, %v", host, loopbackErr)
+			resolveError = fmt.Errorf("failed to resolve host %q, %v", host, loopbackErr)
 		} else if !isLoopback {
-			errMsg = fmt.Sprintf("invalid endpoint host, %q, only loopback hosts are allowed.", host)
+			resolveError = fmt.Errorf("invalid endpoint host, %q, only loopback hosts are allowed", host)
 		}
 	}
 
-	if len(errMsg) > 0 {
+	if resolveError != nil {
 		if cfg.Logger != nil {
-			cfg.Logger.Log("Ignoring, HTTP credential provider", errMsg, err)
+			cfg.Logger.Log("Ignoring, HTTP credential provider", resolveError.Error())
 		}
-		return awserr.New("CredentialsEndpointError", errMsg, err)
+		return fmt.Errorf("container credentials failure: %w", resolveError)
 	}
 
 	return resolveHTTPCredProvider(cfg, endpointURL, authToken, configs)
 }
 
-func resolveHTTPCredProvider(cfg *aws.Config, url, authToken string, configs Configs) error {
-	cfgCopy := cfg.Copy()
-
-	cfgCopy.EndpointResolver = aws.EndpointResolverFunc(func(service, region string) (aws.Endpoint, error) {
-		return aws.Endpoint{URL: url}, nil
-	})
-
-	opts := []func(*endpointcreds.ProviderOptions){
-		func(options *endpointcreds.ProviderOptions) {
-			options.ExpiryWindow = 5 * time.Minute
-			if len(authToken) != 0 {
-				options.AuthorizationToken = authToken
-			}
-		},
-	}
-
-	options, found, err := GetEndpointCredentialProviderOptions(configs)
-	if err != nil {
-		return err
-	}
-	if found {
-		opts = append(opts, options)
-	}
-
-	provider := endpointcreds.New(cfgCopy, opts...)
-
-	cfg.Credentials = provider
-
-	return nil
-}
-
-func resolveEC2RoleCredentials(cfg *aws.Config, configs Configs) error {
-	cfgCpy := *cfg
-
-	opts := []func(*ec2rolecreds.ProviderOptions){
-		func(options *ec2rolecreds.ProviderOptions) {
-			options.ExpiryWindow = 5 * time.Minute
-		},
-	}
-
-	options, found, err := GetEC2RoleCredentialProviderOptions(configs)
-	if err != nil {
-		return err
-	}
-	if found {
-		opts = append(opts, options)
-	}
-
-	provider := ec2rolecreds.New(ec2metadata.New(cfgCpy), opts...)
-
-	cfg.Credentials = provider
-
-	return nil
-}
-
 func resolveCredsFromSource(cfg *aws.Config, envConfig *EnvConfig, sharedCfg *SharedConfig, configs Configs) (err error) {
 	switch sharedCfg.CredentialSource {
 	case credSourceEc2Metadata:
-		err = resolveEC2RoleCredentials(cfg, configs)
+		return resolveEC2RoleCredentials(cfg, configs)
 
 	case credSourceEnvironment:
 		cfg.Credentials = aws.StaticCredentialsProvider{Value: envConfig.Credentials}
 
 	case credSourceECSContainer:
 		if len(envConfig.ContainerCredentialsRelativePath) == 0 {
-			return awserr.New(ErrCodeSharedConfig, "EcsContainer was specified as the credential_source, but 'AWS_CONTAINER_CREDENTIALS_RELATIVE_URI' was not set", nil)
+			return fmt.Errorf("EcsContainer was specified as the credential_source, but 'AWS_CONTAINER_CREDENTIALS_RELATIVE_URI' was not set")
 		}
-		return resolveHTTPCredProvider(cfg, ecsContainerURI(envConfig.ContainerCredentialsRelativePath), envConfig.ContainerAuthorizationToken, nil)
+		return resolveHTTPCredProvider(cfg, ecsContainerURI(envConfig.ContainerCredentialsRelativePath), envConfig.ContainerAuthorizationToken, configs)
 
 	default:
-		return awserr.New(ErrCodeSharedConfig, "credential source values must be EcsContainer, Ec2InstanceMetadata, or Environment", nil)
+		return fmt.Errorf("credential_source values must be EcsContainer, Ec2InstanceMetadata, or Environment")
 	}
-
-	return nil
-}
-
-func assumeWebIdentity(cfg *aws.Config, filepath string, roleARN, sessionName string, configs Configs) error {
-	if len(filepath) == 0 {
-		return awserr.New(stscreds.ErrCodeWebIdentity, "token file path is not set", nil)
-	}
-
-	if len(roleARN) == 0 {
-		return awserr.New(stscreds.ErrCodeWebIdentity, "role ARN is not set", nil)
-	}
-
-	var opts []func(*stscreds.WebIdentityRoleProviderOptions)
-
-	options, found, err := GetWebIdentityCredentialProviderOptions(configs)
-	if err != nil {
-		return err
-	}
-	if found {
-		opts = append(opts, options)
-	}
-
-	provider := stscreds.NewWebIdentityRoleProvider(sts.New(*cfg), roleARN, sessionName, stscreds.IdentityTokenFile(filepath), opts...)
-
-	cfg.Credentials = provider
-
-	return nil
-}
-
-func credsFromAssumeRole(cfg *aws.Config, sharedCfg *SharedConfig, configs Configs) (err error) {
-	var tokenFunc func() (string, error)
-	if len(sharedCfg.MFASerial) != 0 {
-		var found bool
-		tokenFunc, found, err = GetMFATokenFunc(configs)
-		if err != nil {
-			return err
-		}
-
-		if !found {
-			// AssumeRole Token provider is required if doing Assume Role
-			// with MFA.
-			return AssumeRoleTokenProviderNotSetError{}
-		}
-	}
-
-	sts := sts.New(*cfg)
-
-	opts := []func(*stscreds.AssumeRoleProviderOptions){
-		func(options *stscreds.AssumeRoleProviderOptions) {
-			options.RoleSessionName = sharedCfg.RoleSessionName
-			if sharedCfg.RoleDurationSeconds != nil {
-				if *sharedCfg.RoleDurationSeconds/time.Minute > 15 {
-					options.Duration = *sharedCfg.RoleDurationSeconds
-				}
-			}
-
-			// Assume role with external ID
-			if len(sharedCfg.ExternalID) > 0 {
-				options.ExternalID = aws.String(sharedCfg.ExternalID)
-			}
-
-			// Assume role with MFA
-			if len(sharedCfg.MFASerial) != 0 {
-				options.SerialNumber = aws.String(sharedCfg.MFASerial)
-				options.TokenProvider = tokenFunc
-			}
-		},
-	}
-
-	options, found, err := GetAssumeRoleCredentialProviderOptions(configs)
-	if err != nil {
-		return err
-	}
-	if found {
-		opts = append(opts, options)
-	}
-
-	cfg.Credentials = stscreds.NewAssumeRoleProvider(sts, sharedCfg.RoleARN, opts...)
 
 	return nil
 }
@@ -384,22 +243,7 @@ func getAWSConfigSources(configs Configs) (*EnvConfig, *SharedConfig, Configs) {
 // load assume a role with an MFA token.
 type AssumeRoleTokenProviderNotSetError struct{}
 
-// Code is the short id of the error.
-func (e AssumeRoleTokenProviderNotSetError) Code() string {
-	return "AssumeRoleTokenProviderNotSetError"
-}
-
-// Message is the description of the error
-func (e AssumeRoleTokenProviderNotSetError) Message() string {
-	return fmt.Sprintf("assume role with MFA enabled, but AssumeRoleTokenProvider session option not set.")
-}
-
-// OrigErr is the underlying error that caused the failure.
-func (e AssumeRoleTokenProviderNotSetError) OrigErr() error {
-	return nil
-}
-
-// Error satisfies the error interface.
+// Error is the error message
 func (e AssumeRoleTokenProviderNotSetError) Error() string {
-	return awserr.SprintError(e.Code(), e.Message(), "", nil)
+	return fmt.Sprintf("assume role with MFA enabled, but AssumeRoleTokenProvider session option not set.")
 }
