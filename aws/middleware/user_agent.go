@@ -7,7 +7,6 @@ import (
 	"runtime"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/awslabs/smithy-go/httpbinding"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -17,7 +16,7 @@ const execEnvUAKey = `exec-env`
 
 // requestUserAgent is a build middleware that set the User-Agent for the request.
 type requestUserAgent struct {
-	uab *httpbinding.UserAgentBuilder
+	uab *smithyhttp.UserAgentBuilder
 }
 
 // newRequestUserAgent returns a new requestUserAgent which will set the User-Agent for the request.
@@ -25,7 +24,7 @@ type requestUserAgent struct {
 // Default Example:
 //   aws-sdk-go/2.3.4 GOOS/linux GOARCH/amd64 GO/go1.14
 func newRequestUserAgent() *requestUserAgent {
-	uab := httpbinding.NewUserAgentBuilder()
+	uab := smithyhttp.NewUserAgentBuilder()
 	uab.AddKeyValue(aws.SDKName, aws.SDKVersion)
 	uab.AddKeyValue("GOOS", runtime.GOOS)
 	uab.AddKeyValue("GOARCH", runtime.GOARCH)
