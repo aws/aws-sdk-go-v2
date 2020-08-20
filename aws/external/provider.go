@@ -1,15 +1,10 @@
 package external
 
 import (
-	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/ec2metadata"
-	"github.com/aws/aws-sdk-go-v2/aws/ec2rolecreds"
-	"github.com/aws/aws-sdk-go-v2/aws/endpointcreds"
 	"github.com/aws/aws-sdk-go-v2/aws/processcreds"
-	"github.com/aws/aws-sdk-go-v2/aws/stscreds"
 )
 
 // SharedConfigProfileProvider provides access to the shared config profile
@@ -221,69 +216,6 @@ func GetMFATokenFunc(configs Configs) (func() (string, error), bool, error) {
 	return nil, false, nil
 }
 
-// WithEC2MetadataRegion provides a RegionProvider that retrieves the region
-// from the EC2 Metadata service.
-//
-// TODO add this provider to the default config loading?
-type WithEC2MetadataRegion struct {
-	ctx    context.Context
-	client *ec2metadata.Client
-}
-
-// NewWithEC2MetadataRegion function takes in a context and an ec2metadataClient,
-// returns a WithEC2MetadataRegion region provider
-//
-// Usage:
-// ec2metaClient := ec2metadata.New(defaults.Config())
-//
-// cfg, err := external.LoadDefaultAWSConfig(
-//    external.NewWithEC2MetadataRegion(ctx, ec2metaClient),
-// )
-//
-func NewWithEC2MetadataRegion(ctx context.Context, client *ec2metadata.Client) WithEC2MetadataRegion {
-	return WithEC2MetadataRegion{
-		ctx:    ctx,
-		client: client,
-	}
-}
-
-// GetRegion attempts to retrieve the region from EC2 Metadata service.
-func (p WithEC2MetadataRegion) GetRegion() (string, error) {
-	return p.client.Region(p.ctx)
-}
-
-// EnableEndpointDiscoveryProvider provides access to the
-type EnableEndpointDiscoveryProvider interface {
-	GetEnableEndpointDiscovery() (value, found bool, err error)
-}
-
-// WithEnableEndpointDiscovery provides a wrapping type of a bool to satisfy
-// the EnableEndpointDiscoveryProvider interface.
-type WithEnableEndpointDiscovery bool
-
-// GetEnableEndpointDiscovery returns whether to enable service endpoint discovery
-func (w WithEnableEndpointDiscovery) GetEnableEndpointDiscovery() (value, found bool, err error) {
-	return bool(w), true, nil
-}
-
-// GetEnableEndpointDiscovery searches the provided configs and returns the value for
-// EndpointDiscoveryEnabled.
-func GetEnableEndpointDiscovery(configs Configs) (value, found bool, err error) {
-	for _, cfg := range configs {
-		if p, ok := cfg.(EnableEndpointDiscoveryProvider); ok {
-			value, found, err = p.GetEnableEndpointDiscovery()
-			if err != nil {
-				return false, false, err
-			}
-			if found {
-				break
-			}
-		}
-	}
-
-	return value, found, err
-}
-
 // WithAssumeRoleDuration provides a wrapping type of a time.Duration to satisfy
 type WithAssumeRoleDuration time.Duration
 
@@ -291,131 +223,6 @@ type WithAssumeRoleDuration time.Duration
 // the assume role credentials duration.
 func (w WithAssumeRoleDuration) GetAssumeRoleDuration() (time.Duration, bool, error) {
 	return time.Duration(w), true, nil
-}
-
-// HandlersFunc is a function pointer that takes a list of handlers and returns the modified set of handlers to use
-type HandlersFunc func(aws.Handlers) aws.Handlers
-
-// HandlersFuncProvider provides access to the configuration handlers
-type HandlersFuncProvider interface {
-	GetHandlersFunc() (HandlersFunc, bool, error)
-}
-
-// WithHandlersFunc implements the HandlersFuncProvider and delegates to the wrapped function
-type WithHandlersFunc HandlersFunc
-
-// GetHandlersFunc returns the wrapped haundlers function
-func (w WithHandlersFunc) GetHandlersFunc() (HandlersFunc, bool, error) {
-	return HandlersFunc(w), true, nil
-}
-
-// GetHandlersFunc searches the provided configs and returns the first HandlersFunc returned
-// by a configuration provider.
-func GetHandlersFunc(configs Configs) (f HandlersFunc, found bool, err error) {
-	for _, c := range configs {
-		if p, ok := c.(HandlersFuncProvider); ok {
-			f, found, err = p.GetHandlersFunc()
-			if err != nil {
-				return nil, false, err
-			}
-			if found {
-				break
-			}
-		}
-	}
-	return f, found, err
-}
-
-// EndpointResolverFunc is a function that is given the default EndpointResolver and returns an aws.EndpointResolver
-// that will be used
-type EndpointResolverFunc func(aws.EndpointResolver) aws.EndpointResolver
-
-// EndpointResolverFuncProvider is an interface for retrieving an aws.EndpointResolver from a configuration source
-type EndpointResolverFuncProvider interface {
-	GetEndpointResolverFunc() (EndpointResolverFunc, bool, error)
-}
-
-// WithEndpointResolverFunc wraps a aws.EndpointResolver value to satisfy the EndpointResolverFuncProvider interface
-type WithEndpointResolverFunc EndpointResolverFunc
-
-// GetEndpointResolverFunc returns the wrapped EndpointResolverFunc
-func (w WithEndpointResolverFunc) GetEndpointResolverFunc() (EndpointResolverFunc, bool, error) {
-	return EndpointResolverFunc(w), true, nil
-}
-
-// GetEndpointResolverFunc searches the provided config sources for a EndpointResolverFunc that can be used
-// to configure the aws.Config.EndpointResolver value.
-func GetEndpointResolverFunc(configs Configs) (f EndpointResolverFunc, found bool, err error) {
-	for _, c := range configs {
-		if p, ok := c.(EndpointResolverFuncProvider); ok {
-			f, found, err = p.GetEndpointResolverFunc()
-			if err != nil {
-				return nil, false, err
-			}
-		}
-	}
-
-	return f, found, err
-}
-
-// EC2RoleCredentialProviderOptions is an interface for retrieving a function for setting
-// the ec2rolecreds.Provider options.
-type EC2RoleCredentialProviderOptions interface {
-	GetEC2RoleCredentialProviderOptions() (func(*ec2rolecreds.ProviderOptions), bool, error)
-}
-
-// WithEC2RoleCredentialProviderOptions wraps a function and satisfies the EC2RoleCredentialProviderOptions interface
-type WithEC2RoleCredentialProviderOptions func(*ec2rolecreds.ProviderOptions)
-
-// GetEC2RoleCredentialProviderOptions returns the wrapped function
-func (w WithEC2RoleCredentialProviderOptions) GetEC2RoleCredentialProviderOptions() (func(*ec2rolecreds.ProviderOptions), bool, error) {
-	return w, true, nil
-}
-
-// GetEC2RoleCredentialProviderOptions searches the slice of configs and returns the first function found
-func GetEC2RoleCredentialProviderOptions(configs Configs) (f func(*ec2rolecreds.ProviderOptions), found bool, err error) {
-	for _, config := range configs {
-		if p, ok := config.(EC2RoleCredentialProviderOptions); ok {
-			f, found, err = p.GetEC2RoleCredentialProviderOptions()
-			if err != nil {
-				return nil, false, err
-			}
-			if found {
-				break
-			}
-		}
-	}
-	return f, found, err
-}
-
-// EndpointCredentialProviderOptions is an interface for retrieving a function for setting
-// the endpointcreds.ProviderOptions.
-type EndpointCredentialProviderOptions interface {
-	GetEndpointCredentialProviderOptions() (func(*endpointcreds.ProviderOptions), bool, error)
-}
-
-// WithEndpointCredentialProviderOptions wraps a function and satisfies the EC2RoleCredentialProviderOptions interface
-type WithEndpointCredentialProviderOptions func(*endpointcreds.ProviderOptions)
-
-// GetEndpointCredentialProviderOptions returns the wrapped function
-func (w WithEndpointCredentialProviderOptions) GetEndpointCredentialProviderOptions() (func(*endpointcreds.ProviderOptions), bool, error) {
-	return w, true, nil
-}
-
-// GetEndpointCredentialProviderOptions searches the slice of configs and returns the first function found
-func GetEndpointCredentialProviderOptions(configs Configs) (f func(*endpointcreds.ProviderOptions), found bool, err error) {
-	for _, config := range configs {
-		if p, ok := config.(EndpointCredentialProviderOptions); ok {
-			f, found, err = p.GetEndpointCredentialProviderOptions()
-			if err != nil {
-				return nil, false, err
-			}
-			if found {
-				break
-			}
-		}
-	}
-	return f, found, err
 }
 
 // ProcessCredentialProviderOptions is an interface for retrieving a function for setting
@@ -437,66 +244,6 @@ func GetProcessCredentialProviderOptions(configs Configs) (f func(*processcreds.
 	for _, config := range configs {
 		if p, ok := config.(ProcessCredentialProviderOptions); ok {
 			f, found, err = p.GetProcessCredentialProviderOptions()
-			if err != nil {
-				return nil, false, err
-			}
-			if found {
-				break
-			}
-		}
-	}
-	return f, found, err
-}
-
-// AssumeRoleCredentialProviderOptions is an interface for retrieving a function for setting
-// the stscreds.AssumeRoleProviderOptions.
-type AssumeRoleCredentialProviderOptions interface {
-	GetAssumeRoleCredentialProviderOptions() (func(*stscreds.AssumeRoleProviderOptions), bool, error)
-}
-
-// WithAssumeRoleCredentialProviderOptions wraps a function and satisfies the EC2RoleCredentialProviderOptions interface
-type WithAssumeRoleCredentialProviderOptions func(*stscreds.AssumeRoleProviderOptions)
-
-// GetAssumeRoleCredentialProviderOptions returns the wrapped function
-func (w WithAssumeRoleCredentialProviderOptions) GetAssumeRoleCredentialProviderOptions() (func(*stscreds.AssumeRoleProviderOptions), bool, error) {
-	return w, true, nil
-}
-
-// GetAssumeRoleCredentialProviderOptions searches the slice of configs and returns the first function found
-func GetAssumeRoleCredentialProviderOptions(configs Configs) (f func(*stscreds.AssumeRoleProviderOptions), found bool, err error) {
-	for _, config := range configs {
-		if p, ok := config.(AssumeRoleCredentialProviderOptions); ok {
-			f, found, err = p.GetAssumeRoleCredentialProviderOptions()
-			if err != nil {
-				return nil, false, err
-			}
-			if found {
-				break
-			}
-		}
-	}
-	return f, found, err
-}
-
-// WebIdentityCredentialProviderOptions is an interface for retrieving a function for setting
-// the stscreds.WebIdentityCredentialProviderOptions.
-type WebIdentityCredentialProviderOptions interface {
-	GetWebIdentityCredentialProviderOptions() (func(*stscreds.WebIdentityRoleProviderOptions), bool, error)
-}
-
-// WithWebIdentityCredentialProviderOptions wraps a function and satisfies the EC2RoleCredentialProviderOptions interface
-type WithWebIdentityCredentialProviderOptions func(*stscreds.WebIdentityRoleProviderOptions)
-
-// GetWebIdentityCredentialProviderOptions returns the wrapped function
-func (w WithWebIdentityCredentialProviderOptions) GetWebIdentityCredentialProviderOptions() (func(*stscreds.WebIdentityRoleProviderOptions), bool, error) {
-	return w, true, nil
-}
-
-// GetWebIdentityCredentialProviderOptions searches the slice of configs and returns the first function found
-func GetWebIdentityCredentialProviderOptions(configs Configs) (f func(*stscreds.WebIdentityRoleProviderOptions), found bool, err error) {
-	for _, config := range configs {
-		if p, ok := config.(WebIdentityCredentialProviderOptions); ok {
-			f, found, err = p.GetWebIdentityCredentialProviderOptions()
 			if err != nil {
 				return nil, false, err
 			}

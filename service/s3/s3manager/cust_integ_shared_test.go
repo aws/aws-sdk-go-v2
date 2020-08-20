@@ -1,4 +1,4 @@
-// +build integration
+// +build integration,disabled
 
 package s3manager_test
 
@@ -14,7 +14,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/integration/s3integ"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
 )
 
 func init() {
@@ -74,7 +73,7 @@ func (d dlwriter) WriteAt(p []byte, pos int64) (n int, err error) {
 }
 
 func validate(t *testing.T, key string, md5value string) {
-	mgr := s3manager.NewDownloader(integCfg)
+	mgr := NewDownloader(integCfg)
 	params := &s3.GetObjectInput{Bucket: bucketName, Key: &key}
 
 	w := newDLWriter(1024 * 1024 * 20)

@@ -1,3 +1,5 @@
+// +build disabled
+
 package s3manager
 
 func defaultDownloadBufferProvider() WriterReadFromProvider {

@@ -1,4 +1,4 @@
-// +build !windows
+// +build !windows,disabled
 
 package s3manager
 

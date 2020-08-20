@@ -1,3 +1,5 @@
+// +build disabled
+
 package stscreds_test
 
 import (

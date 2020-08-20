@@ -1,3 +1,5 @@
+// +build disabled
+
 package ec2rolecreds_test
 
 import (

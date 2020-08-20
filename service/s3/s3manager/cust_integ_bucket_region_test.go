@@ -1,4 +1,4 @@
-// +build integration
+// +build integration,disabled
 
 package s3manager_test
 
@@ -7,14 +7,13 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/s3/s3manager"
 )
 
 func TestInteg_GetBucketRegion(t *testing.T) {
 	expectRegion := integCfg.Region
 
 	ctx := context.Background()
-	region, err := s3manager.GetBucketRegion(ctx, integCfg,
+	region, err := GetBucketRegion(ctx, integCfg,
 		aws.StringValue(bucketName), integCfg.Region)
 
 	if err != nil {

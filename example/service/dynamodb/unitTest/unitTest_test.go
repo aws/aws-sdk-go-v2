@@ -1,4 +1,4 @@
-// +build example
+// +build example,disabled
 
 // Unit tests for package unitTest.
 package unitTest

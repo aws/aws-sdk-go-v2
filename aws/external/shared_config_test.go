@@ -9,8 +9,8 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/awserr"
 	"github.com/aws/aws-sdk-go-v2/internal/ini"
+	"github.com/awslabs/smithy-go/ptr"
 )
 
 var _ RegionProvider = (*SharedConfig)(nil)
@@ -140,7 +140,7 @@ func TestNewSharedConfig(t *testing.T) {
 			Profile:   "profile_name",
 			Err: SharedConfigLoadError{
 				Filename: filepath.Join("testdata", "shared_config_invalid_ini"),
-				Err:      awserr.New("INIParseError", "", nil),
+				Err:      fmt.Errorf("invalid state"),
 			},
 		},
 		9: {
@@ -148,7 +148,7 @@ func TestNewSharedConfig(t *testing.T) {
 			Filenames: []string{testConfigFilename},
 			Expected: SharedConfig{
 				Profile:        "valid_arn_region",
-				S3UseARNRegion: aws.Bool(true),
+				S3UseARNRegion: ptr.Bool(true),
 			},
 		},
 		10: {
@@ -156,7 +156,7 @@ func TestNewSharedConfig(t *testing.T) {
 			Filenames: []string{testConfigFilename},
 			Expected: SharedConfig{
 				Profile:                 "endpoint_discovery",
-				EnableEndpointDiscovery: aws.Bool(true),
+				EnableEndpointDiscovery: ptr.Bool(true),
 			},
 		},
 		11: {

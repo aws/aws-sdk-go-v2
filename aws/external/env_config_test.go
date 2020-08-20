@@ -8,6 +8,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
+	"github.com/awslabs/smithy-go/ptr"
 )
 
 var _ SharedConfigProfileProvider = (*EnvConfig)(nil)
@@ -218,7 +219,7 @@ func TestNewEnvConfig(t *testing.T) {
 				"AWS_S3_USE_ARN_REGION": "true",
 			},
 			Config: EnvConfig{
-				S3UseARNRegion: aws.Bool(true),
+				S3UseARNRegion: ptr.Bool(true),
 			},
 		},
 		12: {
@@ -226,7 +227,7 @@ func TestNewEnvConfig(t *testing.T) {
 				"AWS_ENABLE_ENDPOINT_DISCOVERY": "true",
 			},
 			Config: EnvConfig{
-				EnableEndpointDiscovery: aws.Bool(true),
+				EnableEndpointDiscovery: ptr.Bool(true),
 			},
 		},
 	}

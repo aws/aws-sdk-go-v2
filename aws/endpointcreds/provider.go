@@ -1,3 +1,5 @@
+// +build disabled
+
 // Package endpointcreds provides support for retrieving credentials from an
 // arbitrary HTTP endpoint.
 //
