@@ -10,6 +10,7 @@ import (
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
+	"strings"
 )
 
 type awsAwsquery_deserializeOpEmptyInputAndEmptyOutput struct {
@@ -52,7 +53,7 @@ func awsAwsquery_deserializeOpErrorEmptyInputAndEmptyOutput(response *smithyhttp
 	errorMessage := errorCode
 
 	_ = errorBody
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -103,7 +104,7 @@ func awsAwsquery_deserializeOpErrorFlattenedXmlMap(response *smithyhttp.Response
 	errorMessage := errorCode
 
 	_ = errorBody
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -154,7 +155,7 @@ func awsAwsquery_deserializeOpErrorFlattenedXmlMapWithXmlName(response *smithyht
 	errorMessage := errorCode
 
 	_ = errorBody
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -205,11 +206,11 @@ func awsAwsquery_deserializeOpErrorGreetingWithErrors(response *smithyhttp.Respo
 	errorMessage := errorCode
 
 	_ = errorBody
-	switch errorCode {
-	case "ComplexError":
+	switch {
+	case strings.EqualFold("ComplexError", errorCode):
 		return awsAwsquery_deserializeErrorComplexError(response, errorBody)
 
-	case "InvalidGreeting":
+	case strings.EqualFold("InvalidGreeting", errorCode):
 		return awsAwsquery_deserializeErrorInvalidGreeting(response, errorBody)
 
 	default:
@@ -262,7 +263,7 @@ func awsAwsquery_deserializeOpErrorIgnoresWrappingXmlName(response *smithyhttp.R
 	errorMessage := errorCode
 
 	_ = errorBody
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -313,7 +314,7 @@ func awsAwsquery_deserializeOpErrorNestedStructures(response *smithyhttp.Respons
 	errorMessage := errorCode
 
 	_ = errorBody
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -364,7 +365,7 @@ func awsAwsquery_deserializeOpErrorNoInputAndNoOutput(response *smithyhttp.Respo
 	errorMessage := errorCode
 
 	_ = errorBody
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -415,7 +416,7 @@ func awsAwsquery_deserializeOpErrorNoInputAndOutput(response *smithyhttp.Respons
 	errorMessage := errorCode
 
 	_ = errorBody
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -466,7 +467,7 @@ func awsAwsquery_deserializeOpErrorQueryIdempotencyTokenAutoFill(response *smith
 	errorMessage := errorCode
 
 	_ = errorBody
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -517,7 +518,7 @@ func awsAwsquery_deserializeOpErrorQueryLists(response *smithyhttp.Response) err
 	errorMessage := errorCode
 
 	_ = errorBody
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -568,7 +569,7 @@ func awsAwsquery_deserializeOpErrorQueryMaps(response *smithyhttp.Response) erro
 	errorMessage := errorCode
 
 	_ = errorBody
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -619,7 +620,7 @@ func awsAwsquery_deserializeOpErrorQueryTimestamps(response *smithyhttp.Response
 	errorMessage := errorCode
 
 	_ = errorBody
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -670,7 +671,7 @@ func awsAwsquery_deserializeOpErrorRecursiveXmlShapes(response *smithyhttp.Respo
 	errorMessage := errorCode
 
 	_ = errorBody
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -721,7 +722,7 @@ func awsAwsquery_deserializeOpErrorSimpleInputParams(response *smithyhttp.Respon
 	errorMessage := errorCode
 
 	_ = errorBody
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -772,7 +773,7 @@ func awsAwsquery_deserializeOpErrorSimpleScalarXmlProperties(response *smithyhtt
 	errorMessage := errorCode
 
 	_ = errorBody
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -823,7 +824,7 @@ func awsAwsquery_deserializeOpErrorXmlBlobs(response *smithyhttp.Response) error
 	errorMessage := errorCode
 
 	_ = errorBody
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -874,7 +875,7 @@ func awsAwsquery_deserializeOpErrorXmlEnums(response *smithyhttp.Response) error
 	errorMessage := errorCode
 
 	_ = errorBody
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -925,7 +926,7 @@ func awsAwsquery_deserializeOpErrorXmlLists(response *smithyhttp.Response) error
 	errorMessage := errorCode
 
 	_ = errorBody
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -976,7 +977,7 @@ func awsAwsquery_deserializeOpErrorXmlMaps(response *smithyhttp.Response) error 
 	errorMessage := errorCode
 
 	_ = errorBody
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1027,7 +1028,7 @@ func awsAwsquery_deserializeOpErrorXmlMapsXmlName(response *smithyhttp.Response)
 	errorMessage := errorCode
 
 	_ = errorBody
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1078,7 +1079,7 @@ func awsAwsquery_deserializeOpErrorXmlNamespaces(response *smithyhttp.Response) 
 	errorMessage := errorCode
 
 	_ = errorBody
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1129,7 +1130,7 @@ func awsAwsquery_deserializeOpErrorXmlTimestamps(response *smithyhttp.Response) 
 	errorMessage := errorCode
 
 	_ = errorBody
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,

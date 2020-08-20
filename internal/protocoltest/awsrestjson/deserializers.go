@@ -78,7 +78,7 @@ func awsRestjson1_deserializeOpErrorAllQueryStringTypes(response *smithyhttp.Res
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -91,7 +91,7 @@ func awsRestjson1_deserializeOpErrorAllQueryStringTypes(response *smithyhttp.Res
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -158,7 +158,7 @@ func awsRestjson1_deserializeOpErrorConstantAndVariableQueryString(response *smi
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -171,7 +171,7 @@ func awsRestjson1_deserializeOpErrorConstantAndVariableQueryString(response *smi
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -238,7 +238,7 @@ func awsRestjson1_deserializeOpErrorConstantQueryString(response *smithyhttp.Res
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -251,7 +251,7 @@ func awsRestjson1_deserializeOpErrorConstantQueryString(response *smithyhttp.Res
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -318,7 +318,7 @@ func awsRestjson1_deserializeOpErrorEmptyInputAndEmptyOutput(response *smithyhtt
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -331,7 +331,7 @@ func awsRestjson1_deserializeOpErrorEmptyInputAndEmptyOutput(response *smithyhtt
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -403,7 +403,7 @@ func awsRestjson1_deserializeOpErrorGreetingWithErrors(response *smithyhttp.Resp
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -416,14 +416,14 @@ func awsRestjson1_deserializeOpErrorGreetingWithErrors(response *smithyhttp.Resp
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "ComplexError":
+	switch {
+	case strings.EqualFold("ComplexError", errorCode):
 		return awsRestjson1_deserializeErrorComplexError(response, errorBody)
 
-	case "FooError":
+	case strings.EqualFold("FooError", errorCode):
 		return awsRestjson1_deserializeErrorFooError(response, errorBody)
 
-	case "InvalidGreeting":
+	case strings.EqualFold("InvalidGreeting", errorCode):
 		return awsRestjson1_deserializeErrorInvalidGreeting(response, errorBody)
 
 	default:
@@ -515,7 +515,7 @@ func awsRestjson1_deserializeOpErrorHttpPayloadTraits(response *smithyhttp.Respo
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -528,7 +528,7 @@ func awsRestjson1_deserializeOpErrorHttpPayloadTraits(response *smithyhttp.Respo
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -632,7 +632,7 @@ func awsRestjson1_deserializeOpErrorHttpPayloadTraitsWithMediaType(response *smi
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -645,7 +645,7 @@ func awsRestjson1_deserializeOpErrorHttpPayloadTraitsWithMediaType(response *smi
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -757,7 +757,7 @@ func awsRestjson1_deserializeOpErrorHttpPayloadWithStructure(response *smithyhtt
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -770,7 +770,7 @@ func awsRestjson1_deserializeOpErrorHttpPayloadWithStructure(response *smithyhtt
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -898,7 +898,7 @@ func awsRestjson1_deserializeOpErrorHttpPrefixHeaders(response *smithyhttp.Respo
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -911,7 +911,7 @@ func awsRestjson1_deserializeOpErrorHttpPrefixHeaders(response *smithyhttp.Respo
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1001,7 +1001,7 @@ func awsRestjson1_deserializeOpErrorHttpRequestWithGreedyLabelInPath(response *s
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1014,7 +1014,7 @@ func awsRestjson1_deserializeOpErrorHttpRequestWithGreedyLabelInPath(response *s
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1081,7 +1081,7 @@ func awsRestjson1_deserializeOpErrorHttpRequestWithLabels(response *smithyhttp.R
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1094,7 +1094,7 @@ func awsRestjson1_deserializeOpErrorHttpRequestWithLabels(response *smithyhttp.R
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1161,7 +1161,7 @@ func awsRestjson1_deserializeOpErrorHttpRequestWithLabelsAndTimestampFormat(resp
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1174,7 +1174,7 @@ func awsRestjson1_deserializeOpErrorHttpRequestWithLabelsAndTimestampFormat(resp
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1259,7 +1259,7 @@ func awsRestjson1_deserializeOpErrorIgnoreQueryParamsInResponse(response *smithy
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1272,7 +1272,7 @@ func awsRestjson1_deserializeOpErrorIgnoreQueryParamsInResponse(response *smithy
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1421,7 +1421,7 @@ func awsRestjson1_deserializeOpErrorInlineDocument(response *smithyhttp.Response
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1434,7 +1434,7 @@ func awsRestjson1_deserializeOpErrorInlineDocument(response *smithyhttp.Response
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1588,7 +1588,7 @@ func awsRestjson1_deserializeOpErrorInlineDocumentAsPayload(response *smithyhttp
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1601,7 +1601,7 @@ func awsRestjson1_deserializeOpErrorInlineDocumentAsPayload(response *smithyhttp
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1729,7 +1729,7 @@ func awsRestjson1_deserializeOpErrorInputAndOutputWithHeaders(response *smithyht
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1742,7 +1742,7 @@ func awsRestjson1_deserializeOpErrorInputAndOutputWithHeaders(response *smithyht
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -2025,7 +2025,7 @@ func awsRestjson1_deserializeOpErrorJsonBlobs(response *smithyhttp.Response) err
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2038,7 +2038,7 @@ func awsRestjson1_deserializeOpErrorJsonBlobs(response *smithyhttp.Response) err
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -2180,7 +2180,7 @@ func awsRestjson1_deserializeOpErrorJsonEnums(response *smithyhttp.Response) err
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2193,7 +2193,7 @@ func awsRestjson1_deserializeOpErrorJsonEnums(response *smithyhttp.Response) err
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -2383,7 +2383,7 @@ func awsRestjson1_deserializeOpErrorJsonLists(response *smithyhttp.Response) err
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2396,7 +2396,7 @@ func awsRestjson1_deserializeOpErrorJsonLists(response *smithyhttp.Response) err
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -2572,7 +2572,7 @@ func awsRestjson1_deserializeOpErrorJsonMaps(response *smithyhttp.Response) erro
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2585,7 +2585,7 @@ func awsRestjson1_deserializeOpErrorJsonMaps(response *smithyhttp.Response) erro
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -2726,7 +2726,7 @@ func awsRestjson1_deserializeOpErrorJsonTimestamps(response *smithyhttp.Response
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2739,7 +2739,7 @@ func awsRestjson1_deserializeOpErrorJsonTimestamps(response *smithyhttp.Response
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -2930,7 +2930,7 @@ func awsRestjson1_deserializeOpErrorMediaTypeHeader(response *smithyhttp.Respons
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -2943,7 +2943,7 @@ func awsRestjson1_deserializeOpErrorMediaTypeHeader(response *smithyhttp.Respons
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -3023,7 +3023,7 @@ func awsRestjson1_deserializeOpErrorNoInputAndNoOutput(response *smithyhttp.Resp
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3036,7 +3036,7 @@ func awsRestjson1_deserializeOpErrorNoInputAndNoOutput(response *smithyhttp.Resp
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -3103,7 +3103,7 @@ func awsRestjson1_deserializeOpErrorNoInputAndOutput(response *smithyhttp.Respon
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3116,7 +3116,7 @@ func awsRestjson1_deserializeOpErrorNoInputAndOutput(response *smithyhttp.Respon
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -3188,7 +3188,7 @@ func awsRestjson1_deserializeOpErrorNullAndEmptyHeadersClient(response *smithyht
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3201,7 +3201,7 @@ func awsRestjson1_deserializeOpErrorNullAndEmptyHeadersClient(response *smithyht
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -3307,7 +3307,7 @@ func awsRestjson1_deserializeOpErrorNullAndEmptyHeadersServer(response *smithyht
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3320,7 +3320,7 @@ func awsRestjson1_deserializeOpErrorNullAndEmptyHeadersServer(response *smithyht
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -3421,7 +3421,7 @@ func awsRestjson1_deserializeOpErrorOmitsNullSerializesEmptyString(response *smi
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3434,7 +3434,7 @@ func awsRestjson1_deserializeOpErrorOmitsNullSerializesEmptyString(response *smi
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -3501,7 +3501,7 @@ func awsRestjson1_deserializeOpErrorQueryIdempotencyTokenAutoFill(response *smit
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3514,7 +3514,7 @@ func awsRestjson1_deserializeOpErrorQueryIdempotencyTokenAutoFill(response *smit
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -3599,7 +3599,7 @@ func awsRestjson1_deserializeOpErrorRecursiveShapes(response *smithyhttp.Respons
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3612,7 +3612,7 @@ func awsRestjson1_deserializeOpErrorRecursiveShapes(response *smithyhttp.Respons
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -3758,7 +3758,7 @@ func awsRestjson1_deserializeOpErrorSimpleScalarProperties(response *smithyhttp.
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -3771,7 +3771,7 @@ func awsRestjson1_deserializeOpErrorSimpleScalarProperties(response *smithyhttp.
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -4052,7 +4052,7 @@ func awsRestjson1_deserializeOpErrorStreamingTraits(response *smithyhttp.Respons
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4065,7 +4065,7 @@ func awsRestjson1_deserializeOpErrorStreamingTraits(response *smithyhttp.Respons
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -4163,7 +4163,7 @@ func awsRestjson1_deserializeOpErrorStreamingTraitsRequireLength(response *smith
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4176,7 +4176,7 @@ func awsRestjson1_deserializeOpErrorStreamingTraitsRequireLength(response *smith
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -4274,7 +4274,7 @@ func awsRestjson1_deserializeOpErrorStreamingTraitsWithMediaType(response *smith
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4287,7 +4287,7 @@ func awsRestjson1_deserializeOpErrorStreamingTraitsWithMediaType(response *smith
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -4380,7 +4380,7 @@ func awsRestjson1_deserializeOpErrorTimestampFormatHeaders(response *smithyhttp.
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4393,7 +4393,7 @@ func awsRestjson1_deserializeOpErrorTimestampFormatHeaders(response *smithyhttp.
 		errorMessage = message
 	}
 
-	switch errorCode {
+	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -4490,8 +4490,6 @@ func awsRestjson1_deserializeHttpBindingsComplexError(v *types.ComplexError, res
 }
 func awsRestjson1_deserializeErrorComplexError(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ComplexError{}
-	_ = output
-
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
@@ -4505,7 +4503,7 @@ func awsRestjson1_deserializeErrorComplexError(response *smithyhttp.Response, er
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -4521,15 +4519,11 @@ func awsRestjson1_deserializeErrorComplexError(response *smithyhttp.Response, er
 
 func awsRestjson1_deserializeErrorFooError(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.FooError{}
-	_ = output
-
 	return output
 }
 
 func awsRestjson1_deserializeErrorInvalidGreeting(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InvalidGreeting{}
-	_ = output
-
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
@@ -4543,7 +4537,7 @@ func awsRestjson1_deserializeErrorInvalidGreeting(response *smithyhttp.Response,
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
