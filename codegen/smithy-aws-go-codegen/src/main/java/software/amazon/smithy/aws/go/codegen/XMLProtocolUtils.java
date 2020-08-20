@@ -183,12 +183,36 @@ final class XmlProtocolUtils {
     }
 
     /**
-     * initializeXmlDecoder generates stub code to initialize xml decoder
+     * initializeXmlDecoder generates stub code to initialize xml decoder.
+     * Returns nil in case EOF occurs while initializing xml decoder.
      *
      * @param writer       the go writer used to write
      * @param bodyLocation the variable used to represent response body
      */
     public static void initializeXmlDecoder(GoWriter writer, String bodyLocation) {
+        initializeXmlDecoder(writer, bodyLocation, "", "nil");
+    }
+
+    /**
+     * initializeXmlDecoder generates stub code to initialize xml decoder
+     *
+     * @param writer       the go writer used to write
+     * @param bodyLocation the variable used to represent response body
+     * @param returnOnEOF  the variable to return in case an EOF error occurs while initializing xml decoder
+     */
+    public static void initializeXmlDecoder(GoWriter writer, String bodyLocation, String returnOnEOF) {
+        initializeXmlDecoder(writer, bodyLocation, "", returnOnEOF);
+    }
+
+    /**
+     * initializeXmlDecoder generates stub code to initialize xml decoder
+     *
+     * @param writer       the go writer used to write
+     * @param bodyLocation the variable used to represent response body
+     * @param returnExtras the extra variables to be returned with the wrapped error check statement
+     * @param returnOnEOF  the variable to return in case an EOF error occurs while initializing xml decoder
+     */
+    public static void initializeXmlDecoder(GoWriter writer, String bodyLocation, String returnExtras, String returnOnEOF) {
         // Use a ring buffer and tee reader to help in pinpointing any deserialization errors.
         writer.addUseImports(SmithyGoDependency.SMITHY_IO);
         writer.write("buff := make([]byte, 1024)");
@@ -201,22 +225,23 @@ final class XmlProtocolUtils {
         writer.write("body := io.TeeReader($L, ringBuffer)", bodyLocation);
         writer.write("rootDecoder := xml.NewDecoder(body)");
         writer.write("t, err := smithyxml.FetchRootElement(rootDecoder)");
+        writer.write("if err == io.EOF { return $L$L}", returnExtras, returnOnEOF);
+        handleDecodeError(writer, returnExtras);
 
-        handleDecodeError(writer, "");
+        writer.insertTrailingNewline();
         writer.write("decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)");
         writer.insertTrailingNewline();
     }
 
-
     /**
      * handleDecodeError handles the xml deserialization error wrapping.
      *
-     * @param writer the go writer used to write
+     * @param writer       the go writer used to write
      * @param returnExtras extra variables to be returned with the wrapped error statement
      */
     public static void handleDecodeError(GoWriter writer, String returnExtras) {
         writer.addUseImports(SmithyGoDependency.IO);
-        writer.openBlock("if err != nil && err != io.EOF {", "}", () -> {
+        writer.openBlock("if err != nil {", "}", () -> {
             writer.addUseImports(SmithyGoDependency.BYTES);
             writer.addUseImports(SmithyGoDependency.SMITHY);
             writer.write("var snapshot bytes.Buffer");

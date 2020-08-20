@@ -66,7 +66,9 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
             return;
         }
         Shape inputShape = ProtocolUtils.expectInput(context.getModel(), operation);
-        inputShape.accept(new XmlShapeSerVisitor(context, memberShape -> documentBindings.contains(memberShape) && !memberShape.hasTrait(XmlAttributeTrait.class)));
+        inputShape.accept(new XmlShapeSerVisitor(context,
+                memberShape -> documentBindings.contains(memberShape) && !memberShape.hasTrait(
+                        XmlAttributeTrait.class)));
     }
 
     @Override
@@ -98,7 +100,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
 
         writer.openBlock("if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); "
                 + "err != nil {", "}", () -> {
-                    writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
+            writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
         });
     }
 
@@ -167,15 +169,6 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.write("output := &$T{}", symbol);
         writer.insertTrailingNewline();
 
-        if (isShapeWithResponseBindings(context.getModel(), shape, HttpBinding.Location.DOCUMENT)) {
-            String documentDeserFunctionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
-                    shape, getProtocolName());
-            initializeXmlDecoder(writer, "errorBody");
-            writer.write("err = $L(&output, decoder)", documentDeserFunctionName);
-            handleDecodeError(writer, "");
-            writer.insertTrailingNewline();
-        }
-
         if (isShapeWithRestResponseBindings(context.getModel(), shape)) {
             String bindingDeserFunctionName = ProtocolGenerator.getOperationHttpBindingsDeserFunctionName(
                     shape, getProtocolName());
@@ -184,6 +177,16 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
                 writer.write(String.format("return &smithy.DeserializationError{Err: %s}",
                         "fmt.Errorf(\"failed to decode response error with invalid HTTP bindings, %w\", err)"));
             });
+            writer.insertTrailingNewline();
+        }
+
+        if (isShapeWithResponseBindings(context.getModel(), shape, HttpBinding.Location.DOCUMENT)) {
+            String documentDeserFunctionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
+                    shape, getProtocolName());
+            writer.addUseImports(SmithyGoDependency.IO);
+            initializeXmlDecoder(writer, "errorBody", "output");
+            writer.write("err = $L(&output, decoder)", documentDeserFunctionName);
+            handleDecodeError(writer, "");
             writer.insertTrailingNewline();
         }
 
@@ -339,34 +342,10 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
             Shape shape,
             String operand
     ) {
-        writer.addUseImports(SmithyGoDependency.SMITHY_XML);
-        writer.addUseImports(SmithyGoDependency.SMITHY_IO);
-
-        writer.write("buff := make([]byte, 1024)");
-        writer.write("ringBuffer := smithyio.NewRingBuffer(buff)");
-        writer.insertTrailingNewline();
-
-        writer.addUseImports(SmithyGoDependency.IO);
-        writer.write("body := io.TeeReader(response.Body, ringBuffer)");
-        writer.write("defer response.Body.Close()");
-        writer.insertTrailingNewline();
-
-        writer.addUseImports(SmithyGoDependency.XML);
-        writer.addUseImports(SmithyGoDependency.SMITHY_XML);
-        writer.write("rootDecoder := xml.NewDecoder(body)");
-
-        writer.writeDocs("fetch the root element ignoring comments and preamble");
-        writer.write("t, err  := smithyxml.FetchRootElement(rootDecoder)");
-
-        writer.addUseImports(SmithyGoDependency.IO);
-        writer.write("if err == io.EOF { err = nil }");
-        writer.write("if err != nil {return out, metadata, "
-                + "fmt.Errorf(\"error fetching the start element of xml response body: %w\", err)}");
-        writer.write("decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)");
-        writer.insertTrailingNewline();
-
+        XmlProtocolUtils.initializeXmlDecoder(writer, "response.Body", "out, metadata,", "nil");
         String deserFuncName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, getProtocolName());
+        writer.addUseImports(SmithyGoDependency.IO);
         writer.write("err = $L(&$L, decoder)", deserFuncName, operand);
-        AwsProtocolUtils.handleDecodeError(writer, "out, metadata,");
+        XmlProtocolUtils.handleDecodeError(writer, "out, metadata,");
     }
 }
