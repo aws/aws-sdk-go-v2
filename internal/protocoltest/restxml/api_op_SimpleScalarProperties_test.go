@@ -70,6 +70,48 @@ func TestClient_SimpleScalarProperties_awsRestxmlSerialize(t *testing.T) {
 			`))
 			},
 		},
+		// Serializes string with escaping
+		"SimpleScalarPropertiesWithEscapedCharacter": {
+			Params: &SimpleScalarPropertiesInput{
+				Foo:         ptr.String("Foo"),
+				StringValue: ptr.String("<string>"),
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/SimpleScalarProperties",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+				"X-Foo":        []string{"Foo"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesInputOutput>
+			    <stringValue>&lt;string&gt;</stringValue>
+			</SimpleScalarPropertiesInputOutput>
+			`))
+			},
+		},
+		// Serializes string containing white space
+		"SimpleScalarPropertiesWithWhiteSpace": {
+			Params: &SimpleScalarPropertiesInput{
+				Foo:         ptr.String("Foo"),
+				StringValue: ptr.String("string with white    space"),
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/SimpleScalarProperties",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+				"X-Foo":        []string{"Foo"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<SimpleScalarPropertiesInputOutput>
+			    <stringValue>string with white    space</stringValue>
+			</SimpleScalarPropertiesInputOutput>
+			`))
+			},
+		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
@@ -175,6 +217,61 @@ func TestClient_SimpleScalarProperties_awsRestxmlDeserialize(t *testing.T) {
 				LongValue:         ptr.Int64(4),
 				FloatValue:        ptr.Float32(5.5),
 				DoubleValue:       ptr.Float64(6.5),
+			},
+		},
+		// Serializes string with escaping
+		"SimpleScalarPropertiesWithEscapedCharacter": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+				"X-Foo":        []string{"Foo"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<SimpleScalarPropertiesInputOutput>
+			    <stringValue>&lt;string&gt;</stringValue>
+			</SimpleScalarPropertiesInputOutput>
+			`),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				Foo:         ptr.String("Foo"),
+				StringValue: ptr.String("<string>"),
+			},
+		},
+		// Serializes simple scalar properties with xml preamble, comments and CDATA
+		"SimpleScalarPropertiesWithXMLPreamble": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+				"X-Foo":        []string{"Foo"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<?xml version = "1.0" encoding = "UTF-8"?>
+			<SimpleScalarPropertiesInputOutput>
+			    <![CDATA[characters representing CDATA]]>
+			    <stringValue>string</stringValue>
+			    <!--xml comment-->
+			</SimpleScalarPropertiesInputOutput>
+			`),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				Foo:         ptr.String("Foo"),
+				StringValue: ptr.String("string"),
+			},
+		},
+		// Serializes string containing white space
+		"SimpleScalarPropertiesWithWhiteSpace": {
+			StatusCode: 200,
+			Header: http.Header{
+				"Content-Type": []string{"application/xml"},
+				"X-Foo":        []string{"Foo"},
+			},
+			BodyMediaType: "application/xml",
+			Body: []byte(`<?xml version = "1.0" encoding = "UTF-8"?>
+			<SimpleScalarPropertiesInputOutput>
+			    <stringValue>string with white    space</stringValue>
+			</SimpleScalarPropertiesInputOutput>
+			`),
+			ExpectResult: &SimpleScalarPropertiesOutput{
+				Foo:         ptr.String("Foo"),
+				StringValue: ptr.String("string with white    space"),
 			},
 		},
 	}

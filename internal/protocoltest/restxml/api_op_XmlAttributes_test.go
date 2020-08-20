@@ -53,6 +53,26 @@ func TestClient_XmlAttributes_awsRestxmlSerialize(t *testing.T) {
 			`))
 			},
 		},
+		// Serializes XML attributes with escaped characters on the synthesized document
+		"XmlAttributesWithEscaping": {
+			Params: &XmlAttributesInput{
+				Foo:  ptr.String("hi"),
+				Attr: ptr.String("<test&mock>"),
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/XmlAttributes",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/xml"},
+			},
+			BodyMediaType: "application/xml",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlAttributesInputOutput test="&lt;test&amp;mock&gt;">
+			    <foo>hi</foo>
+			</XmlAttributesInputOutput>
+			`))
+			},
+		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {

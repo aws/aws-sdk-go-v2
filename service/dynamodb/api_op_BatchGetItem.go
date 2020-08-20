@@ -116,13 +116,13 @@ type BatchGetItemInput struct {
 	// prevent special characters in an attribute name from being misinterpreted in an
 	// expression.
 	//
-	// Use the # character in an expression to dereference an attribute
-	// name. For example, consider the following attribute name:
+	//     Use the # character in an expression to dereference an
+	// attribute name. For example, consider the following attribute name:
 	//
 	//         *
 	// Percentile
 	//
-	// The name of this attribute conflicts with a reserved word, so it
+	//     The name of this attribute conflicts with a reserved word, so it
 	// cannot be used directly in an expression. (For the complete list of reserved
 	// words, see Reserved Words
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ReservedWords.html)
@@ -131,13 +131,13 @@ type BatchGetItemInput struct {
 	//
 	//         * {"#P":"Percentile"}
 	//
-	// You
-	// could then use this substitution in an expression, as in this example:
+	//
+	// You could then use this substitution in an expression, as in this example:
 	//
 	//
 	// * #P = :val
 	//
-	// Tokens that begin with the : character are expression attribute
+	//     Tokens that begin with the : character are expression attribute
 	// values, which are placeholders for the actual value at runtime. For more
 	// information about expression attribute names, see Accessing Item Attributes
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
@@ -231,9 +231,9 @@ func addawsAwsjson10_serdeOpBatchGetItemMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opBatchGetItem(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:         region,
-		ServiceName:    "DynamoDB GoV2",
-		ServiceID:      "dynamodbgov2",
-		EndpointPrefix: "dynamodbgov2",
+		ServiceName:    "DynamoDB",
+		ServiceID:      "dynamodb",
+		EndpointPrefix: "dynamodb",
 		SigningName:    "dynamodb",
 		OperationName:  "BatchGetItem",
 	}

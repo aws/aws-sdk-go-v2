@@ -84,9 +84,9 @@ func addawsAwsjson10_serdeOpUpdateContinuousBackupsMiddlewares(stack *middleware
 func newServiceMetadataMiddleware_opUpdateContinuousBackups(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:         region,
-		ServiceName:    "DynamoDB GoV2",
-		ServiceID:      "dynamodbgov2",
-		EndpointPrefix: "dynamodbgov2",
+		ServiceName:    "DynamoDB",
+		ServiceID:      "dynamodb",
+		EndpointPrefix: "dynamodb",
 		SigningName:    "dynamodb",
 		OperationName:  "UpdateContinuousBackups",
 	}
