@@ -95,20 +95,18 @@ func TestRequestUserAgent_HandleBuild(t *testing.T) {
 
 	for name, tt := range cases {
 		t.Run(name, func(t *testing.T) {
-			if len(tt.Env) > 0 {
-				environ := os.Environ()
+			environ := os.Environ()
+			os.Clearenv()
+			defer func() {
 				os.Clearenv()
-				defer func() {
-					os.Clearenv()
-					for _, v := range environ {
-						split := strings.SplitN(v, "=", 2)
-						key, value := split[0], split[1]
-						os.Setenv(key, value)
-					}
-				}()
-				for k, v := range tt.Env {
-					os.Setenv(k, v)
+				for _, v := range environ {
+					split := strings.SplitN(v, "=", 2)
+					key, value := split[0], split[1]
+					os.Setenv(key, value)
 				}
+			}()
+			for k, v := range tt.Env {
+				os.Setenv(k, v)
 			}
 
 			b := newRequestUserAgent()
