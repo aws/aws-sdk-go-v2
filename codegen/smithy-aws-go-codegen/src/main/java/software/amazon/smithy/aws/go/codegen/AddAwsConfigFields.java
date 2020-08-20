@@ -190,7 +190,10 @@ public class AddAwsConfigFields implements GoIntegration {
         writer.write("");
     }
 
-    private static class AwsConfigField extends ConfigField {
+    /**
+     * Provides configuration field for AWS client.
+     */
+    public static class AwsConfigField extends ConfigField {
         private final boolean generatedOnClient;
         private final BiPredicate<Model, ServiceShape> servicePredicate;
         private final Symbol resolveFunction;
@@ -218,7 +221,10 @@ public class AddAwsConfigFields implements GoIntegration {
             return new Builder();
         }
 
-        private static class Builder extends ConfigField.Builder {
+        /**
+         * Provides builder for AWSConfigFile values.
+         */
+        public static class Builder extends ConfigField.Builder {
             private boolean generatedOnClient = true;
             private BiPredicate<Model, ServiceShape> servicePredicate = null;
             private Symbol resolveFunction = null;

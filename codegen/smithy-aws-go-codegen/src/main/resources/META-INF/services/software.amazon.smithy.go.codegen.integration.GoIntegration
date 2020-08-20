@@ -3,3 +3,4 @@ software.amazon.smithy.aws.go.codegen.AddAwsConfigFields
 software.amazon.smithy.aws.go.codegen.RegisterServiceMetadataMiddleware
 software.amazon.smithy.aws.go.codegen.AssembleMiddlewareStack
 software.amazon.smithy.aws.go.codegen.AwsEndpointGenerator
+software.amazon.smithy.aws.go.codegen.customization.DynamoDBValidateResponseChecksum
