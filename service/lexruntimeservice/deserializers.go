@@ -92,7 +92,7 @@ func awsRestjson1_deserializeOpErrorDeleteSession(response *smithyhttp.Response)
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -105,20 +105,20 @@ func awsRestjson1_deserializeOpErrorDeleteSession(response *smithyhttp.Response)
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "BadRequestException":
+	switch {
+	case strings.EqualFold("BadRequestException", errorCode):
 		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
 
-	case "ConflictException":
+	case strings.EqualFold("ConflictException", errorCode):
 		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
 
-	case "InternalFailureException":
+	case strings.EqualFold("InternalFailureException", errorCode):
 		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
 
-	case "LimitExceededException":
+	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsRestjson1_deserializeErrorLimitExceededException(response, errorBody)
 
-	case "NotFoundException":
+	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
 	default:
@@ -308,7 +308,7 @@ func awsRestjson1_deserializeOpErrorGetSession(response *smithyhttp.Response) er
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -321,17 +321,17 @@ func awsRestjson1_deserializeOpErrorGetSession(response *smithyhttp.Response) er
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "BadRequestException":
+	switch {
+	case strings.EqualFold("BadRequestException", errorCode):
 		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
 
-	case "InternalFailureException":
+	case strings.EqualFold("InternalFailureException", errorCode):
 		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
 
-	case "LimitExceededException":
+	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsRestjson1_deserializeErrorLimitExceededException(response, errorBody)
 
-	case "NotFoundException":
+	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
 	default:
@@ -489,7 +489,7 @@ func awsRestjson1_deserializeOpErrorPostContent(response *smithyhttp.Response) e
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -502,38 +502,38 @@ func awsRestjson1_deserializeOpErrorPostContent(response *smithyhttp.Response) e
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "BadRequestException":
+	switch {
+	case strings.EqualFold("BadRequestException", errorCode):
 		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
 
-	case "ConflictException":
+	case strings.EqualFold("ConflictException", errorCode):
 		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
 
-	case "InternalFailureException":
+	case strings.EqualFold("InternalFailureException", errorCode):
 		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
 
-	case "LimitExceededException":
+	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsRestjson1_deserializeErrorLimitExceededException(response, errorBody)
 
-	case "NotAcceptableException":
+	case strings.EqualFold("NotAcceptableException", errorCode):
 		return awsRestjson1_deserializeErrorNotAcceptableException(response, errorBody)
 
-	case "NotFoundException":
+	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
-	case "RequestTimeoutException":
+	case strings.EqualFold("RequestTimeoutException", errorCode):
 		return awsRestjson1_deserializeErrorRequestTimeoutException(response, errorBody)
 
-	case "UnsupportedMediaTypeException":
+	case strings.EqualFold("UnsupportedMediaTypeException", errorCode):
 		return awsRestjson1_deserializeErrorUnsupportedMediaTypeException(response, errorBody)
 
-	case "BadGatewayException":
+	case strings.EqualFold("BadGatewayException", errorCode):
 		return awsRestjson1_deserializeErrorBadGatewayException(response, errorBody)
 
-	case "DependencyFailedException":
+	case strings.EqualFold("DependencyFailedException", errorCode):
 		return awsRestjson1_deserializeErrorDependencyFailedException(response, errorBody)
 
-	case "LoopDetectedException":
+	case strings.EqualFold("LoopDetectedException", errorCode):
 		return awsRestjson1_deserializeErrorLoopDetectedException(response, errorBody)
 
 	default:
@@ -691,7 +691,7 @@ func awsRestjson1_deserializeOpErrorPostText(response *smithyhttp.Response) erro
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -704,29 +704,29 @@ func awsRestjson1_deserializeOpErrorPostText(response *smithyhttp.Response) erro
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "BadRequestException":
+	switch {
+	case strings.EqualFold("BadRequestException", errorCode):
 		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
 
-	case "ConflictException":
+	case strings.EqualFold("ConflictException", errorCode):
 		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
 
-	case "InternalFailureException":
+	case strings.EqualFold("InternalFailureException", errorCode):
 		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
 
-	case "LimitExceededException":
+	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsRestjson1_deserializeErrorLimitExceededException(response, errorBody)
 
-	case "NotFoundException":
+	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
-	case "BadGatewayException":
+	case strings.EqualFold("BadGatewayException", errorCode):
 		return awsRestjson1_deserializeErrorBadGatewayException(response, errorBody)
 
-	case "DependencyFailedException":
+	case strings.EqualFold("DependencyFailedException", errorCode):
 		return awsRestjson1_deserializeErrorDependencyFailedException(response, errorBody)
 
-	case "LoopDetectedException":
+	case strings.EqualFold("LoopDetectedException", errorCode):
 		return awsRestjson1_deserializeErrorLoopDetectedException(response, errorBody)
 
 	default:
@@ -954,7 +954,7 @@ func awsRestjson1_deserializeOpErrorPutSession(response *smithyhttp.Response) er
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -967,29 +967,29 @@ func awsRestjson1_deserializeOpErrorPutSession(response *smithyhttp.Response) er
 		errorMessage = message
 	}
 
-	switch errorCode {
-	case "BadRequestException":
+	switch {
+	case strings.EqualFold("BadRequestException", errorCode):
 		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
 
-	case "ConflictException":
+	case strings.EqualFold("ConflictException", errorCode):
 		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
 
-	case "InternalFailureException":
+	case strings.EqualFold("InternalFailureException", errorCode):
 		return awsRestjson1_deserializeErrorInternalFailureException(response, errorBody)
 
-	case "LimitExceededException":
+	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsRestjson1_deserializeErrorLimitExceededException(response, errorBody)
 
-	case "NotAcceptableException":
+	case strings.EqualFold("NotAcceptableException", errorCode):
 		return awsRestjson1_deserializeErrorNotAcceptableException(response, errorBody)
 
-	case "NotFoundException":
+	case strings.EqualFold("NotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
-	case "BadGatewayException":
+	case strings.EqualFold("BadGatewayException", errorCode):
 		return awsRestjson1_deserializeErrorBadGatewayException(response, errorBody)
 
-	case "DependencyFailedException":
+	case strings.EqualFold("DependencyFailedException", errorCode):
 		return awsRestjson1_deserializeErrorDependencyFailedException(response, errorBody)
 
 	default:
@@ -1077,8 +1077,6 @@ func awsRestjson1_deserializeHttpBindingsLimitExceededException(v *types.LimitEx
 }
 func awsRestjson1_deserializeErrorBadRequestException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.BadRequestException{}
-	_ = output
-
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
@@ -1092,7 +1090,7 @@ func awsRestjson1_deserializeErrorBadRequestException(response *smithyhttp.Respo
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1104,8 +1102,6 @@ func awsRestjson1_deserializeErrorBadRequestException(response *smithyhttp.Respo
 
 func awsRestjson1_deserializeErrorConflictException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ConflictException{}
-	_ = output
-
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
@@ -1119,7 +1115,7 @@ func awsRestjson1_deserializeErrorConflictException(response *smithyhttp.Respons
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1131,8 +1127,6 @@ func awsRestjson1_deserializeErrorConflictException(response *smithyhttp.Respons
 
 func awsRestjson1_deserializeErrorInternalFailureException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InternalFailureException{}
-	_ = output
-
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
@@ -1146,7 +1140,7 @@ func awsRestjson1_deserializeErrorInternalFailureException(response *smithyhttp.
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1158,8 +1152,6 @@ func awsRestjson1_deserializeErrorInternalFailureException(response *smithyhttp.
 
 func awsRestjson1_deserializeErrorLimitExceededException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.LimitExceededException{}
-	_ = output
-
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
@@ -1173,7 +1165,7 @@ func awsRestjson1_deserializeErrorLimitExceededException(response *smithyhttp.Re
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1189,8 +1181,6 @@ func awsRestjson1_deserializeErrorLimitExceededException(response *smithyhttp.Re
 
 func awsRestjson1_deserializeErrorNotAcceptableException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.NotAcceptableException{}
-	_ = output
-
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
@@ -1204,7 +1194,7 @@ func awsRestjson1_deserializeErrorNotAcceptableException(response *smithyhttp.Re
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1216,8 +1206,6 @@ func awsRestjson1_deserializeErrorNotAcceptableException(response *smithyhttp.Re
 
 func awsRestjson1_deserializeErrorNotFoundException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.NotFoundException{}
-	_ = output
-
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
@@ -1231,7 +1219,7 @@ func awsRestjson1_deserializeErrorNotFoundException(response *smithyhttp.Respons
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1243,8 +1231,6 @@ func awsRestjson1_deserializeErrorNotFoundException(response *smithyhttp.Respons
 
 func awsRestjson1_deserializeErrorRequestTimeoutException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.RequestTimeoutException{}
-	_ = output
-
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
@@ -1258,7 +1244,7 @@ func awsRestjson1_deserializeErrorRequestTimeoutException(response *smithyhttp.R
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1270,8 +1256,6 @@ func awsRestjson1_deserializeErrorRequestTimeoutException(response *smithyhttp.R
 
 func awsRestjson1_deserializeErrorUnsupportedMediaTypeException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.UnsupportedMediaTypeException{}
-	_ = output
-
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
@@ -1285,7 +1269,7 @@ func awsRestjson1_deserializeErrorUnsupportedMediaTypeException(response *smithy
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1297,8 +1281,6 @@ func awsRestjson1_deserializeErrorUnsupportedMediaTypeException(response *smithy
 
 func awsRestjson1_deserializeErrorBadGatewayException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.BadGatewayException{}
-	_ = output
-
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
@@ -1312,7 +1294,7 @@ func awsRestjson1_deserializeErrorBadGatewayException(response *smithyhttp.Respo
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1324,8 +1306,6 @@ func awsRestjson1_deserializeErrorBadGatewayException(response *smithyhttp.Respo
 
 func awsRestjson1_deserializeErrorDependencyFailedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.DependencyFailedException{}
-	_ = output
-
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
@@ -1339,7 +1319,7 @@ func awsRestjson1_deserializeErrorDependencyFailedException(response *smithyhttp
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}
@@ -1351,8 +1331,6 @@ func awsRestjson1_deserializeErrorDependencyFailedException(response *smithyhttp
 
 func awsRestjson1_deserializeErrorLoopDetectedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.LoopDetectedException{}
-	_ = output
-
 	buff := make([]byte, 1024)
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
@@ -1366,7 +1344,7 @@ func awsRestjson1_deserializeErrorLoopDetectedException(response *smithyhttp.Res
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
 		return &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
 	}

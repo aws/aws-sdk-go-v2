@@ -67,7 +67,7 @@ final class XmlShapeSerVisitor extends DocumentShapeSerVisitor {
         });
 
         if (member.hasTrait(XmlNameTrait.class) || member.hasTrait(XmlNamespaceTrait.class)) {
-            XMLProtocolUtils.generateXMLStartElement(context, member, "customMemberName", "v");
+            XmlProtocolUtils.generateXMLStartElement(context, member, "customMemberName", "v");
             writer.write("array = value.ArrayWithCustomName(customMemberName)");
         } else {
             writer.write("array = value.Array()");
@@ -117,12 +117,12 @@ final class XmlShapeSerVisitor extends DocumentShapeSerVisitor {
             }
 
             // map entry key
-            XMLProtocolUtils.generateXMLStartElement(context, shape.getKey(), "keyElement", "v");
+            XmlProtocolUtils.generateXMLStartElement(context, shape.getKey(), "keyElement", "v");
             targetKey.accept(getMemberSerVisitor(shape.getKey(), "&key", "entry.MemberElement(keyElement)"));
             writer.insertTrailingNewline();
 
             // map entry value
-            XMLProtocolUtils.generateXMLStartElement(context, shape.getValue(), "valueElement", "v");
+            XmlProtocolUtils.generateXMLStartElement(context, shape.getValue(), "valueElement", "v");
             String dest = "entry.MemberElement(valueElement)";
             if (shape.getValue().hasTrait(XmlFlattenedTrait.class)) {
                 dest = "entry.FlattenedElement(valueElement)";
@@ -155,7 +155,7 @@ final class XmlShapeSerVisitor extends DocumentShapeSerVisitor {
 
             writer.addUseImports(SmithyGoDependency.SMITHY_XML);
             writeSafeMemberAccessor(context, member, "v", (operand) -> {
-                XMLProtocolUtils.generateXMLStartElement(context, member, "root", "v");
+                XmlProtocolUtils.generateXMLStartElement(context, member, "root", "v");
 
                 // check if member shape has flattened trait
                 if (member.hasTrait(XmlFlattenedTrait.class)) {
