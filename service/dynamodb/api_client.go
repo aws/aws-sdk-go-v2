@@ -63,6 +63,10 @@ type Options struct {
 	// The credentials object to use when signing requests.
 	Credentials aws.CredentialsProvider
 
+	// DisableResponseChecksumValidation allows you to disable the client's validation
+	// of response integrity using CRC32 checksum.
+	DisableResponseChecksumValidation bool
+
 	// The endpoint options to be used when attempting to resolve an endpoint.
 	EndpointOptions ResolverOptions
 
@@ -97,6 +101,10 @@ type Options struct {
 
 func (o Options) GetCredentials() aws.CredentialsProvider {
 	return o.Credentials
+}
+
+func (o Options) GetDisableResponseChecksumValidation() bool {
+	return o.DisableResponseChecksumValidation
 }
 
 func (o Options) GetEndpointOptions() ResolverOptions {

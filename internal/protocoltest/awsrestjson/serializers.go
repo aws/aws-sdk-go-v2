@@ -677,6 +677,56 @@ func awsRestjson1_serializeHttpBindingsHttpPrefixHeadersInput(v *HttpPrefixHeade
 	return nil
 }
 
+type awsRestjson1_serializeOpHttpPrefixHeadersResponse struct {
+}
+
+func (*awsRestjson1_serializeOpHttpPrefixHeadersResponse) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpHttpPrefixHeadersResponse) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*HttpPrefixHeadersResponseInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/HttpPrefixHeadersResponse")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeHttpBindingsHttpPrefixHeadersResponseInput(v *HttpPrefixHeadersResponseInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpHttpRequestWithGreedyLabelInPath struct {
 }
 
@@ -1744,6 +1794,81 @@ func awsRestjson1_serializeDocumentJsonTimestampsInput(v *JsonTimestampsInput, v
 	return nil
 }
 
+type awsRestjson1_serializeOpJsonUnions struct {
+}
+
+func (*awsRestjson1_serializeOpJsonUnions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpJsonUnions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*JsonUnionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/JsonUnions")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeDocumentJsonUnionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeHttpBindingsJsonUnionsInput(v *JsonUnionsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJsonUnionsInput(v *JsonUnionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Contents != nil {
+		ok := object.Key("contents")
+		if err := awsRestjson1_serializeDocumentMyUnion(v.Contents, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpMediaTypeHeader struct {
 }
 
@@ -2687,6 +2812,63 @@ func awsRestjson1_serializeDocumentJsonMapsInputOutputMap(v map[string]*types.Gr
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMyUnion(v *types.MyUnion, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *MyUnionBlobValue:
+		av := object.Key("[]byte")
+		av.Base64EncodeBytes(uv.Value())
+
+	case *MyUnionBooleanValue:
+		av := object.Key("bool")
+		av.Boolean(*uv.Value())
+
+	case *MyUnionEnumValue:
+		av := object.Key("FooEnum")
+		av.String(string(uv.Value()))
+
+	case *MyUnionListValue:
+		av := object.Key("StringList")
+		if err := awsRestjson1_serializeDocumentStringList(uv.Value(), av); err != nil {
+			return err
+		}
+
+	case *MyUnionMapValue:
+		av := object.Key("StringMap")
+		if err := awsRestjson1_serializeDocumentStringMap(uv.Value(), av); err != nil {
+			return err
+		}
+
+	case *MyUnionNumberValue:
+		av := object.Key("int32")
+		av.Integer(*uv.Value())
+
+	case *MyUnionStringValue:
+		av := object.Key("string")
+		av.String(*uv.Value())
+
+	case *MyUnionStructureValue:
+		av := object.Key("GreetingStruct")
+		if err := awsRestjson1_serializeDocumentGreetingStruct(uv.Value(), av); err != nil {
+			return err
+		}
+
+	case *MyUnionTimestampValue:
+		av := object.Key("Time")
+		av.Double(smithytime.FormatEpochSeconds(*uv.Value()))
+
+	case *MyUnionUnknown:
+		fallthrough
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentNestedPayload(v *types.NestedPayload, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2879,6 +3061,21 @@ func awsRestjson1_serializeDocumentStringList(v []*string, value smithyjson.Valu
 			continue
 		}
 		av.String(*v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStringMap(v map[string]*string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			om.Null()
+			continue
+		}
+		om.String(*v[key])
 	}
 	return nil
 }

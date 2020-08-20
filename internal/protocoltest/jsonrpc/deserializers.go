@@ -319,6 +319,103 @@ func awsAwsjson11_deserializeOpErrorJsonEnums(response *smithyhttp.Response) err
 	}
 }
 
+type awsAwsjson11_deserializeOpJsonUnions struct {
+}
+
+func (*awsAwsjson11_deserializeOpJsonUnions) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpJsonUnions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorJsonUnions(response)
+	}
+	output := &JsonUnionsOutput{}
+	out.Result = output
+
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+
+	err = awsAwsjson11_deserializeDocumentJsonUnionsOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorJsonUnions(response *smithyhttp.Response) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpKitchenSinkOperation struct {
 }
 
@@ -2131,6 +2228,14 @@ func awsAwsjson11_deserializeDocumentMapOfStructs(v *map[string]*types.SimpleStr
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentMyUnion(v **types.MyUnion, decoder *json.Decoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	// TODO: implement union serialization.
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentSimpleStruct(v **types.SimpleStruct, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2425,6 +2530,70 @@ func awsAwsjson11_deserializeDocumentFooEnumSet(v *[]types.FooEnum, decoder *jso
 	}
 
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentGreetingStruct(v **types.GreetingStruct, decoder *json.Decoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	startToken, err := decoder.Token()
+	if err == io.EOF {
+		return nil
+	}
+	if err != nil {
+		return err
+	}
+	if startToken == nil {
+		return nil
+	}
+	if t, ok := startToken.(json.Delim); !ok || t != '{' {
+		return fmt.Errorf("expect `{` as start token")
+	}
+
+	var sv *types.GreetingStruct
+	if *v == nil {
+		sv = &types.GreetingStruct{}
+	} else {
+		sv = *v
+	}
+
+	for decoder.More() {
+		t, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		switch t {
+		case "hi":
+			val, err := decoder.Token()
+			if err != nil {
+				return err
+			}
+			if val != nil {
+				jtv, ok := val.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", val)
+				}
+				sv.Hi = &jtv
+			}
+
+		default:
+			err := restjson.DiscardUnknownField(decoder)
+			if err != nil {
+				return err
+			}
+
+		}
+	}
+	endToken, err := decoder.Token()
+	if err != nil {
+		return err
+	}
+	if t, ok := endToken.(json.Delim); !ok || t != '}' {
+		return fmt.Errorf("expect `}` as end token")
+	}
+
+	*v = sv
 	return nil
 }
 
@@ -2741,6 +2910,62 @@ func awsAwsjson11_deserializeDocumentJsonEnumsOutput(v **JsonEnumsOutput, decode
 
 		case "fooEnumSet":
 			if err := awsAwsjson11_deserializeDocumentFooEnumSet(&sv.FooEnumSet, decoder); err != nil {
+				return err
+			}
+
+		default:
+			err := restjson.DiscardUnknownField(decoder)
+			if err != nil {
+				return err
+			}
+
+		}
+	}
+	endToken, err := decoder.Token()
+	if err != nil {
+		return err
+	}
+	if t, ok := endToken.(json.Delim); !ok || t != '}' {
+		return fmt.Errorf("expect `}` as end token")
+	}
+
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentJsonUnionsOutput(v **JsonUnionsOutput, decoder *json.Decoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	startToken, err := decoder.Token()
+	if err == io.EOF {
+		return nil
+	}
+	if err != nil {
+		return err
+	}
+	if startToken == nil {
+		return nil
+	}
+	if t, ok := startToken.(json.Delim); !ok || t != '{' {
+		return fmt.Errorf("expect `{` as start token")
+	}
+
+	var sv *JsonUnionsOutput
+	if *v == nil {
+		sv = &JsonUnionsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for decoder.More() {
+		t, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		switch t {
+		case "contents":
+			if err := awsAwsjson11_deserializeDocumentMyUnion(&sv.Contents, decoder); err != nil {
 				return err
 			}
 

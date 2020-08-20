@@ -7,6 +7,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -55,6 +56,8 @@ func (c *Client) CreateBackup(ctx context.Context, params *CreateBackupInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateBackupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBackup(options.Region), middleware.Before)
+	customizations.AddChecksumMiddleware(stack, options)
+	customizations.AddAcceptEncodingGzip(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
