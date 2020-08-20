@@ -19,7 +19,6 @@ import java.util.Set;
 import java.util.TreeSet;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
-import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolTestGenerator;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestGenerator;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestRequestGenerator;
@@ -60,10 +59,10 @@ final class AwsProtocolUtils {
                             writer.addUseImports(AwsGoDependency.AWS_CORE);
                             writer.openBlock("$L(func(region string, options $L) (e aws.Endpoint, err error) {", "}),",
                                     EndpointGenerator.RESOLVER_FUNC_NAME, EndpointGenerator.RESOLVER_OPTIONS, () -> {
-                                writer.write("e.URL = server.URL");
-                                writer.write("e.SigningRegion = \"us-west-2\"");
-                                writer.write("return e, err");
-                            });
+                                        writer.write("e.URL = server.URL");
+                                        writer.write("e.SigningRegion = \"us-west-2\"");
+                                        writer.write("return e, err");
+                                    });
                         })
                         .build(),
                 HttpProtocolUnitTestGenerator.ConfigValue.builder()
