@@ -10,5 +10,3 @@ require (
 )
 
 go 1.14
-
-replace github.com/awslabs/smithy-go => ../smithy-go
