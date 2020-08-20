@@ -108,9 +108,9 @@ func addawsAwsjson10_serdeOpTransactGetItemsMiddlewares(stack *middleware.Stack)
 func newServiceMetadataMiddleware_opTransactGetItems(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:         region,
-		ServiceName:    "DynamoDB GoV2",
-		ServiceID:      "dynamodbgov2",
-		EndpointPrefix: "dynamodbgov2",
+		ServiceName:    "DynamoDB",
+		ServiceID:      "dynamodb",
+		EndpointPrefix: "dynamodb",
 		SigningName:    "dynamodb",
 		OperationName:  "TransactGetItems",
 	}
