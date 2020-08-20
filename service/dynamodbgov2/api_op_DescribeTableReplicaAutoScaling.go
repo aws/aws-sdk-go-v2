@@ -31,6 +31,8 @@ func (c *Client) DescribeTableReplicaAutoScaling(ctx context.Context, params *De
 	retry.AddRetryMiddlewares(stack, options)
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeTableReplicaAutoScalingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTableReplicaAutoScaling(options.Region), middleware.Before)
 

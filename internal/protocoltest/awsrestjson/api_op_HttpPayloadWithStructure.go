@@ -26,6 +26,8 @@ func (c *Client) HttpPayloadWithStructure(ctx context.Context, params *HttpPaylo
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadWithStructure(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {

@@ -46,6 +46,8 @@ func (c *Client) UpdateTimeToLive(ctx context.Context, params *UpdateTimeToLiveI
 	retry.AddRetryMiddlewares(stack, options)
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateTimeToLiveValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTimeToLive(options.Region), middleware.Before)
 

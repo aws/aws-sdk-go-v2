@@ -23,6 +23,8 @@ func (c *Client) SimpleScalarProperties(ctx context.Context, params *SimpleScala
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSimpleScalarProperties(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {

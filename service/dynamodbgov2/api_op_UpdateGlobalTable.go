@@ -45,6 +45,8 @@ func (c *Client) UpdateGlobalTable(ctx context.Context, params *UpdateGlobalTabl
 	retry.AddRetryMiddlewares(stack, options)
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateGlobalTableValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGlobalTable(options.Region), middleware.Before)
 

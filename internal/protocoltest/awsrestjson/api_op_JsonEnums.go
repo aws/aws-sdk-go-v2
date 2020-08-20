@@ -25,6 +25,8 @@ func (c *Client) JsonEnums(ctx context.Context, params *JsonEnumsInput, optFns .
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opJsonEnums(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {

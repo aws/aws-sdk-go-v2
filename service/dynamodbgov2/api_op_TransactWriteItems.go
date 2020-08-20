@@ -68,6 +68,8 @@ func (c *Client) TransactWriteItems(ctx context.Context, params *TransactWriteIt
 	retry.AddRetryMiddlewares(stack, options)
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addIdempotencyToken_opTransactWriteItemsMiddleware(stack, options)
 	addOpTransactWriteItemsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTransactWriteItems(options.Region), middleware.Before)

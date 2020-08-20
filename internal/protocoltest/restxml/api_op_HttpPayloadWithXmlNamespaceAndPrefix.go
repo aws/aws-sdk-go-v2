@@ -25,6 +25,8 @@ func (c *Client) HttpPayloadWithXmlNamespaceAndPrefix(ctx context.Context, param
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadWithXmlNamespaceAndPrefix(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {

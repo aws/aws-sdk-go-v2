@@ -25,6 +25,8 @@ func (c *Client) XmlMaps(ctx context.Context, params *XmlMapsInput, optFns ...fu
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opXmlMaps(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {

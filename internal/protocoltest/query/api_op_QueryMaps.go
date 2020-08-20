@@ -25,6 +25,8 @@ func (c *Client) QueryMaps(ctx context.Context, params *QueryMapsInput, optFns .
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opQueryMaps(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {

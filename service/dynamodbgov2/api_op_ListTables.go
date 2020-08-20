@@ -29,6 +29,8 @@ func (c *Client) ListTables(ctx context.Context, params *ListTablesInput, optFns
 	retry.AddRetryMiddlewares(stack, options)
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListTables(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
