@@ -81,9 +81,9 @@ func addawsAwsjson10_serdeOpUpdateContributorInsightsMiddlewares(stack *middlewa
 func newServiceMetadataMiddleware_opUpdateContributorInsights(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:         region,
-		ServiceName:    "DynamoDB GoV2",
-		ServiceID:      "dynamodbgov2",
-		EndpointPrefix: "dynamodbgov2",
+		ServiceName:    "DynamoDB",
+		ServiceID:      "dynamodb",
+		EndpointPrefix: "dynamodb",
 		SigningName:    "dynamodb",
 		OperationName:  "UpdateContributorInsights",
 	}

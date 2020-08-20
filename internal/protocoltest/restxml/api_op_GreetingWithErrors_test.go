@@ -114,7 +114,7 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsRestxmlDeserialize(t *test
 			      <Type>Sender</Type>
 			      <Code>InvalidGreeting</Code>
 			      <Message>Hi</Message>
-			      <AnotherSetting>setting</Message>
+			      <AnotherSetting>setting</AnotherSetting>
 			   </Error>
 			   <RequestId>foo-id</RequestId>
 			</ErrorResponse>

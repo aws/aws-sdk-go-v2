@@ -13,7 +13,7 @@ type Options struct {
 	DisableHTTPS bool
 }
 
-// Resolver DynamoDB GoV2 endpoint resolver
+// Resolver DynamoDB endpoint resolver
 type Resolver struct {
 	partitions endpoints.Partitions
 }
