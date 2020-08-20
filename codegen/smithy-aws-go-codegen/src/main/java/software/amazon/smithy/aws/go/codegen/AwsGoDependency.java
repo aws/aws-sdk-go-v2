@@ -21,7 +21,7 @@ import software.amazon.smithy.go.codegen.SmithyGoDependency;
 /**
  * A class of constants for dependencies used by this package.
  */
-public final class AwsGoDependency {
+public class AwsGoDependency {
     public static final GoDependency AWS_REST_JSON_PROTOCOL = aws("aws/protocol/restjson");
     public static final GoDependency AWS_QUERY_PROTOCOL = aws("aws/protocol/query");
     public static final GoDependency AWS_CORE = aws("aws");
@@ -34,14 +34,14 @@ public final class AwsGoDependency {
 
     public static final String AWS_SOURCE_PATH = "github.com/aws/aws-sdk-go-v2";
 
-    private AwsGoDependency() {
+    protected AwsGoDependency() {
     }
 
-    private static GoDependency aws(String relativePath) {
+    protected static GoDependency aws(String relativePath) {
         return aws(relativePath, null);
     }
 
-    private static GoDependency aws(String relativePath, String alias) {
+    protected static GoDependency aws(String relativePath, String alias) {
         String importPath = AWS_SOURCE_PATH;
         if (relativePath != null) {
             importPath = importPath + "/" + relativePath;
@@ -50,6 +50,6 @@ public final class AwsGoDependency {
     }
 
     private static final class Versions {
-        private static final String AWS_SDK = "v0.24.1-0.20200821181726-bc564654ccac";
+        private static final String AWS_SDK = "v0.0.0-20200822000546-1425ec4565dd";
     }
 }
