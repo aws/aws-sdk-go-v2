@@ -35,6 +35,23 @@
         }
       }
     },
+    "aws-json-10": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.protocoltests.json10#JsonRpc10"]
+          }
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "aws.protocoltests.json10#JsonRpc10",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10",
+          "moduleVersion": "1.0"
+        }
+      }
+    },
     "aws-query": {
       "transforms": [
         {
