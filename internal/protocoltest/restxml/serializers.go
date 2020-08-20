@@ -270,7 +270,7 @@ func (m *awsRestxml_serializeOpConstantQueryString) HandleSerialize(ctx context.
 		request.URL.RawQuery = opQuery
 	}
 
-	request.Method = "POST"
+	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -556,10 +556,6 @@ func (m *awsRestxml_serializeOpGreetingWithErrors) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsHttpPayloadTraitsInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -570,12 +566,6 @@ func (m *awsRestxml_serializeOpGreetingWithErrors) HandleSerialize(ctx context.C
 func awsRestxml_serializeHttpBindingsGreetingWithErrorsInput(v *GreetingWithErrorsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Foo != nil {
-		if len(*v.Foo) > 0 {
-			encoder.SetHeader("X-Foo").String(*v.Foo)
-		}
 	}
 
 	return nil
@@ -1010,21 +1000,6 @@ func awsRestxml_serializeHttpBindingsHttpPayloadWithXmlNamespaceAndPrefixInput(v
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Foo != nil {
-		if len(*v.Foo) > 0 {
-			encoder.SetHeader("X-Foo").String(*v.Foo)
-		}
-	}
-
-	if v.FooMap != nil {
-		hv := encoder.Headers("X-Foo-")
-		for mapKey, mapVal := range v.FooMap {
-			if mapVal != nil && len(*mapVal) > 0 {
-				hv.AddHeader(mapKey).String(*mapVal)
-			}
-		}
-	}
-
 	return nil
 }
 
@@ -1091,54 +1066,6 @@ func awsRestxml_serializeHttpBindingsHttpPrefixHeadersInput(v *HttpPrefixHeaders
 			if mapVal != nil && len(*mapVal) > 0 {
 				hv.AddHeader(mapKey).String(*mapVal)
 			}
-		}
-	}
-
-	if v.Boolean != nil {
-		if err := encoder.SetURI("boolean").Boolean(*v.Boolean); err != nil {
-			return err
-		}
-	}
-
-	if v.Double != nil {
-		if err := encoder.SetURI("double").Double(*v.Double); err != nil {
-			return err
-		}
-	}
-
-	if v.Float != nil {
-		if err := encoder.SetURI("float").Float(*v.Float); err != nil {
-			return err
-		}
-	}
-
-	if v.Integer != nil {
-		if err := encoder.SetURI("integer").Integer(*v.Integer); err != nil {
-			return err
-		}
-	}
-
-	if v.Long != nil {
-		if err := encoder.SetURI("long").Long(*v.Long); err != nil {
-			return err
-		}
-	}
-
-	if v.Short != nil {
-		if err := encoder.SetURI("short").Short(*v.Short); err != nil {
-			return err
-		}
-	}
-
-	if v.String_ != nil {
-		if err := encoder.SetURI("string").String(*v.String_); err != nil {
-			return err
-		}
-	}
-
-	if v.Timestamp != nil {
-		if err := encoder.SetURI("timestamp").String(smithytime.FormatDateTime(*v.Timestamp)); err != nil {
-			return err
 		}
 	}
 
@@ -1211,14 +1138,14 @@ func awsRestxml_serializeHttpBindingsHttpRequestWithGreedyLabelInPathInput(v *Ht
 	return nil
 }
 
-type awsRestxml_serializeOpInputAndOutputWithHeaders struct {
+type awsRestxml_serializeOpHttpRequestWithLabels struct {
 }
 
-func (*awsRestxml_serializeOpInputAndOutputWithHeaders) ID() string {
+func (*awsRestxml_serializeOpHttpRequestWithLabels) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsRestxml_serializeOpInputAndOutputWithHeaders) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsRestxml_serializeOpHttpRequestWithLabels) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	request, ok := in.Request.(*smithyhttp.Request)
@@ -1226,13 +1153,13 @@ func (m *awsRestxml_serializeOpInputAndOutputWithHeaders) HandleSerialize(ctx co
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
-	input, ok := in.Parameters.(*InputAndOutputWithHeadersInput)
+	input, ok := in.Parameters.(*HttpRequestWithLabelsInput)
 	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/InputAndOutputWithHeaders")
+	opPath, opQuery := httpbinding.SplitURI("/HttpRequestWithLabels/{string}/{short}/{integer}/{long}/{float}/{double}/{boolean}/{timestamp}")
 	request.URL.Path = opPath
 	if len(request.URL.RawQuery) > 0 {
 		request.URL.RawQuery = "&" + opQuery
@@ -1240,13 +1167,13 @@ func (m *awsRestxml_serializeOpInputAndOutputWithHeaders) HandleSerialize(ctx co
 		request.URL.RawQuery = opQuery
 	}
 
-	request.Method = "POST"
+	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsInputAndOutputWithHeadersInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeHttpBindingsHttpRequestWithLabelsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1257,99 +1184,57 @@ func (m *awsRestxml_serializeOpInputAndOutputWithHeaders) HandleSerialize(ctx co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsInputAndOutputWithHeadersInput(v *InputAndOutputWithHeadersInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeHttpBindingsHttpRequestWithLabelsInput(v *HttpRequestWithLabelsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.HeaderBooleanList != nil {
-		for i := range v.HeaderBooleanList {
-			if v.HeaderBooleanList[i] != nil {
-				encoder.AddHeader("X-BooleanList").Boolean(*v.HeaderBooleanList[i])
-			}
+	if v.Boolean != nil {
+		if err := encoder.SetURI("boolean").Boolean(*v.Boolean); err != nil {
+			return err
 		}
 	}
 
-	if v.HeaderByte != nil {
-		encoder.SetHeader("X-Byte").Byte(*v.HeaderByte)
-	}
-
-	if v.HeaderDouble != nil {
-		encoder.SetHeader("X-Double").Double(*v.HeaderDouble)
-	}
-
-	if len(v.HeaderEnum) > 0 {
-		encoder.SetHeader("X-Enum").String(string(v.HeaderEnum))
-	}
-
-	if v.HeaderEnumList != nil {
-		for i := range v.HeaderEnumList {
-			if len(v.HeaderEnumList[i]) > 0 {
-				encoder.AddHeader("X-EnumList").String(string(v.HeaderEnumList[i]))
-			}
+	if v.Double != nil {
+		if err := encoder.SetURI("double").Double(*v.Double); err != nil {
+			return err
 		}
 	}
 
-	if v.HeaderFalseBool != nil {
-		encoder.SetHeader("X-Boolean2").Boolean(*v.HeaderFalseBool)
-	}
-
-	if v.HeaderFloat != nil {
-		encoder.SetHeader("X-Float").Float(*v.HeaderFloat)
-	}
-
-	if v.HeaderInteger != nil {
-		encoder.SetHeader("X-Integer").Integer(*v.HeaderInteger)
-	}
-
-	if v.HeaderIntegerList != nil {
-		for i := range v.HeaderIntegerList {
-			if v.HeaderIntegerList[i] != nil {
-				encoder.AddHeader("X-IntegerList").Integer(*v.HeaderIntegerList[i])
-			}
+	if v.Float != nil {
+		if err := encoder.SetURI("float").Float(*v.Float); err != nil {
+			return err
 		}
 	}
 
-	if v.HeaderLong != nil {
-		encoder.SetHeader("X-Long").Long(*v.HeaderLong)
-	}
-
-	if v.HeaderShort != nil {
-		encoder.SetHeader("X-Short").Short(*v.HeaderShort)
-	}
-
-	if v.HeaderString != nil {
-		if len(*v.HeaderString) > 0 {
-			encoder.SetHeader("X-String").String(*v.HeaderString)
+	if v.Integer != nil {
+		if err := encoder.SetURI("integer").Integer(*v.Integer); err != nil {
+			return err
 		}
 	}
 
-	if v.HeaderStringList != nil {
-		for i := range v.HeaderStringList {
-			if v.HeaderStringList[i] != nil && len(*v.HeaderStringList[i]) > 0 {
-				encoder.AddHeader("X-StringList").String(*v.HeaderStringList[i])
-			}
+	if v.Long != nil {
+		if err := encoder.SetURI("long").Long(*v.Long); err != nil {
+			return err
 		}
 	}
 
-	if v.HeaderStringSet != nil {
-		for i := range v.HeaderStringSet {
-			if v.HeaderStringSet[i] != nil && len(*v.HeaderStringSet[i]) > 0 {
-				encoder.AddHeader("X-StringSet").String(*v.HeaderStringSet[i])
-			}
+	if v.Short != nil {
+		if err := encoder.SetURI("short").Short(*v.Short); err != nil {
+			return err
 		}
 	}
 
-	if v.HeaderTimestampList != nil {
-		for i := range v.HeaderTimestampList {
-			if v.HeaderTimestampList[i] != nil {
-				encoder.AddHeader("X-TimestampList").String(smithytime.FormatHTTPDate(*v.HeaderTimestampList[i]))
-			}
+	if v.String_ != nil {
+		if err := encoder.SetURI("string").String(*v.String_); err != nil {
+			return err
 		}
 	}
 
-	if v.HeaderTrueBool != nil {
-		encoder.SetHeader("X-Boolean1").Boolean(*v.HeaderTrueBool)
+	if v.Timestamp != nil {
+		if err := encoder.SetURI("timestamp").String(smithytime.FormatDateTime(*v.Timestamp)); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -1552,8 +1437,94 @@ func awsRestxml_serializeHttpBindingsInputAndOutputWithHeadersInput(v *InputAndO
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Token != nil {
-		encoder.SetQuery("token").String(*v.Token)
+	if v.HeaderBooleanList != nil {
+		for i := range v.HeaderBooleanList {
+			if v.HeaderBooleanList[i] != nil {
+				encoder.AddHeader("X-BooleanList").Boolean(*v.HeaderBooleanList[i])
+			}
+		}
+	}
+
+	if v.HeaderByte != nil {
+		encoder.SetHeader("X-Byte").Byte(*v.HeaderByte)
+	}
+
+	if v.HeaderDouble != nil {
+		encoder.SetHeader("X-Double").Double(*v.HeaderDouble)
+	}
+
+	if len(v.HeaderEnum) > 0 {
+		encoder.SetHeader("X-Enum").String(string(v.HeaderEnum))
+	}
+
+	if v.HeaderEnumList != nil {
+		for i := range v.HeaderEnumList {
+			if len(v.HeaderEnumList[i]) > 0 {
+				encoder.AddHeader("X-EnumList").String(string(v.HeaderEnumList[i]))
+			}
+		}
+	}
+
+	if v.HeaderFalseBool != nil {
+		encoder.SetHeader("X-Boolean2").Boolean(*v.HeaderFalseBool)
+	}
+
+	if v.HeaderFloat != nil {
+		encoder.SetHeader("X-Float").Float(*v.HeaderFloat)
+	}
+
+	if v.HeaderInteger != nil {
+		encoder.SetHeader("X-Integer").Integer(*v.HeaderInteger)
+	}
+
+	if v.HeaderIntegerList != nil {
+		for i := range v.HeaderIntegerList {
+			if v.HeaderIntegerList[i] != nil {
+				encoder.AddHeader("X-IntegerList").Integer(*v.HeaderIntegerList[i])
+			}
+		}
+	}
+
+	if v.HeaderLong != nil {
+		encoder.SetHeader("X-Long").Long(*v.HeaderLong)
+	}
+
+	if v.HeaderShort != nil {
+		encoder.SetHeader("X-Short").Short(*v.HeaderShort)
+	}
+
+	if v.HeaderString != nil {
+		if len(*v.HeaderString) > 0 {
+			encoder.SetHeader("X-String").String(*v.HeaderString)
+		}
+	}
+
+	if v.HeaderStringList != nil {
+		for i := range v.HeaderStringList {
+			if v.HeaderStringList[i] != nil && len(*v.HeaderStringList[i]) > 0 {
+				encoder.AddHeader("X-StringList").String(*v.HeaderStringList[i])
+			}
+		}
+	}
+
+	if v.HeaderStringSet != nil {
+		for i := range v.HeaderStringSet {
+			if v.HeaderStringSet[i] != nil && len(*v.HeaderStringSet[i]) > 0 {
+				encoder.AddHeader("X-StringSet").String(*v.HeaderStringSet[i])
+			}
+		}
+	}
+
+	if v.HeaderTimestampList != nil {
+		for i := range v.HeaderTimestampList {
+			if v.HeaderTimestampList[i] != nil {
+				encoder.AddHeader("X-TimestampList").String(smithytime.FormatHTTPDate(*v.HeaderTimestampList[i]))
+			}
+		}
+	}
+
+	if v.HeaderTrueBool != nil {
+		encoder.SetHeader("X-Boolean1").Boolean(*v.HeaderTrueBool)
 	}
 
 	return nil
@@ -1836,7 +1807,7 @@ func (m *awsRestxml_serializeOpOmitsNullSerializesEmptyString) HandleSerialize(c
 		request.URL.RawQuery = opQuery
 	}
 
-	request.Method = "PUT"
+	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -2304,7 +2275,7 @@ func (m *awsRestxml_serializeOpXmlAttributes) HandleSerialize(ctx context.Contex
 		request.URL.RawQuery = opQuery
 	}
 
-	request.Method = "POST"
+	request.Method = "PUT"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}

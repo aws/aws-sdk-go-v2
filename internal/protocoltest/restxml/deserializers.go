@@ -2420,9 +2420,9 @@ func awsRestxml_deserializeHttpBindingsComplexError(v *types.ComplexError, respo
 	return nil
 }
 func awsRestxml_deserializeErrorComplexError(response *smithyhttp.Response, errorBody *bytes.Reader) error {
-	return &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
+	return &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializerfor %v", errorBody)}
 }
 
 func awsRestxml_deserializeErrorInvalidGreeting(response *smithyhttp.Response, errorBody *bytes.Reader) error {
-	return &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializer delegators")}
+	return &smithy.DeserializationError{Err: fmt.Errorf("TODO: Implement error deserializerfor %v", errorBody)}
 }
