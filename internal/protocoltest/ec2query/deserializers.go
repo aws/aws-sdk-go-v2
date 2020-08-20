@@ -42,8 +42,6 @@ func (m *awsEc2query_deserializeOpEmptyInputAndEmptyOutput) HandleDeserialize(ct
 }
 
 func awsEc2query_deserializeOpErrorEmptyInputAndEmptyOutput(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -95,8 +93,6 @@ func (m *awsEc2query_deserializeOpGreetingWithErrors) HandleDeserialize(ctx cont
 }
 
 func awsEc2query_deserializeOpErrorGreetingWithErrors(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -154,8 +150,6 @@ func (m *awsEc2query_deserializeOpIgnoresWrappingXmlName) HandleDeserialize(ctx 
 }
 
 func awsEc2query_deserializeOpErrorIgnoresWrappingXmlName(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -207,8 +201,6 @@ func (m *awsEc2query_deserializeOpNestedStructures) HandleDeserialize(ctx contex
 }
 
 func awsEc2query_deserializeOpErrorNestedStructures(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -260,8 +252,6 @@ func (m *awsEc2query_deserializeOpNoInputAndOutput) HandleDeserialize(ctx contex
 }
 
 func awsEc2query_deserializeOpErrorNoInputAndOutput(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -313,8 +303,6 @@ func (m *awsEc2query_deserializeOpQueryIdempotencyTokenAutoFill) HandleDeseriali
 }
 
 func awsEc2query_deserializeOpErrorQueryIdempotencyTokenAutoFill(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -366,8 +354,6 @@ func (m *awsEc2query_deserializeOpQueryLists) HandleDeserialize(ctx context.Cont
 }
 
 func awsEc2query_deserializeOpErrorQueryLists(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -419,8 +405,6 @@ func (m *awsEc2query_deserializeOpQueryTimestamps) HandleDeserialize(ctx context
 }
 
 func awsEc2query_deserializeOpErrorQueryTimestamps(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -472,8 +456,6 @@ func (m *awsEc2query_deserializeOpRecursiveXmlShapes) HandleDeserialize(ctx cont
 }
 
 func awsEc2query_deserializeOpErrorRecursiveXmlShapes(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -525,8 +507,6 @@ func (m *awsEc2query_deserializeOpSimpleInputParams) HandleDeserialize(ctx conte
 }
 
 func awsEc2query_deserializeOpErrorSimpleInputParams(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -578,8 +558,6 @@ func (m *awsEc2query_deserializeOpSimpleScalarXmlProperties) HandleDeserialize(c
 }
 
 func awsEc2query_deserializeOpErrorSimpleScalarXmlProperties(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -631,8 +609,6 @@ func (m *awsEc2query_deserializeOpXmlBlobs) HandleDeserialize(ctx context.Contex
 }
 
 func awsEc2query_deserializeOpErrorXmlBlobs(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -684,8 +660,6 @@ func (m *awsEc2query_deserializeOpXmlEnums) HandleDeserialize(ctx context.Contex
 }
 
 func awsEc2query_deserializeOpErrorXmlEnums(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -737,8 +711,6 @@ func (m *awsEc2query_deserializeOpXmlLists) HandleDeserialize(ctx context.Contex
 }
 
 func awsEc2query_deserializeOpErrorXmlLists(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -790,8 +762,6 @@ func (m *awsEc2query_deserializeOpXmlNamespaces) HandleDeserialize(ctx context.C
 }
 
 func awsEc2query_deserializeOpErrorXmlNamespaces(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -843,8 +813,6 @@ func (m *awsEc2query_deserializeOpXmlTimestamps) HandleDeserialize(ctx context.C
 }
 
 func awsEc2query_deserializeOpErrorXmlTimestamps(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

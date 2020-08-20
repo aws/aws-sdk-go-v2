@@ -48,7 +48,6 @@ func (m *awsRestjson1_deserializeOpDeleteSession) HandleDeserialize(ctx context.
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
 	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
@@ -67,8 +66,6 @@ func (m *awsRestjson1_deserializeOpDeleteSession) HandleDeserialize(ctx context.
 }
 
 func awsRestjson1_deserializeOpErrorDeleteSession(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -267,7 +264,6 @@ func (m *awsRestjson1_deserializeOpGetSession) HandleDeserialize(ctx context.Con
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
 	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
@@ -286,8 +282,6 @@ func (m *awsRestjson1_deserializeOpGetSession) HandleDeserialize(ctx context.Con
 }
 
 func awsRestjson1_deserializeOpErrorGetSession(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -469,8 +463,6 @@ func (m *awsRestjson1_deserializeOpPostContent) HandleDeserialize(ctx context.Co
 }
 
 func awsRestjson1_deserializeOpErrorPostContent(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -655,7 +647,6 @@ func (m *awsRestjson1_deserializeOpPostText) HandleDeserialize(ctx context.Conte
 	ringBuffer := smithyio.NewRingBuffer(buff)
 
 	body := io.TeeReader(response.Body, ringBuffer)
-	defer response.Body.Close()
 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
@@ -674,8 +665,6 @@ func (m *awsRestjson1_deserializeOpPostText) HandleDeserialize(ctx context.Conte
 }
 
 func awsRestjson1_deserializeOpErrorPostText(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -939,8 +928,6 @@ func (m *awsRestjson1_deserializeOpPutSession) HandleDeserialize(ctx context.Con
 }
 
 func awsRestjson1_deserializeOpErrorPutSession(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

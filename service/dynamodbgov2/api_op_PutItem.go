@@ -86,6 +86,8 @@ func (c *Client) PutItem(ctx context.Context, params *PutItemInput, optFns ...fu
 	retry.AddRetryMiddlewares(stack, options)
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutItemValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutItem(options.Region), middleware.Before)
 

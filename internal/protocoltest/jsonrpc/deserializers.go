@@ -65,8 +65,6 @@ func (m *awsAwsjson11_deserializeOpEmptyOperation) HandleDeserialize(ctx context
 }
 
 func awsAwsjson11_deserializeOpErrorEmptyOperation(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -164,8 +162,6 @@ func (m *awsAwsjson11_deserializeOpGreetingWithErrors) HandleDeserialize(ctx con
 }
 
 func awsAwsjson11_deserializeOpErrorGreetingWithErrors(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -272,8 +268,6 @@ func (m *awsAwsjson11_deserializeOpJsonEnums) HandleDeserialize(ctx context.Cont
 }
 
 func awsAwsjson11_deserializeOpErrorJsonEnums(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -371,8 +365,6 @@ func (m *awsAwsjson11_deserializeOpKitchenSinkOperation) HandleDeserialize(ctx c
 }
 
 func awsAwsjson11_deserializeOpErrorKitchenSinkOperation(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -476,8 +468,6 @@ func (m *awsAwsjson11_deserializeOpNullOperation) HandleDeserialize(ctx context.
 }
 
 func awsAwsjson11_deserializeOpErrorNullOperation(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -575,8 +565,6 @@ func (m *awsAwsjson11_deserializeOpOperationWithOptionalInputOutput) HandleDeser
 }
 
 func awsAwsjson11_deserializeOpErrorOperationWithOptionalInputOutput(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -674,8 +662,6 @@ func (m *awsAwsjson11_deserializeOpPutAndGetInlineDocuments) HandleDeserialize(c
 }
 
 func awsAwsjson11_deserializeOpErrorPutAndGetInlineDocuments(response *smithyhttp.Response) error {
-	defer response.Body.Close()
-
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

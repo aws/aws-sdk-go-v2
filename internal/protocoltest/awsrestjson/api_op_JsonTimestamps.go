@@ -26,6 +26,8 @@ func (c *Client) JsonTimestamps(ctx context.Context, params *JsonTimestampsInput
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opJsonTimestamps(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {

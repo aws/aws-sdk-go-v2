@@ -79,6 +79,8 @@ func (c *Client) BatchWriteItem(ctx context.Context, params *BatchWriteItemInput
 	retry.AddRetryMiddlewares(stack, options)
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchWriteItemValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchWriteItem(options.Region), middleware.Before)
 

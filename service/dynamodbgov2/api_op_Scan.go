@@ -50,6 +50,8 @@ func (c *Client) Scan(ctx context.Context, params *ScanInput, optFns ...func(*Op
 	retry.AddRetryMiddlewares(stack, options)
 	v4.AddHTTPSignerMiddleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpScanValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opScan(options.Region), middleware.Before)
 

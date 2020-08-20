@@ -24,6 +24,8 @@ func (c *Client) InlineDocument(ctx context.Context, params *InlineDocumentInput
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opInlineDocument(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
