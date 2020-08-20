@@ -220,51 +220,51 @@ type UpdateItemInput struct {
 	// it. You can append the new element to the start or the end of the list by
 	// reversing the order of the operands.
 	//
-	// These function names are case-sensitive.
+	//     These function names are
+	// case-sensitive.
+	//
+	//     * REMOVE - Removes one or more attributes from an item.
 	//
 	//
-	// * REMOVE - Removes one or more attributes from an item.
+	// * ADD - Adds the specified value to the item, if the attribute does not already
+	// exist. If the attribute does exist, then the behavior of ADD depends on the data
+	// type of the attribute:
 	//
-	//     * ADD - Adds the
-	// specified value to the item, if the attribute does not already exist. If the
-	// attribute does exist, then the behavior of ADD depends on the data type of the
-	// attribute:
+	//         * If the existing attribute is a number, and if
+	// Value is also a number, then Value is mathematically added to the existing
+	// attribute. If Value is a negative number, then it is subtracted from the
+	// existing attribute. If you use ADD to increment or decrement a number value for
+	// an item that doesn't exist before the update, DynamoDB uses 0 as the initial
+	// value. Similarly, if you use ADD for an existing item to increment or decrement
+	// an attribute value that doesn't exist before the update, DynamoDB uses 0 as the
+	// initial value. For example, suppose that the item you want to update doesn't
+	// have an attribute named itemcount, but you decide to ADD the number 3 to this
+	// attribute anyway. DynamoDB will create the itemcount attribute, set its initial
+	// value to 0, and finally add 3 to it. The result will be a new itemcount
+	// attribute in the item, with a value of 3.
 	//
-	//         * If the existing attribute is a number, and if Value is
-	// also a number, then Value is mathematically added to the existing attribute. If
-	// Value is a negative number, then it is subtracted from the existing attribute.
-	// If you use ADD to increment or decrement a number value for an item that doesn't
-	// exist before the update, DynamoDB uses 0 as the initial value. Similarly, if you
-	// use ADD for an existing item to increment or decrement an attribute value that
-	// doesn't exist before the update, DynamoDB uses 0 as the initial value. For
-	// example, suppose that the item you want to update doesn't have an attribute
-	// named itemcount, but you decide to ADD the number 3 to this attribute anyway.
-	// DynamoDB will create the itemcount attribute, set its initial value to 0, and
-	// finally add 3 to it. The result will be a new itemcount attribute in the item,
-	// with a value of 3.
+	//         * If the existing data type
+	// is a set and if Value is also a set, then Value is added to the existing set.
+	// For example, if the attribute value is the set [1,2], and the ADD action
+	// specified [3], then the final attribute value is [1,2,3]. An error occurs if an
+	// ADD action is specified for a set attribute and the attribute type specified
+	// does not match the existing set type. Both sets must have the same primitive
+	// data type. For example, if the existing data type is a set of strings, the Value
+	// must also be a set of strings.
 	//
-	//         * If the existing data type is a set and if Value is
-	// also a set, then Value is added to the existing set. For example, if the
-	// attribute value is the set [1,2], and the ADD action specified [3], then the
-	// final attribute value is [1,2,3]. An error occurs if an ADD action is specified
-	// for a set attribute and the attribute type specified does not match the existing
-	// set type. Both sets must have the same primitive data type. For example, if the
-	// existing data type is a set of strings, the Value must also be a set of
-	// strings.
+	//     The ADD action only supports Number and set
+	// data types. In addition, ADD can only be used on top-level attributes, not
+	// nested attributes.
 	//
-	// The ADD action only supports Number and set data types. In addition,
-	// ADD can only be used on top-level attributes, not nested attributes.
-	//
-	//     *
-	// DELETE - Deletes an element from a set. If a set of values is specified, then
-	// those values are subtracted from the old set. For example, if the attribute
-	// value was the set [a,b,c] and the DELETE action specifies [a,c], then the final
-	// attribute value is [b]. Specifying an empty set is an error. The DELETE action
-	// only supports set data types. In addition, DELETE can only be used on top-level
-	// attributes, not nested attributes.  </li> </ul> <p>You can have many actions in
-	// a single expression, such as the following: <code>SET a=:value1, b=:value2
-	// DELETE :value3, :value4, :value5</code> </p> <p>For more information on update
-	// expressions, see <a
+	//     * DELETE - Deletes an element from a set. If a set of
+	// values is specified, then those values are subtracted from the old set. For
+	// example, if the attribute value was the set [a,b,c] and the DELETE action
+	// specifies [a,c], then the final attribute value is [b]. Specifying an empty set
+	// is an error. The DELETE action only supports set data types. In addition, DELETE
+	// can only be used on top-level attributes, not nested attributes.  </li> </ul>
+	// <p>You can have many actions in a single expression, such as the following:
+	// <code>SET a=:value1, b=:value2 DELETE :value3, :value4, :value5</code> </p>
+	// <p>For more information on update expressions, see <a
 	// href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Modifying.html">Modifying
 	// Items and Attributes</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>
 	UpdateExpression *string
