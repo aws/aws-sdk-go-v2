@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	v4Internal "github.com/aws/aws-sdk-go-v2/aws/signer/internal/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
@@ -180,7 +181,8 @@ func (m *contentSHA256HeaderMiddleware) HandleBuild(
 
 // SignHTTPRequestMiddleware is a `FinalizeMiddleware` implementation for SigV4 HTTP Signing
 type SignHTTPRequestMiddleware struct {
-	signer HTTPSigner
+	credentialsProvider aws.CredentialsProvider
+	signer              HTTPSigner
 }
 
 // NewSignHTTPRequestMiddleware constructs a SignHTTPRequestMiddleware using the given Signer for signing requests
@@ -208,7 +210,12 @@ func (s *SignHTTPRequestMiddleware) HandleFinalize(ctx context.Context, in middl
 		return out, metadata, &SigningError{Err: fmt.Errorf("computed payload hash missing from context")}
 	}
 
-	err = s.signer.SignHTTP(ctx, req.Request, payloadHash, signingName, signingRegion, sdk.NowTime())
+	credentials, err := s.credentialsProvider.Retrieve(ctx)
+	if err != nil {
+		return out, metadata, &SigningError{Err: fmt.Errorf("failed to retrieve credentials: %w", err)}
+	}
+
+	err = s.signer.SignHTTP(ctx, credentials, req.Request, payloadHash, signingName, signingRegion, sdk.NowTime())
 	if err != nil {
 		return out, metadata, &SigningError{Err: fmt.Errorf("failed to sign http request, %w", err)}
 	}

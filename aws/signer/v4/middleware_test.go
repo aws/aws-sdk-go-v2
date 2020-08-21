@@ -11,6 +11,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -79,10 +80,10 @@ func TestComputePayloadHashMiddleware(t *testing.T) {
 	}
 }
 
-type mockSigner func(ctx context.Context, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error
+type httpSignerFunc func(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error
 
-func (f mockSigner) SignHTTP(ctx context.Context, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error {
-	return f(ctx, r, payloadHash, service, region, signingTime)
+func (f httpSignerFunc) SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error {
+	return f(ctx, credentials, r, payloadHash, service, region, signingTime)
 }
 
 func TestSignHTTPRequestMiddleware(t *testing.T) {
@@ -107,7 +108,13 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 	for i, tt := range cases {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
 			c := &SignHTTPRequestMiddleware{
-				signer: mockSigner(func(ctx context.Context, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error {
+				credentialsProvider: aws.StaticCredentialsProvider{
+					Value: aws.Credentials{AccessKeyID: "key", SecretAccessKey: "secret"},
+				},
+				signer: httpSignerFunc(func(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error {
+					if e, a := (aws.Credentials{AccessKeyID: "key", SecretAccessKey: "secret", Source: "StaticCredentialsProvider"}), credentials; e != a {
+						t.Errorf("expected %v, got %v", e, a)
+					}
 					if e, a := tt.hash, payloadHash; e != a {
 						t.Errorf("expected %v, got %v", e, a)
 					}
