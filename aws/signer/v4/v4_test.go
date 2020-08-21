@@ -17,6 +17,8 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
+var testCredentials = aws.Credentials{AccessKeyID: "AKID", SecretAccessKey: "SECRET", SessionToken: "SESSION"}
+
 func buildRequest(serviceName, region, body string) (*http.Request, string) {
 	reader := strings.NewReader(body)
 	return buildRequestWithBodyReader(serviceName, region, reader)
@@ -53,30 +55,11 @@ func buildRequestWithBodyReader(serviceName, region string, body io.Reader) (*ht
 	return req, payloadHash
 }
 
-func buildSigner() Signer {
-	return Signer{
-		Credentials: aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
-	}
-}
-
-func removeWS(text string) string {
-	text = strings.Replace(text, " ", "", -1)
-	text = strings.Replace(text, "\n", "", -1)
-	text = strings.Replace(text, "\t", "", -1)
-	return text
-}
-
-func assertEqual(t *testing.T, expected, given string) {
-	if removeWS(expected) != removeWS(given) {
-		t.Errorf("\nExpected: %s\nGiven:    %s", expected, given)
-	}
-}
-
 func TestPresignRequest(t *testing.T) {
 	req, body := buildRequest("dynamodb", "us-east-1", "{}")
 
-	signer := buildSigner()
-	signed, headers, err := signer.PresignHTTP(context.Background(), req, body, "dynamodb", "us-east-1", 300*time.Second, time.Unix(0, 0))
+	signer := Signer{}
+	signed, headers, err := signer.PresignHTTP(context.Background(), testCredentials, req, body, "dynamodb", "us-east-1", 300*time.Second, time.Unix(0, 0))
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
 	}
@@ -123,8 +106,8 @@ func TestPresignBodyWithArrayRequest(t *testing.T) {
 	req, body := buildRequest("dynamodb", "us-east-1", "{}")
 	req.URL.RawQuery = "Foo=z&Foo=o&Foo=m&Foo=a"
 
-	signer := buildSigner()
-	signed, headers, err := signer.PresignHTTP(context.Background(), req, body, "dynamodb", "us-east-1", 300*time.Second, time.Unix(0, 0))
+	signer := Signer{}
+	signed, headers, err := signer.PresignHTTP(context.Background(), testCredentials, req, body, "dynamodb", "us-east-1", 300*time.Second, time.Unix(0, 0))
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -169,8 +152,8 @@ func TestPresignBodyWithArrayRequest(t *testing.T) {
 
 func TestSignRequest(t *testing.T) {
 	req, body := buildRequest("dynamodb", "us-east-1", "{}")
-	signer := buildSigner()
-	err := signer.SignHTTP(context.Background(), req, body, "dynamodb", "us-east-1", time.Unix(0, 0))
+	signer := Signer{}
+	err := signer.SignHTTP(context.Background(), testCredentials, req, body, "dynamodb", "us-east-1", time.Unix(0, 0))
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -210,15 +193,14 @@ func TestBuildCanonicalRequest(t *testing.T) {
 }
 
 func TestSigner_SignHTTP_NoReplaceRequestBody(t *testing.T) {
-	creds := aws.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION")
 	req, bodyHash := buildRequest("dynamodb", "us-east-1", "{}")
 	req.Body = ioutil.NopCloser(bytes.NewReader([]byte{}))
 
-	s := NewSigner(creds)
+	s := NewSigner()
 
 	origBody := req.Body
 
-	err := s.SignHTTP(context.Background(), req, bodyHash, "dynamodb", "us-east-1", time.Now())
+	err := s.SignHTTP(context.Background(), testCredentials, req, bodyHash, "dynamodb", "us-east-1", time.Now())
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -251,17 +233,17 @@ func TestRequestHost(t *testing.T) {
 }
 
 func BenchmarkPresignRequest(b *testing.B) {
-	signer := buildSigner()
+	signer := Signer{}
 	req, bodyHash := buildRequest("dynamodb", "us-east-1", "{}")
 	for i := 0; i < b.N; i++ {
-		signer.PresignHTTP(context.Background(), req, bodyHash, "dynamodb", "us-east-1", 300*time.Second, time.Now())
+		signer.PresignHTTP(context.Background(), testCredentials, req, bodyHash, "dynamodb", "us-east-1", 300*time.Second, time.Now())
 	}
 }
 
 func BenchmarkSignRequest(b *testing.B) {
-	signer := buildSigner()
+	signer := Signer{}
 	req, bodyHash := buildRequest("dynamodb", "us-east-1", "{}")
 	for i := 0; i < b.N; i++ {
-		signer.SignHTTP(context.Background(), req, bodyHash, "dynamodb", "us-east-1", time.Now())
+		signer.SignHTTP(context.Background(), testCredentials, req, bodyHash, "dynamodb", "us-east-1", time.Now())
 	}
 }

@@ -31,8 +31,11 @@ var standaloneSignCases = []struct {
 func TestStandaloneSign_CustomURIEscape(t *testing.T) {
 	var expectSig = `AWS4-HMAC-SHA256 Credential=AKID/19700101/us-east-1/es/aws4_request, SignedHeaders=host;x-amz-date;x-amz-security-token, Signature=6601e883cc6d23871fd6c2a394c5677ea2b8c82b04a6446786d64cd74f520967`
 
-	creds := unit.Config().Credentials
-	signer := v4.NewSigner(creds, func(s *v4.Signer) {
+	creds, err := unit.Config().Credentials.Retrieve(context.Background())
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	signer := v4.NewSigner(func(s *v4.Signer) {
 		s.DisableURIPathEscaping = true
 	})
 
@@ -45,7 +48,7 @@ func TestStandaloneSign_CustomURIEscape(t *testing.T) {
 	req.URL.Path = `/log-*/_search`
 	req.URL.Opaque = "//subdomain.us-east-1.es.amazonaws.com/log-%2A/_search"
 
-	err = signer.SignHTTP(context.Background(), req, v4Internal.EmptyStringSHA256, "es", "us-east-1", time.Unix(0, 0))
+	err = signer.SignHTTP(context.Background(), creds, req, v4Internal.EmptyStringSHA256, "es", "us-east-1", time.Unix(0, 0))
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
@@ -57,8 +60,11 @@ func TestStandaloneSign_CustomURIEscape(t *testing.T) {
 }
 
 func TestStandaloneSign(t *testing.T) {
-	creds := unit.Config().Credentials
-	signer := v4.NewSigner(creds)
+	creds, err := unit.Config().Credentials.Retrieve(context.Background())
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	signer := v4.NewSigner()
 
 	for _, c := range standaloneSignCases {
 		host := fmt.Sprintf("https://%s.%s.%s.amazonaws.com",
@@ -74,7 +80,7 @@ func TestStandaloneSign(t *testing.T) {
 		req.URL.Path = c.OrigURI
 		req.URL.RawQuery = c.OrigQuery
 
-		err = signer.SignHTTP(context.Background(), req, v4Internal.EmptyStringSHA256, c.Service, c.Region, time.Unix(0, 0))
+		err = signer.SignHTTP(context.Background(), creds, req, v4Internal.EmptyStringSHA256, c.Service, c.Region, time.Unix(0, 0))
 		if err != nil {
 			t.Errorf("expected no error, but received %v", err)
 		}
@@ -93,8 +99,11 @@ func TestStandaloneSign(t *testing.T) {
 }
 
 func TestStandaloneSign_RawPath(t *testing.T) {
-	creds := unit.Config().Credentials
-	signer := v4.NewSigner(creds)
+	creds, err := unit.Config().Credentials.Retrieve(context.Background())
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	signer := v4.NewSigner()
 
 	for _, c := range standaloneSignCases {
 		host := fmt.Sprintf("https://%s.%s.%s.amazonaws.com",
@@ -111,7 +120,7 @@ func TestStandaloneSign_RawPath(t *testing.T) {
 		req.URL.RawPath = c.EscapedURI
 		req.URL.RawQuery = c.OrigQuery
 
-		err = signer.SignHTTP(context.Background(), req, v4Internal.EmptyStringSHA256, c.Service, c.Region, time.Unix(0, 0))
+		err = signer.SignHTTP(context.Background(), creds, req, v4Internal.EmptyStringSHA256, c.Service, c.Region, time.Unix(0, 0))
 		if err != nil {
 			t.Errorf("expected no error, but received %v", err)
 		}
