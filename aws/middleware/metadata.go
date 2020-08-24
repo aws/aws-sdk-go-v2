@@ -9,12 +9,11 @@ import (
 // RegisterServiceMetadata registers metadata about the service and operation into the middleware context
 // so that it is available at runtime for other middleware to introspect.
 type RegisterServiceMetadata struct {
-	ServiceName    string
-	ServiceID      string
-	EndpointPrefix string
-	SigningName    string
-	Region         string
-	OperationName  string
+	ServiceName   string
+	ServiceID     string
+	SigningName   string
+	Region        string
+	OperationName string
 }
 
 // ID returns the middleware identifier.
@@ -31,9 +30,6 @@ func (s RegisterServiceMetadata) HandleInitialize(
 	}
 	if len(s.ServiceID) > 0 {
 		ctx = setServiceID(ctx, s.ServiceID)
-	}
-	if len(s.EndpointPrefix) > 0 {
-		ctx = setEndpointPrefix(ctx, s.EndpointPrefix)
 	}
 	if len(s.SigningName) > 0 {
 		ctx = SetSigningName(ctx, s.SigningName)
@@ -67,12 +63,6 @@ func GetServiceName(ctx context.Context) (v string) {
 // GetServiceID retrieves the service id from the context.
 func GetServiceID(ctx context.Context) (v string) {
 	v, _ = ctx.Value(serviceIDKey{}).(string)
-	return v
-}
-
-// GetEndpointPrefix retrieves the service endpoints id from the context.
-func GetEndpointPrefix(ctx context.Context) (v string) {
-	v, _ = ctx.Value(endpointPrefixKey{}).(string)
 	return v
 }
 
@@ -118,11 +108,6 @@ func setServiceName(ctx context.Context, value string) context.Context {
 // setServiceID sets the service id on the context.
 func setServiceID(ctx context.Context, value string) context.Context {
 	return context.WithValue(ctx, serviceIDKey{}, value)
-}
-
-// setEndpointPrefix sets the service endpoint id on the context.
-func setEndpointPrefix(ctx context.Context, value string) context.Context {
-	return context.WithValue(ctx, endpointPrefixKey{}, value)
 }
 
 // setRegion sets the endpoint region on the context.
