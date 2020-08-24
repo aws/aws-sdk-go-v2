@@ -69,7 +69,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
         return Collections.singletonMap("decoder", "smithyxml.NodeDecoder");
     }
 
-    private XmlMemberDeserVisitor getMemberDeserVisitor(MemberShape member, String dataDest, boolean isXmlAttibuteMember) {
+    protected XmlMemberDeserVisitor getMemberDeserVisitor(MemberShape member, String dataDest, boolean isXmlAttibuteMember) {
         // Get the timestamp format to be used, defaulting to rfc 3339 date-time format.
         TimestampFormatTrait.Format format = member.getMemberTrait(getContext().getModel(), TimestampFormatTrait.class)
                 .map(TimestampFormatTrait::getFormat).orElse(DEFAULT_TIMESTAMP_FORMAT);
@@ -371,7 +371,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
         return false;
     }
 
-    private String getSerializedMemberName(MemberShape memberShape) {
+    protected String getSerializedMemberName(MemberShape memberShape) {
         Optional<XmlNameTrait> xmlNameTrait = memberShape.getTrait(XmlNameTrait.class);
         return xmlNameTrait.isPresent() ? xmlNameTrait.get().getValue() : memberShape.getMemberName();
     }

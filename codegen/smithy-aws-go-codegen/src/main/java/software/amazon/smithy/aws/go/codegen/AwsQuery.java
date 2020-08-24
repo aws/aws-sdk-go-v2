@@ -87,7 +87,7 @@ class AwsQuery extends HttpRpcProtocolGenerator {
 
     @Override
     protected void generateDocumentBodyShapeDeserializers(GenerationContext context, Set<Shape> shapes) {
-        QueryShapeDeserVisitor visitor = new QueryShapeDeserVisitor(context);
+        XmlShapeDeserVisitor visitor = new XmlShapeDeserVisitor(context);
         shapes.forEach(shape -> shape.accept(visitor));
     }
 
@@ -125,11 +125,8 @@ class AwsQuery extends HttpRpcProtocolGenerator {
 
     @Override
     protected void writeErrorMessageCodeDeserializer(GenerationContext context) {
-        // TODO: support query error message / code deser
         GoWriter writer = context.getWriter();
         writer.write("_ = errorBody");
-
-        writer.writeDocs("error message code deser");
         XmlProtocolUtils.writeXmlErrorMessageCodeDeserializer(context);
     }
 
