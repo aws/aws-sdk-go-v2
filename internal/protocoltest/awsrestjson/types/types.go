@@ -2,9 +2,209 @@
 
 package types
 
+import (
+	"time"
+)
+
 type ComplexNestedErrorData struct {
 	Foo *string
 }
+
+// A union with a representative set of types for members.
+type MyUnion interface {
+	isMyUnion()
+}
+
+type MyUnionStringValue interface {
+	MyUnion
+	isMyUnionStringValue()
+	Value() string
+}
+
+func AsMyUnionStringValue(v string) MyUnionStringValue {
+	return myUnionStringValue{value: v}
+}
+
+type myUnionStringValue struct {
+	value string
+}
+
+func (myUnionStringValue) isMyUnion()            {}
+func (myUnionStringValue) isMyUnionStringValue() {}
+func (v myUnionStringValue) Value() string {
+	return v.value
+}
+
+type MyUnionBooleanValue interface {
+	MyUnion
+	isMyUnionBooleanValue()
+	Value() bool
+}
+
+func AsMyUnionBooleanValue(v bool) MyUnionBooleanValue {
+	return myUnionBooleanValue{value: v}
+}
+
+type myUnionBooleanValue struct {
+	value bool
+}
+
+func (myUnionBooleanValue) isMyUnion()             {}
+func (myUnionBooleanValue) isMyUnionBooleanValue() {}
+func (v myUnionBooleanValue) Value() bool {
+	return v.value
+}
+
+type MyUnionNumberValue interface {
+	MyUnion
+	isMyUnionNumberValue()
+	Value() int32
+}
+
+func AsMyUnionNumberValue(v int32) MyUnionNumberValue {
+	return myUnionNumberValue{value: v}
+}
+
+type myUnionNumberValue struct {
+	value int32
+}
+
+func (myUnionNumberValue) isMyUnion()            {}
+func (myUnionNumberValue) isMyUnionNumberValue() {}
+func (v myUnionNumberValue) Value() int32 {
+	return v.value
+}
+
+type MyUnionBlobValue interface {
+	MyUnion
+	isMyUnionBlobValue()
+	Value() []byte
+}
+
+func AsMyUnionBlobValue(v []byte) MyUnionBlobValue {
+	return myUnionBlobValue{value: v}
+}
+
+type myUnionBlobValue struct {
+	value []byte
+}
+
+func (myUnionBlobValue) isMyUnion()          {}
+func (myUnionBlobValue) isMyUnionBlobValue() {}
+func (v myUnionBlobValue) Value() []byte {
+	return v.value
+}
+
+type MyUnionTimestampValue interface {
+	MyUnion
+	isMyUnionTimestampValue()
+	Value() time.Time
+}
+
+func AsMyUnionTimestampValue(v time.Time) MyUnionTimestampValue {
+	return myUnionTimestampValue{value: v}
+}
+
+type myUnionTimestampValue struct {
+	value time.Time
+}
+
+func (myUnionTimestampValue) isMyUnion()               {}
+func (myUnionTimestampValue) isMyUnionTimestampValue() {}
+func (v myUnionTimestampValue) Value() time.Time {
+	return v.value
+}
+
+type MyUnionEnumValue interface {
+	MyUnion
+	isMyUnionEnumValue()
+	Value() FooEnum
+}
+
+func AsMyUnionEnumValue(v FooEnum) MyUnionEnumValue {
+	return myUnionEnumValue{value: v}
+}
+
+type myUnionEnumValue struct {
+	value FooEnum
+}
+
+func (myUnionEnumValue) isMyUnion()          {}
+func (myUnionEnumValue) isMyUnionEnumValue() {}
+func (v myUnionEnumValue) Value() FooEnum {
+	return v.value
+}
+
+type MyUnionListValue interface {
+	MyUnion
+	isMyUnionListValue()
+	Value() []string
+}
+
+func AsMyUnionListValue(v []string) MyUnionListValue {
+	return myUnionListValue{value: v}
+}
+
+type myUnionListValue struct {
+	value []string
+}
+
+func (myUnionListValue) isMyUnion()          {}
+func (myUnionListValue) isMyUnionListValue() {}
+func (v myUnionListValue) Value() []string {
+	return v.value
+}
+
+type MyUnionMapValue interface {
+	MyUnion
+	isMyUnionMapValue()
+	Value() map[string]string
+}
+
+func AsMyUnionMapValue(v map[string]string) MyUnionMapValue {
+	return myUnionMapValue{value: v}
+}
+
+type myUnionMapValue struct {
+	value map[string]string
+}
+
+func (myUnionMapValue) isMyUnion()         {}
+func (myUnionMapValue) isMyUnionMapValue() {}
+func (v myUnionMapValue) Value() map[string]string {
+	return v.value
+}
+
+type MyUnionStructureValue interface {
+	MyUnion
+	isMyUnionStructureValue()
+	Value() GreetingStruct
+}
+
+func AsMyUnionStructureValue(v GreetingStruct) MyUnionStructureValue {
+	return myUnionStructureValue{value: v}
+}
+
+type myUnionStructureValue struct {
+	value GreetingStruct
+}
+
+func (myUnionStructureValue) isMyUnion()               {}
+func (myUnionStructureValue) isMyUnionStructureValue() {}
+func (v myUnionStructureValue) Value() GreetingStruct {
+	return v.value
+}
+
+// MyUnionUnknown is returned when a union member is returned over the wire, but
+// has an unknown tag.
+type MyUnionUnknown struct {
+	tag   string
+	value []byte
+}
+
+func (v MyUnionUnknown) isMyUnion()    {}
+func (v MyUnionUnknown) Value() []byte { return v.value }
+func (v MyUnionUnknown) Tag() string   { return v.tag }
 
 type NestedPayload struct {
 	Greeting *string

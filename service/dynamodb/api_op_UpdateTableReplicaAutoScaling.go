@@ -29,7 +29,7 @@ func (c *Client) UpdateTableReplicaAutoScaling(ctx context.Context, params *Upda
 	AddResolveEndpointMiddleware(stack, options)
 	v4.AddComputePayloadSHA256Middleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
-	v4.AddHTTPSignerMiddleware(stack, options)
+	registerHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)

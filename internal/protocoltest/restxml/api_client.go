@@ -3,10 +3,11 @@
 package restxml
 
 import (
+	cryptorand "crypto/rand"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyrand "github.com/awslabs/smithy-go/rand"
 	"net/http"
 )
 
@@ -22,6 +23,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	options = options.Copy()
 
 	resolveDefaultEndpointConfiguration(&options)
+
+	resolveIdempotencyTokenProvider(&options)
 
 	for _, fn := range optFns {
 		fn(&options)
@@ -52,10 +55,6 @@ type Options struct {
 	// The service endpoint resolver.
 	EndpointResolver EndpointResolver
 
-	// HTTPSigner provides AWS request signing for HTTP requests made from the client.
-	// When nil the API client will use a default signer.
-	HTTPSigner v4.HTTPSigner
-
 	// Provides idempotency tokens values that will be automatically populated into
 	// idempotent API operations.
 	IdempotencyTokenProvider IdempotencyTokenProvider
@@ -84,10 +83,6 @@ func (o Options) GetEndpointOptions() ResolverOptions {
 
 func (o Options) GetEndpointResolver() EndpointResolver {
 	return o.EndpointResolver
-}
-
-func (o Options) GetHTTPSigner() v4.HTTPSigner {
-	return o.HTTPSigner
 }
 
 func (o Options) GetIdempotencyTokenProvider() IdempotencyTokenProvider {
@@ -134,6 +129,27 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient: cfg.HTTPClient,
 	}
 	return New(opts, optFns...)
+}
+
+func resolveHTTPClient(o *Options) {
+	if o.HTTPClient != nil {
+		return
+	}
+	o.HTTPClient = aws.NewBuildableHTTPClient()
+}
+
+func resolveAwsRetryer(o *Options) {
+	if o.Retryer != nil {
+		return
+	}
+	o.Retryer = retry.NewStandard()
+}
+
+func resolveIdempotencyTokenProvider(o *Options) {
+	if o.IdempotencyTokenProvider != nil {
+		return
+	}
+	o.IdempotencyTokenProvider = smithyrand.NewUUIDIdempotencyToken(cryptorand.Reader)
 }
 
 // IdempotencyTokenProvider interface for providing idempotency token

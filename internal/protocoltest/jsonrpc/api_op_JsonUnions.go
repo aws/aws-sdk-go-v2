@@ -7,18 +7,20 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-func (c *Client) OperationWithOptionalInputOutput(ctx context.Context, params *OperationWithOptionalInputOutputInput, optFns ...func(*Options)) (*OperationWithOptionalInputOutputOutput, error) {
-	stack := middleware.NewStack("OperationWithOptionalInputOutput", smithyhttp.NewStackRequest)
+// This operation uses unions for inputs and outputs.
+func (c *Client) JsonUnions(ctx context.Context, params *JsonUnionsInput, optFns ...func(*Options)) (*JsonUnionsOutput, error) {
+	stack := middleware.NewStack("JsonUnions", smithyhttp.NewStackRequest)
 	options := c.options.Copy()
 	for _, fn := range optFns {
 		fn(&options)
 	}
-	addawsAwsjson11_serdeOpOperationWithOptionalInputOutputMiddlewares(stack)
+	addawsAwsjson11_serdeOpJsonUnionsMiddlewares(stack)
 	awsmiddleware.AddRequestInvocationIDMiddleware(stack)
 	smithyhttp.AddContentLengthMiddleware(stack)
 	AddResolveEndpointMiddleware(stack, options)
@@ -28,7 +30,7 @@ func (c *Client) OperationWithOptionalInputOutput(ctx context.Context, params *O
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
-	stack.Initialize.Add(newServiceMetadataMiddleware_opOperationWithOptionalInputOutput(options.Region), middleware.Before)
+	stack.Initialize.Add(newServiceMetadataMiddleware_opJsonUnions(options.Region), middleware.Before)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -40,38 +42,42 @@ func (c *Client) OperationWithOptionalInputOutput(ctx context.Context, params *O
 	if err != nil {
 		return nil, &smithy.OperationError{
 			ServiceID:     c.ServiceID(),
-			OperationName: "OperationWithOptionalInputOutput",
+			OperationName: "JsonUnions",
 			Err:           err,
 		}
 	}
-	out := result.(*OperationWithOptionalInputOutputOutput)
+	out := result.(*JsonUnionsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type OperationWithOptionalInputOutputInput struct {
-	Value *string
+// A shared structure that contains a single union member.
+type JsonUnionsInput struct {
+	// A union with a representative set of types for members.
+	Contents *types.MyUnion
 }
 
-type OperationWithOptionalInputOutputOutput struct {
-	Value *string
+// A shared structure that contains a single union member.
+type JsonUnionsOutput struct {
+	// A union with a representative set of types for members.
+	Contents *types.MyUnion
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }
 
-func addawsAwsjson11_serdeOpOperationWithOptionalInputOutputMiddlewares(stack *middleware.Stack) {
-	stack.Serialize.Add(&awsAwsjson11_serializeOpOperationWithOptionalInputOutput{}, middleware.After)
-	stack.Deserialize.Add(&awsAwsjson11_deserializeOpOperationWithOptionalInputOutput{}, middleware.After)
+func addawsAwsjson11_serdeOpJsonUnionsMiddlewares(stack *middleware.Stack) {
+	stack.Serialize.Add(&awsAwsjson11_serializeOpJsonUnions{}, middleware.After)
+	stack.Deserialize.Add(&awsAwsjson11_deserializeOpJsonUnions{}, middleware.After)
 }
 
-func newServiceMetadataMiddleware_opOperationWithOptionalInputOutput(region string) awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opJsonUnions(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:         region,
 		ServiceName:    "Json Protocol",
 		ServiceID:      "jsonprotocol",
 		EndpointPrefix: "jsonprotocol",
 		SigningName:    "foo",
-		OperationName:  "OperationWithOptionalInputOutput",
+		OperationName:  "JsonUnions",
 	}
 }

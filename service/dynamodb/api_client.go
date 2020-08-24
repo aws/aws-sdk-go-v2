@@ -3,11 +3,15 @@
 package dynamodb
 
 import (
+	"context"
+	cryptorand "crypto/rand"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyrand "github.com/awslabs/smithy-go/rand"
 	"net/http"
+	"time"
 )
 
 // Amazon DynamoDB  <p>Amazon DynamoDB is a fully managed NoSQL database service
@@ -36,6 +40,10 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	options = options.Copy()
 
 	resolveDefaultEndpointConfiguration(&options)
+
+	resolveHTTPSignerV4(&options)
+
+	resolveIdempotencyTokenProvider(&options)
 
 	for _, fn := range optFns {
 		fn(&options)
@@ -69,9 +77,8 @@ type Options struct {
 	// The service endpoint resolver.
 	EndpointResolver EndpointResolver
 
-	// HTTPSigner provides AWS request signing for HTTP requests made from the client.
-	// When nil the API client will use a default signer.
-	HTTPSigner v4.HTTPSigner
+	// Provides the AWS Signature Version 4 Implementation
+	HTTPSignerV4 HTTPSignerV4
 
 	// Provides idempotency tokens values that will be automatically populated into
 	// idempotent API operations.
@@ -107,8 +114,8 @@ func (o Options) GetEndpointResolver() EndpointResolver {
 	return o.EndpointResolver
 }
 
-func (o Options) GetHTTPSigner() v4.HTTPSigner {
-	return o.HTTPSigner
+func (o Options) GetHTTPSignerV4() HTTPSignerV4 {
+	return o.HTTPSignerV4
 }
 
 func (o Options) GetIdempotencyTokenProvider() IdempotencyTokenProvider {
@@ -156,6 +163,44 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		Credentials: cfg.Credentials,
 	}
 	return New(opts, optFns...)
+}
+
+func resolveHTTPClient(o *Options) {
+	if o.HTTPClient != nil {
+		return
+	}
+	o.HTTPClient = aws.NewBuildableHTTPClient()
+}
+
+func resolveAwsRetryer(o *Options) {
+	if o.Retryer != nil {
+		return
+	}
+	o.Retryer = retry.NewStandard()
+}
+
+type HTTPSignerV4 interface {
+	SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error
+}
+
+func resolveHTTPSignerV4(o *Options) {
+	if o.HTTPSignerV4 != nil {
+		return
+	}
+	o.HTTPSignerV4 = v4.NewSigner(func(s *v4.Signer) {
+		o.Logger = o.Logger
+	})
+}
+
+func registerHTTPSignerV4Middleware(stack *middleware.Stack, o Options) {
+	stack.Finalize.Add(v4.NewSignHTTPRequestMiddleware(o.Credentials, o.HTTPSignerV4), middleware.After)
+}
+
+func resolveIdempotencyTokenProvider(o *Options) {
+	if o.IdempotencyTokenProvider != nil {
+		return
+	}
+	o.IdempotencyTokenProvider = smithyrand.NewUUIDIdempotencyToken(cryptorand.Reader)
 }
 
 // IdempotencyTokenProvider interface for providing idempotency token
