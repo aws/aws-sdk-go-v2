@@ -18,27 +18,20 @@ package software.amazon.smithy.aws.go.codegen;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
-import software.amazon.smithy.aws.traits.auth.SigV4Trait;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
+import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SymbolUtils;
-import software.amazon.smithy.go.codegen.TriConsumer;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
-import software.amazon.smithy.model.knowledge.ServiceIndex;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.utils.ListUtils;
-import software.amazon.smithy.utils.SetUtils;
 
 /**
  * Registers additional AWS specific client configuration fields
@@ -53,7 +46,6 @@ public class AddAwsConfigFields implements GoIntegration {
     public static final String LOGGER_CONFIG_NAME = "Logger";
     public static final String LOG_LEVEL_CONFIG_NAME = "LogLevel";
     public static final String RETRYER_CONFIG_NAME = "Retryer";
-    public static final String HTTP_SIGNER_CONFIG_NAME = "HTTPSigner";
 
     private static final List<AwsConfigField> AWS_CONFIG_FIELDS = ListUtils.of(
             AwsConfigField.builder()
@@ -67,12 +59,6 @@ public class AddAwsConfigFields implements GoIntegration {
                     .documentation("Retryer guides how HTTP requests should be retried in case of\n"
                             + "recoverable failures. When nil the API client will use a default\n"
                             + "retryer.")
-                    .build(),
-            AwsConfigField.builder()
-                    .name(HTTP_SIGNER_CONFIG_NAME)
-                    .type(getAwsSignerV4Symbol("HTTPSigner"))
-                    .documentation("HTTPSigner provides AWS request signing for HTTP requests made\n"
-                            + "from the client. When nil the API client will use a default signer.")
                     .build(),
             AwsConfigField.builder()
                     .name(LOG_LEVEL_CONFIG_NAME)
@@ -93,11 +79,10 @@ public class AddAwsConfigFields implements GoIntegration {
                     .name(CREDENTIALS_CONFIG_NAME)
                     .type(getAwsCoreSymbol("CredentialsProvider"))
                     .documentation("The credentials object to use when signing requests.")
-                    .servicePredicate((model, serviceShape) -> model.getKnowledge(ServiceIndex.class)
-                            .getAuthSchemes(serviceShape).values().stream().anyMatch(trait -> trait.getClass()
-                                    .equals(SigV4Trait.class)))
+                    .servicePredicate(AwsSignatureVersion4::isSupportedAuthentication)
                     .build()
     );
+    public static final String RESOLVE_HTTP_CLIENT = "resolveHTTPClient";
 
     /**
      * Gets the sort order of the customization from -128 to 127, with lowest
@@ -135,34 +120,55 @@ public class AddAwsConfigFields implements GoIntegration {
             GoSettings settings,
             Model model,
             SymbolProvider symbolProvider,
-            TriConsumer<String, String, Consumer<GoWriter>> writerFactory
+            GoDelegator goDelegator
     ) {
         LOGGER.info("generating aws.Config based client constructor");
-        writerFactory.accept("api_client.go", settings.getModuleName(), w -> {
-            writeAwsConfigConstructor(model, model.expectShape(settings.getService()).asServiceShape().get(), w);
+        ServiceShape serviceShape = settings.getService(model);
+        goDelegator.useShapeWriter(serviceShape, w -> {
+            writeAwsConfigConstructor(model, serviceShape, w);
+            writeAwsDefaultResolvers(w);
         });
+    }
+
+    private void writeAwsDefaultResolvers(GoWriter writer) {
+        writeHttpClientResolver(writer);
+        writeRetryerResolver(writer);
+    }
+
+    private void writeRetryerResolver(GoWriter writer) {
+        writer.openBlock("func $L(o *Options) {", "}", "resolveAwsRetryer", () -> {
+            writer.openBlock("if o.$L != nil {", "}", RETRYER_CONFIG_NAME, () -> writer.write("return"));
+            writer.write("o.$L = $T()", RETRYER_CONFIG_NAME, SymbolUtils.createValueSymbolBuilder("NewStandard",
+                    AwsGoDependency.AWS_RETRY).build());
+        });
+        writer.write("");
+    }
+
+    private void writeHttpClientResolver(GoWriter writer) {
+        writer.openBlock("func $L(o *Options) {", "}", RESOLVE_HTTP_CLIENT, () -> {
+            writer.openBlock("if o.$L != nil {", "}", HTTP_CLIENT_CONFIG_NAME, () -> writer.write("return"));
+            writer.write("o.$L = $T()", HTTP_CLIENT_CONFIG_NAME,
+                    SymbolUtils.createValueSymbolBuilder("NewBuildableHTTPClient", AwsGoDependency.AWS_CORE).build());
+        });
+        writer.write("");
     }
 
     @Override
     public List<RuntimeClientPlugin> getClientPlugins() {
         List<RuntimeClientPlugin> plugins = new ArrayList<>();
 
-        // Collect fields that have no service predicate into a single runtime client plugin
-        List<ConfigField> allClients = AWS_CONFIG_FIELDS.stream().filter(AwsConfigField::isGeneratedOnClient)
-                .filter(field -> !field.getServicePredicate().isPresent())
-                .collect(Collectors.toList());
-        plugins.add(RuntimeClientPlugin.builder().configFields(allClients).build());
-
-        // For each service predicate construct runtime client plugins for the field
-        AWS_CONFIG_FIELDS.stream().filter(AwsConfigField::isGeneratedOnClient)
-                .filter(field -> field.getServicePredicate().isPresent())
-                .forEach(field -> {
-                    RuntimeClientPlugin.Builder builder = RuntimeClientPlugin.builder()
-                            .configFields(ListUtils.of(field))
-                            .servicePredicate(field.getServicePredicate().get());
-                    field.getResolverFunction().ifPresent(builder::resolveFunction);
-                    plugins.add(builder.build());
-                });
+        AWS_CONFIG_FIELDS.forEach(awsConfigField -> {
+            RuntimeClientPlugin.Builder builder = RuntimeClientPlugin.builder();
+            awsConfigField.getServicePredicate().ifPresent(
+                    modelServiceShapeBiPredicate -> builder.servicePredicate(modelServiceShapeBiPredicate));
+            if (awsConfigField.isGeneratedOnClient()) {
+                builder.addConfigField(awsConfigField);
+            }
+            awsConfigField.getResolverFunction().ifPresent(symbol -> {
+                builder.resolveFunction(symbol);
+            });
+            plugins.add(builder.build());
+        });
 
         return plugins;
     }
@@ -177,10 +183,6 @@ public class AddAwsConfigFields implements GoIntegration {
                                 if (!field.getServicePredicate().get().test(model, service)) {
                                     continue;
                                 }
-                            }
-                            if (field.getName().equals(HTTP_SIGNER_CONFIG_NAME)) {
-                                // TODO signer does not exist in the aws.Config.
-                                continue;
                             }
                             writer.write("$L: cfg.$L,", field.getName(), field.getName());
                         }
