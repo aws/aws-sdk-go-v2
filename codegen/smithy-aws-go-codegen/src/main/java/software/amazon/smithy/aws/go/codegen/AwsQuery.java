@@ -3,18 +3,16 @@ package software.amazon.smithy.aws.go.codegen;
 import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.handleDecodeError;
 import static software.amazon.smithy.aws.go.codegen.XmlProtocolUtils.initializeXmlDecoder;
 
-import java.util.Collection;
 import java.util.Set;
 import software.amazon.smithy.aws.traits.protocols.AwsQueryTrait;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
+import software.amazon.smithy.go.codegen.integration.HttpProtocolGeneratorUtils;
 import software.amazon.smithy.go.codegen.integration.HttpRpcProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
-import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.knowledge.HttpBinding;
-import software.amazon.smithy.model.knowledge.HttpBindingIndex;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.ShapeId;
@@ -93,7 +91,6 @@ class AwsQuery extends HttpRpcProtocolGenerator {
 
     @Override
     protected void deserializeOutputDocument(GenerationContext context, OperationShape operation) {
-        // TODO: support query deser
         GoWriter writer = context.getWriter();
         StructureShape output = ProtocolUtils.expectOutput(context.getModel(), operation);
         String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(output, getProtocolName());
@@ -110,7 +107,7 @@ class AwsQuery extends HttpRpcProtocolGenerator {
         writer.write("output := &$T{}", symbol);
         writer.insertTrailingNewline();
 
-        if (isShapeWithResponseBindings(context.getModel(), shape, HttpBinding.Location.DOCUMENT)) {
+        if (HttpProtocolGeneratorUtils.isShapeWithResponseBindings(context.getModel(), shape, HttpBinding.Location.DOCUMENT)) {
             String documentDeserFunctionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
                     shape, getProtocolName());
             writer.addUseImports(SmithyGoDependency.IO);

@@ -1,7 +1,5 @@
 package software.amazon.smithy.aws.go.codegen;
 
-import java.util.function.Consumer;
-import java.util.function.Predicate;
 import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.CodegenUtils;
@@ -78,10 +76,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
     public Void booleanShape(BooleanShape shape) {
         GoWriter writer = context.getWriter();
         writer.addUseImports(SmithyGoDependency.FMT);
-        consumeToken(()->{
-            writer.write("xtv := true");
-            writer.write("$L = &xtv", dataDest);
-        });
+        consumeToken();
 
         writer.openBlock("if val != nil {", "}", () -> {
             writer.addUseImports(SmithyGoDependency.STRCONV);
@@ -99,7 +94,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
      * Consumes a single token into the variable "val", returning on any error.
      * If member is an xmlAttributeMember, "attr" representing xml attribute value is in scope.
      */
-    private void consumeToken(Runnable r) {
+    private void consumeToken() {
         GoWriter writer = context.getWriter();
         // if the member is a modeled as an xml attribute, we do not need to
         // get another token, instead use the attribute values from previously
@@ -112,12 +107,8 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
         writer.write("val, done, err := decoder.Value()");
         writer.write("if err != nil { return err }");
 
-        // we got the matching end element we must set the zero value
-        writer.openBlock("if done {", "}", () -> {
-          r.run();
-          writer.write("break");
-        });
-
+        // Since we got the matching end element we skip setting the value
+        writer.write("if done { break }");
     }
 
     @Override
@@ -174,7 +165,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
     private void handleNumber(Shape shape, Runnable r) {
         GoWriter writer = context.getWriter();
         writer.addUseImports(SmithyGoDependency.FMT);
-        consumeToken(()->{});
+        consumeToken();
 
         writer.openBlock("if val != nil {", "}", () -> {
             writer.write("xtv := string(val)");
@@ -217,12 +208,9 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
         Symbol symbol = context.getSymbolProvider().toSymbol(shape);
 
         if (shape.hasTrait(EnumTrait.class)) {
-            handleString(shape, () -> writer.write("$L = $P(xtv)", dataDest, symbol), ()->{});
+            handleString(shape, () -> writer.write("$L = $P(xtv)", dataDest, symbol));
         } else {
-            handleString(shape, () -> writer.write("$L = &xtv", dataDest), () -> {
-                writer.write("xtv := \"\"");
-                writer.write("$L = &xtv", dataDest);
-            });
+            handleString(shape, () -> writer.write("$L = &xtv", dataDest));
         }
 
         return null;
@@ -232,17 +220,17 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
      * Deserializes a xml string into a xml token.
      * The number token is stored under the variable {@code xtv}.
      *
-     * @param shape         The shape being deserialized.
-     * @param valueAssigner A runnable that runs after the value has been parsed, before the scope closes.
+     * @param shape The shape being deserialized.
+     * @param r     A runnable that runs after the value has been parsed, before the scope closes.
      */
-    private void handleString(Shape shape, Runnable valueAssigner, Runnable zeroValueAssigner) {
+    private void handleString(Shape shape, Runnable r) {
         GoWriter writer = context.getWriter();
         writer.addUseImports(SmithyGoDependency.FMT);
-        consumeToken(zeroValueAssigner);
+        consumeToken();
 
         writer.openBlock("if val != nil {", "}", () -> {
             writer.write("xtv := string(val)");
-            valueAssigner.run();
+            r.run();
         });
     }
 
@@ -257,14 +245,14 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
                     writer.write("t, err := smithytime.ParseDateTime(xtv)");
                     writer.write("if err != nil { return err }");
                     writer.write("$L = &t", dataDest);
-                }, ()->{});
+                });
                 break;
             case HTTP_DATE:
                 handleString(shape, () -> {
                     writer.write("t, err := smithytime.ParseHTTPDate(xtv)");
                     writer.write("if err != nil { return err }");
                     writer.write("$L = &t", dataDest);
-                }, ()->{});
+                });
                 break;
             case EPOCH_SECONDS:
                 writer.addUseImports(SmithyGoDependency.SMITHY_PTR);

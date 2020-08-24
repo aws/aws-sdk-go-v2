@@ -1,6 +1,7 @@
 package software.amazon.smithy.aws.go.codegen;
 
 
+import static software.amazon.smithy.go.codegen.integration.HttpProtocolGeneratorUtils.isShapeWithResponseBindings;
 import static software.amazon.smithy.aws.go.codegen.XmlProtocolUtils.initializeXmlDecoder;
 import static software.amazon.smithy.aws.go.codegen.XmlProtocolUtils.handleDecodeError;
 import static software.amazon.smithy.aws.go.codegen.XmlProtocolUtils.writeXmlErrorMessageCodeDeserializer;
