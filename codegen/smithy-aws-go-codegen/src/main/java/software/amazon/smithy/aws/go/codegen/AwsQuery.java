@@ -1,12 +1,20 @@
 package software.amazon.smithy.aws.go.codegen;
 
+import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.handleDecodeError;
+import static software.amazon.smithy.aws.go.codegen.XmlProtocolUtils.initializeXmlDecoder;
+
+import java.util.Collection;
 import java.util.Set;
 import software.amazon.smithy.aws.traits.protocols.AwsQueryTrait;
+import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.HttpRpcProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
+import software.amazon.smithy.model.Model;
+import software.amazon.smithy.model.knowledge.HttpBinding;
+import software.amazon.smithy.model.knowledge.HttpBindingIndex;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.ShapeId;
@@ -79,26 +87,50 @@ class AwsQuery extends HttpRpcProtocolGenerator {
 
     @Override
     protected void generateDocumentBodyShapeDeserializers(GenerationContext context, Set<Shape> shapes) {
-        // TODO: support query deser
+        QueryShapeDeserVisitor visitor = new QueryShapeDeserVisitor(context);
+        shapes.forEach(shape -> shape.accept(visitor));
     }
 
     @Override
     protected void deserializeOutputDocument(GenerationContext context, OperationShape operation) {
         // TODO: support query deser
+        GoWriter writer = context.getWriter();
+        StructureShape output = ProtocolUtils.expectOutput(context.getModel(), operation);
+        String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(output, getProtocolName());
+        initializeXmlDecoder(writer, "response.Body", "out, metadata, ","nil");
+        writer.write("err = $L(&output, decoder)", functionName);
+        handleDecodeError(writer, "out, metadata, ");
     }
 
     @Override
     protected void deserializeError(GenerationContext context, StructureShape shape) {
-        // TODO: support query error deser
         GoWriter writer = context.getWriter();
-        writer.writeDocs("TODO: support query error deser");
-        writer.write("return &smithy.DeserializationError{Err: fmt.Errorf(\"TODO: support query error deser\")}");
+        Symbol symbol = context.getSymbolProvider().toSymbol(shape);
+
+        writer.write("output := &$T{}", symbol);
+        writer.insertTrailingNewline();
+
+        if (isShapeWithResponseBindings(context.getModel(), shape, HttpBinding.Location.DOCUMENT)) {
+            String documentDeserFunctionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
+                    shape, getProtocolName());
+            writer.addUseImports(SmithyGoDependency.IO);
+            initializeXmlDecoder(writer, "errorBody", "output");
+            writer.write("err = $L(&output, decoder)", documentDeserFunctionName);
+            XmlProtocolUtils.handleDecodeError(writer, "");
+            writer.insertTrailingNewline();
+        }
+
+        writer.write("return output");
     }
 
     @Override
     protected void writeErrorMessageCodeDeserializer(GenerationContext context) {
         // TODO: support query error message / code deser
-        context.getWriter().write("_ = errorBody");
+        GoWriter writer = context.getWriter();
+        writer.write("_ = errorBody");
+
+        writer.writeDocs("error message code deser");
+        XmlProtocolUtils.writeXmlErrorMessageCodeDeserializer(context);
     }
 
     @Override
