@@ -5,3 +5,4 @@ software.amazon.smithy.aws.go.codegen.AssembleMiddlewareStack
 software.amazon.smithy.aws.go.codegen.AwsEndpointGenerator
 software.amazon.smithy.aws.go.codegen.AwsSignatureVersion4
 software.amazon.smithy.aws.go.codegen.AwsIdempotencyTokenProvider
+software.amazon.smithy.aws.go.codegen.AwsClientUserAgent

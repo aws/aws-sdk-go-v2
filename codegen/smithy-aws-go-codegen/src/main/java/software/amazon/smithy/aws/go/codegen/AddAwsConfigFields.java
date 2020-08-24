@@ -47,6 +47,9 @@ public class AddAwsConfigFields implements GoIntegration {
     public static final String LOG_LEVEL_CONFIG_NAME = "LogLevel";
     public static final String RETRYER_CONFIG_NAME = "Retryer";
 
+    private static final String RESOLVE_HTTP_CLIENT = "resolveHTTPClient";
+    private static final String RESOLVE_RETRYER = "resolveRetryer";
+
     private static final List<AwsConfigField> AWS_CONFIG_FIELDS = ListUtils.of(
             AwsConfigField.builder()
                     .name(REGION_CONFIG_NAME)
@@ -59,6 +62,7 @@ public class AddAwsConfigFields implements GoIntegration {
                     .documentation("Retryer guides how HTTP requests should be retried in case of\n"
                             + "recoverable failures. When nil the API client will use a default\n"
                             + "retryer.")
+                    .resolveFunction(SymbolUtils.createValueSymbolBuilder(RESOLVE_RETRYER).build())
                     .build(),
             AwsConfigField.builder()
                     .name(LOG_LEVEL_CONFIG_NAME)
@@ -74,6 +78,7 @@ public class AddAwsConfigFields implements GoIntegration {
                     .name(HTTP_CLIENT_CONFIG_NAME)
                     .type(SymbolUtils.createValueSymbolBuilder("HTTPClient").build())
                     .generatedOnClient(false)
+                    .resolveFunction(SymbolUtils.createValueSymbolBuilder(RESOLVE_HTTP_CLIENT).build())
                     .build(),
             AwsConfigField.builder()
                     .name(CREDENTIALS_CONFIG_NAME)
@@ -82,7 +87,6 @@ public class AddAwsConfigFields implements GoIntegration {
                     .servicePredicate(AwsSignatureVersion4::isSupportedAuthentication)
                     .build()
     );
-    public static final String RESOLVE_HTTP_CLIENT = "resolveHTTPClient";
 
     /**
      * Gets the sort order of the customization from -128 to 127, with lowest
@@ -136,7 +140,7 @@ public class AddAwsConfigFields implements GoIntegration {
     }
 
     private void writeRetryerResolver(GoWriter writer) {
-        writer.openBlock("func $L(o *Options) {", "}", "resolveAwsRetryer", () -> {
+        writer.openBlock("func $L(o *Options) {", "}", RESOLVE_RETRYER, () -> {
             writer.openBlock("if o.$L != nil {", "}", RETRYER_CONFIG_NAME, () -> writer.write("return"));
             writer.write("o.$L = $T()", RETRYER_CONFIG_NAME, SymbolUtils.createValueSymbolBuilder("NewStandard",
                     AwsGoDependency.AWS_RETRY).build());

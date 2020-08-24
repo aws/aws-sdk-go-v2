@@ -114,6 +114,14 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                         "AddAttemptClockSkewMiddleware", AwsGoDependency.AWS_MIDDLEWARE)
                                         .build())
                                 .build())
+                        .build(),
+
+                // Add Client UserAgent
+                RuntimeClientPlugin.builder()
+                        .registerMiddleware(MiddlewareRegistrar.builder()
+                                .resolvedFunction(SymbolUtils.createPointableSymbolBuilder(
+                                        AwsClientUserAgent.MIDDLEWARE_RESOLVER).build())
+                                .build())
                         .build()
         );
     }

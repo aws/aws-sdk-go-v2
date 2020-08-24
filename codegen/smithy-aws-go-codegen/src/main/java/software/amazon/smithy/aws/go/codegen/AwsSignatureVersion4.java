@@ -42,7 +42,12 @@ public final class AwsSignatureVersion4 implements GoIntegration {
     public static final String SIGNER_INTERFACE_TYPE = "HTTPSignerV4";
     public static final String SIGNER_CONFIG_NAME = SIGNER_INTERFACE_TYPE;
     public static final String DEFAULT_RESOLVER_FUNCTION = "resolveHTTPSignerV4";
-    public static final String REGISTER_MIDDLEWARE_FUNCTION = "registerHTTPSignerV4Middleware";
+    public static final String REGISTER_MIDDLEWARE_FUNCTION = "addHTTPSignerV4Middleware";
+
+    @Override
+    public byte getOrder() {
+        return -48;
+    }
 
     @Override
     public void writeAdditionalFiles(
