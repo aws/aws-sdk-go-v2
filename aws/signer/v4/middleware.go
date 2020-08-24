@@ -186,8 +186,8 @@ type SignHTTPRequestMiddleware struct {
 }
 
 // NewSignHTTPRequestMiddleware constructs a SignHTTPRequestMiddleware using the given Signer for signing requests
-func NewSignHTTPRequestMiddleware(signer HTTPSigner) *SignHTTPRequestMiddleware {
-	return &SignHTTPRequestMiddleware{signer: signer}
+func NewSignHTTPRequestMiddleware(credentialsProvider aws.CredentialsProvider, signer HTTPSigner) *SignHTTPRequestMiddleware {
+	return &SignHTTPRequestMiddleware{credentialsProvider: credentialsProvider, signer: signer}
 }
 
 // ID is the SignHTTPRequestMiddleware identifier
@@ -235,26 +235,4 @@ func GetPayloadHash(ctx context.Context) (v string) {
 func SetPayloadHash(ctx context.Context, hash string) context.Context {
 	ctx = context.WithValue(ctx, payloadHashKey{}, hash)
 	return ctx
-}
-
-// HTTPSignerMiddlewareConfig interface for HTTP signer middleware config
-type HTTPSignerMiddlewareConfig interface {
-	GetHTTPSigner() HTTPSigner
-}
-
-// HTTPSignerMiddleware represent the middleware's for HTTPSigner
-type HTTPSignerMiddleware struct {
-	SignHTTPRequestMiddleware *SignHTTPRequestMiddleware
-}
-
-// AddHTTPSignerMiddleware adds HTTP signer middleware's to operation stack
-func AddHTTPSignerMiddleware(stack *middleware.Stack, cfg HTTPSignerMiddlewareConfig, optFns ...func(*HTTPSignerMiddleware)) {
-	m := HTTPSignerMiddleware{
-		SignHTTPRequestMiddleware: NewSignHTTPRequestMiddleware(cfg.GetHTTPSigner()),
-	}
-	for _, fn := range optFns {
-		fn(&m)
-	}
-
-	stack.Finalize.Add(m.SignHTTPRequestMiddleware, middleware.After)
 }
