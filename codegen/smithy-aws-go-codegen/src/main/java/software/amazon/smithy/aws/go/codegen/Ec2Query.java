@@ -27,7 +27,7 @@ final class Ec2Query extends AwsQuery {
 
     @Override
     protected void generateDocumentBodyShapeDeserializers(GenerationContext context, Set<Shape> shapes) {
-        Ec2QueryShapeDeserVisitor visitor = new Ec2QueryShapeDeserVisitor(context);
+        XmlShapeDeserVisitor visitor = new XmlShapeDeserVisitor(context);
         shapes.forEach(shape -> shape.accept(visitor));
     }
 
@@ -35,7 +35,7 @@ final class Ec2Query extends AwsQuery {
     protected void writeErrorMessageCodeDeserializer(GenerationContext context) {
         GoWriter writer = context.getWriter();
         writer.addUseImports(AwsGoDependency.AWS_EC2QUERY_PROTOCOL);
-        writer.write("errorCode, err := ec2query.GetResponseErrorCode(errorBody)");
+        writer.write("errorCode, errorMessage, err := ec2query.GetResponseErrorCode(errorBody)");
         writer.write("if err != nil { return err }");
         writer.insertTrailingNewline();
 
