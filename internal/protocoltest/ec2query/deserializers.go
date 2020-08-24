@@ -5,12 +5,22 @@ package ec2query
 import (
 	"bytes"
 	"context"
+	"encoding/base64"
+	"encoding/xml"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws/protocol/ec2query"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query/types"
 	smithy "github.com/awslabs/smithy-go"
+	smithyio "github.com/awslabs/smithy-go/io"
 	"github.com/awslabs/smithy-go/middleware"
+	"github.com/awslabs/smithy-go/ptr"
+	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	smithyxml "github.com/awslabs/smithy-go/xml"
 	"io"
+	"strconv"
 	"strings"
+	"time"
 )
 
 type awsEc2query_deserializeOpEmptyInputAndEmptyOutput struct {
@@ -39,6 +49,34 @@ func (m *awsEc2query_deserializeOpEmptyInputAndEmptyOutput) HandleDeserialize(ct
 	output := &EmptyInputAndEmptyOutputOutput{}
 	out.Result = output
 
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsEc2query_deserializeDocumentEmptyInputAndEmptyOutputOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -52,7 +90,11 @@ func awsEc2query_deserializeOpErrorEmptyInputAndEmptyOutput(response *smithyhttp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	_ = errorBody
+	errorCode, errorMessage, err := ec2query.GetResponseErrorCode(errorBody)
+	if err != nil {
+		return err
+	}
+	errorBody.Seek(0, io.SeekStart)
 	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -90,6 +132,34 @@ func (m *awsEc2query_deserializeOpGreetingWithErrors) HandleDeserialize(ctx cont
 	output := &GreetingWithErrorsOutput{}
 	out.Result = output
 
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsEc2query_deserializeDocumentGreetingWithErrorsOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -103,7 +173,11 @@ func awsEc2query_deserializeOpErrorGreetingWithErrors(response *smithyhttp.Respo
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	_ = errorBody
+	errorCode, errorMessage, err := ec2query.GetResponseErrorCode(errorBody)
+	if err != nil {
+		return err
+	}
+	errorBody.Seek(0, io.SeekStart)
 	switch {
 	case strings.EqualFold("ComplexError", errorCode):
 		return awsEc2query_deserializeErrorComplexError(response, errorBody)
@@ -147,6 +221,34 @@ func (m *awsEc2query_deserializeOpIgnoresWrappingXmlName) HandleDeserialize(ctx 
 	output := &IgnoresWrappingXmlNameOutput{}
 	out.Result = output
 
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsEc2query_deserializeDocumentIgnoresWrappingXmlNameOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -160,7 +262,11 @@ func awsEc2query_deserializeOpErrorIgnoresWrappingXmlName(response *smithyhttp.R
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	_ = errorBody
+	errorCode, errorMessage, err := ec2query.GetResponseErrorCode(errorBody)
+	if err != nil {
+		return err
+	}
+	errorBody.Seek(0, io.SeekStart)
 	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -198,6 +304,34 @@ func (m *awsEc2query_deserializeOpNestedStructures) HandleDeserialize(ctx contex
 	output := &NestedStructuresOutput{}
 	out.Result = output
 
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsEc2query_deserializeDocumentNestedStructuresOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -211,7 +345,11 @@ func awsEc2query_deserializeOpErrorNestedStructures(response *smithyhttp.Respons
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	_ = errorBody
+	errorCode, errorMessage, err := ec2query.GetResponseErrorCode(errorBody)
+	if err != nil {
+		return err
+	}
+	errorBody.Seek(0, io.SeekStart)
 	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -249,6 +387,34 @@ func (m *awsEc2query_deserializeOpNoInputAndOutput) HandleDeserialize(ctx contex
 	output := &NoInputAndOutputOutput{}
 	out.Result = output
 
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsEc2query_deserializeDocumentNoInputAndOutputOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -262,7 +428,11 @@ func awsEc2query_deserializeOpErrorNoInputAndOutput(response *smithyhttp.Respons
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	_ = errorBody
+	errorCode, errorMessage, err := ec2query.GetResponseErrorCode(errorBody)
+	if err != nil {
+		return err
+	}
+	errorBody.Seek(0, io.SeekStart)
 	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -300,6 +470,34 @@ func (m *awsEc2query_deserializeOpQueryIdempotencyTokenAutoFill) HandleDeseriali
 	output := &QueryIdempotencyTokenAutoFillOutput{}
 	out.Result = output
 
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsEc2query_deserializeDocumentQueryIdempotencyTokenAutoFillOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -313,7 +511,11 @@ func awsEc2query_deserializeOpErrorQueryIdempotencyTokenAutoFill(response *smith
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	_ = errorBody
+	errorCode, errorMessage, err := ec2query.GetResponseErrorCode(errorBody)
+	if err != nil {
+		return err
+	}
+	errorBody.Seek(0, io.SeekStart)
 	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -351,6 +553,34 @@ func (m *awsEc2query_deserializeOpQueryLists) HandleDeserialize(ctx context.Cont
 	output := &QueryListsOutput{}
 	out.Result = output
 
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsEc2query_deserializeDocumentQueryListsOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -364,7 +594,11 @@ func awsEc2query_deserializeOpErrorQueryLists(response *smithyhttp.Response) err
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	_ = errorBody
+	errorCode, errorMessage, err := ec2query.GetResponseErrorCode(errorBody)
+	if err != nil {
+		return err
+	}
+	errorBody.Seek(0, io.SeekStart)
 	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -402,6 +636,34 @@ func (m *awsEc2query_deserializeOpQueryTimestamps) HandleDeserialize(ctx context
 	output := &QueryTimestampsOutput{}
 	out.Result = output
 
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsEc2query_deserializeDocumentQueryTimestampsOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -415,7 +677,11 @@ func awsEc2query_deserializeOpErrorQueryTimestamps(response *smithyhttp.Response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	_ = errorBody
+	errorCode, errorMessage, err := ec2query.GetResponseErrorCode(errorBody)
+	if err != nil {
+		return err
+	}
+	errorBody.Seek(0, io.SeekStart)
 	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -453,6 +719,34 @@ func (m *awsEc2query_deserializeOpRecursiveXmlShapes) HandleDeserialize(ctx cont
 	output := &RecursiveXmlShapesOutput{}
 	out.Result = output
 
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsEc2query_deserializeDocumentRecursiveXmlShapesOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -466,7 +760,11 @@ func awsEc2query_deserializeOpErrorRecursiveXmlShapes(response *smithyhttp.Respo
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	_ = errorBody
+	errorCode, errorMessage, err := ec2query.GetResponseErrorCode(errorBody)
+	if err != nil {
+		return err
+	}
+	errorBody.Seek(0, io.SeekStart)
 	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -504,6 +802,34 @@ func (m *awsEc2query_deserializeOpSimpleInputParams) HandleDeserialize(ctx conte
 	output := &SimpleInputParamsOutput{}
 	out.Result = output
 
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsEc2query_deserializeDocumentSimpleInputParamsOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -517,7 +843,11 @@ func awsEc2query_deserializeOpErrorSimpleInputParams(response *smithyhttp.Respon
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	_ = errorBody
+	errorCode, errorMessage, err := ec2query.GetResponseErrorCode(errorBody)
+	if err != nil {
+		return err
+	}
+	errorBody.Seek(0, io.SeekStart)
 	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -555,6 +885,34 @@ func (m *awsEc2query_deserializeOpSimpleScalarXmlProperties) HandleDeserialize(c
 	output := &SimpleScalarXmlPropertiesOutput{}
 	out.Result = output
 
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsEc2query_deserializeDocumentSimpleScalarXmlPropertiesOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -568,7 +926,11 @@ func awsEc2query_deserializeOpErrorSimpleScalarXmlProperties(response *smithyhtt
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	_ = errorBody
+	errorCode, errorMessage, err := ec2query.GetResponseErrorCode(errorBody)
+	if err != nil {
+		return err
+	}
+	errorBody.Seek(0, io.SeekStart)
 	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -606,6 +968,34 @@ func (m *awsEc2query_deserializeOpXmlBlobs) HandleDeserialize(ctx context.Contex
 	output := &XmlBlobsOutput{}
 	out.Result = output
 
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsEc2query_deserializeDocumentXmlBlobsOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -619,7 +1009,11 @@ func awsEc2query_deserializeOpErrorXmlBlobs(response *smithyhttp.Response) error
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	_ = errorBody
+	errorCode, errorMessage, err := ec2query.GetResponseErrorCode(errorBody)
+	if err != nil {
+		return err
+	}
+	errorBody.Seek(0, io.SeekStart)
 	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -657,6 +1051,34 @@ func (m *awsEc2query_deserializeOpXmlEnums) HandleDeserialize(ctx context.Contex
 	output := &XmlEnumsOutput{}
 	out.Result = output
 
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsEc2query_deserializeDocumentXmlEnumsOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -670,7 +1092,11 @@ func awsEc2query_deserializeOpErrorXmlEnums(response *smithyhttp.Response) error
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	_ = errorBody
+	errorCode, errorMessage, err := ec2query.GetResponseErrorCode(errorBody)
+	if err != nil {
+		return err
+	}
+	errorBody.Seek(0, io.SeekStart)
 	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -708,6 +1134,34 @@ func (m *awsEc2query_deserializeOpXmlLists) HandleDeserialize(ctx context.Contex
 	output := &XmlListsOutput{}
 	out.Result = output
 
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsEc2query_deserializeDocumentXmlListsOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -721,7 +1175,11 @@ func awsEc2query_deserializeOpErrorXmlLists(response *smithyhttp.Response) error
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	_ = errorBody
+	errorCode, errorMessage, err := ec2query.GetResponseErrorCode(errorBody)
+	if err != nil {
+		return err
+	}
+	errorBody.Seek(0, io.SeekStart)
 	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -759,6 +1217,34 @@ func (m *awsEc2query_deserializeOpXmlNamespaces) HandleDeserialize(ctx context.C
 	output := &XmlNamespacesOutput{}
 	out.Result = output
 
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsEc2query_deserializeDocumentXmlNamespacesOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -772,7 +1258,11 @@ func awsEc2query_deserializeOpErrorXmlNamespaces(response *smithyhttp.Response) 
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	_ = errorBody
+	errorCode, errorMessage, err := ec2query.GetResponseErrorCode(errorBody)
+	if err != nil {
+		return err
+	}
+	errorBody.Seek(0, io.SeekStart)
 	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -810,6 +1300,34 @@ func (m *awsEc2query_deserializeOpXmlTimestamps) HandleDeserialize(ctx context.C
 	output := &XmlTimestampsOutput{}
 	out.Result = output
 
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsEc2query_deserializeDocumentXmlTimestampsOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
 	return out, metadata, err
 }
 
@@ -823,7 +1341,11 @@ func awsEc2query_deserializeOpErrorXmlTimestamps(response *smithyhttp.Response) 
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	_ = errorBody
+	errorCode, errorMessage, err := ec2query.GetResponseErrorCode(errorBody)
+	if err != nil {
+		return err
+	}
+	errorBody.Seek(0, io.SeekStart)
 	switch {
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -836,11 +1358,2164 @@ func awsEc2query_deserializeOpErrorXmlTimestamps(response *smithyhttp.Response) 
 }
 
 func awsEc2query_deserializeErrorComplexError(response *smithyhttp.Response, errorBody *bytes.Reader) error {
-	// TODO: support query error deser
-	return &smithy.DeserializationError{Err: fmt.Errorf("TODO: support query error deser")}
+	output := &types.ComplexError{}
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsEc2query_deserializeDocumentComplexError(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
 }
 
 func awsEc2query_deserializeErrorInvalidGreeting(response *smithyhttp.Response, errorBody *bytes.Reader) error {
-	// TODO: support query error deser
-	return &smithy.DeserializationError{Err: fmt.Errorf("TODO: support query error deser")}
+	output := &types.InvalidGreeting{}
+	buff := make([]byte, 1024)
+	ringBuffer := smithyio.NewRingBuffer(buff)
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsEc2query_deserializeDocumentInvalidGreeting(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsEc2query_deserializeDocumentComplexError(v **types.ComplexError, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ComplexError
+	if *v == nil {
+		sv = &types.ComplexError{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		_ = t
+		switch {
+		case strings.EqualFold("Nested", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentComplexNestedErrorData(&sv.Nested, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("TopLevel", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.TopLevel = &xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentComplexNestedErrorData(v **types.ComplexNestedErrorData, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ComplexNestedErrorData
+	if *v == nil {
+		sv = &types.ComplexNestedErrorData{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		_ = t
+		switch {
+		case strings.EqualFold("Foo", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.Foo = &xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentInvalidGreeting(v **types.InvalidGreeting, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.InvalidGreeting
+	if *v == nil {
+		sv = &types.InvalidGreeting{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		_ = t
+		switch {
+		case strings.EqualFold("Message", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.Message = &xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentRecursiveXmlShapesOutputNested1(v **types.RecursiveXmlShapesOutputNested1, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.RecursiveXmlShapesOutputNested1
+	if *v == nil {
+		sv = &types.RecursiveXmlShapesOutputNested1{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		_ = t
+		switch {
+		case strings.EqualFold("foo", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.Foo = &xtv
+			}
+
+		case strings.EqualFold("nested", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentRecursiveXmlShapesOutputNested2(&sv.Nested, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentRecursiveXmlShapesOutputNested2(v **types.RecursiveXmlShapesOutputNested2, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.RecursiveXmlShapesOutputNested2
+	if *v == nil {
+		sv = &types.RecursiveXmlShapesOutputNested2{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		_ = t
+		switch {
+		case strings.EqualFold("bar", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.Bar = &xtv
+			}
+
+		case strings.EqualFold("recursiveMember", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentRecursiveXmlShapesOutputNested1(&sv.RecursiveMember, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentRenamedListMembers(v *[]*string, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []*string
+	if *v == nil {
+		sv = make([]*string, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		for {
+			if strings.EqualFold("item", t.Name.Local) {
+				var col *string
+				val, done, err := decoder.Value()
+				if err != nil {
+					return err
+				}
+				if done {
+					break
+				}
+				if val != nil {
+					xtv := string(val)
+					col = &xtv
+				}
+				sv = append(sv, col)
+			}
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentRenamedListMembersUnwrapped(v *[]*string, decoder smithyxml.NodeDecoder) error {
+	var sv []*string
+	if *v == nil {
+		sv = make([]*string, 0)
+	} else {
+		sv = *v
+	}
+
+	for {
+		var mv *string
+		t := decoder.StartEl
+		_ = t
+		val, done, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		if val != nil {
+			xtv := string(val)
+			mv = &xtv
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsEc2query_deserializeDocumentStructureList(v *[]*types.StructureListMember, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []*types.StructureListMember
+	if *v == nil {
+		sv = make([]*types.StructureListMember, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		for {
+			if strings.EqualFold("item", t.Name.Local) {
+				var col *types.StructureListMember
+				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+				if err := awsEc2query_deserializeDocumentStructureListMember(&col, nodeDecoder); err != nil {
+					return err
+				}
+				sv = append(sv, col)
+				break
+			}
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentStructureListUnwrapped(v *[]*types.StructureListMember, decoder smithyxml.NodeDecoder) error {
+	var sv []*types.StructureListMember
+	if *v == nil {
+		sv = make([]*types.StructureListMember, 0)
+	} else {
+		sv = *v
+	}
+
+	for {
+		var mv *types.StructureListMember
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		if err := awsEc2query_deserializeDocumentStructureListMember(&mv, nodeDecoder); err != nil {
+			return err
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsEc2query_deserializeDocumentStructureListMember(v **types.StructureListMember, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.StructureListMember
+	if *v == nil {
+		sv = &types.StructureListMember{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		_ = t
+		switch {
+		case strings.EqualFold("value", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.A = &xtv
+			}
+
+		case strings.EqualFold("other", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.B = &xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentXmlNamespacedList(v *[]*string, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []*string
+	if *v == nil {
+		sv = make([]*string, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		for {
+			if strings.EqualFold("member", t.Name.Local) {
+				var col *string
+				val, done, err := decoder.Value()
+				if err != nil {
+					return err
+				}
+				if done {
+					break
+				}
+				if val != nil {
+					xtv := string(val)
+					col = &xtv
+				}
+				sv = append(sv, col)
+			}
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentXmlNamespacedListUnwrapped(v *[]*string, decoder smithyxml.NodeDecoder) error {
+	var sv []*string
+	if *v == nil {
+		sv = make([]*string, 0)
+	} else {
+		sv = *v
+	}
+
+	for {
+		var mv *string
+		t := decoder.StartEl
+		_ = t
+		val, done, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		if val != nil {
+			xtv := string(val)
+			mv = &xtv
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsEc2query_deserializeDocumentXmlNamespaceNested(v **types.XmlNamespaceNested, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.XmlNamespaceNested
+	if *v == nil {
+		sv = &types.XmlNamespaceNested{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		_ = t
+		switch {
+		case strings.EqualFold("foo", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.Foo = &xtv
+			}
+
+		case strings.EqualFold("values", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentXmlNamespacedList(&sv.Values, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentBooleanList(v *[]*bool, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []*bool
+	if *v == nil {
+		sv = make([]*bool, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		for {
+			if strings.EqualFold("member", t.Name.Local) {
+				var col *bool
+				val, done, err := decoder.Value()
+				if err != nil {
+					return err
+				}
+				if done {
+					break
+				}
+				if val != nil {
+					xtv, err := strconv.ParseBool(string(val))
+					if err != nil {
+						return fmt.Errorf("expected PrimitiveBoolean to be of type *bool, got %T instead", val)
+					}
+					col = &xtv
+				}
+				sv = append(sv, col)
+			}
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentBooleanListUnwrapped(v *[]*bool, decoder smithyxml.NodeDecoder) error {
+	var sv []*bool
+	if *v == nil {
+		sv = make([]*bool, 0)
+	} else {
+		sv = *v
+	}
+
+	for {
+		var mv *bool
+		t := decoder.StartEl
+		_ = t
+		val, done, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		if val != nil {
+			xtv, err := strconv.ParseBool(string(val))
+			if err != nil {
+				return fmt.Errorf("expected PrimitiveBoolean to be of type *bool, got %T instead", val)
+			}
+			mv = &xtv
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsEc2query_deserializeDocumentFooEnumList(v *[]types.FooEnum, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.FooEnum
+	if *v == nil {
+		sv = make([]types.FooEnum, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		for {
+			if strings.EqualFold("member", t.Name.Local) {
+				var col types.FooEnum
+				val, done, err := decoder.Value()
+				if err != nil {
+					return err
+				}
+				if done {
+					break
+				}
+				if val != nil {
+					xtv := string(val)
+					col = types.FooEnum(xtv)
+				}
+				sv = append(sv, col)
+			}
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentFooEnumListUnwrapped(v *[]types.FooEnum, decoder smithyxml.NodeDecoder) error {
+	var sv []types.FooEnum
+	if *v == nil {
+		sv = make([]types.FooEnum, 0)
+	} else {
+		sv = *v
+	}
+
+	for {
+		var mv types.FooEnum
+		t := decoder.StartEl
+		_ = t
+		val, done, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		if val != nil {
+			xtv := string(val)
+			mv = types.FooEnum(xtv)
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsEc2query_deserializeDocumentFooEnumMap(v *map[string]types.FooEnum, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv map[string]types.FooEnum
+	if *v == nil {
+		sv = make(map[string]types.FooEnum, 0)
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		if strings.EqualFold("entry", t.Name.Local) {
+			entryDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentFooEnumMapUnwrapped(&sv, entryDecoder); err != nil {
+				return err
+			}
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentFooEnumMapUnwrapped(v *map[string]types.FooEnum, decoder smithyxml.NodeDecoder) error {
+	var sv map[string]types.FooEnum
+	if *v == nil {
+		sv = make(map[string]types.FooEnum, 0)
+	} else {
+		sv = *v
+	}
+
+	var ek *string
+	var ev types.FooEnum
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			sv[*ek] = ev
+			break
+		}
+		switch {
+		case strings.EqualFold("key", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				ek = &xtv
+			}
+
+		case strings.EqualFold("value", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				ev = types.FooEnum(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
+func awsEc2query_deserializeDocumentFooEnumSet(v *[]types.FooEnum, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.FooEnum
+	if *v == nil {
+		sv = make([]types.FooEnum, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		for {
+			if strings.EqualFold("member", t.Name.Local) {
+				var col types.FooEnum
+				val, done, err := decoder.Value()
+				if err != nil {
+					return err
+				}
+				if done {
+					break
+				}
+				if val != nil {
+					xtv := string(val)
+					col = types.FooEnum(xtv)
+				}
+				sv = append(sv, col)
+			}
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentFooEnumSetUnwrapped(v *[]types.FooEnum, decoder smithyxml.NodeDecoder) error {
+	var sv []types.FooEnum
+	if *v == nil {
+		sv = make([]types.FooEnum, 0)
+	} else {
+		sv = *v
+	}
+
+	for {
+		var mv types.FooEnum
+		t := decoder.StartEl
+		_ = t
+		val, done, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		if val != nil {
+			xtv := string(val)
+			mv = types.FooEnum(xtv)
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsEc2query_deserializeDocumentIntegerList(v *[]*int32, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []*int32
+	if *v == nil {
+		sv = make([]*int32, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		for {
+			if strings.EqualFold("member", t.Name.Local) {
+				var col *int32
+				val, done, err := decoder.Value()
+				if err != nil {
+					return err
+				}
+				if done {
+					break
+				}
+				if val != nil {
+					xtv := string(val)
+					i64, err := strconv.ParseInt(xtv, 10, 64)
+					if err != nil {
+						return err
+					}
+					col = ptr.Int32(int32(i64))
+				}
+				sv = append(sv, col)
+			}
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentIntegerListUnwrapped(v *[]*int32, decoder smithyxml.NodeDecoder) error {
+	var sv []*int32
+	if *v == nil {
+		sv = make([]*int32, 0)
+	} else {
+		sv = *v
+	}
+
+	for {
+		var mv *int32
+		t := decoder.StartEl
+		_ = t
+		val, done, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		if val != nil {
+			xtv := string(val)
+			i64, err := strconv.ParseInt(xtv, 10, 64)
+			if err != nil {
+				return err
+			}
+			mv = ptr.Int32(int32(i64))
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsEc2query_deserializeDocumentNestedStringList(v *[][]*string, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv [][]*string
+	if *v == nil {
+		sv = make([][]*string, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		for {
+			if strings.EqualFold("member", t.Name.Local) {
+				var col []*string
+				nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+				if err := awsEc2query_deserializeDocumentStringList(&col, nodeDecoder); err != nil {
+					return err
+				}
+				sv = append(sv, col)
+				break
+			}
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentNestedStringListUnwrapped(v *[][]*string, decoder smithyxml.NodeDecoder) error {
+	var sv [][]*string
+	if *v == nil {
+		sv = make([][]*string, 0)
+	} else {
+		sv = *v
+	}
+
+	for {
+		var mv []*string
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		if err := awsEc2query_deserializeDocumentStringList(&mv, nodeDecoder); err != nil {
+			return err
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsEc2query_deserializeDocumentStringList(v *[]*string, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []*string
+	if *v == nil {
+		sv = make([]*string, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		for {
+			if strings.EqualFold("member", t.Name.Local) {
+				var col *string
+				val, done, err := decoder.Value()
+				if err != nil {
+					return err
+				}
+				if done {
+					break
+				}
+				if val != nil {
+					xtv := string(val)
+					col = &xtv
+				}
+				sv = append(sv, col)
+			}
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentStringListUnwrapped(v *[]*string, decoder smithyxml.NodeDecoder) error {
+	var sv []*string
+	if *v == nil {
+		sv = make([]*string, 0)
+	} else {
+		sv = *v
+	}
+
+	for {
+		var mv *string
+		t := decoder.StartEl
+		_ = t
+		val, done, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		if val != nil {
+			xtv := string(val)
+			mv = &xtv
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsEc2query_deserializeDocumentStringSet(v *[]*string, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []*string
+	if *v == nil {
+		sv = make([]*string, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		for {
+			if strings.EqualFold("member", t.Name.Local) {
+				var col *string
+				val, done, err := decoder.Value()
+				if err != nil {
+					return err
+				}
+				if done {
+					break
+				}
+				if val != nil {
+					xtv := string(val)
+					col = &xtv
+				}
+				sv = append(sv, col)
+			}
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentStringSetUnwrapped(v *[]*string, decoder smithyxml.NodeDecoder) error {
+	var sv []*string
+	if *v == nil {
+		sv = make([]*string, 0)
+	} else {
+		sv = *v
+	}
+
+	for {
+		var mv *string
+		t := decoder.StartEl
+		_ = t
+		val, done, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		if val != nil {
+			xtv := string(val)
+			mv = &xtv
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsEc2query_deserializeDocumentTimestampList(v *[]*time.Time, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []*time.Time
+	if *v == nil {
+		sv = make([]*time.Time, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		for {
+			if strings.EqualFold("member", t.Name.Local) {
+				var col *time.Time
+				val, done, err := decoder.Value()
+				if err != nil {
+					return err
+				}
+				if done {
+					break
+				}
+				if val != nil {
+					xtv := string(val)
+					t, err := smithytime.ParseDateTime(xtv)
+					if err != nil {
+						return err
+					}
+					col = &t
+				}
+				sv = append(sv, col)
+			}
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentTimestampListUnwrapped(v *[]*time.Time, decoder smithyxml.NodeDecoder) error {
+	var sv []*time.Time
+	if *v == nil {
+		sv = make([]*time.Time, 0)
+	} else {
+		sv = *v
+	}
+
+	for {
+		var mv *time.Time
+		t := decoder.StartEl
+		_ = t
+		val, done, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		if val != nil {
+			xtv := string(val)
+			t, err := smithytime.ParseDateTime(xtv)
+			if err != nil {
+				return err
+			}
+			mv = &t
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsEc2query_deserializeDocumentEmptyInputAndEmptyOutputOutput(v **EmptyInputAndEmptyOutputOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *EmptyInputAndEmptyOutputOutput
+	if *v == nil {
+		sv = &EmptyInputAndEmptyOutputOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		_ = t
+		switch {
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentGreetingWithErrorsOutput(v **GreetingWithErrorsOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *GreetingWithErrorsOutput
+	if *v == nil {
+		sv = &GreetingWithErrorsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		_ = t
+		switch {
+		case strings.EqualFold("greeting", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.Greeting = &xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentIgnoresWrappingXmlNameOutput(v **IgnoresWrappingXmlNameOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *IgnoresWrappingXmlNameOutput
+	if *v == nil {
+		sv = &IgnoresWrappingXmlNameOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		_ = t
+		switch {
+		case strings.EqualFold("foo", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.Foo = &xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentNestedStructuresOutput(v **NestedStructuresOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *NestedStructuresOutput
+	if *v == nil {
+		sv = &NestedStructuresOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		_ = t
+		switch {
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentNoInputAndOutputOutput(v **NoInputAndOutputOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *NoInputAndOutputOutput
+	if *v == nil {
+		sv = &NoInputAndOutputOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		_ = t
+		switch {
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentQueryIdempotencyTokenAutoFillOutput(v **QueryIdempotencyTokenAutoFillOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *QueryIdempotencyTokenAutoFillOutput
+	if *v == nil {
+		sv = &QueryIdempotencyTokenAutoFillOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		_ = t
+		switch {
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentQueryListsOutput(v **QueryListsOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *QueryListsOutput
+	if *v == nil {
+		sv = &QueryListsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		_ = t
+		switch {
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentQueryTimestampsOutput(v **QueryTimestampsOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *QueryTimestampsOutput
+	if *v == nil {
+		sv = &QueryTimestampsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		_ = t
+		switch {
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentRecursiveXmlShapesOutput(v **RecursiveXmlShapesOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *RecursiveXmlShapesOutput
+	if *v == nil {
+		sv = &RecursiveXmlShapesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		_ = t
+		switch {
+		case strings.EqualFold("nested", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentRecursiveXmlShapesOutputNested1(&sv.Nested, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentSimpleInputParamsOutput(v **SimpleInputParamsOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *SimpleInputParamsOutput
+	if *v == nil {
+		sv = &SimpleInputParamsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		_ = t
+		switch {
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentSimpleScalarXmlPropertiesOutput(v **SimpleScalarXmlPropertiesOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *SimpleScalarXmlPropertiesOutput
+	if *v == nil {
+		sv = &SimpleScalarXmlPropertiesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		_ = t
+		switch {
+		case strings.EqualFold("byteValue", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.ByteValue = ptr.Int8(int8(i64))
+			}
+
+		case strings.EqualFold("DoubleDribble", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.DoubleValue = &f64
+			}
+
+		case strings.EqualFold("emptyStringValue", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.EmptyStringValue = &xtv
+			}
+
+		case strings.EqualFold("falseBooleanValue", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.FalseBooleanValue = &xtv
+			}
+
+		case strings.EqualFold("floatValue", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.FloatValue = ptr.Float32(float32(f64))
+			}
+
+		case strings.EqualFold("integerValue", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.IntegerValue = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("longValue", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.LongValue = &i64
+			}
+
+		case strings.EqualFold("shortValue", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.ShortValue = ptr.Int16(int16(i64))
+			}
+
+		case strings.EqualFold("stringValue", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.StringValue = &xtv
+			}
+
+		case strings.EqualFold("trueBooleanValue", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.TrueBooleanValue = &xtv
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentXmlBlobsOutput(v **XmlBlobsOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *XmlBlobsOutput
+	if *v == nil {
+		sv = &XmlBlobsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		_ = t
+		switch {
+		case strings.EqualFold("data", t.Name.Local):
+			var data string
+			err := decoder.Decoder.DecodeElement(&data, &t)
+			if err != nil {
+				return err
+			}
+			sv.Data, err = base64.StdEncoding.DecodeString(data)
+			if err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentXmlEnumsOutput(v **XmlEnumsOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *XmlEnumsOutput
+	if *v == nil {
+		sv = &XmlEnumsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		_ = t
+		switch {
+		case strings.EqualFold("fooEnum1", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.FooEnum1 = types.FooEnum(xtv)
+			}
+
+		case strings.EqualFold("fooEnum2", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.FooEnum2 = types.FooEnum(xtv)
+			}
+
+		case strings.EqualFold("fooEnum3", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				sv.FooEnum3 = types.FooEnum(xtv)
+			}
+
+		case strings.EqualFold("fooEnumList", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentFooEnumList(&sv.FooEnumList, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("fooEnumMap", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentFooEnumMap(&sv.FooEnumMap, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("fooEnumSet", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentFooEnumSet(&sv.FooEnumSet, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentXmlListsOutput(v **XmlListsOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *XmlListsOutput
+	if *v == nil {
+		sv = &XmlListsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		_ = t
+		switch {
+		case strings.EqualFold("booleanList", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentBooleanList(&sv.BooleanList, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("enumList", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentFooEnumList(&sv.EnumList, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("flattenedList", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentRenamedListMembersUnwrapped(&sv.FlattenedList, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("customName", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentRenamedListMembersUnwrapped(&sv.FlattenedList2, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("integerList", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentIntegerList(&sv.IntegerList, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("nestedStringList", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentNestedStringList(&sv.NestedStringList, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("renamed", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentRenamedListMembers(&sv.RenamedListMembers, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("stringList", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentStringList(&sv.StringList, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("stringSet", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentStringSet(&sv.StringSet, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("myStructureList", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentStructureList(&sv.StructureList, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("timestampList", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentTimestampList(&sv.TimestampList, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentXmlNamespacesOutput(v **XmlNamespacesOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *XmlNamespacesOutput
+	if *v == nil {
+		sv = &XmlNamespacesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		_ = t
+		switch {
+		case strings.EqualFold("nested", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsEc2query_deserializeDocumentXmlNamespaceNested(&sv.Nested, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsEc2query_deserializeDocumentXmlTimestampsOutput(v **XmlTimestampsOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *XmlTimestampsOutput
+	if *v == nil {
+		sv = &XmlTimestampsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		_ = t
+		switch {
+		case strings.EqualFold("dateTime", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				t, err := smithytime.ParseDateTime(xtv)
+				if err != nil {
+					return err
+				}
+				sv.DateTime = &t
+			}
+
+		case strings.EqualFold("epochSeconds", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				f64, err := strconv.ParseFloat(xtv, 64)
+				if err != nil {
+					return err
+				}
+				sv.EpochSeconds = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case strings.EqualFold("httpDate", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				t, err := smithytime.ParseHTTPDate(xtv)
+				if err != nil {
+					return err
+				}
+				sv.HttpDate = &t
+			}
+
+		case strings.EqualFold("normal", t.Name.Local):
+			val, done, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				t, err := smithytime.ParseDateTime(xtv)
+				if err != nil {
+					return err
+				}
+				sv.Normal = &t
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+
+		}
+	}
+	*v = sv
+	return nil
 }

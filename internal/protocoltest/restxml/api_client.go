@@ -5,6 +5,7 @@ package restxml
 import (
 	cryptorand "crypto/rand"
 	"github.com/aws/aws-sdk-go-v2/aws"
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyrand "github.com/awslabs/smithy-go/rand"
@@ -21,6 +22,10 @@ type Client struct {
 // such as changing the client's endpoint or adding custom middleware behavior.
 func New(options Options, optFns ...func(*Options)) *Client {
 	options = options.Copy()
+
+	resolveRetryer(&options)
+
+	resolveHTTPClient(&options)
 
 	resolveDefaultEndpointConfiguration(&options)
 
@@ -138,11 +143,15 @@ func resolveHTTPClient(o *Options) {
 	o.HTTPClient = aws.NewBuildableHTTPClient()
 }
 
-func resolveAwsRetryer(o *Options) {
+func resolveRetryer(o *Options) {
 	if o.Retryer != nil {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func addServiceUserAgent(stack *middleware.Stack) {
+	awsmiddleware.AddUserAgentKey("RestXmlProtocol")(stack)
 }
 
 func resolveIdempotencyTokenProvider(o *Options) {

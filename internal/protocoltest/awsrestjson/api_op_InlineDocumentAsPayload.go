@@ -24,6 +24,7 @@ func (c *Client) InlineDocumentAsPayload(ctx context.Context, params *InlineDocu
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opInlineDocumentAsPayload(options.Region), middleware.Before)
@@ -65,10 +66,9 @@ func addawsRestjson1_serdeOpInlineDocumentAsPayloadMiddlewares(stack *middleware
 
 func newServiceMetadataMiddleware_opInlineDocumentAsPayload(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Rest Json Protocol",
-		ServiceID:      "restjsonprotocol",
-		EndpointPrefix: "restjsonprotocol",
-		OperationName:  "InlineDocumentAsPayload",
+		Region:        region,
+		ServiceName:   "Rest Json Protocol",
+		ServiceID:     "RestJsonProtocol",
+		OperationName: "InlineDocumentAsPayload",
 	}
 }

@@ -26,8 +26,9 @@ func (c *Client) JsonUnions(ctx context.Context, params *JsonUnionsInput, optFns
 	AddResolveEndpointMiddleware(stack, options)
 	v4.AddComputePayloadSHA256Middleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
-	registerHTTPSignerV4Middleware(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opJsonUnions(options.Region), middleware.Before)
@@ -73,11 +74,10 @@ func addawsAwsjson11_serdeOpJsonUnionsMiddlewares(stack *middleware.Stack) {
 
 func newServiceMetadataMiddleware_opJsonUnions(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Json Protocol",
-		ServiceID:      "jsonprotocol",
-		EndpointPrefix: "jsonprotocol",
-		SigningName:    "foo",
-		OperationName:  "JsonUnions",
+		Region:        region,
+		ServiceName:   "Json Protocol",
+		ServiceID:     "JsonProtocol",
+		SigningName:   "foo",
+		OperationName: "JsonUnions",
 	}
 }

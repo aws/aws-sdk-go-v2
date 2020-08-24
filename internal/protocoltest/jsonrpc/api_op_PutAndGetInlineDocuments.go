@@ -25,8 +25,9 @@ func (c *Client) PutAndGetInlineDocuments(ctx context.Context, params *PutAndGet
 	AddResolveEndpointMiddleware(stack, options)
 	v4.AddComputePayloadSHA256Middleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
-	registerHTTPSignerV4Middleware(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutAndGetInlineDocuments(options.Region), middleware.Before)
@@ -68,11 +69,10 @@ func addawsAwsjson11_serdeOpPutAndGetInlineDocumentsMiddlewares(stack *middlewar
 
 func newServiceMetadataMiddleware_opPutAndGetInlineDocuments(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Json Protocol",
-		ServiceID:      "jsonprotocol",
-		EndpointPrefix: "jsonprotocol",
-		SigningName:    "foo",
-		OperationName:  "PutAndGetInlineDocuments",
+		Region:        region,
+		ServiceName:   "Json Protocol",
+		ServiceID:     "JsonProtocol",
+		SigningName:   "foo",
+		OperationName: "PutAndGetInlineDocuments",
 	}
 }

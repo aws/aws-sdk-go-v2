@@ -5,6 +5,7 @@ package lexruntimeservice
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
@@ -33,9 +34,13 @@ type Client struct {
 func New(options Options, optFns ...func(*Options)) *Client {
 	options = options.Copy()
 
-	resolveDefaultEndpointConfiguration(&options)
+	resolveRetryer(&options)
+
+	resolveHTTPClient(&options)
 
 	resolveHTTPSignerV4(&options)
+
+	resolveDefaultEndpointConfiguration(&options)
 
 	for _, fn := range optFns {
 		fn(&options)
@@ -156,11 +161,15 @@ func resolveHTTPClient(o *Options) {
 	o.HTTPClient = aws.NewBuildableHTTPClient()
 }
 
-func resolveAwsRetryer(o *Options) {
+func resolveRetryer(o *Options) {
 	if o.Retryer != nil {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func addServiceUserAgent(stack *middleware.Stack) {
+	awsmiddleware.AddUserAgentKey("LexRuntimeService")(stack)
 }
 
 type HTTPSignerV4 interface {
@@ -176,6 +185,6 @@ func resolveHTTPSignerV4(o *Options) {
 	})
 }
 
-func registerHTTPSignerV4Middleware(stack *middleware.Stack, o Options) {
+func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) {
 	stack.Finalize.Add(v4.NewSignHTTPRequestMiddleware(o.Credentials, o.HTTPSignerV4), middleware.After)
 }

@@ -84,8 +84,9 @@ func (c *Client) PostContent(ctx context.Context, params *PostContentInput, optF
 	v4.AddUnsignedPayloadMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
-	registerHTTPSignerV4Middleware(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	addOpPostContentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPostContent(options.Region), middleware.Before)
@@ -340,11 +341,10 @@ func addawsRestjson1_serdeOpPostContentMiddlewares(stack *middleware.Stack) {
 
 func newServiceMetadataMiddleware_opPostContent(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Lex Runtime Service",
-		ServiceID:      "lexruntimeservice",
-		EndpointPrefix: "lexruntimeservice",
-		SigningName:    "lex",
-		OperationName:  "PostContent",
+		Region:        region,
+		ServiceName:   "Lex Runtime Service",
+		ServiceID:     "LexRuntimeService",
+		SigningName:   "lex",
+		OperationName: "PostContent",
 	}
 }
