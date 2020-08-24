@@ -1,5 +1,6 @@
 package software.amazon.smithy.aws.go.codegen;
 
+import static software.amazon.smithy.go.codegen.integration.HttpProtocolGeneratorUtils.isShapeWithResponseBindings;
 import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.handleDecodeError;
 import static software.amazon.smithy.aws.go.codegen.XmlProtocolUtils.initializeXmlDecoder;
 
@@ -8,7 +9,6 @@ import software.amazon.smithy.aws.traits.protocols.AwsQueryTrait;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
-import software.amazon.smithy.go.codegen.integration.HttpProtocolGeneratorUtils;
 import software.amazon.smithy.go.codegen.integration.HttpRpcProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
@@ -106,8 +106,7 @@ class AwsQuery extends HttpRpcProtocolGenerator {
 
         writer.write("output := &$T{}", symbol);
         writer.insertTrailingNewline();
-
-        if (HttpProtocolGeneratorUtils.isShapeWithResponseBindings(context.getModel(), shape, HttpBinding.Location.DOCUMENT)) {
+        if (isShapeWithResponseBindings(context.getModel(), shape, HttpBinding.Location.DOCUMENT)) {
             String documentDeserFunctionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
                     shape, getProtocolName());
             writer.addUseImports(SmithyGoDependency.IO);
@@ -116,14 +115,11 @@ class AwsQuery extends HttpRpcProtocolGenerator {
             XmlProtocolUtils.handleDecodeError(writer, "");
             writer.insertTrailingNewline();
         }
-
         writer.write("return output");
     }
 
     @Override
     protected void writeErrorMessageCodeDeserializer(GenerationContext context) {
-        GoWriter writer = context.getWriter();
-        writer.write("_ = errorBody");
         XmlProtocolUtils.writeXmlErrorMessageCodeDeserializer(context);
     }
 
