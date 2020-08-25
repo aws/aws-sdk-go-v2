@@ -15,10 +15,10 @@
 
 package software.amazon.smithy.aws.go.codegen;
 
+import static software.amazon.smithy.go.codegen.integration.HttpProtocolGeneratorUtils.isShapeWithResponseBindings;
 import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.handleDecodeError;
 import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.initializeJsonDecoder;
 import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.writeJsonErrorMessageCodeDeserializer;
-import static software.amazon.smithy.go.codegen.integration.ProtocolUtils.writeSafeMemberAccessor;
 
 import java.util.Optional;
 import java.util.Set;

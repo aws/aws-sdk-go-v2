@@ -24,6 +24,7 @@ import software.amazon.smithy.go.codegen.SmithyGoDependency;
 public final class AwsGoDependency {
     public static final GoDependency AWS_REST_JSON_PROTOCOL = aws("aws/protocol/restjson");
     public static final GoDependency AWS_QUERY_PROTOCOL = aws("aws/protocol/query");
+    public static final GoDependency AWS_EC2QUERY_PROTOCOL = aws("aws/protocol/ec2query");
     public static final GoDependency AWS_CORE = aws("aws");
     public static final GoDependency AWS_MIDDLEWARE = aws("aws/middleware", "awsmiddleware");
     public static final GoDependency AWS_RETRY = aws("aws/retry");
@@ -50,6 +51,6 @@ public final class AwsGoDependency {
     }
 
     private static final class Versions {
-        private static final String AWS_SDK = "v0.24.1-0.20200821181726-bc564654ccac";
+        private static final String AWS_SDK = "v0.0.0-20200825173225-662e4f915a66";
     }
 }
