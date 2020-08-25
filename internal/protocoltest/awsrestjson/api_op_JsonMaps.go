@@ -25,6 +25,7 @@ func (c *Client) JsonMaps(ctx context.Context, params *JsonMapsInput, optFns ...
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opJsonMaps(options.Region), middleware.Before)
@@ -66,10 +67,9 @@ func addawsRestjson1_serdeOpJsonMapsMiddlewares(stack *middleware.Stack) {
 
 func newServiceMetadataMiddleware_opJsonMaps(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Rest Json Protocol",
-		ServiceID:      "restjsonprotocol",
-		EndpointPrefix: "restjsonprotocol",
-		OperationName:  "JsonMaps",
+		Region:        region,
+		ServiceName:   "Rest Json Protocol",
+		ServiceID:     "RestJsonProtocol",
+		OperationName: "JsonMaps",
 	}
 }

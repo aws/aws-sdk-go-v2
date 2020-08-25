@@ -24,6 +24,7 @@ func (c *Client) XmlAttributes(ctx context.Context, params *XmlAttributesInput, 
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opXmlAttributes(options.Region), middleware.Before)
@@ -67,10 +68,9 @@ func addawsRestxml_serdeOpXmlAttributesMiddlewares(stack *middleware.Stack) {
 
 func newServiceMetadataMiddleware_opXmlAttributes(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Rest Xml Protocol",
-		ServiceID:      "restxmlprotocol",
-		EndpointPrefix: "restxmlprotocol",
-		OperationName:  "XmlAttributes",
+		Region:        region,
+		ServiceName:   "Rest Xml Protocol",
+		ServiceID:     "RestXmlProtocol",
+		OperationName: "XmlAttributes",
 	}
 }

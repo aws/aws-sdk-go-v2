@@ -24,6 +24,7 @@ func (c *Client) FlattenedXmlMapWithXmlName(ctx context.Context, params *Flatten
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opFlattenedXmlMapWithXmlName(options.Region), middleware.Before)
@@ -64,10 +65,9 @@ func addawsAwsquery_serdeOpFlattenedXmlMapWithXmlNameMiddlewares(stack *middlewa
 
 func newServiceMetadataMiddleware_opFlattenedXmlMapWithXmlName(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Query Protocol",
-		ServiceID:      "queryprotocol",
-		EndpointPrefix: "queryprotocol",
-		OperationName:  "FlattenedXmlMapWithXmlName",
+		Region:        region,
+		ServiceName:   "Query Protocol",
+		ServiceID:     "QueryProtocol",
+		OperationName: "FlattenedXmlMapWithXmlName",
 	}
 }

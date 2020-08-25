@@ -26,6 +26,7 @@ func (c *Client) HttpRequestWithLabels(ctx context.Context, params *HttpRequestW
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpHttpRequestWithLabelsValidationMiddleware(stack)
@@ -76,10 +77,9 @@ func addawsRestxml_serdeOpHttpRequestWithLabelsMiddlewares(stack *middleware.Sta
 
 func newServiceMetadataMiddleware_opHttpRequestWithLabels(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Rest Xml Protocol",
-		ServiceID:      "restxmlprotocol",
-		EndpointPrefix: "restxmlprotocol",
-		OperationName:  "HttpRequestWithLabels",
+		Region:        region,
+		ServiceName:   "Rest Xml Protocol",
+		ServiceID:     "RestXmlProtocol",
+		OperationName: "HttpRequestWithLabels",
 	}
 }

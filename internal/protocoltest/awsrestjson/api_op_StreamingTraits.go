@@ -27,6 +27,7 @@ func (c *Client) StreamingTraits(ctx context.Context, params *StreamingTraitsInp
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStreamingTraits(options.Region), middleware.Before)
 
@@ -69,10 +70,9 @@ func addawsRestjson1_serdeOpStreamingTraitsMiddlewares(stack *middleware.Stack) 
 
 func newServiceMetadataMiddleware_opStreamingTraits(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Rest Json Protocol",
-		ServiceID:      "restjsonprotocol",
-		EndpointPrefix: "restjsonprotocol",
-		OperationName:  "StreamingTraits",
+		Region:        region,
+		ServiceName:   "Rest Json Protocol",
+		ServiceID:     "RestJsonProtocol",
+		OperationName: "StreamingTraits",
 	}
 }

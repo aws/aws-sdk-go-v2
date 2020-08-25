@@ -26,6 +26,7 @@ func (c *Client) AllQueryStringTypes(ctx context.Context, params *AllQueryString
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAllQueryStringTypes(options.Region), middleware.Before)
@@ -82,10 +83,9 @@ func addawsRestxml_serdeOpAllQueryStringTypesMiddlewares(stack *middleware.Stack
 
 func newServiceMetadataMiddleware_opAllQueryStringTypes(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Rest Xml Protocol",
-		ServiceID:      "restxmlprotocol",
-		EndpointPrefix: "restxmlprotocol",
-		OperationName:  "AllQueryStringTypes",
+		Region:        region,
+		ServiceName:   "Rest Xml Protocol",
+		ServiceID:     "RestXmlProtocol",
+		OperationName: "AllQueryStringTypes",
 	}
 }

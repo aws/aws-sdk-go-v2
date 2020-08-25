@@ -24,6 +24,7 @@ func (c *Client) NullAndEmptyHeadersClient(ctx context.Context, params *NullAndE
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opNullAndEmptyHeadersClient(options.Region), middleware.Before)
@@ -69,10 +70,9 @@ func addawsRestjson1_serdeOpNullAndEmptyHeadersClientMiddlewares(stack *middlewa
 
 func newServiceMetadataMiddleware_opNullAndEmptyHeadersClient(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Rest Json Protocol",
-		ServiceID:      "restjsonprotocol",
-		EndpointPrefix: "restjsonprotocol",
-		OperationName:  "NullAndEmptyHeadersClient",
+		Region:        region,
+		ServiceName:   "Rest Json Protocol",
+		ServiceID:     "RestJsonProtocol",
+		OperationName: "NullAndEmptyHeadersClient",
 	}
 }

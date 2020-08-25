@@ -25,6 +25,7 @@ func (c *Client) QueryLists(ctx context.Context, params *QueryListsInput, optFns
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opQueryLists(options.Region), middleware.Before)
@@ -68,10 +69,9 @@ func addawsAwsquery_serdeOpQueryListsMiddlewares(stack *middleware.Stack) {
 
 func newServiceMetadataMiddleware_opQueryLists(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Query Protocol",
-		ServiceID:      "queryprotocol",
-		EndpointPrefix: "queryprotocol",
-		OperationName:  "QueryLists",
+		Region:        region,
+		ServiceName:   "Query Protocol",
+		ServiceID:     "QueryProtocol",
+		OperationName: "QueryLists",
 	}
 }

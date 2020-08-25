@@ -43,8 +43,9 @@ func (c *Client) RestoreTableFromBackup(ctx context.Context, params *RestoreTabl
 	AddResolveEndpointMiddleware(stack, options)
 	v4.AddComputePayloadSHA256Middleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
-	registerHTTPSignerV4Middleware(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRestoreTableFromBackupValidationMiddleware(stack)
@@ -103,11 +104,10 @@ func addawsAwsjson10_serdeOpRestoreTableFromBackupMiddlewares(stack *middleware.
 
 func newServiceMetadataMiddleware_opRestoreTableFromBackup(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "DynamoDB",
-		ServiceID:      "dynamodb",
-		EndpointPrefix: "dynamodb",
-		SigningName:    "dynamodb",
-		OperationName:  "RestoreTableFromBackup",
+		Region:        region,
+		ServiceName:   "DynamoDB",
+		ServiceID:     "DynamoDB",
+		SigningName:   "dynamodb",
+		OperationName: "RestoreTableFromBackup",
 	}
 }

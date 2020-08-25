@@ -43,6 +43,7 @@ func (c *Client) XmlLists(ctx context.Context, params *XmlListsInput, optFns ...
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opXmlLists(options.Region), middleware.Before)
@@ -94,10 +95,9 @@ func addawsEc2query_serdeOpXmlListsMiddlewares(stack *middleware.Stack) {
 
 func newServiceMetadataMiddleware_opXmlLists(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "EC2 Protocol",
-		ServiceID:      "ec2protocol",
-		EndpointPrefix: "ec2protocol",
-		OperationName:  "XmlLists",
+		Region:        region,
+		ServiceName:   "EC2 Protocol",
+		ServiceID:     "EC2Protocol",
+		OperationName: "XmlLists",
 	}
 }

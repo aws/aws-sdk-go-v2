@@ -26,6 +26,7 @@ func (c *Client) IgnoresWrappingXmlName(ctx context.Context, params *IgnoresWrap
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opIgnoresWrappingXmlName(options.Region), middleware.Before)
@@ -66,10 +67,9 @@ func addawsAwsquery_serdeOpIgnoresWrappingXmlNameMiddlewares(stack *middleware.S
 
 func newServiceMetadataMiddleware_opIgnoresWrappingXmlName(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Query Protocol",
-		ServiceID:      "queryprotocol",
-		EndpointPrefix: "queryprotocol",
-		OperationName:  "IgnoresWrappingXmlName",
+		Region:        region,
+		ServiceName:   "Query Protocol",
+		ServiceID:     "QueryProtocol",
+		OperationName: "IgnoresWrappingXmlName",
 	}
 }

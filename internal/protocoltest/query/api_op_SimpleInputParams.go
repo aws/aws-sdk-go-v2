@@ -25,6 +25,7 @@ func (c *Client) SimpleInputParams(ctx context.Context, params *SimpleInputParam
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSimpleInputParams(options.Region), middleware.Before)
@@ -70,10 +71,9 @@ func addawsAwsquery_serdeOpSimpleInputParamsMiddlewares(stack *middleware.Stack)
 
 func newServiceMetadataMiddleware_opSimpleInputParams(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Query Protocol",
-		ServiceID:      "queryprotocol",
-		EndpointPrefix: "queryprotocol",
-		OperationName:  "SimpleInputParams",
+		Region:        region,
+		ServiceName:   "Query Protocol",
+		ServiceID:     "QueryProtocol",
+		OperationName: "SimpleInputParams",
 	}
 }

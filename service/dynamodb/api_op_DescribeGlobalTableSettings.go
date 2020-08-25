@@ -29,8 +29,9 @@ func (c *Client) DescribeGlobalTableSettings(ctx context.Context, params *Descri
 	AddResolveEndpointMiddleware(stack, options)
 	v4.AddComputePayloadSHA256Middleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
-	registerHTTPSignerV4Middleware(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeGlobalTableSettingsValidationMiddleware(stack)
@@ -77,11 +78,10 @@ func addawsAwsjson10_serdeOpDescribeGlobalTableSettingsMiddlewares(stack *middle
 
 func newServiceMetadataMiddleware_opDescribeGlobalTableSettings(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "DynamoDB",
-		ServiceID:      "dynamodb",
-		EndpointPrefix: "dynamodb",
-		SigningName:    "dynamodb",
-		OperationName:  "DescribeGlobalTableSettings",
+		Region:        region,
+		ServiceName:   "DynamoDB",
+		ServiceID:     "DynamoDB",
+		SigningName:   "dynamodb",
+		OperationName: "DescribeGlobalTableSettings",
 	}
 }

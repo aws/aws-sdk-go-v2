@@ -26,6 +26,7 @@ func (c *Client) HttpPayloadWithStructure(ctx context.Context, params *HttpPaylo
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadWithStructure(options.Region), middleware.Before)
@@ -67,10 +68,9 @@ func addawsRestxml_serdeOpHttpPayloadWithStructureMiddlewares(stack *middleware.
 
 func newServiceMetadataMiddleware_opHttpPayloadWithStructure(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Rest Xml Protocol",
-		ServiceID:      "restxmlprotocol",
-		EndpointPrefix: "restxmlprotocol",
-		OperationName:  "HttpPayloadWithStructure",
+		Region:        region,
+		ServiceName:   "Rest Xml Protocol",
+		ServiceID:     "RestXmlProtocol",
+		OperationName: "HttpPayloadWithStructure",
 	}
 }

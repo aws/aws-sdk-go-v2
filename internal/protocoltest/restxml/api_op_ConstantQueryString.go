@@ -27,6 +27,7 @@ func (c *Client) ConstantQueryString(ctx context.Context, params *ConstantQueryS
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpConstantQueryStringValidationMiddleware(stack)
@@ -67,10 +68,9 @@ func addawsRestxml_serdeOpConstantQueryStringMiddlewares(stack *middleware.Stack
 
 func newServiceMetadataMiddleware_opConstantQueryString(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Rest Xml Protocol",
-		ServiceID:      "restxmlprotocol",
-		EndpointPrefix: "restxmlprotocol",
-		OperationName:  "ConstantQueryString",
+		Region:        region,
+		ServiceName:   "Rest Xml Protocol",
+		ServiceID:     "RestXmlProtocol",
+		OperationName: "ConstantQueryString",
 	}
 }

@@ -37,8 +37,9 @@ func (c *Client) CreateTable(ctx context.Context, params *CreateTableInput, optF
 	AddResolveEndpointMiddleware(stack, options)
 	v4.AddComputePayloadSHA256Middleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
-	registerHTTPSignerV4Middleware(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateTableValidationMiddleware(stack)
@@ -246,11 +247,10 @@ func addawsAwsjson10_serdeOpCreateTableMiddlewares(stack *middleware.Stack) {
 
 func newServiceMetadataMiddleware_opCreateTable(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "DynamoDB",
-		ServiceID:      "dynamodb",
-		EndpointPrefix: "dynamodb",
-		SigningName:    "dynamodb",
-		OperationName:  "CreateTable",
+		Region:        region,
+		ServiceName:   "DynamoDB",
+		ServiceID:     "DynamoDB",
+		SigningName:   "dynamodb",
+		OperationName: "CreateTable",
 	}
 }

@@ -25,6 +25,7 @@ func (c *Client) RecursiveXmlShapes(ctx context.Context, params *RecursiveXmlSha
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRecursiveXmlShapes(options.Region), middleware.Before)
@@ -65,10 +66,9 @@ func addawsAwsquery_serdeOpRecursiveXmlShapesMiddlewares(stack *middleware.Stack
 
 func newServiceMetadataMiddleware_opRecursiveXmlShapes(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Query Protocol",
-		ServiceID:      "queryprotocol",
-		EndpointPrefix: "queryprotocol",
-		OperationName:  "RecursiveXmlShapes",
+		Region:        region,
+		ServiceName:   "Query Protocol",
+		ServiceID:     "QueryProtocol",
+		OperationName: "RecursiveXmlShapes",
 	}
 }

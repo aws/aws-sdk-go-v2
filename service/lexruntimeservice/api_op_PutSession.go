@@ -30,8 +30,9 @@ func (c *Client) PutSession(ctx context.Context, params *PutSessionInput, optFns
 	AddResolveEndpointMiddleware(stack, options)
 	v4.AddComputePayloadSHA256Middleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
-	registerHTTPSignerV4Middleware(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	addOpPutSessionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutSession(options.Region), middleware.Before)
@@ -195,11 +196,10 @@ func addawsRestjson1_serdeOpPutSessionMiddlewares(stack *middleware.Stack) {
 
 func newServiceMetadataMiddleware_opPutSession(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Lex Runtime Service",
-		ServiceID:      "lexruntimeservice",
-		EndpointPrefix: "lexruntimeservice",
-		SigningName:    "lex",
-		OperationName:  "PutSession",
+		Region:        region,
+		ServiceName:   "Lex Runtime Service",
+		ServiceID:     "LexRuntimeService",
+		SigningName:   "lex",
+		OperationName: "PutSession",
 	}
 }

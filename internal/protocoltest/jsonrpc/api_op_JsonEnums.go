@@ -26,8 +26,9 @@ func (c *Client) JsonEnums(ctx context.Context, params *JsonEnumsInput, optFns .
 	AddResolveEndpointMiddleware(stack, options)
 	v4.AddComputePayloadSHA256Middleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
-	registerHTTPSignerV4Middleware(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opJsonEnums(options.Region), middleware.Before)
@@ -79,11 +80,10 @@ func addawsAwsjson11_serdeOpJsonEnumsMiddlewares(stack *middleware.Stack) {
 
 func newServiceMetadataMiddleware_opJsonEnums(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Json Protocol",
-		ServiceID:      "jsonprotocol",
-		EndpointPrefix: "jsonprotocol",
-		SigningName:    "foo",
-		OperationName:  "JsonEnums",
+		Region:        region,
+		ServiceName:   "Json Protocol",
+		ServiceID:     "JsonProtocol",
+		SigningName:   "foo",
+		OperationName: "JsonEnums",
 	}
 }

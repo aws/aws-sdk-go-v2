@@ -24,6 +24,7 @@ func (c *Client) XmlBlobs(ctx context.Context, params *XmlBlobsInput, optFns ...
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opXmlBlobs(options.Region), middleware.Before)
@@ -64,10 +65,9 @@ func addawsEc2query_serdeOpXmlBlobsMiddlewares(stack *middleware.Stack) {
 
 func newServiceMetadataMiddleware_opXmlBlobs(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "EC2 Protocol",
-		ServiceID:      "ec2protocol",
-		EndpointPrefix: "ec2protocol",
-		OperationName:  "XmlBlobs",
+		Region:        region,
+		ServiceName:   "EC2 Protocol",
+		ServiceID:     "EC2Protocol",
+		OperationName: "XmlBlobs",
 	}
 }

@@ -23,6 +23,7 @@ func (c *Client) HttpRequestWithGreedyLabelInPath(ctx context.Context, params *H
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addServiceUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpHttpRequestWithGreedyLabelInPathValidationMiddleware(stack)
@@ -64,10 +65,9 @@ func addawsRestjson1_serdeOpHttpRequestWithGreedyLabelInPathMiddlewares(stack *m
 
 func newServiceMetadataMiddleware_opHttpRequestWithGreedyLabelInPath(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Rest Json Protocol",
-		ServiceID:      "restjsonprotocol",
-		EndpointPrefix: "restjsonprotocol",
-		OperationName:  "HttpRequestWithGreedyLabelInPath",
+		Region:        region,
+		ServiceName:   "Rest Json Protocol",
+		ServiceID:     "RestJsonProtocol",
+		OperationName: "HttpRequestWithGreedyLabelInPath",
 	}
 }
