@@ -1,6 +1,5 @@
 package software.amazon.smithy.aws.go.codegen;
 
-import java.util.function.Predicate;
 import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.CodegenUtils;

@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 import software.amazon.smithy.codegen.core.Symbol;
@@ -327,6 +326,8 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
             writer.write("t, done, err := decoder.Token()");
             writer.write("if err != nil { return err }");
             writer.write("if done { break }");
+            // TODO: fix self closing tags deser
+            writer.write("_ = t");
 
             writer.openBlock("switch {", "}", () -> {
                 Set<MemberShape> members = new TreeSet<>(shape.members());
