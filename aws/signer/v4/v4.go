@@ -101,19 +101,6 @@ type Signer struct {
 	DisableURIPathEscaping bool
 }
 
-// NewSigner returns a Signer pointer configured with the credentials and optional
-// option values provided. If not options are provided the Signer will use its
-// default configuration.
-func NewSigner(options ...func(*Signer)) *Signer {
-	v4 := &Signer{}
-
-	for _, option := range options {
-		option(v4)
-	}
-
-	return v4
-}
-
 type httpSigner struct {
 	Request     *http.Request
 	ServiceName string
