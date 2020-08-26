@@ -9,7 +9,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
-	"strconv"
 	"strings"
 	"testing"
 	"time"
@@ -41,7 +40,7 @@ func buildRequestWithBodyReader(serviceName, region string, body io.Reader) (*ht
 	req.Header.Set("Content-Type", "application/x-amz-json-1.0")
 
 	if bodyLen > 0 {
-		req.Header.Set("Content-Length", strconv.Itoa(bodyLen))
+		req.ContentLength = int64(bodyLen)
 	}
 
 	req.Header.Set("X-Amz-Meta-Other-Header", "some-value=!@#$%^&* (+)")

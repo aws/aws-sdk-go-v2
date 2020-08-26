@@ -167,7 +167,7 @@ func (s *httpSigner) Build() (signedRequest, error) {
 		host = req.Host
 	}
 
-	signedHeaders, signedHeadersStr, canonicalHeaderStr := s.buildCanonicalHeaders(host, v4Internal.IgnoredHeaders, unsignedHeaders)
+	signedHeaders, signedHeadersStr, canonicalHeaderStr := s.buildCanonicalHeaders(host, v4Internal.IgnoredHeaders, unsignedHeaders, s.Request.ContentLength)
 
 	if s.IsPreSign {
 		query.Set(v4Internal.AmzSignedHeadersKey, signedHeadersStr)
@@ -337,12 +337,17 @@ func buildQuery(r v4Internal.Rule, header http.Header) (url.Values, http.Header)
 	return query, unsignedHeaders
 }
 
-func (s *httpSigner) buildCanonicalHeaders(host string, rule v4Internal.Rule, header http.Header) (signed http.Header, signedHeaders, canonicalHeaders string) {
+func (s *httpSigner) buildCanonicalHeaders(host string, rule v4Internal.Rule, header http.Header, length int64) (signed http.Header, signedHeaders, canonicalHeaders string) {
 	signed = make(http.Header)
 
 	var headers []string
 	headers = append(headers, "host")
 	signed["host"] = append(signed["host"], host)
+
+	if length > 0 {
+		headers = append(headers, "content-length")
+		signed["content-length"] = append(signed["content-length"], strconv.FormatInt(length, 10))
+	}
 
 	for k, v := range header {
 		canonicalKey := http.CanonicalHeaderKey(k)
