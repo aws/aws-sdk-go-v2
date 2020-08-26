@@ -39,9 +39,6 @@ import software.amazon.smithy.utils.ListUtils;
  * Generates Client Configuration, Middleware, and Config Resolvers for AWS Signature Version 4 support.
  */
 public final class AwsSignatureVersion4 implements GoIntegration {
-    public static final String SIGNER_INTERFACE_TYPE = "HTTPSignerV4";
-    public static final String SIGNER_CONFIG_NAME = SIGNER_INTERFACE_TYPE;
-    public static final String DEFAULT_RESOLVER_FUNCTION = "resolveHTTPSignerV4";
     public static final String REGISTER_MIDDLEWARE_FUNCTION = "addHTTPSignerV4Middleware";
 
     @Override
@@ -59,66 +56,33 @@ public final class AwsSignatureVersion4 implements GoIntegration {
         ServiceShape serviceShape = settings.getService(model);
         if (isSupportedAuthentication(model, serviceShape)) {
             goDelegator.useShapeWriter(serviceShape, writer -> {
-                writeSignerInterface(writer);
-                writeDefaultResolver(writer);
-                writeMiddlewareRegister(writer);
+                writeMiddlewareRegister(model, writer, serviceShape);
             });
         }
     }
 
-    private void writeMiddlewareRegister(GoWriter writer) {
+    private void writeMiddlewareRegister(Model model, GoWriter writer, ServiceShape serviceShape) {
         writer.openBlock("func $L(stack $P, o Options) {", "}", REGISTER_MIDDLEWARE_FUNCTION,
-                SymbolUtils.createPointableSymbolBuilder("Stack", SmithyGoDependency.SMITHY_MIDDLEWARE).build(),
-                () -> writer.write("stack.Finalize.Add($T(o.$L, o.$L), middleware.After)",
-                        SymbolUtils.createValueSymbolBuilder("NewSignHTTPRequestMiddleware",
-                                AwsGoDependency.AWS_SIGNER_V4).build(),
-                        AddAwsConfigFields.CREDENTIALS_CONFIG_NAME,
-                        SIGNER_CONFIG_NAME));
-        writer.write("");
-    }
-
-    @Override
-    public List<RuntimeClientPlugin> getClientPlugins() {
-        return ListUtils.of(RuntimeClientPlugin.builder()
-                .servicePredicate(AwsSignatureVersion4::isSupportedAuthentication)
-                .addConfigField(ConfigField.builder()
-                        .name(SIGNER_CONFIG_NAME)
-                        .type(SymbolUtils.createValueSymbolBuilder(SIGNER_INTERFACE_TYPE).build())
-                        .documentation("Provides the AWS Signature Version 4 Implementation")
-                        .build())
-                .resolveFunction(SymbolUtils.createValueSymbolBuilder(DEFAULT_RESOLVER_FUNCTION).build())
-                .build());
-    }
-
-    private void writeDefaultResolver(GoWriter writer) {
-        writer.openBlock("func $L(o *Options) {", "}", DEFAULT_RESOLVER_FUNCTION, () -> {
-            writer.openBlock("if o.$L != nil {", "}", SIGNER_CONFIG_NAME, () -> writer.write("return"));
-            writer.openBlock("o.$L = $T(func(s $P) {", "})", SIGNER_CONFIG_NAME,
-                    SymbolUtils.createValueSymbolBuilder("NewSigner", AwsGoDependency.AWS_SIGNER_V4).build(),
-                    SymbolUtils.createPointableSymbolBuilder("Signer", AwsGoDependency.AWS_SIGNER_V4).build(),
-                    () -> {
-                        writer.write("o.Logger = o.Logger");
+                SymbolUtils.createPointableSymbolBuilder("Stack", SmithyGoDependency.SMITHY_MIDDLEWARE).build(), () -> {
+                    writer.openBlock("signer := $T{", "}", SymbolUtils.createValueSymbolBuilder("Signer",
+                            AwsGoDependency.AWS_SIGNER_V4).build(), () -> {
+                        writeServiceSignerConfig(model, writer, serviceShape);
                     });
-        });
+                    writer.write("stack.Finalize.Add($T(o.$L, signer), middleware.After)",
+                            SymbolUtils.createValueSymbolBuilder("NewSignHTTPRequestMiddleware",
+                                    AwsGoDependency.AWS_SIGNER_V4).build(),
+                            AddAwsConfigFields.CREDENTIALS_CONFIG_NAME);
+                });
         writer.write("");
     }
 
-    private void writeSignerInterface(GoWriter writer) {
-        writer.openBlock("type $L interface {", "}", SIGNER_INTERFACE_TYPE, () -> {
-            writer.addUseImports(SmithyGoDependency.CONTEXT);
-            writer.addUseImports(AwsGoDependency.AWS_CORE);
-            writer.addUseImports(SmithyGoDependency.NET_HTTP);
-            writer.addUseImports(SmithyGoDependency.TIME);
-            writer.write("SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, "
-                    + "payloadHash string, service string, region string, signingTime time.Time) error");
-        });
-        writer.write("");
+    private void writeServiceSignerConfig(Model model, GoWriter writer, ServiceShape serviceShape) {
     }
 
     /**
      * Returns if the SigV4Trait is a auth scheme supported by the service.
      *
-     * @param model model definition
+     * @param model        model definition
      * @param serviceShape service shape for the API
      * @return if the SigV4 trait is used by the service.
      */
