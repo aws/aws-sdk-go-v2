@@ -634,8 +634,9 @@ func awsRestxml_serializeHttpBindingsHttpPayloadTraitsInput(v *HttpPayloadTraits
 	}
 
 	if v.Foo != nil {
+		locationName := "X-Foo"
 		if len(*v.Foo) > 0 {
-			encoder.SetHeader("X-Foo").String(*v.Foo)
+			encoder.SetHeader(locationName).String(*v.Foo)
 		}
 	}
 
@@ -705,8 +706,9 @@ func awsRestxml_serializeHttpBindingsHttpPayloadTraitsWithMediaTypeInput(v *Http
 	}
 
 	if v.Foo != nil {
+		locationName := "X-Foo"
 		if len(*v.Foo) > 0 {
-			encoder.SetHeader("X-Foo").String(*v.Foo)
+			encoder.SetHeader(locationName).String(*v.Foo)
 		}
 	}
 
@@ -1055,16 +1057,17 @@ func awsRestxml_serializeHttpBindingsHttpPrefixHeadersInput(v *HttpPrefixHeaders
 	}
 
 	if v.Foo != nil {
+		locationName := "X-Foo"
 		if len(*v.Foo) > 0 {
-			encoder.SetHeader("X-Foo").String(*v.Foo)
+			encoder.SetHeader(locationName).String(*v.Foo)
 		}
 	}
 
 	if v.FooMap != nil {
 		hv := encoder.Headers("X-Foo-")
 		for mapKey, mapVal := range v.FooMap {
-			if mapVal != nil && len(*mapVal) > 0 {
-				hv.AddHeader(mapKey).String(*mapVal)
+			if len(*mapVal) > 0 {
+				hv.SetHeader(mapKey).String(*mapVal)
 			}
 		}
 	}
@@ -1438,93 +1441,109 @@ func awsRestxml_serializeHttpBindingsInputAndOutputWithHeadersInput(v *InputAndO
 	}
 
 	if v.HeaderBooleanList != nil {
+		locationName := "X-BooleanList"
 		for i := range v.HeaderBooleanList {
 			if v.HeaderBooleanList[i] != nil {
-				encoder.AddHeader("X-BooleanList").Boolean(*v.HeaderBooleanList[i])
+				encoder.AddHeader(locationName).Boolean(*v.HeaderBooleanList[i])
 			}
 		}
 	}
 
 	if v.HeaderByte != nil {
-		encoder.SetHeader("X-Byte").Byte(*v.HeaderByte)
+		locationName := "X-Byte"
+		encoder.SetHeader(locationName).Byte(*v.HeaderByte)
 	}
 
 	if v.HeaderDouble != nil {
-		encoder.SetHeader("X-Double").Double(*v.HeaderDouble)
+		locationName := "X-Double"
+		encoder.SetHeader(locationName).Double(*v.HeaderDouble)
 	}
 
 	if len(v.HeaderEnum) > 0 {
-		encoder.SetHeader("X-Enum").String(string(v.HeaderEnum))
+		locationName := "X-Enum"
+		encoder.SetHeader(locationName).String(string(v.HeaderEnum))
 	}
 
 	if v.HeaderEnumList != nil {
+		locationName := "X-EnumList"
 		for i := range v.HeaderEnumList {
 			if len(v.HeaderEnumList[i]) > 0 {
-				encoder.AddHeader("X-EnumList").String(string(v.HeaderEnumList[i]))
+				encoder.AddHeader(locationName).String(string(v.HeaderEnumList[i]))
 			}
 		}
 	}
 
 	if v.HeaderFalseBool != nil {
-		encoder.SetHeader("X-Boolean2").Boolean(*v.HeaderFalseBool)
+		locationName := "X-Boolean2"
+		encoder.SetHeader(locationName).Boolean(*v.HeaderFalseBool)
 	}
 
 	if v.HeaderFloat != nil {
-		encoder.SetHeader("X-Float").Float(*v.HeaderFloat)
+		locationName := "X-Float"
+		encoder.SetHeader(locationName).Float(*v.HeaderFloat)
 	}
 
 	if v.HeaderInteger != nil {
-		encoder.SetHeader("X-Integer").Integer(*v.HeaderInteger)
+		locationName := "X-Integer"
+		encoder.SetHeader(locationName).Integer(*v.HeaderInteger)
 	}
 
 	if v.HeaderIntegerList != nil {
+		locationName := "X-IntegerList"
 		for i := range v.HeaderIntegerList {
 			if v.HeaderIntegerList[i] != nil {
-				encoder.AddHeader("X-IntegerList").Integer(*v.HeaderIntegerList[i])
+				encoder.AddHeader(locationName).Integer(*v.HeaderIntegerList[i])
 			}
 		}
 	}
 
 	if v.HeaderLong != nil {
-		encoder.SetHeader("X-Long").Long(*v.HeaderLong)
+		locationName := "X-Long"
+		encoder.SetHeader(locationName).Long(*v.HeaderLong)
 	}
 
 	if v.HeaderShort != nil {
-		encoder.SetHeader("X-Short").Short(*v.HeaderShort)
+		locationName := "X-Short"
+		encoder.SetHeader(locationName).Short(*v.HeaderShort)
 	}
 
 	if v.HeaderString != nil {
+		locationName := "X-String"
 		if len(*v.HeaderString) > 0 {
-			encoder.SetHeader("X-String").String(*v.HeaderString)
+			encoder.SetHeader(locationName).String(*v.HeaderString)
 		}
 	}
 
 	if v.HeaderStringList != nil {
+		locationName := "X-StringList"
 		for i := range v.HeaderStringList {
 			if v.HeaderStringList[i] != nil && len(*v.HeaderStringList[i]) > 0 {
-				encoder.AddHeader("X-StringList").String(*v.HeaderStringList[i])
+				encoder.AddHeader(locationName).String(*v.HeaderStringList[i])
 			}
 		}
 	}
 
 	if v.HeaderStringSet != nil {
+		locationName := "X-StringSet"
 		for i := range v.HeaderStringSet {
 			if v.HeaderStringSet[i] != nil && len(*v.HeaderStringSet[i]) > 0 {
-				encoder.AddHeader("X-StringSet").String(*v.HeaderStringSet[i])
+				encoder.AddHeader(locationName).String(*v.HeaderStringSet[i])
 			}
 		}
 	}
 
 	if v.HeaderTimestampList != nil {
+		locationName := "X-TimestampList"
 		for i := range v.HeaderTimestampList {
 			if v.HeaderTimestampList[i] != nil {
-				encoder.AddHeader("X-TimestampList").String(smithytime.FormatHTTPDate(*v.HeaderTimestampList[i]))
+				encoder.AddHeader(locationName).String(smithytime.FormatHTTPDate(*v.HeaderTimestampList[i]))
 			}
 		}
 	}
 
 	if v.HeaderTrueBool != nil {
-		encoder.SetHeader("X-Boolean1").Boolean(*v.HeaderTrueBool)
+		locationName := "X-Boolean1"
+		encoder.SetHeader(locationName).Boolean(*v.HeaderTrueBool)
 	}
 
 	return nil
@@ -1682,21 +1701,24 @@ func awsRestxml_serializeHttpBindingsNullAndEmptyHeadersClientInput(v *NullAndEm
 	}
 
 	if v.A != nil {
+		locationName := "X-A"
 		if len(*v.A) > 0 {
-			encoder.SetHeader("X-A").String(*v.A)
+			encoder.SetHeader(locationName).String(*v.A)
 		}
 	}
 
 	if v.B != nil {
+		locationName := "X-B"
 		if len(*v.B) > 0 {
-			encoder.SetHeader("X-B").String(*v.B)
+			encoder.SetHeader(locationName).String(*v.B)
 		}
 	}
 
 	if v.C != nil {
+		locationName := "X-C"
 		for i := range v.C {
 			if v.C[i] != nil && len(*v.C[i]) > 0 {
-				encoder.AddHeader("X-C").String(*v.C[i])
+				encoder.AddHeader(locationName).String(*v.C[i])
 			}
 		}
 	}
@@ -1756,21 +1778,24 @@ func awsRestxml_serializeHttpBindingsNullAndEmptyHeadersServerInput(v *NullAndEm
 	}
 
 	if v.A != nil {
+		locationName := "X-A"
 		if len(*v.A) > 0 {
-			encoder.SetHeader("X-A").String(*v.A)
+			encoder.SetHeader(locationName).String(*v.A)
 		}
 	}
 
 	if v.B != nil {
+		locationName := "X-B"
 		if len(*v.B) > 0 {
-			encoder.SetHeader("X-B").String(*v.B)
+			encoder.SetHeader(locationName).String(*v.B)
 		}
 	}
 
 	if v.C != nil {
+		locationName := "X-C"
 		for i := range v.C {
 			if v.C[i] != nil && len(*v.C[i]) > 0 {
-				encoder.AddHeader("X-C").String(*v.C[i])
+				encoder.AddHeader(locationName).String(*v.C[i])
 			}
 		}
 	}
@@ -2052,8 +2077,9 @@ func awsRestxml_serializeHttpBindingsSimpleScalarPropertiesInput(v *SimpleScalar
 	}
 
 	if v.Foo != nil {
+		locationName := "X-Foo"
 		if len(*v.Foo) > 0 {
-			encoder.SetHeader("X-Foo").String(*v.Foo)
+			encoder.SetHeader(locationName).String(*v.Foo)
 		}
 	}
 
@@ -2216,31 +2242,38 @@ func awsRestxml_serializeHttpBindingsTimestampFormatHeadersInput(v *TimestampFor
 	}
 
 	if v.DefaultFormat != nil {
-		encoder.SetHeader("X-defaultFormat").String(smithytime.FormatHTTPDate(*v.DefaultFormat))
+		locationName := "X-defaultFormat"
+		encoder.SetHeader(locationName).String(smithytime.FormatHTTPDate(*v.DefaultFormat))
 	}
 
 	if v.MemberDateTime != nil {
-		encoder.SetHeader("X-memberDateTime").String(smithytime.FormatDateTime(*v.MemberDateTime))
+		locationName := "X-memberDateTime"
+		encoder.SetHeader(locationName).String(smithytime.FormatDateTime(*v.MemberDateTime))
 	}
 
 	if v.MemberEpochSeconds != nil {
-		encoder.SetHeader("X-memberEpochSeconds").Double(smithytime.FormatEpochSeconds(*v.MemberEpochSeconds))
+		locationName := "X-memberEpochSeconds"
+		encoder.SetHeader(locationName).Double(smithytime.FormatEpochSeconds(*v.MemberEpochSeconds))
 	}
 
 	if v.MemberHttpDate != nil {
-		encoder.SetHeader("X-memberHttpDate").String(smithytime.FormatHTTPDate(*v.MemberHttpDate))
+		locationName := "X-memberHttpDate"
+		encoder.SetHeader(locationName).String(smithytime.FormatHTTPDate(*v.MemberHttpDate))
 	}
 
 	if v.TargetDateTime != nil {
-		encoder.SetHeader("X-targetDateTime").String(smithytime.FormatDateTime(*v.TargetDateTime))
+		locationName := "X-targetDateTime"
+		encoder.SetHeader(locationName).String(smithytime.FormatDateTime(*v.TargetDateTime))
 	}
 
 	if v.TargetEpochSeconds != nil {
-		encoder.SetHeader("X-targetEpochSeconds").Double(smithytime.FormatEpochSeconds(*v.TargetEpochSeconds))
+		locationName := "X-targetEpochSeconds"
+		encoder.SetHeader(locationName).Double(smithytime.FormatEpochSeconds(*v.TargetEpochSeconds))
 	}
 
 	if v.TargetHttpDate != nil {
-		encoder.SetHeader("X-targetHttpDate").String(smithytime.FormatHTTPDate(*v.TargetHttpDate))
+		locationName := "X-targetHttpDate"
+		encoder.SetHeader(locationName).String(smithytime.FormatHTTPDate(*v.TargetHttpDate))
 	}
 
 	return nil
