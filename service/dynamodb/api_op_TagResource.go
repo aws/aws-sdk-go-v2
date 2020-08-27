@@ -34,7 +34,7 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTagResourceValidationMiddleware(stack)
@@ -49,7 +49,7 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "TagResource",
 			Err:           err,
 		}
@@ -81,7 +81,7 @@ func newServiceMetadataMiddleware_opTagResource(region string) awsmiddleware.Reg
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "DynamoDB",
-		ServiceID:     "DynamoDB",
+		ServiceID:     ClientID,
 		SigningName:   "dynamodb",
 		OperationName: "TagResource",
 	}

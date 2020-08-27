@@ -86,7 +86,7 @@ func (c *Client) PostContent(ctx context.Context, params *PostContentInput, optF
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	addOpPostContentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPostContent(options.Region), middleware.Before)
@@ -100,7 +100,7 @@ func (c *Client) PostContent(ctx context.Context, params *PostContentInput, optF
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "PostContent",
 			Err:           err,
 		}
@@ -343,7 +343,7 @@ func newServiceMetadataMiddleware_opPostContent(region string) awsmiddleware.Reg
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Lex Runtime Service",
-		ServiceID:     "LexRuntimeService",
+		ServiceID:     ClientID,
 		SigningName:   "lex",
 		OperationName: "PostContent",
 	}

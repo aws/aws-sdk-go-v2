@@ -38,7 +38,7 @@ func (c *Client) GreetingWithErrors(ctx context.Context, params *GreetingWithErr
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGreetingWithErrors(options.Region), middleware.Before)
@@ -81,7 +81,7 @@ func newServiceMetadataMiddleware_opGreetingWithErrors(region string) awsmiddlew
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Json Protocol",
-		ServiceID:     "JsonProtocol",
+		ServiceID:     ClientID,
 		SigningName:   "foo",
 		OperationName: "GreetingWithErrors",
 	}

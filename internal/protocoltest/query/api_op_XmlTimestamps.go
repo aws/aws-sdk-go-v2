@@ -26,7 +26,7 @@ func (c *Client) XmlTimestamps(ctx context.Context, params *XmlTimestampsInput, 
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opXmlTimestamps(options.Region), middleware.Before)
@@ -72,7 +72,7 @@ func newServiceMetadataMiddleware_opXmlTimestamps(region string) awsmiddleware.R
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Query Protocol",
-		ServiceID:     "QueryProtocol",
+		ServiceID:     ClientID,
 		OperationName: "XmlTimestamps",
 	}
 }

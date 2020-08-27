@@ -27,7 +27,7 @@ func (c *Client) DeleteSession(ctx context.Context, params *DeleteSessionInput, 
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteSessionValidationMiddleware(stack)
@@ -42,7 +42,7 @@ func (c *Client) DeleteSession(ctx context.Context, params *DeleteSessionInput, 
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "DeleteSession",
 			Err:           err,
 		}
@@ -84,7 +84,7 @@ func newServiceMetadataMiddleware_opDeleteSession(region string) awsmiddleware.R
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Lex Runtime Service",
-		ServiceID:     "LexRuntimeService",
+		ServiceID:     ClientID,
 		SigningName:   "lex",
 		OperationName: "DeleteSession",
 	}

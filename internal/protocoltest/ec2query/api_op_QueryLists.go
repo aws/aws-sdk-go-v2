@@ -25,7 +25,7 @@ func (c *Client) QueryLists(ctx context.Context, params *QueryListsInput, optFns
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opQueryLists(options.Region), middleware.Before)
@@ -70,7 +70,7 @@ func newServiceMetadataMiddleware_opQueryLists(region string) awsmiddleware.Regi
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "EC2 Protocol",
-		ServiceID:     "EC2Protocol",
+		ServiceID:     ClientID,
 		OperationName: "QueryLists",
 	}
 }

@@ -32,7 +32,7 @@ func (c *Client) GreetingWithErrors(ctx context.Context, params *GreetingWithErr
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGreetingWithErrors(options.Region), middleware.Before)
@@ -75,7 +75,7 @@ func newServiceMetadataMiddleware_opGreetingWithErrors(region string) awsmiddlew
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "EC2 Protocol",
-		ServiceID:     "EC2Protocol",
+		ServiceID:     ClientID,
 		OperationName: "GreetingWithErrors",
 	}
 }

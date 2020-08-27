@@ -31,7 +31,7 @@ func (c *Client) DescribeGlobalTableSettings(ctx context.Context, params *Descri
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeGlobalTableSettingsValidationMiddleware(stack)
@@ -46,7 +46,7 @@ func (c *Client) DescribeGlobalTableSettings(ctx context.Context, params *Descri
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "DescribeGlobalTableSettings",
 			Err:           err,
 		}
@@ -80,7 +80,7 @@ func newServiceMetadataMiddleware_opDescribeGlobalTableSettings(region string) a
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "DynamoDB",
-		ServiceID:     "DynamoDB",
+		ServiceID:     ClientID,
 		SigningName:   "dynamodb",
 		OperationName: "DescribeGlobalTableSettings",
 	}

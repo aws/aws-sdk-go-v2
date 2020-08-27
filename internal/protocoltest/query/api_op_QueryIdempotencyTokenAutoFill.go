@@ -25,7 +25,7 @@ func (c *Client) QueryIdempotencyTokenAutoFill(ctx context.Context, params *Quer
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addIdempotencyToken_opQueryIdempotencyTokenAutoFillMiddleware(stack, options)
@@ -101,7 +101,7 @@ func newServiceMetadataMiddleware_opQueryIdempotencyTokenAutoFill(region string)
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Query Protocol",
-		ServiceID:     "QueryProtocol",
+		ServiceID:     ClientID,
 		OperationName: "QueryIdempotencyTokenAutoFill",
 	}
 }

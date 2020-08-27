@@ -28,7 +28,7 @@ func (c *Client) DescribeTimeToLive(ctx context.Context, params *DescribeTimeToL
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeTimeToLiveValidationMiddleware(stack)
@@ -43,7 +43,7 @@ func (c *Client) DescribeTimeToLive(ctx context.Context, params *DescribeTimeToL
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "DescribeTimeToLive",
 			Err:           err,
 		}
@@ -75,7 +75,7 @@ func newServiceMetadataMiddleware_opDescribeTimeToLive(region string) awsmiddlew
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "DynamoDB",
-		ServiceID:     "DynamoDB",
+		ServiceID:     ClientID,
 		SigningName:   "dynamodb",
 		OperationName: "DescribeTimeToLive",
 	}

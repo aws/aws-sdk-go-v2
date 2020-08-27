@@ -24,7 +24,7 @@ func (c *Client) JsonBlobs(ctx context.Context, params *JsonBlobsInput, optFns .
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opJsonBlobs(options.Region), middleware.Before)
@@ -68,7 +68,7 @@ func newServiceMetadataMiddleware_opJsonBlobs(region string) awsmiddleware.Regis
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Rest Json Protocol",
-		ServiceID:     "RestJsonProtocol",
+		ServiceID:     ClientID,
 		OperationName: "JsonBlobs",
 	}
 }

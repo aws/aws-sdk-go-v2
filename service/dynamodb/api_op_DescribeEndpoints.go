@@ -28,7 +28,7 @@ func (c *Client) DescribeEndpoints(ctx context.Context, params *DescribeEndpoint
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEndpoints(options.Region), middleware.Before)
@@ -42,7 +42,7 @@ func (c *Client) DescribeEndpoints(ctx context.Context, params *DescribeEndpoint
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "DescribeEndpoints",
 			Err:           err,
 		}
@@ -72,7 +72,7 @@ func newServiceMetadataMiddleware_opDescribeEndpoints(region string) awsmiddlewa
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "DynamoDB",
-		ServiceID:     "DynamoDB",
+		ServiceID:     ClientID,
 		SigningName:   "dynamodb",
 		OperationName: "DescribeEndpoints",
 	}

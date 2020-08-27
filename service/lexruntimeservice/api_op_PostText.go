@@ -70,7 +70,7 @@ func (c *Client) PostText(ctx context.Context, params *PostTextInput, optFns ...
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPostTextValidationMiddleware(stack)
@@ -85,7 +85,7 @@ func (c *Client) PostText(ctx context.Context, params *PostTextInput, optFns ...
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "PostText",
 			Err:           err,
 		}
@@ -243,7 +243,7 @@ func newServiceMetadataMiddleware_opPostText(region string) awsmiddleware.Regist
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Lex Runtime Service",
-		ServiceID:     "LexRuntimeService",
+		ServiceID:     ClientID,
 		SigningName:   "lex",
 		OperationName: "PostText",
 	}

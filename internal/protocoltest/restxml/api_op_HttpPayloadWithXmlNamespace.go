@@ -25,7 +25,7 @@ func (c *Client) HttpPayloadWithXmlNamespace(ctx context.Context, params *HttpPa
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadWithXmlNamespace(options.Region), middleware.Before)
@@ -69,7 +69,7 @@ func newServiceMetadataMiddleware_opHttpPayloadWithXmlNamespace(region string) a
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Rest Xml Protocol",
-		ServiceID:     "RestXmlProtocol",
+		ServiceID:     ClientID,
 		OperationName: "HttpPayloadWithXmlNamespace",
 	}
 }

@@ -26,7 +26,7 @@ func (c *Client) JsonTimestamps(ctx context.Context, params *JsonTimestampsInput
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opJsonTimestamps(options.Region), middleware.Before)
@@ -76,7 +76,7 @@ func newServiceMetadataMiddleware_opJsonTimestamps(region string) awsmiddleware.
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Rest Json Protocol",
-		ServiceID:     "RestJsonProtocol",
+		ServiceID:     ClientID,
 		OperationName: "JsonTimestamps",
 	}
 }

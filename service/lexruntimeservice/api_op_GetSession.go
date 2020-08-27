@@ -28,7 +28,7 @@ func (c *Client) GetSession(ctx context.Context, params *GetSessionInput, optFns
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetSessionValidationMiddleware(stack)
@@ -43,7 +43,7 @@ func (c *Client) GetSession(ctx context.Context, params *GetSessionInput, optFns
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "GetSession",
 			Err:           err,
 		}
@@ -96,7 +96,7 @@ func newServiceMetadataMiddleware_opGetSession(region string) awsmiddleware.Regi
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Lex Runtime Service",
-		ServiceID:     "LexRuntimeService",
+		ServiceID:     ClientID,
 		SigningName:   "lex",
 		OperationName: "GetSession",
 	}

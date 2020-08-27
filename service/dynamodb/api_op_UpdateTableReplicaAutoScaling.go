@@ -31,7 +31,7 @@ func (c *Client) UpdateTableReplicaAutoScaling(ctx context.Context, params *Upda
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateTableReplicaAutoScalingValidationMiddleware(stack)
@@ -46,7 +46,7 @@ func (c *Client) UpdateTableReplicaAutoScaling(ctx context.Context, params *Upda
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "UpdateTableReplicaAutoScaling",
 			Err:           err,
 		}
@@ -87,7 +87,7 @@ func newServiceMetadataMiddleware_opUpdateTableReplicaAutoScaling(region string)
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "DynamoDB",
-		ServiceID:     "DynamoDB",
+		ServiceID:     ClientID,
 		SigningName:   "dynamodb",
 		OperationName: "UpdateTableReplicaAutoScaling",
 	}

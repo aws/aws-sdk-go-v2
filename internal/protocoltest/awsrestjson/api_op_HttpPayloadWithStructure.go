@@ -26,7 +26,7 @@ func (c *Client) HttpPayloadWithStructure(ctx context.Context, params *HttpPaylo
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadWithStructure(options.Region), middleware.Before)
@@ -70,7 +70,7 @@ func newServiceMetadataMiddleware_opHttpPayloadWithStructure(region string) awsm
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Rest Json Protocol",
-		ServiceID:     "RestJsonProtocol",
+		ServiceID:     ClientID,
 		OperationName: "HttpPayloadWithStructure",
 	}
 }

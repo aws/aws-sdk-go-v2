@@ -36,7 +36,7 @@ func (c *Client) UpdateContinuousBackups(ctx context.Context, params *UpdateCont
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateContinuousBackupsValidationMiddleware(stack)
@@ -51,7 +51,7 @@ func (c *Client) UpdateContinuousBackups(ctx context.Context, params *UpdateCont
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "UpdateContinuousBackups",
 			Err:           err,
 		}
@@ -86,7 +86,7 @@ func newServiceMetadataMiddleware_opUpdateContinuousBackups(region string) awsmi
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "DynamoDB",
-		ServiceID:     "DynamoDB",
+		ServiceID:     ClientID,
 		SigningName:   "dynamodb",
 		OperationName: "UpdateContinuousBackups",
 	}

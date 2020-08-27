@@ -24,7 +24,7 @@ func (c *Client) XmlBlobs(ctx context.Context, params *XmlBlobsInput, optFns ...
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opXmlBlobs(options.Region), middleware.Before)
@@ -68,7 +68,7 @@ func newServiceMetadataMiddleware_opXmlBlobs(region string) awsmiddleware.Regist
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Rest Xml Protocol",
-		ServiceID:     "RestXmlProtocol",
+		ServiceID:     ClientID,
 		OperationName: "XmlBlobs",
 	}
 }

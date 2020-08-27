@@ -34,7 +34,7 @@ func (c *Client) QueryTimestamps(ctx context.Context, params *QueryTimestampsInp
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opQueryTimestamps(options.Region), middleware.Before)
@@ -78,7 +78,7 @@ func newServiceMetadataMiddleware_opQueryTimestamps(region string) awsmiddleware
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "EC2 Protocol",
-		ServiceID:     "EC2Protocol",
+		ServiceID:     ClientID,
 		OperationName: "QueryTimestamps",
 	}
 }

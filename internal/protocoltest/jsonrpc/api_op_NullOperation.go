@@ -26,7 +26,7 @@ func (c *Client) NullOperation(ctx context.Context, params *NullOperationInput, 
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opNullOperation(options.Region), middleware.Before)
@@ -74,7 +74,7 @@ func newServiceMetadataMiddleware_opNullOperation(region string) awsmiddleware.R
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Json Protocol",
-		ServiceID:     "JsonProtocol",
+		ServiceID:     ClientID,
 		SigningName:   "foo",
 		OperationName: "NullOperation",
 	}

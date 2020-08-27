@@ -24,7 +24,7 @@ func (c *Client) FlattenedXmlMapWithXmlName(ctx context.Context, params *Flatten
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opFlattenedXmlMapWithXmlName(options.Region), middleware.Before)
@@ -68,7 +68,7 @@ func newServiceMetadataMiddleware_opFlattenedXmlMapWithXmlName(region string) aw
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Rest Xml Protocol",
-		ServiceID:     "RestXmlProtocol",
+		ServiceID:     ClientID,
 		OperationName: "FlattenedXmlMapWithXmlName",
 	}
 }

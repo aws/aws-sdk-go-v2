@@ -28,7 +28,7 @@ func (c *Client) KitchenSinkOperation(ctx context.Context, params *KitchenSinkOp
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opKitchenSinkOperation(options.Region), middleware.Before)
@@ -122,7 +122,7 @@ func newServiceMetadataMiddleware_opKitchenSinkOperation(region string) awsmiddl
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Json Protocol",
-		ServiceID:     "JsonProtocol",
+		ServiceID:     ClientID,
 		SigningName:   "foo",
 		OperationName: "KitchenSinkOperation",
 	}

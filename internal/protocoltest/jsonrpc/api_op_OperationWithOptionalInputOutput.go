@@ -26,7 +26,7 @@ func (c *Client) OperationWithOptionalInputOutput(ctx context.Context, params *O
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opOperationWithOptionalInputOutput(options.Region), middleware.Before)
@@ -70,7 +70,7 @@ func newServiceMetadataMiddleware_opOperationWithOptionalInputOutput(region stri
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Json Protocol",
-		ServiceID:     "JsonProtocol",
+		ServiceID:     ClientID,
 		SigningName:   "foo",
 		OperationName: "OperationWithOptionalInputOutput",
 	}

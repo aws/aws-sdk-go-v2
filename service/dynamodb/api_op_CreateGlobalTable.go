@@ -63,7 +63,7 @@ func (c *Client) CreateGlobalTable(ctx context.Context, params *CreateGlobalTabl
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateGlobalTableValidationMiddleware(stack)
@@ -78,7 +78,7 @@ func (c *Client) CreateGlobalTable(ctx context.Context, params *CreateGlobalTabl
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "CreateGlobalTable",
 			Err:           err,
 		}
@@ -112,7 +112,7 @@ func newServiceMetadataMiddleware_opCreateGlobalTable(region string) awsmiddlewa
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "DynamoDB",
-		ServiceID:     "DynamoDB",
+		ServiceID:     ClientID,
 		SigningName:   "dynamodb",
 		OperationName: "CreateGlobalTable",
 	}

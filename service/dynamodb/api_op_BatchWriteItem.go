@@ -79,7 +79,7 @@ func (c *Client) BatchWriteItem(ctx context.Context, params *BatchWriteItemInput
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchWriteItemValidationMiddleware(stack)
@@ -94,7 +94,7 @@ func (c *Client) BatchWriteItem(ctx context.Context, params *BatchWriteItemInput
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "BatchWriteItem",
 			Err:           err,
 		}
@@ -228,7 +228,7 @@ func newServiceMetadataMiddleware_opBatchWriteItem(region string) awsmiddleware.
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "DynamoDB",
-		ServiceID:     "DynamoDB",
+		ServiceID:     ClientID,
 		SigningName:   "dynamodb",
 		OperationName: "BatchWriteItem",
 	}

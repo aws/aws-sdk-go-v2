@@ -50,7 +50,7 @@ func (c *Client) Scan(ctx context.Context, params *ScanInput, optFns ...func(*Op
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpScanValidationMiddleware(stack)
@@ -65,7 +65,7 @@ func (c *Client) Scan(ctx context.Context, params *ScanInput, optFns ...func(*Op
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "Scan",
 			Err:           err,
 		}
@@ -328,7 +328,7 @@ func newServiceMetadataMiddleware_opScan(region string) awsmiddleware.RegisterSe
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "DynamoDB",
-		ServiceID:     "DynamoDB",
+		ServiceID:     ClientID,
 		SigningName:   "dynamodb",
 		OperationName: "Scan",
 	}

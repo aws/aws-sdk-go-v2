@@ -28,7 +28,7 @@ func (c *Client) UpdateContributorInsights(ctx context.Context, params *UpdateCo
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateContributorInsightsValidationMiddleware(stack)
@@ -43,7 +43,7 @@ func (c *Client) UpdateContributorInsights(ctx context.Context, params *UpdateCo
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "UpdateContributorInsights",
 			Err:           err,
 		}
@@ -83,7 +83,7 @@ func newServiceMetadataMiddleware_opUpdateContributorInsights(region string) aws
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "DynamoDB",
-		ServiceID:     "DynamoDB",
+		ServiceID:     ClientID,
 		SigningName:   "dynamodb",
 		OperationName: "UpdateContributorInsights",
 	}

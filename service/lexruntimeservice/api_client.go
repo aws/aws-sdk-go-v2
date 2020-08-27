@@ -11,6 +11,8 @@ import (
 	"net/http"
 )
 
+const ClientID = "Lex Runtime Service"
+
 // Amazon Lex provides both build and runtime endpoints. Each endpoint provides a
 // set of operations (API). Your conversational bot uses the runtime API to
 // understand user utterances (user input text or voice). For example, suppose a
@@ -49,11 +51,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	return client
 }
 
-// ServiceID returns the name of the identifier for the service API.
-func (c *Client) ServiceID() string { return "lexruntimeservice" }
-
-// ServiceName returns the full service title.
-func (c *Client) ServiceName() string { return "Amazon Lex Runtime Service" }
+// ClientID returns the name of the identifier for the service API.
+func (c *Client) ClientID() string { return ClientID }
 
 type Options struct {
 	// Set of options to modify how an operation is invoked. These apply to all
@@ -157,8 +156,8 @@ func resolveRetryer(o *Options) {
 	o.Retryer = retry.NewStandard()
 }
 
-func addServiceUserAgent(stack *middleware.Stack) {
-	awsmiddleware.AddUserAgentKey("LexRuntimeService")(stack)
+func addClientUserAgent(stack *middleware.Stack) {
+	awsmiddleware.AddUserAgentKey("lexruntimeservice")(stack)
 }
 
 func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) {

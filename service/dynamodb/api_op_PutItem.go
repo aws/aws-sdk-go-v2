@@ -86,7 +86,7 @@ func (c *Client) PutItem(ctx context.Context, params *PutItemInput, optFns ...fu
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutItemValidationMiddleware(stack)
@@ -101,7 +101,7 @@ func (c *Client) PutItem(ctx context.Context, params *PutItemInput, optFns ...fu
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "PutItem",
 			Err:           err,
 		}
@@ -292,7 +292,7 @@ func newServiceMetadataMiddleware_opPutItem(region string) awsmiddleware.Registe
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "DynamoDB",
-		ServiceID:     "DynamoDB",
+		ServiceID:     ClientID,
 		SigningName:   "dynamodb",
 		OperationName: "PutItem",
 	}

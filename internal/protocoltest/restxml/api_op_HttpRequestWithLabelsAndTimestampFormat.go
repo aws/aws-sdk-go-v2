@@ -26,7 +26,7 @@ func (c *Client) HttpRequestWithLabelsAndTimestampFormat(ctx context.Context, pa
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpHttpRequestWithLabelsAndTimestampFormatValidationMiddleware(stack)
@@ -75,7 +75,7 @@ func newServiceMetadataMiddleware_opHttpRequestWithLabelsAndTimestampFormat(regi
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Rest Xml Protocol",
-		ServiceID:     "RestXmlProtocol",
+		ServiceID:     ClientID,
 		OperationName: "HttpRequestWithLabelsAndTimestampFormat",
 	}
 }

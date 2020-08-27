@@ -67,7 +67,7 @@ func (c *Client) BatchGetItem(ctx context.Context, params *BatchGetItemInput, op
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchGetItemValidationMiddleware(stack)
@@ -82,7 +82,7 @@ func (c *Client) BatchGetItem(ctx context.Context, params *BatchGetItemInput, op
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "BatchGetItem",
 			Err:           err,
 		}
@@ -233,7 +233,7 @@ func newServiceMetadataMiddleware_opBatchGetItem(region string) awsmiddleware.Re
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "DynamoDB",
-		ServiceID:     "DynamoDB",
+		ServiceID:     ClientID,
 		SigningName:   "dynamodb",
 		OperationName: "BatchGetItem",
 	}

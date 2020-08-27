@@ -26,7 +26,7 @@ func (c *Client) NoInputAndNoOutput(ctx context.Context, params *NoInputAndNoOut
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opNoInputAndNoOutput(options.Region), middleware.Before)
@@ -67,7 +67,7 @@ func newServiceMetadataMiddleware_opNoInputAndNoOutput(region string) awsmiddlew
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Query Protocol",
-		ServiceID:     "QueryProtocol",
+		ServiceID:     ClientID,
 		OperationName: "NoInputAndNoOutput",
 	}
 }

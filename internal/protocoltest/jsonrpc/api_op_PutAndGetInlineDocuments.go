@@ -27,7 +27,7 @@ func (c *Client) PutAndGetInlineDocuments(ctx context.Context, params *PutAndGet
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutAndGetInlineDocuments(options.Region), middleware.Before)
@@ -71,7 +71,7 @@ func newServiceMetadataMiddleware_opPutAndGetInlineDocuments(region string) awsm
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Json Protocol",
-		ServiceID:     "JsonProtocol",
+		ServiceID:     ClientID,
 		SigningName:   "foo",
 		OperationName: "PutAndGetInlineDocuments",
 	}

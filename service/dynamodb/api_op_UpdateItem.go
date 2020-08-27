@@ -34,7 +34,7 @@ func (c *Client) UpdateItem(ctx context.Context, params *UpdateItemInput, optFns
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateItemValidationMiddleware(stack)
@@ -49,7 +49,7 @@ func (c *Client) UpdateItem(ctx context.Context, params *UpdateItemInput, optFns
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "UpdateItem",
 			Err:           err,
 		}
@@ -319,7 +319,7 @@ func newServiceMetadataMiddleware_opUpdateItem(region string) awsmiddleware.Regi
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "DynamoDB",
-		ServiceID:     "DynamoDB",
+		ServiceID:     ClientID,
 		SigningName:   "dynamodb",
 		OperationName: "UpdateItem",
 	}

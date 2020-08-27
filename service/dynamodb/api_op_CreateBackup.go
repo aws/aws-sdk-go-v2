@@ -51,7 +51,7 @@ func (c *Client) CreateBackup(ctx context.Context, params *CreateBackupInput, op
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateBackupValidationMiddleware(stack)
@@ -66,7 +66,7 @@ func (c *Client) CreateBackup(ctx context.Context, params *CreateBackupInput, op
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "CreateBackup",
 			Err:           err,
 		}
@@ -100,7 +100,7 @@ func newServiceMetadataMiddleware_opCreateBackup(region string) awsmiddleware.Re
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "DynamoDB",
-		ServiceID:     "DynamoDB",
+		ServiceID:     ClientID,
 		SigningName:   "dynamodb",
 		OperationName: "CreateBackup",
 	}

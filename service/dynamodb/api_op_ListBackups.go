@@ -35,7 +35,7 @@ func (c *Client) ListBackups(ctx context.Context, params *ListBackupsInput, optF
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListBackups(options.Region), middleware.Before)
@@ -49,7 +49,7 @@ func (c *Client) ListBackups(ctx context.Context, params *ListBackupsInput, optF
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "ListBackups",
 			Err:           err,
 		}
@@ -115,7 +115,7 @@ func newServiceMetadataMiddleware_opListBackups(region string) awsmiddleware.Reg
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "DynamoDB",
-		ServiceID:     "DynamoDB",
+		ServiceID:     ClientID,
 		SigningName:   "dynamodb",
 		OperationName: "ListBackups",
 	}

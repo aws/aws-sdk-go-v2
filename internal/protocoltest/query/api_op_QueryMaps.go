@@ -25,7 +25,7 @@ func (c *Client) QueryMaps(ctx context.Context, params *QueryMapsInput, optFns .
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opQueryMaps(options.Region), middleware.Before)
@@ -73,7 +73,7 @@ func newServiceMetadataMiddleware_opQueryMaps(region string) awsmiddleware.Regis
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Query Protocol",
-		ServiceID:     "QueryProtocol",
+		ServiceID:     ClientID,
 		OperationName: "QueryMaps",
 	}
 }

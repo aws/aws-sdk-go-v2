@@ -12,6 +12,8 @@ import (
 	"net/http"
 )
 
+const ClientID = "Rest Xml Protocol"
+
 // A REST XML service that sends XML requests and responses.
 type Client struct {
 	options Options
@@ -42,11 +44,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	return client
 }
 
-// ServiceID returns the name of the identifier for the service API.
-func (c *Client) ServiceID() string { return "restxml" }
-
-// ServiceName returns the full service title.
-func (c *Client) ServiceName() string { return "restxml" }
+// ClientID returns the name of the identifier for the service API.
+func (c *Client) ClientID() string { return ClientID }
 
 type Options struct {
 	// Set of options to modify how an operation is invoked. These apply to all
@@ -150,8 +149,8 @@ func resolveRetryer(o *Options) {
 	o.Retryer = retry.NewStandard()
 }
 
-func addServiceUserAgent(stack *middleware.Stack) {
-	awsmiddleware.AddUserAgentKey("RestXmlProtocol")(stack)
+func addClientUserAgent(stack *middleware.Stack) {
+	awsmiddleware.AddUserAgentKey("restxml")(stack)
 }
 
 func resolveIdempotencyTokenProvider(o *Options) {

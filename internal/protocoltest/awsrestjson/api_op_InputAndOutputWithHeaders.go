@@ -27,7 +27,7 @@ func (c *Client) InputAndOutputWithHeaders(ctx context.Context, params *InputAnd
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opInputAndOutputWithHeaders(options.Region), middleware.Before)
@@ -101,7 +101,7 @@ func newServiceMetadataMiddleware_opInputAndOutputWithHeaders(region string) aws
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Rest Json Protocol",
-		ServiceID:     "RestJsonProtocol",
+		ServiceID:     ClientID,
 		OperationName: "InputAndOutputWithHeaders",
 	}
 }

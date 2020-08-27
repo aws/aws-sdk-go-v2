@@ -26,7 +26,7 @@ func (c *Client) IgnoreQueryParamsInResponse(ctx context.Context, params *Ignore
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opIgnoreQueryParamsInResponse(options.Region), middleware.Before)
@@ -69,7 +69,7 @@ func newServiceMetadataMiddleware_opIgnoreQueryParamsInResponse(region string) a
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Rest Json Protocol",
-		ServiceID:     "RestJsonProtocol",
+		ServiceID:     ClientID,
 		OperationName: "IgnoreQueryParamsInResponse",
 	}
 }

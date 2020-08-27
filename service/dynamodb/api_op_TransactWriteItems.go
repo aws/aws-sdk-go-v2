@@ -68,7 +68,7 @@ func (c *Client) TransactWriteItems(ctx context.Context, params *TransactWriteIt
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addIdempotencyToken_opTransactWriteItemsMiddleware(stack, options)
@@ -84,7 +84,7 @@ func (c *Client) TransactWriteItems(ctx context.Context, params *TransactWriteIt
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "TransactWriteItems",
 			Err:           err,
 		}
@@ -195,7 +195,7 @@ func newServiceMetadataMiddleware_opTransactWriteItems(region string) awsmiddlew
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "DynamoDB",
-		ServiceID:     "DynamoDB",
+		ServiceID:     ClientID,
 		SigningName:   "dynamodb",
 		OperationName: "TransactWriteItems",
 	}

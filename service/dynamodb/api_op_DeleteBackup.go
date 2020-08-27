@@ -29,7 +29,7 @@ func (c *Client) DeleteBackup(ctx context.Context, params *DeleteBackupInput, op
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteBackupValidationMiddleware(stack)
@@ -44,7 +44,7 @@ func (c *Client) DeleteBackup(ctx context.Context, params *DeleteBackupInput, op
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "DeleteBackup",
 			Err:           err,
 		}
@@ -76,7 +76,7 @@ func newServiceMetadataMiddleware_opDeleteBackup(region string) awsmiddleware.Re
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "DynamoDB",
-		ServiceID:     "DynamoDB",
+		ServiceID:     ClientID,
 		SigningName:   "dynamodb",
 		OperationName: "DeleteBackup",
 	}

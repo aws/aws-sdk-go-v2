@@ -23,7 +23,7 @@ func (c *Client) HttpRequestWithGreedyLabelInPath(ctx context.Context, params *H
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpHttpRequestWithGreedyLabelInPathValidationMiddleware(stack)
@@ -67,7 +67,7 @@ func newServiceMetadataMiddleware_opHttpRequestWithGreedyLabelInPath(region stri
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Rest Xml Protocol",
-		ServiceID:     "RestXmlProtocol",
+		ServiceID:     ClientID,
 		OperationName: "HttpRequestWithGreedyLabelInPath",
 	}
 }

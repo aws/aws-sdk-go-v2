@@ -25,7 +25,7 @@ func (c *Client) HttpPayloadTraits(ctx context.Context, params *HttpPayloadTrait
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadTraits(options.Region), middleware.Before)
@@ -71,7 +71,7 @@ func newServiceMetadataMiddleware_opHttpPayloadTraits(region string) awsmiddlewa
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Rest Xml Protocol",
-		ServiceID:     "RestXmlProtocol",
+		ServiceID:     ClientID,
 		OperationName: "HttpPayloadTraits",
 	}
 }

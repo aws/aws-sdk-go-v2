@@ -40,7 +40,7 @@ func (c *Client) DeleteTable(ctx context.Context, params *DeleteTableInput, optF
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteTableValidationMiddleware(stack)
@@ -55,7 +55,7 @@ func (c *Client) DeleteTable(ctx context.Context, params *DeleteTableInput, optF
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "DeleteTable",
 			Err:           err,
 		}
@@ -89,7 +89,7 @@ func newServiceMetadataMiddleware_opDeleteTable(region string) awsmiddleware.Reg
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "DynamoDB",
-		ServiceID:     "DynamoDB",
+		ServiceID:     ClientID,
 		SigningName:   "dynamodb",
 		OperationName: "DeleteTable",
 	}

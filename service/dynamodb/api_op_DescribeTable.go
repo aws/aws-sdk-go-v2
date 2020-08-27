@@ -34,7 +34,7 @@ func (c *Client) DescribeTable(ctx context.Context, params *DescribeTableInput, 
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeTableValidationMiddleware(stack)
@@ -49,7 +49,7 @@ func (c *Client) DescribeTable(ctx context.Context, params *DescribeTableInput, 
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "DescribeTable",
 			Err:           err,
 		}
@@ -83,7 +83,7 @@ func newServiceMetadataMiddleware_opDescribeTable(region string) awsmiddleware.R
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "DynamoDB",
-		ServiceID:     "DynamoDB",
+		ServiceID:     ClientID,
 		SigningName:   "dynamodb",
 		OperationName: "DescribeTable",
 	}

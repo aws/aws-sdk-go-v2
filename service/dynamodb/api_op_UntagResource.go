@@ -31,7 +31,7 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 	retry.AddRetryMiddlewares(stack, options)
 	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUntagResourceValidationMiddleware(stack)
@@ -46,7 +46,7 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ClientID:      c.ClientID(),
 			OperationName: "UntagResource",
 			Err:           err,
 		}
@@ -79,7 +79,7 @@ func newServiceMetadataMiddleware_opUntagResource(region string) awsmiddleware.R
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "DynamoDB",
-		ServiceID:     "DynamoDB",
+		ServiceID:     ClientID,
 		SigningName:   "dynamodb",
 		OperationName: "UntagResource",
 	}

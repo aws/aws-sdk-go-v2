@@ -25,7 +25,7 @@ func (c *Client) JsonUnions(ctx context.Context, params *JsonUnionsInput, optFns
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opJsonUnions(options.Region), middleware.Before)
@@ -73,7 +73,7 @@ func newServiceMetadataMiddleware_opJsonUnions(region string) awsmiddleware.Regi
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Rest Json Protocol",
-		ServiceID:     "RestJsonProtocol",
+		ServiceID:     ClientID,
 		OperationName: "JsonUnions",
 	}
 }

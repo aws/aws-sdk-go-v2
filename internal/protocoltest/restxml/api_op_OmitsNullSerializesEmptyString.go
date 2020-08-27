@@ -24,7 +24,7 @@ func (c *Client) OmitsNullSerializesEmptyString(ctx context.Context, params *Omi
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
-	addServiceUserAgent(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opOmitsNullSerializesEmptyString(options.Region), middleware.Before)
@@ -67,7 +67,7 @@ func newServiceMetadataMiddleware_opOmitsNullSerializesEmptyString(region string
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceName:   "Rest Xml Protocol",
-		ServiceID:     "RestXmlProtocol",
+		ServiceID:     ClientID,
 		OperationName: "OmitsNullSerializesEmptyString",
 	}
 }
