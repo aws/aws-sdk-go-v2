@@ -345,6 +345,7 @@ func awsRestxml_deserializeDocumentFlattenedXmlMapOutput(v **FlattenedXmlMapOutp
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("myMap", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -463,6 +464,7 @@ func awsRestxml_deserializeDocumentFlattenedXmlMapWithXmlNameOutput(v **Flattene
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("KVP", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -842,6 +844,7 @@ func awsRestxml_deserializeDocumentHttpPayloadWithStructureOutput(v **HttpPayloa
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("nested", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -960,6 +963,7 @@ func awsRestxml_deserializeDocumentHttpPayloadWithXmlNameOutput(v **HttpPayloadW
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("nested", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -1078,6 +1082,7 @@ func awsRestxml_deserializeDocumentHttpPayloadWithXmlNamespaceOutput(v **HttpPay
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("nested", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -1196,6 +1201,7 @@ func awsRestxml_deserializeDocumentHttpPayloadWithXmlNamespaceAndPrefixOutput(v 
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("nested", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -1562,6 +1568,7 @@ func awsRestxml_deserializeDocumentIgnoreQueryParamsInResponseOutput(v **IgnoreQ
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("baz", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -2353,6 +2360,7 @@ func awsRestxml_deserializeDocumentRecursiveShapesOutput(v **RecursiveShapesOutp
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("nested", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -2488,6 +2496,7 @@ func awsRestxml_deserializeDocumentSimpleScalarPropertiesOutput(v **SimpleScalar
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("byteValue", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -2891,6 +2900,7 @@ func awsRestxml_deserializeDocumentXmlAttributesOutput(v **XmlAttributesOutput, 
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("foo", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -3016,6 +3026,7 @@ func awsRestxml_deserializeDocumentXmlAttributesOnPayloadOutput(v **XmlAttribute
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("payload", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -3134,6 +3145,7 @@ func awsRestxml_deserializeDocumentXmlBlobsOutput(v **XmlBlobsOutput, decoder sm
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("data", t.Name.Local):
 			var data string
@@ -3257,6 +3269,7 @@ func awsRestxml_deserializeDocumentXmlEnumsOutput(v **XmlEnumsOutput, decoder sm
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("fooEnum1", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -3426,6 +3439,7 @@ func awsRestxml_deserializeDocumentXmlListsOutput(v **XmlListsOutput, decoder sm
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("booleanList", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -3604,6 +3618,7 @@ func awsRestxml_deserializeDocumentXmlMapsOutput(v **XmlMapsOutput, decoder smit
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("myMap", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -3722,6 +3737,7 @@ func awsRestxml_deserializeDocumentXmlMapsXmlNameOutput(v **XmlMapsXmlNameOutput
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("myMap", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -3840,6 +3856,7 @@ func awsRestxml_deserializeDocumentXmlNamespacesOutput(v **XmlNamespacesOutput, 
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("nested", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -3958,6 +3975,7 @@ func awsRestxml_deserializeDocumentXmlTimestampsOutput(v **XmlTimestampsOutput, 
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("dateTime", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -4136,6 +4154,7 @@ func awsRestxml_deserializeDocumentComplexError(v **types.ComplexError, decoder 
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("Header", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -4197,6 +4216,7 @@ func awsRestxml_deserializeDocumentComplexNestedErrorData(v **types.ComplexNeste
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("Foo", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -4323,6 +4343,7 @@ func awsRestxml_deserializeDocumentInvalidGreeting(v **types.InvalidGreeting, de
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -4365,6 +4386,7 @@ func awsRestxml_deserializeDocumentNestedPayload(v **types.NestedPayload, decode
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("greeting", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -4420,6 +4442,7 @@ func awsRestxml_deserializeDocumentPayloadWithXmlName(v **types.PayloadWithXmlNa
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("name", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -4462,6 +4485,7 @@ func awsRestxml_deserializeDocumentPayloadWithXmlNamespace(v **types.PayloadWith
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("name", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -4504,6 +4528,7 @@ func awsRestxml_deserializeDocumentPayloadWithXmlNamespaceAndPrefix(v **types.Pa
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("name", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -4546,6 +4571,7 @@ func awsRestxml_deserializeDocumentRecursiveShapesInputOutputNested1(v **types.R
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("foo", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -4594,6 +4620,7 @@ func awsRestxml_deserializeDocumentRecursiveShapesInputOutputNested2(v **types.R
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("bar", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -4773,6 +4800,7 @@ func awsRestxml_deserializeDocumentStructureListMember(v **types.StructureListMe
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("value", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -4839,6 +4867,7 @@ func awsRestxml_deserializeDocumentXmlAttributesInputOutput(v **types.XmlAttribu
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("foo", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -5108,6 +5137,7 @@ func awsRestxml_deserializeDocumentXmlNamespaceNested(v **types.XmlNamespaceNest
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("foo", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -5465,6 +5495,7 @@ func awsRestxml_deserializeDocumentGreetingStruct(v **types.GreetingStruct, deco
 		if done {
 			break
 		}
+		_ = t
 		switch {
 		case strings.EqualFold("hi", t.Name.Local):
 			val, done, err := decoder.Value()

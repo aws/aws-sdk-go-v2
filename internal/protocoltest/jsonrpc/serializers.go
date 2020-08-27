@@ -139,6 +139,52 @@ func (m *awsAwsjson11_serializeOpJsonEnums) HandleSerialize(ctx context.Context,
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpJsonUnions struct {
+}
+
+func (*awsAwsjson11_serializeOpJsonUnions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpJsonUnions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*JsonUnionsInput)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("JsonProtocol.JsonUnions")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeDocumentJsonUnionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpKitchenSinkOperation struct {
 }
 
@@ -665,6 +711,60 @@ func awsAwsjson11_serializeDocumentMapOfStructs(v map[string]*types.SimpleStruct
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentMyUnion(v types.MyUnion, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.MyUnionMemberBlobValue:
+		av := object.Key("blobValue")
+		av.Base64EncodeBytes(uv.Value)
+
+	case *types.MyUnionMemberBooleanValue:
+		av := object.Key("booleanValue")
+		av.Boolean(uv.Value)
+
+	case *types.MyUnionMemberEnumValue:
+		av := object.Key("enumValue")
+		av.String(string(uv.Value))
+
+	case *types.MyUnionMemberListValue:
+		av := object.Key("listValue")
+		if err := awsAwsjson11_serializeDocumentStringList(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.MyUnionMemberMapValue:
+		av := object.Key("mapValue")
+		if err := awsAwsjson11_serializeDocumentStringMap(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.MyUnionMemberNumberValue:
+		av := object.Key("numberValue")
+		av.Integer(uv.Value)
+
+	case *types.MyUnionMemberStringValue:
+		av := object.Key("stringValue")
+		av.String(uv.Value)
+
+	case *types.MyUnionMemberStructureValue:
+		av := object.Key("structureValue")
+		if err := awsAwsjson11_serializeDocumentGreetingStruct(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.MyUnionMemberTimestampValue:
+		av := object.Key("timestampValue")
+		av.Double(smithytime.FormatEpochSeconds(uv.Value))
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSimpleStruct(v *types.SimpleStruct, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -719,6 +819,18 @@ func awsAwsjson11_serializeDocumentFooEnumSet(v []types.FooEnum, value smithyjso
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentGreetingStruct(v *types.GreetingStruct, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Hi != nil {
+		ok := object.Key("hi")
+		ok.String(*v.Hi)
+	}
+
 	return nil
 }
 
@@ -802,6 +914,20 @@ func awsAwsjson11_serializeDocumentJsonEnumsInput(v *JsonEnumsInput, value smith
 	if v.FooEnumSet != nil {
 		ok := object.Key("fooEnumSet")
 		if err := awsAwsjson11_serializeDocumentFooEnumSet(v.FooEnumSet, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentJsonUnionsInput(v *JsonUnionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Contents != nil {
+		ok := object.Key("contents")
+		if err := awsAwsjson11_serializeDocumentMyUnion(v.Contents, ok); err != nil {
 			return err
 		}
 	}

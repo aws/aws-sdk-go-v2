@@ -5,12 +5,14 @@ package lexruntimeservice
 import (
 	"bytes"
 	"context"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/restjson"
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice/types"
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
+	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
 	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -215,7 +217,7 @@ func awsRestjson1_deserializeDocumentDeleteSessionOutput(v **DeleteSessionOutput
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -404,7 +406,7 @@ func awsRestjson1_deserializeDocumentGetSessionOutput(v **GetSessionOutput, deco
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -588,7 +590,11 @@ func awsRestjson1_deserializeHttpBindingsPostContentOutput(v *PostContentOutput,
 
 	if headerValues := response.Header.Values("x-amz-lex-session-attributes"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
-		v.SessionAttributes = ptr.String(headerValues[0])
+		b, err := base64.StdEncoding.DecodeString(headerValues[0])
+		if err != nil {
+			return err
+		}
+		v.SessionAttributes = ptr.String(string(b))
 	}
 
 	if headerValues := response.Header.Values("x-amz-lex-session-id"); len(headerValues) != 0 {
@@ -598,7 +604,11 @@ func awsRestjson1_deserializeHttpBindingsPostContentOutput(v *PostContentOutput,
 
 	if headerValues := response.Header.Values("x-amz-lex-slots"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
-		v.Slots = ptr.String(headerValues[0])
+		b, err := base64.StdEncoding.DecodeString(headerValues[0])
+		if err != nil {
+			return err
+		}
+		v.Slots = ptr.String(string(b))
 	}
 
 	if headerValues := response.Header.Values("x-amz-lex-slot-to-elicit"); len(headerValues) != 0 {
@@ -869,7 +879,7 @@ func awsRestjson1_deserializeDocumentPostTextOutput(v **PostTextOutput, decoder 
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -1034,7 +1044,11 @@ func awsRestjson1_deserializeHttpBindingsPutSessionOutput(v *PutSessionOutput, r
 
 	if headerValues := response.Header.Values("x-amz-lex-session-attributes"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
-		v.SessionAttributes = ptr.String(headerValues[0])
+		b, err := base64.StdEncoding.DecodeString(headerValues[0])
+		if err != nil {
+			return err
+		}
+		v.SessionAttributes = ptr.String(string(b))
 	}
 
 	if headerValues := response.Header.Values("x-amz-lex-session-id"); len(headerValues) != 0 {
@@ -1044,7 +1058,11 @@ func awsRestjson1_deserializeHttpBindingsPutSessionOutput(v *PutSessionOutput, r
 
 	if headerValues := response.Header.Values("x-amz-lex-slots"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
-		v.Slots = ptr.String(headerValues[0])
+		b, err := base64.StdEncoding.DecodeString(headerValues[0])
+		if err != nil {
+			return err
+		}
+		v.Slots = ptr.String(string(b))
 	}
 
 	if headerValues := response.Header.Values("x-amz-lex-slot-to-elicit"); len(headerValues) != 0 {
@@ -1399,7 +1417,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -1463,7 +1481,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -1527,7 +1545,7 @@ func awsRestjson1_deserializeDocumentInternalFailureException(v **types.Internal
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -1604,7 +1622,7 @@ func awsRestjson1_deserializeDocumentLimitExceededException(v **types.LimitExcee
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -1668,7 +1686,7 @@ func awsRestjson1_deserializeDocumentNotAcceptableException(v **types.NotAccepta
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -1732,7 +1750,7 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -1796,7 +1814,7 @@ func awsRestjson1_deserializeDocumentRequestTimeoutException(v **types.RequestTi
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -1860,7 +1878,7 @@ func awsRestjson1_deserializeDocumentUnsupportedMediaTypeException(v **types.Uns
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -1924,7 +1942,7 @@ func awsRestjson1_deserializeDocumentBadGatewayException(v **types.BadGatewayExc
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -1988,7 +2006,7 @@ func awsRestjson1_deserializeDocumentDependencyFailedException(v **types.Depende
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -2122,7 +2140,7 @@ func awsRestjson1_deserializeDocumentDialogAction(v **types.DialogAction, decode
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -2256,7 +2274,7 @@ func awsRestjson1_deserializeDocumentIntentSummary(v **types.IntentSummary, deco
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -2365,7 +2383,7 @@ func awsRestjson1_deserializeDocumentLoopDetectedException(v **types.LoopDetecte
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -2442,7 +2460,7 @@ func awsRestjson1_deserializeDocumentSentimentResponse(v **types.SentimentRespon
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -2582,7 +2600,7 @@ func awsRestjson1_deserializeDocumentButton(v **types.Button, decoder *json.Deco
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -2690,7 +2708,7 @@ func awsRestjson1_deserializeDocumentGenericAttachment(v **types.GenericAttachme
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -2862,7 +2880,7 @@ func awsRestjson1_deserializeDocumentResponseCard(v **types.ResponseCard, decode
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}

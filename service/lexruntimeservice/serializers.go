@@ -5,12 +5,14 @@ package lexruntimeservice
 import (
 	"bytes"
 	"context"
+	"encoding/base64"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/httpbinding"
 	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
+	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
@@ -225,8 +227,9 @@ func awsRestjson1_serializeHttpBindingsPostContentInput(v *PostContentInput, enc
 	}
 
 	if v.Accept != nil {
+		locationName := "Accept"
 		if len(*v.Accept) > 0 {
-			encoder.SetHeader("Accept").String(*v.Accept)
+			encoder.SetHeader(locationName).String(*v.Accept)
 		}
 	}
 
@@ -243,20 +246,25 @@ func awsRestjson1_serializeHttpBindingsPostContentInput(v *PostContentInput, enc
 	}
 
 	if v.ContentType != nil {
+		locationName := "Content-Type"
 		if len(*v.ContentType) > 0 {
-			encoder.SetHeader("Content-Type").String(*v.ContentType)
+			encoder.SetHeader(locationName).String(*v.ContentType)
 		}
 	}
 
 	if v.RequestAttributes != nil {
+		locationName := "x-amz-lex-request-attributes"
 		if len(*v.RequestAttributes) > 0 {
-			encoder.SetHeader("x-amz-lex-request-attributes").String(*v.RequestAttributes)
+			encoded := ptr.String(base64.StdEncoding.EncodeToString([]byte(*v.RequestAttributes)))
+			encoder.SetHeader(locationName).String(*encoded)
 		}
 	}
 
 	if v.SessionAttributes != nil {
+		locationName := "x-amz-lex-session-attributes"
 		if len(*v.SessionAttributes) > 0 {
-			encoder.SetHeader("x-amz-lex-session-attributes").String(*v.SessionAttributes)
+			encoded := ptr.String(base64.StdEncoding.EncodeToString([]byte(*v.SessionAttributes)))
+			encoder.SetHeader(locationName).String(*encoded)
 		}
 	}
 
@@ -441,8 +449,9 @@ func awsRestjson1_serializeHttpBindingsPutSessionInput(v *PutSessionInput, encod
 	}
 
 	if v.Accept != nil {
+		locationName := "Accept"
 		if len(*v.Accept) > 0 {
-			encoder.SetHeader("Accept").String(*v.Accept)
+			encoder.SetHeader(locationName).String(*v.Accept)
 		}
 	}
 
