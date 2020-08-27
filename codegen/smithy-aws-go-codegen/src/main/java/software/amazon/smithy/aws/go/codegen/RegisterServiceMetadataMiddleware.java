@@ -52,10 +52,8 @@ public final class RegisterServiceMetadataMiddleware implements GoIntegration {
 
                     if (serviceTrait.isPresent()) {
                         ServiceTrait trait = serviceTrait.get();
-                        String sdkIdAsSymbol = ServiceIdUtils.toTitleCase(trait.getSdkId()).replace(" ", "");
                         builder.append(String.format("ServiceName: \"%s\",\n", trait.getSdkId()));
-                        builder.append(String.format("ServiceID: \"%s\",\n", sdkIdAsSymbol));
-                        // TODO: EndpointID can be different but is not modeled in Smithy.
+                        builder.append("ServiceID: ClientID,\n");
                     }
 
                     if (sigV4Trait.isPresent()) {

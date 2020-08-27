@@ -21,21 +21,43 @@ package software.amazon.smithy.aws.go.codegen;
 public final class ServiceIdUtils {
     /**
      * Converts beginning of words to title case with spaces removed.
-     * Does not modify the case of characters used within a word.
      *
      * @param id service id
      * @return the title cased string
      */
     public static String toTitleCase(String id) {
+        return toTitleCase(id, true);
+    }
+
+    /**
+     * Converts begining of words to title case with or without the space separator removed.
+     * Does not modify the case of characters used within a word.
+     *
+     * @param id service id
+     * @param removeSeparator whether the separator character should be removed between words
+     * @return the title cases string
+     */
+    public static String toTitleCase(String id, boolean removeSeparator) {
+        StringBuilder builder = new StringBuilder();
         char[] charArray = id.toCharArray();
         char prev = ' ';
         for (int i = 0; i < charArray.length; i++) {
-            if (prev != ' ') {
-                continue;
+            char c = charArray[i];
+
+            if (isSeparator(prev)) {
+                c = Character.toTitleCase(c);
             }
-            charArray[i] = Character.toTitleCase(charArray[i]);
-            prev = charArray[i];
+
+            if (!removeSeparator || !isSeparator(c)) {
+                builder.append(c);
+            }
+
+            prev = c;
         }
-        return new String(charArray);
+        return builder.toString();
+    }
+
+    private static boolean isSeparator(char c) {
+        return c == ' ';
     }
 }

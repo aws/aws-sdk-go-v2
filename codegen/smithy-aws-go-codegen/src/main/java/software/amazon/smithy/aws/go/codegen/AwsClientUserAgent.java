@@ -17,6 +17,7 @@ package software.amazon.smithy.aws.go.codegen;
 
 import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.SymbolProvider;
+import software.amazon.smithy.go.codegen.CodegenUtils;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
@@ -25,7 +26,7 @@ import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.model.Model;
 
 public class AwsClientUserAgent implements GoIntegration {
-    public static final String MIDDLEWARE_RESOLVER = "addServiceUserAgent";
+    public static final String MIDDLEWARE_RESOLVER = "addClientUserAgent";
 
     @Override
     public byte getOrder() {
@@ -43,8 +44,8 @@ public class AwsClientUserAgent implements GoIntegration {
                     SmithyGoDependency.SMITHY_MIDDLEWARE).build(), () -> {
                 // TODO: This should include the module version
                 writer.write("$T($S)(stack)", SymbolUtils.createValueSymbolBuilder("AddUserAgentKey",
-                        AwsGoDependency.AWS_MIDDLEWARE).build(), ServiceIdUtils.toTitleCase(serviceTrait.getSdkId()
-                        .replace(" ", "")));
+                        AwsGoDependency.AWS_MIDDLEWARE).build(), CodegenUtils.getDefaultPackageImportName(
+                                settings.getModuleName()));
             });
             writer.write("");
         });
