@@ -206,8 +206,8 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
                 }
 
                 writer.openBlock("default:", "", () -> {
-                    writer.addUseImports(AwsGoDependency.AWS_REST_JSON_PROTOCOL);
-                    writer.write("err := restjson.DiscardUnknownField(decoder)");
+                    writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
+                    writer.write("err := smithyjson.DiscardUnknownField(decoder)");
                     writer.write("if err != nil {return err}");
                 });
             });
@@ -262,10 +262,10 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
                         UnionGenerator.UNKNOWN_MEMBER_NAME,
                         symbol.getNamespace()
                 ).build();
-                writer.addUseImports(AwsGoDependency.AWS_REST_JSON_PROTOCOL);
+                writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
                 writer.write("tagString, ok := t.(string)");
                 writer.write("if !ok { return fmt.Errorf(\"expected string key, found %T\", t) }");
-                writer.write("value, err := restjson.CollectUnknownField(decoder)");
+                writer.write("value, err := smithyjson.CollectUnknownField(decoder)");
                 writer.write("if err != nil { return err }");
                 writer.write("uv = &$T{Tag: tagString, Value: value}", unknownMemberSymbol);
             });
