@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/awslabs/smithy-go"
+	smithyjson "github.com/awslabs/smithy-go/json"
 )
 
 // GetErrorInfo util looks for code, __type, and message members in the
@@ -41,7 +42,7 @@ func GetErrorInfo(decoder *json.Decoder) (errorType string, message string, err 
 		case strings.EqualFold(st, "message"):
 			target = &message
 		default:
-			DiscardUnknownField(decoder)
+			smithyjson.DiscardUnknownField(decoder)
 			continue
 		}
 
@@ -83,34 +84,7 @@ func SanitizeErrorCode(errorCode string) string {
 	return errorCode
 }
 
-// DiscardUnknownField discards unknown fields from decoder body.
-// This function is useful while deserializing json body with additional
-// unknown information that should be discarded.
-func DiscardUnknownField(decoder *json.Decoder) error {
-	v, err := decoder.Token()
-	if err == io.EOF {
-		return nil
-	}
-	if err != nil {
-		return err
-	}
 
-	if _, ok := v.(json.Delim); ok {
-		for decoder.More() {
-			err = DiscardUnknownField(decoder)
-		}
-		endToken, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if _, ok := endToken.(json.Delim); !ok {
-			return fmt.Errorf("invalid JSON : expected json delimiter, found %T %v",
-				endToken, endToken)
-		}
-	}
-
-	return nil
-}
 
 // GetSmithyGenericAPIError returns smithy generic api error and an error interface.
 // Takes in json decoder, and error Code string as args. The function retrieves error message
