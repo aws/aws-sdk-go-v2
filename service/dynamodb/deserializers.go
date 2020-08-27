@@ -11,6 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
+	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
@@ -5244,7 +5245,7 @@ func awsAwsjson10_deserializeDocumentArchivalSummary(v **types.ArchivalSummary, 
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -5321,7 +5322,7 @@ func awsAwsjson10_deserializeDocumentAttributeDefinition(v **types.AttributeDefi
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -5608,7 +5609,7 @@ func awsAwsjson10_deserializeDocumentAttributeValue(v **types.AttributeValue, de
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -5677,7 +5678,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingPolicyDescription(v **types.Auto
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -5838,7 +5839,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingSettingsDescription(v **types.Au
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -5953,7 +5954,7 @@ func awsAwsjson10_deserializeDocumentAutoScalingTargetTrackingScalingPolicyConfi
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -6019,7 +6020,7 @@ func awsAwsjson10_deserializeDocumentBackupDescription(v **types.BackupDescripti
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -6173,7 +6174,7 @@ func awsAwsjson10_deserializeDocumentBackupDetails(v **types.BackupDetails, deco
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -6237,7 +6238,7 @@ func awsAwsjson10_deserializeDocumentBackupInUseException(v **types.BackupInUseE
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -6301,7 +6302,7 @@ func awsAwsjson10_deserializeDocumentBackupNotFoundException(v **types.BackupNot
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -6539,7 +6540,7 @@ func awsAwsjson10_deserializeDocumentBackupSummary(v **types.BackupSummary, deco
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -6785,7 +6786,7 @@ func awsAwsjson10_deserializeDocumentBillingModeSummary(v **types.BillingModeSum
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -6913,7 +6914,7 @@ func awsAwsjson10_deserializeDocumentCancellationReason(v **types.CancellationRe
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -7060,7 +7061,7 @@ func awsAwsjson10_deserializeDocumentCapacity(v **types.Capacity, decoder *json.
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -7124,7 +7125,7 @@ func awsAwsjson10_deserializeDocumentConditionalCheckFailedException(v **types.C
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -7254,7 +7255,7 @@ func awsAwsjson10_deserializeDocumentConsumedCapacity(v **types.ConsumedCapacity
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -7368,7 +7369,7 @@ func awsAwsjson10_deserializeDocumentContinuousBackupsDescription(v **types.Cont
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -7432,7 +7433,7 @@ func awsAwsjson10_deserializeDocumentContinuousBackupsUnavailableException(v **t
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -7620,7 +7621,7 @@ func awsAwsjson10_deserializeDocumentContributorInsightsSummary(v **types.Contri
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -7676,7 +7677,7 @@ func awsAwsjson10_deserializeDocumentDeleteRequest(v **types.DeleteRequest, deco
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -7757,7 +7758,7 @@ func awsAwsjson10_deserializeDocumentEndpoint(v **types.Endpoint, decoder *json.
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -7942,7 +7943,7 @@ func awsAwsjson10_deserializeDocumentFailureException(v **types.FailureException
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -8094,7 +8095,7 @@ func awsAwsjson10_deserializeDocumentGlobalSecondaryIndexDescription(v **types.G
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -8263,7 +8264,7 @@ func awsAwsjson10_deserializeDocumentGlobalSecondaryIndexInfo(v **types.GlobalSe
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -8332,7 +8333,7 @@ func awsAwsjson10_deserializeDocumentGlobalTable(v **types.GlobalTable, decoder 
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -8396,7 +8397,7 @@ func awsAwsjson10_deserializeDocumentGlobalTableAlreadyExistsException(v **types
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -8508,7 +8509,7 @@ func awsAwsjson10_deserializeDocumentGlobalTableDescription(v **types.GlobalTabl
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -8617,7 +8618,7 @@ func awsAwsjson10_deserializeDocumentGlobalTableNotFoundException(v **types.Glob
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -8681,7 +8682,7 @@ func awsAwsjson10_deserializeDocumentIdempotentParameterMismatchException(v **ty
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -8745,7 +8746,7 @@ func awsAwsjson10_deserializeDocumentIndexNotFoundException(v **types.IndexNotFo
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -8809,7 +8810,7 @@ func awsAwsjson10_deserializeDocumentInternalServerError(v **types.InternalServe
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -8873,7 +8874,7 @@ func awsAwsjson10_deserializeDocumentInvalidEndpointException(v **types.InvalidE
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -8937,7 +8938,7 @@ func awsAwsjson10_deserializeDocumentInvalidRestoreTimeException(v **types.Inval
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -9053,7 +9054,7 @@ func awsAwsjson10_deserializeDocumentItemCollectionMetrics(v **types.ItemCollect
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -9274,7 +9275,7 @@ func awsAwsjson10_deserializeDocumentItemCollectionSizeLimitExceededException(v 
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -9375,7 +9376,7 @@ func awsAwsjson10_deserializeDocumentItemResponse(v **types.ItemResponse, decode
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -9612,7 +9613,7 @@ func awsAwsjson10_deserializeDocumentKeysAndAttributes(v **types.KeysAndAttribut
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -9734,7 +9735,7 @@ func awsAwsjson10_deserializeDocumentKeySchemaElement(v **types.KeySchemaElement
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -9798,7 +9799,7 @@ func awsAwsjson10_deserializeDocumentLimitExceededException(v **types.LimitExcee
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -9964,7 +9965,7 @@ func awsAwsjson10_deserializeDocumentLocalSecondaryIndexDescription(v **types.Lo
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -10128,7 +10129,7 @@ func awsAwsjson10_deserializeDocumentLocalSecondaryIndexInfo(v **types.LocalSeco
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -10387,7 +10388,7 @@ func awsAwsjson10_deserializeDocumentPointInTimeRecoveryDescription(v **types.Po
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -10451,7 +10452,7 @@ func awsAwsjson10_deserializeDocumentPointInTimeRecoveryUnavailableException(v *
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -10520,7 +10521,7 @@ func awsAwsjson10_deserializeDocumentProjection(v **types.Projection, decoder *j
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -10605,7 +10606,7 @@ func awsAwsjson10_deserializeDocumentProvisionedThroughput(v **types.Provisioned
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -10741,7 +10742,7 @@ func awsAwsjson10_deserializeDocumentProvisionedThroughputDescription(v **types.
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -10805,7 +10806,7 @@ func awsAwsjson10_deserializeDocumentProvisionedThroughputExceededException(v **
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -10873,7 +10874,7 @@ func awsAwsjson10_deserializeDocumentProvisionedThroughputOverride(v **types.Pro
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -10984,7 +10985,7 @@ func awsAwsjson10_deserializeDocumentPutRequest(v **types.PutRequest, decoder *j
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -11048,7 +11049,7 @@ func awsAwsjson10_deserializeDocumentReplica(v **types.Replica, decoder *json.De
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -11112,7 +11113,7 @@ func awsAwsjson10_deserializeDocumentReplicaAlreadyExistsException(v **types.Rep
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -11204,7 +11205,7 @@ func awsAwsjson10_deserializeDocumentReplicaAutoScalingDescription(v **types.Rep
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -11375,7 +11376,7 @@ func awsAwsjson10_deserializeDocumentReplicaDescription(v **types.ReplicaDescrip
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -11507,7 +11508,7 @@ func awsAwsjson10_deserializeDocumentReplicaGlobalSecondaryIndexAutoScalingDescr
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -11621,7 +11622,7 @@ func awsAwsjson10_deserializeDocumentReplicaGlobalSecondaryIndexDescription(v **
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -11787,7 +11788,7 @@ func awsAwsjson10_deserializeDocumentReplicaGlobalSecondaryIndexSettingsDescript
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -11941,7 +11942,7 @@ func awsAwsjson10_deserializeDocumentReplicaNotFoundException(v **types.ReplicaN
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -12072,7 +12073,7 @@ func awsAwsjson10_deserializeDocumentReplicaSettingsDescription(v **types.Replic
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -12181,7 +12182,7 @@ func awsAwsjson10_deserializeDocumentRequestLimitExceeded(v **types.RequestLimit
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -12245,7 +12246,7 @@ func awsAwsjson10_deserializeDocumentResourceInUseException(v **types.ResourceIn
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -12309,7 +12310,7 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -12416,7 +12417,7 @@ func awsAwsjson10_deserializeDocumentRestoreSummary(v **types.RestoreSummary, de
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -12635,7 +12636,7 @@ func awsAwsjson10_deserializeDocumentSourceTableDetails(v **types.SourceTableDet
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -12711,7 +12712,7 @@ func awsAwsjson10_deserializeDocumentSourceTableFeatureDetails(v **types.SourceT
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -12818,7 +12819,7 @@ func awsAwsjson10_deserializeDocumentSSEDescription(v **types.SSEDescription, de
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -12895,7 +12896,7 @@ func awsAwsjson10_deserializeDocumentStreamSpecification(v **types.StreamSpecifi
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -13012,7 +13013,7 @@ func awsAwsjson10_deserializeDocumentTableAlreadyExistsException(v **types.Table
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -13094,7 +13095,7 @@ func awsAwsjson10_deserializeDocumentTableAutoScalingDescription(v **types.Table
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -13342,7 +13343,7 @@ func awsAwsjson10_deserializeDocumentTableDescription(v **types.TableDescription
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -13406,7 +13407,7 @@ func awsAwsjson10_deserializeDocumentTableInUseException(v **types.TableInUseExc
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -13523,7 +13524,7 @@ func awsAwsjson10_deserializeDocumentTableNotFoundException(v **types.TableNotFo
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -13600,7 +13601,7 @@ func awsAwsjson10_deserializeDocumentTag(v **types.Tag, decoder *json.Decoder) e
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -13722,7 +13723,7 @@ func awsAwsjson10_deserializeDocumentTimeToLiveDescription(v **types.TimeToLiveD
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -13799,7 +13800,7 @@ func awsAwsjson10_deserializeDocumentTimeToLiveSpecification(v **types.TimeToLiv
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -13868,7 +13869,7 @@ func awsAwsjson10_deserializeDocumentTransactionCanceledException(v **types.Tran
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -13932,7 +13933,7 @@ func awsAwsjson10_deserializeDocumentTransactionConflictException(v **types.Tran
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -13996,7 +13997,7 @@ func awsAwsjson10_deserializeDocumentTransactionInProgressException(v **types.Tr
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -14057,7 +14058,7 @@ func awsAwsjson10_deserializeDocumentWriteRequest(v **types.WriteRequest, decode
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -14168,7 +14169,7 @@ func awsAwsjson10_deserializeDocumentBatchGetItemOutput(v **BatchGetItemOutput, 
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -14234,7 +14235,7 @@ func awsAwsjson10_deserializeDocumentBatchWriteItemOutput(v **BatchWriteItemOutp
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -14290,7 +14291,7 @@ func awsAwsjson10_deserializeDocumentCreateBackupOutput(v **CreateBackupOutput, 
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -14346,7 +14347,7 @@ func awsAwsjson10_deserializeDocumentCreateGlobalTableOutput(v **CreateGlobalTab
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -14402,7 +14403,7 @@ func awsAwsjson10_deserializeDocumentCreateTableOutput(v **CreateTableOutput, de
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -14458,7 +14459,7 @@ func awsAwsjson10_deserializeDocumentDeleteBackupOutput(v **DeleteBackupOutput, 
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -14524,7 +14525,7 @@ func awsAwsjson10_deserializeDocumentDeleteItemOutput(v **DeleteItemOutput, deco
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -14580,7 +14581,7 @@ func awsAwsjson10_deserializeDocumentDeleteTableOutput(v **DeleteTableOutput, de
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -14636,7 +14637,7 @@ func awsAwsjson10_deserializeDocumentDescribeBackupOutput(v **DescribeBackupOutp
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -14692,7 +14693,7 @@ func awsAwsjson10_deserializeDocumentDescribeContinuousBackupsOutput(v **Describ
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -14809,7 +14810,7 @@ func awsAwsjson10_deserializeDocumentDescribeContributorInsightsOutput(v **Descr
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -14865,7 +14866,7 @@ func awsAwsjson10_deserializeDocumentDescribeEndpointsOutput(v **DescribeEndpoin
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -14921,7 +14922,7 @@ func awsAwsjson10_deserializeDocumentDescribeGlobalTableOutput(v **DescribeGloba
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -14990,7 +14991,7 @@ func awsAwsjson10_deserializeDocumentDescribeGlobalTableSettingsOutput(v **Descr
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -15109,7 +15110,7 @@ func awsAwsjson10_deserializeDocumentDescribeLimitsOutput(v **DescribeLimitsOutp
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -15165,7 +15166,7 @@ func awsAwsjson10_deserializeDocumentDescribeTableOutput(v **DescribeTableOutput
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -15221,7 +15222,7 @@ func awsAwsjson10_deserializeDocumentDescribeTableReplicaAutoScalingOutput(v **D
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -15277,7 +15278,7 @@ func awsAwsjson10_deserializeDocumentDescribeTimeToLiveOutput(v **DescribeTimeTo
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -15338,7 +15339,7 @@ func awsAwsjson10_deserializeDocumentGetItemOutput(v **GetItemOutput, decoder *j
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -15407,7 +15408,7 @@ func awsAwsjson10_deserializeDocumentListBackupsOutput(v **ListBackupsOutput, de
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -15476,7 +15477,7 @@ func awsAwsjson10_deserializeDocumentListContributorInsightsOutput(v **ListContr
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -15545,7 +15546,7 @@ func awsAwsjson10_deserializeDocumentListGlobalTablesOutput(v **ListGlobalTables
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -15614,7 +15615,7 @@ func awsAwsjson10_deserializeDocumentListTablesOutput(v **ListTablesOutput, deco
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -15683,7 +15684,7 @@ func awsAwsjson10_deserializeDocumentListTagsOfResourceOutput(v **ListTagsOfReso
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -15749,7 +15750,7 @@ func awsAwsjson10_deserializeDocumentPutItemOutput(v **PutItemOutput, decoder *j
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -15849,7 +15850,7 @@ func awsAwsjson10_deserializeDocumentQueryOutput(v **QueryOutput, decoder *json.
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -15905,7 +15906,7 @@ func awsAwsjson10_deserializeDocumentRestoreTableFromBackupOutput(v **RestoreTab
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -15961,7 +15962,7 @@ func awsAwsjson10_deserializeDocumentRestoreTableToPointInTimeOutput(v **Restore
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -16061,7 +16062,7 @@ func awsAwsjson10_deserializeDocumentScanOutput(v **ScanOutput, decoder *json.De
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -16112,7 +16113,7 @@ func awsAwsjson10_deserializeDocumentTagResourceOutput(v **TagResourceOutput, de
 		}
 		switch t {
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -16173,7 +16174,7 @@ func awsAwsjson10_deserializeDocumentTransactGetItemsOutput(v **TransactGetItems
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -16234,7 +16235,7 @@ func awsAwsjson10_deserializeDocumentTransactWriteItemsOutput(v **TransactWriteI
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -16285,7 +16286,7 @@ func awsAwsjson10_deserializeDocumentUntagResourceOutput(v **UntagResourceOutput
 		}
 		switch t {
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -16341,7 +16342,7 @@ func awsAwsjson10_deserializeDocumentUpdateContinuousBackupsOutput(v **UpdateCon
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -16431,7 +16432,7 @@ func awsAwsjson10_deserializeDocumentUpdateContributorInsightsOutput(v **UpdateC
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -16487,7 +16488,7 @@ func awsAwsjson10_deserializeDocumentUpdateGlobalTableOutput(v **UpdateGlobalTab
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -16556,7 +16557,7 @@ func awsAwsjson10_deserializeDocumentUpdateGlobalTableSettingsOutput(v **UpdateG
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -16622,7 +16623,7 @@ func awsAwsjson10_deserializeDocumentUpdateItemOutput(v **UpdateItemOutput, deco
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -16678,7 +16679,7 @@ func awsAwsjson10_deserializeDocumentUpdateTableOutput(v **UpdateTableOutput, de
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -16734,7 +16735,7 @@ func awsAwsjson10_deserializeDocumentUpdateTableReplicaAutoScalingOutput(v **Upd
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
@@ -16790,7 +16791,7 @@ func awsAwsjson10_deserializeDocumentUpdateTimeToLiveOutput(v **UpdateTimeToLive
 			}
 
 		default:
-			err := restjson.DiscardUnknownField(decoder)
+			err := smithyjson.DiscardUnknownField(decoder)
 			if err != nil {
 				return err
 			}
