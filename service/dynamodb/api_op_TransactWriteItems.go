@@ -84,7 +84,7 @@ func (c *Client) TransactWriteItems(ctx context.Context, params *TransactWriteIt
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "TransactWriteItems",
 			Err:           err,
 		}
@@ -194,8 +194,7 @@ func addIdempotencyToken_opTransactWriteItemsMiddleware(stack *middleware.Stack,
 func newServiceMetadataMiddleware_opTransactWriteItems(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "TransactWriteItems",
 	}

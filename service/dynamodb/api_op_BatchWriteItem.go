@@ -94,7 +94,7 @@ func (c *Client) BatchWriteItem(ctx context.Context, params *BatchWriteItemInput
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "BatchWriteItem",
 			Err:           err,
 		}
@@ -227,8 +227,7 @@ func addawsAwsjson10_serdeOpBatchWriteItemMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opBatchWriteItem(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "BatchWriteItem",
 	}

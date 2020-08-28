@@ -49,7 +49,7 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "TagResource",
 			Err:           err,
 		}
@@ -80,8 +80,7 @@ func addawsAwsjson10_serdeOpTagResourceMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opTagResource(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "TagResource",
 	}

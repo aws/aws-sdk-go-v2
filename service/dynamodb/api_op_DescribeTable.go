@@ -49,7 +49,7 @@ func (c *Client) DescribeTable(ctx context.Context, params *DescribeTableInput, 
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "DescribeTable",
 			Err:           err,
 		}
@@ -82,8 +82,7 @@ func addawsAwsjson10_serdeOpDescribeTableMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opDescribeTable(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "DescribeTable",
 	}

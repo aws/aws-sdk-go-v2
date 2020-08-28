@@ -12,7 +12,7 @@ import (
 	"net/http"
 )
 
-const ClientID = "Rest Json Protocol"
+const ServiceID = "Rest Json Protocol"
 
 // A REST JSON service that sends JSON requests and responses.
 type Client struct {
@@ -43,9 +43,6 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	return client
 }
-
-// ClientID returns the name of the identifier for the service API.
-func (c *Client) ClientID() string { return ClientID }
 
 type Options struct {
 	// Set of options to modify how an operation is invoked. These apply to all

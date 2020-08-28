@@ -40,7 +40,7 @@ func (c *Client) OperationWithOptionalInputOutput(ctx context.Context, params *O
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "OperationWithOptionalInputOutput",
 			Err:           err,
 		}
@@ -69,8 +69,7 @@ func addawsAwsjson11_serdeOpOperationWithOptionalInputOutputMiddlewares(stack *m
 func newServiceMetadataMiddleware_opOperationWithOptionalInputOutput(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Json Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "foo",
 		OperationName: "OperationWithOptionalInputOutput",
 	}

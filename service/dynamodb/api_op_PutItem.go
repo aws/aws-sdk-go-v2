@@ -101,7 +101,7 @@ func (c *Client) PutItem(ctx context.Context, params *PutItemInput, optFns ...fu
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "PutItem",
 			Err:           err,
 		}
@@ -291,8 +291,7 @@ func addawsAwsjson10_serdeOpPutItemMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opPutItem(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "PutItem",
 	}

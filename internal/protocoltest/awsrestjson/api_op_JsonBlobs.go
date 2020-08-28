@@ -38,7 +38,7 @@ func (c *Client) JsonBlobs(ctx context.Context, params *JsonBlobsInput, optFns .
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "JsonBlobs",
 			Err:           err,
 		}
@@ -67,8 +67,7 @@ func addawsRestjson1_serdeOpJsonBlobsMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opJsonBlobs(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Rest Json Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "JsonBlobs",
 	}
 }

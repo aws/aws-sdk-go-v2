@@ -40,7 +40,7 @@ func (c *Client) EmptyOperation(ctx context.Context, params *EmptyOperationInput
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "EmptyOperation",
 			Err:           err,
 		}
@@ -66,8 +66,7 @@ func addawsAwsjson11_serdeOpEmptyOperationMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opEmptyOperation(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Json Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "foo",
 		OperationName: "EmptyOperation",
 	}

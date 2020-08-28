@@ -38,7 +38,7 @@ func (c *Client) XmlNamespaces(ctx context.Context, params *XmlNamespacesInput, 
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "XmlNamespaces",
 			Err:           err,
 		}
@@ -66,8 +66,7 @@ func addawsAwsquery_serdeOpXmlNamespacesMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opXmlNamespaces(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Query Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "XmlNamespaces",
 	}
 }

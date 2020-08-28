@@ -39,7 +39,7 @@ func (c *Client) RecursiveXmlShapes(ctx context.Context, params *RecursiveXmlSha
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "RecursiveXmlShapes",
 			Err:           err,
 		}
@@ -67,8 +67,7 @@ func addawsEc2query_serdeOpRecursiveXmlShapesMiddlewares(stack *middleware.Stack
 func newServiceMetadataMiddleware_opRecursiveXmlShapes(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "EC2 Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "RecursiveXmlShapes",
 	}
 }

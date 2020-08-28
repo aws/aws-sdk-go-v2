@@ -100,7 +100,7 @@ func (c *Client) PostContent(ctx context.Context, params *PostContentInput, optF
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "PostContent",
 			Err:           err,
 		}
@@ -342,8 +342,7 @@ func addawsRestjson1_serdeOpPostContentMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opPostContent(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Lex Runtime Service",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "lex",
 		OperationName: "PostContent",
 	}

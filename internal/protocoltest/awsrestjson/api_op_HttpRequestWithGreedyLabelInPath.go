@@ -38,7 +38,7 @@ func (c *Client) HttpRequestWithGreedyLabelInPath(ctx context.Context, params *H
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "HttpRequestWithGreedyLabelInPath",
 			Err:           err,
 		}
@@ -66,8 +66,7 @@ func addawsRestjson1_serdeOpHttpRequestWithGreedyLabelInPathMiddlewares(stack *m
 func newServiceMetadataMiddleware_opHttpRequestWithGreedyLabelInPath(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Rest Json Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "HttpRequestWithGreedyLabelInPath",
 	}
 }

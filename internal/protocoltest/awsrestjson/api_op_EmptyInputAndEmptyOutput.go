@@ -41,7 +41,7 @@ func (c *Client) EmptyInputAndEmptyOutput(ctx context.Context, params *EmptyInpu
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "EmptyInputAndEmptyOutput",
 			Err:           err,
 		}
@@ -67,8 +67,7 @@ func addawsRestjson1_serdeOpEmptyInputAndEmptyOutputMiddlewares(stack *middlewar
 func newServiceMetadataMiddleware_opEmptyInputAndEmptyOutput(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Rest Json Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "EmptyInputAndEmptyOutput",
 	}
 }

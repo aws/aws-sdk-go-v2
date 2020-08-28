@@ -11,7 +11,7 @@ import (
 	"net/http"
 )
 
-const ClientID = "Lex Runtime Service"
+const ServiceID = "Lex Runtime Service"
 
 // Amazon Lex provides both build and runtime endpoints. Each endpoint provides a
 // set of operations (API). Your conversational bot uses the runtime API to
@@ -50,9 +50,6 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	return client
 }
-
-// ClientID returns the name of the identifier for the service API.
-func (c *Client) ClientID() string { return ClientID }
 
 type Options struct {
 	// Set of options to modify how an operation is invoked. These apply to all

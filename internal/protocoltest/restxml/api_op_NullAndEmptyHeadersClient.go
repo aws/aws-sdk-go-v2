@@ -38,7 +38,7 @@ func (c *Client) NullAndEmptyHeadersClient(ctx context.Context, params *NullAndE
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "NullAndEmptyHeadersClient",
 			Err:           err,
 		}
@@ -71,8 +71,7 @@ func addawsRestxml_serdeOpNullAndEmptyHeadersClientMiddlewares(stack *middleware
 func newServiceMetadataMiddleware_opNullAndEmptyHeadersClient(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Rest Xml Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "NullAndEmptyHeadersClient",
 	}
 }

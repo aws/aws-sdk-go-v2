@@ -57,7 +57,7 @@ func (c *Client) XmlLists(ctx context.Context, params *XmlListsInput, optFns ...
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "XmlLists",
 			Err:           err,
 		}
@@ -96,8 +96,7 @@ func addawsEc2query_serdeOpXmlListsMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opXmlLists(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "EC2 Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "XmlLists",
 	}
 }

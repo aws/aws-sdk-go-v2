@@ -43,7 +43,7 @@ func (c *Client) UpdateContributorInsights(ctx context.Context, params *UpdateCo
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "UpdateContributorInsights",
 			Err:           err,
 		}
@@ -82,8 +82,7 @@ func addawsAwsjson10_serdeOpUpdateContributorInsightsMiddlewares(stack *middlewa
 func newServiceMetadataMiddleware_opUpdateContributorInsights(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "UpdateContributorInsights",
 	}

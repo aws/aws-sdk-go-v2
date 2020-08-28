@@ -40,7 +40,7 @@ func (c *Client) StreamingTraitsRequireLength(ctx context.Context, params *Strea
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "StreamingTraitsRequireLength",
 			Err:           err,
 		}
@@ -71,8 +71,7 @@ func addawsRestjson1_serdeOpStreamingTraitsRequireLengthMiddlewares(stack *middl
 func newServiceMetadataMiddleware_opStreamingTraitsRequireLength(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Rest Json Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "StreamingTraitsRequireLength",
 	}
 }

@@ -51,7 +51,7 @@ func (c *Client) DeleteItem(ctx context.Context, params *DeleteItemInput, optFns
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "DeleteItem",
 			Err:           err,
 		}
@@ -234,8 +234,7 @@ func addawsAwsjson10_serdeOpDeleteItemMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opDeleteItem(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "DeleteItem",
 	}

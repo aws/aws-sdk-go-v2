@@ -48,7 +48,7 @@ func (c *Client) QueryTimestamps(ctx context.Context, params *QueryTimestampsInp
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "QueryTimestamps",
 			Err:           err,
 		}
@@ -77,8 +77,7 @@ func addawsAwsquery_serdeOpQueryTimestampsMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opQueryTimestamps(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Query Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "QueryTimestamps",
 	}
 }

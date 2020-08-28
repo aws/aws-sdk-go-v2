@@ -39,7 +39,7 @@ func (c *Client) FlattenedXmlMap(ctx context.Context, params *FlattenedXmlMapInp
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "FlattenedXmlMap",
 			Err:           err,
 		}
@@ -67,8 +67,7 @@ func addawsAwsquery_serdeOpFlattenedXmlMapMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opFlattenedXmlMap(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Query Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "FlattenedXmlMap",
 	}
 }

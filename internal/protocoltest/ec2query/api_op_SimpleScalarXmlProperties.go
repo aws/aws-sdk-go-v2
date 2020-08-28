@@ -37,7 +37,7 @@ func (c *Client) SimpleScalarXmlProperties(ctx context.Context, params *SimpleSc
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "SimpleScalarXmlProperties",
 			Err:           err,
 		}
@@ -74,8 +74,7 @@ func addawsEc2query_serdeOpSimpleScalarXmlPropertiesMiddlewares(stack *middlewar
 func newServiceMetadataMiddleware_opSimpleScalarXmlProperties(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "EC2 Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "SimpleScalarXmlProperties",
 	}
 }

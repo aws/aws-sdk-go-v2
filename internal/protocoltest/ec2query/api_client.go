@@ -12,7 +12,7 @@ import (
 	"net/http"
 )
 
-const ClientID = "EC2 Protocol"
+const ServiceID = "EC2 Protocol"
 
 // An EC2 query service that sends query requests and XML responses.
 type Client struct {
@@ -43,9 +43,6 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	return client
 }
-
-// ClientID returns the name of the identifier for the service API.
-func (c *Client) ClientID() string { return ClientID }
 
 type Options struct {
 	// Set of options to modify how an operation is invoked. These apply to all

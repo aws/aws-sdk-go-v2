@@ -46,7 +46,7 @@ func (c *Client) DescribeGlobalTableSettings(ctx context.Context, params *Descri
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "DescribeGlobalTableSettings",
 			Err:           err,
 		}
@@ -79,8 +79,7 @@ func addawsAwsjson10_serdeOpDescribeGlobalTableSettingsMiddlewares(stack *middle
 func newServiceMetadataMiddleware_opDescribeGlobalTableSettings(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "DescribeGlobalTableSettings",
 	}

@@ -39,7 +39,7 @@ func (c *Client) RecursiveShapes(ctx context.Context, params *RecursiveShapesInp
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "RecursiveShapes",
 			Err:           err,
 		}
@@ -68,8 +68,7 @@ func addawsRestjson1_serdeOpRecursiveShapesMiddlewares(stack *middleware.Stack) 
 func newServiceMetadataMiddleware_opRecursiveShapes(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Rest Json Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "RecursiveShapes",
 	}
 }

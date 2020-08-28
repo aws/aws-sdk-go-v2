@@ -42,7 +42,7 @@ func (c *Client) ConstantQueryString(ctx context.Context, params *ConstantQueryS
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "ConstantQueryString",
 			Err:           err,
 		}
@@ -69,8 +69,7 @@ func addawsRestxml_serdeOpConstantQueryStringMiddlewares(stack *middleware.Stack
 func newServiceMetadataMiddleware_opConstantQueryString(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Rest Xml Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "ConstantQueryString",
 	}
 }

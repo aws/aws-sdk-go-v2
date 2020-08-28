@@ -61,7 +61,7 @@ func (c *Client) UpdateTimeToLive(ctx context.Context, params *UpdateTimeToLiveI
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "UpdateTimeToLive",
 			Err:           err,
 		}
@@ -96,8 +96,7 @@ func addawsAwsjson10_serdeOpUpdateTimeToLiveMiddlewares(stack *middleware.Stack)
 func newServiceMetadataMiddleware_opUpdateTimeToLive(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "UpdateTimeToLive",
 	}

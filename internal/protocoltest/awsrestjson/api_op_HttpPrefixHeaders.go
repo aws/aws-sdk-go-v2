@@ -38,7 +38,7 @@ func (c *Client) HttpPrefixHeaders(ctx context.Context, params *HttpPrefixHeader
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "HttpPrefixHeaders",
 			Err:           err,
 		}
@@ -69,8 +69,7 @@ func addawsRestjson1_serdeOpHttpPrefixHeadersMiddlewares(stack *middleware.Stack
 func newServiceMetadataMiddleware_opHttpPrefixHeaders(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Rest Json Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "HttpPrefixHeaders",
 	}
 }

@@ -38,7 +38,7 @@ func (c *Client) InlineDocumentAsPayload(ctx context.Context, params *InlineDocu
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "InlineDocumentAsPayload",
 			Err:           err,
 		}
@@ -67,8 +67,7 @@ func addawsRestjson1_serdeOpInlineDocumentAsPayloadMiddlewares(stack *middleware
 func newServiceMetadataMiddleware_opInlineDocumentAsPayload(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Rest Json Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "InlineDocumentAsPayload",
 	}
 }

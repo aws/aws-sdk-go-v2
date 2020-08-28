@@ -39,7 +39,7 @@ func (c *Client) NestedStructures(ctx context.Context, params *NestedStructuresI
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "NestedStructures",
 			Err:           err,
 		}
@@ -66,8 +66,7 @@ func addawsAwsquery_serdeOpNestedStructuresMiddlewares(stack *middleware.Stack) 
 func newServiceMetadataMiddleware_opNestedStructures(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Query Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "NestedStructures",
 	}
 }

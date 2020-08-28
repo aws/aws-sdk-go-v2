@@ -41,7 +41,7 @@ func (c *Client) PutAndGetInlineDocuments(ctx context.Context, params *PutAndGet
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "PutAndGetInlineDocuments",
 			Err:           err,
 		}
@@ -70,8 +70,7 @@ func addawsAwsjson11_serdeOpPutAndGetInlineDocumentsMiddlewares(stack *middlewar
 func newServiceMetadataMiddleware_opPutAndGetInlineDocuments(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Json Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "foo",
 		OperationName: "PutAndGetInlineDocuments",
 	}

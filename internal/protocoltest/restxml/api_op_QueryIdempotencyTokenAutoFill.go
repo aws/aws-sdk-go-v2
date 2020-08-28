@@ -40,7 +40,7 @@ func (c *Client) QueryIdempotencyTokenAutoFill(ctx context.Context, params *Quer
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "QueryIdempotencyTokenAutoFill",
 			Err:           err,
 		}
@@ -100,8 +100,7 @@ func addIdempotencyToken_opQueryIdempotencyTokenAutoFillMiddleware(stack *middle
 func newServiceMetadataMiddleware_opQueryIdempotencyTokenAutoFill(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Rest Xml Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "QueryIdempotencyTokenAutoFill",
 	}
 }

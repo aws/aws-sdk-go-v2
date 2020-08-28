@@ -49,7 +49,7 @@ func (c *Client) GetItem(ctx context.Context, params *GetItemInput, optFns ...fu
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "GetItem",
 			Err:           err,
 		}
@@ -171,8 +171,7 @@ func addawsAwsjson10_serdeOpGetItemMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opGetItem(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "GetItem",
 	}

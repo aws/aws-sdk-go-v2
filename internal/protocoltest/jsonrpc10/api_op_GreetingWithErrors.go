@@ -35,6 +35,7 @@ func (c *Client) GreetingWithErrors(ctx context.Context, params *GreetingWithErr
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGreetingWithErrors(options.Region), middleware.Before)
@@ -48,7 +49,7 @@ func (c *Client) GreetingWithErrors(ctx context.Context, params *GreetingWithErr
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "GreetingWithErrors",
 			Err:           err,
 		}
@@ -75,10 +76,8 @@ func addawsAwsjson10_serdeOpGreetingWithErrorsMiddlewares(stack *middleware.Stac
 
 func newServiceMetadataMiddleware_opGreetingWithErrors(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "JSON RPC 10",
-		ServiceID:      "jsonrpc10",
-		EndpointPrefix: "jsonrpc10",
-		OperationName:  "GreetingWithErrors",
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "GreetingWithErrors",
 	}
 }

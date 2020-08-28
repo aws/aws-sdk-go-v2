@@ -52,7 +52,7 @@ func (c *Client) GreetingWithErrors(ctx context.Context, params *GreetingWithErr
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "GreetingWithErrors",
 			Err:           err,
 		}
@@ -80,8 +80,7 @@ func addawsAwsjson11_serdeOpGreetingWithErrorsMiddlewares(stack *middleware.Stac
 func newServiceMetadataMiddleware_opGreetingWithErrors(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Json Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "foo",
 		OperationName: "GreetingWithErrors",
 	}

@@ -46,7 +46,7 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "UntagResource",
 			Err:           err,
 		}
@@ -78,8 +78,7 @@ func addawsAwsjson10_serdeOpUntagResourceMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opUntagResource(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "UntagResource",
 	}

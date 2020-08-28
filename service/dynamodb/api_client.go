@@ -13,7 +13,7 @@ import (
 	"net/http"
 )
 
-const ClientID = "DynamoDB"
+const ServiceID = "DynamoDB"
 
 // Amazon DynamoDB  <p>Amazon DynamoDB is a fully managed NoSQL database service
 // that provides fast and predictable performance with seamless scalability.
@@ -58,9 +58,6 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	return client
 }
-
-// ClientID returns the name of the identifier for the service API.
-func (c *Client) ClientID() string { return ClientID }
 
 type Options struct {
 	// Set of options to modify how an operation is invoked. These apply to all

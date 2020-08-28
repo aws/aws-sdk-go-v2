@@ -43,7 +43,7 @@ func (c *Client) ListTables(ctx context.Context, params *ListTablesInput, optFns
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "ListTables",
 			Err:           err,
 		}
@@ -91,8 +91,7 @@ func addawsAwsjson10_serdeOpListTablesMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opListTables(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "ListTables",
 	}

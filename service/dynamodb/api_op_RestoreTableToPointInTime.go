@@ -69,7 +69,7 @@ func (c *Client) RestoreTableToPointInTime(ctx context.Context, params *RestoreT
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "RestoreTableToPointInTime",
 			Err:           err,
 		}
@@ -119,8 +119,7 @@ func addawsAwsjson10_serdeOpRestoreTableToPointInTimeMiddlewares(stack *middlewa
 func newServiceMetadataMiddleware_opRestoreTableToPointInTime(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "RestoreTableToPointInTime",
 	}

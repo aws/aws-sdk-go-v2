@@ -38,7 +38,7 @@ func (c *Client) MediaTypeHeader(ctx context.Context, params *MediaTypeHeaderInp
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "MediaTypeHeader",
 			Err:           err,
 		}
@@ -67,8 +67,7 @@ func addawsRestjson1_serdeOpMediaTypeHeaderMiddlewares(stack *middleware.Stack) 
 func newServiceMetadataMiddleware_opMediaTypeHeader(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Rest Json Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "MediaTypeHeader",
 	}
 }

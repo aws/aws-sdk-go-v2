@@ -43,7 +43,7 @@ func (c *Client) GetSession(ctx context.Context, params *GetSessionInput, optFns
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "GetSession",
 			Err:           err,
 		}
@@ -95,8 +95,7 @@ func addawsRestjson1_serdeOpGetSessionMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opGetSession(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Lex Runtime Service",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "lex",
 		OperationName: "GetSession",
 	}

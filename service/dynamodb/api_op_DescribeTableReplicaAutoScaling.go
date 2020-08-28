@@ -46,7 +46,7 @@ func (c *Client) DescribeTableReplicaAutoScaling(ctx context.Context, params *De
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "DescribeTableReplicaAutoScaling",
 			Err:           err,
 		}
@@ -77,8 +77,7 @@ func addawsAwsjson10_serdeOpDescribeTableReplicaAutoScalingMiddlewares(stack *mi
 func newServiceMetadataMiddleware_opDescribeTableReplicaAutoScaling(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "DescribeTableReplicaAutoScaling",
 	}

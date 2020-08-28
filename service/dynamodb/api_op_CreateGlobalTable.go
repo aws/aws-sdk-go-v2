@@ -78,7 +78,7 @@ func (c *Client) CreateGlobalTable(ctx context.Context, params *CreateGlobalTabl
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "CreateGlobalTable",
 			Err:           err,
 		}
@@ -111,8 +111,7 @@ func addawsAwsjson10_serdeOpCreateGlobalTableMiddlewares(stack *middleware.Stack
 func newServiceMetadataMiddleware_opCreateGlobalTable(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "CreateGlobalTable",
 	}

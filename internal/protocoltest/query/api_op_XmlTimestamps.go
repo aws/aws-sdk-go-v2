@@ -40,7 +40,7 @@ func (c *Client) XmlTimestamps(ctx context.Context, params *XmlTimestampsInput, 
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "XmlTimestamps",
 			Err:           err,
 		}
@@ -71,8 +71,7 @@ func addawsAwsquery_serdeOpXmlTimestampsMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opXmlTimestamps(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Query Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "XmlTimestamps",
 	}
 }

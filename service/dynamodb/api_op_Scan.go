@@ -65,7 +65,7 @@ func (c *Client) Scan(ctx context.Context, params *ScanInput, optFns ...func(*Op
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "Scan",
 			Err:           err,
 		}
@@ -327,8 +327,7 @@ func addawsAwsjson10_serdeOpScanMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opScan(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "Scan",
 	}

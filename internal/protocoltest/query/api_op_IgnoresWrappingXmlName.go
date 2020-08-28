@@ -40,7 +40,7 @@ func (c *Client) IgnoresWrappingXmlName(ctx context.Context, params *IgnoresWrap
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "IgnoresWrappingXmlName",
 			Err:           err,
 		}
@@ -68,8 +68,7 @@ func addawsAwsquery_serdeOpIgnoresWrappingXmlNameMiddlewares(stack *middleware.S
 func newServiceMetadataMiddleware_opIgnoresWrappingXmlName(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Query Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "IgnoresWrappingXmlName",
 	}
 }

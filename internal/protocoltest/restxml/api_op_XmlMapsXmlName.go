@@ -38,7 +38,7 @@ func (c *Client) XmlMapsXmlName(ctx context.Context, params *XmlMapsXmlNameInput
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "XmlMapsXmlName",
 			Err:           err,
 		}
@@ -67,8 +67,7 @@ func addawsRestxml_serdeOpXmlMapsXmlNameMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opXmlMapsXmlName(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Rest Xml Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "XmlMapsXmlName",
 	}
 }

@@ -44,7 +44,7 @@ func (c *Client) DescribeBackup(ctx context.Context, params *DescribeBackupInput
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "DescribeBackup",
 			Err:           err,
 		}
@@ -75,8 +75,7 @@ func addawsAwsjson10_serdeOpDescribeBackupMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opDescribeBackup(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "DescribeBackup",
 	}

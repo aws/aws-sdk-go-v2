@@ -39,7 +39,7 @@ func (c *Client) HttpPayloadTraits(ctx context.Context, params *HttpPayloadTrait
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "HttpPayloadTraits",
 			Err:           err,
 		}
@@ -70,8 +70,7 @@ func addawsRestjson1_serdeOpHttpPayloadTraitsMiddlewares(stack *middleware.Stack
 func newServiceMetadataMiddleware_opHttpPayloadTraits(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Rest Json Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "HttpPayloadTraits",
 	}
 }

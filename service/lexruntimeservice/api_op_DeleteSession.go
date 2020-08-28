@@ -42,7 +42,7 @@ func (c *Client) DeleteSession(ctx context.Context, params *DeleteSessionInput, 
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "DeleteSession",
 			Err:           err,
 		}
@@ -83,8 +83,7 @@ func addawsRestjson1_serdeOpDeleteSessionMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opDeleteSession(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Lex Runtime Service",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "lex",
 		OperationName: "DeleteSession",
 	}

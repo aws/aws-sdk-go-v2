@@ -66,7 +66,7 @@ func (c *Client) CreateBackup(ctx context.Context, params *CreateBackupInput, op
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "CreateBackup",
 			Err:           err,
 		}
@@ -99,8 +99,7 @@ func addawsAwsjson10_serdeOpCreateBackupMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opCreateBackup(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "CreateBackup",
 	}

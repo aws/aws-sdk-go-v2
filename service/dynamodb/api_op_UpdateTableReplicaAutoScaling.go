@@ -46,7 +46,7 @@ func (c *Client) UpdateTableReplicaAutoScaling(ctx context.Context, params *Upda
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "UpdateTableReplicaAutoScaling",
 			Err:           err,
 		}
@@ -86,8 +86,7 @@ func addawsAwsjson10_serdeOpUpdateTableReplicaAutoScalingMiddlewares(stack *midd
 func newServiceMetadataMiddleware_opUpdateTableReplicaAutoScaling(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "UpdateTableReplicaAutoScaling",
 	}

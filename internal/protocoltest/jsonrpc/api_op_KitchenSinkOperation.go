@@ -42,7 +42,7 @@ func (c *Client) KitchenSinkOperation(ctx context.Context, params *KitchenSinkOp
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "KitchenSinkOperation",
 			Err:           err,
 		}
@@ -121,8 +121,7 @@ func addawsAwsjson11_serdeOpKitchenSinkOperationMiddlewares(stack *middleware.St
 func newServiceMetadataMiddleware_opKitchenSinkOperation(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Json Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "foo",
 		OperationName: "KitchenSinkOperation",
 	}

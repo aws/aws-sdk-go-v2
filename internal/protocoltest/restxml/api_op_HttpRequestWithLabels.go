@@ -41,7 +41,7 @@ func (c *Client) HttpRequestWithLabels(ctx context.Context, params *HttpRequestW
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "HttpRequestWithLabels",
 			Err:           err,
 		}
@@ -78,8 +78,7 @@ func addawsRestxml_serdeOpHttpRequestWithLabelsMiddlewares(stack *middleware.Sta
 func newServiceMetadataMiddleware_opHttpRequestWithLabels(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Rest Xml Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "HttpRequestWithLabels",
 	}
 }

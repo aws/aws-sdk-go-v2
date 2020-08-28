@@ -40,7 +40,7 @@ func (c *Client) IgnoreQueryParamsInResponse(ctx context.Context, params *Ignore
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "IgnoreQueryParamsInResponse",
 			Err:           err,
 		}
@@ -68,8 +68,7 @@ func addawsRestjson1_serdeOpIgnoreQueryParamsInResponseMiddlewares(stack *middle
 func newServiceMetadataMiddleware_opIgnoreQueryParamsInResponse(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Rest Json Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "IgnoreQueryParamsInResponse",
 	}
 }

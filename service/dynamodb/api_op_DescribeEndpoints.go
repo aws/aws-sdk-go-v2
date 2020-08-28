@@ -42,7 +42,7 @@ func (c *Client) DescribeEndpoints(ctx context.Context, params *DescribeEndpoint
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "DescribeEndpoints",
 			Err:           err,
 		}
@@ -71,8 +71,7 @@ func addawsAwsjson10_serdeOpDescribeEndpointsMiddlewares(stack *middleware.Stack
 func newServiceMetadataMiddleware_opDescribeEndpoints(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "DescribeEndpoints",
 	}

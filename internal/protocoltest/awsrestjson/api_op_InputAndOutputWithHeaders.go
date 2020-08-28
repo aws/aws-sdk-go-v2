@@ -41,7 +41,7 @@ func (c *Client) InputAndOutputWithHeaders(ctx context.Context, params *InputAnd
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "InputAndOutputWithHeaders",
 			Err:           err,
 		}
@@ -100,8 +100,7 @@ func addawsRestjson1_serdeOpInputAndOutputWithHeadersMiddlewares(stack *middlewa
 func newServiceMetadataMiddleware_opInputAndOutputWithHeaders(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Rest Json Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "InputAndOutputWithHeaders",
 	}
 }

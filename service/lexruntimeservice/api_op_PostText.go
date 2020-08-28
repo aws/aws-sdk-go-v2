@@ -85,7 +85,7 @@ func (c *Client) PostText(ctx context.Context, params *PostTextInput, optFns ...
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "PostText",
 			Err:           err,
 		}
@@ -242,8 +242,7 @@ func addawsRestjson1_serdeOpPostTextMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opPostText(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Lex Runtime Service",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "lex",
 		OperationName: "PostText",
 	}

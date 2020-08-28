@@ -41,7 +41,7 @@ func (c *Client) HttpRequestWithLabelsAndTimestampFormat(ctx context.Context, pa
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "HttpRequestWithLabelsAndTimestampFormat",
 			Err:           err,
 		}
@@ -74,8 +74,7 @@ func addawsRestxml_serdeOpHttpRequestWithLabelsAndTimestampFormatMiddlewares(sta
 func newServiceMetadataMiddleware_opHttpRequestWithLabelsAndTimestampFormat(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Rest Xml Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "HttpRequestWithLabelsAndTimestampFormat",
 	}
 }

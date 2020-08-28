@@ -39,7 +39,7 @@ func (c *Client) XmlEnums(ctx context.Context, params *XmlEnumsInput, optFns ...
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "XmlEnums",
 			Err:           err,
 		}
@@ -72,8 +72,7 @@ func addawsEc2query_serdeOpXmlEnumsMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opXmlEnums(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "EC2 Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "XmlEnums",
 	}
 }

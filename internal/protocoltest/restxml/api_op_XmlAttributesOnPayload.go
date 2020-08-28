@@ -39,7 +39,7 @@ func (c *Client) XmlAttributesOnPayload(ctx context.Context, params *XmlAttribut
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "XmlAttributesOnPayload",
 			Err:           err,
 		}
@@ -68,8 +68,7 @@ func addawsRestxml_serdeOpXmlAttributesOnPayloadMiddlewares(stack *middleware.St
 func newServiceMetadataMiddleware_opXmlAttributesOnPayload(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Rest Xml Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "XmlAttributesOnPayload",
 	}
 }

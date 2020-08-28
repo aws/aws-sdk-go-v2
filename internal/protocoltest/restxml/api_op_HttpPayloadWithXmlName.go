@@ -40,7 +40,7 @@ func (c *Client) HttpPayloadWithXmlName(ctx context.Context, params *HttpPayload
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "HttpPayloadWithXmlName",
 			Err:           err,
 		}
@@ -69,8 +69,7 @@ func addawsRestxml_serdeOpHttpPayloadWithXmlNameMiddlewares(stack *middleware.St
 func newServiceMetadataMiddleware_opHttpPayloadWithXmlName(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Rest Xml Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "HttpPayloadWithXmlName",
 	}
 }

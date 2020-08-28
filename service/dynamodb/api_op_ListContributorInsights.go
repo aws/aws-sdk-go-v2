@@ -43,7 +43,7 @@ func (c *Client) ListContributorInsights(ctx context.Context, params *ListContri
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "ListContributorInsights",
 			Err:           err,
 		}
@@ -80,8 +80,7 @@ func addawsAwsjson10_serdeOpListContributorInsightsMiddlewares(stack *middleware
 func newServiceMetadataMiddleware_opListContributorInsights(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "ListContributorInsights",
 	}

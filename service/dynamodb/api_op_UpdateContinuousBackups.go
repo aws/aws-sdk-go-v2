@@ -51,7 +51,7 @@ func (c *Client) UpdateContinuousBackups(ctx context.Context, params *UpdateCont
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "UpdateContinuousBackups",
 			Err:           err,
 		}
@@ -85,8 +85,7 @@ func addawsAwsjson10_serdeOpUpdateContinuousBackupsMiddlewares(stack *middleware
 func newServiceMetadataMiddleware_opUpdateContinuousBackups(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "UpdateContinuousBackups",
 	}

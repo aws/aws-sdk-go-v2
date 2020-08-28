@@ -40,7 +40,7 @@ func (c *Client) NullOperation(ctx context.Context, params *NullOperationInput, 
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "NullOperation",
 			Err:           err,
 		}
@@ -73,8 +73,7 @@ func addawsAwsjson11_serdeOpNullOperationMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opNullOperation(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Json Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "foo",
 		OperationName: "NullOperation",
 	}

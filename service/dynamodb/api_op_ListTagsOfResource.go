@@ -47,7 +47,7 @@ func (c *Client) ListTagsOfResource(ctx context.Context, params *ListTagsOfResou
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "ListTagsOfResource",
 			Err:           err,
 		}
@@ -86,8 +86,7 @@ func addawsAwsjson10_serdeOpListTagsOfResourceMiddlewares(stack *middleware.Stac
 func newServiceMetadataMiddleware_opListTagsOfResource(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "ListTagsOfResource",
 	}

@@ -39,7 +39,7 @@ func (c *Client) XmlMaps(ctx context.Context, params *XmlMapsInput, optFns ...fu
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "XmlMaps",
 			Err:           err,
 		}
@@ -67,8 +67,7 @@ func addawsAwsquery_serdeOpXmlMapsMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opXmlMaps(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "Query Protocol",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		OperationName: "XmlMaps",
 	}
 }

@@ -81,7 +81,7 @@ func (c *Client) DescribeLimits(ctx context.Context, params *DescribeLimitsInput
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ClientID:      c.ClientID(),
+			ServiceID:     ServiceID,
 			OperationName: "DescribeLimits",
 			Err:           err,
 		}
@@ -124,8 +124,7 @@ func addawsAwsjson10_serdeOpDescribeLimitsMiddlewares(stack *middleware.Stack) {
 func newServiceMetadataMiddleware_opDescribeLimits(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
-		ServiceName:   "DynamoDB",
-		ServiceID:     ClientID,
+		ServiceID:     ServiceID,
 		SigningName:   "dynamodb",
 		OperationName: "DescribeLimits",
 	}
