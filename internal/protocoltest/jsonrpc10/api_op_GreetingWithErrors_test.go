@@ -95,7 +95,7 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsAwsjson10Deserialize(t *te
 			if !errors.As(err, &opErr) {
 				t.Fatalf("expect *types.InvalidGreeting operation error, got %T", err)
 			}
-			if e, a := client.ServiceID(), opErr.Service(); e != a {
+			if e, a := ServiceID, opErr.Service(); e != a {
 				t.Errorf("expect %v operation service name, got %v", e, a)
 			}
 			if e, a := "GreetingWithErrors", opErr.Operation(); e != a {
@@ -287,7 +287,7 @@ func TestClient_GreetingWithErrors_FooError_awsAwsjson10Deserialize(t *testing.T
 			if !errors.As(err, &opErr) {
 				t.Fatalf("expect *types.FooError operation error, got %T", err)
 			}
-			if e, a := client.ServiceID(), opErr.Service(); e != a {
+			if e, a := ServiceID, opErr.Service(); e != a {
 				t.Errorf("expect %v operation service name, got %v", e, a)
 			}
 			if e, a := "GreetingWithErrors", opErr.Operation(); e != a {
@@ -398,7 +398,7 @@ func TestClient_GreetingWithErrors_ComplexError_awsAwsjson10Deserialize(t *testi
 			if !errors.As(err, &opErr) {
 				t.Fatalf("expect *types.ComplexError operation error, got %T", err)
 			}
-			if e, a := client.ServiceID(), opErr.Service(); e != a {
+			if e, a := ServiceID, opErr.Service(); e != a {
 				t.Errorf("expect %v operation service name, got %v", e, a)
 			}
 			if e, a := "GreetingWithErrors", opErr.Operation(); e != a {
