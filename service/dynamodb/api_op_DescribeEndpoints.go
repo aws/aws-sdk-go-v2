@@ -26,8 +26,9 @@ func (c *Client) DescribeEndpoints(ctx context.Context, params *DescribeEndpoint
 	AddResolveEndpointMiddleware(stack, options)
 	v4.AddComputePayloadSHA256Middleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
-	v4.AddHTTPSignerMiddleware(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEndpoints(options.Region), middleware.Before)
@@ -41,7 +42,7 @@ func (c *Client) DescribeEndpoints(ctx context.Context, params *DescribeEndpoint
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "DescribeEndpoints",
 			Err:           err,
 		}
@@ -69,11 +70,9 @@ func addawsAwsjson10_serdeOpDescribeEndpointsMiddlewares(stack *middleware.Stack
 
 func newServiceMetadataMiddleware_opDescribeEndpoints(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "DynamoDB",
-		ServiceID:      "dynamodb",
-		EndpointPrefix: "dynamodb",
-		SigningName:    "dynamodb",
-		OperationName:  "DescribeEndpoints",
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "dynamodb",
+		OperationName: "DescribeEndpoints",
 	}
 }

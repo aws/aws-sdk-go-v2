@@ -68,16 +68,12 @@ const (
 
 // HTTPSigner is an interface to a SigV4 signer that can sign HTTP requests
 type HTTPSigner interface {
-	SignHTTP(ctx context.Context, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error
+	SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error
 }
 
 // Signer applies AWS v4 signing to given request. Use this to sign requests
 // that need to be signed with AWS V4 Signatures.
 type Signer struct {
-	// The authentication credentials the request will be signed against.
-	// This value must be set to sign requests.
-	Credentials aws.CredentialsProvider
-
 	// Sets the log level the signer should use when reporting information to
 	// the logger. If the logger is nil nothing will be logged. See
 	// aws.LogLevel for more information on available logging levels
@@ -103,21 +99,6 @@ type Signer struct {
 	//
 	// http://docs.aws.amazon.com/general/latest/gr/sigv4-create-canonical-request.html
 	DisableURIPathEscaping bool
-}
-
-// NewSigner returns a Signer pointer configured with the credentials and optional
-// option values provided. If not options are provided the Signer will use its
-// default configuration.
-func NewSigner(credsProvider aws.CredentialsProvider, options ...func(*Signer)) *Signer {
-	v4 := &Signer{
-		Credentials: credsProvider,
-	}
-
-	for _, option := range options {
-		option(v4)
-	}
-
-	return v4
 }
 
 type httpSigner struct {
@@ -173,7 +154,7 @@ func (s *httpSigner) Build() (signedRequest, error) {
 		host = req.Host
 	}
 
-	signedHeaders, signedHeadersStr, canonicalHeaderStr := s.buildCanonicalHeaders(host, v4Internal.IgnoredHeaders, unsignedHeaders)
+	signedHeaders, signedHeadersStr, canonicalHeaderStr := s.buildCanonicalHeaders(host, v4Internal.IgnoredHeaders, unsignedHeaders, s.Request.ContentLength)
 
 	if s.IsPreSign {
 		query.Set(v4Internal.AmzSignedHeadersKey, signedHeadersStr)
@@ -230,12 +211,7 @@ func (s *httpSigner) Build() (signedRequest, error) {
 // will not be lost.
 //
 // The passed in request will be modified in place.
-func (v4 Signer) SignHTTP(ctx context.Context, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error {
-	credentials, err := v4.Credentials.Retrieve(ctx)
-	if err != nil {
-		return err
-	}
-
+func (v4 Signer) SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error {
 	signer := &httpSigner{
 		Request:                r,
 		PayloadHash:            payloadHash,
@@ -278,12 +254,7 @@ func (v4 Signer) SignHTTP(ctx context.Context, r *http.Request, payloadHash stri
 // set when the request will expire.
 //
 // This method does not modify the provided request.
-func (v4 *Signer) PresignHTTP(ctx context.Context, r *http.Request, payloadHash string, service string, region string, expireTime time.Duration, signingTime time.Time) (signedURI string, signedHeaders http.Header, err error) {
-	credentials, err := v4.Credentials.Retrieve(ctx)
-	if err != nil {
-		return "", nil, err
-	}
-
+func (v4 *Signer) PresignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, expireTime time.Duration, signingTime time.Time) (signedURI string, signedHeaders http.Header, err error) {
 	signer := &httpSigner{
 		Request:                r.Clone(r.Context()),
 		PayloadHash:            payloadHash,
@@ -353,12 +324,17 @@ func buildQuery(r v4Internal.Rule, header http.Header) (url.Values, http.Header)
 	return query, unsignedHeaders
 }
 
-func (s *httpSigner) buildCanonicalHeaders(host string, rule v4Internal.Rule, header http.Header) (signed http.Header, signedHeaders, canonicalHeaders string) {
+func (s *httpSigner) buildCanonicalHeaders(host string, rule v4Internal.Rule, header http.Header, length int64) (signed http.Header, signedHeaders, canonicalHeaders string) {
 	signed = make(http.Header)
 
 	var headers []string
 	headers = append(headers, "host")
 	signed["host"] = append(signed["host"], host)
+
+	if length > 0 {
+		headers = append(headers, "content-length")
+		signed["content-length"] = append(signed["content-length"], strconv.FormatInt(length, 10))
+	}
 
 	for k, v := range header {
 		canonicalKey := http.CanonicalHeaderKey(k)

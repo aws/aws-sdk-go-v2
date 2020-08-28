@@ -26,8 +26,9 @@ func (c *Client) UpdateContributorInsights(ctx context.Context, params *UpdateCo
 	AddResolveEndpointMiddleware(stack, options)
 	v4.AddComputePayloadSHA256Middleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
-	v4.AddHTTPSignerMiddleware(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateContributorInsightsValidationMiddleware(stack)
@@ -42,7 +43,7 @@ func (c *Client) UpdateContributorInsights(ctx context.Context, params *UpdateCo
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "UpdateContributorInsights",
 			Err:           err,
 		}
@@ -80,11 +81,9 @@ func addawsAwsjson10_serdeOpUpdateContributorInsightsMiddlewares(stack *middlewa
 
 func newServiceMetadataMiddleware_opUpdateContributorInsights(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "DynamoDB",
-		ServiceID:      "dynamodb",
-		EndpointPrefix: "dynamodb",
-		SigningName:    "dynamodb",
-		OperationName:  "UpdateContributorInsights",
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "dynamodb",
+		OperationName: "UpdateContributorInsights",
 	}
 }

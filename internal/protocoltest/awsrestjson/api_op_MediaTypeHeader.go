@@ -24,6 +24,7 @@ func (c *Client) MediaTypeHeader(ctx context.Context, params *MediaTypeHeaderInp
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opMediaTypeHeader(options.Region), middleware.Before)
@@ -37,7 +38,7 @@ func (c *Client) MediaTypeHeader(ctx context.Context, params *MediaTypeHeaderInp
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "MediaTypeHeader",
 			Err:           err,
 		}
@@ -65,10 +66,8 @@ func addawsRestjson1_serdeOpMediaTypeHeaderMiddlewares(stack *middleware.Stack) 
 
 func newServiceMetadataMiddleware_opMediaTypeHeader(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Rest Json Protocol",
-		ServiceID:      "restjsonprotocol",
-		EndpointPrefix: "restjsonprotocol",
-		OperationName:  "MediaTypeHeader",
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "MediaTypeHeader",
 	}
 }

@@ -25,6 +25,7 @@ func (c *Client) XmlEnums(ctx context.Context, params *XmlEnumsInput, optFns ...
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opXmlEnums(options.Region), middleware.Before)
@@ -38,7 +39,7 @@ func (c *Client) XmlEnums(ctx context.Context, params *XmlEnumsInput, optFns ...
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "XmlEnums",
 			Err:           err,
 		}
@@ -76,10 +77,8 @@ func addawsRestxml_serdeOpXmlEnumsMiddlewares(stack *middleware.Stack) {
 
 func newServiceMetadataMiddleware_opXmlEnums(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Rest Xml Protocol",
-		ServiceID:      "restxmlprotocol",
-		EndpointPrefix: "restxmlprotocol",
-		OperationName:  "XmlEnums",
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "XmlEnums",
 	}
 }

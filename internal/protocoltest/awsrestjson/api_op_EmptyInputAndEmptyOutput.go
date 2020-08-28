@@ -27,6 +27,7 @@ func (c *Client) EmptyInputAndEmptyOutput(ctx context.Context, params *EmptyInpu
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opEmptyInputAndEmptyOutput(options.Region), middleware.Before)
@@ -40,7 +41,7 @@ func (c *Client) EmptyInputAndEmptyOutput(ctx context.Context, params *EmptyInpu
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "EmptyInputAndEmptyOutput",
 			Err:           err,
 		}
@@ -65,10 +66,8 @@ func addawsRestjson1_serdeOpEmptyInputAndEmptyOutputMiddlewares(stack *middlewar
 
 func newServiceMetadataMiddleware_opEmptyInputAndEmptyOutput(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Rest Json Protocol",
-		ServiceID:      "restjsonprotocol",
-		EndpointPrefix: "restjsonprotocol",
-		OperationName:  "EmptyInputAndEmptyOutput",
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "EmptyInputAndEmptyOutput",
 	}
 }

@@ -84,8 +84,9 @@ func (c *Client) PostContent(ctx context.Context, params *PostContentInput, optF
 	v4.AddUnsignedPayloadMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
-	v4.AddHTTPSignerMiddleware(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	addOpPostContentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPostContent(options.Region), middleware.Before)
@@ -99,7 +100,7 @@ func (c *Client) PostContent(ctx context.Context, params *PostContentInput, optF
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "PostContent",
 			Err:           err,
 		}
@@ -340,11 +341,9 @@ func addawsRestjson1_serdeOpPostContentMiddlewares(stack *middleware.Stack) {
 
 func newServiceMetadataMiddleware_opPostContent(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Lex Runtime Service",
-		ServiceID:      "lexruntimeservice",
-		EndpointPrefix: "lexruntimeservice",
-		SigningName:    "lex",
-		OperationName:  "PostContent",
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "lex",
+		OperationName: "PostContent",
 	}
 }

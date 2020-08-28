@@ -26,6 +26,7 @@ func (c *Client) ConstantAndVariableQueryString(ctx context.Context, params *Con
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opConstantAndVariableQueryString(options.Region), middleware.Before)
@@ -39,7 +40,7 @@ func (c *Client) ConstantAndVariableQueryString(ctx context.Context, params *Con
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "ConstantAndVariableQueryString",
 			Err:           err,
 		}
@@ -66,10 +67,8 @@ func addawsRestjson1_serdeOpConstantAndVariableQueryStringMiddlewares(stack *mid
 
 func newServiceMetadataMiddleware_opConstantAndVariableQueryString(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Rest Json Protocol",
-		ServiceID:      "restjsonprotocol",
-		EndpointPrefix: "restjsonprotocol",
-		OperationName:  "ConstantAndVariableQueryString",
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "ConstantAndVariableQueryString",
 	}
 }

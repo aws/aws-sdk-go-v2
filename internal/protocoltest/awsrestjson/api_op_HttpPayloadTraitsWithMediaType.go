@@ -25,6 +25,7 @@ func (c *Client) HttpPayloadTraitsWithMediaType(ctx context.Context, params *Htt
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadTraitsWithMediaType(options.Region), middleware.Before)
@@ -38,7 +39,7 @@ func (c *Client) HttpPayloadTraitsWithMediaType(ctx context.Context, params *Htt
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "HttpPayloadTraitsWithMediaType",
 			Err:           err,
 		}
@@ -68,10 +69,8 @@ func addawsRestjson1_serdeOpHttpPayloadTraitsWithMediaTypeMiddlewares(stack *mid
 
 func newServiceMetadataMiddleware_opHttpPayloadTraitsWithMediaType(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Rest Json Protocol",
-		ServiceID:      "restjsonprotocol",
-		EndpointPrefix: "restjsonprotocol",
-		OperationName:  "HttpPayloadTraitsWithMediaType",
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "HttpPayloadTraitsWithMediaType",
 	}
 }

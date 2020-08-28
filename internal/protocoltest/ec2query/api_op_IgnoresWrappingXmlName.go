@@ -25,6 +25,7 @@ func (c *Client) IgnoresWrappingXmlName(ctx context.Context, params *IgnoresWrap
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opIgnoresWrappingXmlName(options.Region), middleware.Before)
@@ -38,7 +39,7 @@ func (c *Client) IgnoresWrappingXmlName(ctx context.Context, params *IgnoresWrap
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "IgnoresWrappingXmlName",
 			Err:           err,
 		}
@@ -65,10 +66,8 @@ func addawsEc2query_serdeOpIgnoresWrappingXmlNameMiddlewares(stack *middleware.S
 
 func newServiceMetadataMiddleware_opIgnoresWrappingXmlName(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "EC2 Protocol",
-		ServiceID:      "ec2protocol",
-		EndpointPrefix: "ec2protocol",
-		OperationName:  "IgnoresWrappingXmlName",
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "IgnoresWrappingXmlName",
 	}
 }

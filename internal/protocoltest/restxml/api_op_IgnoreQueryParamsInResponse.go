@@ -26,6 +26,7 @@ func (c *Client) IgnoreQueryParamsInResponse(ctx context.Context, params *Ignore
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opIgnoreQueryParamsInResponse(options.Region), middleware.Before)
@@ -39,7 +40,7 @@ func (c *Client) IgnoreQueryParamsInResponse(ctx context.Context, params *Ignore
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "IgnoreQueryParamsInResponse",
 			Err:           err,
 		}
@@ -66,10 +67,8 @@ func addawsRestxml_serdeOpIgnoreQueryParamsInResponseMiddlewares(stack *middlewa
 
 func newServiceMetadataMiddleware_opIgnoreQueryParamsInResponse(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Rest Xml Protocol",
-		ServiceID:      "restxmlprotocol",
-		EndpointPrefix: "restxmlprotocol",
-		OperationName:  "IgnoreQueryParamsInResponse",
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "IgnoreQueryParamsInResponse",
 	}
 }

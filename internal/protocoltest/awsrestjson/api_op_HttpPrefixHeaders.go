@@ -24,6 +24,7 @@ func (c *Client) HttpPrefixHeaders(ctx context.Context, params *HttpPrefixHeader
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPrefixHeaders(options.Region), middleware.Before)
@@ -37,7 +38,7 @@ func (c *Client) HttpPrefixHeaders(ctx context.Context, params *HttpPrefixHeader
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "HttpPrefixHeaders",
 			Err:           err,
 		}
@@ -67,10 +68,8 @@ func addawsRestjson1_serdeOpHttpPrefixHeadersMiddlewares(stack *middleware.Stack
 
 func newServiceMetadataMiddleware_opHttpPrefixHeaders(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Rest Json Protocol",
-		ServiceID:      "restjsonprotocol",
-		EndpointPrefix: "restjsonprotocol",
-		OperationName:  "HttpPrefixHeaders",
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "HttpPrefixHeaders",
 	}
 }

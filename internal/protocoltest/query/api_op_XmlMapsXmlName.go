@@ -24,6 +24,7 @@ func (c *Client) XmlMapsXmlName(ctx context.Context, params *XmlMapsXmlNameInput
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opXmlMapsXmlName(options.Region), middleware.Before)
@@ -37,7 +38,7 @@ func (c *Client) XmlMapsXmlName(ctx context.Context, params *XmlMapsXmlNameInput
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "XmlMapsXmlName",
 			Err:           err,
 		}
@@ -64,10 +65,8 @@ func addawsAwsquery_serdeOpXmlMapsXmlNameMiddlewares(stack *middleware.Stack) {
 
 func newServiceMetadataMiddleware_opXmlMapsXmlName(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Query Protocol",
-		ServiceID:      "queryprotocol",
-		EndpointPrefix: "queryprotocol",
-		OperationName:  "XmlMapsXmlName",
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "XmlMapsXmlName",
 	}
 }

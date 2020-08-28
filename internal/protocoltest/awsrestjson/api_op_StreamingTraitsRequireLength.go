@@ -27,6 +27,7 @@ func (c *Client) StreamingTraitsRequireLength(ctx context.Context, params *Strea
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStreamingTraitsRequireLength(options.Region), middleware.Before)
 
@@ -39,7 +40,7 @@ func (c *Client) StreamingTraitsRequireLength(ctx context.Context, params *Strea
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "StreamingTraitsRequireLength",
 			Err:           err,
 		}
@@ -69,10 +70,8 @@ func addawsRestjson1_serdeOpStreamingTraitsRequireLengthMiddlewares(stack *middl
 
 func newServiceMetadataMiddleware_opStreamingTraitsRequireLength(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Rest Json Protocol",
-		ServiceID:      "restjsonprotocol",
-		EndpointPrefix: "restjsonprotocol",
-		OperationName:  "StreamingTraitsRequireLength",
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "StreamingTraitsRequireLength",
 	}
 }

@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	v4Internal "github.com/aws/aws-sdk-go-v2/aws/signer/internal/v4"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
@@ -180,12 +181,13 @@ func (m *contentSHA256HeaderMiddleware) HandleBuild(
 
 // SignHTTPRequestMiddleware is a `FinalizeMiddleware` implementation for SigV4 HTTP Signing
 type SignHTTPRequestMiddleware struct {
-	signer HTTPSigner
+	credentialsProvider aws.CredentialsProvider
+	signer              HTTPSigner
 }
 
 // NewSignHTTPRequestMiddleware constructs a SignHTTPRequestMiddleware using the given Signer for signing requests
-func NewSignHTTPRequestMiddleware(signer HTTPSigner) *SignHTTPRequestMiddleware {
-	return &SignHTTPRequestMiddleware{signer: signer}
+func NewSignHTTPRequestMiddleware(credentialsProvider aws.CredentialsProvider, signer HTTPSigner) *SignHTTPRequestMiddleware {
+	return &SignHTTPRequestMiddleware{credentialsProvider: credentialsProvider, signer: signer}
 }
 
 // ID is the SignHTTPRequestMiddleware identifier
@@ -208,7 +210,12 @@ func (s *SignHTTPRequestMiddleware) HandleFinalize(ctx context.Context, in middl
 		return out, metadata, &SigningError{Err: fmt.Errorf("computed payload hash missing from context")}
 	}
 
-	err = s.signer.SignHTTP(ctx, req.Request, payloadHash, signingName, signingRegion, sdk.NowTime())
+	credentials, err := s.credentialsProvider.Retrieve(ctx)
+	if err != nil {
+		return out, metadata, &SigningError{Err: fmt.Errorf("failed to retrieve credentials: %w", err)}
+	}
+
+	err = s.signer.SignHTTP(ctx, credentials, req.Request, payloadHash, signingName, signingRegion, sdk.NowTime())
 	if err != nil {
 		return out, metadata, &SigningError{Err: fmt.Errorf("failed to sign http request, %w", err)}
 	}
@@ -228,26 +235,4 @@ func GetPayloadHash(ctx context.Context) (v string) {
 func SetPayloadHash(ctx context.Context, hash string) context.Context {
 	ctx = context.WithValue(ctx, payloadHashKey{}, hash)
 	return ctx
-}
-
-// HTTPSignerMiddlewareConfig interface for HTTP signer middleware config
-type HTTPSignerMiddlewareConfig interface {
-	GetHTTPSigner() HTTPSigner
-}
-
-// HTTPSignerMiddleware represent the middleware's for HTTPSigner
-type HTTPSignerMiddleware struct {
-	SignHTTPRequestMiddleware *SignHTTPRequestMiddleware
-}
-
-// AddHTTPSignerMiddleware adds HTTP signer middleware's to operation stack
-func AddHTTPSignerMiddleware(stack *middleware.Stack, cfg HTTPSignerMiddlewareConfig, optFns ...func(*HTTPSignerMiddleware)) {
-	m := HTTPSignerMiddleware{
-		SignHTTPRequestMiddleware: NewSignHTTPRequestMiddleware(cfg.GetHTTPSigner()),
-	}
-	for _, fn := range optFns {
-		fn(&m)
-	}
-
-	stack.Finalize.Add(m.SignHTTPRequestMiddleware, middleware.After)
 }

@@ -25,6 +25,7 @@ func (c *Client) RecursiveShapes(ctx context.Context, params *RecursiveShapesInp
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRecursiveShapes(options.Region), middleware.Before)
@@ -38,7 +39,7 @@ func (c *Client) RecursiveShapes(ctx context.Context, params *RecursiveShapesInp
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "RecursiveShapes",
 			Err:           err,
 		}
@@ -66,10 +67,8 @@ func addawsRestxml_serdeOpRecursiveShapesMiddlewares(stack *middleware.Stack) {
 
 func newServiceMetadataMiddleware_opRecursiveShapes(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Rest Xml Protocol",
-		ServiceID:      "restxmlprotocol",
-		EndpointPrefix: "restxmlprotocol",
-		OperationName:  "RecursiveShapes",
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "RecursiveShapes",
 	}
 }

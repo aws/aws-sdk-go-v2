@@ -25,6 +25,7 @@ func (c *Client) QueryIdempotencyTokenAutoFill(ctx context.Context, params *Quer
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addIdempotencyToken_opQueryIdempotencyTokenAutoFillMiddleware(stack, options)
@@ -39,7 +40,7 @@ func (c *Client) QueryIdempotencyTokenAutoFill(ctx context.Context, params *Quer
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "QueryIdempotencyTokenAutoFill",
 			Err:           err,
 		}
@@ -98,10 +99,8 @@ func addIdempotencyToken_opQueryIdempotencyTokenAutoFillMiddleware(stack *middle
 
 func newServiceMetadataMiddleware_opQueryIdempotencyTokenAutoFill(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "EC2 Protocol",
-		ServiceID:      "ec2protocol",
-		EndpointPrefix: "ec2protocol",
-		OperationName:  "QueryIdempotencyTokenAutoFill",
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "QueryIdempotencyTokenAutoFill",
 	}
 }

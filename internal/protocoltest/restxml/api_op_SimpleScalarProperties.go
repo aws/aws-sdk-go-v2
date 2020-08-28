@@ -23,6 +23,7 @@ func (c *Client) SimpleScalarProperties(ctx context.Context, params *SimpleScala
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSimpleScalarProperties(options.Region), middleware.Before)
@@ -36,7 +37,7 @@ func (c *Client) SimpleScalarProperties(ctx context.Context, params *SimpleScala
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "SimpleScalarProperties",
 			Err:           err,
 		}
@@ -82,10 +83,8 @@ func addawsRestxml_serdeOpSimpleScalarPropertiesMiddlewares(stack *middleware.St
 
 func newServiceMetadataMiddleware_opSimpleScalarProperties(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Rest Xml Protocol",
-		ServiceID:      "restxmlprotocol",
-		EndpointPrefix: "restxmlprotocol",
-		OperationName:  "SimpleScalarProperties",
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "SimpleScalarProperties",
 	}
 }

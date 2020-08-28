@@ -34,8 +34,9 @@ func (c *Client) DeleteItem(ctx context.Context, params *DeleteItemInput, optFns
 	AddResolveEndpointMiddleware(stack, options)
 	v4.AddComputePayloadSHA256Middleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
-	v4.AddHTTPSignerMiddleware(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteItemValidationMiddleware(stack)
@@ -50,7 +51,7 @@ func (c *Client) DeleteItem(ctx context.Context, params *DeleteItemInput, optFns
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "DeleteItem",
 			Err:           err,
 		}
@@ -232,11 +233,9 @@ func addawsAwsjson10_serdeOpDeleteItemMiddlewares(stack *middleware.Stack) {
 
 func newServiceMetadataMiddleware_opDeleteItem(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "DynamoDB",
-		ServiceID:      "dynamodb",
-		EndpointPrefix: "dynamodb",
-		SigningName:    "dynamodb",
-		OperationName:  "DeleteItem",
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "dynamodb",
+		OperationName: "DeleteItem",
 	}
 }

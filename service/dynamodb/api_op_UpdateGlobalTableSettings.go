@@ -26,8 +26,9 @@ func (c *Client) UpdateGlobalTableSettings(ctx context.Context, params *UpdateGl
 	AddResolveEndpointMiddleware(stack, options)
 	v4.AddComputePayloadSHA256Middleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
-	v4.AddHTTPSignerMiddleware(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateGlobalTableSettingsValidationMiddleware(stack)
@@ -42,7 +43,7 @@ func (c *Client) UpdateGlobalTableSettings(ctx context.Context, params *UpdateGl
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "UpdateGlobalTableSettings",
 			Err:           err,
 		}
@@ -98,11 +99,9 @@ func addawsAwsjson10_serdeOpUpdateGlobalTableSettingsMiddlewares(stack *middlewa
 
 func newServiceMetadataMiddleware_opUpdateGlobalTableSettings(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "DynamoDB",
-		ServiceID:      "dynamodb",
-		EndpointPrefix: "dynamodb",
-		SigningName:    "dynamodb",
-		OperationName:  "UpdateGlobalTableSettings",
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "dynamodb",
+		OperationName: "UpdateGlobalTableSettings",
 	}
 }

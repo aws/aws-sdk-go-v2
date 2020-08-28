@@ -25,6 +25,7 @@ func (c *Client) RecursiveXmlShapes(ctx context.Context, params *RecursiveXmlSha
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRecursiveXmlShapes(options.Region), middleware.Before)
@@ -38,7 +39,7 @@ func (c *Client) RecursiveXmlShapes(ctx context.Context, params *RecursiveXmlSha
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "RecursiveXmlShapes",
 			Err:           err,
 		}
@@ -65,10 +66,8 @@ func addawsEc2query_serdeOpRecursiveXmlShapesMiddlewares(stack *middleware.Stack
 
 func newServiceMetadataMiddleware_opRecursiveXmlShapes(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "EC2 Protocol",
-		ServiceID:      "ec2protocol",
-		EndpointPrefix: "ec2protocol",
-		OperationName:  "RecursiveXmlShapes",
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "RecursiveXmlShapes",
 	}
 }

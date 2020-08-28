@@ -25,8 +25,9 @@ func (c *Client) PutAndGetInlineDocuments(ctx context.Context, params *PutAndGet
 	AddResolveEndpointMiddleware(stack, options)
 	v4.AddComputePayloadSHA256Middleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
-	v4.AddHTTPSignerMiddleware(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutAndGetInlineDocuments(options.Region), middleware.Before)
@@ -40,7 +41,7 @@ func (c *Client) PutAndGetInlineDocuments(ctx context.Context, params *PutAndGet
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "PutAndGetInlineDocuments",
 			Err:           err,
 		}
@@ -68,11 +69,9 @@ func addawsAwsjson11_serdeOpPutAndGetInlineDocumentsMiddlewares(stack *middlewar
 
 func newServiceMetadataMiddleware_opPutAndGetInlineDocuments(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Json Protocol",
-		ServiceID:      "jsonprotocol",
-		EndpointPrefix: "jsonprotocol",
-		SigningName:    "foo",
-		OperationName:  "PutAndGetInlineDocuments",
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "foo",
+		OperationName: "PutAndGetInlineDocuments",
 	}
 }
