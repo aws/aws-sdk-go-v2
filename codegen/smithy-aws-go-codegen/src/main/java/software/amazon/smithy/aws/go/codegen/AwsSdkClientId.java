@@ -28,7 +28,7 @@ public class AwsSdkClientId implements GoIntegration {
     }
 
     @Override
-    public String processClientId(GoSettings settings, Model model, String clientId) {
+    public String processServiceId(GoSettings settings, Model model, String serviceId) {
         ServiceShape serviceShape = settings.getService(model);
         return serviceShape.expectTrait(ServiceTrait.class).getSdkId();
     }

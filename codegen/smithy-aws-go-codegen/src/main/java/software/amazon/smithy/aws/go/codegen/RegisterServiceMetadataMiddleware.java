@@ -52,8 +52,7 @@ public final class RegisterServiceMetadataMiddleware implements GoIntegration {
 
                     if (serviceTrait.isPresent()) {
                         ServiceTrait trait = serviceTrait.get();
-                        builder.append(String.format("ServiceName: \"%s\",\n", trait.getSdkId()));
-                        builder.append("ServiceID: ClientID,\n");
+                        builder.append("ServiceID: ServiceID,\n");
                     }
 
                     if (sigV4Trait.isPresent()) {
