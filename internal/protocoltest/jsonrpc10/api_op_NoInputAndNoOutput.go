@@ -26,6 +26,7 @@ func (c *Client) NoInputAndNoOutput(ctx context.Context, params *NoInputAndNoOut
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opNoInputAndNoOutput(options.Region), middleware.Before)
@@ -39,7 +40,7 @@ func (c *Client) NoInputAndNoOutput(ctx context.Context, params *NoInputAndNoOut
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "NoInputAndNoOutput",
 			Err:           err,
 		}
@@ -64,10 +65,8 @@ func addawsAwsjson10_serdeOpNoInputAndNoOutputMiddlewares(stack *middleware.Stac
 
 func newServiceMetadataMiddleware_opNoInputAndNoOutput(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "JSON RPC 10",
-		ServiceID:      "jsonrpc10",
-		EndpointPrefix: "jsonrpc10",
-		OperationName:  "NoInputAndNoOutput",
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "NoInputAndNoOutput",
 	}
 }

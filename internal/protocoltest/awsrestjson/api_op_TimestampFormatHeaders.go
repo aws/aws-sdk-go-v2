@@ -25,6 +25,7 @@ func (c *Client) TimestampFormatHeaders(ctx context.Context, params *TimestampFo
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTimestampFormatHeaders(options.Region), middleware.Before)
@@ -38,7 +39,7 @@ func (c *Client) TimestampFormatHeaders(ctx context.Context, params *TimestampFo
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "TimestampFormatHeaders",
 			Err:           err,
 		}
@@ -78,10 +79,8 @@ func addawsRestjson1_serdeOpTimestampFormatHeadersMiddlewares(stack *middleware.
 
 func newServiceMetadataMiddleware_opTimestampFormatHeaders(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Rest Json Protocol",
-		ServiceID:      "restjsonprotocol",
-		EndpointPrefix: "restjsonprotocol",
-		OperationName:  "TimestampFormatHeaders",
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "TimestampFormatHeaders",
 	}
 }

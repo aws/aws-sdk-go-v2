@@ -4,11 +4,13 @@ package jsonrpc10
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
 	"net/http"
 )
+
+const ServiceID = "JSON RPC 10"
 
 type Client struct {
 	options Options
@@ -19,6 +21,10 @@ type Client struct {
 // such as changing the client's endpoint or adding custom middleware behavior.
 func New(options Options, optFns ...func(*Options)) *Client {
 	options = options.Copy()
+
+	resolveRetryer(&options)
+
+	resolveHTTPClient(&options)
 
 	resolveDefaultEndpointConfiguration(&options)
 
@@ -33,12 +39,6 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	return client
 }
 
-// ServiceID returns the name of the identifier for the service API.
-func (c *Client) ServiceID() string { return "jsonrpc10" }
-
-// ServiceName returns the full service title.
-func (c *Client) ServiceName() string { return "jsonrpc10" }
-
 type Options struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
@@ -50,10 +50,6 @@ type Options struct {
 
 	// The service endpoint resolver.
 	EndpointResolver EndpointResolver
-
-	// HTTPSigner provides AWS request signing for HTTP requests made from the client.
-	// When nil the API client will use a default signer.
-	HTTPSigner v4.HTTPSigner
 
 	// An integer value representing the logging level.
 	LogLevel aws.LogLevel
@@ -79,10 +75,6 @@ func (o Options) GetEndpointOptions() ResolverOptions {
 
 func (o Options) GetEndpointResolver() EndpointResolver {
 	return o.EndpointResolver
-}
-
-func (o Options) GetHTTPSigner() v4.HTTPSigner {
-	return o.HTTPSigner
 }
 
 func (o Options) GetLogLevel() aws.LogLevel {
@@ -125,4 +117,22 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient: cfg.HTTPClient,
 	}
 	return New(opts, optFns...)
+}
+
+func resolveHTTPClient(o *Options) {
+	if o.HTTPClient != nil {
+		return
+	}
+	o.HTTPClient = aws.NewBuildableHTTPClient()
+}
+
+func resolveRetryer(o *Options) {
+	if o.Retryer != nil {
+		return
+	}
+	o.Retryer = retry.NewStandard()
+}
+
+func addClientUserAgent(stack *middleware.Stack) {
+	awsmiddleware.AddUserAgentKey("jsonrpc10")(stack)
 }

@@ -23,6 +23,7 @@ func (c *Client) SimpleScalarXmlProperties(ctx context.Context, params *SimpleSc
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSimpleScalarXmlProperties(options.Region), middleware.Before)
@@ -36,7 +37,7 @@ func (c *Client) SimpleScalarXmlProperties(ctx context.Context, params *SimpleSc
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "SimpleScalarXmlProperties",
 			Err:           err,
 		}
@@ -72,10 +73,8 @@ func addawsAwsquery_serdeOpSimpleScalarXmlPropertiesMiddlewares(stack *middlewar
 
 func newServiceMetadataMiddleware_opSimpleScalarXmlProperties(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Query Protocol",
-		ServiceID:      "queryprotocol",
-		EndpointPrefix: "queryprotocol",
-		OperationName:  "SimpleScalarXmlProperties",
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "SimpleScalarXmlProperties",
 	}
 }

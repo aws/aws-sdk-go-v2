@@ -26,6 +26,7 @@ func (c *Client) AllQueryStringTypes(ctx context.Context, params *AllQueryString
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAllQueryStringTypes(options.Region), middleware.Before)
@@ -39,7 +40,7 @@ func (c *Client) AllQueryStringTypes(ctx context.Context, params *AllQueryString
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "AllQueryStringTypes",
 			Err:           err,
 		}
@@ -82,10 +83,8 @@ func addawsRestjson1_serdeOpAllQueryStringTypesMiddlewares(stack *middleware.Sta
 
 func newServiceMetadataMiddleware_opAllQueryStringTypes(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Rest Json Protocol",
-		ServiceID:      "restjsonprotocol",
-		EndpointPrefix: "restjsonprotocol",
-		OperationName:  "AllQueryStringTypes",
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "AllQueryStringTypes",
 	}
 }

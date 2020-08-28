@@ -26,8 +26,9 @@ func (c *Client) JsonEnums(ctx context.Context, params *JsonEnumsInput, optFns .
 	AddResolveEndpointMiddleware(stack, options)
 	v4.AddComputePayloadSHA256Middleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
-	v4.AddHTTPSignerMiddleware(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opJsonEnums(options.Region), middleware.Before)
@@ -41,7 +42,7 @@ func (c *Client) JsonEnums(ctx context.Context, params *JsonEnumsInput, optFns .
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "JsonEnums",
 			Err:           err,
 		}
@@ -79,11 +80,9 @@ func addawsAwsjson11_serdeOpJsonEnumsMiddlewares(stack *middleware.Stack) {
 
 func newServiceMetadataMiddleware_opJsonEnums(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Json Protocol",
-		ServiceID:      "jsonprotocol",
-		EndpointPrefix: "jsonprotocol",
-		SigningName:    "foo",
-		OperationName:  "JsonEnums",
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "foo",
+		OperationName: "JsonEnums",
 	}
 }

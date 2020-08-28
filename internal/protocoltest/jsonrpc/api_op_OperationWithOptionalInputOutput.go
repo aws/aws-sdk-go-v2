@@ -24,8 +24,9 @@ func (c *Client) OperationWithOptionalInputOutput(ctx context.Context, params *O
 	AddResolveEndpointMiddleware(stack, options)
 	v4.AddComputePayloadSHA256Middleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
-	v4.AddHTTPSignerMiddleware(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opOperationWithOptionalInputOutput(options.Region), middleware.Before)
@@ -39,7 +40,7 @@ func (c *Client) OperationWithOptionalInputOutput(ctx context.Context, params *O
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "OperationWithOptionalInputOutput",
 			Err:           err,
 		}
@@ -67,11 +68,9 @@ func addawsAwsjson11_serdeOpOperationWithOptionalInputOutputMiddlewares(stack *m
 
 func newServiceMetadataMiddleware_opOperationWithOptionalInputOutput(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Json Protocol",
-		ServiceID:      "jsonprotocol",
-		EndpointPrefix: "jsonprotocol",
-		SigningName:    "foo",
-		OperationName:  "OperationWithOptionalInputOutput",
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "foo",
+		OperationName: "OperationWithOptionalInputOutput",
 	}
 }

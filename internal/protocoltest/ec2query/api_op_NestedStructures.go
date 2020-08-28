@@ -25,6 +25,7 @@ func (c *Client) NestedStructures(ctx context.Context, params *NestedStructuresI
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opNestedStructures(options.Region), middleware.Before)
@@ -38,7 +39,7 @@ func (c *Client) NestedStructures(ctx context.Context, params *NestedStructuresI
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "NestedStructures",
 			Err:           err,
 		}
@@ -64,10 +65,8 @@ func addawsEc2query_serdeOpNestedStructuresMiddlewares(stack *middleware.Stack) 
 
 func newServiceMetadataMiddleware_opNestedStructures(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "EC2 Protocol",
-		ServiceID:      "ec2protocol",
-		EndpointPrefix: "ec2protocol",
-		OperationName:  "NestedStructures",
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "NestedStructures",
 	}
 }

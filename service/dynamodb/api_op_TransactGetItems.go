@@ -45,8 +45,9 @@ func (c *Client) TransactGetItems(ctx context.Context, params *TransactGetItemsI
 	AddResolveEndpointMiddleware(stack, options)
 	v4.AddComputePayloadSHA256Middleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
-	v4.AddHTTPSignerMiddleware(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTransactGetItemsValidationMiddleware(stack)
@@ -61,7 +62,7 @@ func (c *Client) TransactGetItems(ctx context.Context, params *TransactGetItemsI
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "TransactGetItems",
 			Err:           err,
 		}
@@ -107,11 +108,9 @@ func addawsAwsjson10_serdeOpTransactGetItemsMiddlewares(stack *middleware.Stack)
 
 func newServiceMetadataMiddleware_opTransactGetItems(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "DynamoDB",
-		ServiceID:      "dynamodb",
-		EndpointPrefix: "dynamodb",
-		SigningName:    "dynamodb",
-		OperationName:  "TransactGetItems",
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "dynamodb",
+		OperationName: "TransactGetItems",
 	}
 }

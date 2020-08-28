@@ -43,8 +43,9 @@ func (c *Client) RestoreTableFromBackup(ctx context.Context, params *RestoreTabl
 	AddResolveEndpointMiddleware(stack, options)
 	v4.AddComputePayloadSHA256Middleware(stack)
 	retry.AddRetryMiddlewares(stack, options)
-	v4.AddHTTPSignerMiddleware(stack, options)
+	addHTTPSignerV4Middleware(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRestoreTableFromBackupValidationMiddleware(stack)
@@ -59,7 +60,7 @@ func (c *Client) RestoreTableFromBackup(ctx context.Context, params *RestoreTabl
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "RestoreTableFromBackup",
 			Err:           err,
 		}
@@ -103,11 +104,9 @@ func addawsAwsjson10_serdeOpRestoreTableFromBackupMiddlewares(stack *middleware.
 
 func newServiceMetadataMiddleware_opRestoreTableFromBackup(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "DynamoDB",
-		ServiceID:      "dynamodb",
-		EndpointPrefix: "dynamodb",
-		SigningName:    "dynamodb",
-		OperationName:  "RestoreTableFromBackup",
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "dynamodb",
+		OperationName: "RestoreTableFromBackup",
 	}
 }

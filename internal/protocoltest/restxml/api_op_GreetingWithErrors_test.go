@@ -177,7 +177,7 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsRestxmlDeserialize(t *test
 			if !errors.As(err, &opErr) {
 				t.Fatalf("expect *types.InvalidGreeting operation error, got %T", err)
 			}
-			if e, a := client.ServiceID(), opErr.Service(); e != a {
+			if e, a := ServiceID, opErr.Service(); e != a {
 				t.Errorf("expect %v operation service name, got %v", e, a)
 			}
 			if e, a := "GreetingWithErrors", opErr.Operation(); e != a {
@@ -284,7 +284,7 @@ func TestClient_GreetingWithErrors_ComplexError_awsRestxmlDeserialize(t *testing
 			if !errors.As(err, &opErr) {
 				t.Fatalf("expect *types.ComplexError operation error, got %T", err)
 			}
-			if e, a := client.ServiceID(), opErr.Service(); e != a {
+			if e, a := ServiceID, opErr.Service(); e != a {
 				t.Errorf("expect %v operation service name, got %v", e, a)
 			}
 			if e, a := "GreetingWithErrors", opErr.Operation(); e != a {

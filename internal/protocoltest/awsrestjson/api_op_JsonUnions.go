@@ -25,6 +25,7 @@ func (c *Client) JsonUnions(ctx context.Context, params *JsonUnionsInput, optFns
 	AddResolveEndpointMiddleware(stack, options)
 	retry.AddRetryMiddlewares(stack, options)
 	awsmiddleware.AddAttemptClockSkewMiddleware(stack)
+	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opJsonUnions(options.Region), middleware.Before)
@@ -38,7 +39,7 @@ func (c *Client) JsonUnions(ctx context.Context, params *JsonUnionsInput, optFns
 	result, metadata, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, &smithy.OperationError{
-			ServiceID:     c.ServiceID(),
+			ServiceID:     ServiceID,
 			OperationName: "JsonUnions",
 			Err:           err,
 		}
@@ -70,10 +71,8 @@ func addawsRestjson1_serdeOpJsonUnionsMiddlewares(stack *middleware.Stack) {
 
 func newServiceMetadataMiddleware_opJsonUnions(region string) awsmiddleware.RegisterServiceMetadata {
 	return awsmiddleware.RegisterServiceMetadata{
-		Region:         region,
-		ServiceName:    "Rest Json Protocol",
-		ServiceID:      "restjsonprotocol",
-		EndpointPrefix: "restjsonprotocol",
-		OperationName:  "JsonUnions",
+		Region:        region,
+		ServiceID:     ServiceID,
+		OperationName: "JsonUnions",
 	}
 }

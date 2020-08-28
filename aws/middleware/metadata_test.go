@@ -10,25 +10,17 @@ import (
 
 func TestServiceMetadataProvider(t *testing.T) {
 	m := RegisterServiceMetadata{
-		ServiceName:    "Foo",
-		ServiceID:      "Bar",
-		EndpointPrefix: "Baz",
-		SigningName:    "Jaz",
-		Region:         "Fuz",
-		OperationName:  "FooOp",
+		ServiceID:     "Bar",
+		SigningName:   "Jaz",
+		Region:        "Fuz",
+		OperationName: "FooOp",
 	}
 
 	_, _, err := m.HandleInitialize(context.Background(), middleware.InitializeInput{}, middleware.InitializeHandlerFunc(func(
 		ctx context.Context, input middleware.InitializeInput,
 	) (o middleware.InitializeOutput, m middleware.Metadata, err error) {
 		t.Helper()
-		if e, a := "Foo", GetServiceName(ctx); e != a {
-			t.Errorf("expected %v, got %v", e, a)
-		}
 		if e, a := "Bar", GetServiceID(ctx); e != a {
-			t.Errorf("expected %v, got %v", e, a)
-		}
-		if e, a := "Baz", GetEndpointPrefix(ctx); e != a {
 			t.Errorf("expected %v, got %v", e, a)
 		}
 		if e, a := "Jaz", GetSigningName(ctx); e != a {

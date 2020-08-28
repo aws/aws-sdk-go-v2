@@ -3,12 +3,17 @@
 package dynamodb
 
 import (
+	cryptorand "crypto/rand"
 	"github.com/aws/aws-sdk-go-v2/aws"
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
+	smithyrand "github.com/awslabs/smithy-go/rand"
 	"net/http"
 )
+
+const ServiceID = "DynamoDB"
 
 // Amazon DynamoDB  <p>Amazon DynamoDB is a fully managed NoSQL database service
 // that provides fast and predictable performance with seamless scalability.
@@ -35,7 +40,13 @@ type Client struct {
 func New(options Options, optFns ...func(*Options)) *Client {
 	options = options.Copy()
 
+	resolveRetryer(&options)
+
+	resolveHTTPClient(&options)
+
 	resolveDefaultEndpointConfiguration(&options)
+
+	resolveIdempotencyTokenProvider(&options)
 
 	for _, fn := range optFns {
 		fn(&options)
@@ -47,12 +58,6 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	return client
 }
-
-// ServiceID returns the name of the identifier for the service API.
-func (c *Client) ServiceID() string { return "dynamodb" }
-
-// ServiceName returns the full service title.
-func (c *Client) ServiceName() string { return "Amazon DynamoDB" }
 
 type Options struct {
 	// Set of options to modify how an operation is invoked. These apply to all
@@ -68,10 +73,6 @@ type Options struct {
 
 	// The service endpoint resolver.
 	EndpointResolver EndpointResolver
-
-	// HTTPSigner provides AWS request signing for HTTP requests made from the client.
-	// When nil the API client will use a default signer.
-	HTTPSigner v4.HTTPSigner
 
 	// Provides idempotency tokens values that will be automatically populated into
 	// idempotent API operations.
@@ -105,10 +106,6 @@ func (o Options) GetEndpointOptions() ResolverOptions {
 
 func (o Options) GetEndpointResolver() EndpointResolver {
 	return o.EndpointResolver
-}
-
-func (o Options) GetHTTPSigner() v4.HTTPSigner {
-	return o.HTTPSigner
 }
 
 func (o Options) GetIdempotencyTokenProvider() IdempotencyTokenProvider {
@@ -156,6 +153,36 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		Credentials: cfg.Credentials,
 	}
 	return New(opts, optFns...)
+}
+
+func resolveHTTPClient(o *Options) {
+	if o.HTTPClient != nil {
+		return
+	}
+	o.HTTPClient = aws.NewBuildableHTTPClient()
+}
+
+func resolveRetryer(o *Options) {
+	if o.Retryer != nil {
+		return
+	}
+	o.Retryer = retry.NewStandard()
+}
+
+func addClientUserAgent(stack *middleware.Stack) {
+	awsmiddleware.AddUserAgentKey("dynamodb")(stack)
+}
+
+func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) {
+	signer := v4.Signer{}
+	stack.Finalize.Add(v4.NewSignHTTPRequestMiddleware(o.Credentials, signer), middleware.After)
+}
+
+func resolveIdempotencyTokenProvider(o *Options) {
+	if o.IdempotencyTokenProvider != nil {
+		return
+	}
+	o.IdempotencyTokenProvider = smithyrand.NewUUIDIdempotencyToken(cryptorand.Reader)
 }
 
 // IdempotencyTokenProvider interface for providing idempotency token
