@@ -21,7 +21,7 @@ import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.ServiceShape;
 
-public class AwsSdkClientId implements GoIntegration {
+public class AwsSdkServiceId implements GoIntegration {
     @Override
     public byte getOrder() {
         return 127;
