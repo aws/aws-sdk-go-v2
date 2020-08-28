@@ -9,7 +9,6 @@ import (
 // RegisterServiceMetadata registers metadata about the service and operation into the middleware context
 // so that it is available at runtime for other middleware to introspect.
 type RegisterServiceMetadata struct {
-	ServiceName   string
 	ServiceID     string
 	SigningName   string
 	Region        string
@@ -25,9 +24,6 @@ func (s RegisterServiceMetadata) ID() string {
 func (s RegisterServiceMetadata) HandleInitialize(
 	ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler,
 ) (out middleware.InitializeOutput, metadata middleware.Metadata, err error) {
-	if len(s.ServiceName) > 0 {
-		ctx = setServiceName(ctx, s.ServiceName)
-	}
 	if len(s.ServiceID) > 0 {
 		ctx = setServiceID(ctx, s.ServiceID)
 	}
@@ -45,20 +41,12 @@ func (s RegisterServiceMetadata) HandleInitialize(
 
 // service metadata keys for storing and lookup of runtime stack information.
 type (
-	serviceNameKey    struct{}
-	serviceIDKey      struct{}
-	endpointPrefixKey struct{}
-	signingNameKey    struct{}
-	signingRegionKey  struct{}
-	regionKey         struct{}
-	operationNameKey  struct{}
+	serviceIDKey     struct{}
+	signingNameKey   struct{}
+	signingRegionKey struct{}
+	regionKey        struct{}
+	operationNameKey struct{}
 )
-
-// GetServiceName retrieves the service name from the context.
-func GetServiceName(ctx context.Context) (v string) {
-	v, _ = ctx.Value(serviceNameKey{}).(string)
-	return v
-}
 
 // GetServiceID retrieves the service id from the context.
 func GetServiceID(ctx context.Context) (v string) {
@@ -98,11 +86,6 @@ func SetSigningName(ctx context.Context, value string) context.Context {
 // SetSigningRegion sets or modifies the region on the context.
 func SetSigningRegion(ctx context.Context, value string) context.Context {
 	return context.WithValue(ctx, signingRegionKey{}, value)
-}
-
-// setServiceName sets the service name on the context.
-func setServiceName(ctx context.Context, value string) context.Context {
-	return context.WithValue(ctx, serviceNameKey{}, value)
 }
 
 // setServiceID sets the service id on the context.

@@ -10,7 +10,6 @@ import (
 
 func TestServiceMetadataProvider(t *testing.T) {
 	m := RegisterServiceMetadata{
-		ServiceName:   "Foo",
 		ServiceID:     "Bar",
 		SigningName:   "Jaz",
 		Region:        "Fuz",
@@ -21,9 +20,6 @@ func TestServiceMetadataProvider(t *testing.T) {
 		ctx context.Context, input middleware.InitializeInput,
 	) (o middleware.InitializeOutput, m middleware.Metadata, err error) {
 		t.Helper()
-		if e, a := "Foo", GetServiceName(ctx); e != a {
-			t.Errorf("expected %v, got %v", e, a)
-		}
 		if e, a := "Bar", GetServiceID(ctx); e != a {
 			t.Errorf("expected %v, got %v", e, a)
 		}
