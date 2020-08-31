@@ -1,5 +1,5 @@
 /*
-Package customization provides customizations for the Amazon DynamoDB API client.
+Package customizations provides customizations for the Amazon DynamoDB API client.
 
 The DynamoDB API client uses two customizations, response checksum validation,
 and manual content-encoding: gzip support.

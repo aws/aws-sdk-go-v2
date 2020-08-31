@@ -88,6 +88,8 @@ func (*AcceptEncodingGzipMiddleware) HandleFinalize(
 	return next.HandleFinalize(ctx, input)
 }
 
+// DecompressGzipMiddleware provides the middleware for decompressing a gzip
+// response from the service.
 type DecompressGzipMiddleware struct{}
 
 // ID returns the id for the middleware.
