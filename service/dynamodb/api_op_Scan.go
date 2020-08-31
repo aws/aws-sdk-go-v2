@@ -55,6 +55,8 @@ func (c *Client) Scan(ctx context.Context, params *ScanInput, optFns ...func(*Op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpScanValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opScan(options.Region), middleware.Before)
+	addValidateResponseChecksum(stack, options)
+	addAcceptEncodingGzip(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

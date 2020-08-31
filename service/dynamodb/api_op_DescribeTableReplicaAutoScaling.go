@@ -36,6 +36,8 @@ func (c *Client) DescribeTableReplicaAutoScaling(ctx context.Context, params *De
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeTableReplicaAutoScalingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTableReplicaAutoScaling(options.Region), middleware.Before)
+	addValidateResponseChecksum(stack, options)
+	addAcceptEncodingGzip(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
