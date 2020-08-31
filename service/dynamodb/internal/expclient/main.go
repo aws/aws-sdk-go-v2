@@ -8,7 +8,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
-	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	ddbtypes "github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	"github.com/awslabs/smithy-go/middleware"
@@ -24,7 +23,6 @@ func main() {
 
 	client := dynamodb.NewFromConfig(cfg, func(o *dynamodb.Options) {
 		o.HTTPClient = smithyhttp.WrapLogClient(logger{}, aws.NewBuildableHTTPClient(), false)
-		o.HTTPSigner = v4.NewSigner(cfg.Credentials)
 		o.Retryer = retry.NewStandard()
 		//o.DisableAcceptEncodingGzip = true
 		//o.DisableValidateResponseChecksum = true
