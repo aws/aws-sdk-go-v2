@@ -3,6 +3,7 @@ package retry
 import (
 	"context"
 	"fmt"
+	"strconv"
 	"strings"
 	"time"
 
@@ -134,12 +135,12 @@ func (r MetricsHeaderMiddleware) HandleFinalize(ctx context.Context, in smithymi
 		return out, metadata, fmt.Errorf("retry metadata value not found on context")
 	}
 
-	const retryMetricHeader = "amz-sdk-request"
+	const retryMetricHeader = "Amz-Sdk-Request"
 	var parts []string
 
-	parts = append(parts, fmt.Sprintf("attempt=%d", retryMetadata.AttemptNum))
+	parts = append(parts, "attempt="+strconv.Itoa(retryMetadata.AttemptNum))
 	if retryMetadata.MaxAttempts != 0 {
-		parts = append(parts, fmt.Sprintf("max=%d", retryMetadata.MaxAttempts))
+		parts = append(parts, "max="+strconv.Itoa(retryMetadata.MaxAttempts))
 	}
 
 	var ttl time.Time
@@ -151,12 +152,12 @@ func (r MetricsHeaderMiddleware) HandleFinalize(ctx context.Context, in smithymi
 	if !ttl.IsZero() && retryMetadata.AttemptClockSkew > 0 {
 		const unixTimeFormat = "20060102T150405Z"
 		ttl = ttl.Add(retryMetadata.AttemptClockSkew)
-		parts = append(parts, fmt.Sprintf("ttl=%s", ttl.Format(unixTimeFormat)))
+		parts = append(parts, "ttl="+ttl.Format(unixTimeFormat))
 	}
 
 	switch req := in.Request.(type) {
 	case *http.Request:
-		req.Header.Set(retryMetricHeader, strings.Join(parts, "; "))
+		req.Header[retryMetricHeader] = append(req.Header[retryMetricHeader][:0], strings.Join(parts, "; "))
 	default:
 		return out, metadata, fmt.Errorf("unknown transport type %T", req)
 	}
