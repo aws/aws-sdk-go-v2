@@ -24,7 +24,8 @@ func main() {
 	client := dynamodb.NewFromConfig(cfg, func(o *dynamodb.Options) {
 		o.HTTPClient = smithyhttp.WrapLogClient(logger{}, aws.NewBuildableHTTPClient(), false)
 		o.Retryer = retry.NewStandard()
-		//o.DisableAcceptEncodingGzip = true
+
+		//o.EnableAcceptEncodingGzip = true
 		//o.DisableValidateResponseChecksum = true
 	})
 

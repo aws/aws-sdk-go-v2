@@ -14,20 +14,20 @@ import (
 // AddAcceptEncodingGzipOptions provides the options for the
 // AddAcceptEncodingGzip middleware setup.
 type AddAcceptEncodingGzipOptions struct {
-	Disable bool
+	Enable bool
 }
 
 // AddAcceptEncodingGzip explicitly adds handling for accept-encoding GZIP
 // middleware to the operation stack. This allows checksums to be correctly
 // computed without disabling GZIP support.
 func AddAcceptEncodingGzip(stack *middleware.Stack, options AddAcceptEncodingGzipOptions) {
-	if options.Disable {
-		stack.Finalize.Add(&DisableAcceptEncodingGzipMiddleware{}, middleware.Before)
+	if options.Enable {
+		stack.Finalize.Add(&AcceptEncodingGzipMiddleware{}, middleware.Before)
+		stack.Deserialize.Insert(&DecompressGzipMiddleware{}, "OperationDeserializer", middleware.After)
 		return
 	}
 
-	stack.Finalize.Add(&AcceptEncodingGzipMiddleware{}, middleware.Before)
-	stack.Deserialize.Insert(&DecompressGzipMiddleware{}, "OperationDeserializer", middleware.After)
+	stack.Finalize.Add(&DisableAcceptEncodingGzipMiddleware{}, middleware.Before)
 }
 
 // DisableAcceptEncodingGzipMiddleware provides the middleware that will

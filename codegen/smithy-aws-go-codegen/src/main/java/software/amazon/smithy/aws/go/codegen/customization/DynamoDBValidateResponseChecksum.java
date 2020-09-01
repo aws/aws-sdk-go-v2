@@ -37,7 +37,7 @@ public class DynamoDBValidateResponseChecksum implements GoIntegration {
     private static final String CHECKSUM_ADDER = "addValidateResponseChecksum";
     private static final String CHECKSUM_INTERNAL_ADDER = "AddValidateResponseChecksum";
 
-    private static final String GZIP_CLIENT_OPTION = "DisableAcceptEncodingGzip";
+    private static final String GZIP_CLIENT_OPTION = "EnableAcceptEncodingGzip";
     private static final String GZIP_ADDER = "addAcceptEncodingGzip";
     private static final String GZIP_INTERNAL_ADDER = "AddAcceptEncodingGzip";
 
@@ -79,7 +79,7 @@ public class DynamoDBValidateResponseChecksum implements GoIntegration {
         writer.write("");
 
         writer.openBlock("func $L(stack *middleware.Stack, options Options) {", "}", GZIP_ADDER, () -> {
-            writer.write("$T(stack, $T{Disable: options.$L})",
+            writer.write("$T(stack, $T{Enable: options.$L})",
                     SymbolUtils.createValueSymbolBuilder(GZIP_INTERNAL_ADDER,
                             AwsCustomGoDependency.DYNAMODB_CUSTOMIZATION).build(),
                     SymbolUtils.createValueSymbolBuilder(GZIP_INTERNAL_ADDER + "Options",
@@ -103,7 +103,7 @@ public class DynamoDBValidateResponseChecksum implements GoIntegration {
                                                 .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true)
                                                 .build())
                                         .documentation("Allows you to disable the client's validation of "
-                                                + "response integrity using CRC32 checksum.")
+                                                + "response integrity using CRC32 checksum. Enabled by default.")
                                         .build()
                         ))
                         .registerMiddleware(MiddlewareRegistrar.builder()
@@ -123,8 +123,8 @@ public class DynamoDBValidateResponseChecksum implements GoIntegration {
                                         .type(SymbolUtils.createValueSymbolBuilder("bool")
                                                 .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true)
                                                 .build())
-                                        .documentation("Allows you to disable the client's support for "
-                                                + "compressed gzip responses.")
+                                        .documentation("Allows you to enable the client's support for "
+                                                + "compressed gzip responses. Disabled by default.")
                                         .build()
                         ))
                         .registerMiddleware(MiddlewareRegistrar.builder()

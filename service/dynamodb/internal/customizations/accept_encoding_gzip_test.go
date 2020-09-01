@@ -16,12 +16,13 @@ import (
 
 func TestAddAcceptEncodingGzip(t *testing.T) {
 	cases := map[string]struct {
-		Disable   bool
-		Response  io.ReadCloser
-		ExpectErr string
+		Enable bool
 	}{
 		"disabled": {
-			Disable: true,
+			Enable: false,
+		},
+		"enabled": {
+			Enable: true,
 		},
 	}
 
@@ -32,7 +33,7 @@ func TestAddAcceptEncodingGzip(t *testing.T) {
 			stack.Deserialize.Add(&stubOpDeserializer{}, middleware.After)
 
 			AddAcceptEncodingGzip(stack, AddAcceptEncodingGzipOptions{
-				Disable: c.Disable,
+				Enable: c.Enable,
 			})
 
 			id := "OperationDeserializer"
@@ -40,27 +41,26 @@ func TestAddAcceptEncodingGzip(t *testing.T) {
 				t.Fatalf("expect %s not to be removed", id)
 			}
 
-			if c.Disable {
+			if c.Enable {
 				id = (*AcceptEncodingGzipMiddleware)(nil).ID()
-				if m, ok := stack.Finalize.Get(id); ok || m != nil {
-					t.Fatalf("expect %s not to be present.", id)
+				if m, ok := stack.Finalize.Get(id); !ok || m == nil {
+					t.Fatalf("expect %s to be present.", id)
 				}
 
 				id = (*DecompressGzipMiddleware)(nil).ID()
-				if m, ok := stack.Deserialize.Get(id); ok || m != nil {
-					t.Fatalf("expect %s not to be present.", id)
+				if m, ok := stack.Deserialize.Get(id); !ok || m == nil {
+					t.Fatalf("expect %s to be present.", id)
 				}
 				return
 			}
-
 			id = (*AcceptEncodingGzipMiddleware)(nil).ID()
-			if m, ok := stack.Finalize.Get(id); !ok || m == nil {
-				t.Fatalf("expect %s to be present.", id)
+			if m, ok := stack.Finalize.Get(id); ok || m != nil {
+				t.Fatalf("expect %s not to be present.", id)
 			}
 
 			id = (*DecompressGzipMiddleware)(nil).ID()
-			if m, ok := stack.Deserialize.Get(id); !ok || m == nil {
-				t.Fatalf("expect %s to be present.", id)
+			if m, ok := stack.Deserialize.Get(id); ok || m != nil {
+				t.Fatalf("expect %s not to be present.", id)
 			}
 		})
 	}

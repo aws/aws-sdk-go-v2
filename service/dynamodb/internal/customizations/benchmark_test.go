@@ -42,53 +42,63 @@ func BenchmarkCustomizations(b *testing.B) {
 		b.Fatalf("failed to load test data, %s, %v", testdataFilename, err)
 	}
 
-	b.Run("all", func(b *testing.B) {
+	b.Run("defaults", func(b *testing.B) {
 		client := dynamodb.New(dynamodb.Options{
 			Credentials: aws.NewStaticCredentialsProvider("AKID", "SECRET", ""),
 			HTTPClient: &mockClient{
-				//ChecksumHeaderValue: []string{"2981943876"},
-				ChecksumHeaderValue: []string{"891511383"},
-				ScanRespGzipBody:    gzipBody,
+				ChecksumHeaderValue: []string{"512691431"},
+				ScanRespBody:        body,
 			},
 		})
 
 		doBenchScan(b, client)
 	})
 
-	b.Run("none", func(b *testing.B) {
+	b.Run("all enabled", func(b *testing.B) {
+		client := dynamodb.New(dynamodb.Options{
+			Credentials: aws.NewStaticCredentialsProvider("AKID", "SECRET", ""),
+			HTTPClient: &mockClient{
+				ChecksumHeaderValue: []string{"891511383"},
+				ScanRespGzipBody:    gzipBody,
+			},
+			EnableAcceptEncodingGzip: true,
+		})
+
+		doBenchScan(b, client)
+	})
+
+	b.Run("none enabled", func(b *testing.B) {
 		client := dynamodb.New(dynamodb.Options{
 			Credentials: aws.NewStaticCredentialsProvider("AKID", "SECRET", ""),
 			HTTPClient: &mockClient{
 				ScanRespBody: body,
 			},
-			DisableAcceptEncodingGzip:       true,
 			DisableValidateResponseChecksum: true,
 		})
 
 		doBenchScan(b, client)
 	})
 
-	b.Run("validate checksum only", func(b *testing.B) {
+	b.Run("checksum only", func(b *testing.B) {
 		client := dynamodb.New(dynamodb.Options{
 			Credentials: aws.NewStaticCredentialsProvider("AKID", "SECRET", ""),
 			HTTPClient: &mockClient{
-				//ChecksumHeaderValue: []string{"3977635235"},
 				ChecksumHeaderValue: []string{"512691431"},
 				ScanRespBody:        body,
 			},
-			DisableAcceptEncodingGzip: true,
 		})
 
 		doBenchScan(b, client)
 	})
 
-	b.Run("accept encoding gzip only", func(b *testing.B) {
+	b.Run("gzip only", func(b *testing.B) {
 		client := dynamodb.New(dynamodb.Options{
 			Credentials: aws.NewStaticCredentialsProvider("AKID", "SECRET", ""),
 			HTTPClient: &mockClient{
 				ScanRespGzipBody: gzipBody,
 			},
 			DisableValidateResponseChecksum: true,
+			EnableAcceptEncodingGzip:        true,
 		})
 
 		doBenchScan(b, client)

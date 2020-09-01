@@ -69,12 +69,13 @@ type Options struct {
 	// The credentials object to use when signing requests.
 	Credentials aws.CredentialsProvider
 
-	// Allows you to disable the client's support for compressed gzip responses.
-	DisableAcceptEncodingGzip bool
-
 	// Allows you to disable the client's validation of response integrity using CRC32
-	// checksum.
+	// checksum. Enabled by default.
 	DisableValidateResponseChecksum bool
+
+	// Allows you to enable the client's support for compressed gzip responses.
+	// Disabled by default.
+	EnableAcceptEncodingGzip bool
 
 	// The endpoint options to be used when attempting to resolve an endpoint.
 	EndpointOptions ResolverOptions
@@ -108,12 +109,12 @@ func (o Options) GetCredentials() aws.CredentialsProvider {
 	return o.Credentials
 }
 
-func (o Options) GetDisableAcceptEncodingGzip() bool {
-	return o.DisableAcceptEncodingGzip
-}
-
 func (o Options) GetDisableValidateResponseChecksum() bool {
 	return o.DisableValidateResponseChecksum
+}
+
+func (o Options) GetEnableAcceptEncodingGzip() bool {
+	return o.EnableAcceptEncodingGzip
 }
 
 func (o Options) GetEndpointOptions() ResolverOptions {
@@ -211,5 +212,5 @@ func addValidateResponseChecksum(stack *middleware.Stack, options Options) {
 }
 
 func addAcceptEncodingGzip(stack *middleware.Stack, options Options) {
-	ddbcust.AddAcceptEncodingGzip(stack, ddbcust.AddAcceptEncodingGzipOptions{Disable: options.DisableAcceptEncodingGzip})
+	ddbcust.AddAcceptEncodingGzip(stack, ddbcust.AddAcceptEncodingGzipOptions{Enable: options.EnableAcceptEncodingGzip})
 }
