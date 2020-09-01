@@ -6,9 +6,11 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/internal/rand"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/awslabs/smithy-go/middleware"
-	smithyHTTP "github.com/awslabs/smithy-go/transport/http"
+	smithyrand "github.com/awslabs/smithy-go/rand"
+	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 // RequestInvocationIDMiddleware is a Smithy BuildMiddleware that will generate a unique ID for logical API operation
@@ -24,19 +26,18 @@ func (r RequestInvocationIDMiddleware) ID() string {
 func (r RequestInvocationIDMiddleware) HandleBuild(ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler) (
 	out middleware.BuildOutput, metadata middleware.Metadata, err error,
 ) {
-	const invocationIDHeader = "amz-sdk-invocation-id"
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", req)
+	}
 
-	invocationID, err := sdk.UUIDVersion4()
+	invocationID, err := smithyrand.NewUUID(rand.Reader).GetUUID()
 	if err != nil {
 		return out, metadata, err
 	}
 
-	switch req := in.Request.(type) {
-	case *smithyHTTP.Request:
-		req.Header.Set(invocationIDHeader, invocationID)
-	default:
-		return out, metadata, fmt.Errorf("unknown transport type %T", req)
-	}
+	const invocationIDHeader = "Amz-Sdk-Invocation-Id"
+	req.Header[invocationIDHeader] = append(req.Header[invocationIDHeader][:0], invocationID)
 
 	return next.HandleBuild(ctx, in)
 }
@@ -60,7 +61,7 @@ func (a AttemptClockSkewMiddleware) HandleDeserialize(ctx context.Context, in mi
 	respMeta.ResponseAt = sdk.NowTime()
 
 	switch resp := out.RawResponse.(type) {
-	case *smithyHTTP.Response:
+	case *smithyhttp.Response:
 		respDateHeader := resp.Header.Get("Date")
 		if len(respDateHeader) == 0 {
 			break
