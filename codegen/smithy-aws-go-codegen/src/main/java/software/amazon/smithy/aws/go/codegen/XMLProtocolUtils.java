@@ -215,8 +215,8 @@ final class XmlProtocolUtils {
     public static void initializeXmlDecoder(GoWriter writer, String bodyLocation, String returnExtras, String returnOnEOF) {
         // Use a ring buffer and tee reader to help in pinpointing any deserialization errors.
         writer.addUseImports(SmithyGoDependency.SMITHY_IO);
-        writer.write("buff := make([]byte, 1024)");
-        writer.write("ringBuffer := smithyio.NewRingBuffer(buff)");
+        writer.write("var buff [1024]byte");
+        writer.write("ringBuffer := smithyio.NewRingBuffer(buff[:])");
         writer.insertTrailingNewline();
 
         writer.addUseImports(SmithyGoDependency.IO);
