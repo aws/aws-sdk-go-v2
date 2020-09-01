@@ -102,13 +102,17 @@ func (u *requestUserAgent) HandleBuild(ctx context.Context, in middleware.BuildI
 		return out, metadata, fmt.Errorf("unknown transport type %T", in)
 	}
 
-	current := req.Header.Get("User-Agent")
+	const userAgent = "User-Agent"
+	var current string
+	if v := req.Header[userAgent]; len(v) > 0 {
+		current = v[0]
+	}
 	if v := u.uab.Build(); len(current) > 0 {
 		current = v + " " + current
 	} else {
 		current = v
 	}
-	req.Header.Set("User-Agent", current)
+	req.Header[userAgent] = append(req.Header[userAgent][:0], current)
 
 	return next.HandleBuild(ctx, in)
 }
