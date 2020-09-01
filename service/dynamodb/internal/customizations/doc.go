@@ -26,7 +26,7 @@ means that if the response is gzipped the checksum is of the gzipped response,
 not the decompressed response bytes.
 
 Customization option:
-    DisableResponseChecksumValidation
+    DisableValidateResponseChecksum
 
 Accept encoding gzip
 
@@ -36,7 +36,7 @@ by the SDK's deserializer not match the checksum header. To prevent this the
 SDK must manually enable or disable content-encoding gzip.
 
 Customization option:
-    DisableAcceptEncodingGzip
+    EnableAcceptEncodingGzip
 
 */
 package customizations
