@@ -39,9 +39,9 @@ func TestStripExcessHeaders(t *testing.T) {
 		"12 3 1abc123",
 	}
 
-	StripExcessSpaces(vals)
 	for i := 0; i < len(vals); i++ {
-		if e, a := expected[i], vals[i]; e != a {
+		r := StripExcessSpaces(vals[i])
+		if e, a := expected[i], r; e != a {
 			t.Errorf("%d, expect %v, got %v", i, e, a)
 		}
 	}
@@ -68,8 +68,8 @@ var stripExcessSpaceCases = []string{
 
 func BenchmarkStripExcessSpaces(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		// Make sure to start with a copy of the cases
-		cases := append([]string{}, stripExcessSpaceCases...)
-		StripExcessSpaces(cases)
+		for _, v := range stripExcessSpaceCases {
+			StripExcessSpaces(v)
+		}
 	}
 }
