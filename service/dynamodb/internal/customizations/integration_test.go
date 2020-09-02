@@ -1,9 +1,14 @@
-package main
+// +build integration
+
+package customizations_test
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"log"
+	"os"
+	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
@@ -11,43 +16,50 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	ddbtypes "github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	"github.com/awslabs/smithy-go/middleware"
-	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-func main() {
+var (
+	tableName string
+)
+
+func init() {
+	flag.StringVar(&tableName, "table", "testTable",
+		"The `name` of the table to test against")
+}
+
+func TestMain(m *testing.M) {
+	flag.Parse()
+
+	// call flag.Parse() here if TestMain uses flags
+	os.Exit(m.Run())
+}
+
+func TestInteg_ClientScan(t *testing.T) {
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		log.Fatalf("failed to load config, %v", err)
 	}
 
 	client := dynamodb.NewFromConfig(cfg, func(o *dynamodb.Options) {
-		o.HTTPClient = smithyhttp.WrapLogClient(logger{}, aws.NewBuildableHTTPClient(), false)
+		o.HTTPClient = smithyhttp.WrapLogClient(t, aws.NewBuildableHTTPClient(), false)
 		o.Retryer = retry.NewStandard()
 
-		//o.EnableAcceptEncodingGzip = true
-		//o.DisableValidateResponseChecksum = true
+		o.EnableAcceptEncodingGzip = true
+		o.DisableValidateResponseChecksum = false // default
 	})
 
-	resp, err := client.Scan(context.Background(),
+	_, err = client.Scan(context.Background(),
 		&dynamodb.ScanInput{
-			TableName:              ptr.String("RepoUsage"),
+			TableName:              &tableName,
 			ReturnConsumedCapacity: ddbtypes.ReturnConsumedCapacityTotal,
 		}, func(o *dynamodb.Options) {
 			o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
-				fmt.Println("Deserialize:", stack.Deserialize.List())
+				fmt.Println("Stack:", stack.String())
 				return nil
 			})
 		})
 	if err != nil {
-		log.Fatal(err)
+		t.Fatal(err)
 	}
-
-	log.Println("success", len(resp.Items))
-}
-
-type logger struct{}
-
-func (logger) Logf(fmt string, args ...interface{}) {
-	log.Printf(fmt, args...)
 }

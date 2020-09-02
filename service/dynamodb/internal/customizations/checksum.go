@@ -51,14 +51,14 @@ func (m *ChecksumMiddleware) HandleDeserialize(
 
 	resp, ok := output.RawResponse.(*smithyhttp.Response)
 	if !ok {
-		return output, metadata, &smithy.SerializationError{
+		return output, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("unknown response type %T", output.RawResponse),
 		}
 	}
 
 	expectChecksum, ok, err := getCRC32Checksum(resp.Header)
 	if err != nil {
-		return output, metadata, &smithy.SerializationError{Err: err}
+		return output, metadata, &smithy.DeserializationError{Err: err}
 	}
 
 	resp.Body = wrapCRC32ChecksumValidate(expectChecksum, resp.Body)

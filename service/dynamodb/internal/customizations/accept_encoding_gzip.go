@@ -11,6 +11,9 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
+const acceptEncodingHeaderKey = "Accept-Encoding"
+const contentEncodingHeaderKey = "Content-Encoding"
+
 // AddAcceptEncodingGzipOptions provides the options for the
 // AddAcceptEncodingGzip middleware setup.
 type AddAcceptEncodingGzipOptions struct {
@@ -55,7 +58,7 @@ func (*DisableAcceptEncodingGzipMiddleware) HandleFinalize(
 
 	// Explicitly enable gzip support, this will prevent the http client from
 	// auto extracting the zipped content.
-	req.Header.Set("Accept-Encoding", "identity")
+	req.Header.Set(acceptEncodingHeaderKey, "identity")
 
 	return next.HandleFinalize(ctx, input)
 }
@@ -83,7 +86,7 @@ func (*AcceptEncodingGzipMiddleware) HandleFinalize(
 
 	// Explicitly enable gzip support, this will prevent the http client from
 	// auto extracting the zipped content.
-	req.Header.Set("Accept-Encoding", "gzip")
+	req.Header.Set(acceptEncodingHeaderKey, "gzip")
 
 	return next.HandleFinalize(ctx, input)
 }
@@ -112,7 +115,7 @@ func (*DecompressGzipMiddleware) HandleDeserialize(
 			Err: fmt.Errorf("unknown response type %T", output.RawResponse),
 		}
 	}
-	if v := resp.Header.Get("Content-Encoding"); v != "gzip" {
+	if v := resp.Header.Get(contentEncodingHeaderKey); v != "gzip" {
 		return output, metadata, err
 	}
 

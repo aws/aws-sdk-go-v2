@@ -82,7 +82,7 @@ func TestAcceptEncodingGzipMiddleware(t *testing.T) {
 					t.Fatalf("expect smithy request, got %T", input.Request)
 				}
 
-				actual := req.Header.Get("Accept-Encoding")
+				actual := req.Header.Get(acceptEncodingHeaderKey)
 				if e, a := "gzip", actual; e != a {
 					t.Errorf("expect %v accept-encoding, got %v", e, a)
 				}
@@ -120,7 +120,7 @@ func TestDecompressGzipMiddleware(t *testing.T) {
 				Response: &http.Response{
 					StatusCode: 200,
 					Header: http.Header{
-						"Content-Encoding": []string{"gzip"},
+						contentEncodingHeaderKey: []string{"gzip"},
 					},
 					ContentLength: 10,
 					Body: func() io.ReadCloser {

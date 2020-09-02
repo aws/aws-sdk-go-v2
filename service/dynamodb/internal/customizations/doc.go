@@ -26,17 +26,24 @@ means that if the response is gzipped the checksum is of the gzipped response,
 not the decompressed response bytes.
 
 Customization option:
-    DisableValidateResponseChecksum
+    DisableValidateResponseChecksum (Enabled by Default)
 
 Accept encoding gzip
 
-The Go HTTP client will automatically support accept-encoding and
-content-encoding gzip by default. This behavior prevents the response body read
-by the SDK's deserializer not match the checksum header. To prevent this the
-SDK must manually enable or disable content-encoding gzip.
+The Go HTTP client automatically supports accept-encoding and content-encoding
+gzip by default. This default behavior is not desired by the SDK, and prevents
+validating the response body's checksum. To prevent this the SDK must manually
+control usage of content-encoding gzip.
+
+To control content-encoding, the SDK must always set the `Accept-Encoding`
+header to a value. This prevents the HTTP client from using gzip automatically.
+When gzip is enabled on the API client, the SDK's customization will control
+decompressing the gzip data in order to not break the checksum validation. When
+gzip is disabled, the API client will disable gzip, preventing the HTTP
+client's default behavior.
 
 Customization option:
-    EnableAcceptEncodingGzip
+    EnableAcceptEncodingGzip (Disabled by Default)
 
 */
 package customizations
