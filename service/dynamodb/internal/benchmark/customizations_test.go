@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -23,11 +24,42 @@ import (
 	ddbOld "github.com/aws/aws-sdk-go/service/dynamodb"
 )
 
-func BenchmarkCustomizations_Old(b *testing.B) {
-	testdataFilename := filepath.Join("testdata", "scan_response.short.json")
-	_, body, err := loadBenchTestData(testdataFilename)
+type testData struct {
+	filename         string
+	respChecksum     int
+	respGzipChecksum int
+}
+
+func BenchmarkCustomizations(b *testing.B) {
+	cases := map[string]testData{
+		"small": {
+			filename:         filepath.Join("testdata", "scan_response.short.json"),
+			respChecksum:     512691431,
+			respGzipChecksum: 891511383,
+		},
+		"large": {
+			filename:         filepath.Join("testdata", "scan_response.json"),
+			respChecksum:     4158286593,
+			respGzipChecksum: 3095499784,
+		},
+	}
+
+	for name, c := range cases {
+		b.Run(name, func(b *testing.B) {
+			b.Run("old", func(b *testing.B) {
+				benchCustomizationsOld(b, c)
+			})
+			b.Run("smithy", func(b *testing.B) {
+				benchCustomizationsSmithy(b, c)
+			})
+		})
+	}
+}
+
+func benchCustomizationsOld(b *testing.B, c testData) {
+	_, body, err := loadBenchTestData(c.filename)
 	if err != nil {
-		b.Fatalf("failed to load test data, %s, %v", testdataFilename, err)
+		b.Fatalf("failed to load test data, %s, %v", c.filename, err)
 	}
 
 	sess, err := session.NewSession(&awsOld.Config{
@@ -40,7 +72,7 @@ func BenchmarkCustomizations_Old(b *testing.B) {
 			r.HTTPResponse = &http.Response{
 				StatusCode: 200,
 				Header: http.Header{
-					"X-Amz-Crc32": []string{"512691431"},
+					"X-Amz-Crc32": []string{strconv.Itoa(c.respChecksum)},
 				},
 				ContentLength: int64(len(body)),
 				Body:          ioutil.NopCloser(bytes.NewReader(body)),
@@ -86,18 +118,17 @@ func doBenchScanOld(b *testing.B, client *ddbOld.DynamoDB) {
 	})
 }
 
-func BenchmarkCustomizations_Smithy(b *testing.B) {
-	testdataFilename := filepath.Join("testdata", "scan_response.short.json")
-	gzipBody, body, err := loadBenchTestData(testdataFilename)
+func benchCustomizationsSmithy(b *testing.B, c testData) {
+	gzipBody, body, err := loadBenchTestData(c.filename)
 	if err != nil {
-		b.Fatalf("failed to load test data, %s, %v", testdataFilename, err)
+		b.Fatalf("failed to load test data, %s, %v", c.filename, err)
 	}
 
 	options := dynamodb.Options{
 		Region:      "us-west-2",
 		Credentials: aws.NewStaticCredentialsProvider("AKID", "SECRET", ""),
 		HTTPClient: &mockClient{
-			ChecksumHeaderValue: []string{"512691431"},
+			ChecksumHeaderValue: []string{strconv.Itoa(c.respChecksum)},
 			ScanRespBody:        body,
 		},
 	}
@@ -111,7 +142,7 @@ func BenchmarkCustomizations_Smithy(b *testing.B) {
 	b.Run("all enabled", func(b *testing.B) {
 		client := dynamodb.New(options, func(o *dynamodb.Options) {
 			o.HTTPClient = &mockClient{
-				ChecksumHeaderValue: []string{"891511383"},
+				ChecksumHeaderValue: []string{strconv.Itoa(c.respGzipChecksum)},
 				ScanRespGzipBody:    gzipBody,
 			}
 			o.DisableValidateResponseChecksum = false
