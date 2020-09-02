@@ -6,7 +6,7 @@
 // Standalone Signer
 //
 // Generally using the signer outside of the SDK should not require any additional
-//  The signer does this by taking advantageof the URL.EscapedPath method. If your request URI requires
+//  The signer does this by taking advantage of the URL.EscapedPath method. If your request URI requires
 // additional escaping you many need to use the URL.Opaque to define what the raw URI should be sent
 // to the service as.
 //
@@ -45,7 +45,6 @@ package v4
 
 import (
 	"context"
-	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
@@ -63,12 +62,17 @@ import (
 )
 
 const (
-	signingAlgorithm = "AWS4-HMAC-SHA256"
+	signingAlgorithm    = "AWS4-HMAC-SHA256"
+	authorizationHeader = "Authorization"
 )
 
 // HTTPSigner is an interface to a SigV4 signer that can sign HTTP requests
 type HTTPSigner interface {
 	SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error
+}
+
+type keyDerivator interface {
+	DeriveKey(credential aws.Credentials, service, region string, signingTime v4Internal.SigningTime) []byte
 }
 
 // Signer applies AWS v4 signing to given request. Use this to sign requests
@@ -99,16 +103,30 @@ type Signer struct {
 	//
 	// http://docs.aws.amazon.com/general/latest/gr/sigv4-create-canonical-request.html
 	DisableURIPathEscaping bool
+
+	keyDerivator keyDerivator
+}
+
+// NewSigner returns a new SigV4 Signer
+func NewSigner(optFns ...func(signer *Signer)) *Signer {
+	s := &Signer{keyDerivator: v4Internal.NewSigningKeyDeriver()}
+
+	for _, fn := range optFns {
+		fn(s)
+	}
+
+	return s
 }
 
 type httpSigner struct {
-	Request     *http.Request
-	ServiceName string
-	Region      string
-	Time        time.Time
-	ExpireTime  time.Duration
-	Credentials aws.Credentials
-	IsPreSign   bool
+	Request      *http.Request
+	ServiceName  string
+	Region       string
+	Time         v4Internal.SigningTime
+	ExpireTime   time.Duration
+	Credentials  aws.Credentials
+	KeyDerivator keyDerivator
+	IsPreSign    bool
 
 	// PayloadHash is the hex encoded SHA-256 hash of the request payload
 	// If len(PayloadHash) == 0 the signer will attempt to send the request
@@ -142,8 +160,8 @@ func (s *httpSigner) Build() (signedRequest, error) {
 
 	unsignedHeaders := headers
 	if s.IsPreSign && !s.DisableHeaderHoisting {
-		urlValues := url.Values{}
-		urlValues, unsignedHeaders = buildQuery(v4Internal.AllowedQueryHoisting, unsignedHeaders)
+		var urlValues url.Values
+		urlValues, unsignedHeaders = buildQuery(v4Internal.AllowedQueryHoisting, headers)
 		for k := range urlValues {
 			query[k] = urlValues[k]
 		}
@@ -160,7 +178,8 @@ func (s *httpSigner) Build() (signedRequest, error) {
 		query.Set(v4Internal.AmzSignedHeadersKey, signedHeadersStr)
 	}
 
-	rawQuery := strings.Replace(query.Encode(), "+", "%20", -1)
+	var rawQuery strings.Builder
+	rawQuery.WriteString(strings.Replace(query.Encode(), "+", "%20", -1))
 
 	canonicalURI := v4Internal.GetURIPath(req.URL)
 	if !s.DisableURIPathEscaping {
@@ -170,26 +189,25 @@ func (s *httpSigner) Build() (signedRequest, error) {
 	canonicalString := s.buildCanonicalString(
 		req.Method,
 		canonicalURI,
-		rawQuery,
+		rawQuery.String(),
 		signedHeadersStr,
 		canonicalHeaderStr,
 	)
 
 	strToSign := s.buildStringToSign(credentialScope, canonicalString)
-	signingSignature := s.buildSignature(strToSign)
-
-	if s.IsPreSign {
-		rawQuery += "&X-Amz-Signature=" + signingSignature
-	} else {
-		parts := []string{
-			"Credential=" + credentialStr,
-			"SignedHeaders=" + signedHeadersStr,
-			"Signature=" + signingSignature,
-		}
-		headers.Set("Authorization", signingAlgorithm+" "+strings.Join(parts, ", "))
+	signingSignature, err := s.buildSignature(strToSign)
+	if err != nil {
+		return signedRequest{}, err
 	}
 
-	req.URL.RawQuery = rawQuery
+	if s.IsPreSign {
+		rawQuery.WriteString("&X-Amz-Signature=")
+		rawQuery.WriteString(signingSignature)
+	} else {
+		headers[authorizationHeader] = append(headers[authorizationHeader][:0], buildAuthorizationHeader(credentialStr, signedHeadersStr, signingSignature))
+	}
+
+	req.URL.RawQuery = rawQuery.String()
 
 	return signedRequest{
 		Request:         req,
@@ -198,6 +216,31 @@ func (s *httpSigner) Build() (signedRequest, error) {
 		StringToSign:    strToSign,
 		PreSigned:       s.IsPreSign,
 	}, nil
+}
+
+func buildAuthorizationHeader(credentialStr, signedHeadersStr, signingSignature string) string {
+	const credential = "Credential="
+	const signedHeaders = "SignedHeaders="
+	const signature = "Signature="
+	const commaSpace = ", "
+
+	var parts strings.Builder
+	parts.Grow(len(signingAlgorithm) + 1 +
+		len(credential) + len(credentialStr) + 2 +
+		len(signedHeaders) + len(signedHeadersStr) + 2 +
+		len(signature) + len(signingSignature),
+	)
+	parts.WriteString(signingAlgorithm)
+	parts.WriteRune(' ')
+	parts.WriteString(credential)
+	parts.WriteString(credentialStr)
+	parts.WriteString(commaSpace)
+	parts.WriteString(signedHeaders)
+	parts.WriteString(signedHeadersStr)
+	parts.WriteString(commaSpace)
+	parts.WriteString(signature)
+	parts.WriteString(signingSignature)
+	return parts.String()
 }
 
 // SignHTTP signs AWS v4 requests with the provided payload hash, service name, region the
@@ -218,9 +261,10 @@ func (v4 Signer) SignHTTP(ctx context.Context, credentials aws.Credentials, r *h
 		ServiceName:            service,
 		Region:                 region,
 		Credentials:            credentials,
-		Time:                   signingTime.UTC(),
+		Time:                   v4Internal.NewSigningTime(signingTime.UTC()),
 		DisableHeaderHoisting:  v4.DisableHeaderHoisting,
 		DisableURIPathEscaping: v4.DisableURIPathEscaping,
+		KeyDerivator:           v4.keyDerivator,
 	}
 
 	signedRequest, err := signer.Build()
@@ -261,11 +305,12 @@ func (v4 *Signer) PresignHTTP(ctx context.Context, credentials aws.Credentials, 
 		ServiceName:            service,
 		Region:                 region,
 		Credentials:            credentials,
-		Time:                   signingTime.UTC(),
+		Time:                   v4Internal.NewSigningTime(signingTime.UTC()),
 		IsPreSign:              true,
 		ExpireTime:             expireTime,
 		DisableHeaderHoisting:  v4.DisableHeaderHoisting,
 		DisableURIPathEscaping: v4.DisableURIPathEscaping,
+		KeyDerivator:           v4.keyDerivator,
 	}
 
 	signedRequest, err := signer.Build()
@@ -303,7 +348,7 @@ func (v4 Signer) logHTTPSigningInfo(r signedRequest) {
 
 func (s *httpSigner) buildCredentialScope() string {
 	return strings.Join([]string{
-		s.Time.Format(v4Internal.ShortTimeFormat),
+		s.Time.ShortTimeFormat(),
 		s.Region,
 		s.ServiceName,
 		"aws4_request",
@@ -324,21 +369,22 @@ func buildQuery(r v4Internal.Rule, header http.Header) (url.Values, http.Header)
 	return query, unsignedHeaders
 }
 
-func (s *httpSigner) buildCanonicalHeaders(host string, rule v4Internal.Rule, header http.Header, length int64) (signed http.Header, signedHeaders, canonicalHeaders string) {
+func (s *httpSigner) buildCanonicalHeaders(host string, rule v4Internal.Rule, header http.Header, length int64) (signed http.Header, signedHeaders, canonicalHeadersStr string) {
 	signed = make(http.Header)
 
 	var headers []string
-	headers = append(headers, "host")
-	signed["host"] = append(signed["host"], host)
+	const hostHeader = "host"
+	headers = append(headers, hostHeader)
+	signed[hostHeader] = append(signed[hostHeader], host)
 
 	if length > 0 {
-		headers = append(headers, "content-length")
-		signed["content-length"] = append(signed["content-length"], strconv.FormatInt(length, 10))
+		const contentLengthHeader = "content-length"
+		headers = append(headers, contentLengthHeader)
+		signed[contentLengthHeader] = append(signed[contentLengthHeader], strconv.FormatInt(length, 10))
 	}
 
 	for k, v := range header {
-		canonicalKey := http.CanonicalHeaderKey(k)
-		if !rule.IsValid(canonicalKey) {
+		if !rule.IsValid(k) {
 			continue // ignored header
 		}
 
@@ -356,18 +402,24 @@ func (s *httpSigner) buildCanonicalHeaders(host string, rule v4Internal.Rule, he
 
 	signedHeaders = strings.Join(headers, ";")
 
-	headerValues := make([]string, len(headers))
-	for i, k := range headers {
-		if k == "host" {
-			headerValues[i] = "host:" + host
+	var canonicalHeaders strings.Builder
+	n := len(headers)
+	const colon = ':'
+	for i := 0; i < n; i++ {
+		if headers[i] == hostHeader {
+			canonicalHeaders.WriteString(hostHeader)
+			canonicalHeaders.WriteRune(colon)
+			canonicalHeaders.WriteString(v4Internal.StripExcessSpaces(host))
 		} else {
-			headerValues[i] = k + ":" + strings.Join(signed[k], ",")
+			canonicalHeaders.WriteString(headers[i])
+			canonicalHeaders.WriteRune(colon)
+			canonicalHeaders.WriteString(strings.Join(signed[headers[i]], ","))
 		}
+		canonicalHeaders.WriteRune('\n')
 	}
-	v4Internal.StripExcessSpaces(headerValues)
-	canonicalHeaders = strings.Join(headerValues, "\n")
+	canonicalHeadersStr = canonicalHeaders.String()
 
-	return signed, signedHeaders, canonicalHeaders
+	return signed, signedHeaders, canonicalHeadersStr
 }
 
 func (s *httpSigner) buildCanonicalString(method, uri, query, signedHeaders, canonicalHeaders string) string {
@@ -375,7 +427,7 @@ func (s *httpSigner) buildCanonicalString(method, uri, query, signedHeaders, can
 		method,
 		uri,
 		query,
-		canonicalHeaders + "\n",
+		canonicalHeaders,
 		signedHeaders,
 		s.PayloadHash,
 	}, "\n")
@@ -384,7 +436,7 @@ func (s *httpSigner) buildCanonicalString(method, uri, query, signedHeaders, can
 func (s *httpSigner) buildStringToSign(credentialScope, canonicalRequestString string) string {
 	return strings.Join([]string{
 		signingAlgorithm,
-		s.Time.Format(v4Internal.TimeFormat),
+		s.Time.TimeFormat(),
 		credentialScope,
 		hex.EncodeToString(makeHash(sha256.New(), []byte(canonicalRequestString))),
 	}, "\n")
@@ -396,18 +448,13 @@ func makeHash(hash hash.Hash, b []byte) []byte {
 	return hash.Sum(nil)
 }
 
-func (s *httpSigner) buildSignature(strToSign string) string {
-	secret := s.Credentials.SecretAccessKey
-	date := makeHmacSha256([]byte("AWS4"+secret), []byte(s.Time.Format(v4Internal.ShortTimeFormat)))
-	region := makeHmacSha256(date, []byte(s.Region))
-	service := makeHmacSha256(region, []byte(s.ServiceName))
-	credentials := makeHmacSha256(service, []byte("aws4_request"))
-	signature := makeHmacSha256(credentials, []byte(strToSign))
-	return hex.EncodeToString(signature)
+func (s *httpSigner) buildSignature(strToSign string) (string, error) {
+	key := s.KeyDerivator.DeriveKey(s.Credentials, s.ServiceName, s.Region, s.Time)
+	return hex.EncodeToString(v4Internal.HMACSHA256(key, []byte(strToSign))), nil
 }
 
 func (s *httpSigner) setRequiredSigningFields(headers http.Header, query url.Values) {
-	amzDate := s.Time.Format(v4Internal.TimeFormat)
+	amzDate := s.Time.TimeFormat()
 
 	if s.IsPreSign {
 		query.Set(v4Internal.AmzAlgorithmKey, signingAlgorithm)
@@ -421,17 +468,11 @@ func (s *httpSigner) setRequiredSigningFields(headers http.Header, query url.Val
 		return
 	}
 
-	headers.Set(v4Internal.AmzDateKey, amzDate)
+	headers[v4Internal.AmzDateKey] = append(headers[v4Internal.AmzDateKey][:0], amzDate)
 
 	if len(s.Credentials.SessionToken) > 0 {
-		headers.Set(v4Internal.AmzSecurityTokenKey, s.Credentials.SessionToken)
+		headers[v4Internal.AmzSecurityTokenKey] = append(headers[v4Internal.AmzSecurityTokenKey][:0], s.Credentials.SessionToken)
 	}
-}
-
-func makeHmacSha256(key []byte, data []byte) []byte {
-	hash := hmac.New(sha256.New, key)
-	hash.Write(data)
-	return hash.Sum(nil)
 }
 
 type signedRequest struct {
