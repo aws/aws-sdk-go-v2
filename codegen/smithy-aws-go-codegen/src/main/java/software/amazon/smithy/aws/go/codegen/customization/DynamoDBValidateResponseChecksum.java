@@ -25,6 +25,7 @@ import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SymbolUtils;
+import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
@@ -97,7 +98,7 @@ public class DynamoDBValidateResponseChecksum implements GoIntegration {
                 RuntimeClientPlugin.builder()
                         .servicePredicate(DynamoDBValidateResponseChecksum::isDynamoDBService)
                         .configFields(ListUtils.of(
-                                AwsConfigField.builder()
+                                ConfigField.builder()
                                         .name(CHECKSUM_CLIENT_OPTION)
                                         .type(SymbolUtils.createValueSymbolBuilder("bool")
                                                 .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true)
@@ -118,7 +119,7 @@ public class DynamoDBValidateResponseChecksum implements GoIntegration {
                 RuntimeClientPlugin.builder()
                         .servicePredicate(DynamoDBValidateResponseChecksum::isDynamoDBService)
                         .configFields(ListUtils.of(
-                                AwsConfigField.builder()
+                                ConfigField.builder()
                                         .name(GZIP_CLIENT_OPTION)
                                         .type(SymbolUtils.createValueSymbolBuilder("bool")
                                                 .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true)
