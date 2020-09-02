@@ -51,7 +51,7 @@ func (*DisableAcceptEncodingGzipMiddleware) HandleFinalize(
 ) {
 	req, ok := input.Request.(*smithyhttp.Request)
 	if !ok {
-		return output, metadata, &smithy.SerializationError{
+		return output, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("unknown request type %T", input.Request),
 		}
 	}
@@ -79,7 +79,7 @@ func (*AcceptEncodingGzipMiddleware) HandleFinalize(
 ) {
 	req, ok := input.Request.(*smithyhttp.Request)
 	if !ok {
-		return output, metadata, &smithy.SerializationError{
+		return output, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("unknown request type %T", input.Request),
 		}
 	}
@@ -111,7 +111,7 @@ func (*DecompressGzipMiddleware) HandleDeserialize(
 
 	resp, ok := output.RawResponse.(*smithyhttp.Response)
 	if !ok {
-		return output, metadata, &smithy.SerializationError{
+		return output, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("unknown response type %T", output.RawResponse),
 		}
 	}
