@@ -17,6 +17,7 @@ import (
 
 	awsOld "github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/corehandlers"
+	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/request"
 	"github.com/aws/aws-sdk-go/aws/session"
 	ddbOld "github.com/aws/aws-sdk-go/service/dynamodb"
@@ -30,7 +31,8 @@ func BenchmarkCustomizations_Old(b *testing.B) {
 	}
 
 	sess, err := session.NewSession(&awsOld.Config{
-		Region: awsOld.String("us-west-2"),
+		Credentials: credentials.NewStaticCredentials("AKID", "SECRET", ""),
+		Region:      awsOld.String("us-west-2"),
 	})
 	sess.Handlers.Send.SwapNamed(request.NamedHandler{
 		Name: corehandlers.SendHandler.Name,
@@ -91,63 +93,56 @@ func BenchmarkCustomizations_Smithy(b *testing.B) {
 		b.Fatalf("failed to load test data, %s, %v", testdataFilename, err)
 	}
 
-	b.Run("defaults", func(b *testing.B) {
-		client := dynamodb.New(dynamodb.Options{
-			Credentials: aws.NewStaticCredentialsProvider("AKID", "SECRET", ""),
-			HTTPClient: &mockClient{
-				ChecksumHeaderValue: []string{"512691431"},
-				ScanRespBody:        body,
-			},
-		})
+	options := dynamodb.Options{
+		Region:      "us-west-2",
+		Credentials: aws.NewStaticCredentialsProvider("AKID", "SECRET", ""),
+		HTTPClient: &mockClient{
+			ChecksumHeaderValue: []string{"512691431"},
+			ScanRespBody:        body,
+		},
+	}
+
+	b.Run("default", func(b *testing.B) {
+		client := dynamodb.New(options)
 
 		doBenchScan(b, client)
 	})
 
 	b.Run("all enabled", func(b *testing.B) {
-		client := dynamodb.New(dynamodb.Options{
-			Credentials: aws.NewStaticCredentialsProvider("AKID", "SECRET", ""),
-			HTTPClient: &mockClient{
+		client := dynamodb.New(options, func(o *dynamodb.Options) {
+			o.HTTPClient = &mockClient{
 				ChecksumHeaderValue: []string{"891511383"},
 				ScanRespGzipBody:    gzipBody,
-			},
-			EnableAcceptEncodingGzip: true,
+			}
+			o.DisableValidateResponseChecksum = false
+			o.EnableAcceptEncodingGzip = true
 		})
 
 		doBenchScan(b, client)
 	})
 
 	b.Run("none enabled", func(b *testing.B) {
-		client := dynamodb.New(dynamodb.Options{
-			Credentials: aws.NewStaticCredentialsProvider("AKID", "SECRET", ""),
-			HTTPClient: &mockClient{
-				ScanRespBody: body,
-			},
-			DisableValidateResponseChecksum: true,
+		client := dynamodb.New(options, func(o *dynamodb.Options) {
+			o.DisableValidateResponseChecksum = true
+			o.EnableAcceptEncodingGzip = false
 		})
 
 		doBenchScan(b, client)
 	})
 
 	b.Run("checksum only", func(b *testing.B) {
-		client := dynamodb.New(dynamodb.Options{
-			Credentials: aws.NewStaticCredentialsProvider("AKID", "SECRET", ""),
-			HTTPClient: &mockClient{
-				ChecksumHeaderValue: []string{"512691431"},
-				ScanRespBody:        body,
-			},
-		})
+		client := dynamodb.New(options)
 
 		doBenchScan(b, client)
 	})
 
 	b.Run("gzip only", func(b *testing.B) {
-		client := dynamodb.New(dynamodb.Options{
-			Credentials: aws.NewStaticCredentialsProvider("AKID", "SECRET", ""),
-			HTTPClient: &mockClient{
+		client := dynamodb.New(options, func(o *dynamodb.Options) {
+			o.HTTPClient = &mockClient{
 				ScanRespGzipBody: gzipBody,
-			},
-			DisableValidateResponseChecksum: true,
-			EnableAcceptEncodingGzip:        true,
+			}
+			o.DisableValidateResponseChecksum = true
+			o.EnableAcceptEncodingGzip = true
 		})
 
 		doBenchScan(b, client)
