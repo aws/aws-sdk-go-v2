@@ -1,5 +1,7 @@
 package aws
 
+import "github.com/awslabs/smithy-go/middleware"
+
 // A Config provides service configuration for service clients.
 type Config struct {
 	// The region to send requests to. This parameter is required and must
@@ -41,6 +43,11 @@ type Config struct {
 	// ConfigSources are the sources that were used to construct the Config.
 	// Allows for additional configuration to be loaded by clients.
 	ConfigSources []interface{}
+
+	// APIOptions provides the set of middleware mutations modify how the API
+	// client requests will be handled. This is useful for adding additional
+	// tracing data to a request, or changing behavior of the SDK's client.
+	APIOptions []func(*middleware.Stack) error
 }
 
 // NewConfig returns a new Config pointer that can be chained with builder
