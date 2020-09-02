@@ -13,6 +13,9 @@ github.com/awslabs/smithy-go v0.0.0-20200914213924-b41e7bef5d4f h1:+ORlmI9IRG6Z/
 github.com/awslabs/smithy-go v0.0.0-20200914213924-b41e7bef5d4f/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/google/go-cmp v0.4.1 h1:/exdXoGamhu5ONeUJH0deniYLWYvQwW66yvlfiiKTu0=
+github.com/aws/aws-sdk-go-v2 v0.24.1-0.20200828232643-9cee6f194dae/go.mod h1:7zJxC7S/5mRImnc1ar4ijZMoMxiK/VGDdQzOZeT/y/o=
+github.com/awslabs/smithy-go v0.0.0-20200828214850-b1c39f43623b/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
+github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/google/go-cmp v0.4.1/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
 github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af/go.mod h1:Nht3zPeWKUH0NzdCt2Blrr5ys8VGpn0CEB0cQHVjt7k=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
