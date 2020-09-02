@@ -76,7 +76,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
     public Void booleanShape(BooleanShape shape) {
         GoWriter writer = context.getWriter();
         writer.addUseImports(SmithyGoDependency.FMT);
-        consumeToken();
+        consumeToken(shape);
 
         writer.openBlock("if val != nil {", "}", () -> {
             writer.addUseImports(SmithyGoDependency.STRCONV);
@@ -94,7 +94,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
      * Consumes a single token into the variable "val", returning on any error.
      * If member is an xmlAttributeMember, "attr" representing xml attribute value is in scope.
      */
-    private void consumeToken() {
+    private void consumeToken(Shape shape) {
         GoWriter writer = context.getWriter();
         // if the member is a modeled as an xml attribute, we do not need to
         // get another token, instead use the attribute values from previously
@@ -106,9 +106,22 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
 
         writer.write("val, done, err := decoder.Value()");
         writer.write("if err != nil { return err }");
+        writer.openBlock("if done {", "}", () -> {
+            handleDone(shape);
+            writer.write("break");
+        });
+    }
 
-        // Since we got the matching end element we skip setting the value
-        writer.write("if done { break }");
+    // handles zero value assignment in case a empty xml tag is sent for the response member
+    private void handleDone(Shape shape) {
+        GoWriter writer = context.getWriter();
+
+        // Only string shapes can have an empty xml tag in response. If an empty xml tag is
+        // found for a string shape, we deserialize and the member value to a empty string.
+        if (shape.isStringShape() && !shape.hasTrait(EnumTrait.ID)) {
+            writer.addUseImports(SmithyGoDependency.SMITHY_PTR);
+            writer.write("if val == nil { $L = ptr.String(\"\")}", dataDest);
+        }
     }
 
     @Override
@@ -165,7 +178,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
     private void handleNumber(Shape shape, Runnable r) {
         GoWriter writer = context.getWriter();
         writer.addUseImports(SmithyGoDependency.FMT);
-        consumeToken();
+        consumeToken(shape);
 
         writer.openBlock("if val != nil {", "}", () -> {
             writer.write("xtv := string(val)");
@@ -226,7 +239,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
     private void handleString(Shape shape, Runnable r) {
         GoWriter writer = context.getWriter();
         writer.addUseImports(SmithyGoDependency.FMT);
-        consumeToken();
+        consumeToken(shape);
 
         writer.openBlock("if val != nil {", "}", () -> {
             writer.write("xtv := string(val)");
