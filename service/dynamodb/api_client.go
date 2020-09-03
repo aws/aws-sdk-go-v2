@@ -8,6 +8,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	ddbcust "github.com/aws/aws-sdk-go-v2/service/dynamodb/internal/customizations"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyrand "github.com/awslabs/smithy-go/rand"
 	"net/http"
@@ -68,6 +69,14 @@ type Options struct {
 	// The credentials object to use when signing requests.
 	Credentials aws.CredentialsProvider
 
+	// Allows you to disable the client's validation of response integrity using CRC32
+	// checksum. Enabled by default.
+	DisableValidateResponseChecksum bool
+
+	// Allows you to enable the client's support for compressed gzip responses.
+	// Disabled by default.
+	EnableAcceptEncodingGzip bool
+
 	// The endpoint options to be used when attempting to resolve an endpoint.
 	EndpointOptions ResolverOptions
 
@@ -98,6 +107,14 @@ type Options struct {
 
 func (o Options) GetCredentials() aws.CredentialsProvider {
 	return o.Credentials
+}
+
+func (o Options) GetDisableValidateResponseChecksum() bool {
+	return o.DisableValidateResponseChecksum
+}
+
+func (o Options) GetEnableAcceptEncodingGzip() bool {
+	return o.EnableAcceptEncodingGzip
 }
 
 func (o Options) GetEndpointOptions() ResolverOptions {
@@ -188,4 +205,12 @@ func resolveIdempotencyTokenProvider(o *Options) {
 // IdempotencyTokenProvider interface for providing idempotency token
 type IdempotencyTokenProvider interface {
 	GetIdempotencyToken() (string, error)
+}
+
+func addValidateResponseChecksum(stack *middleware.Stack, options Options) {
+	ddbcust.AddValidateResponseChecksum(stack, ddbcust.AddValidateResponseChecksumOptions{Disable: options.DisableValidateResponseChecksum})
+}
+
+func addAcceptEncodingGzip(stack *middleware.Stack, options Options) {
+	ddbcust.AddAcceptEncodingGzip(stack, ddbcust.AddAcceptEncodingGzipOptions{Enable: options.EnableAcceptEncodingGzip})
 }

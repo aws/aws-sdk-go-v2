@@ -51,6 +51,8 @@ func (c *Client) UpdateTimeToLive(ctx context.Context, params *UpdateTimeToLiveI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateTimeToLiveValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTimeToLive(options.Region), middleware.Before)
+	addValidateResponseChecksum(stack, options)
+	addAcceptEncodingGzip(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

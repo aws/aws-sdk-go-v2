@@ -50,6 +50,8 @@ func (c *Client) UpdateGlobalTable(ctx context.Context, params *UpdateGlobalTabl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateGlobalTableValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGlobalTable(options.Region), middleware.Before)
+	addValidateResponseChecksum(stack, options)
+	addAcceptEncodingGzip(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

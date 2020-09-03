@@ -44,6 +44,8 @@ func (c *Client) CreateTable(ctx context.Context, params *CreateTableInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateTableValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTable(options.Region), middleware.Before)
+	addValidateResponseChecksum(stack, options)
+	addAcceptEncodingGzip(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
