@@ -16,6 +16,7 @@
 package software.amazon.smithy.aws.go.codegen;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
@@ -30,7 +31,9 @@ import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.knowledge.NeighborProviderIndex;
 import software.amazon.smithy.model.neighbor.NeighborProvider;
 import software.amazon.smithy.model.neighbor.Walker;
+import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.Shape;
+import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.model.traits.IdempotencyTokenTrait;
 import software.amazon.smithy.utils.ListUtils;
 
@@ -54,12 +57,10 @@ public final class AwsIdempotencyTokenProvider implements GoIntegration {
 
     @Override
     public void processFinalizedModel(GoSettings settings, Model model) {
-        NeighborProviderIndex neighborProviderIndex = model.getKnowledge(NeighborProviderIndex.class);
-        NeighborProvider provider = neighborProviderIndex.getProviderWithTraitRelationships();
-        Optional<Shape> optionalShape = new Walker(provider).walkShapes(settings.getService(model))
-                .stream().filter(shape -> shape.getMemberTrait(model, IdempotencyTokenTrait.class).isPresent())
-                .findAny();
-        isTraitUsed = optionalShape.isPresent();
+        Map<ShapeId, MemberShape> map = IdempotencyTokenMiddlewareGenerator.getOperationsWithIdempotencyToken(model,
+                settings.getService(model));
+
+        isTraitUsed = !map.isEmpty();
     }
 
     private void writeResolver(GoWriter writer) {
@@ -76,7 +77,7 @@ public final class AwsIdempotencyTokenProvider implements GoIntegration {
 
     @Override
     public List<RuntimeClientPlugin> getClientPlugins() {
-        if(!isTraitUsed) {
+        if (!isTraitUsed) {
             return ListUtils.of();
         }
 
