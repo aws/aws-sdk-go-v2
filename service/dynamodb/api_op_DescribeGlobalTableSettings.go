@@ -13,8 +13,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Describes Region-specific settings for a global table. This method only applies
-// to Version 2017.11.29
+// Describes Region-specific settings for a global table. This operation only
+// applies to Version 2017.11.29
 // (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html)
 // of global tables.
 func (c *Client) DescribeGlobalTableSettings(ctx context.Context, params *DescribeGlobalTableSettingsInput, optFns ...func(*Options)) (*DescribeGlobalTableSettingsOutput, error) {
@@ -62,10 +62,10 @@ type DescribeGlobalTableSettingsInput struct {
 }
 
 type DescribeGlobalTableSettingsOutput struct {
-	// The name of the global table.
-	GlobalTableName *string
 	// The Region-specific settings for the global table.
 	ReplicaSettings []*types.ReplicaSettingsDescription
+	// The name of the global table.
+	GlobalTableName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -1,0 +1,1614 @@
+{
+  "smithy": "1.0",
+  "metadata": {
+    "suppressions": [
+      {
+        "id": "HttpMethodSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpResponseCodeSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "PaginatedTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpHeaderTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpUriConflict",
+        "namespace": "*"
+      },
+      {
+        "id": "Service",
+        "namespace": "*"
+      }
+    ]
+  },
+  "shapes": {
+    "com.amazonaws.mediastore#AllowedHeaders": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mediastore#Header"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.mediastore#AllowedMethods": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mediastore#MethodName"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 4
+        }
+      }
+    },
+    "com.amazonaws.mediastore#AllowedOrigins": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mediastore#Origin"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.mediastore#Container": {
+      "type": "structure",
+      "members": {
+        "Endpoint": {
+          "target": "com.amazonaws.mediastore#Endpoint",
+          "traits": {
+            "smithy.api#documentation": "<p>The DNS endpoint of the container. Use the endpoint to identify the specific\n         container when sending requests to the data plane. The service assigns this value when the\n         container is created. Once the value has been assigned, it does not change.</p>"
+          }
+        },
+        "ARN": {
+          "target": "com.amazonaws.mediastore#ContainerARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the container. The ARN has the following\n         format:</p>\n         <p>arn:aws:<region>:<account that owns this container>:container/<name of\n         container> </p>\n         <p>For example: arn:aws:mediastore:us-west-2:111122223333:container/movies </p>"
+          }
+        },
+        "Status": {
+          "target": "com.amazonaws.mediastore#ContainerStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of container creation or deletion. The status is one of the following:\n            <code>CREATING</code>, <code>ACTIVE</code>, or <code>DELETING</code>. While the service\n         is creating the container, the status is <code>CREATING</code>. When the endpoint is\n         available, the status changes to <code>ACTIVE</code>.</p>"
+          }
+        },
+        "AccessLoggingEnabled": {
+          "target": "com.amazonaws.mediastore#ContainerAccessLoggingEnabled",
+          "traits": {
+            "smithy.api#documentation": "<p>The state of access logging on the container. This value is <code>false</code> by default, indicating that AWS Elemental MediaStore does not send access logs to Amazon CloudWatch Logs. When you enable access logging on the container, MediaStore changes this value to <code>true</code>, indicating that the service delivers access logs for objects stored in that container to CloudWatch Logs.</p>"
+          }
+        },
+        "CreationTime": {
+          "target": "com.amazonaws.mediastore#TimeStamp",
+          "traits": {
+            "smithy.api#documentation": "<p>Unix timestamp.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.mediastore#ContainerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the container.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>This section describes operations that you can perform on an AWS Elemental MediaStore\n         container.</p>"
+      }
+    },
+    "com.amazonaws.mediastore#ContainerARN": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1024
+        },
+        "smithy.api#pattern": "arn:aws:mediastore:[a-z]+-[a-z]+-\\d:\\d{12}:container/[\\w-]{1,255}"
+      }
+    },
+    "com.amazonaws.mediastore#ContainerAccessLoggingEnabled": {
+      "type": "boolean",
+      "traits": {
+        "smithy.api#box": {}
+      }
+    },
+    "com.amazonaws.mediastore#ContainerInUseException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.mediastore#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The container that you specified in the request already exists or is being\n         updated.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.mediastore#ContainerLevelMetrics": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ENABLED",
+            "name": "ENABLED"
+          },
+          {
+            "value": "DISABLED",
+            "name": "DISABLED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.mediastore#ContainerList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mediastore#Container"
+      }
+    },
+    "com.amazonaws.mediastore#ContainerListLimit": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {},
+        "smithy.api#range": {
+          "min": 1,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.mediastore#ContainerName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        },
+        "smithy.api#pattern": "[\\w-]+"
+      }
+    },
+    "com.amazonaws.mediastore#ContainerNotFoundException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.mediastore#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The container that you specified in the request does not exist.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.mediastore#ContainerPolicy": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 8192
+        },
+        "smithy.api#pattern": "[\\x00-\\x7F]+"
+      }
+    },
+    "com.amazonaws.mediastore#ContainerStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ACTIVE",
+            "name": "ACTIVE"
+          },
+          {
+            "value": "CREATING",
+            "name": "CREATING"
+          },
+          {
+            "value": "DELETING",
+            "name": "DELETING"
+          }
+        ],
+        "smithy.api#length": {
+          "min": 1,
+          "max": 16
+        }
+      }
+    },
+    "com.amazonaws.mediastore#CorsPolicy": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mediastore#CorsRule"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The CORS policy of the container. </p>",
+        "smithy.api#length": {
+          "min": 1,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.mediastore#CorsPolicyNotFoundException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.mediastore#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The CORS policy that you specified in the request does not exist.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.mediastore#CorsRule": {
+      "type": "structure",
+      "members": {
+        "ExposeHeaders": {
+          "target": "com.amazonaws.mediastore#ExposeHeaders",
+          "traits": {
+            "smithy.api#documentation": "<p>One or more headers in the response that you want users to be able to access from\n         their applications (for example, from a JavaScript <code>XMLHttpRequest</code>\n         object).</p>\n         <p>This element is optional for each rule.</p>"
+          }
+        },
+        "AllowedMethods": {
+          "target": "com.amazonaws.mediastore#AllowedMethods",
+          "traits": {
+            "smithy.api#documentation": "<p>Identifies an HTTP method that the origin that is specified in the rule is allowed to\n         execute.</p>\n         <p>Each CORS rule must contain at least one <code>AllowedMethods</code> and one\n            <code>AllowedOrigins</code> element.</p>"
+          }
+        },
+        "AllowedHeaders": {
+          "target": "com.amazonaws.mediastore#AllowedHeaders",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies which headers are allowed in a preflight <code>OPTIONS</code> request\n         through the <code>Access-Control-Request-Headers</code> header. Each header name that is\n         specified in <code>Access-Control-Request-Headers</code> must have a corresponding entry in\n         the rule. Only the headers that were requested are sent back. </p>\n         <p>This element can contain only one wildcard character (*).</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "MaxAgeSeconds": {
+          "target": "com.amazonaws.mediastore#MaxAgeSeconds",
+          "traits": {
+            "smithy.api#documentation": "<p>The time in seconds that your browser caches the preflight response for the specified\n         resource.</p>\n         <p>A CORS rule can have only one <code>MaxAgeSeconds</code> element.</p>"
+          }
+        },
+        "AllowedOrigins": {
+          "target": "com.amazonaws.mediastore#AllowedOrigins",
+          "traits": {
+            "smithy.api#documentation": "<p>One or more response headers that you want users to be able to access from their\n         applications (for example, from a JavaScript <code>XMLHttpRequest</code> object).</p>\n         <p>Each CORS rule must have at least one <code>AllowedOrigins</code> element. The string\n         value can include only one wildcard character (*), for example, http://*.example.com.\n         Additionally, you can specify only one wildcard character to allow cross-origin access for\n         all origins.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A rule for a CORS policy. You can add up to 100 rules to a CORS policy. If more than\n         one rule applies, the service uses the first applicable rule listed.</p>"
+      }
+    },
+    "com.amazonaws.mediastore#CreateContainer": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mediastore#CreateContainerInput"
+      },
+      "output": {
+        "target": "com.amazonaws.mediastore#CreateContainerOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mediastore#ContainerInUseException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#InternalServerError"
+        },
+        {
+          "target": "com.amazonaws.mediastore#LimitExceededException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a storage container to hold objects. A container is similar to a bucket in\n         the Amazon S3 service.</p>"
+      }
+    },
+    "com.amazonaws.mediastore#CreateContainerInput": {
+      "type": "structure",
+      "members": {
+        "ContainerName": {
+          "target": "com.amazonaws.mediastore#ContainerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name for the container. The name must be from 1 to 255 characters. Container\n         names must be unique to your AWS account within a specific region. As an example, you could\n         create a container named <code>movies</code> in every region, as long as you don’t have an\n         existing container with that name.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.mediastore#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of key:value pairs that you define. These values can be anything that you want. Typically, the tag key represents a category (such as\n           \"environment\") and the tag value represents a specific value within that category (such as \"test,\" \"development,\" or \"production\"). You can add up to 50 \n           tags to each container. For more information about tagging, including naming and usage conventions, see <a href=\"https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html\">Tagging Resources in MediaStore</a>.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#CreateContainerOutput": {
+      "type": "structure",
+      "members": {
+        "Container": {
+          "target": "com.amazonaws.mediastore#Container",
+          "traits": {
+            "smithy.api#documentation": "<p>ContainerARN: The Amazon Resource Name (ARN) of the newly created container. The ARN\n         has the following format: arn:aws:<region>:<account that owns this\n         container>:container/<name of container>. For example:\n         arn:aws:mediastore:us-west-2:111122223333:container/movies </p>\n         <p>ContainerName: The container name as specified in the request.</p>\n         <p>CreationTime: Unix time stamp.</p>\n         <p>Status: The status of container creation or deletion. The status is one of the\n         following: <code>CREATING</code>, <code>ACTIVE</code>, or <code>DELETING</code>. While the\n         service is creating the container, the status is <code>CREATING</code>. When an endpoint is\n         available, the status changes to <code>ACTIVE</code>.</p>\n         <p>The return value does not include the container's endpoint. To make downstream\n         requests, you must obtain this value by using <a>DescribeContainer</a> or <a>ListContainers</a>.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#DeleteContainer": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mediastore#DeleteContainerInput"
+      },
+      "output": {
+        "target": "com.amazonaws.mediastore#DeleteContainerOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mediastore#ContainerInUseException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#ContainerNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#InternalServerError"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes the specified container. Before you make a <code>DeleteContainer</code>\n         request, delete any objects in the container or in any folders in the container. You can\n         delete only empty containers. </p>"
+      }
+    },
+    "com.amazonaws.mediastore#DeleteContainerInput": {
+      "type": "structure",
+      "members": {
+        "ContainerName": {
+          "target": "com.amazonaws.mediastore#ContainerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the container to delete. </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#DeleteContainerOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mediastore#DeleteContainerPolicy": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mediastore#DeleteContainerPolicyInput"
+      },
+      "output": {
+        "target": "com.amazonaws.mediastore#DeleteContainerPolicyOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mediastore#ContainerInUseException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#ContainerNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#InternalServerError"
+        },
+        {
+          "target": "com.amazonaws.mediastore#PolicyNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes the access policy that is associated with the specified container.</p>"
+      }
+    },
+    "com.amazonaws.mediastore#DeleteContainerPolicyInput": {
+      "type": "structure",
+      "members": {
+        "ContainerName": {
+          "target": "com.amazonaws.mediastore#ContainerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the container that holds the policy.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#DeleteContainerPolicyOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mediastore#DeleteCorsPolicy": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mediastore#DeleteCorsPolicyInput"
+      },
+      "output": {
+        "target": "com.amazonaws.mediastore#DeleteCorsPolicyOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mediastore#ContainerInUseException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#ContainerNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#CorsPolicyNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#InternalServerError"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes the cross-origin resource sharing (CORS) configuration information that is\n         set for the container.</p>\n         <p>To use this operation, you must have permission to perform the\n            <code>MediaStore:DeleteCorsPolicy</code> action. The container owner has this permission\n         by default and can grant this permission to others.</p>"
+      }
+    },
+    "com.amazonaws.mediastore#DeleteCorsPolicyInput": {
+      "type": "structure",
+      "members": {
+        "ContainerName": {
+          "target": "com.amazonaws.mediastore#ContainerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the container to remove the policy from.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#DeleteCorsPolicyOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mediastore#DeleteLifecyclePolicy": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mediastore#DeleteLifecyclePolicyInput"
+      },
+      "output": {
+        "target": "com.amazonaws.mediastore#DeleteLifecyclePolicyOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mediastore#ContainerInUseException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#ContainerNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#InternalServerError"
+        },
+        {
+          "target": "com.amazonaws.mediastore#PolicyNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes an object lifecycle policy from a container. It takes up to 20 minutes for the change to take effect.</p>"
+      }
+    },
+    "com.amazonaws.mediastore#DeleteLifecyclePolicyInput": {
+      "type": "structure",
+      "members": {
+        "ContainerName": {
+          "target": "com.amazonaws.mediastore#ContainerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the container that holds the object lifecycle policy.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#DeleteLifecyclePolicyOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mediastore#DeleteMetricPolicy": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mediastore#DeleteMetricPolicyInput"
+      },
+      "output": {
+        "target": "com.amazonaws.mediastore#DeleteMetricPolicyOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mediastore#ContainerInUseException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#ContainerNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#InternalServerError"
+        },
+        {
+          "target": "com.amazonaws.mediastore#PolicyNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes the metric policy that is associated with the specified container. If there is no metric policy associated with the container, MediaStore doesn't send metrics to CloudWatch.</p>"
+      }
+    },
+    "com.amazonaws.mediastore#DeleteMetricPolicyInput": {
+      "type": "structure",
+      "members": {
+        "ContainerName": {
+          "target": "com.amazonaws.mediastore#ContainerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the container that is associated with the metric policy that you want to delete.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#DeleteMetricPolicyOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mediastore#DescribeContainer": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mediastore#DescribeContainerInput"
+      },
+      "output": {
+        "target": "com.amazonaws.mediastore#DescribeContainerOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mediastore#ContainerNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#InternalServerError"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves the properties of the requested container. This request is commonly used to\n         retrieve the endpoint of a container. An endpoint is a value assigned by the service when a\n         new container is created. A container's endpoint does not change after it has been\n         assigned. The <code>DescribeContainer</code> request returns a single\n            <code>Container</code> object based on <code>ContainerName</code>. To return all\n            <code>Container</code> objects that are associated with a specified AWS account, use\n            <a>ListContainers</a>.</p>"
+      }
+    },
+    "com.amazonaws.mediastore#DescribeContainerInput": {
+      "type": "structure",
+      "members": {
+        "ContainerName": {
+          "target": "com.amazonaws.mediastore#ContainerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the container to query.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#DescribeContainerOutput": {
+      "type": "structure",
+      "members": {
+        "Container": {
+          "target": "com.amazonaws.mediastore#Container",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the queried container.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#Endpoint": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        },
+        "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
+      }
+    },
+    "com.amazonaws.mediastore#ErrorMessage": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        },
+        "smithy.api#pattern": "[ \\w:\\.\\?-]+"
+      }
+    },
+    "com.amazonaws.mediastore#ExposeHeaders": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mediastore#Header"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.mediastore#GetContainerPolicy": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mediastore#GetContainerPolicyInput"
+      },
+      "output": {
+        "target": "com.amazonaws.mediastore#GetContainerPolicyOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mediastore#ContainerInUseException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#ContainerNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#InternalServerError"
+        },
+        {
+          "target": "com.amazonaws.mediastore#PolicyNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves the access policy for the specified container. For information about the\n         data that is included in an access policy, see the <a href=\"https://aws.amazon.com/documentation/iam/\">AWS Identity and Access Management User\n            Guide</a>.</p>"
+      }
+    },
+    "com.amazonaws.mediastore#GetContainerPolicyInput": {
+      "type": "structure",
+      "members": {
+        "ContainerName": {
+          "target": "com.amazonaws.mediastore#ContainerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the container. </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#GetContainerPolicyOutput": {
+      "type": "structure",
+      "members": {
+        "Policy": {
+          "target": "com.amazonaws.mediastore#ContainerPolicy",
+          "traits": {
+            "smithy.api#documentation": "<p>The contents of the access policy.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#GetCorsPolicy": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mediastore#GetCorsPolicyInput"
+      },
+      "output": {
+        "target": "com.amazonaws.mediastore#GetCorsPolicyOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mediastore#ContainerInUseException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#ContainerNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#CorsPolicyNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#InternalServerError"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns the cross-origin resource sharing (CORS) configuration information that is\n         set for the container.</p>\n         <p>To use this operation, you must have permission to perform the\n            <code>MediaStore:GetCorsPolicy</code> action. By default, the container owner has this\n         permission and can grant it to others.</p>"
+      }
+    },
+    "com.amazonaws.mediastore#GetCorsPolicyInput": {
+      "type": "structure",
+      "members": {
+        "ContainerName": {
+          "target": "com.amazonaws.mediastore#ContainerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the container that the policy is assigned to.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#GetCorsPolicyOutput": {
+      "type": "structure",
+      "members": {
+        "CorsPolicy": {
+          "target": "com.amazonaws.mediastore#CorsPolicy",
+          "traits": {
+            "smithy.api#documentation": "<p>The CORS policy assigned to the container.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#GetLifecyclePolicy": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mediastore#GetLifecyclePolicyInput"
+      },
+      "output": {
+        "target": "com.amazonaws.mediastore#GetLifecyclePolicyOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mediastore#ContainerInUseException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#ContainerNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#InternalServerError"
+        },
+        {
+          "target": "com.amazonaws.mediastore#PolicyNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves the object lifecycle policy that is assigned to a container.</p>"
+      }
+    },
+    "com.amazonaws.mediastore#GetLifecyclePolicyInput": {
+      "type": "structure",
+      "members": {
+        "ContainerName": {
+          "target": "com.amazonaws.mediastore#ContainerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the container that the object lifecycle policy is assigned to.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#GetLifecyclePolicyOutput": {
+      "type": "structure",
+      "members": {
+        "LifecyclePolicy": {
+          "target": "com.amazonaws.mediastore#LifecyclePolicy",
+          "traits": {
+            "smithy.api#documentation": "<p>The object lifecycle policy that is assigned to the container.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#GetMetricPolicy": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mediastore#GetMetricPolicyInput"
+      },
+      "output": {
+        "target": "com.amazonaws.mediastore#GetMetricPolicyOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mediastore#ContainerInUseException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#ContainerNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#InternalServerError"
+        },
+        {
+          "target": "com.amazonaws.mediastore#PolicyNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns the metric policy for the specified container. </p>"
+      }
+    },
+    "com.amazonaws.mediastore#GetMetricPolicyInput": {
+      "type": "structure",
+      "members": {
+        "ContainerName": {
+          "target": "com.amazonaws.mediastore#ContainerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the container that is associated with the metric policy.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#GetMetricPolicyOutput": {
+      "type": "structure",
+      "members": {
+        "MetricPolicy": {
+          "target": "com.amazonaws.mediastore#MetricPolicy",
+          "traits": {
+            "smithy.api#documentation": "<p>The metric policy that is associated with the specific container.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#Header": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 8192
+        },
+        "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
+      }
+    },
+    "com.amazonaws.mediastore#InternalServerError": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.mediastore#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The service is temporarily unavailable.</p>",
+        "smithy.api#error": "server"
+      }
+    },
+    "com.amazonaws.mediastore#LifecyclePolicy": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 8192
+        },
+        "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
+      }
+    },
+    "com.amazonaws.mediastore#LimitExceededException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.mediastore#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A service limit has been exceeded.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.mediastore#ListContainers": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mediastore#ListContainersInput"
+      },
+      "output": {
+        "target": "com.amazonaws.mediastore#ListContainersOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mediastore#InternalServerError"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists the properties of all containers in AWS Elemental MediaStore. </p>\n         <p>You can query to receive all the containers in one response. Or you can include the\n            <code>MaxResults</code> parameter to receive a limited number of containers in each\n         response. In this case, the response includes a token. To get the next set of containers,\n         send the command again, this time with the <code>NextToken</code> parameter (with the\n         returned token as its value). The next set of responses appears, with a token if there are\n         still more containers to receive. </p>\n         <p>See also <a>DescribeContainer</a>, which gets the properties of one\n         container. </p>",
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.mediastore#ListContainersInput": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "target": "com.amazonaws.mediastore#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>Only if you used <code>MaxResults</code> in the first command, enter the token (which\n         was included in the previous response) to obtain the next set of containers. This token is\n         included in a response only if there actually are more containers to list.</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.mediastore#ContainerListLimit",
+          "traits": {
+            "smithy.api#documentation": "<p>Enter the maximum number of containers in the response. Use from 1 to 255 characters.\n      </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#ListContainersOutput": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "target": "com.amazonaws.mediastore#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            <code>NextToken</code> is the token to use in the next call to <code>ListContainers</code>.\n         This token is returned only if you included the <code>MaxResults</code> tag in the original\n         command, and only if there are still containers to return. </p>"
+          }
+        },
+        "Containers": {
+          "target": "com.amazonaws.mediastore#ContainerList",
+          "traits": {
+            "smithy.api#documentation": "<p>The names of the containers.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#ListTagsForResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mediastore#ListTagsForResourceInput"
+      },
+      "output": {
+        "target": "com.amazonaws.mediastore#ListTagsForResourceOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mediastore#ContainerInUseException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#ContainerNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#InternalServerError"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns a list of the tags assigned to the specified container. </p>"
+      }
+    },
+    "com.amazonaws.mediastore#ListTagsForResourceInput": {
+      "type": "structure",
+      "members": {
+        "Resource": {
+          "target": "com.amazonaws.mediastore#ContainerARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the container.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#ListTagsForResourceOutput": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "target": "com.amazonaws.mediastore#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of key:value pairs that are assigned to the container.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#MaxAgeSeconds": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 0,
+          "max": 2147483647
+        }
+      }
+    },
+    "com.amazonaws.mediastore#MediaStore_20170901": {
+      "type": "service",
+      "version": "2017-09-01",
+      "operations": [
+        {
+          "target": "com.amazonaws.mediastore#CreateContainer"
+        },
+        {
+          "target": "com.amazonaws.mediastore#DeleteContainer"
+        },
+        {
+          "target": "com.amazonaws.mediastore#DeleteContainerPolicy"
+        },
+        {
+          "target": "com.amazonaws.mediastore#DeleteCorsPolicy"
+        },
+        {
+          "target": "com.amazonaws.mediastore#DeleteLifecyclePolicy"
+        },
+        {
+          "target": "com.amazonaws.mediastore#DeleteMetricPolicy"
+        },
+        {
+          "target": "com.amazonaws.mediastore#DescribeContainer"
+        },
+        {
+          "target": "com.amazonaws.mediastore#GetContainerPolicy"
+        },
+        {
+          "target": "com.amazonaws.mediastore#GetCorsPolicy"
+        },
+        {
+          "target": "com.amazonaws.mediastore#GetLifecyclePolicy"
+        },
+        {
+          "target": "com.amazonaws.mediastore#GetMetricPolicy"
+        },
+        {
+          "target": "com.amazonaws.mediastore#ListContainers"
+        },
+        {
+          "target": "com.amazonaws.mediastore#ListTagsForResource"
+        },
+        {
+          "target": "com.amazonaws.mediastore#PutContainerPolicy"
+        },
+        {
+          "target": "com.amazonaws.mediastore#PutCorsPolicy"
+        },
+        {
+          "target": "com.amazonaws.mediastore#PutLifecyclePolicy"
+        },
+        {
+          "target": "com.amazonaws.mediastore#PutMetricPolicy"
+        },
+        {
+          "target": "com.amazonaws.mediastore#StartAccessLogging"
+        },
+        {
+          "target": "com.amazonaws.mediastore#StopAccessLogging"
+        },
+        {
+          "target": "com.amazonaws.mediastore#TagResource"
+        },
+        {
+          "target": "com.amazonaws.mediastore#UntagResource"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "MediaStore",
+          "arnNamespace": "mediastore",
+          "cloudFormationName": "MediaStore",
+          "cloudTrailEventSource": "mediastore.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "mediastore"
+        },
+        "aws.protocols#awsJson1_1": {},
+        "smithy.api#documentation": "<p>An AWS Elemental MediaStore container is a namespace that holds folders and objects.\n         You use a container endpoint to create, read, and delete objects. </p>",
+        "smithy.api#title": "AWS Elemental MediaStore",
+        "smithy.api#xmlNamespace": {
+          "uri": "https://mediastore.amazonaws.com/doc/2017-09-01"
+        }
+      }
+    },
+    "com.amazonaws.mediastore#MethodName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "PUT",
+            "name": "PUT"
+          },
+          {
+            "value": "GET",
+            "name": "GET"
+          },
+          {
+            "value": "DELETE",
+            "name": "DELETE"
+          },
+          {
+            "value": "HEAD",
+            "name": "HEAD"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.mediastore#MetricPolicy": {
+      "type": "structure",
+      "members": {
+        "MetricPolicyRules": {
+          "target": "com.amazonaws.mediastore#MetricPolicyRules",
+          "traits": {
+            "smithy.api#documentation": "<p>A parameter that holds an array of rules that enable metrics at the object level. This parameter is optional, but if you choose to include it, you must also include at least one rule. By default, you can include up to five rules. You can also <a href=\"https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas\">request a quota increase</a> to allow up to 300 rules per policy.</p>"
+          }
+        },
+        "ContainerLevelMetrics": {
+          "target": "com.amazonaws.mediastore#ContainerLevelMetrics",
+          "traits": {
+            "smithy.api#documentation": "<p>A setting to enable or disable metrics at the container level.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The metric policy that is associated with the container. A metric policy allows AWS Elemental MediaStore to send metrics to Amazon CloudWatch. In the policy, you must indicate whether you want MediaStore to send container-level metrics. You can also include rules to define groups of objects that you want MediaStore to send object-level metrics for.</p>\n         <p>To view examples of how to construct a metric policy for your use case, see <a href=\"https://docs.aws.amazon.com/mediastore/latest/ug/policies-metric-examples.html\">Example Metric Policies</a>.</p>"
+      }
+    },
+    "com.amazonaws.mediastore#MetricPolicyRule": {
+      "type": "structure",
+      "members": {
+        "ObjectGroup": {
+          "target": "com.amazonaws.mediastore#ObjectGroup",
+          "traits": {
+            "smithy.api#documentation": "<p>A path or file name that defines which objects to include in the group. Wildcards (*) are acceptable.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ObjectGroupName": {
+          "target": "com.amazonaws.mediastore#ObjectGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>A name that allows you to refer to the object group.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A setting that enables metrics at the object level. Each rule contains an object group and an object group name. If the policy includes the MetricPolicyRules parameter, you must include at least one rule. Each metric policy can include up to five rules by default. You can also <a href=\"https://console.aws.amazon.com/servicequotas/home?region=us-east-1#!/services/mediastore/quotas\">request a quota increase</a> to allow up to 300 rules per policy.</p>"
+      }
+    },
+    "com.amazonaws.mediastore#MetricPolicyRules": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mediastore#MetricPolicyRule"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 300
+        }
+      }
+    },
+    "com.amazonaws.mediastore#ObjectGroup": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 900
+        },
+        "smithy.api#pattern": "/?(?:[A-Za-z0-9_=:\\.\\-\\~\\*]+/){0,10}(?:[A-Za-z0-9_=:\\.\\-\\~\\*]+)?/?"
+      }
+    },
+    "com.amazonaws.mediastore#ObjectGroupName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 30
+        },
+        "smithy.api#pattern": "[a-zA-Z0-9_]+"
+      }
+    },
+    "com.amazonaws.mediastore#Origin": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 2048
+        },
+        "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
+      }
+    },
+    "com.amazonaws.mediastore#PaginationToken": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1024
+        },
+        "smithy.api#pattern": "[0-9A-Za-z=/+]+"
+      }
+    },
+    "com.amazonaws.mediastore#PolicyNotFoundException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.mediastore#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The policy that you specified in the request does not exist.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.mediastore#PutContainerPolicy": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mediastore#PutContainerPolicyInput"
+      },
+      "output": {
+        "target": "com.amazonaws.mediastore#PutContainerPolicyOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mediastore#ContainerInUseException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#ContainerNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#InternalServerError"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates an access policy for the specified container to restrict the users and\n         clients that can access it. For information about the data that is included in an access\n         policy, see the <a href=\"https://aws.amazon.com/documentation/iam/\">AWS Identity and\n            Access Management User Guide</a>.</p>\n         <p>For this release of the REST API, you can create only one policy for a container. If\n         you enter <code>PutContainerPolicy</code> twice, the second command modifies the existing\n         policy. </p>"
+      }
+    },
+    "com.amazonaws.mediastore#PutContainerPolicyInput": {
+      "type": "structure",
+      "members": {
+        "Policy": {
+          "target": "com.amazonaws.mediastore#ContainerPolicy",
+          "traits": {
+            "smithy.api#documentation": "<p>The contents of the policy, which includes the following: </p>\n         <ul>\n            <li>\n               <p>One <code>Version</code> tag</p>\n            </li>\n            <li>\n               <p>One <code>Statement</code> tag that contains the standard tags for the\n               policy.</p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        },
+        "ContainerName": {
+          "target": "com.amazonaws.mediastore#ContainerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the container.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#PutContainerPolicyOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mediastore#PutCorsPolicy": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mediastore#PutCorsPolicyInput"
+      },
+      "output": {
+        "target": "com.amazonaws.mediastore#PutCorsPolicyOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mediastore#ContainerInUseException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#ContainerNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#InternalServerError"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Sets the cross-origin resource sharing (CORS) configuration on a container so that\n         the container can service cross-origin requests. For example, you might want to enable a\n         request whose origin is http://www.example.com to access your AWS Elemental MediaStore\n         container at my.example.container.com by using the browser's XMLHttpRequest\n         capability.</p>\n         <p>To enable CORS on a container, you attach a CORS policy to the container. In the CORS\n         policy, you configure rules that identify origins and the HTTP methods that can be executed\n         on your container. The policy can contain up to 398,000 characters. You can add up to 100\n         rules to a CORS policy. If more than one rule applies, the service uses the first\n         applicable rule listed.</p>\n         <p>To learn more about CORS, see <a href=\"https://docs.aws.amazon.com/mediastore/latest/ug/cors-policy.html\">Cross-Origin Resource Sharing (CORS) in AWS Elemental MediaStore</a>.</p>"
+      }
+    },
+    "com.amazonaws.mediastore#PutCorsPolicyInput": {
+      "type": "structure",
+      "members": {
+        "CorsPolicy": {
+          "target": "com.amazonaws.mediastore#CorsPolicy",
+          "traits": {
+            "smithy.api#documentation": "<p>The CORS policy to apply to the container.  </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ContainerName": {
+          "target": "com.amazonaws.mediastore#ContainerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the container that you want to assign the CORS policy to.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#PutCorsPolicyOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mediastore#PutLifecyclePolicy": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mediastore#PutLifecyclePolicyInput"
+      },
+      "output": {
+        "target": "com.amazonaws.mediastore#PutLifecyclePolicyOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mediastore#ContainerInUseException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#ContainerNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#InternalServerError"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Writes an object lifecycle policy to a container. If the container already has an object lifecycle policy, the service replaces the existing policy with the new policy. It takes up to 20 minutes for the change to take effect.</p>\n         <p>For information about how to construct an object lifecycle policy, see <a href=\"https://docs.aws.amazon.com/mediastore/latest/ug/policies-object-lifecycle-components.html\">Components of an Object Lifecycle Policy</a>.</p>"
+      }
+    },
+    "com.amazonaws.mediastore#PutLifecyclePolicyInput": {
+      "type": "structure",
+      "members": {
+        "ContainerName": {
+          "target": "com.amazonaws.mediastore#ContainerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the container that you want to assign the object lifecycle policy to.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "LifecyclePolicy": {
+          "target": "com.amazonaws.mediastore#LifecyclePolicy",
+          "traits": {
+            "smithy.api#documentation": "<p>The object lifecycle policy to apply to the container.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#PutLifecyclePolicyOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mediastore#PutMetricPolicy": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mediastore#PutMetricPolicyInput"
+      },
+      "output": {
+        "target": "com.amazonaws.mediastore#PutMetricPolicyOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mediastore#ContainerInUseException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#ContainerNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#InternalServerError"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>The metric policy that you want to add to the container. A metric policy allows AWS Elemental MediaStore to send metrics to Amazon CloudWatch. It takes up to 20 minutes for the new policy to take effect.</p>"
+      }
+    },
+    "com.amazonaws.mediastore#PutMetricPolicyInput": {
+      "type": "structure",
+      "members": {
+        "ContainerName": {
+          "target": "com.amazonaws.mediastore#ContainerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the container that you want to add the metric policy to.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "MetricPolicy": {
+          "target": "com.amazonaws.mediastore#MetricPolicy",
+          "traits": {
+            "smithy.api#documentation": "<p>The metric policy that you want to associate with the container. In the policy, you must indicate whether you want MediaStore to send container-level metrics. You can also include up to five rules to define groups of objects that you want MediaStore to send object-level metrics for.  If you include rules in the policy, construct each rule with both of the following:</p>\n         <ul>\n            <li>\n               <p>An object group that defines which objects to include in the group. The definition can be a path or a file name, but it can't have more than 900 characters. Valid characters are: a-z, A-Z, 0-9, _ (underscore), = (equal), : (colon), . (period), - (hyphen), ~ (tilde), / (forward slash), and * (asterisk). Wildcards (*) are acceptable.</p>\n            </li>\n            <li>\n               <p>An object group name that allows you to refer to the object group. The name can't have more than 30 characters. Valid characters are: a-z, A-Z, 0-9, and _ (underscore).</p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#PutMetricPolicyOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mediastore#StartAccessLogging": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mediastore#StartAccessLoggingInput"
+      },
+      "output": {
+        "target": "com.amazonaws.mediastore#StartAccessLoggingOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mediastore#ContainerInUseException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#ContainerNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#InternalServerError"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Starts access logging on the specified container. When you enable access logging on a container, MediaStore delivers access logs for objects stored in that container to Amazon CloudWatch Logs.</p>"
+      }
+    },
+    "com.amazonaws.mediastore#StartAccessLoggingInput": {
+      "type": "structure",
+      "members": {
+        "ContainerName": {
+          "target": "com.amazonaws.mediastore#ContainerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the container that you want to start access logging on.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#StartAccessLoggingOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mediastore#StopAccessLogging": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mediastore#StopAccessLoggingInput"
+      },
+      "output": {
+        "target": "com.amazonaws.mediastore#StopAccessLoggingOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mediastore#ContainerInUseException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#ContainerNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#InternalServerError"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Stops access logging on the specified container. When you stop access logging on a container, MediaStore stops sending access logs to Amazon CloudWatch Logs. These access logs are not saved and are not retrievable.</p>"
+      }
+    },
+    "com.amazonaws.mediastore#StopAccessLoggingInput": {
+      "type": "structure",
+      "members": {
+        "ContainerName": {
+          "target": "com.amazonaws.mediastore#ContainerName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the container that you want to stop access logging on.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#StopAccessLoggingOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mediastore#Tag": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "target": "com.amazonaws.mediastore#TagValue",
+          "traits": {
+            "smithy.api#documentation": "<p>Part of the key:value pair that defines a tag. You can use a tag value to describe a specific value within a category, such as \"companyA\" or\n            \"companyB.\" Tag values are case-sensitive.</p>"
+          }
+        },
+        "Key": {
+          "target": "com.amazonaws.mediastore#TagKey",
+          "traits": {
+            "smithy.api#documentation": "<p>Part of the key:value pair that defines a tag. You can use a tag key to describe a category of information, such as \"customer.\" Tag keys are\n            case-sensitive.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A collection of tags associated with a container. Each tag consists of a key:value pair, which can be anything you define. Typically, the tag key\n            represents a category (such as \"environment\") and the tag value represents a specific value within that category (such as \"test,\" \"development,\" or\n            \"production\"). You can add up to 50 \n            tags to each container. For more information about tagging, including naming and usage conventions, see <a href=\"https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html\">Tagging Resources in MediaStore</a>.</p>"
+      }
+    },
+    "com.amazonaws.mediastore#TagKey": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        },
+        "smithy.api#pattern": "[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*"
+      }
+    },
+    "com.amazonaws.mediastore#TagKeyList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mediastore#TagKey"
+      }
+    },
+    "com.amazonaws.mediastore#TagList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mediastore#Tag"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 200
+        }
+      }
+    },
+    "com.amazonaws.mediastore#TagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mediastore#TagResourceInput"
+      },
+      "output": {
+        "target": "com.amazonaws.mediastore#TagResourceOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mediastore#ContainerInUseException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#ContainerNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#InternalServerError"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Adds tags to the specified AWS Elemental MediaStore container. Tags are key:value pairs that you can associate with AWS resources. For example, the\n            tag key might be \"customer\" and the tag value might be \"companyA.\" You can specify one or more tags to add to each container. You can add up to 50\n            tags to each container. For more information about tagging, including naming and usage conventions, see <a href=\"https://docs.aws.amazon.com/mediastore/latest/ug/tagging.html\">Tagging Resources in MediaStore</a>.</p>"
+      }
+    },
+    "com.amazonaws.mediastore#TagResourceInput": {
+      "type": "structure",
+      "members": {
+        "Resource": {
+          "target": "com.amazonaws.mediastore#ContainerARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the container. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Tags": {
+          "target": "com.amazonaws.mediastore#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of key:value pairs that you want to add to the container. You need to specify only the tags that you want to add or update. For example,\n            suppose a container already has two tags (customer:CompanyA and priority:High). You want to change the priority tag and also add a third tag\n            (type:Contract). For TagResource, you specify the following tags: priority:Medium, type:Contract. The result is that your container has three tags:\n            customer:CompanyA, priority:Medium, and type:Contract.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#TagResourceOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mediastore#TagValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 256
+        },
+        "smithy.api#pattern": "[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*"
+      }
+    },
+    "com.amazonaws.mediastore#TimeStamp": {
+      "type": "timestamp"
+    },
+    "com.amazonaws.mediastore#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mediastore#UntagResourceInput"
+      },
+      "output": {
+        "target": "com.amazonaws.mediastore#UntagResourceOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mediastore#ContainerInUseException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#ContainerNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.mediastore#InternalServerError"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes tags from the specified container. You can specify one or more tags to remove. </p>"
+      }
+    },
+    "com.amazonaws.mediastore#UntagResourceInput": {
+      "type": "structure",
+      "members": {
+        "Resource": {
+          "target": "com.amazonaws.mediastore#ContainerARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the container.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TagKeys": {
+          "target": "com.amazonaws.mediastore#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>A comma-separated list of keys for tags that you want to remove from the container. For example, if your container has two tags (customer:CompanyA\n            and priority:High) and you want to remove one of the tags (priority:High), you specify the key for the tag that you want to remove\n            (priority).</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mediastore#UntagResourceOutput": {
+      "type": "structure",
+      "members": {}
+    }
+  }
+}

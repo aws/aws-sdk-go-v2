@@ -8,6 +8,30 @@ import (
 	"github.com/awslabs/smithy-go/ptr"
 )
 
+// Either the Amazon Lex bot is still building, or one of the dependent services
+// (Amazon Polly, AWS Lambda) failed with an internal service error.
+type BadGatewayException struct {
+	Message *string
+}
+
+func (e *BadGatewayException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *BadGatewayException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *BadGatewayException) ErrorCode() string             { return "BadGatewayException" }
+func (e *BadGatewayException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (e *BadGatewayException) GetMessage() string {
+	return ptr.ToString(e.Message)
+}
+func (e *BadGatewayException) HasMessage() bool {
+	return e.Message != nil
+}
+
 // Request validation failed, there is no usable message in the context, or the bot
 // build failed, is still in progress, or contains unbuilt changes.
 type BadRequestException struct {
@@ -52,6 +76,39 @@ func (e *ConflictException) GetMessage() string {
 	return ptr.ToString(e.Message)
 }
 func (e *ConflictException) HasMessage() bool {
+	return e.Message != nil
+}
+
+// One of the dependencies, such as AWS Lambda or Amazon Polly, threw an exception.
+// For example,
+//
+//     * If Amazon Lex does not have sufficient permissions to call a
+// Lambda function.
+//
+//     * If a Lambda function takes longer than 30 seconds to
+// execute.
+//
+//     * If a fulfillment Lambda function returns a Delegate dialog
+// action without removing any slot values.
+type DependencyFailedException struct {
+	Message *string
+}
+
+func (e *DependencyFailedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DependencyFailedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DependencyFailedException) ErrorCode() string             { return "DependencyFailedException" }
+func (e *DependencyFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (e *DependencyFailedException) GetMessage() string {
+	return ptr.ToString(e.Message)
+}
+func (e *DependencyFailedException) HasMessage() bool {
 	return e.Message != nil
 }
 
@@ -107,6 +164,29 @@ func (e *LimitExceededException) GetRetryAfterSeconds() string {
 }
 func (e *LimitExceededException) HasRetryAfterSeconds() bool {
 	return e.RetryAfterSeconds != nil
+}
+
+// This exception is not used.
+type LoopDetectedException struct {
+	Message *string
+}
+
+func (e *LoopDetectedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *LoopDetectedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *LoopDetectedException) ErrorCode() string             { return "LoopDetectedException" }
+func (e *LoopDetectedException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (e *LoopDetectedException) GetMessage() string {
+	return ptr.ToString(e.Message)
+}
+func (e *LoopDetectedException) HasMessage() bool {
+	return e.Message != nil
 }
 
 // The accept header in the request does not have a valid value.
@@ -199,85 +279,5 @@ func (e *UnsupportedMediaTypeException) GetMessage() string {
 	return ptr.ToString(e.Message)
 }
 func (e *UnsupportedMediaTypeException) HasMessage() bool {
-	return e.Message != nil
-}
-
-// Either the Amazon Lex bot is still building, or one of the dependent services
-// (Amazon Polly, AWS Lambda) failed with an internal service error.
-type BadGatewayException struct {
-	Message *string
-}
-
-func (e *BadGatewayException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *BadGatewayException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *BadGatewayException) ErrorCode() string             { return "BadGatewayException" }
-func (e *BadGatewayException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *BadGatewayException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *BadGatewayException) HasMessage() bool {
-	return e.Message != nil
-}
-
-// One of the dependencies, such as AWS Lambda or Amazon Polly, threw an exception.
-// For example,
-//
-//     * If Amazon Lex does not have sufficient permissions to call a
-// Lambda function.
-//
-//     * If a Lambda function takes longer than 30 seconds to
-// execute.
-//
-//     * If a fulfillment Lambda function returns a Delegate dialog
-// action without removing any slot values.
-type DependencyFailedException struct {
-	Message *string
-}
-
-func (e *DependencyFailedException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *DependencyFailedException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *DependencyFailedException) ErrorCode() string             { return "DependencyFailedException" }
-func (e *DependencyFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-func (e *DependencyFailedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *DependencyFailedException) HasMessage() bool {
-	return e.Message != nil
-}
-
-// This exception is not used.
-type LoopDetectedException struct {
-	Message *string
-}
-
-func (e *LoopDetectedException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *LoopDetectedException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *LoopDetectedException) ErrorCode() string             { return "LoopDetectedException" }
-func (e *LoopDetectedException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-func (e *LoopDetectedException) GetMessage() string {
-	return ptr.ToString(e.Message)
-}
-func (e *LoopDetectedException) HasMessage() bool {
 	return e.Message != nil
 }

@@ -11,6 +11,13 @@ const (
 	ConfirmationStatusDenied    ConfirmationStatus = "Denied"
 )
 
+type ContentType string
+
+// Enum values for ContentType
+const (
+	ContentTypeGeneric ContentType = "application/vnd.amazonaws.card.generic"
+)
+
 type DialogActionType string
 
 // Enum values for DialogActionType
@@ -51,11 +58,4 @@ const (
 	MessageFormatTypeCustom_payload MessageFormatType = "CustomPayload"
 	MessageFormatTypeSsml           MessageFormatType = "SSML"
 	MessageFormatTypeComposite      MessageFormatType = "Composite"
-)
-
-type ContentType string
-
-// Enum values for ContentType
-const (
-	ContentTypeGeneric ContentType = "application/vnd.amazonaws.card.generic"
 )

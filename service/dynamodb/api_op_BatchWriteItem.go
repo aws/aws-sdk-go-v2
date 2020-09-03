@@ -106,6 +106,22 @@ func (c *Client) BatchWriteItem(ctx context.Context, params *BatchWriteItemInput
 
 // Represents the input of a BatchWriteItem operation.
 type BatchWriteItemInput struct {
+	// Determines the level of detail about provisioned throughput consumption that is
+	// returned in the response:
+	//
+	//     * INDEXES - The response includes the aggregate
+	// ConsumedCapacity for the operation, together with ConsumedCapacity for each
+	// table and secondary index that was accessed. Note that some operations, such as
+	// GetItem and BatchGetItem, do not access any indexes at all. In these cases,
+	// specifying INDEXES will only return ConsumedCapacity information for table(s).
+	//
+	//
+	// * TOTAL - The response includes only the aggregate ConsumedCapacity for the
+	// operation.
+	//
+	//     * NONE - No ConsumedCapacity details are included in the
+	// response.
+	ReturnConsumedCapacity types.ReturnConsumedCapacity
 	// A map of one or more table names and, for each table, a list of operations to be
 	// performed (DeleteRequest or PutRequest). Each element in the map consists of the
 	// following:
@@ -133,22 +149,6 @@ type BatchWriteItemInput struct {
 	// that are part of an index key, then the data types for those attributes must
 	// match those of the schema in the table's attribute definition.
 	RequestItems map[string][]*types.WriteRequest
-	// Determines the level of detail about provisioned throughput consumption that is
-	// returned in the response:
-	//
-	//     * INDEXES - The response includes the aggregate
-	// ConsumedCapacity for the operation, together with ConsumedCapacity for each
-	// table and secondary index that was accessed. Note that some operations, such as
-	// GetItem and BatchGetItem, do not access any indexes at all. In these cases,
-	// specifying INDEXES will only return ConsumedCapacity information for table(s).
-	//
-	//
-	// * TOTAL - The response includes only the aggregate ConsumedCapacity for the
-	// operation.
-	//
-	//     * NONE - No ConsumedCapacity details are included in the
-	// response.
-	ReturnConsumedCapacity types.ReturnConsumedCapacity
 	// Determines whether item collection metrics are returned. If set to SIZE, the
 	// response includes statistics about item collections, if any, that were modified
 	// during the operation are returned in the response. If set to NONE (the default),
@@ -158,31 +158,6 @@ type BatchWriteItemInput struct {
 
 // Represents the output of a BatchWriteItem operation.
 type BatchWriteItemOutput struct {
-	// The capacity units consumed by the entire BatchWriteItem operation. Each element
-	// consists of:
-	//
-	//     * TableName - The table that consumed the provisioned
-	// throughput.
-	//
-	//     * CapacityUnits - The total number of capacity units consumed.
-	ConsumedCapacity []*types.ConsumedCapacity
-	// A list of tables that were processed by BatchWriteItem and, for each table,
-	// information about any item collections that were affected by individual
-	// DeleteItem or PutItem operations. Each entry consists of the following
-	// subelements:
-	//
-	//     * ItemCollectionKey - The partition key value of the item
-	// collection. This is the same as the partition key value of the item.
-	//
-	//     *
-	// SizeEstimateRangeGB - An estimate of item collection size, expressed in GB. This
-	// is a two-element array containing a lower bound and an upper bound for the
-	// estimate. The estimate includes the size of all the items in the table, plus the
-	// size of all attributes projected into all of the local secondary indexes on the
-	// table. Use this estimate to measure whether a local secondary index is
-	// approaching its size limit. The estimate is subject to change over time;
-	// therefore, do not rely on the precision or accuracy of the estimate.
-	ItemCollectionMetrics map[string][]*types.ItemCollectionMetrics
 	// A map of tables and requests against those tables that were not processed. The
 	// UnprocessedItems value is in the same form as RequestItems, so you can provide
 	// this value directly to a subsequent BatchGetItem operation. For more
@@ -214,6 +189,31 @@ type BatchWriteItemOutput struct {
 	// If there are no unprocessed items remaining, the response contains
 	// an empty UnprocessedItems map.
 	UnprocessedItems map[string][]*types.WriteRequest
+	// The capacity units consumed by the entire BatchWriteItem operation. Each element
+	// consists of:
+	//
+	//     * TableName - The table that consumed the provisioned
+	// throughput.
+	//
+	//     * CapacityUnits - The total number of capacity units consumed.
+	ConsumedCapacity []*types.ConsumedCapacity
+	// A list of tables that were processed by BatchWriteItem and, for each table,
+	// information about any item collections that were affected by individual
+	// DeleteItem or PutItem operations. Each entry consists of the following
+	// subelements:
+	//
+	//     * ItemCollectionKey - The partition key value of the item
+	// collection. This is the same as the partition key value of the item.
+	//
+	//     *
+	// SizeEstimateRangeGB - An estimate of item collection size, expressed in GB. This
+	// is a two-element array containing a lower bound and an upper bound for the
+	// estimate. The estimate includes the size of all the items in the table, plus the
+	// size of all attributes projected into all of the local secondary indexes on the
+	// table. Use this estimate to measure whether a local secondary index is
+	// approaching its size limit. The estimate is subject to change over time;
+	// therefore, do not rely on the precision or accuracy of the estimate.
+	ItemCollectionMetrics map[string][]*types.ItemCollectionMetrics
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

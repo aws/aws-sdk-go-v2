@@ -1,0 +1,663 @@
+{
+  "smithy": "1.0",
+  "metadata": {
+    "suppressions": [
+      {
+        "id": "HttpMethodSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpResponseCodeSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "PaginatedTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpHeaderTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpUriConflict",
+        "namespace": "*"
+      },
+      {
+        "id": "Service",
+        "namespace": "*"
+      }
+    ]
+  },
+  "shapes": {
+    "com.amazonaws.honeycode#AccessDeniedException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.honeycode#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>\n            You do not have sufficient access to perform this action. Check that the workbook is owned by you and your\n            IAM policy allows access to the screen/automation in the request.\n        </p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 403
+      }
+    },
+    "com.amazonaws.honeycode#AutomationExecutionException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.honeycode#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The automation execution did not end successfully.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.honeycode#AutomationExecutionTimeoutException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.honeycode#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The automation execution timed out.</p>",
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 504
+      }
+    },
+    "com.amazonaws.honeycode#ClientRequestToken": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 32,
+          "max": 64
+        }
+      }
+    },
+    "com.amazonaws.honeycode#ColumnMetadata": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.honeycode#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the column.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "format": {
+          "target": "com.amazonaws.honeycode#Format",
+          "traits": {
+            "smithy.api#documentation": "<p>The format of the column.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Metadata for column in the table.</p>"
+      }
+    },
+    "com.amazonaws.honeycode#DataItem": {
+      "type": "structure",
+      "members": {
+        "formattedValue": {
+          "target": "com.amazonaws.honeycode#FormattedValue",
+          "traits": {
+            "smithy.api#documentation": "<p>The formatted value of the data. e.g. John Smith.</p>"
+          }
+        },
+        "overrideFormat": {
+          "target": "com.amazonaws.honeycode#Format",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The overrideFormat is optional and is specified only if a particular row of data has a different format for\n            the data than the default format defined on the screen or the table.\n        </p>"
+          }
+        },
+        "rawValue": {
+          "target": "com.amazonaws.honeycode#RawValue",
+          "traits": {
+            "smithy.api#documentation": "<p>The raw value of the data. e.g. jsmith@example.com</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The data in a particular data cell defined on the screen.</p>",
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.honeycode#DataItems": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.honeycode#DataItem"
+      }
+    },
+    "com.amazonaws.honeycode#ErrorMessage": {
+      "type": "string"
+    },
+    "com.amazonaws.honeycode#Format": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "AUTO",
+            "name": "Auto"
+          },
+          {
+            "value": "NUMBER",
+            "name": "Number"
+          },
+          {
+            "value": "CURRENCY",
+            "name": "Currency"
+          },
+          {
+            "value": "DATE",
+            "name": "Date"
+          },
+          {
+            "value": "TIME",
+            "name": "Time"
+          },
+          {
+            "value": "DATE_TIME",
+            "name": "DateTime"
+          },
+          {
+            "value": "PERCENTAGE",
+            "name": "Percentage"
+          },
+          {
+            "value": "TEXT",
+            "name": "Text"
+          },
+          {
+            "value": "ACCOUNTING",
+            "name": "Accounting"
+          },
+          {
+            "value": "CONTACT",
+            "name": "Contact"
+          },
+          {
+            "value": "ROWLINK",
+            "name": "Rowlink"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.honeycode#FormattedValue": {
+      "type": "string"
+    },
+    "com.amazonaws.honeycode#GetScreenData": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.honeycode#GetScreenDataRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.honeycode#GetScreenDataResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.honeycode#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.honeycode#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.honeycode#RequestTimeoutException"
+        },
+        {
+          "target": "com.amazonaws.honeycode#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.honeycode#ServiceUnavailableException"
+        },
+        {
+          "target": "com.amazonaws.honeycode#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.honeycode#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The GetScreenData API allows retrieval of data from a screen in a Honeycode app.\n            The API allows setting local variables in the screen to filter, sort or otherwise affect what will be\n            displayed on the screen.\n        </p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/screendata",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.honeycode#GetScreenDataRequest": {
+      "type": "structure",
+      "members": {
+        "variables": {
+          "target": "com.amazonaws.honeycode#VariableValueMap",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            Variables are optional and are needed only if the screen requires them to render correctly. Variables are\n            specified as a map where the key is the name of the variable as defined on the screen. The value is an\n            object which currently has only one property, rawValue, which holds the value of the variable to be passed\n            to the screen.\n        </p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.honeycode#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            This parameter is optional. If a nextToken is not specified, the API returns the first page of data.\n        </p>\n        <p>\n            Pagination tokens expire after 1 hour. If you use a token that was returned more than an hour back, the API\n            will throw ValidationException.\n        </p>"
+          }
+        },
+        "appId": {
+          "target": "com.amazonaws.honeycode#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the app that contains the screem.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.honeycode#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The number of results to be returned on a single page.\n            Specify a number between 1 and 100. The maximum value is 100.\n        </p>\n        <p>\n            This parameter is optional. If you don't specify this parameter, the default page size is 100.\n        </p>"
+          }
+        },
+        "screenId": {
+          "target": "com.amazonaws.honeycode#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the screen.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "workbookId": {
+          "target": "com.amazonaws.honeycode#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the workbook that contains the screen.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.honeycode#GetScreenDataResult": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.honeycode#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            Provides the pagination token to load the next page if there are more results matching the request. If a\n            pagination token is not present in the response, it means that all data matching the query has been loaded.\n        </p>"
+          }
+        },
+        "workbookCursor": {
+          "target": "com.amazonaws.honeycode#WorkbookCursor",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            Indicates the cursor of the workbook at which the data returned by this workbook is read. Workbook cursor\n            keeps increasing with every update and the increments are not sequential.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "results": {
+          "target": "com.amazonaws.honeycode#ResultSetMap",
+          "traits": {
+            "smithy.api#documentation": "<p>A map of all the rows on the screen keyed by block name.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.honeycode#InternalServerException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.honeycode#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>There were unexpected errors from the server.</p>",
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 500
+      }
+    },
+    "com.amazonaws.honeycode#InvokeScreenAutomation": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.honeycode#InvokeScreenAutomationRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.honeycode#InvokeScreenAutomationResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.honeycode#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.honeycode#AutomationExecutionException"
+        },
+        {
+          "target": "com.amazonaws.honeycode#AutomationExecutionTimeoutException"
+        },
+        {
+          "target": "com.amazonaws.honeycode#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.honeycode#RequestTimeoutException"
+        },
+        {
+          "target": "com.amazonaws.honeycode#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.honeycode#ServiceUnavailableException"
+        },
+        {
+          "target": "com.amazonaws.honeycode#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.honeycode#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The InvokeScreenAutomation API allows invoking an action defined in a screen in a Honeycode app.\n            The API allows setting local variables, which can then be used in the automation being invoked.\n            This allows automating the Honeycode app interactions to write, update or delete data in the workbook.\n        </p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/workbooks/{workbookId}/apps/{appId}/screens/{screenId}/automations/{screenAutomationId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.honeycode#InvokeScreenAutomationRequest": {
+      "type": "structure",
+      "members": {
+        "screenAutomationId": {
+          "target": "com.amazonaws.honeycode#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the automation action to be performed.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "appId": {
+          "target": "com.amazonaws.honeycode#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the app that contains the screen automation.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "clientRequestToken": {
+          "target": "com.amazonaws.honeycode#ClientRequestToken",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The request token for performing the automation action.\n            Request tokens help to identify duplicate requests. If a call times out or fails due to a transient error\n            like a failed network connection, you can retry the call with the same request token. The service ensures\n            that if the first call using that request token is successfully performed, the second call will return the\n            response of the previous call rather than performing the action again.\n        </p>\n        <p>\n            Note that request tokens are valid only for a few minutes. You cannot use request tokens to dedupe requests\n            spanning hours or days.\n        </p>"
+          }
+        },
+        "workbookId": {
+          "target": "com.amazonaws.honeycode#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the workbook that contains the screen automation.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "variables": {
+          "target": "com.amazonaws.honeycode#VariableValueMap",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            Variables are optional and are needed only if the screen requires them to render correctly. Variables are\n            specified as a map where the key is the name of the variable as defined on the screen. The value is an\n            object which currently has only one property, rawValue, which holds the value of the variable to be passed\n            to the screen.\n        </p>"
+          }
+        },
+        "rowId": {
+          "target": "com.amazonaws.honeycode#RowId",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The row ID for the automation if the automation is defined inside a block with source or list.\n        </p>"
+          }
+        },
+        "screenId": {
+          "target": "com.amazonaws.honeycode#ResourceId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the screen that contains the screen automation.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.honeycode#InvokeScreenAutomationResult": {
+      "type": "structure",
+      "members": {
+        "workbookCursor": {
+          "target": "com.amazonaws.honeycode#WorkbookCursor",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated workbook cursor after performing the automation action.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.honeycode#MaxResults": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {},
+        "smithy.api#range": {
+          "min": 1,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.honeycode#Name": {
+      "type": "string",
+      "traits": {
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.honeycode#PaginationToken": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1024
+        }
+      }
+    },
+    "com.amazonaws.honeycode#RawValue": {
+      "type": "string"
+    },
+    "com.amazonaws.honeycode#RequestTimeoutException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.honeycode#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The request timed out.</p>",
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 504
+      }
+    },
+    "com.amazonaws.honeycode#ResourceId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
+      }
+    },
+    "com.amazonaws.honeycode#ResourceNotFoundException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.honeycode#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A Workbook, App, Screen or Screen Automation was not found with the given ID.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
+      }
+    },
+    "com.amazonaws.honeycode#ResultHeader": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.honeycode#ColumnMetadata"
+      }
+    },
+    "com.amazonaws.honeycode#ResultRow": {
+      "type": "structure",
+      "members": {
+        "rowId": {
+          "target": "com.amazonaws.honeycode#RowId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID for a particular row.</p>"
+          }
+        },
+        "dataItems": {
+          "target": "com.amazonaws.honeycode#DataItems",
+          "traits": {
+            "smithy.api#documentation": "<p>List of all the data cells in a row.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A single row in the ResultSet.</p>"
+      }
+    },
+    "com.amazonaws.honeycode#ResultRows": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.honeycode#ResultRow"
+      }
+    },
+    "com.amazonaws.honeycode#ResultSet": {
+      "type": "structure",
+      "members": {
+        "headers": {
+          "target": "com.amazonaws.honeycode#ResultHeader",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            List of headers for all the data cells in the block. The header identifies the name and default format of\n            the data cell. Data cells appear in the same order in all rows as defined in the header. The names and\n            formats are not repeated in the rows. If a particular row does not have a value for a data cell, a blank\n            value is used.\n        </p>\n        <p>\n            For example, a task list that displays the task name, due date and assigned person might have headers\n            [ { \"name\": \"Task Name\"}, {\"name\": \"Due Date\", \"format\": \"DATE\"}, {\"name\": \"Assigned\", \"format\": \"CONTACT\"} ].\n            Every row in the result will have the task name as the first item, due date as the second item and assigned\n            person as the third item. If a particular task does not have a due date, that row will still have a blank\n            value in the second element and the assigned person will still be in the third element.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "rows": {
+          "target": "com.amazonaws.honeycode#ResultRows",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            List of rows returned by the request. Each row has a row Id and a list of data cells in that row. The data\n            cells will be present in the same order as they are defined in the header.\n        </p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>\n            ResultSet contains the results of the request for a single block or list defined on the screen.\n        </p>"
+      }
+    },
+    "com.amazonaws.honeycode#ResultSetMap": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.honeycode#Name"
+      },
+      "value": {
+        "target": "com.amazonaws.honeycode#ResultSet"
+      }
+    },
+    "com.amazonaws.honeycode#RowId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "row:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
+      }
+    },
+    "com.amazonaws.honeycode#ServiceUnavailableException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.honeycode#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Remote service is unreachable.</p>",
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 503
+      }
+    },
+    "com.amazonaws.honeycode#SheetsPublicApiService": {
+      "type": "service",
+      "version": "2020-03-01",
+      "operations": [
+        {
+          "target": "com.amazonaws.honeycode#GetScreenData"
+        },
+        {
+          "target": "com.amazonaws.honeycode#InvokeScreenAutomation"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "Honeycode",
+          "arnNamespace": "honeycode",
+          "cloudFormationName": "Honeycode",
+          "cloudTrailEventSource": "model.honeycode.services.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "honeycode"
+        },
+        "aws.protocols#restJson1": {},
+        "smithy.api#documentation": "<p>\n      Amazon Honeycode is a fully managed service that allows you to quickly build mobile and web apps for teams—without\n      programming. Build Honeycode apps for managing almost anything, like projects, customers, operations, approvals,\n      resources, and even your team.\n    </p>",
+        "smithy.api#title": "Amazon Honeycode"
+      }
+    },
+    "com.amazonaws.honeycode#ThrottlingException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.honeycode#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Tps(transactions per second) rate reached.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 429
+      }
+    },
+    "com.amazonaws.honeycode#ValidationException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.honeycode#ErrorMessage",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>\n            Request is invalid. The message in the response contains details on why the request is invalid.\n        </p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.honeycode#VariableName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.honeycode#VariableValue": {
+      "type": "structure",
+      "members": {
+        "rawValue": {
+          "target": "com.amazonaws.honeycode#RawValue",
+          "traits": {
+            "smithy.api#documentation": "<p>Raw value of the variable.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The input variables to the app to be used by the InvokeScreenAutomation action request.</p>",
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.honeycode#VariableValueMap": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.honeycode#VariableName"
+      },
+      "value": {
+        "target": "com.amazonaws.honeycode#VariableValue"
+      },
+      "traits": {
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.honeycode#WorkbookCursor": {
+      "type": "long"
+    }
+  }
+}

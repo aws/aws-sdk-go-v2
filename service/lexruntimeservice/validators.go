@@ -182,14 +182,14 @@ func validateOpDeleteSessionInput(v *DeleteSessionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteSessionInput"}
-	if v.BotAlias == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BotAlias"))
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if v.BotName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BotName"))
 	}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	if v.BotAlias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotAlias"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -203,11 +203,11 @@ func validateOpGetSessionInput(v *GetSessionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetSessionInput"}
-	if v.BotAlias == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BotAlias"))
-	}
 	if v.BotName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BotName"))
+	}
+	if v.BotAlias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotAlias"))
 	}
 	if v.UserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
@@ -224,20 +224,20 @@ func validateOpPostContentInput(v *PostContentInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PostContentInput"}
-	if v.BotAlias == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BotAlias"))
-	}
-	if v.BotName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BotName"))
+	if v.InputStream == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputStream"))
 	}
 	if v.ContentType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
 	}
-	if v.InputStream == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InputStream"))
-	}
 	if v.UserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
+	if v.BotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotName"))
+	}
+	if v.BotAlias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotAlias"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -251,17 +251,17 @@ func validateOpPostTextInput(v *PostTextInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PostTextInput"}
-	if v.BotAlias == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BotAlias"))
-	}
-	if v.BotName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BotName"))
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if v.InputText == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputText"))
 	}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	if v.BotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotName"))
+	}
+	if v.BotAlias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotAlias"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -275,11 +275,14 @@ func validateOpPutSessionInput(v *PutSessionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutSessionInput"}
-	if v.BotAlias == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BotAlias"))
+	if v.UserId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if v.BotName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BotName"))
+	}
+	if v.BotAlias == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotAlias"))
 	}
 	if v.DialogAction != nil {
 		if err := validateDialogAction(v.DialogAction); err != nil {
@@ -290,9 +293,6 @@ func validateOpPutSessionInput(v *PutSessionInput) error {
 		if err := validateIntentSummaryList(v.RecentIntentSummaryView); err != nil {
 			invalidParams.AddNested("RecentIntentSummaryView", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.UserId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -111,6 +111,31 @@ func (c *Client) PostContent(ctx context.Context, params *PostContentInput, optF
 }
 
 type PostContentInput struct {
+	// User input in PCM or Opus audio format or text format as described in the
+	// Content-Type HTTP header. You can stream audio data to Amazon Lex or you can
+	// create a local buffer that captures all of the audio data before sending. In
+	// general, you get better performance if you stream audio data rather than
+	// buffering the data locally.
+	InputStream io.Reader
+	// You pass this value as the x-amz-lex-session-attributes HTTP header.
+	// Application-specific information passed between Amazon Lex and a client
+	// application. The value must be a JSON serialized and base64 encoded map with
+	// string keys and values. The total size of the sessionAttributes and
+	// requestAttributes headers is limited to 12 KB. For more information, see Setting
+	// Session Attributes
+	// (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs).
+	// This value conforms to the media type: application/json
+	SessionAttributes *string
+	// You pass this value as the x-amz-lex-request-attributes HTTP header.
+	// Request-specific information passed between Amazon Lex and a client application.
+	// The value must be a JSON serialized and base64 encoded map with string keys and
+	// values. The total size of the requestAttributes and sessionAttributes headers is
+	// limited to 12 KB. The namespace x-amz-lex: is reserved for special attributes.
+	// Don't create any request attributes with the prefix x-amz-lex:. For more
+	// information, see Setting Request Attributes
+	// (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs).
+	// This value conforms to the media type: application/json
+	RequestAttributes *string
 	// You pass this value as the Accept HTTP header. The message Amazon Lex returns in
 	// the response can be either text or speech based on the Accept HTTP header value
 	// in the request.
@@ -141,10 +166,6 @@ type PostContentInput struct {
 	//
 	//         * audio/* (defaults to mpeg)
 	Accept *string
-	// Alias of the Amazon Lex bot.
-	BotAlias *string
-	// Name of the Amazon Lex bot.
-	BotName *string
 	// You pass this value as the Content-Type HTTP header. Indicates the audio format
 	// or text. The header value must start with one of the following prefixes:
 	//
@@ -171,31 +192,6 @@ type PostContentInput struct {
 	//         * text/plain;
 	// charset=utf-8
 	ContentType *string
-	// User input in PCM or Opus audio format or text format as described in the
-	// Content-Type HTTP header. You can stream audio data to Amazon Lex or you can
-	// create a local buffer that captures all of the audio data before sending. In
-	// general, you get better performance if you stream audio data rather than
-	// buffering the data locally.
-	InputStream io.Reader
-	// You pass this value as the x-amz-lex-request-attributes HTTP header.
-	// Request-specific information passed between Amazon Lex and a client application.
-	// The value must be a JSON serialized and base64 encoded map with string keys and
-	// values. The total size of the requestAttributes and sessionAttributes headers is
-	// limited to 12 KB. The namespace x-amz-lex: is reserved for special attributes.
-	// Don't create any request attributes with the prefix x-amz-lex:. For more
-	// information, see Setting Request Attributes
-	// (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs).
-	// This value conforms to the media type: application/json
-	RequestAttributes *string
-	// You pass this value as the x-amz-lex-session-attributes HTTP header.
-	// Application-specific information passed between Amazon Lex and a client
-	// application. The value must be a JSON serialized and base64 encoded map with
-	// string keys and values. The total size of the sessionAttributes and
-	// requestAttributes headers is limited to 12 KB. For more information, see Setting
-	// Session Attributes
-	// (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs).
-	// This value conforms to the media type: application/json
-	SessionAttributes *string
 	// The ID of the client application user. Amazon Lex uses this to identify a user's
 	// conversation with your bot. At runtime, each request must contain the userID
 	// field. To decide the user ID to use for your application, consider the following
@@ -219,9 +215,38 @@ type PostContentInput struct {
 	// conversation with two different versions, for example, while testing, include
 	// the bot alias in the user ID to separate the two conversations.
 	UserId *string
+	// Name of the Amazon Lex bot.
+	BotName *string
+	// Alias of the Amazon Lex bot.
+	BotAlias *string
 }
 
 type PostContentOutput struct {
+	// The message to convey to the user. The message can come from the bot's
+	// configuration or from a Lambda function. If the intent is not configured with a
+	// Lambda function, or if the Lambda function returned Delegate as the
+	// dialogAction.type in its response, Amazon Lex decides on the next course of
+	// action and selects an appropriate message from the bot's configuration based on
+	// the current interaction context. For example, if Amazon Lex isn't able to
+	// understand user input, it uses a clarification prompt message. When you create
+	// an intent you can assign messages to groups. When messages are assigned to
+	// groups Amazon Lex returns one message from each group in the response. The
+	// message field is an escaped JSON string containing the messages. For more
+	// information about the structure of the JSON string returned, see
+	// msg-prompts-formats (). If the Lambda function returns a message, Amazon Lex
+	// passes it to the client in its response.
+	Message *string
+	// Map of zero or more intent slots (name/value pairs) Amazon Lex detected from the
+	// user input during the conversation. The field is base-64 encoded. Amazon Lex
+	// creates a resolution list containing likely values for a slot. The value that it
+	// returns is determined by the valueSelectionStrategy selected when the slot type
+	// was created or updated. If valueSelectionStrategy is set to ORIGINAL_VALUE, the
+	// value provided by the user is returned, if the user value is similar to the slot
+	// values. If valueSelectionStrategy is set to TOP_RESOLUTION Amazon Lex returns
+	// the first value in the resolution list or, if there is no resolution list, null.
+	// If you don't specify a valueSelectionStrategy, the default is ORIGINAL_VALUE.
+	// This value conforms to the media type: application/json
+	Slots *string
 	// The prompt (or statement) to convey to the user. This is based on the bot
 	// configuration and context. For example, if Amazon Lex did not understand the
 	// user intent, it sends the clarificationPrompt configured for the bot. If the
@@ -230,8 +255,6 @@ type PostContentOutput struct {
 	// successfully fulfilled the intent, and sent a message to convey to the user.
 	// Then Amazon Lex sends that message in the response.
 	AudioStream io.ReadCloser
-	// Content type as specified in the Accept HTTP header in the request.
-	ContentType *string
 	// Identifies the current state of the user interaction. Amazon Lex returns one of
 	// the following values as dialogState. The client can optionally use this
 	// information to customize the user interface.
@@ -269,28 +292,14 @@ type PostContentOutput struct {
 	// the service (you can configure how many times Amazon Lex can prompt a user for
 	// specific information), or if the Lambda function fails to fulfill the intent.
 	DialogState types.DialogState
+	// Current user intent that Amazon Lex is aware of.
+	IntentName *string
 	// The text used to process the request. If the input was an audio stream, the
 	// inputTranscript field contains the text extracted from the audio stream. This is
 	// the text that is actually processed to recognize intents and slot values. You
 	// can use this information to determine if Amazon Lex is correctly processing the
 	// audio that you send.
 	InputTranscript *string
-	// Current user intent that Amazon Lex is aware of.
-	IntentName *string
-	// The message to convey to the user. The message can come from the bot's
-	// configuration or from a Lambda function. If the intent is not configured with a
-	// Lambda function, or if the Lambda function returned Delegate as the
-	// dialogAction.type in its response, Amazon Lex decides on the next course of
-	// action and selects an appropriate message from the bot's configuration based on
-	// the current interaction context. For example, if Amazon Lex isn't able to
-	// understand user input, it uses a clarification prompt message. When you create
-	// an intent you can assign messages to groups. When messages are assigned to
-	// groups Amazon Lex returns one message from each group in the response. The
-	// message field is an escaped JSON string containing the messages. For more
-	// information about the structure of the JSON string returned, see
-	// msg-prompts-formats (). If the Lambda function returns a message, Amazon Lex
-	// passes it to the client in its response.
-	Message *string
 	// The format of the response message. One of the following values:
 	//
 	//     *
@@ -306,29 +315,20 @@ type PostContentOutput struct {
 	// escaped JSON object containing one or more messages from the groups that
 	// messages were assigned to when the intent was created.
 	MessageFormat types.MessageFormatType
+	// Content type as specified in the Accept HTTP header in the request.
+	ContentType *string
+	// The unique identifier for the session.
+	SessionId *string
+	// Map of key/value pairs representing the session-specific context information.
+	// This value conforms to the media type: application/json
+	SessionAttributes *string
 	// The sentiment expressed in and utterance. When the bot is configured to send
 	// utterances to Amazon Comprehend for sentiment analysis, this field contains the
 	// result of the analysis.
 	SentimentResponse *string
-	// Map of key/value pairs representing the session-specific context information.
-	// This value conforms to the media type: application/json
-	SessionAttributes *string
-	// The unique identifier for the session.
-	SessionId *string
 	// If the dialogState value is ElicitSlot, returns the name of the slot for which
 	// Amazon Lex is eliciting a value.
 	SlotToElicit *string
-	// Map of zero or more intent slots (name/value pairs) Amazon Lex detected from the
-	// user input during the conversation. The field is base-64 encoded. Amazon Lex
-	// creates a resolution list containing likely values for a slot. The value that it
-	// returns is determined by the valueSelectionStrategy selected when the slot type
-	// was created or updated. If valueSelectionStrategy is set to ORIGINAL_VALUE, the
-	// value provided by the user is returned, if the user value is similar to the slot
-	// values. If valueSelectionStrategy is set to TOP_RESOLUTION Amazon Lex returns
-	// the first value in the resolution list or, if there is no resolution list, null.
-	// If you don't specify a valueSelectionStrategy, the default is ORIGINAL_VALUE.
-	// This value conforms to the media type: application/json
-	Slots *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
