@@ -1,0 +1,1199 @@
+{
+  "smithy": "1.0",
+  "shapes": {
+    "com.amazonaws.braket#AccessDeniedException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 403
+      }
+    },
+    "com.amazonaws.braket#Arn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "/////"
+      }
+    },
+    "com.amazonaws.braket#Braket": {
+      "type": "service",
+      "version": "2019-09-01",
+      "resources": [
+        {
+          "target": "com.amazonaws.braket#DeviceResource"
+        },
+        {
+          "target": "com.amazonaws.braket#HybridJobResource"
+        },
+        {
+          "target": "com.amazonaws.braket#QuantumJobResource"
+        },
+        {
+          "target": "com.amazonaws.braket#QuantumTaskResource"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "Braket",
+          "arnNamespace": "braket",
+          "cloudFormationName": "Braket",
+          "cloudTrailEventSource": "REPLACE_WITH_EVENT_SOURCE"
+        },
+        "aws.auth#sigv4": {
+          "name": "braket"
+        },
+        "aws.protocols#restJson1": {},
+        "smithy.api#cors": {
+          "additionalAllowedHeaders": [
+            "x-amz-content-sha256",
+            "x-amzn-trace-id",
+            "x-amz-user-agent",
+            "*",
+            "content-type",
+            "x-amzn-platform-id"
+          ],
+          "additionalExposedHeaders": [
+            "date",
+            "x-amz-apigw-id",
+            "x-amzn-trace-id",
+            "x-amzn-errortype",
+            "x-amzn-requestid",
+            "x-amzn-errormessage"
+          ]
+        },
+        "smithy.api#documentation": "<p>The Amazon Braket API Reference provides information about the operations and structures supported in Amazon Braket.</p>",
+        "smithy.api#title": "Braket"
+      }
+    },
+    "com.amazonaws.braket#CancelQuantumTask": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.braket#CancelQuantumTaskRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.braket#CancelQuantumTaskResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.braket#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.braket#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.braket#InternalServiceException"
+        },
+        {
+          "target": "com.amazonaws.braket#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.braket#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.braket#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Cancels the specified task.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/quantum-task/{quantumTaskArn}/cancel",
+          "code": 200
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.braket#CancelQuantumTaskRequest": {
+      "type": "structure",
+      "members": {
+        "quantumTaskArn": {
+          "target": "com.amazonaws.braket#QuantumTaskArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the task to cancel.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "clientToken": {
+          "target": "com.amazonaws.braket#String64",
+          "traits": {
+            "smithy.api#documentation": "<p>The client token associated with the request.</p>",
+            "smithy.api#idempotencyToken": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.braket#CancelQuantumTaskResponse": {
+      "type": "structure",
+      "members": {
+        "quantumTaskArn": {
+          "target": "com.amazonaws.braket#QuantumTaskArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the task.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "cancellationStatus": {
+          "target": "com.amazonaws.braket#CancellationStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the cancellation request.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.braket#CancellationStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "CANCELLING",
+            "name": "CANCELLING"
+          },
+          {
+            "value": "CANCELLED",
+            "name": "CANCELLED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.braket#ConflictException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An error occurred due to a conflict.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 409
+      }
+    },
+    "com.amazonaws.braket#CreateQuantumTask": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.braket#CreateQuantumTaskRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.braket#CreateQuantumTaskResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.braket#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.braket#DeviceOfflineException"
+        },
+        {
+          "target": "com.amazonaws.braket#InternalServiceException"
+        },
+        {
+          "target": "com.amazonaws.braket#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.braket#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.braket#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a quantum task.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/quantum-task",
+          "code": 201
+        }
+      }
+    },
+    "com.amazonaws.braket#CreateQuantumTaskRequest": {
+      "type": "structure",
+      "members": {
+        "clientToken": {
+          "target": "com.amazonaws.braket#String64",
+          "traits": {
+            "smithy.api#documentation": "<p>The client token associated with the request.</p>",
+            "smithy.api#idempotencyToken": {},
+            "smithy.api#required": {}
+          }
+        },
+        "deviceArn": {
+          "target": "com.amazonaws.braket#DeviceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the device to run the task on.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "deviceParameters": {
+          "target": "com.amazonaws.braket#JsonValue",
+          "traits": {
+            "smithy.api#documentation": "<p>The parameters for the device to run the task on.</p>",
+            "smithy.api#length": {
+              "min": 1,
+              "max": 2048
+            }
+          }
+        },
+        "shots": {
+          "target": "smithy.api#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of shots to use for the task.</p>",
+            "smithy.api#range": {
+              "min": 0
+            },
+            "smithy.api#required": {}
+          }
+        },
+        "outputS3Bucket": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The S3 bucket to store task result files in.</p>",
+            "smithy.api#length": {
+              "min": 3,
+              "max": 63
+            },
+            "smithy.api#required": {}
+          }
+        },
+        "outputS3KeyPrefix": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The key prefix for the location in the S3 bucket to store task results in.</p>",
+            "smithy.api#length": {
+              "min": 1,
+              "max": 1024
+            },
+            "smithy.api#required": {}
+          }
+        },
+        "action": {
+          "target": "com.amazonaws.braket#JsonValue",
+          "traits": {
+            "smithy.api#documentation": "<p>The action associated with the task.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.braket#CreateQuantumTaskResponse": {
+      "type": "structure",
+      "members": {
+        "quantumTaskArn": {
+          "target": "com.amazonaws.braket#QuantumTaskArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the task created by the request.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.braket#DeviceArn": {
+      "type": "string",
+      "traits": {
+        "aws.api#arnReference": {
+          "service": "com.amazonaws.braket#Braket",
+          "resource": "com.amazonaws.braket#DeviceResource"
+        },
+        "smithy.api#length": {
+          "min": 1,
+          "max": 256
+        }
+      }
+    },
+    "com.amazonaws.braket#DeviceOfflineException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The specified device is currently offline.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 424
+      }
+    },
+    "com.amazonaws.braket#DeviceResource": {
+      "type": "resource",
+      "identifiers": {
+        "deviceArn": {
+          "target": "com.amazonaws.braket#DeviceArn"
+        }
+      },
+      "read": {
+        "target": "com.amazonaws.braket#GetDevice"
+      },
+      "list": {
+        "target": "com.amazonaws.braket#SearchDevices"
+      },
+      "traits": {
+        "aws.api#arn": {
+          "template": "{deviceArn}",
+          "absolute": true,
+          "noAccount": false,
+          "noRegion": false
+        }
+      }
+    },
+    "com.amazonaws.braket#DeviceStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ONLINE",
+            "name": "ONLINE"
+          },
+          {
+            "value": "OFFLINE",
+            "name": "OFFLINE"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.braket#DeviceSummary": {
+      "type": "structure",
+      "members": {
+        "deviceArn": {
+          "target": "com.amazonaws.braket#DeviceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the device.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "deviceName": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the device.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "providerName": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The provider of the device.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "deviceType": {
+          "target": "com.amazonaws.braket#DeviceType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of the device.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "deviceStatus": {
+          "target": "com.amazonaws.braket#DeviceStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the device.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Includes information about the device.</p>"
+      }
+    },
+    "com.amazonaws.braket#DeviceSummaryList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.braket#DeviceSummary"
+      }
+    },
+    "com.amazonaws.braket#DeviceType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "QPU",
+            "name": "QPU"
+          },
+          {
+            "value": "SIMULATOR",
+            "name": "SIMULATOR"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.braket#GetDevice": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.braket#GetDeviceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.braket#GetDeviceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.braket#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.braket#InternalServiceException"
+        },
+        {
+          "target": "com.amazonaws.braket#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.braket#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.braket#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves the devices available in Amazon Braket.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/device/{deviceArn}",
+          "code": 200
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.braket#GetDeviceRequest": {
+      "type": "structure",
+      "members": {
+        "deviceArn": {
+          "target": "com.amazonaws.braket#DeviceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the device to retrieve.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.braket#GetDeviceResponse": {
+      "type": "structure",
+      "members": {
+        "deviceArn": {
+          "target": "com.amazonaws.braket#DeviceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the device.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "deviceName": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the device.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "providerName": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the partner company for the device.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "deviceType": {
+          "target": "com.amazonaws.braket#DeviceType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of the device.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "deviceStatus": {
+          "target": "com.amazonaws.braket#DeviceStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the device.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "deviceCapabilities": {
+          "target": "com.amazonaws.braket#JsonValue",
+          "traits": {
+            "smithy.api#documentation": "<p>Details about the capabilities of the device.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.braket#GetQuantumTask": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.braket#GetQuantumTaskRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.braket#GetQuantumTaskResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.braket#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.braket#InternalServiceException"
+        },
+        {
+          "target": "com.amazonaws.braket#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.braket#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.braket#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves the specified quantum task.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/quantum-task/{quantumTaskArn}",
+          "code": 200
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.braket#GetQuantumTaskRequest": {
+      "type": "structure",
+      "members": {
+        "quantumTaskArn": {
+          "target": "com.amazonaws.braket#QuantumTaskArn",
+          "traits": {
+            "smithy.api#documentation": "<p>the ARN of the task to retrieve.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.braket#GetQuantumTaskResponse": {
+      "type": "structure",
+      "members": {
+        "quantumTaskArn": {
+          "target": "com.amazonaws.braket#QuantumTaskArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the task.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.braket#QuantumTaskStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the task.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "failureReason": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The reason that a task failed.</p>"
+          }
+        },
+        "deviceArn": {
+          "target": "com.amazonaws.braket#DeviceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the device the task was run on.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "deviceParameters": {
+          "target": "com.amazonaws.braket#JsonValue",
+          "traits": {
+            "smithy.api#documentation": "<p>The parameters for the device on which the task ran.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "shots": {
+          "target": "smithy.api#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of shots used in the task.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "outputS3Bucket": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The S3 bucket where task results are stored.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "outputS3Directory": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The folder in the S3 bucket where task results are stored.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "createdAt": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the task was created.</p>",
+            "smithy.api#required": {},
+            "smithy.api#timestampFormat": "date-time"
+          }
+        },
+        "endedAt": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the task ended.</p>",
+            "smithy.api#timestampFormat": "date-time"
+          }
+        }
+      }
+    },
+    "com.amazonaws.braket#HybridJobResource": {
+      "type": "resource",
+      "identifiers": {
+        "hybridJobArn": {
+          "target": "com.amazonaws.braket#Arn"
+        }
+      },
+      "traits": {
+        "aws.api#arn": {
+          "template": "{hybridJobArn}",
+          "absolute": true,
+          "noAccount": false,
+          "noRegion": false
+        }
+      }
+    },
+    "com.amazonaws.braket#InternalServiceException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception or failure.</p>",
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 500
+      }
+    },
+    "com.amazonaws.braket#JsonValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#mediaType": "application/json"
+      }
+    },
+    "com.amazonaws.braket#QuantumJobResource": {
+      "type": "resource",
+      "identifiers": {
+        "quantumJobArn": {
+          "target": "com.amazonaws.braket#Arn"
+        }
+      },
+      "traits": {
+        "aws.api#arn": {
+          "template": "{quantumJobArn}",
+          "absolute": true,
+          "noAccount": false,
+          "noRegion": false
+        }
+      }
+    },
+    "com.amazonaws.braket#QuantumTaskArn": {
+      "type": "string",
+      "traits": {
+        "aws.api#arnReference": {
+          "service": "com.amazonaws.braket#Braket",
+          "resource": "com.amazonaws.braket#QuantumTaskResource"
+        },
+        "smithy.api#length": {
+          "min": 1,
+          "max": 256
+        }
+      }
+    },
+    "com.amazonaws.braket#QuantumTaskResource": {
+      "type": "resource",
+      "identifiers": {
+        "quantumTaskArn": {
+          "target": "com.amazonaws.braket#QuantumTaskArn"
+        }
+      },
+      "create": {
+        "target": "com.amazonaws.braket#CreateQuantumTask"
+      },
+      "read": {
+        "target": "com.amazonaws.braket#GetQuantumTask"
+      },
+      "update": {
+        "target": "com.amazonaws.braket#CancelQuantumTask"
+      },
+      "list": {
+        "target": "com.amazonaws.braket#SearchQuantumTasks"
+      },
+      "traits": {
+        "aws.api#arn": {
+          "template": "{quantumTaskArn}",
+          "absolute": true,
+          "noAccount": false,
+          "noRegion": false
+        }
+      }
+    },
+    "com.amazonaws.braket#QuantumTaskStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "CREATED",
+            "name": "CREATED"
+          },
+          {
+            "value": "QUEUED",
+            "name": "QUEUED"
+          },
+          {
+            "value": "RUNNING",
+            "name": "RUNNING"
+          },
+          {
+            "value": "COMPLETED",
+            "name": "COMPLETED"
+          },
+          {
+            "value": "FAILED",
+            "name": "FAILED"
+          },
+          {
+            "value": "CANCELLING",
+            "name": "CANCELLING"
+          },
+          {
+            "value": "CANCELLED",
+            "name": "CANCELLED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.braket#QuantumTaskSummary": {
+      "type": "structure",
+      "members": {
+        "quantumTaskArn": {
+          "target": "com.amazonaws.braket#QuantumTaskArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the task.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.braket#QuantumTaskStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the task.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "deviceArn": {
+          "target": "com.amazonaws.braket#DeviceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the device the task ran on.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "shots": {
+          "target": "smithy.api#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The shots used for the task.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "outputS3Bucket": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The S3 bucket where the task result file is stored..</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "outputS3Directory": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The folder in the S3 bucket where the task result file is stored.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "createdAt": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the task was created.</p>",
+            "smithy.api#required": {},
+            "smithy.api#timestampFormat": "date-time"
+          }
+        },
+        "endedAt": {
+          "target": "smithy.api#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the task finished.</p>",
+            "smithy.api#timestampFormat": "date-time"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Includes information about a quantum task.</p>"
+      }
+    },
+    "com.amazonaws.braket#QuantumTaskSummaryList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.braket#QuantumTaskSummary"
+      }
+    },
+    "com.amazonaws.braket#ResourceNotFoundException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The specified resource was not found.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
+      }
+    },
+    "com.amazonaws.braket#SearchDevices": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.braket#SearchDevicesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.braket#SearchDevicesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.braket#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.braket#InternalServiceException"
+        },
+        {
+          "target": "com.amazonaws.braket#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.braket#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Searches for devices using the specified filters.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/devices",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "devices",
+          "pageSize": "maxResults"
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.braket#SearchDevicesFilter": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name to use to filter results.</p>",
+            "smithy.api#length": {
+              "min": 1,
+              "max": 64
+            },
+            "smithy.api#required": {}
+          }
+        },
+        "values": {
+          "target": "com.amazonaws.braket#String256List",
+          "traits": {
+            "smithy.api#documentation": "<p>The values to use to filter results.</p>",
+            "smithy.api#length": {
+              "min": 1,
+              "max": 10
+            },
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The filter to use for searching devices.</p>"
+      }
+    },
+    "com.amazonaws.braket#SearchDevicesFilterList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.braket#SearchDevicesFilter"
+      }
+    },
+    "com.amazonaws.braket#SearchDevicesRequest": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A token used for pagination of results returned in the response. Use the token returned from the previous request continue results where the previous request ended.</p>"
+          }
+        },
+        "maxResults": {
+          "target": "smithy.api#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>",
+            "smithy.api#range": {
+              "min": 1,
+              "max": 100
+            }
+          }
+        },
+        "filters": {
+          "target": "com.amazonaws.braket#SearchDevicesFilterList",
+          "traits": {
+            "smithy.api#documentation": "<p>The filter values to use to search for a device.</p>",
+            "smithy.api#length": {
+              "min": 0,
+              "max": 10
+            },
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.braket#SearchDevicesResponse": {
+      "type": "structure",
+      "members": {
+        "devices": {
+          "target": "com.amazonaws.braket#DeviceSummaryList",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of <code>DeviceSummary</code> objects for devices that match the specified filter values.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "nextToken": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A token used for pagination of results, or null if there are no additional results. Use the token value in a subsequent request to continue results where the previous request ended.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.braket#SearchQuantumTasks": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.braket#SearchQuantumTasksRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.braket#SearchQuantumTasksResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.braket#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.braket#InternalServiceException"
+        },
+        {
+          "target": "com.amazonaws.braket#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.braket#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Searches for tasks that match the specified filter values.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/quantum-tasks",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "quantumTasks",
+          "pageSize": "maxResults"
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.braket#SearchQuantumTasksFilter": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.braket#String64",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the device used for the task.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "values": {
+          "target": "com.amazonaws.braket#String256List",
+          "traits": {
+            "smithy.api#documentation": "<p>The values to use for the filter.</p>",
+            "smithy.api#length": {
+              "min": 1,
+              "max": 10
+            },
+            "smithy.api#required": {}
+          }
+        },
+        "operator": {
+          "target": "com.amazonaws.braket#SearchQuantumTasksFilterOperator",
+          "traits": {
+            "smithy.api#documentation": "<p>An operator to use in the filter.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A filter to use to search for tasks.</p>"
+      }
+    },
+    "com.amazonaws.braket#SearchQuantumTasksFilterList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.braket#SearchQuantumTasksFilter"
+      }
+    },
+    "com.amazonaws.braket#SearchQuantumTasksFilterOperator": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "LT",
+            "name": "LT"
+          },
+          {
+            "value": "LTE",
+            "name": "LTE"
+          },
+          {
+            "value": "EQUAL",
+            "name": "EQUAL"
+          },
+          {
+            "value": "GT",
+            "name": "GT"
+          },
+          {
+            "value": "GTE",
+            "name": "GTE"
+          },
+          {
+            "value": "BETWEEN",
+            "name": "BETWEEN"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.braket#SearchQuantumTasksRequest": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A token used for pagination of results returned in the response. Use the token returned from the previous request continue results where the previous request ended.</p>"
+          }
+        },
+        "maxResults": {
+          "target": "smithy.api#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>Maximum number of results to return in the response.</p>",
+            "smithy.api#range": {
+              "min": 1,
+              "max": 100
+            }
+          }
+        },
+        "filters": {
+          "target": "com.amazonaws.braket#SearchQuantumTasksFilterList",
+          "traits": {
+            "smithy.api#documentation": "<p>Array of <code>SearchQuantumTasksFilter</code> objects.</p>",
+            "smithy.api#length": {
+              "min": 0,
+              "max": 10
+            },
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.braket#SearchQuantumTasksResponse": {
+      "type": "structure",
+      "members": {
+        "quantumTasks": {
+          "target": "com.amazonaws.braket#QuantumTaskSummaryList",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of <code>QuantumTaskSummary</code> objects for tasks that match the specified filters.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "nextToken": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A token used for pagination of results, or null if there are no additional results. Use the token value in a subsequent request to continue results where the previous request ended.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.braket#ServiceQuotaExceededException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The request failed because a service quota is met.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 402
+      }
+    },
+    "com.amazonaws.braket#String256": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 256
+        }
+      }
+    },
+    "com.amazonaws.braket#String256List": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.braket#String256"
+      }
+    },
+    "com.amazonaws.braket#String64": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 64
+        }
+      }
+    },
+    "com.amazonaws.braket#ThrottlingException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The throttling rate limit is met.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 429
+      }
+    },
+    "com.amazonaws.braket#ValidationException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an AWS service.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    }
+  }
+}

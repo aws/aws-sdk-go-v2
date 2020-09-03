@@ -1,0 +1,296 @@
+{
+  "smithy": "1.0",
+  "metadata": {
+    "suppressions": [
+      {
+        "id": "HttpMethodSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpResponseCodeSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "PaginatedTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpHeaderTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpUriConflict",
+        "namespace": "*"
+      },
+      {
+        "id": "Service",
+        "namespace": "*"
+      }
+    ]
+  },
+  "shapes": {
+    "com.amazonaws.apigatewaymanagementapi#ApiGatewayManagementApi": {
+      "type": "service",
+      "version": "2018-11-29",
+      "operations": [
+        {
+          "target": "com.amazonaws.apigatewaymanagementapi#DeleteConnection"
+        },
+        {
+          "target": "com.amazonaws.apigatewaymanagementapi#GetConnection"
+        },
+        {
+          "target": "com.amazonaws.apigatewaymanagementapi#PostToConnection"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "ApiGatewayManagementApi",
+          "arnNamespace": "execute-api",
+          "cloudFormationName": "ApiGatewayManagementApi",
+          "cloudTrailEventSource": "apigatewaymanagementapi.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "execute-api"
+        },
+        "aws.protocols#restJson1": {},
+        "smithy.api#documentation": "<p>The Amazon API Gateway Management API allows you to directly manage runtime aspects of your deployed APIs. To use it, you must explicitly set the SDK's endpoint to point to the endpoint of your deployed API. The endpoint will be of the form https://{api-id}.execute-api.{region}.amazonaws.com/{stage}, or will be the endpoint corresponding to your API's custom domain and base path, if applicable.</p>",
+        "smithy.api#title": "AmazonApiGatewayManagementApi"
+      }
+    },
+    "com.amazonaws.apigatewaymanagementapi#Data": {
+      "type": "blob",
+      "traits": {
+        "smithy.api#documentation": "<p>The data to be sent to the client specified by its connection id.</p>",
+        "smithy.api#length": {
+          "min": 0,
+          "max": 131072
+        }
+      }
+    },
+    "com.amazonaws.apigatewaymanagementapi#DeleteConnection": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.apigatewaymanagementapi#DeleteConnectionRequest"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.apigatewaymanagementapi#ForbiddenException"
+        },
+        {
+          "target": "com.amazonaws.apigatewaymanagementapi#GoneException"
+        },
+        {
+          "target": "com.amazonaws.apigatewaymanagementapi#LimitExceededException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Delete the connection with the provided id.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/@connections/{ConnectionId}",
+          "code": 204
+        }
+      }
+    },
+    "com.amazonaws.apigatewaymanagementapi#DeleteConnectionRequest": {
+      "type": "structure",
+      "members": {
+        "ConnectionId": {
+          "target": "com.amazonaws.apigatewaymanagementapi#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.apigatewaymanagementapi#ForbiddenException": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#documentation": "<p>The caller is not authorized to invoke this operation.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 403
+      }
+    },
+    "com.amazonaws.apigatewaymanagementapi#GetConnection": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.apigatewaymanagementapi#GetConnectionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.apigatewaymanagementapi#GetConnectionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.apigatewaymanagementapi#ForbiddenException"
+        },
+        {
+          "target": "com.amazonaws.apigatewaymanagementapi#GoneException"
+        },
+        {
+          "target": "com.amazonaws.apigatewaymanagementapi#LimitExceededException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Get information about the connection with the provided id.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/@connections/{ConnectionId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.apigatewaymanagementapi#GetConnectionRequest": {
+      "type": "structure",
+      "members": {
+        "ConnectionId": {
+          "target": "com.amazonaws.apigatewaymanagementapi#__string",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.apigatewaymanagementapi#GetConnectionResponse": {
+      "type": "structure",
+      "members": {
+        "Identity": {
+          "target": "com.amazonaws.apigatewaymanagementapi#Identity",
+          "traits": {
+            "smithy.api#jsonName": "identity"
+          }
+        },
+        "ConnectedAt": {
+          "target": "com.amazonaws.apigatewaymanagementapi#__timestampIso8601",
+          "traits": {
+            "smithy.api#documentation": "<p>The time in ISO 8601 format for when the connection was established.</p>",
+            "smithy.api#jsonName": "connectedAt"
+          }
+        },
+        "LastActiveAt": {
+          "target": "com.amazonaws.apigatewaymanagementapi#__timestampIso8601",
+          "traits": {
+            "smithy.api#documentation": "<p>The time in ISO 8601 format for when the connection was last active.</p>",
+            "smithy.api#jsonName": "lastActiveAt"
+          }
+        }
+      }
+    },
+    "com.amazonaws.apigatewaymanagementapi#GoneException": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#documentation": "<p>The connection with the provided id no longer exists.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 410
+      }
+    },
+    "com.amazonaws.apigatewaymanagementapi#Identity": {
+      "type": "structure",
+      "members": {
+        "SourceIp": {
+          "target": "com.amazonaws.apigatewaymanagementapi#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The source IP address of the TCP connection making the request to API Gateway.</p>",
+            "smithy.api#jsonName": "sourceIp",
+            "smithy.api#required": {}
+          }
+        },
+        "UserAgent": {
+          "target": "com.amazonaws.apigatewaymanagementapi#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The User Agent of the API caller.</p>",
+            "smithy.api#jsonName": "userAgent",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.apigatewaymanagementapi#LimitExceededException": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#documentation": "<p>The client is sending more than the allowed number of requests per unit of time or the WebSocket client side buffer is full.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 429
+      }
+    },
+    "com.amazonaws.apigatewaymanagementapi#PayloadTooLargeException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.apigatewaymanagementapi#__string",
+          "traits": {
+            "smithy.api#jsonName": "message"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The data has exceeded the maximum size allowed.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 413
+      }
+    },
+    "com.amazonaws.apigatewaymanagementapi#PostToConnection": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.apigatewaymanagementapi#PostToConnectionRequest"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.apigatewaymanagementapi#ForbiddenException"
+        },
+        {
+          "target": "com.amazonaws.apigatewaymanagementapi#GoneException"
+        },
+        {
+          "target": "com.amazonaws.apigatewaymanagementapi#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.apigatewaymanagementapi#PayloadTooLargeException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Sends the provided data to the specified connection.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/@connections/{ConnectionId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.apigatewaymanagementapi#PostToConnectionRequest": {
+      "type": "structure",
+      "members": {
+        "ConnectionId": {
+          "target": "com.amazonaws.apigatewaymanagementapi#__string",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier of the connection that a specific client is using.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "Data": {
+          "target": "com.amazonaws.apigatewaymanagementapi#Data",
+          "traits": {
+            "smithy.api#documentation": "<p>The data to be sent to the client specified by its connection id.</p>",
+            "smithy.api#httpPayload": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.apigatewaymanagementapi#__string": {
+      "type": "string"
+    },
+    "com.amazonaws.apigatewaymanagementapi#__timestampIso8601": {
+      "type": "timestamp",
+      "traits": {
+        "smithy.api#timestampFormat": "date-time"
+      }
+    }
+  }
+}
