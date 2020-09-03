@@ -54,7 +54,7 @@ func (m *awsRestjson1_deserializeOpDeleteSession) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDeleteSessionOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDeleteSessionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -133,7 +133,7 @@ func awsRestjson1_deserializeOpErrorDeleteSession(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteSessionOutput(v **DeleteSessionOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteSessionOutput(v **DeleteSessionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -270,7 +270,7 @@ func (m *awsRestjson1_deserializeOpGetSession) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetSessionOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetSessionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -346,7 +346,7 @@ func awsRestjson1_deserializeOpErrorGetSession(response *smithyhttp.Response) er
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetSessionOutput(v **GetSessionOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetSessionOutput(v **GetSessionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -451,12 +451,12 @@ func (m *awsRestjson1_deserializeOpPostContent) HandleDeserialize(ctx context.Co
 	output := &PostContentOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsPostContentOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsPostContentOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeDocumentPostContentOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentPostContentOutput(output, response.Body)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -548,7 +548,7 @@ func awsRestjson1_deserializeOpErrorPostContent(response *smithyhttp.Response) e
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsPostContentOutput(v *PostContentOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsPostContentOutput(v *PostContentOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -618,7 +618,7 @@ func awsRestjson1_deserializeHttpBindingsPostContentOutput(v *PostContentOutput,
 
 	return nil
 }
-func awsRestjson1_deserializeDocumentPostContentOutput(v *PostContentOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentPostContentOutput(v *PostContentOutput, body io.ReadCloser) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
@@ -661,7 +661,7 @@ func (m *awsRestjson1_deserializeOpPostText) HandleDeserialize(ctx context.Conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentPostTextOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentPostTextOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -749,7 +749,7 @@ func awsRestjson1_deserializeOpErrorPostText(response *smithyhttp.Response) erro
 	}
 }
 
-func awsRestjson1_deserializeDocumentPostTextOutput(v **PostTextOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentPostTextOutput(v **PostTextOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -924,12 +924,12 @@ func (m *awsRestjson1_deserializeOpPutSession) HandleDeserialize(ctx context.Con
 	output := &PutSessionOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsPutSessionOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsPutSessionOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeDocumentPutSessionOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentPutSessionOutput(output, response.Body)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -1012,7 +1012,7 @@ func awsRestjson1_deserializeOpErrorPutSession(response *smithyhttp.Response) er
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsPutSessionOutput(v *PutSessionOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsPutSessionOutput(v *PutSessionOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -1072,7 +1072,7 @@ func awsRestjson1_deserializeHttpBindingsPutSessionOutput(v *PutSessionOutput, r
 
 	return nil
 }
-func awsRestjson1_deserializeDocumentPutSessionOutput(v *PutSessionOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentPutSessionOutput(v *PutSessionOutput, body io.ReadCloser) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
@@ -1081,7 +1081,7 @@ func awsRestjson1_deserializeDocumentPutSessionOutput(v *PutSessionOutput, body 
 	return nil
 }
 
-func awsRestjson1_deserializeHttpBindingsLimitExceededException(v *types.LimitExceededException, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsLimitExceededException(v *types.LimitExceededException, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -1240,7 +1240,7 @@ func awsRestjson1_deserializeErrorLimitExceededException(response *smithyhttp.Re
 
 	errorBody.Seek(0, io.SeekStart)
 
-	if err := awsRestjson1_deserializeHttpBindingsLimitExceededException(output, response); err != nil {
+	if err := awsRestjson1_deserializeOpHttpBindingsLimitExceededException(output, response); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
 	}
 

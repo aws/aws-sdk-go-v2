@@ -3,13 +3,11 @@
 package braket
 
 import (
-	cryptorand "crypto/rand"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
-	smithyrand "github.com/awslabs/smithy-go/rand"
 	"net/http"
 )
 
@@ -32,8 +30,6 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	resolveHTTPClient(&options)
 
 	resolveDefaultEndpointConfiguration(&options)
-
-	resolveIdempotencyTokenProvider(&options)
 
 	for _, fn := range optFns {
 		fn(&options)
@@ -155,11 +151,4 @@ func addClientUserAgent(stack *middleware.Stack) {
 func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) {
 	signer := v4.Signer{}
 	stack.Finalize.Add(v4.NewSignHTTPRequestMiddleware(o.Credentials, signer), middleware.After)
-}
-
-func resolveIdempotencyTokenProvider(o *Options) {
-	if o.IdempotencyTokenProvider != nil {
-		return
-	}
-	o.IdempotencyTokenProvider = smithyrand.NewUUIDIdempotencyToken(cryptorand.Reader)
 }

@@ -45,7 +45,7 @@ func (m *awsAwsjson11_serializeOpDescribeEntitiesDetectionV2Job) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.DescribeEntitiesDetectionV2Job")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeEntitiesDetectionV2JobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeEntitiesDetectionV2JobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -91,7 +91,7 @@ func (m *awsAwsjson11_serializeOpDescribeICD10CMInferenceJob) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.DescribeICD10CMInferenceJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeICD10CMInferenceJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeICD10CMInferenceJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -137,7 +137,7 @@ func (m *awsAwsjson11_serializeOpDescribePHIDetectionJob) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.DescribePHIDetectionJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribePHIDetectionJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribePHIDetectionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -183,7 +183,7 @@ func (m *awsAwsjson11_serializeOpDescribeRxNormInferenceJob) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.DescribeRxNormInferenceJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeRxNormInferenceJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeRxNormInferenceJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -229,7 +229,7 @@ func (m *awsAwsjson11_serializeOpDetectEntities) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.DetectEntities")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDetectEntitiesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDetectEntitiesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -275,7 +275,7 @@ func (m *awsAwsjson11_serializeOpDetectEntitiesV2) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.DetectEntitiesV2")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDetectEntitiesV2Input(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDetectEntitiesV2Input(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -321,7 +321,7 @@ func (m *awsAwsjson11_serializeOpDetectPHI) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.DetectPHI")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDetectPHIInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDetectPHIInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -367,7 +367,7 @@ func (m *awsAwsjson11_serializeOpInferICD10CM) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.InferICD10CM")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentInferICD10CMInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentInferICD10CMInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -413,7 +413,7 @@ func (m *awsAwsjson11_serializeOpInferRxNorm) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.InferRxNorm")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentInferRxNormInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentInferRxNormInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -459,7 +459,7 @@ func (m *awsAwsjson11_serializeOpListEntitiesDetectionV2Jobs) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.ListEntitiesDetectionV2Jobs")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListEntitiesDetectionV2JobsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListEntitiesDetectionV2JobsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -505,7 +505,7 @@ func (m *awsAwsjson11_serializeOpListICD10CMInferenceJobs) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.ListICD10CMInferenceJobs")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListICD10CMInferenceJobsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListICD10CMInferenceJobsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -551,7 +551,7 @@ func (m *awsAwsjson11_serializeOpListPHIDetectionJobs) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.ListPHIDetectionJobs")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListPHIDetectionJobsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListPHIDetectionJobsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -597,7 +597,7 @@ func (m *awsAwsjson11_serializeOpListRxNormInferenceJobs) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.ListRxNormInferenceJobs")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListRxNormInferenceJobsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListRxNormInferenceJobsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -643,7 +643,7 @@ func (m *awsAwsjson11_serializeOpStartEntitiesDetectionV2Job) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.StartEntitiesDetectionV2Job")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartEntitiesDetectionV2JobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartEntitiesDetectionV2JobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -689,7 +689,7 @@ func (m *awsAwsjson11_serializeOpStartICD10CMInferenceJob) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.StartICD10CMInferenceJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartICD10CMInferenceJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartICD10CMInferenceJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -735,7 +735,7 @@ func (m *awsAwsjson11_serializeOpStartPHIDetectionJob) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.StartPHIDetectionJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartPHIDetectionJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartPHIDetectionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -781,7 +781,7 @@ func (m *awsAwsjson11_serializeOpStartRxNormInferenceJob) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.StartRxNormInferenceJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartRxNormInferenceJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartRxNormInferenceJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -827,7 +827,7 @@ func (m *awsAwsjson11_serializeOpStopEntitiesDetectionV2Job) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.StopEntitiesDetectionV2Job")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopEntitiesDetectionV2JobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopEntitiesDetectionV2JobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -873,7 +873,7 @@ func (m *awsAwsjson11_serializeOpStopICD10CMInferenceJob) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.StopICD10CMInferenceJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopICD10CMInferenceJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopICD10CMInferenceJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -919,7 +919,7 @@ func (m *awsAwsjson11_serializeOpStopPHIDetectionJob) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.StopPHIDetectionJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopPHIDetectionJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopPHIDetectionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -965,7 +965,7 @@ func (m *awsAwsjson11_serializeOpStopRxNormInferenceJob) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComprehendMedical_20181030.StopRxNormInferenceJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopRxNormInferenceJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopRxNormInferenceJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1041,7 +1041,7 @@ func awsAwsjson11_serializeDocumentOutputDataConfig(v *types.OutputDataConfig, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeEntitiesDetectionV2JobInput(v *DescribeEntitiesDetectionV2JobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeEntitiesDetectionV2JobInput(v *DescribeEntitiesDetectionV2JobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1053,7 +1053,7 @@ func awsAwsjson11_serializeDocumentDescribeEntitiesDetectionV2JobInput(v *Descri
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeICD10CMInferenceJobInput(v *DescribeICD10CMInferenceJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeICD10CMInferenceJobInput(v *DescribeICD10CMInferenceJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1065,7 +1065,7 @@ func awsAwsjson11_serializeDocumentDescribeICD10CMInferenceJobInput(v *DescribeI
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribePHIDetectionJobInput(v *DescribePHIDetectionJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribePHIDetectionJobInput(v *DescribePHIDetectionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1077,7 +1077,7 @@ func awsAwsjson11_serializeDocumentDescribePHIDetectionJobInput(v *DescribePHIDe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeRxNormInferenceJobInput(v *DescribeRxNormInferenceJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeRxNormInferenceJobInput(v *DescribeRxNormInferenceJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1089,7 +1089,7 @@ func awsAwsjson11_serializeDocumentDescribeRxNormInferenceJobInput(v *DescribeRx
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDetectEntitiesInput(v *DetectEntitiesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDetectEntitiesInput(v *DetectEntitiesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1101,7 +1101,7 @@ func awsAwsjson11_serializeDocumentDetectEntitiesInput(v *DetectEntitiesInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDetectEntitiesV2Input(v *DetectEntitiesV2Input, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDetectEntitiesV2Input(v *DetectEntitiesV2Input, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1113,7 +1113,7 @@ func awsAwsjson11_serializeDocumentDetectEntitiesV2Input(v *DetectEntitiesV2Inpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDetectPHIInput(v *DetectPHIInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDetectPHIInput(v *DetectPHIInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1125,7 +1125,7 @@ func awsAwsjson11_serializeDocumentDetectPHIInput(v *DetectPHIInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentInferICD10CMInput(v *InferICD10CMInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentInferICD10CMInput(v *InferICD10CMInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1137,7 +1137,7 @@ func awsAwsjson11_serializeDocumentInferICD10CMInput(v *InferICD10CMInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentInferRxNormInput(v *InferRxNormInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentInferRxNormInput(v *InferRxNormInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1149,7 +1149,7 @@ func awsAwsjson11_serializeDocumentInferRxNormInput(v *InferRxNormInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListEntitiesDetectionV2JobsInput(v *ListEntitiesDetectionV2JobsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListEntitiesDetectionV2JobsInput(v *ListEntitiesDetectionV2JobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1173,7 +1173,7 @@ func awsAwsjson11_serializeDocumentListEntitiesDetectionV2JobsInput(v *ListEntit
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListICD10CMInferenceJobsInput(v *ListICD10CMInferenceJobsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListICD10CMInferenceJobsInput(v *ListICD10CMInferenceJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1197,7 +1197,7 @@ func awsAwsjson11_serializeDocumentListICD10CMInferenceJobsInput(v *ListICD10CMI
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListPHIDetectionJobsInput(v *ListPHIDetectionJobsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListPHIDetectionJobsInput(v *ListPHIDetectionJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1221,7 +1221,7 @@ func awsAwsjson11_serializeDocumentListPHIDetectionJobsInput(v *ListPHIDetection
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListRxNormInferenceJobsInput(v *ListRxNormInferenceJobsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListRxNormInferenceJobsInput(v *ListRxNormInferenceJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1245,7 +1245,7 @@ func awsAwsjson11_serializeDocumentListRxNormInferenceJobsInput(v *ListRxNormInf
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartEntitiesDetectionV2JobInput(v *StartEntitiesDetectionV2JobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartEntitiesDetectionV2JobInput(v *StartEntitiesDetectionV2JobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1291,7 +1291,7 @@ func awsAwsjson11_serializeDocumentStartEntitiesDetectionV2JobInput(v *StartEnti
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartICD10CMInferenceJobInput(v *StartICD10CMInferenceJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartICD10CMInferenceJobInput(v *StartICD10CMInferenceJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1337,7 +1337,7 @@ func awsAwsjson11_serializeDocumentStartICD10CMInferenceJobInput(v *StartICD10CM
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartPHIDetectionJobInput(v *StartPHIDetectionJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartPHIDetectionJobInput(v *StartPHIDetectionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1383,7 +1383,7 @@ func awsAwsjson11_serializeDocumentStartPHIDetectionJobInput(v *StartPHIDetectio
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartRxNormInferenceJobInput(v *StartRxNormInferenceJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartRxNormInferenceJobInput(v *StartRxNormInferenceJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1429,7 +1429,7 @@ func awsAwsjson11_serializeDocumentStartRxNormInferenceJobInput(v *StartRxNormIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopEntitiesDetectionV2JobInput(v *StopEntitiesDetectionV2JobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopEntitiesDetectionV2JobInput(v *StopEntitiesDetectionV2JobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1441,7 +1441,7 @@ func awsAwsjson11_serializeDocumentStopEntitiesDetectionV2JobInput(v *StopEntiti
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopICD10CMInferenceJobInput(v *StopICD10CMInferenceJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopICD10CMInferenceJobInput(v *StopICD10CMInferenceJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1453,7 +1453,7 @@ func awsAwsjson11_serializeDocumentStopICD10CMInferenceJobInput(v *StopICD10CMIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopPHIDetectionJobInput(v *StopPHIDetectionJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopPHIDetectionJobInput(v *StopPHIDetectionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1465,7 +1465,7 @@ func awsAwsjson11_serializeDocumentStopPHIDetectionJobInput(v *StopPHIDetectionJ
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopRxNormInferenceJobInput(v *StopRxNormInferenceJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopRxNormInferenceJobInput(v *StopRxNormInferenceJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

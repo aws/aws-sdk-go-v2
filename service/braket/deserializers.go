@@ -53,7 +53,7 @@ func (m *awsRestjson1_deserializeOpCancelQuantumTask) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentCancelQuantumTaskOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentCancelQuantumTaskOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -135,7 +135,7 @@ func awsRestjson1_deserializeOpErrorCancelQuantumTask(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeDocumentCancelQuantumTaskOutput(v **CancelQuantumTaskOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCancelQuantumTaskOutput(v **CancelQuantumTaskOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -246,7 +246,7 @@ func (m *awsRestjson1_deserializeOpCreateQuantumTask) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentCreateQuantumTaskOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentCreateQuantumTaskOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -328,7 +328,7 @@ func awsRestjson1_deserializeOpErrorCreateQuantumTask(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateQuantumTaskOutput(v **CreateQuantumTaskOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateQuantumTaskOutput(v **CreateQuantumTaskOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -426,7 +426,7 @@ func (m *awsRestjson1_deserializeOpGetDevice) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetDeviceOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetDeviceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -505,7 +505,7 @@ func awsRestjson1_deserializeOpErrorGetDevice(response *smithyhttp.Response) err
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetDeviceOutput(v **GetDeviceOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetDeviceOutput(v **GetDeviceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -668,7 +668,7 @@ func (m *awsRestjson1_deserializeOpGetQuantumTask) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetQuantumTaskOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetQuantumTaskOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -747,7 +747,7 @@ func awsRestjson1_deserializeOpErrorGetQuantumTask(response *smithyhttp.Response
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetQuantumTaskOutput(v **GetQuantumTaskOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetQuantumTaskOutput(v **GetQuantumTaskOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -974,7 +974,7 @@ func (m *awsRestjson1_deserializeOpSearchDevices) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentSearchDevicesOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentSearchDevicesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1050,7 +1050,7 @@ func awsRestjson1_deserializeOpErrorSearchDevices(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentSearchDevicesOutput(v **SearchDevicesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentSearchDevicesOutput(v **SearchDevicesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1153,7 +1153,7 @@ func (m *awsRestjson1_deserializeOpSearchQuantumTasks) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentSearchQuantumTasksOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentSearchQuantumTasksOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1229,7 +1229,7 @@ func awsRestjson1_deserializeOpErrorSearchQuantumTasks(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentSearchQuantumTasksOutput(v **SearchQuantumTasksOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentSearchQuantumTasksOutput(v **SearchQuantumTasksOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

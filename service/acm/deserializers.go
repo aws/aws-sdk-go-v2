@@ -274,7 +274,7 @@ func (m *awsAwsjson11_deserializeOpDescribeCertificate) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeCertificateOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeCertificateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -377,7 +377,7 @@ func (m *awsAwsjson11_deserializeOpExportCertificate) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentExportCertificateOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentExportCertificateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -483,7 +483,7 @@ func (m *awsAwsjson11_deserializeOpGetCertificate) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetCertificateOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetCertificateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -589,7 +589,7 @@ func (m *awsAwsjson11_deserializeOpImportCertificate) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentImportCertificateOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentImportCertificateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -704,7 +704,7 @@ func (m *awsAwsjson11_deserializeOpListCertificates) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListCertificatesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListCertificatesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -804,7 +804,7 @@ func (m *awsAwsjson11_deserializeOpListTagsForCertificate) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListTagsForCertificateOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListTagsForCertificateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1122,7 +1122,7 @@ func (m *awsAwsjson11_deserializeOpRequestCertificate) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentRequestCertificateOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentRequestCertificateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3985,7 +3985,7 @@ func awsAwsjson11_deserializeDocumentDeleteCertificateOutput(v **DeleteCertifica
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeCertificateOutput(v **DescribeCertificateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeCertificateOutput(v **DescribeCertificateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4041,7 +4041,7 @@ func awsAwsjson11_deserializeDocumentDescribeCertificateOutput(v **DescribeCerti
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentExportCertificateOutput(v **ExportCertificateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentExportCertificateOutput(v **ExportCertificateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4131,7 +4131,7 @@ func awsAwsjson11_deserializeDocumentExportCertificateOutput(v **ExportCertifica
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetCertificateOutput(v **GetCertificateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetCertificateOutput(v **GetCertificateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4208,7 +4208,7 @@ func awsAwsjson11_deserializeDocumentGetCertificateOutput(v **GetCertificateOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentImportCertificateOutput(v **ImportCertificateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentImportCertificateOutput(v **ImportCertificateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4272,7 +4272,7 @@ func awsAwsjson11_deserializeDocumentImportCertificateOutput(v **ImportCertifica
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListCertificatesOutput(v **ListCertificatesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListCertificatesOutput(v **ListCertificatesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4341,7 +4341,7 @@ func awsAwsjson11_deserializeDocumentListCertificatesOutput(v **ListCertificates
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListTagsForCertificateOutput(v **ListTagsForCertificateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListTagsForCertificateOutput(v **ListTagsForCertificateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4499,7 +4499,7 @@ func awsAwsjson11_deserializeDocumentRenewCertificateOutput(v **RenewCertificate
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentRequestCertificateOutput(v **RequestCertificateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentRequestCertificateOutput(v **RequestCertificateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

@@ -45,7 +45,7 @@ func (m *awsAwsjson11_serializeOpAddTags) HandleSerialize(ctx context.Context, i
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudTrail_20131101.AddTags")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAddTagsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAddTagsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -91,7 +91,7 @@ func (m *awsAwsjson11_serializeOpCreateTrail) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudTrail_20131101.CreateTrail")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateTrailInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateTrailInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -137,7 +137,7 @@ func (m *awsAwsjson11_serializeOpDeleteTrail) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudTrail_20131101.DeleteTrail")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteTrailInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteTrailInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -183,7 +183,7 @@ func (m *awsAwsjson11_serializeOpDescribeTrails) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudTrail_20131101.DescribeTrails")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeTrailsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeTrailsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -229,7 +229,7 @@ func (m *awsAwsjson11_serializeOpGetEventSelectors) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudTrail_20131101.GetEventSelectors")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetEventSelectorsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetEventSelectorsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -275,7 +275,7 @@ func (m *awsAwsjson11_serializeOpGetInsightSelectors) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudTrail_20131101.GetInsightSelectors")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetInsightSelectorsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetInsightSelectorsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -321,7 +321,7 @@ func (m *awsAwsjson11_serializeOpGetTrail) HandleSerialize(ctx context.Context, 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudTrail_20131101.GetTrail")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetTrailInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetTrailInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -367,7 +367,7 @@ func (m *awsAwsjson11_serializeOpGetTrailStatus) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudTrail_20131101.GetTrailStatus")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetTrailStatusInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetTrailStatusInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -413,7 +413,7 @@ func (m *awsAwsjson11_serializeOpListPublicKeys) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudTrail_20131101.ListPublicKeys")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListPublicKeysInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListPublicKeysInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -459,7 +459,7 @@ func (m *awsAwsjson11_serializeOpListTags) HandleSerialize(ctx context.Context, 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudTrail_20131101.ListTags")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -505,7 +505,7 @@ func (m *awsAwsjson11_serializeOpListTrails) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudTrail_20131101.ListTrails")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTrailsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTrailsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -551,7 +551,7 @@ func (m *awsAwsjson11_serializeOpLookupEvents) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudTrail_20131101.LookupEvents")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentLookupEventsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentLookupEventsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -597,7 +597,7 @@ func (m *awsAwsjson11_serializeOpPutEventSelectors) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudTrail_20131101.PutEventSelectors")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutEventSelectorsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutEventSelectorsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -643,7 +643,7 @@ func (m *awsAwsjson11_serializeOpPutInsightSelectors) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudTrail_20131101.PutInsightSelectors")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutInsightSelectorsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutInsightSelectorsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -689,7 +689,7 @@ func (m *awsAwsjson11_serializeOpRemoveTags) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudTrail_20131101.RemoveTags")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRemoveTagsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRemoveTagsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -735,7 +735,7 @@ func (m *awsAwsjson11_serializeOpStartLogging) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudTrail_20131101.StartLogging")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartLoggingInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartLoggingInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -781,7 +781,7 @@ func (m *awsAwsjson11_serializeOpStopLogging) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudTrail_20131101.StopLogging")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopLoggingInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopLoggingInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -827,7 +827,7 @@ func (m *awsAwsjson11_serializeOpUpdateTrail) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudTrail_20131101.UpdateTrail")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateTrailInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateTrailInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1083,7 +1083,7 @@ func awsAwsjson11_serializeDocumentTrailNameList(v []*string, value smithyjson.V
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAddTagsInput(v *AddTagsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAddTagsInput(v *AddTagsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1102,7 +1102,7 @@ func awsAwsjson11_serializeDocumentAddTagsInput(v *AddTagsInput, value smithyjso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateTrailInput(v *CreateTrailInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateTrailInput(v *CreateTrailInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1171,7 +1171,7 @@ func awsAwsjson11_serializeDocumentCreateTrailInput(v *CreateTrailInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteTrailInput(v *DeleteTrailInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteTrailInput(v *DeleteTrailInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1183,7 +1183,7 @@ func awsAwsjson11_serializeDocumentDeleteTrailInput(v *DeleteTrailInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeTrailsInput(v *DescribeTrailsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeTrailsInput(v *DescribeTrailsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1202,7 +1202,7 @@ func awsAwsjson11_serializeDocumentDescribeTrailsInput(v *DescribeTrailsInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetEventSelectorsInput(v *GetEventSelectorsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetEventSelectorsInput(v *GetEventSelectorsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1214,7 +1214,7 @@ func awsAwsjson11_serializeDocumentGetEventSelectorsInput(v *GetEventSelectorsIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetInsightSelectorsInput(v *GetInsightSelectorsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetInsightSelectorsInput(v *GetInsightSelectorsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1226,7 +1226,7 @@ func awsAwsjson11_serializeDocumentGetInsightSelectorsInput(v *GetInsightSelecto
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetTrailInput(v *GetTrailInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetTrailInput(v *GetTrailInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1238,7 +1238,7 @@ func awsAwsjson11_serializeDocumentGetTrailInput(v *GetTrailInput, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetTrailStatusInput(v *GetTrailStatusInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetTrailStatusInput(v *GetTrailStatusInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1250,7 +1250,7 @@ func awsAwsjson11_serializeDocumentGetTrailStatusInput(v *GetTrailStatusInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListPublicKeysInput(v *ListPublicKeysInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListPublicKeysInput(v *ListPublicKeysInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1272,7 +1272,7 @@ func awsAwsjson11_serializeDocumentListPublicKeysInput(v *ListPublicKeysInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsInput(v *ListTagsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTagsInput(v *ListTagsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1291,7 +1291,7 @@ func awsAwsjson11_serializeDocumentListTagsInput(v *ListTagsInput, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTrailsInput(v *ListTrailsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTrailsInput(v *ListTrailsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1303,7 +1303,7 @@ func awsAwsjson11_serializeDocumentListTrailsInput(v *ListTrailsInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentLookupEventsInput(v *LookupEventsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentLookupEventsInput(v *LookupEventsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1342,7 +1342,7 @@ func awsAwsjson11_serializeDocumentLookupEventsInput(v *LookupEventsInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutEventSelectorsInput(v *PutEventSelectorsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutEventSelectorsInput(v *PutEventSelectorsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1361,7 +1361,7 @@ func awsAwsjson11_serializeDocumentPutEventSelectorsInput(v *PutEventSelectorsIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutInsightSelectorsInput(v *PutInsightSelectorsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutInsightSelectorsInput(v *PutInsightSelectorsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1380,7 +1380,7 @@ func awsAwsjson11_serializeDocumentPutInsightSelectorsInput(v *PutInsightSelecto
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRemoveTagsInput(v *RemoveTagsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRemoveTagsInput(v *RemoveTagsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1399,7 +1399,7 @@ func awsAwsjson11_serializeDocumentRemoveTagsInput(v *RemoveTagsInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartLoggingInput(v *StartLoggingInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartLoggingInput(v *StartLoggingInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1411,7 +1411,7 @@ func awsAwsjson11_serializeDocumentStartLoggingInput(v *StartLoggingInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopLoggingInput(v *StopLoggingInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopLoggingInput(v *StopLoggingInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1423,7 +1423,7 @@ func awsAwsjson11_serializeDocumentStopLoggingInput(v *StopLoggingInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateTrailInput(v *UpdateTrailInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateTrailInput(v *UpdateTrailInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

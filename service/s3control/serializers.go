@@ -50,7 +50,7 @@ func (m *awsRestxml_serializeOpCreateAccessPoint) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsCreateAccessPointInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsCreateAccessPointInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -64,7 +64,7 @@ func (m *awsRestxml_serializeOpCreateAccessPoint) HandleSerialize(ctx context.Co
 		},
 		Attr: rootAttr,
 	}
-	if err := awsRestxml_serializeDocumentCreateAccessPointInput(input, xmlEncoder.RootElement(root)); err != nil {
+	if err := awsRestxml_serializeOpDocumentCreateAccessPointInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
@@ -78,7 +78,7 @@ func (m *awsRestxml_serializeOpCreateAccessPoint) HandleSerialize(ctx context.Co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsCreateAccessPointInput(v *CreateAccessPointInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsCreateAccessPointInput(v *CreateAccessPointInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -99,7 +99,7 @@ func awsRestxml_serializeHttpBindingsCreateAccessPointInput(v *CreateAccessPoint
 	return nil
 }
 
-func awsRestxml_serializeDocumentCreateAccessPointInput(v *CreateAccessPointInput, value smithyxml.Value) error {
+func awsRestxml_serializeOpDocumentCreateAccessPointInput(v *CreateAccessPointInput, value smithyxml.Value) error {
 	defer value.Close()
 	if v.Bucket != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -176,7 +176,7 @@ func (m *awsRestxml_serializeOpCreateJob) HandleSerialize(ctx context.Context, i
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsCreateJobInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsCreateJobInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -190,7 +190,7 @@ func (m *awsRestxml_serializeOpCreateJob) HandleSerialize(ctx context.Context, i
 		},
 		Attr: rootAttr,
 	}
-	if err := awsRestxml_serializeDocumentCreateJobInput(input, xmlEncoder.RootElement(root)); err != nil {
+	if err := awsRestxml_serializeOpDocumentCreateJobInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
@@ -204,7 +204,7 @@ func (m *awsRestxml_serializeOpCreateJob) HandleSerialize(ctx context.Context, i
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsCreateJobInput(v *CreateJobInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsCreateJobInput(v *CreateJobInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -219,7 +219,7 @@ func awsRestxml_serializeHttpBindingsCreateJobInput(v *CreateJobInput, encoder *
 	return nil
 }
 
-func awsRestxml_serializeDocumentCreateJobInput(v *CreateJobInput, value smithyxml.Value) error {
+func awsRestxml_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smithyxml.Value) error {
 	defer value.Close()
 	if v.ClientRequestToken != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -366,7 +366,7 @@ func (m *awsRestxml_serializeOpDeleteAccessPoint) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsDeleteAccessPointInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsDeleteAccessPointInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -377,7 +377,7 @@ func (m *awsRestxml_serializeOpDeleteAccessPoint) HandleSerialize(ctx context.Co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsDeleteAccessPointInput(v *DeleteAccessPointInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsDeleteAccessPointInput(v *DeleteAccessPointInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -433,7 +433,7 @@ func (m *awsRestxml_serializeOpDeleteAccessPointPolicy) HandleSerialize(ctx cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsDeleteAccessPointPolicyInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsDeleteAccessPointPolicyInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -444,7 +444,7 @@ func (m *awsRestxml_serializeOpDeleteAccessPointPolicy) HandleSerialize(ctx cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsDeleteAccessPointPolicyInput(v *DeleteAccessPointPolicyInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsDeleteAccessPointPolicyInput(v *DeleteAccessPointPolicyInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -500,7 +500,7 @@ func (m *awsRestxml_serializeOpDeleteJobTagging) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsDeleteJobTaggingInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsDeleteJobTaggingInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -511,7 +511,7 @@ func (m *awsRestxml_serializeOpDeleteJobTagging) HandleSerialize(ctx context.Con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsDeleteJobTaggingInput(v *DeleteJobTaggingInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsDeleteJobTaggingInput(v *DeleteJobTaggingInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -567,7 +567,7 @@ func (m *awsRestxml_serializeOpDeletePublicAccessBlock) HandleSerialize(ctx cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsDeletePublicAccessBlockInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsDeletePublicAccessBlockInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -578,7 +578,7 @@ func (m *awsRestxml_serializeOpDeletePublicAccessBlock) HandleSerialize(ctx cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsDeletePublicAccessBlockInput(v *DeletePublicAccessBlockInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsDeletePublicAccessBlockInput(v *DeletePublicAccessBlockInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -628,7 +628,7 @@ func (m *awsRestxml_serializeOpDescribeJob) HandleSerialize(ctx context.Context,
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsDescribeJobInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsDescribeJobInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -639,7 +639,7 @@ func (m *awsRestxml_serializeOpDescribeJob) HandleSerialize(ctx context.Context,
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsDescribeJobInput(v *DescribeJobInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsDescribeJobInput(v *DescribeJobInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -695,7 +695,7 @@ func (m *awsRestxml_serializeOpGetAccessPoint) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsGetAccessPointInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsGetAccessPointInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -706,7 +706,7 @@ func (m *awsRestxml_serializeOpGetAccessPoint) HandleSerialize(ctx context.Conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsGetAccessPointInput(v *GetAccessPointInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsGetAccessPointInput(v *GetAccessPointInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -762,7 +762,7 @@ func (m *awsRestxml_serializeOpGetAccessPointPolicy) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsGetAccessPointPolicyInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsGetAccessPointPolicyInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -773,7 +773,7 @@ func (m *awsRestxml_serializeOpGetAccessPointPolicy) HandleSerialize(ctx context
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsGetAccessPointPolicyInput(v *GetAccessPointPolicyInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsGetAccessPointPolicyInput(v *GetAccessPointPolicyInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -829,7 +829,7 @@ func (m *awsRestxml_serializeOpGetAccessPointPolicyStatus) HandleSerialize(ctx c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsGetAccessPointPolicyStatusInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsGetAccessPointPolicyStatusInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -840,7 +840,7 @@ func (m *awsRestxml_serializeOpGetAccessPointPolicyStatus) HandleSerialize(ctx c
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsGetAccessPointPolicyStatusInput(v *GetAccessPointPolicyStatusInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsGetAccessPointPolicyStatusInput(v *GetAccessPointPolicyStatusInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -896,7 +896,7 @@ func (m *awsRestxml_serializeOpGetJobTagging) HandleSerialize(ctx context.Contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsGetJobTaggingInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsGetJobTaggingInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -907,7 +907,7 @@ func (m *awsRestxml_serializeOpGetJobTagging) HandleSerialize(ctx context.Contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsGetJobTaggingInput(v *GetJobTaggingInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsGetJobTaggingInput(v *GetJobTaggingInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -963,7 +963,7 @@ func (m *awsRestxml_serializeOpGetPublicAccessBlock) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsGetPublicAccessBlockInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsGetPublicAccessBlockInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -974,7 +974,7 @@ func (m *awsRestxml_serializeOpGetPublicAccessBlock) HandleSerialize(ctx context
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsGetPublicAccessBlockInput(v *GetPublicAccessBlockInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsGetPublicAccessBlockInput(v *GetPublicAccessBlockInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1024,7 +1024,7 @@ func (m *awsRestxml_serializeOpListAccessPoints) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsListAccessPointsInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsListAccessPointsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1035,7 +1035,7 @@ func (m *awsRestxml_serializeOpListAccessPoints) HandleSerialize(ctx context.Con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsListAccessPointsInput(v *ListAccessPointsInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsListAccessPointsInput(v *ListAccessPointsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1097,7 +1097,7 @@ func (m *awsRestxml_serializeOpListJobs) HandleSerialize(ctx context.Context, in
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsListJobsInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsListJobsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1108,7 +1108,7 @@ func (m *awsRestxml_serializeOpListJobs) HandleSerialize(ctx context.Context, in
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsListJobsInput(v *ListJobsInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsListJobsInput(v *ListJobsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1172,7 +1172,7 @@ func (m *awsRestxml_serializeOpPutAccessPointPolicy) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsPutAccessPointPolicyInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsPutAccessPointPolicyInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1186,7 +1186,7 @@ func (m *awsRestxml_serializeOpPutAccessPointPolicy) HandleSerialize(ctx context
 		},
 		Attr: rootAttr,
 	}
-	if err := awsRestxml_serializeDocumentPutAccessPointPolicyInput(input, xmlEncoder.RootElement(root)); err != nil {
+	if err := awsRestxml_serializeOpDocumentPutAccessPointPolicyInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
@@ -1200,7 +1200,7 @@ func (m *awsRestxml_serializeOpPutAccessPointPolicy) HandleSerialize(ctx context
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsPutAccessPointPolicyInput(v *PutAccessPointPolicyInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsPutAccessPointPolicyInput(v *PutAccessPointPolicyInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1221,7 +1221,7 @@ func awsRestxml_serializeHttpBindingsPutAccessPointPolicyInput(v *PutAccessPoint
 	return nil
 }
 
-func awsRestxml_serializeDocumentPutAccessPointPolicyInput(v *PutAccessPointPolicyInput, value smithyxml.Value) error {
+func awsRestxml_serializeOpDocumentPutAccessPointPolicyInput(v *PutAccessPointPolicyInput, value smithyxml.Value) error {
 	defer value.Close()
 	if v.Policy != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -1272,7 +1272,7 @@ func (m *awsRestxml_serializeOpPutJobTagging) HandleSerialize(ctx context.Contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsPutJobTaggingInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsPutJobTaggingInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1286,7 +1286,7 @@ func (m *awsRestxml_serializeOpPutJobTagging) HandleSerialize(ctx context.Contex
 		},
 		Attr: rootAttr,
 	}
-	if err := awsRestxml_serializeDocumentPutJobTaggingInput(input, xmlEncoder.RootElement(root)); err != nil {
+	if err := awsRestxml_serializeOpDocumentPutJobTaggingInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
@@ -1300,7 +1300,7 @@ func (m *awsRestxml_serializeOpPutJobTagging) HandleSerialize(ctx context.Contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsPutJobTaggingInput(v *PutJobTaggingInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsPutJobTaggingInput(v *PutJobTaggingInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1321,7 +1321,7 @@ func awsRestxml_serializeHttpBindingsPutJobTaggingInput(v *PutJobTaggingInput, e
 	return nil
 }
 
-func awsRestxml_serializeDocumentPutJobTaggingInput(v *PutJobTaggingInput, value smithyxml.Value) error {
+func awsRestxml_serializeOpDocumentPutJobTaggingInput(v *PutJobTaggingInput, value smithyxml.Value) error {
 	defer value.Close()
 	if v.Tags != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -1374,7 +1374,7 @@ func (m *awsRestxml_serializeOpPutPublicAccessBlock) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsPutPublicAccessBlockInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsPutPublicAccessBlockInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1407,7 +1407,7 @@ func (m *awsRestxml_serializeOpPutPublicAccessBlock) HandleSerialize(ctx context
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsPutPublicAccessBlockInput(v *PutPublicAccessBlockInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsPutPublicAccessBlockInput(v *PutPublicAccessBlockInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1457,7 +1457,7 @@ func (m *awsRestxml_serializeOpUpdateJobPriority) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsUpdateJobPriorityInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsUpdateJobPriorityInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1468,7 +1468,7 @@ func (m *awsRestxml_serializeOpUpdateJobPriority) HandleSerialize(ctx context.Co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsUpdateJobPriorityInput(v *UpdateJobPriorityInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsUpdateJobPriorityInput(v *UpdateJobPriorityInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1528,7 +1528,7 @@ func (m *awsRestxml_serializeOpUpdateJobStatus) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsUpdateJobStatusInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsUpdateJobStatusInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1539,7 +1539,7 @@ func (m *awsRestxml_serializeOpUpdateJobStatus) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsUpdateJobStatusInput(v *UpdateJobStatusInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsUpdateJobStatusInput(v *UpdateJobStatusInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}

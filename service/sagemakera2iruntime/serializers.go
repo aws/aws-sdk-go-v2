@@ -50,7 +50,7 @@ func (m *awsRestjson1_serializeOpDeleteHumanLoop) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDeleteHumanLoopInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteHumanLoopInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -61,7 +61,7 @@ func (m *awsRestjson1_serializeOpDeleteHumanLoop) HandleSerialize(ctx context.Co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDeleteHumanLoopInput(v *DeleteHumanLoopInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDeleteHumanLoopInput(v *DeleteHumanLoopInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -110,7 +110,7 @@ func (m *awsRestjson1_serializeOpDescribeHumanLoop) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDescribeHumanLoopInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeHumanLoopInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -121,7 +121,7 @@ func (m *awsRestjson1_serializeOpDescribeHumanLoop) HandleSerialize(ctx context.
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDescribeHumanLoopInput(v *DescribeHumanLoopInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDescribeHumanLoopInput(v *DescribeHumanLoopInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -170,7 +170,7 @@ func (m *awsRestjson1_serializeOpListHumanLoops) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListHumanLoopsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListHumanLoopsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -181,7 +181,7 @@ func (m *awsRestjson1_serializeOpListHumanLoops) HandleSerialize(ctx context.Con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListHumanLoopsInput(v *ListHumanLoopsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListHumanLoopsInput(v *ListHumanLoopsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -251,7 +251,7 @@ func (m *awsRestjson1_serializeOpStartHumanLoop) HandleSerialize(ctx context.Con
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentStartHumanLoopInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentStartHumanLoopInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -266,7 +266,7 @@ func (m *awsRestjson1_serializeOpStartHumanLoop) HandleSerialize(ctx context.Con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsStartHumanLoopInput(v *StartHumanLoopInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsStartHumanLoopInput(v *StartHumanLoopInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -274,7 +274,7 @@ func awsRestjson1_serializeHttpBindingsStartHumanLoopInput(v *StartHumanLoopInpu
 	return nil
 }
 
-func awsRestjson1_serializeDocumentStartHumanLoopInput(v *StartHumanLoopInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentStartHumanLoopInput(v *StartHumanLoopInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -343,7 +343,7 @@ func (m *awsRestjson1_serializeOpStopHumanLoop) HandleSerialize(ctx context.Cont
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentStopHumanLoopInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentStopHumanLoopInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -358,7 +358,7 @@ func (m *awsRestjson1_serializeOpStopHumanLoop) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsStopHumanLoopInput(v *StopHumanLoopInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsStopHumanLoopInput(v *StopHumanLoopInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -366,7 +366,7 @@ func awsRestjson1_serializeHttpBindingsStopHumanLoopInput(v *StopHumanLoopInput,
 	return nil
 }
 
-func awsRestjson1_serializeDocumentStopHumanLoopInput(v *StopHumanLoopInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentStopHumanLoopInput(v *StopHumanLoopInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

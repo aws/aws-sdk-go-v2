@@ -53,7 +53,7 @@ func (m *awsAwsjson11_deserializeOpAssociateDRTLogBucket) HandleDeserialize(ctx 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentAssociateDRTLogBucketOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentAssociateDRTLogBucketOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -174,7 +174,7 @@ func (m *awsAwsjson11_deserializeOpAssociateDRTRole) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentAssociateDRTRoleOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentAssociateDRTRoleOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -289,7 +289,7 @@ func (m *awsAwsjson11_deserializeOpAssociateHealthCheck) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentAssociateHealthCheckOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentAssociateHealthCheckOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -401,7 +401,7 @@ func (m *awsAwsjson11_deserializeOpAssociateProactiveEngagementDetails) HandleDe
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentAssociateProactiveEngagementDetailsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentAssociateProactiveEngagementDetailsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -513,7 +513,7 @@ func (m *awsAwsjson11_deserializeOpCreateProtection) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateProtectionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateProtectionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -631,7 +631,7 @@ func (m *awsAwsjson11_deserializeOpCreateSubscription) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateSubscriptionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateSubscriptionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -734,7 +734,7 @@ func (m *awsAwsjson11_deserializeOpDeleteProtection) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteProtectionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteProtectionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -840,7 +840,7 @@ func (m *awsAwsjson11_deserializeOpDeleteSubscription) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteSubscriptionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteSubscriptionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -946,7 +946,7 @@ func (m *awsAwsjson11_deserializeOpDescribeAttack) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeAttackOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeAttackOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1049,7 +1049,7 @@ func (m *awsAwsjson11_deserializeOpDescribeDRTAccess) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeDRTAccessOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeDRTAccessOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1152,7 +1152,7 @@ func (m *awsAwsjson11_deserializeOpDescribeEmergencyContactSettings) HandleDeser
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeEmergencyContactSettingsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeEmergencyContactSettingsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1255,7 +1255,7 @@ func (m *awsAwsjson11_deserializeOpDescribeProtection) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeProtectionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeProtectionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1361,7 +1361,7 @@ func (m *awsAwsjson11_deserializeOpDescribeSubscription) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeSubscriptionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeSubscriptionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1464,7 +1464,7 @@ func (m *awsAwsjson11_deserializeOpDisableProactiveEngagement) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDisableProactiveEngagementOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDisableProactiveEngagementOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1576,7 +1576,7 @@ func (m *awsAwsjson11_deserializeOpDisassociateDRTLogBucket) HandleDeserialize(c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDisassociateDRTLogBucketOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDisassociateDRTLogBucketOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1691,7 +1691,7 @@ func (m *awsAwsjson11_deserializeOpDisassociateDRTRole) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDisassociateDRTRoleOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDisassociateDRTRoleOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1800,7 +1800,7 @@ func (m *awsAwsjson11_deserializeOpDisassociateHealthCheck) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDisassociateHealthCheckOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDisassociateHealthCheckOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1909,7 +1909,7 @@ func (m *awsAwsjson11_deserializeOpEnableProactiveEngagement) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentEnableProactiveEngagementOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentEnableProactiveEngagementOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2021,7 +2021,7 @@ func (m *awsAwsjson11_deserializeOpGetSubscriptionState) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetSubscriptionStateOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetSubscriptionStateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2121,7 +2121,7 @@ func (m *awsAwsjson11_deserializeOpListAttacks) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListAttacksOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListAttacksOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2227,7 +2227,7 @@ func (m *awsAwsjson11_deserializeOpListProtections) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListProtectionsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListProtectionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2333,7 +2333,7 @@ func (m *awsAwsjson11_deserializeOpUpdateEmergencyContactSettings) HandleDeseria
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateEmergencyContactSettingsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateEmergencyContactSettingsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2442,7 +2442,7 @@ func (m *awsAwsjson11_deserializeOpUpdateSubscription) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateSubscriptionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateSubscriptionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5564,7 +5564,7 @@ func awsAwsjson11_deserializeDocumentTopContributors(v *[]*types.Contributor, de
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAssociateDRTLogBucketOutput(v **AssociateDRTLogBucketOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAssociateDRTLogBucketOutput(v **AssociateDRTLogBucketOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5615,7 +5615,7 @@ func awsAwsjson11_deserializeDocumentAssociateDRTLogBucketOutput(v **AssociateDR
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAssociateDRTRoleOutput(v **AssociateDRTRoleOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAssociateDRTRoleOutput(v **AssociateDRTRoleOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5666,7 +5666,7 @@ func awsAwsjson11_deserializeDocumentAssociateDRTRoleOutput(v **AssociateDRTRole
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAssociateHealthCheckOutput(v **AssociateHealthCheckOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAssociateHealthCheckOutput(v **AssociateHealthCheckOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5717,7 +5717,7 @@ func awsAwsjson11_deserializeDocumentAssociateHealthCheckOutput(v **AssociateHea
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAssociateProactiveEngagementDetailsOutput(v **AssociateProactiveEngagementDetailsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAssociateProactiveEngagementDetailsOutput(v **AssociateProactiveEngagementDetailsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5768,7 +5768,7 @@ func awsAwsjson11_deserializeDocumentAssociateProactiveEngagementDetailsOutput(v
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateProtectionOutput(v **CreateProtectionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateProtectionOutput(v **CreateProtectionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5832,7 +5832,7 @@ func awsAwsjson11_deserializeDocumentCreateProtectionOutput(v **CreateProtection
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateSubscriptionOutput(v **CreateSubscriptionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateSubscriptionOutput(v **CreateSubscriptionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5883,7 +5883,7 @@ func awsAwsjson11_deserializeDocumentCreateSubscriptionOutput(v **CreateSubscrip
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteProtectionOutput(v **DeleteProtectionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteProtectionOutput(v **DeleteProtectionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5934,7 +5934,7 @@ func awsAwsjson11_deserializeDocumentDeleteProtectionOutput(v **DeleteProtection
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteSubscriptionOutput(v **DeleteSubscriptionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteSubscriptionOutput(v **DeleteSubscriptionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5985,7 +5985,7 @@ func awsAwsjson11_deserializeDocumentDeleteSubscriptionOutput(v **DeleteSubscrip
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeAttackOutput(v **DescribeAttackOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeAttackOutput(v **DescribeAttackOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6041,7 +6041,7 @@ func awsAwsjson11_deserializeDocumentDescribeAttackOutput(v **DescribeAttackOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeDRTAccessOutput(v **DescribeDRTAccessOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeDRTAccessOutput(v **DescribeDRTAccessOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6110,7 +6110,7 @@ func awsAwsjson11_deserializeDocumentDescribeDRTAccessOutput(v **DescribeDRTAcce
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeEmergencyContactSettingsOutput(v **DescribeEmergencyContactSettingsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeEmergencyContactSettingsOutput(v **DescribeEmergencyContactSettingsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6166,7 +6166,7 @@ func awsAwsjson11_deserializeDocumentDescribeEmergencyContactSettingsOutput(v **
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeProtectionOutput(v **DescribeProtectionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeProtectionOutput(v **DescribeProtectionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6222,7 +6222,7 @@ func awsAwsjson11_deserializeDocumentDescribeProtectionOutput(v **DescribeProtec
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeSubscriptionOutput(v **DescribeSubscriptionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeSubscriptionOutput(v **DescribeSubscriptionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6278,7 +6278,7 @@ func awsAwsjson11_deserializeDocumentDescribeSubscriptionOutput(v **DescribeSubs
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDisableProactiveEngagementOutput(v **DisableProactiveEngagementOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDisableProactiveEngagementOutput(v **DisableProactiveEngagementOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6329,7 +6329,7 @@ func awsAwsjson11_deserializeDocumentDisableProactiveEngagementOutput(v **Disabl
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDisassociateDRTLogBucketOutput(v **DisassociateDRTLogBucketOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDisassociateDRTLogBucketOutput(v **DisassociateDRTLogBucketOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6380,7 +6380,7 @@ func awsAwsjson11_deserializeDocumentDisassociateDRTLogBucketOutput(v **Disassoc
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDisassociateDRTRoleOutput(v **DisassociateDRTRoleOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDisassociateDRTRoleOutput(v **DisassociateDRTRoleOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6431,7 +6431,7 @@ func awsAwsjson11_deserializeDocumentDisassociateDRTRoleOutput(v **DisassociateD
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDisassociateHealthCheckOutput(v **DisassociateHealthCheckOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDisassociateHealthCheckOutput(v **DisassociateHealthCheckOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6482,7 +6482,7 @@ func awsAwsjson11_deserializeDocumentDisassociateHealthCheckOutput(v **Disassoci
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentEnableProactiveEngagementOutput(v **EnableProactiveEngagementOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentEnableProactiveEngagementOutput(v **EnableProactiveEngagementOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6533,7 +6533,7 @@ func awsAwsjson11_deserializeDocumentEnableProactiveEngagementOutput(v **EnableP
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetSubscriptionStateOutput(v **GetSubscriptionStateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetSubscriptionStateOutput(v **GetSubscriptionStateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6597,7 +6597,7 @@ func awsAwsjson11_deserializeDocumentGetSubscriptionStateOutput(v **GetSubscript
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListAttacksOutput(v **ListAttacksOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListAttacksOutput(v **ListAttacksOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6666,7 +6666,7 @@ func awsAwsjson11_deserializeDocumentListAttacksOutput(v **ListAttacksOutput, de
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListProtectionsOutput(v **ListProtectionsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListProtectionsOutput(v **ListProtectionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6735,7 +6735,7 @@ func awsAwsjson11_deserializeDocumentListProtectionsOutput(v **ListProtectionsOu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateEmergencyContactSettingsOutput(v **UpdateEmergencyContactSettingsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateEmergencyContactSettingsOutput(v **UpdateEmergencyContactSettingsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6786,7 +6786,7 @@ func awsAwsjson11_deserializeDocumentUpdateEmergencyContactSettingsOutput(v **Up
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateSubscriptionOutput(v **UpdateSubscriptionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateSubscriptionOutput(v **UpdateSubscriptionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

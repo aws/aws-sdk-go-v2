@@ -53,7 +53,7 @@ func (m *awsAwsjson11_deserializeOpCreateHomeRegionControl) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateHomeRegionControlOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateHomeRegionControlOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -168,7 +168,7 @@ func (m *awsAwsjson11_deserializeOpDescribeHomeRegionControls) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeHomeRegionControlsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeHomeRegionControlsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -280,7 +280,7 @@ func (m *awsAwsjson11_deserializeOpGetHomeRegion) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetHomeRegionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetHomeRegionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1125,7 +1125,7 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateHomeRegionControlOutput(v **CreateHomeRegionControlOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateHomeRegionControlOutput(v **CreateHomeRegionControlOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1181,7 +1181,7 @@ func awsAwsjson11_deserializeDocumentCreateHomeRegionControlOutput(v **CreateHom
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeHomeRegionControlsOutput(v **DescribeHomeRegionControlsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeHomeRegionControlsOutput(v **DescribeHomeRegionControlsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1250,7 +1250,7 @@ func awsAwsjson11_deserializeDocumentDescribeHomeRegionControlsOutput(v **Descri
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetHomeRegionOutput(v **GetHomeRegionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetHomeRegionOutput(v **GetHomeRegionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

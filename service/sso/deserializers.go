@@ -52,7 +52,7 @@ func (m *awsRestjson1_deserializeOpGetRoleCredentials) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetRoleCredentialsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetRoleCredentialsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -128,7 +128,7 @@ func awsRestjson1_deserializeOpErrorGetRoleCredentials(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetRoleCredentialsOutput(v **GetRoleCredentialsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetRoleCredentialsOutput(v **GetRoleCredentialsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -218,7 +218,7 @@ func (m *awsRestjson1_deserializeOpListAccountRoles) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListAccountRolesOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListAccountRolesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -294,7 +294,7 @@ func awsRestjson1_deserializeOpErrorListAccountRoles(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeDocumentListAccountRolesOutput(v **ListAccountRolesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListAccountRolesOutput(v **ListAccountRolesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -397,7 +397,7 @@ func (m *awsRestjson1_deserializeOpListAccounts) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListAccountsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListAccountsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -473,7 +473,7 @@ func awsRestjson1_deserializeOpErrorListAccounts(response *smithyhttp.Response) 
 	}
 }
 
-func awsRestjson1_deserializeDocumentListAccountsOutput(v **ListAccountsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListAccountsOutput(v **ListAccountsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

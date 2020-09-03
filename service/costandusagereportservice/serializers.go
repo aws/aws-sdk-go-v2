@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpDeleteReportDefinition) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrigamiServiceGatewayService.DeleteReportDefinition")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteReportDefinitionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteReportDefinitionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpDescribeReportDefinitions) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrigamiServiceGatewayService.DescribeReportDefinitions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeReportDefinitionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeReportDefinitionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpModifyReportDefinition) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrigamiServiceGatewayService.ModifyReportDefinition")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentModifyReportDefinitionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentModifyReportDefinitionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpPutReportDefinition) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrigamiServiceGatewayService.PutReportDefinition")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutReportDefinitionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutReportDefinitionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -285,7 +285,7 @@ func awsAwsjson11_serializeDocumentSchemaElementList(v []types.SchemaElement, va
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteReportDefinitionInput(v *DeleteReportDefinitionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteReportDefinitionInput(v *DeleteReportDefinitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -297,7 +297,7 @@ func awsAwsjson11_serializeDocumentDeleteReportDefinitionInput(v *DeleteReportDe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeReportDefinitionsInput(v *DescribeReportDefinitionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeReportDefinitionsInput(v *DescribeReportDefinitionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -314,7 +314,7 @@ func awsAwsjson11_serializeDocumentDescribeReportDefinitionsInput(v *DescribeRep
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentModifyReportDefinitionInput(v *ModifyReportDefinitionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentModifyReportDefinitionInput(v *ModifyReportDefinitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -333,7 +333,7 @@ func awsAwsjson11_serializeDocumentModifyReportDefinitionInput(v *ModifyReportDe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutReportDefinitionInput(v *PutReportDefinitionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutReportDefinitionInput(v *PutReportDefinitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

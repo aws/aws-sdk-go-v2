@@ -41,7 +41,7 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
+		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me)\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
 	},
 	{

@@ -48,7 +48,7 @@ func (m *awsAwsquery_serializeOpBuildSuggesters) HandleSerialize(ctx context.Con
 	body.Key("Action").String("BuildSuggesters")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentBuildSuggestersInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentBuildSuggestersInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -103,7 +103,7 @@ func (m *awsAwsquery_serializeOpCreateDomain) HandleSerialize(ctx context.Contex
 	body.Key("Action").String("CreateDomain")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentCreateDomainInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateDomainInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -158,7 +158,7 @@ func (m *awsAwsquery_serializeOpDefineAnalysisScheme) HandleSerialize(ctx contex
 	body.Key("Action").String("DefineAnalysisScheme")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentDefineAnalysisSchemeInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDefineAnalysisSchemeInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -213,7 +213,7 @@ func (m *awsAwsquery_serializeOpDefineExpression) HandleSerialize(ctx context.Co
 	body.Key("Action").String("DefineExpression")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentDefineExpressionInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDefineExpressionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -268,7 +268,7 @@ func (m *awsAwsquery_serializeOpDefineIndexField) HandleSerialize(ctx context.Co
 	body.Key("Action").String("DefineIndexField")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentDefineIndexFieldInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDefineIndexFieldInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -323,7 +323,7 @@ func (m *awsAwsquery_serializeOpDefineSuggester) HandleSerialize(ctx context.Con
 	body.Key("Action").String("DefineSuggester")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentDefineSuggesterInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDefineSuggesterInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -378,7 +378,7 @@ func (m *awsAwsquery_serializeOpDeleteAnalysisScheme) HandleSerialize(ctx contex
 	body.Key("Action").String("DeleteAnalysisScheme")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteAnalysisSchemeInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteAnalysisSchemeInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -433,7 +433,7 @@ func (m *awsAwsquery_serializeOpDeleteDomain) HandleSerialize(ctx context.Contex
 	body.Key("Action").String("DeleteDomain")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteDomainInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteDomainInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -488,7 +488,7 @@ func (m *awsAwsquery_serializeOpDeleteExpression) HandleSerialize(ctx context.Co
 	body.Key("Action").String("DeleteExpression")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteExpressionInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteExpressionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -543,7 +543,7 @@ func (m *awsAwsquery_serializeOpDeleteIndexField) HandleSerialize(ctx context.Co
 	body.Key("Action").String("DeleteIndexField")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteIndexFieldInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteIndexFieldInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -598,7 +598,7 @@ func (m *awsAwsquery_serializeOpDeleteSuggester) HandleSerialize(ctx context.Con
 	body.Key("Action").String("DeleteSuggester")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteSuggesterInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteSuggesterInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -653,7 +653,7 @@ func (m *awsAwsquery_serializeOpDescribeAnalysisSchemes) HandleSerialize(ctx con
 	body.Key("Action").String("DescribeAnalysisSchemes")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeAnalysisSchemesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeAnalysisSchemesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -708,7 +708,7 @@ func (m *awsAwsquery_serializeOpDescribeAvailabilityOptions) HandleSerialize(ctx
 	body.Key("Action").String("DescribeAvailabilityOptions")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeAvailabilityOptionsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeAvailabilityOptionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -763,7 +763,7 @@ func (m *awsAwsquery_serializeOpDescribeDomainEndpointOptions) HandleSerialize(c
 	body.Key("Action").String("DescribeDomainEndpointOptions")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeDomainEndpointOptionsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeDomainEndpointOptionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -818,7 +818,7 @@ func (m *awsAwsquery_serializeOpDescribeDomains) HandleSerialize(ctx context.Con
 	body.Key("Action").String("DescribeDomains")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeDomainsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeDomainsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -873,7 +873,7 @@ func (m *awsAwsquery_serializeOpDescribeExpressions) HandleSerialize(ctx context
 	body.Key("Action").String("DescribeExpressions")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeExpressionsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeExpressionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -928,7 +928,7 @@ func (m *awsAwsquery_serializeOpDescribeIndexFields) HandleSerialize(ctx context
 	body.Key("Action").String("DescribeIndexFields")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeIndexFieldsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeIndexFieldsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -983,7 +983,7 @@ func (m *awsAwsquery_serializeOpDescribeScalingParameters) HandleSerialize(ctx c
 	body.Key("Action").String("DescribeScalingParameters")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeScalingParametersInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeScalingParametersInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1038,7 +1038,7 @@ func (m *awsAwsquery_serializeOpDescribeServiceAccessPolicies) HandleSerialize(c
 	body.Key("Action").String("DescribeServiceAccessPolicies")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeServiceAccessPoliciesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeServiceAccessPoliciesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1093,7 +1093,7 @@ func (m *awsAwsquery_serializeOpDescribeSuggesters) HandleSerialize(ctx context.
 	body.Key("Action").String("DescribeSuggesters")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeSuggestersInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeSuggestersInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1148,7 +1148,7 @@ func (m *awsAwsquery_serializeOpIndexDocuments) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("IndexDocuments")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentIndexDocumentsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentIndexDocumentsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1256,7 +1256,7 @@ func (m *awsAwsquery_serializeOpUpdateAvailabilityOptions) HandleSerialize(ctx c
 	body.Key("Action").String("UpdateAvailabilityOptions")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentUpdateAvailabilityOptionsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUpdateAvailabilityOptionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1311,7 +1311,7 @@ func (m *awsAwsquery_serializeOpUpdateDomainEndpointOptions) HandleSerialize(ctx
 	body.Key("Action").String("UpdateDomainEndpointOptions")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentUpdateDomainEndpointOptionsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUpdateDomainEndpointOptionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1366,7 +1366,7 @@ func (m *awsAwsquery_serializeOpUpdateScalingParameters) HandleSerialize(ctx con
 	body.Key("Action").String("UpdateScalingParameters")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentUpdateScalingParametersInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUpdateScalingParametersInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1421,7 +1421,7 @@ func (m *awsAwsquery_serializeOpUpdateServiceAccessPolicies) HandleSerialize(ctx
 	body.Key("Action").String("UpdateServiceAccessPolicies")
 	body.Key("Version").String("2013-01-01")
 
-	if err := awsAwsquery_serializeDocumentUpdateServiceAccessPoliciesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUpdateServiceAccessPoliciesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2118,7 +2118,7 @@ func awsAwsquery_serializeDocumentTextOptions(v *types.TextOptions, value query.
 	return nil
 }
 
-func awsAwsquery_serializeDocumentBuildSuggestersInput(v *BuildSuggestersInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentBuildSuggestersInput(v *BuildSuggestersInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2130,7 +2130,7 @@ func awsAwsquery_serializeDocumentBuildSuggestersInput(v *BuildSuggestersInput, 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateDomainInput(v *CreateDomainInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateDomainInput(v *CreateDomainInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2142,7 +2142,7 @@ func awsAwsquery_serializeDocumentCreateDomainInput(v *CreateDomainInput, value 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDefineAnalysisSchemeInput(v *DefineAnalysisSchemeInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDefineAnalysisSchemeInput(v *DefineAnalysisSchemeInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2161,7 +2161,7 @@ func awsAwsquery_serializeDocumentDefineAnalysisSchemeInput(v *DefineAnalysisSch
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDefineExpressionInput(v *DefineExpressionInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDefineExpressionInput(v *DefineExpressionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2180,7 +2180,7 @@ func awsAwsquery_serializeDocumentDefineExpressionInput(v *DefineExpressionInput
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDefineIndexFieldInput(v *DefineIndexFieldInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDefineIndexFieldInput(v *DefineIndexFieldInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2199,7 +2199,7 @@ func awsAwsquery_serializeDocumentDefineIndexFieldInput(v *DefineIndexFieldInput
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDefineSuggesterInput(v *DefineSuggesterInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDefineSuggesterInput(v *DefineSuggesterInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2218,7 +2218,7 @@ func awsAwsquery_serializeDocumentDefineSuggesterInput(v *DefineSuggesterInput, 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteAnalysisSchemeInput(v *DeleteAnalysisSchemeInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteAnalysisSchemeInput(v *DeleteAnalysisSchemeInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2235,7 +2235,7 @@ func awsAwsquery_serializeDocumentDeleteAnalysisSchemeInput(v *DeleteAnalysisSch
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteDomainInput(v *DeleteDomainInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteDomainInput(v *DeleteDomainInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2247,7 +2247,7 @@ func awsAwsquery_serializeDocumentDeleteDomainInput(v *DeleteDomainInput, value 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteExpressionInput(v *DeleteExpressionInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteExpressionInput(v *DeleteExpressionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2264,7 +2264,7 @@ func awsAwsquery_serializeDocumentDeleteExpressionInput(v *DeleteExpressionInput
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteIndexFieldInput(v *DeleteIndexFieldInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteIndexFieldInput(v *DeleteIndexFieldInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2281,7 +2281,7 @@ func awsAwsquery_serializeDocumentDeleteIndexFieldInput(v *DeleteIndexFieldInput
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteSuggesterInput(v *DeleteSuggesterInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteSuggesterInput(v *DeleteSuggesterInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2298,7 +2298,7 @@ func awsAwsquery_serializeDocumentDeleteSuggesterInput(v *DeleteSuggesterInput, 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeAnalysisSchemesInput(v *DescribeAnalysisSchemesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeAnalysisSchemesInput(v *DescribeAnalysisSchemesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2322,7 +2322,7 @@ func awsAwsquery_serializeDocumentDescribeAnalysisSchemesInput(v *DescribeAnalys
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeAvailabilityOptionsInput(v *DescribeAvailabilityOptionsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeAvailabilityOptionsInput(v *DescribeAvailabilityOptionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2339,7 +2339,7 @@ func awsAwsquery_serializeDocumentDescribeAvailabilityOptionsInput(v *DescribeAv
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeDomainEndpointOptionsInput(v *DescribeDomainEndpointOptionsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeDomainEndpointOptionsInput(v *DescribeDomainEndpointOptionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2356,7 +2356,7 @@ func awsAwsquery_serializeDocumentDescribeDomainEndpointOptionsInput(v *Describe
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeDomainsInput(v *DescribeDomainsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeDomainsInput(v *DescribeDomainsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2370,7 +2370,7 @@ func awsAwsquery_serializeDocumentDescribeDomainsInput(v *DescribeDomainsInput, 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeExpressionsInput(v *DescribeExpressionsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeExpressionsInput(v *DescribeExpressionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2394,7 +2394,7 @@ func awsAwsquery_serializeDocumentDescribeExpressionsInput(v *DescribeExpression
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeIndexFieldsInput(v *DescribeIndexFieldsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeIndexFieldsInput(v *DescribeIndexFieldsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2418,7 +2418,7 @@ func awsAwsquery_serializeDocumentDescribeIndexFieldsInput(v *DescribeIndexField
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeScalingParametersInput(v *DescribeScalingParametersInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeScalingParametersInput(v *DescribeScalingParametersInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2430,7 +2430,7 @@ func awsAwsquery_serializeDocumentDescribeScalingParametersInput(v *DescribeScal
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeServiceAccessPoliciesInput(v *DescribeServiceAccessPoliciesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeServiceAccessPoliciesInput(v *DescribeServiceAccessPoliciesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2447,7 +2447,7 @@ func awsAwsquery_serializeDocumentDescribeServiceAccessPoliciesInput(v *Describe
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeSuggestersInput(v *DescribeSuggestersInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeSuggestersInput(v *DescribeSuggestersInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2471,7 +2471,7 @@ func awsAwsquery_serializeDocumentDescribeSuggestersInput(v *DescribeSuggestersI
 	return nil
 }
 
-func awsAwsquery_serializeDocumentIndexDocumentsInput(v *IndexDocumentsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentIndexDocumentsInput(v *IndexDocumentsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2490,7 +2490,7 @@ func awsAwsquery_serializeDocumentListDomainNamesInput(v *ListDomainNamesInput, 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUpdateAvailabilityOptionsInput(v *UpdateAvailabilityOptionsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUpdateAvailabilityOptionsInput(v *UpdateAvailabilityOptionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2507,7 +2507,7 @@ func awsAwsquery_serializeDocumentUpdateAvailabilityOptionsInput(v *UpdateAvaila
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUpdateDomainEndpointOptionsInput(v *UpdateDomainEndpointOptionsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUpdateDomainEndpointOptionsInput(v *UpdateDomainEndpointOptionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2526,7 +2526,7 @@ func awsAwsquery_serializeDocumentUpdateDomainEndpointOptionsInput(v *UpdateDoma
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUpdateScalingParametersInput(v *UpdateScalingParametersInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUpdateScalingParametersInput(v *UpdateScalingParametersInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2545,7 +2545,7 @@ func awsAwsquery_serializeDocumentUpdateScalingParametersInput(v *UpdateScalingP
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUpdateServiceAccessPoliciesInput(v *UpdateServiceAccessPoliciesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUpdateServiceAccessPoliciesInput(v *UpdateServiceAccessPoliciesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 

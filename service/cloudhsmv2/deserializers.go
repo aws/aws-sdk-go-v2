@@ -53,7 +53,7 @@ func (m *awsAwsjson11_deserializeOpCopyBackupToRegion) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCopyBackupToRegionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCopyBackupToRegionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -168,7 +168,7 @@ func (m *awsAwsjson11_deserializeOpCreateCluster) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateClusterOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateClusterOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -283,7 +283,7 @@ func (m *awsAwsjson11_deserializeOpCreateHsm) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateHsmOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateHsmOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -395,7 +395,7 @@ func (m *awsAwsjson11_deserializeOpDeleteBackup) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteBackupOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteBackupOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -507,7 +507,7 @@ func (m *awsAwsjson11_deserializeOpDeleteCluster) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteClusterOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteClusterOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -622,7 +622,7 @@ func (m *awsAwsjson11_deserializeOpDeleteHsm) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteHsmOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteHsmOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -734,7 +734,7 @@ func (m *awsAwsjson11_deserializeOpDescribeBackups) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeBackupsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeBackupsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -849,7 +849,7 @@ func (m *awsAwsjson11_deserializeOpDescribeClusters) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeClustersOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeClustersOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -961,7 +961,7 @@ func (m *awsAwsjson11_deserializeOpInitializeCluster) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentInitializeClusterOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentInitializeClusterOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1073,7 +1073,7 @@ func (m *awsAwsjson11_deserializeOpListTags) HandleDeserialize(ctx context.Conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListTagsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListTagsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1188,7 +1188,7 @@ func (m *awsAwsjson11_deserializeOpRestoreBackup) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentRestoreBackupOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentRestoreBackupOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1300,7 +1300,7 @@ func (m *awsAwsjson11_deserializeOpTagResource) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentTagResourceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentTagResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1415,7 +1415,7 @@ func (m *awsAwsjson11_deserializeOpUntagResource) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUntagResourceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUntagResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3113,7 +3113,7 @@ func awsAwsjson11_deserializeDocumentTagList(v *[]*types.Tag, decoder *json.Deco
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCopyBackupToRegionOutput(v **CopyBackupToRegionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCopyBackupToRegionOutput(v **CopyBackupToRegionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3169,7 +3169,7 @@ func awsAwsjson11_deserializeDocumentCopyBackupToRegionOutput(v **CopyBackupToRe
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateClusterOutput(v **CreateClusterOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateClusterOutput(v **CreateClusterOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3225,7 +3225,7 @@ func awsAwsjson11_deserializeDocumentCreateClusterOutput(v **CreateClusterOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateHsmOutput(v **CreateHsmOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateHsmOutput(v **CreateHsmOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3281,7 +3281,7 @@ func awsAwsjson11_deserializeDocumentCreateHsmOutput(v **CreateHsmOutput, decode
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteBackupOutput(v **DeleteBackupOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteBackupOutput(v **DeleteBackupOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3337,7 +3337,7 @@ func awsAwsjson11_deserializeDocumentDeleteBackupOutput(v **DeleteBackupOutput, 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteClusterOutput(v **DeleteClusterOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteClusterOutput(v **DeleteClusterOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3393,7 +3393,7 @@ func awsAwsjson11_deserializeDocumentDeleteClusterOutput(v **DeleteClusterOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteHsmOutput(v **DeleteHsmOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteHsmOutput(v **DeleteHsmOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3457,7 +3457,7 @@ func awsAwsjson11_deserializeDocumentDeleteHsmOutput(v **DeleteHsmOutput, decode
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeBackupsOutput(v **DescribeBackupsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeBackupsOutput(v **DescribeBackupsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3526,7 +3526,7 @@ func awsAwsjson11_deserializeDocumentDescribeBackupsOutput(v **DescribeBackupsOu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeClustersOutput(v **DescribeClustersOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeClustersOutput(v **DescribeClustersOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3595,7 +3595,7 @@ func awsAwsjson11_deserializeDocumentDescribeClustersOutput(v **DescribeClusters
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentInitializeClusterOutput(v **InitializeClusterOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentInitializeClusterOutput(v **InitializeClusterOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3672,7 +3672,7 @@ func awsAwsjson11_deserializeDocumentInitializeClusterOutput(v **InitializeClust
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListTagsOutput(v **ListTagsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListTagsOutput(v **ListTagsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3741,7 +3741,7 @@ func awsAwsjson11_deserializeDocumentListTagsOutput(v **ListTagsOutput, decoder 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentRestoreBackupOutput(v **RestoreBackupOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentRestoreBackupOutput(v **RestoreBackupOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3797,7 +3797,7 @@ func awsAwsjson11_deserializeDocumentRestoreBackupOutput(v **RestoreBackupOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentTagResourceOutput(v **TagResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentTagResourceOutput(v **TagResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3848,7 +3848,7 @@ func awsAwsjson11_deserializeDocumentTagResourceOutput(v **TagResourceOutput, de
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUntagResourceOutput(v **UntagResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUntagResourceOutput(v **UntagResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

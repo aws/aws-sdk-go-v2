@@ -46,7 +46,7 @@ func (m *awsRestjson1_serializeOpGetRawMessageContent) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsGetRawMessageContentInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsGetRawMessageContentInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -57,7 +57,7 @@ func (m *awsRestjson1_serializeOpGetRawMessageContent) HandleSerialize(ctx conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsGetRawMessageContentInput(v *GetRawMessageContentInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetRawMessageContentInput(v *GetRawMessageContentInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}

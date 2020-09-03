@@ -47,7 +47,7 @@ func (m *awsRestjson1_serializeOpInvokeEndpoint) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsInvokeEndpointInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsInvokeEndpointInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -69,7 +69,7 @@ func (m *awsRestjson1_serializeOpInvokeEndpoint) HandleSerialize(ctx context.Con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsInvokeEndpointInput(v *InvokeEndpointInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsInvokeEndpointInput(v *InvokeEndpointInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}

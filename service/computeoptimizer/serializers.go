@@ -45,7 +45,7 @@ func (m *awsAwsjson10_serializeOpDescribeRecommendationExportJobs) HandleSeriali
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComputeOptimizerService.DescribeRecommendationExportJobs")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentDescribeRecommendationExportJobsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentDescribeRecommendationExportJobsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -91,7 +91,7 @@ func (m *awsAwsjson10_serializeOpExportAutoScalingGroupRecommendations) HandleSe
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComputeOptimizerService.ExportAutoScalingGroupRecommendations")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentExportAutoScalingGroupRecommendationsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentExportAutoScalingGroupRecommendationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -137,7 +137,7 @@ func (m *awsAwsjson10_serializeOpExportEC2InstanceRecommendations) HandleSeriali
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComputeOptimizerService.ExportEC2InstanceRecommendations")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentExportEC2InstanceRecommendationsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentExportEC2InstanceRecommendationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -183,7 +183,7 @@ func (m *awsAwsjson10_serializeOpGetAutoScalingGroupRecommendations) HandleSeria
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComputeOptimizerService.GetAutoScalingGroupRecommendations")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentGetAutoScalingGroupRecommendationsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentGetAutoScalingGroupRecommendationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -229,7 +229,7 @@ func (m *awsAwsjson10_serializeOpGetEC2InstanceRecommendations) HandleSerialize(
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComputeOptimizerService.GetEC2InstanceRecommendations")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentGetEC2InstanceRecommendationsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentGetEC2InstanceRecommendationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -275,7 +275,7 @@ func (m *awsAwsjson10_serializeOpGetEC2RecommendationProjectedMetrics) HandleSer
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComputeOptimizerService.GetEC2RecommendationProjectedMetrics")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentGetEC2RecommendationProjectedMetricsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentGetEC2RecommendationProjectedMetricsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -360,7 +360,7 @@ func (m *awsAwsjson10_serializeOpGetRecommendationSummaries) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComputeOptimizerService.GetRecommendationSummaries")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentGetRecommendationSummariesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentGetRecommendationSummariesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -406,7 +406,7 @@ func (m *awsAwsjson10_serializeOpUpdateEnrollmentStatus) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ComputeOptimizerService.UpdateEnrollmentStatus")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentUpdateEnrollmentStatusInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentUpdateEnrollmentStatusInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -607,7 +607,7 @@ func awsAwsjson10_serializeDocumentS3DestinationConfig(v *types.S3DestinationCon
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDescribeRecommendationExportJobsInput(v *DescribeRecommendationExportJobsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentDescribeRecommendationExportJobsInput(v *DescribeRecommendationExportJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -638,7 +638,7 @@ func awsAwsjson10_serializeDocumentDescribeRecommendationExportJobsInput(v *Desc
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentExportAutoScalingGroupRecommendationsInput(v *ExportAutoScalingGroupRecommendationsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentExportAutoScalingGroupRecommendationsInput(v *ExportAutoScalingGroupRecommendationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -683,7 +683,7 @@ func awsAwsjson10_serializeDocumentExportAutoScalingGroupRecommendationsInput(v 
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentExportEC2InstanceRecommendationsInput(v *ExportEC2InstanceRecommendationsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentExportEC2InstanceRecommendationsInput(v *ExportEC2InstanceRecommendationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -728,7 +728,7 @@ func awsAwsjson10_serializeDocumentExportEC2InstanceRecommendationsInput(v *Expo
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentGetAutoScalingGroupRecommendationsInput(v *GetAutoScalingGroupRecommendationsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentGetAutoScalingGroupRecommendationsInput(v *GetAutoScalingGroupRecommendationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -766,7 +766,7 @@ func awsAwsjson10_serializeDocumentGetAutoScalingGroupRecommendationsInput(v *Ge
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentGetEC2InstanceRecommendationsInput(v *GetEC2InstanceRecommendationsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentGetEC2InstanceRecommendationsInput(v *GetEC2InstanceRecommendationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -804,7 +804,7 @@ func awsAwsjson10_serializeDocumentGetEC2InstanceRecommendationsInput(v *GetEC2I
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentGetEC2RecommendationProjectedMetricsInput(v *GetEC2RecommendationProjectedMetricsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentGetEC2RecommendationProjectedMetricsInput(v *GetEC2RecommendationProjectedMetricsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -836,14 +836,14 @@ func awsAwsjson10_serializeDocumentGetEC2RecommendationProjectedMetricsInput(v *
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentGetEnrollmentStatusInput(v *GetEnrollmentStatusInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentGetEnrollmentStatusInput(v *GetEnrollmentStatusInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentGetRecommendationSummariesInput(v *GetRecommendationSummariesInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentGetRecommendationSummariesInput(v *GetRecommendationSummariesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -867,7 +867,7 @@ func awsAwsjson10_serializeDocumentGetRecommendationSummariesInput(v *GetRecomme
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentUpdateEnrollmentStatusInput(v *UpdateEnrollmentStatusInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentUpdateEnrollmentStatusInput(v *UpdateEnrollmentStatusInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

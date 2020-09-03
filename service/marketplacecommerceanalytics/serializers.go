@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpGenerateDataSet) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("MarketplaceCommerceAnalytics20150701.GenerateDataSet")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGenerateDataSetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGenerateDataSetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpStartSupportDataExport) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("MarketplaceCommerceAnalytics20150701.StartSupportDataExport")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartSupportDataExportInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartSupportDataExportInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -120,7 +120,7 @@ func awsAwsjson11_serializeDocumentCustomerDefinedValues(v map[string]*string, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGenerateDataSetInput(v *GenerateDataSetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGenerateDataSetInput(v *GenerateDataSetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -164,7 +164,7 @@ func awsAwsjson11_serializeDocumentGenerateDataSetInput(v *GenerateDataSetInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartSupportDataExportInput(v *StartSupportDataExportInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartSupportDataExportInput(v *StartSupportDataExportInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

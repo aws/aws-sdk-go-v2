@@ -54,7 +54,7 @@ func (m *awsAwsjson10_deserializeOpEmptyInputAndEmptyOutput) HandleDeserialize(c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentEmptyInputAndEmptyOutputOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentEmptyInputAndEmptyOutputOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -151,7 +151,7 @@ func (m *awsAwsjson10_deserializeOpGreetingWithErrors) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentGreetingWithErrorsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentGreetingWithErrorsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -257,7 +257,7 @@ func (m *awsAwsjson10_deserializeOpJsonUnions) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentJsonUnionsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentJsonUnionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -451,7 +451,7 @@ func (m *awsAwsjson10_deserializeOpNoInputAndOutput) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentNoInputAndOutputOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentNoInputAndOutputOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1175,7 +1175,7 @@ func awsAwsjson10_deserializeDocumentStringMap(v *map[string]*string, decoder *j
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentEmptyInputAndEmptyOutputOutput(v **EmptyInputAndEmptyOutputOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentEmptyInputAndEmptyOutputOutput(v **EmptyInputAndEmptyOutputOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1226,7 +1226,7 @@ func awsAwsjson10_deserializeDocumentEmptyInputAndEmptyOutputOutput(v **EmptyInp
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentGreetingWithErrorsOutput(v **GreetingWithErrorsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentGreetingWithErrorsOutput(v **GreetingWithErrorsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1290,7 +1290,7 @@ func awsAwsjson10_deserializeDocumentGreetingWithErrorsOutput(v **GreetingWithEr
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentJsonUnionsOutput(v **JsonUnionsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentJsonUnionsOutput(v **JsonUnionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1397,7 +1397,7 @@ func awsAwsjson10_deserializeDocumentNoInputAndNoOutputOutput(v **NoInputAndNoOu
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentNoInputAndOutputOutput(v **NoInputAndOutputOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentNoInputAndOutputOutput(v **NoInputAndOutputOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

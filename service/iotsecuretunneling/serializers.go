@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpCloseTunnel) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IoTSecuredTunneling.CloseTunnel")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCloseTunnelInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCloseTunnelInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpDescribeTunnel) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IoTSecuredTunneling.DescribeTunnel")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeTunnelInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeTunnelInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IoTSecuredTunneling.ListTagsForResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpListTunnels) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IoTSecuredTunneling.ListTunnels")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTunnelsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTunnelsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpOpenTunnel) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IoTSecuredTunneling.OpenTunnel")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentOpenTunnelInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentOpenTunnelInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IoTSecuredTunneling.TagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IoTSecuredTunneling.UntagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -430,7 +430,7 @@ func awsAwsjson11_serializeDocumentTimeoutConfig(v *types.TimeoutConfig, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCloseTunnelInput(v *CloseTunnelInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCloseTunnelInput(v *CloseTunnelInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -447,7 +447,7 @@ func awsAwsjson11_serializeDocumentCloseTunnelInput(v *CloseTunnelInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeTunnelInput(v *DescribeTunnelInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeTunnelInput(v *DescribeTunnelInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -459,7 +459,7 @@ func awsAwsjson11_serializeDocumentDescribeTunnelInput(v *DescribeTunnelInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -471,7 +471,7 @@ func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResour
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTunnelsInput(v *ListTunnelsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTunnelsInput(v *ListTunnelsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -493,7 +493,7 @@ func awsAwsjson11_serializeDocumentListTunnelsInput(v *ListTunnelsInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentOpenTunnelInput(v *OpenTunnelInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentOpenTunnelInput(v *OpenTunnelInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -526,7 +526,7 @@ func awsAwsjson11_serializeDocumentOpenTunnelInput(v *OpenTunnelInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -545,7 +545,7 @@ func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

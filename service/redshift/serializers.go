@@ -49,7 +49,7 @@ func (m *awsAwsquery_serializeOpAcceptReservedNodeExchange) HandleSerialize(ctx 
 	body.Key("Action").String("AcceptReservedNodeExchange")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentAcceptReservedNodeExchangeInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentAcceptReservedNodeExchangeInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -104,7 +104,7 @@ func (m *awsAwsquery_serializeOpAuthorizeClusterSecurityGroupIngress) HandleSeri
 	body.Key("Action").String("AuthorizeClusterSecurityGroupIngress")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentAuthorizeClusterSecurityGroupIngressInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentAuthorizeClusterSecurityGroupIngressInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -159,7 +159,7 @@ func (m *awsAwsquery_serializeOpAuthorizeSnapshotAccess) HandleSerialize(ctx con
 	body.Key("Action").String("AuthorizeSnapshotAccess")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentAuthorizeSnapshotAccessInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentAuthorizeSnapshotAccessInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -214,7 +214,7 @@ func (m *awsAwsquery_serializeOpBatchDeleteClusterSnapshots) HandleSerialize(ctx
 	body.Key("Action").String("BatchDeleteClusterSnapshots")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentBatchDeleteClusterSnapshotsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentBatchDeleteClusterSnapshotsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -269,7 +269,7 @@ func (m *awsAwsquery_serializeOpBatchModifyClusterSnapshots) HandleSerialize(ctx
 	body.Key("Action").String("BatchModifyClusterSnapshots")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentBatchModifyClusterSnapshotsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentBatchModifyClusterSnapshotsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -324,7 +324,7 @@ func (m *awsAwsquery_serializeOpCancelResize) HandleSerialize(ctx context.Contex
 	body.Key("Action").String("CancelResize")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentCancelResizeInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCancelResizeInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -379,7 +379,7 @@ func (m *awsAwsquery_serializeOpCopyClusterSnapshot) HandleSerialize(ctx context
 	body.Key("Action").String("CopyClusterSnapshot")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentCopyClusterSnapshotInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCopyClusterSnapshotInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -434,7 +434,7 @@ func (m *awsAwsquery_serializeOpCreateCluster) HandleSerialize(ctx context.Conte
 	body.Key("Action").String("CreateCluster")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateClusterInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateClusterInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -489,7 +489,7 @@ func (m *awsAwsquery_serializeOpCreateClusterParameterGroup) HandleSerialize(ctx
 	body.Key("Action").String("CreateClusterParameterGroup")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateClusterParameterGroupInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateClusterParameterGroupInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -544,7 +544,7 @@ func (m *awsAwsquery_serializeOpCreateClusterSecurityGroup) HandleSerialize(ctx 
 	body.Key("Action").String("CreateClusterSecurityGroup")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateClusterSecurityGroupInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateClusterSecurityGroupInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -599,7 +599,7 @@ func (m *awsAwsquery_serializeOpCreateClusterSnapshot) HandleSerialize(ctx conte
 	body.Key("Action").String("CreateClusterSnapshot")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateClusterSnapshotInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateClusterSnapshotInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -654,7 +654,7 @@ func (m *awsAwsquery_serializeOpCreateClusterSubnetGroup) HandleSerialize(ctx co
 	body.Key("Action").String("CreateClusterSubnetGroup")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateClusterSubnetGroupInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateClusterSubnetGroupInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -709,7 +709,7 @@ func (m *awsAwsquery_serializeOpCreateEventSubscription) HandleSerialize(ctx con
 	body.Key("Action").String("CreateEventSubscription")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateEventSubscriptionInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateEventSubscriptionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -764,7 +764,7 @@ func (m *awsAwsquery_serializeOpCreateHsmClientCertificate) HandleSerialize(ctx 
 	body.Key("Action").String("CreateHsmClientCertificate")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateHsmClientCertificateInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateHsmClientCertificateInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -819,7 +819,7 @@ func (m *awsAwsquery_serializeOpCreateHsmConfiguration) HandleSerialize(ctx cont
 	body.Key("Action").String("CreateHsmConfiguration")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateHsmConfigurationInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateHsmConfigurationInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -874,7 +874,7 @@ func (m *awsAwsquery_serializeOpCreateScheduledAction) HandleSerialize(ctx conte
 	body.Key("Action").String("CreateScheduledAction")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateScheduledActionInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateScheduledActionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -929,7 +929,7 @@ func (m *awsAwsquery_serializeOpCreateSnapshotCopyGrant) HandleSerialize(ctx con
 	body.Key("Action").String("CreateSnapshotCopyGrant")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateSnapshotCopyGrantInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateSnapshotCopyGrantInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -984,7 +984,7 @@ func (m *awsAwsquery_serializeOpCreateSnapshotSchedule) HandleSerialize(ctx cont
 	body.Key("Action").String("CreateSnapshotSchedule")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateSnapshotScheduleInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateSnapshotScheduleInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1039,7 +1039,7 @@ func (m *awsAwsquery_serializeOpCreateTags) HandleSerialize(ctx context.Context,
 	body.Key("Action").String("CreateTags")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateTagsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateTagsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1094,7 +1094,7 @@ func (m *awsAwsquery_serializeOpCreateUsageLimit) HandleSerialize(ctx context.Co
 	body.Key("Action").String("CreateUsageLimit")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateUsageLimitInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateUsageLimitInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1149,7 +1149,7 @@ func (m *awsAwsquery_serializeOpDeleteCluster) HandleSerialize(ctx context.Conte
 	body.Key("Action").String("DeleteCluster")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteClusterInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteClusterInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1204,7 +1204,7 @@ func (m *awsAwsquery_serializeOpDeleteClusterParameterGroup) HandleSerialize(ctx
 	body.Key("Action").String("DeleteClusterParameterGroup")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteClusterParameterGroupInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteClusterParameterGroupInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1259,7 +1259,7 @@ func (m *awsAwsquery_serializeOpDeleteClusterSecurityGroup) HandleSerialize(ctx 
 	body.Key("Action").String("DeleteClusterSecurityGroup")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteClusterSecurityGroupInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteClusterSecurityGroupInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1314,7 +1314,7 @@ func (m *awsAwsquery_serializeOpDeleteClusterSnapshot) HandleSerialize(ctx conte
 	body.Key("Action").String("DeleteClusterSnapshot")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteClusterSnapshotInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteClusterSnapshotInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1369,7 +1369,7 @@ func (m *awsAwsquery_serializeOpDeleteClusterSubnetGroup) HandleSerialize(ctx co
 	body.Key("Action").String("DeleteClusterSubnetGroup")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteClusterSubnetGroupInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteClusterSubnetGroupInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1424,7 +1424,7 @@ func (m *awsAwsquery_serializeOpDeleteEventSubscription) HandleSerialize(ctx con
 	body.Key("Action").String("DeleteEventSubscription")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteEventSubscriptionInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteEventSubscriptionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1479,7 +1479,7 @@ func (m *awsAwsquery_serializeOpDeleteHsmClientCertificate) HandleSerialize(ctx 
 	body.Key("Action").String("DeleteHsmClientCertificate")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteHsmClientCertificateInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteHsmClientCertificateInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1534,7 +1534,7 @@ func (m *awsAwsquery_serializeOpDeleteHsmConfiguration) HandleSerialize(ctx cont
 	body.Key("Action").String("DeleteHsmConfiguration")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteHsmConfigurationInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteHsmConfigurationInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1589,7 +1589,7 @@ func (m *awsAwsquery_serializeOpDeleteScheduledAction) HandleSerialize(ctx conte
 	body.Key("Action").String("DeleteScheduledAction")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteScheduledActionInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteScheduledActionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1644,7 +1644,7 @@ func (m *awsAwsquery_serializeOpDeleteSnapshotCopyGrant) HandleSerialize(ctx con
 	body.Key("Action").String("DeleteSnapshotCopyGrant")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteSnapshotCopyGrantInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteSnapshotCopyGrantInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1699,7 +1699,7 @@ func (m *awsAwsquery_serializeOpDeleteSnapshotSchedule) HandleSerialize(ctx cont
 	body.Key("Action").String("DeleteSnapshotSchedule")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteSnapshotScheduleInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteSnapshotScheduleInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1754,7 +1754,7 @@ func (m *awsAwsquery_serializeOpDeleteTags) HandleSerialize(ctx context.Context,
 	body.Key("Action").String("DeleteTags")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteTagsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteTagsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1809,7 +1809,7 @@ func (m *awsAwsquery_serializeOpDeleteUsageLimit) HandleSerialize(ctx context.Co
 	body.Key("Action").String("DeleteUsageLimit")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteUsageLimitInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteUsageLimitInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1864,7 +1864,7 @@ func (m *awsAwsquery_serializeOpDescribeAccountAttributes) HandleSerialize(ctx c
 	body.Key("Action").String("DescribeAccountAttributes")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeAccountAttributesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeAccountAttributesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1919,7 +1919,7 @@ func (m *awsAwsquery_serializeOpDescribeClusterDbRevisions) HandleSerialize(ctx 
 	body.Key("Action").String("DescribeClusterDbRevisions")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeClusterDbRevisionsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeClusterDbRevisionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1974,7 +1974,7 @@ func (m *awsAwsquery_serializeOpDescribeClusterParameterGroups) HandleSerialize(
 	body.Key("Action").String("DescribeClusterParameterGroups")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeClusterParameterGroupsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeClusterParameterGroupsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2029,7 +2029,7 @@ func (m *awsAwsquery_serializeOpDescribeClusterParameters) HandleSerialize(ctx c
 	body.Key("Action").String("DescribeClusterParameters")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeClusterParametersInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeClusterParametersInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2084,7 +2084,7 @@ func (m *awsAwsquery_serializeOpDescribeClusters) HandleSerialize(ctx context.Co
 	body.Key("Action").String("DescribeClusters")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeClustersInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeClustersInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2139,7 +2139,7 @@ func (m *awsAwsquery_serializeOpDescribeClusterSecurityGroups) HandleSerialize(c
 	body.Key("Action").String("DescribeClusterSecurityGroups")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeClusterSecurityGroupsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeClusterSecurityGroupsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2194,7 +2194,7 @@ func (m *awsAwsquery_serializeOpDescribeClusterSnapshots) HandleSerialize(ctx co
 	body.Key("Action").String("DescribeClusterSnapshots")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeClusterSnapshotsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeClusterSnapshotsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2249,7 +2249,7 @@ func (m *awsAwsquery_serializeOpDescribeClusterSubnetGroups) HandleSerialize(ctx
 	body.Key("Action").String("DescribeClusterSubnetGroups")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeClusterSubnetGroupsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeClusterSubnetGroupsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2304,7 +2304,7 @@ func (m *awsAwsquery_serializeOpDescribeClusterTracks) HandleSerialize(ctx conte
 	body.Key("Action").String("DescribeClusterTracks")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeClusterTracksInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeClusterTracksInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2359,7 +2359,7 @@ func (m *awsAwsquery_serializeOpDescribeClusterVersions) HandleSerialize(ctx con
 	body.Key("Action").String("DescribeClusterVersions")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeClusterVersionsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeClusterVersionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2414,7 +2414,7 @@ func (m *awsAwsquery_serializeOpDescribeDefaultClusterParameters) HandleSerializ
 	body.Key("Action").String("DescribeDefaultClusterParameters")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeDefaultClusterParametersInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeDefaultClusterParametersInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2469,7 +2469,7 @@ func (m *awsAwsquery_serializeOpDescribeEventCategories) HandleSerialize(ctx con
 	body.Key("Action").String("DescribeEventCategories")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeEventCategoriesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeEventCategoriesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2524,7 +2524,7 @@ func (m *awsAwsquery_serializeOpDescribeEvents) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("DescribeEvents")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeEventsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeEventsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2579,7 +2579,7 @@ func (m *awsAwsquery_serializeOpDescribeEventSubscriptions) HandleSerialize(ctx 
 	body.Key("Action").String("DescribeEventSubscriptions")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeEventSubscriptionsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeEventSubscriptionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2634,7 +2634,7 @@ func (m *awsAwsquery_serializeOpDescribeHsmClientCertificates) HandleSerialize(c
 	body.Key("Action").String("DescribeHsmClientCertificates")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeHsmClientCertificatesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeHsmClientCertificatesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2689,7 +2689,7 @@ func (m *awsAwsquery_serializeOpDescribeHsmConfigurations) HandleSerialize(ctx c
 	body.Key("Action").String("DescribeHsmConfigurations")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeHsmConfigurationsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeHsmConfigurationsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2744,7 +2744,7 @@ func (m *awsAwsquery_serializeOpDescribeLoggingStatus) HandleSerialize(ctx conte
 	body.Key("Action").String("DescribeLoggingStatus")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeLoggingStatusInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeLoggingStatusInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2799,7 +2799,7 @@ func (m *awsAwsquery_serializeOpDescribeNodeConfigurationOptions) HandleSerializ
 	body.Key("Action").String("DescribeNodeConfigurationOptions")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeNodeConfigurationOptionsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeNodeConfigurationOptionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2854,7 +2854,7 @@ func (m *awsAwsquery_serializeOpDescribeOrderableClusterOptions) HandleSerialize
 	body.Key("Action").String("DescribeOrderableClusterOptions")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeOrderableClusterOptionsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeOrderableClusterOptionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2909,7 +2909,7 @@ func (m *awsAwsquery_serializeOpDescribeReservedNodeOfferings) HandleSerialize(c
 	body.Key("Action").String("DescribeReservedNodeOfferings")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeReservedNodeOfferingsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeReservedNodeOfferingsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2964,7 +2964,7 @@ func (m *awsAwsquery_serializeOpDescribeReservedNodes) HandleSerialize(ctx conte
 	body.Key("Action").String("DescribeReservedNodes")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeReservedNodesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeReservedNodesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3019,7 +3019,7 @@ func (m *awsAwsquery_serializeOpDescribeResize) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("DescribeResize")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeResizeInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeResizeInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3074,7 +3074,7 @@ func (m *awsAwsquery_serializeOpDescribeScheduledActions) HandleSerialize(ctx co
 	body.Key("Action").String("DescribeScheduledActions")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeScheduledActionsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeScheduledActionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3129,7 +3129,7 @@ func (m *awsAwsquery_serializeOpDescribeSnapshotCopyGrants) HandleSerialize(ctx 
 	body.Key("Action").String("DescribeSnapshotCopyGrants")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeSnapshotCopyGrantsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeSnapshotCopyGrantsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3184,7 +3184,7 @@ func (m *awsAwsquery_serializeOpDescribeSnapshotSchedules) HandleSerialize(ctx c
 	body.Key("Action").String("DescribeSnapshotSchedules")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeSnapshotSchedulesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeSnapshotSchedulesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3292,7 +3292,7 @@ func (m *awsAwsquery_serializeOpDescribeTableRestoreStatus) HandleSerialize(ctx 
 	body.Key("Action").String("DescribeTableRestoreStatus")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeTableRestoreStatusInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeTableRestoreStatusInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3347,7 +3347,7 @@ func (m *awsAwsquery_serializeOpDescribeTags) HandleSerialize(ctx context.Contex
 	body.Key("Action").String("DescribeTags")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeTagsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeTagsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3402,7 +3402,7 @@ func (m *awsAwsquery_serializeOpDescribeUsageLimits) HandleSerialize(ctx context
 	body.Key("Action").String("DescribeUsageLimits")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeUsageLimitsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeUsageLimitsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3457,7 +3457,7 @@ func (m *awsAwsquery_serializeOpDisableLogging) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("DisableLogging")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDisableLoggingInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDisableLoggingInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3512,7 +3512,7 @@ func (m *awsAwsquery_serializeOpDisableSnapshotCopy) HandleSerialize(ctx context
 	body.Key("Action").String("DisableSnapshotCopy")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentDisableSnapshotCopyInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDisableSnapshotCopyInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3567,7 +3567,7 @@ func (m *awsAwsquery_serializeOpEnableLogging) HandleSerialize(ctx context.Conte
 	body.Key("Action").String("EnableLogging")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentEnableLoggingInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentEnableLoggingInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3622,7 +3622,7 @@ func (m *awsAwsquery_serializeOpEnableSnapshotCopy) HandleSerialize(ctx context.
 	body.Key("Action").String("EnableSnapshotCopy")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentEnableSnapshotCopyInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentEnableSnapshotCopyInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3677,7 +3677,7 @@ func (m *awsAwsquery_serializeOpGetClusterCredentials) HandleSerialize(ctx conte
 	body.Key("Action").String("GetClusterCredentials")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentGetClusterCredentialsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetClusterCredentialsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3732,7 +3732,7 @@ func (m *awsAwsquery_serializeOpGetReservedNodeExchangeOfferings) HandleSerializ
 	body.Key("Action").String("GetReservedNodeExchangeOfferings")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentGetReservedNodeExchangeOfferingsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetReservedNodeExchangeOfferingsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3787,7 +3787,7 @@ func (m *awsAwsquery_serializeOpModifyCluster) HandleSerialize(ctx context.Conte
 	body.Key("Action").String("ModifyCluster")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentModifyClusterInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentModifyClusterInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3842,7 +3842,7 @@ func (m *awsAwsquery_serializeOpModifyClusterDbRevision) HandleSerialize(ctx con
 	body.Key("Action").String("ModifyClusterDbRevision")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentModifyClusterDbRevisionInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentModifyClusterDbRevisionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3897,7 +3897,7 @@ func (m *awsAwsquery_serializeOpModifyClusterIamRoles) HandleSerialize(ctx conte
 	body.Key("Action").String("ModifyClusterIamRoles")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentModifyClusterIamRolesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentModifyClusterIamRolesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3952,7 +3952,7 @@ func (m *awsAwsquery_serializeOpModifyClusterMaintenance) HandleSerialize(ctx co
 	body.Key("Action").String("ModifyClusterMaintenance")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentModifyClusterMaintenanceInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentModifyClusterMaintenanceInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4007,7 +4007,7 @@ func (m *awsAwsquery_serializeOpModifyClusterParameterGroup) HandleSerialize(ctx
 	body.Key("Action").String("ModifyClusterParameterGroup")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentModifyClusterParameterGroupInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentModifyClusterParameterGroupInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4062,7 +4062,7 @@ func (m *awsAwsquery_serializeOpModifyClusterSnapshot) HandleSerialize(ctx conte
 	body.Key("Action").String("ModifyClusterSnapshot")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentModifyClusterSnapshotInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentModifyClusterSnapshotInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4117,7 +4117,7 @@ func (m *awsAwsquery_serializeOpModifyClusterSnapshotSchedule) HandleSerialize(c
 	body.Key("Action").String("ModifyClusterSnapshotSchedule")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentModifyClusterSnapshotScheduleInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentModifyClusterSnapshotScheduleInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4172,7 +4172,7 @@ func (m *awsAwsquery_serializeOpModifyClusterSubnetGroup) HandleSerialize(ctx co
 	body.Key("Action").String("ModifyClusterSubnetGroup")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentModifyClusterSubnetGroupInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentModifyClusterSubnetGroupInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4227,7 +4227,7 @@ func (m *awsAwsquery_serializeOpModifyEventSubscription) HandleSerialize(ctx con
 	body.Key("Action").String("ModifyEventSubscription")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentModifyEventSubscriptionInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentModifyEventSubscriptionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4282,7 +4282,7 @@ func (m *awsAwsquery_serializeOpModifyScheduledAction) HandleSerialize(ctx conte
 	body.Key("Action").String("ModifyScheduledAction")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentModifyScheduledActionInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentModifyScheduledActionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4337,7 +4337,7 @@ func (m *awsAwsquery_serializeOpModifySnapshotCopyRetentionPeriod) HandleSeriali
 	body.Key("Action").String("ModifySnapshotCopyRetentionPeriod")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentModifySnapshotCopyRetentionPeriodInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentModifySnapshotCopyRetentionPeriodInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4392,7 +4392,7 @@ func (m *awsAwsquery_serializeOpModifySnapshotSchedule) HandleSerialize(ctx cont
 	body.Key("Action").String("ModifySnapshotSchedule")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentModifySnapshotScheduleInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentModifySnapshotScheduleInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4447,7 +4447,7 @@ func (m *awsAwsquery_serializeOpModifyUsageLimit) HandleSerialize(ctx context.Co
 	body.Key("Action").String("ModifyUsageLimit")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentModifyUsageLimitInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentModifyUsageLimitInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4502,7 +4502,7 @@ func (m *awsAwsquery_serializeOpPauseCluster) HandleSerialize(ctx context.Contex
 	body.Key("Action").String("PauseCluster")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentPauseClusterInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentPauseClusterInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4557,7 +4557,7 @@ func (m *awsAwsquery_serializeOpPurchaseReservedNodeOffering) HandleSerialize(ct
 	body.Key("Action").String("PurchaseReservedNodeOffering")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentPurchaseReservedNodeOfferingInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentPurchaseReservedNodeOfferingInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4612,7 +4612,7 @@ func (m *awsAwsquery_serializeOpRebootCluster) HandleSerialize(ctx context.Conte
 	body.Key("Action").String("RebootCluster")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentRebootClusterInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentRebootClusterInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4667,7 +4667,7 @@ func (m *awsAwsquery_serializeOpResetClusterParameterGroup) HandleSerialize(ctx 
 	body.Key("Action").String("ResetClusterParameterGroup")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentResetClusterParameterGroupInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentResetClusterParameterGroupInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4722,7 +4722,7 @@ func (m *awsAwsquery_serializeOpResizeCluster) HandleSerialize(ctx context.Conte
 	body.Key("Action").String("ResizeCluster")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentResizeClusterInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentResizeClusterInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4777,7 +4777,7 @@ func (m *awsAwsquery_serializeOpRestoreFromClusterSnapshot) HandleSerialize(ctx 
 	body.Key("Action").String("RestoreFromClusterSnapshot")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentRestoreFromClusterSnapshotInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentRestoreFromClusterSnapshotInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4832,7 +4832,7 @@ func (m *awsAwsquery_serializeOpRestoreTableFromClusterSnapshot) HandleSerialize
 	body.Key("Action").String("RestoreTableFromClusterSnapshot")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentRestoreTableFromClusterSnapshotInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentRestoreTableFromClusterSnapshotInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4887,7 +4887,7 @@ func (m *awsAwsquery_serializeOpResumeCluster) HandleSerialize(ctx context.Conte
 	body.Key("Action").String("ResumeCluster")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentResumeClusterInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentResumeClusterInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4942,7 +4942,7 @@ func (m *awsAwsquery_serializeOpRevokeClusterSecurityGroupIngress) HandleSeriali
 	body.Key("Action").String("RevokeClusterSecurityGroupIngress")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentRevokeClusterSecurityGroupIngressInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentRevokeClusterSecurityGroupIngressInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4997,7 +4997,7 @@ func (m *awsAwsquery_serializeOpRevokeSnapshotAccess) HandleSerialize(ctx contex
 	body.Key("Action").String("RevokeSnapshotAccess")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentRevokeSnapshotAccessInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentRevokeSnapshotAccessInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5052,7 +5052,7 @@ func (m *awsAwsquery_serializeOpRotateEncryptionKey) HandleSerialize(ctx context
 	body.Key("Action").String("RotateEncryptionKey")
 	body.Key("Version").String("2012-12-01")
 
-	if err := awsAwsquery_serializeDocumentRotateEncryptionKeyInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentRotateEncryptionKeyInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5618,7 +5618,7 @@ func awsAwsquery_serializeDocumentVpcSecurityGroupIdList(v []*string, value quer
 	return nil
 }
 
-func awsAwsquery_serializeDocumentAcceptReservedNodeExchangeInput(v *AcceptReservedNodeExchangeInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentAcceptReservedNodeExchangeInput(v *AcceptReservedNodeExchangeInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5635,7 +5635,7 @@ func awsAwsquery_serializeDocumentAcceptReservedNodeExchangeInput(v *AcceptReser
 	return nil
 }
 
-func awsAwsquery_serializeDocumentAuthorizeClusterSecurityGroupIngressInput(v *AuthorizeClusterSecurityGroupIngressInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentAuthorizeClusterSecurityGroupIngressInput(v *AuthorizeClusterSecurityGroupIngressInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5662,7 +5662,7 @@ func awsAwsquery_serializeDocumentAuthorizeClusterSecurityGroupIngressInput(v *A
 	return nil
 }
 
-func awsAwsquery_serializeDocumentAuthorizeSnapshotAccessInput(v *AuthorizeSnapshotAccessInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentAuthorizeSnapshotAccessInput(v *AuthorizeSnapshotAccessInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5684,7 +5684,7 @@ func awsAwsquery_serializeDocumentAuthorizeSnapshotAccessInput(v *AuthorizeSnaps
 	return nil
 }
 
-func awsAwsquery_serializeDocumentBatchDeleteClusterSnapshotsInput(v *BatchDeleteClusterSnapshotsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentBatchDeleteClusterSnapshotsInput(v *BatchDeleteClusterSnapshotsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5698,7 +5698,7 @@ func awsAwsquery_serializeDocumentBatchDeleteClusterSnapshotsInput(v *BatchDelet
 	return nil
 }
 
-func awsAwsquery_serializeDocumentBatchModifyClusterSnapshotsInput(v *BatchModifyClusterSnapshotsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentBatchModifyClusterSnapshotsInput(v *BatchModifyClusterSnapshotsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5722,7 +5722,7 @@ func awsAwsquery_serializeDocumentBatchModifyClusterSnapshotsInput(v *BatchModif
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCancelResizeInput(v *CancelResizeInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCancelResizeInput(v *CancelResizeInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5734,7 +5734,7 @@ func awsAwsquery_serializeDocumentCancelResizeInput(v *CancelResizeInput, value 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCopyClusterSnapshotInput(v *CopyClusterSnapshotInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCopyClusterSnapshotInput(v *CopyClusterSnapshotInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5761,7 +5761,7 @@ func awsAwsquery_serializeDocumentCopyClusterSnapshotInput(v *CopyClusterSnapsho
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateClusterInput(v *CreateClusterInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5926,7 +5926,7 @@ func awsAwsquery_serializeDocumentCreateClusterInput(v *CreateClusterInput, valu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateClusterParameterGroupInput(v *CreateClusterParameterGroupInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateClusterParameterGroupInput(v *CreateClusterParameterGroupInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5955,7 +5955,7 @@ func awsAwsquery_serializeDocumentCreateClusterParameterGroupInput(v *CreateClus
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateClusterSecurityGroupInput(v *CreateClusterSecurityGroupInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateClusterSecurityGroupInput(v *CreateClusterSecurityGroupInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5979,7 +5979,7 @@ func awsAwsquery_serializeDocumentCreateClusterSecurityGroupInput(v *CreateClust
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateClusterSnapshotInput(v *CreateClusterSnapshotInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateClusterSnapshotInput(v *CreateClusterSnapshotInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6008,7 +6008,7 @@ func awsAwsquery_serializeDocumentCreateClusterSnapshotInput(v *CreateClusterSna
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateClusterSubnetGroupInput(v *CreateClusterSubnetGroupInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateClusterSubnetGroupInput(v *CreateClusterSubnetGroupInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6039,7 +6039,7 @@ func awsAwsquery_serializeDocumentCreateClusterSubnetGroupInput(v *CreateCluster
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateEventSubscriptionInput(v *CreateEventSubscriptionInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateEventSubscriptionInput(v *CreateEventSubscriptionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6092,7 +6092,7 @@ func awsAwsquery_serializeDocumentCreateEventSubscriptionInput(v *CreateEventSub
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateHsmClientCertificateInput(v *CreateHsmClientCertificateInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateHsmClientCertificateInput(v *CreateHsmClientCertificateInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6111,7 +6111,7 @@ func awsAwsquery_serializeDocumentCreateHsmClientCertificateInput(v *CreateHsmCl
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateHsmConfigurationInput(v *CreateHsmConfigurationInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateHsmConfigurationInput(v *CreateHsmConfigurationInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6155,7 +6155,7 @@ func awsAwsquery_serializeDocumentCreateHsmConfigurationInput(v *CreateHsmConfig
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateScheduledActionInput(v *CreateScheduledActionInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateScheduledActionInput(v *CreateScheduledActionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6204,7 +6204,7 @@ func awsAwsquery_serializeDocumentCreateScheduledActionInput(v *CreateScheduledA
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateSnapshotCopyGrantInput(v *CreateSnapshotCopyGrantInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateSnapshotCopyGrantInput(v *CreateSnapshotCopyGrantInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6228,7 +6228,7 @@ func awsAwsquery_serializeDocumentCreateSnapshotCopyGrantInput(v *CreateSnapshot
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateSnapshotScheduleInput(v *CreateSnapshotScheduleInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateSnapshotScheduleInput(v *CreateSnapshotScheduleInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6269,7 +6269,7 @@ func awsAwsquery_serializeDocumentCreateSnapshotScheduleInput(v *CreateSnapshotS
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateTagsInput(v *CreateTagsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateTagsInput(v *CreateTagsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6288,7 +6288,7 @@ func awsAwsquery_serializeDocumentCreateTagsInput(v *CreateTagsInput, value quer
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateUsageLimitInput(v *CreateUsageLimitInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateUsageLimitInput(v *CreateUsageLimitInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6332,7 +6332,7 @@ func awsAwsquery_serializeDocumentCreateUsageLimitInput(v *CreateUsageLimitInput
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteClusterInput(v *DeleteClusterInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteClusterInput(v *DeleteClusterInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6359,7 +6359,7 @@ func awsAwsquery_serializeDocumentDeleteClusterInput(v *DeleteClusterInput, valu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteClusterParameterGroupInput(v *DeleteClusterParameterGroupInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteClusterParameterGroupInput(v *DeleteClusterParameterGroupInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6371,7 +6371,7 @@ func awsAwsquery_serializeDocumentDeleteClusterParameterGroupInput(v *DeleteClus
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteClusterSecurityGroupInput(v *DeleteClusterSecurityGroupInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteClusterSecurityGroupInput(v *DeleteClusterSecurityGroupInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6383,7 +6383,7 @@ func awsAwsquery_serializeDocumentDeleteClusterSecurityGroupInput(v *DeleteClust
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteClusterSnapshotInput(v *DeleteClusterSnapshotInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteClusterSnapshotInput(v *DeleteClusterSnapshotInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6400,7 +6400,7 @@ func awsAwsquery_serializeDocumentDeleteClusterSnapshotInput(v *DeleteClusterSna
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteClusterSubnetGroupInput(v *DeleteClusterSubnetGroupInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteClusterSubnetGroupInput(v *DeleteClusterSubnetGroupInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6412,7 +6412,7 @@ func awsAwsquery_serializeDocumentDeleteClusterSubnetGroupInput(v *DeleteCluster
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteEventSubscriptionInput(v *DeleteEventSubscriptionInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteEventSubscriptionInput(v *DeleteEventSubscriptionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6424,7 +6424,7 @@ func awsAwsquery_serializeDocumentDeleteEventSubscriptionInput(v *DeleteEventSub
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteHsmClientCertificateInput(v *DeleteHsmClientCertificateInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteHsmClientCertificateInput(v *DeleteHsmClientCertificateInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6436,7 +6436,7 @@ func awsAwsquery_serializeDocumentDeleteHsmClientCertificateInput(v *DeleteHsmCl
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteHsmConfigurationInput(v *DeleteHsmConfigurationInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteHsmConfigurationInput(v *DeleteHsmConfigurationInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6448,7 +6448,7 @@ func awsAwsquery_serializeDocumentDeleteHsmConfigurationInput(v *DeleteHsmConfig
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteScheduledActionInput(v *DeleteScheduledActionInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteScheduledActionInput(v *DeleteScheduledActionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6460,7 +6460,7 @@ func awsAwsquery_serializeDocumentDeleteScheduledActionInput(v *DeleteScheduledA
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteSnapshotCopyGrantInput(v *DeleteSnapshotCopyGrantInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteSnapshotCopyGrantInput(v *DeleteSnapshotCopyGrantInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6472,7 +6472,7 @@ func awsAwsquery_serializeDocumentDeleteSnapshotCopyGrantInput(v *DeleteSnapshot
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteSnapshotScheduleInput(v *DeleteSnapshotScheduleInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteSnapshotScheduleInput(v *DeleteSnapshotScheduleInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6484,7 +6484,7 @@ func awsAwsquery_serializeDocumentDeleteSnapshotScheduleInput(v *DeleteSnapshotS
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteTagsInput(v *DeleteTagsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteTagsInput(v *DeleteTagsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6503,7 +6503,7 @@ func awsAwsquery_serializeDocumentDeleteTagsInput(v *DeleteTagsInput, value quer
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteUsageLimitInput(v *DeleteUsageLimitInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteUsageLimitInput(v *DeleteUsageLimitInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6515,7 +6515,7 @@ func awsAwsquery_serializeDocumentDeleteUsageLimitInput(v *DeleteUsageLimitInput
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeAccountAttributesInput(v *DescribeAccountAttributesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeAccountAttributesInput(v *DescribeAccountAttributesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6529,7 +6529,7 @@ func awsAwsquery_serializeDocumentDescribeAccountAttributesInput(v *DescribeAcco
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeClusterDbRevisionsInput(v *DescribeClusterDbRevisionsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeClusterDbRevisionsInput(v *DescribeClusterDbRevisionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6551,7 +6551,7 @@ func awsAwsquery_serializeDocumentDescribeClusterDbRevisionsInput(v *DescribeClu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeClusterParameterGroupsInput(v *DescribeClusterParameterGroupsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeClusterParameterGroupsInput(v *DescribeClusterParameterGroupsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6587,7 +6587,7 @@ func awsAwsquery_serializeDocumentDescribeClusterParameterGroupsInput(v *Describ
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeClusterParametersInput(v *DescribeClusterParametersInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeClusterParametersInput(v *DescribeClusterParametersInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6614,7 +6614,7 @@ func awsAwsquery_serializeDocumentDescribeClusterParametersInput(v *DescribeClus
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeClusterSecurityGroupsInput(v *DescribeClusterSecurityGroupsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeClusterSecurityGroupsInput(v *DescribeClusterSecurityGroupsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6650,7 +6650,7 @@ func awsAwsquery_serializeDocumentDescribeClusterSecurityGroupsInput(v *Describe
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeClustersInput(v *DescribeClustersInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeClustersInput(v *DescribeClustersInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6686,7 +6686,7 @@ func awsAwsquery_serializeDocumentDescribeClustersInput(v *DescribeClustersInput
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeClusterSnapshotsInput(v *DescribeClusterSnapshotsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeClusterSnapshotsInput(v *DescribeClusterSnapshotsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6759,7 +6759,7 @@ func awsAwsquery_serializeDocumentDescribeClusterSnapshotsInput(v *DescribeClust
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeClusterSubnetGroupsInput(v *DescribeClusterSubnetGroupsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeClusterSubnetGroupsInput(v *DescribeClusterSubnetGroupsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6795,7 +6795,7 @@ func awsAwsquery_serializeDocumentDescribeClusterSubnetGroupsInput(v *DescribeCl
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeClusterTracksInput(v *DescribeClusterTracksInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeClusterTracksInput(v *DescribeClusterTracksInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6817,7 +6817,7 @@ func awsAwsquery_serializeDocumentDescribeClusterTracksInput(v *DescribeClusterT
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeClusterVersionsInput(v *DescribeClusterVersionsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeClusterVersionsInput(v *DescribeClusterVersionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6844,7 +6844,7 @@ func awsAwsquery_serializeDocumentDescribeClusterVersionsInput(v *DescribeCluste
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeDefaultClusterParametersInput(v *DescribeDefaultClusterParametersInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeDefaultClusterParametersInput(v *DescribeDefaultClusterParametersInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6866,7 +6866,7 @@ func awsAwsquery_serializeDocumentDescribeDefaultClusterParametersInput(v *Descr
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeEventCategoriesInput(v *DescribeEventCategoriesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeEventCategoriesInput(v *DescribeEventCategoriesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6878,7 +6878,7 @@ func awsAwsquery_serializeDocumentDescribeEventCategoriesInput(v *DescribeEventC
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeEventsInput(v *DescribeEventsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeEventsInput(v *DescribeEventsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6920,7 +6920,7 @@ func awsAwsquery_serializeDocumentDescribeEventsInput(v *DescribeEventsInput, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeEventSubscriptionsInput(v *DescribeEventSubscriptionsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeEventSubscriptionsInput(v *DescribeEventSubscriptionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6956,7 +6956,7 @@ func awsAwsquery_serializeDocumentDescribeEventSubscriptionsInput(v *DescribeEve
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeHsmClientCertificatesInput(v *DescribeHsmClientCertificatesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeHsmClientCertificatesInput(v *DescribeHsmClientCertificatesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6992,7 +6992,7 @@ func awsAwsquery_serializeDocumentDescribeHsmClientCertificatesInput(v *Describe
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeHsmConfigurationsInput(v *DescribeHsmConfigurationsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeHsmConfigurationsInput(v *DescribeHsmConfigurationsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7028,7 +7028,7 @@ func awsAwsquery_serializeDocumentDescribeHsmConfigurationsInput(v *DescribeHsmC
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeLoggingStatusInput(v *DescribeLoggingStatusInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeLoggingStatusInput(v *DescribeLoggingStatusInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7040,7 +7040,7 @@ func awsAwsquery_serializeDocumentDescribeLoggingStatusInput(v *DescribeLoggingS
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeNodeConfigurationOptionsInput(v *DescribeNodeConfigurationOptionsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeNodeConfigurationOptionsInput(v *DescribeNodeConfigurationOptionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7084,7 +7084,7 @@ func awsAwsquery_serializeDocumentDescribeNodeConfigurationOptionsInput(v *Descr
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeOrderableClusterOptionsInput(v *DescribeOrderableClusterOptionsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeOrderableClusterOptionsInput(v *DescribeOrderableClusterOptionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7111,7 +7111,7 @@ func awsAwsquery_serializeDocumentDescribeOrderableClusterOptionsInput(v *Descri
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeReservedNodeOfferingsInput(v *DescribeReservedNodeOfferingsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeReservedNodeOfferingsInput(v *DescribeReservedNodeOfferingsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7133,7 +7133,7 @@ func awsAwsquery_serializeDocumentDescribeReservedNodeOfferingsInput(v *Describe
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeReservedNodesInput(v *DescribeReservedNodesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeReservedNodesInput(v *DescribeReservedNodesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7155,7 +7155,7 @@ func awsAwsquery_serializeDocumentDescribeReservedNodesInput(v *DescribeReserved
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeResizeInput(v *DescribeResizeInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeResizeInput(v *DescribeResizeInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7167,7 +7167,7 @@ func awsAwsquery_serializeDocumentDescribeResizeInput(v *DescribeResizeInput, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeScheduledActionsInput(v *DescribeScheduledActionsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeScheduledActionsInput(v *DescribeScheduledActionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7216,7 +7216,7 @@ func awsAwsquery_serializeDocumentDescribeScheduledActionsInput(v *DescribeSched
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeSnapshotCopyGrantsInput(v *DescribeSnapshotCopyGrantsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeSnapshotCopyGrantsInput(v *DescribeSnapshotCopyGrantsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7252,7 +7252,7 @@ func awsAwsquery_serializeDocumentDescribeSnapshotCopyGrantsInput(v *DescribeSna
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeSnapshotSchedulesInput(v *DescribeSnapshotSchedulesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeSnapshotSchedulesInput(v *DescribeSnapshotSchedulesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7300,7 +7300,7 @@ func awsAwsquery_serializeDocumentDescribeStorageInput(v *DescribeStorageInput, 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeTableRestoreStatusInput(v *DescribeTableRestoreStatusInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeTableRestoreStatusInput(v *DescribeTableRestoreStatusInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7327,7 +7327,7 @@ func awsAwsquery_serializeDocumentDescribeTableRestoreStatusInput(v *DescribeTab
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeTagsInput(v *DescribeTagsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeTagsInput(v *DescribeTagsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7368,7 +7368,7 @@ func awsAwsquery_serializeDocumentDescribeTagsInput(v *DescribeTagsInput, value 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeUsageLimitsInput(v *DescribeUsageLimitsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeUsageLimitsInput(v *DescribeUsageLimitsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7414,7 +7414,7 @@ func awsAwsquery_serializeDocumentDescribeUsageLimitsInput(v *DescribeUsageLimit
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDisableLoggingInput(v *DisableLoggingInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDisableLoggingInput(v *DisableLoggingInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7426,7 +7426,7 @@ func awsAwsquery_serializeDocumentDisableLoggingInput(v *DisableLoggingInput, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDisableSnapshotCopyInput(v *DisableSnapshotCopyInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDisableSnapshotCopyInput(v *DisableSnapshotCopyInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7438,7 +7438,7 @@ func awsAwsquery_serializeDocumentDisableSnapshotCopyInput(v *DisableSnapshotCop
 	return nil
 }
 
-func awsAwsquery_serializeDocumentEnableLoggingInput(v *EnableLoggingInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentEnableLoggingInput(v *EnableLoggingInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7460,7 +7460,7 @@ func awsAwsquery_serializeDocumentEnableLoggingInput(v *EnableLoggingInput, valu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentEnableSnapshotCopyInput(v *EnableSnapshotCopyInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentEnableSnapshotCopyInput(v *EnableSnapshotCopyInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7492,7 +7492,7 @@ func awsAwsquery_serializeDocumentEnableSnapshotCopyInput(v *EnableSnapshotCopyI
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetClusterCredentialsInput(v *GetClusterCredentialsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetClusterCredentialsInput(v *GetClusterCredentialsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7531,7 +7531,7 @@ func awsAwsquery_serializeDocumentGetClusterCredentialsInput(v *GetClusterCreden
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetReservedNodeExchangeOfferingsInput(v *GetReservedNodeExchangeOfferingsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetReservedNodeExchangeOfferingsInput(v *GetReservedNodeExchangeOfferingsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7553,7 +7553,7 @@ func awsAwsquery_serializeDocumentGetReservedNodeExchangeOfferingsInput(v *GetRe
 	return nil
 }
 
-func awsAwsquery_serializeDocumentModifyClusterDbRevisionInput(v *ModifyClusterDbRevisionInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentModifyClusterDbRevisionInput(v *ModifyClusterDbRevisionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7570,7 +7570,7 @@ func awsAwsquery_serializeDocumentModifyClusterDbRevisionInput(v *ModifyClusterD
 	return nil
 }
 
-func awsAwsquery_serializeDocumentModifyClusterIamRolesInput(v *ModifyClusterIamRolesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentModifyClusterIamRolesInput(v *ModifyClusterIamRolesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7596,7 +7596,7 @@ func awsAwsquery_serializeDocumentModifyClusterIamRolesInput(v *ModifyClusterIam
 	return nil
 }
 
-func awsAwsquery_serializeDocumentModifyClusterInput(v *ModifyClusterInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentModifyClusterInput(v *ModifyClusterInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7717,7 +7717,7 @@ func awsAwsquery_serializeDocumentModifyClusterInput(v *ModifyClusterInput, valu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentModifyClusterMaintenanceInput(v *ModifyClusterMaintenanceInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentModifyClusterMaintenanceInput(v *ModifyClusterMaintenanceInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7754,7 +7754,7 @@ func awsAwsquery_serializeDocumentModifyClusterMaintenanceInput(v *ModifyCluster
 	return nil
 }
 
-func awsAwsquery_serializeDocumentModifyClusterParameterGroupInput(v *ModifyClusterParameterGroupInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentModifyClusterParameterGroupInput(v *ModifyClusterParameterGroupInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7773,7 +7773,7 @@ func awsAwsquery_serializeDocumentModifyClusterParameterGroupInput(v *ModifyClus
 	return nil
 }
 
-func awsAwsquery_serializeDocumentModifyClusterSnapshotInput(v *ModifyClusterSnapshotInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentModifyClusterSnapshotInput(v *ModifyClusterSnapshotInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7795,7 +7795,7 @@ func awsAwsquery_serializeDocumentModifyClusterSnapshotInput(v *ModifyClusterSna
 	return nil
 }
 
-func awsAwsquery_serializeDocumentModifyClusterSnapshotScheduleInput(v *ModifyClusterSnapshotScheduleInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentModifyClusterSnapshotScheduleInput(v *ModifyClusterSnapshotScheduleInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7817,7 +7817,7 @@ func awsAwsquery_serializeDocumentModifyClusterSnapshotScheduleInput(v *ModifyCl
 	return nil
 }
 
-func awsAwsquery_serializeDocumentModifyClusterSubnetGroupInput(v *ModifyClusterSubnetGroupInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentModifyClusterSubnetGroupInput(v *ModifyClusterSubnetGroupInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7841,7 +7841,7 @@ func awsAwsquery_serializeDocumentModifyClusterSubnetGroupInput(v *ModifyCluster
 	return nil
 }
 
-func awsAwsquery_serializeDocumentModifyEventSubscriptionInput(v *ModifyEventSubscriptionInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentModifyEventSubscriptionInput(v *ModifyEventSubscriptionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7887,7 +7887,7 @@ func awsAwsquery_serializeDocumentModifyEventSubscriptionInput(v *ModifyEventSub
 	return nil
 }
 
-func awsAwsquery_serializeDocumentModifyScheduledActionInput(v *ModifyScheduledActionInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentModifyScheduledActionInput(v *ModifyScheduledActionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7936,7 +7936,7 @@ func awsAwsquery_serializeDocumentModifyScheduledActionInput(v *ModifyScheduledA
 	return nil
 }
 
-func awsAwsquery_serializeDocumentModifySnapshotCopyRetentionPeriodInput(v *ModifySnapshotCopyRetentionPeriodInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentModifySnapshotCopyRetentionPeriodInput(v *ModifySnapshotCopyRetentionPeriodInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7958,7 +7958,7 @@ func awsAwsquery_serializeDocumentModifySnapshotCopyRetentionPeriodInput(v *Modi
 	return nil
 }
 
-func awsAwsquery_serializeDocumentModifySnapshotScheduleInput(v *ModifySnapshotScheduleInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentModifySnapshotScheduleInput(v *ModifySnapshotScheduleInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7977,7 +7977,7 @@ func awsAwsquery_serializeDocumentModifySnapshotScheduleInput(v *ModifySnapshotS
 	return nil
 }
 
-func awsAwsquery_serializeDocumentModifyUsageLimitInput(v *ModifyUsageLimitInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentModifyUsageLimitInput(v *ModifyUsageLimitInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -7999,7 +7999,7 @@ func awsAwsquery_serializeDocumentModifyUsageLimitInput(v *ModifyUsageLimitInput
 	return nil
 }
 
-func awsAwsquery_serializeDocumentPauseClusterInput(v *PauseClusterInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentPauseClusterInput(v *PauseClusterInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -8011,7 +8011,7 @@ func awsAwsquery_serializeDocumentPauseClusterInput(v *PauseClusterInput, value 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentPurchaseReservedNodeOfferingInput(v *PurchaseReservedNodeOfferingInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentPurchaseReservedNodeOfferingInput(v *PurchaseReservedNodeOfferingInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -8028,7 +8028,7 @@ func awsAwsquery_serializeDocumentPurchaseReservedNodeOfferingInput(v *PurchaseR
 	return nil
 }
 
-func awsAwsquery_serializeDocumentRebootClusterInput(v *RebootClusterInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentRebootClusterInput(v *RebootClusterInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -8040,7 +8040,7 @@ func awsAwsquery_serializeDocumentRebootClusterInput(v *RebootClusterInput, valu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentResetClusterParameterGroupInput(v *ResetClusterParameterGroupInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentResetClusterParameterGroupInput(v *ResetClusterParameterGroupInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -8064,7 +8064,7 @@ func awsAwsquery_serializeDocumentResetClusterParameterGroupInput(v *ResetCluste
 	return nil
 }
 
-func awsAwsquery_serializeDocumentResizeClusterInput(v *ResizeClusterInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentResizeClusterInput(v *ResizeClusterInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -8096,7 +8096,7 @@ func awsAwsquery_serializeDocumentResizeClusterInput(v *ResizeClusterInput, valu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentRestoreFromClusterSnapshotInput(v *RestoreFromClusterSnapshotInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentRestoreFromClusterSnapshotInput(v *RestoreFromClusterSnapshotInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -8239,7 +8239,7 @@ func awsAwsquery_serializeDocumentRestoreFromClusterSnapshotInput(v *RestoreFrom
 	return nil
 }
 
-func awsAwsquery_serializeDocumentRestoreTableFromClusterSnapshotInput(v *RestoreTableFromClusterSnapshotInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentRestoreTableFromClusterSnapshotInput(v *RestoreTableFromClusterSnapshotInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -8286,7 +8286,7 @@ func awsAwsquery_serializeDocumentRestoreTableFromClusterSnapshotInput(v *Restor
 	return nil
 }
 
-func awsAwsquery_serializeDocumentResumeClusterInput(v *ResumeClusterInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentResumeClusterInput(v *ResumeClusterInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -8298,7 +8298,7 @@ func awsAwsquery_serializeDocumentResumeClusterInput(v *ResumeClusterInput, valu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentRevokeClusterSecurityGroupIngressInput(v *RevokeClusterSecurityGroupIngressInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentRevokeClusterSecurityGroupIngressInput(v *RevokeClusterSecurityGroupIngressInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -8325,7 +8325,7 @@ func awsAwsquery_serializeDocumentRevokeClusterSecurityGroupIngressInput(v *Revo
 	return nil
 }
 
-func awsAwsquery_serializeDocumentRevokeSnapshotAccessInput(v *RevokeSnapshotAccessInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentRevokeSnapshotAccessInput(v *RevokeSnapshotAccessInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -8347,7 +8347,7 @@ func awsAwsquery_serializeDocumentRevokeSnapshotAccessInput(v *RevokeSnapshotAcc
 	return nil
 }
 
-func awsAwsquery_serializeDocumentRotateEncryptionKeyInput(v *RotateEncryptionKeyInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentRotateEncryptionKeyInput(v *RotateEncryptionKeyInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 

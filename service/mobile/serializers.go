@@ -47,7 +47,7 @@ func (m *awsRestjson1_serializeOpCreateProject) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsCreateProjectInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsCreateProjectInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -69,7 +69,7 @@ func (m *awsRestjson1_serializeOpCreateProject) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsCreateProjectInput(v *CreateProjectInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsCreateProjectInput(v *CreateProjectInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -124,7 +124,7 @@ func (m *awsRestjson1_serializeOpDeleteProject) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDeleteProjectInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteProjectInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -135,7 +135,7 @@ func (m *awsRestjson1_serializeOpDeleteProject) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDeleteProjectInput(v *DeleteProjectInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDeleteProjectInput(v *DeleteProjectInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -184,7 +184,7 @@ func (m *awsRestjson1_serializeOpDescribeBundle) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDescribeBundleInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeBundleInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -195,7 +195,7 @@ func (m *awsRestjson1_serializeOpDescribeBundle) HandleSerialize(ctx context.Con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDescribeBundleInput(v *DescribeBundleInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDescribeBundleInput(v *DescribeBundleInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -244,7 +244,7 @@ func (m *awsRestjson1_serializeOpDescribeProject) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDescribeProjectInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeProjectInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -255,7 +255,7 @@ func (m *awsRestjson1_serializeOpDescribeProject) HandleSerialize(ctx context.Co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDescribeProjectInput(v *DescribeProjectInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDescribeProjectInput(v *DescribeProjectInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -306,7 +306,7 @@ func (m *awsRestjson1_serializeOpExportBundle) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsExportBundleInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsExportBundleInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -317,7 +317,7 @@ func (m *awsRestjson1_serializeOpExportBundle) HandleSerialize(ctx context.Conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsExportBundleInput(v *ExportBundleInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsExportBundleInput(v *ExportBundleInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -374,7 +374,7 @@ func (m *awsRestjson1_serializeOpExportProject) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsExportProjectInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsExportProjectInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -385,7 +385,7 @@ func (m *awsRestjson1_serializeOpExportProject) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsExportProjectInput(v *ExportProjectInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsExportProjectInput(v *ExportProjectInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -434,7 +434,7 @@ func (m *awsRestjson1_serializeOpListBundles) HandleSerialize(ctx context.Contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListBundlesInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListBundlesInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -445,7 +445,7 @@ func (m *awsRestjson1_serializeOpListBundles) HandleSerialize(ctx context.Contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListBundlesInput(v *ListBundlesInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListBundlesInput(v *ListBundlesInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -496,7 +496,7 @@ func (m *awsRestjson1_serializeOpListProjects) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListProjectsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListProjectsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -507,7 +507,7 @@ func (m *awsRestjson1_serializeOpListProjects) HandleSerialize(ctx context.Conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListProjectsInput(v *ListProjectsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListProjectsInput(v *ListProjectsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -558,7 +558,7 @@ func (m *awsRestjson1_serializeOpUpdateProject) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsUpdateProjectInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateProjectInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -580,7 +580,7 @@ func (m *awsRestjson1_serializeOpUpdateProject) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsUpdateProjectInput(v *UpdateProjectInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsUpdateProjectInput(v *UpdateProjectInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}

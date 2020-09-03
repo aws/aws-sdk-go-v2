@@ -52,7 +52,7 @@ func (m *awsRestjson1_deserializeOpCreateSavingsPlan) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentCreateSavingsPlanOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentCreateSavingsPlanOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -128,7 +128,7 @@ func awsRestjson1_deserializeOpErrorCreateSavingsPlan(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateSavingsPlanOutput(v **CreateSavingsPlanOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateSavingsPlanOutput(v **CreateSavingsPlanOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -226,7 +226,7 @@ func (m *awsRestjson1_deserializeOpDescribeSavingsPlanRates) HandleDeserialize(c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDescribeSavingsPlanRatesOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDescribeSavingsPlanRatesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -296,7 +296,7 @@ func awsRestjson1_deserializeOpErrorDescribeSavingsPlanRates(response *smithyhtt
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeSavingsPlanRatesOutput(v **DescribeSavingsPlanRatesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeSavingsPlanRatesOutput(v **DescribeSavingsPlanRatesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -412,7 +412,7 @@ func (m *awsRestjson1_deserializeOpDescribeSavingsPlans) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDescribeSavingsPlansOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDescribeSavingsPlansOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -482,7 +482,7 @@ func awsRestjson1_deserializeOpErrorDescribeSavingsPlans(response *smithyhttp.Re
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeSavingsPlansOutput(v **DescribeSavingsPlansOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeSavingsPlansOutput(v **DescribeSavingsPlansOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -585,7 +585,7 @@ func (m *awsRestjson1_deserializeOpDescribeSavingsPlansOfferingRates) HandleDese
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDescribeSavingsPlansOfferingRatesOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDescribeSavingsPlansOfferingRatesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -655,7 +655,7 @@ func awsRestjson1_deserializeOpErrorDescribeSavingsPlansOfferingRates(response *
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeSavingsPlansOfferingRatesOutput(v **DescribeSavingsPlansOfferingRatesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeSavingsPlansOfferingRatesOutput(v **DescribeSavingsPlansOfferingRatesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -758,7 +758,7 @@ func (m *awsRestjson1_deserializeOpDescribeSavingsPlansOfferings) HandleDeserial
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDescribeSavingsPlansOfferingsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDescribeSavingsPlansOfferingsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -828,7 +828,7 @@ func awsRestjson1_deserializeOpErrorDescribeSavingsPlansOfferings(response *smit
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeSavingsPlansOfferingsOutput(v **DescribeSavingsPlansOfferingsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeSavingsPlansOfferingsOutput(v **DescribeSavingsPlansOfferingsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -931,7 +931,7 @@ func (m *awsRestjson1_deserializeOpListTagsForResource) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListTagsForResourceOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1004,7 +1004,7 @@ func awsRestjson1_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

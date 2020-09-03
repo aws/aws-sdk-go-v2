@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpAssociateTeamMember) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_20170419.AssociateTeamMember")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAssociateTeamMemberInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAssociateTeamMemberInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpCreateProject) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_20170419.CreateProject")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateProjectInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateProjectInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpCreateUserProfile) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_20170419.CreateUserProfile")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateUserProfileInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateUserProfileInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpDeleteProject) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_20170419.DeleteProject")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteProjectInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteProjectInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpDeleteUserProfile) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_20170419.DeleteUserProfile")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteUserProfileInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteUserProfileInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpDescribeProject) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_20170419.DescribeProject")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeProjectInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeProjectInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson11_serializeOpDescribeUserProfile) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_20170419.DescribeUserProfile")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeUserProfileInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeUserProfileInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -366,7 +366,7 @@ func (m *awsAwsjson11_serializeOpDisassociateTeamMember) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_20170419.DisassociateTeamMember")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDisassociateTeamMemberInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDisassociateTeamMemberInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -412,7 +412,7 @@ func (m *awsAwsjson11_serializeOpListProjects) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_20170419.ListProjects")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListProjectsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListProjectsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -458,7 +458,7 @@ func (m *awsAwsjson11_serializeOpListResources) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_20170419.ListResources")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListResourcesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListResourcesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -504,7 +504,7 @@ func (m *awsAwsjson11_serializeOpListTagsForProject) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_20170419.ListTagsForProject")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsForProjectInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsForProjectInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -550,7 +550,7 @@ func (m *awsAwsjson11_serializeOpListTeamMembers) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_20170419.ListTeamMembers")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTeamMembersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTeamMembersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -596,7 +596,7 @@ func (m *awsAwsjson11_serializeOpListUserProfiles) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_20170419.ListUserProfiles")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListUserProfilesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListUserProfilesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -642,7 +642,7 @@ func (m *awsAwsjson11_serializeOpTagProject) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_20170419.TagProject")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTagProjectInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTagProjectInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -688,7 +688,7 @@ func (m *awsAwsjson11_serializeOpUntagProject) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_20170419.UntagProject")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUntagProjectInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUntagProjectInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -734,7 +734,7 @@ func (m *awsAwsjson11_serializeOpUpdateProject) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_20170419.UpdateProject")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateProjectInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateProjectInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -780,7 +780,7 @@ func (m *awsAwsjson11_serializeOpUpdateTeamMember) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_20170419.UpdateTeamMember")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateTeamMemberInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateTeamMemberInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -826,7 +826,7 @@ func (m *awsAwsjson11_serializeOpUpdateUserProfile) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_20170419.UpdateUserProfile")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateUserProfileInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateUserProfileInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1070,7 +1070,7 @@ func awsAwsjson11_serializeDocumentToolchainSource(v *types.ToolchainSource, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssociateTeamMemberInput(v *AssociateTeamMemberInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAssociateTeamMemberInput(v *AssociateTeamMemberInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1102,7 +1102,7 @@ func awsAwsjson11_serializeDocumentAssociateTeamMemberInput(v *AssociateTeamMemb
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateProjectInput(v *CreateProjectInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateProjectInput(v *CreateProjectInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1150,7 +1150,7 @@ func awsAwsjson11_serializeDocumentCreateProjectInput(v *CreateProjectInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateUserProfileInput(v *CreateUserProfileInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateUserProfileInput(v *CreateUserProfileInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1177,7 +1177,7 @@ func awsAwsjson11_serializeDocumentCreateUserProfileInput(v *CreateUserProfileIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteProjectInput(v *DeleteProjectInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteProjectInput(v *DeleteProjectInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1199,7 +1199,7 @@ func awsAwsjson11_serializeDocumentDeleteProjectInput(v *DeleteProjectInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteUserProfileInput(v *DeleteUserProfileInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteUserProfileInput(v *DeleteUserProfileInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1211,7 +1211,7 @@ func awsAwsjson11_serializeDocumentDeleteUserProfileInput(v *DeleteUserProfileIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeProjectInput(v *DescribeProjectInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeProjectInput(v *DescribeProjectInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1223,7 +1223,7 @@ func awsAwsjson11_serializeDocumentDescribeProjectInput(v *DescribeProjectInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeUserProfileInput(v *DescribeUserProfileInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeUserProfileInput(v *DescribeUserProfileInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1235,7 +1235,7 @@ func awsAwsjson11_serializeDocumentDescribeUserProfileInput(v *DescribeUserProfi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDisassociateTeamMemberInput(v *DisassociateTeamMemberInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDisassociateTeamMemberInput(v *DisassociateTeamMemberInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1252,7 +1252,7 @@ func awsAwsjson11_serializeDocumentDisassociateTeamMemberInput(v *DisassociateTe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListProjectsInput(v *ListProjectsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListProjectsInput(v *ListProjectsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1269,7 +1269,7 @@ func awsAwsjson11_serializeDocumentListProjectsInput(v *ListProjectsInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListResourcesInput(v *ListResourcesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListResourcesInput(v *ListResourcesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1291,7 +1291,7 @@ func awsAwsjson11_serializeDocumentListResourcesInput(v *ListResourcesInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsForProjectInput(v *ListTagsForProjectInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTagsForProjectInput(v *ListTagsForProjectInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1313,7 +1313,7 @@ func awsAwsjson11_serializeDocumentListTagsForProjectInput(v *ListTagsForProject
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTeamMembersInput(v *ListTeamMembersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTeamMembersInput(v *ListTeamMembersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1335,7 +1335,7 @@ func awsAwsjson11_serializeDocumentListTeamMembersInput(v *ListTeamMembersInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListUserProfilesInput(v *ListUserProfilesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListUserProfilesInput(v *ListUserProfilesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1352,7 +1352,7 @@ func awsAwsjson11_serializeDocumentListUserProfilesInput(v *ListUserProfilesInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagProjectInput(v *TagProjectInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTagProjectInput(v *TagProjectInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1371,7 +1371,7 @@ func awsAwsjson11_serializeDocumentTagProjectInput(v *TagProjectInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUntagProjectInput(v *UntagProjectInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUntagProjectInput(v *UntagProjectInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1390,7 +1390,7 @@ func awsAwsjson11_serializeDocumentUntagProjectInput(v *UntagProjectInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateProjectInput(v *UpdateProjectInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateProjectInput(v *UpdateProjectInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1412,7 +1412,7 @@ func awsAwsjson11_serializeDocumentUpdateProjectInput(v *UpdateProjectInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateTeamMemberInput(v *UpdateTeamMemberInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateTeamMemberInput(v *UpdateTeamMemberInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1439,7 +1439,7 @@ func awsAwsjson11_serializeDocumentUpdateTeamMemberInput(v *UpdateTeamMemberInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateUserProfileInput(v *UpdateUserProfileInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateUserProfileInput(v *UpdateUserProfileInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

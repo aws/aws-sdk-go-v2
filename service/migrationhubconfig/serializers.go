@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpCreateHomeRegionControl) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSMigrationHubMultiAccountService.CreateHomeRegionControl")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateHomeRegionControlInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateHomeRegionControlInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpDescribeHomeRegionControls) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSMigrationHubMultiAccountService.DescribeHomeRegionControls")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeHomeRegionControlsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeHomeRegionControlsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -161,7 +161,7 @@ func awsAwsjson11_serializeDocumentTarget(v *types.Target, value smithyjson.Valu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateHomeRegionControlInput(v *CreateHomeRegionControlInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateHomeRegionControlInput(v *CreateHomeRegionControlInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -185,7 +185,7 @@ func awsAwsjson11_serializeDocumentCreateHomeRegionControlInput(v *CreateHomeReg
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeHomeRegionControlsInput(v *DescribeHomeRegionControlsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeHomeRegionControlsInput(v *DescribeHomeRegionControlsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -219,7 +219,7 @@ func awsAwsjson11_serializeDocumentDescribeHomeRegionControlsInput(v *DescribeHo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetHomeRegionInput(v *GetHomeRegionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetHomeRegionInput(v *GetHomeRegionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

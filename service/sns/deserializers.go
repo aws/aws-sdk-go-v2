@@ -157,7 +157,7 @@ func (m *awsAwsquery_deserializeOpCheckIfPhoneNumberIsOptedOut) HandleDeserializ
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCheckIfPhoneNumberIsOptedOutOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCheckIfPhoneNumberIsOptedOutOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -252,7 +252,7 @@ func (m *awsAwsquery_deserializeOpConfirmSubscription) HandleDeserialize(ctx con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentConfirmSubscriptionOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentConfirmSubscriptionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -353,7 +353,7 @@ func (m *awsAwsquery_deserializeOpCreatePlatformApplication) HandleDeserialize(c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreatePlatformApplicationOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreatePlatformApplicationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -445,7 +445,7 @@ func (m *awsAwsquery_deserializeOpCreatePlatformEndpoint) HandleDeserialize(ctx 
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreatePlatformEndpointOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreatePlatformEndpointOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -540,7 +540,7 @@ func (m *awsAwsquery_deserializeOpCreateTopic) HandleDeserialize(ctx context.Con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateTopicOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateTopicOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -938,7 +938,7 @@ func (m *awsAwsquery_deserializeOpGetEndpointAttributes) HandleDeserialize(ctx c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetEndpointAttributesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetEndpointAttributesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1033,7 +1033,7 @@ func (m *awsAwsquery_deserializeOpGetPlatformApplicationAttributes) HandleDeseri
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetPlatformApplicationAttributesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetPlatformApplicationAttributesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1128,7 +1128,7 @@ func (m *awsAwsquery_deserializeOpGetSMSAttributes) HandleDeserialize(ctx contex
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetSMSAttributesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetSMSAttributesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1223,7 +1223,7 @@ func (m *awsAwsquery_deserializeOpGetSubscriptionAttributes) HandleDeserialize(c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetSubscriptionAttributesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetSubscriptionAttributesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1318,7 +1318,7 @@ func (m *awsAwsquery_deserializeOpGetTopicAttributes) HandleDeserialize(ctx cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetTopicAttributesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetTopicAttributesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1416,7 +1416,7 @@ func (m *awsAwsquery_deserializeOpListEndpointsByPlatformApplication) HandleDese
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentListEndpointsByPlatformApplicationOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentListEndpointsByPlatformApplicationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1511,7 +1511,7 @@ func (m *awsAwsquery_deserializeOpListPhoneNumbersOptedOut) HandleDeserialize(ct
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentListPhoneNumbersOptedOutOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentListPhoneNumbersOptedOutOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1606,7 +1606,7 @@ func (m *awsAwsquery_deserializeOpListPlatformApplications) HandleDeserialize(ct
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentListPlatformApplicationsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentListPlatformApplicationsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1698,7 +1698,7 @@ func (m *awsAwsquery_deserializeOpListSubscriptions) HandleDeserialize(ctx conte
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentListSubscriptionsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentListSubscriptionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1790,7 +1790,7 @@ func (m *awsAwsquery_deserializeOpListSubscriptionsByTopic) HandleDeserialize(ct
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentListSubscriptionsByTopicOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentListSubscriptionsByTopicOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1885,7 +1885,7 @@ func (m *awsAwsquery_deserializeOpListTagsForResource) HandleDeserialize(ctx con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentListTagsForResourceOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentListTagsForResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1983,7 +1983,7 @@ func (m *awsAwsquery_deserializeOpListTopics) HandleDeserialize(ctx context.Cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentListTopicsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentListTopicsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2075,7 +2075,7 @@ func (m *awsAwsquery_deserializeOpOptInPhoneNumber) HandleDeserialize(ctx contex
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentOptInPhoneNumberOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentOptInPhoneNumberOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2170,7 +2170,7 @@ func (m *awsAwsquery_deserializeOpPublish) HandleDeserialize(ctx context.Context
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentPublishOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentPublishOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2580,7 +2580,7 @@ func (m *awsAwsquery_deserializeOpSetSMSAttributes) HandleDeserialize(ctx contex
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentSetSMSAttributesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentSetSMSAttributesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2871,7 +2871,7 @@ func (m *awsAwsquery_deserializeOpSubscribe) HandleDeserialize(ctx context.Conte
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentSubscribeOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentSubscribeOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2975,7 +2975,7 @@ func (m *awsAwsquery_deserializeOpTagResource) HandleDeserialize(ctx context.Con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentTagResourceOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentTagResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3177,7 +3177,7 @@ func (m *awsAwsquery_deserializeOpUntagResource) HandleDeserialize(ctx context.C
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentUntagResourceOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentUntagResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5922,7 +5922,7 @@ func awsAwsquery_deserializeDocumentAddPermissionOutput(v **AddPermissionOutput,
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCheckIfPhoneNumberIsOptedOutOutput(v **CheckIfPhoneNumberIsOptedOutOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCheckIfPhoneNumberIsOptedOutOutput(v **CheckIfPhoneNumberIsOptedOutOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5968,7 +5968,7 @@ func awsAwsquery_deserializeDocumentCheckIfPhoneNumberIsOptedOutOutput(v **Check
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentConfirmSubscriptionOutput(v **ConfirmSubscriptionOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentConfirmSubscriptionOutput(v **ConfirmSubscriptionOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6011,7 +6011,7 @@ func awsAwsquery_deserializeDocumentConfirmSubscriptionOutput(v **ConfirmSubscri
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreatePlatformApplicationOutput(v **CreatePlatformApplicationOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreatePlatformApplicationOutput(v **CreatePlatformApplicationOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6054,7 +6054,7 @@ func awsAwsquery_deserializeDocumentCreatePlatformApplicationOutput(v **CreatePl
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreatePlatformEndpointOutput(v **CreatePlatformEndpointOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreatePlatformEndpointOutput(v **CreatePlatformEndpointOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6097,7 +6097,7 @@ func awsAwsquery_deserializeDocumentCreatePlatformEndpointOutput(v **CreatePlatf
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateTopicOutput(v **CreateTopicOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateTopicOutput(v **CreateTopicOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6230,7 +6230,7 @@ func awsAwsquery_deserializeDocumentDeleteTopicOutput(v **DeleteTopicOutput, dec
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetEndpointAttributesOutput(v **GetEndpointAttributesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetEndpointAttributesOutput(v **GetEndpointAttributesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6266,7 +6266,7 @@ func awsAwsquery_deserializeDocumentGetEndpointAttributesOutput(v **GetEndpointA
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetPlatformApplicationAttributesOutput(v **GetPlatformApplicationAttributesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetPlatformApplicationAttributesOutput(v **GetPlatformApplicationAttributesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6302,7 +6302,7 @@ func awsAwsquery_deserializeDocumentGetPlatformApplicationAttributesOutput(v **G
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetSMSAttributesOutput(v **GetSMSAttributesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetSMSAttributesOutput(v **GetSMSAttributesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6338,7 +6338,7 @@ func awsAwsquery_deserializeDocumentGetSMSAttributesOutput(v **GetSMSAttributesO
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetSubscriptionAttributesOutput(v **GetSubscriptionAttributesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetSubscriptionAttributesOutput(v **GetSubscriptionAttributesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6374,7 +6374,7 @@ func awsAwsquery_deserializeDocumentGetSubscriptionAttributesOutput(v **GetSubsc
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetTopicAttributesOutput(v **GetTopicAttributesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetTopicAttributesOutput(v **GetTopicAttributesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6410,7 +6410,7 @@ func awsAwsquery_deserializeDocumentGetTopicAttributesOutput(v **GetTopicAttribu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentListEndpointsByPlatformApplicationOutput(v **ListEndpointsByPlatformApplicationOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentListEndpointsByPlatformApplicationOutput(v **ListEndpointsByPlatformApplicationOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6459,7 +6459,7 @@ func awsAwsquery_deserializeDocumentListEndpointsByPlatformApplicationOutput(v *
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentListPhoneNumbersOptedOutOutput(v **ListPhoneNumbersOptedOutOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentListPhoneNumbersOptedOutOutput(v **ListPhoneNumbersOptedOutOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6508,7 +6508,7 @@ func awsAwsquery_deserializeDocumentListPhoneNumbersOptedOutOutput(v **ListPhone
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentListPlatformApplicationsOutput(v **ListPlatformApplicationsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentListPlatformApplicationsOutput(v **ListPlatformApplicationsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6557,7 +6557,7 @@ func awsAwsquery_deserializeDocumentListPlatformApplicationsOutput(v **ListPlatf
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentListSubscriptionsByTopicOutput(v **ListSubscriptionsByTopicOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentListSubscriptionsByTopicOutput(v **ListSubscriptionsByTopicOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6606,7 +6606,7 @@ func awsAwsquery_deserializeDocumentListSubscriptionsByTopicOutput(v **ListSubsc
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentListSubscriptionsOutput(v **ListSubscriptionsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentListSubscriptionsOutput(v **ListSubscriptionsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6655,7 +6655,7 @@ func awsAwsquery_deserializeDocumentListSubscriptionsOutput(v **ListSubscription
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6691,7 +6691,7 @@ func awsAwsquery_deserializeDocumentListTagsForResourceOutput(v **ListTagsForRes
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentListTopicsOutput(v **ListTopicsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentListTopicsOutput(v **ListTopicsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6740,7 +6740,7 @@ func awsAwsquery_deserializeDocumentListTopicsOutput(v **ListTopicsOutput, decod
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentOptInPhoneNumberOutput(v **OptInPhoneNumberOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentOptInPhoneNumberOutput(v **OptInPhoneNumberOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6770,7 +6770,7 @@ func awsAwsquery_deserializeDocumentOptInPhoneNumberOutput(v **OptInPhoneNumberO
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentPublishOutput(v **PublishOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentPublishOutput(v **PublishOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6903,7 +6903,7 @@ func awsAwsquery_deserializeDocumentSetPlatformApplicationAttributesOutput(v **S
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentSetSMSAttributesOutput(v **SetSMSAttributesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentSetSMSAttributesOutput(v **SetSMSAttributesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6993,7 +6993,7 @@ func awsAwsquery_deserializeDocumentSetTopicAttributesOutput(v **SetTopicAttribu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentSubscribeOutput(v **SubscribeOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentSubscribeOutput(v **SubscribeOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7036,7 +7036,7 @@ func awsAwsquery_deserializeDocumentSubscribeOutput(v **SubscribeOutput, decoder
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentTagResourceOutput(v **TagResourceOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentTagResourceOutput(v **TagResourceOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7096,7 +7096,7 @@ func awsAwsquery_deserializeDocumentUnsubscribeOutput(v **UnsubscribeOutput, dec
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentUntagResourceOutput(v **UntagResourceOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentUntagResourceOutput(v **UntagResourceOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

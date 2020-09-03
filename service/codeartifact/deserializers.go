@@ -55,7 +55,7 @@ func (m *awsRestjson1_deserializeOpAssociateExternalConnection) HandleDeserializ
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentAssociateExternalConnectionOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentAssociateExternalConnectionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -140,7 +140,7 @@ func awsRestjson1_deserializeOpErrorAssociateExternalConnection(response *smithy
 	}
 }
 
-func awsRestjson1_deserializeDocumentAssociateExternalConnectionOutput(v **AssociateExternalConnectionOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentAssociateExternalConnectionOutput(v **AssociateExternalConnectionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -230,7 +230,7 @@ func (m *awsRestjson1_deserializeOpCopyPackageVersions) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentCopyPackageVersionsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentCopyPackageVersionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -315,7 +315,7 @@ func awsRestjson1_deserializeOpErrorCopyPackageVersions(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentCopyPackageVersionsOutput(v **CopyPackageVersionsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCopyPackageVersionsOutput(v **CopyPackageVersionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -410,7 +410,7 @@ func (m *awsRestjson1_deserializeOpCreateDomain) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentCreateDomainOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentCreateDomainOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -495,7 +495,7 @@ func awsRestjson1_deserializeOpErrorCreateDomain(response *smithyhttp.Response) 
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateDomainOutput(v **CreateDomainOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateDomainOutput(v **CreateDomainOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -585,7 +585,7 @@ func (m *awsRestjson1_deserializeOpCreateRepository) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentCreateRepositoryOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentCreateRepositoryOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -670,7 +670,7 @@ func awsRestjson1_deserializeOpErrorCreateRepository(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateRepositoryOutput(v **CreateRepositoryOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateRepositoryOutput(v **CreateRepositoryOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -760,7 +760,7 @@ func (m *awsRestjson1_deserializeOpDeleteDomain) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDeleteDomainOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDeleteDomainOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -842,7 +842,7 @@ func awsRestjson1_deserializeOpErrorDeleteDomain(response *smithyhttp.Response) 
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteDomainOutput(v **DeleteDomainOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteDomainOutput(v **DeleteDomainOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -932,7 +932,7 @@ func (m *awsRestjson1_deserializeOpDeleteDomainPermissionsPolicy) HandleDeserial
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDeleteDomainPermissionsPolicyOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDeleteDomainPermissionsPolicyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1014,7 +1014,7 @@ func awsRestjson1_deserializeOpErrorDeleteDomainPermissionsPolicy(response *smit
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteDomainPermissionsPolicyOutput(v **DeleteDomainPermissionsPolicyOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteDomainPermissionsPolicyOutput(v **DeleteDomainPermissionsPolicyOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1104,7 +1104,7 @@ func (m *awsRestjson1_deserializeOpDeletePackageVersions) HandleDeserialize(ctx 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDeletePackageVersionsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDeletePackageVersionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1186,7 +1186,7 @@ func awsRestjson1_deserializeOpErrorDeletePackageVersions(response *smithyhttp.R
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeletePackageVersionsOutput(v **DeletePackageVersionsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeletePackageVersionsOutput(v **DeletePackageVersionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1281,7 +1281,7 @@ func (m *awsRestjson1_deserializeOpDeleteRepository) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDeleteRepositoryOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDeleteRepositoryOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1363,7 +1363,7 @@ func awsRestjson1_deserializeOpErrorDeleteRepository(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteRepositoryOutput(v **DeleteRepositoryOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteRepositoryOutput(v **DeleteRepositoryOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1453,7 +1453,7 @@ func (m *awsRestjson1_deserializeOpDeleteRepositoryPermissionsPolicy) HandleDese
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDeleteRepositoryPermissionsPolicyOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDeleteRepositoryPermissionsPolicyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1535,7 +1535,7 @@ func awsRestjson1_deserializeOpErrorDeleteRepositoryPermissionsPolicy(response *
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteRepositoryPermissionsPolicyOutput(v **DeleteRepositoryPermissionsPolicyOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteRepositoryPermissionsPolicyOutput(v **DeleteRepositoryPermissionsPolicyOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1625,7 +1625,7 @@ func (m *awsRestjson1_deserializeOpDescribeDomain) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDescribeDomainOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDescribeDomainOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1704,7 +1704,7 @@ func awsRestjson1_deserializeOpErrorDescribeDomain(response *smithyhttp.Response
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeDomainOutput(v **DescribeDomainOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeDomainOutput(v **DescribeDomainOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1794,7 +1794,7 @@ func (m *awsRestjson1_deserializeOpDescribePackageVersion) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDescribePackageVersionOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDescribePackageVersionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1876,7 +1876,7 @@ func awsRestjson1_deserializeOpErrorDescribePackageVersion(response *smithyhttp.
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribePackageVersionOutput(v **DescribePackageVersionOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribePackageVersionOutput(v **DescribePackageVersionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1966,7 +1966,7 @@ func (m *awsRestjson1_deserializeOpDescribeRepository) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDescribeRepositoryOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDescribeRepositoryOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2045,7 +2045,7 @@ func awsRestjson1_deserializeOpErrorDescribeRepository(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeRepositoryOutput(v **DescribeRepositoryOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeRepositoryOutput(v **DescribeRepositoryOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2135,7 +2135,7 @@ func (m *awsRestjson1_deserializeOpDisassociateExternalConnection) HandleDeseria
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDisassociateExternalConnectionOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDisassociateExternalConnectionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2220,7 +2220,7 @@ func awsRestjson1_deserializeOpErrorDisassociateExternalConnection(response *smi
 	}
 }
 
-func awsRestjson1_deserializeDocumentDisassociateExternalConnectionOutput(v **DisassociateExternalConnectionOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDisassociateExternalConnectionOutput(v **DisassociateExternalConnectionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2310,7 +2310,7 @@ func (m *awsRestjson1_deserializeOpDisposePackageVersions) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDisposePackageVersionsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDisposePackageVersionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2392,7 +2392,7 @@ func awsRestjson1_deserializeOpErrorDisposePackageVersions(response *smithyhttp.
 	}
 }
 
-func awsRestjson1_deserializeDocumentDisposePackageVersionsOutput(v **DisposePackageVersionsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDisposePackageVersionsOutput(v **DisposePackageVersionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2487,7 +2487,7 @@ func (m *awsRestjson1_deserializeOpGetAuthorizationToken) HandleDeserialize(ctx 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetAuthorizationTokenOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetAuthorizationTokenOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2566,7 +2566,7 @@ func awsRestjson1_deserializeOpErrorGetAuthorizationToken(response *smithyhttp.R
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetAuthorizationTokenOutput(v **GetAuthorizationTokenOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetAuthorizationTokenOutput(v **GetAuthorizationTokenOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2681,7 +2681,7 @@ func (m *awsRestjson1_deserializeOpGetDomainPermissionsPolicy) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetDomainPermissionsPolicyOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetDomainPermissionsPolicyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2760,7 +2760,7 @@ func awsRestjson1_deserializeOpErrorGetDomainPermissionsPolicy(response *smithyh
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetDomainPermissionsPolicyOutput(v **GetDomainPermissionsPolicyOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetDomainPermissionsPolicyOutput(v **GetDomainPermissionsPolicyOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2842,12 +2842,12 @@ func (m *awsRestjson1_deserializeOpGetPackageVersionAsset) HandleDeserialize(ctx
 	output := &GetPackageVersionAssetOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsGetPackageVersionAssetOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsGetPackageVersionAssetOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeDocumentGetPackageVersionAssetOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentGetPackageVersionAssetOutput(output, response.Body)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -2921,7 +2921,7 @@ func awsRestjson1_deserializeOpErrorGetPackageVersionAsset(response *smithyhttp.
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsGetPackageVersionAssetOutput(v *GetPackageVersionAssetOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsGetPackageVersionAssetOutput(v *GetPackageVersionAssetOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -2943,7 +2943,7 @@ func awsRestjson1_deserializeHttpBindingsGetPackageVersionAssetOutput(v *GetPack
 
 	return nil
 }
-func awsRestjson1_deserializeDocumentGetPackageVersionAssetOutput(v *GetPackageVersionAssetOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentGetPackageVersionAssetOutput(v *GetPackageVersionAssetOutput, body io.ReadCloser) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
@@ -2986,7 +2986,7 @@ func (m *awsRestjson1_deserializeOpGetPackageVersionReadme) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetPackageVersionReadmeOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetPackageVersionReadmeOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3065,7 +3065,7 @@ func awsRestjson1_deserializeOpErrorGetPackageVersionReadme(response *smithyhttp
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetPackageVersionReadmeOutput(v **GetPackageVersionReadmeOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetPackageVersionReadmeOutput(v **GetPackageVersionReadmeOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3228,7 +3228,7 @@ func (m *awsRestjson1_deserializeOpGetRepositoryEndpoint) HandleDeserialize(ctx 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetRepositoryEndpointOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetRepositoryEndpointOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3307,7 +3307,7 @@ func awsRestjson1_deserializeOpErrorGetRepositoryEndpoint(response *smithyhttp.R
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetRepositoryEndpointOutput(v **GetRepositoryEndpointOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetRepositoryEndpointOutput(v **GetRepositoryEndpointOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3405,7 +3405,7 @@ func (m *awsRestjson1_deserializeOpGetRepositoryPermissionsPolicy) HandleDeseria
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetRepositoryPermissionsPolicyOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetRepositoryPermissionsPolicyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3484,7 +3484,7 @@ func awsRestjson1_deserializeOpErrorGetRepositoryPermissionsPolicy(response *smi
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetRepositoryPermissionsPolicyOutput(v **GetRepositoryPermissionsPolicyOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetRepositoryPermissionsPolicyOutput(v **GetRepositoryPermissionsPolicyOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3574,7 +3574,7 @@ func (m *awsRestjson1_deserializeOpListDomains) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListDomainsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListDomainsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3650,7 +3650,7 @@ func awsRestjson1_deserializeOpErrorListDomains(response *smithyhttp.Response) e
 	}
 }
 
-func awsRestjson1_deserializeDocumentListDomainsOutput(v **ListDomainsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListDomainsOutput(v **ListDomainsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3753,7 +3753,7 @@ func (m *awsRestjson1_deserializeOpListPackages) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListPackagesOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListPackagesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3832,7 +3832,7 @@ func awsRestjson1_deserializeOpErrorListPackages(response *smithyhttp.Response) 
 	}
 }
 
-func awsRestjson1_deserializeDocumentListPackagesOutput(v **ListPackagesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListPackagesOutput(v **ListPackagesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3935,7 +3935,7 @@ func (m *awsRestjson1_deserializeOpListPackageVersionAssets) HandleDeserialize(c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListPackageVersionAssetsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListPackageVersionAssetsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4014,7 +4014,7 @@ func awsRestjson1_deserializeOpErrorListPackageVersionAssets(response *smithyhtt
 	}
 }
 
-func awsRestjson1_deserializeDocumentListPackageVersionAssetsOutput(v **ListPackageVersionAssetsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListPackageVersionAssetsOutput(v **ListPackageVersionAssetsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4182,7 +4182,7 @@ func (m *awsRestjson1_deserializeOpListPackageVersionDependencies) HandleDeseria
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListPackageVersionDependenciesOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListPackageVersionDependenciesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4261,7 +4261,7 @@ func awsRestjson1_deserializeOpErrorListPackageVersionDependencies(response *smi
 	}
 }
 
-func awsRestjson1_deserializeDocumentListPackageVersionDependenciesOutput(v **ListPackageVersionDependenciesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListPackageVersionDependenciesOutput(v **ListPackageVersionDependenciesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4429,7 +4429,7 @@ func (m *awsRestjson1_deserializeOpListPackageVersions) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListPackageVersionsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListPackageVersionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4508,7 +4508,7 @@ func awsRestjson1_deserializeOpErrorListPackageVersions(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentListPackageVersionsOutput(v **ListPackageVersionsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListPackageVersionsOutput(v **ListPackageVersionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4663,7 +4663,7 @@ func (m *awsRestjson1_deserializeOpListRepositories) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListRepositoriesOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListRepositoriesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4739,7 +4739,7 @@ func awsRestjson1_deserializeOpErrorListRepositories(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeDocumentListRepositoriesOutput(v **ListRepositoriesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListRepositoriesOutput(v **ListRepositoriesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4842,7 +4842,7 @@ func (m *awsRestjson1_deserializeOpListRepositoriesInDomain) HandleDeserialize(c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListRepositoriesInDomainOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListRepositoriesInDomainOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4921,7 +4921,7 @@ func awsRestjson1_deserializeOpErrorListRepositoriesInDomain(response *smithyhtt
 	}
 }
 
-func awsRestjson1_deserializeDocumentListRepositoriesInDomainOutput(v **ListRepositoriesInDomainOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListRepositoriesInDomainOutput(v **ListRepositoriesInDomainOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5024,7 +5024,7 @@ func (m *awsRestjson1_deserializeOpPutDomainPermissionsPolicy) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentPutDomainPermissionsPolicyOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentPutDomainPermissionsPolicyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5109,7 +5109,7 @@ func awsRestjson1_deserializeOpErrorPutDomainPermissionsPolicy(response *smithyh
 	}
 }
 
-func awsRestjson1_deserializeDocumentPutDomainPermissionsPolicyOutput(v **PutDomainPermissionsPolicyOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentPutDomainPermissionsPolicyOutput(v **PutDomainPermissionsPolicyOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5199,7 +5199,7 @@ func (m *awsRestjson1_deserializeOpPutRepositoryPermissionsPolicy) HandleDeseria
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentPutRepositoryPermissionsPolicyOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentPutRepositoryPermissionsPolicyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5284,7 +5284,7 @@ func awsRestjson1_deserializeOpErrorPutRepositoryPermissionsPolicy(response *smi
 	}
 }
 
-func awsRestjson1_deserializeDocumentPutRepositoryPermissionsPolicyOutput(v **PutRepositoryPermissionsPolicyOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentPutRepositoryPermissionsPolicyOutput(v **PutRepositoryPermissionsPolicyOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5374,7 +5374,7 @@ func (m *awsRestjson1_deserializeOpUpdatePackageVersionsStatus) HandleDeserializ
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentUpdatePackageVersionsStatusOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentUpdatePackageVersionsStatusOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5456,7 +5456,7 @@ func awsRestjson1_deserializeOpErrorUpdatePackageVersionsStatus(response *smithy
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdatePackageVersionsStatusOutput(v **UpdatePackageVersionsStatusOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdatePackageVersionsStatusOutput(v **UpdatePackageVersionsStatusOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5551,7 +5551,7 @@ func (m *awsRestjson1_deserializeOpUpdateRepository) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentUpdateRepositoryOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentUpdateRepositoryOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5636,7 +5636,7 @@ func awsRestjson1_deserializeOpErrorUpdateRepository(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateRepositoryOutput(v **UpdateRepositoryOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateRepositoryOutput(v **UpdateRepositoryOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5692,7 +5692,7 @@ func awsRestjson1_deserializeDocumentUpdateRepositoryOutput(v **UpdateRepository
 	return nil
 }
 
-func awsRestjson1_deserializeHttpBindingsThrottlingException(v *types.ThrottlingException, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsThrottlingException(v *types.ThrottlingException, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -5855,7 +5855,7 @@ func awsRestjson1_deserializeErrorThrottlingException(response *smithyhttp.Respo
 
 	errorBody.Seek(0, io.SeekStart)
 
-	if err := awsRestjson1_deserializeHttpBindingsThrottlingException(output, response); err != nil {
+	if err := awsRestjson1_deserializeOpHttpBindingsThrottlingException(output, response); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
 	}
 

@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpAcceptDirectConnectGatewayAssociationProposal) 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.AcceptDirectConnectGatewayAssociationProposal")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAcceptDirectConnectGatewayAssociationProposalInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAcceptDirectConnectGatewayAssociationProposalInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpAllocateConnectionOnInterconnect) HandleSeriali
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.AllocateConnectionOnInterconnect")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAllocateConnectionOnInterconnectInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAllocateConnectionOnInterconnectInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpAllocateHostedConnection) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.AllocateHostedConnection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAllocateHostedConnectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAllocateHostedConnectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpAllocatePrivateVirtualInterface) HandleSerializ
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.AllocatePrivateVirtualInterface")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAllocatePrivateVirtualInterfaceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAllocatePrivateVirtualInterfaceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpAllocatePublicVirtualInterface) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.AllocatePublicVirtualInterface")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAllocatePublicVirtualInterfaceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAllocatePublicVirtualInterfaceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpAllocateTransitVirtualInterface) HandleSerializ
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.AllocateTransitVirtualInterface")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAllocateTransitVirtualInterfaceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAllocateTransitVirtualInterfaceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson11_serializeOpAssociateConnectionWithLag) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.AssociateConnectionWithLag")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAssociateConnectionWithLagInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAssociateConnectionWithLagInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -366,7 +366,7 @@ func (m *awsAwsjson11_serializeOpAssociateHostedConnection) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.AssociateHostedConnection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAssociateHostedConnectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAssociateHostedConnectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -412,7 +412,7 @@ func (m *awsAwsjson11_serializeOpAssociateVirtualInterface) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.AssociateVirtualInterface")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAssociateVirtualInterfaceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAssociateVirtualInterfaceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -458,7 +458,7 @@ func (m *awsAwsjson11_serializeOpConfirmConnection) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.ConfirmConnection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentConfirmConnectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentConfirmConnectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -504,7 +504,7 @@ func (m *awsAwsjson11_serializeOpConfirmPrivateVirtualInterface) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.ConfirmPrivateVirtualInterface")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentConfirmPrivateVirtualInterfaceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentConfirmPrivateVirtualInterfaceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -550,7 +550,7 @@ func (m *awsAwsjson11_serializeOpConfirmPublicVirtualInterface) HandleSerialize(
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.ConfirmPublicVirtualInterface")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentConfirmPublicVirtualInterfaceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentConfirmPublicVirtualInterfaceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -596,7 +596,7 @@ func (m *awsAwsjson11_serializeOpConfirmTransitVirtualInterface) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.ConfirmTransitVirtualInterface")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentConfirmTransitVirtualInterfaceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentConfirmTransitVirtualInterfaceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -642,7 +642,7 @@ func (m *awsAwsjson11_serializeOpCreateBGPPeer) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.CreateBGPPeer")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateBGPPeerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateBGPPeerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -688,7 +688,7 @@ func (m *awsAwsjson11_serializeOpCreateConnection) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.CreateConnection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateConnectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateConnectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -734,7 +734,7 @@ func (m *awsAwsjson11_serializeOpCreateDirectConnectGateway) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.CreateDirectConnectGateway")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateDirectConnectGatewayInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateDirectConnectGatewayInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -780,7 +780,7 @@ func (m *awsAwsjson11_serializeOpCreateDirectConnectGatewayAssociation) HandleSe
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.CreateDirectConnectGatewayAssociation")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateDirectConnectGatewayAssociationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateDirectConnectGatewayAssociationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -826,7 +826,7 @@ func (m *awsAwsjson11_serializeOpCreateDirectConnectGatewayAssociationProposal) 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.CreateDirectConnectGatewayAssociationProposal")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateDirectConnectGatewayAssociationProposalInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateDirectConnectGatewayAssociationProposalInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -872,7 +872,7 @@ func (m *awsAwsjson11_serializeOpCreateInterconnect) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.CreateInterconnect")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateInterconnectInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateInterconnectInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -918,7 +918,7 @@ func (m *awsAwsjson11_serializeOpCreateLag) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.CreateLag")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateLagInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateLagInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -964,7 +964,7 @@ func (m *awsAwsjson11_serializeOpCreatePrivateVirtualInterface) HandleSerialize(
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.CreatePrivateVirtualInterface")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreatePrivateVirtualInterfaceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreatePrivateVirtualInterfaceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1010,7 +1010,7 @@ func (m *awsAwsjson11_serializeOpCreatePublicVirtualInterface) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.CreatePublicVirtualInterface")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreatePublicVirtualInterfaceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreatePublicVirtualInterfaceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1056,7 +1056,7 @@ func (m *awsAwsjson11_serializeOpCreateTransitVirtualInterface) HandleSerialize(
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.CreateTransitVirtualInterface")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateTransitVirtualInterfaceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateTransitVirtualInterfaceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1102,7 +1102,7 @@ func (m *awsAwsjson11_serializeOpDeleteBGPPeer) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DeleteBGPPeer")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteBGPPeerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteBGPPeerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1148,7 +1148,7 @@ func (m *awsAwsjson11_serializeOpDeleteConnection) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DeleteConnection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteConnectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteConnectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1194,7 +1194,7 @@ func (m *awsAwsjson11_serializeOpDeleteDirectConnectGateway) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DeleteDirectConnectGateway")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteDirectConnectGatewayInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteDirectConnectGatewayInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1240,7 +1240,7 @@ func (m *awsAwsjson11_serializeOpDeleteDirectConnectGatewayAssociation) HandleSe
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DeleteDirectConnectGatewayAssociation")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteDirectConnectGatewayAssociationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteDirectConnectGatewayAssociationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1286,7 +1286,7 @@ func (m *awsAwsjson11_serializeOpDeleteDirectConnectGatewayAssociationProposal) 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DeleteDirectConnectGatewayAssociationProposal")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteDirectConnectGatewayAssociationProposalInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteDirectConnectGatewayAssociationProposalInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1332,7 +1332,7 @@ func (m *awsAwsjson11_serializeOpDeleteInterconnect) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DeleteInterconnect")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteInterconnectInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteInterconnectInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1378,7 +1378,7 @@ func (m *awsAwsjson11_serializeOpDeleteLag) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DeleteLag")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteLagInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteLagInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1424,7 +1424,7 @@ func (m *awsAwsjson11_serializeOpDeleteVirtualInterface) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DeleteVirtualInterface")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteVirtualInterfaceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteVirtualInterfaceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1470,7 +1470,7 @@ func (m *awsAwsjson11_serializeOpDescribeConnectionLoa) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DescribeConnectionLoa")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeConnectionLoaInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeConnectionLoaInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1516,7 +1516,7 @@ func (m *awsAwsjson11_serializeOpDescribeConnections) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DescribeConnections")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeConnectionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeConnectionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1562,7 +1562,7 @@ func (m *awsAwsjson11_serializeOpDescribeConnectionsOnInterconnect) HandleSerial
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DescribeConnectionsOnInterconnect")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeConnectionsOnInterconnectInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeConnectionsOnInterconnectInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1608,7 +1608,7 @@ func (m *awsAwsjson11_serializeOpDescribeDirectConnectGatewayAssociationProposal
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DescribeDirectConnectGatewayAssociationProposals")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeDirectConnectGatewayAssociationProposalsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeDirectConnectGatewayAssociationProposalsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1654,7 +1654,7 @@ func (m *awsAwsjson11_serializeOpDescribeDirectConnectGatewayAssociations) Handl
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DescribeDirectConnectGatewayAssociations")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeDirectConnectGatewayAssociationsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeDirectConnectGatewayAssociationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1700,7 +1700,7 @@ func (m *awsAwsjson11_serializeOpDescribeDirectConnectGatewayAttachments) Handle
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DescribeDirectConnectGatewayAttachments")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeDirectConnectGatewayAttachmentsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeDirectConnectGatewayAttachmentsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1746,7 +1746,7 @@ func (m *awsAwsjson11_serializeOpDescribeDirectConnectGateways) HandleSerialize(
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DescribeDirectConnectGateways")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeDirectConnectGatewaysInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeDirectConnectGatewaysInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1792,7 +1792,7 @@ func (m *awsAwsjson11_serializeOpDescribeHostedConnections) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DescribeHostedConnections")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeHostedConnectionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeHostedConnectionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1838,7 +1838,7 @@ func (m *awsAwsjson11_serializeOpDescribeInterconnectLoa) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DescribeInterconnectLoa")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeInterconnectLoaInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeInterconnectLoaInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1884,7 +1884,7 @@ func (m *awsAwsjson11_serializeOpDescribeInterconnects) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DescribeInterconnects")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeInterconnectsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeInterconnectsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1930,7 +1930,7 @@ func (m *awsAwsjson11_serializeOpDescribeLags) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DescribeLags")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeLagsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeLagsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1976,7 +1976,7 @@ func (m *awsAwsjson11_serializeOpDescribeLoa) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DescribeLoa")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeLoaInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeLoaInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2061,7 +2061,7 @@ func (m *awsAwsjson11_serializeOpDescribeTags) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DescribeTags")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeTagsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeTagsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2146,7 +2146,7 @@ func (m *awsAwsjson11_serializeOpDescribeVirtualInterfaces) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DescribeVirtualInterfaces")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeVirtualInterfacesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeVirtualInterfacesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2192,7 +2192,7 @@ func (m *awsAwsjson11_serializeOpDisassociateConnectionFromLag) HandleSerialize(
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.DisassociateConnectionFromLag")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDisassociateConnectionFromLagInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDisassociateConnectionFromLagInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2238,7 +2238,7 @@ func (m *awsAwsjson11_serializeOpListVirtualInterfaceTestHistory) HandleSerializ
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.ListVirtualInterfaceTestHistory")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListVirtualInterfaceTestHistoryInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListVirtualInterfaceTestHistoryInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2284,7 +2284,7 @@ func (m *awsAwsjson11_serializeOpStartBgpFailoverTest) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.StartBgpFailoverTest")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartBgpFailoverTestInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartBgpFailoverTestInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2330,7 +2330,7 @@ func (m *awsAwsjson11_serializeOpStopBgpFailoverTest) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.StopBgpFailoverTest")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopBgpFailoverTestInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopBgpFailoverTestInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2376,7 +2376,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.TagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2422,7 +2422,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.UntagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2468,7 +2468,7 @@ func (m *awsAwsjson11_serializeOpUpdateDirectConnectGatewayAssociation) HandleSe
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.UpdateDirectConnectGatewayAssociation")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateDirectConnectGatewayAssociationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateDirectConnectGatewayAssociationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2514,7 +2514,7 @@ func (m *awsAwsjson11_serializeOpUpdateLag) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.UpdateLag")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateLagInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateLagInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2560,7 +2560,7 @@ func (m *awsAwsjson11_serializeOpUpdateVirtualInterfaceAttributes) HandleSeriali
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("OvertureService.UpdateVirtualInterfaceAttributes")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateVirtualInterfaceAttributesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateVirtualInterfaceAttributesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3058,7 +3058,7 @@ func awsAwsjson11_serializeDocumentTagList(v []*types.Tag, value smithyjson.Valu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAcceptDirectConnectGatewayAssociationProposalInput(v *AcceptDirectConnectGatewayAssociationProposalInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAcceptDirectConnectGatewayAssociationProposalInput(v *AcceptDirectConnectGatewayAssociationProposalInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3087,7 +3087,7 @@ func awsAwsjson11_serializeDocumentAcceptDirectConnectGatewayAssociationProposal
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAllocateConnectionOnInterconnectInput(v *AllocateConnectionOnInterconnectInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAllocateConnectionOnInterconnectInput(v *AllocateConnectionOnInterconnectInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3119,7 +3119,7 @@ func awsAwsjson11_serializeDocumentAllocateConnectionOnInterconnectInput(v *Allo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAllocateHostedConnectionInput(v *AllocateHostedConnectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAllocateHostedConnectionInput(v *AllocateHostedConnectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3158,7 +3158,7 @@ func awsAwsjson11_serializeDocumentAllocateHostedConnectionInput(v *AllocateHost
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAllocatePrivateVirtualInterfaceInput(v *AllocatePrivateVirtualInterfaceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAllocatePrivateVirtualInterfaceInput(v *AllocatePrivateVirtualInterfaceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3182,7 +3182,7 @@ func awsAwsjson11_serializeDocumentAllocatePrivateVirtualInterfaceInput(v *Alloc
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAllocatePublicVirtualInterfaceInput(v *AllocatePublicVirtualInterfaceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAllocatePublicVirtualInterfaceInput(v *AllocatePublicVirtualInterfaceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3206,7 +3206,7 @@ func awsAwsjson11_serializeDocumentAllocatePublicVirtualInterfaceInput(v *Alloca
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAllocateTransitVirtualInterfaceInput(v *AllocateTransitVirtualInterfaceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAllocateTransitVirtualInterfaceInput(v *AllocateTransitVirtualInterfaceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3230,7 +3230,7 @@ func awsAwsjson11_serializeDocumentAllocateTransitVirtualInterfaceInput(v *Alloc
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssociateConnectionWithLagInput(v *AssociateConnectionWithLagInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAssociateConnectionWithLagInput(v *AssociateConnectionWithLagInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3247,7 +3247,7 @@ func awsAwsjson11_serializeDocumentAssociateConnectionWithLagInput(v *AssociateC
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssociateHostedConnectionInput(v *AssociateHostedConnectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAssociateHostedConnectionInput(v *AssociateHostedConnectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3264,7 +3264,7 @@ func awsAwsjson11_serializeDocumentAssociateHostedConnectionInput(v *AssociateHo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssociateVirtualInterfaceInput(v *AssociateVirtualInterfaceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAssociateVirtualInterfaceInput(v *AssociateVirtualInterfaceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3281,7 +3281,7 @@ func awsAwsjson11_serializeDocumentAssociateVirtualInterfaceInput(v *AssociateVi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentConfirmConnectionInput(v *ConfirmConnectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentConfirmConnectionInput(v *ConfirmConnectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3293,7 +3293,7 @@ func awsAwsjson11_serializeDocumentConfirmConnectionInput(v *ConfirmConnectionIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentConfirmPrivateVirtualInterfaceInput(v *ConfirmPrivateVirtualInterfaceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentConfirmPrivateVirtualInterfaceInput(v *ConfirmPrivateVirtualInterfaceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3315,7 +3315,7 @@ func awsAwsjson11_serializeDocumentConfirmPrivateVirtualInterfaceInput(v *Confir
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentConfirmPublicVirtualInterfaceInput(v *ConfirmPublicVirtualInterfaceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentConfirmPublicVirtualInterfaceInput(v *ConfirmPublicVirtualInterfaceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3327,7 +3327,7 @@ func awsAwsjson11_serializeDocumentConfirmPublicVirtualInterfaceInput(v *Confirm
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentConfirmTransitVirtualInterfaceInput(v *ConfirmTransitVirtualInterfaceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentConfirmTransitVirtualInterfaceInput(v *ConfirmTransitVirtualInterfaceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3344,7 +3344,7 @@ func awsAwsjson11_serializeDocumentConfirmTransitVirtualInterfaceInput(v *Confir
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateBGPPeerInput(v *CreateBGPPeerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateBGPPeerInput(v *CreateBGPPeerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3363,7 +3363,7 @@ func awsAwsjson11_serializeDocumentCreateBGPPeerInput(v *CreateBGPPeerInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateConnectionInput(v *CreateConnectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateConnectionInput(v *CreateConnectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3402,7 +3402,7 @@ func awsAwsjson11_serializeDocumentCreateConnectionInput(v *CreateConnectionInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateDirectConnectGatewayAssociationInput(v *CreateDirectConnectGatewayAssociationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateDirectConnectGatewayAssociationInput(v *CreateDirectConnectGatewayAssociationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3431,7 +3431,7 @@ func awsAwsjson11_serializeDocumentCreateDirectConnectGatewayAssociationInput(v 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateDirectConnectGatewayAssociationProposalInput(v *CreateDirectConnectGatewayAssociationProposalInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateDirectConnectGatewayAssociationProposalInput(v *CreateDirectConnectGatewayAssociationProposalInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3467,7 +3467,7 @@ func awsAwsjson11_serializeDocumentCreateDirectConnectGatewayAssociationProposal
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateDirectConnectGatewayInput(v *CreateDirectConnectGatewayInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateDirectConnectGatewayInput(v *CreateDirectConnectGatewayInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3484,7 +3484,7 @@ func awsAwsjson11_serializeDocumentCreateDirectConnectGatewayInput(v *CreateDire
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateInterconnectInput(v *CreateInterconnectInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateInterconnectInput(v *CreateInterconnectInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3523,7 +3523,7 @@ func awsAwsjson11_serializeDocumentCreateInterconnectInput(v *CreateInterconnect
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateLagInput(v *CreateLagInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateLagInput(v *CreateLagInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3574,7 +3574,7 @@ func awsAwsjson11_serializeDocumentCreateLagInput(v *CreateLagInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreatePrivateVirtualInterfaceInput(v *CreatePrivateVirtualInterfaceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreatePrivateVirtualInterfaceInput(v *CreatePrivateVirtualInterfaceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3593,7 +3593,7 @@ func awsAwsjson11_serializeDocumentCreatePrivateVirtualInterfaceInput(v *CreateP
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreatePublicVirtualInterfaceInput(v *CreatePublicVirtualInterfaceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreatePublicVirtualInterfaceInput(v *CreatePublicVirtualInterfaceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3612,7 +3612,7 @@ func awsAwsjson11_serializeDocumentCreatePublicVirtualInterfaceInput(v *CreatePu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateTransitVirtualInterfaceInput(v *CreateTransitVirtualInterfaceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateTransitVirtualInterfaceInput(v *CreateTransitVirtualInterfaceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3631,7 +3631,7 @@ func awsAwsjson11_serializeDocumentCreateTransitVirtualInterfaceInput(v *CreateT
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteBGPPeerInput(v *DeleteBGPPeerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteBGPPeerInput(v *DeleteBGPPeerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3658,7 +3658,7 @@ func awsAwsjson11_serializeDocumentDeleteBGPPeerInput(v *DeleteBGPPeerInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteConnectionInput(v *DeleteConnectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteConnectionInput(v *DeleteConnectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3670,7 +3670,7 @@ func awsAwsjson11_serializeDocumentDeleteConnectionInput(v *DeleteConnectionInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteDirectConnectGatewayAssociationInput(v *DeleteDirectConnectGatewayAssociationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteDirectConnectGatewayAssociationInput(v *DeleteDirectConnectGatewayAssociationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3692,7 +3692,7 @@ func awsAwsjson11_serializeDocumentDeleteDirectConnectGatewayAssociationInput(v 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteDirectConnectGatewayAssociationProposalInput(v *DeleteDirectConnectGatewayAssociationProposalInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteDirectConnectGatewayAssociationProposalInput(v *DeleteDirectConnectGatewayAssociationProposalInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3704,7 +3704,7 @@ func awsAwsjson11_serializeDocumentDeleteDirectConnectGatewayAssociationProposal
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteDirectConnectGatewayInput(v *DeleteDirectConnectGatewayInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteDirectConnectGatewayInput(v *DeleteDirectConnectGatewayInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3716,7 +3716,7 @@ func awsAwsjson11_serializeDocumentDeleteDirectConnectGatewayInput(v *DeleteDire
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteInterconnectInput(v *DeleteInterconnectInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteInterconnectInput(v *DeleteInterconnectInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3728,7 +3728,7 @@ func awsAwsjson11_serializeDocumentDeleteInterconnectInput(v *DeleteInterconnect
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteLagInput(v *DeleteLagInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteLagInput(v *DeleteLagInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3740,7 +3740,7 @@ func awsAwsjson11_serializeDocumentDeleteLagInput(v *DeleteLagInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteVirtualInterfaceInput(v *DeleteVirtualInterfaceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteVirtualInterfaceInput(v *DeleteVirtualInterfaceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3752,7 +3752,7 @@ func awsAwsjson11_serializeDocumentDeleteVirtualInterfaceInput(v *DeleteVirtualI
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeConnectionLoaInput(v *DescribeConnectionLoaInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeConnectionLoaInput(v *DescribeConnectionLoaInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3774,7 +3774,7 @@ func awsAwsjson11_serializeDocumentDescribeConnectionLoaInput(v *DescribeConnect
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeConnectionsInput(v *DescribeConnectionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeConnectionsInput(v *DescribeConnectionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3786,7 +3786,7 @@ func awsAwsjson11_serializeDocumentDescribeConnectionsInput(v *DescribeConnectio
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeConnectionsOnInterconnectInput(v *DescribeConnectionsOnInterconnectInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeConnectionsOnInterconnectInput(v *DescribeConnectionsOnInterconnectInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3798,7 +3798,7 @@ func awsAwsjson11_serializeDocumentDescribeConnectionsOnInterconnectInput(v *Des
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeDirectConnectGatewayAssociationProposalsInput(v *DescribeDirectConnectGatewayAssociationProposalsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeDirectConnectGatewayAssociationProposalsInput(v *DescribeDirectConnectGatewayAssociationProposalsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3830,7 +3830,7 @@ func awsAwsjson11_serializeDocumentDescribeDirectConnectGatewayAssociationPropos
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeDirectConnectGatewayAssociationsInput(v *DescribeDirectConnectGatewayAssociationsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeDirectConnectGatewayAssociationsInput(v *DescribeDirectConnectGatewayAssociationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3867,7 +3867,7 @@ func awsAwsjson11_serializeDocumentDescribeDirectConnectGatewayAssociationsInput
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeDirectConnectGatewayAttachmentsInput(v *DescribeDirectConnectGatewayAttachmentsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeDirectConnectGatewayAttachmentsInput(v *DescribeDirectConnectGatewayAttachmentsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3894,7 +3894,7 @@ func awsAwsjson11_serializeDocumentDescribeDirectConnectGatewayAttachmentsInput(
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeDirectConnectGatewaysInput(v *DescribeDirectConnectGatewaysInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeDirectConnectGatewaysInput(v *DescribeDirectConnectGatewaysInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3916,7 +3916,7 @@ func awsAwsjson11_serializeDocumentDescribeDirectConnectGatewaysInput(v *Describ
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeHostedConnectionsInput(v *DescribeHostedConnectionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeHostedConnectionsInput(v *DescribeHostedConnectionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3928,7 +3928,7 @@ func awsAwsjson11_serializeDocumentDescribeHostedConnectionsInput(v *DescribeHos
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeInterconnectLoaInput(v *DescribeInterconnectLoaInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeInterconnectLoaInput(v *DescribeInterconnectLoaInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3950,7 +3950,7 @@ func awsAwsjson11_serializeDocumentDescribeInterconnectLoaInput(v *DescribeInter
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeInterconnectsInput(v *DescribeInterconnectsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeInterconnectsInput(v *DescribeInterconnectsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3962,7 +3962,7 @@ func awsAwsjson11_serializeDocumentDescribeInterconnectsInput(v *DescribeInterco
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeLagsInput(v *DescribeLagsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeLagsInput(v *DescribeLagsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3974,7 +3974,7 @@ func awsAwsjson11_serializeDocumentDescribeLagsInput(v *DescribeLagsInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeLoaInput(v *DescribeLoaInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeLoaInput(v *DescribeLoaInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4003,7 +4003,7 @@ func awsAwsjson11_serializeDocumentDescribeLocationsInput(v *DescribeLocationsIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeTagsInput(v *DescribeTagsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeTagsInput(v *DescribeTagsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4024,7 +4024,7 @@ func awsAwsjson11_serializeDocumentDescribeVirtualGatewaysInput(v *DescribeVirtu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeVirtualInterfacesInput(v *DescribeVirtualInterfacesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeVirtualInterfacesInput(v *DescribeVirtualInterfacesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4041,7 +4041,7 @@ func awsAwsjson11_serializeDocumentDescribeVirtualInterfacesInput(v *DescribeVir
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDisassociateConnectionFromLagInput(v *DisassociateConnectionFromLagInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDisassociateConnectionFromLagInput(v *DisassociateConnectionFromLagInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4058,7 +4058,7 @@ func awsAwsjson11_serializeDocumentDisassociateConnectionFromLagInput(v *Disasso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListVirtualInterfaceTestHistoryInput(v *ListVirtualInterfaceTestHistoryInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListVirtualInterfaceTestHistoryInput(v *ListVirtualInterfaceTestHistoryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4097,7 +4097,7 @@ func awsAwsjson11_serializeDocumentListVirtualInterfaceTestHistoryInput(v *ListV
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartBgpFailoverTestInput(v *StartBgpFailoverTestInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartBgpFailoverTestInput(v *StartBgpFailoverTestInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4121,7 +4121,7 @@ func awsAwsjson11_serializeDocumentStartBgpFailoverTestInput(v *StartBgpFailover
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopBgpFailoverTestInput(v *StopBgpFailoverTestInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopBgpFailoverTestInput(v *StopBgpFailoverTestInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4133,7 +4133,7 @@ func awsAwsjson11_serializeDocumentStopBgpFailoverTestInput(v *StopBgpFailoverTe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4152,7 +4152,7 @@ func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4171,7 +4171,7 @@ func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateDirectConnectGatewayAssociationInput(v *UpdateDirectConnectGatewayAssociationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateDirectConnectGatewayAssociationInput(v *UpdateDirectConnectGatewayAssociationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4197,7 +4197,7 @@ func awsAwsjson11_serializeDocumentUpdateDirectConnectGatewayAssociationInput(v 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateLagInput(v *UpdateLagInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateLagInput(v *UpdateLagInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4219,7 +4219,7 @@ func awsAwsjson11_serializeDocumentUpdateLagInput(v *UpdateLagInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateVirtualInterfaceAttributesInput(v *UpdateVirtualInterfaceAttributesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateVirtualInterfaceAttributesInput(v *UpdateVirtualInterfaceAttributesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

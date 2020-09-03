@@ -53,7 +53,7 @@ func (m *awsAwsjson11_deserializeOpCreateScalingPlan) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateScalingPlanOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateScalingPlanOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -162,7 +162,7 @@ func (m *awsAwsjson11_deserializeOpDeleteScalingPlan) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteScalingPlanOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteScalingPlanOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -271,7 +271,7 @@ func (m *awsAwsjson11_deserializeOpDescribeScalingPlanResources) HandleDeseriali
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeScalingPlanResourcesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeScalingPlanResourcesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -380,7 +380,7 @@ func (m *awsAwsjson11_deserializeOpDescribeScalingPlans) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeScalingPlansOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeScalingPlansOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -489,7 +489,7 @@ func (m *awsAwsjson11_deserializeOpGetScalingPlanResourceForecastData) HandleDes
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetScalingPlanResourceForecastDataOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetScalingPlanResourceForecastDataOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -592,7 +592,7 @@ func (m *awsAwsjson11_deserializeOpUpdateScalingPlan) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateScalingPlanOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateScalingPlanOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3030,7 +3030,7 @@ func awsAwsjson11_deserializeDocumentValidationException(v **types.ValidationExc
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateScalingPlanOutput(v **CreateScalingPlanOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateScalingPlanOutput(v **CreateScalingPlanOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3098,7 +3098,7 @@ func awsAwsjson11_deserializeDocumentCreateScalingPlanOutput(v **CreateScalingPl
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteScalingPlanOutput(v **DeleteScalingPlanOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteScalingPlanOutput(v **DeleteScalingPlanOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3149,7 +3149,7 @@ func awsAwsjson11_deserializeDocumentDeleteScalingPlanOutput(v **DeleteScalingPl
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeScalingPlanResourcesOutput(v **DescribeScalingPlanResourcesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeScalingPlanResourcesOutput(v **DescribeScalingPlanResourcesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3218,7 +3218,7 @@ func awsAwsjson11_deserializeDocumentDescribeScalingPlanResourcesOutput(v **Desc
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeScalingPlansOutput(v **DescribeScalingPlansOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeScalingPlansOutput(v **DescribeScalingPlansOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3287,7 +3287,7 @@ func awsAwsjson11_deserializeDocumentDescribeScalingPlansOutput(v **DescribeScal
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetScalingPlanResourceForecastDataOutput(v **GetScalingPlanResourceForecastDataOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetScalingPlanResourceForecastDataOutput(v **GetScalingPlanResourceForecastDataOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3343,7 +3343,7 @@ func awsAwsjson11_deserializeDocumentGetScalingPlanResourceForecastDataOutput(v 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateScalingPlanOutput(v **UpdateScalingPlanOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateScalingPlanOutput(v **UpdateScalingPlanOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

@@ -64,7 +64,7 @@ func (m *awsAwsquery_deserializeOpBuildSuggesters) HandleDeserialize(ctx context
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentBuildSuggestersOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentBuildSuggestersOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -156,7 +156,7 @@ func (m *awsAwsquery_deserializeOpCreateDomain) HandleDeserialize(ctx context.Co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateDomainOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateDomainOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -248,7 +248,7 @@ func (m *awsAwsquery_deserializeOpDefineAnalysisScheme) HandleDeserialize(ctx co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDefineAnalysisSchemeOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDefineAnalysisSchemeOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -346,7 +346,7 @@ func (m *awsAwsquery_deserializeOpDefineExpression) HandleDeserialize(ctx contex
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDefineExpressionOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDefineExpressionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -444,7 +444,7 @@ func (m *awsAwsquery_deserializeOpDefineIndexField) HandleDeserialize(ctx contex
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDefineIndexFieldOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDefineIndexFieldOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -542,7 +542,7 @@ func (m *awsAwsquery_deserializeOpDefineSuggester) HandleDeserialize(ctx context
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDefineSuggesterOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDefineSuggesterOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -640,7 +640,7 @@ func (m *awsAwsquery_deserializeOpDeleteAnalysisScheme) HandleDeserialize(ctx co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteAnalysisSchemeOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDeleteAnalysisSchemeOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -735,7 +735,7 @@ func (m *awsAwsquery_deserializeOpDeleteDomain) HandleDeserialize(ctx context.Co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteDomainOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDeleteDomainOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -824,7 +824,7 @@ func (m *awsAwsquery_deserializeOpDeleteExpression) HandleDeserialize(ctx contex
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteExpressionOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDeleteExpressionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -919,7 +919,7 @@ func (m *awsAwsquery_deserializeOpDeleteIndexField) HandleDeserialize(ctx contex
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteIndexFieldOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDeleteIndexFieldOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1014,7 +1014,7 @@ func (m *awsAwsquery_deserializeOpDeleteSuggester) HandleDeserialize(ctx context
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteSuggesterOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDeleteSuggesterOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1109,7 +1109,7 @@ func (m *awsAwsquery_deserializeOpDescribeAnalysisSchemes) HandleDeserialize(ctx
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeAnalysisSchemesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeAnalysisSchemesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1201,7 +1201,7 @@ func (m *awsAwsquery_deserializeOpDescribeAvailabilityOptions) HandleDeserialize
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeAvailabilityOptionsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeAvailabilityOptionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1302,7 +1302,7 @@ func (m *awsAwsquery_deserializeOpDescribeDomainEndpointOptions) HandleDeseriali
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeDomainEndpointOptionsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeDomainEndpointOptionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1400,7 +1400,7 @@ func (m *awsAwsquery_deserializeOpDescribeDomains) HandleDeserialize(ctx context
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeDomainsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeDomainsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1489,7 +1489,7 @@ func (m *awsAwsquery_deserializeOpDescribeExpressions) HandleDeserialize(ctx con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeExpressionsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeExpressionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1581,7 +1581,7 @@ func (m *awsAwsquery_deserializeOpDescribeIndexFields) HandleDeserialize(ctx con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeIndexFieldsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeIndexFieldsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1673,7 +1673,7 @@ func (m *awsAwsquery_deserializeOpDescribeScalingParameters) HandleDeserialize(c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeScalingParametersOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeScalingParametersOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1765,7 +1765,7 @@ func (m *awsAwsquery_deserializeOpDescribeServiceAccessPolicies) HandleDeseriali
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeServiceAccessPoliciesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeServiceAccessPoliciesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1857,7 +1857,7 @@ func (m *awsAwsquery_deserializeOpDescribeSuggesters) HandleDeserialize(ctx cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeSuggestersOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeSuggestersOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1949,7 +1949,7 @@ func (m *awsAwsquery_deserializeOpIndexDocuments) HandleDeserialize(ctx context.
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentIndexDocumentsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentIndexDocumentsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2041,7 +2041,7 @@ func (m *awsAwsquery_deserializeOpListDomainNames) HandleDeserialize(ctx context
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentListDomainNamesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentListDomainNamesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2127,7 +2127,7 @@ func (m *awsAwsquery_deserializeOpUpdateAvailabilityOptions) HandleDeserialize(c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentUpdateAvailabilityOptionsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentUpdateAvailabilityOptionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2231,7 +2231,7 @@ func (m *awsAwsquery_deserializeOpUpdateDomainEndpointOptions) HandleDeserialize
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentUpdateDomainEndpointOptionsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentUpdateDomainEndpointOptionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2335,7 +2335,7 @@ func (m *awsAwsquery_deserializeOpUpdateScalingParameters) HandleDeserialize(ctx
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentUpdateScalingParametersOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentUpdateScalingParametersOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2433,7 +2433,7 @@ func (m *awsAwsquery_deserializeOpUpdateServiceAccessPolicies) HandleDeserialize
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentUpdateServiceAccessPoliciesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentUpdateServiceAccessPoliciesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -6164,7 +6164,7 @@ func awsAwsquery_deserializeDocumentValidationException(v **types.ValidationExce
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentBuildSuggestersOutput(v **BuildSuggestersOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentBuildSuggestersOutput(v **BuildSuggestersOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6200,7 +6200,7 @@ func awsAwsquery_deserializeDocumentBuildSuggestersOutput(v **BuildSuggestersOut
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateDomainOutput(v **CreateDomainOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateDomainOutput(v **CreateDomainOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6236,7 +6236,7 @@ func awsAwsquery_deserializeDocumentCreateDomainOutput(v **CreateDomainOutput, d
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDefineAnalysisSchemeOutput(v **DefineAnalysisSchemeOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDefineAnalysisSchemeOutput(v **DefineAnalysisSchemeOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6272,7 +6272,7 @@ func awsAwsquery_deserializeDocumentDefineAnalysisSchemeOutput(v **DefineAnalysi
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDefineExpressionOutput(v **DefineExpressionOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDefineExpressionOutput(v **DefineExpressionOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6308,7 +6308,7 @@ func awsAwsquery_deserializeDocumentDefineExpressionOutput(v **DefineExpressionO
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDefineIndexFieldOutput(v **DefineIndexFieldOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDefineIndexFieldOutput(v **DefineIndexFieldOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6344,7 +6344,7 @@ func awsAwsquery_deserializeDocumentDefineIndexFieldOutput(v **DefineIndexFieldO
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDefineSuggesterOutput(v **DefineSuggesterOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDefineSuggesterOutput(v **DefineSuggesterOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6380,7 +6380,7 @@ func awsAwsquery_deserializeDocumentDefineSuggesterOutput(v **DefineSuggesterOut
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteAnalysisSchemeOutput(v **DeleteAnalysisSchemeOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDeleteAnalysisSchemeOutput(v **DeleteAnalysisSchemeOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6416,7 +6416,7 @@ func awsAwsquery_deserializeDocumentDeleteAnalysisSchemeOutput(v **DeleteAnalysi
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteDomainOutput(v **DeleteDomainOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDeleteDomainOutput(v **DeleteDomainOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6452,7 +6452,7 @@ func awsAwsquery_deserializeDocumentDeleteDomainOutput(v **DeleteDomainOutput, d
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteExpressionOutput(v **DeleteExpressionOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDeleteExpressionOutput(v **DeleteExpressionOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6488,7 +6488,7 @@ func awsAwsquery_deserializeDocumentDeleteExpressionOutput(v **DeleteExpressionO
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteIndexFieldOutput(v **DeleteIndexFieldOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDeleteIndexFieldOutput(v **DeleteIndexFieldOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6524,7 +6524,7 @@ func awsAwsquery_deserializeDocumentDeleteIndexFieldOutput(v **DeleteIndexFieldO
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteSuggesterOutput(v **DeleteSuggesterOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDeleteSuggesterOutput(v **DeleteSuggesterOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6560,7 +6560,7 @@ func awsAwsquery_deserializeDocumentDeleteSuggesterOutput(v **DeleteSuggesterOut
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeAnalysisSchemesOutput(v **DescribeAnalysisSchemesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeAnalysisSchemesOutput(v **DescribeAnalysisSchemesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6596,7 +6596,7 @@ func awsAwsquery_deserializeDocumentDescribeAnalysisSchemesOutput(v **DescribeAn
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeAvailabilityOptionsOutput(v **DescribeAvailabilityOptionsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeAvailabilityOptionsOutput(v **DescribeAvailabilityOptionsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6632,7 +6632,7 @@ func awsAwsquery_deserializeDocumentDescribeAvailabilityOptionsOutput(v **Descri
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeDomainEndpointOptionsOutput(v **DescribeDomainEndpointOptionsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeDomainEndpointOptionsOutput(v **DescribeDomainEndpointOptionsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6668,7 +6668,7 @@ func awsAwsquery_deserializeDocumentDescribeDomainEndpointOptionsOutput(v **Desc
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeDomainsOutput(v **DescribeDomainsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeDomainsOutput(v **DescribeDomainsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6704,7 +6704,7 @@ func awsAwsquery_deserializeDocumentDescribeDomainsOutput(v **DescribeDomainsOut
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeExpressionsOutput(v **DescribeExpressionsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeExpressionsOutput(v **DescribeExpressionsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6740,7 +6740,7 @@ func awsAwsquery_deserializeDocumentDescribeExpressionsOutput(v **DescribeExpres
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeIndexFieldsOutput(v **DescribeIndexFieldsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeIndexFieldsOutput(v **DescribeIndexFieldsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6776,7 +6776,7 @@ func awsAwsquery_deserializeDocumentDescribeIndexFieldsOutput(v **DescribeIndexF
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeScalingParametersOutput(v **DescribeScalingParametersOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeScalingParametersOutput(v **DescribeScalingParametersOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6812,7 +6812,7 @@ func awsAwsquery_deserializeDocumentDescribeScalingParametersOutput(v **Describe
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeServiceAccessPoliciesOutput(v **DescribeServiceAccessPoliciesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeServiceAccessPoliciesOutput(v **DescribeServiceAccessPoliciesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6848,7 +6848,7 @@ func awsAwsquery_deserializeDocumentDescribeServiceAccessPoliciesOutput(v **Desc
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeSuggestersOutput(v **DescribeSuggestersOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeSuggestersOutput(v **DescribeSuggestersOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6884,7 +6884,7 @@ func awsAwsquery_deserializeDocumentDescribeSuggestersOutput(v **DescribeSuggest
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentIndexDocumentsOutput(v **IndexDocumentsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentIndexDocumentsOutput(v **IndexDocumentsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6920,7 +6920,7 @@ func awsAwsquery_deserializeDocumentIndexDocumentsOutput(v **IndexDocumentsOutpu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentListDomainNamesOutput(v **ListDomainNamesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentListDomainNamesOutput(v **ListDomainNamesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6956,7 +6956,7 @@ func awsAwsquery_deserializeDocumentListDomainNamesOutput(v **ListDomainNamesOut
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentUpdateAvailabilityOptionsOutput(v **UpdateAvailabilityOptionsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentUpdateAvailabilityOptionsOutput(v **UpdateAvailabilityOptionsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6992,7 +6992,7 @@ func awsAwsquery_deserializeDocumentUpdateAvailabilityOptionsOutput(v **UpdateAv
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentUpdateDomainEndpointOptionsOutput(v **UpdateDomainEndpointOptionsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentUpdateDomainEndpointOptionsOutput(v **UpdateDomainEndpointOptionsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7028,7 +7028,7 @@ func awsAwsquery_deserializeDocumentUpdateDomainEndpointOptionsOutput(v **Update
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentUpdateScalingParametersOutput(v **UpdateScalingParametersOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentUpdateScalingParametersOutput(v **UpdateScalingParametersOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7064,7 +7064,7 @@ func awsAwsquery_deserializeDocumentUpdateScalingParametersOutput(v **UpdateScal
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentUpdateServiceAccessPoliciesOutput(v **UpdateServiceAccessPoliciesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentUpdateServiceAccessPoliciesOutput(v **UpdateServiceAccessPoliciesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpAddTagsToResource) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudHsmFrontendService.AddTagsToResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAddTagsToResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAddTagsToResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpCreateHapg) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudHsmFrontendService.CreateHapg")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateHapgInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateHapgInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpCreateHsm) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudHsmFrontendService.CreateHsm")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateHsmInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateHsmInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpCreateLunaClient) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudHsmFrontendService.CreateLunaClient")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateLunaClientInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateLunaClientInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpDeleteHapg) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudHsmFrontendService.DeleteHapg")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteHapgInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteHapgInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpDeleteHsm) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudHsmFrontendService.DeleteHsm")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteHsmInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteHsmInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson11_serializeOpDeleteLunaClient) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudHsmFrontendService.DeleteLunaClient")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteLunaClientInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteLunaClientInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -366,7 +366,7 @@ func (m *awsAwsjson11_serializeOpDescribeHapg) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudHsmFrontendService.DescribeHapg")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeHapgInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeHapgInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -412,7 +412,7 @@ func (m *awsAwsjson11_serializeOpDescribeHsm) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudHsmFrontendService.DescribeHsm")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeHsmInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeHsmInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -458,7 +458,7 @@ func (m *awsAwsjson11_serializeOpDescribeLunaClient) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudHsmFrontendService.DescribeLunaClient")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeLunaClientInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeLunaClientInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -504,7 +504,7 @@ func (m *awsAwsjson11_serializeOpGetConfig) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudHsmFrontendService.GetConfig")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetConfigInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetConfigInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -589,7 +589,7 @@ func (m *awsAwsjson11_serializeOpListHapgs) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudHsmFrontendService.ListHapgs")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListHapgsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListHapgsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -635,7 +635,7 @@ func (m *awsAwsjson11_serializeOpListHsms) HandleSerialize(ctx context.Context, 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudHsmFrontendService.ListHsms")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListHsmsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListHsmsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -681,7 +681,7 @@ func (m *awsAwsjson11_serializeOpListLunaClients) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudHsmFrontendService.ListLunaClients")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListLunaClientsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListLunaClientsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -727,7 +727,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudHsmFrontendService.ListTagsForResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -773,7 +773,7 @@ func (m *awsAwsjson11_serializeOpModifyHapg) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudHsmFrontendService.ModifyHapg")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentModifyHapgInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentModifyHapgInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -819,7 +819,7 @@ func (m *awsAwsjson11_serializeOpModifyHsm) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudHsmFrontendService.ModifyHsm")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentModifyHsmInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentModifyHsmInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -865,7 +865,7 @@ func (m *awsAwsjson11_serializeOpModifyLunaClient) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudHsmFrontendService.ModifyLunaClient")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentModifyLunaClientInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentModifyLunaClientInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -911,7 +911,7 @@ func (m *awsAwsjson11_serializeOpRemoveTagsFromResource) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudHsmFrontendService.RemoveTagsFromResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRemoveTagsFromResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRemoveTagsFromResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1005,7 +1005,7 @@ func awsAwsjson11_serializeDocumentTagList(v []*types.Tag, value smithyjson.Valu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAddTagsToResourceInput(v *AddTagsToResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAddTagsToResourceInput(v *AddTagsToResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1024,7 +1024,7 @@ func awsAwsjson11_serializeDocumentAddTagsToResourceInput(v *AddTagsToResourceIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateHapgInput(v *CreateHapgInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateHapgInput(v *CreateHapgInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1036,7 +1036,7 @@ func awsAwsjson11_serializeDocumentCreateHapgInput(v *CreateHapgInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateHsmInput(v *CreateHsmInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateHsmInput(v *CreateHsmInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1083,7 +1083,7 @@ func awsAwsjson11_serializeDocumentCreateHsmInput(v *CreateHsmInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateLunaClientInput(v *CreateLunaClientInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateLunaClientInput(v *CreateLunaClientInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1100,7 +1100,7 @@ func awsAwsjson11_serializeDocumentCreateLunaClientInput(v *CreateLunaClientInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteHapgInput(v *DeleteHapgInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteHapgInput(v *DeleteHapgInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1112,7 +1112,7 @@ func awsAwsjson11_serializeDocumentDeleteHapgInput(v *DeleteHapgInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteHsmInput(v *DeleteHsmInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteHsmInput(v *DeleteHsmInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1124,7 +1124,7 @@ func awsAwsjson11_serializeDocumentDeleteHsmInput(v *DeleteHsmInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteLunaClientInput(v *DeleteLunaClientInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteLunaClientInput(v *DeleteLunaClientInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1136,7 +1136,7 @@ func awsAwsjson11_serializeDocumentDeleteLunaClientInput(v *DeleteLunaClientInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeHapgInput(v *DescribeHapgInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeHapgInput(v *DescribeHapgInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1148,7 +1148,7 @@ func awsAwsjson11_serializeDocumentDescribeHapgInput(v *DescribeHapgInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeHsmInput(v *DescribeHsmInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeHsmInput(v *DescribeHsmInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1165,7 +1165,7 @@ func awsAwsjson11_serializeDocumentDescribeHsmInput(v *DescribeHsmInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeLunaClientInput(v *DescribeLunaClientInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeLunaClientInput(v *DescribeLunaClientInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1182,7 +1182,7 @@ func awsAwsjson11_serializeDocumentDescribeLunaClientInput(v *DescribeLunaClient
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetConfigInput(v *GetConfigInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetConfigInput(v *GetConfigInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1206,26 +1206,14 @@ func awsAwsjson11_serializeDocumentGetConfigInput(v *GetConfigInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListAvailableZonesInput(v *ListAvailableZonesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListAvailableZonesInput(v *ListAvailableZonesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListHapgsInput(v *ListHapgsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.NextToken != nil {
-		ok := object.Key("NextToken")
-		ok.String(*v.NextToken)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentListHsmsInput(v *ListHsmsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListHapgsInput(v *ListHapgsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1237,7 +1225,7 @@ func awsAwsjson11_serializeDocumentListHsmsInput(v *ListHsmsInput, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListLunaClientsInput(v *ListLunaClientsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListHsmsInput(v *ListHsmsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1249,7 +1237,19 @@ func awsAwsjson11_serializeDocumentListLunaClientsInput(v *ListLunaClientsInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListLunaClientsInput(v *ListLunaClientsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1261,7 +1261,7 @@ func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResour
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentModifyHapgInput(v *ModifyHapgInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentModifyHapgInput(v *ModifyHapgInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1285,7 +1285,7 @@ func awsAwsjson11_serializeDocumentModifyHapgInput(v *ModifyHapgInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentModifyHsmInput(v *ModifyHsmInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentModifyHsmInput(v *ModifyHsmInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1322,7 +1322,7 @@ func awsAwsjson11_serializeDocumentModifyHsmInput(v *ModifyHsmInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentModifyLunaClientInput(v *ModifyLunaClientInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentModifyLunaClientInput(v *ModifyLunaClientInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1339,7 +1339,7 @@ func awsAwsjson11_serializeDocumentModifyLunaClientInput(v *ModifyLunaClientInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRemoveTagsFromResourceInput(v *RemoveTagsFromResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRemoveTagsFromResourceInput(v *RemoveTagsFromResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

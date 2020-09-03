@@ -51,7 +51,7 @@ func (m *awsAwsjson11_deserializeOpDeleteReportDefinition) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteReportDefinitionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteReportDefinitionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -154,7 +154,7 @@ func (m *awsAwsjson11_deserializeOpDescribeReportDefinitions) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeReportDefinitionsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeReportDefinitionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -254,7 +254,7 @@ func (m *awsAwsjson11_deserializeOpModifyReportDefinition) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentModifyReportDefinitionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentModifyReportDefinitionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -357,7 +357,7 @@ func (m *awsAwsjson11_deserializeOpPutReportDefinition) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentPutReportDefinitionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentPutReportDefinitionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1114,7 +1114,7 @@ func awsAwsjson11_deserializeDocumentValidationException(v **types.ValidationExc
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteReportDefinitionOutput(v **DeleteReportDefinitionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteReportDefinitionOutput(v **DeleteReportDefinitionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1178,7 +1178,7 @@ func awsAwsjson11_deserializeDocumentDeleteReportDefinitionOutput(v **DeleteRepo
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeReportDefinitionsOutput(v **DescribeReportDefinitionsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeReportDefinitionsOutput(v **DescribeReportDefinitionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1247,7 +1247,7 @@ func awsAwsjson11_deserializeDocumentDescribeReportDefinitionsOutput(v **Describ
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentModifyReportDefinitionOutput(v **ModifyReportDefinitionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentModifyReportDefinitionOutput(v **ModifyReportDefinitionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1298,7 +1298,7 @@ func awsAwsjson11_deserializeDocumentModifyReportDefinitionOutput(v **ModifyRepo
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentPutReportDefinitionOutput(v **PutReportDefinitionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentPutReportDefinitionOutput(v **PutReportDefinitionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

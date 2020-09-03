@@ -123,7 +123,7 @@ func (m *awsAwsjson11_serializeOpJsonEnums) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("JsonProtocol.JsonEnums")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentJsonEnumsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentJsonEnumsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -169,7 +169,7 @@ func (m *awsAwsjson11_serializeOpJsonUnions) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("JsonProtocol.JsonUnions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentJsonUnionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentJsonUnionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -215,7 +215,7 @@ func (m *awsAwsjson11_serializeOpKitchenSinkOperation) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("JsonProtocol.KitchenSinkOperation")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentKitchenSinkOperationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentKitchenSinkOperationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -261,7 +261,7 @@ func (m *awsAwsjson11_serializeOpNullOperation) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("JsonProtocol.NullOperation")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentNullOperationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentNullOperationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -307,7 +307,7 @@ func (m *awsAwsjson11_serializeOpOperationWithOptionalInputOutput) HandleSeriali
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("JsonProtocol.OperationWithOptionalInputOutput")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentOperationWithOptionalInputOutputInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentOperationWithOptionalInputOutputInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -353,7 +353,7 @@ func (m *awsAwsjson11_serializeOpPutAndGetInlineDocuments) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("JsonProtocol.PutAndGetInlineDocuments")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutAndGetInlineDocumentsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutAndGetInlineDocumentsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -878,7 +878,7 @@ func awsAwsjson11_serializeDocumentGreetingWithErrorsInput(v *GreetingWithErrors
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentJsonEnumsInput(v *JsonEnumsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentJsonEnumsInput(v *JsonEnumsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -921,7 +921,7 @@ func awsAwsjson11_serializeDocumentJsonEnumsInput(v *JsonEnumsInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentJsonUnionsInput(v *JsonUnionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentJsonUnionsInput(v *JsonUnionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -935,7 +935,7 @@ func awsAwsjson11_serializeDocumentJsonUnionsInput(v *JsonUnionsInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentKitchenSinkOperationInput(v *KitchenSinkOperationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentKitchenSinkOperationInput(v *KitchenSinkOperationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1100,7 +1100,7 @@ func awsAwsjson11_serializeDocumentKitchenSinkOperationInput(v *KitchenSinkOpera
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentNullOperationInput(v *NullOperationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentNullOperationInput(v *NullOperationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1126,7 +1126,7 @@ func awsAwsjson11_serializeDocumentNullOperationInput(v *NullOperationInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentOperationWithOptionalInputOutputInput(v *OperationWithOptionalInputOutputInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentOperationWithOptionalInputOutputInput(v *OperationWithOptionalInputOutputInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1138,7 +1138,7 @@ func awsAwsjson11_serializeDocumentOperationWithOptionalInputOutputInput(v *Oper
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutAndGetInlineDocumentsInput(v *PutAndGetInlineDocumentsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutAndGetInlineDocumentsInput(v *PutAndGetInlineDocumentsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

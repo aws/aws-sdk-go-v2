@@ -49,7 +49,7 @@ func (m *awsRestjson1_serializeOpCancelSigningProfile) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsCancelSigningProfileInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsCancelSigningProfileInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -60,7 +60,7 @@ func (m *awsRestjson1_serializeOpCancelSigningProfile) HandleSerialize(ctx conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsCancelSigningProfileInput(v *CancelSigningProfileInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsCancelSigningProfileInput(v *CancelSigningProfileInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -109,7 +109,7 @@ func (m *awsRestjson1_serializeOpDescribeSigningJob) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDescribeSigningJobInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeSigningJobInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -120,7 +120,7 @@ func (m *awsRestjson1_serializeOpDescribeSigningJob) HandleSerialize(ctx context
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDescribeSigningJobInput(v *DescribeSigningJobInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDescribeSigningJobInput(v *DescribeSigningJobInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -169,7 +169,7 @@ func (m *awsRestjson1_serializeOpGetSigningPlatform) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsGetSigningPlatformInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsGetSigningPlatformInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -180,7 +180,7 @@ func (m *awsRestjson1_serializeOpGetSigningPlatform) HandleSerialize(ctx context
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsGetSigningPlatformInput(v *GetSigningPlatformInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetSigningPlatformInput(v *GetSigningPlatformInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -229,7 +229,7 @@ func (m *awsRestjson1_serializeOpGetSigningProfile) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsGetSigningProfileInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsGetSigningProfileInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -240,7 +240,7 @@ func (m *awsRestjson1_serializeOpGetSigningProfile) HandleSerialize(ctx context.
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsGetSigningProfileInput(v *GetSigningProfileInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetSigningProfileInput(v *GetSigningProfileInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -289,7 +289,7 @@ func (m *awsRestjson1_serializeOpListSigningJobs) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListSigningJobsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListSigningJobsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -300,7 +300,7 @@ func (m *awsRestjson1_serializeOpListSigningJobs) HandleSerialize(ctx context.Co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListSigningJobsInput(v *ListSigningJobsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListSigningJobsInput(v *ListSigningJobsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -363,7 +363,7 @@ func (m *awsRestjson1_serializeOpListSigningPlatforms) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListSigningPlatformsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListSigningPlatformsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -374,7 +374,7 @@ func (m *awsRestjson1_serializeOpListSigningPlatforms) HandleSerialize(ctx conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListSigningPlatformsInput(v *ListSigningPlatformsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListSigningPlatformsInput(v *ListSigningPlatformsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -437,7 +437,7 @@ func (m *awsRestjson1_serializeOpListSigningProfiles) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListSigningProfilesInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListSigningProfilesInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -448,7 +448,7 @@ func (m *awsRestjson1_serializeOpListSigningProfiles) HandleSerialize(ctx contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListSigningProfilesInput(v *ListSigningProfilesInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListSigningProfilesInput(v *ListSigningProfilesInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -503,7 +503,7 @@ func (m *awsRestjson1_serializeOpListTagsForResource) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListTagsForResourceInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -514,7 +514,7 @@ func (m *awsRestjson1_serializeOpListTagsForResource) HandleSerialize(ctx contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListTagsForResourceInput(v *ListTagsForResourceInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsForResourceInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -563,14 +563,14 @@ func (m *awsRestjson1_serializeOpPutSigningProfile) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsPutSigningProfileInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsPutSigningProfileInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentPutSigningProfileInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentPutSigningProfileInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -585,7 +585,7 @@ func (m *awsRestjson1_serializeOpPutSigningProfile) HandleSerialize(ctx context.
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsPutSigningProfileInput(v *PutSigningProfileInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsPutSigningProfileInput(v *PutSigningProfileInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -599,7 +599,7 @@ func awsRestjson1_serializeHttpBindingsPutSigningProfileInput(v *PutSigningProfi
 	return nil
 }
 
-func awsRestjson1_serializeDocumentPutSigningProfileInput(v *PutSigningProfileInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentPutSigningProfileInput(v *PutSigningProfileInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -677,7 +677,7 @@ func (m *awsRestjson1_serializeOpStartSigningJob) HandleSerialize(ctx context.Co
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentStartSigningJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentStartSigningJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -692,7 +692,7 @@ func (m *awsRestjson1_serializeOpStartSigningJob) HandleSerialize(ctx context.Co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsStartSigningJobInput(v *StartSigningJobInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsStartSigningJobInput(v *StartSigningJobInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -700,7 +700,7 @@ func awsRestjson1_serializeHttpBindingsStartSigningJobInput(v *StartSigningJobIn
 	return nil
 }
 
-func awsRestjson1_serializeDocumentStartSigningJobInput(v *StartSigningJobInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentStartSigningJobInput(v *StartSigningJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -766,14 +766,14 @@ func (m *awsRestjson1_serializeOpTagResource) HandleSerialize(ctx context.Contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsTagResourceInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsTagResourceInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -788,7 +788,7 @@ func (m *awsRestjson1_serializeOpTagResource) HandleSerialize(ctx context.Contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsTagResourceInput(v *TagResourceInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -802,7 +802,7 @@ func awsRestjson1_serializeHttpBindingsTagResourceInput(v *TagResourceInput, enc
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -851,7 +851,7 @@ func (m *awsRestjson1_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsUntagResourceInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsUntagResourceInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -862,7 +862,7 @@ func (m *awsRestjson1_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsUntagResourceInput(v *UntagResourceInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}

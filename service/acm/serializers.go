@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpAddTagsToCertificate) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CertificateManager.AddTagsToCertificate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAddTagsToCertificateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAddTagsToCertificateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpDeleteCertificate) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CertificateManager.DeleteCertificate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteCertificateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteCertificateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpDescribeCertificate) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CertificateManager.DescribeCertificate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeCertificateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeCertificateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpExportCertificate) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CertificateManager.ExportCertificate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentExportCertificateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentExportCertificateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpGetCertificate) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CertificateManager.GetCertificate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetCertificateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetCertificateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpImportCertificate) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CertificateManager.ImportCertificate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentImportCertificateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentImportCertificateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson11_serializeOpListCertificates) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CertificateManager.ListCertificates")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListCertificatesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListCertificatesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -366,7 +366,7 @@ func (m *awsAwsjson11_serializeOpListTagsForCertificate) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CertificateManager.ListTagsForCertificate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsForCertificateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsForCertificateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -412,7 +412,7 @@ func (m *awsAwsjson11_serializeOpRemoveTagsFromCertificate) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CertificateManager.RemoveTagsFromCertificate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRemoveTagsFromCertificateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRemoveTagsFromCertificateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -458,7 +458,7 @@ func (m *awsAwsjson11_serializeOpRenewCertificate) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CertificateManager.RenewCertificate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRenewCertificateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRenewCertificateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -504,7 +504,7 @@ func (m *awsAwsjson11_serializeOpRequestCertificate) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CertificateManager.RequestCertificate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRequestCertificateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRequestCertificateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -550,7 +550,7 @@ func (m *awsAwsjson11_serializeOpResendValidationEmail) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CertificateManager.ResendValidationEmail")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentResendValidationEmailInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentResendValidationEmailInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -596,7 +596,7 @@ func (m *awsAwsjson11_serializeOpUpdateCertificateOptions) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CertificateManager.UpdateCertificateOptions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateCertificateOptionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateCertificateOptionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -778,7 +778,7 @@ func awsAwsjson11_serializeDocumentTagList(v []*types.Tag, value smithyjson.Valu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAddTagsToCertificateInput(v *AddTagsToCertificateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAddTagsToCertificateInput(v *AddTagsToCertificateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -797,7 +797,7 @@ func awsAwsjson11_serializeDocumentAddTagsToCertificateInput(v *AddTagsToCertifi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteCertificateInput(v *DeleteCertificateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteCertificateInput(v *DeleteCertificateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -809,7 +809,7 @@ func awsAwsjson11_serializeDocumentDeleteCertificateInput(v *DeleteCertificateIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeCertificateInput(v *DescribeCertificateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeCertificateInput(v *DescribeCertificateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -821,7 +821,7 @@ func awsAwsjson11_serializeDocumentDescribeCertificateInput(v *DescribeCertifica
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentExportCertificateInput(v *ExportCertificateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentExportCertificateInput(v *ExportCertificateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -838,7 +838,7 @@ func awsAwsjson11_serializeDocumentExportCertificateInput(v *ExportCertificateIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetCertificateInput(v *GetCertificateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetCertificateInput(v *GetCertificateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -850,7 +850,7 @@ func awsAwsjson11_serializeDocumentGetCertificateInput(v *GetCertificateInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentImportCertificateInput(v *ImportCertificateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentImportCertificateInput(v *ImportCertificateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -884,7 +884,7 @@ func awsAwsjson11_serializeDocumentImportCertificateInput(v *ImportCertificateIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListCertificatesInput(v *ListCertificatesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListCertificatesInput(v *ListCertificatesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -915,7 +915,7 @@ func awsAwsjson11_serializeDocumentListCertificatesInput(v *ListCertificatesInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsForCertificateInput(v *ListTagsForCertificateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTagsForCertificateInput(v *ListTagsForCertificateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -927,7 +927,7 @@ func awsAwsjson11_serializeDocumentListTagsForCertificateInput(v *ListTagsForCer
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRemoveTagsFromCertificateInput(v *RemoveTagsFromCertificateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRemoveTagsFromCertificateInput(v *RemoveTagsFromCertificateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -946,7 +946,7 @@ func awsAwsjson11_serializeDocumentRemoveTagsFromCertificateInput(v *RemoveTagsF
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRenewCertificateInput(v *RenewCertificateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRenewCertificateInput(v *RenewCertificateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -958,7 +958,7 @@ func awsAwsjson11_serializeDocumentRenewCertificateInput(v *RenewCertificateInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRequestCertificateInput(v *RequestCertificateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRequestCertificateInput(v *RequestCertificateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1013,7 +1013,7 @@ func awsAwsjson11_serializeDocumentRequestCertificateInput(v *RequestCertificate
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentResendValidationEmailInput(v *ResendValidationEmailInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentResendValidationEmailInput(v *ResendValidationEmailInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1035,7 +1035,7 @@ func awsAwsjson11_serializeDocumentResendValidationEmailInput(v *ResendValidatio
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateCertificateOptionsInput(v *UpdateCertificateOptionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateCertificateOptionsInput(v *UpdateCertificateOptionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

@@ -47,7 +47,7 @@ func (m *awsRestjson1_serializeOpDeleteThingShadow) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDeleteThingShadowInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteThingShadowInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -58,7 +58,7 @@ func (m *awsRestjson1_serializeOpDeleteThingShadow) HandleSerialize(ctx context.
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDeleteThingShadowInput(v *DeleteThingShadowInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDeleteThingShadowInput(v *DeleteThingShadowInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -111,7 +111,7 @@ func (m *awsRestjson1_serializeOpGetThingShadow) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsGetThingShadowInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsGetThingShadowInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -122,7 +122,7 @@ func (m *awsRestjson1_serializeOpGetThingShadow) HandleSerialize(ctx context.Con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsGetThingShadowInput(v *GetThingShadowInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetThingShadowInput(v *GetThingShadowInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -175,7 +175,7 @@ func (m *awsRestjson1_serializeOpListNamedShadowsForThing) HandleSerialize(ctx c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListNamedShadowsForThingInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListNamedShadowsForThingInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -186,7 +186,7 @@ func (m *awsRestjson1_serializeOpListNamedShadowsForThing) HandleSerialize(ctx c
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListNamedShadowsForThingInput(v *ListNamedShadowsForThingInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListNamedShadowsForThingInput(v *ListNamedShadowsForThingInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -243,7 +243,7 @@ func (m *awsRestjson1_serializeOpPublish) HandleSerialize(ctx context.Context, i
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsPublishInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsPublishInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -265,7 +265,7 @@ func (m *awsRestjson1_serializeOpPublish) HandleSerialize(ctx context.Context, i
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsPublishInput(v *PublishInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsPublishInput(v *PublishInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -318,7 +318,7 @@ func (m *awsRestjson1_serializeOpUpdateThingShadow) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsUpdateThingShadowInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateThingShadowInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -340,7 +340,7 @@ func (m *awsRestjson1_serializeOpUpdateThingShadow) HandleSerialize(ctx context.
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsUpdateThingShadowInput(v *UpdateThingShadowInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsUpdateThingShadowInput(v *UpdateThingShadowInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}

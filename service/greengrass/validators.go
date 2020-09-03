@@ -1886,7 +1886,7 @@ func validate__listOfConnector(v []*types.Connector) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "__listOfConnector"}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfConnector"}
 	for i := range v {
 		if err := validateConnector(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
@@ -1903,7 +1903,7 @@ func validate__listOfCore(v []*types.Core) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "__listOfCore"}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfCore"}
 	for i := range v {
 		if err := validateCore(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
@@ -1920,7 +1920,7 @@ func validate__listOfDevice(v []*types.Device) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "__listOfDevice"}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfDevice"}
 	for i := range v {
 		if err := validateDevice(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
@@ -1937,7 +1937,7 @@ func validate__listOfFunction(v []*types.Function) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "__listOfFunction"}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfFunction"}
 	for i := range v {
 		if err := validateFunction(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
@@ -1954,7 +1954,7 @@ func validate__listOfLogger(v []*types.Logger) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "__listOfLogger"}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfLogger"}
 	for i := range v {
 		if err := validateLogger(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
@@ -1971,7 +1971,7 @@ func validate__listOfResource(v []*types.Resource) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "__listOfResource"}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfResource"}
 	for i := range v {
 		if err := validateResource(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
@@ -1988,7 +1988,7 @@ func validate__listOfResourceAccessPolicy(v []*types.ResourceAccessPolicy) error
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "__listOfResourceAccessPolicy"}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfResourceAccessPolicy"}
 	for i := range v {
 		if err := validateResourceAccessPolicy(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
@@ -2005,7 +2005,7 @@ func validate__listOfSubscription(v []*types.Subscription) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "__listOfSubscription"}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfSubscription"}
 	for i := range v {
 		if err := validateSubscription(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))

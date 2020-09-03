@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpAnalyzeDocument) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Textract.AnalyzeDocument")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAnalyzeDocumentInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAnalyzeDocumentInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpDetectDocumentText) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Textract.DetectDocumentText")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDetectDocumentTextInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDetectDocumentTextInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpGetDocumentAnalysis) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Textract.GetDocumentAnalysis")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetDocumentAnalysisInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetDocumentAnalysisInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpGetDocumentTextDetection) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Textract.GetDocumentTextDetection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetDocumentTextDetectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetDocumentTextDetectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpStartDocumentAnalysis) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Textract.StartDocumentAnalysis")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartDocumentAnalysisInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartDocumentAnalysisInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpStartDocumentTextDetection) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Textract.StartDocumentTextDetection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartDocumentTextDetectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartDocumentTextDetectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -421,7 +421,7 @@ func awsAwsjson11_serializeDocumentS3Object(v *types.S3Object, value smithyjson.
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAnalyzeDocumentInput(v *AnalyzeDocumentInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAnalyzeDocumentInput(v *AnalyzeDocumentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -449,7 +449,7 @@ func awsAwsjson11_serializeDocumentAnalyzeDocumentInput(v *AnalyzeDocumentInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDetectDocumentTextInput(v *DetectDocumentTextInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDetectDocumentTextInput(v *DetectDocumentTextInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -463,7 +463,7 @@ func awsAwsjson11_serializeDocumentDetectDocumentTextInput(v *DetectDocumentText
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetDocumentAnalysisInput(v *GetDocumentAnalysisInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetDocumentAnalysisInput(v *GetDocumentAnalysisInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -485,7 +485,7 @@ func awsAwsjson11_serializeDocumentGetDocumentAnalysisInput(v *GetDocumentAnalys
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetDocumentTextDetectionInput(v *GetDocumentTextDetectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetDocumentTextDetectionInput(v *GetDocumentTextDetectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -507,7 +507,7 @@ func awsAwsjson11_serializeDocumentGetDocumentTextDetectionInput(v *GetDocumentT
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartDocumentAnalysisInput(v *StartDocumentAnalysisInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartDocumentAnalysisInput(v *StartDocumentAnalysisInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -545,7 +545,7 @@ func awsAwsjson11_serializeDocumentStartDocumentAnalysisInput(v *StartDocumentAn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartDocumentTextDetectionInput(v *StartDocumentTextDetectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartDocumentTextDetectionInput(v *StartDocumentTextDetectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

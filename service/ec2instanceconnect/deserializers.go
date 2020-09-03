@@ -51,7 +51,7 @@ func (m *awsAwsjson11_deserializeOpSendSSHPublicKey) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentSendSSHPublicKeyOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentSendSSHPublicKeyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -570,7 +570,7 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentSendSSHPublicKeyOutput(v **SendSSHPublicKeyOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentSendSSHPublicKeyOutput(v **SendSSHPublicKeyOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

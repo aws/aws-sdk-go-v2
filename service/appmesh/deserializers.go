@@ -142,7 +142,7 @@ func awsRestjson1_deserializeOpErrorCreateGatewayRoute(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateGatewayRouteOutput(v **CreateGatewayRouteOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateGatewayRouteOutput(v **CreateGatewayRouteOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -320,7 +320,7 @@ func awsRestjson1_deserializeOpErrorCreateMesh(response *smithyhttp.Response) er
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateMeshOutput(v **CreateMeshOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateMeshOutput(v **CreateMeshOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -498,7 +498,7 @@ func awsRestjson1_deserializeOpErrorCreateRoute(response *smithyhttp.Response) e
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateRouteOutput(v **CreateRouteOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateRouteOutput(v **CreateRouteOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -676,7 +676,7 @@ func awsRestjson1_deserializeOpErrorCreateVirtualGateway(response *smithyhttp.Re
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateVirtualGatewayOutput(v **CreateVirtualGatewayOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateVirtualGatewayOutput(v **CreateVirtualGatewayOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -854,7 +854,7 @@ func awsRestjson1_deserializeOpErrorCreateVirtualNode(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateVirtualNodeOutput(v **CreateVirtualNodeOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateVirtualNodeOutput(v **CreateVirtualNodeOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1032,7 +1032,7 @@ func awsRestjson1_deserializeOpErrorCreateVirtualRouter(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateVirtualRouterOutput(v **CreateVirtualRouterOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateVirtualRouterOutput(v **CreateVirtualRouterOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1210,7 +1210,7 @@ func awsRestjson1_deserializeOpErrorCreateVirtualService(response *smithyhttp.Re
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateVirtualServiceOutput(v **CreateVirtualServiceOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateVirtualServiceOutput(v **CreateVirtualServiceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1385,7 +1385,7 @@ func awsRestjson1_deserializeOpErrorDeleteGatewayRoute(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteGatewayRouteOutput(v **DeleteGatewayRouteOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteGatewayRouteOutput(v **DeleteGatewayRouteOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1560,7 +1560,7 @@ func awsRestjson1_deserializeOpErrorDeleteMesh(response *smithyhttp.Response) er
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteMeshOutput(v **DeleteMeshOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteMeshOutput(v **DeleteMeshOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1735,7 +1735,7 @@ func awsRestjson1_deserializeOpErrorDeleteRoute(response *smithyhttp.Response) e
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteRouteOutput(v **DeleteRouteOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteRouteOutput(v **DeleteRouteOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1910,7 +1910,7 @@ func awsRestjson1_deserializeOpErrorDeleteVirtualGateway(response *smithyhttp.Re
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteVirtualGatewayOutput(v **DeleteVirtualGatewayOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteVirtualGatewayOutput(v **DeleteVirtualGatewayOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2085,7 +2085,7 @@ func awsRestjson1_deserializeOpErrorDeleteVirtualNode(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteVirtualNodeOutput(v **DeleteVirtualNodeOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteVirtualNodeOutput(v **DeleteVirtualNodeOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2260,7 +2260,7 @@ func awsRestjson1_deserializeOpErrorDeleteVirtualRouter(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteVirtualRouterOutput(v **DeleteVirtualRouterOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteVirtualRouterOutput(v **DeleteVirtualRouterOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2435,7 +2435,7 @@ func awsRestjson1_deserializeOpErrorDeleteVirtualService(response *smithyhttp.Re
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteVirtualServiceOutput(v **DeleteVirtualServiceOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteVirtualServiceOutput(v **DeleteVirtualServiceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2607,7 +2607,7 @@ func awsRestjson1_deserializeOpErrorDescribeGatewayRoute(response *smithyhttp.Re
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeGatewayRouteOutput(v **DescribeGatewayRouteOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeGatewayRouteOutput(v **DescribeGatewayRouteOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2779,7 +2779,7 @@ func awsRestjson1_deserializeOpErrorDescribeMesh(response *smithyhttp.Response) 
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeMeshOutput(v **DescribeMeshOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeMeshOutput(v **DescribeMeshOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2951,7 +2951,7 @@ func awsRestjson1_deserializeOpErrorDescribeRoute(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeRouteOutput(v **DescribeRouteOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeRouteOutput(v **DescribeRouteOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3123,7 +3123,7 @@ func awsRestjson1_deserializeOpErrorDescribeVirtualGateway(response *smithyhttp.
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeVirtualGatewayOutput(v **DescribeVirtualGatewayOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeVirtualGatewayOutput(v **DescribeVirtualGatewayOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3295,7 +3295,7 @@ func awsRestjson1_deserializeOpErrorDescribeVirtualNode(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeVirtualNodeOutput(v **DescribeVirtualNodeOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeVirtualNodeOutput(v **DescribeVirtualNodeOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3467,7 +3467,7 @@ func awsRestjson1_deserializeOpErrorDescribeVirtualRouter(response *smithyhttp.R
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeVirtualRouterOutput(v **DescribeVirtualRouterOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeVirtualRouterOutput(v **DescribeVirtualRouterOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3639,7 +3639,7 @@ func awsRestjson1_deserializeOpErrorDescribeVirtualService(response *smithyhttp.
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeVirtualServiceOutput(v **DescribeVirtualServiceOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeVirtualServiceOutput(v **DescribeVirtualServiceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3729,7 +3729,7 @@ func (m *awsRestjson1_deserializeOpListGatewayRoutes) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListGatewayRoutesOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListGatewayRoutesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3811,7 +3811,7 @@ func awsRestjson1_deserializeOpErrorListGatewayRoutes(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeDocumentListGatewayRoutesOutput(v **ListGatewayRoutesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListGatewayRoutesOutput(v **ListGatewayRoutesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3914,7 +3914,7 @@ func (m *awsRestjson1_deserializeOpListMeshes) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListMeshesOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListMeshesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3996,7 +3996,7 @@ func awsRestjson1_deserializeOpErrorListMeshes(response *smithyhttp.Response) er
 	}
 }
 
-func awsRestjson1_deserializeDocumentListMeshesOutput(v **ListMeshesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListMeshesOutput(v **ListMeshesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4099,7 +4099,7 @@ func (m *awsRestjson1_deserializeOpListRoutes) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListRoutesOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListRoutesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4181,7 +4181,7 @@ func awsRestjson1_deserializeOpErrorListRoutes(response *smithyhttp.Response) er
 	}
 }
 
-func awsRestjson1_deserializeDocumentListRoutesOutput(v **ListRoutesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListRoutesOutput(v **ListRoutesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4284,7 +4284,7 @@ func (m *awsRestjson1_deserializeOpListTagsForResource) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListTagsForResourceOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4366,7 +4366,7 @@ func awsRestjson1_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4469,7 +4469,7 @@ func (m *awsRestjson1_deserializeOpListVirtualGateways) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListVirtualGatewaysOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListVirtualGatewaysOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4551,7 +4551,7 @@ func awsRestjson1_deserializeOpErrorListVirtualGateways(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentListVirtualGatewaysOutput(v **ListVirtualGatewaysOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListVirtualGatewaysOutput(v **ListVirtualGatewaysOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4654,7 +4654,7 @@ func (m *awsRestjson1_deserializeOpListVirtualNodes) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListVirtualNodesOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListVirtualNodesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4736,7 +4736,7 @@ func awsRestjson1_deserializeOpErrorListVirtualNodes(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeDocumentListVirtualNodesOutput(v **ListVirtualNodesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListVirtualNodesOutput(v **ListVirtualNodesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4839,7 +4839,7 @@ func (m *awsRestjson1_deserializeOpListVirtualRouters) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListVirtualRoutersOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListVirtualRoutersOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4921,7 +4921,7 @@ func awsRestjson1_deserializeOpErrorListVirtualRouters(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentListVirtualRoutersOutput(v **ListVirtualRoutersOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListVirtualRoutersOutput(v **ListVirtualRoutersOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5024,7 +5024,7 @@ func (m *awsRestjson1_deserializeOpListVirtualServices) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListVirtualServicesOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListVirtualServicesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5106,7 +5106,7 @@ func awsRestjson1_deserializeOpErrorListVirtualServices(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentListVirtualServicesOutput(v **ListVirtualServicesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListVirtualServicesOutput(v **ListVirtualServicesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5496,7 +5496,7 @@ func awsRestjson1_deserializeOpErrorUpdateGatewayRoute(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateGatewayRouteOutput(v **UpdateGatewayRouteOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateGatewayRouteOutput(v **UpdateGatewayRouteOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5671,7 +5671,7 @@ func awsRestjson1_deserializeOpErrorUpdateMesh(response *smithyhttp.Response) er
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateMeshOutput(v **UpdateMeshOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateMeshOutput(v **UpdateMeshOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5849,7 +5849,7 @@ func awsRestjson1_deserializeOpErrorUpdateRoute(response *smithyhttp.Response) e
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateRouteOutput(v **UpdateRouteOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateRouteOutput(v **UpdateRouteOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6027,7 +6027,7 @@ func awsRestjson1_deserializeOpErrorUpdateVirtualGateway(response *smithyhttp.Re
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateVirtualGatewayOutput(v **UpdateVirtualGatewayOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateVirtualGatewayOutput(v **UpdateVirtualGatewayOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6205,7 +6205,7 @@ func awsRestjson1_deserializeOpErrorUpdateVirtualNode(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateVirtualNodeOutput(v **UpdateVirtualNodeOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateVirtualNodeOutput(v **UpdateVirtualNodeOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6383,7 +6383,7 @@ func awsRestjson1_deserializeOpErrorUpdateVirtualRouter(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateVirtualRouterOutput(v **UpdateVirtualRouterOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateVirtualRouterOutput(v **UpdateVirtualRouterOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6561,7 +6561,7 @@ func awsRestjson1_deserializeOpErrorUpdateVirtualService(response *smithyhttp.Re
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateVirtualServiceOutput(v **UpdateVirtualServiceOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateVirtualServiceOutput(v **UpdateVirtualServiceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

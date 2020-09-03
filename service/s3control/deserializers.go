@@ -119,7 +119,7 @@ func (m *awsRestxml_deserializeOpCreateJob) HandleDeserialize(ctx context.Contex
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentCreateJobOutput(&output, decoder)
+	err = awsRestxml_deserializeOpDocumentCreateJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -170,7 +170,7 @@ func awsRestxml_deserializeOpErrorCreateJob(response *smithyhttp.Response) error
 	}
 }
 
-func awsRestxml_deserializeDocumentCreateJobOutput(v **CreateJobOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentCreateJobOutput(v **CreateJobOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -486,7 +486,7 @@ func (m *awsRestxml_deserializeOpDescribeJob) HandleDeserialize(ctx context.Cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentDescribeJobOutput(&output, decoder)
+	err = awsRestxml_deserializeOpDocumentDescribeJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -537,7 +537,7 @@ func awsRestxml_deserializeOpErrorDescribeJob(response *smithyhttp.Response) err
 	}
 }
 
-func awsRestxml_deserializeDocumentDescribeJobOutput(v **DescribeJobOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentDescribeJobOutput(v **DescribeJobOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -617,7 +617,7 @@ func (m *awsRestxml_deserializeOpGetAccessPoint) HandleDeserialize(ctx context.C
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentGetAccessPointOutput(&output, decoder)
+	err = awsRestxml_deserializeOpDocumentGetAccessPointOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -656,7 +656,7 @@ func awsRestxml_deserializeOpErrorGetAccessPoint(response *smithyhttp.Response) 
 	}
 }
 
-func awsRestxml_deserializeDocumentGetAccessPointOutput(v **GetAccessPointOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentGetAccessPointOutput(v **GetAccessPointOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -798,7 +798,7 @@ func (m *awsRestxml_deserializeOpGetAccessPointPolicy) HandleDeserialize(ctx con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentGetAccessPointPolicyOutput(&output, decoder)
+	err = awsRestxml_deserializeOpDocumentGetAccessPointPolicyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -837,7 +837,7 @@ func awsRestxml_deserializeOpErrorGetAccessPointPolicy(response *smithyhttp.Resp
 	}
 }
 
-func awsRestxml_deserializeDocumentGetAccessPointPolicyOutput(v **GetAccessPointPolicyOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentGetAccessPointPolicyOutput(v **GetAccessPointPolicyOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -924,7 +924,7 @@ func (m *awsRestxml_deserializeOpGetAccessPointPolicyStatus) HandleDeserialize(c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentGetAccessPointPolicyStatusOutput(&output, decoder)
+	err = awsRestxml_deserializeOpDocumentGetAccessPointPolicyStatusOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -963,7 +963,7 @@ func awsRestxml_deserializeOpErrorGetAccessPointPolicyStatus(response *smithyhtt
 	}
 }
 
-func awsRestxml_deserializeDocumentGetAccessPointPolicyStatusOutput(v **GetAccessPointPolicyStatusOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentGetAccessPointPolicyStatusOutput(v **GetAccessPointPolicyStatusOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1043,7 +1043,7 @@ func (m *awsRestxml_deserializeOpGetJobTagging) HandleDeserialize(ctx context.Co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentGetJobTaggingOutput(&output, decoder)
+	err = awsRestxml_deserializeOpDocumentGetJobTaggingOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1091,7 +1091,7 @@ func awsRestxml_deserializeOpErrorGetJobTagging(response *smithyhttp.Response) e
 	}
 }
 
-func awsRestxml_deserializeDocumentGetJobTaggingOutput(v **GetJobTaggingOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentGetJobTaggingOutput(v **GetJobTaggingOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1213,7 +1213,7 @@ func awsRestxml_deserializeOpErrorGetPublicAccessBlock(response *smithyhttp.Resp
 	}
 }
 
-func awsRestxml_deserializeDocumentGetPublicAccessBlockOutput(v **GetPublicAccessBlockOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentGetPublicAccessBlockOutput(v **GetPublicAccessBlockOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1293,7 +1293,7 @@ func (m *awsRestxml_deserializeOpListAccessPoints) HandleDeserialize(ctx context
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentListAccessPointsOutput(&output, decoder)
+	err = awsRestxml_deserializeOpDocumentListAccessPointsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1332,7 +1332,7 @@ func awsRestxml_deserializeOpErrorListAccessPoints(response *smithyhttp.Response
 	}
 }
 
-func awsRestxml_deserializeDocumentListAccessPointsOutput(v **ListAccessPointsOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentListAccessPointsOutput(v **ListAccessPointsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1425,7 +1425,7 @@ func (m *awsRestxml_deserializeOpListJobs) HandleDeserialize(ctx context.Context
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentListJobsOutput(&output, decoder)
+	err = awsRestxml_deserializeOpDocumentListJobsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1473,7 +1473,7 @@ func awsRestxml_deserializeOpErrorListJobs(response *smithyhttp.Response) error 
 	}
 }
 
-func awsRestxml_deserializeDocumentListJobsOutput(v **ListJobsOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentListJobsOutput(v **ListJobsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1743,7 +1743,7 @@ func (m *awsRestxml_deserializeOpUpdateJobPriority) HandleDeserialize(ctx contex
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentUpdateJobPriorityOutput(&output, decoder)
+	err = awsRestxml_deserializeOpDocumentUpdateJobPriorityOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1794,7 +1794,7 @@ func awsRestxml_deserializeOpErrorUpdateJobPriority(response *smithyhttp.Respons
 	}
 }
 
-func awsRestxml_deserializeDocumentUpdateJobPriorityOutput(v **UpdateJobPriorityOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentUpdateJobPriorityOutput(v **UpdateJobPriorityOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1898,7 +1898,7 @@ func (m *awsRestxml_deserializeOpUpdateJobStatus) HandleDeserialize(ctx context.
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentUpdateJobStatusOutput(&output, decoder)
+	err = awsRestxml_deserializeOpDocumentUpdateJobStatusOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1952,7 +1952,7 @@ func awsRestxml_deserializeOpErrorUpdateJobStatus(response *smithyhttp.Response)
 	}
 }
 
-func awsRestxml_deserializeDocumentUpdateJobStatusOutput(v **UpdateJobStatusOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentUpdateJobStatusOutput(v **UpdateJobStatusOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

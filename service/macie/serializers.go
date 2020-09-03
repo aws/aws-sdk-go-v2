@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpAssociateMemberAccount) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("MacieService.AssociateMemberAccount")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAssociateMemberAccountInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAssociateMemberAccountInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpAssociateS3Resources) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("MacieService.AssociateS3Resources")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAssociateS3ResourcesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAssociateS3ResourcesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpDisassociateMemberAccount) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("MacieService.DisassociateMemberAccount")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDisassociateMemberAccountInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDisassociateMemberAccountInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpDisassociateS3Resources) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("MacieService.DisassociateS3Resources")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDisassociateS3ResourcesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDisassociateS3ResourcesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpListMemberAccounts) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("MacieService.ListMemberAccounts")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListMemberAccountsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListMemberAccountsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpListS3Resources) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("MacieService.ListS3Resources")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListS3ResourcesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListS3ResourcesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson11_serializeOpUpdateS3Resources) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("MacieService.UpdateS3Resources")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateS3ResourcesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateS3ResourcesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -485,7 +485,7 @@ func awsAwsjson11_serializeDocumentS3ResourcesClassificationUpdate(v []*types.S3
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssociateMemberAccountInput(v *AssociateMemberAccountInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAssociateMemberAccountInput(v *AssociateMemberAccountInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -497,7 +497,7 @@ func awsAwsjson11_serializeDocumentAssociateMemberAccountInput(v *AssociateMembe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssociateS3ResourcesInput(v *AssociateS3ResourcesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAssociateS3ResourcesInput(v *AssociateS3ResourcesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -516,7 +516,7 @@ func awsAwsjson11_serializeDocumentAssociateS3ResourcesInput(v *AssociateS3Resou
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDisassociateMemberAccountInput(v *DisassociateMemberAccountInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDisassociateMemberAccountInput(v *DisassociateMemberAccountInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -528,7 +528,7 @@ func awsAwsjson11_serializeDocumentDisassociateMemberAccountInput(v *Disassociat
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDisassociateS3ResourcesInput(v *DisassociateS3ResourcesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDisassociateS3ResourcesInput(v *DisassociateS3ResourcesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -547,7 +547,7 @@ func awsAwsjson11_serializeDocumentDisassociateS3ResourcesInput(v *DisassociateS
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListMemberAccountsInput(v *ListMemberAccountsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListMemberAccountsInput(v *ListMemberAccountsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -564,7 +564,7 @@ func awsAwsjson11_serializeDocumentListMemberAccountsInput(v *ListMemberAccounts
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListS3ResourcesInput(v *ListS3ResourcesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListS3ResourcesInput(v *ListS3ResourcesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -586,7 +586,7 @@ func awsAwsjson11_serializeDocumentListS3ResourcesInput(v *ListS3ResourcesInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateS3ResourcesInput(v *UpdateS3ResourcesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateS3ResourcesInput(v *UpdateS3ResourcesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

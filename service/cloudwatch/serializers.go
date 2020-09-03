@@ -49,7 +49,7 @@ func (m *awsAwsquery_serializeOpDeleteAlarms) HandleSerialize(ctx context.Contex
 	body.Key("Action").String("DeleteAlarms")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteAlarmsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteAlarmsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -104,7 +104,7 @@ func (m *awsAwsquery_serializeOpDeleteAnomalyDetector) HandleSerialize(ctx conte
 	body.Key("Action").String("DeleteAnomalyDetector")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteAnomalyDetectorInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteAnomalyDetectorInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -159,7 +159,7 @@ func (m *awsAwsquery_serializeOpDeleteDashboards) HandleSerialize(ctx context.Co
 	body.Key("Action").String("DeleteDashboards")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteDashboardsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteDashboardsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -214,7 +214,7 @@ func (m *awsAwsquery_serializeOpDeleteInsightRules) HandleSerialize(ctx context.
 	body.Key("Action").String("DeleteInsightRules")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteInsightRulesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteInsightRulesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -269,7 +269,7 @@ func (m *awsAwsquery_serializeOpDescribeAlarmHistory) HandleSerialize(ctx contex
 	body.Key("Action").String("DescribeAlarmHistory")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeAlarmHistoryInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeAlarmHistoryInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -324,7 +324,7 @@ func (m *awsAwsquery_serializeOpDescribeAlarms) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("DescribeAlarms")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeAlarmsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeAlarmsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -379,7 +379,7 @@ func (m *awsAwsquery_serializeOpDescribeAlarmsForMetric) HandleSerialize(ctx con
 	body.Key("Action").String("DescribeAlarmsForMetric")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeAlarmsForMetricInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeAlarmsForMetricInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -434,7 +434,7 @@ func (m *awsAwsquery_serializeOpDescribeAnomalyDetectors) HandleSerialize(ctx co
 	body.Key("Action").String("DescribeAnomalyDetectors")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeAnomalyDetectorsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeAnomalyDetectorsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -489,7 +489,7 @@ func (m *awsAwsquery_serializeOpDescribeInsightRules) HandleSerialize(ctx contex
 	body.Key("Action").String("DescribeInsightRules")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeInsightRulesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeInsightRulesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -544,7 +544,7 @@ func (m *awsAwsquery_serializeOpDisableAlarmActions) HandleSerialize(ctx context
 	body.Key("Action").String("DisableAlarmActions")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentDisableAlarmActionsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDisableAlarmActionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -599,7 +599,7 @@ func (m *awsAwsquery_serializeOpDisableInsightRules) HandleSerialize(ctx context
 	body.Key("Action").String("DisableInsightRules")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentDisableInsightRulesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDisableInsightRulesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -654,7 +654,7 @@ func (m *awsAwsquery_serializeOpEnableAlarmActions) HandleSerialize(ctx context.
 	body.Key("Action").String("EnableAlarmActions")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentEnableAlarmActionsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentEnableAlarmActionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -709,7 +709,7 @@ func (m *awsAwsquery_serializeOpEnableInsightRules) HandleSerialize(ctx context.
 	body.Key("Action").String("EnableInsightRules")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentEnableInsightRulesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentEnableInsightRulesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -764,7 +764,7 @@ func (m *awsAwsquery_serializeOpGetDashboard) HandleSerialize(ctx context.Contex
 	body.Key("Action").String("GetDashboard")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentGetDashboardInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetDashboardInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -819,7 +819,7 @@ func (m *awsAwsquery_serializeOpGetInsightRuleReport) HandleSerialize(ctx contex
 	body.Key("Action").String("GetInsightRuleReport")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentGetInsightRuleReportInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetInsightRuleReportInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -874,7 +874,7 @@ func (m *awsAwsquery_serializeOpGetMetricData) HandleSerialize(ctx context.Conte
 	body.Key("Action").String("GetMetricData")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentGetMetricDataInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetMetricDataInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -929,7 +929,7 @@ func (m *awsAwsquery_serializeOpGetMetricStatistics) HandleSerialize(ctx context
 	body.Key("Action").String("GetMetricStatistics")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentGetMetricStatisticsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetMetricStatisticsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -984,7 +984,7 @@ func (m *awsAwsquery_serializeOpGetMetricWidgetImage) HandleSerialize(ctx contex
 	body.Key("Action").String("GetMetricWidgetImage")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentGetMetricWidgetImageInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetMetricWidgetImageInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1039,7 +1039,7 @@ func (m *awsAwsquery_serializeOpListDashboards) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("ListDashboards")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentListDashboardsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListDashboardsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1094,7 +1094,7 @@ func (m *awsAwsquery_serializeOpListMetrics) HandleSerialize(ctx context.Context
 	body.Key("Action").String("ListMetrics")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentListMetricsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListMetricsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1149,7 +1149,7 @@ func (m *awsAwsquery_serializeOpListTagsForResource) HandleSerialize(ctx context
 	body.Key("Action").String("ListTagsForResource")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentListTagsForResourceInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListTagsForResourceInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1204,7 +1204,7 @@ func (m *awsAwsquery_serializeOpPutAnomalyDetector) HandleSerialize(ctx context.
 	body.Key("Action").String("PutAnomalyDetector")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentPutAnomalyDetectorInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentPutAnomalyDetectorInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1259,7 +1259,7 @@ func (m *awsAwsquery_serializeOpPutCompositeAlarm) HandleSerialize(ctx context.C
 	body.Key("Action").String("PutCompositeAlarm")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentPutCompositeAlarmInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentPutCompositeAlarmInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1314,7 +1314,7 @@ func (m *awsAwsquery_serializeOpPutDashboard) HandleSerialize(ctx context.Contex
 	body.Key("Action").String("PutDashboard")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentPutDashboardInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentPutDashboardInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1369,7 +1369,7 @@ func (m *awsAwsquery_serializeOpPutInsightRule) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("PutInsightRule")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentPutInsightRuleInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentPutInsightRuleInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1424,7 +1424,7 @@ func (m *awsAwsquery_serializeOpPutMetricAlarm) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("PutMetricAlarm")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentPutMetricAlarmInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentPutMetricAlarmInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1479,7 +1479,7 @@ func (m *awsAwsquery_serializeOpPutMetricData) HandleSerialize(ctx context.Conte
 	body.Key("Action").String("PutMetricData")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentPutMetricDataInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentPutMetricDataInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1534,7 +1534,7 @@ func (m *awsAwsquery_serializeOpSetAlarmState) HandleSerialize(ctx context.Conte
 	body.Key("Action").String("SetAlarmState")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentSetAlarmStateInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSetAlarmStateInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1589,7 +1589,7 @@ func (m *awsAwsquery_serializeOpTagResource) HandleSerialize(ctx context.Context
 	body.Key("Action").String("TagResource")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentTagResourceInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentTagResourceInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1644,7 +1644,7 @@ func (m *awsAwsquery_serializeOpUntagResource) HandleSerialize(ctx context.Conte
 	body.Key("Action").String("UntagResource")
 	body.Key("Version").String("2010-08-01")
 
-	if err := awsAwsquery_serializeDocumentUntagResourceInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUntagResourceInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2208,7 +2208,7 @@ func awsAwsquery_serializeDocumentValues(v []*float64, value query.Value) error 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteAlarmsInput(v *DeleteAlarmsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteAlarmsInput(v *DeleteAlarmsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2222,7 +2222,7 @@ func awsAwsquery_serializeDocumentDeleteAlarmsInput(v *DeleteAlarmsInput, value 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteAnomalyDetectorInput(v *DeleteAnomalyDetectorInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteAnomalyDetectorInput(v *DeleteAnomalyDetectorInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2251,7 +2251,7 @@ func awsAwsquery_serializeDocumentDeleteAnomalyDetectorInput(v *DeleteAnomalyDet
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteDashboardsInput(v *DeleteDashboardsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteDashboardsInput(v *DeleteDashboardsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2265,7 +2265,7 @@ func awsAwsquery_serializeDocumentDeleteDashboardsInput(v *DeleteDashboardsInput
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteInsightRulesInput(v *DeleteInsightRulesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteInsightRulesInput(v *DeleteInsightRulesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2279,7 +2279,7 @@ func awsAwsquery_serializeDocumentDeleteInsightRulesInput(v *DeleteInsightRulesI
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeAlarmHistoryInput(v *DescribeAlarmHistoryInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeAlarmHistoryInput(v *DescribeAlarmHistoryInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2328,7 +2328,7 @@ func awsAwsquery_serializeDocumentDescribeAlarmHistoryInput(v *DescribeAlarmHist
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeAlarmsForMetricInput(v *DescribeAlarmsForMetricInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeAlarmsForMetricInput(v *DescribeAlarmsForMetricInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2372,7 +2372,7 @@ func awsAwsquery_serializeDocumentDescribeAlarmsForMetricInput(v *DescribeAlarms
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeAlarmsInput(v *DescribeAlarmsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeAlarmsInput(v *DescribeAlarmsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2428,7 +2428,7 @@ func awsAwsquery_serializeDocumentDescribeAlarmsInput(v *DescribeAlarmsInput, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeAnomalyDetectorsInput(v *DescribeAnomalyDetectorsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeAnomalyDetectorsInput(v *DescribeAnomalyDetectorsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2462,7 +2462,7 @@ func awsAwsquery_serializeDocumentDescribeAnomalyDetectorsInput(v *DescribeAnoma
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeInsightRulesInput(v *DescribeInsightRulesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeInsightRulesInput(v *DescribeInsightRulesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2479,7 +2479,7 @@ func awsAwsquery_serializeDocumentDescribeInsightRulesInput(v *DescribeInsightRu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDisableAlarmActionsInput(v *DisableAlarmActionsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDisableAlarmActionsInput(v *DisableAlarmActionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2493,7 +2493,7 @@ func awsAwsquery_serializeDocumentDisableAlarmActionsInput(v *DisableAlarmAction
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDisableInsightRulesInput(v *DisableInsightRulesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDisableInsightRulesInput(v *DisableInsightRulesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2507,7 +2507,7 @@ func awsAwsquery_serializeDocumentDisableInsightRulesInput(v *DisableInsightRule
 	return nil
 }
 
-func awsAwsquery_serializeDocumentEnableAlarmActionsInput(v *EnableAlarmActionsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentEnableAlarmActionsInput(v *EnableAlarmActionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2521,7 +2521,7 @@ func awsAwsquery_serializeDocumentEnableAlarmActionsInput(v *EnableAlarmActionsI
 	return nil
 }
 
-func awsAwsquery_serializeDocumentEnableInsightRulesInput(v *EnableInsightRulesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentEnableInsightRulesInput(v *EnableInsightRulesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2535,7 +2535,7 @@ func awsAwsquery_serializeDocumentEnableInsightRulesInput(v *EnableInsightRulesI
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetDashboardInput(v *GetDashboardInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetDashboardInput(v *GetDashboardInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2547,7 +2547,7 @@ func awsAwsquery_serializeDocumentGetDashboardInput(v *GetDashboardInput, value 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetInsightRuleReportInput(v *GetInsightRuleReportInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetInsightRuleReportInput(v *GetInsightRuleReportInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2591,7 +2591,7 @@ func awsAwsquery_serializeDocumentGetInsightRuleReportInput(v *GetInsightRuleRep
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetMetricDataInput(v *GetMetricDataInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetMetricDataInput(v *GetMetricDataInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2630,7 +2630,7 @@ func awsAwsquery_serializeDocumentGetMetricDataInput(v *GetMetricDataInput, valu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetMetricStatisticsInput(v *GetMetricStatisticsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetMetricStatisticsInput(v *GetMetricStatisticsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2688,7 +2688,7 @@ func awsAwsquery_serializeDocumentGetMetricStatisticsInput(v *GetMetricStatistic
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetMetricWidgetImageInput(v *GetMetricWidgetImageInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetMetricWidgetImageInput(v *GetMetricWidgetImageInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2705,7 +2705,7 @@ func awsAwsquery_serializeDocumentGetMetricWidgetImageInput(v *GetMetricWidgetIm
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListDashboardsInput(v *ListDashboardsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListDashboardsInput(v *ListDashboardsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2722,7 +2722,7 @@ func awsAwsquery_serializeDocumentListDashboardsInput(v *ListDashboardsInput, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListMetricsInput(v *ListMetricsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListMetricsInput(v *ListMetricsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2756,7 +2756,7 @@ func awsAwsquery_serializeDocumentListMetricsInput(v *ListMetricsInput, value qu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2768,7 +2768,7 @@ func awsAwsquery_serializeDocumentListTagsForResourceInput(v *ListTagsForResourc
 	return nil
 }
 
-func awsAwsquery_serializeDocumentPutAnomalyDetectorInput(v *PutAnomalyDetectorInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentPutAnomalyDetectorInput(v *PutAnomalyDetectorInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2804,7 +2804,7 @@ func awsAwsquery_serializeDocumentPutAnomalyDetectorInput(v *PutAnomalyDetectorI
 	return nil
 }
 
-func awsAwsquery_serializeDocumentPutCompositeAlarmInput(v *PutCompositeAlarmInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentPutCompositeAlarmInput(v *PutCompositeAlarmInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2859,7 +2859,7 @@ func awsAwsquery_serializeDocumentPutCompositeAlarmInput(v *PutCompositeAlarmInp
 	return nil
 }
 
-func awsAwsquery_serializeDocumentPutDashboardInput(v *PutDashboardInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentPutDashboardInput(v *PutDashboardInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2876,7 +2876,7 @@ func awsAwsquery_serializeDocumentPutDashboardInput(v *PutDashboardInput, value 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentPutInsightRuleInput(v *PutInsightRuleInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentPutInsightRuleInput(v *PutInsightRuleInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2905,7 +2905,7 @@ func awsAwsquery_serializeDocumentPutInsightRuleInput(v *PutInsightRuleInput, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentPutMetricAlarmInput(v *PutMetricAlarmInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentPutMetricAlarmInput(v *PutMetricAlarmInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3034,7 +3034,7 @@ func awsAwsquery_serializeDocumentPutMetricAlarmInput(v *PutMetricAlarmInput, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentPutMetricDataInput(v *PutMetricDataInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentPutMetricDataInput(v *PutMetricDataInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3053,7 +3053,7 @@ func awsAwsquery_serializeDocumentPutMetricDataInput(v *PutMetricDataInput, valu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSetAlarmStateInput(v *SetAlarmStateInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSetAlarmStateInput(v *SetAlarmStateInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3080,7 +3080,7 @@ func awsAwsquery_serializeDocumentSetAlarmStateInput(v *SetAlarmStateInput, valu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentTagResourceInput(v *TagResourceInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentTagResourceInput(v *TagResourceInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3099,7 +3099,7 @@ func awsAwsquery_serializeDocumentTagResourceInput(v *TagResourceInput, value qu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUntagResourceInput(v *UntagResourceInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 

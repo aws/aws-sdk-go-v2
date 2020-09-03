@@ -49,7 +49,7 @@ func (m *awsAwsquery_serializeOpCloneReceiptRuleSet) HandleSerialize(ctx context
 	body.Key("Action").String("CloneReceiptRuleSet")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentCloneReceiptRuleSetInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCloneReceiptRuleSetInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -104,7 +104,7 @@ func (m *awsAwsquery_serializeOpCreateConfigurationSet) HandleSerialize(ctx cont
 	body.Key("Action").String("CreateConfigurationSet")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateConfigurationSetInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateConfigurationSetInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -159,7 +159,7 @@ func (m *awsAwsquery_serializeOpCreateConfigurationSetEventDestination) HandleSe
 	body.Key("Action").String("CreateConfigurationSetEventDestination")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateConfigurationSetEventDestinationInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateConfigurationSetEventDestinationInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -214,7 +214,7 @@ func (m *awsAwsquery_serializeOpCreateConfigurationSetTrackingOptions) HandleSer
 	body.Key("Action").String("CreateConfigurationSetTrackingOptions")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateConfigurationSetTrackingOptionsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateConfigurationSetTrackingOptionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -269,7 +269,7 @@ func (m *awsAwsquery_serializeOpCreateCustomVerificationEmailTemplate) HandleSer
 	body.Key("Action").String("CreateCustomVerificationEmailTemplate")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateCustomVerificationEmailTemplateInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateCustomVerificationEmailTemplateInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -324,7 +324,7 @@ func (m *awsAwsquery_serializeOpCreateReceiptFilter) HandleSerialize(ctx context
 	body.Key("Action").String("CreateReceiptFilter")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateReceiptFilterInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateReceiptFilterInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -379,7 +379,7 @@ func (m *awsAwsquery_serializeOpCreateReceiptRule) HandleSerialize(ctx context.C
 	body.Key("Action").String("CreateReceiptRule")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateReceiptRuleInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateReceiptRuleInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -434,7 +434,7 @@ func (m *awsAwsquery_serializeOpCreateReceiptRuleSet) HandleSerialize(ctx contex
 	body.Key("Action").String("CreateReceiptRuleSet")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateReceiptRuleSetInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateReceiptRuleSetInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -489,7 +489,7 @@ func (m *awsAwsquery_serializeOpCreateTemplate) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("CreateTemplate")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateTemplateInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateTemplateInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -544,7 +544,7 @@ func (m *awsAwsquery_serializeOpDeleteConfigurationSet) HandleSerialize(ctx cont
 	body.Key("Action").String("DeleteConfigurationSet")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteConfigurationSetInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteConfigurationSetInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -599,7 +599,7 @@ func (m *awsAwsquery_serializeOpDeleteConfigurationSetEventDestination) HandleSe
 	body.Key("Action").String("DeleteConfigurationSetEventDestination")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteConfigurationSetEventDestinationInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteConfigurationSetEventDestinationInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -654,7 +654,7 @@ func (m *awsAwsquery_serializeOpDeleteConfigurationSetTrackingOptions) HandleSer
 	body.Key("Action").String("DeleteConfigurationSetTrackingOptions")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteConfigurationSetTrackingOptionsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteConfigurationSetTrackingOptionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -709,7 +709,7 @@ func (m *awsAwsquery_serializeOpDeleteCustomVerificationEmailTemplate) HandleSer
 	body.Key("Action").String("DeleteCustomVerificationEmailTemplate")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteCustomVerificationEmailTemplateInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteCustomVerificationEmailTemplateInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -764,7 +764,7 @@ func (m *awsAwsquery_serializeOpDeleteIdentity) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("DeleteIdentity")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteIdentityInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteIdentityInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -819,7 +819,7 @@ func (m *awsAwsquery_serializeOpDeleteIdentityPolicy) HandleSerialize(ctx contex
 	body.Key("Action").String("DeleteIdentityPolicy")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteIdentityPolicyInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteIdentityPolicyInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -874,7 +874,7 @@ func (m *awsAwsquery_serializeOpDeleteReceiptFilter) HandleSerialize(ctx context
 	body.Key("Action").String("DeleteReceiptFilter")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteReceiptFilterInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteReceiptFilterInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -929,7 +929,7 @@ func (m *awsAwsquery_serializeOpDeleteReceiptRule) HandleSerialize(ctx context.C
 	body.Key("Action").String("DeleteReceiptRule")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteReceiptRuleInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteReceiptRuleInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -984,7 +984,7 @@ func (m *awsAwsquery_serializeOpDeleteReceiptRuleSet) HandleSerialize(ctx contex
 	body.Key("Action").String("DeleteReceiptRuleSet")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteReceiptRuleSetInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteReceiptRuleSetInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1039,7 +1039,7 @@ func (m *awsAwsquery_serializeOpDeleteTemplate) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("DeleteTemplate")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteTemplateInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteTemplateInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1094,7 +1094,7 @@ func (m *awsAwsquery_serializeOpDeleteVerifiedEmailAddress) HandleSerialize(ctx 
 	body.Key("Action").String("DeleteVerifiedEmailAddress")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteVerifiedEmailAddressInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteVerifiedEmailAddressInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1202,7 +1202,7 @@ func (m *awsAwsquery_serializeOpDescribeConfigurationSet) HandleSerialize(ctx co
 	body.Key("Action").String("DescribeConfigurationSet")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeConfigurationSetInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeConfigurationSetInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1257,7 +1257,7 @@ func (m *awsAwsquery_serializeOpDescribeReceiptRule) HandleSerialize(ctx context
 	body.Key("Action").String("DescribeReceiptRule")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeReceiptRuleInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeReceiptRuleInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1312,7 +1312,7 @@ func (m *awsAwsquery_serializeOpDescribeReceiptRuleSet) HandleSerialize(ctx cont
 	body.Key("Action").String("DescribeReceiptRuleSet")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeReceiptRuleSetInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeReceiptRuleSetInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1420,7 +1420,7 @@ func (m *awsAwsquery_serializeOpGetCustomVerificationEmailTemplate) HandleSerial
 	body.Key("Action").String("GetCustomVerificationEmailTemplate")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentGetCustomVerificationEmailTemplateInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetCustomVerificationEmailTemplateInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1475,7 +1475,7 @@ func (m *awsAwsquery_serializeOpGetIdentityDkimAttributes) HandleSerialize(ctx c
 	body.Key("Action").String("GetIdentityDkimAttributes")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentGetIdentityDkimAttributesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetIdentityDkimAttributesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1530,7 +1530,7 @@ func (m *awsAwsquery_serializeOpGetIdentityMailFromDomainAttributes) HandleSeria
 	body.Key("Action").String("GetIdentityMailFromDomainAttributes")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentGetIdentityMailFromDomainAttributesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetIdentityMailFromDomainAttributesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1585,7 +1585,7 @@ func (m *awsAwsquery_serializeOpGetIdentityNotificationAttributes) HandleSeriali
 	body.Key("Action").String("GetIdentityNotificationAttributes")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentGetIdentityNotificationAttributesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetIdentityNotificationAttributesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1640,7 +1640,7 @@ func (m *awsAwsquery_serializeOpGetIdentityPolicies) HandleSerialize(ctx context
 	body.Key("Action").String("GetIdentityPolicies")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentGetIdentityPoliciesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetIdentityPoliciesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1695,7 +1695,7 @@ func (m *awsAwsquery_serializeOpGetIdentityVerificationAttributes) HandleSeriali
 	body.Key("Action").String("GetIdentityVerificationAttributes")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentGetIdentityVerificationAttributesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetIdentityVerificationAttributesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1856,7 +1856,7 @@ func (m *awsAwsquery_serializeOpGetTemplate) HandleSerialize(ctx context.Context
 	body.Key("Action").String("GetTemplate")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentGetTemplateInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetTemplateInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1911,7 +1911,7 @@ func (m *awsAwsquery_serializeOpListConfigurationSets) HandleSerialize(ctx conte
 	body.Key("Action").String("ListConfigurationSets")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentListConfigurationSetsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListConfigurationSetsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1966,7 +1966,7 @@ func (m *awsAwsquery_serializeOpListCustomVerificationEmailTemplates) HandleSeri
 	body.Key("Action").String("ListCustomVerificationEmailTemplates")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentListCustomVerificationEmailTemplatesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListCustomVerificationEmailTemplatesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2021,7 +2021,7 @@ func (m *awsAwsquery_serializeOpListIdentities) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("ListIdentities")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentListIdentitiesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListIdentitiesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2076,7 +2076,7 @@ func (m *awsAwsquery_serializeOpListIdentityPolicies) HandleSerialize(ctx contex
 	body.Key("Action").String("ListIdentityPolicies")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentListIdentityPoliciesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListIdentityPoliciesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2184,7 +2184,7 @@ func (m *awsAwsquery_serializeOpListReceiptRuleSets) HandleSerialize(ctx context
 	body.Key("Action").String("ListReceiptRuleSets")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentListReceiptRuleSetsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListReceiptRuleSetsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2239,7 +2239,7 @@ func (m *awsAwsquery_serializeOpListTemplates) HandleSerialize(ctx context.Conte
 	body.Key("Action").String("ListTemplates")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentListTemplatesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListTemplatesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2347,7 +2347,7 @@ func (m *awsAwsquery_serializeOpPutConfigurationSetDeliveryOptions) HandleSerial
 	body.Key("Action").String("PutConfigurationSetDeliveryOptions")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentPutConfigurationSetDeliveryOptionsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentPutConfigurationSetDeliveryOptionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2402,7 +2402,7 @@ func (m *awsAwsquery_serializeOpPutIdentityPolicy) HandleSerialize(ctx context.C
 	body.Key("Action").String("PutIdentityPolicy")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentPutIdentityPolicyInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentPutIdentityPolicyInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2457,7 +2457,7 @@ func (m *awsAwsquery_serializeOpReorderReceiptRuleSet) HandleSerialize(ctx conte
 	body.Key("Action").String("ReorderReceiptRuleSet")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentReorderReceiptRuleSetInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentReorderReceiptRuleSetInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2512,7 +2512,7 @@ func (m *awsAwsquery_serializeOpSendBounce) HandleSerialize(ctx context.Context,
 	body.Key("Action").String("SendBounce")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentSendBounceInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSendBounceInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2567,7 +2567,7 @@ func (m *awsAwsquery_serializeOpSendBulkTemplatedEmail) HandleSerialize(ctx cont
 	body.Key("Action").String("SendBulkTemplatedEmail")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentSendBulkTemplatedEmailInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSendBulkTemplatedEmailInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2622,7 +2622,7 @@ func (m *awsAwsquery_serializeOpSendCustomVerificationEmail) HandleSerialize(ctx
 	body.Key("Action").String("SendCustomVerificationEmail")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentSendCustomVerificationEmailInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSendCustomVerificationEmailInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2677,7 +2677,7 @@ func (m *awsAwsquery_serializeOpSendEmail) HandleSerialize(ctx context.Context, 
 	body.Key("Action").String("SendEmail")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentSendEmailInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSendEmailInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2732,7 +2732,7 @@ func (m *awsAwsquery_serializeOpSendRawEmail) HandleSerialize(ctx context.Contex
 	body.Key("Action").String("SendRawEmail")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentSendRawEmailInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSendRawEmailInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2787,7 +2787,7 @@ func (m *awsAwsquery_serializeOpSendTemplatedEmail) HandleSerialize(ctx context.
 	body.Key("Action").String("SendTemplatedEmail")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentSendTemplatedEmailInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSendTemplatedEmailInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2842,7 +2842,7 @@ func (m *awsAwsquery_serializeOpSetActiveReceiptRuleSet) HandleSerialize(ctx con
 	body.Key("Action").String("SetActiveReceiptRuleSet")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentSetActiveReceiptRuleSetInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSetActiveReceiptRuleSetInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2897,7 +2897,7 @@ func (m *awsAwsquery_serializeOpSetIdentityDkimEnabled) HandleSerialize(ctx cont
 	body.Key("Action").String("SetIdentityDkimEnabled")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentSetIdentityDkimEnabledInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSetIdentityDkimEnabledInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2952,7 +2952,7 @@ func (m *awsAwsquery_serializeOpSetIdentityFeedbackForwardingEnabled) HandleSeri
 	body.Key("Action").String("SetIdentityFeedbackForwardingEnabled")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentSetIdentityFeedbackForwardingEnabledInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSetIdentityFeedbackForwardingEnabledInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3007,7 +3007,7 @@ func (m *awsAwsquery_serializeOpSetIdentityHeadersInNotificationsEnabled) Handle
 	body.Key("Action").String("SetIdentityHeadersInNotificationsEnabled")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentSetIdentityHeadersInNotificationsEnabledInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSetIdentityHeadersInNotificationsEnabledInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3062,7 +3062,7 @@ func (m *awsAwsquery_serializeOpSetIdentityMailFromDomain) HandleSerialize(ctx c
 	body.Key("Action").String("SetIdentityMailFromDomain")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentSetIdentityMailFromDomainInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSetIdentityMailFromDomainInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3117,7 +3117,7 @@ func (m *awsAwsquery_serializeOpSetIdentityNotificationTopic) HandleSerialize(ct
 	body.Key("Action").String("SetIdentityNotificationTopic")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentSetIdentityNotificationTopicInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSetIdentityNotificationTopicInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3172,7 +3172,7 @@ func (m *awsAwsquery_serializeOpSetReceiptRulePosition) HandleSerialize(ctx cont
 	body.Key("Action").String("SetReceiptRulePosition")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentSetReceiptRulePositionInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSetReceiptRulePositionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3227,7 +3227,7 @@ func (m *awsAwsquery_serializeOpTestRenderTemplate) HandleSerialize(ctx context.
 	body.Key("Action").String("TestRenderTemplate")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentTestRenderTemplateInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentTestRenderTemplateInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3282,7 +3282,7 @@ func (m *awsAwsquery_serializeOpUpdateAccountSendingEnabled) HandleSerialize(ctx
 	body.Key("Action").String("UpdateAccountSendingEnabled")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentUpdateAccountSendingEnabledInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUpdateAccountSendingEnabledInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3337,7 +3337,7 @@ func (m *awsAwsquery_serializeOpUpdateConfigurationSetEventDestination) HandleSe
 	body.Key("Action").String("UpdateConfigurationSetEventDestination")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentUpdateConfigurationSetEventDestinationInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUpdateConfigurationSetEventDestinationInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3392,7 +3392,7 @@ func (m *awsAwsquery_serializeOpUpdateConfigurationSetReputationMetricsEnabled) 
 	body.Key("Action").String("UpdateConfigurationSetReputationMetricsEnabled")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentUpdateConfigurationSetReputationMetricsEnabledInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUpdateConfigurationSetReputationMetricsEnabledInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3447,7 +3447,7 @@ func (m *awsAwsquery_serializeOpUpdateConfigurationSetSendingEnabled) HandleSeri
 	body.Key("Action").String("UpdateConfigurationSetSendingEnabled")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentUpdateConfigurationSetSendingEnabledInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUpdateConfigurationSetSendingEnabledInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3502,7 +3502,7 @@ func (m *awsAwsquery_serializeOpUpdateConfigurationSetTrackingOptions) HandleSer
 	body.Key("Action").String("UpdateConfigurationSetTrackingOptions")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentUpdateConfigurationSetTrackingOptionsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUpdateConfigurationSetTrackingOptionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3557,7 +3557,7 @@ func (m *awsAwsquery_serializeOpUpdateCustomVerificationEmailTemplate) HandleSer
 	body.Key("Action").String("UpdateCustomVerificationEmailTemplate")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentUpdateCustomVerificationEmailTemplateInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUpdateCustomVerificationEmailTemplateInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3612,7 +3612,7 @@ func (m *awsAwsquery_serializeOpUpdateReceiptRule) HandleSerialize(ctx context.C
 	body.Key("Action").String("UpdateReceiptRule")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentUpdateReceiptRuleInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUpdateReceiptRuleInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3667,7 +3667,7 @@ func (m *awsAwsquery_serializeOpUpdateTemplate) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("UpdateTemplate")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentUpdateTemplateInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUpdateTemplateInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3722,7 +3722,7 @@ func (m *awsAwsquery_serializeOpVerifyDomainDkim) HandleSerialize(ctx context.Co
 	body.Key("Action").String("VerifyDomainDkim")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentVerifyDomainDkimInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentVerifyDomainDkimInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3777,7 +3777,7 @@ func (m *awsAwsquery_serializeOpVerifyDomainIdentity) HandleSerialize(ctx contex
 	body.Key("Action").String("VerifyDomainIdentity")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentVerifyDomainIdentityInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentVerifyDomainIdentityInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3832,7 +3832,7 @@ func (m *awsAwsquery_serializeOpVerifyEmailAddress) HandleSerialize(ctx context.
 	body.Key("Action").String("VerifyEmailAddress")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentVerifyEmailAddressInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentVerifyEmailAddressInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3887,7 +3887,7 @@ func (m *awsAwsquery_serializeOpVerifyEmailIdentity) HandleSerialize(ctx context
 	body.Key("Action").String("VerifyEmailIdentity")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentVerifyEmailIdentityInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentVerifyEmailIdentityInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4832,7 +4832,7 @@ func awsAwsquery_serializeDocumentWorkmailAction(v *types.WorkmailAction, value 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCloneReceiptRuleSetInput(v *CloneReceiptRuleSetInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCloneReceiptRuleSetInput(v *CloneReceiptRuleSetInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4849,7 +4849,7 @@ func awsAwsquery_serializeDocumentCloneReceiptRuleSetInput(v *CloneReceiptRuleSe
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateConfigurationSetEventDestinationInput(v *CreateConfigurationSetEventDestinationInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateConfigurationSetEventDestinationInput(v *CreateConfigurationSetEventDestinationInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4868,7 +4868,7 @@ func awsAwsquery_serializeDocumentCreateConfigurationSetEventDestinationInput(v 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateConfigurationSetInput(v *CreateConfigurationSetInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateConfigurationSetInput(v *CreateConfigurationSetInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4882,7 +4882,7 @@ func awsAwsquery_serializeDocumentCreateConfigurationSetInput(v *CreateConfigura
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateConfigurationSetTrackingOptionsInput(v *CreateConfigurationSetTrackingOptionsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateConfigurationSetTrackingOptionsInput(v *CreateConfigurationSetTrackingOptionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4901,7 +4901,7 @@ func awsAwsquery_serializeDocumentCreateConfigurationSetTrackingOptionsInput(v *
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateCustomVerificationEmailTemplateInput(v *CreateCustomVerificationEmailTemplateInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateCustomVerificationEmailTemplateInput(v *CreateCustomVerificationEmailTemplateInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4938,7 +4938,7 @@ func awsAwsquery_serializeDocumentCreateCustomVerificationEmailTemplateInput(v *
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateReceiptFilterInput(v *CreateReceiptFilterInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateReceiptFilterInput(v *CreateReceiptFilterInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4952,7 +4952,7 @@ func awsAwsquery_serializeDocumentCreateReceiptFilterInput(v *CreateReceiptFilte
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateReceiptRuleInput(v *CreateReceiptRuleInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateReceiptRuleInput(v *CreateReceiptRuleInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4976,7 +4976,7 @@ func awsAwsquery_serializeDocumentCreateReceiptRuleInput(v *CreateReceiptRuleInp
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateReceiptRuleSetInput(v *CreateReceiptRuleSetInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateReceiptRuleSetInput(v *CreateReceiptRuleSetInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4988,7 +4988,7 @@ func awsAwsquery_serializeDocumentCreateReceiptRuleSetInput(v *CreateReceiptRule
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateTemplateInput(v *CreateTemplateInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateTemplateInput(v *CreateTemplateInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5002,7 +5002,7 @@ func awsAwsquery_serializeDocumentCreateTemplateInput(v *CreateTemplateInput, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteConfigurationSetEventDestinationInput(v *DeleteConfigurationSetEventDestinationInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteConfigurationSetEventDestinationInput(v *DeleteConfigurationSetEventDestinationInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5019,7 +5019,7 @@ func awsAwsquery_serializeDocumentDeleteConfigurationSetEventDestinationInput(v 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteConfigurationSetInput(v *DeleteConfigurationSetInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteConfigurationSetInput(v *DeleteConfigurationSetInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5031,7 +5031,7 @@ func awsAwsquery_serializeDocumentDeleteConfigurationSetInput(v *DeleteConfigura
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteConfigurationSetTrackingOptionsInput(v *DeleteConfigurationSetTrackingOptionsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteConfigurationSetTrackingOptionsInput(v *DeleteConfigurationSetTrackingOptionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5043,7 +5043,7 @@ func awsAwsquery_serializeDocumentDeleteConfigurationSetTrackingOptionsInput(v *
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteCustomVerificationEmailTemplateInput(v *DeleteCustomVerificationEmailTemplateInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteCustomVerificationEmailTemplateInput(v *DeleteCustomVerificationEmailTemplateInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5055,7 +5055,7 @@ func awsAwsquery_serializeDocumentDeleteCustomVerificationEmailTemplateInput(v *
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteIdentityInput(v *DeleteIdentityInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteIdentityInput(v *DeleteIdentityInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5067,7 +5067,7 @@ func awsAwsquery_serializeDocumentDeleteIdentityInput(v *DeleteIdentityInput, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteIdentityPolicyInput(v *DeleteIdentityPolicyInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteIdentityPolicyInput(v *DeleteIdentityPolicyInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5084,7 +5084,7 @@ func awsAwsquery_serializeDocumentDeleteIdentityPolicyInput(v *DeleteIdentityPol
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteReceiptFilterInput(v *DeleteReceiptFilterInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteReceiptFilterInput(v *DeleteReceiptFilterInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5096,7 +5096,7 @@ func awsAwsquery_serializeDocumentDeleteReceiptFilterInput(v *DeleteReceiptFilte
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteReceiptRuleInput(v *DeleteReceiptRuleInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteReceiptRuleInput(v *DeleteReceiptRuleInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5113,7 +5113,7 @@ func awsAwsquery_serializeDocumentDeleteReceiptRuleInput(v *DeleteReceiptRuleInp
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteReceiptRuleSetInput(v *DeleteReceiptRuleSetInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteReceiptRuleSetInput(v *DeleteReceiptRuleSetInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5125,7 +5125,7 @@ func awsAwsquery_serializeDocumentDeleteReceiptRuleSetInput(v *DeleteReceiptRule
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteTemplateInput(v *DeleteTemplateInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteTemplateInput(v *DeleteTemplateInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5137,7 +5137,7 @@ func awsAwsquery_serializeDocumentDeleteTemplateInput(v *DeleteTemplateInput, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteVerifiedEmailAddressInput(v *DeleteVerifiedEmailAddressInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteVerifiedEmailAddressInput(v *DeleteVerifiedEmailAddressInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5149,14 +5149,14 @@ func awsAwsquery_serializeDocumentDeleteVerifiedEmailAddressInput(v *DeleteVerif
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeActiveReceiptRuleSetInput(v *DescribeActiveReceiptRuleSetInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeActiveReceiptRuleSetInput(v *DescribeActiveReceiptRuleSetInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeConfigurationSetInput(v *DescribeConfigurationSetInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeConfigurationSetInput(v *DescribeConfigurationSetInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5175,7 +5175,7 @@ func awsAwsquery_serializeDocumentDescribeConfigurationSetInput(v *DescribeConfi
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeReceiptRuleInput(v *DescribeReceiptRuleInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeReceiptRuleInput(v *DescribeReceiptRuleInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5192,7 +5192,7 @@ func awsAwsquery_serializeDocumentDescribeReceiptRuleInput(v *DescribeReceiptRul
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeReceiptRuleSetInput(v *DescribeReceiptRuleSetInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeReceiptRuleSetInput(v *DescribeReceiptRuleSetInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5211,7 +5211,7 @@ func awsAwsquery_serializeDocumentGetAccountSendingEnabledInput(v *GetAccountSen
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetCustomVerificationEmailTemplateInput(v *GetCustomVerificationEmailTemplateInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetCustomVerificationEmailTemplateInput(v *GetCustomVerificationEmailTemplateInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5223,7 +5223,7 @@ func awsAwsquery_serializeDocumentGetCustomVerificationEmailTemplateInput(v *Get
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetIdentityDkimAttributesInput(v *GetIdentityDkimAttributesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetIdentityDkimAttributesInput(v *GetIdentityDkimAttributesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5237,7 +5237,7 @@ func awsAwsquery_serializeDocumentGetIdentityDkimAttributesInput(v *GetIdentityD
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetIdentityMailFromDomainAttributesInput(v *GetIdentityMailFromDomainAttributesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetIdentityMailFromDomainAttributesInput(v *GetIdentityMailFromDomainAttributesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5251,7 +5251,7 @@ func awsAwsquery_serializeDocumentGetIdentityMailFromDomainAttributesInput(v *Ge
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetIdentityNotificationAttributesInput(v *GetIdentityNotificationAttributesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetIdentityNotificationAttributesInput(v *GetIdentityNotificationAttributesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5265,7 +5265,7 @@ func awsAwsquery_serializeDocumentGetIdentityNotificationAttributesInput(v *GetI
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetIdentityPoliciesInput(v *GetIdentityPoliciesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetIdentityPoliciesInput(v *GetIdentityPoliciesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5284,7 +5284,7 @@ func awsAwsquery_serializeDocumentGetIdentityPoliciesInput(v *GetIdentityPolicie
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetIdentityVerificationAttributesInput(v *GetIdentityVerificationAttributesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetIdentityVerificationAttributesInput(v *GetIdentityVerificationAttributesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5312,7 +5312,7 @@ func awsAwsquery_serializeDocumentGetSendStatisticsInput(v *GetSendStatisticsInp
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetTemplateInput(v *GetTemplateInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetTemplateInput(v *GetTemplateInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5324,7 +5324,7 @@ func awsAwsquery_serializeDocumentGetTemplateInput(v *GetTemplateInput, value qu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListConfigurationSetsInput(v *ListConfigurationSetsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListConfigurationSetsInput(v *ListConfigurationSetsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5341,7 +5341,7 @@ func awsAwsquery_serializeDocumentListConfigurationSetsInput(v *ListConfiguratio
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListCustomVerificationEmailTemplatesInput(v *ListCustomVerificationEmailTemplatesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListCustomVerificationEmailTemplatesInput(v *ListCustomVerificationEmailTemplatesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5358,7 +5358,7 @@ func awsAwsquery_serializeDocumentListCustomVerificationEmailTemplatesInput(v *L
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListIdentitiesInput(v *ListIdentitiesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListIdentitiesInput(v *ListIdentitiesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5380,7 +5380,7 @@ func awsAwsquery_serializeDocumentListIdentitiesInput(v *ListIdentitiesInput, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListIdentityPoliciesInput(v *ListIdentityPoliciesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListIdentityPoliciesInput(v *ListIdentityPoliciesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5392,14 +5392,14 @@ func awsAwsquery_serializeDocumentListIdentityPoliciesInput(v *ListIdentityPolic
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListReceiptFiltersInput(v *ListReceiptFiltersInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListReceiptFiltersInput(v *ListReceiptFiltersInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListReceiptRuleSetsInput(v *ListReceiptRuleSetsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListReceiptRuleSetsInput(v *ListReceiptRuleSetsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5411,7 +5411,7 @@ func awsAwsquery_serializeDocumentListReceiptRuleSetsInput(v *ListReceiptRuleSet
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListTemplatesInput(v *ListTemplatesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListTemplatesInput(v *ListTemplatesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5435,7 +5435,7 @@ func awsAwsquery_serializeDocumentListVerifiedEmailAddressesInput(v *ListVerifie
 	return nil
 }
 
-func awsAwsquery_serializeDocumentPutConfigurationSetDeliveryOptionsInput(v *PutConfigurationSetDeliveryOptionsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentPutConfigurationSetDeliveryOptionsInput(v *PutConfigurationSetDeliveryOptionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5454,7 +5454,7 @@ func awsAwsquery_serializeDocumentPutConfigurationSetDeliveryOptionsInput(v *Put
 	return nil
 }
 
-func awsAwsquery_serializeDocumentPutIdentityPolicyInput(v *PutIdentityPolicyInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentPutIdentityPolicyInput(v *PutIdentityPolicyInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5476,7 +5476,7 @@ func awsAwsquery_serializeDocumentPutIdentityPolicyInput(v *PutIdentityPolicyInp
 	return nil
 }
 
-func awsAwsquery_serializeDocumentReorderReceiptRuleSetInput(v *ReorderReceiptRuleSetInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentReorderReceiptRuleSetInput(v *ReorderReceiptRuleSetInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5495,7 +5495,7 @@ func awsAwsquery_serializeDocumentReorderReceiptRuleSetInput(v *ReorderReceiptRu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSendBounceInput(v *SendBounceInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSendBounceInput(v *SendBounceInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5536,7 +5536,7 @@ func awsAwsquery_serializeDocumentSendBounceInput(v *SendBounceInput, value quer
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSendBulkTemplatedEmailInput(v *SendBulkTemplatedEmailInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSendBulkTemplatedEmailInput(v *SendBulkTemplatedEmailInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5604,7 +5604,7 @@ func awsAwsquery_serializeDocumentSendBulkTemplatedEmailInput(v *SendBulkTemplat
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSendCustomVerificationEmailInput(v *SendCustomVerificationEmailInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSendCustomVerificationEmailInput(v *SendCustomVerificationEmailInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5626,7 +5626,7 @@ func awsAwsquery_serializeDocumentSendCustomVerificationEmailInput(v *SendCustom
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSendEmailInput(v *SendEmailInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSendEmailInput(v *SendEmailInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5686,7 +5686,7 @@ func awsAwsquery_serializeDocumentSendEmailInput(v *SendEmailInput, value query.
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSendRawEmailInput(v *SendRawEmailInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSendRawEmailInput(v *SendRawEmailInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5739,7 +5739,7 @@ func awsAwsquery_serializeDocumentSendRawEmailInput(v *SendRawEmailInput, value 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSendTemplatedEmailInput(v *SendTemplatedEmailInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSendTemplatedEmailInput(v *SendTemplatedEmailInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5807,7 +5807,7 @@ func awsAwsquery_serializeDocumentSendTemplatedEmailInput(v *SendTemplatedEmailI
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSetActiveReceiptRuleSetInput(v *SetActiveReceiptRuleSetInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSetActiveReceiptRuleSetInput(v *SetActiveReceiptRuleSetInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5819,7 +5819,7 @@ func awsAwsquery_serializeDocumentSetActiveReceiptRuleSetInput(v *SetActiveRecei
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSetIdentityDkimEnabledInput(v *SetIdentityDkimEnabledInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSetIdentityDkimEnabledInput(v *SetIdentityDkimEnabledInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5836,7 +5836,7 @@ func awsAwsquery_serializeDocumentSetIdentityDkimEnabledInput(v *SetIdentityDkim
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSetIdentityFeedbackForwardingEnabledInput(v *SetIdentityFeedbackForwardingEnabledInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSetIdentityFeedbackForwardingEnabledInput(v *SetIdentityFeedbackForwardingEnabledInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5853,7 +5853,7 @@ func awsAwsquery_serializeDocumentSetIdentityFeedbackForwardingEnabledInput(v *S
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSetIdentityHeadersInNotificationsEnabledInput(v *SetIdentityHeadersInNotificationsEnabledInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSetIdentityHeadersInNotificationsEnabledInput(v *SetIdentityHeadersInNotificationsEnabledInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5875,7 +5875,7 @@ func awsAwsquery_serializeDocumentSetIdentityHeadersInNotificationsEnabledInput(
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSetIdentityMailFromDomainInput(v *SetIdentityMailFromDomainInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSetIdentityMailFromDomainInput(v *SetIdentityMailFromDomainInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5897,7 +5897,7 @@ func awsAwsquery_serializeDocumentSetIdentityMailFromDomainInput(v *SetIdentityM
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSetIdentityNotificationTopicInput(v *SetIdentityNotificationTopicInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSetIdentityNotificationTopicInput(v *SetIdentityNotificationTopicInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5919,7 +5919,7 @@ func awsAwsquery_serializeDocumentSetIdentityNotificationTopicInput(v *SetIdenti
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSetReceiptRulePositionInput(v *SetReceiptRulePositionInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSetReceiptRulePositionInput(v *SetReceiptRulePositionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5941,7 +5941,7 @@ func awsAwsquery_serializeDocumentSetReceiptRulePositionInput(v *SetReceiptRuleP
 	return nil
 }
 
-func awsAwsquery_serializeDocumentTestRenderTemplateInput(v *TestRenderTemplateInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentTestRenderTemplateInput(v *TestRenderTemplateInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5958,7 +5958,7 @@ func awsAwsquery_serializeDocumentTestRenderTemplateInput(v *TestRenderTemplateI
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUpdateAccountSendingEnabledInput(v *UpdateAccountSendingEnabledInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUpdateAccountSendingEnabledInput(v *UpdateAccountSendingEnabledInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5970,7 +5970,7 @@ func awsAwsquery_serializeDocumentUpdateAccountSendingEnabledInput(v *UpdateAcco
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUpdateConfigurationSetEventDestinationInput(v *UpdateConfigurationSetEventDestinationInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUpdateConfigurationSetEventDestinationInput(v *UpdateConfigurationSetEventDestinationInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5989,7 +5989,7 @@ func awsAwsquery_serializeDocumentUpdateConfigurationSetEventDestinationInput(v 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUpdateConfigurationSetReputationMetricsEnabledInput(v *UpdateConfigurationSetReputationMetricsEnabledInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUpdateConfigurationSetReputationMetricsEnabledInput(v *UpdateConfigurationSetReputationMetricsEnabledInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6006,7 +6006,7 @@ func awsAwsquery_serializeDocumentUpdateConfigurationSetReputationMetricsEnabled
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUpdateConfigurationSetSendingEnabledInput(v *UpdateConfigurationSetSendingEnabledInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUpdateConfigurationSetSendingEnabledInput(v *UpdateConfigurationSetSendingEnabledInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6023,7 +6023,7 @@ func awsAwsquery_serializeDocumentUpdateConfigurationSetSendingEnabledInput(v *U
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUpdateConfigurationSetTrackingOptionsInput(v *UpdateConfigurationSetTrackingOptionsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUpdateConfigurationSetTrackingOptionsInput(v *UpdateConfigurationSetTrackingOptionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6042,7 +6042,7 @@ func awsAwsquery_serializeDocumentUpdateConfigurationSetTrackingOptionsInput(v *
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUpdateCustomVerificationEmailTemplateInput(v *UpdateCustomVerificationEmailTemplateInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUpdateCustomVerificationEmailTemplateInput(v *UpdateCustomVerificationEmailTemplateInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6079,7 +6079,7 @@ func awsAwsquery_serializeDocumentUpdateCustomVerificationEmailTemplateInput(v *
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUpdateReceiptRuleInput(v *UpdateReceiptRuleInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUpdateReceiptRuleInput(v *UpdateReceiptRuleInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6098,7 +6098,7 @@ func awsAwsquery_serializeDocumentUpdateReceiptRuleInput(v *UpdateReceiptRuleInp
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUpdateTemplateInput(v *UpdateTemplateInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUpdateTemplateInput(v *UpdateTemplateInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6112,7 +6112,7 @@ func awsAwsquery_serializeDocumentUpdateTemplateInput(v *UpdateTemplateInput, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentVerifyDomainDkimInput(v *VerifyDomainDkimInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentVerifyDomainDkimInput(v *VerifyDomainDkimInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6124,7 +6124,7 @@ func awsAwsquery_serializeDocumentVerifyDomainDkimInput(v *VerifyDomainDkimInput
 	return nil
 }
 
-func awsAwsquery_serializeDocumentVerifyDomainIdentityInput(v *VerifyDomainIdentityInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentVerifyDomainIdentityInput(v *VerifyDomainIdentityInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6136,7 +6136,7 @@ func awsAwsquery_serializeDocumentVerifyDomainIdentityInput(v *VerifyDomainIdent
 	return nil
 }
 
-func awsAwsquery_serializeDocumentVerifyEmailAddressInput(v *VerifyEmailAddressInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentVerifyEmailAddressInput(v *VerifyEmailAddressInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -6148,7 +6148,7 @@ func awsAwsquery_serializeDocumentVerifyEmailAddressInput(v *VerifyEmailAddressI
 	return nil
 }
 
-func awsAwsquery_serializeDocumentVerifyEmailIdentityInput(v *VerifyEmailIdentityInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentVerifyEmailIdentityInput(v *VerifyEmailIdentityInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 

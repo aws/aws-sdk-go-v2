@@ -53,7 +53,7 @@ func (m *awsAwsjson11_deserializeOpDescribeAffectedAccountsForOrganization) Hand
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeAffectedAccountsForOrganizationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeAffectedAccountsForOrganizationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -153,7 +153,7 @@ func (m *awsAwsjson11_deserializeOpDescribeAffectedEntities) HandleDeserialize(c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeAffectedEntitiesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeAffectedEntitiesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -256,7 +256,7 @@ func (m *awsAwsjson11_deserializeOpDescribeAffectedEntitiesForOrganization) Hand
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeAffectedEntitiesForOrganizationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeAffectedEntitiesForOrganizationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -359,7 +359,7 @@ func (m *awsAwsjson11_deserializeOpDescribeEntityAggregates) HandleDeserialize(c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeEntityAggregatesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeEntityAggregatesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -456,7 +456,7 @@ func (m *awsAwsjson11_deserializeOpDescribeEventAggregates) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeEventAggregatesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeEventAggregatesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -556,7 +556,7 @@ func (m *awsAwsjson11_deserializeOpDescribeEventDetails) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeEventDetailsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeEventDetailsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -656,7 +656,7 @@ func (m *awsAwsjson11_deserializeOpDescribeEventDetailsForOrganization) HandleDe
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeEventDetailsForOrganizationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeEventDetailsForOrganizationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -756,7 +756,7 @@ func (m *awsAwsjson11_deserializeOpDescribeEvents) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeEventsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeEventsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -859,7 +859,7 @@ func (m *awsAwsjson11_deserializeOpDescribeEventsForOrganization) HandleDeserial
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeEventsForOrganizationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeEventsForOrganizationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -962,7 +962,7 @@ func (m *awsAwsjson11_deserializeOpDescribeEventTypes) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeEventTypesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeEventTypesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1065,7 +1065,7 @@ func (m *awsAwsjson11_deserializeOpDescribeHealthServiceStatusForOrganization) H
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeHealthServiceStatusForOrganizationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeHealthServiceStatusForOrganizationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3574,7 +3574,7 @@ func awsAwsjson11_deserializeDocumentUnsupportedLocale(v **types.UnsupportedLoca
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeAffectedAccountsForOrganizationOutput(v **DescribeAffectedAccountsForOrganizationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeAffectedAccountsForOrganizationOutput(v **DescribeAffectedAccountsForOrganizationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3656,7 +3656,7 @@ func awsAwsjson11_deserializeDocumentDescribeAffectedAccountsForOrganizationOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeAffectedEntitiesForOrganizationOutput(v **DescribeAffectedEntitiesForOrganizationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeAffectedEntitiesForOrganizationOutput(v **DescribeAffectedEntitiesForOrganizationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3730,7 +3730,7 @@ func awsAwsjson11_deserializeDocumentDescribeAffectedEntitiesForOrganizationOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeAffectedEntitiesOutput(v **DescribeAffectedEntitiesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeAffectedEntitiesOutput(v **DescribeAffectedEntitiesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3799,7 +3799,7 @@ func awsAwsjson11_deserializeDocumentDescribeAffectedEntitiesOutput(v **Describe
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeEntityAggregatesOutput(v **DescribeEntityAggregatesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeEntityAggregatesOutput(v **DescribeEntityAggregatesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3855,7 +3855,7 @@ func awsAwsjson11_deserializeDocumentDescribeEntityAggregatesOutput(v **Describe
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeEventAggregatesOutput(v **DescribeEventAggregatesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeEventAggregatesOutput(v **DescribeEventAggregatesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3924,7 +3924,7 @@ func awsAwsjson11_deserializeDocumentDescribeEventAggregatesOutput(v **DescribeE
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeEventDetailsForOrganizationOutput(v **DescribeEventDetailsForOrganizationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeEventDetailsForOrganizationOutput(v **DescribeEventDetailsForOrganizationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3985,7 +3985,7 @@ func awsAwsjson11_deserializeDocumentDescribeEventDetailsForOrganizationOutput(v
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeEventDetailsOutput(v **DescribeEventDetailsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeEventDetailsOutput(v **DescribeEventDetailsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4046,7 +4046,7 @@ func awsAwsjson11_deserializeDocumentDescribeEventDetailsOutput(v **DescribeEven
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeEventsForOrganizationOutput(v **DescribeEventsForOrganizationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeEventsForOrganizationOutput(v **DescribeEventsForOrganizationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4115,7 +4115,7 @@ func awsAwsjson11_deserializeDocumentDescribeEventsForOrganizationOutput(v **Des
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeEventsOutput(v **DescribeEventsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeEventsOutput(v **DescribeEventsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4184,7 +4184,7 @@ func awsAwsjson11_deserializeDocumentDescribeEventsOutput(v **DescribeEventsOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeEventTypesOutput(v **DescribeEventTypesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeEventTypesOutput(v **DescribeEventTypesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4253,7 +4253,7 @@ func awsAwsjson11_deserializeDocumentDescribeEventTypesOutput(v **DescribeEventT
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeHealthServiceStatusForOrganizationOutput(v **DescribeHealthServiceStatusForOrganizationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeHealthServiceStatusForOrganizationOutput(v **DescribeHealthServiceStatusForOrganizationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

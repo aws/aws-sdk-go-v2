@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpApproveSkill) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.ApproveSkill")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentApproveSkillInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentApproveSkillInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpAssociateContactWithAddressBook) HandleSerializ
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.AssociateContactWithAddressBook")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAssociateContactWithAddressBookInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAssociateContactWithAddressBookInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpAssociateDeviceWithNetworkProfile) HandleSerial
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.AssociateDeviceWithNetworkProfile")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAssociateDeviceWithNetworkProfileInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAssociateDeviceWithNetworkProfileInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpAssociateDeviceWithRoom) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.AssociateDeviceWithRoom")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAssociateDeviceWithRoomInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAssociateDeviceWithRoomInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpAssociateSkillGroupWithRoom) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.AssociateSkillGroupWithRoom")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAssociateSkillGroupWithRoomInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAssociateSkillGroupWithRoomInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpAssociateSkillWithSkillGroup) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.AssociateSkillWithSkillGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAssociateSkillWithSkillGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAssociateSkillWithSkillGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson11_serializeOpAssociateSkillWithUsers) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.AssociateSkillWithUsers")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAssociateSkillWithUsersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAssociateSkillWithUsersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -366,7 +366,7 @@ func (m *awsAwsjson11_serializeOpCreateAddressBook) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.CreateAddressBook")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateAddressBookInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateAddressBookInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -412,7 +412,7 @@ func (m *awsAwsjson11_serializeOpCreateBusinessReportSchedule) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.CreateBusinessReportSchedule")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateBusinessReportScheduleInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateBusinessReportScheduleInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -458,7 +458,7 @@ func (m *awsAwsjson11_serializeOpCreateConferenceProvider) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.CreateConferenceProvider")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateConferenceProviderInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateConferenceProviderInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -504,7 +504,7 @@ func (m *awsAwsjson11_serializeOpCreateContact) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.CreateContact")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateContactInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateContactInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -550,7 +550,7 @@ func (m *awsAwsjson11_serializeOpCreateGatewayGroup) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.CreateGatewayGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateGatewayGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateGatewayGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -596,7 +596,7 @@ func (m *awsAwsjson11_serializeOpCreateNetworkProfile) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.CreateNetworkProfile")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateNetworkProfileInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateNetworkProfileInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -642,7 +642,7 @@ func (m *awsAwsjson11_serializeOpCreateProfile) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.CreateProfile")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateProfileInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateProfileInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -688,7 +688,7 @@ func (m *awsAwsjson11_serializeOpCreateRoom) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.CreateRoom")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateRoomInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateRoomInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -734,7 +734,7 @@ func (m *awsAwsjson11_serializeOpCreateSkillGroup) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.CreateSkillGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateSkillGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateSkillGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -780,7 +780,7 @@ func (m *awsAwsjson11_serializeOpCreateUser) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.CreateUser")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateUserInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateUserInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -826,7 +826,7 @@ func (m *awsAwsjson11_serializeOpDeleteAddressBook) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.DeleteAddressBook")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteAddressBookInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteAddressBookInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -872,7 +872,7 @@ func (m *awsAwsjson11_serializeOpDeleteBusinessReportSchedule) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.DeleteBusinessReportSchedule")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteBusinessReportScheduleInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteBusinessReportScheduleInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -918,7 +918,7 @@ func (m *awsAwsjson11_serializeOpDeleteConferenceProvider) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.DeleteConferenceProvider")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteConferenceProviderInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteConferenceProviderInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -964,7 +964,7 @@ func (m *awsAwsjson11_serializeOpDeleteContact) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.DeleteContact")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteContactInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteContactInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1010,7 +1010,7 @@ func (m *awsAwsjson11_serializeOpDeleteDevice) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.DeleteDevice")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteDeviceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteDeviceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1056,7 +1056,7 @@ func (m *awsAwsjson11_serializeOpDeleteDeviceUsageData) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.DeleteDeviceUsageData")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteDeviceUsageDataInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteDeviceUsageDataInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1102,7 +1102,7 @@ func (m *awsAwsjson11_serializeOpDeleteGatewayGroup) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.DeleteGatewayGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteGatewayGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteGatewayGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1148,7 +1148,7 @@ func (m *awsAwsjson11_serializeOpDeleteNetworkProfile) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.DeleteNetworkProfile")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteNetworkProfileInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteNetworkProfileInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1194,7 +1194,7 @@ func (m *awsAwsjson11_serializeOpDeleteProfile) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.DeleteProfile")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteProfileInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteProfileInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1240,7 +1240,7 @@ func (m *awsAwsjson11_serializeOpDeleteRoom) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.DeleteRoom")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteRoomInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteRoomInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1286,7 +1286,7 @@ func (m *awsAwsjson11_serializeOpDeleteRoomSkillParameter) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.DeleteRoomSkillParameter")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteRoomSkillParameterInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteRoomSkillParameterInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1332,7 +1332,7 @@ func (m *awsAwsjson11_serializeOpDeleteSkillAuthorization) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.DeleteSkillAuthorization")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteSkillAuthorizationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteSkillAuthorizationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1378,7 +1378,7 @@ func (m *awsAwsjson11_serializeOpDeleteSkillGroup) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.DeleteSkillGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteSkillGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteSkillGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1424,7 +1424,7 @@ func (m *awsAwsjson11_serializeOpDeleteUser) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.DeleteUser")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteUserInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteUserInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1470,7 +1470,7 @@ func (m *awsAwsjson11_serializeOpDisassociateContactFromAddressBook) HandleSeria
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.DisassociateContactFromAddressBook")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDisassociateContactFromAddressBookInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDisassociateContactFromAddressBookInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1516,7 +1516,7 @@ func (m *awsAwsjson11_serializeOpDisassociateDeviceFromRoom) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.DisassociateDeviceFromRoom")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDisassociateDeviceFromRoomInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDisassociateDeviceFromRoomInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1562,7 +1562,7 @@ func (m *awsAwsjson11_serializeOpDisassociateSkillFromSkillGroup) HandleSerializ
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.DisassociateSkillFromSkillGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDisassociateSkillFromSkillGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDisassociateSkillFromSkillGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1608,7 +1608,7 @@ func (m *awsAwsjson11_serializeOpDisassociateSkillFromUsers) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.DisassociateSkillFromUsers")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDisassociateSkillFromUsersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDisassociateSkillFromUsersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1654,7 +1654,7 @@ func (m *awsAwsjson11_serializeOpDisassociateSkillGroupFromRoom) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.DisassociateSkillGroupFromRoom")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDisassociateSkillGroupFromRoomInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDisassociateSkillGroupFromRoomInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1700,7 +1700,7 @@ func (m *awsAwsjson11_serializeOpForgetSmartHomeAppliances) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.ForgetSmartHomeAppliances")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentForgetSmartHomeAppliancesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentForgetSmartHomeAppliancesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1746,7 +1746,7 @@ func (m *awsAwsjson11_serializeOpGetAddressBook) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.GetAddressBook")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetAddressBookInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetAddressBookInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1831,7 +1831,7 @@ func (m *awsAwsjson11_serializeOpGetConferenceProvider) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.GetConferenceProvider")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetConferenceProviderInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetConferenceProviderInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1877,7 +1877,7 @@ func (m *awsAwsjson11_serializeOpGetContact) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.GetContact")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetContactInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetContactInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1923,7 +1923,7 @@ func (m *awsAwsjson11_serializeOpGetDevice) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.GetDevice")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetDeviceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetDeviceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1969,7 +1969,7 @@ func (m *awsAwsjson11_serializeOpGetGateway) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.GetGateway")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetGatewayInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetGatewayInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2015,7 +2015,7 @@ func (m *awsAwsjson11_serializeOpGetGatewayGroup) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.GetGatewayGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetGatewayGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetGatewayGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2100,7 +2100,7 @@ func (m *awsAwsjson11_serializeOpGetNetworkProfile) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.GetNetworkProfile")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetNetworkProfileInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetNetworkProfileInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2146,7 +2146,7 @@ func (m *awsAwsjson11_serializeOpGetProfile) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.GetProfile")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetProfileInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetProfileInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2192,7 +2192,7 @@ func (m *awsAwsjson11_serializeOpGetRoom) HandleSerialize(ctx context.Context, i
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.GetRoom")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetRoomInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetRoomInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2238,7 +2238,7 @@ func (m *awsAwsjson11_serializeOpGetRoomSkillParameter) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.GetRoomSkillParameter")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetRoomSkillParameterInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetRoomSkillParameterInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2284,7 +2284,7 @@ func (m *awsAwsjson11_serializeOpGetSkillGroup) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.GetSkillGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetSkillGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetSkillGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2330,7 +2330,7 @@ func (m *awsAwsjson11_serializeOpListBusinessReportSchedules) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.ListBusinessReportSchedules")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListBusinessReportSchedulesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListBusinessReportSchedulesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2376,7 +2376,7 @@ func (m *awsAwsjson11_serializeOpListConferenceProviders) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.ListConferenceProviders")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListConferenceProvidersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListConferenceProvidersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2422,7 +2422,7 @@ func (m *awsAwsjson11_serializeOpListDeviceEvents) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.ListDeviceEvents")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListDeviceEventsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListDeviceEventsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2468,7 +2468,7 @@ func (m *awsAwsjson11_serializeOpListGatewayGroups) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.ListGatewayGroups")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListGatewayGroupsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListGatewayGroupsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2514,7 +2514,7 @@ func (m *awsAwsjson11_serializeOpListGateways) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.ListGateways")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListGatewaysInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListGatewaysInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2560,7 +2560,7 @@ func (m *awsAwsjson11_serializeOpListSkills) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.ListSkills")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListSkillsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListSkillsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2606,7 +2606,7 @@ func (m *awsAwsjson11_serializeOpListSkillsStoreCategories) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.ListSkillsStoreCategories")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListSkillsStoreCategoriesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListSkillsStoreCategoriesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2652,7 +2652,7 @@ func (m *awsAwsjson11_serializeOpListSkillsStoreSkillsByCategory) HandleSerializ
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.ListSkillsStoreSkillsByCategory")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListSkillsStoreSkillsByCategoryInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListSkillsStoreSkillsByCategoryInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2698,7 +2698,7 @@ func (m *awsAwsjson11_serializeOpListSmartHomeAppliances) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.ListSmartHomeAppliances")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListSmartHomeAppliancesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListSmartHomeAppliancesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2744,7 +2744,7 @@ func (m *awsAwsjson11_serializeOpListTags) HandleSerialize(ctx context.Context, 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.ListTags")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2790,7 +2790,7 @@ func (m *awsAwsjson11_serializeOpPutConferencePreference) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.PutConferencePreference")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutConferencePreferenceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutConferencePreferenceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2836,7 +2836,7 @@ func (m *awsAwsjson11_serializeOpPutInvitationConfiguration) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.PutInvitationConfiguration")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutInvitationConfigurationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutInvitationConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2882,7 +2882,7 @@ func (m *awsAwsjson11_serializeOpPutRoomSkillParameter) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.PutRoomSkillParameter")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutRoomSkillParameterInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutRoomSkillParameterInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2928,7 +2928,7 @@ func (m *awsAwsjson11_serializeOpPutSkillAuthorization) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.PutSkillAuthorization")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutSkillAuthorizationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutSkillAuthorizationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2974,7 +2974,7 @@ func (m *awsAwsjson11_serializeOpRegisterAVSDevice) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.RegisterAVSDevice")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRegisterAVSDeviceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRegisterAVSDeviceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3020,7 +3020,7 @@ func (m *awsAwsjson11_serializeOpRejectSkill) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.RejectSkill")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRejectSkillInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRejectSkillInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3066,7 +3066,7 @@ func (m *awsAwsjson11_serializeOpResolveRoom) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.ResolveRoom")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentResolveRoomInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentResolveRoomInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3112,7 +3112,7 @@ func (m *awsAwsjson11_serializeOpRevokeInvitation) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.RevokeInvitation")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRevokeInvitationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRevokeInvitationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3158,7 +3158,7 @@ func (m *awsAwsjson11_serializeOpSearchAddressBooks) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.SearchAddressBooks")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSearchAddressBooksInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSearchAddressBooksInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3204,7 +3204,7 @@ func (m *awsAwsjson11_serializeOpSearchContacts) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.SearchContacts")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSearchContactsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSearchContactsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3250,7 +3250,7 @@ func (m *awsAwsjson11_serializeOpSearchDevices) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.SearchDevices")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSearchDevicesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSearchDevicesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3296,7 +3296,7 @@ func (m *awsAwsjson11_serializeOpSearchNetworkProfiles) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.SearchNetworkProfiles")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSearchNetworkProfilesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSearchNetworkProfilesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3342,7 +3342,7 @@ func (m *awsAwsjson11_serializeOpSearchProfiles) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.SearchProfiles")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSearchProfilesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSearchProfilesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3388,7 +3388,7 @@ func (m *awsAwsjson11_serializeOpSearchRooms) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.SearchRooms")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSearchRoomsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSearchRoomsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3434,7 +3434,7 @@ func (m *awsAwsjson11_serializeOpSearchSkillGroups) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.SearchSkillGroups")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSearchSkillGroupsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSearchSkillGroupsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3480,7 +3480,7 @@ func (m *awsAwsjson11_serializeOpSearchUsers) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.SearchUsers")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSearchUsersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSearchUsersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3526,7 +3526,7 @@ func (m *awsAwsjson11_serializeOpSendAnnouncement) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.SendAnnouncement")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSendAnnouncementInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSendAnnouncementInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3572,7 +3572,7 @@ func (m *awsAwsjson11_serializeOpSendInvitation) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.SendInvitation")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSendInvitationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSendInvitationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3618,7 +3618,7 @@ func (m *awsAwsjson11_serializeOpStartDeviceSync) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.StartDeviceSync")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartDeviceSyncInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartDeviceSyncInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3664,7 +3664,7 @@ func (m *awsAwsjson11_serializeOpStartSmartHomeApplianceDiscovery) HandleSeriali
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.StartSmartHomeApplianceDiscovery")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartSmartHomeApplianceDiscoveryInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartSmartHomeApplianceDiscoveryInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3710,7 +3710,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.TagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3756,7 +3756,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.UntagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3802,7 +3802,7 @@ func (m *awsAwsjson11_serializeOpUpdateAddressBook) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.UpdateAddressBook")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateAddressBookInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateAddressBookInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3848,7 +3848,7 @@ func (m *awsAwsjson11_serializeOpUpdateBusinessReportSchedule) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.UpdateBusinessReportSchedule")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateBusinessReportScheduleInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateBusinessReportScheduleInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3894,7 +3894,7 @@ func (m *awsAwsjson11_serializeOpUpdateConferenceProvider) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.UpdateConferenceProvider")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateConferenceProviderInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateConferenceProviderInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3940,7 +3940,7 @@ func (m *awsAwsjson11_serializeOpUpdateContact) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.UpdateContact")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateContactInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateContactInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3986,7 +3986,7 @@ func (m *awsAwsjson11_serializeOpUpdateDevice) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.UpdateDevice")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateDeviceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateDeviceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4032,7 +4032,7 @@ func (m *awsAwsjson11_serializeOpUpdateGateway) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.UpdateGateway")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateGatewayInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateGatewayInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4078,7 +4078,7 @@ func (m *awsAwsjson11_serializeOpUpdateGatewayGroup) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.UpdateGatewayGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateGatewayGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateGatewayGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4124,7 +4124,7 @@ func (m *awsAwsjson11_serializeOpUpdateNetworkProfile) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.UpdateNetworkProfile")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateNetworkProfileInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateNetworkProfileInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4170,7 +4170,7 @@ func (m *awsAwsjson11_serializeOpUpdateProfile) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.UpdateProfile")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateProfileInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateProfileInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4216,7 +4216,7 @@ func (m *awsAwsjson11_serializeOpUpdateRoom) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.UpdateRoom")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateRoomInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateRoomInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4262,7 +4262,7 @@ func (m *awsAwsjson11_serializeOpUpdateSkillGroup) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AlexaForBusiness.UpdateSkillGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateSkillGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateSkillGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4971,7 +4971,7 @@ func awsAwsjson11_serializeDocumentUpdateRequireCheckIn(v *types.UpdateRequireCh
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentApproveSkillInput(v *ApproveSkillInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentApproveSkillInput(v *ApproveSkillInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4983,7 +4983,7 @@ func awsAwsjson11_serializeDocumentApproveSkillInput(v *ApproveSkillInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssociateContactWithAddressBookInput(v *AssociateContactWithAddressBookInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAssociateContactWithAddressBookInput(v *AssociateContactWithAddressBookInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5000,7 +5000,7 @@ func awsAwsjson11_serializeDocumentAssociateContactWithAddressBookInput(v *Assoc
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssociateDeviceWithNetworkProfileInput(v *AssociateDeviceWithNetworkProfileInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAssociateDeviceWithNetworkProfileInput(v *AssociateDeviceWithNetworkProfileInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5017,7 +5017,7 @@ func awsAwsjson11_serializeDocumentAssociateDeviceWithNetworkProfileInput(v *Ass
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssociateDeviceWithRoomInput(v *AssociateDeviceWithRoomInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAssociateDeviceWithRoomInput(v *AssociateDeviceWithRoomInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5034,7 +5034,7 @@ func awsAwsjson11_serializeDocumentAssociateDeviceWithRoomInput(v *AssociateDevi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssociateSkillGroupWithRoomInput(v *AssociateSkillGroupWithRoomInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAssociateSkillGroupWithRoomInput(v *AssociateSkillGroupWithRoomInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5051,7 +5051,7 @@ func awsAwsjson11_serializeDocumentAssociateSkillGroupWithRoomInput(v *Associate
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssociateSkillWithSkillGroupInput(v *AssociateSkillWithSkillGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAssociateSkillWithSkillGroupInput(v *AssociateSkillWithSkillGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5068,7 +5068,7 @@ func awsAwsjson11_serializeDocumentAssociateSkillWithSkillGroupInput(v *Associat
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssociateSkillWithUsersInput(v *AssociateSkillWithUsersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAssociateSkillWithUsersInput(v *AssociateSkillWithUsersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5080,7 +5080,7 @@ func awsAwsjson11_serializeDocumentAssociateSkillWithUsersInput(v *AssociateSkil
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateAddressBookInput(v *CreateAddressBookInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateAddressBookInput(v *CreateAddressBookInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5102,7 +5102,7 @@ func awsAwsjson11_serializeDocumentCreateAddressBookInput(v *CreateAddressBookIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateBusinessReportScheduleInput(v *CreateBusinessReportScheduleInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateBusinessReportScheduleInput(v *CreateBusinessReportScheduleInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5155,7 +5155,7 @@ func awsAwsjson11_serializeDocumentCreateBusinessReportScheduleInput(v *CreateBu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateConferenceProviderInput(v *CreateConferenceProviderInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateConferenceProviderInput(v *CreateConferenceProviderInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5198,7 +5198,7 @@ func awsAwsjson11_serializeDocumentCreateConferenceProviderInput(v *CreateConfer
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateContactInput(v *CreateContactInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateContactInput(v *CreateContactInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5244,7 +5244,7 @@ func awsAwsjson11_serializeDocumentCreateContactInput(v *CreateContactInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateGatewayGroupInput(v *CreateGatewayGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateGatewayGroupInput(v *CreateGatewayGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5266,7 +5266,7 @@ func awsAwsjson11_serializeDocumentCreateGatewayGroupInput(v *CreateGatewayGroup
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateNetworkProfileInput(v *CreateNetworkProfileInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateNetworkProfileInput(v *CreateNetworkProfileInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5325,7 +5325,7 @@ func awsAwsjson11_serializeDocumentCreateNetworkProfileInput(v *CreateNetworkPro
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateProfileInput(v *CreateProfileInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateProfileInput(v *CreateProfileInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5401,7 +5401,7 @@ func awsAwsjson11_serializeDocumentCreateProfileInput(v *CreateProfileInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateRoomInput(v *CreateRoomInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateRoomInput(v *CreateRoomInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5440,7 +5440,7 @@ func awsAwsjson11_serializeDocumentCreateRoomInput(v *CreateRoomInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateSkillGroupInput(v *CreateSkillGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateSkillGroupInput(v *CreateSkillGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5469,7 +5469,7 @@ func awsAwsjson11_serializeDocumentCreateSkillGroupInput(v *CreateSkillGroupInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateUserInput(v *CreateUserInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateUserInput(v *CreateUserInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5508,7 +5508,7 @@ func awsAwsjson11_serializeDocumentCreateUserInput(v *CreateUserInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteAddressBookInput(v *DeleteAddressBookInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteAddressBookInput(v *DeleteAddressBookInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5520,7 +5520,7 @@ func awsAwsjson11_serializeDocumentDeleteAddressBookInput(v *DeleteAddressBookIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteBusinessReportScheduleInput(v *DeleteBusinessReportScheduleInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteBusinessReportScheduleInput(v *DeleteBusinessReportScheduleInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5532,7 +5532,7 @@ func awsAwsjson11_serializeDocumentDeleteBusinessReportScheduleInput(v *DeleteBu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteConferenceProviderInput(v *DeleteConferenceProviderInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteConferenceProviderInput(v *DeleteConferenceProviderInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5544,7 +5544,7 @@ func awsAwsjson11_serializeDocumentDeleteConferenceProviderInput(v *DeleteConfer
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteContactInput(v *DeleteContactInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteContactInput(v *DeleteContactInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5556,7 +5556,7 @@ func awsAwsjson11_serializeDocumentDeleteContactInput(v *DeleteContactInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteDeviceInput(v *DeleteDeviceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteDeviceInput(v *DeleteDeviceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5568,7 +5568,7 @@ func awsAwsjson11_serializeDocumentDeleteDeviceInput(v *DeleteDeviceInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteDeviceUsageDataInput(v *DeleteDeviceUsageDataInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteDeviceUsageDataInput(v *DeleteDeviceUsageDataInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5585,7 +5585,7 @@ func awsAwsjson11_serializeDocumentDeleteDeviceUsageDataInput(v *DeleteDeviceUsa
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteGatewayGroupInput(v *DeleteGatewayGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteGatewayGroupInput(v *DeleteGatewayGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5597,7 +5597,7 @@ func awsAwsjson11_serializeDocumentDeleteGatewayGroupInput(v *DeleteGatewayGroup
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteNetworkProfileInput(v *DeleteNetworkProfileInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteNetworkProfileInput(v *DeleteNetworkProfileInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5609,7 +5609,7 @@ func awsAwsjson11_serializeDocumentDeleteNetworkProfileInput(v *DeleteNetworkPro
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteProfileInput(v *DeleteProfileInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteProfileInput(v *DeleteProfileInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5621,7 +5621,7 @@ func awsAwsjson11_serializeDocumentDeleteProfileInput(v *DeleteProfileInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteRoomInput(v *DeleteRoomInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteRoomInput(v *DeleteRoomInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5633,7 +5633,7 @@ func awsAwsjson11_serializeDocumentDeleteRoomInput(v *DeleteRoomInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteRoomSkillParameterInput(v *DeleteRoomSkillParameterInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteRoomSkillParameterInput(v *DeleteRoomSkillParameterInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5655,7 +5655,7 @@ func awsAwsjson11_serializeDocumentDeleteRoomSkillParameterInput(v *DeleteRoomSk
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteSkillAuthorizationInput(v *DeleteSkillAuthorizationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteSkillAuthorizationInput(v *DeleteSkillAuthorizationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5672,7 +5672,7 @@ func awsAwsjson11_serializeDocumentDeleteSkillAuthorizationInput(v *DeleteSkillA
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteSkillGroupInput(v *DeleteSkillGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteSkillGroupInput(v *DeleteSkillGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5684,7 +5684,7 @@ func awsAwsjson11_serializeDocumentDeleteSkillGroupInput(v *DeleteSkillGroupInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteUserInput(v *DeleteUserInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteUserInput(v *DeleteUserInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5701,7 +5701,7 @@ func awsAwsjson11_serializeDocumentDeleteUserInput(v *DeleteUserInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDisassociateContactFromAddressBookInput(v *DisassociateContactFromAddressBookInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDisassociateContactFromAddressBookInput(v *DisassociateContactFromAddressBookInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5718,7 +5718,7 @@ func awsAwsjson11_serializeDocumentDisassociateContactFromAddressBookInput(v *Di
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDisassociateDeviceFromRoomInput(v *DisassociateDeviceFromRoomInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDisassociateDeviceFromRoomInput(v *DisassociateDeviceFromRoomInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5730,7 +5730,7 @@ func awsAwsjson11_serializeDocumentDisassociateDeviceFromRoomInput(v *Disassocia
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDisassociateSkillFromSkillGroupInput(v *DisassociateSkillFromSkillGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDisassociateSkillFromSkillGroupInput(v *DisassociateSkillFromSkillGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5747,7 +5747,7 @@ func awsAwsjson11_serializeDocumentDisassociateSkillFromSkillGroupInput(v *Disas
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDisassociateSkillFromUsersInput(v *DisassociateSkillFromUsersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDisassociateSkillFromUsersInput(v *DisassociateSkillFromUsersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5759,7 +5759,7 @@ func awsAwsjson11_serializeDocumentDisassociateSkillFromUsersInput(v *Disassocia
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDisassociateSkillGroupFromRoomInput(v *DisassociateSkillGroupFromRoomInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDisassociateSkillGroupFromRoomInput(v *DisassociateSkillGroupFromRoomInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5776,7 +5776,7 @@ func awsAwsjson11_serializeDocumentDisassociateSkillGroupFromRoomInput(v *Disass
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentForgetSmartHomeAppliancesInput(v *ForgetSmartHomeAppliancesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentForgetSmartHomeAppliancesInput(v *ForgetSmartHomeAppliancesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5788,7 +5788,7 @@ func awsAwsjson11_serializeDocumentForgetSmartHomeAppliancesInput(v *ForgetSmart
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetAddressBookInput(v *GetAddressBookInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetAddressBookInput(v *GetAddressBookInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5800,14 +5800,14 @@ func awsAwsjson11_serializeDocumentGetAddressBookInput(v *GetAddressBookInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetConferencePreferenceInput(v *GetConferencePreferenceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetConferencePreferenceInput(v *GetConferencePreferenceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetConferenceProviderInput(v *GetConferenceProviderInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetConferenceProviderInput(v *GetConferenceProviderInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5819,7 +5819,7 @@ func awsAwsjson11_serializeDocumentGetConferenceProviderInput(v *GetConferencePr
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetContactInput(v *GetContactInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetContactInput(v *GetContactInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5831,7 +5831,7 @@ func awsAwsjson11_serializeDocumentGetContactInput(v *GetContactInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetDeviceInput(v *GetDeviceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetDeviceInput(v *GetDeviceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5843,7 +5843,7 @@ func awsAwsjson11_serializeDocumentGetDeviceInput(v *GetDeviceInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetGatewayGroupInput(v *GetGatewayGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetGatewayGroupInput(v *GetGatewayGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5855,7 +5855,7 @@ func awsAwsjson11_serializeDocumentGetGatewayGroupInput(v *GetGatewayGroupInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetGatewayInput(v *GetGatewayInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetGatewayInput(v *GetGatewayInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5867,14 +5867,14 @@ func awsAwsjson11_serializeDocumentGetGatewayInput(v *GetGatewayInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetInvitationConfigurationInput(v *GetInvitationConfigurationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetInvitationConfigurationInput(v *GetInvitationConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetNetworkProfileInput(v *GetNetworkProfileInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetNetworkProfileInput(v *GetNetworkProfileInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5886,7 +5886,7 @@ func awsAwsjson11_serializeDocumentGetNetworkProfileInput(v *GetNetworkProfileIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetProfileInput(v *GetProfileInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetProfileInput(v *GetProfileInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5898,7 +5898,7 @@ func awsAwsjson11_serializeDocumentGetProfileInput(v *GetProfileInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetRoomInput(v *GetRoomInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetRoomInput(v *GetRoomInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5910,7 +5910,7 @@ func awsAwsjson11_serializeDocumentGetRoomInput(v *GetRoomInput, value smithyjso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetRoomSkillParameterInput(v *GetRoomSkillParameterInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetRoomSkillParameterInput(v *GetRoomSkillParameterInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5932,7 +5932,7 @@ func awsAwsjson11_serializeDocumentGetRoomSkillParameterInput(v *GetRoomSkillPar
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetSkillGroupInput(v *GetSkillGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetSkillGroupInput(v *GetSkillGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5944,7 +5944,7 @@ func awsAwsjson11_serializeDocumentGetSkillGroupInput(v *GetSkillGroupInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListBusinessReportSchedulesInput(v *ListBusinessReportSchedulesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListBusinessReportSchedulesInput(v *ListBusinessReportSchedulesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5961,7 +5961,7 @@ func awsAwsjson11_serializeDocumentListBusinessReportSchedulesInput(v *ListBusin
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListConferenceProvidersInput(v *ListConferenceProvidersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListConferenceProvidersInput(v *ListConferenceProvidersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5978,7 +5978,7 @@ func awsAwsjson11_serializeDocumentListConferenceProvidersInput(v *ListConferenc
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListDeviceEventsInput(v *ListDeviceEventsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListDeviceEventsInput(v *ListDeviceEventsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6005,7 +6005,7 @@ func awsAwsjson11_serializeDocumentListDeviceEventsInput(v *ListDeviceEventsInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListGatewayGroupsInput(v *ListGatewayGroupsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListGatewayGroupsInput(v *ListGatewayGroupsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6022,7 +6022,7 @@ func awsAwsjson11_serializeDocumentListGatewayGroupsInput(v *ListGatewayGroupsIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListGatewaysInput(v *ListGatewaysInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListGatewaysInput(v *ListGatewaysInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6044,7 +6044,7 @@ func awsAwsjson11_serializeDocumentListGatewaysInput(v *ListGatewaysInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListSkillsInput(v *ListSkillsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListSkillsInput(v *ListSkillsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6076,7 +6076,7 @@ func awsAwsjson11_serializeDocumentListSkillsInput(v *ListSkillsInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListSkillsStoreCategoriesInput(v *ListSkillsStoreCategoriesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListSkillsStoreCategoriesInput(v *ListSkillsStoreCategoriesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6093,7 +6093,7 @@ func awsAwsjson11_serializeDocumentListSkillsStoreCategoriesInput(v *ListSkillsS
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListSkillsStoreSkillsByCategoryInput(v *ListSkillsStoreSkillsByCategoryInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListSkillsStoreSkillsByCategoryInput(v *ListSkillsStoreSkillsByCategoryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6115,7 +6115,7 @@ func awsAwsjson11_serializeDocumentListSkillsStoreSkillsByCategoryInput(v *ListS
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListSmartHomeAppliancesInput(v *ListSmartHomeAppliancesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListSmartHomeAppliancesInput(v *ListSmartHomeAppliancesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6137,7 +6137,7 @@ func awsAwsjson11_serializeDocumentListSmartHomeAppliancesInput(v *ListSmartHome
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsInput(v *ListTagsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTagsInput(v *ListTagsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6159,7 +6159,7 @@ func awsAwsjson11_serializeDocumentListTagsInput(v *ListTagsInput, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutConferencePreferenceInput(v *PutConferencePreferenceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutConferencePreferenceInput(v *PutConferencePreferenceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6173,7 +6173,7 @@ func awsAwsjson11_serializeDocumentPutConferencePreferenceInput(v *PutConference
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutInvitationConfigurationInput(v *PutInvitationConfigurationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutInvitationConfigurationInput(v *PutInvitationConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6197,7 +6197,7 @@ func awsAwsjson11_serializeDocumentPutInvitationConfigurationInput(v *PutInvitat
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutRoomSkillParameterInput(v *PutRoomSkillParameterInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutRoomSkillParameterInput(v *PutRoomSkillParameterInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6221,7 +6221,7 @@ func awsAwsjson11_serializeDocumentPutRoomSkillParameterInput(v *PutRoomSkillPar
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutSkillAuthorizationInput(v *PutSkillAuthorizationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutSkillAuthorizationInput(v *PutSkillAuthorizationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6245,7 +6245,7 @@ func awsAwsjson11_serializeDocumentPutSkillAuthorizationInput(v *PutSkillAuthori
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRegisterAVSDeviceInput(v *RegisterAVSDeviceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRegisterAVSDeviceInput(v *RegisterAVSDeviceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6282,7 +6282,7 @@ func awsAwsjson11_serializeDocumentRegisterAVSDeviceInput(v *RegisterAVSDeviceIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRejectSkillInput(v *RejectSkillInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRejectSkillInput(v *RejectSkillInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6294,7 +6294,7 @@ func awsAwsjson11_serializeDocumentRejectSkillInput(v *RejectSkillInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentResolveRoomInput(v *ResolveRoomInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentResolveRoomInput(v *ResolveRoomInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6311,7 +6311,7 @@ func awsAwsjson11_serializeDocumentResolveRoomInput(v *ResolveRoomInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRevokeInvitationInput(v *RevokeInvitationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRevokeInvitationInput(v *RevokeInvitationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6328,7 +6328,7 @@ func awsAwsjson11_serializeDocumentRevokeInvitationInput(v *RevokeInvitationInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSearchAddressBooksInput(v *SearchAddressBooksInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSearchAddressBooksInput(v *SearchAddressBooksInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6359,7 +6359,7 @@ func awsAwsjson11_serializeDocumentSearchAddressBooksInput(v *SearchAddressBooks
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSearchContactsInput(v *SearchContactsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSearchContactsInput(v *SearchContactsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6390,7 +6390,7 @@ func awsAwsjson11_serializeDocumentSearchContactsInput(v *SearchContactsInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSearchDevicesInput(v *SearchDevicesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSearchDevicesInput(v *SearchDevicesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6421,7 +6421,7 @@ func awsAwsjson11_serializeDocumentSearchDevicesInput(v *SearchDevicesInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSearchNetworkProfilesInput(v *SearchNetworkProfilesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSearchNetworkProfilesInput(v *SearchNetworkProfilesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6452,7 +6452,7 @@ func awsAwsjson11_serializeDocumentSearchNetworkProfilesInput(v *SearchNetworkPr
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSearchProfilesInput(v *SearchProfilesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSearchProfilesInput(v *SearchProfilesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6483,7 +6483,7 @@ func awsAwsjson11_serializeDocumentSearchProfilesInput(v *SearchProfilesInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSearchRoomsInput(v *SearchRoomsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSearchRoomsInput(v *SearchRoomsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6514,7 +6514,7 @@ func awsAwsjson11_serializeDocumentSearchRoomsInput(v *SearchRoomsInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSearchSkillGroupsInput(v *SearchSkillGroupsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSearchSkillGroupsInput(v *SearchSkillGroupsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6545,7 +6545,7 @@ func awsAwsjson11_serializeDocumentSearchSkillGroupsInput(v *SearchSkillGroupsIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSearchUsersInput(v *SearchUsersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSearchUsersInput(v *SearchUsersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6576,7 +6576,7 @@ func awsAwsjson11_serializeDocumentSearchUsersInput(v *SearchUsersInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSendAnnouncementInput(v *SendAnnouncementInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSendAnnouncementInput(v *SendAnnouncementInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6607,7 +6607,7 @@ func awsAwsjson11_serializeDocumentSendAnnouncementInput(v *SendAnnouncementInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSendInvitationInput(v *SendInvitationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSendInvitationInput(v *SendInvitationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6619,7 +6619,7 @@ func awsAwsjson11_serializeDocumentSendInvitationInput(v *SendInvitationInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartDeviceSyncInput(v *StartDeviceSyncInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartDeviceSyncInput(v *StartDeviceSyncInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6643,7 +6643,7 @@ func awsAwsjson11_serializeDocumentStartDeviceSyncInput(v *StartDeviceSyncInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartSmartHomeApplianceDiscoveryInput(v *StartSmartHomeApplianceDiscoveryInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartSmartHomeApplianceDiscoveryInput(v *StartSmartHomeApplianceDiscoveryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6655,7 +6655,7 @@ func awsAwsjson11_serializeDocumentStartSmartHomeApplianceDiscoveryInput(v *Star
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6674,7 +6674,7 @@ func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6693,7 +6693,7 @@ func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateAddressBookInput(v *UpdateAddressBookInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateAddressBookInput(v *UpdateAddressBookInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6715,7 +6715,7 @@ func awsAwsjson11_serializeDocumentUpdateAddressBookInput(v *UpdateAddressBookIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateBusinessReportScheduleInput(v *UpdateBusinessReportScheduleInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateBusinessReportScheduleInput(v *UpdateBusinessReportScheduleInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6754,7 +6754,7 @@ func awsAwsjson11_serializeDocumentUpdateBusinessReportScheduleInput(v *UpdateBu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateConferenceProviderInput(v *UpdateConferenceProviderInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateConferenceProviderInput(v *UpdateConferenceProviderInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6792,7 +6792,7 @@ func awsAwsjson11_serializeDocumentUpdateConferenceProviderInput(v *UpdateConfer
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateContactInput(v *UpdateContactInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateContactInput(v *UpdateContactInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6838,7 +6838,7 @@ func awsAwsjson11_serializeDocumentUpdateContactInput(v *UpdateContactInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateDeviceInput(v *UpdateDeviceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateDeviceInput(v *UpdateDeviceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6855,7 +6855,7 @@ func awsAwsjson11_serializeDocumentUpdateDeviceInput(v *UpdateDeviceInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateGatewayGroupInput(v *UpdateGatewayGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateGatewayGroupInput(v *UpdateGatewayGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6877,7 +6877,7 @@ func awsAwsjson11_serializeDocumentUpdateGatewayGroupInput(v *UpdateGatewayGroup
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateGatewayInput(v *UpdateGatewayInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateGatewayInput(v *UpdateGatewayInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6904,7 +6904,7 @@ func awsAwsjson11_serializeDocumentUpdateGatewayInput(v *UpdateGatewayInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateNetworkProfileInput(v *UpdateNetworkProfileInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateNetworkProfileInput(v *UpdateNetworkProfileInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6948,7 +6948,7 @@ func awsAwsjson11_serializeDocumentUpdateNetworkProfileInput(v *UpdateNetworkPro
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateProfileInput(v *UpdateProfileInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateProfileInput(v *UpdateProfileInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -7022,7 +7022,7 @@ func awsAwsjson11_serializeDocumentUpdateProfileInput(v *UpdateProfileInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateRoomInput(v *UpdateRoomInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateRoomInput(v *UpdateRoomInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -7054,7 +7054,7 @@ func awsAwsjson11_serializeDocumentUpdateRoomInput(v *UpdateRoomInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateSkillGroupInput(v *UpdateSkillGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateSkillGroupInput(v *UpdateSkillGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

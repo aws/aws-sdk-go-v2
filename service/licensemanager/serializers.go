@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpCreateLicenseConfiguration) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.CreateLicenseConfiguration")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateLicenseConfigurationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateLicenseConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpDeleteLicenseConfiguration) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.DeleteLicenseConfiguration")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteLicenseConfigurationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteLicenseConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpGetLicenseConfiguration) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.GetLicenseConfiguration")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetLicenseConfigurationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetLicenseConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -221,7 +221,7 @@ func (m *awsAwsjson11_serializeOpListAssociationsForLicenseConfiguration) Handle
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.ListAssociationsForLicenseConfiguration")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListAssociationsForLicenseConfigurationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListAssociationsForLicenseConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -267,7 +267,7 @@ func (m *awsAwsjson11_serializeOpListFailuresForLicenseConfigurationOperations) 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.ListFailuresForLicenseConfigurationOperations")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListFailuresForLicenseConfigurationOperationsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListFailuresForLicenseConfigurationOperationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -313,7 +313,7 @@ func (m *awsAwsjson11_serializeOpListLicenseConfigurations) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.ListLicenseConfigurations")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListLicenseConfigurationsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListLicenseConfigurationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -359,7 +359,7 @@ func (m *awsAwsjson11_serializeOpListLicenseSpecificationsForResource) HandleSer
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.ListLicenseSpecificationsForResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListLicenseSpecificationsForResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListLicenseSpecificationsForResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -405,7 +405,7 @@ func (m *awsAwsjson11_serializeOpListResourceInventory) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.ListResourceInventory")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListResourceInventoryInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListResourceInventoryInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -451,7 +451,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.ListTagsForResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -497,7 +497,7 @@ func (m *awsAwsjson11_serializeOpListUsageForLicenseConfiguration) HandleSeriali
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.ListUsageForLicenseConfiguration")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListUsageForLicenseConfigurationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListUsageForLicenseConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -543,7 +543,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.TagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -589,7 +589,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.UntagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -635,7 +635,7 @@ func (m *awsAwsjson11_serializeOpUpdateLicenseConfiguration) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.UpdateLicenseConfiguration")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateLicenseConfigurationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateLicenseConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -681,7 +681,7 @@ func (m *awsAwsjson11_serializeOpUpdateLicenseSpecificationsForResource) HandleS
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.UpdateLicenseSpecificationsForResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateLicenseSpecificationsForResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateLicenseSpecificationsForResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -727,7 +727,7 @@ func (m *awsAwsjson11_serializeOpUpdateServiceSettings) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.UpdateServiceSettings")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateServiceSettingsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateServiceSettingsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1014,7 +1014,7 @@ func awsAwsjson11_serializeDocumentTagList(v []*types.Tag, value smithyjson.Valu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateLicenseConfigurationInput(v *CreateLicenseConfigurationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateLicenseConfigurationInput(v *CreateLicenseConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1067,7 +1067,7 @@ func awsAwsjson11_serializeDocumentCreateLicenseConfigurationInput(v *CreateLice
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteLicenseConfigurationInput(v *DeleteLicenseConfigurationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteLicenseConfigurationInput(v *DeleteLicenseConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1079,7 +1079,7 @@ func awsAwsjson11_serializeDocumentDeleteLicenseConfigurationInput(v *DeleteLice
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetLicenseConfigurationInput(v *GetLicenseConfigurationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetLicenseConfigurationInput(v *GetLicenseConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1091,36 +1091,14 @@ func awsAwsjson11_serializeDocumentGetLicenseConfigurationInput(v *GetLicenseCon
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetServiceSettingsInput(v *GetServiceSettingsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetServiceSettingsInput(v *GetServiceSettingsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListAssociationsForLicenseConfigurationInput(v *ListAssociationsForLicenseConfigurationInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.LicenseConfigurationArn != nil {
-		ok := object.Key("LicenseConfigurationArn")
-		ok.String(*v.LicenseConfigurationArn)
-	}
-
-	if v.MaxResults != nil {
-		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
-	}
-
-	if v.NextToken != nil {
-		ok := object.Key("NextToken")
-		ok.String(*v.NextToken)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentListFailuresForLicenseConfigurationOperationsInput(v *ListFailuresForLicenseConfigurationOperationsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListAssociationsForLicenseConfigurationInput(v *ListAssociationsForLicenseConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1142,7 +1120,29 @@ func awsAwsjson11_serializeDocumentListFailuresForLicenseConfigurationOperations
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListLicenseConfigurationsInput(v *ListLicenseConfigurationsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListFailuresForLicenseConfigurationOperationsInput(v *ListFailuresForLicenseConfigurationOperationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LicenseConfigurationArn != nil {
+		ok := object.Key("LicenseConfigurationArn")
+		ok.String(*v.LicenseConfigurationArn)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListLicenseConfigurationsInput(v *ListLicenseConfigurationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1173,7 +1173,7 @@ func awsAwsjson11_serializeDocumentListLicenseConfigurationsInput(v *ListLicense
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListLicenseSpecificationsForResourceInput(v *ListLicenseSpecificationsForResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListLicenseSpecificationsForResourceInput(v *ListLicenseSpecificationsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1195,7 +1195,7 @@ func awsAwsjson11_serializeDocumentListLicenseSpecificationsForResourceInput(v *
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListResourceInventoryInput(v *ListResourceInventoryInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListResourceInventoryInput(v *ListResourceInventoryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1219,7 +1219,7 @@ func awsAwsjson11_serializeDocumentListResourceInventoryInput(v *ListResourceInv
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1231,7 +1231,7 @@ func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResour
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListUsageForLicenseConfigurationInput(v *ListUsageForLicenseConfigurationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListUsageForLicenseConfigurationInput(v *ListUsageForLicenseConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1260,7 +1260,7 @@ func awsAwsjson11_serializeDocumentListUsageForLicenseConfigurationInput(v *List
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1279,7 +1279,7 @@ func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1298,7 +1298,7 @@ func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateLicenseConfigurationInput(v *UpdateLicenseConfigurationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateLicenseConfigurationInput(v *UpdateLicenseConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1349,7 +1349,7 @@ func awsAwsjson11_serializeDocumentUpdateLicenseConfigurationInput(v *UpdateLice
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateLicenseSpecificationsForResourceInput(v *UpdateLicenseSpecificationsForResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateLicenseSpecificationsForResourceInput(v *UpdateLicenseSpecificationsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1375,7 +1375,7 @@ func awsAwsjson11_serializeDocumentUpdateLicenseSpecificationsForResourceInput(v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateServiceSettingsInput(v *UpdateServiceSettingsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateServiceSettingsInput(v *UpdateServiceSettingsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

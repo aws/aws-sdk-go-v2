@@ -45,7 +45,7 @@ func (m *awsAwsjson11_serializeOpBatchDetectDominantLanguage) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.BatchDetectDominantLanguage")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchDetectDominantLanguageInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchDetectDominantLanguageInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -91,7 +91,7 @@ func (m *awsAwsjson11_serializeOpBatchDetectEntities) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.BatchDetectEntities")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchDetectEntitiesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchDetectEntitiesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -137,7 +137,7 @@ func (m *awsAwsjson11_serializeOpBatchDetectKeyPhrases) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.BatchDetectKeyPhrases")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchDetectKeyPhrasesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchDetectKeyPhrasesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -183,7 +183,7 @@ func (m *awsAwsjson11_serializeOpBatchDetectSentiment) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.BatchDetectSentiment")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchDetectSentimentInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchDetectSentimentInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -229,7 +229,7 @@ func (m *awsAwsjson11_serializeOpBatchDetectSyntax) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.BatchDetectSyntax")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchDetectSyntaxInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchDetectSyntaxInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -275,7 +275,7 @@ func (m *awsAwsjson11_serializeOpClassifyDocument) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.ClassifyDocument")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentClassifyDocumentInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentClassifyDocumentInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -321,7 +321,7 @@ func (m *awsAwsjson11_serializeOpCreateDocumentClassifier) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.CreateDocumentClassifier")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateDocumentClassifierInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateDocumentClassifierInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -367,7 +367,7 @@ func (m *awsAwsjson11_serializeOpCreateEndpoint) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.CreateEndpoint")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateEndpointInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateEndpointInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -413,7 +413,7 @@ func (m *awsAwsjson11_serializeOpCreateEntityRecognizer) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.CreateEntityRecognizer")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateEntityRecognizerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateEntityRecognizerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -459,7 +459,7 @@ func (m *awsAwsjson11_serializeOpDeleteDocumentClassifier) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.DeleteDocumentClassifier")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteDocumentClassifierInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteDocumentClassifierInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -505,7 +505,7 @@ func (m *awsAwsjson11_serializeOpDeleteEndpoint) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.DeleteEndpoint")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteEndpointInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteEndpointInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -551,7 +551,7 @@ func (m *awsAwsjson11_serializeOpDeleteEntityRecognizer) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.DeleteEntityRecognizer")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteEntityRecognizerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteEntityRecognizerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -597,7 +597,7 @@ func (m *awsAwsjson11_serializeOpDescribeDocumentClassificationJob) HandleSerial
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.DescribeDocumentClassificationJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeDocumentClassificationJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeDocumentClassificationJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -643,7 +643,7 @@ func (m *awsAwsjson11_serializeOpDescribeDocumentClassifier) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.DescribeDocumentClassifier")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeDocumentClassifierInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeDocumentClassifierInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -689,7 +689,7 @@ func (m *awsAwsjson11_serializeOpDescribeDominantLanguageDetectionJob) HandleSer
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.DescribeDominantLanguageDetectionJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeDominantLanguageDetectionJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeDominantLanguageDetectionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -735,7 +735,7 @@ func (m *awsAwsjson11_serializeOpDescribeEndpoint) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.DescribeEndpoint")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeEndpointInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeEndpointInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -781,7 +781,7 @@ func (m *awsAwsjson11_serializeOpDescribeEntitiesDetectionJob) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.DescribeEntitiesDetectionJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeEntitiesDetectionJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeEntitiesDetectionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -827,7 +827,7 @@ func (m *awsAwsjson11_serializeOpDescribeEntityRecognizer) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.DescribeEntityRecognizer")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeEntityRecognizerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeEntityRecognizerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -873,7 +873,7 @@ func (m *awsAwsjson11_serializeOpDescribeKeyPhrasesDetectionJob) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.DescribeKeyPhrasesDetectionJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeKeyPhrasesDetectionJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeKeyPhrasesDetectionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -919,7 +919,7 @@ func (m *awsAwsjson11_serializeOpDescribeSentimentDetectionJob) HandleSerialize(
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.DescribeSentimentDetectionJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeSentimentDetectionJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeSentimentDetectionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -965,7 +965,7 @@ func (m *awsAwsjson11_serializeOpDescribeTopicsDetectionJob) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.DescribeTopicsDetectionJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeTopicsDetectionJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeTopicsDetectionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1011,7 +1011,7 @@ func (m *awsAwsjson11_serializeOpDetectDominantLanguage) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.DetectDominantLanguage")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDetectDominantLanguageInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDetectDominantLanguageInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1057,7 +1057,7 @@ func (m *awsAwsjson11_serializeOpDetectEntities) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.DetectEntities")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDetectEntitiesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDetectEntitiesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1103,7 +1103,7 @@ func (m *awsAwsjson11_serializeOpDetectKeyPhrases) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.DetectKeyPhrases")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDetectKeyPhrasesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDetectKeyPhrasesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1149,7 +1149,7 @@ func (m *awsAwsjson11_serializeOpDetectSentiment) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.DetectSentiment")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDetectSentimentInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDetectSentimentInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1195,7 +1195,7 @@ func (m *awsAwsjson11_serializeOpDetectSyntax) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.DetectSyntax")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDetectSyntaxInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDetectSyntaxInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1241,7 +1241,7 @@ func (m *awsAwsjson11_serializeOpListDocumentClassificationJobs) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.ListDocumentClassificationJobs")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListDocumentClassificationJobsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListDocumentClassificationJobsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1287,7 +1287,7 @@ func (m *awsAwsjson11_serializeOpListDocumentClassifiers) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.ListDocumentClassifiers")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListDocumentClassifiersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListDocumentClassifiersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1333,7 +1333,7 @@ func (m *awsAwsjson11_serializeOpListDominantLanguageDetectionJobs) HandleSerial
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.ListDominantLanguageDetectionJobs")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListDominantLanguageDetectionJobsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListDominantLanguageDetectionJobsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1379,7 +1379,7 @@ func (m *awsAwsjson11_serializeOpListEndpoints) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.ListEndpoints")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListEndpointsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListEndpointsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1425,7 +1425,7 @@ func (m *awsAwsjson11_serializeOpListEntitiesDetectionJobs) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.ListEntitiesDetectionJobs")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListEntitiesDetectionJobsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListEntitiesDetectionJobsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1471,7 +1471,7 @@ func (m *awsAwsjson11_serializeOpListEntityRecognizers) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.ListEntityRecognizers")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListEntityRecognizersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListEntityRecognizersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1517,7 +1517,7 @@ func (m *awsAwsjson11_serializeOpListKeyPhrasesDetectionJobs) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.ListKeyPhrasesDetectionJobs")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListKeyPhrasesDetectionJobsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListKeyPhrasesDetectionJobsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1563,7 +1563,7 @@ func (m *awsAwsjson11_serializeOpListSentimentDetectionJobs) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.ListSentimentDetectionJobs")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListSentimentDetectionJobsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListSentimentDetectionJobsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1609,7 +1609,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.ListTagsForResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1655,7 +1655,7 @@ func (m *awsAwsjson11_serializeOpListTopicsDetectionJobs) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.ListTopicsDetectionJobs")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTopicsDetectionJobsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTopicsDetectionJobsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1701,7 +1701,7 @@ func (m *awsAwsjson11_serializeOpStartDocumentClassificationJob) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.StartDocumentClassificationJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartDocumentClassificationJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartDocumentClassificationJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1747,7 +1747,7 @@ func (m *awsAwsjson11_serializeOpStartDominantLanguageDetectionJob) HandleSerial
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.StartDominantLanguageDetectionJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartDominantLanguageDetectionJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartDominantLanguageDetectionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1793,7 +1793,7 @@ func (m *awsAwsjson11_serializeOpStartEntitiesDetectionJob) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.StartEntitiesDetectionJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartEntitiesDetectionJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartEntitiesDetectionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1839,7 +1839,7 @@ func (m *awsAwsjson11_serializeOpStartKeyPhrasesDetectionJob) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.StartKeyPhrasesDetectionJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartKeyPhrasesDetectionJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartKeyPhrasesDetectionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1885,7 +1885,7 @@ func (m *awsAwsjson11_serializeOpStartSentimentDetectionJob) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.StartSentimentDetectionJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartSentimentDetectionJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartSentimentDetectionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1931,7 +1931,7 @@ func (m *awsAwsjson11_serializeOpStartTopicsDetectionJob) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.StartTopicsDetectionJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartTopicsDetectionJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartTopicsDetectionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1977,7 +1977,7 @@ func (m *awsAwsjson11_serializeOpStopDominantLanguageDetectionJob) HandleSeriali
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.StopDominantLanguageDetectionJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopDominantLanguageDetectionJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopDominantLanguageDetectionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2023,7 +2023,7 @@ func (m *awsAwsjson11_serializeOpStopEntitiesDetectionJob) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.StopEntitiesDetectionJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopEntitiesDetectionJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopEntitiesDetectionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2069,7 +2069,7 @@ func (m *awsAwsjson11_serializeOpStopKeyPhrasesDetectionJob) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.StopKeyPhrasesDetectionJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopKeyPhrasesDetectionJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopKeyPhrasesDetectionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2115,7 +2115,7 @@ func (m *awsAwsjson11_serializeOpStopSentimentDetectionJob) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.StopSentimentDetectionJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopSentimentDetectionJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopSentimentDetectionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2161,7 +2161,7 @@ func (m *awsAwsjson11_serializeOpStopTrainingDocumentClassifier) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.StopTrainingDocumentClassifier")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopTrainingDocumentClassifierInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopTrainingDocumentClassifierInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2207,7 +2207,7 @@ func (m *awsAwsjson11_serializeOpStopTrainingEntityRecognizer) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.StopTrainingEntityRecognizer")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopTrainingEntityRecognizerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopTrainingEntityRecognizerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2253,7 +2253,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.TagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2299,7 +2299,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.UntagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2345,7 +2345,7 @@ func (m *awsAwsjson11_serializeOpUpdateEndpoint) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Comprehend_20171127.UpdateEndpoint")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateEndpointInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateEndpointInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2876,7 +2876,7 @@ func awsAwsjson11_serializeDocumentVpcConfig(v *types.VpcConfig, value smithyjso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchDetectDominantLanguageInput(v *BatchDetectDominantLanguageInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchDetectDominantLanguageInput(v *BatchDetectDominantLanguageInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2890,26 +2890,7 @@ func awsAwsjson11_serializeDocumentBatchDetectDominantLanguageInput(v *BatchDete
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchDetectEntitiesInput(v *BatchDetectEntitiesInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if len(v.LanguageCode) > 0 {
-		ok := object.Key("LanguageCode")
-		ok.String(string(v.LanguageCode))
-	}
-
-	if v.TextList != nil {
-		ok := object.Key("TextList")
-		if err := awsAwsjson11_serializeDocumentCustomerInputStringList(v.TextList, ok); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentBatchDetectKeyPhrasesInput(v *BatchDetectKeyPhrasesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchDetectEntitiesInput(v *BatchDetectEntitiesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2928,7 +2909,7 @@ func awsAwsjson11_serializeDocumentBatchDetectKeyPhrasesInput(v *BatchDetectKeyP
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchDetectSentimentInput(v *BatchDetectSentimentInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchDetectKeyPhrasesInput(v *BatchDetectKeyPhrasesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2947,7 +2928,7 @@ func awsAwsjson11_serializeDocumentBatchDetectSentimentInput(v *BatchDetectSenti
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchDetectSyntaxInput(v *BatchDetectSyntaxInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchDetectSentimentInput(v *BatchDetectSentimentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2966,7 +2947,26 @@ func awsAwsjson11_serializeDocumentBatchDetectSyntaxInput(v *BatchDetectSyntaxIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentClassifyDocumentInput(v *ClassifyDocumentInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchDetectSyntaxInput(v *BatchDetectSyntaxInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.LanguageCode) > 0 {
+		ok := object.Key("LanguageCode")
+		ok.String(string(v.LanguageCode))
+	}
+
+	if v.TextList != nil {
+		ok := object.Key("TextList")
+		if err := awsAwsjson11_serializeDocumentCustomerInputStringList(v.TextList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentClassifyDocumentInput(v *ClassifyDocumentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2983,7 +2983,7 @@ func awsAwsjson11_serializeDocumentClassifyDocumentInput(v *ClassifyDocumentInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateDocumentClassifierInput(v *CreateDocumentClassifierInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateDocumentClassifierInput(v *CreateDocumentClassifierInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3048,7 +3048,7 @@ func awsAwsjson11_serializeDocumentCreateDocumentClassifierInput(v *CreateDocume
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateEndpointInput(v *CreateEndpointInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateEndpointInput(v *CreateEndpointInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3082,7 +3082,7 @@ func awsAwsjson11_serializeDocumentCreateEndpointInput(v *CreateEndpointInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateEntityRecognizerInput(v *CreateEntityRecognizerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateEntityRecognizerInput(v *CreateEntityRecognizerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3135,7 +3135,7 @@ func awsAwsjson11_serializeDocumentCreateEntityRecognizerInput(v *CreateEntityRe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteDocumentClassifierInput(v *DeleteDocumentClassifierInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteDocumentClassifierInput(v *DeleteDocumentClassifierInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3147,7 +3147,7 @@ func awsAwsjson11_serializeDocumentDeleteDocumentClassifierInput(v *DeleteDocume
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteEndpointInput(v *DeleteEndpointInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteEndpointInput(v *DeleteEndpointInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3159,7 +3159,7 @@ func awsAwsjson11_serializeDocumentDeleteEndpointInput(v *DeleteEndpointInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteEntityRecognizerInput(v *DeleteEntityRecognizerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteEntityRecognizerInput(v *DeleteEntityRecognizerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3171,7 +3171,7 @@ func awsAwsjson11_serializeDocumentDeleteEntityRecognizerInput(v *DeleteEntityRe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeDocumentClassificationJobInput(v *DescribeDocumentClassificationJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeDocumentClassificationJobInput(v *DescribeDocumentClassificationJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3183,7 +3183,7 @@ func awsAwsjson11_serializeDocumentDescribeDocumentClassificationJobInput(v *Des
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeDocumentClassifierInput(v *DescribeDocumentClassifierInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeDocumentClassifierInput(v *DescribeDocumentClassifierInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3195,7 +3195,7 @@ func awsAwsjson11_serializeDocumentDescribeDocumentClassifierInput(v *DescribeDo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeDominantLanguageDetectionJobInput(v *DescribeDominantLanguageDetectionJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeDominantLanguageDetectionJobInput(v *DescribeDominantLanguageDetectionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3207,7 +3207,7 @@ func awsAwsjson11_serializeDocumentDescribeDominantLanguageDetectionJobInput(v *
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeEndpointInput(v *DescribeEndpointInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeEndpointInput(v *DescribeEndpointInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3219,7 +3219,7 @@ func awsAwsjson11_serializeDocumentDescribeEndpointInput(v *DescribeEndpointInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeEntitiesDetectionJobInput(v *DescribeEntitiesDetectionJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeEntitiesDetectionJobInput(v *DescribeEntitiesDetectionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3231,7 +3231,7 @@ func awsAwsjson11_serializeDocumentDescribeEntitiesDetectionJobInput(v *Describe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeEntityRecognizerInput(v *DescribeEntityRecognizerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeEntityRecognizerInput(v *DescribeEntityRecognizerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3243,7 +3243,7 @@ func awsAwsjson11_serializeDocumentDescribeEntityRecognizerInput(v *DescribeEnti
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeKeyPhrasesDetectionJobInput(v *DescribeKeyPhrasesDetectionJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeKeyPhrasesDetectionJobInput(v *DescribeKeyPhrasesDetectionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3255,7 +3255,7 @@ func awsAwsjson11_serializeDocumentDescribeKeyPhrasesDetectionJobInput(v *Descri
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeSentimentDetectionJobInput(v *DescribeSentimentDetectionJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeSentimentDetectionJobInput(v *DescribeSentimentDetectionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3267,7 +3267,7 @@ func awsAwsjson11_serializeDocumentDescribeSentimentDetectionJobInput(v *Describ
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeTopicsDetectionJobInput(v *DescribeTopicsDetectionJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeTopicsDetectionJobInput(v *DescribeTopicsDetectionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3279,7 +3279,7 @@ func awsAwsjson11_serializeDocumentDescribeTopicsDetectionJobInput(v *DescribeTo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDetectDominantLanguageInput(v *DetectDominantLanguageInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDetectDominantLanguageInput(v *DetectDominantLanguageInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3291,7 +3291,7 @@ func awsAwsjson11_serializeDocumentDetectDominantLanguageInput(v *DetectDominant
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDetectEntitiesInput(v *DetectEntitiesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDetectEntitiesInput(v *DetectEntitiesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3313,7 +3313,7 @@ func awsAwsjson11_serializeDocumentDetectEntitiesInput(v *DetectEntitiesInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDetectKeyPhrasesInput(v *DetectKeyPhrasesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDetectKeyPhrasesInput(v *DetectKeyPhrasesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3330,7 +3330,7 @@ func awsAwsjson11_serializeDocumentDetectKeyPhrasesInput(v *DetectKeyPhrasesInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDetectSentimentInput(v *DetectSentimentInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDetectSentimentInput(v *DetectSentimentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3347,7 +3347,7 @@ func awsAwsjson11_serializeDocumentDetectSentimentInput(v *DetectSentimentInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDetectSyntaxInput(v *DetectSyntaxInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDetectSyntaxInput(v *DetectSyntaxInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3364,7 +3364,7 @@ func awsAwsjson11_serializeDocumentDetectSyntaxInput(v *DetectSyntaxInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListDocumentClassificationJobsInput(v *ListDocumentClassificationJobsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListDocumentClassificationJobsInput(v *ListDocumentClassificationJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3388,7 +3388,7 @@ func awsAwsjson11_serializeDocumentListDocumentClassificationJobsInput(v *ListDo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListDocumentClassifiersInput(v *ListDocumentClassifiersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListDocumentClassifiersInput(v *ListDocumentClassifiersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3412,7 +3412,7 @@ func awsAwsjson11_serializeDocumentListDocumentClassifiersInput(v *ListDocumentC
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListDominantLanguageDetectionJobsInput(v *ListDominantLanguageDetectionJobsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListDominantLanguageDetectionJobsInput(v *ListDominantLanguageDetectionJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3436,7 +3436,7 @@ func awsAwsjson11_serializeDocumentListDominantLanguageDetectionJobsInput(v *Lis
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListEndpointsInput(v *ListEndpointsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListEndpointsInput(v *ListEndpointsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3460,7 +3460,7 @@ func awsAwsjson11_serializeDocumentListEndpointsInput(v *ListEndpointsInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListEntitiesDetectionJobsInput(v *ListEntitiesDetectionJobsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListEntitiesDetectionJobsInput(v *ListEntitiesDetectionJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3484,7 +3484,7 @@ func awsAwsjson11_serializeDocumentListEntitiesDetectionJobsInput(v *ListEntitie
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListEntityRecognizersInput(v *ListEntityRecognizersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListEntityRecognizersInput(v *ListEntityRecognizersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3508,7 +3508,7 @@ func awsAwsjson11_serializeDocumentListEntityRecognizersInput(v *ListEntityRecog
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListKeyPhrasesDetectionJobsInput(v *ListKeyPhrasesDetectionJobsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListKeyPhrasesDetectionJobsInput(v *ListKeyPhrasesDetectionJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3532,7 +3532,7 @@ func awsAwsjson11_serializeDocumentListKeyPhrasesDetectionJobsInput(v *ListKeyPh
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListSentimentDetectionJobsInput(v *ListSentimentDetectionJobsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListSentimentDetectionJobsInput(v *ListSentimentDetectionJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3556,7 +3556,7 @@ func awsAwsjson11_serializeDocumentListSentimentDetectionJobsInput(v *ListSentim
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3568,7 +3568,7 @@ func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResour
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTopicsDetectionJobsInput(v *ListTopicsDetectionJobsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTopicsDetectionJobsInput(v *ListTopicsDetectionJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3592,7 +3592,7 @@ func awsAwsjson11_serializeDocumentListTopicsDetectionJobsInput(v *ListTopicsDet
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartDocumentClassificationJobInput(v *StartDocumentClassificationJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartDocumentClassificationJobInput(v *StartDocumentClassificationJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3645,7 +3645,7 @@ func awsAwsjson11_serializeDocumentStartDocumentClassificationJobInput(v *StartD
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartDominantLanguageDetectionJobInput(v *StartDominantLanguageDetectionJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartDominantLanguageDetectionJobInput(v *StartDominantLanguageDetectionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3693,7 +3693,7 @@ func awsAwsjson11_serializeDocumentStartDominantLanguageDetectionJobInput(v *Sta
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartEntitiesDetectionJobInput(v *StartEntitiesDetectionJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartEntitiesDetectionJobInput(v *StartEntitiesDetectionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3751,7 +3751,7 @@ func awsAwsjson11_serializeDocumentStartEntitiesDetectionJobInput(v *StartEntiti
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartKeyPhrasesDetectionJobInput(v *StartKeyPhrasesDetectionJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartKeyPhrasesDetectionJobInput(v *StartKeyPhrasesDetectionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3804,7 +3804,7 @@ func awsAwsjson11_serializeDocumentStartKeyPhrasesDetectionJobInput(v *StartKeyP
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartSentimentDetectionJobInput(v *StartSentimentDetectionJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartSentimentDetectionJobInput(v *StartSentimentDetectionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3857,7 +3857,7 @@ func awsAwsjson11_serializeDocumentStartSentimentDetectionJobInput(v *StartSenti
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartTopicsDetectionJobInput(v *StartTopicsDetectionJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartTopicsDetectionJobInput(v *StartTopicsDetectionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3910,7 +3910,7 @@ func awsAwsjson11_serializeDocumentStartTopicsDetectionJobInput(v *StartTopicsDe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopDominantLanguageDetectionJobInput(v *StopDominantLanguageDetectionJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopDominantLanguageDetectionJobInput(v *StopDominantLanguageDetectionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3922,7 +3922,7 @@ func awsAwsjson11_serializeDocumentStopDominantLanguageDetectionJobInput(v *Stop
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopEntitiesDetectionJobInput(v *StopEntitiesDetectionJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopEntitiesDetectionJobInput(v *StopEntitiesDetectionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3934,7 +3934,7 @@ func awsAwsjson11_serializeDocumentStopEntitiesDetectionJobInput(v *StopEntities
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopKeyPhrasesDetectionJobInput(v *StopKeyPhrasesDetectionJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopKeyPhrasesDetectionJobInput(v *StopKeyPhrasesDetectionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3946,7 +3946,7 @@ func awsAwsjson11_serializeDocumentStopKeyPhrasesDetectionJobInput(v *StopKeyPhr
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopSentimentDetectionJobInput(v *StopSentimentDetectionJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopSentimentDetectionJobInput(v *StopSentimentDetectionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3958,7 +3958,7 @@ func awsAwsjson11_serializeDocumentStopSentimentDetectionJobInput(v *StopSentime
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopTrainingDocumentClassifierInput(v *StopTrainingDocumentClassifierInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopTrainingDocumentClassifierInput(v *StopTrainingDocumentClassifierInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3970,7 +3970,7 @@ func awsAwsjson11_serializeDocumentStopTrainingDocumentClassifierInput(v *StopTr
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopTrainingEntityRecognizerInput(v *StopTrainingEntityRecognizerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopTrainingEntityRecognizerInput(v *StopTrainingEntityRecognizerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3982,7 +3982,7 @@ func awsAwsjson11_serializeDocumentStopTrainingEntityRecognizerInput(v *StopTrai
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4001,7 +4001,7 @@ func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4020,7 +4020,7 @@ func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateEndpointInput(v *UpdateEndpointInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateEndpointInput(v *UpdateEndpointInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

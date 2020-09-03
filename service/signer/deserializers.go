@@ -146,7 +146,7 @@ func (m *awsRestjson1_deserializeOpDescribeSigningJob) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDescribeSigningJobOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDescribeSigningJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -219,7 +219,7 @@ func awsRestjson1_deserializeOpErrorDescribeSigningJob(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeSigningJobOutput(v **DescribeSigningJobOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeSigningJobOutput(v **DescribeSigningJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -441,7 +441,7 @@ func (m *awsRestjson1_deserializeOpGetSigningPlatform) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetSigningPlatformOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetSigningPlatformOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -514,7 +514,7 @@ func awsRestjson1_deserializeOpErrorGetSigningPlatform(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetSigningPlatformOutput(v **GetSigningPlatformOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetSigningPlatformOutput(v **GetSigningPlatformOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -691,7 +691,7 @@ func (m *awsRestjson1_deserializeOpGetSigningProfile) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetSigningProfileOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetSigningProfileOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -767,7 +767,7 @@ func awsRestjson1_deserializeOpErrorGetSigningProfile(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetSigningProfileOutput(v **GetSigningProfileOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetSigningProfileOutput(v **GetSigningProfileOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -924,7 +924,7 @@ func (m *awsRestjson1_deserializeOpListSigningJobs) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListSigningJobsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListSigningJobsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1000,7 +1000,7 @@ func awsRestjson1_deserializeOpErrorListSigningJobs(response *smithyhttp.Respons
 	}
 }
 
-func awsRestjson1_deserializeDocumentListSigningJobsOutput(v **ListSigningJobsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListSigningJobsOutput(v **ListSigningJobsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1103,7 +1103,7 @@ func (m *awsRestjson1_deserializeOpListSigningPlatforms) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListSigningPlatformsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListSigningPlatformsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1179,7 +1179,7 @@ func awsRestjson1_deserializeOpErrorListSigningPlatforms(response *smithyhttp.Re
 	}
 }
 
-func awsRestjson1_deserializeDocumentListSigningPlatformsOutput(v **ListSigningPlatformsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListSigningPlatformsOutput(v **ListSigningPlatformsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1282,7 +1282,7 @@ func (m *awsRestjson1_deserializeOpListSigningProfiles) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListSigningProfilesOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListSigningProfilesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1355,7 +1355,7 @@ func awsRestjson1_deserializeOpErrorListSigningProfiles(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentListSigningProfilesOutput(v **ListSigningProfilesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListSigningProfilesOutput(v **ListSigningProfilesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1458,7 +1458,7 @@ func (m *awsRestjson1_deserializeOpListTagsForResource) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListTagsForResourceOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1531,7 +1531,7 @@ func awsRestjson1_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1621,7 +1621,7 @@ func (m *awsRestjson1_deserializeOpPutSigningProfile) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentPutSigningProfileOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentPutSigningProfileOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1700,7 +1700,7 @@ func awsRestjson1_deserializeOpErrorPutSigningProfile(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeDocumentPutSigningProfileOutput(v **PutSigningProfileOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentPutSigningProfileOutput(v **PutSigningProfileOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1798,7 +1798,7 @@ func (m *awsRestjson1_deserializeOpStartSigningJob) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentStartSigningJobOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentStartSigningJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1877,7 +1877,7 @@ func awsRestjson1_deserializeOpErrorStartSigningJob(response *smithyhttp.Respons
 	}
 }
 
-func awsRestjson1_deserializeDocumentStartSigningJobOutput(v **StartSigningJobOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentStartSigningJobOutput(v **StartSigningJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

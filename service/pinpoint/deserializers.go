@@ -139,7 +139,7 @@ func awsRestjson1_deserializeOpErrorCreateApp(response *smithyhttp.Response) err
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateAppOutput(v **CreateAppOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateAppOutput(v **CreateAppOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -314,7 +314,7 @@ func awsRestjson1_deserializeOpErrorCreateCampaign(response *smithyhttp.Response
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateCampaignOutput(v **CreateCampaignOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateCampaignOutput(v **CreateCampaignOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -483,7 +483,7 @@ func awsRestjson1_deserializeOpErrorCreateEmailTemplate(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateEmailTemplateOutput(v **CreateEmailTemplateOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateEmailTemplateOutput(v **CreateEmailTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -658,7 +658,7 @@ func awsRestjson1_deserializeOpErrorCreateExportJob(response *smithyhttp.Respons
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateExportJobOutput(v **CreateExportJobOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateExportJobOutput(v **CreateExportJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -833,7 +833,7 @@ func awsRestjson1_deserializeOpErrorCreateImportJob(response *smithyhttp.Respons
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateImportJobOutput(v **CreateImportJobOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateImportJobOutput(v **CreateImportJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1008,7 +1008,7 @@ func awsRestjson1_deserializeOpErrorCreateJourney(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateJourneyOutput(v **CreateJourneyOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateJourneyOutput(v **CreateJourneyOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1177,7 +1177,7 @@ func awsRestjson1_deserializeOpErrorCreatePushTemplate(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreatePushTemplateOutput(v **CreatePushTemplateOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreatePushTemplateOutput(v **CreatePushTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1352,7 +1352,7 @@ func awsRestjson1_deserializeOpErrorCreateRecommenderConfiguration(response *smi
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateRecommenderConfigurationOutput(v **CreateRecommenderConfigurationOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateRecommenderConfigurationOutput(v **CreateRecommenderConfigurationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1527,7 +1527,7 @@ func awsRestjson1_deserializeOpErrorCreateSegment(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateSegmentOutput(v **CreateSegmentOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateSegmentOutput(v **CreateSegmentOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1696,7 +1696,7 @@ func awsRestjson1_deserializeOpErrorCreateSmsTemplate(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateSmsTemplateOutput(v **CreateSmsTemplateOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateSmsTemplateOutput(v **CreateSmsTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1865,7 +1865,7 @@ func awsRestjson1_deserializeOpErrorCreateVoiceTemplate(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateVoiceTemplateOutput(v **CreateVoiceTemplateOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateVoiceTemplateOutput(v **CreateVoiceTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2040,7 +2040,7 @@ func awsRestjson1_deserializeOpErrorDeleteAdmChannel(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteAdmChannelOutput(v **DeleteAdmChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteAdmChannelOutput(v **DeleteAdmChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2215,7 +2215,7 @@ func awsRestjson1_deserializeOpErrorDeleteApnsChannel(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteApnsChannelOutput(v **DeleteApnsChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteApnsChannelOutput(v **DeleteApnsChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2390,7 +2390,7 @@ func awsRestjson1_deserializeOpErrorDeleteApnsSandboxChannel(response *smithyhtt
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteApnsSandboxChannelOutput(v **DeleteApnsSandboxChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteApnsSandboxChannelOutput(v **DeleteApnsSandboxChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2565,7 +2565,7 @@ func awsRestjson1_deserializeOpErrorDeleteApnsVoipChannel(response *smithyhttp.R
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteApnsVoipChannelOutput(v **DeleteApnsVoipChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteApnsVoipChannelOutput(v **DeleteApnsVoipChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2740,7 +2740,7 @@ func awsRestjson1_deserializeOpErrorDeleteApnsVoipSandboxChannel(response *smith
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteApnsVoipSandboxChannelOutput(v **DeleteApnsVoipSandboxChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteApnsVoipSandboxChannelOutput(v **DeleteApnsVoipSandboxChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2915,7 +2915,7 @@ func awsRestjson1_deserializeOpErrorDeleteApp(response *smithyhttp.Response) err
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteAppOutput(v **DeleteAppOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteAppOutput(v **DeleteAppOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3090,7 +3090,7 @@ func awsRestjson1_deserializeOpErrorDeleteBaiduChannel(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteBaiduChannelOutput(v **DeleteBaiduChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteBaiduChannelOutput(v **DeleteBaiduChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3265,7 +3265,7 @@ func awsRestjson1_deserializeOpErrorDeleteCampaign(response *smithyhttp.Response
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteCampaignOutput(v **DeleteCampaignOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteCampaignOutput(v **DeleteCampaignOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3440,7 +3440,7 @@ func awsRestjson1_deserializeOpErrorDeleteEmailChannel(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteEmailChannelOutput(v **DeleteEmailChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteEmailChannelOutput(v **DeleteEmailChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3615,7 +3615,7 @@ func awsRestjson1_deserializeOpErrorDeleteEmailTemplate(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteEmailTemplateOutput(v **DeleteEmailTemplateOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteEmailTemplateOutput(v **DeleteEmailTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3790,7 +3790,7 @@ func awsRestjson1_deserializeOpErrorDeleteEndpoint(response *smithyhttp.Response
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteEndpointOutput(v **DeleteEndpointOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteEndpointOutput(v **DeleteEndpointOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3965,7 +3965,7 @@ func awsRestjson1_deserializeOpErrorDeleteEventStream(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteEventStreamOutput(v **DeleteEventStreamOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteEventStreamOutput(v **DeleteEventStreamOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4140,7 +4140,7 @@ func awsRestjson1_deserializeOpErrorDeleteGcmChannel(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteGcmChannelOutput(v **DeleteGcmChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteGcmChannelOutput(v **DeleteGcmChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4315,7 +4315,7 @@ func awsRestjson1_deserializeOpErrorDeleteJourney(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteJourneyOutput(v **DeleteJourneyOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteJourneyOutput(v **DeleteJourneyOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4490,7 +4490,7 @@ func awsRestjson1_deserializeOpErrorDeletePushTemplate(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeletePushTemplateOutput(v **DeletePushTemplateOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeletePushTemplateOutput(v **DeletePushTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4665,7 +4665,7 @@ func awsRestjson1_deserializeOpErrorDeleteRecommenderConfiguration(response *smi
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteRecommenderConfigurationOutput(v **DeleteRecommenderConfigurationOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteRecommenderConfigurationOutput(v **DeleteRecommenderConfigurationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4840,7 +4840,7 @@ func awsRestjson1_deserializeOpErrorDeleteSegment(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteSegmentOutput(v **DeleteSegmentOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteSegmentOutput(v **DeleteSegmentOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5015,7 +5015,7 @@ func awsRestjson1_deserializeOpErrorDeleteSmsChannel(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteSmsChannelOutput(v **DeleteSmsChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteSmsChannelOutput(v **DeleteSmsChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5190,7 +5190,7 @@ func awsRestjson1_deserializeOpErrorDeleteSmsTemplate(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteSmsTemplateOutput(v **DeleteSmsTemplateOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteSmsTemplateOutput(v **DeleteSmsTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5365,7 +5365,7 @@ func awsRestjson1_deserializeOpErrorDeleteUserEndpoints(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteUserEndpointsOutput(v **DeleteUserEndpointsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteUserEndpointsOutput(v **DeleteUserEndpointsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5540,7 +5540,7 @@ func awsRestjson1_deserializeOpErrorDeleteVoiceChannel(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteVoiceChannelOutput(v **DeleteVoiceChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteVoiceChannelOutput(v **DeleteVoiceChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5715,7 +5715,7 @@ func awsRestjson1_deserializeOpErrorDeleteVoiceTemplate(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteVoiceTemplateOutput(v **DeleteVoiceTemplateOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteVoiceTemplateOutput(v **DeleteVoiceTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5890,7 +5890,7 @@ func awsRestjson1_deserializeOpErrorGetAdmChannel(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetAdmChannelOutput(v **GetAdmChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetAdmChannelOutput(v **GetAdmChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6065,7 +6065,7 @@ func awsRestjson1_deserializeOpErrorGetApnsChannel(response *smithyhttp.Response
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetApnsChannelOutput(v **GetApnsChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetApnsChannelOutput(v **GetApnsChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6240,7 +6240,7 @@ func awsRestjson1_deserializeOpErrorGetApnsSandboxChannel(response *smithyhttp.R
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetApnsSandboxChannelOutput(v **GetApnsSandboxChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetApnsSandboxChannelOutput(v **GetApnsSandboxChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6415,7 +6415,7 @@ func awsRestjson1_deserializeOpErrorGetApnsVoipChannel(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetApnsVoipChannelOutput(v **GetApnsVoipChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetApnsVoipChannelOutput(v **GetApnsVoipChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6590,7 +6590,7 @@ func awsRestjson1_deserializeOpErrorGetApnsVoipSandboxChannel(response *smithyht
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetApnsVoipSandboxChannelOutput(v **GetApnsVoipSandboxChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetApnsVoipSandboxChannelOutput(v **GetApnsVoipSandboxChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6765,7 +6765,7 @@ func awsRestjson1_deserializeOpErrorGetApp(response *smithyhttp.Response) error 
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetAppOutput(v **GetAppOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetAppOutput(v **GetAppOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6940,7 +6940,7 @@ func awsRestjson1_deserializeOpErrorGetApplicationDateRangeKpi(response *smithyh
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetApplicationDateRangeKpiOutput(v **GetApplicationDateRangeKpiOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetApplicationDateRangeKpiOutput(v **GetApplicationDateRangeKpiOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7115,7 +7115,7 @@ func awsRestjson1_deserializeOpErrorGetApplicationSettings(response *smithyhttp.
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetApplicationSettingsOutput(v **GetApplicationSettingsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetApplicationSettingsOutput(v **GetApplicationSettingsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7290,7 +7290,7 @@ func awsRestjson1_deserializeOpErrorGetApps(response *smithyhttp.Response) error
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetAppsOutput(v **GetAppsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetAppsOutput(v **GetAppsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7465,7 +7465,7 @@ func awsRestjson1_deserializeOpErrorGetBaiduChannel(response *smithyhttp.Respons
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetBaiduChannelOutput(v **GetBaiduChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetBaiduChannelOutput(v **GetBaiduChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7640,7 +7640,7 @@ func awsRestjson1_deserializeOpErrorGetCampaign(response *smithyhttp.Response) e
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetCampaignOutput(v **GetCampaignOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetCampaignOutput(v **GetCampaignOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7815,7 +7815,7 @@ func awsRestjson1_deserializeOpErrorGetCampaignActivities(response *smithyhttp.R
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetCampaignActivitiesOutput(v **GetCampaignActivitiesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetCampaignActivitiesOutput(v **GetCampaignActivitiesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7990,7 +7990,7 @@ func awsRestjson1_deserializeOpErrorGetCampaignDateRangeKpi(response *smithyhttp
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetCampaignDateRangeKpiOutput(v **GetCampaignDateRangeKpiOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetCampaignDateRangeKpiOutput(v **GetCampaignDateRangeKpiOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8165,7 +8165,7 @@ func awsRestjson1_deserializeOpErrorGetCampaigns(response *smithyhttp.Response) 
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetCampaignsOutput(v **GetCampaignsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetCampaignsOutput(v **GetCampaignsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8340,7 +8340,7 @@ func awsRestjson1_deserializeOpErrorGetCampaignVersion(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetCampaignVersionOutput(v **GetCampaignVersionOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetCampaignVersionOutput(v **GetCampaignVersionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8515,7 +8515,7 @@ func awsRestjson1_deserializeOpErrorGetCampaignVersions(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetCampaignVersionsOutput(v **GetCampaignVersionsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetCampaignVersionsOutput(v **GetCampaignVersionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8690,7 +8690,7 @@ func awsRestjson1_deserializeOpErrorGetChannels(response *smithyhttp.Response) e
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetChannelsOutput(v **GetChannelsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetChannelsOutput(v **GetChannelsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8865,7 +8865,7 @@ func awsRestjson1_deserializeOpErrorGetEmailChannel(response *smithyhttp.Respons
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetEmailChannelOutput(v **GetEmailChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetEmailChannelOutput(v **GetEmailChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9040,7 +9040,7 @@ func awsRestjson1_deserializeOpErrorGetEmailTemplate(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetEmailTemplateOutput(v **GetEmailTemplateOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetEmailTemplateOutput(v **GetEmailTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9215,7 +9215,7 @@ func awsRestjson1_deserializeOpErrorGetEndpoint(response *smithyhttp.Response) e
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetEndpointOutput(v **GetEndpointOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetEndpointOutput(v **GetEndpointOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9390,7 +9390,7 @@ func awsRestjson1_deserializeOpErrorGetEventStream(response *smithyhttp.Response
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetEventStreamOutput(v **GetEventStreamOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetEventStreamOutput(v **GetEventStreamOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9565,7 +9565,7 @@ func awsRestjson1_deserializeOpErrorGetExportJob(response *smithyhttp.Response) 
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetExportJobOutput(v **GetExportJobOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetExportJobOutput(v **GetExportJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9740,7 +9740,7 @@ func awsRestjson1_deserializeOpErrorGetExportJobs(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetExportJobsOutput(v **GetExportJobsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetExportJobsOutput(v **GetExportJobsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9915,7 +9915,7 @@ func awsRestjson1_deserializeOpErrorGetGcmChannel(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetGcmChannelOutput(v **GetGcmChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetGcmChannelOutput(v **GetGcmChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10090,7 +10090,7 @@ func awsRestjson1_deserializeOpErrorGetImportJob(response *smithyhttp.Response) 
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetImportJobOutput(v **GetImportJobOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetImportJobOutput(v **GetImportJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10265,7 +10265,7 @@ func awsRestjson1_deserializeOpErrorGetImportJobs(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetImportJobsOutput(v **GetImportJobsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetImportJobsOutput(v **GetImportJobsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10440,7 +10440,7 @@ func awsRestjson1_deserializeOpErrorGetJourney(response *smithyhttp.Response) er
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetJourneyOutput(v **GetJourneyOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetJourneyOutput(v **GetJourneyOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10615,7 +10615,7 @@ func awsRestjson1_deserializeOpErrorGetJourneyDateRangeKpi(response *smithyhttp.
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetJourneyDateRangeKpiOutput(v **GetJourneyDateRangeKpiOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetJourneyDateRangeKpiOutput(v **GetJourneyDateRangeKpiOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10790,7 +10790,7 @@ func awsRestjson1_deserializeOpErrorGetJourneyExecutionActivityMetrics(response 
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetJourneyExecutionActivityMetricsOutput(v **GetJourneyExecutionActivityMetricsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetJourneyExecutionActivityMetricsOutput(v **GetJourneyExecutionActivityMetricsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10965,7 +10965,7 @@ func awsRestjson1_deserializeOpErrorGetJourneyExecutionMetrics(response *smithyh
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetJourneyExecutionMetricsOutput(v **GetJourneyExecutionMetricsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetJourneyExecutionMetricsOutput(v **GetJourneyExecutionMetricsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11140,7 +11140,7 @@ func awsRestjson1_deserializeOpErrorGetPushTemplate(response *smithyhttp.Respons
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetPushTemplateOutput(v **GetPushTemplateOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetPushTemplateOutput(v **GetPushTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11315,7 +11315,7 @@ func awsRestjson1_deserializeOpErrorGetRecommenderConfiguration(response *smithy
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetRecommenderConfigurationOutput(v **GetRecommenderConfigurationOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetRecommenderConfigurationOutput(v **GetRecommenderConfigurationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11490,7 +11490,7 @@ func awsRestjson1_deserializeOpErrorGetRecommenderConfigurations(response *smith
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetRecommenderConfigurationsOutput(v **GetRecommenderConfigurationsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetRecommenderConfigurationsOutput(v **GetRecommenderConfigurationsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11665,7 +11665,7 @@ func awsRestjson1_deserializeOpErrorGetSegment(response *smithyhttp.Response) er
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetSegmentOutput(v **GetSegmentOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetSegmentOutput(v **GetSegmentOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11840,7 +11840,7 @@ func awsRestjson1_deserializeOpErrorGetSegmentExportJobs(response *smithyhttp.Re
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetSegmentExportJobsOutput(v **GetSegmentExportJobsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetSegmentExportJobsOutput(v **GetSegmentExportJobsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12015,7 +12015,7 @@ func awsRestjson1_deserializeOpErrorGetSegmentImportJobs(response *smithyhttp.Re
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetSegmentImportJobsOutput(v **GetSegmentImportJobsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetSegmentImportJobsOutput(v **GetSegmentImportJobsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12190,7 +12190,7 @@ func awsRestjson1_deserializeOpErrorGetSegments(response *smithyhttp.Response) e
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetSegmentsOutput(v **GetSegmentsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetSegmentsOutput(v **GetSegmentsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12365,7 +12365,7 @@ func awsRestjson1_deserializeOpErrorGetSegmentVersion(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetSegmentVersionOutput(v **GetSegmentVersionOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetSegmentVersionOutput(v **GetSegmentVersionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12540,7 +12540,7 @@ func awsRestjson1_deserializeOpErrorGetSegmentVersions(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetSegmentVersionsOutput(v **GetSegmentVersionsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetSegmentVersionsOutput(v **GetSegmentVersionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12715,7 +12715,7 @@ func awsRestjson1_deserializeOpErrorGetSmsChannel(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetSmsChannelOutput(v **GetSmsChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetSmsChannelOutput(v **GetSmsChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12890,7 +12890,7 @@ func awsRestjson1_deserializeOpErrorGetSmsTemplate(response *smithyhttp.Response
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetSmsTemplateOutput(v **GetSmsTemplateOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetSmsTemplateOutput(v **GetSmsTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13065,7 +13065,7 @@ func awsRestjson1_deserializeOpErrorGetUserEndpoints(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetUserEndpointsOutput(v **GetUserEndpointsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetUserEndpointsOutput(v **GetUserEndpointsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13240,7 +13240,7 @@ func awsRestjson1_deserializeOpErrorGetVoiceChannel(response *smithyhttp.Respons
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetVoiceChannelOutput(v **GetVoiceChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetVoiceChannelOutput(v **GetVoiceChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13415,7 +13415,7 @@ func awsRestjson1_deserializeOpErrorGetVoiceTemplate(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetVoiceTemplateOutput(v **GetVoiceTemplateOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetVoiceTemplateOutput(v **GetVoiceTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13590,7 +13590,7 @@ func awsRestjson1_deserializeOpErrorListJourneys(response *smithyhttp.Response) 
 	}
 }
 
-func awsRestjson1_deserializeDocumentListJourneysOutput(v **ListJourneysOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListJourneysOutput(v **ListJourneysOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13744,7 +13744,7 @@ func awsRestjson1_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13913,7 +13913,7 @@ func awsRestjson1_deserializeOpErrorListTemplates(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentListTemplatesOutput(v **ListTemplatesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListTemplatesOutput(v **ListTemplatesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14088,7 +14088,7 @@ func awsRestjson1_deserializeOpErrorListTemplateVersions(response *smithyhttp.Re
 	}
 }
 
-func awsRestjson1_deserializeDocumentListTemplateVersionsOutput(v **ListTemplateVersionsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListTemplateVersionsOutput(v **ListTemplateVersionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14263,7 +14263,7 @@ func awsRestjson1_deserializeOpErrorPhoneNumberValidate(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentPhoneNumberValidateOutput(v **PhoneNumberValidateOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentPhoneNumberValidateOutput(v **PhoneNumberValidateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14438,7 +14438,7 @@ func awsRestjson1_deserializeOpErrorPutEvents(response *smithyhttp.Response) err
 	}
 }
 
-func awsRestjson1_deserializeDocumentPutEventsOutput(v **PutEventsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentPutEventsOutput(v **PutEventsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14613,7 +14613,7 @@ func awsRestjson1_deserializeOpErrorPutEventStream(response *smithyhttp.Response
 	}
 }
 
-func awsRestjson1_deserializeDocumentPutEventStreamOutput(v **PutEventStreamOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentPutEventStreamOutput(v **PutEventStreamOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14788,7 +14788,7 @@ func awsRestjson1_deserializeOpErrorRemoveAttributes(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeDocumentRemoveAttributesOutput(v **RemoveAttributesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentRemoveAttributesOutput(v **RemoveAttributesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14963,7 +14963,7 @@ func awsRestjson1_deserializeOpErrorSendMessages(response *smithyhttp.Response) 
 	}
 }
 
-func awsRestjson1_deserializeDocumentSendMessagesOutput(v **SendMessagesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentSendMessagesOutput(v **SendMessagesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15138,7 +15138,7 @@ func awsRestjson1_deserializeOpErrorSendUsersMessages(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeDocumentSendUsersMessagesOutput(v **SendUsersMessagesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentSendUsersMessagesOutput(v **SendUsersMessagesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15473,7 +15473,7 @@ func awsRestjson1_deserializeOpErrorUpdateAdmChannel(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateAdmChannelOutput(v **UpdateAdmChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateAdmChannelOutput(v **UpdateAdmChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15648,7 +15648,7 @@ func awsRestjson1_deserializeOpErrorUpdateApnsChannel(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateApnsChannelOutput(v **UpdateApnsChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateApnsChannelOutput(v **UpdateApnsChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15823,7 +15823,7 @@ func awsRestjson1_deserializeOpErrorUpdateApnsSandboxChannel(response *smithyhtt
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateApnsSandboxChannelOutput(v **UpdateApnsSandboxChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateApnsSandboxChannelOutput(v **UpdateApnsSandboxChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15998,7 +15998,7 @@ func awsRestjson1_deserializeOpErrorUpdateApnsVoipChannel(response *smithyhttp.R
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateApnsVoipChannelOutput(v **UpdateApnsVoipChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateApnsVoipChannelOutput(v **UpdateApnsVoipChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16173,7 +16173,7 @@ func awsRestjson1_deserializeOpErrorUpdateApnsVoipSandboxChannel(response *smith
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateApnsVoipSandboxChannelOutput(v **UpdateApnsVoipSandboxChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateApnsVoipSandboxChannelOutput(v **UpdateApnsVoipSandboxChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16348,7 +16348,7 @@ func awsRestjson1_deserializeOpErrorUpdateApplicationSettings(response *smithyht
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateApplicationSettingsOutput(v **UpdateApplicationSettingsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateApplicationSettingsOutput(v **UpdateApplicationSettingsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16523,7 +16523,7 @@ func awsRestjson1_deserializeOpErrorUpdateBaiduChannel(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateBaiduChannelOutput(v **UpdateBaiduChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateBaiduChannelOutput(v **UpdateBaiduChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16698,7 +16698,7 @@ func awsRestjson1_deserializeOpErrorUpdateCampaign(response *smithyhttp.Response
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateCampaignOutput(v **UpdateCampaignOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateCampaignOutput(v **UpdateCampaignOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16873,7 +16873,7 @@ func awsRestjson1_deserializeOpErrorUpdateEmailChannel(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateEmailChannelOutput(v **UpdateEmailChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateEmailChannelOutput(v **UpdateEmailChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -17048,7 +17048,7 @@ func awsRestjson1_deserializeOpErrorUpdateEmailTemplate(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateEmailTemplateOutput(v **UpdateEmailTemplateOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateEmailTemplateOutput(v **UpdateEmailTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -17223,7 +17223,7 @@ func awsRestjson1_deserializeOpErrorUpdateEndpoint(response *smithyhttp.Response
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateEndpointOutput(v **UpdateEndpointOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateEndpointOutput(v **UpdateEndpointOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -17398,7 +17398,7 @@ func awsRestjson1_deserializeOpErrorUpdateEndpointsBatch(response *smithyhttp.Re
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateEndpointsBatchOutput(v **UpdateEndpointsBatchOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateEndpointsBatchOutput(v **UpdateEndpointsBatchOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -17573,7 +17573,7 @@ func awsRestjson1_deserializeOpErrorUpdateGcmChannel(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateGcmChannelOutput(v **UpdateGcmChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateGcmChannelOutput(v **UpdateGcmChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -17748,7 +17748,7 @@ func awsRestjson1_deserializeOpErrorUpdateJourney(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateJourneyOutput(v **UpdateJourneyOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateJourneyOutput(v **UpdateJourneyOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -17923,7 +17923,7 @@ func awsRestjson1_deserializeOpErrorUpdateJourneyState(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateJourneyStateOutput(v **UpdateJourneyStateOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateJourneyStateOutput(v **UpdateJourneyStateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -18098,7 +18098,7 @@ func awsRestjson1_deserializeOpErrorUpdatePushTemplate(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdatePushTemplateOutput(v **UpdatePushTemplateOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdatePushTemplateOutput(v **UpdatePushTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -18273,7 +18273,7 @@ func awsRestjson1_deserializeOpErrorUpdateRecommenderConfiguration(response *smi
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateRecommenderConfigurationOutput(v **UpdateRecommenderConfigurationOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateRecommenderConfigurationOutput(v **UpdateRecommenderConfigurationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -18448,7 +18448,7 @@ func awsRestjson1_deserializeOpErrorUpdateSegment(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateSegmentOutput(v **UpdateSegmentOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateSegmentOutput(v **UpdateSegmentOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -18623,7 +18623,7 @@ func awsRestjson1_deserializeOpErrorUpdateSmsChannel(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateSmsChannelOutput(v **UpdateSmsChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateSmsChannelOutput(v **UpdateSmsChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -18798,7 +18798,7 @@ func awsRestjson1_deserializeOpErrorUpdateSmsTemplate(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateSmsTemplateOutput(v **UpdateSmsTemplateOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateSmsTemplateOutput(v **UpdateSmsTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -18973,7 +18973,7 @@ func awsRestjson1_deserializeOpErrorUpdateTemplateActiveVersion(response *smithy
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateTemplateActiveVersionOutput(v **UpdateTemplateActiveVersionOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateTemplateActiveVersionOutput(v **UpdateTemplateActiveVersionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -19148,7 +19148,7 @@ func awsRestjson1_deserializeOpErrorUpdateVoiceChannel(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateVoiceChannelOutput(v **UpdateVoiceChannelOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateVoiceChannelOutput(v **UpdateVoiceChannelOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -19323,7 +19323,7 @@ func awsRestjson1_deserializeOpErrorUpdateVoiceTemplate(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateVoiceTemplateOutput(v **UpdateVoiceTemplateOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateVoiceTemplateOutput(v **UpdateVoiceTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -28444,7 +28444,7 @@ func awsRestjson1_deserializeDocumentJourneysResponse(v **types.JourneysResponse
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentListOf__EndpointTypesElement(v *[]types.__EndpointTypesElement, decoder *json.Decoder) error {
+func awsRestjson1_deserializeDocumentListOf__EndpointTypesElement(v *[]types.EndpointTypesElement, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -28462,15 +28462,15 @@ func awsRestjson1_deserializeDocumentListOf__EndpointTypesElement(v *[]types.__E
 		return fmt.Errorf("expect `[` as start token")
 	}
 
-	var cv []types.__EndpointTypesElement
+	var cv []types.EndpointTypesElement
 	if *v == nil {
-		cv = []types.__EndpointTypesElement{}
+		cv = []types.EndpointTypesElement{}
 	} else {
 		cv = *v
 	}
 
 	for decoder.More() {
-		var col types.__EndpointTypesElement
+		var col types.EndpointTypesElement
 		val, err := decoder.Token()
 		if err != nil {
 			return err
@@ -28480,7 +28480,7 @@ func awsRestjson1_deserializeDocumentListOf__EndpointTypesElement(v *[]types.__E
 			if !ok {
 				return fmt.Errorf("expected __EndpointTypesElement to be of type string, got %T instead", val)
 			}
-			col = types.__EndpointTypesElement(jtv)
+			col = types.EndpointTypesElement(jtv)
 		}
 		cv = append(cv, col)
 

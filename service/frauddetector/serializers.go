@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpBatchCreateVariable) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.BatchCreateVariable")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchCreateVariableInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchCreateVariableInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpBatchGetVariable) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.BatchGetVariable")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchGetVariableInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchGetVariableInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpCreateDetectorVersion) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.CreateDetectorVersion")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateDetectorVersionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateDetectorVersionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpCreateModel) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.CreateModel")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateModelInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateModelInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpCreateModelVersion) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.CreateModelVersion")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateModelVersionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateModelVersionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpCreateRule) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.CreateRule")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateRuleInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateRuleInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson11_serializeOpCreateVariable) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.CreateVariable")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateVariableInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateVariableInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -366,7 +366,7 @@ func (m *awsAwsjson11_serializeOpDeleteDetector) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.DeleteDetector")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteDetectorInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteDetectorInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -412,7 +412,7 @@ func (m *awsAwsjson11_serializeOpDeleteDetectorVersion) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.DeleteDetectorVersion")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteDetectorVersionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteDetectorVersionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -458,7 +458,7 @@ func (m *awsAwsjson11_serializeOpDeleteEvent) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.DeleteEvent")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteEventInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteEventInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -504,7 +504,7 @@ func (m *awsAwsjson11_serializeOpDeleteRule) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.DeleteRule")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteRuleInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteRuleInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -550,7 +550,7 @@ func (m *awsAwsjson11_serializeOpDescribeDetector) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.DescribeDetector")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeDetectorInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeDetectorInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -596,7 +596,7 @@ func (m *awsAwsjson11_serializeOpDescribeModelVersions) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.DescribeModelVersions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeModelVersionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeModelVersionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -642,7 +642,7 @@ func (m *awsAwsjson11_serializeOpGetDetectors) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.GetDetectors")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetDetectorsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetDetectorsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -688,7 +688,7 @@ func (m *awsAwsjson11_serializeOpGetDetectorVersion) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.GetDetectorVersion")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetDetectorVersionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetDetectorVersionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -734,7 +734,7 @@ func (m *awsAwsjson11_serializeOpGetEntityTypes) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.GetEntityTypes")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetEntityTypesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetEntityTypesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -780,7 +780,7 @@ func (m *awsAwsjson11_serializeOpGetEventPrediction) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.GetEventPrediction")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetEventPredictionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetEventPredictionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -826,7 +826,7 @@ func (m *awsAwsjson11_serializeOpGetEventTypes) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.GetEventTypes")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetEventTypesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetEventTypesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -872,7 +872,7 @@ func (m *awsAwsjson11_serializeOpGetExternalModels) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.GetExternalModels")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetExternalModelsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetExternalModelsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -957,7 +957,7 @@ func (m *awsAwsjson11_serializeOpGetLabels) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.GetLabels")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetLabelsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetLabelsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1003,7 +1003,7 @@ func (m *awsAwsjson11_serializeOpGetModels) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.GetModels")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetModelsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetModelsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1049,7 +1049,7 @@ func (m *awsAwsjson11_serializeOpGetModelVersion) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.GetModelVersion")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetModelVersionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetModelVersionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1095,7 +1095,7 @@ func (m *awsAwsjson11_serializeOpGetOutcomes) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.GetOutcomes")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetOutcomesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetOutcomesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1141,7 +1141,7 @@ func (m *awsAwsjson11_serializeOpGetRules) HandleSerialize(ctx context.Context, 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.GetRules")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetRulesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetRulesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1187,7 +1187,7 @@ func (m *awsAwsjson11_serializeOpGetVariables) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.GetVariables")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetVariablesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetVariablesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1233,7 +1233,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.ListTagsForResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1279,7 +1279,7 @@ func (m *awsAwsjson11_serializeOpPutDetector) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.PutDetector")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutDetectorInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutDetectorInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1325,7 +1325,7 @@ func (m *awsAwsjson11_serializeOpPutEntityType) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.PutEntityType")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutEntityTypeInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutEntityTypeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1371,7 +1371,7 @@ func (m *awsAwsjson11_serializeOpPutEventType) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.PutEventType")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutEventTypeInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutEventTypeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1417,7 +1417,7 @@ func (m *awsAwsjson11_serializeOpPutExternalModel) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.PutExternalModel")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutExternalModelInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutExternalModelInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1463,7 +1463,7 @@ func (m *awsAwsjson11_serializeOpPutKMSEncryptionKey) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.PutKMSEncryptionKey")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutKMSEncryptionKeyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutKMSEncryptionKeyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1509,7 +1509,7 @@ func (m *awsAwsjson11_serializeOpPutLabel) HandleSerialize(ctx context.Context, 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.PutLabel")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutLabelInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutLabelInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1555,7 +1555,7 @@ func (m *awsAwsjson11_serializeOpPutOutcome) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.PutOutcome")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutOutcomeInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutOutcomeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1601,7 +1601,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.TagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1647,7 +1647,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.UntagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1693,7 +1693,7 @@ func (m *awsAwsjson11_serializeOpUpdateDetectorVersion) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.UpdateDetectorVersion")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateDetectorVersionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateDetectorVersionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1739,7 +1739,7 @@ func (m *awsAwsjson11_serializeOpUpdateDetectorVersionMetadata) HandleSerialize(
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.UpdateDetectorVersionMetadata")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateDetectorVersionMetadataInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateDetectorVersionMetadataInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1785,7 +1785,7 @@ func (m *awsAwsjson11_serializeOpUpdateDetectorVersionStatus) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.UpdateDetectorVersionStatus")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateDetectorVersionStatusInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateDetectorVersionStatusInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1831,7 +1831,7 @@ func (m *awsAwsjson11_serializeOpUpdateModel) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.UpdateModel")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateModelInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateModelInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1877,7 +1877,7 @@ func (m *awsAwsjson11_serializeOpUpdateModelVersion) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.UpdateModelVersion")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateModelVersionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateModelVersionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1923,7 +1923,7 @@ func (m *awsAwsjson11_serializeOpUpdateModelVersionStatus) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.UpdateModelVersionStatus")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateModelVersionStatusInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateModelVersionStatusInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1969,7 +1969,7 @@ func (m *awsAwsjson11_serializeOpUpdateRuleMetadata) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.UpdateRuleMetadata")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateRuleMetadataInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateRuleMetadataInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2015,7 +2015,7 @@ func (m *awsAwsjson11_serializeOpUpdateRuleVersion) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.UpdateRuleVersion")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateRuleVersionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateRuleVersionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2061,7 +2061,7 @@ func (m *awsAwsjson11_serializeOpUpdateVariable) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHawksNestServiceFacade.UpdateVariable")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateVariableInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateVariableInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2547,7 +2547,7 @@ func awsAwsjson11_serializeDocumentVariableEntryList(v []*types.VariableEntry, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchCreateVariableInput(v *BatchCreateVariableInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchCreateVariableInput(v *BatchCreateVariableInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2568,7 +2568,7 @@ func awsAwsjson11_serializeDocumentBatchCreateVariableInput(v *BatchCreateVariab
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchGetVariableInput(v *BatchGetVariableInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchGetVariableInput(v *BatchGetVariableInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2582,7 +2582,7 @@ func awsAwsjson11_serializeDocumentBatchGetVariableInput(v *BatchGetVariableInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateDetectorVersionInput(v *CreateDetectorVersionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateDetectorVersionInput(v *CreateDetectorVersionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2632,7 +2632,7 @@ func awsAwsjson11_serializeDocumentCreateDetectorVersionInput(v *CreateDetectorV
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateModelInput(v *CreateModelInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateModelInput(v *CreateModelInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2666,7 +2666,7 @@ func awsAwsjson11_serializeDocumentCreateModelInput(v *CreateModelInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateModelVersionInput(v *CreateModelVersionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateModelVersionInput(v *CreateModelVersionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2709,7 +2709,7 @@ func awsAwsjson11_serializeDocumentCreateModelVersionInput(v *CreateModelVersion
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateRuleInput(v *CreateRuleInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateRuleInput(v *CreateRuleInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2755,7 +2755,7 @@ func awsAwsjson11_serializeDocumentCreateRuleInput(v *CreateRuleInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateVariableInput(v *CreateVariableInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateVariableInput(v *CreateVariableInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2799,7 +2799,7 @@ func awsAwsjson11_serializeDocumentCreateVariableInput(v *CreateVariableInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteDetectorInput(v *DeleteDetectorInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteDetectorInput(v *DeleteDetectorInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2811,7 +2811,7 @@ func awsAwsjson11_serializeDocumentDeleteDetectorInput(v *DeleteDetectorInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteDetectorVersionInput(v *DeleteDetectorVersionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteDetectorVersionInput(v *DeleteDetectorVersionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2828,7 +2828,7 @@ func awsAwsjson11_serializeDocumentDeleteDetectorVersionInput(v *DeleteDetectorV
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteEventInput(v *DeleteEventInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteEventInput(v *DeleteEventInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2845,7 +2845,7 @@ func awsAwsjson11_serializeDocumentDeleteEventInput(v *DeleteEventInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteRuleInput(v *DeleteRuleInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteRuleInput(v *DeleteRuleInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2859,7 +2859,7 @@ func awsAwsjson11_serializeDocumentDeleteRuleInput(v *DeleteRuleInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeDetectorInput(v *DescribeDetectorInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeDetectorInput(v *DescribeDetectorInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2881,7 +2881,7 @@ func awsAwsjson11_serializeDocumentDescribeDetectorInput(v *DescribeDetectorInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeModelVersionsInput(v *DescribeModelVersionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeModelVersionsInput(v *DescribeModelVersionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2913,7 +2913,7 @@ func awsAwsjson11_serializeDocumentDescribeModelVersionsInput(v *DescribeModelVe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetDetectorsInput(v *GetDetectorsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetDetectorsInput(v *GetDetectorsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2935,7 +2935,7 @@ func awsAwsjson11_serializeDocumentGetDetectorsInput(v *GetDetectorsInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetDetectorVersionInput(v *GetDetectorVersionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetDetectorVersionInput(v *GetDetectorVersionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2952,7 +2952,7 @@ func awsAwsjson11_serializeDocumentGetDetectorVersionInput(v *GetDetectorVersion
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetEntityTypesInput(v *GetEntityTypesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetEntityTypesInput(v *GetEntityTypesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2974,7 +2974,7 @@ func awsAwsjson11_serializeDocumentGetEntityTypesInput(v *GetEntityTypesInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetEventPredictionInput(v *GetEventPredictionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetEventPredictionInput(v *GetEventPredictionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3027,7 +3027,7 @@ func awsAwsjson11_serializeDocumentGetEventPredictionInput(v *GetEventPrediction
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetEventTypesInput(v *GetEventTypesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetEventTypesInput(v *GetEventTypesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3049,7 +3049,7 @@ func awsAwsjson11_serializeDocumentGetEventTypesInput(v *GetEventTypesInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetExternalModelsInput(v *GetExternalModelsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetExternalModelsInput(v *GetExternalModelsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3078,7 +3078,7 @@ func awsAwsjson11_serializeDocumentGetKMSEncryptionKeyInput(v *GetKMSEncryptionK
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetLabelsInput(v *GetLabelsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetLabelsInput(v *GetLabelsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3100,7 +3100,7 @@ func awsAwsjson11_serializeDocumentGetLabelsInput(v *GetLabelsInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetModelsInput(v *GetModelsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetModelsInput(v *GetModelsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3127,7 +3127,7 @@ func awsAwsjson11_serializeDocumentGetModelsInput(v *GetModelsInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetModelVersionInput(v *GetModelVersionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetModelVersionInput(v *GetModelVersionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3149,7 +3149,7 @@ func awsAwsjson11_serializeDocumentGetModelVersionInput(v *GetModelVersionInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetOutcomesInput(v *GetOutcomesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetOutcomesInput(v *GetOutcomesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3171,7 +3171,7 @@ func awsAwsjson11_serializeDocumentGetOutcomesInput(v *GetOutcomesInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetRulesInput(v *GetRulesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetRulesInput(v *GetRulesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3203,7 +3203,7 @@ func awsAwsjson11_serializeDocumentGetRulesInput(v *GetRulesInput, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetVariablesInput(v *GetVariablesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetVariablesInput(v *GetVariablesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3225,7 +3225,7 @@ func awsAwsjson11_serializeDocumentGetVariablesInput(v *GetVariablesInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3247,7 +3247,7 @@ func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResour
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutDetectorInput(v *PutDetectorInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutDetectorInput(v *PutDetectorInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3276,7 +3276,7 @@ func awsAwsjson11_serializeDocumentPutDetectorInput(v *PutDetectorInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutEntityTypeInput(v *PutEntityTypeInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutEntityTypeInput(v *PutEntityTypeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3300,7 +3300,7 @@ func awsAwsjson11_serializeDocumentPutEntityTypeInput(v *PutEntityTypeInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutEventTypeInput(v *PutEventTypeInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutEventTypeInput(v *PutEventTypeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3345,7 +3345,7 @@ func awsAwsjson11_serializeDocumentPutEventTypeInput(v *PutEventTypeInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutExternalModelInput(v *PutExternalModelInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutExternalModelInput(v *PutExternalModelInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3393,7 +3393,7 @@ func awsAwsjson11_serializeDocumentPutExternalModelInput(v *PutExternalModelInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutKMSEncryptionKeyInput(v *PutKMSEncryptionKeyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutKMSEncryptionKeyInput(v *PutKMSEncryptionKeyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3405,7 +3405,7 @@ func awsAwsjson11_serializeDocumentPutKMSEncryptionKeyInput(v *PutKMSEncryptionK
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutLabelInput(v *PutLabelInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutLabelInput(v *PutLabelInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3429,7 +3429,7 @@ func awsAwsjson11_serializeDocumentPutLabelInput(v *PutLabelInput, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutOutcomeInput(v *PutOutcomeInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutOutcomeInput(v *PutOutcomeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3453,7 +3453,7 @@ func awsAwsjson11_serializeDocumentPutOutcomeInput(v *PutOutcomeInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3472,7 +3472,7 @@ func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3491,7 +3491,7 @@ func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateDetectorVersionInput(v *UpdateDetectorVersionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateDetectorVersionInput(v *UpdateDetectorVersionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3539,7 +3539,7 @@ func awsAwsjson11_serializeDocumentUpdateDetectorVersionInput(v *UpdateDetectorV
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateDetectorVersionMetadataInput(v *UpdateDetectorVersionMetadataInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateDetectorVersionMetadataInput(v *UpdateDetectorVersionMetadataInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3561,7 +3561,7 @@ func awsAwsjson11_serializeDocumentUpdateDetectorVersionMetadataInput(v *UpdateD
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateDetectorVersionStatusInput(v *UpdateDetectorVersionStatusInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateDetectorVersionStatusInput(v *UpdateDetectorVersionStatusInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3583,7 +3583,7 @@ func awsAwsjson11_serializeDocumentUpdateDetectorVersionStatusInput(v *UpdateDet
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateModelInput(v *UpdateModelInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateModelInput(v *UpdateModelInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3605,7 +3605,7 @@ func awsAwsjson11_serializeDocumentUpdateModelInput(v *UpdateModelInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateModelVersionInput(v *UpdateModelVersionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateModelVersionInput(v *UpdateModelVersionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3641,7 +3641,7 @@ func awsAwsjson11_serializeDocumentUpdateModelVersionInput(v *UpdateModelVersion
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateModelVersionStatusInput(v *UpdateModelVersionStatusInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateModelVersionStatusInput(v *UpdateModelVersionStatusInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3668,7 +3668,7 @@ func awsAwsjson11_serializeDocumentUpdateModelVersionStatusInput(v *UpdateModelV
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateRuleMetadataInput(v *UpdateRuleMetadataInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateRuleMetadataInput(v *UpdateRuleMetadataInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3687,7 +3687,7 @@ func awsAwsjson11_serializeDocumentUpdateRuleMetadataInput(v *UpdateRuleMetadata
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateRuleVersionInput(v *UpdateRuleVersionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateRuleVersionInput(v *UpdateRuleVersionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3730,7 +3730,7 @@ func awsAwsjson11_serializeDocumentUpdateRuleVersionInput(v *UpdateRuleVersionIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateVariableInput(v *UpdateVariableInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateVariableInput(v *UpdateVariableInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

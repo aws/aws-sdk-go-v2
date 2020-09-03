@@ -53,7 +53,7 @@ func (m *awsAwsjson11_deserializeOpCreateDataset) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateDatasetOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateDatasetOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -159,7 +159,7 @@ func (m *awsAwsjson11_deserializeOpCreateDatasetGroup) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateDatasetGroupOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateDatasetGroupOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -271,7 +271,7 @@ func (m *awsAwsjson11_deserializeOpCreateDatasetImportJob) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateDatasetImportJobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateDatasetImportJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -383,7 +383,7 @@ func (m *awsAwsjson11_deserializeOpCreateForecast) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateForecastOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateForecastOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -495,7 +495,7 @@ func (m *awsAwsjson11_deserializeOpCreateForecastExportJob) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateForecastExportJobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateForecastExportJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -607,7 +607,7 @@ func (m *awsAwsjson11_deserializeOpCreatePredictor) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreatePredictorOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreatePredictorOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1355,7 +1355,7 @@ func (m *awsAwsjson11_deserializeOpDescribeDataset) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeDatasetOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeDatasetOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1458,7 +1458,7 @@ func (m *awsAwsjson11_deserializeOpDescribeDatasetGroup) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeDatasetGroupOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeDatasetGroupOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1561,7 +1561,7 @@ func (m *awsAwsjson11_deserializeOpDescribeDatasetImportJob) HandleDeserialize(c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeDatasetImportJobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeDatasetImportJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1664,7 +1664,7 @@ func (m *awsAwsjson11_deserializeOpDescribeForecast) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeForecastOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeForecastOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1767,7 +1767,7 @@ func (m *awsAwsjson11_deserializeOpDescribeForecastExportJob) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeForecastExportJobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeForecastExportJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1870,7 +1870,7 @@ func (m *awsAwsjson11_deserializeOpDescribePredictor) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribePredictorOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribePredictorOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1973,7 +1973,7 @@ func (m *awsAwsjson11_deserializeOpGetAccuracyMetrics) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetAccuracyMetricsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetAccuracyMetricsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2079,7 +2079,7 @@ func (m *awsAwsjson11_deserializeOpListDatasetGroups) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListDatasetGroupsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListDatasetGroupsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2179,7 +2179,7 @@ func (m *awsAwsjson11_deserializeOpListDatasetImportJobs) HandleDeserialize(ctx 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListDatasetImportJobsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListDatasetImportJobsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2282,7 +2282,7 @@ func (m *awsAwsjson11_deserializeOpListDatasets) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListDatasetsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListDatasetsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2382,7 +2382,7 @@ func (m *awsAwsjson11_deserializeOpListForecastExportJobs) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListForecastExportJobsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListForecastExportJobsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2485,7 +2485,7 @@ func (m *awsAwsjson11_deserializeOpListForecasts) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListForecastsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListForecastsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2588,7 +2588,7 @@ func (m *awsAwsjson11_deserializeOpListPredictors) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListPredictorsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListPredictorsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2691,7 +2691,7 @@ func (m *awsAwsjson11_deserializeOpListTagsForResource) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListTagsForResourceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2794,7 +2794,7 @@ func (m *awsAwsjson11_deserializeOpTagResource) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentTagResourceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentTagResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2900,7 +2900,7 @@ func (m *awsAwsjson11_deserializeOpUntagResource) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUntagResourceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUntagResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3003,7 +3003,7 @@ func (m *awsAwsjson11_deserializeOpUpdateDatasetGroup) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateDatasetGroupOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateDatasetGroupOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -7804,7 +7804,7 @@ func awsAwsjson11_deserializeDocumentWindowSummary(v **types.WindowSummary, deco
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateDatasetGroupOutput(v **CreateDatasetGroupOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateDatasetGroupOutput(v **CreateDatasetGroupOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7868,7 +7868,7 @@ func awsAwsjson11_deserializeDocumentCreateDatasetGroupOutput(v **CreateDatasetG
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateDatasetImportJobOutput(v **CreateDatasetImportJobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateDatasetImportJobOutput(v **CreateDatasetImportJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7932,7 +7932,7 @@ func awsAwsjson11_deserializeDocumentCreateDatasetImportJobOutput(v **CreateData
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateDatasetOutput(v **CreateDatasetOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateDatasetOutput(v **CreateDatasetOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7996,7 +7996,7 @@ func awsAwsjson11_deserializeDocumentCreateDatasetOutput(v **CreateDatasetOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateForecastExportJobOutput(v **CreateForecastExportJobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateForecastExportJobOutput(v **CreateForecastExportJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8060,7 +8060,7 @@ func awsAwsjson11_deserializeDocumentCreateForecastExportJobOutput(v **CreateFor
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateForecastOutput(v **CreateForecastOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateForecastOutput(v **CreateForecastOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8124,7 +8124,7 @@ func awsAwsjson11_deserializeDocumentCreateForecastOutput(v **CreateForecastOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreatePredictorOutput(v **CreatePredictorOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreatePredictorOutput(v **CreatePredictorOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8494,7 +8494,7 @@ func awsAwsjson11_deserializeDocumentDeletePredictorOutput(v **DeletePredictorOu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeDatasetGroupOutput(v **DescribeDatasetGroupOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeDatasetGroupOutput(v **DescribeDatasetGroupOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8636,7 +8636,7 @@ func awsAwsjson11_deserializeDocumentDescribeDatasetGroupOutput(v **DescribeData
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeDatasetImportJobOutput(v **DescribeDatasetImportJobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeDatasetImportJobOutput(v **DescribeDatasetImportJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8826,7 +8826,7 @@ func awsAwsjson11_deserializeDocumentDescribeDatasetImportJobOutput(v **Describe
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeDatasetOutput(v **DescribeDatasetOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeDatasetOutput(v **DescribeDatasetOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8999,7 +8999,7 @@ func awsAwsjson11_deserializeDocumentDescribeDatasetOutput(v **DescribeDatasetOu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeForecastExportJobOutput(v **DescribeForecastExportJobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeForecastExportJobOutput(v **DescribeForecastExportJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9154,7 +9154,7 @@ func awsAwsjson11_deserializeDocumentDescribeForecastExportJobOutput(v **Describ
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeForecastOutput(v **DescribeForecastOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeForecastOutput(v **DescribeForecastOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9322,7 +9322,7 @@ func awsAwsjson11_deserializeDocumentDescribeForecastOutput(v **DescribeForecast
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribePredictorOutput(v **DescribePredictorOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribePredictorOutput(v **DescribePredictorOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9560,7 +9560,7 @@ func awsAwsjson11_deserializeDocumentDescribePredictorOutput(v **DescribePredict
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetAccuracyMetricsOutput(v **GetAccuracyMetricsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetAccuracyMetricsOutput(v **GetAccuracyMetricsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9616,7 +9616,7 @@ func awsAwsjson11_deserializeDocumentGetAccuracyMetricsOutput(v **GetAccuracyMet
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListDatasetGroupsOutput(v **ListDatasetGroupsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListDatasetGroupsOutput(v **ListDatasetGroupsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9685,7 +9685,7 @@ func awsAwsjson11_deserializeDocumentListDatasetGroupsOutput(v **ListDatasetGrou
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListDatasetImportJobsOutput(v **ListDatasetImportJobsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListDatasetImportJobsOutput(v **ListDatasetImportJobsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9754,7 +9754,7 @@ func awsAwsjson11_deserializeDocumentListDatasetImportJobsOutput(v **ListDataset
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListDatasetsOutput(v **ListDatasetsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListDatasetsOutput(v **ListDatasetsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9823,7 +9823,7 @@ func awsAwsjson11_deserializeDocumentListDatasetsOutput(v **ListDatasetsOutput, 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListForecastExportJobsOutput(v **ListForecastExportJobsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListForecastExportJobsOutput(v **ListForecastExportJobsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9892,7 +9892,7 @@ func awsAwsjson11_deserializeDocumentListForecastExportJobsOutput(v **ListForeca
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListForecastsOutput(v **ListForecastsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListForecastsOutput(v **ListForecastsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9961,7 +9961,7 @@ func awsAwsjson11_deserializeDocumentListForecastsOutput(v **ListForecastsOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListPredictorsOutput(v **ListPredictorsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListPredictorsOutput(v **ListPredictorsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10030,7 +10030,7 @@ func awsAwsjson11_deserializeDocumentListPredictorsOutput(v **ListPredictorsOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10086,7 +10086,7 @@ func awsAwsjson11_deserializeDocumentListTagsForResourceOutput(v **ListTagsForRe
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentTagResourceOutput(v **TagResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentTagResourceOutput(v **TagResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10137,7 +10137,7 @@ func awsAwsjson11_deserializeDocumentTagResourceOutput(v **TagResourceOutput, de
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUntagResourceOutput(v **UntagResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUntagResourceOutput(v **UntagResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10188,7 +10188,7 @@ func awsAwsjson11_deserializeDocumentUntagResourceOutput(v **UntagResourceOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateDatasetGroupOutput(v **UpdateDatasetGroupOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateDatasetGroupOutput(v **UpdateDatasetGroupOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

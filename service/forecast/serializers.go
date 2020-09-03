@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpCreateDataset) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.CreateDataset")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateDatasetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateDatasetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpCreateDatasetGroup) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.CreateDatasetGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateDatasetGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateDatasetGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpCreateDatasetImportJob) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.CreateDatasetImportJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateDatasetImportJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateDatasetImportJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpCreateForecast) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.CreateForecast")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateForecastInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateForecastInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpCreateForecastExportJob) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.CreateForecastExportJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateForecastExportJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateForecastExportJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpCreatePredictor) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.CreatePredictor")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreatePredictorInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreatePredictorInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson11_serializeOpDeleteDataset) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.DeleteDataset")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteDatasetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteDatasetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -366,7 +366,7 @@ func (m *awsAwsjson11_serializeOpDeleteDatasetGroup) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.DeleteDatasetGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteDatasetGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteDatasetGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -412,7 +412,7 @@ func (m *awsAwsjson11_serializeOpDeleteDatasetImportJob) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.DeleteDatasetImportJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteDatasetImportJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteDatasetImportJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -458,7 +458,7 @@ func (m *awsAwsjson11_serializeOpDeleteForecast) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.DeleteForecast")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteForecastInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteForecastInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -504,7 +504,7 @@ func (m *awsAwsjson11_serializeOpDeleteForecastExportJob) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.DeleteForecastExportJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteForecastExportJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteForecastExportJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -550,7 +550,7 @@ func (m *awsAwsjson11_serializeOpDeletePredictor) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.DeletePredictor")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeletePredictorInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeletePredictorInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -596,7 +596,7 @@ func (m *awsAwsjson11_serializeOpDescribeDataset) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.DescribeDataset")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeDatasetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeDatasetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -642,7 +642,7 @@ func (m *awsAwsjson11_serializeOpDescribeDatasetGroup) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.DescribeDatasetGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeDatasetGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeDatasetGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -688,7 +688,7 @@ func (m *awsAwsjson11_serializeOpDescribeDatasetImportJob) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.DescribeDatasetImportJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeDatasetImportJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeDatasetImportJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -734,7 +734,7 @@ func (m *awsAwsjson11_serializeOpDescribeForecast) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.DescribeForecast")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeForecastInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeForecastInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -780,7 +780,7 @@ func (m *awsAwsjson11_serializeOpDescribeForecastExportJob) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.DescribeForecastExportJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeForecastExportJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeForecastExportJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -826,7 +826,7 @@ func (m *awsAwsjson11_serializeOpDescribePredictor) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.DescribePredictor")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribePredictorInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribePredictorInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -872,7 +872,7 @@ func (m *awsAwsjson11_serializeOpGetAccuracyMetrics) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.GetAccuracyMetrics")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetAccuracyMetricsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetAccuracyMetricsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -918,7 +918,7 @@ func (m *awsAwsjson11_serializeOpListDatasetGroups) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.ListDatasetGroups")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListDatasetGroupsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListDatasetGroupsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -964,7 +964,7 @@ func (m *awsAwsjson11_serializeOpListDatasetImportJobs) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.ListDatasetImportJobs")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListDatasetImportJobsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListDatasetImportJobsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1010,7 +1010,7 @@ func (m *awsAwsjson11_serializeOpListDatasets) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.ListDatasets")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListDatasetsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListDatasetsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1056,7 +1056,7 @@ func (m *awsAwsjson11_serializeOpListForecastExportJobs) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.ListForecastExportJobs")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListForecastExportJobsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListForecastExportJobsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1102,7 +1102,7 @@ func (m *awsAwsjson11_serializeOpListForecasts) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.ListForecasts")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListForecastsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListForecastsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1148,7 +1148,7 @@ func (m *awsAwsjson11_serializeOpListPredictors) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.ListPredictors")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListPredictorsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListPredictorsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1194,7 +1194,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.ListTagsForResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1240,7 +1240,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.TagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1286,7 +1286,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.UntagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1332,7 +1332,7 @@ func (m *awsAwsjson11_serializeOpUpdateDatasetGroup) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecast.UpdateDatasetGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateDatasetGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateDatasetGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1974,7 +1974,7 @@ func awsAwsjson11_serializeDocumentValues(v []*string, value smithyjson.Value) e
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateDatasetGroupInput(v *CreateDatasetGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateDatasetGroupInput(v *CreateDatasetGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2005,7 +2005,7 @@ func awsAwsjson11_serializeDocumentCreateDatasetGroupInput(v *CreateDatasetGroup
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateDatasetImportJobInput(v *CreateDatasetImportJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateDatasetImportJobInput(v *CreateDatasetImportJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2041,7 +2041,7 @@ func awsAwsjson11_serializeDocumentCreateDatasetImportJobInput(v *CreateDatasetI
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateDatasetInput(v *CreateDatasetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateDatasetInput(v *CreateDatasetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2089,7 +2089,7 @@ func awsAwsjson11_serializeDocumentCreateDatasetInput(v *CreateDatasetInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateForecastExportJobInput(v *CreateForecastExportJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateForecastExportJobInput(v *CreateForecastExportJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2120,7 +2120,7 @@ func awsAwsjson11_serializeDocumentCreateForecastExportJobInput(v *CreateForecas
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateForecastInput(v *CreateForecastInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateForecastInput(v *CreateForecastInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2151,7 +2151,7 @@ func awsAwsjson11_serializeDocumentCreateForecastInput(v *CreateForecastInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreatePredictorInput(v *CreatePredictorInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreatePredictorInput(v *CreatePredictorInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2232,7 +2232,7 @@ func awsAwsjson11_serializeDocumentCreatePredictorInput(v *CreatePredictorInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteDatasetGroupInput(v *DeleteDatasetGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteDatasetGroupInput(v *DeleteDatasetGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2244,7 +2244,7 @@ func awsAwsjson11_serializeDocumentDeleteDatasetGroupInput(v *DeleteDatasetGroup
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteDatasetImportJobInput(v *DeleteDatasetImportJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteDatasetImportJobInput(v *DeleteDatasetImportJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2256,7 +2256,7 @@ func awsAwsjson11_serializeDocumentDeleteDatasetImportJobInput(v *DeleteDatasetI
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteDatasetInput(v *DeleteDatasetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteDatasetInput(v *DeleteDatasetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2268,7 +2268,7 @@ func awsAwsjson11_serializeDocumentDeleteDatasetInput(v *DeleteDatasetInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteForecastExportJobInput(v *DeleteForecastExportJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteForecastExportJobInput(v *DeleteForecastExportJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2280,7 +2280,7 @@ func awsAwsjson11_serializeDocumentDeleteForecastExportJobInput(v *DeleteForecas
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteForecastInput(v *DeleteForecastInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteForecastInput(v *DeleteForecastInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2292,7 +2292,7 @@ func awsAwsjson11_serializeDocumentDeleteForecastInput(v *DeleteForecastInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeletePredictorInput(v *DeletePredictorInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeletePredictorInput(v *DeletePredictorInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2304,7 +2304,7 @@ func awsAwsjson11_serializeDocumentDeletePredictorInput(v *DeletePredictorInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeDatasetGroupInput(v *DescribeDatasetGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeDatasetGroupInput(v *DescribeDatasetGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2316,7 +2316,7 @@ func awsAwsjson11_serializeDocumentDescribeDatasetGroupInput(v *DescribeDatasetG
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeDatasetImportJobInput(v *DescribeDatasetImportJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeDatasetImportJobInput(v *DescribeDatasetImportJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2328,7 +2328,7 @@ func awsAwsjson11_serializeDocumentDescribeDatasetImportJobInput(v *DescribeData
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeDatasetInput(v *DescribeDatasetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeDatasetInput(v *DescribeDatasetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2340,7 +2340,7 @@ func awsAwsjson11_serializeDocumentDescribeDatasetInput(v *DescribeDatasetInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeForecastExportJobInput(v *DescribeForecastExportJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeForecastExportJobInput(v *DescribeForecastExportJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2352,7 +2352,7 @@ func awsAwsjson11_serializeDocumentDescribeForecastExportJobInput(v *DescribeFor
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeForecastInput(v *DescribeForecastInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeForecastInput(v *DescribeForecastInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2364,7 +2364,7 @@ func awsAwsjson11_serializeDocumentDescribeForecastInput(v *DescribeForecastInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribePredictorInput(v *DescribePredictorInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribePredictorInput(v *DescribePredictorInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2376,7 +2376,7 @@ func awsAwsjson11_serializeDocumentDescribePredictorInput(v *DescribePredictorIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetAccuracyMetricsInput(v *GetAccuracyMetricsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetAccuracyMetricsInput(v *GetAccuracyMetricsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2388,7 +2388,7 @@ func awsAwsjson11_serializeDocumentGetAccuracyMetricsInput(v *GetAccuracyMetrics
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListDatasetGroupsInput(v *ListDatasetGroupsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListDatasetGroupsInput(v *ListDatasetGroupsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2405,48 +2405,7 @@ func awsAwsjson11_serializeDocumentListDatasetGroupsInput(v *ListDatasetGroupsIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListDatasetImportJobsInput(v *ListDatasetImportJobsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Filters != nil {
-		ok := object.Key("Filters")
-		if err := awsAwsjson11_serializeDocumentFilters(v.Filters, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.MaxResults != nil {
-		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
-	}
-
-	if v.NextToken != nil {
-		ok := object.Key("NextToken")
-		ok.String(*v.NextToken)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentListDatasetsInput(v *ListDatasetsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.MaxResults != nil {
-		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
-	}
-
-	if v.NextToken != nil {
-		ok := object.Key("NextToken")
-		ok.String(*v.NextToken)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentListForecastExportJobsInput(v *ListForecastExportJobsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListDatasetImportJobsInput(v *ListDatasetImportJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2470,7 +2429,24 @@ func awsAwsjson11_serializeDocumentListForecastExportJobsInput(v *ListForecastEx
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListForecastsInput(v *ListForecastsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListDatasetsInput(v *ListDatasetsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListForecastExportJobsInput(v *ListForecastExportJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2494,7 +2470,7 @@ func awsAwsjson11_serializeDocumentListForecastsInput(v *ListForecastsInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListPredictorsInput(v *ListPredictorsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListForecastsInput(v *ListForecastsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2518,7 +2494,31 @@ func awsAwsjson11_serializeDocumentListPredictorsInput(v *ListPredictorsInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListPredictorsInput(v *ListPredictorsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsAwsjson11_serializeDocumentFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2530,7 +2530,7 @@ func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResour
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2549,7 +2549,7 @@ func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2568,7 +2568,7 @@ func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateDatasetGroupInput(v *UpdateDatasetGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateDatasetGroupInput(v *UpdateDatasetGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

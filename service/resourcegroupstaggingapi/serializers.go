@@ -83,7 +83,7 @@ func (m *awsAwsjson11_serializeOpGetComplianceSummary) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ResourceGroupsTaggingAPI_20170126.GetComplianceSummary")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetComplianceSummaryInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetComplianceSummaryInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -129,7 +129,7 @@ func (m *awsAwsjson11_serializeOpGetResources) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ResourceGroupsTaggingAPI_20170126.GetResources")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetResourcesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetResourcesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -175,7 +175,7 @@ func (m *awsAwsjson11_serializeOpGetTagKeys) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ResourceGroupsTaggingAPI_20170126.GetTagKeys")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetTagKeysInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetTagKeysInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -221,7 +221,7 @@ func (m *awsAwsjson11_serializeOpGetTagValues) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ResourceGroupsTaggingAPI_20170126.GetTagValues")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetTagValuesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetTagValuesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -267,7 +267,7 @@ func (m *awsAwsjson11_serializeOpStartReportCreation) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ResourceGroupsTaggingAPI_20170126.StartReportCreation")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartReportCreationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartReportCreationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -313,7 +313,7 @@ func (m *awsAwsjson11_serializeOpTagResources) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ResourceGroupsTaggingAPI_20170126.TagResources")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTagResourcesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTagResourcesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -359,7 +359,7 @@ func (m *awsAwsjson11_serializeOpUntagResources) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ResourceGroupsTaggingAPI_20170126.UntagResources")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUntagResourcesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUntagResourcesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -541,14 +541,14 @@ func awsAwsjson11_serializeDocumentTargetIdFilterList(v []*string, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeReportCreationInput(v *DescribeReportCreationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeReportCreationInput(v *DescribeReportCreationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetComplianceSummaryInput(v *GetComplianceSummaryInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetComplianceSummaryInput(v *GetComplianceSummaryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -600,7 +600,7 @@ func awsAwsjson11_serializeDocumentGetComplianceSummaryInput(v *GetComplianceSum
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetResourcesInput(v *GetResourcesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetResourcesInput(v *GetResourcesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -646,7 +646,7 @@ func awsAwsjson11_serializeDocumentGetResourcesInput(v *GetResourcesInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetTagKeysInput(v *GetTagKeysInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetTagKeysInput(v *GetTagKeysInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -663,7 +663,7 @@ func awsAwsjson11_serializeDocumentGetTagKeysInput(v *GetTagKeysInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetTagValuesInput(v *GetTagValuesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetTagValuesInput(v *GetTagValuesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -685,7 +685,7 @@ func awsAwsjson11_serializeDocumentGetTagValuesInput(v *GetTagValuesInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartReportCreationInput(v *StartReportCreationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartReportCreationInput(v *StartReportCreationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -697,7 +697,7 @@ func awsAwsjson11_serializeDocumentStartReportCreationInput(v *StartReportCreati
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagResourcesInput(v *TagResourcesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTagResourcesInput(v *TagResourcesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -718,7 +718,7 @@ func awsAwsjson11_serializeDocumentTagResourcesInput(v *TagResourcesInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUntagResourcesInput(v *UntagResourcesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUntagResourcesInput(v *UntagResourcesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

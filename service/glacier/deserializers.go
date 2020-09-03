@@ -324,7 +324,7 @@ func (m *awsRestjson1_deserializeOpCompleteMultipartUpload) HandleDeserialize(ct
 	output := &CompleteMultipartUploadOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsCompleteMultipartUploadOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsCompleteMultipartUploadOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -395,7 +395,7 @@ func awsRestjson1_deserializeOpErrorCompleteMultipartUpload(response *smithyhttp
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsCompleteMultipartUploadOutput(v *CompleteMultipartUploadOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsCompleteMultipartUploadOutput(v *CompleteMultipartUploadOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -536,7 +536,7 @@ func (m *awsRestjson1_deserializeOpCreateVault) HandleDeserialize(ctx context.Co
 	output := &CreateVaultOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsCreateVaultOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsCreateVaultOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -607,7 +607,7 @@ func awsRestjson1_deserializeOpErrorCreateVault(response *smithyhttp.Response) e
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsCreateVaultOutput(v *CreateVaultOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsCreateVaultOutput(v *CreateVaultOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -1022,7 +1022,7 @@ func (m *awsRestjson1_deserializeOpDescribeJob) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDescribeJobOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDescribeJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1098,7 +1098,7 @@ func awsRestjson1_deserializeOpErrorDescribeJob(response *smithyhttp.Response) e
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeJobOutput(v **DescribeJobOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeJobOutput(v **DescribeJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1440,7 +1440,7 @@ func (m *awsRestjson1_deserializeOpDescribeVault) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDescribeVaultOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDescribeVaultOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1516,7 +1516,7 @@ func awsRestjson1_deserializeOpErrorDescribeVault(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeVaultOutput(v **DescribeVaultOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeVaultOutput(v **DescribeVaultOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1687,7 +1687,7 @@ func (m *awsRestjson1_deserializeOpGetDataRetrievalPolicy) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetDataRetrievalPolicyOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetDataRetrievalPolicyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1760,7 +1760,7 @@ func awsRestjson1_deserializeOpErrorGetDataRetrievalPolicy(response *smithyhttp.
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetDataRetrievalPolicyOutput(v **GetDataRetrievalPolicyOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetDataRetrievalPolicyOutput(v **GetDataRetrievalPolicyOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1842,12 +1842,12 @@ func (m *awsRestjson1_deserializeOpGetJobOutput) HandleDeserialize(ctx context.C
 	output := &GetJobOutputOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsGetJobOutputOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsGetJobOutputOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeDocumentGetJobOutputOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentGetJobOutputOutput(output, response.Body)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -1918,7 +1918,7 @@ func awsRestjson1_deserializeOpErrorGetJobOutput(response *smithyhttp.Response) 
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsGetJobOutputOutput(v *GetJobOutputOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsGetJobOutputOutput(v *GetJobOutputOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -1950,7 +1950,7 @@ func awsRestjson1_deserializeHttpBindingsGetJobOutputOutput(v *GetJobOutputOutpu
 
 	return nil
 }
-func awsRestjson1_deserializeDocumentGetJobOutputOutput(v *GetJobOutputOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentGetJobOutputOutput(v *GetJobOutputOutput, body io.ReadCloser) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
@@ -2069,7 +2069,7 @@ func awsRestjson1_deserializeOpErrorGetVaultAccessPolicy(response *smithyhttp.Re
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetVaultAccessPolicyOutput(v **GetVaultAccessPolicyOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetVaultAccessPolicyOutput(v **GetVaultAccessPolicyOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2159,7 +2159,7 @@ func (m *awsRestjson1_deserializeOpGetVaultLock) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetVaultLockOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetVaultLockOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2235,7 +2235,7 @@ func awsRestjson1_deserializeOpErrorGetVaultLock(response *smithyhttp.Response) 
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetVaultLockOutput(v **GetVaultLockOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetVaultLockOutput(v **GetVaultLockOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2448,7 +2448,7 @@ func awsRestjson1_deserializeOpErrorGetVaultNotifications(response *smithyhttp.R
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetVaultNotificationsOutput(v **GetVaultNotificationsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetVaultNotificationsOutput(v **GetVaultNotificationsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2530,7 +2530,7 @@ func (m *awsRestjson1_deserializeOpInitiateJob) HandleDeserialize(ctx context.Co
 	output := &InitiateJobOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsInitiateJobOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsInitiateJobOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -2607,7 +2607,7 @@ func awsRestjson1_deserializeOpErrorInitiateJob(response *smithyhttp.Response) e
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsInitiateJobOutput(v *InitiateJobOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsInitiateJobOutput(v *InitiateJobOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -2656,7 +2656,7 @@ func (m *awsRestjson1_deserializeOpInitiateMultipartUpload) HandleDeserialize(ct
 	output := &InitiateMultipartUploadOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsInitiateMultipartUploadOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsInitiateMultipartUploadOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -2727,7 +2727,7 @@ func awsRestjson1_deserializeOpErrorInitiateMultipartUpload(response *smithyhttp
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsInitiateMultipartUploadOutput(v *InitiateMultipartUploadOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsInitiateMultipartUploadOutput(v *InitiateMultipartUploadOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -2771,7 +2771,7 @@ func (m *awsRestjson1_deserializeOpInitiateVaultLock) HandleDeserialize(ctx cont
 	output := &InitiateVaultLockOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsInitiateVaultLockOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsInitiateVaultLockOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -2842,7 +2842,7 @@ func awsRestjson1_deserializeOpErrorInitiateVaultLock(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsInitiateVaultLockOutput(v *InitiateVaultLockOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsInitiateVaultLockOutput(v *InitiateVaultLockOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -2889,7 +2889,7 @@ func (m *awsRestjson1_deserializeOpListJobs) HandleDeserialize(ctx context.Conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListJobsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListJobsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2965,7 +2965,7 @@ func awsRestjson1_deserializeOpErrorListJobs(response *smithyhttp.Response) erro
 	}
 }
 
-func awsRestjson1_deserializeDocumentListJobsOutput(v **ListJobsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListJobsOutput(v **ListJobsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3068,7 +3068,7 @@ func (m *awsRestjson1_deserializeOpListMultipartUploads) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListMultipartUploadsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListMultipartUploadsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3144,7 +3144,7 @@ func awsRestjson1_deserializeOpErrorListMultipartUploads(response *smithyhttp.Re
 	}
 }
 
-func awsRestjson1_deserializeDocumentListMultipartUploadsOutput(v **ListMultipartUploadsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListMultipartUploadsOutput(v **ListMultipartUploadsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3247,7 +3247,7 @@ func (m *awsRestjson1_deserializeOpListParts) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListPartsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListPartsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3323,7 +3323,7 @@ func awsRestjson1_deserializeOpErrorListParts(response *smithyhttp.Response) err
 	}
 }
 
-func awsRestjson1_deserializeDocumentListPartsOutput(v **ListPartsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListPartsOutput(v **ListPartsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3495,7 +3495,7 @@ func (m *awsRestjson1_deserializeOpListProvisionedCapacity) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListProvisionedCapacityOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListProvisionedCapacityOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3568,7 +3568,7 @@ func awsRestjson1_deserializeOpErrorListProvisionedCapacity(response *smithyhttp
 	}
 }
 
-func awsRestjson1_deserializeDocumentListProvisionedCapacityOutput(v **ListProvisionedCapacityOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListProvisionedCapacityOutput(v **ListProvisionedCapacityOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3658,7 +3658,7 @@ func (m *awsRestjson1_deserializeOpListTagsForVault) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListTagsForVaultOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListTagsForVaultOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3734,7 +3734,7 @@ func awsRestjson1_deserializeOpErrorListTagsForVault(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeDocumentListTagsForVaultOutput(v **ListTagsForVaultOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListTagsForVaultOutput(v **ListTagsForVaultOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3824,7 +3824,7 @@ func (m *awsRestjson1_deserializeOpListVaults) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListVaultsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListVaultsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3900,7 +3900,7 @@ func awsRestjson1_deserializeOpErrorListVaults(response *smithyhttp.Response) er
 	}
 }
 
-func awsRestjson1_deserializeDocumentListVaultsOutput(v **ListVaultsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListVaultsOutput(v **ListVaultsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3995,7 +3995,7 @@ func (m *awsRestjson1_deserializeOpPurchaseProvisionedCapacity) HandleDeserializ
 	output := &PurchaseProvisionedCapacityOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsPurchaseProvisionedCapacityOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsPurchaseProvisionedCapacityOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -4066,7 +4066,7 @@ func awsRestjson1_deserializeOpErrorPurchaseProvisionedCapacity(response *smithy
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsPurchaseProvisionedCapacityOutput(v *PurchaseProvisionedCapacityOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsPurchaseProvisionedCapacityOutput(v *PurchaseProvisionedCapacityOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -4470,7 +4470,7 @@ func (m *awsRestjson1_deserializeOpUploadArchive) HandleDeserialize(ctx context.
 	output := &UploadArchiveOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsUploadArchiveOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsUploadArchiveOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -4544,7 +4544,7 @@ func awsRestjson1_deserializeOpErrorUploadArchive(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsUploadArchiveOutput(v *UploadArchiveOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsUploadArchiveOutput(v *UploadArchiveOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -4593,7 +4593,7 @@ func (m *awsRestjson1_deserializeOpUploadMultipartPart) HandleDeserialize(ctx co
 	output := &UploadMultipartPartOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsUploadMultipartPartOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsUploadMultipartPartOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -4667,7 +4667,7 @@ func awsRestjson1_deserializeOpErrorUploadMultipartPart(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsUploadMultipartPartOutput(v *UploadMultipartPartOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsUploadMultipartPartOutput(v *UploadMultipartPartOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}

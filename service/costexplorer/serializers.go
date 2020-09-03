@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpCreateCostCategoryDefinition) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.CreateCostCategoryDefinition")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateCostCategoryDefinitionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateCostCategoryDefinitionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpDeleteCostCategoryDefinition) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.DeleteCostCategoryDefinition")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteCostCategoryDefinitionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteCostCategoryDefinitionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpDescribeCostCategoryDefinition) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.DescribeCostCategoryDefinition")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeCostCategoryDefinitionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeCostCategoryDefinitionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpGetCostAndUsage) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.GetCostAndUsage")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetCostAndUsageInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetCostAndUsageInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpGetCostAndUsageWithResources) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.GetCostAndUsageWithResources")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetCostAndUsageWithResourcesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetCostAndUsageWithResourcesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpGetCostForecast) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.GetCostForecast")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetCostForecastInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetCostForecastInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson11_serializeOpGetDimensionValues) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.GetDimensionValues")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetDimensionValuesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetDimensionValuesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -366,7 +366,7 @@ func (m *awsAwsjson11_serializeOpGetReservationCoverage) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.GetReservationCoverage")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetReservationCoverageInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetReservationCoverageInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -412,7 +412,7 @@ func (m *awsAwsjson11_serializeOpGetReservationPurchaseRecommendation) HandleSer
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.GetReservationPurchaseRecommendation")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetReservationPurchaseRecommendationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetReservationPurchaseRecommendationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -458,7 +458,7 @@ func (m *awsAwsjson11_serializeOpGetReservationUtilization) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.GetReservationUtilization")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetReservationUtilizationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetReservationUtilizationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -504,7 +504,7 @@ func (m *awsAwsjson11_serializeOpGetRightsizingRecommendation) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.GetRightsizingRecommendation")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetRightsizingRecommendationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetRightsizingRecommendationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -550,7 +550,7 @@ func (m *awsAwsjson11_serializeOpGetSavingsPlansCoverage) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.GetSavingsPlansCoverage")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetSavingsPlansCoverageInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetSavingsPlansCoverageInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -596,7 +596,7 @@ func (m *awsAwsjson11_serializeOpGetSavingsPlansPurchaseRecommendation) HandleSe
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.GetSavingsPlansPurchaseRecommendation")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetSavingsPlansPurchaseRecommendationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetSavingsPlansPurchaseRecommendationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -642,7 +642,7 @@ func (m *awsAwsjson11_serializeOpGetSavingsPlansUtilization) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.GetSavingsPlansUtilization")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetSavingsPlansUtilizationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetSavingsPlansUtilizationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -688,7 +688,7 @@ func (m *awsAwsjson11_serializeOpGetSavingsPlansUtilizationDetails) HandleSerial
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.GetSavingsPlansUtilizationDetails")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetSavingsPlansUtilizationDetailsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetSavingsPlansUtilizationDetailsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -734,7 +734,7 @@ func (m *awsAwsjson11_serializeOpGetTags) HandleSerialize(ctx context.Context, i
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.GetTags")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetTagsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetTagsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -780,7 +780,7 @@ func (m *awsAwsjson11_serializeOpGetUsageForecast) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.GetUsageForecast")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetUsageForecastInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetUsageForecastInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -826,7 +826,7 @@ func (m *awsAwsjson11_serializeOpListCostCategoryDefinitions) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.ListCostCategoryDefinitions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListCostCategoryDefinitionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListCostCategoryDefinitionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -872,7 +872,7 @@ func (m *awsAwsjson11_serializeOpUpdateCostCategoryDefinition) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSInsightsIndexService.UpdateCostCategoryDefinition")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateCostCategoryDefinitionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateCostCategoryDefinitionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1195,7 +1195,7 @@ func awsAwsjson11_serializeDocumentValues(v []*string, value smithyjson.Value) e
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateCostCategoryDefinitionInput(v *CreateCostCategoryDefinitionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateCostCategoryDefinitionInput(v *CreateCostCategoryDefinitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1219,7 +1219,7 @@ func awsAwsjson11_serializeDocumentCreateCostCategoryDefinitionInput(v *CreateCo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteCostCategoryDefinitionInput(v *DeleteCostCategoryDefinitionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteCostCategoryDefinitionInput(v *DeleteCostCategoryDefinitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1231,7 +1231,7 @@ func awsAwsjson11_serializeDocumentDeleteCostCategoryDefinitionInput(v *DeleteCo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeCostCategoryDefinitionInput(v *DescribeCostCategoryDefinitionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeCostCategoryDefinitionInput(v *DescribeCostCategoryDefinitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1248,7 +1248,7 @@ func awsAwsjson11_serializeDocumentDescribeCostCategoryDefinitionInput(v *Descri
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetCostAndUsageInput(v *GetCostAndUsageInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetCostAndUsageInput(v *GetCostAndUsageInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1293,7 +1293,7 @@ func awsAwsjson11_serializeDocumentGetCostAndUsageInput(v *GetCostAndUsageInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetCostAndUsageWithResourcesInput(v *GetCostAndUsageWithResourcesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetCostAndUsageWithResourcesInput(v *GetCostAndUsageWithResourcesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1338,7 +1338,7 @@ func awsAwsjson11_serializeDocumentGetCostAndUsageWithResourcesInput(v *GetCostA
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetCostForecastInput(v *GetCostForecastInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetCostForecastInput(v *GetCostForecastInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1374,7 +1374,7 @@ func awsAwsjson11_serializeDocumentGetCostForecastInput(v *GetCostForecastInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetDimensionValuesInput(v *GetDimensionValuesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetDimensionValuesInput(v *GetDimensionValuesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1408,7 +1408,7 @@ func awsAwsjson11_serializeDocumentGetDimensionValuesInput(v *GetDimensionValues
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetReservationCoverageInput(v *GetReservationCoverageInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetReservationCoverageInput(v *GetReservationCoverageInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1453,7 +1453,7 @@ func awsAwsjson11_serializeDocumentGetReservationCoverageInput(v *GetReservation
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetReservationPurchaseRecommendationInput(v *GetReservationPurchaseRecommendationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetReservationPurchaseRecommendationInput(v *GetReservationPurchaseRecommendationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1507,7 +1507,7 @@ func awsAwsjson11_serializeDocumentGetReservationPurchaseRecommendationInput(v *
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetReservationUtilizationInput(v *GetReservationUtilizationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetReservationUtilizationInput(v *GetReservationUtilizationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1545,7 +1545,7 @@ func awsAwsjson11_serializeDocumentGetReservationUtilizationInput(v *GetReservat
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetRightsizingRecommendationInput(v *GetRightsizingRecommendationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetRightsizingRecommendationInput(v *GetRightsizingRecommendationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1581,7 +1581,7 @@ func awsAwsjson11_serializeDocumentGetRightsizingRecommendationInput(v *GetRight
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetSavingsPlansCoverageInput(v *GetSavingsPlansCoverageInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetSavingsPlansCoverageInput(v *GetSavingsPlansCoverageInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1631,7 +1631,7 @@ func awsAwsjson11_serializeDocumentGetSavingsPlansCoverageInput(v *GetSavingsPla
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetSavingsPlansPurchaseRecommendationInput(v *GetSavingsPlansPurchaseRecommendationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetSavingsPlansPurchaseRecommendationInput(v *GetSavingsPlansPurchaseRecommendationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1680,7 +1680,7 @@ func awsAwsjson11_serializeDocumentGetSavingsPlansPurchaseRecommendationInput(v 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetSavingsPlansUtilizationDetailsInput(v *GetSavingsPlansUtilizationDetailsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetSavingsPlansUtilizationDetailsInput(v *GetSavingsPlansUtilizationDetailsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1711,7 +1711,7 @@ func awsAwsjson11_serializeDocumentGetSavingsPlansUtilizationDetailsInput(v *Get
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetSavingsPlansUtilizationInput(v *GetSavingsPlansUtilizationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetSavingsPlansUtilizationInput(v *GetSavingsPlansUtilizationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1737,7 +1737,7 @@ func awsAwsjson11_serializeDocumentGetSavingsPlansUtilizationInput(v *GetSavings
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetTagsInput(v *GetTagsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetTagsInput(v *GetTagsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1766,7 +1766,7 @@ func awsAwsjson11_serializeDocumentGetTagsInput(v *GetTagsInput, value smithyjso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetUsageForecastInput(v *GetUsageForecastInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetUsageForecastInput(v *GetUsageForecastInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1802,7 +1802,7 @@ func awsAwsjson11_serializeDocumentGetUsageForecastInput(v *GetUsageForecastInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListCostCategoryDefinitionsInput(v *ListCostCategoryDefinitionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListCostCategoryDefinitionsInput(v *ListCostCategoryDefinitionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1824,7 +1824,7 @@ func awsAwsjson11_serializeDocumentListCostCategoryDefinitionsInput(v *ListCostC
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateCostCategoryDefinitionInput(v *UpdateCostCategoryDefinitionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateCostCategoryDefinitionInput(v *UpdateCostCategoryDefinitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

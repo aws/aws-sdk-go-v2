@@ -82,7 +82,7 @@ func (m *awsAwsjson11_serializeOpDeleteServiceQuotaIncreaseRequestFromTemplate) 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ServiceQuotasV20190624.DeleteServiceQuotaIncreaseRequestFromTemplate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteServiceQuotaIncreaseRequestFromTemplateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteServiceQuotaIncreaseRequestFromTemplateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -206,7 +206,7 @@ func (m *awsAwsjson11_serializeOpGetAWSDefaultServiceQuota) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ServiceQuotasV20190624.GetAWSDefaultServiceQuota")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetAWSDefaultServiceQuotaInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetAWSDefaultServiceQuotaInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -252,7 +252,7 @@ func (m *awsAwsjson11_serializeOpGetRequestedServiceQuotaChange) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ServiceQuotasV20190624.GetRequestedServiceQuotaChange")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetRequestedServiceQuotaChangeInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetRequestedServiceQuotaChangeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -298,7 +298,7 @@ func (m *awsAwsjson11_serializeOpGetServiceQuota) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ServiceQuotasV20190624.GetServiceQuota")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetServiceQuotaInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetServiceQuotaInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -344,7 +344,7 @@ func (m *awsAwsjson11_serializeOpGetServiceQuotaIncreaseRequestFromTemplate) Han
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ServiceQuotasV20190624.GetServiceQuotaIncreaseRequestFromTemplate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetServiceQuotaIncreaseRequestFromTemplateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetServiceQuotaIncreaseRequestFromTemplateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -390,7 +390,7 @@ func (m *awsAwsjson11_serializeOpListAWSDefaultServiceQuotas) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ServiceQuotasV20190624.ListAWSDefaultServiceQuotas")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListAWSDefaultServiceQuotasInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListAWSDefaultServiceQuotasInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -436,7 +436,7 @@ func (m *awsAwsjson11_serializeOpListRequestedServiceQuotaChangeHistory) HandleS
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ServiceQuotasV20190624.ListRequestedServiceQuotaChangeHistory")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListRequestedServiceQuotaChangeHistoryInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListRequestedServiceQuotaChangeHistoryInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -482,7 +482,7 @@ func (m *awsAwsjson11_serializeOpListRequestedServiceQuotaChangeHistoryByQuota) 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ServiceQuotasV20190624.ListRequestedServiceQuotaChangeHistoryByQuota")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListRequestedServiceQuotaChangeHistoryByQuotaInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListRequestedServiceQuotaChangeHistoryByQuotaInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -528,7 +528,7 @@ func (m *awsAwsjson11_serializeOpListServiceQuotaIncreaseRequestsInTemplate) Han
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ServiceQuotasV20190624.ListServiceQuotaIncreaseRequestsInTemplate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListServiceQuotaIncreaseRequestsInTemplateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListServiceQuotaIncreaseRequestsInTemplateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -574,7 +574,7 @@ func (m *awsAwsjson11_serializeOpListServiceQuotas) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ServiceQuotasV20190624.ListServiceQuotas")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListServiceQuotasInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListServiceQuotasInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -620,7 +620,7 @@ func (m *awsAwsjson11_serializeOpListServices) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ServiceQuotasV20190624.ListServices")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListServicesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListServicesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -666,7 +666,7 @@ func (m *awsAwsjson11_serializeOpPutServiceQuotaIncreaseRequestIntoTemplate) Han
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ServiceQuotasV20190624.PutServiceQuotaIncreaseRequestIntoTemplate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutServiceQuotaIncreaseRequestIntoTemplateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutServiceQuotaIncreaseRequestIntoTemplateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -712,7 +712,7 @@ func (m *awsAwsjson11_serializeOpRequestServiceQuotaIncrease) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ServiceQuotasV20190624.RequestServiceQuotaIncrease")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRequestServiceQuotaIncreaseInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRequestServiceQuotaIncreaseInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -727,14 +727,14 @@ func (m *awsAwsjson11_serializeOpRequestServiceQuotaIncrease) HandleSerialize(ct
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsAwsjson11_serializeDocumentAssociateServiceQuotaTemplateInput(v *AssociateServiceQuotaTemplateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAssociateServiceQuotaTemplateInput(v *AssociateServiceQuotaTemplateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteServiceQuotaIncreaseRequestFromTemplateInput(v *DeleteServiceQuotaIncreaseRequestFromTemplateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteServiceQuotaIncreaseRequestFromTemplateInput(v *DeleteServiceQuotaIncreaseRequestFromTemplateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -756,21 +756,21 @@ func awsAwsjson11_serializeDocumentDeleteServiceQuotaIncreaseRequestFromTemplate
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDisassociateServiceQuotaTemplateInput(v *DisassociateServiceQuotaTemplateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDisassociateServiceQuotaTemplateInput(v *DisassociateServiceQuotaTemplateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetAssociationForServiceQuotaTemplateInput(v *GetAssociationForServiceQuotaTemplateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetAssociationForServiceQuotaTemplateInput(v *GetAssociationForServiceQuotaTemplateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetAWSDefaultServiceQuotaInput(v *GetAWSDefaultServiceQuotaInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetAWSDefaultServiceQuotaInput(v *GetAWSDefaultServiceQuotaInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -787,7 +787,7 @@ func awsAwsjson11_serializeDocumentGetAWSDefaultServiceQuotaInput(v *GetAWSDefau
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetRequestedServiceQuotaChangeInput(v *GetRequestedServiceQuotaChangeInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetRequestedServiceQuotaChangeInput(v *GetRequestedServiceQuotaChangeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -799,7 +799,7 @@ func awsAwsjson11_serializeDocumentGetRequestedServiceQuotaChangeInput(v *GetReq
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetServiceQuotaIncreaseRequestFromTemplateInput(v *GetServiceQuotaIncreaseRequestFromTemplateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetServiceQuotaIncreaseRequestFromTemplateInput(v *GetServiceQuotaIncreaseRequestFromTemplateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -821,7 +821,7 @@ func awsAwsjson11_serializeDocumentGetServiceQuotaIncreaseRequestFromTemplateInp
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetServiceQuotaInput(v *GetServiceQuotaInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetServiceQuotaInput(v *GetServiceQuotaInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -838,7 +838,7 @@ func awsAwsjson11_serializeDocumentGetServiceQuotaInput(v *GetServiceQuotaInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListAWSDefaultServiceQuotasInput(v *ListAWSDefaultServiceQuotasInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListAWSDefaultServiceQuotasInput(v *ListAWSDefaultServiceQuotasInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -860,7 +860,7 @@ func awsAwsjson11_serializeDocumentListAWSDefaultServiceQuotasInput(v *ListAWSDe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListRequestedServiceQuotaChangeHistoryByQuotaInput(v *ListRequestedServiceQuotaChangeHistoryByQuotaInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListRequestedServiceQuotaChangeHistoryByQuotaInput(v *ListRequestedServiceQuotaChangeHistoryByQuotaInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -892,7 +892,7 @@ func awsAwsjson11_serializeDocumentListRequestedServiceQuotaChangeHistoryByQuota
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListRequestedServiceQuotaChangeHistoryInput(v *ListRequestedServiceQuotaChangeHistoryInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListRequestedServiceQuotaChangeHistoryInput(v *ListRequestedServiceQuotaChangeHistoryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -919,7 +919,7 @@ func awsAwsjson11_serializeDocumentListRequestedServiceQuotaChangeHistoryInput(v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListServiceQuotaIncreaseRequestsInTemplateInput(v *ListServiceQuotaIncreaseRequestsInTemplateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListServiceQuotaIncreaseRequestsInTemplateInput(v *ListServiceQuotaIncreaseRequestsInTemplateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -946,7 +946,7 @@ func awsAwsjson11_serializeDocumentListServiceQuotaIncreaseRequestsInTemplateInp
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListServiceQuotasInput(v *ListServiceQuotasInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListServiceQuotasInput(v *ListServiceQuotasInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -968,7 +968,7 @@ func awsAwsjson11_serializeDocumentListServiceQuotasInput(v *ListServiceQuotasIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListServicesInput(v *ListServicesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListServicesInput(v *ListServicesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -985,7 +985,7 @@ func awsAwsjson11_serializeDocumentListServicesInput(v *ListServicesInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutServiceQuotaIncreaseRequestIntoTemplateInput(v *PutServiceQuotaIncreaseRequestIntoTemplateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutServiceQuotaIncreaseRequestIntoTemplateInput(v *PutServiceQuotaIncreaseRequestIntoTemplateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1012,7 +1012,7 @@ func awsAwsjson11_serializeDocumentPutServiceQuotaIncreaseRequestIntoTemplateInp
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRequestServiceQuotaIncreaseInput(v *RequestServiceQuotaIncreaseInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRequestServiceQuotaIncreaseInput(v *RequestServiceQuotaIncreaseInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
