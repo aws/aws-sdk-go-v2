@@ -1,0 +1,3543 @@
+{
+  "smithy": "1.0",
+  "metadata": {
+    "suppressions": [
+      {
+        "id": "HttpMethodSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpResponseCodeSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "PaginatedTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpHeaderTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpUriConflict",
+        "namespace": "*"
+      },
+      {
+        "id": "Service",
+        "namespace": "*"
+      }
+    ]
+  },
+  "shapes": {
+    "com.amazonaws.iotthingsgraph#Arn": {
+      "type": "string"
+    },
+    "com.amazonaws.iotthingsgraph#AssociateEntityToThing": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#AssociateEntityToThingRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#AssociateEntityToThingResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Associates a device with a concrete thing that is in the user's registry.</p>\n         <p>A thing can be associated with only one device at a time. If you associate a thing with a new device id, its previous association will be removed.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#AssociateEntityToThingRequest": {
+      "type": "structure",
+      "members": {
+        "namespaceVersion": {
+          "target": "com.amazonaws.iotthingsgraph#Version",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the user's namespace. Defaults to the latest version of the user's namespace.</p>"
+          }
+        },
+        "thingName": {
+          "target": "com.amazonaws.iotthingsgraph#ThingName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the thing to which the entity is to be associated.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "entityId": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the device to be associated with the thing.</p>\n         <p>The ID should be in the following format.</p>\n         <p>\n            <code>urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME</code>\n         </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#AssociateEntityToThingResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.iotthingsgraph#CreateFlowTemplate": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#CreateFlowTemplateRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#CreateFlowTemplateResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceAlreadyExistsException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a workflow template. Workflows can be created only in the user's namespace. (The public namespace contains only \n         entities.) The workflow can contain only entities in the specified namespace. The workflow is validated against the entities in the \n      latest version of the user's namespace unless another namespace version is specified in the request.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#CreateFlowTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "definition": {
+          "target": "com.amazonaws.iotthingsgraph#DefinitionDocument",
+          "traits": {
+            "smithy.api#documentation": "<p>The workflow <code>DefinitionDocument</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "compatibleNamespaceVersion": {
+          "target": "com.amazonaws.iotthingsgraph#Version",
+          "traits": {
+            "smithy.api#documentation": "<p>The namespace version in which the workflow is to be created.</p>\n         <p>If no value is specified, the latest version is used by default.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#CreateFlowTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "summary": {
+          "target": "com.amazonaws.iotthingsgraph#FlowTemplateSummary",
+          "traits": {
+            "smithy.api#documentation": "<p>The summary object that describes the created workflow.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#CreateSystemInstance": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#CreateSystemInstanceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#CreateSystemInstanceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceAlreadyExistsException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a system instance. </p>\n         <p>This action validates the system instance, prepares the deployment-related resources. For Greengrass deployments, it updates the Greengrass group that is \n            specified by the <code>greengrassGroupName</code> parameter. It also adds a file to the S3 bucket specified by the <code>s3BucketName</code> parameter. You need to \n            call <code>DeploySystemInstance</code> after running this action.</p>\n         <p>For Greengrass deployments, since this action modifies and adds resources to a Greengrass group and an S3 bucket on the caller's behalf, the calling identity must have write permissions \n         to both the specified Greengrass group and S3 bucket. Otherwise, the call will fail with an authorization error.</p>\n         <p>For cloud deployments, this action requires a <code>flowActionsRoleArn</code> value. This is an IAM role \n      that has permissions to access AWS services, such as AWS Lambda and AWS IoT, that the flow uses when it executes.</p>\n         <p>If the definition document doesn't specify a version of the user's namespace, the latest version will be used by default.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#CreateSystemInstanceRequest": {
+      "type": "structure",
+      "members": {
+        "s3BucketName": {
+          "target": "com.amazonaws.iotthingsgraph#S3BucketName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the Amazon Simple Storage Service bucket that will be used to store and deploy the system instance's resource file. This value is required if \n         the value of the <code>target</code> parameter is <code>GREENGRASS</code>.</p>"
+          }
+        },
+        "metricsConfiguration": {
+          "target": "com.amazonaws.iotthingsgraph#MetricsConfiguration"
+        },
+        "greengrassGroupName": {
+          "target": "com.amazonaws.iotthingsgraph#GroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the Greengrass group where the system instance will be deployed. This value is required if \n      the value of the <code>target</code> parameter is <code>GREENGRASS</code>.</p>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.iotthingsgraph#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata, consisting of key-value pairs, that can be used to categorize your system instances.</p>"
+          }
+        },
+        "target": {
+          "target": "com.amazonaws.iotthingsgraph#DeploymentTarget",
+          "traits": {
+            "smithy.api#documentation": "<p>The target type of the deployment. Valid values are <code>GREENGRASS</code> and <code>CLOUD</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "definition": {
+          "target": "com.amazonaws.iotthingsgraph#DefinitionDocument",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "flowActionsRoleArn": {
+          "target": "com.amazonaws.iotthingsgraph#RoleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the IAM role that AWS IoT Things Graph will assume when it executes the flow. This role must have \n      read and write access to AWS Lambda and AWS IoT and any other AWS services that the flow uses when it executes.  This \n      value is required if the value of the <code>target</code> parameter is <code>CLOUD</code>.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#CreateSystemInstanceResponse": {
+      "type": "structure",
+      "members": {
+        "summary": {
+          "target": "com.amazonaws.iotthingsgraph#SystemInstanceSummary",
+          "traits": {
+            "smithy.api#documentation": "<p>The summary object that describes the new system instance.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#CreateSystemTemplate": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#CreateSystemTemplateRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#CreateSystemTemplateResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceAlreadyExistsException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a system. The system is validated against the entities in the \n         latest version of the user's namespace unless another namespace version is specified in the request.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#CreateSystemTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "definition": {
+          "target": "com.amazonaws.iotthingsgraph#DefinitionDocument",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>DefinitionDocument</code> used to create the system.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "compatibleNamespaceVersion": {
+          "target": "com.amazonaws.iotthingsgraph#Version",
+          "traits": {
+            "smithy.api#documentation": "<p>The namespace version in which the system is to be created.</p>\n         <p>If no value is specified, the latest version is used by default.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#CreateSystemTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "summary": {
+          "target": "com.amazonaws.iotthingsgraph#SystemTemplateSummary",
+          "traits": {
+            "smithy.api#documentation": "<p>The summary object that describes the created system.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DefinitionDocument": {
+      "type": "structure",
+      "members": {
+        "language": {
+          "target": "com.amazonaws.iotthingsgraph#DefinitionLanguage",
+          "traits": {
+            "smithy.api#documentation": "<p>The language used to define the entity. <code>GRAPHQL</code> is the only valid value.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "text": {
+          "target": "com.amazonaws.iotthingsgraph#DefinitionText",
+          "traits": {
+            "smithy.api#documentation": "<p>The GraphQL text that defines the entity.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A document that defines an entity. </p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DefinitionLanguage": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "GRAPHQL",
+            "name": "GRAPHQL"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DefinitionText": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 1048576
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DeleteFlowTemplate": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#DeleteFlowTemplateRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#DeleteFlowTemplateResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceInUseException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes a workflow. Any new system or deployment that contains this workflow will fail to update or deploy. \n         Existing deployments that contain the workflow will continue to run (since they use a snapshot of the workflow taken at the time of deployment).</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DeleteFlowTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the workflow to be deleted.</p>\n         <p>The ID should be in the following format.</p>\n         <p>\n            <code>urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME</code>\n         </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DeleteFlowTemplateResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.iotthingsgraph#DeleteNamespace": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#DeleteNamespaceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#DeleteNamespaceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes the specified namespace. This action deletes all of the entities in the namespace. Delete the systems and flows that use entities in the namespace before performing this action.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DeleteNamespaceRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.iotthingsgraph#DeleteNamespaceResponse": {
+      "type": "structure",
+      "members": {
+        "namespaceName": {
+          "target": "com.amazonaws.iotthingsgraph#NamespaceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the namespace to be deleted.</p>"
+          }
+        },
+        "namespaceArn": {
+          "target": "com.amazonaws.iotthingsgraph#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the namespace to be deleted.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DeleteSystemInstance": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#DeleteSystemInstanceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#DeleteSystemInstanceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceInUseException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes a system instance. \n         Only system instances that have never been deployed, or that have been undeployed can be deleted.</p>\n         <p>Users can create a new system instance that has the same ID as a deleted system instance.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DeleteSystemInstanceRequest": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the system instance to be deleted.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DeleteSystemInstanceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.iotthingsgraph#DeleteSystemTemplate": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#DeleteSystemTemplateRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#DeleteSystemTemplateResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceInUseException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes a system. New deployments can't contain the system after its deletion. \n      Existing deployments that contain the system will continue to work because they use a snapshot of the system that is taken when it is deployed.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DeleteSystemTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the system to be deleted.</p>\n         <p>The ID should be in the following format.</p>\n         <p>\n            <code>urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME</code>\n         </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DeleteSystemTemplateResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.iotthingsgraph#DependencyRevision": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the workflow or system.</p>"
+          }
+        },
+        "revisionNumber": {
+          "target": "com.amazonaws.iotthingsgraph#Version",
+          "traits": {
+            "smithy.api#documentation": "<p>The revision number of the workflow or system.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object that contains the ID and revision number of a workflow or system that is part of a deployment.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DependencyRevisions": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.iotthingsgraph#DependencyRevision"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DeploySystemInstance": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#DeploySystemInstanceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#DeploySystemInstanceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceInUseException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            <b>Greengrass and Cloud Deployments</b>\n         </p>\n         <p>Deploys the system instance to the target specified in <code>CreateSystemInstance</code>. </p>\n         <p>\n            <b>Greengrass Deployments</b>\n         </p>\n         <p>If the system or any workflows and entities have been updated before this action is called, then the deployment will create a new Amazon Simple Storage Service \n         resource file and then deploy it.</p>\n         <p>Since this action creates a Greengrass deployment on the caller's behalf, the calling identity must have write permissions \n         to the specified Greengrass group. Otherwise, the call will fail with an authorization error.</p>\n         <p>For information about the artifacts that get added to your Greengrass core device when you use this API, see <a href=\"https://docs.aws.amazon.com/thingsgraph/latest/ug/iot-tg-greengrass.html\">AWS IoT Things Graph and AWS IoT Greengrass</a>.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DeploySystemInstanceRequest": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the system instance. This value is returned by the <code>CreateSystemInstance</code> action.</p>\n         <p>The ID should be in the following format.</p>\n         <p>\n            <code>urn:tdm:REGION/ACCOUNT ID/default:deployment:DEPLOYMENTNAME</code>\n         </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DeploySystemInstanceResponse": {
+      "type": "structure",
+      "members": {
+        "greengrassDeploymentId": {
+          "target": "com.amazonaws.iotthingsgraph#GreengrassDeploymentId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the Greengrass deployment used to deploy the system instance.</p>"
+          }
+        },
+        "summary": {
+          "target": "com.amazonaws.iotthingsgraph#SystemInstanceSummary",
+          "traits": {
+            "smithy.api#documentation": "<p>An object that contains summary information about a system instance that was deployed. </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DeploymentTarget": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "GREENGRASS",
+            "name": "GREENGRASS"
+          },
+          {
+            "value": "CLOUD",
+            "name": "CLOUD"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DeprecateExistingEntities": {
+      "type": "boolean"
+    },
+    "com.amazonaws.iotthingsgraph#DeprecateFlowTemplate": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#DeprecateFlowTemplateRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#DeprecateFlowTemplateResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deprecates the specified workflow. This action marks the workflow for deletion. Deprecated flows can't be deployed, but existing deployments will continue to run.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DeprecateFlowTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the workflow to be deleted.</p>\n         <p>The ID should be in the following format.</p>\n         <p>\n            <code>urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME</code>\n         </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DeprecateFlowTemplateResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.iotthingsgraph#DeprecateSystemTemplate": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#DeprecateSystemTemplateRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#DeprecateSystemTemplateResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deprecates the specified system.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DeprecateSystemTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the system to delete.</p>\n         <p>The ID should be in the following format.</p>\n         <p>\n            <code>urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME</code>\n         </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DeprecateSystemTemplateResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.iotthingsgraph#DescribeNamespace": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#DescribeNamespaceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#DescribeNamespaceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Gets the latest version of the user's namespace and the public version that it is tracking.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DescribeNamespaceRequest": {
+      "type": "structure",
+      "members": {
+        "namespaceName": {
+          "target": "com.amazonaws.iotthingsgraph#NamespaceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the user's namespace. Set this to <code>aws</code> to get the public namespace.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DescribeNamespaceResponse": {
+      "type": "structure",
+      "members": {
+        "trackingNamespaceVersion": {
+          "target": "com.amazonaws.iotthingsgraph#Version",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the public namespace that the latest version is tracking.</p>"
+          }
+        },
+        "trackingNamespaceName": {
+          "target": "com.amazonaws.iotthingsgraph#NamespaceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the public namespace that the latest namespace version is tracking.</p>"
+          }
+        },
+        "namespaceVersion": {
+          "target": "com.amazonaws.iotthingsgraph#Version",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the user's namespace to describe.</p>"
+          }
+        },
+        "namespaceName": {
+          "target": "com.amazonaws.iotthingsgraph#NamespaceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the namespace.</p>"
+          }
+        },
+        "namespaceArn": {
+          "target": "com.amazonaws.iotthingsgraph#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the namespace.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DissociateEntityFromThing": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#DissociateEntityFromThingRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#DissociateEntityFromThingResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Dissociates a device entity from a concrete thing. The action takes only the type of the entity that you need to dissociate because only \n         one entity of a particular type can be associated with a thing.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DissociateEntityFromThingRequest": {
+      "type": "structure",
+      "members": {
+        "entityType": {
+          "target": "com.amazonaws.iotthingsgraph#EntityType",
+          "traits": {
+            "smithy.api#documentation": "<p>The entity type from which to disassociate the thing.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "thingName": {
+          "target": "com.amazonaws.iotthingsgraph#ThingName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the thing to disassociate.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#DissociateEntityFromThingResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.iotthingsgraph#Enabled": {
+      "type": "boolean"
+    },
+    "com.amazonaws.iotthingsgraph#EntityDescription": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The entity ID.</p>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.iotthingsgraph#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The entity ARN.</p>"
+          }
+        },
+        "createdAt": {
+          "target": "com.amazonaws.iotthingsgraph#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the entity was created.</p>"
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.iotthingsgraph#EntityType",
+          "traits": {
+            "smithy.api#documentation": "<p>The entity type.</p>"
+          }
+        },
+        "definition": {
+          "target": "com.amazonaws.iotthingsgraph#DefinitionDocument",
+          "traits": {
+            "smithy.api#documentation": "<p>The definition document of the entity.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes the properties of an entity.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#EntityDescriptions": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.iotthingsgraph#EntityDescription"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#EntityFilter": {
+      "type": "structure",
+      "members": {
+        "value": {
+          "target": "com.amazonaws.iotthingsgraph#EntityFilterValues",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of string values for the search filter field. Multiple values function as AND criteria in the search.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.iotthingsgraph#EntityFilterName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the entity search filter field. <code>REFERENCED_ENTITY_ID</code> filters on entities that are used by the entity in the result set. For example, \n         you can filter on the ID of a property that is used in a state.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object that filters an entity search. Multiple filters function as OR criteria in the search. For example a search that includes \n      a <code>NAMESPACE</code> and a <code>REFERENCED_ENTITY_ID</code> filter searches for entities in the specified namespace that use the entity specified by \n      the value of <code>REFERENCED_ENTITY_ID</code>.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#EntityFilterName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "NAME",
+            "name": "NAME"
+          },
+          {
+            "value": "NAMESPACE",
+            "name": "NAMESPACE"
+          },
+          {
+            "value": "SEMANTIC_TYPE_PATH",
+            "name": "SEMANTIC_TYPE_PATH"
+          },
+          {
+            "value": "REFERENCED_ENTITY_ID",
+            "name": "REFERENCED_ENTITY_ID"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.iotthingsgraph#EntityFilterValue": {
+      "type": "string"
+    },
+    "com.amazonaws.iotthingsgraph#EntityFilterValues": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.iotthingsgraph#EntityFilterValue"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#EntityFilters": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.iotthingsgraph#EntityFilter"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#EntityType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "DEVICE",
+            "name": "DEVICE"
+          },
+          {
+            "value": "SERVICE",
+            "name": "SERVICE"
+          },
+          {
+            "value": "DEVICE_MODEL",
+            "name": "DEVICE_MODEL"
+          },
+          {
+            "value": "CAPABILITY",
+            "name": "CAPABILITY"
+          },
+          {
+            "value": "STATE",
+            "name": "STATE"
+          },
+          {
+            "value": "ACTION",
+            "name": "ACTION"
+          },
+          {
+            "value": "EVENT",
+            "name": "EVENT"
+          },
+          {
+            "value": "PROPERTY",
+            "name": "PROPERTY"
+          },
+          {
+            "value": "MAPPING",
+            "name": "MAPPING"
+          },
+          {
+            "value": "ENUM",
+            "name": "ENUM"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.iotthingsgraph#EntityTypes": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.iotthingsgraph#EntityType"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#ErrorMessage": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 2048
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#FlowExecutionEventType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "EXECUTION_STARTED",
+            "name": "EXECUTION_STARTED"
+          },
+          {
+            "value": "EXECUTION_FAILED",
+            "name": "EXECUTION_FAILED"
+          },
+          {
+            "value": "EXECUTION_ABORTED",
+            "name": "EXECUTION_ABORTED"
+          },
+          {
+            "value": "EXECUTION_SUCCEEDED",
+            "name": "EXECUTION_SUCCEEDED"
+          },
+          {
+            "value": "STEP_STARTED",
+            "name": "STEP_STARTED"
+          },
+          {
+            "value": "STEP_FAILED",
+            "name": "STEP_FAILED"
+          },
+          {
+            "value": "STEP_SUCCEEDED",
+            "name": "STEP_SUCCEEDED"
+          },
+          {
+            "value": "ACTIVITY_SCHEDULED",
+            "name": "ACTIVITY_SCHEDULED"
+          },
+          {
+            "value": "ACTIVITY_STARTED",
+            "name": "ACTIVITY_STARTED"
+          },
+          {
+            "value": "ACTIVITY_FAILED",
+            "name": "ACTIVITY_FAILED"
+          },
+          {
+            "value": "ACTIVITY_SUCCEEDED",
+            "name": "ACTIVITY_SUCCEEDED"
+          },
+          {
+            "value": "START_FLOW_EXECUTION_TASK",
+            "name": "START_FLOW_EXECUTION_TASK"
+          },
+          {
+            "value": "SCHEDULE_NEXT_READY_STEPS_TASK",
+            "name": "SCHEDULE_NEXT_READY_STEPS_TASK"
+          },
+          {
+            "value": "THING_ACTION_TASK",
+            "name": "THING_ACTION_TASK"
+          },
+          {
+            "value": "THING_ACTION_TASK_FAILED",
+            "name": "THING_ACTION_TASK_FAILED"
+          },
+          {
+            "value": "THING_ACTION_TASK_SUCCEEDED",
+            "name": "THING_ACTION_TASK_SUCCEEDED"
+          },
+          {
+            "value": "ACKNOWLEDGE_TASK_MESSAGE",
+            "name": "ACKNOWLEDGE_TASK_MESSAGE"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.iotthingsgraph#FlowExecutionId": {
+      "type": "string"
+    },
+    "com.amazonaws.iotthingsgraph#FlowExecutionMessage": {
+      "type": "structure",
+      "members": {
+        "eventType": {
+          "target": "com.amazonaws.iotthingsgraph#FlowExecutionEventType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of flow event .</p>"
+          }
+        },
+        "messageId": {
+          "target": "com.amazonaws.iotthingsgraph#FlowExecutionMessageId",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier of the message.</p>"
+          }
+        },
+        "payload": {
+          "target": "com.amazonaws.iotthingsgraph#FlowExecutionMessagePayload",
+          "traits": {
+            "smithy.api#documentation": "<p>A string containing information about the flow event.</p>"
+          }
+        },
+        "timestamp": {
+          "target": "com.amazonaws.iotthingsgraph#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time when the message was last updated.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object that contains information about a flow event.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#FlowExecutionMessageId": {
+      "type": "string"
+    },
+    "com.amazonaws.iotthingsgraph#FlowExecutionMessagePayload": {
+      "type": "string"
+    },
+    "com.amazonaws.iotthingsgraph#FlowExecutionMessages": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.iotthingsgraph#FlowExecutionMessage"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#FlowExecutionStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "RUNNING",
+            "name": "RUNNING"
+          },
+          {
+            "value": "ABORTED",
+            "name": "ABORTED"
+          },
+          {
+            "value": "SUCCEEDED",
+            "name": "SUCCEEDED"
+          },
+          {
+            "value": "FAILED",
+            "name": "FAILED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.iotthingsgraph#FlowExecutionSummaries": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.iotthingsgraph#FlowExecutionSummary"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#FlowExecutionSummary": {
+      "type": "structure",
+      "members": {
+        "flowTemplateId": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the flow.</p>"
+          }
+        },
+        "updatedAt": {
+          "target": "com.amazonaws.iotthingsgraph#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time when the flow execution summary was last updated.</p>"
+          }
+        },
+        "createdAt": {
+          "target": "com.amazonaws.iotthingsgraph#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time when the flow execution summary was created.</p>"
+          }
+        },
+        "flowExecutionId": {
+          "target": "com.amazonaws.iotthingsgraph#FlowExecutionId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the flow execution.</p>"
+          }
+        },
+        "systemInstanceId": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the system instance that contains the flow.</p>"
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.iotthingsgraph#FlowExecutionStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The current status of the flow execution.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object that contains summary information about a flow execution.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#FlowTemplateDescription": {
+      "type": "structure",
+      "members": {
+        "definition": {
+          "target": "com.amazonaws.iotthingsgraph#DefinitionDocument",
+          "traits": {
+            "smithy.api#documentation": "<p>A workflow's definition document.</p>"
+          }
+        },
+        "validatedNamespaceVersion": {
+          "target": "com.amazonaws.iotthingsgraph#Version",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the user's namespace against which the workflow was validated. Use this value in your system instance.</p>"
+          }
+        },
+        "summary": {
+          "target": "com.amazonaws.iotthingsgraph#FlowTemplateSummary",
+          "traits": {
+            "smithy.api#documentation": "<p>An object that contains summary information about a workflow.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object that contains a workflow's definition and summary information.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#FlowTemplateFilter": {
+      "type": "structure",
+      "members": {
+        "value": {
+          "target": "com.amazonaws.iotthingsgraph#FlowTemplateFilterValues",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of string values for the search filter field. Multiple values function as AND criteria in the search.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.iotthingsgraph#FlowTemplateFilterName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the search filter field.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object that filters a workflow search.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#FlowTemplateFilterName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "DEVICE_MODEL_ID",
+            "name": "DEVICE_MODEL_ID"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.iotthingsgraph#FlowTemplateFilterValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "^urn:tdm:(([a-z]{2}-(gov-)?[a-z]{4,9}-[0-9]{1,3}/[0-9]+/)*[\\p{Alnum}_]+(/[\\p{Alnum}_]+)*):([\\p{Alpha}]*):([\\p{Alnum}_]+(/[\\p{Alnum}_]+)*)$"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#FlowTemplateFilterValues": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.iotthingsgraph#FlowTemplateFilterValue"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#FlowTemplateFilters": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.iotthingsgraph#FlowTemplateFilter"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#FlowTemplateSummaries": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.iotthingsgraph#FlowTemplateSummary"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#FlowTemplateSummary": {
+      "type": "structure",
+      "members": {
+        "createdAt": {
+          "target": "com.amazonaws.iotthingsgraph#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date when the workflow was created.</p>"
+          }
+        },
+        "revisionNumber": {
+          "target": "com.amazonaws.iotthingsgraph#Version",
+          "traits": {
+            "smithy.api#documentation": "<p>The revision number of the workflow.</p>"
+          }
+        },
+        "id": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the workflow.</p>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.iotthingsgraph#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the workflow.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object that contains summary information about a workflow.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GetEntities": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#GetEntitiesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#GetEntitiesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Gets definitions of the specified entities. Uses the latest version of the user's namespace by default. This API returns the \n      following TDM entities.</p>\n         <ul>\n            <li>\n               <p>Properties</p>\n            </li>\n            <li>\n               <p>States</p>\n            </li>\n            <li>\n               <p>Events</p>\n            </li>\n            <li>\n               <p>Actions</p>\n            </li>\n            <li>\n               <p>Capabilities</p>\n            </li>\n            <li>\n               <p>Mappings</p>\n            </li>\n            <li>\n               <p>Devices</p>\n            </li>\n            <li>\n               <p>Device Models</p>\n            </li>\n            <li>\n               <p>Services</p>\n            </li>\n         </ul>\n         <p>This action doesn't return definitions for systems, flows, and deployments.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GetEntitiesRequest": {
+      "type": "structure",
+      "members": {
+        "namespaceVersion": {
+          "target": "com.amazonaws.iotthingsgraph#Version",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the user's namespace. Defaults to the latest version of the user's namespace.</p>"
+          }
+        },
+        "ids": {
+          "target": "com.amazonaws.iotthingsgraph#Urns",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of entity IDs.</p>\n         <p>The IDs should be in the following format.</p>\n         <p>\n            <code>urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME</code>\n         </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GetEntitiesResponse": {
+      "type": "structure",
+      "members": {
+        "descriptions": {
+          "target": "com.amazonaws.iotthingsgraph#EntityDescriptions",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of descriptions for the specified entities.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GetFlowTemplate": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#GetFlowTemplateRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#GetFlowTemplateResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Gets the latest version of the <code>DefinitionDocument</code> and <code>FlowTemplateSummary</code> for the specified workflow.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GetFlowTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the workflow.</p>\n         <p>The ID should be in the following format.</p>\n         <p>\n            <code>urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME</code>\n         </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "revisionNumber": {
+          "target": "com.amazonaws.iotthingsgraph#Version",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of the workflow revision to retrieve.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GetFlowTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "description": {
+          "target": "com.amazonaws.iotthingsgraph#FlowTemplateDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>The object that describes the specified workflow.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GetFlowTemplateRevisions": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#GetFlowTemplateRevisionsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#GetFlowTemplateRevisionsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Gets revisions of the specified workflow. Only the last 100 revisions are stored. If the workflow has been deprecated, \n      this action will return revisions that occurred before the deprecation. This action won't work for workflows that have been deleted.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "summaries",
+          "pageSize": "maxResults"
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GetFlowTemplateRevisionsRequest": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.iotthingsgraph#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The string that specifies the next page of results. Use this when you're paginating results.</p>"
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.iotthingsgraph#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>"
+          }
+        },
+        "id": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the workflow.</p>\n         <p>The ID should be in the following format.</p>\n         <p>\n            <code>urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME</code>\n         </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GetFlowTemplateRevisionsResponse": {
+      "type": "structure",
+      "members": {
+        "summaries": {
+          "target": "com.amazonaws.iotthingsgraph#FlowTemplateSummaries",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of objects that provide summary data about each revision.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.iotthingsgraph#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The string to specify as <code>nextToken</code> when you request the next page of results.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GetNamespaceDeletionStatus": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#GetNamespaceDeletionStatusRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#GetNamespaceDeletionStatusResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Gets the status of a namespace deletion task.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GetNamespaceDeletionStatusRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.iotthingsgraph#GetNamespaceDeletionStatusResponse": {
+      "type": "structure",
+      "members": {
+        "namespaceName": {
+          "target": "com.amazonaws.iotthingsgraph#NamespaceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the namespace that is being deleted.</p>"
+          }
+        },
+        "errorCode": {
+          "target": "com.amazonaws.iotthingsgraph#NamespaceDeletionStatusErrorCodes",
+          "traits": {
+            "smithy.api#documentation": "<p>An error code returned by the namespace deletion task.</p>"
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.iotthingsgraph#NamespaceDeletionStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the deletion request.</p>"
+          }
+        },
+        "namespaceArn": {
+          "target": "com.amazonaws.iotthingsgraph#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the namespace that is being deleted.</p>"
+          }
+        },
+        "errorMessage": {
+          "target": "com.amazonaws.iotthingsgraph#String",
+          "traits": {
+            "smithy.api#documentation": "<p>An error code returned by the namespace deletion task.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GetSystemInstance": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#GetSystemInstanceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#GetSystemInstanceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Gets a system instance.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GetSystemInstanceRequest": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the system deployment instance. This value is returned by <code>CreateSystemInstance</code>.</p>\n         <p>The ID should be in the following format.</p>\n         <p>\n            <code>urn:tdm:REGION/ACCOUNT ID/default:deployment:DEPLOYMENTNAME</code>\n         </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GetSystemInstanceResponse": {
+      "type": "structure",
+      "members": {
+        "description": {
+          "target": "com.amazonaws.iotthingsgraph#SystemInstanceDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>An object that describes the system instance.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GetSystemTemplate": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#GetSystemTemplateRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#GetSystemTemplateResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Gets a system.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GetSystemTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "revisionNumber": {
+          "target": "com.amazonaws.iotthingsgraph#Version",
+          "traits": {
+            "smithy.api#documentation": "<p>The number that specifies the revision of the system to get.</p>"
+          }
+        },
+        "id": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the system to get. This ID must be in the user's namespace.</p>\n         <p>The ID should be in the following format.</p>\n         <p>\n            <code>urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME</code>\n         </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GetSystemTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "description": {
+          "target": "com.amazonaws.iotthingsgraph#SystemTemplateDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>An object that contains summary data about the system.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GetSystemTemplateRevisions": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#GetSystemTemplateRevisionsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#GetSystemTemplateRevisionsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Gets revisions made to the specified system template. Only the previous 100 revisions are stored. If the system has been deprecated, this action will return \n      the revisions that occurred before its deprecation. This action won't work with systems that have been deleted.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "summaries",
+          "pageSize": "maxResults"
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GetSystemTemplateRevisionsRequest": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the system template.</p>\n         <p>The ID should be in the following format.</p>\n         <p>\n            <code>urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME</code>\n         </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.iotthingsgraph#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.iotthingsgraph#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The string that specifies the next page of results. Use this when you're paginating results.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GetSystemTemplateRevisionsResponse": {
+      "type": "structure",
+      "members": {
+        "summaries": {
+          "target": "com.amazonaws.iotthingsgraph#SystemTemplateSummaries",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of objects that contain summary data about the system template revisions.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.iotthingsgraph#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The string to specify as <code>nextToken</code> when you request the next page of results. </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GetUploadStatus": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#GetUploadStatusRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#GetUploadStatusResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Gets the status of the specified upload.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GetUploadStatusRequest": {
+      "type": "structure",
+      "members": {
+        "uploadId": {
+          "target": "com.amazonaws.iotthingsgraph#UploadId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the upload. This value is returned by the <code>UploadEntityDefinitions</code> action.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GetUploadStatusResponse": {
+      "type": "structure",
+      "members": {
+        "namespaceArn": {
+          "target": "com.amazonaws.iotthingsgraph#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the upload.</p>"
+          }
+        },
+        "failureReason": {
+          "target": "com.amazonaws.iotthingsgraph#StringList",
+          "traits": {
+            "smithy.api#documentation": "<p>The reason for an upload failure.</p>"
+          }
+        },
+        "uploadId": {
+          "target": "com.amazonaws.iotthingsgraph#UploadId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the upload.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "namespaceName": {
+          "target": "com.amazonaws.iotthingsgraph#NamespaceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the upload's namespace.</p>"
+          }
+        },
+        "namespaceVersion": {
+          "target": "com.amazonaws.iotthingsgraph#Version",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the user's namespace. Defaults to the latest version of the user's namespace.</p>"
+          }
+        },
+        "uploadStatus": {
+          "target": "com.amazonaws.iotthingsgraph#UploadStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the upload. The initial status is <code>IN_PROGRESS</code>. The response show all validation failures if the upload fails.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "createdDate": {
+          "target": "com.amazonaws.iotthingsgraph#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date at which the upload was created.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#GreengrassDeploymentId": {
+      "type": "string"
+    },
+    "com.amazonaws.iotthingsgraph#GreengrassGroupId": {
+      "type": "string"
+    },
+    "com.amazonaws.iotthingsgraph#GreengrassGroupVersionId": {
+      "type": "string"
+    },
+    "com.amazonaws.iotthingsgraph#GroupName": {
+      "type": "string"
+    },
+    "com.amazonaws.iotthingsgraph#InternalFailureException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.iotthingsgraph#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p></p>",
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 500
+      }
+    },
+    "com.amazonaws.iotthingsgraph#InvalidRequestException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.iotthingsgraph#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p></p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.iotthingsgraph#IotThingsGraphFrontEndService": {
+      "type": "service",
+      "version": "2018-09-06",
+      "operations": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#AssociateEntityToThing"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#CreateFlowTemplate"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#CreateSystemInstance"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#CreateSystemTemplate"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#DeleteFlowTemplate"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#DeleteNamespace"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#DeleteSystemInstance"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#DeleteSystemTemplate"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#DeploySystemInstance"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#DeprecateFlowTemplate"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#DeprecateSystemTemplate"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#DescribeNamespace"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#DissociateEntityFromThing"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#GetEntities"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#GetFlowTemplate"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#GetFlowTemplateRevisions"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#GetNamespaceDeletionStatus"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#GetSystemInstance"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#GetSystemTemplate"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#GetSystemTemplateRevisions"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#GetUploadStatus"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ListFlowExecutionMessages"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ListTagsForResource"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#SearchEntities"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#SearchFlowExecutions"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#SearchFlowTemplates"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#SearchSystemInstances"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#SearchSystemTemplates"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#SearchThings"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#TagResource"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#UndeploySystemInstance"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#UntagResource"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#UpdateFlowTemplate"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#UpdateSystemTemplate"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#UploadEntityDefinitions"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "IoTThingsGraph",
+          "arnNamespace": "iotthingsgraph",
+          "cloudFormationName": "IoTThingsGraph",
+          "cloudTrailEventSource": "thingsgraph.iot.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "iotthingsgraph"
+        },
+        "aws.protocols#awsJson1_1": {},
+        "smithy.api#documentation": "<fullname>AWS IoT Things Graph</fullname>\n         <p>AWS IoT Things Graph provides an integrated set of tools that enable developers to connect devices and services that use different standards, \n       such as units of measure and communication protocols. AWS IoT Things Graph makes it possible to build IoT applications with little to no code by connecting devices and services \n       and defining how they interact at an abstract level.</p>\n         <p>For more information about how AWS IoT Things Graph works, see the <a href=\"https://docs.aws.amazon.com/thingsgraph/latest/ug/iot-tg-whatis.html\">User Guide</a>.</p>",
+        "smithy.api#title": "AWS IoT Things Graph"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#LimitExceededException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.iotthingsgraph#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p></p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 410
+      }
+    },
+    "com.amazonaws.iotthingsgraph#ListFlowExecutionMessages": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#ListFlowExecutionMessagesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#ListFlowExecutionMessagesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns a list of objects that contain information about events in a flow execution.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "messages",
+          "pageSize": "maxResults"
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#ListFlowExecutionMessagesRequest": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "target": "com.amazonaws.iotthingsgraph#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>"
+          }
+        },
+        "flowExecutionId": {
+          "target": "com.amazonaws.iotthingsgraph#FlowExecutionId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the flow execution.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.iotthingsgraph#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The string that specifies the next page of results. Use this when you're paginating results.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#ListFlowExecutionMessagesResponse": {
+      "type": "structure",
+      "members": {
+        "messages": {
+          "target": "com.amazonaws.iotthingsgraph#FlowExecutionMessages",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of objects that contain information about events in the specified flow execution.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.iotthingsgraph#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The string to specify as <code>nextToken</code> when you request the next page of results. </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#ListTagsForResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#ListTagsForResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceAlreadyExistsException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists all tags on an AWS IoT Things Graph resource.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "tags",
+          "pageSize": "maxResults"
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#ListTagsForResourceRequest": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "target": "com.amazonaws.iotthingsgraph#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of tags to return.</p>"
+          }
+        },
+        "resourceArn": {
+          "target": "com.amazonaws.iotthingsgraph#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource whose tags are to be returned.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.iotthingsgraph#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token that specifies the next page of results to return.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.iotthingsgraph#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token that specifies the next page of results to return.</p>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.iotthingsgraph#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>List of tags returned by the <code>ListTagsForResource</code> operation.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#MaxResults": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {},
+        "smithy.api#range": {
+          "min": 1,
+          "max": 250
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#MetricsConfiguration": {
+      "type": "structure",
+      "members": {
+        "metricRuleRoleArn": {
+          "target": "com.amazonaws.iotthingsgraph#RoleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the role that is used to collect cloud metrics.</p>"
+          }
+        },
+        "cloudMetricEnabled": {
+          "target": "com.amazonaws.iotthingsgraph#Enabled",
+          "traits": {
+            "smithy.api#documentation": "<p>A Boolean that specifies whether cloud metrics are collected.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object that specifies whether cloud metrics are collected in a deployment and, if so, what role is used to collect metrics.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#NamespaceDeletionStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "IN_PROGRESS",
+            "name": "IN_PROGRESS"
+          },
+          {
+            "value": "SUCCEEDED",
+            "name": "SUCCEEDED"
+          },
+          {
+            "value": "FAILED",
+            "name": "FAILED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.iotthingsgraph#NamespaceDeletionStatusErrorCodes": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "VALIDATION_FAILED",
+            "name": "VALIDATION_FAILED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.iotthingsgraph#NamespaceName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 128
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#NextToken": {
+      "type": "string"
+    },
+    "com.amazonaws.iotthingsgraph#ResourceAlreadyExistsException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.iotthingsgraph#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p></p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 409
+      }
+    },
+    "com.amazonaws.iotthingsgraph#ResourceArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 2048
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#ResourceInUseException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.iotthingsgraph#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p></p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 412
+      }
+    },
+    "com.amazonaws.iotthingsgraph#ResourceNotFoundException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.iotthingsgraph#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p></p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
+      }
+    },
+    "com.amazonaws.iotthingsgraph#RoleArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 20,
+          "max": 2048
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#S3BucketName": {
+      "type": "string"
+    },
+    "com.amazonaws.iotthingsgraph#SearchEntities": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#SearchEntitiesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#SearchEntitiesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Searches for entities of the specified type. You can search for entities in your namespace and the public namespace that you're tracking.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "descriptions",
+          "pageSize": "maxResults"
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SearchEntitiesRequest": {
+      "type": "structure",
+      "members": {
+        "filters": {
+          "target": "com.amazonaws.iotthingsgraph#EntityFilters",
+          "traits": {
+            "smithy.api#documentation": "<p>Optional filter to apply to the search. Valid filters are <code>NAME</code> \n            <code>NAMESPACE</code>, <code>SEMANTIC_TYPE_PATH</code> and <code>REFERENCED_ENTITY_ID</code>. \n         <code>REFERENCED_ENTITY_ID</code> filters on entities that are used by the entity in the result set. For example, \n      you can filter on the ID of a property that is used in a state.</p>\n         <p>Multiple filters function as OR criteria in the query. Multiple values passed inside the filter function as AND criteria.</p>"
+          }
+        },
+        "entityTypes": {
+          "target": "com.amazonaws.iotthingsgraph#EntityTypes",
+          "traits": {
+            "smithy.api#documentation": "<p>The entity types for which to search.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "namespaceVersion": {
+          "target": "com.amazonaws.iotthingsgraph#Version",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the user's namespace. Defaults to the latest version of the user's namespace.</p>"
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.iotthingsgraph#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.iotthingsgraph#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The string that specifies the next page of results. Use this when you're paginating results.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SearchEntitiesResponse": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.iotthingsgraph#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The string to specify as <code>nextToken</code> when you request the next page of results.</p>"
+          }
+        },
+        "descriptions": {
+          "target": "com.amazonaws.iotthingsgraph#EntityDescriptions",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of descriptions for each entity returned in the search result.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SearchFlowExecutions": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#SearchFlowExecutionsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#SearchFlowExecutionsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Searches for AWS IoT Things Graph workflow execution instances.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "summaries",
+          "pageSize": "maxResults"
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SearchFlowExecutionsRequest": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "target": "com.amazonaws.iotthingsgraph#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>"
+          }
+        },
+        "startTime": {
+          "target": "com.amazonaws.iotthingsgraph#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time of the earliest flow execution to return.</p>"
+          }
+        },
+        "flowExecutionId": {
+          "target": "com.amazonaws.iotthingsgraph#FlowExecutionId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of a flow execution.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.iotthingsgraph#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The string that specifies the next page of results. Use this when you're paginating results.</p>"
+          }
+        },
+        "systemInstanceId": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the system instance that contains the flow.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "endTime": {
+          "target": "com.amazonaws.iotthingsgraph#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time of the latest flow execution to return.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SearchFlowExecutionsResponse": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.iotthingsgraph#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The string to specify as <code>nextToken</code> when you request the next page of results.</p>"
+          }
+        },
+        "summaries": {
+          "target": "com.amazonaws.iotthingsgraph#FlowExecutionSummaries",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of objects that contain summary information about each workflow execution in the result set.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SearchFlowTemplates": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#SearchFlowTemplatesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#SearchFlowTemplatesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Searches for summary information about workflows.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "summaries",
+          "pageSize": "maxResults"
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SearchFlowTemplatesRequest": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.iotthingsgraph#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The string that specifies the next page of results. Use this when you're paginating results.</p>"
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.iotthingsgraph#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>"
+          }
+        },
+        "filters": {
+          "target": "com.amazonaws.iotthingsgraph#FlowTemplateFilters",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of objects that limit the result set. The only valid filter is <code>DEVICE_MODEL_ID</code>.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SearchFlowTemplatesResponse": {
+      "type": "structure",
+      "members": {
+        "summaries": {
+          "target": "com.amazonaws.iotthingsgraph#FlowTemplateSummaries",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of objects that contain summary information about each workflow in the result set.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.iotthingsgraph#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The string to specify as <code>nextToken</code> when you request the next page of results.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SearchSystemInstances": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#SearchSystemInstancesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#SearchSystemInstancesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Searches for system instances in the user's account.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "summaries",
+          "pageSize": "maxResults"
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SearchSystemInstancesRequest": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "target": "com.amazonaws.iotthingsgraph#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.iotthingsgraph#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The string that specifies the next page of results. Use this when you're paginating results.</p>"
+          }
+        },
+        "filters": {
+          "target": "com.amazonaws.iotthingsgraph#SystemInstanceFilters",
+          "traits": {
+            "smithy.api#documentation": "<p>Optional filter to apply to the search. Valid filters are <code>SYSTEM_TEMPLATE_ID</code>, <code>STATUS</code>, and \n         <code>GREENGRASS_GROUP_NAME</code>.</p>\n         <p>Multiple filters function as OR criteria in the query. Multiple values passed inside the filter function as AND criteria.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SearchSystemInstancesResponse": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.iotthingsgraph#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The string to specify as <code>nextToken</code> when you request the next page of results. </p>"
+          }
+        },
+        "summaries": {
+          "target": "com.amazonaws.iotthingsgraph#SystemInstanceSummaries",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of objects that contain summary data abour the system instances in the result set.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SearchSystemTemplates": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#SearchSystemTemplatesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#SearchSystemTemplatesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Searches for summary information about systems in the user's account. You can filter by the ID of a workflow to return only systems that use the specified workflow.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "summaries",
+          "pageSize": "maxResults"
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SearchSystemTemplatesRequest": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.iotthingsgraph#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The string that specifies the next page of results. Use this when you're paginating results.</p>"
+          }
+        },
+        "filters": {
+          "target": "com.amazonaws.iotthingsgraph#SystemTemplateFilters",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of filters that limit the result set. The only valid filter is <code>FLOW_TEMPLATE_ID</code>.</p>"
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.iotthingsgraph#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SearchSystemTemplatesResponse": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.iotthingsgraph#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The string to specify as <code>nextToken</code> when you request the next page of results.</p>"
+          }
+        },
+        "summaries": {
+          "target": "com.amazonaws.iotthingsgraph#SystemTemplateSummaries",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of objects that contain summary information about each system deployment in the result set.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SearchThings": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#SearchThingsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#SearchThingsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Searches for things associated with the specified entity. You can search by both device and device model.</p>\n         <p>For example, if two different devices, camera1 and camera2, implement the camera device model, the user can associate thing1 to camera1 and thing2 to camera2.\n         <code>SearchThings(camera2)</code> will return only thing2, but <code>SearchThings(camera)</code> will return both thing1 and thing2.</p>\n         <p>This action searches for exact matches and doesn't perform partial text matching.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "things",
+          "pageSize": "maxResults"
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SearchThingsRequest": {
+      "type": "structure",
+      "members": {
+        "entityId": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the entity to which the things are associated.</p>\n         <p>The IDs should be in the following format.</p>\n         <p>\n            <code>urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME</code>\n         </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.iotthingsgraph#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.iotthingsgraph#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The string that specifies the next page of results. Use this when you're paginating results.</p>"
+          }
+        },
+        "namespaceVersion": {
+          "target": "com.amazonaws.iotthingsgraph#Version",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the user's namespace. Defaults to the latest version of the user's namespace.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SearchThingsResponse": {
+      "type": "structure",
+      "members": {
+        "things": {
+          "target": "com.amazonaws.iotthingsgraph#Things",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of things in the result set.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.iotthingsgraph#NextToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The string to specify as <code>nextToken</code> when you request the next page of results.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#String": {
+      "type": "string"
+    },
+    "com.amazonaws.iotthingsgraph#StringList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.iotthingsgraph#String"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SyncWithPublicNamespace": {
+      "type": "boolean"
+    },
+    "com.amazonaws.iotthingsgraph#SystemInstanceDeploymentStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "NOT_DEPLOYED",
+            "name": "NOT_DEPLOYED"
+          },
+          {
+            "value": "BOOTSTRAP",
+            "name": "BOOTSTRAP"
+          },
+          {
+            "value": "DEPLOY_IN_PROGRESS",
+            "name": "DEPLOY_IN_PROGRESS"
+          },
+          {
+            "value": "DEPLOYED_IN_TARGET",
+            "name": "DEPLOYED_IN_TARGET"
+          },
+          {
+            "value": "UNDEPLOY_IN_PROGRESS",
+            "name": "UNDEPLOY_IN_PROGRESS"
+          },
+          {
+            "value": "FAILED",
+            "name": "FAILED"
+          },
+          {
+            "value": "PENDING_DELETE",
+            "name": "PENDING_DELETE"
+          },
+          {
+            "value": "DELETED_IN_TARGET",
+            "name": "DELETED_IN_TARGET"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SystemInstanceDescription": {
+      "type": "structure",
+      "members": {
+        "validatedDependencyRevisions": {
+          "target": "com.amazonaws.iotthingsgraph#DependencyRevisions",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of objects that contain all of the IDs and revision numbers of workflows and systems that are used in a system instance.</p>"
+          }
+        },
+        "s3BucketName": {
+          "target": "com.amazonaws.iotthingsgraph#S3BucketName",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Simple Storage Service bucket where information about a system instance is stored.</p>"
+          }
+        },
+        "flowActionsRoleArn": {
+          "target": "com.amazonaws.iotthingsgraph#RoleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS Identity and Access Management (IAM) role that AWS IoT Things Graph assumes during flow execution in a \n      cloud deployment. This role must have read and write permissionss to AWS Lambda and AWS IoT and to any other \n      AWS services that the flow uses.</p>"
+          }
+        },
+        "metricsConfiguration": {
+          "target": "com.amazonaws.iotthingsgraph#MetricsConfiguration"
+        },
+        "validatedNamespaceVersion": {
+          "target": "com.amazonaws.iotthingsgraph#Version",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the user's namespace against which the system instance was validated.</p>"
+          }
+        },
+        "summary": {
+          "target": "com.amazonaws.iotthingsgraph#SystemInstanceSummary",
+          "traits": {
+            "smithy.api#documentation": "<p>An object that contains summary information about a system instance.</p>"
+          }
+        },
+        "definition": {
+          "target": "com.amazonaws.iotthingsgraph#DefinitionDocument"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object that contains a system instance definition and summary information.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SystemInstanceFilter": {
+      "type": "structure",
+      "members": {
+        "value": {
+          "target": "com.amazonaws.iotthingsgraph#SystemInstanceFilterValues",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of string values for the search filter field. Multiple values function as AND criteria in the search. </p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.iotthingsgraph#SystemInstanceFilterName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the search filter field.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object that filters a system instance search. \n         Multiple filters function as OR criteria in the search. For example a search that includes a GREENGRASS_GROUP_NAME and a \n         STATUS filter searches for system instances in the specified Greengrass group that have the specified status.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SystemInstanceFilterName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "SYSTEM_TEMPLATE_ID",
+            "name": "SYSTEM_TEMPLATE_ID"
+          },
+          {
+            "value": "STATUS",
+            "name": "STATUS"
+          },
+          {
+            "value": "GREENGRASS_GROUP_NAME",
+            "name": "GREENGRASS_GROUP_NAME"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SystemInstanceFilterValue": {
+      "type": "string"
+    },
+    "com.amazonaws.iotthingsgraph#SystemInstanceFilterValues": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.iotthingsgraph#SystemInstanceFilterValue"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SystemInstanceFilters": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.iotthingsgraph#SystemInstanceFilter"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SystemInstanceSummaries": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.iotthingsgraph#SystemInstanceSummary"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SystemInstanceSummary": {
+      "type": "structure",
+      "members": {
+        "greengrassGroupId": {
+          "target": "com.amazonaws.iotthingsgraph#GreengrassGroupId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the Greengrass group where the system instance is deployed.</p>"
+          }
+        },
+        "createdAt": {
+          "target": "com.amazonaws.iotthingsgraph#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date when the system instance was created.</p>"
+          }
+        },
+        "greengrassGroupVersionId": {
+          "target": "com.amazonaws.iotthingsgraph#GreengrassGroupVersionId",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the Greengrass group where the system instance is deployed.</p>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.iotthingsgraph#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the system instance.</p>"
+          }
+        },
+        "updatedAt": {
+          "target": "com.amazonaws.iotthingsgraph#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>\n         \n         The date and time when the system instance was last updated.</p>"
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.iotthingsgraph#SystemInstanceDeploymentStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the system instance.</p>"
+          }
+        },
+        "id": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the system instance.</p>"
+          }
+        },
+        "target": {
+          "target": "com.amazonaws.iotthingsgraph#DeploymentTarget",
+          "traits": {
+            "smithy.api#documentation": "<p>The target of the system instance.</p>"
+          }
+        },
+        "greengrassGroupName": {
+          "target": "com.amazonaws.iotthingsgraph#GroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the Greengrass group where the system instance is deployed.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object that contains summary information about a system instance.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SystemTemplateDescription": {
+      "type": "structure",
+      "members": {
+        "validatedNamespaceVersion": {
+          "target": "com.amazonaws.iotthingsgraph#Version",
+          "traits": {
+            "smithy.api#documentation": "<p>The namespace version against which the system was validated. Use this value in your system instance.</p>"
+          }
+        },
+        "definition": {
+          "target": "com.amazonaws.iotthingsgraph#DefinitionDocument",
+          "traits": {
+            "smithy.api#documentation": "<p>The definition document of a system.</p>"
+          }
+        },
+        "summary": {
+          "target": "com.amazonaws.iotthingsgraph#SystemTemplateSummary",
+          "traits": {
+            "smithy.api#documentation": "<p>An object that contains summary information about a system.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object that contains a system's definition document and summary information.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SystemTemplateFilter": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.iotthingsgraph#SystemTemplateFilterName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the system search filter field.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "value": {
+          "target": "com.amazonaws.iotthingsgraph#SystemTemplateFilterValues",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of string values for the search filter field. Multiple values function as AND criteria in the search.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object that filters a system search.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SystemTemplateFilterName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "FLOW_TEMPLATE_ID",
+            "name": "FLOW_TEMPLATE_ID"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SystemTemplateFilterValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "^urn:tdm:(([a-z]{2}-(gov-)?[a-z]{4,9}-[0-9]{1,3}/[0-9]+/)*[\\p{Alnum}_]+(/[\\p{Alnum}_]+)*):([\\p{Alpha}]*):([\\p{Alnum}_]+(/[\\p{Alnum}_]+)*)$"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SystemTemplateFilterValues": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.iotthingsgraph#SystemTemplateFilterValue"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SystemTemplateFilters": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.iotthingsgraph#SystemTemplateFilter"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SystemTemplateSummaries": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.iotthingsgraph#SystemTemplateSummary"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#SystemTemplateSummary": {
+      "type": "structure",
+      "members": {
+        "revisionNumber": {
+          "target": "com.amazonaws.iotthingsgraph#Version",
+          "traits": {
+            "smithy.api#documentation": "<p>The revision number of the system.</p>"
+          }
+        },
+        "id": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the system.</p>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.iotthingsgraph#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the system.</p>"
+          }
+        },
+        "createdAt": {
+          "target": "com.amazonaws.iotthingsgraph#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date when the system was created.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object that contains information about a system.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#Tag": {
+      "type": "structure",
+      "members": {
+        "value": {
+          "target": "com.amazonaws.iotthingsgraph#TagValue",
+          "traits": {
+            "smithy.api#documentation": "<p>The optional value of the tag. The string value can be from 1 to 256 Unicode characters in length.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "key": {
+          "target": "com.amazonaws.iotthingsgraph#TagKey",
+          "traits": {
+            "smithy.api#documentation": "<p>The required name of the tag. The string value can be from 1 to 128 Unicode characters in length.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Metadata assigned to an AWS IoT Things Graph resource consisting of a key-value pair.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#TagKey": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        },
+        "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#TagKeyList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.iotthingsgraph#TagKey"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 50
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#TagList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.iotthingsgraph#Tag"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 50
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#TagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#TagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#TagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceAlreadyExistsException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a tag for the specified resource.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#TagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "com.amazonaws.iotthingsgraph#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource whose tags are returned.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.iotthingsgraph#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of tags to add to the resource.></p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.iotthingsgraph#TagValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 256
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#Thing": {
+      "type": "structure",
+      "members": {
+        "thingName": {
+          "target": "com.amazonaws.iotthingsgraph#ThingName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the thing.</p>"
+          }
+        },
+        "thingArn": {
+          "target": "com.amazonaws.iotthingsgraph#ThingArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the thing.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An AWS IoT thing.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#ThingArn": {
+      "type": "string"
+    },
+    "com.amazonaws.iotthingsgraph#ThingName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        },
+        "smithy.api#pattern": "[a-zA-Z0-9:_-]+"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#Things": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.iotthingsgraph#Thing"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#ThrottlingException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.iotthingsgraph#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p></p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 429
+      }
+    },
+    "com.amazonaws.iotthingsgraph#Timestamp": {
+      "type": "timestamp"
+    },
+    "com.amazonaws.iotthingsgraph#UndeploySystemInstance": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#UndeploySystemInstanceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#UndeploySystemInstanceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceInUseException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes a system instance from its target (Cloud or Greengrass).</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#UndeploySystemInstanceRequest": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the system instance to remove from its target.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#UndeploySystemInstanceResponse": {
+      "type": "structure",
+      "members": {
+        "summary": {
+          "target": "com.amazonaws.iotthingsgraph#SystemInstanceSummary",
+          "traits": {
+            "smithy.api#documentation": "<p>An object that contains summary information about the system instance that was removed from its target.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#UntagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceAlreadyExistsException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes a tag from the specified resource.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "tagKeys": {
+          "target": "com.amazonaws.iotthingsgraph#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of tag key names to remove from the resource. You don't specify the value. Both the key and its associated value are removed. </p>\n         <p>This parameter to the API requires a JSON text string argument. For information on how to format a JSON parameter for the various command line tool environments, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html#cli-using-param-json\">Using JSON for Parameters</a> in the <i>AWS CLI User Guide</i>. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "resourceArn": {
+          "target": "com.amazonaws.iotthingsgraph#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource whose tags are to be removed.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.iotthingsgraph#UpdateFlowTemplate": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#UpdateFlowTemplateRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#UpdateFlowTemplateResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates the specified workflow. All deployed systems and system instances that use the workflow will see the changes in the flow when it is redeployed. If you don't want this \n         behavior, copy the workflow (creating a new workflow with a different ID), and update the copy. The workflow can contain only entities in the specified namespace. </p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#UpdateFlowTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "definition": {
+          "target": "com.amazonaws.iotthingsgraph#DefinitionDocument",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>DefinitionDocument</code> that contains the updated workflow definition.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "compatibleNamespaceVersion": {
+          "target": "com.amazonaws.iotthingsgraph#Version",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the user's namespace.</p>\n         <p>If no value is specified, the latest version is used by default. Use the <code>GetFlowTemplateRevisions</code> if you want to find earlier revisions of the flow \n      to update.</p>"
+          }
+        },
+        "id": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the workflow to be updated.</p>\n         <p>The ID should be in the following format.</p>\n         <p>\n            <code>urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME</code>\n         </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#UpdateFlowTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "summary": {
+          "target": "com.amazonaws.iotthingsgraph#FlowTemplateSummary",
+          "traits": {
+            "smithy.api#documentation": "<p>An object containing summary information about the updated workflow.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#UpdateSystemTemplate": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#UpdateSystemTemplateRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#UpdateSystemTemplateResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates the specified system. You don't need to run this action after updating a workflow. Any deployment that uses the system will see the changes in the system when it is redeployed.</p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#UpdateSystemTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "definition": {
+          "target": "com.amazonaws.iotthingsgraph#DefinitionDocument",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>DefinitionDocument</code> that contains the updated system definition.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "compatibleNamespaceVersion": {
+          "target": "com.amazonaws.iotthingsgraph#Version",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the user's namespace. Defaults to the latest version of the user's namespace.</p>\n         <p>If no value is specified, the latest version is used by default.</p>"
+          }
+        },
+        "id": {
+          "target": "com.amazonaws.iotthingsgraph#Urn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the system to be updated.</p>\n         <p>The ID should be in the following format.</p>\n         <p>\n            <code>urn:tdm:REGION/ACCOUNT ID/default:system:SYSTEMNAME</code>\n         </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#UpdateSystemTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "summary": {
+          "target": "com.amazonaws.iotthingsgraph#SystemTemplateSummary",
+          "traits": {
+            "smithy.api#documentation": "<p>An object containing summary information about the updated system.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#UploadEntityDefinitions": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.iotthingsgraph#UploadEntityDefinitionsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.iotthingsgraph#UploadEntityDefinitionsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.iotthingsgraph#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#InvalidRequestException"
+        },
+        {
+          "target": "com.amazonaws.iotthingsgraph#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Asynchronously uploads one or more entity definitions to the user's namespace. The <code>document</code> parameter is required if \n      <code>syncWithPublicNamespace</code> and <code>deleteExistingEntites</code> are false. If the <code>syncWithPublicNamespace</code> parameter  is set to \n         <code>true</code>, the user's namespace will synchronize with the latest version of the public namespace. If <code>deprecateExistingEntities</code> is set to true, \n      all entities in the latest version will be deleted before the new <code>DefinitionDocument</code> is uploaded.</p>\n         <p>When a user uploads entity definitions for the first time, the service creates a new namespace for the user. The new namespace tracks the public namespace. Currently users \n      can have only one namespace. The namespace version increments whenever a user uploads entity definitions that are backwards-incompatible and whenever a user sets the \n         <code>syncWithPublicNamespace</code> parameter or the <code>deprecateExistingEntities</code> parameter to <code>true</code>.</p>\n         <p>The IDs for all of the entities should be in URN format. Each entity must be in the user's namespace. Users can't create entities in the public namespace, but entity definitions can refer to entities in the public namespace.</p>\n         <p>Valid entities are <code>Device</code>, <code>DeviceModel</code>, <code>Service</code>, <code>Capability</code>, <code>State</code>, <code>Action</code>, <code>Event</code>, <code>Property</code>, \n         <code>Mapping</code>, <code>Enum</code>.\n         </p>"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#UploadEntityDefinitionsRequest": {
+      "type": "structure",
+      "members": {
+        "deprecateExistingEntities": {
+          "target": "com.amazonaws.iotthingsgraph#DeprecateExistingEntities",
+          "traits": {
+            "smithy.api#documentation": "<p>A Boolean that specifies whether to deprecate all entities in the latest version before uploading the new <code>DefinitionDocument</code>. \n         If set to <code>true</code>, the upload will create a new namespace version.</p>"
+          }
+        },
+        "document": {
+          "target": "com.amazonaws.iotthingsgraph#DefinitionDocument",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>DefinitionDocument</code> that defines the updated entities.</p>"
+          }
+        },
+        "syncWithPublicNamespace": {
+          "target": "com.amazonaws.iotthingsgraph#SyncWithPublicNamespace",
+          "traits": {
+            "smithy.api#documentation": "<p>A Boolean that specifies whether to synchronize with the latest version of the public namespace. If set to <code>true</code>, the upload will create a new namespace version.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#UploadEntityDefinitionsResponse": {
+      "type": "structure",
+      "members": {
+        "uploadId": {
+          "target": "com.amazonaws.iotthingsgraph#UploadId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID that specifies the upload action. You can use this to track the status of the upload.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#UploadId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 40
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#UploadStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "IN_PROGRESS",
+            "name": "IN_PROGRESS"
+          },
+          {
+            "value": "SUCCEEDED",
+            "name": "SUCCEEDED"
+          },
+          {
+            "value": "FAILED",
+            "name": "FAILED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.iotthingsgraph#Urn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 160
+        },
+        "smithy.api#pattern": "^urn:tdm:(([a-z]{2}-(gov-)?[a-z]{4,9}-[0-9]{1,3}/[0-9]+/)*[\\p{Alnum}_]+(/[\\p{Alnum}_]+)*):([\\p{Alpha}]*):([\\p{Alnum}_]+(/[\\p{Alnum}_]+)*)$"
+      }
+    },
+    "com.amazonaws.iotthingsgraph#Urns": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.iotthingsgraph#Urn"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 25
+        }
+      }
+    },
+    "com.amazonaws.iotthingsgraph#Version": {
+      "type": "long",
+      "traits": {
+        "smithy.api#box": {}
+      }
+    }
+  }
+}

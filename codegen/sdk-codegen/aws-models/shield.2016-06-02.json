@@ -1,0 +1,2144 @@
+{
+  "smithy": "1.0",
+  "metadata": {
+    "suppressions": [
+      {
+        "id": "HttpMethodSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpResponseCodeSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "PaginatedTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpHeaderTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpUriConflict",
+        "namespace": "*"
+      },
+      {
+        "id": "Service",
+        "namespace": "*"
+      }
+    ]
+  },
+  "shapes": {
+    "com.amazonaws.shield#AWSShield_20160616": {
+      "type": "service",
+      "version": "2016-06-02",
+      "operations": [
+        {
+          "target": "com.amazonaws.shield#AssociateDRTLogBucket"
+        },
+        {
+          "target": "com.amazonaws.shield#AssociateDRTRole"
+        },
+        {
+          "target": "com.amazonaws.shield#AssociateHealthCheck"
+        },
+        {
+          "target": "com.amazonaws.shield#AssociateProactiveEngagementDetails"
+        },
+        {
+          "target": "com.amazonaws.shield#CreateProtection"
+        },
+        {
+          "target": "com.amazonaws.shield#CreateSubscription"
+        },
+        {
+          "target": "com.amazonaws.shield#DeleteProtection"
+        },
+        {
+          "target": "com.amazonaws.shield#DeleteSubscription"
+        },
+        {
+          "target": "com.amazonaws.shield#DescribeAttack"
+        },
+        {
+          "target": "com.amazonaws.shield#DescribeDRTAccess"
+        },
+        {
+          "target": "com.amazonaws.shield#DescribeEmergencyContactSettings"
+        },
+        {
+          "target": "com.amazonaws.shield#DescribeProtection"
+        },
+        {
+          "target": "com.amazonaws.shield#DescribeSubscription"
+        },
+        {
+          "target": "com.amazonaws.shield#DisableProactiveEngagement"
+        },
+        {
+          "target": "com.amazonaws.shield#DisassociateDRTLogBucket"
+        },
+        {
+          "target": "com.amazonaws.shield#DisassociateDRTRole"
+        },
+        {
+          "target": "com.amazonaws.shield#DisassociateHealthCheck"
+        },
+        {
+          "target": "com.amazonaws.shield#EnableProactiveEngagement"
+        },
+        {
+          "target": "com.amazonaws.shield#GetSubscriptionState"
+        },
+        {
+          "target": "com.amazonaws.shield#ListAttacks"
+        },
+        {
+          "target": "com.amazonaws.shield#ListProtections"
+        },
+        {
+          "target": "com.amazonaws.shield#UpdateEmergencyContactSettings"
+        },
+        {
+          "target": "com.amazonaws.shield#UpdateSubscription"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "Shield",
+          "arnNamespace": "shield",
+          "cloudFormationName": "Shield",
+          "cloudTrailEventSource": "v20160616.bardockcustomerapiservice.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "shield"
+        },
+        "aws.protocols#awsJson1_1": {},
+        "smithy.api#documentation": "<fullname>AWS Shield Advanced</fullname>\n         <p>This is the <i>AWS Shield Advanced API Reference</i>. This guide is for developers who need detailed information about the AWS Shield Advanced API actions, \n         data types, and errors. For detailed information about AWS WAF and AWS Shield Advanced features and an overview of how to use the AWS WAF and AWS Shield Advanced APIs, see the \n         <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/\">AWS WAF and AWS Shield Developer Guide</a>.</p>",
+        "smithy.api#title": "AWS Shield",
+        "smithy.api#xmlNamespace": {
+          "uri": "http://ddp.amazonaws.com/doc/2016-06-02/"
+        }
+      }
+    },
+    "com.amazonaws.shield#AccessDeniedException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.shield#errorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Exception that indicates the specified <code>AttackId</code> does not exist, or the requester does not have the appropriate permissions to access the <code>AttackId</code>.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.shield#AccessDeniedForDependencyException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.shield#errorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>In order to grant the necessary access to the DDoS Response Team (DRT), the user submitting the request must have the <code>iam:PassRole</code> permission. This error indicates the user did not have the appropriate permissions. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html\">Granting a User Permissions to Pass a Role to an AWS Service</a>. </p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.shield#AssociateDRTLogBucket": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#AssociateDRTLogBucketRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#AssociateDRTLogBucketResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#AccessDeniedForDependencyException"
+        },
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidOperationException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidParameterException"
+        },
+        {
+          "target": "com.amazonaws.shield#LimitsExceededException"
+        },
+        {
+          "target": "com.amazonaws.shield#NoAssociatedRoleException"
+        },
+        {
+          "target": "com.amazonaws.shield#OptimisticLockException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Authorizes the DDoS Response Team (DRT) to access the specified Amazon S3 bucket containing your AWS WAF logs. You can associate up to 10 Amazon S3 buckets with your subscription.</p>\n\t        <p>To use the services of the DRT and make an <code>AssociateDRTLogBucket</code> request, you must be subscribed to the <a href=\"https://aws.amazon.com/premiumsupport/business-support/\">Business Support plan</a> or the <a href=\"https://aws.amazon.com/premiumsupport/enterprise-support/\">Enterprise Support plan</a>.</p>"
+      }
+    },
+    "com.amazonaws.shield#AssociateDRTLogBucketRequest": {
+      "type": "structure",
+      "members": {
+        "LogBucket": {
+          "target": "com.amazonaws.shield#LogBucket",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon S3 bucket that contains your AWS WAF logs.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#AssociateDRTLogBucketResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.shield#AssociateDRTRole": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#AssociateDRTRoleRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#AssociateDRTRoleResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#AccessDeniedForDependencyException"
+        },
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidOperationException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidParameterException"
+        },
+        {
+          "target": "com.amazonaws.shield#OptimisticLockException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Authorizes the DDoS Response Team (DRT), using the specified role, to access your AWS account to assist with DDoS attack mitigation during potential attacks. This enables the DRT to inspect your AWS WAF configuration and create or update AWS WAF rules and web ACLs.</p>\n         <p>You can associate only one <code>RoleArn</code> with your subscription. If you submit an <code>AssociateDRTRole</code> request for an account that already has an associated role, the new <code>RoleArn</code> will replace the existing <code>RoleArn</code>. </p>\n         <p>Prior to making the <code>AssociateDRTRole</code> request, you must attach the <a href=\"https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy\">AWSShieldDRTAccessPolicy</a> managed policy to the role you will specify in the request. For more information see <a href=\" https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html\">Attaching and Detaching IAM Policies</a>. The role must also trust the service principal <code> drt.shield.amazonaws.com</code>. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html\">IAM JSON Policy Elements: Principal</a>.</p>\n\n         <p>The DRT will have access only to your AWS WAF and Shield resources. By submitting this request, you authorize the DRT to inspect your AWS WAF and Shield configuration and create and update AWS WAF rules and web ACLs on your behalf. The DRT takes these actions only if explicitly authorized by you.</p>\n         <p>You must have the <code>iam:PassRole</code> permission to make an <code>AssociateDRTRole</code> request. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html\">Granting a User Permissions to Pass a Role to an AWS Service</a>. </p>\n         <p>To use the services of the DRT and make an <code>AssociateDRTRole</code> request, you must be subscribed to the <a href=\"https://aws.amazon.com/premiumsupport/business-support/\">Business Support plan</a> or the <a href=\"https://aws.amazon.com/premiumsupport/enterprise-support/\">Enterprise Support plan</a>.</p>"
+      }
+    },
+    "com.amazonaws.shield#AssociateDRTRoleRequest": {
+      "type": "structure",
+      "members": {
+        "RoleArn": {
+          "target": "com.amazonaws.shield#RoleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role the DRT will use to access your AWS account.</p>\n\t        <p>Prior to making the <code>AssociateDRTRole</code> request, you must attach the <a href=\"https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy\">AWSShieldDRTAccessPolicy</a> managed policy to this role.  For more information see <a href=\" https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html\">Attaching and Detaching IAM Policies</a>.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#AssociateDRTRoleResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.shield#AssociateHealthCheck": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#AssociateHealthCheckRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#AssociateHealthCheckResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidParameterException"
+        },
+        {
+          "target": "com.amazonaws.shield#LimitsExceededException"
+        },
+        {
+          "target": "com.amazonaws.shield#OptimisticLockException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Adds health-based detection to the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your AWS resource to improve responsiveness and accuracy in attack detection and mitigation.  </p>\n         <p>You define the health check in Route 53 and then associate it with your Shield Advanced protection. For more information, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option\">Shield Advanced Health-Based Detection</a> in the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/\">AWS WAF and AWS Shield Developer Guide</a>. </p>"
+      }
+    },
+    "com.amazonaws.shield#AssociateHealthCheckRequest": {
+      "type": "structure",
+      "members": {
+        "HealthCheckArn": {
+          "target": "com.amazonaws.shield#HealthCheckArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the health check to associate with the protection.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ProtectionId": {
+          "target": "com.amazonaws.shield#ProtectionId",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier (ID) for the <a>Protection</a> object to add the health check association to. </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#AssociateHealthCheckResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.shield#AssociateProactiveEngagementDetails": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#AssociateProactiveEngagementDetailsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#AssociateProactiveEngagementDetailsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidOperationException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidParameterException"
+        },
+        {
+          "target": "com.amazonaws.shield#OptimisticLockException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Initializes proactive engagement and sets the list of contacts for the DDoS Response Team (DRT) to use. You must provide at least one phone number in the emergency contact list. </p>\n         <p>After you have initialized proactive engagement using this call, to disable or enable proactive engagement, use the calls <code>DisableProactiveEngagement</code> and <code>EnableProactiveEngagement</code>.  </p>\n         <note>\n            <p>This call defines the list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you for escalations to the DRT and to initiate proactive customer support.</p>\n            <p>The contacts that you provide in the request replace any contacts that were already defined. If you already have contacts defined and want to use them, retrieve the list using <code>DescribeEmergencyContactSettings</code> and then provide it to this call.  </p>\n         </note>"
+      }
+    },
+    "com.amazonaws.shield#AssociateProactiveEngagementDetailsRequest": {
+      "type": "structure",
+      "members": {
+        "EmergencyContactList": {
+          "target": "com.amazonaws.shield#EmergencyContactList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you for escalations to the DRT and to initiate proactive customer support. </p>\n         <p>To enable proactive engagement, the contact list must include at least one phone number.</p>\n         <note>\n            <p>The contacts that you provide here replace any contacts that were already defined. If you already have contacts defined and want to use them, retrieve the list using <code>DescribeEmergencyContactSettings</code> and then provide it here.  </p>\n         </note>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#AssociateProactiveEngagementDetailsResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.shield#AttackDetail": {
+      "type": "structure",
+      "members": {
+        "StartTime": {
+          "target": "com.amazonaws.shield#AttackTimestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time the attack started, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
+          }
+        },
+        "SubResources": {
+          "target": "com.amazonaws.shield#SubResourceSummaryList",
+          "traits": {
+            "smithy.api#documentation": "<p>If applicable, additional detail about the resource being attacked, for example, IP\n         address or URL.</p>"
+          }
+        },
+        "AttackProperties": {
+          "target": "com.amazonaws.shield#AttackProperties",
+          "traits": {
+            "smithy.api#documentation": "<p>The array of <a>AttackProperty</a> objects.</p>"
+          }
+        },
+        "ResourceArn": {
+          "target": "com.amazonaws.shield#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the resource that was attacked.</p>"
+          }
+        },
+        "AttackId": {
+          "target": "com.amazonaws.shield#AttackId",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier (ID) of the attack.</p>"
+          }
+        },
+        "EndTime": {
+          "target": "com.amazonaws.shield#AttackTimestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time the attack ended, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
+          }
+        },
+        "AttackCounters": {
+          "target": "com.amazonaws.shield#SummarizedCounterList",
+          "traits": {
+            "smithy.api#documentation": "<p>List of counters that describe the attack for the specified time period.</p>"
+          }
+        },
+        "Mitigations": {
+          "target": "com.amazonaws.shield#MitigationList",
+          "traits": {
+            "smithy.api#documentation": "<p>List of mitigation actions taken for the attack.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The details of a DDoS attack.</p>"
+      }
+    },
+    "com.amazonaws.shield#AttackId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        },
+        "smithy.api#pattern": "[a-zA-Z0-9\\\\-]*"
+      }
+    },
+    "com.amazonaws.shield#AttackLayer": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "NETWORK",
+            "name": "NETWORK"
+          },
+          {
+            "value": "APPLICATION",
+            "name": "APPLICATION"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.shield#AttackProperties": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.shield#AttackProperty"
+      }
+    },
+    "com.amazonaws.shield#AttackProperty": {
+      "type": "structure",
+      "members": {
+        "Total": {
+          "target": "com.amazonaws.shield#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The total contributions made to this attack by all contributors, not just the five listed in the <code>TopContributors</code> list.</p>"
+          }
+        },
+        "AttackLayer": {
+          "target": "com.amazonaws.shield#AttackLayer",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of distributed denial of service (DDoS) event that was observed.\n            <code>NETWORK</code> indicates layer 3 and layer 4 events and <code>APPLICATION</code>\n         indicates layer 7 events.</p>"
+          }
+        },
+        "Unit": {
+          "target": "com.amazonaws.shield#Unit",
+          "traits": {
+            "smithy.api#documentation": "<p>The unit of the <code>Value</code> of the contributions.</p>"
+          }
+        },
+        "AttackPropertyIdentifier": {
+          "target": "com.amazonaws.shield#AttackPropertyIdentifier",
+          "traits": {
+            "smithy.api#documentation": "<p>Defines the DDoS attack property information that is provided. The\n            <code>WORDPRESS_PINGBACK_REFLECTOR</code> and <code>WORDPRESS_PINGBACK_SOURCE</code>\n         values are valid only for WordPress reflective pingback DDoS attacks.</p>"
+          }
+        },
+        "TopContributors": {
+          "target": "com.amazonaws.shield#TopContributors",
+          "traits": {
+            "smithy.api#documentation": "<p>The array of <a>Contributor</a> objects that includes the top five contributors to an attack. </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Details of the described attack.</p>"
+      }
+    },
+    "com.amazonaws.shield#AttackPropertyIdentifier": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "DESTINATION_URL",
+            "name": "DESTINATION_URL"
+          },
+          {
+            "value": "REFERRER",
+            "name": "REFERRER"
+          },
+          {
+            "value": "SOURCE_ASN",
+            "name": "SOURCE_ASN"
+          },
+          {
+            "value": "SOURCE_COUNTRY",
+            "name": "SOURCE_COUNTRY"
+          },
+          {
+            "value": "SOURCE_IP_ADDRESS",
+            "name": "SOURCE_IP_ADDRESS"
+          },
+          {
+            "value": "SOURCE_USER_AGENT",
+            "name": "SOURCE_USER_AGENT"
+          },
+          {
+            "value": "WORDPRESS_PINGBACK_REFLECTOR",
+            "name": "WORDPRESS_PINGBACK_REFLECTOR"
+          },
+          {
+            "value": "WORDPRESS_PINGBACK_SOURCE",
+            "name": "WORDPRESS_PINGBACK_SOURCE"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.shield#AttackSummaries": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.shield#AttackSummary"
+      }
+    },
+    "com.amazonaws.shield#AttackSummary": {
+      "type": "structure",
+      "members": {
+        "AttackId": {
+          "target": "com.amazonaws.shield#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier (ID) of the attack.</p>"
+          }
+        },
+        "AttackVectors": {
+          "target": "com.amazonaws.shield#AttackVectorDescriptionList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of attacks for a specified time period.</p>"
+          }
+        },
+        "ResourceArn": {
+          "target": "com.amazonaws.shield#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the resource that was attacked.</p>"
+          }
+        },
+        "StartTime": {
+          "target": "com.amazonaws.shield#AttackTimestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The start time of the attack, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
+          }
+        },
+        "EndTime": {
+          "target": "com.amazonaws.shield#AttackTimestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The end time of the attack, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Summarizes all DDoS attacks for a specified time period.</p>"
+      }
+    },
+    "com.amazonaws.shield#AttackTimestamp": {
+      "type": "timestamp"
+    },
+    "com.amazonaws.shield#AttackVectorDescription": {
+      "type": "structure",
+      "members": {
+        "VectorType": {
+          "target": "com.amazonaws.shield#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The attack type. Valid values:</p>\n\t        <ul>\n            <li>\n               <p>UDP_TRAFFIC</p>\n            </li>\n            <li>\n               <p>UDP_FRAGMENT</p>\n            </li>\n            <li>\n               <p>GENERIC_UDP_REFLECTION</p>\n            </li>\n            <li>\n               <p>DNS_REFLECTION</p>\n            </li>\n            <li>\n               <p>NTP_REFLECTION</p>\n            </li>\n            <li>\n               <p>CHARGEN_REFLECTION</p>\n            </li>\n            <li>\n               <p>SSDP_REFLECTION</p>\n            </li>\n            <li>\n               <p>PORT_MAPPER</p>\n            </li>\n            <li>\n               <p>RIP_REFLECTION</p>\n            </li>\n            <li>\n               <p>SNMP_REFLECTION</p>\n            </li>\n            <li>\n               <p>MSSQL_REFLECTION</p>\n            </li>\n            <li>\n               <p>NET_BIOS_REFLECTION</p>\n            </li>\n            <li>\n               <p>SYN_FLOOD</p>\n            </li>\n            <li>\n               <p>ACK_FLOOD</p>\n            </li>\n            <li>\n               <p>REQUEST_FLOOD</p> \n            </li>\n            <li>\n               <p>HTTP_REFLECTION</p>\n            </li>\n            <li>\n               <p>UDS_REFLECTION</p>\n            </li>\n            <li>\n               <p>MEMCACHED_REFLECTION</p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes the attack.</p>"
+      }
+    },
+    "com.amazonaws.shield#AttackVectorDescriptionList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.shield#AttackVectorDescription"
+      }
+    },
+    "com.amazonaws.shield#AutoRenew": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ENABLED",
+            "name": "ENABLED"
+          },
+          {
+            "value": "DISABLED",
+            "name": "DISABLED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.shield#ContactNotes": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1024
+        },
+        "smithy.api#pattern": "^[\\w\\s\\.\\-,:/()+@]*$"
+      }
+    },
+    "com.amazonaws.shield#Contributor": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.shield#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the contributor. This is dependent on the <code>AttackPropertyIdentifier</code>. For example, if the <code>AttackPropertyIdentifier</code> is <code>SOURCE_COUNTRY</code>, the <code>Name</code> could be <code>United States</code>.</p>"
+          }
+        },
+        "Value": {
+          "target": "com.amazonaws.shield#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The contribution of this contributor expressed in <a>Protection</a> units. For example <code>10,000</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A contributor to the attack and their contribution.</p>"
+      }
+    },
+    "com.amazonaws.shield#CreateProtection": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#CreateProtectionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#CreateProtectionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidOperationException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidResourceException"
+        },
+        {
+          "target": "com.amazonaws.shield#LimitsExceededException"
+        },
+        {
+          "target": "com.amazonaws.shield#OptimisticLockException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceAlreadyExistsException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Enables AWS Shield Advanced for a specific AWS resource. The resource can be an Amazon\n         CloudFront distribution, Elastic Load Balancing load balancer, AWS Global Accelerator accelerator, Elastic IP Address, or an Amazon Route 53 hosted zone.</p>\n         <p>You can add protection to only a single resource with each CreateProtection request. If you want to add protection to multiple resources at once, use the <a href=\"https://console.aws.amazon.com/waf/\">AWS WAF console</a>. For more information see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html\">Getting Started with AWS Shield Advanced</a> and <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/configure-new-protection.html\">Add AWS Shield Advanced Protection to more AWS Resources</a>.</p>"
+      }
+    },
+    "com.amazonaws.shield#CreateProtectionRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "target": "com.amazonaws.shield#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the resource to be protected.</p>\n         <p>The ARN should be in one of the following formats:</p>\n         <ul>\n            <li>\n               <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Elastic Load Balancer (Classic Load Balancer): <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/<i>load-balancer-name</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an AWS CloudFront distribution: <code>arn:aws:cloudfront::<i>account-id</i>:distribution/<i>distribution-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an AWS Global Accelerator accelerator: <code>arn:aws:globalaccelerator::<i>account-id</i>:accelerator/<i>accelerator-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For Amazon Route 53: <code>arn:aws:route53:::hostedzone/<i>hosted-zone-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Elastic IP address: <code>arn:aws:ec2:<i>region</i>:<i>account-id</i>:eip-allocation/<i>allocation-id</i>\n                  </code>\n               </p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.shield#ProtectionName",
+          "traits": {
+            "smithy.api#documentation": "<p>Friendly name for the <code>Protection</code> you are creating.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#CreateProtectionResponse": {
+      "type": "structure",
+      "members": {
+        "ProtectionId": {
+          "target": "com.amazonaws.shield#ProtectionId",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier (ID) for the <a>Protection</a> object that is created.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#CreateSubscription": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#CreateSubscriptionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#CreateSubscriptionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceAlreadyExistsException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Activates AWS Shield Advanced for an account.</p>\n      \n         <p>When you initally create a subscription, your subscription is set to be automatically renewed at the end of the existing subscription period.  You can change this by submitting an <code>UpdateSubscription</code> request. </p>"
+      }
+    },
+    "com.amazonaws.shield#CreateSubscriptionRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.shield#CreateSubscriptionResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.shield#DeleteProtection": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#DeleteProtectionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#DeleteProtectionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#OptimisticLockException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes an AWS Shield Advanced <a>Protection</a>.</p>"
+      }
+    },
+    "com.amazonaws.shield#DeleteProtectionRequest": {
+      "type": "structure",
+      "members": {
+        "ProtectionId": {
+          "target": "com.amazonaws.shield#ProtectionId",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier (ID) for the <a>Protection</a> object to be\n         deleted.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#DeleteProtectionResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.shield#DeleteSubscription": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#DeleteSubscriptionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#DeleteSubscriptionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#LockedSubscriptionException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#deprecated": {},
+        "smithy.api#documentation": "<p>Removes AWS Shield Advanced from an account. AWS Shield Advanced requires a 1-year subscription commitment. You cannot delete a subscription prior to the completion of that commitment. </p>"
+      }
+    },
+    "com.amazonaws.shield#DeleteSubscriptionRequest": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#deprecated": {}
+      }
+    },
+    "com.amazonaws.shield#DeleteSubscriptionResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#deprecated": {}
+      }
+    },
+    "com.amazonaws.shield#DescribeAttack": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#DescribeAttackRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#DescribeAttackResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Describes the details of a DDoS attack. </p>"
+      }
+    },
+    "com.amazonaws.shield#DescribeAttackRequest": {
+      "type": "structure",
+      "members": {
+        "AttackId": {
+          "target": "com.amazonaws.shield#AttackId",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier (ID) for the attack that to be described.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#DescribeAttackResponse": {
+      "type": "structure",
+      "members": {
+        "Attack": {
+          "target": "com.amazonaws.shield#AttackDetail",
+          "traits": {
+            "smithy.api#documentation": "<p>The attack that is described.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#DescribeDRTAccess": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#DescribeDRTAccessRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#DescribeDRTAccessResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns the current role and list of Amazon S3 log buckets used by the DDoS Response Team (DRT) to access your AWS account while assisting with attack mitigation.</p>"
+      }
+    },
+    "com.amazonaws.shield#DescribeDRTAccessRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.shield#DescribeDRTAccessResponse": {
+      "type": "structure",
+      "members": {
+        "RoleArn": {
+          "target": "com.amazonaws.shield#RoleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role the DRT used to access your AWS account.</p>"
+          }
+        },
+        "LogBucketList": {
+          "target": "com.amazonaws.shield#LogBucketList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of Amazon S3 buckets accessed by the DRT.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#DescribeEmergencyContactSettings": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#DescribeEmergencyContactSettingsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#DescribeEmergencyContactSettingsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>A list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you if you have proactive engagement enabled, for escalations to the DRT and to initiate proactive customer support.</p>"
+      }
+    },
+    "com.amazonaws.shield#DescribeEmergencyContactSettingsRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.shield#DescribeEmergencyContactSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "EmergencyContactList": {
+          "target": "com.amazonaws.shield#EmergencyContactList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you if you have proactive engagement enabled, for escalations to the DRT and to initiate proactive customer support.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#DescribeProtection": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#DescribeProtectionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#DescribeProtectionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidParameterException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists the details of a <a>Protection</a> object.</p>"
+      }
+    },
+    "com.amazonaws.shield#DescribeProtectionRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "target": "com.amazonaws.shield#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the AWS resource for the <a>Protection</a> object that is\n         described. When submitting the <code>DescribeProtection</code> request you must provide either the <code>ResourceArn</code> or the <code>ProtectionID</code>, but not both.</p>"
+          }
+        },
+        "ProtectionId": {
+          "target": "com.amazonaws.shield#ProtectionId",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier (ID) for the <a>Protection</a> object that is\n         described. When submitting the <code>DescribeProtection</code> request you must provide either the <code>ResourceArn</code> or the <code>ProtectionID</code>, but not both.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#DescribeProtectionResponse": {
+      "type": "structure",
+      "members": {
+        "Protection": {
+          "target": "com.amazonaws.shield#Protection",
+          "traits": {
+            "smithy.api#documentation": "<p>The <a>Protection</a> object that is described.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#DescribeSubscription": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#DescribeSubscriptionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#DescribeSubscriptionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Provides details about the AWS Shield Advanced subscription for an account.</p>"
+      }
+    },
+    "com.amazonaws.shield#DescribeSubscriptionRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.shield#DescribeSubscriptionResponse": {
+      "type": "structure",
+      "members": {
+        "Subscription": {
+          "target": "com.amazonaws.shield#Subscription",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS Shield Advanced subscription details for an account.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#DisableProactiveEngagement": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#DisableProactiveEngagementRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#DisableProactiveEngagementResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidOperationException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidParameterException"
+        },
+        {
+          "target": "com.amazonaws.shield#OptimisticLockException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes authorization from the DDoS Response Team (DRT) to notify contacts about escalations to the DRT and to initiate proactive customer support.</p>"
+      }
+    },
+    "com.amazonaws.shield#DisableProactiveEngagementRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.shield#DisableProactiveEngagementResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.shield#DisassociateDRTLogBucket": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#DisassociateDRTLogBucketRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#DisassociateDRTLogBucketResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#AccessDeniedForDependencyException"
+        },
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidOperationException"
+        },
+        {
+          "target": "com.amazonaws.shield#NoAssociatedRoleException"
+        },
+        {
+          "target": "com.amazonaws.shield#OptimisticLockException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes the DDoS Response Team's (DRT) access to the specified Amazon S3 bucket containing your AWS WAF logs.</p>\n\t        <p>To make a <code>DisassociateDRTLogBucket</code> request, you must be subscribed to the <a href=\"https://aws.amazon.com/premiumsupport/business-support/\">Business Support plan</a> or the <a href=\"https://aws.amazon.com/premiumsupport/enterprise-support/\">Enterprise Support plan</a>. However, if you are not subscribed to one of these support plans, but had been previously and had granted the DRT access to your account, you can submit a <code>DisassociateDRTLogBucket</code> request to remove this access.</p>"
+      }
+    },
+    "com.amazonaws.shield#DisassociateDRTLogBucketRequest": {
+      "type": "structure",
+      "members": {
+        "LogBucket": {
+          "target": "com.amazonaws.shield#LogBucket",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon S3 bucket that contains your AWS WAF logs.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#DisassociateDRTLogBucketResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.shield#DisassociateDRTRole": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#DisassociateDRTRoleRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#DisassociateDRTRoleResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidOperationException"
+        },
+        {
+          "target": "com.amazonaws.shield#OptimisticLockException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes the DDoS Response Team's (DRT) access to your AWS account.</p>\n\t        <p>To make a <code>DisassociateDRTRole</code> request, you must be subscribed to the <a href=\"https://aws.amazon.com/premiumsupport/business-support/\">Business Support plan</a> or the <a href=\"https://aws.amazon.com/premiumsupport/enterprise-support/\">Enterprise Support plan</a>. However, if you are not subscribed to one of these support plans, but had been previously and had granted the DRT access to your account, you can submit a <code>DisassociateDRTRole</code> request to remove this access.</p>"
+      }
+    },
+    "com.amazonaws.shield#DisassociateDRTRoleRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.shield#DisassociateDRTRoleResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.shield#DisassociateHealthCheck": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#DisassociateHealthCheckRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#DisassociateHealthCheckResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidParameterException"
+        },
+        {
+          "target": "com.amazonaws.shield#OptimisticLockException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes health-based detection from the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your AWS resource to improve responsiveness and accuracy in attack detection and mitigation. </p>\n         <p>You define the health check in Route 53 and then associate or disassociate it with your Shield Advanced protection. For more information, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html#ddos-advanced-health-check-option\">Shield Advanced Health-Based Detection</a> in the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/\">AWS WAF and AWS Shield Developer Guide</a>. </p>"
+      }
+    },
+    "com.amazonaws.shield#DisassociateHealthCheckRequest": {
+      "type": "structure",
+      "members": {
+        "HealthCheckArn": {
+          "target": "com.amazonaws.shield#HealthCheckArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the health check that is associated with the protection.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ProtectionId": {
+          "target": "com.amazonaws.shield#ProtectionId",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier (ID) for the <a>Protection</a> object to remove the health check association from. </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#DisassociateHealthCheckResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.shield#Double": {
+      "type": "double"
+    },
+    "com.amazonaws.shield#DurationInSeconds": {
+      "type": "long",
+      "traits": {
+        "smithy.api#range": {
+          "min": 0
+        }
+      }
+    },
+    "com.amazonaws.shield#EmailAddress": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 150
+        },
+        "smithy.api#pattern": "^\\S+@\\S+\\.\\S+$"
+      }
+    },
+    "com.amazonaws.shield#EmergencyContact": {
+      "type": "structure",
+      "members": {
+        "PhoneNumber": {
+          "target": "com.amazonaws.shield#PhoneNumber",
+          "traits": {
+            "smithy.api#documentation": "<p>The phone number for the contact.</p>"
+          }
+        },
+        "EmailAddress": {
+          "target": "com.amazonaws.shield#EmailAddress",
+          "traits": {
+            "smithy.api#documentation": "<p>The email address for the contact.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ContactNotes": {
+          "target": "com.amazonaws.shield#ContactNotes",
+          "traits": {
+            "smithy.api#documentation": "<p>Additional notes regarding the contact. </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contact information that the DRT can use to contact you if you have proactive engagement enabled, for escalations to the DRT and to initiate proactive customer support.</p>"
+      }
+    },
+    "com.amazonaws.shield#EmergencyContactList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.shield#EmergencyContact"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 10
+        }
+      }
+    },
+    "com.amazonaws.shield#EnableProactiveEngagement": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#EnableProactiveEngagementRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#EnableProactiveEngagementResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidOperationException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidParameterException"
+        },
+        {
+          "target": "com.amazonaws.shield#OptimisticLockException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Authorizes the DDoS Response Team (DRT) to use email and phone to notify contacts about escalations to the DRT and to initiate proactive customer support.</p>"
+      }
+    },
+    "com.amazonaws.shield#EnableProactiveEngagementRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.shield#EnableProactiveEngagementResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.shield#GetSubscriptionState": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#GetSubscriptionStateRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#GetSubscriptionStateResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns the <code>SubscriptionState</code>, either <code>Active</code> or <code>Inactive</code>.</p>"
+      }
+    },
+    "com.amazonaws.shield#GetSubscriptionStateRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.shield#GetSubscriptionStateResponse": {
+      "type": "structure",
+      "members": {
+        "SubscriptionState": {
+          "target": "com.amazonaws.shield#SubscriptionState",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the subscription.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#HealthCheckArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 2048
+        },
+        "smithy.api#pattern": "^arn:aws:route53:::healthcheck/\\S{36}$"
+      }
+    },
+    "com.amazonaws.shield#HealthCheckId": {
+      "type": "string"
+    },
+    "com.amazonaws.shield#HealthCheckIds": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.shield#HealthCheckId"
+      }
+    },
+    "com.amazonaws.shield#Integer": {
+      "type": "integer"
+    },
+    "com.amazonaws.shield#InternalErrorException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.shield#errorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Exception that indicates that a problem occurred with the service infrastructure. You\n         can retry the request.</p>",
+        "smithy.api#error": "server"
+      }
+    },
+    "com.amazonaws.shield#InvalidOperationException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.shield#errorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Exception that indicates that the operation would not cause any change to occur.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.shield#InvalidPaginationTokenException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.shield#errorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Exception that indicates that the NextToken specified in the request is invalid. Submit the request using the NextToken value that was returned in the response.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.shield#InvalidParameterException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.shield#errorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Exception that indicates that the parameters passed to the API are invalid. </p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.shield#InvalidResourceException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.shield#errorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Exception that indicates that the resource is invalid. You might not have access to the resource, or the resource might not exist.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.shield#Limit": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "target": "com.amazonaws.shield#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of protection.</p>"
+          }
+        },
+        "Max": {
+          "target": "com.amazonaws.shield#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of protections that can be created for the specified <code>Type</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Specifies how many protections of a given type you can create.</p>"
+      }
+    },
+    "com.amazonaws.shield#LimitNumber": {
+      "type": "long"
+    },
+    "com.amazonaws.shield#LimitType": {
+      "type": "string"
+    },
+    "com.amazonaws.shield#Limits": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.shield#Limit"
+      }
+    },
+    "com.amazonaws.shield#LimitsExceededException": {
+      "type": "structure",
+      "members": {
+        "Limit": {
+          "target": "com.amazonaws.shield#LimitNumber"
+        },
+        "Type": {
+          "target": "com.amazonaws.shield#LimitType"
+        },
+        "message": {
+          "target": "com.amazonaws.shield#errorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Exception that indicates that the operation would exceed a limit.</p>\n         <p>\n            <code>Type</code> is the type of limit that would be exceeded.</p>\n         <p>\n            <code>Limit</code> is the threshold that would be exceeded.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.shield#ListAttacks": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#ListAttacksRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#ListAttacksResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidOperationException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidParameterException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns all ongoing DDoS attacks or all DDoS attacks during a specified time\n         period.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "AttackSummaries",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.shield#ListAttacksRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "target": "com.amazonaws.shield#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>ListAttacksRequest.NextMarker</code> value from a previous call to <code>ListAttacksRequest</code>. Pass null if this is the first call.</p>"
+          }
+        },
+        "ResourceArns": {
+          "target": "com.amazonaws.shield#ResourceArnFilterList",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the resource that was attacked. If this is left\n         blank, all applicable resources for this account will be included.</p>"
+          }
+        },
+        "EndTime": {
+          "target": "com.amazonaws.shield#TimeRange",
+          "traits": {
+            "smithy.api#documentation": "<p>The end of the time period for the attacks. This is a <code>timestamp</code> type. The sample request above indicates a <code>number</code> type because the default used by WAF is Unix time in seconds. However any valid <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp format</a>  is allowed.  </p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.shield#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of <a>AttackSummary</a> objects to be returned. If this is left blank, the first 20 results will be returned.</p>\n         <p>This is a maximum value; it is possible that AWS WAF will return the results in smaller batches. That is, the number of <a>AttackSummary</a> objects returned could be less than <code>MaxResults</code>, even if there are still more <a>AttackSummary</a> objects yet to return. If there are more <a>AttackSummary</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>"
+          }
+        },
+        "StartTime": {
+          "target": "com.amazonaws.shield#TimeRange",
+          "traits": {
+            "smithy.api#documentation": "<p>The start of the time period for the attacks. This is a <code>timestamp</code> type. The sample request above indicates a <code>number</code> type because the default used by WAF is Unix time in seconds. However any valid <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp format</a>  is allowed.  </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#ListAttacksResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "target": "com.amazonaws.shield#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>The token returned by a previous call to indicate that there is more data available.\n         If not null, more results are available. Pass this value for the <code>NextMarker</code>\n         parameter in a subsequent call to <code>ListAttacks</code> to retrieve the next set of\n         items.</p>\n         <p>AWS WAF might return the list of <a>AttackSummary</a> objects in batches smaller than the number specified by MaxResults. If there are more <a>AttackSummary</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>"
+          }
+        },
+        "AttackSummaries": {
+          "target": "com.amazonaws.shield#AttackSummaries",
+          "traits": {
+            "smithy.api#documentation": "<p>The attack information for the specified time range.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#ListProtections": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#ListProtectionsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#ListProtectionsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidPaginationTokenException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists all <a>Protection</a> objects for the account.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "Protections",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.shield#ListProtectionsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "target": "com.amazonaws.shield#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>ListProtectionsRequest.NextToken</code> value from a previous call to <code>ListProtections</code>. Pass null if this is the first call.</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.shield#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of <a>Protection</a> objects to be returned. If this is\n         left blank the first 20 results will be returned.</p>\n         <p>This is a maximum value; it is possible that AWS WAF will return the results in smaller batches. That is, the number of <a>Protection</a> objects returned could be less than <code>MaxResults</code>, even if there are still more <a>Protection</a> objects yet to return. If there are more <a>Protection</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#ListProtectionsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "target": "com.amazonaws.shield#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>If you specify a value for <code>MaxResults</code> and you have more Protections than the value of MaxResults, AWS Shield Advanced returns a NextToken value in the response that allows you to list another group of Protections. For the second and subsequent ListProtections requests, specify the value of NextToken from the previous response to get information about another batch of Protections.</p>\n         <p>AWS WAF might return the list of <a>Protection</a> objects in batches smaller than the number specified by MaxResults. If there are more <a>Protection</a> objects to return, AWS WAF will always also return a <code>NextToken</code>.</p>"
+          }
+        },
+        "Protections": {
+          "target": "com.amazonaws.shield#Protections",
+          "traits": {
+            "smithy.api#documentation": "<p>The array of enabled <a>Protection</a> objects.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#LockedSubscriptionException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.shield#errorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>You are trying to update a subscription that has not yet completed the 1-year commitment. You can change the <code>AutoRenew</code> parameter during the last 30 days of your subscription. This exception indicates that you are attempting to change <code>AutoRenew</code> prior to that period.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.shield#LogBucket": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 3,
+          "max": 63
+        },
+        "smithy.api#pattern": "^([a-z]|(\\d(?!\\d{0,2}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})))([a-z\\d]|(\\.(?!(\\.|-)))|(-(?!\\.))){1,61}[a-z\\d]$"
+      }
+    },
+    "com.amazonaws.shield#LogBucketList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.shield#LogBucket"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 10
+        }
+      }
+    },
+    "com.amazonaws.shield#Long": {
+      "type": "long"
+    },
+    "com.amazonaws.shield#MaxResults": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {},
+        "smithy.api#range": {
+          "min": 0,
+          "max": 10000
+        }
+      }
+    },
+    "com.amazonaws.shield#Mitigation": {
+      "type": "structure",
+      "members": {
+        "MitigationName": {
+          "target": "com.amazonaws.shield#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the mitigation taken for this attack.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The mitigation applied to a DDoS attack.</p>"
+      }
+    },
+    "com.amazonaws.shield#MitigationList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.shield#Mitigation"
+      }
+    },
+    "com.amazonaws.shield#NoAssociatedRoleException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.shield#errorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The ARN of the role that you specifed does not exist.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.shield#OptimisticLockException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.shield#errorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Exception that indicates that the resource state has been modified by another\n         client. Retrieve the resource and then retry your request.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.shield#PhoneNumber": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 16
+        },
+        "smithy.api#pattern": "^\\+[1-9]\\d{1,14}$"
+      }
+    },
+    "com.amazonaws.shield#ProactiveEngagementStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ENABLED",
+            "name": "ENABLED"
+          },
+          {
+            "value": "DISABLED",
+            "name": "DISABLED"
+          },
+          {
+            "value": "PENDING",
+            "name": "PENDING"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.shield#Protection": {
+      "type": "structure",
+      "members": {
+        "HealthCheckIds": {
+          "target": "com.amazonaws.shield#HealthCheckIds",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier (ID) for the Route 53 health check that's associated with the protection. </p>"
+          }
+        },
+        "ResourceArn": {
+          "target": "com.amazonaws.shield#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the AWS resource that is protected.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.shield#ProtectionName",
+          "traits": {
+            "smithy.api#documentation": "<p>The friendly name of the protection. For example, <code>My CloudFront distributions</code>.</p>"
+          }
+        },
+        "Id": {
+          "target": "com.amazonaws.shield#ProtectionId",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier (ID) of the protection.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object that represents a resource that is under DDoS protection.</p>"
+      }
+    },
+    "com.amazonaws.shield#ProtectionId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 36
+        },
+        "smithy.api#pattern": "[a-zA-Z0-9\\\\-]*"
+      }
+    },
+    "com.amazonaws.shield#ProtectionName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        },
+        "smithy.api#pattern": "[ a-zA-Z0-9_\\\\.\\\\-]*"
+      }
+    },
+    "com.amazonaws.shield#Protections": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.shield#Protection"
+      }
+    },
+    "com.amazonaws.shield#ResourceAlreadyExistsException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.shield#errorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Exception indicating the specified resource already exists.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.shield#ResourceArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 2048
+        },
+        "smithy.api#pattern": "^arn:aws.*"
+      }
+    },
+    "com.amazonaws.shield#ResourceArnFilterList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.shield#ResourceArn"
+      }
+    },
+    "com.amazonaws.shield#ResourceNotFoundException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.shield#errorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Exception indicating the specified resource does not exist.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.shield#RoleArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 2048
+        },
+        "smithy.api#pattern": "^arn:aws:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+"
+      }
+    },
+    "com.amazonaws.shield#String": {
+      "type": "string"
+    },
+    "com.amazonaws.shield#SubResourceSummary": {
+      "type": "structure",
+      "members": {
+        "Counters": {
+          "target": "com.amazonaws.shield#SummarizedCounterList",
+          "traits": {
+            "smithy.api#documentation": "<p>The counters that describe the details of the attack.</p>"
+          }
+        },
+        "Type": {
+          "target": "com.amazonaws.shield#SubResourceType",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>SubResource</code> type.</p>"
+          }
+        },
+        "AttackVectors": {
+          "target": "com.amazonaws.shield#SummarizedAttackVectorList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of attack types and associated counters.</p>"
+          }
+        },
+        "Id": {
+          "target": "com.amazonaws.shield#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier (ID) of the <code>SubResource</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The attack information for the specified SubResource.</p>"
+      }
+    },
+    "com.amazonaws.shield#SubResourceSummaryList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.shield#SubResourceSummary"
+      }
+    },
+    "com.amazonaws.shield#SubResourceType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "IP",
+            "name": "IP"
+          },
+          {
+            "value": "URL",
+            "name": "URL"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.shield#Subscription": {
+      "type": "structure",
+      "members": {
+        "StartTime": {
+          "target": "com.amazonaws.shield#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The start time of the subscription, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
+          }
+        },
+        "Limits": {
+          "target": "com.amazonaws.shield#Limits",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies how many protections of a given type you can create.</p>"
+          }
+        },
+        "AutoRenew": {
+          "target": "com.amazonaws.shield#AutoRenew",
+          "traits": {
+            "smithy.api#documentation": "<p>If <code>ENABLED</code>, the subscription will be automatically renewed at the end of the existing subscription period.</p>\n         <p>When you initally create a subscription, <code>AutoRenew</code> is set to <code>ENABLED</code>. You can change this by submitting an <code>UpdateSubscription</code> request. If the <code>UpdateSubscription</code> request does not included a value for <code>AutoRenew</code>, the existing value for <code>AutoRenew</code> remains unchanged.</p>"
+          }
+        },
+        "EndTime": {
+          "target": "com.amazonaws.shield#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time your subscription will end.</p>"
+          }
+        },
+        "TimeCommitmentInSeconds": {
+          "target": "com.amazonaws.shield#DurationInSeconds",
+          "traits": {
+            "smithy.api#documentation": "<p>The length, in seconds, of the AWS Shield Advanced subscription for the account.</p>"
+          }
+        },
+        "ProactiveEngagementStatus": {
+          "target": "com.amazonaws.shield#ProactiveEngagementStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>If <code>ENABLED</code>, the DDoS Response Team (DRT) will use email and phone to notify contacts about escalations to the DRT and to initiate proactive customer support.</p>\n         <p>If <code>PENDING</code>, you have requested proactive engagement and the request is pending. The status changes to <code>ENABLED</code> when your request is fully processed.</p>\n         <p>If <code>DISABLED</code>, the DRT will not proactively notify contacts about escalations or to initiate proactive customer support. </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Information about the AWS Shield Advanced subscription for an account.</p>"
+      }
+    },
+    "com.amazonaws.shield#SubscriptionState": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ACTIVE",
+            "name": "ACTIVE"
+          },
+          {
+            "value": "INACTIVE",
+            "name": "INACTIVE"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.shield#SummarizedAttackVector": {
+      "type": "structure",
+      "members": {
+        "VectorCounters": {
+          "target": "com.amazonaws.shield#SummarizedCounterList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of counters that describe the details of the attack.</p>"
+          }
+        },
+        "VectorType": {
+          "target": "com.amazonaws.shield#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The attack type, for example, SNMP reflection or SYN flood.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A summary of information about the attack.</p>"
+      }
+    },
+    "com.amazonaws.shield#SummarizedAttackVectorList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.shield#SummarizedAttackVector"
+      }
+    },
+    "com.amazonaws.shield#SummarizedCounter": {
+      "type": "structure",
+      "members": {
+        "N": {
+          "target": "com.amazonaws.shield#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of counters for a specified time period.</p>"
+          }
+        },
+        "Unit": {
+          "target": "com.amazonaws.shield#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The unit of the counters.</p>"
+          }
+        },
+        "Average": {
+          "target": "com.amazonaws.shield#Double",
+          "traits": {
+            "smithy.api#documentation": "<p>The average value of the counter for a specified time period.</p>"
+          }
+        },
+        "Max": {
+          "target": "com.amazonaws.shield#Double",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum value of the counter for a specified time period.</p>"
+          }
+        },
+        "Sum": {
+          "target": "com.amazonaws.shield#Double",
+          "traits": {
+            "smithy.api#documentation": "<p>The total of counter values for a specified time period.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.shield#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The counter name.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The counter that describes a DDoS attack.</p>"
+      }
+    },
+    "com.amazonaws.shield#SummarizedCounterList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.shield#SummarizedCounter"
+      }
+    },
+    "com.amazonaws.shield#TimeRange": {
+      "type": "structure",
+      "members": {
+        "FromInclusive": {
+          "target": "com.amazonaws.shield#AttackTimestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The start time, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
+          }
+        },
+        "ToExclusive": {
+          "target": "com.amazonaws.shield#AttackTimestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The end time, in Unix time in seconds. For more information see <a href=\"http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types\">timestamp</a>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The time range.</p>"
+      }
+    },
+    "com.amazonaws.shield#Timestamp": {
+      "type": "timestamp"
+    },
+    "com.amazonaws.shield#Token": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 4096
+        },
+        "smithy.api#pattern": "^.*$"
+      }
+    },
+    "com.amazonaws.shield#TopContributors": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.shield#Contributor"
+      }
+    },
+    "com.amazonaws.shield#Unit": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "BITS",
+            "name": "BITS"
+          },
+          {
+            "value": "BYTES",
+            "name": "BYTES"
+          },
+          {
+            "value": "PACKETS",
+            "name": "PACKETS"
+          },
+          {
+            "value": "REQUESTS",
+            "name": "REQUESTS"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.shield#UpdateEmergencyContactSettings": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#UpdateEmergencyContactSettingsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#UpdateEmergencyContactSettingsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidParameterException"
+        },
+        {
+          "target": "com.amazonaws.shield#OptimisticLockException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates the details of the list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you if you have proactive engagement enabled, for escalations to the DRT and to initiate proactive customer support.</p>"
+      }
+    },
+    "com.amazonaws.shield#UpdateEmergencyContactSettingsRequest": {
+      "type": "structure",
+      "members": {
+        "EmergencyContactList": {
+          "target": "com.amazonaws.shield#EmergencyContactList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you if you have proactive engagement enabled, for escalations to the DRT and to initiate proactive customer support.</p>\n         <p>If you have proactive engagement enabled, the contact list must include at least one phone number.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#UpdateEmergencyContactSettingsResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.shield#UpdateSubscription": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.shield#UpdateSubscriptionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.shield#UpdateSubscriptionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.shield#InternalErrorException"
+        },
+        {
+          "target": "com.amazonaws.shield#InvalidParameterException"
+        },
+        {
+          "target": "com.amazonaws.shield#LockedSubscriptionException"
+        },
+        {
+          "target": "com.amazonaws.shield#OptimisticLockException"
+        },
+        {
+          "target": "com.amazonaws.shield#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates the details of an existing subscription. Only enter values for parameters you want to change. Empty parameters are not updated.</p>"
+      }
+    },
+    "com.amazonaws.shield#UpdateSubscriptionRequest": {
+      "type": "structure",
+      "members": {
+        "AutoRenew": {
+          "target": "com.amazonaws.shield#AutoRenew",
+          "traits": {
+            "smithy.api#documentation": "<p>When you initally create a subscription, <code>AutoRenew</code> is set to <code>ENABLED</code>. If <code>ENABLED</code>, the subscription will be automatically renewed at the end of the existing subscription period. You can change this by submitting an <code>UpdateSubscription</code> request. If the <code>UpdateSubscription</code> request does not included a value for <code>AutoRenew</code>, the existing value for <code>AutoRenew</code> remains unchanged.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.shield#UpdateSubscriptionResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.shield#errorMessage": {
+      "type": "string"
+    }
+  }
+}

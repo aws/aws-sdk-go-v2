@@ -66,21 +66,66 @@ func (c *Client) CreateTable(ctx context.Context, params *CreateTableInput, optF
 
 // Represents the input of a CreateTable operation.
 type CreateTableInput struct {
+	// Represents the settings used to enable server-side encryption.
+	SSESpecification *types.SSESpecification
+	// The settings for DynamoDB Streams on the table. These settings consist of:
+	//
+	//
+	// * StreamEnabled - Indicates whether DynamoDB Streams is to be enabled (true) or
+	// disabled (false).
+	//
+	//     * StreamViewType - When an item in the table is modified,
+	// StreamViewType determines what information is written to the table's stream.
+	// Valid values for StreamViewType are:
+	//
+	//         * KEYS_ONLY - Only the key
+	// attributes of the modified item are written to the stream.
+	//
+	//         * NEW_IMAGE
+	// - The entire item, as it appears after it was modified, is written to the
+	// stream.
+	//
+	//         * OLD_IMAGE - The entire item, as it appeared before it was
+	// modified, is written to the stream.
+	//
+	//         * NEW_AND_OLD_IMAGES - Both the new
+	// and the old item images of the item are written to the stream.
+	StreamSpecification *types.StreamSpecification
+	// Specifies the attributes that make up the primary key for a table or an index.
+	// The attributes in KeySchema must also be defined in the AttributeDefinitions
+	// array. For more information, see Data Model
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html)
+	// in the Amazon DynamoDB Developer Guide. Each KeySchemaElement in the array is
+	// composed of:
+	//
+	//     * AttributeName - The name of this key attribute.
+	//
+	//     *
+	// KeyType - The role that the key attribute will assume:
+	//
+	//         * HASH -
+	// partition key
+	//
+	//         * RANGE - sort key
+	//
+	// The partition key of an item is also
+	// known as its hash attribute. The term "hash attribute" derives from the DynamoDB
+	// usage of an internal hash function to evenly distribute data items across
+	// partitions, based on their partition key values. The sort key of an item is also
+	// known as its range attribute. The term "range attribute" derives from the way
+	// DynamoDB stores items with the same partition key physically close together, in
+	// sorted order by the sort key value.  <p>For a simple primary key (partition
+	// key), you must provide exactly one element with a <code>KeyType</code> of
+	// <code>HASH</code>.</p> <p>For a composite primary key (partition key and sort
+	// key), you must provide exactly two elements, in this order: The first element
+	// must have a <code>KeyType</code> of <code>HASH</code>, and the second element
+	// must have a <code>KeyType</code> of <code>RANGE</code>.</p> <p>For more
+	// information, see <a
+	// href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#WorkingWithTables.primary.key">Working
+	// with Tables</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>
+	KeySchema []*types.KeySchemaElement
 	// An array of attributes that describe the key schema for the table and indexes.
 	AttributeDefinitions []*types.AttributeDefinition
-	// Controls how you are charged for read and write throughput and how you manage
-	// capacity. This setting can be changed later.
-	//
-	//     * PROVISIONED - We recommend
-	// using PROVISIONED for predictable workloads. PROVISIONED sets the billing mode
-	// to Provisioned Mode
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual).
-	//
-	//
-	// * PAY_PER_REQUEST - We recommend using PAY_PER_REQUEST for unpredictable
-	// workloads. PAY_PER_REQUEST sets the billing mode to On-Demand Mode
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand).
-	BillingMode types.BillingMode
 	// One or more global secondary indexes (the maximum is 20) to be created on the
 	// table. Each global secondary index in the array includes the following:
 	//
@@ -119,39 +164,19 @@ type CreateTableInput struct {
 	//     * ProvisionedThroughput - The provisioned throughput settings for
 	// the global secondary index, consisting of read and write capacity units.
 	GlobalSecondaryIndexes []*types.GlobalSecondaryIndex
-	// Specifies the attributes that make up the primary key for a table or an index.
-	// The attributes in KeySchema must also be defined in the AttributeDefinitions
-	// array. For more information, see Data Model
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html)
-	// in the Amazon DynamoDB Developer Guide. Each KeySchemaElement in the array is
-	// composed of:
+	// Controls how you are charged for read and write throughput and how you manage
+	// capacity. This setting can be changed later.
 	//
-	//     * AttributeName - The name of this key attribute.
+	//     * PROVISIONED - We recommend
+	// using PROVISIONED for predictable workloads. PROVISIONED sets the billing mode
+	// to Provisioned Mode
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.ProvisionedThroughput.Manual).
 	//
-	//     *
-	// KeyType - The role that the key attribute will assume:
 	//
-	//         * HASH -
-	// partition key
-	//
-	//         * RANGE - sort key
-	//
-	// The partition key of an item is also
-	// known as its hash attribute. The term "hash attribute" derives from the DynamoDB
-	// usage of an internal hash function to evenly distribute data items across
-	// partitions, based on their partition key values. The sort key of an item is also
-	// known as its range attribute. The term "range attribute" derives from the way
-	// DynamoDB stores items with the same partition key physically close together, in
-	// sorted order by the sort key value.  <p>For a simple primary key (partition
-	// key), you must provide exactly one element with a <code>KeyType</code> of
-	// <code>HASH</code>.</p> <p>For a composite primary key (partition key and sort
-	// key), you must provide exactly two elements, in this order: The first element
-	// must have a <code>KeyType</code> of <code>HASH</code>, and the second element
-	// must have a <code>KeyType</code> of <code>RANGE</code>.</p> <p>For more
-	// information, see <a
-	// href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#WorkingWithTables.primary.key">Working
-	// with Tables</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>
-	KeySchema []*types.KeySchemaElement
+	// * PAY_PER_REQUEST - We recommend using PAY_PER_REQUEST for unpredictable
+	// workloads. PAY_PER_REQUEST sets the billing mode to On-Demand Mode
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand).
+	BillingMode types.BillingMode
 	// One or more local secondary indexes (the maximum is 5) to be created on the
 	// table. Each index is scoped to a given partition key value. There is a 10 GB
 	// size limit per partition key value; otherwise, the size of a local secondary
@@ -198,37 +223,12 @@ type CreateTableInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ProvisionedThroughput *types.ProvisionedThroughput
-	// Represents the settings used to enable server-side encryption.
-	SSESpecification *types.SSESpecification
-	// The settings for DynamoDB Streams on the table. These settings consist of:
-	//
-	//
-	// * StreamEnabled - Indicates whether DynamoDB Streams is to be enabled (true) or
-	// disabled (false).
-	//
-	//     * StreamViewType - When an item in the table is modified,
-	// StreamViewType determines what information is written to the table's stream.
-	// Valid values for StreamViewType are:
-	//
-	//         * KEYS_ONLY - Only the key
-	// attributes of the modified item are written to the stream.
-	//
-	//         * NEW_IMAGE
-	// - The entire item, as it appears after it was modified, is written to the
-	// stream.
-	//
-	//         * OLD_IMAGE - The entire item, as it appeared before it was
-	// modified, is written to the stream.
-	//
-	//         * NEW_AND_OLD_IMAGES - Both the new
-	// and the old item images of the item are written to the stream.
-	StreamSpecification *types.StreamSpecification
-	// The name of the table to create.
-	TableName *string
 	// A list of key-value pairs to label the table. For more information, see Tagging
 	// for DynamoDB
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html).
 	Tags []*types.Tag
+	// The name of the table to create.
+	TableName *string
 }
 
 // Represents the output of a CreateTable operation.

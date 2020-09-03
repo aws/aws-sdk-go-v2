@@ -4457,6 +4457,13 @@ func awsAwsjson10_serializeDocumentRestoreTableFromBackupInput(v *RestoreTableFr
 		}
 	}
 
+	if v.SSESpecificationOverride != nil {
+		ok := object.Key("SSESpecificationOverride")
+		if err := awsAwsjson10_serializeDocumentSSESpecification(v.SSESpecificationOverride, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TargetTableName != nil {
 		ok := object.Key("TargetTableName")
 		ok.String(*v.TargetTableName)
@@ -4500,9 +4507,21 @@ func awsAwsjson10_serializeDocumentRestoreTableToPointInTimeInput(v *RestoreTabl
 		ok.Double(smithytime.FormatEpochSeconds(*v.RestoreDateTime))
 	}
 
+	if v.SourceTableArn != nil {
+		ok := object.Key("SourceTableArn")
+		ok.String(*v.SourceTableArn)
+	}
+
 	if v.SourceTableName != nil {
 		ok := object.Key("SourceTableName")
 		ok.String(*v.SourceTableName)
+	}
+
+	if v.SSESpecificationOverride != nil {
+		ok := object.Key("SSESpecificationOverride")
+		if err := awsAwsjson10_serializeDocumentSSESpecification(v.SSESpecificationOverride, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.TargetTableName != nil {

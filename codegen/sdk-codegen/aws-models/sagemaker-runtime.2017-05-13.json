@@ -1,0 +1,266 @@
+{
+  "smithy": "1.0",
+  "metadata": {
+    "suppressions": [
+      {
+        "id": "HttpMethodSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpResponseCodeSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "PaginatedTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpHeaderTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpUriConflict",
+        "namespace": "*"
+      },
+      {
+        "id": "Service",
+        "namespace": "*"
+      }
+    ]
+  },
+  "shapes": {
+    "com.amazonaws.sagemakerruntime#AmazonSageMakerRuntime": {
+      "type": "service",
+      "version": "2017-05-13",
+      "operations": [
+        {
+          "target": "com.amazonaws.sagemakerruntime#InvokeEndpoint"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "SageMaker Runtime",
+          "arnNamespace": "sagemaker",
+          "cloudFormationName": "SageMakerRuntime",
+          "cloudTrailEventSource": "runtime.sagemaker.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "sagemaker"
+        },
+        "aws.protocols#restJson1": {},
+        "smithy.api#documentation": "<p>\n            Amazon SageMaker runtime API.\n        </p>",
+        "smithy.api#title": "Amazon SageMaker Runtime"
+      }
+    },
+    "com.amazonaws.sagemakerruntime#BodyBlob": {
+      "type": "blob",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 5242880
+        },
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.sagemakerruntime#EndpointName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 63
+        },
+        "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+      }
+    },
+    "com.amazonaws.sagemakerruntime#Header": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 1024
+        }
+      }
+    },
+    "com.amazonaws.sagemakerruntime#InternalFailure": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.sagemakerruntime#Message"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>\n            Internal failure occurred. \n        </p>",
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 500
+      }
+    },
+    "com.amazonaws.sagemakerruntime#InvokeEndpoint": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.sagemakerruntime#InvokeEndpointInput"
+      },
+      "output": {
+        "target": "com.amazonaws.sagemakerruntime#InvokeEndpointOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.sagemakerruntime#InternalFailure"
+        },
+        {
+          "target": "com.amazonaws.sagemakerruntime#ModelError"
+        },
+        {
+          "target": "com.amazonaws.sagemakerruntime#ServiceUnavailable"
+        },
+        {
+          "target": "com.amazonaws.sagemakerruntime#ValidationError"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>After you deploy a model into production using Amazon SageMaker hosting services, your\n            client applications use this API to get inferences from the model hosted at the\n            specified endpoint. </p>\n        <p>For an overview of Amazon SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html\">How It Works</a>\n        </p>\n        <p>\n            Amazon SageMaker strips all POST headers except those supported by \n            the API. Amazon SageMaker might add additional headers. You should \n            not rely on the behavior of headers outside those enumerated in the request syntax.\n        </p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/endpoints/{EndpointName}/invocations",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.sagemakerruntime#InvokeEndpointInput": {
+      "type": "structure",
+      "members": {
+        "ContentType": {
+          "target": "com.amazonaws.sagemakerruntime#Header",
+          "traits": {
+            "smithy.api#documentation": "<p>The MIME type of the input data in the request body.</p>",
+            "smithy.api#httpHeader": "Content-Type"
+          }
+        },
+        "Body": {
+          "target": "com.amazonaws.sagemakerruntime#BodyBlob",
+          "traits": {
+            "smithy.api#documentation": "<p>Provides input data, in the format specified in the <code>ContentType</code>\n            request header. Amazon SageMaker passes all of the data in the body to the model. </p>",
+            "smithy.api#httpPayload": {},
+            "smithy.api#required": {}
+          }
+        },
+        "EndpointName": {
+          "target": "com.amazonaws.sagemakerruntime#EndpointName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the endpoint that you specified when you created the endpoint using the\n                <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html\">CreateEndpoint</a> API. </p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "Accept": {
+          "target": "com.amazonaws.sagemakerruntime#Header",
+          "traits": {
+            "smithy.api#documentation": "<p>The desired MIME type of the inference in the response.</p>",
+            "smithy.api#httpHeader": "Accept"
+          }
+        }
+      }
+    },
+    "com.amazonaws.sagemakerruntime#InvokeEndpointOutput": {
+      "type": "structure",
+      "members": {
+        "Body": {
+          "target": "com.amazonaws.sagemakerruntime#BodyBlob",
+          "traits": {
+            "smithy.api#documentation": "<p>Includes the inference provided by the model.</p>",
+            "smithy.api#httpPayload": {},
+            "smithy.api#required": {}
+          }
+        },
+        "InvokedProductionVariant": {
+          "target": "com.amazonaws.sagemakerruntime#Header",
+          "traits": {
+            "smithy.api#documentation": "<p>Identifies the production variant that was invoked.</p>",
+            "smithy.api#httpHeader": "x-Amzn-Invoked-Production-Variant"
+          }
+        },
+        "ContentType": {
+          "target": "com.amazonaws.sagemakerruntime#Header",
+          "traits": {
+            "smithy.api#documentation": "<p>The MIME type of the inference returned in the response body.</p>",
+            "smithy.api#httpHeader": "Content-Type"
+          }
+        }
+      }
+    },
+    "com.amazonaws.sagemakerruntime#LogStreamArn": {
+      "type": "string"
+    },
+    "com.amazonaws.sagemakerruntime#Message": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 2048
+        }
+      }
+    },
+    "com.amazonaws.sagemakerruntime#ModelError": {
+      "type": "structure",
+      "members": {
+        "LogStreamArn": {
+          "target": "com.amazonaws.sagemakerruntime#LogStreamArn",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            Amazon Resource Name (ARN) of the log stream. \n        </p>"
+          }
+        },
+        "OriginalStatusCode": {
+          "target": "com.amazonaws.sagemakerruntime#StatusCode",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            Original status code. \n        </p>"
+          }
+        },
+        "OriginalMessage": {
+          "target": "com.amazonaws.sagemakerruntime#Message",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            Original message. \n        </p>"
+          }
+        },
+        "Message": {
+          "target": "com.amazonaws.sagemakerruntime#Message"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>\n            Model (owned by the customer in the container) returned an error 500.  \n        </p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 424
+      }
+    },
+    "com.amazonaws.sagemakerruntime#ServiceUnavailable": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.sagemakerruntime#Message"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>\n            Service is unavailable. Try your call again.\n        </p>",
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 503
+      }
+    },
+    "com.amazonaws.sagemakerruntime#StatusCode": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {}
+      }
+    },
+    "com.amazonaws.sagemakerruntime#ValidationError": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.sagemakerruntime#Message"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>\n            Inspect your request and try again.\n        \n        </p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    }
+  }
+}

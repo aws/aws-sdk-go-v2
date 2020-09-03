@@ -61,39 +61,37 @@ func (c *Client) UpdateItem(ctx context.Context, params *UpdateItemInput, optFns
 
 // Represents the input of an UpdateItem operation.
 type UpdateItemInput struct {
-	// This is a legacy parameter. Use UpdateExpression instead. For more information,
-	// see AttributeUpdates
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributeUpdates.html)
-	// in the Amazon DynamoDB Developer Guide.
-	AttributeUpdates map[string]*types.AttributeValueUpdate
-	// A condition that must be satisfied in order for a conditional update to succeed.
-	// An expression can contain any of the following:
+	// Determines whether item collection metrics are returned. If set to SIZE, the
+	// response includes statistics about item collections, if any, that were modified
+	// during the operation are returned in the response. If set to NONE (the default),
+	// no statistics are returned.
+	ReturnItemCollectionMetrics types.ReturnItemCollectionMetrics
+	// Use ReturnValues if you want to get the item attributes as they appear before or
+	// after they are updated. For UpdateItem, the valid values are:
 	//
-	//     * Functions:
-	// attribute_exists | attribute_not_exists | attribute_type | contains |
-	// begins_with | size These function names are case-sensitive.
+	//     * NONE - If
+	// ReturnValues is not specified, or if its value is NONE, then nothing is
+	// returned. (This setting is the default for ReturnValues.)
 	//
-	//     * Comparison
-	// operators: = | <> | < | > | <= | >= | BETWEEN | IN
+	//     * ALL_OLD -
+	// Returns all of the attributes of the item, as they appeared before the
+	// UpdateItem operation.
 	//
-	//     * Logical operators: AND
-	// | OR | NOT
+	//     * UPDATED_OLD - Returns only the updated attributes,
+	// as they appeared before the UpdateItem operation.
 	//
-	// For more information about condition expressions, see Specifying
-	// Conditions
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
-	// in the Amazon DynamoDB Developer Guide.
-	ConditionExpression *string
-	// This is a legacy parameter. Use ConditionExpression instead. For more
-	// information, see ConditionalOperator
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html)
-	// in the Amazon DynamoDB Developer Guide.
-	ConditionalOperator types.ConditionalOperator
-	// This is a legacy parameter. Use ConditionExpression instead. For more
-	// information, see Expected
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html)
-	// in the Amazon DynamoDB Developer Guide.
-	Expected map[string]*types.ExpectedAttributeValue
+	//     * ALL_NEW - Returns all
+	// of the attributes of the item, as they appear after the UpdateItem operation.
+	//
+	//
+	// * UPDATED_NEW - Returns only the updated attributes, as they appear after the
+	// UpdateItem operation.
+	//
+	// There is no additional cost associated with requesting a
+	// return value aside from the small network and processing overhead of receiving a
+	// larger response. No read capacity units are consumed. The values returned are
+	// strongly consistent.
+	ReturnValues types.ReturnValue
 	// One or more substitution tokens for attribute names in an expression. The
 	// following are some use cases for using ExpressionAttributeNames:
 	//
@@ -134,73 +132,6 @@ type UpdateItemInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ExpressionAttributeNames map[string]*string
-	// One or more values that can be substituted in an expression. Use the : (colon)
-	// character in an expression to dereference an attribute value. For example,
-	// suppose that you wanted to check whether the value of the ProductStatus
-	// attribute was one of the following: Available | Backordered | Discontinued You
-	// would first need to specify ExpressionAttributeValues as follows: {
-	// ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
-	// ":disc":{"S":"Discontinued"} } You could then use these values in an expression,
-	// such as this: ProductStatus IN (:avail, :back, :disc) For more information on
-	// expression attribute values, see Condition Expressions
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
-	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeValues map[string]*types.AttributeValue
-	// The primary key of the item to be updated. Each element consists of an attribute
-	// name and a value for that attribute. For the primary key, you must provide all
-	// of the attributes. For example, with a simple primary key, you only need to
-	// provide a value for the partition key. For a composite primary key, you must
-	// provide values for both the partition key and the sort key.
-	Key map[string]*types.AttributeValue
-	// Determines the level of detail about provisioned throughput consumption that is
-	// returned in the response:
-	//
-	//     * INDEXES - The response includes the aggregate
-	// ConsumedCapacity for the operation, together with ConsumedCapacity for each
-	// table and secondary index that was accessed. Note that some operations, such as
-	// GetItem and BatchGetItem, do not access any indexes at all. In these cases,
-	// specifying INDEXES will only return ConsumedCapacity information for table(s).
-	//
-	//
-	// * TOTAL - The response includes only the aggregate ConsumedCapacity for the
-	// operation.
-	//
-	//     * NONE - No ConsumedCapacity details are included in the
-	// response.
-	ReturnConsumedCapacity types.ReturnConsumedCapacity
-	// Determines whether item collection metrics are returned. If set to SIZE, the
-	// response includes statistics about item collections, if any, that were modified
-	// during the operation are returned in the response. If set to NONE (the default),
-	// no statistics are returned.
-	ReturnItemCollectionMetrics types.ReturnItemCollectionMetrics
-	// Use ReturnValues if you want to get the item attributes as they appear before or
-	// after they are updated. For UpdateItem, the valid values are:
-	//
-	//     * NONE - If
-	// ReturnValues is not specified, or if its value is NONE, then nothing is
-	// returned. (This setting is the default for ReturnValues.)
-	//
-	//     * ALL_OLD -
-	// Returns all of the attributes of the item, as they appeared before the
-	// UpdateItem operation.
-	//
-	//     * UPDATED_OLD - Returns only the updated attributes,
-	// as they appeared before the UpdateItem operation.
-	//
-	//     * ALL_NEW - Returns all
-	// of the attributes of the item, as they appear after the UpdateItem operation.
-	//
-	//
-	// * UPDATED_NEW - Returns only the updated attributes, as they appear after the
-	// UpdateItem operation.
-	//
-	// There is no additional cost associated with requesting a
-	// return value aside from the small network and processing overhead of receiving a
-	// larger response. No read capacity units are consumed. The values returned are
-	// strongly consistent.
-	ReturnValues types.ReturnValue
-	// The name of the table containing the item to update.
-	TableName *string
 	// An expression that defines one or more attributes to be updated, the action to
 	// be performed on them, and new values for them. The following action values are
 	// available for UpdateExpression.
@@ -269,6 +200,75 @@ type UpdateItemInput struct {
 	// href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.Modifying.html">Modifying
 	// Items and Attributes</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>
 	UpdateExpression *string
+	// A condition that must be satisfied in order for a conditional update to succeed.
+	// An expression can contain any of the following:
+	//
+	//     * Functions:
+	// attribute_exists | attribute_not_exists | attribute_type | contains |
+	// begins_with | size These function names are case-sensitive.
+	//
+	//     * Comparison
+	// operators: = | <> | < | > | <= | >= | BETWEEN | IN
+	//
+	//     * Logical operators: AND
+	// | OR | NOT
+	//
+	// For more information about condition expressions, see Specifying
+	// Conditions
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
+	// in the Amazon DynamoDB Developer Guide.
+	ConditionExpression *string
+	// This is a legacy parameter. Use ConditionExpression instead. For more
+	// information, see ConditionalOperator
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html)
+	// in the Amazon DynamoDB Developer Guide.
+	ConditionalOperator types.ConditionalOperator
+	// One or more values that can be substituted in an expression. Use the : (colon)
+	// character in an expression to dereference an attribute value. For example,
+	// suppose that you wanted to check whether the value of the ProductStatus
+	// attribute was one of the following: Available | Backordered | Discontinued You
+	// would first need to specify ExpressionAttributeValues as follows: {
+	// ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
+	// ":disc":{"S":"Discontinued"} } You could then use these values in an expression,
+	// such as this: ProductStatus IN (:avail, :back, :disc) For more information on
+	// expression attribute values, see Condition Expressions
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
+	// in the Amazon DynamoDB Developer Guide.
+	ExpressionAttributeValues map[string]*types.AttributeValue
+	// Determines the level of detail about provisioned throughput consumption that is
+	// returned in the response:
+	//
+	//     * INDEXES - The response includes the aggregate
+	// ConsumedCapacity for the operation, together with ConsumedCapacity for each
+	// table and secondary index that was accessed. Note that some operations, such as
+	// GetItem and BatchGetItem, do not access any indexes at all. In these cases,
+	// specifying INDEXES will only return ConsumedCapacity information for table(s).
+	//
+	//
+	// * TOTAL - The response includes only the aggregate ConsumedCapacity for the
+	// operation.
+	//
+	//     * NONE - No ConsumedCapacity details are included in the
+	// response.
+	ReturnConsumedCapacity types.ReturnConsumedCapacity
+	// This is a legacy parameter. Use UpdateExpression instead. For more information,
+	// see AttributeUpdates
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributeUpdates.html)
+	// in the Amazon DynamoDB Developer Guide.
+	AttributeUpdates map[string]*types.AttributeValueUpdate
+	// The primary key of the item to be updated. Each element consists of an attribute
+	// name and a value for that attribute. For the primary key, you must provide all
+	// of the attributes. For example, with a simple primary key, you only need to
+	// provide a value for the partition key. For a composite primary key, you must
+	// provide values for both the partition key and the sort key.
+	Key map[string]*types.AttributeValue
+	// This is a legacy parameter. Use ConditionExpression instead. For more
+	// information, see Expected
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html)
+	// in the Amazon DynamoDB Developer Guide.
+	Expected map[string]*types.ExpectedAttributeValue
+	// The name of the table containing the item to update.
+	TableName *string
 }
 
 // Represents the output of an UpdateItem operation.
@@ -278,14 +278,6 @@ type UpdateItemOutput struct {
 	// only present if ReturnValues was specified as something other than NONE in the
 	// request. Each element represents one attribute.
 	Attributes map[string]*types.AttributeValue
-	// The capacity units consumed by the UpdateItem operation. The data returned
-	// includes the total provisioned throughput consumed, along with statistics for
-	// the table and any indexes involved in the operation. ConsumedCapacity is only
-	// returned if the ReturnConsumedCapacity parameter was specified. For more
-	// information, see Provisioned Throughput
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html)
-	// in the Amazon DynamoDB Developer Guide.
-	ConsumedCapacity *types.ConsumedCapacity
 	// Information about item collections, if any, that were affected by the UpdateItem
 	// operation. ItemCollectionMetrics is only returned if the
 	// ReturnItemCollectionMetrics parameter was specified. If the table does not have
@@ -305,6 +297,14 @@ type UpdateItemOutput struct {
 	// subject to change over time; therefore, do not rely on the precision or accuracy
 	// of the estimate.
 	ItemCollectionMetrics *types.ItemCollectionMetrics
+	// The capacity units consumed by the UpdateItem operation. The data returned
+	// includes the total provisioned throughput consumed, along with statistics for
+	// the table and any indexes involved in the operation. ConsumedCapacity is only
+	// returned if the ReturnConsumedCapacity parameter was specified. For more
+	// information, see Provisioned Throughput
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html)
+	// in the Amazon DynamoDB Developer Guide.
+	ConsumedCapacity *types.ConsumedCapacity
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

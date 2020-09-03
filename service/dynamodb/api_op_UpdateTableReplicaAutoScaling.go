@@ -13,7 +13,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Updates auto scaling settings on your global tables at once. This method only
+// Updates auto scaling settings on your global tables at once. This operation only
 // applies to Version 2019.11.21
 // (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html)
 // of global tables.
@@ -57,17 +57,17 @@ func (c *Client) UpdateTableReplicaAutoScaling(ctx context.Context, params *Upda
 }
 
 type UpdateTableReplicaAutoScalingInput struct {
-	// Represents the auto scaling settings of the global secondary indexes of the
-	// replica to be updated.
-	GlobalSecondaryIndexUpdates []*types.GlobalSecondaryIndexAutoScalingUpdate
-	// Represents the auto scaling settings to be modified for a global table or global
-	// secondary index.
-	ProvisionedWriteCapacityAutoScalingUpdate *types.AutoScalingSettingsUpdate
 	// Represents the auto scaling settings of replicas of the table that will be
 	// modified.
 	ReplicaUpdates []*types.ReplicaAutoScalingUpdate
+	// Represents the auto scaling settings to be modified for a global table or global
+	// secondary index.
+	ProvisionedWriteCapacityAutoScalingUpdate *types.AutoScalingSettingsUpdate
 	// The name of the global table to be updated.
 	TableName *string
+	// Represents the auto scaling settings of the global secondary indexes of the
+	// replica to be updated.
+	GlobalSecondaryIndexUpdates []*types.GlobalSecondaryIndexAutoScalingUpdate
 }
 
 type UpdateTableReplicaAutoScalingOutput struct {

@@ -855,11 +855,11 @@ func validateAttributeDefinition(v *types.AttributeDefinition) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AttributeDefinition"}
-	if v.AttributeName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AttributeName"))
-	}
 	if len(v.AttributeType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("AttributeType"))
+	}
+	if v.AttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1011,6 +1011,9 @@ func validateCreateGlobalSecondaryIndexAction(v *types.CreateGlobalSecondaryInde
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateGlobalSecondaryIndexAction"}
+	if v.Projection == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Projection"))
+	}
 	if v.IndexName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IndexName"))
 	}
@@ -1020,9 +1023,6 @@ func validateCreateGlobalSecondaryIndexAction(v *types.CreateGlobalSecondaryInde
 		if err := validateKeySchema(v.KeySchema); err != nil {
 			invalidParams.AddNested("KeySchema", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Projection == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Projection"))
 	}
 	if v.ProvisionedThroughput != nil {
 		if err := validateProvisionedThroughput(v.ProvisionedThroughput); err != nil {
@@ -1056,13 +1056,13 @@ func validateCreateReplicationGroupMemberAction(v *types.CreateReplicationGroupM
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateReplicationGroupMemberAction"}
+	if v.RegionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionName"))
+	}
 	if v.GlobalSecondaryIndexes != nil {
 		if err := validateReplicaGlobalSecondaryIndexList(v.GlobalSecondaryIndexes); err != nil {
 			invalidParams.AddNested("GlobalSecondaryIndexes", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.RegionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RegionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1076,11 +1076,11 @@ func validateDelete(v *types.Delete) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Delete"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1189,6 +1189,14 @@ func validateGlobalSecondaryIndex(v *types.GlobalSecondaryIndex) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GlobalSecondaryIndex"}
+	if v.Projection == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Projection"))
+	}
+	if v.ProvisionedThroughput != nil {
+		if err := validateProvisionedThroughput(v.ProvisionedThroughput); err != nil {
+			invalidParams.AddNested("ProvisionedThroughput", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.IndexName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IndexName"))
 	}
@@ -1197,14 +1205,6 @@ func validateGlobalSecondaryIndex(v *types.GlobalSecondaryIndex) error {
 	} else if v.KeySchema != nil {
 		if err := validateKeySchema(v.KeySchema); err != nil {
 			invalidParams.AddNested("KeySchema", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Projection == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Projection"))
-	}
-	if v.ProvisionedThroughput != nil {
-		if err := validateProvisionedThroughput(v.ProvisionedThroughput); err != nil {
-			invalidParams.AddNested("ProvisionedThroughput", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1270,6 +1270,11 @@ func validateGlobalSecondaryIndexUpdate(v *types.GlobalSecondaryIndexUpdate) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GlobalSecondaryIndexUpdate"}
+	if v.Update != nil {
+		if err := validateUpdateGlobalSecondaryIndexAction(v.Update); err != nil {
+			invalidParams.AddNested("Update", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Create != nil {
 		if err := validateCreateGlobalSecondaryIndexAction(v.Create); err != nil {
 			invalidParams.AddNested("Create", err.(smithy.InvalidParamsError))
@@ -1278,11 +1283,6 @@ func validateGlobalSecondaryIndexUpdate(v *types.GlobalSecondaryIndexUpdate) err
 	if v.Delete != nil {
 		if err := validateDeleteGlobalSecondaryIndexAction(v.Delete); err != nil {
 			invalidParams.AddNested("Delete", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Update != nil {
-		if err := validateUpdateGlobalSecondaryIndexAction(v.Update); err != nil {
-			invalidParams.AddNested("Update", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1400,11 +1400,11 @@ func validateKeySchemaElement(v *types.KeySchemaElement) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "KeySchemaElement"}
-	if v.AttributeName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AttributeName"))
-	}
 	if len(v.KeyType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyType"))
+	}
+	if v.AttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1418,8 +1418,8 @@ func validateLocalSecondaryIndex(v *types.LocalSecondaryIndex) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LocalSecondaryIndex"}
-	if v.IndexName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IndexName"))
+	if v.Projection == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Projection"))
 	}
 	if v.KeySchema == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KeySchema"))
@@ -1428,8 +1428,8 @@ func validateLocalSecondaryIndex(v *types.LocalSecondaryIndex) error {
 			invalidParams.AddNested("KeySchema", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Projection == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Projection"))
+	if v.IndexName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1493,11 +1493,11 @@ func validatePut(v *types.Put) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Put"}
-	if v.Item == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Item"))
-	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.Item == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Item"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1526,9 +1526,6 @@ func validateReplicaAutoScalingUpdate(v *types.ReplicaAutoScalingUpdate) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReplicaAutoScalingUpdate"}
-	if v.RegionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RegionName"))
-	}
 	if v.ReplicaGlobalSecondaryIndexUpdates != nil {
 		if err := validateReplicaGlobalSecondaryIndexAutoScalingUpdateList(v.ReplicaGlobalSecondaryIndexUpdates); err != nil {
 			invalidParams.AddNested("ReplicaGlobalSecondaryIndexUpdates", err.(smithy.InvalidParamsError))
@@ -1538,6 +1535,9 @@ func validateReplicaAutoScalingUpdate(v *types.ReplicaAutoScalingUpdate) error {
 		if err := validateAutoScalingSettingsUpdate(v.ReplicaProvisionedReadCapacityAutoScalingUpdate); err != nil {
 			invalidParams.AddNested("ReplicaProvisionedReadCapacityAutoScalingUpdate", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.RegionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1634,13 +1634,13 @@ func validateReplicaGlobalSecondaryIndexSettingsUpdate(v *types.ReplicaGlobalSec
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReplicaGlobalSecondaryIndexSettingsUpdate"}
-	if v.IndexName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IndexName"))
-	}
 	if v.ProvisionedReadCapacityAutoScalingSettingsUpdate != nil {
 		if err := validateAutoScalingSettingsUpdate(v.ProvisionedReadCapacityAutoScalingSettingsUpdate); err != nil {
 			invalidParams.AddNested("ProvisionedReadCapacityAutoScalingSettingsUpdate", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.IndexName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1671,18 +1671,18 @@ func validateReplicaSettingsUpdate(v *types.ReplicaSettingsUpdate) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReplicaSettingsUpdate"}
-	if v.RegionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RegionName"))
+	if v.ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate != nil {
+		if err := validateAutoScalingSettingsUpdate(v.ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate); err != nil {
+			invalidParams.AddNested("ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.ReplicaGlobalSecondaryIndexSettingsUpdate != nil {
 		if err := validateReplicaGlobalSecondaryIndexSettingsUpdateList(v.ReplicaGlobalSecondaryIndexSettingsUpdate); err != nil {
 			invalidParams.AddNested("ReplicaGlobalSecondaryIndexSettingsUpdate", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate != nil {
-		if err := validateAutoScalingSettingsUpdate(v.ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate); err != nil {
-			invalidParams.AddNested("ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate", err.(smithy.InvalidParamsError))
-		}
+	if v.RegionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1713,14 +1713,14 @@ func validateReplicationGroupUpdate(v *types.ReplicationGroupUpdate) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ReplicationGroupUpdate"}
-	if v.Create != nil {
-		if err := validateCreateReplicationGroupMemberAction(v.Create); err != nil {
-			invalidParams.AddNested("Create", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Delete != nil {
 		if err := validateDeleteReplicationGroupMemberAction(v.Delete); err != nil {
 			invalidParams.AddNested("Delete", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Create != nil {
+		if err := validateCreateReplicationGroupMemberAction(v.Create); err != nil {
+			invalidParams.AddNested("Create", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Update != nil {
@@ -1846,11 +1846,11 @@ func validateTimeToLiveSpecification(v *types.TimeToLiveSpecification) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TimeToLiveSpecification"}
-	if v.AttributeName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AttributeName"))
-	}
 	if v.Enabled == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if v.AttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1900,24 +1900,24 @@ func validateTransactWriteItem(v *types.TransactWriteItem) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TransactWriteItem"}
-	if v.ConditionCheck != nil {
-		if err := validateConditionCheck(v.ConditionCheck); err != nil {
-			invalidParams.AddNested("ConditionCheck", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Delete != nil {
-		if err := validateDelete(v.Delete); err != nil {
-			invalidParams.AddNested("Delete", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Put != nil {
 		if err := validatePut(v.Put); err != nil {
 			invalidParams.AddNested("Put", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ConditionCheck != nil {
+		if err := validateConditionCheck(v.ConditionCheck); err != nil {
+			invalidParams.AddNested("ConditionCheck", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Update != nil {
 		if err := validateUpdate(v.Update); err != nil {
 			invalidParams.AddNested("Update", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Delete != nil {
+		if err := validateDelete(v.Delete); err != nil {
+			invalidParams.AddNested("Delete", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1949,14 +1949,14 @@ func validateUpdate(v *types.Update) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Update"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	if v.UpdateExpression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdateExpression"))
 	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
-	if v.UpdateExpression == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UpdateExpression"))
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1970,15 +1970,15 @@ func validateUpdateGlobalSecondaryIndexAction(v *types.UpdateGlobalSecondaryInde
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateGlobalSecondaryIndexAction"}
-	if v.IndexName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IndexName"))
-	}
 	if v.ProvisionedThroughput == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProvisionedThroughput"))
 	} else if v.ProvisionedThroughput != nil {
 		if err := validateProvisionedThroughput(v.ProvisionedThroughput); err != nil {
 			invalidParams.AddNested("ProvisionedThroughput", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.IndexName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1992,13 +1992,13 @@ func validateUpdateReplicationGroupMemberAction(v *types.UpdateReplicationGroupM
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateReplicationGroupMemberAction"}
+	if v.RegionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionName"))
+	}
 	if v.GlobalSecondaryIndexes != nil {
 		if err := validateReplicaGlobalSecondaryIndexList(v.GlobalSecondaryIndexes); err != nil {
 			invalidParams.AddNested("GlobalSecondaryIndexes", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.RegionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RegionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2089,11 +2089,11 @@ func validateOpCreateBackupInput(v *CreateBackupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateBackupInput"}
-	if v.BackupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BackupName"))
-	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.BackupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2125,6 +2125,18 @@ func validateOpCreateTableInput(v *CreateTableInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateTableInput"}
+	if v.StreamSpecification != nil {
+		if err := validateStreamSpecification(v.StreamSpecification); err != nil {
+			invalidParams.AddNested("StreamSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.KeySchema == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeySchema"))
+	} else if v.KeySchema != nil {
+		if err := validateKeySchema(v.KeySchema); err != nil {
+			invalidParams.AddNested("KeySchema", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.AttributeDefinitions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AttributeDefinitions"))
 	} else if v.AttributeDefinitions != nil {
@@ -2137,13 +2149,6 @@ func validateOpCreateTableInput(v *CreateTableInput) error {
 			invalidParams.AddNested("GlobalSecondaryIndexes", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.KeySchema == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KeySchema"))
-	} else if v.KeySchema != nil {
-		if err := validateKeySchema(v.KeySchema); err != nil {
-			invalidParams.AddNested("KeySchema", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.LocalSecondaryIndexes != nil {
 		if err := validateLocalSecondaryIndexList(v.LocalSecondaryIndexes); err != nil {
 			invalidParams.AddNested("LocalSecondaryIndexes", err.(smithy.InvalidParamsError))
@@ -2154,18 +2159,13 @@ func validateOpCreateTableInput(v *CreateTableInput) error {
 			invalidParams.AddNested("ProvisionedThroughput", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.StreamSpecification != nil {
-		if err := validateStreamSpecification(v.StreamSpecification); err != nil {
-			invalidParams.AddNested("StreamSpecification", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.TableName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
-	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2347,11 +2347,11 @@ func validateOpGetItemInput(v *GetItemInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetItemInput"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2380,11 +2380,11 @@ func validateOpPutItemInput(v *PutItemInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutItemInput"}
-	if v.Item == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Item"))
-	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.Item == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Item"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2423,13 +2423,16 @@ func validateOpRestoreTableFromBackupInput(v *RestoreTableFromBackupInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RestoreTableFromBackupInput"}
-	if v.BackupArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BackupArn"))
-	}
 	if v.GlobalSecondaryIndexOverride != nil {
 		if err := validateGlobalSecondaryIndexList(v.GlobalSecondaryIndexOverride); err != nil {
 			invalidParams.AddNested("GlobalSecondaryIndexOverride", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.TargetTableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetTableName"))
+	}
+	if v.BackupArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupArn"))
 	}
 	if v.LocalSecondaryIndexOverride != nil {
 		if err := validateLocalSecondaryIndexList(v.LocalSecondaryIndexOverride); err != nil {
@@ -2440,9 +2443,6 @@ func validateOpRestoreTableFromBackupInput(v *RestoreTableFromBackupInput) error
 		if err := validateProvisionedThroughput(v.ProvisionedThroughputOverride); err != nil {
 			invalidParams.AddNested("ProvisionedThroughputOverride", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.TargetTableName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetTableName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2456,11 +2456,6 @@ func validateOpRestoreTableToPointInTimeInput(v *RestoreTableToPointInTimeInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RestoreTableToPointInTimeInput"}
-	if v.GlobalSecondaryIndexOverride != nil {
-		if err := validateGlobalSecondaryIndexList(v.GlobalSecondaryIndexOverride); err != nil {
-			invalidParams.AddNested("GlobalSecondaryIndexOverride", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.LocalSecondaryIndexOverride != nil {
 		if err := validateLocalSecondaryIndexList(v.LocalSecondaryIndexOverride); err != nil {
 			invalidParams.AddNested("LocalSecondaryIndexOverride", err.(smithy.InvalidParamsError))
@@ -2471,11 +2466,13 @@ func validateOpRestoreTableToPointInTimeInput(v *RestoreTableToPointInTimeInput)
 			invalidParams.AddNested("ProvisionedThroughputOverride", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.SourceTableName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceTableName"))
-	}
 	if v.TargetTableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetTableName"))
+	}
+	if v.GlobalSecondaryIndexOverride != nil {
+		if err := validateGlobalSecondaryIndexList(v.GlobalSecondaryIndexOverride); err != nil {
+			invalidParams.AddNested("GlobalSecondaryIndexOverride", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2509,15 +2506,15 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2587,15 +2584,15 @@ func validateOpUpdateContinuousBackupsInput(v *UpdateContinuousBackupsInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateContinuousBackupsInput"}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
 	if v.PointInTimeRecoverySpecification == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PointInTimeRecoverySpecification"))
 	} else if v.PointInTimeRecoverySpecification != nil {
 		if err := validatePointInTimeRecoverySpecification(v.PointInTimeRecoverySpecification); err != nil {
 			invalidParams.AddNested("PointInTimeRecoverySpecification", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.TableName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2654,18 +2651,18 @@ func validateOpUpdateGlobalTableSettingsInput(v *UpdateGlobalTableSettingsInput)
 			invalidParams.AddNested("GlobalTableGlobalSecondaryIndexSettingsUpdate", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.GlobalTableName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GlobalTableName"))
+	if v.ReplicaSettingsUpdate != nil {
+		if err := validateReplicaSettingsUpdateList(v.ReplicaSettingsUpdate); err != nil {
+			invalidParams.AddNested("ReplicaSettingsUpdate", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate != nil {
 		if err := validateAutoScalingSettingsUpdate(v.GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate); err != nil {
 			invalidParams.AddNested("GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ReplicaSettingsUpdate != nil {
-		if err := validateReplicaSettingsUpdateList(v.ReplicaSettingsUpdate); err != nil {
-			invalidParams.AddNested("ReplicaSettingsUpdate", err.(smithy.InvalidParamsError))
-		}
+	if v.GlobalTableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalTableName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2697,6 +2694,9 @@ func validateOpUpdateTableInput(v *UpdateTableInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateTableInput"}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
 	if v.AttributeDefinitions != nil {
 		if err := validateAttributeDefinitions(v.AttributeDefinitions); err != nil {
 			invalidParams.AddNested("AttributeDefinitions", err.(smithy.InvalidParamsError))
@@ -2722,9 +2722,6 @@ func validateOpUpdateTableInput(v *UpdateTableInput) error {
 			invalidParams.AddNested("StreamSpecification", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.TableName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2737,9 +2734,9 @@ func validateOpUpdateTableReplicaAutoScalingInput(v *UpdateTableReplicaAutoScali
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateTableReplicaAutoScalingInput"}
-	if v.GlobalSecondaryIndexUpdates != nil {
-		if err := validateGlobalSecondaryIndexAutoScalingUpdateList(v.GlobalSecondaryIndexUpdates); err != nil {
-			invalidParams.AddNested("GlobalSecondaryIndexUpdates", err.(smithy.InvalidParamsError))
+	if v.ReplicaUpdates != nil {
+		if err := validateReplicaAutoScalingUpdateList(v.ReplicaUpdates); err != nil {
+			invalidParams.AddNested("ReplicaUpdates", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ProvisionedWriteCapacityAutoScalingUpdate != nil {
@@ -2747,13 +2744,13 @@ func validateOpUpdateTableReplicaAutoScalingInput(v *UpdateTableReplicaAutoScali
 			invalidParams.AddNested("ProvisionedWriteCapacityAutoScalingUpdate", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ReplicaUpdates != nil {
-		if err := validateReplicaAutoScalingUpdateList(v.ReplicaUpdates); err != nil {
-			invalidParams.AddNested("ReplicaUpdates", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.TableName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.GlobalSecondaryIndexUpdates != nil {
+		if err := validateGlobalSecondaryIndexAutoScalingUpdateList(v.GlobalSecondaryIndexUpdates); err != nil {
+			invalidParams.AddNested("GlobalSecondaryIndexUpdates", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2767,15 +2764,15 @@ func validateOpUpdateTimeToLiveInput(v *UpdateTimeToLiveInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateTimeToLiveInput"}
-	if v.TableName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
-	}
 	if v.TimeToLiveSpecification == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TimeToLiveSpecification"))
 	} else if v.TimeToLiveSpecification != nil {
 		if err := validateTimeToLiveSpecification(v.TimeToLiveSpecification); err != nil {
 			invalidParams.AddNested("TimeToLiveSpecification", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

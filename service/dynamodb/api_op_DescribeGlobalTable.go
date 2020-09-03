@@ -13,10 +13,14 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Returns information about the specified global table. This method only applies
-// to Version 2017.11.29
+// Returns information about the specified global table. This operation only
+// applies to Version 2017.11.29
 // (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html)
-// of global tables.
+// of global tables. If you are using global tables Version 2019.11.21
+// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html)
+// you can use DescribeTable
+// (https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeTable.html)
+// instead.
 func (c *Client) DescribeGlobalTable(ctx context.Context, params *DescribeGlobalTableInput, optFns ...func(*Options)) (*DescribeGlobalTableOutput, error) {
 	stack := middleware.NewStack("DescribeGlobalTable", smithyhttp.NewStackRequest)
 	options := c.options.Copy()

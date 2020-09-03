@@ -73,13 +73,13 @@ func (c *Client) TransactGetItems(ctx context.Context, params *TransactGetItemsI
 }
 
 type TransactGetItemsInput struct {
+	// An ordered array of up to 25 TransactGetItem objects, each of which contains a
+	// Get structure.
+	TransactItems []*types.TransactGetItem
 	// A value of TOTAL causes consumed capacity information to be returned, and a
 	// value of NONE prevents that information from being returned. No other value is
 	// valid.
 	ReturnConsumedCapacity types.ReturnConsumedCapacity
-	// An ordered array of up to 25 TransactGetItem objects, each of which contains a
-	// Get structure.
-	TransactItems []*types.TransactGetItem
 }
 
 type TransactGetItemsOutput struct {
