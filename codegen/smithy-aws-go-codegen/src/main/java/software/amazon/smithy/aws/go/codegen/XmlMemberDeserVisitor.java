@@ -112,14 +112,20 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
         });
     }
 
-    // handles zero value assignment in case a empty xml tag is sent for the response member
+    // handles zero value assignment in case a empty or self closed xml tag is sent for the response member
     private void handleDone(Shape shape) {
         GoWriter writer = context.getWriter();
 
-        // Only string shapes can have an empty xml tag in response. If an empty xml tag is
-        // found for a string shape, we deserialize and the member value to a empty string.
+        // Member shapes string, blob, collection and map can have an empty xml or self closed tag in response.
+        // The string, blob shape with empty xml or self closed tag in response are deserialized as empty string.
+        // Collection, map shape are deserialized as empty list, map respectively.
+        //
+        // empty values are handled for blobs, collection, map in their respective member deser func.
+        //
+        // Handle string shape zero value assignment
         if (shape.isStringShape() && !shape.hasTrait(EnumTrait.ID)) {
             writer.addUseImports(SmithyGoDependency.SMITHY_PTR);
+            // assign empty string as zero value if val for string member is nil.
             writer.write("if val == nil { $L = ptr.String(\"\")}", dataDest);
         }
     }
