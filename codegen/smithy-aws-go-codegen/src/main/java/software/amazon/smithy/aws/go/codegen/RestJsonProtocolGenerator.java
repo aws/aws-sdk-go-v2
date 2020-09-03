@@ -105,6 +105,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 operand, () -> {
             writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
         });
+
+        writer.addUseImports(SmithyGoDependency.BYTES);
         writer.write("payload := bytes.NewReader(jsonEncoder.Bytes())");
     }
 
