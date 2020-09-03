@@ -7,67 +7,45 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	smithyClient "github.com/aws/aws-sdk-go-v2/service/lexruntimeservice"
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice/types"
 	v1Aws "github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/corehandlers"
+	"github.com/aws/aws-sdk-go/aws/credentials"
 	v1Request "github.com/aws/aws-sdk-go/aws/request"
-	v1Session "github.com/aws/aws-sdk-go/aws/session"
 	v1Unit "github.com/aws/aws-sdk-go/awstesting/unit"
 	v1Client "github.com/aws/aws-sdk-go/service/lexruntimeservice"
-	"github.com/awslabs/smithy-go/middleware"
 	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-func addPutSessionAPIResponseMiddleware(options *smithyClient.Options) {
-	options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
-		stack.Deserialize.Add(middleware.DeserializeMiddlewareFunc("StubResponse", func(ctx context.Context, input middleware.DeserializeInput, next middleware.DeserializeHandler,
-		) (out middleware.DeserializeOutput, metadata middleware.Metadata, err error) {
-			out.RawResponse = &smithyhttp.Response{Response: newPutSessionHTTPResponse()}
-			return out, metadata, err
-		}), middleware.After)
-		return nil
+func BenchmarkPutSession(b *testing.B) {
+	b.Run("old", func(b *testing.B) {
+		benchPutSessionOld(b)
+	})
+
+	b.Run("smithy", func(b *testing.B) {
+		benchPutSessionSmithy(b)
 	})
 }
 
-func addPutSessionAPIResponseHandler(sess *v1Session.Session) {
-	sess.Handlers.Send.Swap("core.SendHandler", v1Request.NamedHandler{
-		Name: "StubHandler",
+func benchPutSessionOld(b *testing.B) {
+	sess := v1Unit.Session.Copy(&v1Aws.Config{
+		Credentials: credentials.NewStaticCredentials("AKID", "SECRET", ""),
+		Region:      ptr.String("us-west-2"),
+	})
+	sess.Handlers.Send.SwapNamed(v1Request.NamedHandler{
+		Name: corehandlers.SendHandler.Name,
 		Fn: func(r *v1Request.Request) {
 			r.HTTPResponse = newPutSessionHTTPResponse()
 		},
 	})
-}
 
-var putSessionBody = []byte("fooAudioStream")
+	client := v1Client.New(sess)
 
-func newPutSessionHTTPResponse() *http.Response {
-	return &http.Response{
-		StatusCode:    200,
-		ContentLength: int64(len(putSessionBody)),
-		Header: map[string][]string{
-			"Content-Type":                 {"application/octet-stream"},
-			"x-amz-lex-dialog-state":       {"Fulfilled"},
-			"x-amz-lex-intent-name":        {"fooIntent"},
-			"x-amz-lex-message":            {"fooMessage"},
-			"x-amz-lex-message-format":     {"PlainText"},
-			"x-amz-lex-session-attributes": {"eyJmb29LZXkiOiAiZm9vVmFsdWUifQ=="},
-			"x-amz-lex-session-id":         {"fooSession"},
-			"x-amz-lex-slot-to-elicit":     {"fooSlot"},
-			"x-amz-lex-slots":              {"eyJmb29LZXkiOiAiZm9vVmFsdWUifQ=="},
-		},
-		Body: ioutil.NopCloser(bytes.NewReader(putSessionBody)),
-	}
-}
-
-func BenchmarkPutSession_Old(b *testing.B) {
-	cfg := v1Unit.Session.Copy(&v1Aws.Config{Region: ptr.String("us-west-2")})
-	addPutSessionAPIResponseHandler(cfg)
-	//cfg.Handlers.Sign.Clear()
-	client := v1Client.New(cfg)
-
-	in := &v1Client.PutSessionInput{
+	ctx := context.Background()
+	params := v1Client.PutSessionInput{
 		Accept:   ptr.String("text/plain"),
 		BotAlias: ptr.String("fooAlias"),
 		BotName:  ptr.String("fooName"),
@@ -106,8 +84,7 @@ func BenchmarkPutSession_Old(b *testing.B) {
 	b.ResetTimer()
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
-			request, _ := client.PutSessionRequest(in)
-			err := request.Send()
+			_, err := client.PutSessionWithContext(ctx, &params)
 			if err != nil {
 				b.Errorf("failed to send request: %v", err)
 			}
@@ -115,13 +92,23 @@ func BenchmarkPutSession_Old(b *testing.B) {
 	})
 }
 
-func BenchmarkPutSession_Smithy(b *testing.B) {
-	cfg := unit.Config()
-	cfg.Region = "us-west-2"
-	client := smithyClient.NewFromConfig(cfg, addPutSessionAPIResponseMiddleware)
+func benchPutSessionSmithy(b *testing.B) {
+	var args []func(*smithyClient.Options)
+	if disableSmithySigning {
+		args = append(args, removeSmithySigner)
+	}
+
+	client := smithyClient.New(smithyClient.Options{
+		Region:      "us-west-2",
+		Credentials: aws.NewStaticCredentialsProvider("AKID", "SECRET", ""),
+		HTTPClient: smithyhttp.ClientDoFunc(
+			func(r *http.Request) (*http.Response, error) {
+				return newPutSessionHTTPResponse(), nil
+			}),
+	}, args...)
 
 	ctx := context.Background()
-	in := &smithyClient.PutSessionInput{
+	params := smithyClient.PutSessionInput{
 		Accept:   ptr.String("text/plain"),
 		BotAlias: ptr.String("fooAlias"),
 		BotName:  ptr.String("fooName"),
@@ -160,10 +147,31 @@ func BenchmarkPutSession_Smithy(b *testing.B) {
 	b.ResetTimer()
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
-			_, err := client.PutSession(ctx, in)
+			_, err := client.PutSession(ctx, &params)
 			if err != nil {
 				b.Errorf("failed to send request: %v", err)
 			}
 		}
 	})
+}
+
+var putSessionBody = []byte("fooAudioStream")
+
+func newPutSessionHTTPResponse() *http.Response {
+	return &http.Response{
+		StatusCode:    200,
+		ContentLength: int64(len(putSessionBody)),
+		Header: map[string][]string{
+			"Content-Type":                 {"application/octet-stream"},
+			"x-amz-lex-dialog-state":       {"Fulfilled"},
+			"x-amz-lex-intent-name":        {"fooIntent"},
+			"x-amz-lex-message":            {"fooMessage"},
+			"x-amz-lex-message-format":     {"PlainText"},
+			"x-amz-lex-session-attributes": {"eyJmb29LZXkiOiAiZm9vVmFsdWUifQ=="},
+			"x-amz-lex-session-id":         {"fooSession"},
+			"x-amz-lex-slot-to-elicit":     {"fooSlot"},
+			"x-amz-lex-slots":              {"eyJmb29LZXkiOiAiZm9vVmFsdWUifQ=="},
+		},
+		Body: ioutil.NopCloser(bytes.NewReader(putSessionBody)),
+	}
 }
