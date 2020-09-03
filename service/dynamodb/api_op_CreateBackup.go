@@ -77,10 +77,10 @@ func (c *Client) CreateBackup(ctx context.Context, params *CreateBackupInput, op
 }
 
 type CreateBackupInput struct {
-	// Specified name for the backup.
-	BackupName *string
 	// The name of the table.
 	TableName *string
+	// Specified name for the backup.
+	BackupName *string
 }
 
 type CreateBackupOutput struct {

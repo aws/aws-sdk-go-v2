@@ -56,19 +56,19 @@ func (c *Client) UpdateContributorInsights(ctx context.Context, params *UpdateCo
 type UpdateContributorInsightsInput struct {
 	// Represents the contributor insights action.
 	ContributorInsightsAction types.ContributorInsightsAction
-	// The global secondary index name, if applicable.
-	IndexName *string
 	// The name of the table.
 	TableName *string
+	// The global secondary index name, if applicable.
+	IndexName *string
 }
 
 type UpdateContributorInsightsOutput struct {
 	// The status of contributor insights
 	ContributorInsightsStatus types.ContributorInsightsStatus
-	// The name of the global secondary index, if applicable.
-	IndexName *string
 	// The name of the table.
 	TableName *string
+	// The name of the global secondary index, if applicable.
+	IndexName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -54,19 +54,19 @@ func (c *Client) ListContributorInsights(ctx context.Context, params *ListContri
 }
 
 type ListContributorInsightsInput struct {
+	// The name of the table.
+	TableName *string
 	// Maximum number of results to return per page.
 	MaxResults *int32
 	// A token to for the desired page, if there is one.
 	NextToken *string
-	// The name of the table.
-	TableName *string
 }
 
 type ListContributorInsightsOutput struct {
-	// A list of ContributorInsightsSummary.
-	ContributorInsightsSummaries []*types.ContributorInsightsSummary
 	// A token to go to the next page if there is one.
 	NextToken *string
+	// A list of ContributorInsightsSummary.
+	ContributorInsightsSummaries []*types.ContributorInsightsSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

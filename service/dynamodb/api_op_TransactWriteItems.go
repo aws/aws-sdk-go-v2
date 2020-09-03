@@ -95,6 +95,11 @@ func (c *Client) TransactWriteItems(ctx context.Context, params *TransactWriteIt
 }
 
 type TransactWriteItemsInput struct {
+	// An ordered array of up to 25 TransactWriteItem objects, each of which contains a
+	// ConditionCheck, Put, Update, or Delete object. These can operate on items in
+	// different tables, but the tables must reside in the same AWS account and Region,
+	// and no two of them can operate on the same item.
+	TransactItems []*types.TransactWriteItem
 	// Providing a ClientRequestToken makes the call to TransactWriteItems idempotent,
 	// meaning that multiple identical calls have the same effect as one single call.
 	// Although multiple identical calls using the same client request token produce
@@ -132,11 +137,6 @@ type TransactWriteItemsInput struct {
 	// during the operation and are returned in the response. If set to NONE (the
 	// default), no statistics are returned.
 	ReturnItemCollectionMetrics types.ReturnItemCollectionMetrics
-	// An ordered array of up to 25 TransactWriteItem objects, each of which contains a
-	// ConditionCheck, Put, Update, or Delete object. These can operate on items in
-	// different tables, but the tables must reside in the same AWS account and Region,
-	// and no two of them can operate on the same item.
-	TransactItems []*types.TransactWriteItem
 }
 
 type TransactWriteItemsOutput struct {

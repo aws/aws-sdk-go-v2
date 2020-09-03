@@ -60,11 +60,11 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 }
 
 type TagResourceInput struct {
+	// The tags to be assigned to the Amazon DynamoDB resource.
+	Tags []*types.Tag
 	// Identifies the Amazon DynamoDB resource to which tags should be added. This
 	// value is an Amazon Resource Name (ARN).
 	ResourceArn *string
-	// The tags to be assigned to the Amazon DynamoDB resource.
-	Tags []*types.Tag
 }
 
 type TagResourceOutput struct {

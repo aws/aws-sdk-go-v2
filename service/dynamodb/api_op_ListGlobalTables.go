@@ -13,8 +13,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// Lists all global tables that have a replica in the specified Region. This method
-// only applies to Version 2017.11.29
+// Lists all global tables that have a replica in the specified Region. This
+// operation only applies to Version 2017.11.29
 // (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html)
 // of global tables.
 func (c *Client) ListGlobalTables(ctx context.Context, params *ListGlobalTablesInput, optFns ...func(*Options)) (*ListGlobalTablesOutput, error) {
@@ -58,7 +58,11 @@ func (c *Client) ListGlobalTables(ctx context.Context, params *ListGlobalTablesI
 type ListGlobalTablesInput struct {
 	// The first global table name that this operation will evaluate.
 	ExclusiveStartGlobalTableName *string
-	// The maximum number of table names to return.
+	// The maximum number of table names to return, if the parameter is not specified
+	// DynamoDB defaults to 100. If the number of global tables DynamoDB finds reaches
+	// this limit, it stops the operation and returns the table names collected up to
+	// that point, with a table name in the LastEvaluatedGlobalTableName to apply in a
+	// subsequent operation to the ExclusiveStartGlobalTableName parameter.
 	Limit *int32
 	// Lists the global tables in a specific Region.
 	RegionName *string

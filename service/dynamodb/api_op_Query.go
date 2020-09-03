@@ -91,27 +91,49 @@ func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*
 
 // Represents the input of a Query operation.
 type QueryInput struct {
-	// This is a legacy parameter. Use ProjectionExpression instead. For more
-	// information, see AttributesToGet
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html)
+	// This is a legacy parameter. Use KeyConditionExpression instead. For more
+	// information, see KeyConditions
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.KeyConditions.html)
 	// in the Amazon DynamoDB Developer Guide.
-	AttributesToGet []*string
+	KeyConditions map[string]*types.Condition
+	// Specifies the order for index traversal: If true (default), the traversal is
+	// performed in ascending order; if false, the traversal is performed in descending
+	// order. Items with the same partition key value are stored in sorted order by
+	// sort key. If the sort key data type is Number, the results are stored in numeric
+	// order. For type String, the results are stored in order of UTF-8 bytes. For type
+	// Binary, DynamoDB treats each byte of the binary data as unsigned. If
+	// ScanIndexForward is true, DynamoDB returns the results in the order in which
+	// they are stored (by sort key value). This is the default behavior. If
+	// ScanIndexForward is false, DynamoDB reads the results in reverse order by sort
+	// key value, and then returns the results to the client.
+	ScanIndexForward *bool
 	// This is a legacy parameter. Use FilterExpression instead. For more information,
-	// see ConditionalOperator
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html)
+	// see QueryFilter
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.QueryFilter.html)
 	// in the Amazon DynamoDB Developer Guide.
-	ConditionalOperator types.ConditionalOperator
-	// Determines the read consistency model: If set to true, then the operation uses
-	// strongly consistent reads; otherwise, the operation uses eventually consistent
-	// reads. Strongly consistent reads are not supported on global secondary indexes.
-	// If you query a global secondary index with ConsistentRead set to true, you will
-	// receive a ValidationException.
-	ConsistentRead *bool
-	// The primary key of the first item that this operation will evaluate. Use the
-	// value that was returned for LastEvaluatedKey in the previous operation. The data
-	// type for ExclusiveStartKey must be String, Number, or Binary. No set data types
-	// are allowed.
-	ExclusiveStartKey map[string]*types.AttributeValue
+	QueryFilter map[string]*types.Condition
+	// The name of the table containing the requested items.
+	TableName *string
+	// The name of an index to query. This index can be any local secondary index or
+	// global secondary index on the table. Note that if you use the IndexName
+	// parameter, you must also provide TableName.
+	IndexName *string
+	// Determines the level of detail about provisioned throughput consumption that is
+	// returned in the response:
+	//
+	//     * INDEXES - The response includes the aggregate
+	// ConsumedCapacity for the operation, together with ConsumedCapacity for each
+	// table and secondary index that was accessed. Note that some operations, such as
+	// GetItem and BatchGetItem, do not access any indexes at all. In these cases,
+	// specifying INDEXES will only return ConsumedCapacity information for table(s).
+	//
+	//
+	// * TOTAL - The response includes only the aggregate ConsumedCapacity for the
+	// operation.
+	//
+	//     * NONE - No ConsumedCapacity details are included in the
+	// response.
+	ReturnConsumedCapacity types.ReturnConsumedCapacity
 	// One or more substitution tokens for attribute names in an expression. The
 	// following are some use cases for using ExpressionAttributeNames:
 	//
@@ -152,6 +174,11 @@ type QueryInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ExpressionAttributeNames map[string]*string
+	// This is a legacy parameter. Use ProjectionExpression instead. For more
+	// information, see AttributesToGet
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html)
+	// in the Amazon DynamoDB Developer Guide.
+	AttributesToGet []*string
 	// One or more values that can be substituted in an expression. Use the : (colon)
 	// character in an expression to dereference an attribute value. For example,
 	// suppose that you wanted to check whether the value of the ProductStatus
@@ -164,6 +191,79 @@ type QueryInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ExpressionAttributeValues map[string]*types.AttributeValue
+	// A string that identifies one or more attributes to retrieve from the table.
+	// These attributes can include scalars, sets, or elements of a JSON document. The
+	// attributes in the expression must be separated by commas. If no attribute names
+	// are specified, then all attributes will be returned. If any of the requested
+	// attributes are not found, they will not appear in the result. For more
+	// information, see Accessing Item Attributes
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
+	// in the Amazon DynamoDB Developer Guide.
+	ProjectionExpression *string
+	// Determines the read consistency model: If set to true, then the operation uses
+	// strongly consistent reads; otherwise, the operation uses eventually consistent
+	// reads. Strongly consistent reads are not supported on global secondary indexes.
+	// If you query a global secondary index with ConsistentRead set to true, you will
+	// receive a ValidationException.
+	ConsistentRead *bool
+	// This is a legacy parameter. Use FilterExpression instead. For more information,
+	// see ConditionalOperator
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html)
+	// in the Amazon DynamoDB Developer Guide.
+	ConditionalOperator types.ConditionalOperator
+	// The attributes to be returned in the result. You can retrieve all item
+	// attributes, specific item attributes, the count of matching items, or in the
+	// case of an index, some or all of the attributes projected into the index.
+	//
+	//     *
+	// ALL_ATTRIBUTES - Returns all of the item attributes from the specified table or
+	// index. If you query a local secondary index, then for each matching item in the
+	// index, DynamoDB fetches the entire item from the parent table. If the index is
+	// configured to project all item attributes, then all of the data can be obtained
+	// from the local secondary index, and no fetching is required.
+	//
+	//     *
+	// ALL_PROJECTED_ATTRIBUTES - Allowed only when querying an index. Retrieves all
+	// attributes that have been projected into the index. If the index is configured
+	// to project all attributes, this return value is equivalent to specifying
+	// ALL_ATTRIBUTES.
+	//
+	//     * COUNT - Returns the number of matching items, rather than
+	// the matching items themselves.
+	//
+	//     * SPECIFIC_ATTRIBUTES - Returns only the
+	// attributes listed in AttributesToGet. This return value is equivalent to
+	// specifying AttributesToGet without specifying any value for Select. If you query
+	// or scan a local secondary index and request only attributes that are projected
+	// into that index, the operation will read only the index and not the table. If
+	// any of the requested attributes are not projected into the local secondary
+	// index, DynamoDB fetches each of these attributes from the parent table. This
+	// extra fetching incurs additional throughput cost and latency. If you query or
+	// scan a global secondary index, you can only request attributes that are
+	// projected into the index. Global secondary index queries cannot fetch attributes
+	// from the parent table.
+	//
+	// If neither Select nor AttributesToGet are specified,
+	// DynamoDB defaults to ALL_ATTRIBUTES when accessing a table, and
+	// ALL_PROJECTED_ATTRIBUTES when accessing an index. You cannot use both Select and
+	// AttributesToGet together in a single request, unless the value for Select is
+	// SPECIFIC_ATTRIBUTES. (This usage is equivalent to specifying AttributesToGet
+	// without any value for Select.) If you use the ProjectionExpression parameter,
+	// then the value for Select can only be SPECIFIC_ATTRIBUTES. Any other value for
+	// Select will return an error.
+	Select types.Select
+	// The maximum number of items to evaluate (not necessarily the number of matching
+	// items). If DynamoDB processes the number of items up to the limit while
+	// processing the results, it stops the operation and returns the matching values
+	// up to that point, and a key in LastEvaluatedKey to apply in a subsequent
+	// operation, so that you can pick up where you left off. Also, if the processed
+	// dataset size exceeds 1 MB before DynamoDB reaches this limit, it stops the
+	// operation and returns the matching values up to the limit, and a key in
+	// LastEvaluatedKey to apply in a subsequent operation to continue the operation.
+	// For more information, see Query and Scan
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html)
+	// in the Amazon DynamoDB Developer Guide.
+	Limit *int32
 	// A string that contains conditions that DynamoDB applies after the Query
 	// operation, but before the data is returned to you. Items that do not satisfy the
 	// FilterExpression criteria are not returned. A FilterExpression does not allow
@@ -174,10 +274,11 @@ type QueryInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#FilteringResults)
 	// in the Amazon DynamoDB Developer Guide.
 	FilterExpression *string
-	// The name of an index to query. This index can be any local secondary index or
-	// global secondary index on the table. Note that if you use the IndexName
-	// parameter, you must also provide TableName.
-	IndexName *string
+	// The primary key of the first item that this operation will evaluate. Use the
+	// value that was returned for LastEvaluatedKey in the previous operation. The data
+	// type for ExclusiveStartKey must be String, Number, or Binary. No set data types
+	// are allowed.
+	ExclusiveStartKey map[string]*types.AttributeValue
 	// The condition that specifies the key values for items to be retrieved by the
 	// Query action.  <p>The condition must perform an equality test on a single
 	// partition key value.</p> <p>The condition can optionally perform one of several
@@ -232,119 +333,17 @@ type QueryInput struct {
 	// Placeholders for Attribute Names and Values</a> in the <i>Amazon DynamoDB
 	// Developer Guide</i>.</p>
 	KeyConditionExpression *string
-	// This is a legacy parameter. Use KeyConditionExpression instead. For more
-	// information, see KeyConditions
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.KeyConditions.html)
-	// in the Amazon DynamoDB Developer Guide.
-	KeyConditions map[string]*types.Condition
-	// The maximum number of items to evaluate (not necessarily the number of matching
-	// items). If DynamoDB processes the number of items up to the limit while
-	// processing the results, it stops the operation and returns the matching values
-	// up to that point, and a key in LastEvaluatedKey to apply in a subsequent
-	// operation, so that you can pick up where you left off. Also, if the processed
-	// dataset size exceeds 1 MB before DynamoDB reaches this limit, it stops the
-	// operation and returns the matching values up to the limit, and a key in
-	// LastEvaluatedKey to apply in a subsequent operation to continue the operation.
-	// For more information, see Query and Scan
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html)
-	// in the Amazon DynamoDB Developer Guide.
-	Limit *int32
-	// A string that identifies one or more attributes to retrieve from the table.
-	// These attributes can include scalars, sets, or elements of a JSON document. The
-	// attributes in the expression must be separated by commas. If no attribute names
-	// are specified, then all attributes will be returned. If any of the requested
-	// attributes are not found, they will not appear in the result. For more
-	// information, see Accessing Item Attributes
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
-	// in the Amazon DynamoDB Developer Guide.
-	ProjectionExpression *string
-	// This is a legacy parameter. Use FilterExpression instead. For more information,
-	// see QueryFilter
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.QueryFilter.html)
-	// in the Amazon DynamoDB Developer Guide.
-	QueryFilter map[string]*types.Condition
-	// Determines the level of detail about provisioned throughput consumption that is
-	// returned in the response:
-	//
-	//     * INDEXES - The response includes the aggregate
-	// ConsumedCapacity for the operation, together with ConsumedCapacity for each
-	// table and secondary index that was accessed. Note that some operations, such as
-	// GetItem and BatchGetItem, do not access any indexes at all. In these cases,
-	// specifying INDEXES will only return ConsumedCapacity information for table(s).
-	//
-	//
-	// * TOTAL - The response includes only the aggregate ConsumedCapacity for the
-	// operation.
-	//
-	//     * NONE - No ConsumedCapacity details are included in the
-	// response.
-	ReturnConsumedCapacity types.ReturnConsumedCapacity
-	// Specifies the order for index traversal: If true (default), the traversal is
-	// performed in ascending order; if false, the traversal is performed in descending
-	// order. Items with the same partition key value are stored in sorted order by
-	// sort key. If the sort key data type is Number, the results are stored in numeric
-	// order. For type String, the results are stored in order of UTF-8 bytes. For type
-	// Binary, DynamoDB treats each byte of the binary data as unsigned. If
-	// ScanIndexForward is true, DynamoDB returns the results in the order in which
-	// they are stored (by sort key value). This is the default behavior. If
-	// ScanIndexForward is false, DynamoDB reads the results in reverse order by sort
-	// key value, and then returns the results to the client.
-	ScanIndexForward *bool
-	// The attributes to be returned in the result. You can retrieve all item
-	// attributes, specific item attributes, the count of matching items, or in the
-	// case of an index, some or all of the attributes projected into the index.
-	//
-	//     *
-	// ALL_ATTRIBUTES - Returns all of the item attributes from the specified table or
-	// index. If you query a local secondary index, then for each matching item in the
-	// index, DynamoDB fetches the entire item from the parent table. If the index is
-	// configured to project all item attributes, then all of the data can be obtained
-	// from the local secondary index, and no fetching is required.
-	//
-	//     *
-	// ALL_PROJECTED_ATTRIBUTES - Allowed only when querying an index. Retrieves all
-	// attributes that have been projected into the index. If the index is configured
-	// to project all attributes, this return value is equivalent to specifying
-	// ALL_ATTRIBUTES.
-	//
-	//     * COUNT - Returns the number of matching items, rather than
-	// the matching items themselves.
-	//
-	//     * SPECIFIC_ATTRIBUTES - Returns only the
-	// attributes listed in AttributesToGet. This return value is equivalent to
-	// specifying AttributesToGet without specifying any value for Select. If you query
-	// or scan a local secondary index and request only attributes that are projected
-	// into that index, the operation will read only the index and not the table. If
-	// any of the requested attributes are not projected into the local secondary
-	// index, DynamoDB fetches each of these attributes from the parent table. This
-	// extra fetching incurs additional throughput cost and latency. If you query or
-	// scan a global secondary index, you can only request attributes that are
-	// projected into the index. Global secondary index queries cannot fetch attributes
-	// from the parent table.
-	//
-	// If neither Select nor AttributesToGet are specified,
-	// DynamoDB defaults to ALL_ATTRIBUTES when accessing a table, and
-	// ALL_PROJECTED_ATTRIBUTES when accessing an index. You cannot use both Select and
-	// AttributesToGet together in a single request, unless the value for Select is
-	// SPECIFIC_ATTRIBUTES. (This usage is equivalent to specifying AttributesToGet
-	// without any value for Select.) If you use the ProjectionExpression parameter,
-	// then the value for Select can only be SPECIFIC_ATTRIBUTES. Any other value for
-	// Select will return an error.
-	Select types.Select
-	// The name of the table containing the requested items.
-	TableName *string
 }
 
 // Represents the output of a Query operation.
 type QueryOutput struct {
-	// The capacity units consumed by the Query operation. The data returned includes
-	// the total provisioned throughput consumed, along with statistics for the table
-	// and any indexes involved in the operation. ConsumedCapacity is only returned if
-	// the ReturnConsumedCapacity parameter was specified. For more information, see
-	// Provisioned Throughput
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html)
-	// in the Amazon DynamoDB Developer Guide.
-	ConsumedCapacity *types.ConsumedCapacity
+	// The number of items evaluated, before any QueryFilter is applied. A high
+	// ScannedCount value with few, or no, Count results indicates an inefficient Query
+	// operation. For more information, see Count and ScannedCount
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Count)
+	// in the Amazon DynamoDB Developer Guide. If you did not use a filter in the
+	// request, then ScannedCount is the same as Count.
+	ScannedCount *int32
 	// The number of items in the response. If you used a QueryFilter in the request,
 	// then Count is the number of items returned after the filter was applied, and
 	// ScannedCount is the number of matching items before the filter was applied. If
@@ -354,6 +353,14 @@ type QueryOutput struct {
 	// An array of item attributes that match the query criteria. Each element in this
 	// array consists of an attribute name and the value for that attribute.
 	Items []map[string]*types.AttributeValue
+	// The capacity units consumed by the Query operation. The data returned includes
+	// the total provisioned throughput consumed, along with statistics for the table
+	// and any indexes involved in the operation. ConsumedCapacity is only returned if
+	// the ReturnConsumedCapacity parameter was specified. For more information, see
+	// Provisioned Throughput
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html)
+	// in the Amazon DynamoDB Developer Guide.
+	ConsumedCapacity *types.ConsumedCapacity
 	// The primary key of the item where the operation stopped, inclusive of the
 	// previous result set. Use this value to start a new operation, excluding this
 	// value in the new request. If LastEvaluatedKey is empty, then the "last page" of
@@ -362,13 +369,6 @@ type QueryOutput struct {
 	// data in the result set. The only way to know when you have reached the end of
 	// the result set is when LastEvaluatedKey is empty.
 	LastEvaluatedKey map[string]*types.AttributeValue
-	// The number of items evaluated, before any QueryFilter is applied. A high
-	// ScannedCount value with few, or no, Count results indicates an inefficient Query
-	// operation. For more information, see Count and ScannedCount
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/QueryAndScan.html#Count)
-	// in the Amazon DynamoDB Developer Guide. If you did not use a filter in the
-	// request, then ScannedCount is the same as Count.
-	ScannedCount *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -54,6 +54,14 @@ func (c *Client) UpdateGlobalTableSettings(ctx context.Context, params *UpdateGl
 }
 
 type UpdateGlobalTableSettingsInput struct {
+	// Represents the settings of a global secondary index for a global table that will
+	// be modified.
+	GlobalTableGlobalSecondaryIndexSettingsUpdate []*types.GlobalTableGlobalSecondaryIndexSettingsUpdate
+	// Represents the settings for a global table in a Region that will be modified.
+	ReplicaSettingsUpdate []*types.ReplicaSettingsUpdate
+	// Auto scaling settings for managing provisioned write capacity for the global
+	// table.
+	GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate *types.AutoScalingSettingsUpdate
 	// The billing mode of the global table. If GlobalTableBillingMode is not
 	// specified, the global table defaults to PROVISIONED capacity billing mode.
 	//
@@ -67,26 +75,18 @@ type UpdateGlobalTableSettingsInput struct {
 	// workloads. PAY_PER_REQUEST sets the billing mode to On-Demand Mode
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html#HowItWorks.OnDemand).
 	GlobalTableBillingMode types.BillingMode
-	// Represents the settings of a global secondary index for a global table that will
-	// be modified.
-	GlobalTableGlobalSecondaryIndexSettingsUpdate []*types.GlobalTableGlobalSecondaryIndexSettingsUpdate
 	// The name of the global table
 	GlobalTableName *string
-	// Auto scaling settings for managing provisioned write capacity for the global
-	// table.
-	GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate *types.AutoScalingSettingsUpdate
 	// The maximum number of writes consumed per second before DynamoDB returns a
 	// ThrottlingException.
 	GlobalTableProvisionedWriteCapacityUnits *int64
-	// Represents the settings for a global table in a Region that will be modified.
-	ReplicaSettingsUpdate []*types.ReplicaSettingsUpdate
 }
 
 type UpdateGlobalTableSettingsOutput struct {
-	// The name of the global table.
-	GlobalTableName *string
 	// The Region-specific settings for the global table.
 	ReplicaSettings []*types.ReplicaSettingsDescription
+	// The name of the global table.
+	GlobalTableName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
