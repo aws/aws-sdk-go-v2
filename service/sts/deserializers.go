@@ -16,6 +16,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	smithyxml "github.com/awslabs/smithy-go/xml"
 	"io"
+	"strconv"
 	"strings"
 )
 

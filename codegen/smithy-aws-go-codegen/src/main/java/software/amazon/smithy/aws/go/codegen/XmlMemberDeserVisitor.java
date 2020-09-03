@@ -149,6 +149,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
     private void handleInteger(Shape shape, String cast) {
         GoWriter writer = context.getWriter();
         handleNumber(shape, () -> {
+            writer.addUseImports(SmithyGoDependency.STRCONV);
             writer.write("i64, err := strconv.ParseInt(xtv, 10, 64)");
             writer.write("if err != nil { return err }");
             writer.write("$L = $L", dataDest, cast);
