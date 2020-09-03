@@ -41,6 +41,8 @@ func (c *Client) DeleteItem(ctx context.Context, params *DeleteItemInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteItemValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteItem(options.Region), middleware.Before)
+	addValidateResponseChecksum(stack, options)
+	addAcceptEncodingGzip(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

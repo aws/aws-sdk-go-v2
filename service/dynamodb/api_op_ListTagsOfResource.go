@@ -37,6 +37,8 @@ func (c *Client) ListTagsOfResource(ctx context.Context, params *ListTagsOfResou
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListTagsOfResourceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListTagsOfResource(options.Region), middleware.Before)
+	addValidateResponseChecksum(stack, options)
+	addAcceptEncodingGzip(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

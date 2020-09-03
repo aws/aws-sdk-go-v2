@@ -52,6 +52,8 @@ func (c *Client) TransactGetItems(ctx context.Context, params *TransactGetItemsI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTransactGetItemsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTransactGetItems(options.Region), middleware.Before)
+	addValidateResponseChecksum(stack, options)
+	addAcceptEncodingGzip(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

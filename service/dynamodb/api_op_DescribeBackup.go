@@ -34,6 +34,8 @@ func (c *Client) DescribeBackup(ctx context.Context, params *DescribeBackupInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeBackupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeBackup(options.Region), middleware.Before)
+	addValidateResponseChecksum(stack, options)
+	addAcceptEncodingGzip(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

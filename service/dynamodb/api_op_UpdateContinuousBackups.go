@@ -41,6 +41,8 @@ func (c *Client) UpdateContinuousBackups(ctx context.Context, params *UpdateCont
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateContinuousBackupsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateContinuousBackups(options.Region), middleware.Before)
+	addValidateResponseChecksum(stack, options)
+	addAcceptEncodingGzip(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

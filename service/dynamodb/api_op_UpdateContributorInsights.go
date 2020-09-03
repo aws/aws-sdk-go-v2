@@ -33,6 +33,8 @@ func (c *Client) UpdateContributorInsights(ctx context.Context, params *UpdateCo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateContributorInsightsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateContributorInsights(options.Region), middleware.Before)
+	addValidateResponseChecksum(stack, options)
+	addAcceptEncodingGzip(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
