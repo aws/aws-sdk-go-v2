@@ -5,211 +5,111 @@ import (
 	"context"
 	"io/ioutil"
 	"net/http"
+	"path/filepath"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	smithyClient "github.com/aws/aws-sdk-go-v2/service/lexruntimeservice"
 	v1Aws "github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/corehandlers"
+	"github.com/aws/aws-sdk-go/aws/credentials"
 	v1Request "github.com/aws/aws-sdk-go/aws/request"
-	v1Session "github.com/aws/aws-sdk-go/aws/session"
 	v1Unit "github.com/aws/aws-sdk-go/awstesting/unit"
 	v1Client "github.com/aws/aws-sdk-go/service/lexruntimeservice"
-	"github.com/awslabs/smithy-go/middleware"
 	"github.com/awslabs/smithy-go/ptr"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-func addGetSessionAPIResponseMiddleware(options *smithyClient.Options) {
-	options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
-		stack.Deserialize.Add(middleware.DeserializeMiddlewareFunc("StubResponse", func(ctx context.Context, input middleware.DeserializeInput, next middleware.DeserializeHandler,
-		) (out middleware.DeserializeOutput, metadata middleware.Metadata, err error) {
-			out.RawResponse = &smithyhttp.Response{Response: newGetSessionHTTPResponse()}
-			return out, metadata, err
-		}), middleware.After)
-		return nil
+func BenchmarkGetSession(b *testing.B) {
+	filename := filepath.Join("testdata", "get_session_resp.json")
+	bodyBytes, err := loadTestData(filename)
+	if err != nil {
+		b.Fatalf("failed to load test data, %s, %v", filename, err)
+	}
+
+	b.Run("old", func(b *testing.B) {
+		benchGetSessionOld(b, bodyBytes)
+	})
+
+	b.Run("smithy", func(b *testing.B) {
+		benchGetSessionSmithy(b, bodyBytes)
 	})
 }
 
-func addGetSessionAPIResponseHandler(sess *v1Session.Session) {
-	sess.Handlers.Send.Swap("core.SendHandler", v1Request.NamedHandler{
-		Name: "StubHandler",
+func benchGetSessionOld(b *testing.B, respBytes []byte) {
+	sess := v1Unit.Session.Copy(&v1Aws.Config{
+		Credentials: credentials.NewStaticCredentials("AKID", "SECRET", ""),
+		Region:      ptr.String("us-west-2"),
+	})
+	sess.Handlers.Send.SwapNamed(v1Request.NamedHandler{
+		Name: corehandlers.SendHandler.Name,
 		Fn: func(r *v1Request.Request) {
-			r.HTTPResponse = newGetSessionHTTPResponse()
+			r.HTTPResponse = newGetSessionHTTPResponse(respBytes)
 		},
 	})
+
+	client := v1Client.New(sess)
+	params := v1Client.GetSessionInput{
+		BotAlias:              ptr.String("fooAlias"),
+		BotName:               ptr.String("fooName"),
+		CheckpointLabelFilter: ptr.String("fooFilter"),
+		UserId:                ptr.String("fooUser"),
+	}
+
+	ctx := context.Background()
+
+	b.ResetTimer()
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_, err := client.GetSessionWithContext(ctx, &params)
+			if err != nil {
+				b.Fatalf("failed to send request: %v", err)
+			}
+		}
+	})
 }
 
-func newGetSessionHTTPResponse() *http.Response {
+func benchGetSessionSmithy(b *testing.B, respBytes []byte) {
+	var args []func(*smithyClient.Options)
+	if disableSmithySigning {
+		args = append(args, removeSmithySigner)
+	}
+
+	client := smithyClient.New(smithyClient.Options{
+		Region:      "us-west-2",
+		Credentials: aws.NewStaticCredentialsProvider("AKID", "SECRET", ""),
+		HTTPClient: smithyhttp.ClientDoFunc(
+			func(r *http.Request) (*http.Response, error) {
+				return newGetSessionHTTPResponse(respBytes), nil
+			}),
+	}, args...)
+
+	ctx := context.Background()
+	params := smithyClient.GetSessionInput{
+		BotAlias:              ptr.String("fooAlias"),
+		BotName:               ptr.String("fooName"),
+		CheckpointLabelFilter: ptr.String("fooFilter"),
+		UserId:                ptr.String("fooUser"),
+	}
+
+	b.ResetTimer()
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_, err := client.GetSession(ctx, &params)
+			if err != nil {
+				b.Fatalf("failed to send: %v", err)
+			}
+		}
+	})
+}
+
+func newGetSessionHTTPResponse(body []byte) *http.Response {
 	return &http.Response{
-		StatusCode:    200,
-		ContentLength: int64(len(getSessionResponseBody)),
+		StatusCode: 200,
 		Header: map[string][]string{
 			"Content-Type": {"application/json"},
 		},
-		Body: ioutil.NopCloser(bytes.NewReader(getSessionResponseBody)),
+		ContentLength: int64(len(body)),
+		Body:          ioutil.NopCloser(bytes.NewReader(body)),
 	}
-}
-
-var getSessionResponseBody = []byte(`{
-  "dialogAction": {
-    "fulfillmentState": "ReadyForFulfillment",
-    "intentName": "fooIntent",
-    "message": "fooMessage",
-    "messageFormat": "PlainText",
-    "slotToElicit": "fooSlot",
-    "slots": {
-      "fooSlot": "slotValue",
-      "barSlot": "slotValue"
-    },
-    "type": "ConfirmIntent"
-  },
-  "recentIntentSummaryView": [
-    {
-      "checkpointLabel": "fooLabel1",
-      "confirmationStatus": "Confirmed",
-      "dialogActionType": "ConfirmIntent",
-      "fulfillmentState": "Fulfilled",
-      "intentName": "fooIntent",
-      "slotToElicit": "fooSlot",
-      "slots": {
-        "fooSlot": "slotValue",
-        "barSlot": "slotValue"
-      }
-    },
-    {
-      "checkpointLabel": "fooLabel2",
-      "confirmationStatus": "Confirmed",
-      "dialogActionType": "ConfirmIntent",
-      "fulfillmentState": "Fulfilled",
-      "intentName": "fooIntent",
-      "slotToElicit": "fooSlot",
-      "slots": {
-        "fooSlot": "slotValue",
-        "barSlot": "slotValue"
-      }
-    },
-    {
-      "checkpointLabel": "fooLabel3",
-      "confirmationStatus": "Confirmed",
-      "dialogActionType": "ConfirmIntent",
-      "fulfillmentState": "Fulfilled",
-      "intentName": "fooIntent",
-      "slotToElicit": "fooSlot",
-      "slots": {
-        "fooSlot": "slotValue",
-        "barSlot": "slotValue"
-      }
-    },
-    {
-      "checkpointLabel": "fooLabel4",
-      "confirmationStatus": "Confirmed",
-      "dialogActionType": "ConfirmIntent",
-      "fulfillmentState": "Fulfilled",
-      "intentName": "fooIntent",
-      "slotToElicit": "fooSlot",
-      "slots": {
-        "fooSlot": "slotValue",
-        "barSlot": "slotValue"
-      }
-    },
-    {
-      "checkpointLabel": "fooLabel5",
-      "confirmationStatus": "Confirmed",
-      "dialogActionType": "ConfirmIntent",
-      "fulfillmentState": "Fulfilled",
-      "intentName": "fooIntent",
-      "slotToElicit": "fooSlot",
-      "slots": {
-        "fooSlot": "slotValue",
-        "barSlot": "slotValue"
-      }
-    },
-    {
-      "checkpointLabel": "fooLabel6",
-      "confirmationStatus": "Confirmed",
-      "dialogActionType": "ConfirmIntent",
-      "fulfillmentState": "Fulfilled",
-      "intentName": "fooIntent",
-      "slotToElicit": "fooSlot",
-      "slots": {
-        "fooSlot": "slotValue",
-        "barSlot": "slotValue"
-      }
-    },
-    {
-      "checkpointLabel": "fooLabel7",
-      "confirmationStatus": "Confirmed",
-      "dialogActionType": "ConfirmIntent",
-      "fulfillmentState": "Fulfilled",
-      "intentName": "fooIntent",
-      "slotToElicit": "fooSlot",
-      "slots": {
-        "fooSlot": "slotValue",
-        "barSlot": "slotValue"
-      }
-    }
-  ],
-  "sessionAttributes": {
-    "foo": "fooValue",
-    "bar": "barValue"
-  },
-  "sessionId": "benchmark"
-}`)
-
-func BenchmarkGetSession_Old(b *testing.B) {
-	cfg := v1Unit.Session.Copy(&v1Aws.Config{Region: ptr.String("us-west-2")})
-	addGetSessionAPIResponseHandler(cfg)
-	//cfg.Handlers.Sign.Clear()
-	client := v1Client.New(cfg)
-	in := &v1Client.GetSessionInput{
-		BotAlias:              ptr.String("fooAlias"),
-		BotName:               ptr.String("fooName"),
-		CheckpointLabelFilter: ptr.String("fooFilter"),
-		UserId:                ptr.String("fooUser"),
-	}
-
-	b.ResetTimer()
-	b.RunParallel(func(pb *testing.PB) {
-		for pb.Next() {
-			request, _ := client.GetSessionRequest(in)
-			err := request.Send()
-			if err != nil {
-				b.Errorf("failed to send v1Request: %v", err)
-			}
-		}
-	})
-}
-
-func BenchmarkGetSession_Smithy(b *testing.B) {
-	cfg := unit.Config()
-	cfg.Region = "us-west-2"
-
-	client := smithyClient.NewFromConfig(cfg, addGetSessionAPIResponseMiddleware)
-	ctx := context.Background()
-	in := &smithyClient.GetSessionInput{
-		BotAlias:              ptr.String("fooAlias"),
-		BotName:               ptr.String("fooName"),
-		CheckpointLabelFilter: ptr.String("fooFilter"),
-		UserId:                ptr.String("fooUser"),
-	}
-
-	b.ResetTimer()
-	b.RunParallel(func(pb *testing.PB) {
-		for pb.Next() {
-			_, err := client.GetSession(ctx, in)
-			if err != nil {
-				b.Errorf("failed to send: %v", err)
-			}
-		}
-	})
-}
-
-func removeSmithySigner(options *smithyClient.Options) {
-	options.APIOptions = append(options.APIOptions, func(stack *middleware.Stack) error {
-		stack.Finalize.Remove("SigV4SignHTTPRequestMiddleware")
-		stack.Finalize.Remove("SigV4ContentSHA256HeaderMiddleware")
-		stack.Finalize.Remove("ComputePayloadSHA256Middleware")
-		stack.Finalize.Remove("SigV4UnsignedPayloadMiddleware")
-		return nil
-	})
 }
