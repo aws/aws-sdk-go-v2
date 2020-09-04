@@ -44,7 +44,7 @@ func (m *awsAwsjson10_serializeOpSendCommand) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("QLDBSession.SendCommand")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentSendCommandInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentSendCommandInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -184,7 +184,7 @@ func awsAwsjson10_serializeDocumentValueHolder(v *types.ValueHolder, value smith
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentSendCommandInput(v *SendCommandInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentSendCommandInput(v *SendCommandInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

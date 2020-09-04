@@ -53,7 +53,7 @@ func (m *awsAwsjson11_deserializeOpCreateEnvironmentEC2) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateEnvironmentEC2Output(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateEnvironmentEC2Output(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -171,7 +171,7 @@ func (m *awsAwsjson11_deserializeOpCreateEnvironmentMembership) HandleDeserializ
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateEnvironmentMembershipOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateEnvironmentMembershipOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -289,7 +289,7 @@ func (m *awsAwsjson11_deserializeOpDeleteEnvironment) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteEnvironmentOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteEnvironmentOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -407,7 +407,7 @@ func (m *awsAwsjson11_deserializeOpDeleteEnvironmentMembership) HandleDeserializ
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteEnvironmentMembershipOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteEnvironmentMembershipOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -525,7 +525,7 @@ func (m *awsAwsjson11_deserializeOpDescribeEnvironmentMemberships) HandleDeseria
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeEnvironmentMembershipsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeEnvironmentMembershipsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -643,7 +643,7 @@ func (m *awsAwsjson11_deserializeOpDescribeEnvironments) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeEnvironmentsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeEnvironmentsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -761,7 +761,7 @@ func (m *awsAwsjson11_deserializeOpDescribeEnvironmentStatus) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeEnvironmentStatusOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeEnvironmentStatusOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -879,7 +879,7 @@ func (m *awsAwsjson11_deserializeOpListEnvironments) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListEnvironmentsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListEnvironmentsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -997,7 +997,7 @@ func (m *awsAwsjson11_deserializeOpListTagsForResource) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListTagsForResourceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1103,7 +1103,7 @@ func (m *awsAwsjson11_deserializeOpTagResource) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentTagResourceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentTagResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1209,7 +1209,7 @@ func (m *awsAwsjson11_deserializeOpUntagResource) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUntagResourceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUntagResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1315,7 +1315,7 @@ func (m *awsAwsjson11_deserializeOpUpdateEnvironment) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateEnvironmentOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateEnvironmentOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1433,7 +1433,7 @@ func (m *awsAwsjson11_deserializeOpUpdateEnvironmentMembership) HandleDeserializ
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateEnvironmentMembershipOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateEnvironmentMembershipOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2953,7 +2953,7 @@ func awsAwsjson11_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateEnvironmentEC2Output(v **CreateEnvironmentEC2Output, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateEnvironmentEC2Output(v **CreateEnvironmentEC2Output, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3017,7 +3017,7 @@ func awsAwsjson11_deserializeDocumentCreateEnvironmentEC2Output(v **CreateEnviro
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateEnvironmentMembershipOutput(v **CreateEnvironmentMembershipOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateEnvironmentMembershipOutput(v **CreateEnvironmentMembershipOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3073,7 +3073,7 @@ func awsAwsjson11_deserializeDocumentCreateEnvironmentMembershipOutput(v **Creat
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteEnvironmentMembershipOutput(v **DeleteEnvironmentMembershipOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteEnvironmentMembershipOutput(v **DeleteEnvironmentMembershipOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3124,7 +3124,7 @@ func awsAwsjson11_deserializeDocumentDeleteEnvironmentMembershipOutput(v **Delet
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteEnvironmentOutput(v **DeleteEnvironmentOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteEnvironmentOutput(v **DeleteEnvironmentOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3175,7 +3175,7 @@ func awsAwsjson11_deserializeDocumentDeleteEnvironmentOutput(v **DeleteEnvironme
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeEnvironmentMembershipsOutput(v **DescribeEnvironmentMembershipsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeEnvironmentMembershipsOutput(v **DescribeEnvironmentMembershipsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3244,7 +3244,7 @@ func awsAwsjson11_deserializeDocumentDescribeEnvironmentMembershipsOutput(v **De
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeEnvironmentsOutput(v **DescribeEnvironmentsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeEnvironmentsOutput(v **DescribeEnvironmentsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3300,7 +3300,7 @@ func awsAwsjson11_deserializeDocumentDescribeEnvironmentsOutput(v **DescribeEnvi
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeEnvironmentStatusOutput(v **DescribeEnvironmentStatusOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeEnvironmentStatusOutput(v **DescribeEnvironmentStatusOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3377,7 +3377,7 @@ func awsAwsjson11_deserializeDocumentDescribeEnvironmentStatusOutput(v **Describ
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListEnvironmentsOutput(v **ListEnvironmentsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListEnvironmentsOutput(v **ListEnvironmentsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3446,7 +3446,7 @@ func awsAwsjson11_deserializeDocumentListEnvironmentsOutput(v **ListEnvironments
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3502,7 +3502,7 @@ func awsAwsjson11_deserializeDocumentListTagsForResourceOutput(v **ListTagsForRe
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentTagResourceOutput(v **TagResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentTagResourceOutput(v **TagResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3553,7 +3553,7 @@ func awsAwsjson11_deserializeDocumentTagResourceOutput(v **TagResourceOutput, de
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUntagResourceOutput(v **UntagResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUntagResourceOutput(v **UntagResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3604,7 +3604,7 @@ func awsAwsjson11_deserializeDocumentUntagResourceOutput(v **UntagResourceOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateEnvironmentMembershipOutput(v **UpdateEnvironmentMembershipOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateEnvironmentMembershipOutput(v **UpdateEnvironmentMembershipOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3660,7 +3660,7 @@ func awsAwsjson11_deserializeDocumentUpdateEnvironmentMembershipOutput(v **Updat
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateEnvironmentOutput(v **UpdateEnvironmentOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateEnvironmentOutput(v **UpdateEnvironmentOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

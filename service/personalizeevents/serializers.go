@@ -53,7 +53,7 @@ func (m *awsRestjson1_serializeOpPutEvents) HandleSerialize(ctx context.Context,
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentPutEventsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentPutEventsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -68,7 +68,7 @@ func (m *awsRestjson1_serializeOpPutEvents) HandleSerialize(ctx context.Context,
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsPutEventsInput(v *PutEventsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsPutEventsInput(v *PutEventsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -76,7 +76,7 @@ func awsRestjson1_serializeHttpBindingsPutEventsInput(v *PutEventsInput, encoder
 	return nil
 }
 
-func awsRestjson1_serializeDocumentPutEventsInput(v *PutEventsInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentPutEventsInput(v *PutEventsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

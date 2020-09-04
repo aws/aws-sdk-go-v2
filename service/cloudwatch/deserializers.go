@@ -152,7 +152,7 @@ func (m *awsAwsquery_deserializeOpDeleteAnomalyDetector) HandleDeserialize(ctx c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteAnomalyDetectorOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDeleteAnomalyDetectorOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -247,7 +247,7 @@ func (m *awsAwsquery_deserializeOpDeleteDashboards) HandleDeserialize(ctx contex
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteDashboardsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDeleteDashboardsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -339,7 +339,7 @@ func (m *awsAwsquery_deserializeOpDeleteInsightRules) HandleDeserialize(ctx cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteInsightRulesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDeleteInsightRulesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -428,7 +428,7 @@ func (m *awsAwsquery_deserializeOpDescribeAlarmHistory) HandleDeserialize(ctx co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeAlarmHistoryOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeAlarmHistoryOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -514,7 +514,7 @@ func (m *awsAwsquery_deserializeOpDescribeAlarms) HandleDeserialize(ctx context.
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeAlarmsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeAlarmsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -600,7 +600,7 @@ func (m *awsAwsquery_deserializeOpDescribeAlarmsForMetric) HandleDeserialize(ctx
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeAlarmsForMetricOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeAlarmsForMetricOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -683,7 +683,7 @@ func (m *awsAwsquery_deserializeOpDescribeAnomalyDetectors) HandleDeserialize(ct
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeAnomalyDetectorsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeAnomalyDetectorsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -775,7 +775,7 @@ func (m *awsAwsquery_deserializeOpDescribeInsightRules) HandleDeserialize(ctx co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeInsightRulesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeInsightRulesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -944,7 +944,7 @@ func (m *awsAwsquery_deserializeOpDisableInsightRules) HandleDeserialize(ctx con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDisableInsightRulesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDisableInsightRulesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1116,7 +1116,7 @@ func (m *awsAwsquery_deserializeOpEnableInsightRules) HandleDeserialize(ctx cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentEnableInsightRulesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentEnableInsightRulesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1208,7 +1208,7 @@ func (m *awsAwsquery_deserializeOpGetDashboard) HandleDeserialize(ctx context.Co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetDashboardOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetDashboardOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1300,7 +1300,7 @@ func (m *awsAwsquery_deserializeOpGetInsightRuleReport) HandleDeserialize(ctx co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetInsightRuleReportOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetInsightRuleReportOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1392,7 +1392,7 @@ func (m *awsAwsquery_deserializeOpGetMetricData) HandleDeserialize(ctx context.C
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetMetricDataOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetMetricDataOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1478,7 +1478,7 @@ func (m *awsAwsquery_deserializeOpGetMetricStatistics) HandleDeserialize(ctx con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetMetricStatisticsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetMetricStatisticsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1573,7 +1573,7 @@ func (m *awsAwsquery_deserializeOpGetMetricWidgetImage) HandleDeserialize(ctx co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetMetricWidgetImageOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetMetricWidgetImageOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1656,7 +1656,7 @@ func (m *awsAwsquery_deserializeOpListDashboards) HandleDeserialize(ctx context.
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentListDashboardsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentListDashboardsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1745,7 +1745,7 @@ func (m *awsAwsquery_deserializeOpListMetrics) HandleDeserialize(ctx context.Con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentListMetricsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentListMetricsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1834,7 +1834,7 @@ func (m *awsAwsquery_deserializeOpListTagsForResource) HandleDeserialize(ctx con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentListTagsForResourceOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentListTagsForResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1926,7 +1926,7 @@ func (m *awsAwsquery_deserializeOpPutAnomalyDetector) HandleDeserialize(ctx cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentPutAnomalyDetectorOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentPutAnomalyDetectorOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2107,7 +2107,7 @@ func (m *awsAwsquery_deserializeOpPutDashboard) HandleDeserialize(ctx context.Co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentPutDashboardOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentPutDashboardOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2196,7 +2196,7 @@ func (m *awsAwsquery_deserializeOpPutInsightRule) HandleDeserialize(ctx context.
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentPutInsightRuleOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentPutInsightRuleOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2558,7 +2558,7 @@ func (m *awsAwsquery_deserializeOpTagResource) HandleDeserialize(ctx context.Con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentTagResourceOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentTagResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2653,7 +2653,7 @@ func (m *awsAwsquery_deserializeOpUntagResource) HandleDeserialize(ctx context.C
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentUntagResourceOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentUntagResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -7460,7 +7460,7 @@ func awsAwsquery_deserializeDocumentDeleteAlarmsOutput(v **DeleteAlarmsOutput, d
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteAnomalyDetectorOutput(v **DeleteAnomalyDetectorOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDeleteAnomalyDetectorOutput(v **DeleteAnomalyDetectorOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7490,7 +7490,7 @@ func awsAwsquery_deserializeDocumentDeleteAnomalyDetectorOutput(v **DeleteAnomal
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteDashboardsOutput(v **DeleteDashboardsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDeleteDashboardsOutput(v **DeleteDashboardsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7520,7 +7520,7 @@ func awsAwsquery_deserializeDocumentDeleteDashboardsOutput(v **DeleteDashboardsO
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteInsightRulesOutput(v **DeleteInsightRulesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDeleteInsightRulesOutput(v **DeleteInsightRulesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7556,7 +7556,7 @@ func awsAwsquery_deserializeDocumentDeleteInsightRulesOutput(v **DeleteInsightRu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeAlarmHistoryOutput(v **DescribeAlarmHistoryOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeAlarmHistoryOutput(v **DescribeAlarmHistoryOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7605,7 +7605,7 @@ func awsAwsquery_deserializeDocumentDescribeAlarmHistoryOutput(v **DescribeAlarm
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeAlarmsForMetricOutput(v **DescribeAlarmsForMetricOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeAlarmsForMetricOutput(v **DescribeAlarmsForMetricOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7641,7 +7641,7 @@ func awsAwsquery_deserializeDocumentDescribeAlarmsForMetricOutput(v **DescribeAl
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeAlarmsOutput(v **DescribeAlarmsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeAlarmsOutput(v **DescribeAlarmsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7696,7 +7696,7 @@ func awsAwsquery_deserializeDocumentDescribeAlarmsOutput(v **DescribeAlarmsOutpu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeAnomalyDetectorsOutput(v **DescribeAnomalyDetectorsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeAnomalyDetectorsOutput(v **DescribeAnomalyDetectorsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7745,7 +7745,7 @@ func awsAwsquery_deserializeDocumentDescribeAnomalyDetectorsOutput(v **DescribeA
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeInsightRulesOutput(v **DescribeInsightRulesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeInsightRulesOutput(v **DescribeInsightRulesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7824,7 +7824,7 @@ func awsAwsquery_deserializeDocumentDisableAlarmActionsOutput(v **DisableAlarmAc
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDisableInsightRulesOutput(v **DisableInsightRulesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDisableInsightRulesOutput(v **DisableInsightRulesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7890,7 +7890,7 @@ func awsAwsquery_deserializeDocumentEnableAlarmActionsOutput(v **EnableAlarmActi
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentEnableInsightRulesOutput(v **EnableInsightRulesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentEnableInsightRulesOutput(v **EnableInsightRulesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7926,7 +7926,7 @@ func awsAwsquery_deserializeDocumentEnableInsightRulesOutput(v **EnableInsightRu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetDashboardOutput(v **GetDashboardOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetDashboardOutput(v **GetDashboardOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7995,7 +7995,7 @@ func awsAwsquery_deserializeDocumentGetDashboardOutput(v **GetDashboardOutput, d
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetInsightRuleReportOutput(v **GetInsightRuleReportOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetInsightRuleReportOutput(v **GetInsightRuleReportOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8090,7 +8090,7 @@ func awsAwsquery_deserializeDocumentGetInsightRuleReportOutput(v **GetInsightRul
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetMetricDataOutput(v **GetMetricDataOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetMetricDataOutput(v **GetMetricDataOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8145,7 +8145,7 @@ func awsAwsquery_deserializeDocumentGetMetricDataOutput(v **GetMetricDataOutput,
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetMetricStatisticsOutput(v **GetMetricStatisticsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetMetricStatisticsOutput(v **GetMetricStatisticsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8194,7 +8194,7 @@ func awsAwsquery_deserializeDocumentGetMetricStatisticsOutput(v **GetMetricStati
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetMetricWidgetImageOutput(v **GetMetricWidgetImageOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetMetricWidgetImageOutput(v **GetMetricWidgetImageOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8235,7 +8235,7 @@ func awsAwsquery_deserializeDocumentGetMetricWidgetImageOutput(v **GetMetricWidg
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentListDashboardsOutput(v **ListDashboardsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentListDashboardsOutput(v **ListDashboardsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8284,7 +8284,7 @@ func awsAwsquery_deserializeDocumentListDashboardsOutput(v **ListDashboardsOutpu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentListMetricsOutput(v **ListMetricsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentListMetricsOutput(v **ListMetricsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8333,7 +8333,7 @@ func awsAwsquery_deserializeDocumentListMetricsOutput(v **ListMetricsOutput, dec
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8369,7 +8369,7 @@ func awsAwsquery_deserializeDocumentListTagsForResourceOutput(v **ListTagsForRes
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentPutAnomalyDetectorOutput(v **PutAnomalyDetectorOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentPutAnomalyDetectorOutput(v **PutAnomalyDetectorOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8429,7 +8429,7 @@ func awsAwsquery_deserializeDocumentPutCompositeAlarmOutput(v **PutCompositeAlar
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentPutDashboardOutput(v **PutDashboardOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentPutDashboardOutput(v **PutDashboardOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8465,7 +8465,7 @@ func awsAwsquery_deserializeDocumentPutDashboardOutput(v **PutDashboardOutput, d
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentPutInsightRuleOutput(v **PutInsightRuleOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentPutInsightRuleOutput(v **PutInsightRuleOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8585,7 +8585,7 @@ func awsAwsquery_deserializeDocumentSetAlarmStateOutput(v **SetAlarmStateOutput,
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentTagResourceOutput(v **TagResourceOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentTagResourceOutput(v **TagResourceOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8615,7 +8615,7 @@ func awsAwsquery_deserializeDocumentTagResourceOutput(v **TagResourceOutput, dec
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentUntagResourceOutput(v **UntagResourceOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentUntagResourceOutput(v **UntagResourceOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

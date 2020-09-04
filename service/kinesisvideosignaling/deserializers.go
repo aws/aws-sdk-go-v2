@@ -53,7 +53,7 @@ func (m *awsRestjson1_deserializeOpGetIceServerConfig) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetIceServerConfigOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetIceServerConfigOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -135,7 +135,7 @@ func awsRestjson1_deserializeOpErrorGetIceServerConfig(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetIceServerConfigOutput(v **GetIceServerConfigOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetIceServerConfigOutput(v **GetIceServerConfigOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -225,7 +225,7 @@ func (m *awsRestjson1_deserializeOpSendAlexaOfferToMaster) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentSendAlexaOfferToMasterOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentSendAlexaOfferToMasterOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -301,7 +301,7 @@ func awsRestjson1_deserializeOpErrorSendAlexaOfferToMaster(response *smithyhttp.
 	}
 }
 
-func awsRestjson1_deserializeDocumentSendAlexaOfferToMasterOutput(v **SendAlexaOfferToMasterOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentSendAlexaOfferToMasterOutput(v **SendAlexaOfferToMasterOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

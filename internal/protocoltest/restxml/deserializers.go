@@ -287,7 +287,7 @@ func (m *awsRestxml_deserializeOpFlattenedXmlMap) HandleDeserialize(ctx context.
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentFlattenedXmlMapOutput(&output, decoder)
+	err = awsRestxml_deserializeOpDocumentFlattenedXmlMapOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -326,7 +326,7 @@ func awsRestxml_deserializeOpErrorFlattenedXmlMap(response *smithyhttp.Response)
 	}
 }
 
-func awsRestxml_deserializeDocumentFlattenedXmlMapOutput(v **FlattenedXmlMapOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentFlattenedXmlMapOutput(v **FlattenedXmlMapOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -406,7 +406,7 @@ func (m *awsRestxml_deserializeOpFlattenedXmlMapWithXmlName) HandleDeserialize(c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentFlattenedXmlMapWithXmlNameOutput(&output, decoder)
+	err = awsRestxml_deserializeOpDocumentFlattenedXmlMapWithXmlNameOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -445,7 +445,7 @@ func awsRestxml_deserializeOpErrorFlattenedXmlMapWithXmlName(response *smithyhtt
 	}
 }
 
-func awsRestxml_deserializeDocumentFlattenedXmlMapWithXmlNameOutput(v **FlattenedXmlMapWithXmlNameOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentFlattenedXmlMapWithXmlNameOutput(v **FlattenedXmlMapWithXmlNameOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -507,7 +507,7 @@ func (m *awsRestxml_deserializeOpGreetingWithErrors) HandleDeserialize(ctx conte
 	output := &GreetingWithErrorsOutput{}
 	out.Result = output
 
-	err = awsRestxml_deserializeHttpBindingsGreetingWithErrorsOutput(output, response)
+	err = awsRestxml_deserializeOpHttpBindingsGreetingWithErrorsOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -547,7 +547,7 @@ func awsRestxml_deserializeOpErrorGreetingWithErrors(response *smithyhttp.Respon
 	}
 }
 
-func awsRestxml_deserializeHttpBindingsGreetingWithErrorsOutput(v *GreetingWithErrorsOutput, response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpHttpBindingsGreetingWithErrorsOutput(v *GreetingWithErrorsOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -586,12 +586,12 @@ func (m *awsRestxml_deserializeOpHttpPayloadTraits) HandleDeserialize(ctx contex
 	output := &HttpPayloadTraitsOutput{}
 	out.Result = output
 
-	err = awsRestxml_deserializeHttpBindingsHttpPayloadTraitsOutput(output, response)
+	err = awsRestxml_deserializeOpHttpBindingsHttpPayloadTraitsOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestxml_deserializeDocumentHttpPayloadTraitsOutput(output, response.Body)
+	err = awsRestxml_deserializeOpDocumentHttpPayloadTraitsOutput(output, response.Body)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -625,7 +625,7 @@ func awsRestxml_deserializeOpErrorHttpPayloadTraits(response *smithyhttp.Respons
 	}
 }
 
-func awsRestxml_deserializeHttpBindingsHttpPayloadTraitsOutput(v *HttpPayloadTraitsOutput, response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpHttpBindingsHttpPayloadTraitsOutput(v *HttpPayloadTraitsOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -637,7 +637,7 @@ func awsRestxml_deserializeHttpBindingsHttpPayloadTraitsOutput(v *HttpPayloadTra
 
 	return nil
 }
-func awsRestxml_deserializeDocumentHttpPayloadTraitsOutput(v *HttpPayloadTraitsOutput, body io.ReadCloser) error {
+func awsRestxml_deserializeOpDocumentHttpPayloadTraitsOutput(v *HttpPayloadTraitsOutput, body io.ReadCloser) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
@@ -677,12 +677,12 @@ func (m *awsRestxml_deserializeOpHttpPayloadTraitsWithMediaType) HandleDeseriali
 	output := &HttpPayloadTraitsWithMediaTypeOutput{}
 	out.Result = output
 
-	err = awsRestxml_deserializeHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(output, response)
+	err = awsRestxml_deserializeOpHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestxml_deserializeDocumentHttpPayloadTraitsWithMediaTypeOutput(output, response.Body)
+	err = awsRestxml_deserializeOpDocumentHttpPayloadTraitsWithMediaTypeOutput(output, response.Body)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -716,7 +716,7 @@ func awsRestxml_deserializeOpErrorHttpPayloadTraitsWithMediaType(response *smith
 	}
 }
 
-func awsRestxml_deserializeHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(v *HttpPayloadTraitsWithMediaTypeOutput, response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(v *HttpPayloadTraitsWithMediaTypeOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -728,7 +728,7 @@ func awsRestxml_deserializeHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(v *H
 
 	return nil
 }
-func awsRestxml_deserializeDocumentHttpPayloadTraitsWithMediaTypeOutput(v *HttpPayloadTraitsWithMediaTypeOutput, body io.ReadCloser) error {
+func awsRestxml_deserializeOpDocumentHttpPayloadTraitsWithMediaTypeOutput(v *HttpPayloadTraitsWithMediaTypeOutput, body io.ReadCloser) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
@@ -825,7 +825,7 @@ func awsRestxml_deserializeOpErrorHttpPayloadWithStructure(response *smithyhttp.
 	}
 }
 
-func awsRestxml_deserializeDocumentHttpPayloadWithStructureOutput(v **HttpPayloadWithStructureOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentHttpPayloadWithStructureOutput(v **HttpPayloadWithStructureOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -944,7 +944,7 @@ func awsRestxml_deserializeOpErrorHttpPayloadWithXmlName(response *smithyhttp.Re
 	}
 }
 
-func awsRestxml_deserializeDocumentHttpPayloadWithXmlNameOutput(v **HttpPayloadWithXmlNameOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentHttpPayloadWithXmlNameOutput(v **HttpPayloadWithXmlNameOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1063,7 +1063,7 @@ func awsRestxml_deserializeOpErrorHttpPayloadWithXmlNamespace(response *smithyht
 	}
 }
 
-func awsRestxml_deserializeDocumentHttpPayloadWithXmlNamespaceOutput(v **HttpPayloadWithXmlNamespaceOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentHttpPayloadWithXmlNamespaceOutput(v **HttpPayloadWithXmlNamespaceOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1182,7 +1182,7 @@ func awsRestxml_deserializeOpErrorHttpPayloadWithXmlNamespaceAndPrefix(response 
 	}
 }
 
-func awsRestxml_deserializeDocumentHttpPayloadWithXmlNamespaceAndPrefixOutput(v **HttpPayloadWithXmlNamespaceAndPrefixOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentHttpPayloadWithXmlNamespaceAndPrefixOutput(v **HttpPayloadWithXmlNamespaceAndPrefixOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1244,7 +1244,7 @@ func (m *awsRestxml_deserializeOpHttpPrefixHeaders) HandleDeserialize(ctx contex
 	output := &HttpPrefixHeadersOutput{}
 	out.Result = output
 
-	err = awsRestxml_deserializeHttpBindingsHttpPrefixHeadersOutput(output, response)
+	err = awsRestxml_deserializeOpHttpBindingsHttpPrefixHeadersOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -1278,7 +1278,7 @@ func awsRestxml_deserializeOpErrorHttpPrefixHeaders(response *smithyhttp.Respons
 	}
 }
 
-func awsRestxml_deserializeHttpBindingsHttpPrefixHeadersOutput(v *HttpPrefixHeadersOutput, response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpHttpBindingsHttpPrefixHeadersOutput(v *HttpPrefixHeadersOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -1510,7 +1510,7 @@ func (m *awsRestxml_deserializeOpIgnoreQueryParamsInResponse) HandleDeserialize(
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentIgnoreQueryParamsInResponseOutput(&output, decoder)
+	err = awsRestxml_deserializeOpDocumentIgnoreQueryParamsInResponseOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1549,7 +1549,7 @@ func awsRestxml_deserializeOpErrorIgnoreQueryParamsInResponse(response *smithyht
 	}
 }
 
-func awsRestxml_deserializeDocumentIgnoreQueryParamsInResponseOutput(v **IgnoreQueryParamsInResponseOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentIgnoreQueryParamsInResponseOutput(v **IgnoreQueryParamsInResponseOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1618,7 +1618,7 @@ func (m *awsRestxml_deserializeOpInputAndOutputWithHeaders) HandleDeserialize(ct
 	output := &InputAndOutputWithHeadersOutput{}
 	out.Result = output
 
-	err = awsRestxml_deserializeHttpBindingsInputAndOutputWithHeadersOutput(output, response)
+	err = awsRestxml_deserializeOpHttpBindingsInputAndOutputWithHeadersOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -1652,7 +1652,7 @@ func awsRestxml_deserializeOpErrorInputAndOutputWithHeaders(response *smithyhttp
 	}
 }
 
-func awsRestxml_deserializeHttpBindingsInputAndOutputWithHeadersOutput(v *InputAndOutputWithHeadersOutput, response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpHttpBindingsInputAndOutputWithHeadersOutput(v *InputAndOutputWithHeadersOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -1986,7 +1986,7 @@ func (m *awsRestxml_deserializeOpNullAndEmptyHeadersClient) HandleDeserialize(ct
 	output := &NullAndEmptyHeadersClientOutput{}
 	out.Result = output
 
-	err = awsRestxml_deserializeHttpBindingsNullAndEmptyHeadersClientOutput(output, response)
+	err = awsRestxml_deserializeOpHttpBindingsNullAndEmptyHeadersClientOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -2020,7 +2020,7 @@ func awsRestxml_deserializeOpErrorNullAndEmptyHeadersClient(response *smithyhttp
 	}
 }
 
-func awsRestxml_deserializeHttpBindingsNullAndEmptyHeadersClientOutput(v *NullAndEmptyHeadersClientOutput, response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpHttpBindingsNullAndEmptyHeadersClientOutput(v *NullAndEmptyHeadersClientOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -2080,7 +2080,7 @@ func (m *awsRestxml_deserializeOpNullAndEmptyHeadersServer) HandleDeserialize(ct
 	output := &NullAndEmptyHeadersServerOutput{}
 	out.Result = output
 
-	err = awsRestxml_deserializeHttpBindingsNullAndEmptyHeadersServerOutput(output, response)
+	err = awsRestxml_deserializeOpHttpBindingsNullAndEmptyHeadersServerOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -2114,7 +2114,7 @@ func awsRestxml_deserializeOpErrorNullAndEmptyHeadersServer(response *smithyhttp
 	}
 }
 
-func awsRestxml_deserializeHttpBindingsNullAndEmptyHeadersServerOutput(v *NullAndEmptyHeadersServerOutput, response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpHttpBindingsNullAndEmptyHeadersServerOutput(v *NullAndEmptyHeadersServerOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -2302,7 +2302,7 @@ func (m *awsRestxml_deserializeOpRecursiveShapes) HandleDeserialize(ctx context.
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentRecursiveShapesOutput(&output, decoder)
+	err = awsRestxml_deserializeOpDocumentRecursiveShapesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2341,7 +2341,7 @@ func awsRestxml_deserializeOpErrorRecursiveShapes(response *smithyhttp.Response)
 	}
 }
 
-func awsRestxml_deserializeDocumentRecursiveShapesOutput(v **RecursiveShapesOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentRecursiveShapesOutput(v **RecursiveShapesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2403,7 +2403,7 @@ func (m *awsRestxml_deserializeOpSimpleScalarProperties) HandleDeserialize(ctx c
 	output := &SimpleScalarPropertiesOutput{}
 	out.Result = output
 
-	err = awsRestxml_deserializeHttpBindingsSimpleScalarPropertiesOutput(output, response)
+	err = awsRestxml_deserializeOpHttpBindingsSimpleScalarPropertiesOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -2426,7 +2426,7 @@ func (m *awsRestxml_deserializeOpSimpleScalarProperties) HandleDeserialize(ctx c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentSimpleScalarPropertiesOutput(&output, decoder)
+	err = awsRestxml_deserializeOpDocumentSimpleScalarPropertiesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2465,7 +2465,7 @@ func awsRestxml_deserializeOpErrorSimpleScalarProperties(response *smithyhttp.Re
 	}
 }
 
-func awsRestxml_deserializeHttpBindingsSimpleScalarPropertiesOutput(v *SimpleScalarPropertiesOutput, response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpHttpBindingsSimpleScalarPropertiesOutput(v *SimpleScalarPropertiesOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -2477,7 +2477,7 @@ func awsRestxml_deserializeHttpBindingsSimpleScalarPropertiesOutput(v *SimpleSca
 
 	return nil
 }
-func awsRestxml_deserializeDocumentSimpleScalarPropertiesOutput(v **SimpleScalarPropertiesOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentSimpleScalarPropertiesOutput(v **SimpleScalarPropertiesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2680,7 +2680,7 @@ func (m *awsRestxml_deserializeOpTimestampFormatHeaders) HandleDeserialize(ctx c
 	output := &TimestampFormatHeadersOutput{}
 	out.Result = output
 
-	err = awsRestxml_deserializeHttpBindingsTimestampFormatHeadersOutput(output, response)
+	err = awsRestxml_deserializeOpHttpBindingsTimestampFormatHeadersOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -2714,7 +2714,7 @@ func awsRestxml_deserializeOpErrorTimestampFormatHeaders(response *smithyhttp.Re
 	}
 }
 
-func awsRestxml_deserializeHttpBindingsTimestampFormatHeadersOutput(v *TimestampFormatHeadersOutput, response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpHttpBindingsTimestampFormatHeadersOutput(v *TimestampFormatHeadersOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -2831,7 +2831,7 @@ func (m *awsRestxml_deserializeOpXmlAttributes) HandleDeserialize(ctx context.Co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentXmlAttributesOutput(&output, decoder)
+	err = awsRestxml_deserializeOpDocumentXmlAttributesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2870,7 +2870,7 @@ func awsRestxml_deserializeOpErrorXmlAttributes(response *smithyhttp.Response) e
 	}
 }
 
-func awsRestxml_deserializeDocumentXmlAttributesOutput(v **XmlAttributesOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentXmlAttributesOutput(v **XmlAttributesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3007,7 +3007,7 @@ func awsRestxml_deserializeOpErrorXmlAttributesOnPayload(response *smithyhttp.Re
 	}
 }
 
-func awsRestxml_deserializeDocumentXmlAttributesOnPayloadOutput(v **XmlAttributesOnPayloadOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentXmlAttributesOnPayloadOutput(v **XmlAttributesOnPayloadOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3087,7 +3087,7 @@ func (m *awsRestxml_deserializeOpXmlBlobs) HandleDeserialize(ctx context.Context
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentXmlBlobsOutput(&output, decoder)
+	err = awsRestxml_deserializeOpDocumentXmlBlobsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3126,7 +3126,7 @@ func awsRestxml_deserializeOpErrorXmlBlobs(response *smithyhttp.Response) error 
 	}
 }
 
-func awsRestxml_deserializeDocumentXmlBlobsOutput(v **XmlBlobsOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentXmlBlobsOutput(v **XmlBlobsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3211,7 +3211,7 @@ func (m *awsRestxml_deserializeOpXmlEnums) HandleDeserialize(ctx context.Context
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentXmlEnumsOutput(&output, decoder)
+	err = awsRestxml_deserializeOpDocumentXmlEnumsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3250,7 +3250,7 @@ func awsRestxml_deserializeOpErrorXmlEnums(response *smithyhttp.Response) error 
 	}
 }
 
-func awsRestxml_deserializeDocumentXmlEnumsOutput(v **XmlEnumsOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentXmlEnumsOutput(v **XmlEnumsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3381,7 +3381,7 @@ func (m *awsRestxml_deserializeOpXmlLists) HandleDeserialize(ctx context.Context
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentXmlListsOutput(&output, decoder)
+	err = awsRestxml_deserializeOpDocumentXmlListsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3420,7 +3420,7 @@ func awsRestxml_deserializeOpErrorXmlLists(response *smithyhttp.Response) error 
 	}
 }
 
-func awsRestxml_deserializeDocumentXmlListsOutput(v **XmlListsOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentXmlListsOutput(v **XmlListsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3560,7 +3560,7 @@ func (m *awsRestxml_deserializeOpXmlMaps) HandleDeserialize(ctx context.Context,
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentXmlMapsOutput(&output, decoder)
+	err = awsRestxml_deserializeOpDocumentXmlMapsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3599,7 +3599,7 @@ func awsRestxml_deserializeOpErrorXmlMaps(response *smithyhttp.Response) error {
 	}
 }
 
-func awsRestxml_deserializeDocumentXmlMapsOutput(v **XmlMapsOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentXmlMapsOutput(v **XmlMapsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3679,7 +3679,7 @@ func (m *awsRestxml_deserializeOpXmlMapsXmlName) HandleDeserialize(ctx context.C
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentXmlMapsXmlNameOutput(&output, decoder)
+	err = awsRestxml_deserializeOpDocumentXmlMapsXmlNameOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3718,7 +3718,7 @@ func awsRestxml_deserializeOpErrorXmlMapsXmlName(response *smithyhttp.Response) 
 	}
 }
 
-func awsRestxml_deserializeDocumentXmlMapsXmlNameOutput(v **XmlMapsXmlNameOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentXmlMapsXmlNameOutput(v **XmlMapsXmlNameOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3798,7 +3798,7 @@ func (m *awsRestxml_deserializeOpXmlNamespaces) HandleDeserialize(ctx context.Co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentXmlNamespacesOutput(&output, decoder)
+	err = awsRestxml_deserializeOpDocumentXmlNamespacesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3837,7 +3837,7 @@ func awsRestxml_deserializeOpErrorXmlNamespaces(response *smithyhttp.Response) e
 	}
 }
 
-func awsRestxml_deserializeDocumentXmlNamespacesOutput(v **XmlNamespacesOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentXmlNamespacesOutput(v **XmlNamespacesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3917,7 +3917,7 @@ func (m *awsRestxml_deserializeOpXmlTimestamps) HandleDeserialize(ctx context.Co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentXmlTimestampsOutput(&output, decoder)
+	err = awsRestxml_deserializeOpDocumentXmlTimestampsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3956,7 +3956,7 @@ func awsRestxml_deserializeOpErrorXmlTimestamps(response *smithyhttp.Response) e
 	}
 }
 
-func awsRestxml_deserializeDocumentXmlTimestampsOutput(v **XmlTimestampsOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeOpDocumentXmlTimestampsOutput(v **XmlTimestampsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4054,7 +4054,7 @@ func awsRestxml_deserializeDocumentXmlTimestampsOutput(v **XmlTimestampsOutput, 
 	return nil
 }
 
-func awsRestxml_deserializeHttpBindingsComplexError(v *types.ComplexError, response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpHttpBindingsComplexError(v *types.ComplexError, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -4068,7 +4068,7 @@ func awsRestxml_deserializeHttpBindingsComplexError(v *types.ComplexError, respo
 }
 func awsRestxml_deserializeErrorComplexError(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ComplexError{}
-	if err := awsRestxml_deserializeHttpBindingsComplexError(output, response); err != nil {
+	if err := awsRestxml_deserializeOpHttpBindingsComplexError(output, response); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
 	}
 	buff := make([]byte, 1024)

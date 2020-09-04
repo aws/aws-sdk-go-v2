@@ -51,7 +51,7 @@ func (m *awsRestjson1_serializeOpCreateToken) HandleSerialize(ctx context.Contex
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentCreateTokenInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentCreateTokenInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -66,7 +66,7 @@ func (m *awsRestjson1_serializeOpCreateToken) HandleSerialize(ctx context.Contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsCreateTokenInput(v *CreateTokenInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsCreateTokenInput(v *CreateTokenInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -74,7 +74,7 @@ func awsRestjson1_serializeHttpBindingsCreateTokenInput(v *CreateTokenInput, enc
 	return nil
 }
 
-func awsRestjson1_serializeDocumentCreateTokenInput(v *CreateTokenInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentCreateTokenInput(v *CreateTokenInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -161,7 +161,7 @@ func (m *awsRestjson1_serializeOpRegisterClient) HandleSerialize(ctx context.Con
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentRegisterClientInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentRegisterClientInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -176,7 +176,7 @@ func (m *awsRestjson1_serializeOpRegisterClient) HandleSerialize(ctx context.Con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsRegisterClientInput(v *RegisterClientInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsRegisterClientInput(v *RegisterClientInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -184,7 +184,7 @@ func awsRestjson1_serializeHttpBindingsRegisterClientInput(v *RegisterClientInpu
 	return nil
 }
 
-func awsRestjson1_serializeDocumentRegisterClientInput(v *RegisterClientInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentRegisterClientInput(v *RegisterClientInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -246,7 +246,7 @@ func (m *awsRestjson1_serializeOpStartDeviceAuthorization) HandleSerialize(ctx c
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentStartDeviceAuthorizationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentStartDeviceAuthorizationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -261,7 +261,7 @@ func (m *awsRestjson1_serializeOpStartDeviceAuthorization) HandleSerialize(ctx c
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsStartDeviceAuthorizationInput(v *StartDeviceAuthorizationInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsStartDeviceAuthorizationInput(v *StartDeviceAuthorizationInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -269,7 +269,7 @@ func awsRestjson1_serializeHttpBindingsStartDeviceAuthorizationInput(v *StartDev
 	return nil
 }
 
-func awsRestjson1_serializeDocumentStartDeviceAuthorizationInput(v *StartDeviceAuthorizationInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentStartDeviceAuthorizationInput(v *StartDeviceAuthorizationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

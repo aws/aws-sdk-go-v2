@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpCompareFaces) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.CompareFaces")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCompareFacesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCompareFacesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpCreateCollection) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.CreateCollection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateCollectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateCollectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpCreateProject) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.CreateProject")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateProjectInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateProjectInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpCreateProjectVersion) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.CreateProjectVersion")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateProjectVersionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateProjectVersionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpCreateStreamProcessor) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.CreateStreamProcessor")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateStreamProcessorInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateStreamProcessorInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpDeleteCollection) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.DeleteCollection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteCollectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteCollectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson11_serializeOpDeleteFaces) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.DeleteFaces")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteFacesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteFacesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -366,7 +366,7 @@ func (m *awsAwsjson11_serializeOpDeleteProject) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.DeleteProject")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteProjectInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteProjectInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -412,7 +412,7 @@ func (m *awsAwsjson11_serializeOpDeleteProjectVersion) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.DeleteProjectVersion")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteProjectVersionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteProjectVersionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -458,7 +458,7 @@ func (m *awsAwsjson11_serializeOpDeleteStreamProcessor) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.DeleteStreamProcessor")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteStreamProcessorInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteStreamProcessorInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -504,7 +504,7 @@ func (m *awsAwsjson11_serializeOpDescribeCollection) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.DescribeCollection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeCollectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeCollectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -550,7 +550,7 @@ func (m *awsAwsjson11_serializeOpDescribeProjects) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.DescribeProjects")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeProjectsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeProjectsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -596,7 +596,7 @@ func (m *awsAwsjson11_serializeOpDescribeProjectVersions) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.DescribeProjectVersions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeProjectVersionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeProjectVersionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -642,7 +642,7 @@ func (m *awsAwsjson11_serializeOpDescribeStreamProcessor) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.DescribeStreamProcessor")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeStreamProcessorInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeStreamProcessorInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -688,7 +688,7 @@ func (m *awsAwsjson11_serializeOpDetectCustomLabels) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.DetectCustomLabels")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDetectCustomLabelsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDetectCustomLabelsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -734,7 +734,7 @@ func (m *awsAwsjson11_serializeOpDetectFaces) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.DetectFaces")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDetectFacesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDetectFacesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -780,7 +780,7 @@ func (m *awsAwsjson11_serializeOpDetectLabels) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.DetectLabels")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDetectLabelsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDetectLabelsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -826,7 +826,7 @@ func (m *awsAwsjson11_serializeOpDetectModerationLabels) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.DetectModerationLabels")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDetectModerationLabelsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDetectModerationLabelsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -872,7 +872,7 @@ func (m *awsAwsjson11_serializeOpDetectText) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.DetectText")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDetectTextInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDetectTextInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -918,7 +918,7 @@ func (m *awsAwsjson11_serializeOpGetCelebrityInfo) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.GetCelebrityInfo")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetCelebrityInfoInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetCelebrityInfoInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -964,7 +964,7 @@ func (m *awsAwsjson11_serializeOpGetCelebrityRecognition) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.GetCelebrityRecognition")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetCelebrityRecognitionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetCelebrityRecognitionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1010,7 +1010,7 @@ func (m *awsAwsjson11_serializeOpGetContentModeration) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.GetContentModeration")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetContentModerationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetContentModerationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1056,7 +1056,7 @@ func (m *awsAwsjson11_serializeOpGetFaceDetection) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.GetFaceDetection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetFaceDetectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetFaceDetectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1102,7 +1102,7 @@ func (m *awsAwsjson11_serializeOpGetFaceSearch) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.GetFaceSearch")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetFaceSearchInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetFaceSearchInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1148,7 +1148,7 @@ func (m *awsAwsjson11_serializeOpGetLabelDetection) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.GetLabelDetection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetLabelDetectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetLabelDetectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1194,7 +1194,7 @@ func (m *awsAwsjson11_serializeOpGetPersonTracking) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.GetPersonTracking")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetPersonTrackingInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetPersonTrackingInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1240,7 +1240,7 @@ func (m *awsAwsjson11_serializeOpGetSegmentDetection) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.GetSegmentDetection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetSegmentDetectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetSegmentDetectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1286,7 +1286,7 @@ func (m *awsAwsjson11_serializeOpGetTextDetection) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.GetTextDetection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetTextDetectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetTextDetectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1332,7 +1332,7 @@ func (m *awsAwsjson11_serializeOpIndexFaces) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.IndexFaces")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentIndexFacesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentIndexFacesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1378,7 +1378,7 @@ func (m *awsAwsjson11_serializeOpListCollections) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.ListCollections")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListCollectionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListCollectionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1424,7 +1424,7 @@ func (m *awsAwsjson11_serializeOpListFaces) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.ListFaces")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListFacesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListFacesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1470,7 +1470,7 @@ func (m *awsAwsjson11_serializeOpListStreamProcessors) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.ListStreamProcessors")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListStreamProcessorsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListStreamProcessorsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1516,7 +1516,7 @@ func (m *awsAwsjson11_serializeOpRecognizeCelebrities) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.RecognizeCelebrities")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRecognizeCelebritiesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRecognizeCelebritiesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1562,7 +1562,7 @@ func (m *awsAwsjson11_serializeOpSearchFaces) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.SearchFaces")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSearchFacesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSearchFacesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1608,7 +1608,7 @@ func (m *awsAwsjson11_serializeOpSearchFacesByImage) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.SearchFacesByImage")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSearchFacesByImageInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSearchFacesByImageInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1654,7 +1654,7 @@ func (m *awsAwsjson11_serializeOpStartCelebrityRecognition) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.StartCelebrityRecognition")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartCelebrityRecognitionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartCelebrityRecognitionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1700,7 +1700,7 @@ func (m *awsAwsjson11_serializeOpStartContentModeration) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.StartContentModeration")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartContentModerationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartContentModerationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1746,7 +1746,7 @@ func (m *awsAwsjson11_serializeOpStartFaceDetection) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.StartFaceDetection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartFaceDetectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartFaceDetectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1792,7 +1792,7 @@ func (m *awsAwsjson11_serializeOpStartFaceSearch) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.StartFaceSearch")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartFaceSearchInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartFaceSearchInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1838,7 +1838,7 @@ func (m *awsAwsjson11_serializeOpStartLabelDetection) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.StartLabelDetection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartLabelDetectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartLabelDetectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1884,7 +1884,7 @@ func (m *awsAwsjson11_serializeOpStartPersonTracking) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.StartPersonTracking")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartPersonTrackingInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartPersonTrackingInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1930,7 +1930,7 @@ func (m *awsAwsjson11_serializeOpStartProjectVersion) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.StartProjectVersion")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartProjectVersionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartProjectVersionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1976,7 +1976,7 @@ func (m *awsAwsjson11_serializeOpStartSegmentDetection) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.StartSegmentDetection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartSegmentDetectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartSegmentDetectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2022,7 +2022,7 @@ func (m *awsAwsjson11_serializeOpStartStreamProcessor) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.StartStreamProcessor")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartStreamProcessorInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartStreamProcessorInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2068,7 +2068,7 @@ func (m *awsAwsjson11_serializeOpStartTextDetection) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.StartTextDetection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartTextDetectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartTextDetectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2114,7 +2114,7 @@ func (m *awsAwsjson11_serializeOpStopProjectVersion) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.StopProjectVersion")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopProjectVersionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopProjectVersionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2160,7 +2160,7 @@ func (m *awsAwsjson11_serializeOpStopStreamProcessor) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("RekognitionService.StopStreamProcessor")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopStreamProcessorInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopStreamProcessorInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2693,7 +2693,7 @@ func awsAwsjson11_serializeDocumentVideo(v *types.Video, value smithyjson.Value)
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCompareFacesInput(v *CompareFacesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCompareFacesInput(v *CompareFacesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2724,7 +2724,7 @@ func awsAwsjson11_serializeDocumentCompareFacesInput(v *CompareFacesInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateCollectionInput(v *CreateCollectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateCollectionInput(v *CreateCollectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2736,7 +2736,7 @@ func awsAwsjson11_serializeDocumentCreateCollectionInput(v *CreateCollectionInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateProjectInput(v *CreateProjectInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateProjectInput(v *CreateProjectInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2748,7 +2748,7 @@ func awsAwsjson11_serializeDocumentCreateProjectInput(v *CreateProjectInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateProjectVersionInput(v *CreateProjectVersionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateProjectVersionInput(v *CreateProjectVersionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2786,7 +2786,7 @@ func awsAwsjson11_serializeDocumentCreateProjectVersionInput(v *CreateProjectVer
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateStreamProcessorInput(v *CreateStreamProcessorInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateStreamProcessorInput(v *CreateStreamProcessorInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2824,7 +2824,7 @@ func awsAwsjson11_serializeDocumentCreateStreamProcessorInput(v *CreateStreamPro
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteCollectionInput(v *DeleteCollectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteCollectionInput(v *DeleteCollectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2836,7 +2836,7 @@ func awsAwsjson11_serializeDocumentDeleteCollectionInput(v *DeleteCollectionInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteFacesInput(v *DeleteFacesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteFacesInput(v *DeleteFacesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2855,7 +2855,7 @@ func awsAwsjson11_serializeDocumentDeleteFacesInput(v *DeleteFacesInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteProjectInput(v *DeleteProjectInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteProjectInput(v *DeleteProjectInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2867,7 +2867,7 @@ func awsAwsjson11_serializeDocumentDeleteProjectInput(v *DeleteProjectInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteProjectVersionInput(v *DeleteProjectVersionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteProjectVersionInput(v *DeleteProjectVersionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2879,7 +2879,7 @@ func awsAwsjson11_serializeDocumentDeleteProjectVersionInput(v *DeleteProjectVer
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteStreamProcessorInput(v *DeleteStreamProcessorInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteStreamProcessorInput(v *DeleteStreamProcessorInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2891,7 +2891,7 @@ func awsAwsjson11_serializeDocumentDeleteStreamProcessorInput(v *DeleteStreamPro
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeCollectionInput(v *DescribeCollectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeCollectionInput(v *DescribeCollectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2903,7 +2903,7 @@ func awsAwsjson11_serializeDocumentDescribeCollectionInput(v *DescribeCollection
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeProjectsInput(v *DescribeProjectsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeProjectsInput(v *DescribeProjectsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2920,7 +2920,7 @@ func awsAwsjson11_serializeDocumentDescribeProjectsInput(v *DescribeProjectsInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeProjectVersionsInput(v *DescribeProjectVersionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeProjectVersionsInput(v *DescribeProjectVersionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2949,7 +2949,7 @@ func awsAwsjson11_serializeDocumentDescribeProjectVersionsInput(v *DescribeProje
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeStreamProcessorInput(v *DescribeStreamProcessorInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeStreamProcessorInput(v *DescribeStreamProcessorInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2961,7 +2961,7 @@ func awsAwsjson11_serializeDocumentDescribeStreamProcessorInput(v *DescribeStrea
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDetectCustomLabelsInput(v *DetectCustomLabelsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDetectCustomLabelsInput(v *DetectCustomLabelsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2990,7 +2990,7 @@ func awsAwsjson11_serializeDocumentDetectCustomLabelsInput(v *DetectCustomLabels
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDetectFacesInput(v *DetectFacesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDetectFacesInput(v *DetectFacesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3011,7 +3011,7 @@ func awsAwsjson11_serializeDocumentDetectFacesInput(v *DetectFacesInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDetectLabelsInput(v *DetectLabelsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDetectLabelsInput(v *DetectLabelsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3035,7 +3035,7 @@ func awsAwsjson11_serializeDocumentDetectLabelsInput(v *DetectLabelsInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDetectModerationLabelsInput(v *DetectModerationLabelsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDetectModerationLabelsInput(v *DetectModerationLabelsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3061,7 +3061,7 @@ func awsAwsjson11_serializeDocumentDetectModerationLabelsInput(v *DetectModerati
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDetectTextInput(v *DetectTextInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDetectTextInput(v *DetectTextInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3082,7 +3082,7 @@ func awsAwsjson11_serializeDocumentDetectTextInput(v *DetectTextInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetCelebrityInfoInput(v *GetCelebrityInfoInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetCelebrityInfoInput(v *GetCelebrityInfoInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3094,7 +3094,7 @@ func awsAwsjson11_serializeDocumentGetCelebrityInfoInput(v *GetCelebrityInfoInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetCelebrityRecognitionInput(v *GetCelebrityRecognitionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetCelebrityRecognitionInput(v *GetCelebrityRecognitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3121,7 +3121,7 @@ func awsAwsjson11_serializeDocumentGetCelebrityRecognitionInput(v *GetCelebrityR
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetContentModerationInput(v *GetContentModerationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetContentModerationInput(v *GetContentModerationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3148,7 +3148,7 @@ func awsAwsjson11_serializeDocumentGetContentModerationInput(v *GetContentModera
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetFaceDetectionInput(v *GetFaceDetectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetFaceDetectionInput(v *GetFaceDetectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3170,34 +3170,7 @@ func awsAwsjson11_serializeDocumentGetFaceDetectionInput(v *GetFaceDetectionInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetFaceSearchInput(v *GetFaceSearchInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.JobId != nil {
-		ok := object.Key("JobId")
-		ok.String(*v.JobId)
-	}
-
-	if v.MaxResults != nil {
-		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
-	}
-
-	if v.NextToken != nil {
-		ok := object.Key("NextToken")
-		ok.String(*v.NextToken)
-	}
-
-	if len(v.SortBy) > 0 {
-		ok := object.Key("SortBy")
-		ok.String(string(v.SortBy))
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentGetLabelDetectionInput(v *GetLabelDetectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetFaceSearchInput(v *GetFaceSearchInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3224,7 +3197,7 @@ func awsAwsjson11_serializeDocumentGetLabelDetectionInput(v *GetLabelDetectionIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetPersonTrackingInput(v *GetPersonTrackingInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetLabelDetectionInput(v *GetLabelDetectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3251,7 +3224,34 @@ func awsAwsjson11_serializeDocumentGetPersonTrackingInput(v *GetPersonTrackingIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetSegmentDetectionInput(v *GetSegmentDetectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetPersonTrackingInput(v *GetPersonTrackingInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.JobId != nil {
+		ok := object.Key("JobId")
+		ok.String(*v.JobId)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if len(v.SortBy) > 0 {
+		ok := object.Key("SortBy")
+		ok.String(string(v.SortBy))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetSegmentDetectionInput(v *GetSegmentDetectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3273,7 +3273,7 @@ func awsAwsjson11_serializeDocumentGetSegmentDetectionInput(v *GetSegmentDetecti
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetTextDetectionInput(v *GetTextDetectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetTextDetectionInput(v *GetTextDetectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3295,7 +3295,7 @@ func awsAwsjson11_serializeDocumentGetTextDetectionInput(v *GetTextDetectionInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentIndexFacesInput(v *IndexFacesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentIndexFacesInput(v *IndexFacesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3336,7 +3336,7 @@ func awsAwsjson11_serializeDocumentIndexFacesInput(v *IndexFacesInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListCollectionsInput(v *ListCollectionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListCollectionsInput(v *ListCollectionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3353,7 +3353,7 @@ func awsAwsjson11_serializeDocumentListCollectionsInput(v *ListCollectionsInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListFacesInput(v *ListFacesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListFacesInput(v *ListFacesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3375,7 +3375,7 @@ func awsAwsjson11_serializeDocumentListFacesInput(v *ListFacesInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListStreamProcessorsInput(v *ListStreamProcessorsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListStreamProcessorsInput(v *ListStreamProcessorsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3392,7 +3392,7 @@ func awsAwsjson11_serializeDocumentListStreamProcessorsInput(v *ListStreamProces
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRecognizeCelebritiesInput(v *RecognizeCelebritiesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRecognizeCelebritiesInput(v *RecognizeCelebritiesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3406,7 +3406,7 @@ func awsAwsjson11_serializeDocumentRecognizeCelebritiesInput(v *RecognizeCelebri
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSearchFacesByImageInput(v *SearchFacesByImageInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSearchFacesByImageInput(v *SearchFacesByImageInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3440,7 +3440,7 @@ func awsAwsjson11_serializeDocumentSearchFacesByImageInput(v *SearchFacesByImage
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSearchFacesInput(v *SearchFacesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSearchFacesInput(v *SearchFacesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3467,7 +3467,7 @@ func awsAwsjson11_serializeDocumentSearchFacesInput(v *SearchFacesInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartCelebrityRecognitionInput(v *StartCelebrityRecognitionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartCelebrityRecognitionInput(v *StartCelebrityRecognitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3498,7 +3498,7 @@ func awsAwsjson11_serializeDocumentStartCelebrityRecognitionInput(v *StartCelebr
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartContentModerationInput(v *StartContentModerationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartContentModerationInput(v *StartContentModerationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3534,7 +3534,7 @@ func awsAwsjson11_serializeDocumentStartContentModerationInput(v *StartContentMo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartFaceDetectionInput(v *StartFaceDetectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartFaceDetectionInput(v *StartFaceDetectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3570,7 +3570,7 @@ func awsAwsjson11_serializeDocumentStartFaceDetectionInput(v *StartFaceDetection
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartFaceSearchInput(v *StartFaceSearchInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartFaceSearchInput(v *StartFaceSearchInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3611,7 +3611,7 @@ func awsAwsjson11_serializeDocumentStartFaceSearchInput(v *StartFaceSearchInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartLabelDetectionInput(v *StartLabelDetectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartLabelDetectionInput(v *StartLabelDetectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3647,7 +3647,7 @@ func awsAwsjson11_serializeDocumentStartLabelDetectionInput(v *StartLabelDetecti
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartPersonTrackingInput(v *StartPersonTrackingInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartPersonTrackingInput(v *StartPersonTrackingInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3678,7 +3678,7 @@ func awsAwsjson11_serializeDocumentStartPersonTrackingInput(v *StartPersonTracki
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartProjectVersionInput(v *StartProjectVersionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartProjectVersionInput(v *StartProjectVersionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3695,7 +3695,7 @@ func awsAwsjson11_serializeDocumentStartProjectVersionInput(v *StartProjectVersi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartSegmentDetectionInput(v *StartSegmentDetectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartSegmentDetectionInput(v *StartSegmentDetectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3740,7 +3740,7 @@ func awsAwsjson11_serializeDocumentStartSegmentDetectionInput(v *StartSegmentDet
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartStreamProcessorInput(v *StartStreamProcessorInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartStreamProcessorInput(v *StartStreamProcessorInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3752,7 +3752,7 @@ func awsAwsjson11_serializeDocumentStartStreamProcessorInput(v *StartStreamProce
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartTextDetectionInput(v *StartTextDetectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartTextDetectionInput(v *StartTextDetectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3790,7 +3790,7 @@ func awsAwsjson11_serializeDocumentStartTextDetectionInput(v *StartTextDetection
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopProjectVersionInput(v *StopProjectVersionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopProjectVersionInput(v *StopProjectVersionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3802,7 +3802,7 @@ func awsAwsjson11_serializeDocumentStopProjectVersionInput(v *StopProjectVersion
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopStreamProcessorInput(v *StopStreamProcessorInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopStreamProcessorInput(v *StopStreamProcessorInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

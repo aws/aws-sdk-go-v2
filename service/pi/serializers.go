@@ -45,7 +45,7 @@ func (m *awsAwsjson11_serializeOpDescribeDimensionKeys) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("PerformanceInsightsv20180227.DescribeDimensionKeys")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeDimensionKeysInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeDimensionKeysInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -91,7 +91,7 @@ func (m *awsAwsjson11_serializeOpGetResourceMetrics) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("PerformanceInsightsv20180227.GetResourceMetrics")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetResourceMetricsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetResourceMetricsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -203,7 +203,7 @@ func awsAwsjson11_serializeDocumentStringList(v []*string, value smithyjson.Valu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeDimensionKeysInput(v *DescribeDimensionKeysInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeDimensionKeysInput(v *DescribeDimensionKeysInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -271,7 +271,7 @@ func awsAwsjson11_serializeDocumentDescribeDimensionKeysInput(v *DescribeDimensi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetResourceMetricsInput(v *GetResourceMetricsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetResourceMetricsInput(v *GetResourceMetricsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

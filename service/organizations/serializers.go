@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpAcceptHandshake) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.AcceptHandshake")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAcceptHandshakeInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAcceptHandshakeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpAttachPolicy) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.AttachPolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAttachPolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAttachPolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpCancelHandshake) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.CancelHandshake")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCancelHandshakeInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCancelHandshakeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpCreateAccount) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.CreateAccount")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateAccountInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateAccountInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpCreateGovCloudAccount) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.CreateGovCloudAccount")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateGovCloudAccountInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateGovCloudAccountInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpCreateOrganization) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.CreateOrganization")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateOrganizationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateOrganizationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson11_serializeOpCreateOrganizationalUnit) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.CreateOrganizationalUnit")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateOrganizationalUnitInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateOrganizationalUnitInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -366,7 +366,7 @@ func (m *awsAwsjson11_serializeOpCreatePolicy) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.CreatePolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreatePolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreatePolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -412,7 +412,7 @@ func (m *awsAwsjson11_serializeOpDeclineHandshake) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.DeclineHandshake")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeclineHandshakeInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeclineHandshakeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -497,7 +497,7 @@ func (m *awsAwsjson11_serializeOpDeleteOrganizationalUnit) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.DeleteOrganizationalUnit")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteOrganizationalUnitInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteOrganizationalUnitInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -543,7 +543,7 @@ func (m *awsAwsjson11_serializeOpDeletePolicy) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.DeletePolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeletePolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeletePolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -589,7 +589,7 @@ func (m *awsAwsjson11_serializeOpDeregisterDelegatedAdministrator) HandleSeriali
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.DeregisterDelegatedAdministrator")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeregisterDelegatedAdministratorInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeregisterDelegatedAdministratorInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -635,7 +635,7 @@ func (m *awsAwsjson11_serializeOpDescribeAccount) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.DescribeAccount")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeAccountInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeAccountInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -681,7 +681,7 @@ func (m *awsAwsjson11_serializeOpDescribeCreateAccountStatus) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.DescribeCreateAccountStatus")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeCreateAccountStatusInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeCreateAccountStatusInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -727,7 +727,7 @@ func (m *awsAwsjson11_serializeOpDescribeEffectivePolicy) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.DescribeEffectivePolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeEffectivePolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeEffectivePolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -773,7 +773,7 @@ func (m *awsAwsjson11_serializeOpDescribeHandshake) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.DescribeHandshake")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeHandshakeInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeHandshakeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -858,7 +858,7 @@ func (m *awsAwsjson11_serializeOpDescribeOrganizationalUnit) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.DescribeOrganizationalUnit")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeOrganizationalUnitInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeOrganizationalUnitInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -904,7 +904,7 @@ func (m *awsAwsjson11_serializeOpDescribePolicy) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.DescribePolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribePolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribePolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -950,7 +950,7 @@ func (m *awsAwsjson11_serializeOpDetachPolicy) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.DetachPolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDetachPolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDetachPolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -996,7 +996,7 @@ func (m *awsAwsjson11_serializeOpDisableAWSServiceAccess) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.DisableAWSServiceAccess")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDisableAWSServiceAccessInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDisableAWSServiceAccessInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1042,7 +1042,7 @@ func (m *awsAwsjson11_serializeOpDisablePolicyType) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.DisablePolicyType")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDisablePolicyTypeInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDisablePolicyTypeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1127,7 +1127,7 @@ func (m *awsAwsjson11_serializeOpEnableAWSServiceAccess) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.EnableAWSServiceAccess")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentEnableAWSServiceAccessInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentEnableAWSServiceAccessInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1173,7 +1173,7 @@ func (m *awsAwsjson11_serializeOpEnablePolicyType) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.EnablePolicyType")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentEnablePolicyTypeInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentEnablePolicyTypeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1219,7 +1219,7 @@ func (m *awsAwsjson11_serializeOpInviteAccountToOrganization) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.InviteAccountToOrganization")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentInviteAccountToOrganizationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentInviteAccountToOrganizationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1304,7 +1304,7 @@ func (m *awsAwsjson11_serializeOpListAccounts) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.ListAccounts")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListAccountsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListAccountsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1350,7 +1350,7 @@ func (m *awsAwsjson11_serializeOpListAccountsForParent) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.ListAccountsForParent")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListAccountsForParentInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListAccountsForParentInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1396,7 +1396,7 @@ func (m *awsAwsjson11_serializeOpListAWSServiceAccessForOrganization) HandleSeri
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.ListAWSServiceAccessForOrganization")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListAWSServiceAccessForOrganizationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListAWSServiceAccessForOrganizationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1442,7 +1442,7 @@ func (m *awsAwsjson11_serializeOpListChildren) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.ListChildren")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListChildrenInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListChildrenInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1488,7 +1488,7 @@ func (m *awsAwsjson11_serializeOpListCreateAccountStatus) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.ListCreateAccountStatus")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListCreateAccountStatusInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListCreateAccountStatusInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1534,7 +1534,7 @@ func (m *awsAwsjson11_serializeOpListDelegatedAdministrators) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.ListDelegatedAdministrators")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListDelegatedAdministratorsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListDelegatedAdministratorsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1580,7 +1580,7 @@ func (m *awsAwsjson11_serializeOpListDelegatedServicesForAccount) HandleSerializ
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.ListDelegatedServicesForAccount")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListDelegatedServicesForAccountInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListDelegatedServicesForAccountInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1626,7 +1626,7 @@ func (m *awsAwsjson11_serializeOpListHandshakesForAccount) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.ListHandshakesForAccount")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListHandshakesForAccountInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListHandshakesForAccountInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1672,7 +1672,7 @@ func (m *awsAwsjson11_serializeOpListHandshakesForOrganization) HandleSerialize(
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.ListHandshakesForOrganization")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListHandshakesForOrganizationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListHandshakesForOrganizationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1718,7 +1718,7 @@ func (m *awsAwsjson11_serializeOpListOrganizationalUnitsForParent) HandleSeriali
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.ListOrganizationalUnitsForParent")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListOrganizationalUnitsForParentInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListOrganizationalUnitsForParentInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1764,7 +1764,7 @@ func (m *awsAwsjson11_serializeOpListParents) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.ListParents")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListParentsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListParentsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1810,7 +1810,7 @@ func (m *awsAwsjson11_serializeOpListPolicies) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.ListPolicies")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListPoliciesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListPoliciesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1856,7 +1856,7 @@ func (m *awsAwsjson11_serializeOpListPoliciesForTarget) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.ListPoliciesForTarget")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListPoliciesForTargetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListPoliciesForTargetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1902,7 +1902,7 @@ func (m *awsAwsjson11_serializeOpListRoots) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.ListRoots")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListRootsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListRootsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1948,7 +1948,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.ListTagsForResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1994,7 +1994,7 @@ func (m *awsAwsjson11_serializeOpListTargetsForPolicy) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.ListTargetsForPolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTargetsForPolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTargetsForPolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2040,7 +2040,7 @@ func (m *awsAwsjson11_serializeOpMoveAccount) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.MoveAccount")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentMoveAccountInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentMoveAccountInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2086,7 +2086,7 @@ func (m *awsAwsjson11_serializeOpRegisterDelegatedAdministrator) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.RegisterDelegatedAdministrator")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRegisterDelegatedAdministratorInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRegisterDelegatedAdministratorInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2132,7 +2132,7 @@ func (m *awsAwsjson11_serializeOpRemoveAccountFromOrganization) HandleSerialize(
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.RemoveAccountFromOrganization")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRemoveAccountFromOrganizationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRemoveAccountFromOrganizationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2178,7 +2178,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.TagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2224,7 +2224,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.UntagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2270,7 +2270,7 @@ func (m *awsAwsjson11_serializeOpUpdateOrganizationalUnit) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.UpdateOrganizationalUnit")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateOrganizationalUnitInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateOrganizationalUnitInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2316,7 +2316,7 @@ func (m *awsAwsjson11_serializeOpUpdatePolicy) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSOrganizationsV20161128.UpdatePolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdatePolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdatePolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2425,7 +2425,7 @@ func awsAwsjson11_serializeDocumentTags(v []*types.Tag, value smithyjson.Value) 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAcceptHandshakeInput(v *AcceptHandshakeInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAcceptHandshakeInput(v *AcceptHandshakeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2437,7 +2437,7 @@ func awsAwsjson11_serializeDocumentAcceptHandshakeInput(v *AcceptHandshakeInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAttachPolicyInput(v *AttachPolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAttachPolicyInput(v *AttachPolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2454,7 +2454,7 @@ func awsAwsjson11_serializeDocumentAttachPolicyInput(v *AttachPolicyInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCancelHandshakeInput(v *CancelHandshakeInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCancelHandshakeInput(v *CancelHandshakeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2466,7 +2466,7 @@ func awsAwsjson11_serializeDocumentCancelHandshakeInput(v *CancelHandshakeInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateAccountInput(v *CreateAccountInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateAccountInput(v *CreateAccountInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2493,7 +2493,7 @@ func awsAwsjson11_serializeDocumentCreateAccountInput(v *CreateAccountInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateGovCloudAccountInput(v *CreateGovCloudAccountInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateGovCloudAccountInput(v *CreateGovCloudAccountInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2520,7 +2520,7 @@ func awsAwsjson11_serializeDocumentCreateGovCloudAccountInput(v *CreateGovCloudA
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateOrganizationalUnitInput(v *CreateOrganizationalUnitInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateOrganizationalUnitInput(v *CreateOrganizationalUnitInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2537,7 +2537,7 @@ func awsAwsjson11_serializeDocumentCreateOrganizationalUnitInput(v *CreateOrgani
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateOrganizationInput(v *CreateOrganizationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateOrganizationInput(v *CreateOrganizationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2549,7 +2549,7 @@ func awsAwsjson11_serializeDocumentCreateOrganizationInput(v *CreateOrganization
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreatePolicyInput(v *CreatePolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreatePolicyInput(v *CreatePolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2576,7 +2576,7 @@ func awsAwsjson11_serializeDocumentCreatePolicyInput(v *CreatePolicyInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeclineHandshakeInput(v *DeclineHandshakeInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeclineHandshakeInput(v *DeclineHandshakeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2588,7 +2588,7 @@ func awsAwsjson11_serializeDocumentDeclineHandshakeInput(v *DeclineHandshakeInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteOrganizationalUnitInput(v *DeleteOrganizationalUnitInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteOrganizationalUnitInput(v *DeleteOrganizationalUnitInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2607,7 +2607,7 @@ func awsAwsjson11_serializeDocumentDeleteOrganizationInput(v *DeleteOrganization
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeletePolicyInput(v *DeletePolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeletePolicyInput(v *DeletePolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2619,7 +2619,7 @@ func awsAwsjson11_serializeDocumentDeletePolicyInput(v *DeletePolicyInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeregisterDelegatedAdministratorInput(v *DeregisterDelegatedAdministratorInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeregisterDelegatedAdministratorInput(v *DeregisterDelegatedAdministratorInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2636,7 +2636,7 @@ func awsAwsjson11_serializeDocumentDeregisterDelegatedAdministratorInput(v *Dere
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeAccountInput(v *DescribeAccountInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeAccountInput(v *DescribeAccountInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2648,7 +2648,7 @@ func awsAwsjson11_serializeDocumentDescribeAccountInput(v *DescribeAccountInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeCreateAccountStatusInput(v *DescribeCreateAccountStatusInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeCreateAccountStatusInput(v *DescribeCreateAccountStatusInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2660,7 +2660,7 @@ func awsAwsjson11_serializeDocumentDescribeCreateAccountStatusInput(v *DescribeC
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeEffectivePolicyInput(v *DescribeEffectivePolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeEffectivePolicyInput(v *DescribeEffectivePolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2677,7 +2677,7 @@ func awsAwsjson11_serializeDocumentDescribeEffectivePolicyInput(v *DescribeEffec
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeHandshakeInput(v *DescribeHandshakeInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeHandshakeInput(v *DescribeHandshakeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2689,7 +2689,7 @@ func awsAwsjson11_serializeDocumentDescribeHandshakeInput(v *DescribeHandshakeIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeOrganizationalUnitInput(v *DescribeOrganizationalUnitInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeOrganizationalUnitInput(v *DescribeOrganizationalUnitInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2708,7 +2708,7 @@ func awsAwsjson11_serializeDocumentDescribeOrganizationInput(v *DescribeOrganiza
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribePolicyInput(v *DescribePolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribePolicyInput(v *DescribePolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2720,7 +2720,7 @@ func awsAwsjson11_serializeDocumentDescribePolicyInput(v *DescribePolicyInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDetachPolicyInput(v *DetachPolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDetachPolicyInput(v *DetachPolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2737,7 +2737,7 @@ func awsAwsjson11_serializeDocumentDetachPolicyInput(v *DetachPolicyInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDisableAWSServiceAccessInput(v *DisableAWSServiceAccessInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDisableAWSServiceAccessInput(v *DisableAWSServiceAccessInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2749,7 +2749,7 @@ func awsAwsjson11_serializeDocumentDisableAWSServiceAccessInput(v *DisableAWSSer
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDisablePolicyTypeInput(v *DisablePolicyTypeInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDisablePolicyTypeInput(v *DisablePolicyTypeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2766,14 +2766,14 @@ func awsAwsjson11_serializeDocumentDisablePolicyTypeInput(v *DisablePolicyTypeIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentEnableAllFeaturesInput(v *EnableAllFeaturesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentEnableAllFeaturesInput(v *EnableAllFeaturesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentEnableAWSServiceAccessInput(v *EnableAWSServiceAccessInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentEnableAWSServiceAccessInput(v *EnableAWSServiceAccessInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2785,7 +2785,7 @@ func awsAwsjson11_serializeDocumentEnableAWSServiceAccessInput(v *EnableAWSServi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentEnablePolicyTypeInput(v *EnablePolicyTypeInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentEnablePolicyTypeInput(v *EnablePolicyTypeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2802,7 +2802,7 @@ func awsAwsjson11_serializeDocumentEnablePolicyTypeInput(v *EnablePolicyTypeInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentInviteAccountToOrganizationInput(v *InviteAccountToOrganizationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentInviteAccountToOrganizationInput(v *InviteAccountToOrganizationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2828,7 +2828,7 @@ func awsAwsjson11_serializeDocumentLeaveOrganizationInput(v *LeaveOrganizationIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListAccountsForParentInput(v *ListAccountsForParentInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListAccountsForParentInput(v *ListAccountsForParentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2850,7 +2850,7 @@ func awsAwsjson11_serializeDocumentListAccountsForParentInput(v *ListAccountsFor
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListAccountsInput(v *ListAccountsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListAccountsInput(v *ListAccountsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2867,7 +2867,7 @@ func awsAwsjson11_serializeDocumentListAccountsInput(v *ListAccountsInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListAWSServiceAccessForOrganizationInput(v *ListAWSServiceAccessForOrganizationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListAWSServiceAccessForOrganizationInput(v *ListAWSServiceAccessForOrganizationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2884,7 +2884,7 @@ func awsAwsjson11_serializeDocumentListAWSServiceAccessForOrganizationInput(v *L
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListChildrenInput(v *ListChildrenInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListChildrenInput(v *ListChildrenInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2911,7 +2911,7 @@ func awsAwsjson11_serializeDocumentListChildrenInput(v *ListChildrenInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListCreateAccountStatusInput(v *ListCreateAccountStatusInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListCreateAccountStatusInput(v *ListCreateAccountStatusInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2935,7 +2935,7 @@ func awsAwsjson11_serializeDocumentListCreateAccountStatusInput(v *ListCreateAcc
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListDelegatedAdministratorsInput(v *ListDelegatedAdministratorsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListDelegatedAdministratorsInput(v *ListDelegatedAdministratorsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2957,7 +2957,7 @@ func awsAwsjson11_serializeDocumentListDelegatedAdministratorsInput(v *ListDeleg
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListDelegatedServicesForAccountInput(v *ListDelegatedServicesForAccountInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListDelegatedServicesForAccountInput(v *ListDelegatedServicesForAccountInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2979,7 +2979,7 @@ func awsAwsjson11_serializeDocumentListDelegatedServicesForAccountInput(v *ListD
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListHandshakesForAccountInput(v *ListHandshakesForAccountInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListHandshakesForAccountInput(v *ListHandshakesForAccountInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3003,7 +3003,7 @@ func awsAwsjson11_serializeDocumentListHandshakesForAccountInput(v *ListHandshak
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListHandshakesForOrganizationInput(v *ListHandshakesForOrganizationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListHandshakesForOrganizationInput(v *ListHandshakesForOrganizationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3027,7 +3027,7 @@ func awsAwsjson11_serializeDocumentListHandshakesForOrganizationInput(v *ListHan
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListOrganizationalUnitsForParentInput(v *ListOrganizationalUnitsForParentInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListOrganizationalUnitsForParentInput(v *ListOrganizationalUnitsForParentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3049,7 +3049,7 @@ func awsAwsjson11_serializeDocumentListOrganizationalUnitsForParentInput(v *List
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListParentsInput(v *ListParentsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListParentsInput(v *ListParentsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3071,7 +3071,7 @@ func awsAwsjson11_serializeDocumentListParentsInput(v *ListParentsInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListPoliciesForTargetInput(v *ListPoliciesForTargetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListPoliciesForTargetInput(v *ListPoliciesForTargetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3098,7 +3098,7 @@ func awsAwsjson11_serializeDocumentListPoliciesForTargetInput(v *ListPoliciesFor
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListPoliciesInput(v *ListPoliciesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListPoliciesInput(v *ListPoliciesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3120,7 +3120,7 @@ func awsAwsjson11_serializeDocumentListPoliciesInput(v *ListPoliciesInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListRootsInput(v *ListRootsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListRootsInput(v *ListRootsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3137,7 +3137,7 @@ func awsAwsjson11_serializeDocumentListRootsInput(v *ListRootsInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3154,7 +3154,7 @@ func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResour
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTargetsForPolicyInput(v *ListTargetsForPolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTargetsForPolicyInput(v *ListTargetsForPolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3176,7 +3176,7 @@ func awsAwsjson11_serializeDocumentListTargetsForPolicyInput(v *ListTargetsForPo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentMoveAccountInput(v *MoveAccountInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentMoveAccountInput(v *MoveAccountInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3198,7 +3198,7 @@ func awsAwsjson11_serializeDocumentMoveAccountInput(v *MoveAccountInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRegisterDelegatedAdministratorInput(v *RegisterDelegatedAdministratorInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRegisterDelegatedAdministratorInput(v *RegisterDelegatedAdministratorInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3215,7 +3215,7 @@ func awsAwsjson11_serializeDocumentRegisterDelegatedAdministratorInput(v *Regist
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRemoveAccountFromOrganizationInput(v *RemoveAccountFromOrganizationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRemoveAccountFromOrganizationInput(v *RemoveAccountFromOrganizationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3227,7 +3227,7 @@ func awsAwsjson11_serializeDocumentRemoveAccountFromOrganizationInput(v *RemoveA
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3246,7 +3246,7 @@ func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3265,7 +3265,7 @@ func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateOrganizationalUnitInput(v *UpdateOrganizationalUnitInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateOrganizationalUnitInput(v *UpdateOrganizationalUnitInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3282,7 +3282,7 @@ func awsAwsjson11_serializeDocumentUpdateOrganizationalUnitInput(v *UpdateOrgani
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdatePolicyInput(v *UpdatePolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdatePolicyInput(v *UpdatePolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

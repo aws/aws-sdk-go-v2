@@ -146,7 +146,7 @@ func (m *awsRestjson1_deserializeOpDescribeHumanLoop) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDescribeHumanLoopOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDescribeHumanLoopOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -222,7 +222,7 @@ func awsRestjson1_deserializeOpErrorDescribeHumanLoop(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeHumanLoopOutput(v **DescribeHumanLoopOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeHumanLoopOutput(v **DescribeHumanLoopOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -407,7 +407,7 @@ func (m *awsRestjson1_deserializeOpListHumanLoops) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListHumanLoopsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListHumanLoopsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -483,7 +483,7 @@ func awsRestjson1_deserializeOpErrorListHumanLoops(response *smithyhttp.Response
 	}
 }
 
-func awsRestjson1_deserializeDocumentListHumanLoopsOutput(v **ListHumanLoopsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListHumanLoopsOutput(v **ListHumanLoopsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -586,7 +586,7 @@ func (m *awsRestjson1_deserializeOpStartHumanLoop) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentStartHumanLoopOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentStartHumanLoopOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -665,7 +665,7 @@ func awsRestjson1_deserializeOpErrorStartHumanLoop(response *smithyhttp.Response
 	}
 }
 
-func awsRestjson1_deserializeDocumentStartHumanLoopOutput(v **StartHumanLoopOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentStartHumanLoopOutput(v **StartHumanLoopOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

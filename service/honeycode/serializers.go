@@ -52,7 +52,7 @@ func (m *awsRestjson1_serializeOpGetScreenData) HandleSerialize(ctx context.Cont
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentGetScreenDataInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentGetScreenDataInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -67,7 +67,7 @@ func (m *awsRestjson1_serializeOpGetScreenData) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsGetScreenDataInput(v *GetScreenDataInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetScreenDataInput(v *GetScreenDataInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -75,7 +75,7 @@ func awsRestjson1_serializeHttpBindingsGetScreenDataInput(v *GetScreenDataInput,
 	return nil
 }
 
-func awsRestjson1_serializeDocumentGetScreenDataInput(v *GetScreenDataInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentGetScreenDataInput(v *GetScreenDataInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -149,14 +149,14 @@ func (m *awsRestjson1_serializeOpInvokeScreenAutomation) HandleSerialize(ctx con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsInvokeScreenAutomationInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsInvokeScreenAutomationInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentInvokeScreenAutomationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentInvokeScreenAutomationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -171,7 +171,7 @@ func (m *awsRestjson1_serializeOpInvokeScreenAutomation) HandleSerialize(ctx con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsInvokeScreenAutomationInput(v *InvokeScreenAutomationInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsInvokeScreenAutomationInput(v *InvokeScreenAutomationInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -203,7 +203,7 @@ func awsRestjson1_serializeHttpBindingsInvokeScreenAutomationInput(v *InvokeScre
 	return nil
 }
 
-func awsRestjson1_serializeDocumentInvokeScreenAutomationInput(v *InvokeScreenAutomationInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentInvokeScreenAutomationInput(v *InvokeScreenAutomationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

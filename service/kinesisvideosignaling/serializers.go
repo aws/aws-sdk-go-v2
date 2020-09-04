@@ -51,7 +51,7 @@ func (m *awsRestjson1_serializeOpGetIceServerConfig) HandleSerialize(ctx context
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentGetIceServerConfigInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentGetIceServerConfigInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -66,7 +66,7 @@ func (m *awsRestjson1_serializeOpGetIceServerConfig) HandleSerialize(ctx context
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsGetIceServerConfigInput(v *GetIceServerConfigInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetIceServerConfigInput(v *GetIceServerConfigInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -74,7 +74,7 @@ func awsRestjson1_serializeHttpBindingsGetIceServerConfigInput(v *GetIceServerCo
 	return nil
 }
 
-func awsRestjson1_serializeDocumentGetIceServerConfigInput(v *GetIceServerConfigInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentGetIceServerConfigInput(v *GetIceServerConfigInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -139,7 +139,7 @@ func (m *awsRestjson1_serializeOpSendAlexaOfferToMaster) HandleSerialize(ctx con
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentSendAlexaOfferToMasterInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentSendAlexaOfferToMasterInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -154,7 +154,7 @@ func (m *awsRestjson1_serializeOpSendAlexaOfferToMaster) HandleSerialize(ctx con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsSendAlexaOfferToMasterInput(v *SendAlexaOfferToMasterInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsSendAlexaOfferToMasterInput(v *SendAlexaOfferToMasterInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -162,7 +162,7 @@ func awsRestjson1_serializeHttpBindingsSendAlexaOfferToMasterInput(v *SendAlexaO
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSendAlexaOfferToMasterInput(v *SendAlexaOfferToMasterInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentSendAlexaOfferToMasterInput(v *SendAlexaOfferToMasterInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

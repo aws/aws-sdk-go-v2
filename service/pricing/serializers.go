@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpDescribeServices) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSPriceListService.DescribeServices")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeServicesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeServicesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpGetAttributeValues) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSPriceListService.GetAttributeValues")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetAttributeValuesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetAttributeValuesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpGetProducts) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSPriceListService.GetProducts")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetProductsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetProductsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -190,7 +190,7 @@ func awsAwsjson11_serializeDocumentFilters(v []*types.Filter, value smithyjson.V
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeServicesInput(v *DescribeServicesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeServicesInput(v *DescribeServicesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -217,7 +217,7 @@ func awsAwsjson11_serializeDocumentDescribeServicesInput(v *DescribeServicesInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetAttributeValuesInput(v *GetAttributeValuesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetAttributeValuesInput(v *GetAttributeValuesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -244,7 +244,7 @@ func awsAwsjson11_serializeDocumentGetAttributeValuesInput(v *GetAttributeValues
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetProductsInput(v *GetProductsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetProductsInput(v *GetProductsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

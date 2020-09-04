@@ -123,7 +123,7 @@ func (m *awsAwsjson10_serializeOpJsonUnions) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("JsonRpc10.JsonUnions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentJsonUnionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentJsonUnionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -312,7 +312,7 @@ func awsAwsjson10_serializeDocumentStringMap(v map[string]*string, value smithyj
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentEmptyInputAndEmptyOutputInput(v *EmptyInputAndEmptyOutputInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentEmptyInputAndEmptyOutputInput(v *EmptyInputAndEmptyOutputInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -326,7 +326,7 @@ func awsAwsjson10_serializeDocumentGreetingWithErrorsInput(v *GreetingWithErrors
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentJsonUnionsInput(v *JsonUnionsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentJsonUnionsInput(v *JsonUnionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

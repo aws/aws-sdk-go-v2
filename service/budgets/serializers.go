@@ -45,7 +45,7 @@ func (m *awsAwsjson11_serializeOpCreateBudget) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBudgetServiceGateway.CreateBudget")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateBudgetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateBudgetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -91,7 +91,7 @@ func (m *awsAwsjson11_serializeOpCreateNotification) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBudgetServiceGateway.CreateNotification")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateNotificationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateNotificationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -137,7 +137,7 @@ func (m *awsAwsjson11_serializeOpCreateSubscriber) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBudgetServiceGateway.CreateSubscriber")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateSubscriberInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateSubscriberInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -183,7 +183,7 @@ func (m *awsAwsjson11_serializeOpDeleteBudget) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBudgetServiceGateway.DeleteBudget")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteBudgetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteBudgetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -229,7 +229,7 @@ func (m *awsAwsjson11_serializeOpDeleteNotification) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBudgetServiceGateway.DeleteNotification")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteNotificationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteNotificationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -275,7 +275,7 @@ func (m *awsAwsjson11_serializeOpDeleteSubscriber) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBudgetServiceGateway.DeleteSubscriber")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteSubscriberInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteSubscriberInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -321,7 +321,7 @@ func (m *awsAwsjson11_serializeOpDescribeBudget) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBudgetServiceGateway.DescribeBudget")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeBudgetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeBudgetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -367,7 +367,7 @@ func (m *awsAwsjson11_serializeOpDescribeBudgetPerformanceHistory) HandleSeriali
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBudgetServiceGateway.DescribeBudgetPerformanceHistory")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeBudgetPerformanceHistoryInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeBudgetPerformanceHistoryInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -413,7 +413,7 @@ func (m *awsAwsjson11_serializeOpDescribeBudgets) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBudgetServiceGateway.DescribeBudgets")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeBudgetsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeBudgetsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -459,7 +459,7 @@ func (m *awsAwsjson11_serializeOpDescribeNotificationsForBudget) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBudgetServiceGateway.DescribeNotificationsForBudget")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeNotificationsForBudgetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeNotificationsForBudgetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -505,7 +505,7 @@ func (m *awsAwsjson11_serializeOpDescribeSubscribersForNotification) HandleSeria
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBudgetServiceGateway.DescribeSubscribersForNotification")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeSubscribersForNotificationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeSubscribersForNotificationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -551,7 +551,7 @@ func (m *awsAwsjson11_serializeOpUpdateBudget) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBudgetServiceGateway.UpdateBudget")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateBudgetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateBudgetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -597,7 +597,7 @@ func (m *awsAwsjson11_serializeOpUpdateNotification) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBudgetServiceGateway.UpdateNotification")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateNotificationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateNotificationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -643,7 +643,7 @@ func (m *awsAwsjson11_serializeOpUpdateSubscriber) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSBudgetServiceGateway.UpdateSubscriber")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateSubscriberInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateSubscriberInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -997,7 +997,7 @@ func awsAwsjson11_serializeDocumentTimePeriod(v *types.TimePeriod, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateBudgetInput(v *CreateBudgetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateBudgetInput(v *CreateBudgetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1023,7 +1023,7 @@ func awsAwsjson11_serializeDocumentCreateBudgetInput(v *CreateBudgetInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateNotificationInput(v *CreateNotificationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateNotificationInput(v *CreateNotificationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1054,7 +1054,7 @@ func awsAwsjson11_serializeDocumentCreateNotificationInput(v *CreateNotification
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateSubscriberInput(v *CreateSubscriberInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateSubscriberInput(v *CreateSubscriberInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1085,7 +1085,7 @@ func awsAwsjson11_serializeDocumentCreateSubscriberInput(v *CreateSubscriberInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteBudgetInput(v *DeleteBudgetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteBudgetInput(v *DeleteBudgetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1102,7 +1102,7 @@ func awsAwsjson11_serializeDocumentDeleteBudgetInput(v *DeleteBudgetInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteNotificationInput(v *DeleteNotificationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteNotificationInput(v *DeleteNotificationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1126,7 +1126,7 @@ func awsAwsjson11_serializeDocumentDeleteNotificationInput(v *DeleteNotification
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteSubscriberInput(v *DeleteSubscriberInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteSubscriberInput(v *DeleteSubscriberInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1157,7 +1157,7 @@ func awsAwsjson11_serializeDocumentDeleteSubscriberInput(v *DeleteSubscriberInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeBudgetInput(v *DescribeBudgetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeBudgetInput(v *DescribeBudgetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1174,7 +1174,7 @@ func awsAwsjson11_serializeDocumentDescribeBudgetInput(v *DescribeBudgetInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeBudgetPerformanceHistoryInput(v *DescribeBudgetPerformanceHistoryInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeBudgetPerformanceHistoryInput(v *DescribeBudgetPerformanceHistoryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1208,7 +1208,7 @@ func awsAwsjson11_serializeDocumentDescribeBudgetPerformanceHistoryInput(v *Desc
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeBudgetsInput(v *DescribeBudgetsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeBudgetsInput(v *DescribeBudgetsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1230,7 +1230,7 @@ func awsAwsjson11_serializeDocumentDescribeBudgetsInput(v *DescribeBudgetsInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeNotificationsForBudgetInput(v *DescribeNotificationsForBudgetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeNotificationsForBudgetInput(v *DescribeNotificationsForBudgetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1257,7 +1257,7 @@ func awsAwsjson11_serializeDocumentDescribeNotificationsForBudgetInput(v *Descri
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeSubscribersForNotificationInput(v *DescribeSubscribersForNotificationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeSubscribersForNotificationInput(v *DescribeSubscribersForNotificationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1291,7 +1291,7 @@ func awsAwsjson11_serializeDocumentDescribeSubscribersForNotificationInput(v *De
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateBudgetInput(v *UpdateBudgetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateBudgetInput(v *UpdateBudgetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1310,7 +1310,7 @@ func awsAwsjson11_serializeDocumentUpdateBudgetInput(v *UpdateBudgetInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateNotificationInput(v *UpdateNotificationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateNotificationInput(v *UpdateNotificationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1341,7 +1341,7 @@ func awsAwsjson11_serializeDocumentUpdateNotificationInput(v *UpdateNotification
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateSubscriberInput(v *UpdateSubscriberInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateSubscriberInput(v *UpdateSubscriberInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

@@ -2,22 +2,22 @@
 
 package types
 
-type __EndpointTypesElement string
+type EndpointTypesElement string
 
-// Enum values for __EndpointTypesElement
+// Enum values for EndpointTypesElement
 const (
-	__EndpointTypesElementPush              __EndpointTypesElement = "PUSH"
-	__EndpointTypesElementGcm               __EndpointTypesElement = "GCM"
-	__EndpointTypesElementApns              __EndpointTypesElement = "APNS"
-	__EndpointTypesElementApns_sandbox      __EndpointTypesElement = "APNS_SANDBOX"
-	__EndpointTypesElementApns_voip         __EndpointTypesElement = "APNS_VOIP"
-	__EndpointTypesElementApns_voip_sandbox __EndpointTypesElement = "APNS_VOIP_SANDBOX"
-	__EndpointTypesElementAdm               __EndpointTypesElement = "ADM"
-	__EndpointTypesElementSms               __EndpointTypesElement = "SMS"
-	__EndpointTypesElementVoice             __EndpointTypesElement = "VOICE"
-	__EndpointTypesElementEmail             __EndpointTypesElement = "EMAIL"
-	__EndpointTypesElementBaidu             __EndpointTypesElement = "BAIDU"
-	__EndpointTypesElementCustom            __EndpointTypesElement = "CUSTOM"
+	EndpointTypesElementPush              EndpointTypesElement = "PUSH"
+	EndpointTypesElementGcm               EndpointTypesElement = "GCM"
+	EndpointTypesElementApns              EndpointTypesElement = "APNS"
+	EndpointTypesElementApns_sandbox      EndpointTypesElement = "APNS_SANDBOX"
+	EndpointTypesElementApns_voip         EndpointTypesElement = "APNS_VOIP"
+	EndpointTypesElementApns_voip_sandbox EndpointTypesElement = "APNS_VOIP_SANDBOX"
+	EndpointTypesElementAdm               EndpointTypesElement = "ADM"
+	EndpointTypesElementSms               EndpointTypesElement = "SMS"
+	EndpointTypesElementVoice             EndpointTypesElement = "VOICE"
+	EndpointTypesElementEmail             EndpointTypesElement = "EMAIL"
+	EndpointTypesElementBaidu             EndpointTypesElement = "BAIDU"
+	EndpointTypesElementCustom            EndpointTypesElement = "CUSTOM"
 )
 
 type Action string

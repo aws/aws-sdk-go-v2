@@ -157,7 +157,7 @@ func (m *awsAwsjson11_deserializeOpAssociateS3Resources) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentAssociateS3ResourcesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentAssociateS3ResourcesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -369,7 +369,7 @@ func (m *awsAwsjson11_deserializeOpDisassociateS3Resources) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDisassociateS3ResourcesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDisassociateS3ResourcesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -475,7 +475,7 @@ func (m *awsAwsjson11_deserializeOpListMemberAccounts) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListMemberAccountsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListMemberAccountsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -578,7 +578,7 @@ func (m *awsAwsjson11_deserializeOpListS3Resources) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListS3ResourcesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListS3ResourcesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -684,7 +684,7 @@ func (m *awsAwsjson11_deserializeOpUpdateS3Resources) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateS3ResourcesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateS3ResourcesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1755,7 +1755,7 @@ func awsAwsjson11_deserializeDocumentAssociateMemberAccountOutput(v **AssociateM
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAssociateS3ResourcesOutput(v **AssociateS3ResourcesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAssociateS3ResourcesOutput(v **AssociateS3ResourcesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1862,7 +1862,7 @@ func awsAwsjson11_deserializeDocumentDisassociateMemberAccountOutput(v **Disasso
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDisassociateS3ResourcesOutput(v **DisassociateS3ResourcesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDisassociateS3ResourcesOutput(v **DisassociateS3ResourcesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1918,7 +1918,7 @@ func awsAwsjson11_deserializeDocumentDisassociateS3ResourcesOutput(v **Disassoci
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListMemberAccountsOutput(v **ListMemberAccountsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListMemberAccountsOutput(v **ListMemberAccountsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1987,7 +1987,7 @@ func awsAwsjson11_deserializeDocumentListMemberAccountsOutput(v **ListMemberAcco
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListS3ResourcesOutput(v **ListS3ResourcesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListS3ResourcesOutput(v **ListS3ResourcesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2056,7 +2056,7 @@ func awsAwsjson11_deserializeDocumentListS3ResourcesOutput(v **ListS3ResourcesOu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateS3ResourcesOutput(v **UpdateS3ResourcesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateS3ResourcesOutput(v **UpdateS3ResourcesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

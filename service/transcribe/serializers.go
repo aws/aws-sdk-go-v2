@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpCreateMedicalVocabulary) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.CreateMedicalVocabulary")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateMedicalVocabularyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateMedicalVocabularyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpCreateVocabulary) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.CreateVocabulary")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateVocabularyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateVocabularyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpCreateVocabularyFilter) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.CreateVocabularyFilter")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateVocabularyFilterInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateVocabularyFilterInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpDeleteMedicalTranscriptionJob) HandleSerialize(
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.DeleteMedicalTranscriptionJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteMedicalTranscriptionJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteMedicalTranscriptionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpDeleteMedicalVocabulary) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.DeleteMedicalVocabulary")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteMedicalVocabularyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteMedicalVocabularyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpDeleteTranscriptionJob) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.DeleteTranscriptionJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteTranscriptionJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteTranscriptionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson11_serializeOpDeleteVocabulary) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.DeleteVocabulary")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteVocabularyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteVocabularyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -366,7 +366,7 @@ func (m *awsAwsjson11_serializeOpDeleteVocabularyFilter) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.DeleteVocabularyFilter")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteVocabularyFilterInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteVocabularyFilterInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -412,7 +412,7 @@ func (m *awsAwsjson11_serializeOpGetMedicalTranscriptionJob) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.GetMedicalTranscriptionJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetMedicalTranscriptionJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetMedicalTranscriptionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -458,7 +458,7 @@ func (m *awsAwsjson11_serializeOpGetMedicalVocabulary) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.GetMedicalVocabulary")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetMedicalVocabularyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetMedicalVocabularyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -504,7 +504,7 @@ func (m *awsAwsjson11_serializeOpGetTranscriptionJob) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.GetTranscriptionJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetTranscriptionJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetTranscriptionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -550,7 +550,7 @@ func (m *awsAwsjson11_serializeOpGetVocabulary) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.GetVocabulary")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetVocabularyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetVocabularyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -596,7 +596,7 @@ func (m *awsAwsjson11_serializeOpGetVocabularyFilter) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.GetVocabularyFilter")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetVocabularyFilterInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetVocabularyFilterInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -642,7 +642,7 @@ func (m *awsAwsjson11_serializeOpListMedicalTranscriptionJobs) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.ListMedicalTranscriptionJobs")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListMedicalTranscriptionJobsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListMedicalTranscriptionJobsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -688,7 +688,7 @@ func (m *awsAwsjson11_serializeOpListMedicalVocabularies) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.ListMedicalVocabularies")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListMedicalVocabulariesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListMedicalVocabulariesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -734,7 +734,7 @@ func (m *awsAwsjson11_serializeOpListTranscriptionJobs) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.ListTranscriptionJobs")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTranscriptionJobsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTranscriptionJobsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -780,7 +780,7 @@ func (m *awsAwsjson11_serializeOpListVocabularies) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.ListVocabularies")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListVocabulariesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListVocabulariesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -826,7 +826,7 @@ func (m *awsAwsjson11_serializeOpListVocabularyFilters) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.ListVocabularyFilters")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListVocabularyFiltersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListVocabularyFiltersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -872,7 +872,7 @@ func (m *awsAwsjson11_serializeOpStartMedicalTranscriptionJob) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.StartMedicalTranscriptionJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartMedicalTranscriptionJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartMedicalTranscriptionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -918,7 +918,7 @@ func (m *awsAwsjson11_serializeOpStartTranscriptionJob) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.StartTranscriptionJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartTranscriptionJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartTranscriptionJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -964,7 +964,7 @@ func (m *awsAwsjson11_serializeOpUpdateMedicalVocabulary) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.UpdateMedicalVocabulary")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateMedicalVocabularyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateMedicalVocabularyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1010,7 +1010,7 @@ func (m *awsAwsjson11_serializeOpUpdateVocabulary) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.UpdateVocabulary")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateVocabularyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateVocabularyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1056,7 +1056,7 @@ func (m *awsAwsjson11_serializeOpUpdateVocabularyFilter) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Transcribe.UpdateVocabularyFilter")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateVocabularyFilterInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateVocabularyFilterInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1231,7 +1231,7 @@ func awsAwsjson11_serializeDocumentWords(v []*string, value smithyjson.Value) er
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateMedicalVocabularyInput(v *CreateMedicalVocabularyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateMedicalVocabularyInput(v *CreateMedicalVocabularyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1253,7 +1253,7 @@ func awsAwsjson11_serializeDocumentCreateMedicalVocabularyInput(v *CreateMedical
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateVocabularyFilterInput(v *CreateVocabularyFilterInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateVocabularyFilterInput(v *CreateVocabularyFilterInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1282,7 +1282,7 @@ func awsAwsjson11_serializeDocumentCreateVocabularyFilterInput(v *CreateVocabula
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateVocabularyInput(v *CreateVocabularyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateVocabularyInput(v *CreateVocabularyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1311,7 +1311,7 @@ func awsAwsjson11_serializeDocumentCreateVocabularyInput(v *CreateVocabularyInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteMedicalTranscriptionJobInput(v *DeleteMedicalTranscriptionJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteMedicalTranscriptionJobInput(v *DeleteMedicalTranscriptionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1323,7 +1323,7 @@ func awsAwsjson11_serializeDocumentDeleteMedicalTranscriptionJobInput(v *DeleteM
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteMedicalVocabularyInput(v *DeleteMedicalVocabularyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteMedicalVocabularyInput(v *DeleteMedicalVocabularyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1335,7 +1335,7 @@ func awsAwsjson11_serializeDocumentDeleteMedicalVocabularyInput(v *DeleteMedical
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteTranscriptionJobInput(v *DeleteTranscriptionJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteTranscriptionJobInput(v *DeleteTranscriptionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1347,7 +1347,7 @@ func awsAwsjson11_serializeDocumentDeleteTranscriptionJobInput(v *DeleteTranscri
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteVocabularyFilterInput(v *DeleteVocabularyFilterInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteVocabularyFilterInput(v *DeleteVocabularyFilterInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1359,7 +1359,7 @@ func awsAwsjson11_serializeDocumentDeleteVocabularyFilterInput(v *DeleteVocabula
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteVocabularyInput(v *DeleteVocabularyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteVocabularyInput(v *DeleteVocabularyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1371,7 +1371,7 @@ func awsAwsjson11_serializeDocumentDeleteVocabularyInput(v *DeleteVocabularyInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetMedicalTranscriptionJobInput(v *GetMedicalTranscriptionJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetMedicalTranscriptionJobInput(v *GetMedicalTranscriptionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1383,7 +1383,7 @@ func awsAwsjson11_serializeDocumentGetMedicalTranscriptionJobInput(v *GetMedical
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetMedicalVocabularyInput(v *GetMedicalVocabularyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetMedicalVocabularyInput(v *GetMedicalVocabularyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1395,7 +1395,7 @@ func awsAwsjson11_serializeDocumentGetMedicalVocabularyInput(v *GetMedicalVocabu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetTranscriptionJobInput(v *GetTranscriptionJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetTranscriptionJobInput(v *GetTranscriptionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1407,7 +1407,7 @@ func awsAwsjson11_serializeDocumentGetTranscriptionJobInput(v *GetTranscriptionJ
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetVocabularyFilterInput(v *GetVocabularyFilterInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetVocabularyFilterInput(v *GetVocabularyFilterInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1419,7 +1419,7 @@ func awsAwsjson11_serializeDocumentGetVocabularyFilterInput(v *GetVocabularyFilt
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetVocabularyInput(v *GetVocabularyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetVocabularyInput(v *GetVocabularyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1431,7 +1431,7 @@ func awsAwsjson11_serializeDocumentGetVocabularyInput(v *GetVocabularyInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListMedicalTranscriptionJobsInput(v *ListMedicalTranscriptionJobsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListMedicalTranscriptionJobsInput(v *ListMedicalTranscriptionJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1458,7 +1458,7 @@ func awsAwsjson11_serializeDocumentListMedicalTranscriptionJobsInput(v *ListMedi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListMedicalVocabulariesInput(v *ListMedicalVocabulariesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListMedicalVocabulariesInput(v *ListMedicalVocabulariesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1485,7 +1485,7 @@ func awsAwsjson11_serializeDocumentListMedicalVocabulariesInput(v *ListMedicalVo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTranscriptionJobsInput(v *ListTranscriptionJobsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTranscriptionJobsInput(v *ListTranscriptionJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1512,7 +1512,7 @@ func awsAwsjson11_serializeDocumentListTranscriptionJobsInput(v *ListTranscripti
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListVocabulariesInput(v *ListVocabulariesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListVocabulariesInput(v *ListVocabulariesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1539,7 +1539,7 @@ func awsAwsjson11_serializeDocumentListVocabulariesInput(v *ListVocabulariesInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListVocabularyFiltersInput(v *ListVocabularyFiltersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListVocabularyFiltersInput(v *ListVocabularyFiltersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1561,7 +1561,7 @@ func awsAwsjson11_serializeDocumentListVocabularyFiltersInput(v *ListVocabularyF
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartMedicalTranscriptionJobInput(v *StartMedicalTranscriptionJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartMedicalTranscriptionJobInput(v *StartMedicalTranscriptionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1622,7 +1622,7 @@ func awsAwsjson11_serializeDocumentStartMedicalTranscriptionJobInput(v *StartMed
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartTranscriptionJobInput(v *StartTranscriptionJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartTranscriptionJobInput(v *StartTranscriptionJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1687,7 +1687,7 @@ func awsAwsjson11_serializeDocumentStartTranscriptionJobInput(v *StartTranscript
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateMedicalVocabularyInput(v *UpdateMedicalVocabularyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateMedicalVocabularyInput(v *UpdateMedicalVocabularyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1709,7 +1709,7 @@ func awsAwsjson11_serializeDocumentUpdateMedicalVocabularyInput(v *UpdateMedical
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateVocabularyFilterInput(v *UpdateVocabularyFilterInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateVocabularyFilterInput(v *UpdateVocabularyFilterInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1733,7 +1733,7 @@ func awsAwsjson11_serializeDocumentUpdateVocabularyFilterInput(v *UpdateVocabula
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateVocabularyInput(v *UpdateVocabularyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateVocabularyInput(v *UpdateVocabularyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

@@ -53,7 +53,7 @@ func (m *awsRestjson1_deserializeOpClaimDevicesByClaimCode) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentClaimDevicesByClaimCodeOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentClaimDevicesByClaimCodeOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -126,7 +126,7 @@ func awsRestjson1_deserializeOpErrorClaimDevicesByClaimCode(response *smithyhttp
 	}
 }
 
-func awsRestjson1_deserializeDocumentClaimDevicesByClaimCodeOutput(v **ClaimDevicesByClaimCodeOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentClaimDevicesByClaimCodeOutput(v **ClaimDevicesByClaimCodeOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -241,7 +241,7 @@ func (m *awsRestjson1_deserializeOpDescribeDevice) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDescribeDeviceOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDescribeDeviceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -314,7 +314,7 @@ func awsRestjson1_deserializeOpErrorDescribeDevice(response *smithyhttp.Response
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeDeviceOutput(v **DescribeDeviceOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeDeviceOutput(v **DescribeDeviceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -404,7 +404,7 @@ func (m *awsRestjson1_deserializeOpFinalizeDeviceClaim) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentFinalizeDeviceClaimOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentFinalizeDeviceClaimOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -483,7 +483,7 @@ func awsRestjson1_deserializeOpErrorFinalizeDeviceClaim(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentFinalizeDeviceClaimOutput(v **FinalizeDeviceClaimOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentFinalizeDeviceClaimOutput(v **FinalizeDeviceClaimOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -581,7 +581,7 @@ func (m *awsRestjson1_deserializeOpGetDeviceMethods) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetDeviceMethodsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetDeviceMethodsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -654,7 +654,7 @@ func awsRestjson1_deserializeOpErrorGetDeviceMethods(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetDeviceMethodsOutput(v **GetDeviceMethodsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetDeviceMethodsOutput(v **GetDeviceMethodsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -744,7 +744,7 @@ func (m *awsRestjson1_deserializeOpInitiateDeviceClaim) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentInitiateDeviceClaimOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentInitiateDeviceClaimOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -820,7 +820,7 @@ func awsRestjson1_deserializeOpErrorInitiateDeviceClaim(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentInitiateDeviceClaimOutput(v **InitiateDeviceClaimOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentInitiateDeviceClaimOutput(v **InitiateDeviceClaimOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -918,7 +918,7 @@ func (m *awsRestjson1_deserializeOpInvokeDeviceMethod) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentInvokeDeviceMethodOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentInvokeDeviceMethodOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1000,7 +1000,7 @@ func awsRestjson1_deserializeOpErrorInvokeDeviceMethod(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentInvokeDeviceMethodOutput(v **InvokeDeviceMethodOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentInvokeDeviceMethodOutput(v **InvokeDeviceMethodOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1098,7 +1098,7 @@ func (m *awsRestjson1_deserializeOpListDeviceEvents) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListDeviceEventsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListDeviceEventsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1174,7 +1174,7 @@ func awsRestjson1_deserializeOpErrorListDeviceEvents(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeDocumentListDeviceEventsOutput(v **ListDeviceEventsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListDeviceEventsOutput(v **ListDeviceEventsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1277,7 +1277,7 @@ func (m *awsRestjson1_deserializeOpListDevices) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListDevicesOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListDevicesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1350,7 +1350,7 @@ func awsRestjson1_deserializeOpErrorListDevices(response *smithyhttp.Response) e
 	}
 }
 
-func awsRestjson1_deserializeDocumentListDevicesOutput(v **ListDevicesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListDevicesOutput(v **ListDevicesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1453,7 +1453,7 @@ func (m *awsRestjson1_deserializeOpListTagsForResource) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListTagsForResourceOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1523,7 +1523,7 @@ func awsRestjson1_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1702,7 +1702,7 @@ func (m *awsRestjson1_deserializeOpUnclaimDevice) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentUnclaimDeviceOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentUnclaimDeviceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1775,7 +1775,7 @@ func awsRestjson1_deserializeOpErrorUnclaimDevice(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentUnclaimDeviceOutput(v **UnclaimDeviceOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUnclaimDeviceOutput(v **UnclaimDeviceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

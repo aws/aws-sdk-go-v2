@@ -141,7 +141,7 @@ func (m *awsRestjson1_deserializeOpDescribeVoices) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDescribeVoicesOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDescribeVoicesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -211,7 +211,7 @@ func awsRestjson1_deserializeOpErrorDescribeVoices(response *smithyhttp.Response
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeVoicesOutput(v **DescribeVoicesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeVoicesOutput(v **DescribeVoicesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -314,7 +314,7 @@ func (m *awsRestjson1_deserializeOpGetLexicon) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetLexiconOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetLexiconOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -384,7 +384,7 @@ func awsRestjson1_deserializeOpErrorGetLexicon(response *smithyhttp.Response) er
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetLexiconOutput(v **GetLexiconOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetLexiconOutput(v **GetLexiconOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -479,7 +479,7 @@ func (m *awsRestjson1_deserializeOpGetSpeechSynthesisTask) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetSpeechSynthesisTaskOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetSpeechSynthesisTaskOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -552,7 +552,7 @@ func awsRestjson1_deserializeOpErrorGetSpeechSynthesisTask(response *smithyhttp.
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetSpeechSynthesisTaskOutput(v **GetSpeechSynthesisTaskOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetSpeechSynthesisTaskOutput(v **GetSpeechSynthesisTaskOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -642,7 +642,7 @@ func (m *awsRestjson1_deserializeOpListLexicons) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListLexiconsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListLexiconsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -712,7 +712,7 @@ func awsRestjson1_deserializeOpErrorListLexicons(response *smithyhttp.Response) 
 	}
 }
 
-func awsRestjson1_deserializeDocumentListLexiconsOutput(v **ListLexiconsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListLexiconsOutput(v **ListLexiconsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -815,7 +815,7 @@ func (m *awsRestjson1_deserializeOpListSpeechSynthesisTasks) HandleDeserialize(c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListSpeechSynthesisTasksOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListSpeechSynthesisTasksOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -885,7 +885,7 @@ func awsRestjson1_deserializeOpErrorListSpeechSynthesisTasks(response *smithyhtt
 	}
 }
 
-func awsRestjson1_deserializeDocumentListSpeechSynthesisTasksOutput(v **ListSpeechSynthesisTasksOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListSpeechSynthesisTasksOutput(v **ListSpeechSynthesisTasksOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1089,7 +1089,7 @@ func (m *awsRestjson1_deserializeOpStartSpeechSynthesisTask) HandleDeserialize(c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentStartSpeechSynthesisTaskOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentStartSpeechSynthesisTaskOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1189,7 +1189,7 @@ func awsRestjson1_deserializeOpErrorStartSpeechSynthesisTask(response *smithyhtt
 	}
 }
 
-func awsRestjson1_deserializeDocumentStartSpeechSynthesisTaskOutput(v **StartSpeechSynthesisTaskOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentStartSpeechSynthesisTaskOutput(v **StartSpeechSynthesisTaskOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1271,12 +1271,12 @@ func (m *awsRestjson1_deserializeOpSynthesizeSpeech) HandleDeserialize(ctx conte
 	output := &SynthesizeSpeechOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsSynthesizeSpeechOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsSynthesizeSpeechOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeDocumentSynthesizeSpeechOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentSynthesizeSpeechOutput(output, response.Body)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -1362,7 +1362,7 @@ func awsRestjson1_deserializeOpErrorSynthesizeSpeech(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsSynthesizeSpeechOutput(v *SynthesizeSpeechOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsSynthesizeSpeechOutput(v *SynthesizeSpeechOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -1383,7 +1383,7 @@ func awsRestjson1_deserializeHttpBindingsSynthesizeSpeechOutput(v *SynthesizeSpe
 
 	return nil
 }
-func awsRestjson1_deserializeDocumentSynthesizeSpeechOutput(v *SynthesizeSpeechOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentSynthesizeSpeechOutput(v *SynthesizeSpeechOutput, body io.ReadCloser) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}

@@ -51,7 +51,7 @@ func (m *awsAwsjson11_deserializeOpAddTagsToResource) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentAddTagsToResourceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentAddTagsToResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -157,7 +157,7 @@ func (m *awsAwsjson11_deserializeOpCreateHapg) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateHapgOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateHapgOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -263,7 +263,7 @@ func (m *awsAwsjson11_deserializeOpCreateHsm) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateHsmOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateHsmOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -369,7 +369,7 @@ func (m *awsAwsjson11_deserializeOpCreateLunaClient) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateLunaClientOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateLunaClientOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -475,7 +475,7 @@ func (m *awsAwsjson11_deserializeOpDeleteHapg) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteHapgOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteHapgOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -581,7 +581,7 @@ func (m *awsAwsjson11_deserializeOpDeleteHsm) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteHsmOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteHsmOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -687,7 +687,7 @@ func (m *awsAwsjson11_deserializeOpDeleteLunaClient) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteLunaClientOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteLunaClientOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -793,7 +793,7 @@ func (m *awsAwsjson11_deserializeOpDescribeHapg) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeHapgOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeHapgOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -899,7 +899,7 @@ func (m *awsAwsjson11_deserializeOpDescribeHsm) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeHsmOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeHsmOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1005,7 +1005,7 @@ func (m *awsAwsjson11_deserializeOpDescribeLunaClient) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeLunaClientOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeLunaClientOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1111,7 +1111,7 @@ func (m *awsAwsjson11_deserializeOpGetConfig) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetConfigOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetConfigOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1217,7 +1217,7 @@ func (m *awsAwsjson11_deserializeOpListAvailableZones) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListAvailableZonesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListAvailableZonesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1323,7 +1323,7 @@ func (m *awsAwsjson11_deserializeOpListHapgs) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListHapgsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListHapgsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1429,7 +1429,7 @@ func (m *awsAwsjson11_deserializeOpListHsms) HandleDeserialize(ctx context.Conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListHsmsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListHsmsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1535,7 +1535,7 @@ func (m *awsAwsjson11_deserializeOpListLunaClients) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListLunaClientsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListLunaClientsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1641,7 +1641,7 @@ func (m *awsAwsjson11_deserializeOpListTagsForResource) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListTagsForResourceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1747,7 +1747,7 @@ func (m *awsAwsjson11_deserializeOpModifyHapg) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentModifyHapgOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentModifyHapgOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1853,7 +1853,7 @@ func (m *awsAwsjson11_deserializeOpModifyHsm) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentModifyHsmOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentModifyHsmOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1959,7 +1959,7 @@ func (m *awsAwsjson11_deserializeOpModifyLunaClient) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentModifyLunaClientOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentModifyLunaClientOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2059,7 +2059,7 @@ func (m *awsAwsjson11_deserializeOpRemoveTagsFromResource) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentRemoveTagsFromResourceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentRemoveTagsFromResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2875,7 +2875,7 @@ func awsAwsjson11_deserializeDocumentTagList(v *[]*types.Tag, decoder *json.Deco
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAddTagsToResourceOutput(v **AddTagsToResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAddTagsToResourceOutput(v **AddTagsToResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2939,7 +2939,7 @@ func awsAwsjson11_deserializeDocumentAddTagsToResourceOutput(v **AddTagsToResour
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateHapgOutput(v **CreateHapgOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateHapgOutput(v **CreateHapgOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3003,7 +3003,7 @@ func awsAwsjson11_deserializeDocumentCreateHapgOutput(v **CreateHapgOutput, deco
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateHsmOutput(v **CreateHsmOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateHsmOutput(v **CreateHsmOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3067,7 +3067,7 @@ func awsAwsjson11_deserializeDocumentCreateHsmOutput(v **CreateHsmOutput, decode
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateLunaClientOutput(v **CreateLunaClientOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateLunaClientOutput(v **CreateLunaClientOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3131,7 +3131,7 @@ func awsAwsjson11_deserializeDocumentCreateLunaClientOutput(v **CreateLunaClient
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteHapgOutput(v **DeleteHapgOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteHapgOutput(v **DeleteHapgOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3195,7 +3195,7 @@ func awsAwsjson11_deserializeDocumentDeleteHapgOutput(v **DeleteHapgOutput, deco
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteHsmOutput(v **DeleteHsmOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteHsmOutput(v **DeleteHsmOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3259,7 +3259,7 @@ func awsAwsjson11_deserializeDocumentDeleteHsmOutput(v **DeleteHsmOutput, decode
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteLunaClientOutput(v **DeleteLunaClientOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteLunaClientOutput(v **DeleteLunaClientOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3323,7 +3323,7 @@ func awsAwsjson11_deserializeDocumentDeleteLunaClientOutput(v **DeleteLunaClient
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeHapgOutput(v **DescribeHapgOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeHapgOutput(v **DescribeHapgOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3459,7 +3459,7 @@ func awsAwsjson11_deserializeDocumentDescribeHapgOutput(v **DescribeHapgOutput, 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeHsmOutput(v **DescribeHsmOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeHsmOutput(v **DescribeHsmOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3775,7 +3775,7 @@ func awsAwsjson11_deserializeDocumentDescribeHsmOutput(v **DescribeHsmOutput, de
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeLunaClientOutput(v **DescribeLunaClientOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeLunaClientOutput(v **DescribeLunaClientOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3891,7 +3891,7 @@ func awsAwsjson11_deserializeDocumentDescribeLunaClientOutput(v **DescribeLunaCl
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetConfigOutput(v **GetConfigOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetConfigOutput(v **GetConfigOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3981,7 +3981,7 @@ func awsAwsjson11_deserializeDocumentGetConfigOutput(v **GetConfigOutput, decode
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListAvailableZonesOutput(v **ListAvailableZonesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListAvailableZonesOutput(v **ListAvailableZonesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4037,7 +4037,7 @@ func awsAwsjson11_deserializeDocumentListAvailableZonesOutput(v **ListAvailableZ
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListHapgsOutput(v **ListHapgsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListHapgsOutput(v **ListHapgsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4106,7 +4106,7 @@ func awsAwsjson11_deserializeDocumentListHapgsOutput(v **ListHapgsOutput, decode
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListHsmsOutput(v **ListHsmsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListHsmsOutput(v **ListHsmsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4175,7 +4175,7 @@ func awsAwsjson11_deserializeDocumentListHsmsOutput(v **ListHsmsOutput, decoder 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListLunaClientsOutput(v **ListLunaClientsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListLunaClientsOutput(v **ListLunaClientsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4244,7 +4244,7 @@ func awsAwsjson11_deserializeDocumentListLunaClientsOutput(v **ListLunaClientsOu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4300,7 +4300,7 @@ func awsAwsjson11_deserializeDocumentListTagsForResourceOutput(v **ListTagsForRe
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentModifyHapgOutput(v **ModifyHapgOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentModifyHapgOutput(v **ModifyHapgOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4364,7 +4364,7 @@ func awsAwsjson11_deserializeDocumentModifyHapgOutput(v **ModifyHapgOutput, deco
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentModifyHsmOutput(v **ModifyHsmOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentModifyHsmOutput(v **ModifyHsmOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4428,7 +4428,7 @@ func awsAwsjson11_deserializeDocumentModifyHsmOutput(v **ModifyHsmOutput, decode
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentModifyLunaClientOutput(v **ModifyLunaClientOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentModifyLunaClientOutput(v **ModifyLunaClientOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4492,7 +4492,7 @@ func awsAwsjson11_deserializeDocumentModifyLunaClientOutput(v **ModifyLunaClient
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentRemoveTagsFromResourceOutput(v **RemoveTagsFromResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentRemoveTagsFromResourceOutput(v **RemoveTagsFromResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

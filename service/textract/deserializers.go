@@ -52,7 +52,7 @@ func (m *awsAwsjson11_deserializeOpAnalyzeDocument) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentAnalyzeDocumentOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentAnalyzeDocumentOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -179,7 +179,7 @@ func (m *awsAwsjson11_deserializeOpDetectDocumentText) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDetectDocumentTextOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDetectDocumentTextOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -303,7 +303,7 @@ func (m *awsAwsjson11_deserializeOpGetDocumentAnalysis) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetDocumentAnalysisOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetDocumentAnalysisOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -418,7 +418,7 @@ func (m *awsAwsjson11_deserializeOpGetDocumentTextDetection) HandleDeserialize(c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetDocumentTextDetectionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetDocumentTextDetectionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -533,7 +533,7 @@ func (m *awsAwsjson11_deserializeOpStartDocumentAnalysis) HandleDeserialize(ctx 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStartDocumentAnalysisOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStartDocumentAnalysisOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -663,7 +663,7 @@ func (m *awsAwsjson11_deserializeOpStartDocumentTextDetection) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStartDocumentTextDetectionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStartDocumentTextDetectionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3281,7 +3281,7 @@ func awsAwsjson11_deserializeDocumentWarnings(v *[]*types.Warning, decoder *json
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAnalyzeDocumentOutput(v **AnalyzeDocumentOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAnalyzeDocumentOutput(v **AnalyzeDocumentOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3360,7 +3360,7 @@ func awsAwsjson11_deserializeDocumentAnalyzeDocumentOutput(v **AnalyzeDocumentOu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDetectDocumentTextOutput(v **DetectDocumentTextOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDetectDocumentTextOutput(v **DetectDocumentTextOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3434,7 +3434,7 @@ func awsAwsjson11_deserializeDocumentDetectDocumentTextOutput(v **DetectDocument
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetDocumentAnalysisOutput(v **GetDocumentAnalysisOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetDocumentAnalysisOutput(v **GetDocumentAnalysisOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3552,7 +3552,7 @@ func awsAwsjson11_deserializeDocumentGetDocumentAnalysisOutput(v **GetDocumentAn
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetDocumentTextDetectionOutput(v **GetDocumentTextDetectionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetDocumentTextDetectionOutput(v **GetDocumentTextDetectionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3670,7 +3670,7 @@ func awsAwsjson11_deserializeDocumentGetDocumentTextDetectionOutput(v **GetDocum
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStartDocumentAnalysisOutput(v **StartDocumentAnalysisOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStartDocumentAnalysisOutput(v **StartDocumentAnalysisOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3734,7 +3734,7 @@ func awsAwsjson11_deserializeDocumentStartDocumentAnalysisOutput(v **StartDocume
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStartDocumentTextDetectionOutput(v **StartDocumentTextDetectionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStartDocumentTextDetectionOutput(v **StartDocumentTextDetectionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

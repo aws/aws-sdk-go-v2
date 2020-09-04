@@ -53,7 +53,7 @@ func (m *awsAwsjson11_deserializeOpAcceptDirectConnectGatewayAssociationProposal
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentAcceptDirectConnectGatewayAssociationProposalOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentAcceptDirectConnectGatewayAssociationProposalOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -156,7 +156,7 @@ func (m *awsAwsjson11_deserializeOpAllocateConnectionOnInterconnect) HandleDeser
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentAllocateConnectionOnInterconnectOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -259,7 +259,7 @@ func (m *awsAwsjson11_deserializeOpAllocateHostedConnection) HandleDeserialize(c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentAllocateHostedConnectionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -368,7 +368,7 @@ func (m *awsAwsjson11_deserializeOpAllocatePrivateVirtualInterface) HandleDeseri
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentAllocatePrivateVirtualInterfaceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -477,7 +477,7 @@ func (m *awsAwsjson11_deserializeOpAllocatePublicVirtualInterface) HandleDeseria
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentAllocatePublicVirtualInterfaceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -586,7 +586,7 @@ func (m *awsAwsjson11_deserializeOpAllocateTransitVirtualInterface) HandleDeseri
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentAllocateTransitVirtualInterfaceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentAllocateTransitVirtualInterfaceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -695,7 +695,7 @@ func (m *awsAwsjson11_deserializeOpAssociateConnectionWithLag) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentAssociateConnectionWithLagOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -798,7 +798,7 @@ func (m *awsAwsjson11_deserializeOpAssociateHostedConnection) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentAssociateHostedConnectionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -901,7 +901,7 @@ func (m *awsAwsjson11_deserializeOpAssociateVirtualInterface) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentAssociateVirtualInterfaceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1004,7 +1004,7 @@ func (m *awsAwsjson11_deserializeOpConfirmConnection) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentConfirmConnectionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentConfirmConnectionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1107,7 +1107,7 @@ func (m *awsAwsjson11_deserializeOpConfirmPrivateVirtualInterface) HandleDeseria
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentConfirmPrivateVirtualInterfaceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentConfirmPrivateVirtualInterfaceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1210,7 +1210,7 @@ func (m *awsAwsjson11_deserializeOpConfirmPublicVirtualInterface) HandleDeserial
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentConfirmPublicVirtualInterfaceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentConfirmPublicVirtualInterfaceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1313,7 +1313,7 @@ func (m *awsAwsjson11_deserializeOpConfirmTransitVirtualInterface) HandleDeseria
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentConfirmTransitVirtualInterfaceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentConfirmTransitVirtualInterfaceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1416,7 +1416,7 @@ func (m *awsAwsjson11_deserializeOpCreateBGPPeer) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateBGPPeerOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateBGPPeerOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1519,7 +1519,7 @@ func (m *awsAwsjson11_deserializeOpCreateConnection) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateConnectionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1628,7 +1628,7 @@ func (m *awsAwsjson11_deserializeOpCreateDirectConnectGateway) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateDirectConnectGatewayOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateDirectConnectGatewayOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1731,7 +1731,7 @@ func (m *awsAwsjson11_deserializeOpCreateDirectConnectGatewayAssociation) Handle
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateDirectConnectGatewayAssociationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateDirectConnectGatewayAssociationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1834,7 +1834,7 @@ func (m *awsAwsjson11_deserializeOpCreateDirectConnectGatewayAssociationProposal
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateDirectConnectGatewayAssociationProposalOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateDirectConnectGatewayAssociationProposalOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1937,7 +1937,7 @@ func (m *awsAwsjson11_deserializeOpCreateInterconnect) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateInterconnectOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2046,7 +2046,7 @@ func (m *awsAwsjson11_deserializeOpCreateLag) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateLagOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateLagOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2155,7 +2155,7 @@ func (m *awsAwsjson11_deserializeOpCreatePrivateVirtualInterface) HandleDeserial
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreatePrivateVirtualInterfaceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2264,7 +2264,7 @@ func (m *awsAwsjson11_deserializeOpCreatePublicVirtualInterface) HandleDeseriali
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreatePublicVirtualInterfaceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2373,7 +2373,7 @@ func (m *awsAwsjson11_deserializeOpCreateTransitVirtualInterface) HandleDeserial
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateTransitVirtualInterfaceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateTransitVirtualInterfaceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2482,7 +2482,7 @@ func (m *awsAwsjson11_deserializeOpDeleteBGPPeer) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteBGPPeerOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteBGPPeerOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2585,7 +2585,7 @@ func (m *awsAwsjson11_deserializeOpDeleteConnection) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteConnectionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2688,7 +2688,7 @@ func (m *awsAwsjson11_deserializeOpDeleteDirectConnectGateway) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteDirectConnectGatewayOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteDirectConnectGatewayOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2791,7 +2791,7 @@ func (m *awsAwsjson11_deserializeOpDeleteDirectConnectGatewayAssociation) Handle
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteDirectConnectGatewayAssociationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteDirectConnectGatewayAssociationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2894,7 +2894,7 @@ func (m *awsAwsjson11_deserializeOpDeleteDirectConnectGatewayAssociationProposal
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteDirectConnectGatewayAssociationProposalOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteDirectConnectGatewayAssociationProposalOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2997,7 +2997,7 @@ func (m *awsAwsjson11_deserializeOpDeleteInterconnect) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteInterconnectOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteInterconnectOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3100,7 +3100,7 @@ func (m *awsAwsjson11_deserializeOpDeleteLag) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteLagOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteLagOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3203,7 +3203,7 @@ func (m *awsAwsjson11_deserializeOpDeleteVirtualInterface) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteVirtualInterfaceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteVirtualInterfaceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3306,7 +3306,7 @@ func (m *awsAwsjson11_deserializeOpDescribeConnectionLoa) HandleDeserialize(ctx 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeConnectionLoaOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeConnectionLoaOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3409,7 +3409,7 @@ func (m *awsAwsjson11_deserializeOpDescribeConnections) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeConnectionsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeConnectionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3512,7 +3512,7 @@ func (m *awsAwsjson11_deserializeOpDescribeConnectionsOnInterconnect) HandleDese
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeConnectionsOnInterconnectOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeConnectionsOnInterconnectOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3615,7 +3615,7 @@ func (m *awsAwsjson11_deserializeOpDescribeDirectConnectGatewayAssociationPropos
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeDirectConnectGatewayAssociationProposalsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeDirectConnectGatewayAssociationProposalsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3718,7 +3718,7 @@ func (m *awsAwsjson11_deserializeOpDescribeDirectConnectGatewayAssociations) Han
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeDirectConnectGatewayAssociationsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeDirectConnectGatewayAssociationsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3821,7 +3821,7 @@ func (m *awsAwsjson11_deserializeOpDescribeDirectConnectGatewayAttachments) Hand
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeDirectConnectGatewayAttachmentsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeDirectConnectGatewayAttachmentsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3924,7 +3924,7 @@ func (m *awsAwsjson11_deserializeOpDescribeDirectConnectGateways) HandleDeserial
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeDirectConnectGatewaysOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeDirectConnectGatewaysOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4027,7 +4027,7 @@ func (m *awsAwsjson11_deserializeOpDescribeHostedConnections) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeHostedConnectionsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeHostedConnectionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4130,7 +4130,7 @@ func (m *awsAwsjson11_deserializeOpDescribeInterconnectLoa) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeInterconnectLoaOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeInterconnectLoaOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4233,7 +4233,7 @@ func (m *awsAwsjson11_deserializeOpDescribeInterconnects) HandleDeserialize(ctx 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeInterconnectsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeInterconnectsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4336,7 +4336,7 @@ func (m *awsAwsjson11_deserializeOpDescribeLags) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeLagsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeLagsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4439,7 +4439,7 @@ func (m *awsAwsjson11_deserializeOpDescribeLoa) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeLoaOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeLoaOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4542,7 +4542,7 @@ func (m *awsAwsjson11_deserializeOpDescribeLocations) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeLocationsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeLocationsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4645,7 +4645,7 @@ func (m *awsAwsjson11_deserializeOpDescribeTags) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeTagsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeTagsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4748,7 +4748,7 @@ func (m *awsAwsjson11_deserializeOpDescribeVirtualGateways) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeVirtualGatewaysOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeVirtualGatewaysOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4851,7 +4851,7 @@ func (m *awsAwsjson11_deserializeOpDescribeVirtualInterfaces) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeVirtualInterfacesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeVirtualInterfacesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4954,7 +4954,7 @@ func (m *awsAwsjson11_deserializeOpDisassociateConnectionFromLag) HandleDeserial
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDisassociateConnectionFromLagOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5057,7 +5057,7 @@ func (m *awsAwsjson11_deserializeOpListVirtualInterfaceTestHistory) HandleDeseri
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListVirtualInterfaceTestHistoryOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListVirtualInterfaceTestHistoryOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5160,7 +5160,7 @@ func (m *awsAwsjson11_deserializeOpStartBgpFailoverTest) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStartBgpFailoverTestOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStartBgpFailoverTestOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5263,7 +5263,7 @@ func (m *awsAwsjson11_deserializeOpStopBgpFailoverTest) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStopBgpFailoverTestOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStopBgpFailoverTestOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5366,7 +5366,7 @@ func (m *awsAwsjson11_deserializeOpTagResource) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentTagResourceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentTagResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5475,7 +5475,7 @@ func (m *awsAwsjson11_deserializeOpUntagResource) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUntagResourceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUntagResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5578,7 +5578,7 @@ func (m *awsAwsjson11_deserializeOpUpdateDirectConnectGatewayAssociation) Handle
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateDirectConnectGatewayAssociationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateDirectConnectGatewayAssociationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5681,7 +5681,7 @@ func (m *awsAwsjson11_deserializeOpUpdateLag) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateLagOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateLagOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5784,7 +5784,7 @@ func (m *awsAwsjson11_deserializeOpUpdateVirtualInterfaceAttributes) HandleDeser
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateVirtualInterfaceAttributesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -9609,7 +9609,7 @@ func awsAwsjson11_deserializeDocumentVirtualInterfaceTestHistoryList(v *[]*types
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAcceptDirectConnectGatewayAssociationProposalOutput(v **AcceptDirectConnectGatewayAssociationProposalOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAcceptDirectConnectGatewayAssociationProposalOutput(v **AcceptDirectConnectGatewayAssociationProposalOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9665,7 +9665,7 @@ func awsAwsjson11_deserializeDocumentAcceptDirectConnectGatewayAssociationPropos
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAllocateConnectionOnInterconnectOutput(v **AllocateConnectionOnInterconnectOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v **AllocateConnectionOnInterconnectOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9937,7 +9937,7 @@ func awsAwsjson11_deserializeDocumentAllocateConnectionOnInterconnectOutput(v **
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAllocateHostedConnectionOutput(v **AllocateHostedConnectionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **AllocateHostedConnectionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10209,7 +10209,7 @@ func awsAwsjson11_deserializeDocumentAllocateHostedConnectionOutput(v **Allocate
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAllocatePrivateVirtualInterfaceOutput(v **AllocatePrivateVirtualInterfaceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAllocatePrivateVirtualInterfaceOutput(v **AllocatePrivateVirtualInterfaceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10564,7 +10564,7 @@ func awsAwsjson11_deserializeDocumentAllocatePrivateVirtualInterfaceOutput(v **A
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAllocatePublicVirtualInterfaceOutput(v **AllocatePublicVirtualInterfaceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAllocatePublicVirtualInterfaceOutput(v **AllocatePublicVirtualInterfaceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10919,7 +10919,7 @@ func awsAwsjson11_deserializeDocumentAllocatePublicVirtualInterfaceOutput(v **Al
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAllocateTransitVirtualInterfaceOutput(v **AllocateTransitVirtualInterfaceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAllocateTransitVirtualInterfaceOutput(v **AllocateTransitVirtualInterfaceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10975,7 +10975,7 @@ func awsAwsjson11_deserializeDocumentAllocateTransitVirtualInterfaceOutput(v **A
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAssociateConnectionWithLagOutput(v **AssociateConnectionWithLagOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **AssociateConnectionWithLagOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11247,7 +11247,7 @@ func awsAwsjson11_deserializeDocumentAssociateConnectionWithLagOutput(v **Associ
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAssociateHostedConnectionOutput(v **AssociateHostedConnectionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **AssociateHostedConnectionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11519,7 +11519,7 @@ func awsAwsjson11_deserializeDocumentAssociateHostedConnectionOutput(v **Associa
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAssociateVirtualInterfaceOutput(v **AssociateVirtualInterfaceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAssociateVirtualInterfaceOutput(v **AssociateVirtualInterfaceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11874,7 +11874,7 @@ func awsAwsjson11_deserializeDocumentAssociateVirtualInterfaceOutput(v **Associa
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentConfirmConnectionOutput(v **ConfirmConnectionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentConfirmConnectionOutput(v **ConfirmConnectionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11938,7 +11938,7 @@ func awsAwsjson11_deserializeDocumentConfirmConnectionOutput(v **ConfirmConnecti
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentConfirmPrivateVirtualInterfaceOutput(v **ConfirmPrivateVirtualInterfaceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentConfirmPrivateVirtualInterfaceOutput(v **ConfirmPrivateVirtualInterfaceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12002,7 +12002,7 @@ func awsAwsjson11_deserializeDocumentConfirmPrivateVirtualInterfaceOutput(v **Co
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentConfirmPublicVirtualInterfaceOutput(v **ConfirmPublicVirtualInterfaceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentConfirmPublicVirtualInterfaceOutput(v **ConfirmPublicVirtualInterfaceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12066,7 +12066,7 @@ func awsAwsjson11_deserializeDocumentConfirmPublicVirtualInterfaceOutput(v **Con
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentConfirmTransitVirtualInterfaceOutput(v **ConfirmTransitVirtualInterfaceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentConfirmTransitVirtualInterfaceOutput(v **ConfirmTransitVirtualInterfaceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12130,7 +12130,7 @@ func awsAwsjson11_deserializeDocumentConfirmTransitVirtualInterfaceOutput(v **Co
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateBGPPeerOutput(v **CreateBGPPeerOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateBGPPeerOutput(v **CreateBGPPeerOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12186,7 +12186,7 @@ func awsAwsjson11_deserializeDocumentCreateBGPPeerOutput(v **CreateBGPPeerOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateConnectionOutput(v **CreateConnectionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnectionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12458,7 +12458,7 @@ func awsAwsjson11_deserializeDocumentCreateConnectionOutput(v **CreateConnection
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateDirectConnectGatewayAssociationOutput(v **CreateDirectConnectGatewayAssociationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateDirectConnectGatewayAssociationOutput(v **CreateDirectConnectGatewayAssociationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12514,7 +12514,7 @@ func awsAwsjson11_deserializeDocumentCreateDirectConnectGatewayAssociationOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateDirectConnectGatewayAssociationProposalOutput(v **CreateDirectConnectGatewayAssociationProposalOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateDirectConnectGatewayAssociationProposalOutput(v **CreateDirectConnectGatewayAssociationProposalOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12570,7 +12570,7 @@ func awsAwsjson11_deserializeDocumentCreateDirectConnectGatewayAssociationPropos
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateDirectConnectGatewayOutput(v **CreateDirectConnectGatewayOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateDirectConnectGatewayOutput(v **CreateDirectConnectGatewayOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12626,7 +12626,7 @@ func awsAwsjson11_deserializeDocumentCreateDirectConnectGatewayOutput(v **Create
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateInterconnectOutput(v **CreateInterconnectOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateInterconnectOutput(v **CreateInterconnectOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12855,7 +12855,7 @@ func awsAwsjson11_deserializeDocumentCreateInterconnectOutput(v **CreateIntercon
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateLagOutput(v **CreateLagOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13119,7 +13119,7 @@ func awsAwsjson11_deserializeDocumentCreateLagOutput(v **CreateLagOutput, decode
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreatePrivateVirtualInterfaceOutput(v **CreatePrivateVirtualInterfaceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreatePrivateVirtualInterfaceOutput(v **CreatePrivateVirtualInterfaceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13474,7 +13474,7 @@ func awsAwsjson11_deserializeDocumentCreatePrivateVirtualInterfaceOutput(v **Cre
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreatePublicVirtualInterfaceOutput(v **CreatePublicVirtualInterfaceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreatePublicVirtualInterfaceOutput(v **CreatePublicVirtualInterfaceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13829,7 +13829,7 @@ func awsAwsjson11_deserializeDocumentCreatePublicVirtualInterfaceOutput(v **Crea
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateTransitVirtualInterfaceOutput(v **CreateTransitVirtualInterfaceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateTransitVirtualInterfaceOutput(v **CreateTransitVirtualInterfaceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13885,7 +13885,7 @@ func awsAwsjson11_deserializeDocumentCreateTransitVirtualInterfaceOutput(v **Cre
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteBGPPeerOutput(v **DeleteBGPPeerOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteBGPPeerOutput(v **DeleteBGPPeerOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13941,7 +13941,7 @@ func awsAwsjson11_deserializeDocumentDeleteBGPPeerOutput(v **DeleteBGPPeerOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteConnectionOutput(v **DeleteConnectionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnectionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14213,7 +14213,7 @@ func awsAwsjson11_deserializeDocumentDeleteConnectionOutput(v **DeleteConnection
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteDirectConnectGatewayAssociationOutput(v **DeleteDirectConnectGatewayAssociationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteDirectConnectGatewayAssociationOutput(v **DeleteDirectConnectGatewayAssociationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14269,7 +14269,7 @@ func awsAwsjson11_deserializeDocumentDeleteDirectConnectGatewayAssociationOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteDirectConnectGatewayAssociationProposalOutput(v **DeleteDirectConnectGatewayAssociationProposalOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteDirectConnectGatewayAssociationProposalOutput(v **DeleteDirectConnectGatewayAssociationProposalOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14325,7 +14325,7 @@ func awsAwsjson11_deserializeDocumentDeleteDirectConnectGatewayAssociationPropos
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteDirectConnectGatewayOutput(v **DeleteDirectConnectGatewayOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteDirectConnectGatewayOutput(v **DeleteDirectConnectGatewayOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14381,7 +14381,7 @@ func awsAwsjson11_deserializeDocumentDeleteDirectConnectGatewayOutput(v **Delete
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteInterconnectOutput(v **DeleteInterconnectOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteInterconnectOutput(v **DeleteInterconnectOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14445,7 +14445,7 @@ func awsAwsjson11_deserializeDocumentDeleteInterconnectOutput(v **DeleteIntercon
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteLagOutput(v **DeleteLagOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14709,7 +14709,7 @@ func awsAwsjson11_deserializeDocumentDeleteLagOutput(v **DeleteLagOutput, decode
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteVirtualInterfaceOutput(v **DeleteVirtualInterfaceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteVirtualInterfaceOutput(v **DeleteVirtualInterfaceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14773,7 +14773,7 @@ func awsAwsjson11_deserializeDocumentDeleteVirtualInterfaceOutput(v **DeleteVirt
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeConnectionLoaOutput(v **DescribeConnectionLoaOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeConnectionLoaOutput(v **DescribeConnectionLoaOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14829,7 +14829,7 @@ func awsAwsjson11_deserializeDocumentDescribeConnectionLoaOutput(v **DescribeCon
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeConnectionsOnInterconnectOutput(v **DescribeConnectionsOnInterconnectOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeConnectionsOnInterconnectOutput(v **DescribeConnectionsOnInterconnectOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14885,7 +14885,7 @@ func awsAwsjson11_deserializeDocumentDescribeConnectionsOnInterconnectOutput(v *
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeConnectionsOutput(v **DescribeConnectionsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeConnectionsOutput(v **DescribeConnectionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14941,7 +14941,7 @@ func awsAwsjson11_deserializeDocumentDescribeConnectionsOutput(v **DescribeConne
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeDirectConnectGatewayAssociationProposalsOutput(v **DescribeDirectConnectGatewayAssociationProposalsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeDirectConnectGatewayAssociationProposalsOutput(v **DescribeDirectConnectGatewayAssociationProposalsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15010,7 +15010,7 @@ func awsAwsjson11_deserializeDocumentDescribeDirectConnectGatewayAssociationProp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeDirectConnectGatewayAssociationsOutput(v **DescribeDirectConnectGatewayAssociationsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeDirectConnectGatewayAssociationsOutput(v **DescribeDirectConnectGatewayAssociationsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15079,7 +15079,7 @@ func awsAwsjson11_deserializeDocumentDescribeDirectConnectGatewayAssociationsOut
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeDirectConnectGatewayAttachmentsOutput(v **DescribeDirectConnectGatewayAttachmentsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeDirectConnectGatewayAttachmentsOutput(v **DescribeDirectConnectGatewayAttachmentsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15148,7 +15148,7 @@ func awsAwsjson11_deserializeDocumentDescribeDirectConnectGatewayAttachmentsOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeDirectConnectGatewaysOutput(v **DescribeDirectConnectGatewaysOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeDirectConnectGatewaysOutput(v **DescribeDirectConnectGatewaysOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15217,7 +15217,7 @@ func awsAwsjson11_deserializeDocumentDescribeDirectConnectGatewaysOutput(v **Des
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeHostedConnectionsOutput(v **DescribeHostedConnectionsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeHostedConnectionsOutput(v **DescribeHostedConnectionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15273,7 +15273,7 @@ func awsAwsjson11_deserializeDocumentDescribeHostedConnectionsOutput(v **Describ
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeInterconnectLoaOutput(v **DescribeInterconnectLoaOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeInterconnectLoaOutput(v **DescribeInterconnectLoaOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15329,7 +15329,7 @@ func awsAwsjson11_deserializeDocumentDescribeInterconnectLoaOutput(v **DescribeI
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeInterconnectsOutput(v **DescribeInterconnectsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeInterconnectsOutput(v **DescribeInterconnectsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15385,7 +15385,7 @@ func awsAwsjson11_deserializeDocumentDescribeInterconnectsOutput(v **DescribeInt
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeLagsOutput(v **DescribeLagsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeLagsOutput(v **DescribeLagsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15441,7 +15441,7 @@ func awsAwsjson11_deserializeDocumentDescribeLagsOutput(v **DescribeLagsOutput, 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeLoaOutput(v **DescribeLoaOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeLoaOutput(v **DescribeLoaOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15511,7 +15511,7 @@ func awsAwsjson11_deserializeDocumentDescribeLoaOutput(v **DescribeLoaOutput, de
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeLocationsOutput(v **DescribeLocationsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeLocationsOutput(v **DescribeLocationsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15567,7 +15567,7 @@ func awsAwsjson11_deserializeDocumentDescribeLocationsOutput(v **DescribeLocatio
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeTagsOutput(v **DescribeTagsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeTagsOutput(v **DescribeTagsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15623,7 +15623,7 @@ func awsAwsjson11_deserializeDocumentDescribeTagsOutput(v **DescribeTagsOutput, 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeVirtualGatewaysOutput(v **DescribeVirtualGatewaysOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeVirtualGatewaysOutput(v **DescribeVirtualGatewaysOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15679,7 +15679,7 @@ func awsAwsjson11_deserializeDocumentDescribeVirtualGatewaysOutput(v **DescribeV
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeVirtualInterfacesOutput(v **DescribeVirtualInterfacesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeVirtualInterfacesOutput(v **DescribeVirtualInterfacesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15735,7 +15735,7 @@ func awsAwsjson11_deserializeDocumentDescribeVirtualInterfacesOutput(v **Describ
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDisassociateConnectionFromLagOutput(v **DisassociateConnectionFromLagOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **DisassociateConnectionFromLagOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16007,7 +16007,7 @@ func awsAwsjson11_deserializeDocumentDisassociateConnectionFromLagOutput(v **Dis
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListVirtualInterfaceTestHistoryOutput(v **ListVirtualInterfaceTestHistoryOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListVirtualInterfaceTestHistoryOutput(v **ListVirtualInterfaceTestHistoryOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16076,7 +16076,7 @@ func awsAwsjson11_deserializeDocumentListVirtualInterfaceTestHistoryOutput(v **L
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStartBgpFailoverTestOutput(v **StartBgpFailoverTestOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStartBgpFailoverTestOutput(v **StartBgpFailoverTestOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16132,7 +16132,7 @@ func awsAwsjson11_deserializeDocumentStartBgpFailoverTestOutput(v **StartBgpFail
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStopBgpFailoverTestOutput(v **StopBgpFailoverTestOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStopBgpFailoverTestOutput(v **StopBgpFailoverTestOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16188,7 +16188,7 @@ func awsAwsjson11_deserializeDocumentStopBgpFailoverTestOutput(v **StopBgpFailov
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentTagResourceOutput(v **TagResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentTagResourceOutput(v **TagResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16239,7 +16239,7 @@ func awsAwsjson11_deserializeDocumentTagResourceOutput(v **TagResourceOutput, de
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUntagResourceOutput(v **UntagResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUntagResourceOutput(v **UntagResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16290,7 +16290,7 @@ func awsAwsjson11_deserializeDocumentUntagResourceOutput(v **UntagResourceOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateDirectConnectGatewayAssociationOutput(v **UpdateDirectConnectGatewayAssociationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateDirectConnectGatewayAssociationOutput(v **UpdateDirectConnectGatewayAssociationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16346,7 +16346,7 @@ func awsAwsjson11_deserializeDocumentUpdateDirectConnectGatewayAssociationOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateLagOutput(v **UpdateLagOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16610,7 +16610,7 @@ func awsAwsjson11_deserializeDocumentUpdateLagOutput(v **UpdateLagOutput, decode
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateVirtualInterfaceAttributesOutput(v **UpdateVirtualInterfaceAttributesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateVirtualInterfaceAttributesOutput(v **UpdateVirtualInterfaceAttributesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

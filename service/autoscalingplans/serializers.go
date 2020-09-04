@@ -45,7 +45,7 @@ func (m *awsAwsjson11_serializeOpCreateScalingPlan) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AnyScaleScalingPlannerFrontendService.CreateScalingPlan")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateScalingPlanInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateScalingPlanInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -91,7 +91,7 @@ func (m *awsAwsjson11_serializeOpDeleteScalingPlan) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AnyScaleScalingPlannerFrontendService.DeleteScalingPlan")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteScalingPlanInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteScalingPlanInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -137,7 +137,7 @@ func (m *awsAwsjson11_serializeOpDescribeScalingPlanResources) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AnyScaleScalingPlannerFrontendService.DescribeScalingPlanResources")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeScalingPlanResourcesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeScalingPlanResourcesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -183,7 +183,7 @@ func (m *awsAwsjson11_serializeOpDescribeScalingPlans) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AnyScaleScalingPlannerFrontendService.DescribeScalingPlans")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeScalingPlansInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeScalingPlansInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -229,7 +229,7 @@ func (m *awsAwsjson11_serializeOpGetScalingPlanResourceForecastData) HandleSeria
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AnyScaleScalingPlannerFrontendService.GetScalingPlanResourceForecastData")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetScalingPlanResourceForecastDataInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetScalingPlanResourceForecastDataInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -275,7 +275,7 @@ func (m *awsAwsjson11_serializeOpUpdateScalingPlan) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AnyScaleScalingPlannerFrontendService.UpdateScalingPlan")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateScalingPlanInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateScalingPlanInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -691,7 +691,7 @@ func awsAwsjson11_serializeDocumentTargetTrackingConfigurations(v []*types.Targe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateScalingPlanInput(v *CreateScalingPlanInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateScalingPlanInput(v *CreateScalingPlanInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -717,7 +717,7 @@ func awsAwsjson11_serializeDocumentCreateScalingPlanInput(v *CreateScalingPlanIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteScalingPlanInput(v *DeleteScalingPlanInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteScalingPlanInput(v *DeleteScalingPlanInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -734,7 +734,7 @@ func awsAwsjson11_serializeDocumentDeleteScalingPlanInput(v *DeleteScalingPlanIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeScalingPlanResourcesInput(v *DescribeScalingPlanResourcesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeScalingPlanResourcesInput(v *DescribeScalingPlanResourcesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -761,7 +761,7 @@ func awsAwsjson11_serializeDocumentDescribeScalingPlanResourcesInput(v *Describe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeScalingPlansInput(v *DescribeScalingPlansInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeScalingPlansInput(v *DescribeScalingPlansInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -797,7 +797,7 @@ func awsAwsjson11_serializeDocumentDescribeScalingPlansInput(v *DescribeScalingP
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetScalingPlanResourceForecastDataInput(v *GetScalingPlanResourceForecastDataInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetScalingPlanResourceForecastDataInput(v *GetScalingPlanResourceForecastDataInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -844,7 +844,7 @@ func awsAwsjson11_serializeDocumentGetScalingPlanResourceForecastDataInput(v *Ge
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateScalingPlanInput(v *UpdateScalingPlanInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateScalingPlanInput(v *UpdateScalingPlanInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

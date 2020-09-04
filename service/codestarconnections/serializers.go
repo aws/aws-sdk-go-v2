@@ -44,7 +44,7 @@ func (m *awsAwsjson10_serializeOpCreateConnection) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_connections_20191201.CreateConnection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentCreateConnectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentCreateConnectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson10_serializeOpCreateHost) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_connections_20191201.CreateHost")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentCreateHostInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentCreateHostInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson10_serializeOpDeleteConnection) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_connections_20191201.DeleteConnection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentDeleteConnectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentDeleteConnectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson10_serializeOpDeleteHost) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_connections_20191201.DeleteHost")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentDeleteHostInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentDeleteHostInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson10_serializeOpGetConnection) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_connections_20191201.GetConnection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentGetConnectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentGetConnectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson10_serializeOpGetHost) HandleSerialize(ctx context.Context, i
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_connections_20191201.GetHost")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentGetHostInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentGetHostInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson10_serializeOpListConnections) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_connections_20191201.ListConnections")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentListConnectionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentListConnectionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -366,7 +366,7 @@ func (m *awsAwsjson10_serializeOpListHosts) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_connections_20191201.ListHosts")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentListHostsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentListHostsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -412,7 +412,7 @@ func (m *awsAwsjson10_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_connections_20191201.ListTagsForResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -458,7 +458,7 @@ func (m *awsAwsjson10_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_connections_20191201.TagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -504,7 +504,7 @@ func (m *awsAwsjson10_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeStar_connections_20191201.UntagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -629,7 +629,7 @@ func awsAwsjson10_serializeDocumentVpcConfiguration(v *types.VpcConfiguration, v
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentCreateConnectionInput(v *CreateConnectionInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentCreateConnectionInput(v *CreateConnectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -658,7 +658,7 @@ func awsAwsjson10_serializeDocumentCreateConnectionInput(v *CreateConnectionInpu
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentCreateHostInput(v *CreateHostInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentCreateHostInput(v *CreateHostInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -687,7 +687,7 @@ func awsAwsjson10_serializeDocumentCreateHostInput(v *CreateHostInput, value smi
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDeleteConnectionInput(v *DeleteConnectionInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentDeleteConnectionInput(v *DeleteConnectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -699,7 +699,7 @@ func awsAwsjson10_serializeDocumentDeleteConnectionInput(v *DeleteConnectionInpu
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDeleteHostInput(v *DeleteHostInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentDeleteHostInput(v *DeleteHostInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -711,7 +711,7 @@ func awsAwsjson10_serializeDocumentDeleteHostInput(v *DeleteHostInput, value smi
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentGetConnectionInput(v *GetConnectionInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentGetConnectionInput(v *GetConnectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -723,7 +723,7 @@ func awsAwsjson10_serializeDocumentGetConnectionInput(v *GetConnectionInput, val
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentGetHostInput(v *GetHostInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentGetHostInput(v *GetHostInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -735,7 +735,7 @@ func awsAwsjson10_serializeDocumentGetHostInput(v *GetHostInput, value smithyjso
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentListConnectionsInput(v *ListConnectionsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentListConnectionsInput(v *ListConnectionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -762,7 +762,7 @@ func awsAwsjson10_serializeDocumentListConnectionsInput(v *ListConnectionsInput,
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentListHostsInput(v *ListHostsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentListHostsInput(v *ListHostsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -779,7 +779,7 @@ func awsAwsjson10_serializeDocumentListHostsInput(v *ListHostsInput, value smith
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -791,7 +791,7 @@ func awsAwsjson10_serializeDocumentListTagsForResourceInput(v *ListTagsForResour
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -810,7 +810,7 @@ func awsAwsjson10_serializeDocumentTagResourceInput(v *TagResourceInput, value s
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

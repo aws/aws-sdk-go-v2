@@ -45,7 +45,7 @@ func (m *awsAwsjson10_serializeOpBatchGetItem) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.BatchGetItem")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentBatchGetItemInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentBatchGetItemInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -91,7 +91,7 @@ func (m *awsAwsjson10_serializeOpBatchWriteItem) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.BatchWriteItem")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentBatchWriteItemInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentBatchWriteItemInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -137,7 +137,7 @@ func (m *awsAwsjson10_serializeOpCreateBackup) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.CreateBackup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentCreateBackupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentCreateBackupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -183,7 +183,7 @@ func (m *awsAwsjson10_serializeOpCreateGlobalTable) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.CreateGlobalTable")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentCreateGlobalTableInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentCreateGlobalTableInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -229,7 +229,7 @@ func (m *awsAwsjson10_serializeOpCreateTable) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.CreateTable")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentCreateTableInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentCreateTableInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -275,7 +275,7 @@ func (m *awsAwsjson10_serializeOpDeleteBackup) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.DeleteBackup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentDeleteBackupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentDeleteBackupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -321,7 +321,7 @@ func (m *awsAwsjson10_serializeOpDeleteItem) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.DeleteItem")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentDeleteItemInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentDeleteItemInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -367,7 +367,7 @@ func (m *awsAwsjson10_serializeOpDeleteTable) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.DeleteTable")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentDeleteTableInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentDeleteTableInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -413,7 +413,7 @@ func (m *awsAwsjson10_serializeOpDescribeBackup) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.DescribeBackup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentDescribeBackupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentDescribeBackupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -459,7 +459,7 @@ func (m *awsAwsjson10_serializeOpDescribeContinuousBackups) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.DescribeContinuousBackups")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentDescribeContinuousBackupsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentDescribeContinuousBackupsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -505,7 +505,7 @@ func (m *awsAwsjson10_serializeOpDescribeContributorInsights) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.DescribeContributorInsights")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentDescribeContributorInsightsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentDescribeContributorInsightsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -590,7 +590,7 @@ func (m *awsAwsjson10_serializeOpDescribeGlobalTable) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.DescribeGlobalTable")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentDescribeGlobalTableInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentDescribeGlobalTableInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -636,7 +636,7 @@ func (m *awsAwsjson10_serializeOpDescribeGlobalTableSettings) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.DescribeGlobalTableSettings")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentDescribeGlobalTableSettingsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentDescribeGlobalTableSettingsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -721,7 +721,7 @@ func (m *awsAwsjson10_serializeOpDescribeTable) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.DescribeTable")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentDescribeTableInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentDescribeTableInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -767,7 +767,7 @@ func (m *awsAwsjson10_serializeOpDescribeTableReplicaAutoScaling) HandleSerializ
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.DescribeTableReplicaAutoScaling")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentDescribeTableReplicaAutoScalingInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentDescribeTableReplicaAutoScalingInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -813,7 +813,7 @@ func (m *awsAwsjson10_serializeOpDescribeTimeToLive) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.DescribeTimeToLive")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentDescribeTimeToLiveInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentDescribeTimeToLiveInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -859,7 +859,7 @@ func (m *awsAwsjson10_serializeOpGetItem) HandleSerialize(ctx context.Context, i
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.GetItem")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentGetItemInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentGetItemInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -905,7 +905,7 @@ func (m *awsAwsjson10_serializeOpListBackups) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.ListBackups")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentListBackupsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentListBackupsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -951,7 +951,7 @@ func (m *awsAwsjson10_serializeOpListContributorInsights) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.ListContributorInsights")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentListContributorInsightsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentListContributorInsightsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -997,7 +997,7 @@ func (m *awsAwsjson10_serializeOpListGlobalTables) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.ListGlobalTables")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentListGlobalTablesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentListGlobalTablesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1043,7 +1043,7 @@ func (m *awsAwsjson10_serializeOpListTables) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.ListTables")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentListTablesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentListTablesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1089,7 +1089,7 @@ func (m *awsAwsjson10_serializeOpListTagsOfResource) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.ListTagsOfResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentListTagsOfResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentListTagsOfResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1135,7 +1135,7 @@ func (m *awsAwsjson10_serializeOpPutItem) HandleSerialize(ctx context.Context, i
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.PutItem")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentPutItemInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentPutItemInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1181,7 +1181,7 @@ func (m *awsAwsjson10_serializeOpQuery) HandleSerialize(ctx context.Context, in 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.Query")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentQueryInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentQueryInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1227,7 +1227,7 @@ func (m *awsAwsjson10_serializeOpRestoreTableFromBackup) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.RestoreTableFromBackup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentRestoreTableFromBackupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentRestoreTableFromBackupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1273,7 +1273,7 @@ func (m *awsAwsjson10_serializeOpRestoreTableToPointInTime) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.RestoreTableToPointInTime")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentRestoreTableToPointInTimeInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentRestoreTableToPointInTimeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1319,7 +1319,7 @@ func (m *awsAwsjson10_serializeOpScan) HandleSerialize(ctx context.Context, in m
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.Scan")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentScanInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentScanInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1365,7 +1365,7 @@ func (m *awsAwsjson10_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.TagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1411,7 +1411,7 @@ func (m *awsAwsjson10_serializeOpTransactGetItems) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.TransactGetItems")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentTransactGetItemsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentTransactGetItemsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1457,7 +1457,7 @@ func (m *awsAwsjson10_serializeOpTransactWriteItems) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.TransactWriteItems")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentTransactWriteItemsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentTransactWriteItemsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1503,7 +1503,7 @@ func (m *awsAwsjson10_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.UntagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1549,7 +1549,7 @@ func (m *awsAwsjson10_serializeOpUpdateContinuousBackups) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.UpdateContinuousBackups")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentUpdateContinuousBackupsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentUpdateContinuousBackupsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1595,7 +1595,7 @@ func (m *awsAwsjson10_serializeOpUpdateContributorInsights) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.UpdateContributorInsights")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentUpdateContributorInsightsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentUpdateContributorInsightsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1641,7 +1641,7 @@ func (m *awsAwsjson10_serializeOpUpdateGlobalTable) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.UpdateGlobalTable")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentUpdateGlobalTableInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentUpdateGlobalTableInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1687,7 +1687,7 @@ func (m *awsAwsjson10_serializeOpUpdateGlobalTableSettings) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.UpdateGlobalTableSettings")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentUpdateGlobalTableSettingsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentUpdateGlobalTableSettingsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1733,7 +1733,7 @@ func (m *awsAwsjson10_serializeOpUpdateItem) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.UpdateItem")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentUpdateItemInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentUpdateItemInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1779,7 +1779,7 @@ func (m *awsAwsjson10_serializeOpUpdateTable) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.UpdateTable")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentUpdateTableInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentUpdateTableInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1825,7 +1825,7 @@ func (m *awsAwsjson10_serializeOpUpdateTableReplicaAutoScaling) HandleSerialize(
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.UpdateTableReplicaAutoScaling")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentUpdateTableReplicaAutoScalingInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentUpdateTableReplicaAutoScalingInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1871,7 +1871,7 @@ func (m *awsAwsjson10_serializeOpUpdateTimeToLive) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDB_20120810.UpdateTimeToLive")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentUpdateTimeToLiveInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentUpdateTimeToLiveInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3734,7 +3734,7 @@ func awsAwsjson10_serializeDocumentWriteRequests(v []*types.WriteRequest, value 
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentBatchGetItemInput(v *BatchGetItemInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentBatchGetItemInput(v *BatchGetItemInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3753,7 +3753,7 @@ func awsAwsjson10_serializeDocumentBatchGetItemInput(v *BatchGetItemInput, value
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentBatchWriteItemInput(v *BatchWriteItemInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentBatchWriteItemInput(v *BatchWriteItemInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3777,7 +3777,7 @@ func awsAwsjson10_serializeDocumentBatchWriteItemInput(v *BatchWriteItemInput, v
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentCreateBackupInput(v *CreateBackupInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentCreateBackupInput(v *CreateBackupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3794,7 +3794,7 @@ func awsAwsjson10_serializeDocumentCreateBackupInput(v *CreateBackupInput, value
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentCreateGlobalTableInput(v *CreateGlobalTableInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentCreateGlobalTableInput(v *CreateGlobalTableInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3813,7 +3813,7 @@ func awsAwsjson10_serializeDocumentCreateGlobalTableInput(v *CreateGlobalTableIn
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentCreateTableInput(v *CreateTableInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentCreateTableInput(v *CreateTableInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3886,7 +3886,7 @@ func awsAwsjson10_serializeDocumentCreateTableInput(v *CreateTableInput, value s
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDeleteBackupInput(v *DeleteBackupInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentDeleteBackupInput(v *DeleteBackupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3898,7 +3898,7 @@ func awsAwsjson10_serializeDocumentDeleteBackupInput(v *DeleteBackupInput, value
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDeleteItemInput(v *DeleteItemInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentDeleteItemInput(v *DeleteItemInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3963,7 +3963,7 @@ func awsAwsjson10_serializeDocumentDeleteItemInput(v *DeleteItemInput, value smi
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDeleteTableInput(v *DeleteTableInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentDeleteTableInput(v *DeleteTableInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3975,7 +3975,7 @@ func awsAwsjson10_serializeDocumentDeleteTableInput(v *DeleteTableInput, value s
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDescribeBackupInput(v *DescribeBackupInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentDescribeBackupInput(v *DescribeBackupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3987,7 +3987,7 @@ func awsAwsjson10_serializeDocumentDescribeBackupInput(v *DescribeBackupInput, v
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDescribeContinuousBackupsInput(v *DescribeContinuousBackupsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentDescribeContinuousBackupsInput(v *DescribeContinuousBackupsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3999,7 +3999,7 @@ func awsAwsjson10_serializeDocumentDescribeContinuousBackupsInput(v *DescribeCon
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDescribeContributorInsightsInput(v *DescribeContributorInsightsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentDescribeContributorInsightsInput(v *DescribeContributorInsightsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4016,26 +4016,14 @@ func awsAwsjson10_serializeDocumentDescribeContributorInsightsInput(v *DescribeC
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDescribeEndpointsInput(v *DescribeEndpointsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentDescribeEndpointsInput(v *DescribeEndpointsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDescribeGlobalTableInput(v *DescribeGlobalTableInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.GlobalTableName != nil {
-		ok := object.Key("GlobalTableName")
-		ok.String(*v.GlobalTableName)
-	}
-
-	return nil
-}
-
-func awsAwsjson10_serializeDocumentDescribeGlobalTableSettingsInput(v *DescribeGlobalTableSettingsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentDescribeGlobalTableInput(v *DescribeGlobalTableInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4047,14 +4035,26 @@ func awsAwsjson10_serializeDocumentDescribeGlobalTableSettingsInput(v *DescribeG
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDescribeLimitsInput(v *DescribeLimitsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentDescribeGlobalTableSettingsInput(v *DescribeGlobalTableSettingsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GlobalTableName != nil {
+		ok := object.Key("GlobalTableName")
+		ok.String(*v.GlobalTableName)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentDescribeLimitsInput(v *DescribeLimitsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDescribeTableInput(v *DescribeTableInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentDescribeTableInput(v *DescribeTableInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4066,7 +4066,7 @@ func awsAwsjson10_serializeDocumentDescribeTableInput(v *DescribeTableInput, val
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDescribeTableReplicaAutoScalingInput(v *DescribeTableReplicaAutoScalingInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentDescribeTableReplicaAutoScalingInput(v *DescribeTableReplicaAutoScalingInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4078,7 +4078,7 @@ func awsAwsjson10_serializeDocumentDescribeTableReplicaAutoScalingInput(v *Descr
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDescribeTimeToLiveInput(v *DescribeTimeToLiveInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentDescribeTimeToLiveInput(v *DescribeTimeToLiveInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4090,7 +4090,7 @@ func awsAwsjson10_serializeDocumentDescribeTimeToLiveInput(v *DescribeTimeToLive
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentGetItemInput(v *GetItemInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentGetItemInput(v *GetItemInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4138,7 +4138,7 @@ func awsAwsjson10_serializeDocumentGetItemInput(v *GetItemInput, value smithyjso
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentListBackupsInput(v *ListBackupsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentListBackupsInput(v *ListBackupsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4175,7 +4175,7 @@ func awsAwsjson10_serializeDocumentListBackupsInput(v *ListBackupsInput, value s
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentListContributorInsightsInput(v *ListContributorInsightsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentListContributorInsightsInput(v *ListContributorInsightsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4197,7 +4197,7 @@ func awsAwsjson10_serializeDocumentListContributorInsightsInput(v *ListContribut
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentListGlobalTablesInput(v *ListGlobalTablesInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentListGlobalTablesInput(v *ListGlobalTablesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4219,7 +4219,7 @@ func awsAwsjson10_serializeDocumentListGlobalTablesInput(v *ListGlobalTablesInpu
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentListTablesInput(v *ListTablesInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentListTablesInput(v *ListTablesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4236,7 +4236,7 @@ func awsAwsjson10_serializeDocumentListTablesInput(v *ListTablesInput, value smi
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentListTagsOfResourceInput(v *ListTagsOfResourceInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentListTagsOfResourceInput(v *ListTagsOfResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4253,7 +4253,7 @@ func awsAwsjson10_serializeDocumentListTagsOfResourceInput(v *ListTagsOfResource
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentPutItemInput(v *PutItemInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentPutItemInput(v *PutItemInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4318,7 +4318,7 @@ func awsAwsjson10_serializeDocumentPutItemInput(v *PutItemInput, value smithyjso
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentQueryInput(v *QueryInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentQueryInput(v *QueryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4422,7 +4422,7 @@ func awsAwsjson10_serializeDocumentQueryInput(v *QueryInput, value smithyjson.Va
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentRestoreTableFromBackupInput(v *RestoreTableFromBackupInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentRestoreTableFromBackupInput(v *RestoreTableFromBackupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4472,7 +4472,7 @@ func awsAwsjson10_serializeDocumentRestoreTableFromBackupInput(v *RestoreTableFr
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentRestoreTableToPointInTimeInput(v *RestoreTableToPointInTimeInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentRestoreTableToPointInTimeInput(v *RestoreTableToPointInTimeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4537,7 +4537,7 @@ func awsAwsjson10_serializeDocumentRestoreTableToPointInTimeInput(v *RestoreTabl
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentScanInput(v *ScanInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentScanInput(v *ScanInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4634,7 +4634,7 @@ func awsAwsjson10_serializeDocumentScanInput(v *ScanInput, value smithyjson.Valu
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4653,7 +4653,7 @@ func awsAwsjson10_serializeDocumentTagResourceInput(v *TagResourceInput, value s
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentTransactGetItemsInput(v *TransactGetItemsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentTransactGetItemsInput(v *TransactGetItemsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4672,7 +4672,7 @@ func awsAwsjson10_serializeDocumentTransactGetItemsInput(v *TransactGetItemsInpu
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentTransactWriteItemsInput(v *TransactWriteItemsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentTransactWriteItemsInput(v *TransactWriteItemsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4701,7 +4701,7 @@ func awsAwsjson10_serializeDocumentTransactWriteItemsInput(v *TransactWriteItems
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4720,7 +4720,7 @@ func awsAwsjson10_serializeDocumentUntagResourceInput(v *UntagResourceInput, val
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentUpdateContinuousBackupsInput(v *UpdateContinuousBackupsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentUpdateContinuousBackupsInput(v *UpdateContinuousBackupsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4739,7 +4739,7 @@ func awsAwsjson10_serializeDocumentUpdateContinuousBackupsInput(v *UpdateContinu
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentUpdateContributorInsightsInput(v *UpdateContributorInsightsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentUpdateContributorInsightsInput(v *UpdateContributorInsightsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4761,7 +4761,7 @@ func awsAwsjson10_serializeDocumentUpdateContributorInsightsInput(v *UpdateContr
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentUpdateGlobalTableInput(v *UpdateGlobalTableInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentUpdateGlobalTableInput(v *UpdateGlobalTableInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4780,7 +4780,7 @@ func awsAwsjson10_serializeDocumentUpdateGlobalTableInput(v *UpdateGlobalTableIn
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentUpdateGlobalTableSettingsInput(v *UpdateGlobalTableSettingsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentUpdateGlobalTableSettingsInput(v *UpdateGlobalTableSettingsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4823,7 +4823,7 @@ func awsAwsjson10_serializeDocumentUpdateGlobalTableSettingsInput(v *UpdateGloba
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentUpdateItemInput(v *UpdateItemInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentUpdateItemInput(v *UpdateItemInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4900,7 +4900,7 @@ func awsAwsjson10_serializeDocumentUpdateItemInput(v *UpdateItemInput, value smi
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentUpdateTableInput(v *UpdateTableInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentUpdateTableInput(v *UpdateTableInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4959,7 +4959,7 @@ func awsAwsjson10_serializeDocumentUpdateTableInput(v *UpdateTableInput, value s
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentUpdateTableReplicaAutoScalingInput(v *UpdateTableReplicaAutoScalingInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentUpdateTableReplicaAutoScalingInput(v *UpdateTableReplicaAutoScalingInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4992,7 +4992,7 @@ func awsAwsjson10_serializeDocumentUpdateTableReplicaAutoScalingInput(v *UpdateT
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentUpdateTimeToLiveInput(v *UpdateTimeToLiveInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentUpdateTimeToLiveInput(v *UpdateTimeToLiveInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

@@ -45,7 +45,7 @@ func (m *awsAwsjson11_serializeOpAssociateAdminAccount) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.AssociateAdminAccount")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAssociateAdminAccountInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAssociateAdminAccountInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -91,7 +91,7 @@ func (m *awsAwsjson11_serializeOpDeleteAppsList) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.DeleteAppsList")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteAppsListInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteAppsListInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -176,7 +176,7 @@ func (m *awsAwsjson11_serializeOpDeletePolicy) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.DeletePolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeletePolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeletePolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -222,7 +222,7 @@ func (m *awsAwsjson11_serializeOpDeleteProtocolsList) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.DeleteProtocolsList")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteProtocolsListInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteProtocolsListInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -346,7 +346,7 @@ func (m *awsAwsjson11_serializeOpGetAppsList) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.GetAppsList")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetAppsListInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetAppsListInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -392,7 +392,7 @@ func (m *awsAwsjson11_serializeOpGetComplianceDetail) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.GetComplianceDetail")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetComplianceDetailInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetComplianceDetailInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -477,7 +477,7 @@ func (m *awsAwsjson11_serializeOpGetPolicy) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.GetPolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetPolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetPolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -523,7 +523,7 @@ func (m *awsAwsjson11_serializeOpGetProtectionStatus) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.GetProtectionStatus")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetProtectionStatusInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetProtectionStatusInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -569,7 +569,7 @@ func (m *awsAwsjson11_serializeOpGetProtocolsList) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.GetProtocolsList")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetProtocolsListInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetProtocolsListInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -615,7 +615,7 @@ func (m *awsAwsjson11_serializeOpGetViolationDetails) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.GetViolationDetails")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetViolationDetailsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetViolationDetailsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -661,7 +661,7 @@ func (m *awsAwsjson11_serializeOpListAppsLists) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.ListAppsLists")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListAppsListsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListAppsListsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -707,7 +707,7 @@ func (m *awsAwsjson11_serializeOpListComplianceStatus) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.ListComplianceStatus")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListComplianceStatusInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListComplianceStatusInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -753,7 +753,7 @@ func (m *awsAwsjson11_serializeOpListMemberAccounts) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.ListMemberAccounts")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListMemberAccountsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListMemberAccountsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -799,7 +799,7 @@ func (m *awsAwsjson11_serializeOpListPolicies) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.ListPolicies")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListPoliciesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListPoliciesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -845,7 +845,7 @@ func (m *awsAwsjson11_serializeOpListProtocolsLists) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.ListProtocolsLists")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListProtocolsListsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListProtocolsListsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -891,7 +891,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.ListTagsForResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -937,7 +937,7 @@ func (m *awsAwsjson11_serializeOpPutAppsList) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.PutAppsList")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutAppsListInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutAppsListInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -983,7 +983,7 @@ func (m *awsAwsjson11_serializeOpPutNotificationChannel) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.PutNotificationChannel")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutNotificationChannelInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutNotificationChannelInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1029,7 +1029,7 @@ func (m *awsAwsjson11_serializeOpPutPolicy) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.PutPolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutPolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutPolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1075,7 +1075,7 @@ func (m *awsAwsjson11_serializeOpPutProtocolsList) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.PutProtocolsList")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutProtocolsListInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutProtocolsListInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1121,7 +1121,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.TagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1167,7 +1167,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSFMS_20180101.UntagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1581,7 +1581,7 @@ func awsAwsjson11_serializeDocumentTagList(v []*types.Tag, value smithyjson.Valu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssociateAdminAccountInput(v *AssociateAdminAccountInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAssociateAdminAccountInput(v *AssociateAdminAccountInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1593,7 +1593,7 @@ func awsAwsjson11_serializeDocumentAssociateAdminAccountInput(v *AssociateAdminA
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteAppsListInput(v *DeleteAppsListInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteAppsListInput(v *DeleteAppsListInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1605,14 +1605,14 @@ func awsAwsjson11_serializeDocumentDeleteAppsListInput(v *DeleteAppsListInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteNotificationChannelInput(v *DeleteNotificationChannelInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteNotificationChannelInput(v *DeleteNotificationChannelInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeletePolicyInput(v *DeletePolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeletePolicyInput(v *DeletePolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1629,7 +1629,7 @@ func awsAwsjson11_serializeDocumentDeletePolicyInput(v *DeletePolicyInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteProtocolsListInput(v *DeleteProtocolsListInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteProtocolsListInput(v *DeleteProtocolsListInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1641,21 +1641,21 @@ func awsAwsjson11_serializeDocumentDeleteProtocolsListInput(v *DeleteProtocolsLi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDisassociateAdminAccountInput(v *DisassociateAdminAccountInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDisassociateAdminAccountInput(v *DisassociateAdminAccountInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetAdminAccountInput(v *GetAdminAccountInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetAdminAccountInput(v *GetAdminAccountInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetAppsListInput(v *GetAppsListInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetAppsListInput(v *GetAppsListInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1672,7 +1672,7 @@ func awsAwsjson11_serializeDocumentGetAppsListInput(v *GetAppsListInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetComplianceDetailInput(v *GetComplianceDetailInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetComplianceDetailInput(v *GetComplianceDetailInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1689,14 +1689,14 @@ func awsAwsjson11_serializeDocumentGetComplianceDetailInput(v *GetComplianceDeta
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetNotificationChannelInput(v *GetNotificationChannelInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetNotificationChannelInput(v *GetNotificationChannelInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetPolicyInput(v *GetPolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetPolicyInput(v *GetPolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1708,7 +1708,7 @@ func awsAwsjson11_serializeDocumentGetPolicyInput(v *GetPolicyInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetProtectionStatusInput(v *GetProtectionStatusInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetProtectionStatusInput(v *GetProtectionStatusInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1745,7 +1745,7 @@ func awsAwsjson11_serializeDocumentGetProtectionStatusInput(v *GetProtectionStat
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetProtocolsListInput(v *GetProtocolsListInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetProtocolsListInput(v *GetProtocolsListInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1762,7 +1762,7 @@ func awsAwsjson11_serializeDocumentGetProtocolsListInput(v *GetProtocolsListInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetViolationDetailsInput(v *GetViolationDetailsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetViolationDetailsInput(v *GetViolationDetailsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1789,7 +1789,7 @@ func awsAwsjson11_serializeDocumentGetViolationDetailsInput(v *GetViolationDetai
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListAppsListsInput(v *ListAppsListsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListAppsListsInput(v *ListAppsListsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1811,7 +1811,7 @@ func awsAwsjson11_serializeDocumentListAppsListsInput(v *ListAppsListsInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListComplianceStatusInput(v *ListComplianceStatusInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListComplianceStatusInput(v *ListComplianceStatusInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1833,7 +1833,7 @@ func awsAwsjson11_serializeDocumentListComplianceStatusInput(v *ListComplianceSt
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListMemberAccountsInput(v *ListMemberAccountsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListMemberAccountsInput(v *ListMemberAccountsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1850,7 +1850,7 @@ func awsAwsjson11_serializeDocumentListMemberAccountsInput(v *ListMemberAccounts
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListPoliciesInput(v *ListPoliciesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListPoliciesInput(v *ListPoliciesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1867,7 +1867,7 @@ func awsAwsjson11_serializeDocumentListPoliciesInput(v *ListPoliciesInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListProtocolsListsInput(v *ListProtocolsListsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListProtocolsListsInput(v *ListProtocolsListsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1889,7 +1889,7 @@ func awsAwsjson11_serializeDocumentListProtocolsListsInput(v *ListProtocolsLists
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1901,7 +1901,7 @@ func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResour
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutAppsListInput(v *PutAppsListInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutAppsListInput(v *PutAppsListInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1922,7 +1922,7 @@ func awsAwsjson11_serializeDocumentPutAppsListInput(v *PutAppsListInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutNotificationChannelInput(v *PutNotificationChannelInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutNotificationChannelInput(v *PutNotificationChannelInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1939,7 +1939,7 @@ func awsAwsjson11_serializeDocumentPutNotificationChannelInput(v *PutNotificatio
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutPolicyInput(v *PutPolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutPolicyInput(v *PutPolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1960,7 +1960,7 @@ func awsAwsjson11_serializeDocumentPutPolicyInput(v *PutPolicyInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutProtocolsListInput(v *PutProtocolsListInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutProtocolsListInput(v *PutProtocolsListInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1981,7 +1981,7 @@ func awsAwsjson11_serializeDocumentPutProtocolsListInput(v *PutProtocolsListInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2000,7 +2000,7 @@ func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

@@ -208,7 +208,7 @@ func (m *awsEc2query_serializeOpNestedStructures) HandleSerialize(ctx context.Co
 	body.Key("Action").String("NestedStructures")
 	body.Key("Version").String("2020-01-08")
 
-	if err := awsEc2query_serializeDocumentNestedStructuresInput(input, bodyEncoder.Value); err != nil {
+	if err := awsEc2query_serializeOpDocumentNestedStructuresInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -316,7 +316,7 @@ func (m *awsEc2query_serializeOpQueryIdempotencyTokenAutoFill) HandleSerialize(c
 	body.Key("Action").String("QueryIdempotencyTokenAutoFill")
 	body.Key("Version").String("2020-01-08")
 
-	if err := awsEc2query_serializeDocumentQueryIdempotencyTokenAutoFillInput(input, bodyEncoder.Value); err != nil {
+	if err := awsEc2query_serializeOpDocumentQueryIdempotencyTokenAutoFillInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -371,7 +371,7 @@ func (m *awsEc2query_serializeOpQueryLists) HandleSerialize(ctx context.Context,
 	body.Key("Action").String("QueryLists")
 	body.Key("Version").String("2020-01-08")
 
-	if err := awsEc2query_serializeDocumentQueryListsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsEc2query_serializeOpDocumentQueryListsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -426,7 +426,7 @@ func (m *awsEc2query_serializeOpQueryTimestamps) HandleSerialize(ctx context.Con
 	body.Key("Action").String("QueryTimestamps")
 	body.Key("Version").String("2020-01-08")
 
-	if err := awsEc2query_serializeDocumentQueryTimestampsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsEc2query_serializeOpDocumentQueryTimestampsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -534,7 +534,7 @@ func (m *awsEc2query_serializeOpSimpleInputParams) HandleSerialize(ctx context.C
 	body.Key("Action").String("SimpleInputParams")
 	body.Key("Version").String("2020-01-08")
 
-	if err := awsEc2query_serializeDocumentSimpleInputParamsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsEc2query_serializeOpDocumentSimpleInputParamsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -958,7 +958,7 @@ func awsEc2query_serializeDocumentStringList(v []*string, value query.Value) err
 	return nil
 }
 
-func awsEc2query_serializeDocumentEmptyInputAndEmptyOutputInput(v *EmptyInputAndEmptyOutputInput, value query.Value) error {
+func awsEc2query_serializeOpDocumentEmptyInputAndEmptyOutputInput(v *EmptyInputAndEmptyOutputInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -979,7 +979,7 @@ func awsEc2query_serializeDocumentIgnoresWrappingXmlNameInput(v *IgnoresWrapping
 	return nil
 }
 
-func awsEc2query_serializeDocumentNestedStructuresInput(v *NestedStructuresInput, value query.Value) error {
+func awsEc2query_serializeOpDocumentNestedStructuresInput(v *NestedStructuresInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -1000,7 +1000,7 @@ func awsEc2query_serializeDocumentNoInputAndOutputInput(v *NoInputAndOutputInput
 	return nil
 }
 
-func awsEc2query_serializeDocumentQueryIdempotencyTokenAutoFillInput(v *QueryIdempotencyTokenAutoFillInput, value query.Value) error {
+func awsEc2query_serializeOpDocumentQueryIdempotencyTokenAutoFillInput(v *QueryIdempotencyTokenAutoFillInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -1012,7 +1012,7 @@ func awsEc2query_serializeDocumentQueryIdempotencyTokenAutoFillInput(v *QueryIde
 	return nil
 }
 
-func awsEc2query_serializeDocumentQueryListsInput(v *QueryListsInput, value query.Value) error {
+func awsEc2query_serializeOpDocumentQueryListsInput(v *QueryListsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -1047,7 +1047,7 @@ func awsEc2query_serializeDocumentQueryListsInput(v *QueryListsInput, value quer
 	return nil
 }
 
-func awsEc2query_serializeDocumentQueryTimestampsInput(v *QueryTimestampsInput, value query.Value) error {
+func awsEc2query_serializeOpDocumentQueryTimestampsInput(v *QueryTimestampsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -1076,7 +1076,7 @@ func awsEc2query_serializeDocumentRecursiveXmlShapesInput(v *RecursiveXmlShapesI
 	return nil
 }
 
-func awsEc2query_serializeDocumentSimpleInputParamsInput(v *SimpleInputParamsInput, value query.Value) error {
+func awsEc2query_serializeOpDocumentSimpleInputParamsInput(v *SimpleInputParamsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 

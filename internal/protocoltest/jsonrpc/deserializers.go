@@ -151,7 +151,7 @@ func (m *awsAwsjson11_deserializeOpGreetingWithErrors) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGreetingWithErrorsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGreetingWithErrorsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -257,7 +257,7 @@ func (m *awsAwsjson11_deserializeOpJsonEnums) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentJsonEnumsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentJsonEnumsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -354,7 +354,7 @@ func (m *awsAwsjson11_deserializeOpJsonUnions) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentJsonUnionsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentJsonUnionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -451,7 +451,7 @@ func (m *awsAwsjson11_deserializeOpKitchenSinkOperation) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentKitchenSinkOperationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentKitchenSinkOperationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -554,7 +554,7 @@ func (m *awsAwsjson11_deserializeOpNullOperation) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentNullOperationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentNullOperationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -651,7 +651,7 @@ func (m *awsAwsjson11_deserializeOpOperationWithOptionalInputOutput) HandleDeser
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentOperationWithOptionalInputOutputOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentOperationWithOptionalInputOutputOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -748,7 +748,7 @@ func (m *awsAwsjson11_deserializeOpPutAndGetInlineDocuments) HandleDeserialize(c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentPutAndGetInlineDocumentsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentPutAndGetInlineDocumentsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2918,7 +2918,7 @@ func awsAwsjson11_deserializeDocumentEmptyOperationOutput(v **EmptyOperationOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGreetingWithErrorsOutput(v **GreetingWithErrorsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGreetingWithErrorsOutput(v **GreetingWithErrorsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2982,7 +2982,7 @@ func awsAwsjson11_deserializeDocumentGreetingWithErrorsOutput(v **GreetingWithEr
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentJsonEnumsOutput(v **JsonEnumsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentJsonEnumsOutput(v **JsonEnumsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3087,7 +3087,7 @@ func awsAwsjson11_deserializeDocumentJsonEnumsOutput(v **JsonEnumsOutput, decode
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentJsonUnionsOutput(v **JsonUnionsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentJsonUnionsOutput(v **JsonUnionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3143,7 +3143,7 @@ func awsAwsjson11_deserializeDocumentJsonUnionsOutput(v **JsonUnionsOutput, deco
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentKitchenSinkOperationOutput(v **KitchenSinkOperationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentKitchenSinkOperationOutput(v **KitchenSinkOperationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3445,7 +3445,7 @@ func awsAwsjson11_deserializeDocumentKitchenSinkOperationOutput(v **KitchenSinkO
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentNullOperationOutput(v **NullOperationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentNullOperationOutput(v **NullOperationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3519,7 +3519,7 @@ func awsAwsjson11_deserializeDocumentNullOperationOutput(v **NullOperationOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentOperationWithOptionalInputOutputOutput(v **OperationWithOptionalInputOutputOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentOperationWithOptionalInputOutputOutput(v **OperationWithOptionalInputOutputOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3583,7 +3583,7 @@ func awsAwsjson11_deserializeDocumentOperationWithOptionalInputOutputOutput(v **
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentPutAndGetInlineDocumentsOutput(v **PutAndGetInlineDocumentsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentPutAndGetInlineDocumentsOutput(v **PutAndGetInlineDocumentsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

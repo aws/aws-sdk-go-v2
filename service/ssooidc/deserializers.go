@@ -53,7 +53,7 @@ func (m *awsRestjson1_deserializeOpCreateToken) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentCreateTokenOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentCreateTokenOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -150,7 +150,7 @@ func awsRestjson1_deserializeOpErrorCreateToken(response *smithyhttp.Response) e
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateTokenOutput(v **CreateTokenOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateTokenOutput(v **CreateTokenOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -304,7 +304,7 @@ func (m *awsRestjson1_deserializeOpRegisterClient) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentRegisterClientOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentRegisterClientOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -380,7 +380,7 @@ func awsRestjson1_deserializeOpErrorRegisterClient(response *smithyhttp.Response
 	}
 }
 
-func awsRestjson1_deserializeDocumentRegisterClientOutput(v **RegisterClientOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentRegisterClientOutput(v **RegisterClientOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -551,7 +551,7 @@ func (m *awsRestjson1_deserializeOpStartDeviceAuthorization) HandleDeserialize(c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentStartDeviceAuthorizationOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentStartDeviceAuthorizationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -630,7 +630,7 @@ func awsRestjson1_deserializeOpErrorStartDeviceAuthorization(response *smithyhtt
 	}
 }
 
-func awsRestjson1_deserializeDocumentStartDeviceAuthorizationOutput(v **StartDeviceAuthorizationOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentStartDeviceAuthorizationOutput(v **StartDeviceAuthorizationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

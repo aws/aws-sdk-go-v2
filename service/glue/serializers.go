@@ -45,7 +45,7 @@ func (m *awsAwsjson11_serializeOpBatchCreatePartition) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.BatchCreatePartition")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchCreatePartitionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchCreatePartitionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -91,7 +91,7 @@ func (m *awsAwsjson11_serializeOpBatchDeleteConnection) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.BatchDeleteConnection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchDeleteConnectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchDeleteConnectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -137,7 +137,7 @@ func (m *awsAwsjson11_serializeOpBatchDeletePartition) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.BatchDeletePartition")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchDeletePartitionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchDeletePartitionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -183,7 +183,7 @@ func (m *awsAwsjson11_serializeOpBatchDeleteTable) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.BatchDeleteTable")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchDeleteTableInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchDeleteTableInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -229,7 +229,7 @@ func (m *awsAwsjson11_serializeOpBatchDeleteTableVersion) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.BatchDeleteTableVersion")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchDeleteTableVersionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchDeleteTableVersionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -275,7 +275,7 @@ func (m *awsAwsjson11_serializeOpBatchGetCrawlers) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.BatchGetCrawlers")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchGetCrawlersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchGetCrawlersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -321,7 +321,7 @@ func (m *awsAwsjson11_serializeOpBatchGetDevEndpoints) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.BatchGetDevEndpoints")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchGetDevEndpointsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchGetDevEndpointsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -367,7 +367,7 @@ func (m *awsAwsjson11_serializeOpBatchGetJobs) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.BatchGetJobs")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchGetJobsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchGetJobsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -413,7 +413,7 @@ func (m *awsAwsjson11_serializeOpBatchGetPartition) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.BatchGetPartition")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchGetPartitionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchGetPartitionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -459,7 +459,7 @@ func (m *awsAwsjson11_serializeOpBatchGetTriggers) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.BatchGetTriggers")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchGetTriggersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchGetTriggersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -505,7 +505,7 @@ func (m *awsAwsjson11_serializeOpBatchGetWorkflows) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.BatchGetWorkflows")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchGetWorkflowsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchGetWorkflowsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -551,7 +551,7 @@ func (m *awsAwsjson11_serializeOpBatchStopJobRun) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.BatchStopJobRun")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchStopJobRunInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchStopJobRunInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -597,7 +597,7 @@ func (m *awsAwsjson11_serializeOpCancelMLTaskRun) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.CancelMLTaskRun")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCancelMLTaskRunInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCancelMLTaskRunInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -643,7 +643,7 @@ func (m *awsAwsjson11_serializeOpCreateClassifier) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.CreateClassifier")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateClassifierInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateClassifierInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -689,7 +689,7 @@ func (m *awsAwsjson11_serializeOpCreateConnection) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.CreateConnection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateConnectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateConnectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -735,7 +735,7 @@ func (m *awsAwsjson11_serializeOpCreateCrawler) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.CreateCrawler")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateCrawlerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateCrawlerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -781,7 +781,7 @@ func (m *awsAwsjson11_serializeOpCreateDatabase) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.CreateDatabase")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateDatabaseInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateDatabaseInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -827,7 +827,7 @@ func (m *awsAwsjson11_serializeOpCreateDevEndpoint) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.CreateDevEndpoint")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateDevEndpointInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateDevEndpointInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -873,7 +873,7 @@ func (m *awsAwsjson11_serializeOpCreateJob) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.CreateJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -919,7 +919,7 @@ func (m *awsAwsjson11_serializeOpCreateMLTransform) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.CreateMLTransform")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateMLTransformInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateMLTransformInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -965,7 +965,7 @@ func (m *awsAwsjson11_serializeOpCreatePartition) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.CreatePartition")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreatePartitionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreatePartitionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1011,7 +1011,7 @@ func (m *awsAwsjson11_serializeOpCreateScript) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.CreateScript")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateScriptInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateScriptInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1057,7 +1057,7 @@ func (m *awsAwsjson11_serializeOpCreateSecurityConfiguration) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.CreateSecurityConfiguration")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateSecurityConfigurationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateSecurityConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1103,7 +1103,7 @@ func (m *awsAwsjson11_serializeOpCreateTable) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.CreateTable")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateTableInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateTableInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1149,7 +1149,7 @@ func (m *awsAwsjson11_serializeOpCreateTrigger) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.CreateTrigger")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateTriggerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateTriggerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1195,7 +1195,7 @@ func (m *awsAwsjson11_serializeOpCreateUserDefinedFunction) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.CreateUserDefinedFunction")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateUserDefinedFunctionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateUserDefinedFunctionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1241,7 +1241,7 @@ func (m *awsAwsjson11_serializeOpCreateWorkflow) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.CreateWorkflow")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateWorkflowInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateWorkflowInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1287,7 +1287,7 @@ func (m *awsAwsjson11_serializeOpDeleteClassifier) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.DeleteClassifier")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteClassifierInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteClassifierInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1333,7 +1333,7 @@ func (m *awsAwsjson11_serializeOpDeleteColumnStatisticsForPartition) HandleSeria
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.DeleteColumnStatisticsForPartition")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteColumnStatisticsForPartitionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteColumnStatisticsForPartitionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1379,7 +1379,7 @@ func (m *awsAwsjson11_serializeOpDeleteColumnStatisticsForTable) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.DeleteColumnStatisticsForTable")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteColumnStatisticsForTableInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteColumnStatisticsForTableInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1425,7 +1425,7 @@ func (m *awsAwsjson11_serializeOpDeleteConnection) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.DeleteConnection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteConnectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteConnectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1471,7 +1471,7 @@ func (m *awsAwsjson11_serializeOpDeleteCrawler) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.DeleteCrawler")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteCrawlerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteCrawlerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1517,7 +1517,7 @@ func (m *awsAwsjson11_serializeOpDeleteDatabase) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.DeleteDatabase")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteDatabaseInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteDatabaseInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1563,7 +1563,7 @@ func (m *awsAwsjson11_serializeOpDeleteDevEndpoint) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.DeleteDevEndpoint")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteDevEndpointInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteDevEndpointInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1609,7 +1609,7 @@ func (m *awsAwsjson11_serializeOpDeleteJob) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.DeleteJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1655,7 +1655,7 @@ func (m *awsAwsjson11_serializeOpDeleteMLTransform) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.DeleteMLTransform")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteMLTransformInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteMLTransformInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1701,7 +1701,7 @@ func (m *awsAwsjson11_serializeOpDeletePartition) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.DeletePartition")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeletePartitionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeletePartitionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1747,7 +1747,7 @@ func (m *awsAwsjson11_serializeOpDeleteResourcePolicy) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.DeleteResourcePolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteResourcePolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteResourcePolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1793,7 +1793,7 @@ func (m *awsAwsjson11_serializeOpDeleteSecurityConfiguration) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.DeleteSecurityConfiguration")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteSecurityConfigurationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteSecurityConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1839,7 +1839,7 @@ func (m *awsAwsjson11_serializeOpDeleteTable) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.DeleteTable")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteTableInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteTableInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1885,7 +1885,7 @@ func (m *awsAwsjson11_serializeOpDeleteTableVersion) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.DeleteTableVersion")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteTableVersionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteTableVersionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1931,7 +1931,7 @@ func (m *awsAwsjson11_serializeOpDeleteTrigger) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.DeleteTrigger")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteTriggerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteTriggerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1977,7 +1977,7 @@ func (m *awsAwsjson11_serializeOpDeleteUserDefinedFunction) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.DeleteUserDefinedFunction")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteUserDefinedFunctionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteUserDefinedFunctionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2023,7 +2023,7 @@ func (m *awsAwsjson11_serializeOpDeleteWorkflow) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.DeleteWorkflow")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteWorkflowInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteWorkflowInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2069,7 +2069,7 @@ func (m *awsAwsjson11_serializeOpGetCatalogImportStatus) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetCatalogImportStatus")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetCatalogImportStatusInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetCatalogImportStatusInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2115,7 +2115,7 @@ func (m *awsAwsjson11_serializeOpGetClassifier) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetClassifier")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetClassifierInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetClassifierInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2161,7 +2161,7 @@ func (m *awsAwsjson11_serializeOpGetClassifiers) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetClassifiers")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetClassifiersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetClassifiersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2207,7 +2207,7 @@ func (m *awsAwsjson11_serializeOpGetColumnStatisticsForPartition) HandleSerializ
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetColumnStatisticsForPartition")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetColumnStatisticsForPartitionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetColumnStatisticsForPartitionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2253,7 +2253,7 @@ func (m *awsAwsjson11_serializeOpGetColumnStatisticsForTable) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetColumnStatisticsForTable")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetColumnStatisticsForTableInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetColumnStatisticsForTableInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2299,7 +2299,7 @@ func (m *awsAwsjson11_serializeOpGetConnection) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetConnection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetConnectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetConnectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2345,7 +2345,7 @@ func (m *awsAwsjson11_serializeOpGetConnections) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetConnections")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetConnectionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetConnectionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2391,7 +2391,7 @@ func (m *awsAwsjson11_serializeOpGetCrawler) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetCrawler")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetCrawlerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetCrawlerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2437,7 +2437,7 @@ func (m *awsAwsjson11_serializeOpGetCrawlerMetrics) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetCrawlerMetrics")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetCrawlerMetricsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetCrawlerMetricsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2483,7 +2483,7 @@ func (m *awsAwsjson11_serializeOpGetCrawlers) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetCrawlers")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetCrawlersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetCrawlersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2529,7 +2529,7 @@ func (m *awsAwsjson11_serializeOpGetDatabase) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetDatabase")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetDatabaseInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetDatabaseInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2575,7 +2575,7 @@ func (m *awsAwsjson11_serializeOpGetDatabases) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetDatabases")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetDatabasesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetDatabasesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2621,7 +2621,7 @@ func (m *awsAwsjson11_serializeOpGetDataCatalogEncryptionSettings) HandleSeriali
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetDataCatalogEncryptionSettings")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetDataCatalogEncryptionSettingsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetDataCatalogEncryptionSettingsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2667,7 +2667,7 @@ func (m *awsAwsjson11_serializeOpGetDataflowGraph) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetDataflowGraph")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetDataflowGraphInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetDataflowGraphInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2713,7 +2713,7 @@ func (m *awsAwsjson11_serializeOpGetDevEndpoint) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetDevEndpoint")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetDevEndpointInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetDevEndpointInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2759,7 +2759,7 @@ func (m *awsAwsjson11_serializeOpGetDevEndpoints) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetDevEndpoints")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetDevEndpointsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetDevEndpointsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2805,7 +2805,7 @@ func (m *awsAwsjson11_serializeOpGetJob) HandleSerialize(ctx context.Context, in
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2851,7 +2851,7 @@ func (m *awsAwsjson11_serializeOpGetJobBookmark) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetJobBookmark")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetJobBookmarkInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetJobBookmarkInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2897,7 +2897,7 @@ func (m *awsAwsjson11_serializeOpGetJobRun) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetJobRun")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetJobRunInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetJobRunInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2943,7 +2943,7 @@ func (m *awsAwsjson11_serializeOpGetJobRuns) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetJobRuns")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetJobRunsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetJobRunsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2989,7 +2989,7 @@ func (m *awsAwsjson11_serializeOpGetJobs) HandleSerialize(ctx context.Context, i
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetJobs")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetJobsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetJobsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3035,7 +3035,7 @@ func (m *awsAwsjson11_serializeOpGetMapping) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetMapping")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetMappingInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetMappingInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3081,7 +3081,7 @@ func (m *awsAwsjson11_serializeOpGetMLTaskRun) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetMLTaskRun")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetMLTaskRunInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetMLTaskRunInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3127,7 +3127,7 @@ func (m *awsAwsjson11_serializeOpGetMLTaskRuns) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetMLTaskRuns")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetMLTaskRunsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetMLTaskRunsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3173,7 +3173,7 @@ func (m *awsAwsjson11_serializeOpGetMLTransform) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetMLTransform")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetMLTransformInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetMLTransformInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3219,7 +3219,7 @@ func (m *awsAwsjson11_serializeOpGetMLTransforms) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetMLTransforms")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetMLTransformsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetMLTransformsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3265,7 +3265,7 @@ func (m *awsAwsjson11_serializeOpGetPartition) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetPartition")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetPartitionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetPartitionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3311,7 +3311,7 @@ func (m *awsAwsjson11_serializeOpGetPartitions) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetPartitions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetPartitionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetPartitionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3357,7 +3357,7 @@ func (m *awsAwsjson11_serializeOpGetPlan) HandleSerialize(ctx context.Context, i
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetPlan")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetPlanInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetPlanInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3403,7 +3403,7 @@ func (m *awsAwsjson11_serializeOpGetResourcePolicies) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetResourcePolicies")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetResourcePoliciesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetResourcePoliciesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3449,7 +3449,7 @@ func (m *awsAwsjson11_serializeOpGetResourcePolicy) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetResourcePolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetResourcePolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetResourcePolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3495,7 +3495,7 @@ func (m *awsAwsjson11_serializeOpGetSecurityConfiguration) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetSecurityConfiguration")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetSecurityConfigurationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetSecurityConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3541,7 +3541,7 @@ func (m *awsAwsjson11_serializeOpGetSecurityConfigurations) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetSecurityConfigurations")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetSecurityConfigurationsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetSecurityConfigurationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3587,7 +3587,7 @@ func (m *awsAwsjson11_serializeOpGetTable) HandleSerialize(ctx context.Context, 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetTable")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetTableInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetTableInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3633,7 +3633,7 @@ func (m *awsAwsjson11_serializeOpGetTables) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetTables")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetTablesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetTablesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3679,7 +3679,7 @@ func (m *awsAwsjson11_serializeOpGetTableVersion) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetTableVersion")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetTableVersionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetTableVersionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3725,7 +3725,7 @@ func (m *awsAwsjson11_serializeOpGetTableVersions) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetTableVersions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetTableVersionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetTableVersionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3771,7 +3771,7 @@ func (m *awsAwsjson11_serializeOpGetTags) HandleSerialize(ctx context.Context, i
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetTags")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetTagsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetTagsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3817,7 +3817,7 @@ func (m *awsAwsjson11_serializeOpGetTrigger) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetTrigger")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetTriggerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetTriggerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3863,7 +3863,7 @@ func (m *awsAwsjson11_serializeOpGetTriggers) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetTriggers")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetTriggersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetTriggersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3909,7 +3909,7 @@ func (m *awsAwsjson11_serializeOpGetUserDefinedFunction) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetUserDefinedFunction")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetUserDefinedFunctionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetUserDefinedFunctionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3955,7 +3955,7 @@ func (m *awsAwsjson11_serializeOpGetUserDefinedFunctions) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetUserDefinedFunctions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetUserDefinedFunctionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetUserDefinedFunctionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4001,7 +4001,7 @@ func (m *awsAwsjson11_serializeOpGetWorkflow) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetWorkflow")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetWorkflowInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetWorkflowInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4047,7 +4047,7 @@ func (m *awsAwsjson11_serializeOpGetWorkflowRun) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetWorkflowRun")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetWorkflowRunInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetWorkflowRunInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4093,7 +4093,7 @@ func (m *awsAwsjson11_serializeOpGetWorkflowRunProperties) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetWorkflowRunProperties")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetWorkflowRunPropertiesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetWorkflowRunPropertiesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4139,7 +4139,7 @@ func (m *awsAwsjson11_serializeOpGetWorkflowRuns) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.GetWorkflowRuns")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetWorkflowRunsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetWorkflowRunsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4185,7 +4185,7 @@ func (m *awsAwsjson11_serializeOpImportCatalogToGlue) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.ImportCatalogToGlue")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentImportCatalogToGlueInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentImportCatalogToGlueInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4231,7 +4231,7 @@ func (m *awsAwsjson11_serializeOpListCrawlers) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.ListCrawlers")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListCrawlersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListCrawlersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4277,7 +4277,7 @@ func (m *awsAwsjson11_serializeOpListDevEndpoints) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.ListDevEndpoints")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListDevEndpointsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListDevEndpointsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4323,7 +4323,7 @@ func (m *awsAwsjson11_serializeOpListJobs) HandleSerialize(ctx context.Context, 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.ListJobs")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListJobsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListJobsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4369,7 +4369,7 @@ func (m *awsAwsjson11_serializeOpListMLTransforms) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.ListMLTransforms")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListMLTransformsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListMLTransformsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4415,7 +4415,7 @@ func (m *awsAwsjson11_serializeOpListTriggers) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.ListTriggers")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTriggersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTriggersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4461,7 +4461,7 @@ func (m *awsAwsjson11_serializeOpListWorkflows) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.ListWorkflows")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListWorkflowsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListWorkflowsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4507,7 +4507,7 @@ func (m *awsAwsjson11_serializeOpPutDataCatalogEncryptionSettings) HandleSeriali
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.PutDataCatalogEncryptionSettings")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutDataCatalogEncryptionSettingsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutDataCatalogEncryptionSettingsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4553,7 +4553,7 @@ func (m *awsAwsjson11_serializeOpPutResourcePolicy) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.PutResourcePolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutResourcePolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutResourcePolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4599,7 +4599,7 @@ func (m *awsAwsjson11_serializeOpPutWorkflowRunProperties) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.PutWorkflowRunProperties")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutWorkflowRunPropertiesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutWorkflowRunPropertiesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4645,7 +4645,7 @@ func (m *awsAwsjson11_serializeOpResetJobBookmark) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.ResetJobBookmark")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentResetJobBookmarkInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentResetJobBookmarkInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4691,7 +4691,7 @@ func (m *awsAwsjson11_serializeOpResumeWorkflowRun) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.ResumeWorkflowRun")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentResumeWorkflowRunInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentResumeWorkflowRunInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4737,7 +4737,7 @@ func (m *awsAwsjson11_serializeOpSearchTables) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.SearchTables")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSearchTablesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSearchTablesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4783,7 +4783,7 @@ func (m *awsAwsjson11_serializeOpStartCrawler) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.StartCrawler")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartCrawlerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartCrawlerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4829,7 +4829,7 @@ func (m *awsAwsjson11_serializeOpStartCrawlerSchedule) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.StartCrawlerSchedule")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartCrawlerScheduleInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartCrawlerScheduleInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4875,7 +4875,7 @@ func (m *awsAwsjson11_serializeOpStartExportLabelsTaskRun) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.StartExportLabelsTaskRun")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartExportLabelsTaskRunInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartExportLabelsTaskRunInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4921,7 +4921,7 @@ func (m *awsAwsjson11_serializeOpStartImportLabelsTaskRun) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.StartImportLabelsTaskRun")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartImportLabelsTaskRunInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartImportLabelsTaskRunInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4967,7 +4967,7 @@ func (m *awsAwsjson11_serializeOpStartJobRun) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.StartJobRun")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartJobRunInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartJobRunInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5013,7 +5013,7 @@ func (m *awsAwsjson11_serializeOpStartMLEvaluationTaskRun) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.StartMLEvaluationTaskRun")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartMLEvaluationTaskRunInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartMLEvaluationTaskRunInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5059,7 +5059,7 @@ func (m *awsAwsjson11_serializeOpStartMLLabelingSetGenerationTaskRun) HandleSeri
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.StartMLLabelingSetGenerationTaskRun")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartMLLabelingSetGenerationTaskRunInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartMLLabelingSetGenerationTaskRunInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5105,7 +5105,7 @@ func (m *awsAwsjson11_serializeOpStartTrigger) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.StartTrigger")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartTriggerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartTriggerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5151,7 +5151,7 @@ func (m *awsAwsjson11_serializeOpStartWorkflowRun) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.StartWorkflowRun")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartWorkflowRunInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartWorkflowRunInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5197,7 +5197,7 @@ func (m *awsAwsjson11_serializeOpStopCrawler) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.StopCrawler")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopCrawlerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopCrawlerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5243,7 +5243,7 @@ func (m *awsAwsjson11_serializeOpStopCrawlerSchedule) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.StopCrawlerSchedule")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopCrawlerScheduleInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopCrawlerScheduleInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5289,7 +5289,7 @@ func (m *awsAwsjson11_serializeOpStopTrigger) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.StopTrigger")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopTriggerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopTriggerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5335,7 +5335,7 @@ func (m *awsAwsjson11_serializeOpStopWorkflowRun) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.StopWorkflowRun")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopWorkflowRunInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopWorkflowRunInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5381,7 +5381,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.TagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5427,7 +5427,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.UntagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5473,7 +5473,7 @@ func (m *awsAwsjson11_serializeOpUpdateClassifier) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.UpdateClassifier")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateClassifierInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateClassifierInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5519,7 +5519,7 @@ func (m *awsAwsjson11_serializeOpUpdateColumnStatisticsForPartition) HandleSeria
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.UpdateColumnStatisticsForPartition")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateColumnStatisticsForPartitionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateColumnStatisticsForPartitionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5565,7 +5565,7 @@ func (m *awsAwsjson11_serializeOpUpdateColumnStatisticsForTable) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.UpdateColumnStatisticsForTable")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateColumnStatisticsForTableInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateColumnStatisticsForTableInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5611,7 +5611,7 @@ func (m *awsAwsjson11_serializeOpUpdateConnection) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.UpdateConnection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateConnectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateConnectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5657,7 +5657,7 @@ func (m *awsAwsjson11_serializeOpUpdateCrawler) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.UpdateCrawler")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateCrawlerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateCrawlerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5703,7 +5703,7 @@ func (m *awsAwsjson11_serializeOpUpdateCrawlerSchedule) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.UpdateCrawlerSchedule")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateCrawlerScheduleInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateCrawlerScheduleInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5749,7 +5749,7 @@ func (m *awsAwsjson11_serializeOpUpdateDatabase) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.UpdateDatabase")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateDatabaseInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateDatabaseInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5795,7 +5795,7 @@ func (m *awsAwsjson11_serializeOpUpdateDevEndpoint) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.UpdateDevEndpoint")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateDevEndpointInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateDevEndpointInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5841,7 +5841,7 @@ func (m *awsAwsjson11_serializeOpUpdateJob) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.UpdateJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5887,7 +5887,7 @@ func (m *awsAwsjson11_serializeOpUpdateMLTransform) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.UpdateMLTransform")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateMLTransformInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateMLTransformInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5933,7 +5933,7 @@ func (m *awsAwsjson11_serializeOpUpdatePartition) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.UpdatePartition")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdatePartitionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdatePartitionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5979,7 +5979,7 @@ func (m *awsAwsjson11_serializeOpUpdateTable) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.UpdateTable")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateTableInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateTableInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -6025,7 +6025,7 @@ func (m *awsAwsjson11_serializeOpUpdateTrigger) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.UpdateTrigger")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateTriggerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateTriggerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -6071,7 +6071,7 @@ func (m *awsAwsjson11_serializeOpUpdateUserDefinedFunction) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.UpdateUserDefinedFunction")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateUserDefinedFunctionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateUserDefinedFunctionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -6117,7 +6117,7 @@ func (m *awsAwsjson11_serializeOpUpdateWorkflow) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSGlue.UpdateWorkflow")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateWorkflowInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateWorkflowInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -9097,7 +9097,7 @@ func awsAwsjson11_serializeDocumentWorkflowRunProperties(v map[string]*string, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchCreatePartitionInput(v *BatchCreatePartitionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchCreatePartitionInput(v *BatchCreatePartitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9126,7 +9126,7 @@ func awsAwsjson11_serializeDocumentBatchCreatePartitionInput(v *BatchCreateParti
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchDeleteConnectionInput(v *BatchDeleteConnectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchDeleteConnectionInput(v *BatchDeleteConnectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9145,7 +9145,7 @@ func awsAwsjson11_serializeDocumentBatchDeleteConnectionInput(v *BatchDeleteConn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchDeletePartitionInput(v *BatchDeletePartitionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchDeletePartitionInput(v *BatchDeletePartitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9174,7 +9174,7 @@ func awsAwsjson11_serializeDocumentBatchDeletePartitionInput(v *BatchDeleteParti
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchDeleteTableInput(v *BatchDeleteTableInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchDeleteTableInput(v *BatchDeleteTableInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9198,7 +9198,7 @@ func awsAwsjson11_serializeDocumentBatchDeleteTableInput(v *BatchDeleteTableInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchDeleteTableVersionInput(v *BatchDeleteTableVersionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchDeleteTableVersionInput(v *BatchDeleteTableVersionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9227,7 +9227,7 @@ func awsAwsjson11_serializeDocumentBatchDeleteTableVersionInput(v *BatchDeleteTa
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchGetCrawlersInput(v *BatchGetCrawlersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchGetCrawlersInput(v *BatchGetCrawlersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9241,7 +9241,7 @@ func awsAwsjson11_serializeDocumentBatchGetCrawlersInput(v *BatchGetCrawlersInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchGetDevEndpointsInput(v *BatchGetDevEndpointsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchGetDevEndpointsInput(v *BatchGetDevEndpointsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9255,7 +9255,7 @@ func awsAwsjson11_serializeDocumentBatchGetDevEndpointsInput(v *BatchGetDevEndpo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchGetJobsInput(v *BatchGetJobsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchGetJobsInput(v *BatchGetJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9269,7 +9269,7 @@ func awsAwsjson11_serializeDocumentBatchGetJobsInput(v *BatchGetJobsInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchGetPartitionInput(v *BatchGetPartitionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchGetPartitionInput(v *BatchGetPartitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9298,7 +9298,7 @@ func awsAwsjson11_serializeDocumentBatchGetPartitionInput(v *BatchGetPartitionIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchGetTriggersInput(v *BatchGetTriggersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchGetTriggersInput(v *BatchGetTriggersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9312,7 +9312,7 @@ func awsAwsjson11_serializeDocumentBatchGetTriggersInput(v *BatchGetTriggersInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchGetWorkflowsInput(v *BatchGetWorkflowsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchGetWorkflowsInput(v *BatchGetWorkflowsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9331,7 +9331,7 @@ func awsAwsjson11_serializeDocumentBatchGetWorkflowsInput(v *BatchGetWorkflowsIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchStopJobRunInput(v *BatchStopJobRunInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchStopJobRunInput(v *BatchStopJobRunInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9350,7 +9350,7 @@ func awsAwsjson11_serializeDocumentBatchStopJobRunInput(v *BatchStopJobRunInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCancelMLTaskRunInput(v *CancelMLTaskRunInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCancelMLTaskRunInput(v *CancelMLTaskRunInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9367,7 +9367,7 @@ func awsAwsjson11_serializeDocumentCancelMLTaskRunInput(v *CancelMLTaskRunInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateClassifierInput(v *CreateClassifierInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateClassifierInput(v *CreateClassifierInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9402,7 +9402,7 @@ func awsAwsjson11_serializeDocumentCreateClassifierInput(v *CreateClassifierInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateConnectionInput(v *CreateConnectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateConnectionInput(v *CreateConnectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9421,7 +9421,7 @@ func awsAwsjson11_serializeDocumentCreateConnectionInput(v *CreateConnectionInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateCrawlerInput(v *CreateCrawlerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateCrawlerInput(v *CreateCrawlerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9496,7 +9496,7 @@ func awsAwsjson11_serializeDocumentCreateCrawlerInput(v *CreateCrawlerInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateDatabaseInput(v *CreateDatabaseInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateDatabaseInput(v *CreateDatabaseInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9515,7 +9515,7 @@ func awsAwsjson11_serializeDocumentCreateDatabaseInput(v *CreateDatabaseInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateDevEndpointInput(v *CreateDevEndpointInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateDevEndpointInput(v *CreateDevEndpointInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9605,7 +9605,7 @@ func awsAwsjson11_serializeDocumentCreateDevEndpointInput(v *CreateDevEndpointIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateJobInput(v *CreateJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9721,7 +9721,7 @@ func awsAwsjson11_serializeDocumentCreateJobInput(v *CreateJobInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateMLTransformInput(v *CreateMLTransformInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateMLTransformInput(v *CreateMLTransformInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9794,7 +9794,7 @@ func awsAwsjson11_serializeDocumentCreateMLTransformInput(v *CreateMLTransformIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreatePartitionInput(v *CreatePartitionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreatePartitionInput(v *CreatePartitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9823,7 +9823,7 @@ func awsAwsjson11_serializeDocumentCreatePartitionInput(v *CreatePartitionInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateScriptInput(v *CreateScriptInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateScriptInput(v *CreateScriptInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9849,7 +9849,7 @@ func awsAwsjson11_serializeDocumentCreateScriptInput(v *CreateScriptInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateSecurityConfigurationInput(v *CreateSecurityConfigurationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateSecurityConfigurationInput(v *CreateSecurityConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9868,7 +9868,7 @@ func awsAwsjson11_serializeDocumentCreateSecurityConfigurationInput(v *CreateSec
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateTableInput(v *CreateTableInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateTableInput(v *CreateTableInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9892,7 +9892,7 @@ func awsAwsjson11_serializeDocumentCreateTableInput(v *CreateTableInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateTriggerInput(v *CreateTriggerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateTriggerInput(v *CreateTriggerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9950,7 +9950,7 @@ func awsAwsjson11_serializeDocumentCreateTriggerInput(v *CreateTriggerInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateUserDefinedFunctionInput(v *CreateUserDefinedFunctionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateUserDefinedFunctionInput(v *CreateUserDefinedFunctionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -9974,7 +9974,7 @@ func awsAwsjson11_serializeDocumentCreateUserDefinedFunctionInput(v *CreateUserD
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateWorkflowInput(v *CreateWorkflowInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateWorkflowInput(v *CreateWorkflowInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10005,7 +10005,7 @@ func awsAwsjson11_serializeDocumentCreateWorkflowInput(v *CreateWorkflowInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteClassifierInput(v *DeleteClassifierInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteClassifierInput(v *DeleteClassifierInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10017,7 +10017,7 @@ func awsAwsjson11_serializeDocumentDeleteClassifierInput(v *DeleteClassifierInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteColumnStatisticsForPartitionInput(v *DeleteColumnStatisticsForPartitionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteColumnStatisticsForPartitionInput(v *DeleteColumnStatisticsForPartitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10051,7 +10051,7 @@ func awsAwsjson11_serializeDocumentDeleteColumnStatisticsForPartitionInput(v *De
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteColumnStatisticsForTableInput(v *DeleteColumnStatisticsForTableInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteColumnStatisticsForTableInput(v *DeleteColumnStatisticsForTableInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10078,7 +10078,7 @@ func awsAwsjson11_serializeDocumentDeleteColumnStatisticsForTableInput(v *Delete
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteConnectionInput(v *DeleteConnectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteConnectionInput(v *DeleteConnectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10095,7 +10095,7 @@ func awsAwsjson11_serializeDocumentDeleteConnectionInput(v *DeleteConnectionInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteCrawlerInput(v *DeleteCrawlerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteCrawlerInput(v *DeleteCrawlerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10107,7 +10107,7 @@ func awsAwsjson11_serializeDocumentDeleteCrawlerInput(v *DeleteCrawlerInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteDatabaseInput(v *DeleteDatabaseInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteDatabaseInput(v *DeleteDatabaseInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10124,7 +10124,7 @@ func awsAwsjson11_serializeDocumentDeleteDatabaseInput(v *DeleteDatabaseInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteDevEndpointInput(v *DeleteDevEndpointInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteDevEndpointInput(v *DeleteDevEndpointInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10136,7 +10136,7 @@ func awsAwsjson11_serializeDocumentDeleteDevEndpointInput(v *DeleteDevEndpointIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteJobInput(v *DeleteJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteJobInput(v *DeleteJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10148,7 +10148,7 @@ func awsAwsjson11_serializeDocumentDeleteJobInput(v *DeleteJobInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteMLTransformInput(v *DeleteMLTransformInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteMLTransformInput(v *DeleteMLTransformInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10160,7 +10160,7 @@ func awsAwsjson11_serializeDocumentDeleteMLTransformInput(v *DeleteMLTransformIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeletePartitionInput(v *DeletePartitionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeletePartitionInput(v *DeletePartitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10189,7 +10189,7 @@ func awsAwsjson11_serializeDocumentDeletePartitionInput(v *DeletePartitionInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteResourcePolicyInput(v *DeleteResourcePolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteResourcePolicyInput(v *DeleteResourcePolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10206,7 +10206,7 @@ func awsAwsjson11_serializeDocumentDeleteResourcePolicyInput(v *DeleteResourcePo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteSecurityConfigurationInput(v *DeleteSecurityConfigurationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteSecurityConfigurationInput(v *DeleteSecurityConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10218,7 +10218,7 @@ func awsAwsjson11_serializeDocumentDeleteSecurityConfigurationInput(v *DeleteSec
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteTableInput(v *DeleteTableInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteTableInput(v *DeleteTableInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10240,7 +10240,7 @@ func awsAwsjson11_serializeDocumentDeleteTableInput(v *DeleteTableInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteTableVersionInput(v *DeleteTableVersionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteTableVersionInput(v *DeleteTableVersionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10267,7 +10267,7 @@ func awsAwsjson11_serializeDocumentDeleteTableVersionInput(v *DeleteTableVersion
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteTriggerInput(v *DeleteTriggerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteTriggerInput(v *DeleteTriggerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10279,7 +10279,7 @@ func awsAwsjson11_serializeDocumentDeleteTriggerInput(v *DeleteTriggerInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteUserDefinedFunctionInput(v *DeleteUserDefinedFunctionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteUserDefinedFunctionInput(v *DeleteUserDefinedFunctionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10301,7 +10301,7 @@ func awsAwsjson11_serializeDocumentDeleteUserDefinedFunctionInput(v *DeleteUserD
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteWorkflowInput(v *DeleteWorkflowInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteWorkflowInput(v *DeleteWorkflowInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10313,7 +10313,7 @@ func awsAwsjson11_serializeDocumentDeleteWorkflowInput(v *DeleteWorkflowInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetCatalogImportStatusInput(v *GetCatalogImportStatusInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetCatalogImportStatusInput(v *GetCatalogImportStatusInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10325,7 +10325,7 @@ func awsAwsjson11_serializeDocumentGetCatalogImportStatusInput(v *GetCatalogImpo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetClassifierInput(v *GetClassifierInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetClassifierInput(v *GetClassifierInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10337,7 +10337,7 @@ func awsAwsjson11_serializeDocumentGetClassifierInput(v *GetClassifierInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetClassifiersInput(v *GetClassifiersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetClassifiersInput(v *GetClassifiersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10354,7 +10354,7 @@ func awsAwsjson11_serializeDocumentGetClassifiersInput(v *GetClassifiersInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetColumnStatisticsForPartitionInput(v *GetColumnStatisticsForPartitionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetColumnStatisticsForPartitionInput(v *GetColumnStatisticsForPartitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10390,7 +10390,7 @@ func awsAwsjson11_serializeDocumentGetColumnStatisticsForPartitionInput(v *GetCo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetColumnStatisticsForTableInput(v *GetColumnStatisticsForTableInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetColumnStatisticsForTableInput(v *GetColumnStatisticsForTableInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10419,7 +10419,7 @@ func awsAwsjson11_serializeDocumentGetColumnStatisticsForTableInput(v *GetColumn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetConnectionInput(v *GetConnectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetConnectionInput(v *GetConnectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10441,7 +10441,7 @@ func awsAwsjson11_serializeDocumentGetConnectionInput(v *GetConnectionInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetConnectionsInput(v *GetConnectionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetConnectionsInput(v *GetConnectionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10475,7 +10475,7 @@ func awsAwsjson11_serializeDocumentGetConnectionsInput(v *GetConnectionsInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetCrawlerInput(v *GetCrawlerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetCrawlerInput(v *GetCrawlerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10487,7 +10487,7 @@ func awsAwsjson11_serializeDocumentGetCrawlerInput(v *GetCrawlerInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetCrawlerMetricsInput(v *GetCrawlerMetricsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetCrawlerMetricsInput(v *GetCrawlerMetricsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10511,7 +10511,7 @@ func awsAwsjson11_serializeDocumentGetCrawlerMetricsInput(v *GetCrawlerMetricsIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetCrawlersInput(v *GetCrawlersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetCrawlersInput(v *GetCrawlersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10528,7 +10528,7 @@ func awsAwsjson11_serializeDocumentGetCrawlersInput(v *GetCrawlersInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetDatabaseInput(v *GetDatabaseInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetDatabaseInput(v *GetDatabaseInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10545,7 +10545,7 @@ func awsAwsjson11_serializeDocumentGetDatabaseInput(v *GetDatabaseInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetDatabasesInput(v *GetDatabasesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetDatabasesInput(v *GetDatabasesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10572,7 +10572,7 @@ func awsAwsjson11_serializeDocumentGetDatabasesInput(v *GetDatabasesInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetDataCatalogEncryptionSettingsInput(v *GetDataCatalogEncryptionSettingsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetDataCatalogEncryptionSettingsInput(v *GetDataCatalogEncryptionSettingsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10584,7 +10584,7 @@ func awsAwsjson11_serializeDocumentGetDataCatalogEncryptionSettingsInput(v *GetD
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetDataflowGraphInput(v *GetDataflowGraphInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetDataflowGraphInput(v *GetDataflowGraphInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10596,7 +10596,7 @@ func awsAwsjson11_serializeDocumentGetDataflowGraphInput(v *GetDataflowGraphInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetDevEndpointInput(v *GetDevEndpointInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetDevEndpointInput(v *GetDevEndpointInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10608,7 +10608,7 @@ func awsAwsjson11_serializeDocumentGetDevEndpointInput(v *GetDevEndpointInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetDevEndpointsInput(v *GetDevEndpointsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetDevEndpointsInput(v *GetDevEndpointsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10625,7 +10625,7 @@ func awsAwsjson11_serializeDocumentGetDevEndpointsInput(v *GetDevEndpointsInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetJobBookmarkInput(v *GetJobBookmarkInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetJobBookmarkInput(v *GetJobBookmarkInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10642,7 +10642,7 @@ func awsAwsjson11_serializeDocumentGetJobBookmarkInput(v *GetJobBookmarkInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetJobInput(v *GetJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetJobInput(v *GetJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10654,7 +10654,7 @@ func awsAwsjson11_serializeDocumentGetJobInput(v *GetJobInput, value smithyjson.
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetJobRunInput(v *GetJobRunInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetJobRunInput(v *GetJobRunInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10676,7 +10676,7 @@ func awsAwsjson11_serializeDocumentGetJobRunInput(v *GetJobRunInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetJobRunsInput(v *GetJobRunsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetJobRunsInput(v *GetJobRunsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10698,7 +10698,7 @@ func awsAwsjson11_serializeDocumentGetJobRunsInput(v *GetJobRunsInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetJobsInput(v *GetJobsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetJobsInput(v *GetJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10715,7 +10715,7 @@ func awsAwsjson11_serializeDocumentGetJobsInput(v *GetJobsInput, value smithyjso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetMappingInput(v *GetMappingInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetMappingInput(v *GetMappingInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10743,7 +10743,7 @@ func awsAwsjson11_serializeDocumentGetMappingInput(v *GetMappingInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetMLTaskRunInput(v *GetMLTaskRunInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetMLTaskRunInput(v *GetMLTaskRunInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10760,7 +10760,7 @@ func awsAwsjson11_serializeDocumentGetMLTaskRunInput(v *GetMLTaskRunInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetMLTaskRunsInput(v *GetMLTaskRunsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetMLTaskRunsInput(v *GetMLTaskRunsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10796,7 +10796,7 @@ func awsAwsjson11_serializeDocumentGetMLTaskRunsInput(v *GetMLTaskRunsInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetMLTransformInput(v *GetMLTransformInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetMLTransformInput(v *GetMLTransformInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10808,7 +10808,7 @@ func awsAwsjson11_serializeDocumentGetMLTransformInput(v *GetMLTransformInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetMLTransformsInput(v *GetMLTransformsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetMLTransformsInput(v *GetMLTransformsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10839,7 +10839,7 @@ func awsAwsjson11_serializeDocumentGetMLTransformsInput(v *GetMLTransformsInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetPartitionInput(v *GetPartitionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetPartitionInput(v *GetPartitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10868,7 +10868,7 @@ func awsAwsjson11_serializeDocumentGetPartitionInput(v *GetPartitionInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetPartitionsInput(v *GetPartitionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetPartitionsInput(v *GetPartitionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10912,7 +10912,7 @@ func awsAwsjson11_serializeDocumentGetPartitionsInput(v *GetPartitionsInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetPlanInput(v *GetPlanInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetPlanInput(v *GetPlanInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10952,7 +10952,7 @@ func awsAwsjson11_serializeDocumentGetPlanInput(v *GetPlanInput, value smithyjso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetResourcePoliciesInput(v *GetResourcePoliciesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetResourcePoliciesInput(v *GetResourcePoliciesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10969,7 +10969,7 @@ func awsAwsjson11_serializeDocumentGetResourcePoliciesInput(v *GetResourcePolici
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetResourcePolicyInput(v *GetResourcePolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetResourcePolicyInput(v *GetResourcePolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10981,7 +10981,7 @@ func awsAwsjson11_serializeDocumentGetResourcePolicyInput(v *GetResourcePolicyIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetSecurityConfigurationInput(v *GetSecurityConfigurationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetSecurityConfigurationInput(v *GetSecurityConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -10993,7 +10993,7 @@ func awsAwsjson11_serializeDocumentGetSecurityConfigurationInput(v *GetSecurityC
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetSecurityConfigurationsInput(v *GetSecurityConfigurationsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetSecurityConfigurationsInput(v *GetSecurityConfigurationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11010,7 +11010,7 @@ func awsAwsjson11_serializeDocumentGetSecurityConfigurationsInput(v *GetSecurity
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetTableInput(v *GetTableInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetTableInput(v *GetTableInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11032,7 +11032,7 @@ func awsAwsjson11_serializeDocumentGetTableInput(v *GetTableInput, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetTablesInput(v *GetTablesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetTablesInput(v *GetTablesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11064,7 +11064,7 @@ func awsAwsjson11_serializeDocumentGetTablesInput(v *GetTablesInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetTableVersionInput(v *GetTableVersionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetTableVersionInput(v *GetTableVersionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11091,7 +11091,7 @@ func awsAwsjson11_serializeDocumentGetTableVersionInput(v *GetTableVersionInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetTableVersionsInput(v *GetTableVersionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetTableVersionsInput(v *GetTableVersionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11123,7 +11123,7 @@ func awsAwsjson11_serializeDocumentGetTableVersionsInput(v *GetTableVersionsInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetTagsInput(v *GetTagsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetTagsInput(v *GetTagsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11135,7 +11135,7 @@ func awsAwsjson11_serializeDocumentGetTagsInput(v *GetTagsInput, value smithyjso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetTriggerInput(v *GetTriggerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetTriggerInput(v *GetTriggerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11147,7 +11147,7 @@ func awsAwsjson11_serializeDocumentGetTriggerInput(v *GetTriggerInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetTriggersInput(v *GetTriggersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetTriggersInput(v *GetTriggersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11169,7 +11169,7 @@ func awsAwsjson11_serializeDocumentGetTriggersInput(v *GetTriggersInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetUserDefinedFunctionInput(v *GetUserDefinedFunctionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetUserDefinedFunctionInput(v *GetUserDefinedFunctionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11191,7 +11191,7 @@ func awsAwsjson11_serializeDocumentGetUserDefinedFunctionInput(v *GetUserDefined
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetUserDefinedFunctionsInput(v *GetUserDefinedFunctionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetUserDefinedFunctionsInput(v *GetUserDefinedFunctionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11223,7 +11223,7 @@ func awsAwsjson11_serializeDocumentGetUserDefinedFunctionsInput(v *GetUserDefine
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetWorkflowInput(v *GetWorkflowInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetWorkflowInput(v *GetWorkflowInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11240,7 +11240,7 @@ func awsAwsjson11_serializeDocumentGetWorkflowInput(v *GetWorkflowInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetWorkflowRunInput(v *GetWorkflowRunInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetWorkflowRunInput(v *GetWorkflowRunInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11262,7 +11262,7 @@ func awsAwsjson11_serializeDocumentGetWorkflowRunInput(v *GetWorkflowRunInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetWorkflowRunPropertiesInput(v *GetWorkflowRunPropertiesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetWorkflowRunPropertiesInput(v *GetWorkflowRunPropertiesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11279,7 +11279,7 @@ func awsAwsjson11_serializeDocumentGetWorkflowRunPropertiesInput(v *GetWorkflowR
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetWorkflowRunsInput(v *GetWorkflowRunsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetWorkflowRunsInput(v *GetWorkflowRunsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11306,7 +11306,7 @@ func awsAwsjson11_serializeDocumentGetWorkflowRunsInput(v *GetWorkflowRunsInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentImportCatalogToGlueInput(v *ImportCatalogToGlueInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentImportCatalogToGlueInput(v *ImportCatalogToGlueInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11318,7 +11318,7 @@ func awsAwsjson11_serializeDocumentImportCatalogToGlueInput(v *ImportCatalogToGl
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListCrawlersInput(v *ListCrawlersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListCrawlersInput(v *ListCrawlersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11342,7 +11342,7 @@ func awsAwsjson11_serializeDocumentListCrawlersInput(v *ListCrawlersInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListDevEndpointsInput(v *ListDevEndpointsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListDevEndpointsInput(v *ListDevEndpointsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11366,7 +11366,7 @@ func awsAwsjson11_serializeDocumentListDevEndpointsInput(v *ListDevEndpointsInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListJobsInput(v *ListJobsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListJobsInput(v *ListJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11390,7 +11390,7 @@ func awsAwsjson11_serializeDocumentListJobsInput(v *ListJobsInput, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListMLTransformsInput(v *ListMLTransformsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListMLTransformsInput(v *ListMLTransformsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11428,7 +11428,7 @@ func awsAwsjson11_serializeDocumentListMLTransformsInput(v *ListMLTransformsInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTriggersInput(v *ListTriggersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTriggersInput(v *ListTriggersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11457,7 +11457,7 @@ func awsAwsjson11_serializeDocumentListTriggersInput(v *ListTriggersInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListWorkflowsInput(v *ListWorkflowsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListWorkflowsInput(v *ListWorkflowsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11474,7 +11474,7 @@ func awsAwsjson11_serializeDocumentListWorkflowsInput(v *ListWorkflowsInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutDataCatalogEncryptionSettingsInput(v *PutDataCatalogEncryptionSettingsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutDataCatalogEncryptionSettingsInput(v *PutDataCatalogEncryptionSettingsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11493,7 +11493,7 @@ func awsAwsjson11_serializeDocumentPutDataCatalogEncryptionSettingsInput(v *PutD
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutResourcePolicyInput(v *PutResourcePolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutResourcePolicyInput(v *PutResourcePolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11525,7 +11525,7 @@ func awsAwsjson11_serializeDocumentPutResourcePolicyInput(v *PutResourcePolicyIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutWorkflowRunPropertiesInput(v *PutWorkflowRunPropertiesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutWorkflowRunPropertiesInput(v *PutWorkflowRunPropertiesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11549,7 +11549,7 @@ func awsAwsjson11_serializeDocumentPutWorkflowRunPropertiesInput(v *PutWorkflowR
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentResetJobBookmarkInput(v *ResetJobBookmarkInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentResetJobBookmarkInput(v *ResetJobBookmarkInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11566,7 +11566,7 @@ func awsAwsjson11_serializeDocumentResetJobBookmarkInput(v *ResetJobBookmarkInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentResumeWorkflowRunInput(v *ResumeWorkflowRunInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentResumeWorkflowRunInput(v *ResumeWorkflowRunInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11590,7 +11590,7 @@ func awsAwsjson11_serializeDocumentResumeWorkflowRunInput(v *ResumeWorkflowRunIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSearchTablesInput(v *SearchTablesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSearchTablesInput(v *SearchTablesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11636,7 +11636,7 @@ func awsAwsjson11_serializeDocumentSearchTablesInput(v *SearchTablesInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartCrawlerInput(v *StartCrawlerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartCrawlerInput(v *StartCrawlerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11648,7 +11648,7 @@ func awsAwsjson11_serializeDocumentStartCrawlerInput(v *StartCrawlerInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartCrawlerScheduleInput(v *StartCrawlerScheduleInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartCrawlerScheduleInput(v *StartCrawlerScheduleInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11660,7 +11660,7 @@ func awsAwsjson11_serializeDocumentStartCrawlerScheduleInput(v *StartCrawlerSche
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartExportLabelsTaskRunInput(v *StartExportLabelsTaskRunInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartExportLabelsTaskRunInput(v *StartExportLabelsTaskRunInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11677,7 +11677,7 @@ func awsAwsjson11_serializeDocumentStartExportLabelsTaskRunInput(v *StartExportL
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartImportLabelsTaskRunInput(v *StartImportLabelsTaskRunInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartImportLabelsTaskRunInput(v *StartImportLabelsTaskRunInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11699,7 +11699,7 @@ func awsAwsjson11_serializeDocumentStartImportLabelsTaskRunInput(v *StartImportL
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartJobRunInput(v *StartJobRunInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartJobRunInput(v *StartJobRunInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11760,7 +11760,7 @@ func awsAwsjson11_serializeDocumentStartJobRunInput(v *StartJobRunInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartMLEvaluationTaskRunInput(v *StartMLEvaluationTaskRunInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartMLEvaluationTaskRunInput(v *StartMLEvaluationTaskRunInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11772,7 +11772,7 @@ func awsAwsjson11_serializeDocumentStartMLEvaluationTaskRunInput(v *StartMLEvalu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartMLLabelingSetGenerationTaskRunInput(v *StartMLLabelingSetGenerationTaskRunInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartMLLabelingSetGenerationTaskRunInput(v *StartMLLabelingSetGenerationTaskRunInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11789,7 +11789,7 @@ func awsAwsjson11_serializeDocumentStartMLLabelingSetGenerationTaskRunInput(v *S
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartTriggerInput(v *StartTriggerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartTriggerInput(v *StartTriggerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11801,7 +11801,7 @@ func awsAwsjson11_serializeDocumentStartTriggerInput(v *StartTriggerInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartWorkflowRunInput(v *StartWorkflowRunInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartWorkflowRunInput(v *StartWorkflowRunInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11813,7 +11813,7 @@ func awsAwsjson11_serializeDocumentStartWorkflowRunInput(v *StartWorkflowRunInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopCrawlerInput(v *StopCrawlerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopCrawlerInput(v *StopCrawlerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11825,7 +11825,7 @@ func awsAwsjson11_serializeDocumentStopCrawlerInput(v *StopCrawlerInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopCrawlerScheduleInput(v *StopCrawlerScheduleInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopCrawlerScheduleInput(v *StopCrawlerScheduleInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11837,7 +11837,7 @@ func awsAwsjson11_serializeDocumentStopCrawlerScheduleInput(v *StopCrawlerSchedu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopTriggerInput(v *StopTriggerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopTriggerInput(v *StopTriggerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11849,7 +11849,7 @@ func awsAwsjson11_serializeDocumentStopTriggerInput(v *StopTriggerInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopWorkflowRunInput(v *StopWorkflowRunInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopWorkflowRunInput(v *StopWorkflowRunInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11866,7 +11866,7 @@ func awsAwsjson11_serializeDocumentStopWorkflowRunInput(v *StopWorkflowRunInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11885,7 +11885,7 @@ func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11904,7 +11904,7 @@ func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateClassifierInput(v *UpdateClassifierInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateClassifierInput(v *UpdateClassifierInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11939,7 +11939,7 @@ func awsAwsjson11_serializeDocumentUpdateClassifierInput(v *UpdateClassifierInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateColumnStatisticsForPartitionInput(v *UpdateColumnStatisticsForPartitionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateColumnStatisticsForPartitionInput(v *UpdateColumnStatisticsForPartitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -11975,7 +11975,7 @@ func awsAwsjson11_serializeDocumentUpdateColumnStatisticsForPartitionInput(v *Up
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateColumnStatisticsForTableInput(v *UpdateColumnStatisticsForTableInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateColumnStatisticsForTableInput(v *UpdateColumnStatisticsForTableInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -12004,7 +12004,7 @@ func awsAwsjson11_serializeDocumentUpdateColumnStatisticsForTableInput(v *Update
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateConnectionInput(v *UpdateConnectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateConnectionInput(v *UpdateConnectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -12028,7 +12028,7 @@ func awsAwsjson11_serializeDocumentUpdateConnectionInput(v *UpdateConnectionInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateCrawlerInput(v *UpdateCrawlerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateCrawlerInput(v *UpdateCrawlerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -12096,7 +12096,7 @@ func awsAwsjson11_serializeDocumentUpdateCrawlerInput(v *UpdateCrawlerInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateCrawlerScheduleInput(v *UpdateCrawlerScheduleInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateCrawlerScheduleInput(v *UpdateCrawlerScheduleInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -12113,7 +12113,7 @@ func awsAwsjson11_serializeDocumentUpdateCrawlerScheduleInput(v *UpdateCrawlerSc
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateDatabaseInput(v *UpdateDatabaseInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateDatabaseInput(v *UpdateDatabaseInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -12137,7 +12137,7 @@ func awsAwsjson11_serializeDocumentUpdateDatabaseInput(v *UpdateDatabaseInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateDevEndpointInput(v *UpdateDevEndpointInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateDevEndpointInput(v *UpdateDevEndpointInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -12194,7 +12194,7 @@ func awsAwsjson11_serializeDocumentUpdateDevEndpointInput(v *UpdateDevEndpointIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateJobInput(v *UpdateJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateJobInput(v *UpdateJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -12213,7 +12213,7 @@ func awsAwsjson11_serializeDocumentUpdateJobInput(v *UpdateJobInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateMLTransformInput(v *UpdateMLTransformInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateMLTransformInput(v *UpdateMLTransformInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -12277,7 +12277,7 @@ func awsAwsjson11_serializeDocumentUpdateMLTransformInput(v *UpdateMLTransformIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdatePartitionInput(v *UpdatePartitionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdatePartitionInput(v *UpdatePartitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -12313,7 +12313,7 @@ func awsAwsjson11_serializeDocumentUpdatePartitionInput(v *UpdatePartitionInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateTableInput(v *UpdateTableInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateTableInput(v *UpdateTableInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -12342,7 +12342,7 @@ func awsAwsjson11_serializeDocumentUpdateTableInput(v *UpdateTableInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateTriggerInput(v *UpdateTriggerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateTriggerInput(v *UpdateTriggerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -12361,7 +12361,7 @@ func awsAwsjson11_serializeDocumentUpdateTriggerInput(v *UpdateTriggerInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateUserDefinedFunctionInput(v *UpdateUserDefinedFunctionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateUserDefinedFunctionInput(v *UpdateUserDefinedFunctionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -12390,7 +12390,7 @@ func awsAwsjson11_serializeDocumentUpdateUserDefinedFunctionInput(v *UpdateUserD
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateWorkflowInput(v *UpdateWorkflowInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateWorkflowInput(v *UpdateWorkflowInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

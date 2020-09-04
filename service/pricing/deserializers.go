@@ -51,7 +51,7 @@ func (m *awsAwsjson11_deserializeOpDescribeServices) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeServicesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeServicesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -163,7 +163,7 @@ func (m *awsAwsjson11_deserializeOpGetAttributeValues) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetAttributeValuesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetAttributeValuesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -275,7 +275,7 @@ func (m *awsAwsjson11_deserializeOpGetProducts) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetProductsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetProductsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1123,7 +1123,7 @@ func awsAwsjson11_deserializeDocumentServiceList(v *[]*types.Service, decoder *j
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeServicesOutput(v **DescribeServicesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeServicesOutput(v **DescribeServicesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1205,7 +1205,7 @@ func awsAwsjson11_deserializeDocumentDescribeServicesOutput(v **DescribeServices
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetAttributeValuesOutput(v **GetAttributeValuesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetAttributeValuesOutput(v **GetAttributeValuesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1274,7 +1274,7 @@ func awsAwsjson11_deserializeDocumentGetAttributeValuesOutput(v **GetAttributeVa
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetProductsOutput(v **GetProductsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetProductsOutput(v **GetProductsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

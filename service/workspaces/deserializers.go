@@ -53,7 +53,7 @@ func (m *awsAwsjson11_deserializeOpAssociateIpGroups) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentAssociateIpGroupsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentAssociateIpGroupsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -168,7 +168,7 @@ func (m *awsAwsjson11_deserializeOpAuthorizeIpRules) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentAuthorizeIpRulesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentAuthorizeIpRulesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -280,7 +280,7 @@ func (m *awsAwsjson11_deserializeOpCopyWorkspaceImage) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCopyWorkspaceImageOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCopyWorkspaceImageOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -398,7 +398,7 @@ func (m *awsAwsjson11_deserializeOpCreateIpGroup) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateIpGroupOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateIpGroupOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -510,7 +510,7 @@ func (m *awsAwsjson11_deserializeOpCreateTags) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateTagsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateTagsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -616,7 +616,7 @@ func (m *awsAwsjson11_deserializeOpCreateWorkspaces) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateWorkspacesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateWorkspacesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -719,7 +719,7 @@ func (m *awsAwsjson11_deserializeOpDeleteIpGroup) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteIpGroupOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteIpGroupOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -828,7 +828,7 @@ func (m *awsAwsjson11_deserializeOpDeleteTags) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteTagsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteTagsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -931,7 +931,7 @@ func (m *awsAwsjson11_deserializeOpDeleteWorkspaceImage) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteWorkspaceImageOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteWorkspaceImageOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1037,7 +1037,7 @@ func (m *awsAwsjson11_deserializeOpDeregisterWorkspaceDirectory) HandleDeseriali
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeregisterWorkspaceDirectoryOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeregisterWorkspaceDirectoryOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1149,7 +1149,7 @@ func (m *awsAwsjson11_deserializeOpDescribeAccount) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeAccountOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeAccountOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1249,7 +1249,7 @@ func (m *awsAwsjson11_deserializeOpDescribeAccountModifications) HandleDeseriali
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeAccountModificationsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeAccountModificationsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1349,7 +1349,7 @@ func (m *awsAwsjson11_deserializeOpDescribeClientProperties) HandleDeserialize(c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeClientPropertiesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeClientPropertiesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1455,7 +1455,7 @@ func (m *awsAwsjson11_deserializeOpDescribeIpGroups) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeIpGroupsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeIpGroupsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1558,7 +1558,7 @@ func (m *awsAwsjson11_deserializeOpDescribeTags) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeTagsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeTagsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1658,7 +1658,7 @@ func (m *awsAwsjson11_deserializeOpDescribeWorkspaceBundles) HandleDeserialize(c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeWorkspaceBundlesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeWorkspaceBundlesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1758,7 +1758,7 @@ func (m *awsAwsjson11_deserializeOpDescribeWorkspaceDirectories) HandleDeseriali
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeWorkspaceDirectoriesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeWorkspaceDirectoriesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1858,7 +1858,7 @@ func (m *awsAwsjson11_deserializeOpDescribeWorkspaceImagePermissions) HandleDese
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeWorkspaceImagePermissionsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeWorkspaceImagePermissionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1964,7 +1964,7 @@ func (m *awsAwsjson11_deserializeOpDescribeWorkspaceImages) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeWorkspaceImagesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeWorkspaceImagesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2064,7 +2064,7 @@ func (m *awsAwsjson11_deserializeOpDescribeWorkspaces) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeWorkspacesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeWorkspacesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2167,7 +2167,7 @@ func (m *awsAwsjson11_deserializeOpDescribeWorkspacesConnectionStatus) HandleDes
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeWorkspacesConnectionStatusOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeWorkspacesConnectionStatusOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2267,7 +2267,7 @@ func (m *awsAwsjson11_deserializeOpDescribeWorkspaceSnapshots) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeWorkspaceSnapshotsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeWorkspaceSnapshotsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2373,7 +2373,7 @@ func (m *awsAwsjson11_deserializeOpDisassociateIpGroups) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDisassociateIpGroupsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDisassociateIpGroupsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2482,7 +2482,7 @@ func (m *awsAwsjson11_deserializeOpImportWorkspaceImage) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentImportWorkspaceImageOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentImportWorkspaceImageOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2597,7 +2597,7 @@ func (m *awsAwsjson11_deserializeOpListAvailableManagementCidrRanges) HandleDese
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListAvailableManagementCidrRangesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListAvailableManagementCidrRangesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2700,7 +2700,7 @@ func (m *awsAwsjson11_deserializeOpMigrateWorkspace) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentMigrateWorkspaceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentMigrateWorkspaceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2815,7 +2815,7 @@ func (m *awsAwsjson11_deserializeOpModifyAccount) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentModifyAccountOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentModifyAccountOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2927,7 +2927,7 @@ func (m *awsAwsjson11_deserializeOpModifyClientProperties) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentModifyClientPropertiesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentModifyClientPropertiesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3033,7 +3033,7 @@ func (m *awsAwsjson11_deserializeOpModifySelfservicePermissions) HandleDeseriali
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentModifySelfservicePermissionsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentModifySelfservicePermissionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3139,7 +3139,7 @@ func (m *awsAwsjson11_deserializeOpModifyWorkspaceAccessProperties) HandleDeseri
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentModifyWorkspaceAccessPropertiesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentModifyWorkspaceAccessPropertiesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3242,7 +3242,7 @@ func (m *awsAwsjson11_deserializeOpModifyWorkspaceCreationProperties) HandleDese
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentModifyWorkspaceCreationPropertiesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentModifyWorkspaceCreationPropertiesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3348,7 +3348,7 @@ func (m *awsAwsjson11_deserializeOpModifyWorkspaceProperties) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentModifyWorkspacePropertiesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentModifyWorkspacePropertiesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3466,7 +3466,7 @@ func (m *awsAwsjson11_deserializeOpModifyWorkspaceState) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentModifyWorkspaceStateOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentModifyWorkspaceStateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3572,7 +3572,7 @@ func (m *awsAwsjson11_deserializeOpRebootWorkspaces) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentRebootWorkspacesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentRebootWorkspacesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3669,7 +3669,7 @@ func (m *awsAwsjson11_deserializeOpRebuildWorkspaces) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentRebuildWorkspacesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentRebuildWorkspacesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3766,7 +3766,7 @@ func (m *awsAwsjson11_deserializeOpRegisterWorkspaceDirectory) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentRegisterWorkspaceDirectoryOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentRegisterWorkspaceDirectoryOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3887,7 +3887,7 @@ func (m *awsAwsjson11_deserializeOpRestoreWorkspace) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentRestoreWorkspaceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentRestoreWorkspaceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3993,7 +3993,7 @@ func (m *awsAwsjson11_deserializeOpRevokeIpRules) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentRevokeIpRulesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentRevokeIpRulesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4102,7 +4102,7 @@ func (m *awsAwsjson11_deserializeOpStartWorkspaces) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStartWorkspacesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStartWorkspacesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4199,7 +4199,7 @@ func (m *awsAwsjson11_deserializeOpStopWorkspaces) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStopWorkspacesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStopWorkspacesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4296,7 +4296,7 @@ func (m *awsAwsjson11_deserializeOpTerminateWorkspaces) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentTerminateWorkspacesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentTerminateWorkspacesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4393,7 +4393,7 @@ func (m *awsAwsjson11_deserializeOpUpdateRulesOfIpGroup) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateRulesOfIpGroupOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateRulesOfIpGroupOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4505,7 +4505,7 @@ func (m *awsAwsjson11_deserializeOpUpdateWorkspaceImagePermission) HandleDeseria
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateWorkspaceImagePermissionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateWorkspaceImagePermissionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -9592,7 +9592,7 @@ func awsAwsjson11_deserializeDocumentWorkspacesIpGroupsList(v *[]*types.Workspac
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAssociateIpGroupsOutput(v **AssociateIpGroupsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAssociateIpGroupsOutput(v **AssociateIpGroupsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9643,7 +9643,7 @@ func awsAwsjson11_deserializeDocumentAssociateIpGroupsOutput(v **AssociateIpGrou
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAuthorizeIpRulesOutput(v **AuthorizeIpRulesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAuthorizeIpRulesOutput(v **AuthorizeIpRulesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9694,7 +9694,7 @@ func awsAwsjson11_deserializeDocumentAuthorizeIpRulesOutput(v **AuthorizeIpRules
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCopyWorkspaceImageOutput(v **CopyWorkspaceImageOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCopyWorkspaceImageOutput(v **CopyWorkspaceImageOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9758,7 +9758,7 @@ func awsAwsjson11_deserializeDocumentCopyWorkspaceImageOutput(v **CopyWorkspaceI
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateIpGroupOutput(v **CreateIpGroupOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateIpGroupOutput(v **CreateIpGroupOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9822,7 +9822,7 @@ func awsAwsjson11_deserializeDocumentCreateIpGroupOutput(v **CreateIpGroupOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateTagsOutput(v **CreateTagsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateTagsOutput(v **CreateTagsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9873,7 +9873,7 @@ func awsAwsjson11_deserializeDocumentCreateTagsOutput(v **CreateTagsOutput, deco
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateWorkspacesOutput(v **CreateWorkspacesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateWorkspacesOutput(v **CreateWorkspacesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9934,7 +9934,7 @@ func awsAwsjson11_deserializeDocumentCreateWorkspacesOutput(v **CreateWorkspaces
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteIpGroupOutput(v **DeleteIpGroupOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteIpGroupOutput(v **DeleteIpGroupOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -9985,7 +9985,7 @@ func awsAwsjson11_deserializeDocumentDeleteIpGroupOutput(v **DeleteIpGroupOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteTagsOutput(v **DeleteTagsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteTagsOutput(v **DeleteTagsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10036,7 +10036,7 @@ func awsAwsjson11_deserializeDocumentDeleteTagsOutput(v **DeleteTagsOutput, deco
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteWorkspaceImageOutput(v **DeleteWorkspaceImageOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteWorkspaceImageOutput(v **DeleteWorkspaceImageOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10087,7 +10087,7 @@ func awsAwsjson11_deserializeDocumentDeleteWorkspaceImageOutput(v **DeleteWorksp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeregisterWorkspaceDirectoryOutput(v **DeregisterWorkspaceDirectoryOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeregisterWorkspaceDirectoryOutput(v **DeregisterWorkspaceDirectoryOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10138,7 +10138,7 @@ func awsAwsjson11_deserializeDocumentDeregisterWorkspaceDirectoryOutput(v **Dere
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeAccountModificationsOutput(v **DescribeAccountModificationsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeAccountModificationsOutput(v **DescribeAccountModificationsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10207,7 +10207,7 @@ func awsAwsjson11_deserializeDocumentDescribeAccountModificationsOutput(v **Desc
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeAccountOutput(v **DescribeAccountOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeAccountOutput(v **DescribeAccountOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10284,7 +10284,7 @@ func awsAwsjson11_deserializeDocumentDescribeAccountOutput(v **DescribeAccountOu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeClientPropertiesOutput(v **DescribeClientPropertiesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeClientPropertiesOutput(v **DescribeClientPropertiesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10340,7 +10340,7 @@ func awsAwsjson11_deserializeDocumentDescribeClientPropertiesOutput(v **Describe
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeIpGroupsOutput(v **DescribeIpGroupsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeIpGroupsOutput(v **DescribeIpGroupsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10409,7 +10409,7 @@ func awsAwsjson11_deserializeDocumentDescribeIpGroupsOutput(v **DescribeIpGroups
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeTagsOutput(v **DescribeTagsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeTagsOutput(v **DescribeTagsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10465,7 +10465,7 @@ func awsAwsjson11_deserializeDocumentDescribeTagsOutput(v **DescribeTagsOutput, 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeWorkspaceBundlesOutput(v **DescribeWorkspaceBundlesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeWorkspaceBundlesOutput(v **DescribeWorkspaceBundlesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10534,7 +10534,7 @@ func awsAwsjson11_deserializeDocumentDescribeWorkspaceBundlesOutput(v **Describe
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeWorkspaceDirectoriesOutput(v **DescribeWorkspaceDirectoriesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeWorkspaceDirectoriesOutput(v **DescribeWorkspaceDirectoriesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10603,7 +10603,7 @@ func awsAwsjson11_deserializeDocumentDescribeWorkspaceDirectoriesOutput(v **Desc
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeWorkspaceImagePermissionsOutput(v **DescribeWorkspaceImagePermissionsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeWorkspaceImagePermissionsOutput(v **DescribeWorkspaceImagePermissionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10685,7 +10685,7 @@ func awsAwsjson11_deserializeDocumentDescribeWorkspaceImagePermissionsOutput(v *
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeWorkspaceImagesOutput(v **DescribeWorkspaceImagesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeWorkspaceImagesOutput(v **DescribeWorkspaceImagesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10754,7 +10754,7 @@ func awsAwsjson11_deserializeDocumentDescribeWorkspaceImagesOutput(v **DescribeW
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeWorkspacesConnectionStatusOutput(v **DescribeWorkspacesConnectionStatusOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeWorkspacesConnectionStatusOutput(v **DescribeWorkspacesConnectionStatusOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10823,7 +10823,7 @@ func awsAwsjson11_deserializeDocumentDescribeWorkspacesConnectionStatusOutput(v 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeWorkspaceSnapshotsOutput(v **DescribeWorkspaceSnapshotsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeWorkspaceSnapshotsOutput(v **DescribeWorkspaceSnapshotsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10884,7 +10884,7 @@ func awsAwsjson11_deserializeDocumentDescribeWorkspaceSnapshotsOutput(v **Descri
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeWorkspacesOutput(v **DescribeWorkspacesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeWorkspacesOutput(v **DescribeWorkspacesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10953,7 +10953,7 @@ func awsAwsjson11_deserializeDocumentDescribeWorkspacesOutput(v **DescribeWorksp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDisassociateIpGroupsOutput(v **DisassociateIpGroupsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDisassociateIpGroupsOutput(v **DisassociateIpGroupsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11004,7 +11004,7 @@ func awsAwsjson11_deserializeDocumentDisassociateIpGroupsOutput(v **Disassociate
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentImportWorkspaceImageOutput(v **ImportWorkspaceImageOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentImportWorkspaceImageOutput(v **ImportWorkspaceImageOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11068,7 +11068,7 @@ func awsAwsjson11_deserializeDocumentImportWorkspaceImageOutput(v **ImportWorksp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListAvailableManagementCidrRangesOutput(v **ListAvailableManagementCidrRangesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListAvailableManagementCidrRangesOutput(v **ListAvailableManagementCidrRangesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11137,7 +11137,7 @@ func awsAwsjson11_deserializeDocumentListAvailableManagementCidrRangesOutput(v *
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentMigrateWorkspaceOutput(v **MigrateWorkspaceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentMigrateWorkspaceOutput(v **MigrateWorkspaceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11214,7 +11214,7 @@ func awsAwsjson11_deserializeDocumentMigrateWorkspaceOutput(v **MigrateWorkspace
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentModifyAccountOutput(v **ModifyAccountOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentModifyAccountOutput(v **ModifyAccountOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11265,7 +11265,7 @@ func awsAwsjson11_deserializeDocumentModifyAccountOutput(v **ModifyAccountOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentModifyClientPropertiesOutput(v **ModifyClientPropertiesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentModifyClientPropertiesOutput(v **ModifyClientPropertiesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11316,7 +11316,7 @@ func awsAwsjson11_deserializeDocumentModifyClientPropertiesOutput(v **ModifyClie
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentModifySelfservicePermissionsOutput(v **ModifySelfservicePermissionsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentModifySelfservicePermissionsOutput(v **ModifySelfservicePermissionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11367,7 +11367,7 @@ func awsAwsjson11_deserializeDocumentModifySelfservicePermissionsOutput(v **Modi
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentModifyWorkspaceAccessPropertiesOutput(v **ModifyWorkspaceAccessPropertiesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentModifyWorkspaceAccessPropertiesOutput(v **ModifyWorkspaceAccessPropertiesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11418,7 +11418,7 @@ func awsAwsjson11_deserializeDocumentModifyWorkspaceAccessPropertiesOutput(v **M
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentModifyWorkspaceCreationPropertiesOutput(v **ModifyWorkspaceCreationPropertiesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentModifyWorkspaceCreationPropertiesOutput(v **ModifyWorkspaceCreationPropertiesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11469,7 +11469,7 @@ func awsAwsjson11_deserializeDocumentModifyWorkspaceCreationPropertiesOutput(v *
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentModifyWorkspacePropertiesOutput(v **ModifyWorkspacePropertiesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentModifyWorkspacePropertiesOutput(v **ModifyWorkspacePropertiesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11520,7 +11520,7 @@ func awsAwsjson11_deserializeDocumentModifyWorkspacePropertiesOutput(v **ModifyW
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentModifyWorkspaceStateOutput(v **ModifyWorkspaceStateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentModifyWorkspaceStateOutput(v **ModifyWorkspaceStateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11571,7 +11571,7 @@ func awsAwsjson11_deserializeDocumentModifyWorkspaceStateOutput(v **ModifyWorksp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentRebootWorkspacesOutput(v **RebootWorkspacesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentRebootWorkspacesOutput(v **RebootWorkspacesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11627,7 +11627,7 @@ func awsAwsjson11_deserializeDocumentRebootWorkspacesOutput(v **RebootWorkspaces
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentRebuildWorkspacesOutput(v **RebuildWorkspacesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentRebuildWorkspacesOutput(v **RebuildWorkspacesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11683,7 +11683,7 @@ func awsAwsjson11_deserializeDocumentRebuildWorkspacesOutput(v **RebuildWorkspac
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentRegisterWorkspaceDirectoryOutput(v **RegisterWorkspaceDirectoryOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentRegisterWorkspaceDirectoryOutput(v **RegisterWorkspaceDirectoryOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11734,7 +11734,7 @@ func awsAwsjson11_deserializeDocumentRegisterWorkspaceDirectoryOutput(v **Regist
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentRestoreWorkspaceOutput(v **RestoreWorkspaceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentRestoreWorkspaceOutput(v **RestoreWorkspaceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11785,7 +11785,7 @@ func awsAwsjson11_deserializeDocumentRestoreWorkspaceOutput(v **RestoreWorkspace
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentRevokeIpRulesOutput(v **RevokeIpRulesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentRevokeIpRulesOutput(v **RevokeIpRulesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11836,7 +11836,7 @@ func awsAwsjson11_deserializeDocumentRevokeIpRulesOutput(v **RevokeIpRulesOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStartWorkspacesOutput(v **StartWorkspacesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStartWorkspacesOutput(v **StartWorkspacesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11892,7 +11892,7 @@ func awsAwsjson11_deserializeDocumentStartWorkspacesOutput(v **StartWorkspacesOu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStopWorkspacesOutput(v **StopWorkspacesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStopWorkspacesOutput(v **StopWorkspacesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11948,7 +11948,7 @@ func awsAwsjson11_deserializeDocumentStopWorkspacesOutput(v **StopWorkspacesOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentTerminateWorkspacesOutput(v **TerminateWorkspacesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentTerminateWorkspacesOutput(v **TerminateWorkspacesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12004,7 +12004,7 @@ func awsAwsjson11_deserializeDocumentTerminateWorkspacesOutput(v **TerminateWork
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateRulesOfIpGroupOutput(v **UpdateRulesOfIpGroupOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateRulesOfIpGroupOutput(v **UpdateRulesOfIpGroupOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12055,7 +12055,7 @@ func awsAwsjson11_deserializeDocumentUpdateRulesOfIpGroupOutput(v **UpdateRulesO
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateWorkspaceImagePermissionOutput(v **UpdateWorkspaceImagePermissionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateWorkspaceImagePermissionOutput(v **UpdateWorkspaceImagePermissionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

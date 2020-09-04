@@ -53,7 +53,7 @@ func (m *awsAwsjson11_deserializeOpAcceptDomainTransferFromAnotherAwsAccount) Ha
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentAcceptDomainTransferFromAnotherAwsAccountOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentAcceptDomainTransferFromAnotherAwsAccountOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -159,7 +159,7 @@ func (m *awsAwsjson11_deserializeOpCancelDomainTransferToAnotherAwsAccount) Hand
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCancelDomainTransferToAnotherAwsAccountOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCancelDomainTransferToAnotherAwsAccountOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -262,7 +262,7 @@ func (m *awsAwsjson11_deserializeOpCheckDomainAvailability) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCheckDomainAvailabilityOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCheckDomainAvailabilityOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -365,7 +365,7 @@ func (m *awsAwsjson11_deserializeOpCheckDomainTransferability) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCheckDomainTransferabilityOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCheckDomainTransferabilityOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -468,7 +468,7 @@ func (m *awsAwsjson11_deserializeOpDeleteTagsForDomain) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteTagsForDomainOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteTagsForDomainOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -574,7 +574,7 @@ func (m *awsAwsjson11_deserializeOpDisableDomainAutoRenew) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDisableDomainAutoRenewOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDisableDomainAutoRenewOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -677,7 +677,7 @@ func (m *awsAwsjson11_deserializeOpDisableDomainTransferLock) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDisableDomainTransferLockOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDisableDomainTransferLockOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -789,7 +789,7 @@ func (m *awsAwsjson11_deserializeOpEnableDomainAutoRenew) HandleDeserialize(ctx 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentEnableDomainAutoRenewOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentEnableDomainAutoRenewOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -895,7 +895,7 @@ func (m *awsAwsjson11_deserializeOpEnableDomainTransferLock) HandleDeserialize(c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentEnableDomainTransferLockOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentEnableDomainTransferLockOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1007,7 +1007,7 @@ func (m *awsAwsjson11_deserializeOpGetContactReachabilityStatus) HandleDeseriali
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetContactReachabilityStatusOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetContactReachabilityStatusOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1113,7 +1113,7 @@ func (m *awsAwsjson11_deserializeOpGetDomainDetail) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetDomainDetailOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetDomainDetailOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1216,7 +1216,7 @@ func (m *awsAwsjson11_deserializeOpGetDomainSuggestions) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetDomainSuggestionsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetDomainSuggestionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1319,7 +1319,7 @@ func (m *awsAwsjson11_deserializeOpGetOperationDetail) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetOperationDetailOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetOperationDetailOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1419,7 +1419,7 @@ func (m *awsAwsjson11_deserializeOpListDomains) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListDomainsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListDomainsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1519,7 +1519,7 @@ func (m *awsAwsjson11_deserializeOpListOperations) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListOperationsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListOperationsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1619,7 +1619,7 @@ func (m *awsAwsjson11_deserializeOpListTagsForDomain) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListTagsForDomainOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListTagsForDomainOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1725,7 +1725,7 @@ func (m *awsAwsjson11_deserializeOpRegisterDomain) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentRegisterDomainOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentRegisterDomainOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1840,7 +1840,7 @@ func (m *awsAwsjson11_deserializeOpRejectDomainTransferFromAnotherAwsAccount) Ha
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentRejectDomainTransferFromAnotherAwsAccountOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentRejectDomainTransferFromAnotherAwsAccountOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1943,7 +1943,7 @@ func (m *awsAwsjson11_deserializeOpRenewDomain) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentRenewDomainOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentRenewDomainOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2055,7 +2055,7 @@ func (m *awsAwsjson11_deserializeOpResendContactReachabilityEmail) HandleDeseria
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentResendContactReachabilityEmailOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentResendContactReachabilityEmailOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2161,7 +2161,7 @@ func (m *awsAwsjson11_deserializeOpRetrieveDomainAuthCode) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentRetrieveDomainAuthCodeOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentRetrieveDomainAuthCodeOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2264,7 +2264,7 @@ func (m *awsAwsjson11_deserializeOpTransferDomain) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentTransferDomainOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentTransferDomainOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2379,7 +2379,7 @@ func (m *awsAwsjson11_deserializeOpTransferDomainToAnotherAwsAccount) HandleDese
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentTransferDomainToAnotherAwsAccountOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentTransferDomainToAnotherAwsAccountOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2485,7 +2485,7 @@ func (m *awsAwsjson11_deserializeOpUpdateDomainContact) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateDomainContactOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateDomainContactOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2597,7 +2597,7 @@ func (m *awsAwsjson11_deserializeOpUpdateDomainContactPrivacy) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateDomainContactPrivacyOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateDomainContactPrivacyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2709,7 +2709,7 @@ func (m *awsAwsjson11_deserializeOpUpdateDomainNameservers) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateDomainNameserversOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateDomainNameserversOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2821,7 +2821,7 @@ func (m *awsAwsjson11_deserializeOpUpdateTagsForDomain) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateTagsForDomainOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateTagsForDomainOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2927,7 +2927,7 @@ func (m *awsAwsjson11_deserializeOpViewBilling) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentViewBillingOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentViewBillingOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4870,7 +4870,7 @@ func awsAwsjson11_deserializeDocumentUnsupportedTLD(v **types.UnsupportedTLD, de
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAcceptDomainTransferFromAnotherAwsAccountOutput(v **AcceptDomainTransferFromAnotherAwsAccountOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAcceptDomainTransferFromAnotherAwsAccountOutput(v **AcceptDomainTransferFromAnotherAwsAccountOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4934,7 +4934,7 @@ func awsAwsjson11_deserializeDocumentAcceptDomainTransferFromAnotherAwsAccountOu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCancelDomainTransferToAnotherAwsAccountOutput(v **CancelDomainTransferToAnotherAwsAccountOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCancelDomainTransferToAnotherAwsAccountOutput(v **CancelDomainTransferToAnotherAwsAccountOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4998,7 +4998,7 @@ func awsAwsjson11_deserializeDocumentCancelDomainTransferToAnotherAwsAccountOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCheckDomainAvailabilityOutput(v **CheckDomainAvailabilityOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCheckDomainAvailabilityOutput(v **CheckDomainAvailabilityOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5062,7 +5062,7 @@ func awsAwsjson11_deserializeDocumentCheckDomainAvailabilityOutput(v **CheckDoma
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCheckDomainTransferabilityOutput(v **CheckDomainTransferabilityOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCheckDomainTransferabilityOutput(v **CheckDomainTransferabilityOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5118,7 +5118,7 @@ func awsAwsjson11_deserializeDocumentCheckDomainTransferabilityOutput(v **CheckD
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteTagsForDomainOutput(v **DeleteTagsForDomainOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteTagsForDomainOutput(v **DeleteTagsForDomainOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5169,7 +5169,7 @@ func awsAwsjson11_deserializeDocumentDeleteTagsForDomainOutput(v **DeleteTagsFor
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDisableDomainAutoRenewOutput(v **DisableDomainAutoRenewOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDisableDomainAutoRenewOutput(v **DisableDomainAutoRenewOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5220,7 +5220,7 @@ func awsAwsjson11_deserializeDocumentDisableDomainAutoRenewOutput(v **DisableDom
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDisableDomainTransferLockOutput(v **DisableDomainTransferLockOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDisableDomainTransferLockOutput(v **DisableDomainTransferLockOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5284,7 +5284,7 @@ func awsAwsjson11_deserializeDocumentDisableDomainTransferLockOutput(v **Disable
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentEnableDomainAutoRenewOutput(v **EnableDomainAutoRenewOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentEnableDomainAutoRenewOutput(v **EnableDomainAutoRenewOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5335,7 +5335,7 @@ func awsAwsjson11_deserializeDocumentEnableDomainAutoRenewOutput(v **EnableDomai
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentEnableDomainTransferLockOutput(v **EnableDomainTransferLockOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentEnableDomainTransferLockOutput(v **EnableDomainTransferLockOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5399,7 +5399,7 @@ func awsAwsjson11_deserializeDocumentEnableDomainTransferLockOutput(v **EnableDo
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetContactReachabilityStatusOutput(v **GetContactReachabilityStatusOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetContactReachabilityStatusOutput(v **GetContactReachabilityStatusOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5476,7 +5476,7 @@ func awsAwsjson11_deserializeDocumentGetContactReachabilityStatusOutput(v **GetC
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetDomainDetailOutput(v **GetDomainDetailOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetDomainDetailOutput(v **GetDomainDetailOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5772,7 +5772,7 @@ func awsAwsjson11_deserializeDocumentGetDomainDetailOutput(v **GetDomainDetailOu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetDomainSuggestionsOutput(v **GetDomainSuggestionsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetDomainSuggestionsOutput(v **GetDomainSuggestionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5828,7 +5828,7 @@ func awsAwsjson11_deserializeDocumentGetDomainSuggestionsOutput(v **GetDomainSug
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetOperationDetailOutput(v **GetOperationDetailOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetOperationDetailOutput(v **GetOperationDetailOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5961,7 +5961,7 @@ func awsAwsjson11_deserializeDocumentGetOperationDetailOutput(v **GetOperationDe
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListDomainsOutput(v **ListDomainsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListDomainsOutput(v **ListDomainsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6030,7 +6030,7 @@ func awsAwsjson11_deserializeDocumentListDomainsOutput(v **ListDomainsOutput, de
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListOperationsOutput(v **ListOperationsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListOperationsOutput(v **ListOperationsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6099,7 +6099,7 @@ func awsAwsjson11_deserializeDocumentListOperationsOutput(v **ListOperationsOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListTagsForDomainOutput(v **ListTagsForDomainOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListTagsForDomainOutput(v **ListTagsForDomainOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6155,7 +6155,7 @@ func awsAwsjson11_deserializeDocumentListTagsForDomainOutput(v **ListTagsForDoma
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentRegisterDomainOutput(v **RegisterDomainOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentRegisterDomainOutput(v **RegisterDomainOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6219,7 +6219,7 @@ func awsAwsjson11_deserializeDocumentRegisterDomainOutput(v **RegisterDomainOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentRejectDomainTransferFromAnotherAwsAccountOutput(v **RejectDomainTransferFromAnotherAwsAccountOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentRejectDomainTransferFromAnotherAwsAccountOutput(v **RejectDomainTransferFromAnotherAwsAccountOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6283,7 +6283,7 @@ func awsAwsjson11_deserializeDocumentRejectDomainTransferFromAnotherAwsAccountOu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentRenewDomainOutput(v **RenewDomainOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentRenewDomainOutput(v **RenewDomainOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6347,7 +6347,7 @@ func awsAwsjson11_deserializeDocumentRenewDomainOutput(v **RenewDomainOutput, de
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentResendContactReachabilityEmailOutput(v **ResendContactReachabilityEmailOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentResendContactReachabilityEmailOutput(v **ResendContactReachabilityEmailOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6437,7 +6437,7 @@ func awsAwsjson11_deserializeDocumentResendContactReachabilityEmailOutput(v **Re
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentRetrieveDomainAuthCodeOutput(v **RetrieveDomainAuthCodeOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentRetrieveDomainAuthCodeOutput(v **RetrieveDomainAuthCodeOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6501,7 +6501,7 @@ func awsAwsjson11_deserializeDocumentRetrieveDomainAuthCodeOutput(v **RetrieveDo
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentTransferDomainOutput(v **TransferDomainOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentTransferDomainOutput(v **TransferDomainOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6565,7 +6565,7 @@ func awsAwsjson11_deserializeDocumentTransferDomainOutput(v **TransferDomainOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentTransferDomainToAnotherAwsAccountOutput(v **TransferDomainToAnotherAwsAccountOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentTransferDomainToAnotherAwsAccountOutput(v **TransferDomainToAnotherAwsAccountOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6642,7 +6642,7 @@ func awsAwsjson11_deserializeDocumentTransferDomainToAnotherAwsAccountOutput(v *
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateDomainContactOutput(v **UpdateDomainContactOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateDomainContactOutput(v **UpdateDomainContactOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6706,7 +6706,7 @@ func awsAwsjson11_deserializeDocumentUpdateDomainContactOutput(v **UpdateDomainC
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateDomainContactPrivacyOutput(v **UpdateDomainContactPrivacyOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateDomainContactPrivacyOutput(v **UpdateDomainContactPrivacyOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6770,7 +6770,7 @@ func awsAwsjson11_deserializeDocumentUpdateDomainContactPrivacyOutput(v **Update
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateDomainNameserversOutput(v **UpdateDomainNameserversOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateDomainNameserversOutput(v **UpdateDomainNameserversOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6834,7 +6834,7 @@ func awsAwsjson11_deserializeDocumentUpdateDomainNameserversOutput(v **UpdateDom
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateTagsForDomainOutput(v **UpdateTagsForDomainOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateTagsForDomainOutput(v **UpdateTagsForDomainOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6885,7 +6885,7 @@ func awsAwsjson11_deserializeDocumentUpdateTagsForDomainOutput(v **UpdateTagsFor
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentViewBillingOutput(v **ViewBillingOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentViewBillingOutput(v **ViewBillingOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

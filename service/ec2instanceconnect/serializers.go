@@ -43,7 +43,7 @@ func (m *awsAwsjson11_serializeOpSendSSHPublicKey) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSEC2InstanceConnectService.SendSSHPublicKey")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSendSSHPublicKeyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSendSSHPublicKeyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -58,7 +58,7 @@ func (m *awsAwsjson11_serializeOpSendSSHPublicKey) HandleSerialize(ctx context.C
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsAwsjson11_serializeDocumentSendSSHPublicKeyInput(v *SendSSHPublicKeyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSendSSHPublicKeyInput(v *SendSSHPublicKeyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpAddTags) HandleSerialize(ctx context.Context, i
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.AddTags")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAddTagsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAddTagsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpCreateBatchPrediction) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.CreateBatchPrediction")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateBatchPredictionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateBatchPredictionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpCreateDataSourceFromRDS) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.CreateDataSourceFromRDS")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateDataSourceFromRDSInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateDataSourceFromRDSInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpCreateDataSourceFromRedshift) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.CreateDataSourceFromRedshift")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateDataSourceFromRedshiftInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateDataSourceFromRedshiftInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpCreateDataSourceFromS3) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.CreateDataSourceFromS3")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateDataSourceFromS3Input(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateDataSourceFromS3Input(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpCreateEvaluation) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.CreateEvaluation")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateEvaluationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateEvaluationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson11_serializeOpCreateMLModel) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.CreateMLModel")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateMLModelInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateMLModelInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -366,7 +366,7 @@ func (m *awsAwsjson11_serializeOpCreateRealtimeEndpoint) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.CreateRealtimeEndpoint")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateRealtimeEndpointInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateRealtimeEndpointInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -412,7 +412,7 @@ func (m *awsAwsjson11_serializeOpDeleteBatchPrediction) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.DeleteBatchPrediction")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteBatchPredictionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteBatchPredictionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -458,7 +458,7 @@ func (m *awsAwsjson11_serializeOpDeleteDataSource) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.DeleteDataSource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteDataSourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteDataSourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -504,7 +504,7 @@ func (m *awsAwsjson11_serializeOpDeleteEvaluation) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.DeleteEvaluation")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteEvaluationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteEvaluationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -550,7 +550,7 @@ func (m *awsAwsjson11_serializeOpDeleteMLModel) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.DeleteMLModel")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteMLModelInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteMLModelInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -596,7 +596,7 @@ func (m *awsAwsjson11_serializeOpDeleteRealtimeEndpoint) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.DeleteRealtimeEndpoint")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteRealtimeEndpointInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteRealtimeEndpointInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -642,7 +642,7 @@ func (m *awsAwsjson11_serializeOpDeleteTags) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.DeleteTags")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteTagsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteTagsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -688,7 +688,7 @@ func (m *awsAwsjson11_serializeOpDescribeBatchPredictions) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.DescribeBatchPredictions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeBatchPredictionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeBatchPredictionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -734,7 +734,7 @@ func (m *awsAwsjson11_serializeOpDescribeDataSources) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.DescribeDataSources")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeDataSourcesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeDataSourcesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -780,7 +780,7 @@ func (m *awsAwsjson11_serializeOpDescribeEvaluations) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.DescribeEvaluations")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeEvaluationsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeEvaluationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -826,7 +826,7 @@ func (m *awsAwsjson11_serializeOpDescribeMLModels) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.DescribeMLModels")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeMLModelsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeMLModelsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -872,7 +872,7 @@ func (m *awsAwsjson11_serializeOpDescribeTags) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.DescribeTags")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeTagsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeTagsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -918,7 +918,7 @@ func (m *awsAwsjson11_serializeOpGetBatchPrediction) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.GetBatchPrediction")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetBatchPredictionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetBatchPredictionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -964,7 +964,7 @@ func (m *awsAwsjson11_serializeOpGetDataSource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.GetDataSource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetDataSourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetDataSourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1010,7 +1010,7 @@ func (m *awsAwsjson11_serializeOpGetEvaluation) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.GetEvaluation")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetEvaluationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetEvaluationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1056,7 +1056,7 @@ func (m *awsAwsjson11_serializeOpGetMLModel) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.GetMLModel")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetMLModelInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetMLModelInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1102,7 +1102,7 @@ func (m *awsAwsjson11_serializeOpPredict) HandleSerialize(ctx context.Context, i
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.Predict")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPredictInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPredictInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1148,7 +1148,7 @@ func (m *awsAwsjson11_serializeOpUpdateBatchPrediction) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.UpdateBatchPrediction")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateBatchPredictionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateBatchPredictionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1194,7 +1194,7 @@ func (m *awsAwsjson11_serializeOpUpdateDataSource) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.UpdateDataSource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateDataSourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateDataSourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1240,7 +1240,7 @@ func (m *awsAwsjson11_serializeOpUpdateEvaluation) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.UpdateEvaluation")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateEvaluationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateEvaluationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1286,7 +1286,7 @@ func (m *awsAwsjson11_serializeOpUpdateMLModel) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonML_20141212.UpdateMLModel")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateMLModelInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateMLModelInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1604,7 +1604,7 @@ func awsAwsjson11_serializeDocumentTrainingParameters(v map[string]*string, valu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAddTagsInput(v *AddTagsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAddTagsInput(v *AddTagsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1628,7 +1628,7 @@ func awsAwsjson11_serializeDocumentAddTagsInput(v *AddTagsInput, value smithyjso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateBatchPredictionInput(v *CreateBatchPredictionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateBatchPredictionInput(v *CreateBatchPredictionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1660,7 +1660,7 @@ func awsAwsjson11_serializeDocumentCreateBatchPredictionInput(v *CreateBatchPred
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateDataSourceFromRDSInput(v *CreateDataSourceFromRDSInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateDataSourceFromRDSInput(v *CreateDataSourceFromRDSInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1694,7 +1694,7 @@ func awsAwsjson11_serializeDocumentCreateDataSourceFromRDSInput(v *CreateDataSou
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateDataSourceFromRedshiftInput(v *CreateDataSourceFromRedshiftInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateDataSourceFromRedshiftInput(v *CreateDataSourceFromRedshiftInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1728,7 +1728,7 @@ func awsAwsjson11_serializeDocumentCreateDataSourceFromRedshiftInput(v *CreateDa
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateDataSourceFromS3Input(v *CreateDataSourceFromS3Input, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateDataSourceFromS3Input(v *CreateDataSourceFromS3Input, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1757,7 +1757,7 @@ func awsAwsjson11_serializeDocumentCreateDataSourceFromS3Input(v *CreateDataSour
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateEvaluationInput(v *CreateEvaluationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateEvaluationInput(v *CreateEvaluationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1784,7 +1784,7 @@ func awsAwsjson11_serializeDocumentCreateEvaluationInput(v *CreateEvaluationInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateMLModelInput(v *CreateMLModelInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateMLModelInput(v *CreateMLModelInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1828,7 +1828,7 @@ func awsAwsjson11_serializeDocumentCreateMLModelInput(v *CreateMLModelInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateRealtimeEndpointInput(v *CreateRealtimeEndpointInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateRealtimeEndpointInput(v *CreateRealtimeEndpointInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1840,7 +1840,7 @@ func awsAwsjson11_serializeDocumentCreateRealtimeEndpointInput(v *CreateRealtime
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteBatchPredictionInput(v *DeleteBatchPredictionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteBatchPredictionInput(v *DeleteBatchPredictionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1852,7 +1852,7 @@ func awsAwsjson11_serializeDocumentDeleteBatchPredictionInput(v *DeleteBatchPred
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteDataSourceInput(v *DeleteDataSourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteDataSourceInput(v *DeleteDataSourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1864,7 +1864,7 @@ func awsAwsjson11_serializeDocumentDeleteDataSourceInput(v *DeleteDataSourceInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteEvaluationInput(v *DeleteEvaluationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteEvaluationInput(v *DeleteEvaluationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1876,7 +1876,7 @@ func awsAwsjson11_serializeDocumentDeleteEvaluationInput(v *DeleteEvaluationInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteMLModelInput(v *DeleteMLModelInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteMLModelInput(v *DeleteMLModelInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1888,7 +1888,7 @@ func awsAwsjson11_serializeDocumentDeleteMLModelInput(v *DeleteMLModelInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteRealtimeEndpointInput(v *DeleteRealtimeEndpointInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteRealtimeEndpointInput(v *DeleteRealtimeEndpointInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1900,7 +1900,7 @@ func awsAwsjson11_serializeDocumentDeleteRealtimeEndpointInput(v *DeleteRealtime
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteTagsInput(v *DeleteTagsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteTagsInput(v *DeleteTagsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1924,7 +1924,7 @@ func awsAwsjson11_serializeDocumentDeleteTagsInput(v *DeleteTagsInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeBatchPredictionsInput(v *DescribeBatchPredictionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeBatchPredictionsInput(v *DescribeBatchPredictionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1986,7 +1986,7 @@ func awsAwsjson11_serializeDocumentDescribeBatchPredictionsInput(v *DescribeBatc
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeDataSourcesInput(v *DescribeDataSourcesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeDataSourcesInput(v *DescribeDataSourcesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2048,7 +2048,7 @@ func awsAwsjson11_serializeDocumentDescribeDataSourcesInput(v *DescribeDataSourc
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeEvaluationsInput(v *DescribeEvaluationsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeEvaluationsInput(v *DescribeEvaluationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2110,7 +2110,7 @@ func awsAwsjson11_serializeDocumentDescribeEvaluationsInput(v *DescribeEvaluatio
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeMLModelsInput(v *DescribeMLModelsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeMLModelsInput(v *DescribeMLModelsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2172,7 +2172,7 @@ func awsAwsjson11_serializeDocumentDescribeMLModelsInput(v *DescribeMLModelsInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeTagsInput(v *DescribeTagsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeTagsInput(v *DescribeTagsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2189,7 +2189,7 @@ func awsAwsjson11_serializeDocumentDescribeTagsInput(v *DescribeTagsInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetBatchPredictionInput(v *GetBatchPredictionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetBatchPredictionInput(v *GetBatchPredictionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2201,7 +2201,7 @@ func awsAwsjson11_serializeDocumentGetBatchPredictionInput(v *GetBatchPrediction
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetDataSourceInput(v *GetDataSourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetDataSourceInput(v *GetDataSourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2218,7 +2218,7 @@ func awsAwsjson11_serializeDocumentGetDataSourceInput(v *GetDataSourceInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetEvaluationInput(v *GetEvaluationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetEvaluationInput(v *GetEvaluationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2230,7 +2230,7 @@ func awsAwsjson11_serializeDocumentGetEvaluationInput(v *GetEvaluationInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetMLModelInput(v *GetMLModelInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetMLModelInput(v *GetMLModelInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2247,7 +2247,7 @@ func awsAwsjson11_serializeDocumentGetMLModelInput(v *GetMLModelInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPredictInput(v *PredictInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPredictInput(v *PredictInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2271,7 +2271,7 @@ func awsAwsjson11_serializeDocumentPredictInput(v *PredictInput, value smithyjso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateBatchPredictionInput(v *UpdateBatchPredictionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateBatchPredictionInput(v *UpdateBatchPredictionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2288,7 +2288,7 @@ func awsAwsjson11_serializeDocumentUpdateBatchPredictionInput(v *UpdateBatchPred
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateDataSourceInput(v *UpdateDataSourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateDataSourceInput(v *UpdateDataSourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2305,7 +2305,7 @@ func awsAwsjson11_serializeDocumentUpdateDataSourceInput(v *UpdateDataSourceInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateEvaluationInput(v *UpdateEvaluationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateEvaluationInput(v *UpdateEvaluationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2322,7 +2322,7 @@ func awsAwsjson11_serializeDocumentUpdateEvaluationInput(v *UpdateEvaluationInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateMLModelInput(v *UpdateMLModelInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateMLModelInput(v *UpdateMLModelInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

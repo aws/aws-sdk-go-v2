@@ -51,7 +51,7 @@ func (m *awsAwsjson11_deserializeOpGenerateDataSet) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGenerateDataSetOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGenerateDataSetOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -151,7 +151,7 @@ func (m *awsAwsjson11_deserializeOpStartSupportDataExport) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStartSupportDataExportOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStartSupportDataExportOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -306,7 +306,7 @@ func awsAwsjson11_deserializeDocumentMarketplaceCommerceAnalyticsException(v **t
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGenerateDataSetOutput(v **GenerateDataSetOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGenerateDataSetOutput(v **GenerateDataSetOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -370,7 +370,7 @@ func awsAwsjson11_deserializeDocumentGenerateDataSetOutput(v **GenerateDataSetOu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStartSupportDataExportOutput(v **StartSupportDataExportOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStartSupportDataExportOutput(v **StartSupportDataExportOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

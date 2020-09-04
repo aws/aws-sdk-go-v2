@@ -51,7 +51,7 @@ func (m *awsAwsjson11_deserializeOpAddAttachmentsToSet) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentAddAttachmentsToSetOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentAddAttachmentsToSetOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -163,7 +163,7 @@ func (m *awsAwsjson11_deserializeOpAddCommunicationToCase) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentAddCommunicationToCaseOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentAddCommunicationToCaseOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -272,7 +272,7 @@ func (m *awsAwsjson11_deserializeOpCreateCase) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateCaseOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateCaseOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -381,7 +381,7 @@ func (m *awsAwsjson11_deserializeOpDescribeAttachment) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeAttachmentOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeAttachmentOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -487,7 +487,7 @@ func (m *awsAwsjson11_deserializeOpDescribeCases) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeCasesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeCasesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -590,7 +590,7 @@ func (m *awsAwsjson11_deserializeOpDescribeCommunications) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeCommunicationsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeCommunicationsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -693,7 +693,7 @@ func (m *awsAwsjson11_deserializeOpDescribeServices) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeServicesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeServicesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -793,7 +793,7 @@ func (m *awsAwsjson11_deserializeOpDescribeSeverityLevels) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeSeverityLevelsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeSeverityLevelsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -893,7 +893,7 @@ func (m *awsAwsjson11_deserializeOpDescribeTrustedAdvisorCheckRefreshStatuses) H
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeTrustedAdvisorCheckRefreshStatusesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeTrustedAdvisorCheckRefreshStatusesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -993,7 +993,7 @@ func (m *awsAwsjson11_deserializeOpDescribeTrustedAdvisorCheckResult) HandleDese
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeTrustedAdvisorCheckResultOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeTrustedAdvisorCheckResultOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1093,7 +1093,7 @@ func (m *awsAwsjson11_deserializeOpDescribeTrustedAdvisorChecks) HandleDeseriali
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeTrustedAdvisorChecksOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeTrustedAdvisorChecksOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1193,7 +1193,7 @@ func (m *awsAwsjson11_deserializeOpDescribeTrustedAdvisorCheckSummaries) HandleD
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeTrustedAdvisorCheckSummariesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeTrustedAdvisorCheckSummariesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1293,7 +1293,7 @@ func (m *awsAwsjson11_deserializeOpRefreshTrustedAdvisorCheck) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentRefreshTrustedAdvisorCheckOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentRefreshTrustedAdvisorCheckOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1393,7 +1393,7 @@ func (m *awsAwsjson11_deserializeOpResolveCase) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentResolveCaseOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentResolveCaseOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4350,7 +4350,7 @@ func awsAwsjson11_deserializeDocumentTrustedAdvisorResourcesSummary(v **types.Tr
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAddAttachmentsToSetOutput(v **AddAttachmentsToSetOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAddAttachmentsToSetOutput(v **AddAttachmentsToSetOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4427,7 +4427,7 @@ func awsAwsjson11_deserializeDocumentAddAttachmentsToSetOutput(v **AddAttachment
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAddCommunicationToCaseOutput(v **AddCommunicationToCaseOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAddCommunicationToCaseOutput(v **AddCommunicationToCaseOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4491,7 +4491,7 @@ func awsAwsjson11_deserializeDocumentAddCommunicationToCaseOutput(v **AddCommuni
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateCaseOutput(v **CreateCaseOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateCaseOutput(v **CreateCaseOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4555,7 +4555,7 @@ func awsAwsjson11_deserializeDocumentCreateCaseOutput(v **CreateCaseOutput, deco
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeAttachmentOutput(v **DescribeAttachmentOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeAttachmentOutput(v **DescribeAttachmentOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4611,7 +4611,7 @@ func awsAwsjson11_deserializeDocumentDescribeAttachmentOutput(v **DescribeAttach
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeCasesOutput(v **DescribeCasesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeCasesOutput(v **DescribeCasesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4680,7 +4680,7 @@ func awsAwsjson11_deserializeDocumentDescribeCasesOutput(v **DescribeCasesOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeCommunicationsOutput(v **DescribeCommunicationsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeCommunicationsOutput(v **DescribeCommunicationsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4749,7 +4749,7 @@ func awsAwsjson11_deserializeDocumentDescribeCommunicationsOutput(v **DescribeCo
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeServicesOutput(v **DescribeServicesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeServicesOutput(v **DescribeServicesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4805,7 +4805,7 @@ func awsAwsjson11_deserializeDocumentDescribeServicesOutput(v **DescribeServices
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeSeverityLevelsOutput(v **DescribeSeverityLevelsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeSeverityLevelsOutput(v **DescribeSeverityLevelsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4861,7 +4861,7 @@ func awsAwsjson11_deserializeDocumentDescribeSeverityLevelsOutput(v **DescribeSe
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeTrustedAdvisorCheckRefreshStatusesOutput(v **DescribeTrustedAdvisorCheckRefreshStatusesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeTrustedAdvisorCheckRefreshStatusesOutput(v **DescribeTrustedAdvisorCheckRefreshStatusesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4917,7 +4917,7 @@ func awsAwsjson11_deserializeDocumentDescribeTrustedAdvisorCheckRefreshStatusesO
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeTrustedAdvisorCheckResultOutput(v **DescribeTrustedAdvisorCheckResultOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeTrustedAdvisorCheckResultOutput(v **DescribeTrustedAdvisorCheckResultOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4973,7 +4973,7 @@ func awsAwsjson11_deserializeDocumentDescribeTrustedAdvisorCheckResultOutput(v *
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeTrustedAdvisorChecksOutput(v **DescribeTrustedAdvisorChecksOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeTrustedAdvisorChecksOutput(v **DescribeTrustedAdvisorChecksOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5029,7 +5029,7 @@ func awsAwsjson11_deserializeDocumentDescribeTrustedAdvisorChecksOutput(v **Desc
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeTrustedAdvisorCheckSummariesOutput(v **DescribeTrustedAdvisorCheckSummariesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeTrustedAdvisorCheckSummariesOutput(v **DescribeTrustedAdvisorCheckSummariesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5085,7 +5085,7 @@ func awsAwsjson11_deserializeDocumentDescribeTrustedAdvisorCheckSummariesOutput(
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentRefreshTrustedAdvisorCheckOutput(v **RefreshTrustedAdvisorCheckOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentRefreshTrustedAdvisorCheckOutput(v **RefreshTrustedAdvisorCheckOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5141,7 +5141,7 @@ func awsAwsjson11_deserializeDocumentRefreshTrustedAdvisorCheckOutput(v **Refres
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentResolveCaseOutput(v **ResolveCaseOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentResolveCaseOutput(v **ResolveCaseOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

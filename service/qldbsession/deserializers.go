@@ -51,7 +51,7 @@ func (m *awsAwsjson10_deserializeOpSendCommand) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentSendCommandOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentSendCommandOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1192,7 +1192,7 @@ func awsAwsjson10_deserializeDocumentValueHolders(v *[]*types.ValueHolder, decod
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentSendCommandOutput(v **SendCommandOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentSendCommandOutput(v **SendCommandOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

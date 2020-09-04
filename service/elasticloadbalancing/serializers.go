@@ -48,7 +48,7 @@ func (m *awsAwsquery_serializeOpAddTags) HandleSerialize(ctx context.Context, in
 	body.Key("Action").String("AddTags")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentAddTagsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentAddTagsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -103,7 +103,7 @@ func (m *awsAwsquery_serializeOpApplySecurityGroupsToLoadBalancer) HandleSeriali
 	body.Key("Action").String("ApplySecurityGroupsToLoadBalancer")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentApplySecurityGroupsToLoadBalancerInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentApplySecurityGroupsToLoadBalancerInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -158,7 +158,7 @@ func (m *awsAwsquery_serializeOpAttachLoadBalancerToSubnets) HandleSerialize(ctx
 	body.Key("Action").String("AttachLoadBalancerToSubnets")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentAttachLoadBalancerToSubnetsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentAttachLoadBalancerToSubnetsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -213,7 +213,7 @@ func (m *awsAwsquery_serializeOpConfigureHealthCheck) HandleSerialize(ctx contex
 	body.Key("Action").String("ConfigureHealthCheck")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentConfigureHealthCheckInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentConfigureHealthCheckInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -268,7 +268,7 @@ func (m *awsAwsquery_serializeOpCreateAppCookieStickinessPolicy) HandleSerialize
 	body.Key("Action").String("CreateAppCookieStickinessPolicy")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentCreateAppCookieStickinessPolicyInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateAppCookieStickinessPolicyInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -323,7 +323,7 @@ func (m *awsAwsquery_serializeOpCreateLBCookieStickinessPolicy) HandleSerialize(
 	body.Key("Action").String("CreateLBCookieStickinessPolicy")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentCreateLBCookieStickinessPolicyInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateLBCookieStickinessPolicyInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -378,7 +378,7 @@ func (m *awsAwsquery_serializeOpCreateLoadBalancer) HandleSerialize(ctx context.
 	body.Key("Action").String("CreateLoadBalancer")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentCreateLoadBalancerInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateLoadBalancerInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -433,7 +433,7 @@ func (m *awsAwsquery_serializeOpCreateLoadBalancerListeners) HandleSerialize(ctx
 	body.Key("Action").String("CreateLoadBalancerListeners")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentCreateLoadBalancerListenersInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateLoadBalancerListenersInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -488,7 +488,7 @@ func (m *awsAwsquery_serializeOpCreateLoadBalancerPolicy) HandleSerialize(ctx co
 	body.Key("Action").String("CreateLoadBalancerPolicy")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentCreateLoadBalancerPolicyInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateLoadBalancerPolicyInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -543,7 +543,7 @@ func (m *awsAwsquery_serializeOpDeleteLoadBalancer) HandleSerialize(ctx context.
 	body.Key("Action").String("DeleteLoadBalancer")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteLoadBalancerInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteLoadBalancerInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -598,7 +598,7 @@ func (m *awsAwsquery_serializeOpDeleteLoadBalancerListeners) HandleSerialize(ctx
 	body.Key("Action").String("DeleteLoadBalancerListeners")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteLoadBalancerListenersInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteLoadBalancerListenersInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -653,7 +653,7 @@ func (m *awsAwsquery_serializeOpDeleteLoadBalancerPolicy) HandleSerialize(ctx co
 	body.Key("Action").String("DeleteLoadBalancerPolicy")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteLoadBalancerPolicyInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteLoadBalancerPolicyInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -708,7 +708,7 @@ func (m *awsAwsquery_serializeOpDeregisterInstancesFromLoadBalancer) HandleSeria
 	body.Key("Action").String("DeregisterInstancesFromLoadBalancer")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentDeregisterInstancesFromLoadBalancerInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeregisterInstancesFromLoadBalancerInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -763,7 +763,7 @@ func (m *awsAwsquery_serializeOpDescribeAccountLimits) HandleSerialize(ctx conte
 	body.Key("Action").String("DescribeAccountLimits")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeAccountLimitsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeAccountLimitsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -818,7 +818,7 @@ func (m *awsAwsquery_serializeOpDescribeInstanceHealth) HandleSerialize(ctx cont
 	body.Key("Action").String("DescribeInstanceHealth")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeInstanceHealthInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeInstanceHealthInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -873,7 +873,7 @@ func (m *awsAwsquery_serializeOpDescribeLoadBalancerAttributes) HandleSerialize(
 	body.Key("Action").String("DescribeLoadBalancerAttributes")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeLoadBalancerAttributesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeLoadBalancerAttributesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -928,7 +928,7 @@ func (m *awsAwsquery_serializeOpDescribeLoadBalancerPolicies) HandleSerialize(ct
 	body.Key("Action").String("DescribeLoadBalancerPolicies")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeLoadBalancerPoliciesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeLoadBalancerPoliciesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -983,7 +983,7 @@ func (m *awsAwsquery_serializeOpDescribeLoadBalancerPolicyTypes) HandleSerialize
 	body.Key("Action").String("DescribeLoadBalancerPolicyTypes")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeLoadBalancerPolicyTypesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeLoadBalancerPolicyTypesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1038,7 +1038,7 @@ func (m *awsAwsquery_serializeOpDescribeLoadBalancers) HandleSerialize(ctx conte
 	body.Key("Action").String("DescribeLoadBalancers")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeLoadBalancersInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeLoadBalancersInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1093,7 +1093,7 @@ func (m *awsAwsquery_serializeOpDescribeTags) HandleSerialize(ctx context.Contex
 	body.Key("Action").String("DescribeTags")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeTagsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeTagsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1148,7 +1148,7 @@ func (m *awsAwsquery_serializeOpDetachLoadBalancerFromSubnets) HandleSerialize(c
 	body.Key("Action").String("DetachLoadBalancerFromSubnets")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentDetachLoadBalancerFromSubnetsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDetachLoadBalancerFromSubnetsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1203,7 +1203,7 @@ func (m *awsAwsquery_serializeOpDisableAvailabilityZonesForLoadBalancer) HandleS
 	body.Key("Action").String("DisableAvailabilityZonesForLoadBalancer")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentDisableAvailabilityZonesForLoadBalancerInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDisableAvailabilityZonesForLoadBalancerInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1258,7 +1258,7 @@ func (m *awsAwsquery_serializeOpEnableAvailabilityZonesForLoadBalancer) HandleSe
 	body.Key("Action").String("EnableAvailabilityZonesForLoadBalancer")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentEnableAvailabilityZonesForLoadBalancerInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentEnableAvailabilityZonesForLoadBalancerInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1313,7 +1313,7 @@ func (m *awsAwsquery_serializeOpModifyLoadBalancerAttributes) HandleSerialize(ct
 	body.Key("Action").String("ModifyLoadBalancerAttributes")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentModifyLoadBalancerAttributesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentModifyLoadBalancerAttributesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1368,7 +1368,7 @@ func (m *awsAwsquery_serializeOpRegisterInstancesWithLoadBalancer) HandleSeriali
 	body.Key("Action").String("RegisterInstancesWithLoadBalancer")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentRegisterInstancesWithLoadBalancerInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentRegisterInstancesWithLoadBalancerInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1423,7 +1423,7 @@ func (m *awsAwsquery_serializeOpRemoveTags) HandleSerialize(ctx context.Context,
 	body.Key("Action").String("RemoveTags")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentRemoveTagsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentRemoveTagsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1478,7 +1478,7 @@ func (m *awsAwsquery_serializeOpSetLoadBalancerListenerSSLCertificate) HandleSer
 	body.Key("Action").String("SetLoadBalancerListenerSSLCertificate")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentSetLoadBalancerListenerSSLCertificateInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSetLoadBalancerListenerSSLCertificateInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1533,7 +1533,7 @@ func (m *awsAwsquery_serializeOpSetLoadBalancerPoliciesForBackendServer) HandleS
 	body.Key("Action").String("SetLoadBalancerPoliciesForBackendServer")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentSetLoadBalancerPoliciesForBackendServerInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSetLoadBalancerPoliciesForBackendServerInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1588,7 +1588,7 @@ func (m *awsAwsquery_serializeOpSetLoadBalancerPoliciesOfListener) HandleSeriali
 	body.Key("Action").String("SetLoadBalancerPoliciesOfListener")
 	body.Key("Version").String("2012-06-01")
 
-	if err := awsAwsquery_serializeDocumentSetLoadBalancerPoliciesOfListenerInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSetLoadBalancerPoliciesOfListenerInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2093,7 +2093,7 @@ func awsAwsquery_serializeDocumentTagList(v []*types.Tag, value query.Value) err
 	return nil
 }
 
-func awsAwsquery_serializeDocumentAddTagsInput(v *AddTagsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentAddTagsInput(v *AddTagsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2114,7 +2114,7 @@ func awsAwsquery_serializeDocumentAddTagsInput(v *AddTagsInput, value query.Valu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentApplySecurityGroupsToLoadBalancerInput(v *ApplySecurityGroupsToLoadBalancerInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentApplySecurityGroupsToLoadBalancerInput(v *ApplySecurityGroupsToLoadBalancerInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2133,7 +2133,7 @@ func awsAwsquery_serializeDocumentApplySecurityGroupsToLoadBalancerInput(v *Appl
 	return nil
 }
 
-func awsAwsquery_serializeDocumentAttachLoadBalancerToSubnetsInput(v *AttachLoadBalancerToSubnetsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentAttachLoadBalancerToSubnetsInput(v *AttachLoadBalancerToSubnetsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2152,7 +2152,7 @@ func awsAwsquery_serializeDocumentAttachLoadBalancerToSubnetsInput(v *AttachLoad
 	return nil
 }
 
-func awsAwsquery_serializeDocumentConfigureHealthCheckInput(v *ConfigureHealthCheckInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentConfigureHealthCheckInput(v *ConfigureHealthCheckInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2171,7 +2171,7 @@ func awsAwsquery_serializeDocumentConfigureHealthCheckInput(v *ConfigureHealthCh
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateAppCookieStickinessPolicyInput(v *CreateAppCookieStickinessPolicyInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateAppCookieStickinessPolicyInput(v *CreateAppCookieStickinessPolicyInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2193,7 +2193,7 @@ func awsAwsquery_serializeDocumentCreateAppCookieStickinessPolicyInput(v *Create
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateLBCookieStickinessPolicyInput(v *CreateLBCookieStickinessPolicyInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateLBCookieStickinessPolicyInput(v *CreateLBCookieStickinessPolicyInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2215,7 +2215,7 @@ func awsAwsquery_serializeDocumentCreateLBCookieStickinessPolicyInput(v *CreateL
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateLoadBalancerInput(v *CreateLoadBalancerInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateLoadBalancerInput(v *CreateLoadBalancerInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2267,7 +2267,7 @@ func awsAwsquery_serializeDocumentCreateLoadBalancerInput(v *CreateLoadBalancerI
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateLoadBalancerListenersInput(v *CreateLoadBalancerListenersInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateLoadBalancerListenersInput(v *CreateLoadBalancerListenersInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2286,7 +2286,7 @@ func awsAwsquery_serializeDocumentCreateLoadBalancerListenersInput(v *CreateLoad
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateLoadBalancerPolicyInput(v *CreateLoadBalancerPolicyInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateLoadBalancerPolicyInput(v *CreateLoadBalancerPolicyInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2315,7 +2315,7 @@ func awsAwsquery_serializeDocumentCreateLoadBalancerPolicyInput(v *CreateLoadBal
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteLoadBalancerInput(v *DeleteLoadBalancerInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteLoadBalancerInput(v *DeleteLoadBalancerInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2327,7 +2327,7 @@ func awsAwsquery_serializeDocumentDeleteLoadBalancerInput(v *DeleteLoadBalancerI
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteLoadBalancerListenersInput(v *DeleteLoadBalancerListenersInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteLoadBalancerListenersInput(v *DeleteLoadBalancerListenersInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2346,7 +2346,7 @@ func awsAwsquery_serializeDocumentDeleteLoadBalancerListenersInput(v *DeleteLoad
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteLoadBalancerPolicyInput(v *DeleteLoadBalancerPolicyInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteLoadBalancerPolicyInput(v *DeleteLoadBalancerPolicyInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2363,7 +2363,7 @@ func awsAwsquery_serializeDocumentDeleteLoadBalancerPolicyInput(v *DeleteLoadBal
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeregisterInstancesFromLoadBalancerInput(v *DeregisterInstancesFromLoadBalancerInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeregisterInstancesFromLoadBalancerInput(v *DeregisterInstancesFromLoadBalancerInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2382,7 +2382,7 @@ func awsAwsquery_serializeDocumentDeregisterInstancesFromLoadBalancerInput(v *De
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeAccountLimitsInput(v *DescribeAccountLimitsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeAccountLimitsInput(v *DescribeAccountLimitsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2399,7 +2399,7 @@ func awsAwsquery_serializeDocumentDescribeAccountLimitsInput(v *DescribeAccountL
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeInstanceHealthInput(v *DescribeInstanceHealthInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeInstanceHealthInput(v *DescribeInstanceHealthInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2418,7 +2418,7 @@ func awsAwsquery_serializeDocumentDescribeInstanceHealthInput(v *DescribeInstanc
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeLoadBalancerAttributesInput(v *DescribeLoadBalancerAttributesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeLoadBalancerAttributesInput(v *DescribeLoadBalancerAttributesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2430,7 +2430,7 @@ func awsAwsquery_serializeDocumentDescribeLoadBalancerAttributesInput(v *Describ
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeLoadBalancerPoliciesInput(v *DescribeLoadBalancerPoliciesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeLoadBalancerPoliciesInput(v *DescribeLoadBalancerPoliciesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2449,7 +2449,7 @@ func awsAwsquery_serializeDocumentDescribeLoadBalancerPoliciesInput(v *DescribeL
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeLoadBalancerPolicyTypesInput(v *DescribeLoadBalancerPolicyTypesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeLoadBalancerPolicyTypesInput(v *DescribeLoadBalancerPolicyTypesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2463,7 +2463,7 @@ func awsAwsquery_serializeDocumentDescribeLoadBalancerPolicyTypesInput(v *Descri
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeLoadBalancersInput(v *DescribeLoadBalancersInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeLoadBalancersInput(v *DescribeLoadBalancersInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2487,7 +2487,7 @@ func awsAwsquery_serializeDocumentDescribeLoadBalancersInput(v *DescribeLoadBala
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeTagsInput(v *DescribeTagsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeTagsInput(v *DescribeTagsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2501,7 +2501,7 @@ func awsAwsquery_serializeDocumentDescribeTagsInput(v *DescribeTagsInput, value 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDetachLoadBalancerFromSubnetsInput(v *DetachLoadBalancerFromSubnetsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDetachLoadBalancerFromSubnetsInput(v *DetachLoadBalancerFromSubnetsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2520,7 +2520,7 @@ func awsAwsquery_serializeDocumentDetachLoadBalancerFromSubnetsInput(v *DetachLo
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDisableAvailabilityZonesForLoadBalancerInput(v *DisableAvailabilityZonesForLoadBalancerInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDisableAvailabilityZonesForLoadBalancerInput(v *DisableAvailabilityZonesForLoadBalancerInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2539,7 +2539,7 @@ func awsAwsquery_serializeDocumentDisableAvailabilityZonesForLoadBalancerInput(v
 	return nil
 }
 
-func awsAwsquery_serializeDocumentEnableAvailabilityZonesForLoadBalancerInput(v *EnableAvailabilityZonesForLoadBalancerInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentEnableAvailabilityZonesForLoadBalancerInput(v *EnableAvailabilityZonesForLoadBalancerInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2558,7 +2558,7 @@ func awsAwsquery_serializeDocumentEnableAvailabilityZonesForLoadBalancerInput(v 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentModifyLoadBalancerAttributesInput(v *ModifyLoadBalancerAttributesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentModifyLoadBalancerAttributesInput(v *ModifyLoadBalancerAttributesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2577,7 +2577,7 @@ func awsAwsquery_serializeDocumentModifyLoadBalancerAttributesInput(v *ModifyLoa
 	return nil
 }
 
-func awsAwsquery_serializeDocumentRegisterInstancesWithLoadBalancerInput(v *RegisterInstancesWithLoadBalancerInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentRegisterInstancesWithLoadBalancerInput(v *RegisterInstancesWithLoadBalancerInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2596,7 +2596,7 @@ func awsAwsquery_serializeDocumentRegisterInstancesWithLoadBalancerInput(v *Regi
 	return nil
 }
 
-func awsAwsquery_serializeDocumentRemoveTagsInput(v *RemoveTagsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentRemoveTagsInput(v *RemoveTagsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2617,7 +2617,7 @@ func awsAwsquery_serializeDocumentRemoveTagsInput(v *RemoveTagsInput, value quer
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSetLoadBalancerListenerSSLCertificateInput(v *SetLoadBalancerListenerSSLCertificateInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSetLoadBalancerListenerSSLCertificateInput(v *SetLoadBalancerListenerSSLCertificateInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2639,7 +2639,7 @@ func awsAwsquery_serializeDocumentSetLoadBalancerListenerSSLCertificateInput(v *
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSetLoadBalancerPoliciesForBackendServerInput(v *SetLoadBalancerPoliciesForBackendServerInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSetLoadBalancerPoliciesForBackendServerInput(v *SetLoadBalancerPoliciesForBackendServerInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2663,7 +2663,7 @@ func awsAwsquery_serializeDocumentSetLoadBalancerPoliciesForBackendServerInput(v
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSetLoadBalancerPoliciesOfListenerInput(v *SetLoadBalancerPoliciesOfListenerInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSetLoadBalancerPoliciesOfListenerInput(v *SetLoadBalancerPoliciesOfListenerInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 

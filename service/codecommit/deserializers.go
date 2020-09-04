@@ -186,7 +186,7 @@ func (m *awsAwsjson11_deserializeOpBatchAssociateApprovalRuleTemplateWithReposit
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentBatchAssociateApprovalRuleTemplateWithRepositoriesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentBatchAssociateApprovalRuleTemplateWithRepositoriesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -313,7 +313,7 @@ func (m *awsAwsjson11_deserializeOpBatchDescribeMergeConflicts) HandleDeserializ
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentBatchDescribeMergeConflictsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentBatchDescribeMergeConflictsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -473,7 +473,7 @@ func (m *awsAwsjson11_deserializeOpBatchDisassociateApprovalRuleTemplateFromRepo
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentBatchDisassociateApprovalRuleTemplateFromRepositoriesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentBatchDisassociateApprovalRuleTemplateFromRepositoriesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -600,7 +600,7 @@ func (m *awsAwsjson11_deserializeOpBatchGetCommits) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentBatchGetCommitsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentBatchGetCommitsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -727,7 +727,7 @@ func (m *awsAwsjson11_deserializeOpBatchGetRepositories) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentBatchGetRepositoriesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentBatchGetRepositoriesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -848,7 +848,7 @@ func (m *awsAwsjson11_deserializeOpCreateApprovalRuleTemplate) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateApprovalRuleTemplateOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateApprovalRuleTemplateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1105,7 +1105,7 @@ func (m *awsAwsjson11_deserializeOpCreateCommit) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateCommitOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateCommitOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1316,7 +1316,7 @@ func (m *awsAwsjson11_deserializeOpCreatePullRequest) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreatePullRequestOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreatePullRequestOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1488,7 +1488,7 @@ func (m *awsAwsjson11_deserializeOpCreatePullRequestApprovalRule) HandleDeserial
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreatePullRequestApprovalRuleOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreatePullRequestApprovalRuleOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1630,7 +1630,7 @@ func (m *awsAwsjson11_deserializeOpCreateRepository) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateRepositoryOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateRepositoryOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1769,7 +1769,7 @@ func (m *awsAwsjson11_deserializeOpCreateUnreferencedMergeCommit) HandleDeserial
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateUnreferencedMergeCommitOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateUnreferencedMergeCommitOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1974,7 +1974,7 @@ func (m *awsAwsjson11_deserializeOpDeleteApprovalRuleTemplate) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteApprovalRuleTemplateOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteApprovalRuleTemplateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2080,7 +2080,7 @@ func (m *awsAwsjson11_deserializeOpDeleteBranch) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteBranchOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteBranchOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2210,7 +2210,7 @@ func (m *awsAwsjson11_deserializeOpDeleteCommentContent) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteCommentContentOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteCommentContentOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2319,7 +2319,7 @@ func (m *awsAwsjson11_deserializeOpDeleteFile) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteFileOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteFileOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2482,7 +2482,7 @@ func (m *awsAwsjson11_deserializeOpDeletePullRequestApprovalRule) HandleDeserial
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeletePullRequestApprovalRuleOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeletePullRequestApprovalRuleOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2615,7 +2615,7 @@ func (m *awsAwsjson11_deserializeOpDeleteRepository) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteRepositoryOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteRepositoryOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2733,7 +2733,7 @@ func (m *awsAwsjson11_deserializeOpDescribeMergeConflicts) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeMergeConflictsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeMergeConflictsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2899,7 +2899,7 @@ func (m *awsAwsjson11_deserializeOpDescribePullRequestEvents) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribePullRequestEventsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribePullRequestEventsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3165,7 +3165,7 @@ func (m *awsAwsjson11_deserializeOpEvaluatePullRequestApprovalRules) HandleDeser
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentEvaluatePullRequestApprovalRulesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentEvaluatePullRequestApprovalRulesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3295,7 +3295,7 @@ func (m *awsAwsjson11_deserializeOpGetApprovalRuleTemplate) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetApprovalRuleTemplateOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetApprovalRuleTemplateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3401,7 +3401,7 @@ func (m *awsAwsjson11_deserializeOpGetBlob) HandleDeserialize(ctx context.Contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetBlobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetBlobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3534,7 +3534,7 @@ func (m *awsAwsjson11_deserializeOpGetBranch) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetBranchOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetBranchOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3664,7 +3664,7 @@ func (m *awsAwsjson11_deserializeOpGetComment) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetCommentOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetCommentOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3788,7 +3788,7 @@ func (m *awsAwsjson11_deserializeOpGetCommentReactions) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetCommentReactionsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetCommentReactionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3906,7 +3906,7 @@ func (m *awsAwsjson11_deserializeOpGetCommentsForComparedCommit) HandleDeseriali
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetCommentsForComparedCommitOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetCommentsForComparedCommitOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4042,7 +4042,7 @@ func (m *awsAwsjson11_deserializeOpGetCommentsForPullRequest) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetCommentsForPullRequestOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetCommentsForPullRequestOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4190,7 +4190,7 @@ func (m *awsAwsjson11_deserializeOpGetCommit) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetCommitOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetCommitOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4320,7 +4320,7 @@ func (m *awsAwsjson11_deserializeOpGetDifferences) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetDifferencesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetDifferencesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4465,7 +4465,7 @@ func (m *awsAwsjson11_deserializeOpGetFile) HandleDeserialize(ctx context.Contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetFileOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetFileOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4604,7 +4604,7 @@ func (m *awsAwsjson11_deserializeOpGetFolder) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetFolderOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetFolderOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4740,7 +4740,7 @@ func (m *awsAwsjson11_deserializeOpGetMergeCommit) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetMergeCommitOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetMergeCommitOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4876,7 +4876,7 @@ func (m *awsAwsjson11_deserializeOpGetMergeConflicts) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetMergeConflictsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetMergeConflictsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5039,7 +5039,7 @@ func (m *awsAwsjson11_deserializeOpGetMergeOptions) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetMergeOptionsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetMergeOptionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5184,7 +5184,7 @@ func (m *awsAwsjson11_deserializeOpGetPullRequest) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetPullRequestOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetPullRequestOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5305,7 +5305,7 @@ func (m *awsAwsjson11_deserializeOpGetPullRequestApprovalStates) HandleDeseriali
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetPullRequestApprovalStatesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetPullRequestApprovalStatesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5432,7 +5432,7 @@ func (m *awsAwsjson11_deserializeOpGetPullRequestOverrideState) HandleDeserializ
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetPullRequestOverrideStateOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetPullRequestOverrideStateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5559,7 +5559,7 @@ func (m *awsAwsjson11_deserializeOpGetRepository) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetRepositoryOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetRepositoryOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5680,7 +5680,7 @@ func (m *awsAwsjson11_deserializeOpGetRepositoryTriggers) HandleDeserialize(ctx 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetRepositoryTriggersOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetRepositoryTriggersOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5801,7 +5801,7 @@ func (m *awsAwsjson11_deserializeOpListApprovalRuleTemplates) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListApprovalRuleTemplatesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListApprovalRuleTemplatesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5904,7 +5904,7 @@ func (m *awsAwsjson11_deserializeOpListAssociatedApprovalRuleTemplatesForReposit
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListAssociatedApprovalRuleTemplatesForRepositoryOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListAssociatedApprovalRuleTemplatesForRepositoryOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -6031,7 +6031,7 @@ func (m *awsAwsjson11_deserializeOpListBranches) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListBranchesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListBranchesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -6155,7 +6155,7 @@ func (m *awsAwsjson11_deserializeOpListPullRequests) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListPullRequestsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListPullRequestsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -6291,7 +6291,7 @@ func (m *awsAwsjson11_deserializeOpListRepositories) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListRepositoriesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListRepositoriesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -6397,7 +6397,7 @@ func (m *awsAwsjson11_deserializeOpListRepositoriesForApprovalRuleTemplate) Hand
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListRepositoriesForApprovalRuleTemplateOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListRepositoriesForApprovalRuleTemplateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -6524,7 +6524,7 @@ func (m *awsAwsjson11_deserializeOpListTagsForResource) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListTagsForResourceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -6633,7 +6633,7 @@ func (m *awsAwsjson11_deserializeOpMergeBranchesByFastForward) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentMergeBranchesByFastForwardOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentMergeBranchesByFastForwardOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -6787,7 +6787,7 @@ func (m *awsAwsjson11_deserializeOpMergeBranchesBySquash) HandleDeserialize(ctx 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentMergeBranchesBySquashOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentMergeBranchesBySquashOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -7001,7 +7001,7 @@ func (m *awsAwsjson11_deserializeOpMergeBranchesByThreeWay) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentMergeBranchesByThreeWayOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentMergeBranchesByThreeWayOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -7215,7 +7215,7 @@ func (m *awsAwsjson11_deserializeOpMergePullRequestByFastForward) HandleDeserial
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentMergePullRequestByFastForwardOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentMergePullRequestByFastForwardOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -7369,7 +7369,7 @@ func (m *awsAwsjson11_deserializeOpMergePullRequestBySquash) HandleDeserialize(c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentMergePullRequestBySquashOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentMergePullRequestBySquashOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -7580,7 +7580,7 @@ func (m *awsAwsjson11_deserializeOpMergePullRequestByThreeWay) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentMergePullRequestByThreeWayOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentMergePullRequestByThreeWayOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -7933,7 +7933,7 @@ func (m *awsAwsjson11_deserializeOpPostCommentForComparedCommit) HandleDeseriali
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentPostCommentForComparedCommitOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentPostCommentForComparedCommitOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -8099,7 +8099,7 @@ func (m *awsAwsjson11_deserializeOpPostCommentForPullRequest) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentPostCommentForPullRequestOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentPostCommentForPullRequestOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -8277,7 +8277,7 @@ func (m *awsAwsjson11_deserializeOpPostCommentReply) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentPostCommentReplyOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentPostCommentReplyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -8516,7 +8516,7 @@ func (m *awsAwsjson11_deserializeOpPutFile) HandleDeserialize(ctx context.Contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentPutFileOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentPutFileOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -8703,7 +8703,7 @@ func (m *awsAwsjson11_deserializeOpPutRepositoryTriggers) HandleDeserialize(ctx 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentPutRepositoryTriggersOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentPutRepositoryTriggersOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -8987,7 +8987,7 @@ func (m *awsAwsjson11_deserializeOpTestRepositoryTriggers) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentTestRepositoryTriggersOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentTestRepositoryTriggersOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -9271,7 +9271,7 @@ func (m *awsAwsjson11_deserializeOpUpdateApprovalRuleTemplateContent) HandleDese
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateApprovalRuleTemplateContentOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateApprovalRuleTemplateContentOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -9386,7 +9386,7 @@ func (m *awsAwsjson11_deserializeOpUpdateApprovalRuleTemplateDescription) Handle
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateApprovalRuleTemplateDescriptionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateApprovalRuleTemplateDescriptionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -9495,7 +9495,7 @@ func (m *awsAwsjson11_deserializeOpUpdateApprovalRuleTemplateName) HandleDeseria
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateApprovalRuleTemplateNameOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateApprovalRuleTemplateNameOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -9604,7 +9604,7 @@ func (m *awsAwsjson11_deserializeOpUpdateComment) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateCommentOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateCommentOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -9852,7 +9852,7 @@ func (m *awsAwsjson11_deserializeOpUpdatePullRequestApprovalRuleContent) HandleD
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdatePullRequestApprovalRuleContentOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdatePullRequestApprovalRuleContentOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -10142,7 +10142,7 @@ func (m *awsAwsjson11_deserializeOpUpdatePullRequestDescription) HandleDeseriali
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdatePullRequestDescriptionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdatePullRequestDescriptionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -10254,7 +10254,7 @@ func (m *awsAwsjson11_deserializeOpUpdatePullRequestStatus) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdatePullRequestStatusOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdatePullRequestStatusOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -10384,7 +10384,7 @@ func (m *awsAwsjson11_deserializeOpUpdatePullRequestTitle) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdatePullRequestTitleOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdatePullRequestTitleOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -33999,7 +33999,7 @@ func awsAwsjson11_deserializeDocumentAssociateApprovalRuleTemplateWithRepository
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentBatchAssociateApprovalRuleTemplateWithRepositoriesOutput(v **BatchAssociateApprovalRuleTemplateWithRepositoriesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentBatchAssociateApprovalRuleTemplateWithRepositoriesOutput(v **BatchAssociateApprovalRuleTemplateWithRepositoriesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -34060,7 +34060,7 @@ func awsAwsjson11_deserializeDocumentBatchAssociateApprovalRuleTemplateWithRepos
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentBatchDescribeMergeConflictsOutput(v **BatchDescribeMergeConflictsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentBatchDescribeMergeConflictsOutput(v **BatchDescribeMergeConflictsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -34173,7 +34173,7 @@ func awsAwsjson11_deserializeDocumentBatchDescribeMergeConflictsOutput(v **Batch
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentBatchDisassociateApprovalRuleTemplateFromRepositoriesOutput(v **BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentBatchDisassociateApprovalRuleTemplateFromRepositoriesOutput(v **BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -34234,7 +34234,7 @@ func awsAwsjson11_deserializeDocumentBatchDisassociateApprovalRuleTemplateFromRe
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentBatchGetCommitsOutput(v **BatchGetCommitsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentBatchGetCommitsOutput(v **BatchGetCommitsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -34295,7 +34295,7 @@ func awsAwsjson11_deserializeDocumentBatchGetCommitsOutput(v **BatchGetCommitsOu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentBatchGetRepositoriesOutput(v **BatchGetRepositoriesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentBatchGetRepositoriesOutput(v **BatchGetRepositoriesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -34356,7 +34356,7 @@ func awsAwsjson11_deserializeDocumentBatchGetRepositoriesOutput(v **BatchGetRepo
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateApprovalRuleTemplateOutput(v **CreateApprovalRuleTemplateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateApprovalRuleTemplateOutput(v **CreateApprovalRuleTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -34463,7 +34463,7 @@ func awsAwsjson11_deserializeDocumentCreateBranchOutput(v **CreateBranchOutput, 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateCommitOutput(v **CreateCommitOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateCommitOutput(v **CreateCommitOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -34555,7 +34555,7 @@ func awsAwsjson11_deserializeDocumentCreateCommitOutput(v **CreateCommitOutput, 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreatePullRequestApprovalRuleOutput(v **CreatePullRequestApprovalRuleOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreatePullRequestApprovalRuleOutput(v **CreatePullRequestApprovalRuleOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -34611,7 +34611,7 @@ func awsAwsjson11_deserializeDocumentCreatePullRequestApprovalRuleOutput(v **Cre
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreatePullRequestOutput(v **CreatePullRequestOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreatePullRequestOutput(v **CreatePullRequestOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -34667,7 +34667,7 @@ func awsAwsjson11_deserializeDocumentCreatePullRequestOutput(v **CreatePullReque
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateRepositoryOutput(v **CreateRepositoryOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateRepositoryOutput(v **CreateRepositoryOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -34723,7 +34723,7 @@ func awsAwsjson11_deserializeDocumentCreateRepositoryOutput(v **CreateRepository
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateUnreferencedMergeCommitOutput(v **CreateUnreferencedMergeCommitOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateUnreferencedMergeCommitOutput(v **CreateUnreferencedMergeCommitOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -34800,7 +34800,7 @@ func awsAwsjson11_deserializeDocumentCreateUnreferencedMergeCommitOutput(v **Cre
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteApprovalRuleTemplateOutput(v **DeleteApprovalRuleTemplateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteApprovalRuleTemplateOutput(v **DeleteApprovalRuleTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -34864,7 +34864,7 @@ func awsAwsjson11_deserializeDocumentDeleteApprovalRuleTemplateOutput(v **Delete
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteBranchOutput(v **DeleteBranchOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteBranchOutput(v **DeleteBranchOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -34920,7 +34920,7 @@ func awsAwsjson11_deserializeDocumentDeleteBranchOutput(v **DeleteBranchOutput, 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteCommentContentOutput(v **DeleteCommentContentOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteCommentContentOutput(v **DeleteCommentContentOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -34976,7 +34976,7 @@ func awsAwsjson11_deserializeDocumentDeleteCommentContentOutput(v **DeleteCommen
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteFileOutput(v **DeleteFileOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteFileOutput(v **DeleteFileOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -35079,7 +35079,7 @@ func awsAwsjson11_deserializeDocumentDeleteFileOutput(v **DeleteFileOutput, deco
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeletePullRequestApprovalRuleOutput(v **DeletePullRequestApprovalRuleOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeletePullRequestApprovalRuleOutput(v **DeletePullRequestApprovalRuleOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -35143,7 +35143,7 @@ func awsAwsjson11_deserializeDocumentDeletePullRequestApprovalRuleOutput(v **Del
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteRepositoryOutput(v **DeleteRepositoryOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteRepositoryOutput(v **DeleteRepositoryOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -35207,7 +35207,7 @@ func awsAwsjson11_deserializeDocumentDeleteRepositoryOutput(v **DeleteRepository
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeMergeConflictsOutput(v **DescribeMergeConflictsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeMergeConflictsOutput(v **DescribeMergeConflictsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -35320,7 +35320,7 @@ func awsAwsjson11_deserializeDocumentDescribeMergeConflictsOutput(v **DescribeMe
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribePullRequestEventsOutput(v **DescribePullRequestEventsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribePullRequestEventsOutput(v **DescribePullRequestEventsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -35440,7 +35440,7 @@ func awsAwsjson11_deserializeDocumentDisassociateApprovalRuleTemplateFromReposit
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentEvaluatePullRequestApprovalRulesOutput(v **EvaluatePullRequestApprovalRulesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentEvaluatePullRequestApprovalRulesOutput(v **EvaluatePullRequestApprovalRulesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -35496,7 +35496,7 @@ func awsAwsjson11_deserializeDocumentEvaluatePullRequestApprovalRulesOutput(v **
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetApprovalRuleTemplateOutput(v **GetApprovalRuleTemplateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetApprovalRuleTemplateOutput(v **GetApprovalRuleTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -35552,7 +35552,7 @@ func awsAwsjson11_deserializeDocumentGetApprovalRuleTemplateOutput(v **GetApprov
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetBlobOutput(v **GetBlobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetBlobOutput(v **GetBlobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -35609,7 +35609,7 @@ func awsAwsjson11_deserializeDocumentGetBlobOutput(v **GetBlobOutput, decoder *j
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetBranchOutput(v **GetBranchOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetBranchOutput(v **GetBranchOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -35665,7 +35665,7 @@ func awsAwsjson11_deserializeDocumentGetBranchOutput(v **GetBranchOutput, decode
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetCommentOutput(v **GetCommentOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetCommentOutput(v **GetCommentOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -35721,7 +35721,7 @@ func awsAwsjson11_deserializeDocumentGetCommentOutput(v **GetCommentOutput, deco
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetCommentReactionsOutput(v **GetCommentReactionsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetCommentReactionsOutput(v **GetCommentReactionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -35790,7 +35790,7 @@ func awsAwsjson11_deserializeDocumentGetCommentReactionsOutput(v **GetCommentRea
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetCommentsForComparedCommitOutput(v **GetCommentsForComparedCommitOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetCommentsForComparedCommitOutput(v **GetCommentsForComparedCommitOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -35859,7 +35859,7 @@ func awsAwsjson11_deserializeDocumentGetCommentsForComparedCommitOutput(v **GetC
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetCommentsForPullRequestOutput(v **GetCommentsForPullRequestOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetCommentsForPullRequestOutput(v **GetCommentsForPullRequestOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -35928,7 +35928,7 @@ func awsAwsjson11_deserializeDocumentGetCommentsForPullRequestOutput(v **GetComm
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetCommitOutput(v **GetCommitOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetCommitOutput(v **GetCommitOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -35984,7 +35984,7 @@ func awsAwsjson11_deserializeDocumentGetCommitOutput(v **GetCommitOutput, decode
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetDifferencesOutput(v **GetDifferencesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetDifferencesOutput(v **GetDifferencesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -36053,7 +36053,7 @@ func awsAwsjson11_deserializeDocumentGetDifferencesOutput(v **GetDifferencesOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetFileOutput(v **GetFileOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetFileOutput(v **GetFileOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -36179,7 +36179,7 @@ func awsAwsjson11_deserializeDocumentGetFileOutput(v **GetFileOutput, decoder *j
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetFolderOutput(v **GetFolderOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetFolderOutput(v **GetFolderOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -36289,7 +36289,7 @@ func awsAwsjson11_deserializeDocumentGetFolderOutput(v **GetFolderOutput, decode
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetMergeCommitOutput(v **GetMergeCommitOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetMergeCommitOutput(v **GetMergeCommitOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -36392,7 +36392,7 @@ func awsAwsjson11_deserializeDocumentGetMergeCommitOutput(v **GetMergeCommitOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetMergeConflictsOutput(v **GetMergeConflictsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetMergeConflictsOutput(v **GetMergeConflictsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -36513,7 +36513,7 @@ func awsAwsjson11_deserializeDocumentGetMergeConflictsOutput(v **GetMergeConflic
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetMergeOptionsOutput(v **GetMergeOptionsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetMergeOptionsOutput(v **GetMergeOptionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -36608,7 +36608,7 @@ func awsAwsjson11_deserializeDocumentGetMergeOptionsOutput(v **GetMergeOptionsOu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetPullRequestApprovalStatesOutput(v **GetPullRequestApprovalStatesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetPullRequestApprovalStatesOutput(v **GetPullRequestApprovalStatesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -36664,7 +36664,7 @@ func awsAwsjson11_deserializeDocumentGetPullRequestApprovalStatesOutput(v **GetP
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetPullRequestOutput(v **GetPullRequestOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetPullRequestOutput(v **GetPullRequestOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -36720,7 +36720,7 @@ func awsAwsjson11_deserializeDocumentGetPullRequestOutput(v **GetPullRequestOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetPullRequestOverrideStateOutput(v **GetPullRequestOverrideStateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetPullRequestOverrideStateOutput(v **GetPullRequestOverrideStateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -36797,7 +36797,7 @@ func awsAwsjson11_deserializeDocumentGetPullRequestOverrideStateOutput(v **GetPu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetRepositoryOutput(v **GetRepositoryOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetRepositoryOutput(v **GetRepositoryOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -36853,7 +36853,7 @@ func awsAwsjson11_deserializeDocumentGetRepositoryOutput(v **GetRepositoryOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetRepositoryTriggersOutput(v **GetRepositoryTriggersOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetRepositoryTriggersOutput(v **GetRepositoryTriggersOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -36922,7 +36922,7 @@ func awsAwsjson11_deserializeDocumentGetRepositoryTriggersOutput(v **GetReposito
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListApprovalRuleTemplatesOutput(v **ListApprovalRuleTemplatesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListApprovalRuleTemplatesOutput(v **ListApprovalRuleTemplatesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -36991,7 +36991,7 @@ func awsAwsjson11_deserializeDocumentListApprovalRuleTemplatesOutput(v **ListApp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListAssociatedApprovalRuleTemplatesForRepositoryOutput(v **ListAssociatedApprovalRuleTemplatesForRepositoryOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListAssociatedApprovalRuleTemplatesForRepositoryOutput(v **ListAssociatedApprovalRuleTemplatesForRepositoryOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -37060,7 +37060,7 @@ func awsAwsjson11_deserializeDocumentListAssociatedApprovalRuleTemplatesForRepos
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListBranchesOutput(v **ListBranchesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListBranchesOutput(v **ListBranchesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -37129,7 +37129,7 @@ func awsAwsjson11_deserializeDocumentListBranchesOutput(v **ListBranchesOutput, 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListPullRequestsOutput(v **ListPullRequestsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListPullRequestsOutput(v **ListPullRequestsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -37198,7 +37198,7 @@ func awsAwsjson11_deserializeDocumentListPullRequestsOutput(v **ListPullRequests
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListRepositoriesForApprovalRuleTemplateOutput(v **ListRepositoriesForApprovalRuleTemplateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListRepositoriesForApprovalRuleTemplateOutput(v **ListRepositoriesForApprovalRuleTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -37267,7 +37267,7 @@ func awsAwsjson11_deserializeDocumentListRepositoriesForApprovalRuleTemplateOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListRepositoriesOutput(v **ListRepositoriesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListRepositoriesOutput(v **ListRepositoriesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -37336,7 +37336,7 @@ func awsAwsjson11_deserializeDocumentListRepositoriesOutput(v **ListRepositories
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -37405,7 +37405,7 @@ func awsAwsjson11_deserializeDocumentListTagsForResourceOutput(v **ListTagsForRe
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentMergeBranchesByFastForwardOutput(v **MergeBranchesByFastForwardOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentMergeBranchesByFastForwardOutput(v **MergeBranchesByFastForwardOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -37482,7 +37482,7 @@ func awsAwsjson11_deserializeDocumentMergeBranchesByFastForwardOutput(v **MergeB
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentMergeBranchesBySquashOutput(v **MergeBranchesBySquashOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentMergeBranchesBySquashOutput(v **MergeBranchesBySquashOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -37559,7 +37559,7 @@ func awsAwsjson11_deserializeDocumentMergeBranchesBySquashOutput(v **MergeBranch
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentMergeBranchesByThreeWayOutput(v **MergeBranchesByThreeWayOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentMergeBranchesByThreeWayOutput(v **MergeBranchesByThreeWayOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -37636,7 +37636,7 @@ func awsAwsjson11_deserializeDocumentMergeBranchesByThreeWayOutput(v **MergeBran
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentMergePullRequestByFastForwardOutput(v **MergePullRequestByFastForwardOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentMergePullRequestByFastForwardOutput(v **MergePullRequestByFastForwardOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -37692,7 +37692,7 @@ func awsAwsjson11_deserializeDocumentMergePullRequestByFastForwardOutput(v **Mer
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentMergePullRequestBySquashOutput(v **MergePullRequestBySquashOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentMergePullRequestBySquashOutput(v **MergePullRequestBySquashOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -37748,7 +37748,7 @@ func awsAwsjson11_deserializeDocumentMergePullRequestBySquashOutput(v **MergePul
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentMergePullRequestByThreeWayOutput(v **MergePullRequestByThreeWayOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentMergePullRequestByThreeWayOutput(v **MergePullRequestByThreeWayOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -37855,7 +37855,7 @@ func awsAwsjson11_deserializeDocumentOverridePullRequestApprovalRulesOutput(v **
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentPostCommentForComparedCommitOutput(v **PostCommentForComparedCommitOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentPostCommentForComparedCommitOutput(v **PostCommentForComparedCommitOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -37981,7 +37981,7 @@ func awsAwsjson11_deserializeDocumentPostCommentForComparedCommitOutput(v **Post
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentPostCommentForPullRequestOutput(v **PostCommentForPullRequestOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentPostCommentForPullRequestOutput(v **PostCommentForPullRequestOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -38120,7 +38120,7 @@ func awsAwsjson11_deserializeDocumentPostCommentForPullRequestOutput(v **PostCom
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentPostCommentReplyOutput(v **PostCommentReplyOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentPostCommentReplyOutput(v **PostCommentReplyOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -38227,7 +38227,7 @@ func awsAwsjson11_deserializeDocumentPutCommentReactionOutput(v **PutCommentReac
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentPutFileOutput(v **PutFileOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentPutFileOutput(v **PutFileOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -38317,7 +38317,7 @@ func awsAwsjson11_deserializeDocumentPutFileOutput(v **PutFileOutput, decoder *j
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentPutRepositoryTriggersOutput(v **PutRepositoryTriggersOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentPutRepositoryTriggersOutput(v **PutRepositoryTriggersOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -38432,7 +38432,7 @@ func awsAwsjson11_deserializeDocumentTagResourceOutput(v **TagResourceOutput, de
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentTestRepositoryTriggersOutput(v **TestRepositoryTriggersOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentTestRepositoryTriggersOutput(v **TestRepositoryTriggersOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -38544,7 +38544,7 @@ func awsAwsjson11_deserializeDocumentUntagResourceOutput(v **UntagResourceOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateApprovalRuleTemplateContentOutput(v **UpdateApprovalRuleTemplateContentOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateApprovalRuleTemplateContentOutput(v **UpdateApprovalRuleTemplateContentOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -38600,7 +38600,7 @@ func awsAwsjson11_deserializeDocumentUpdateApprovalRuleTemplateContentOutput(v *
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateApprovalRuleTemplateDescriptionOutput(v **UpdateApprovalRuleTemplateDescriptionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateApprovalRuleTemplateDescriptionOutput(v **UpdateApprovalRuleTemplateDescriptionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -38656,7 +38656,7 @@ func awsAwsjson11_deserializeDocumentUpdateApprovalRuleTemplateDescriptionOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateApprovalRuleTemplateNameOutput(v **UpdateApprovalRuleTemplateNameOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateApprovalRuleTemplateNameOutput(v **UpdateApprovalRuleTemplateNameOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -38712,7 +38712,7 @@ func awsAwsjson11_deserializeDocumentUpdateApprovalRuleTemplateNameOutput(v **Up
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateCommentOutput(v **UpdateCommentOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateCommentOutput(v **UpdateCommentOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -38819,7 +38819,7 @@ func awsAwsjson11_deserializeDocumentUpdateDefaultBranchOutput(v **UpdateDefault
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdatePullRequestApprovalRuleContentOutput(v **UpdatePullRequestApprovalRuleContentOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdatePullRequestApprovalRuleContentOutput(v **UpdatePullRequestApprovalRuleContentOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -38926,7 +38926,7 @@ func awsAwsjson11_deserializeDocumentUpdatePullRequestApprovalStateOutput(v **Up
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdatePullRequestDescriptionOutput(v **UpdatePullRequestDescriptionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdatePullRequestDescriptionOutput(v **UpdatePullRequestDescriptionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -38982,7 +38982,7 @@ func awsAwsjson11_deserializeDocumentUpdatePullRequestDescriptionOutput(v **Upda
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdatePullRequestStatusOutput(v **UpdatePullRequestStatusOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdatePullRequestStatusOutput(v **UpdatePullRequestStatusOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -39038,7 +39038,7 @@ func awsAwsjson11_deserializeDocumentUpdatePullRequestStatusOutput(v **UpdatePul
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdatePullRequestTitleOutput(v **UpdatePullRequestTitleOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdatePullRequestTitleOutput(v **UpdatePullRequestTitleOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

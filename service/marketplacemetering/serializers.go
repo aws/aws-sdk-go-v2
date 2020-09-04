@@ -45,7 +45,7 @@ func (m *awsAwsjson11_serializeOpBatchMeterUsage) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSMPMeteringService.BatchMeterUsage")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchMeterUsageInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchMeterUsageInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -91,7 +91,7 @@ func (m *awsAwsjson11_serializeOpMeterUsage) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSMPMeteringService.MeterUsage")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentMeterUsageInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentMeterUsageInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -137,7 +137,7 @@ func (m *awsAwsjson11_serializeOpRegisterUsage) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSMPMeteringService.RegisterUsage")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRegisterUsageInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRegisterUsageInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -183,7 +183,7 @@ func (m *awsAwsjson11_serializeOpResolveCustomer) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSMPMeteringService.ResolveCustomer")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentResolveCustomerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentResolveCustomerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -242,7 +242,7 @@ func awsAwsjson11_serializeDocumentUsageRecordList(v []*types.UsageRecord, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchMeterUsageInput(v *BatchMeterUsageInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchMeterUsageInput(v *BatchMeterUsageInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -261,7 +261,7 @@ func awsAwsjson11_serializeDocumentBatchMeterUsageInput(v *BatchMeterUsageInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentMeterUsageInput(v *MeterUsageInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentMeterUsageInput(v *MeterUsageInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -293,7 +293,7 @@ func awsAwsjson11_serializeDocumentMeterUsageInput(v *MeterUsageInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRegisterUsageInput(v *RegisterUsageInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRegisterUsageInput(v *RegisterUsageInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -315,7 +315,7 @@ func awsAwsjson11_serializeDocumentRegisterUsageInput(v *RegisterUsageInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentResolveCustomerInput(v *ResolveCustomerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentResolveCustomerInput(v *ResolveCustomerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

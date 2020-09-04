@@ -43,7 +43,7 @@ func (m *awsAwsjson11_serializeOpGetEntitlements) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSMPEntitlementService.GetEntitlements")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetEntitlementsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetEntitlementsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func awsAwsjson11_serializeDocumentGetEntitlementFilters(v map[string][]*string,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetEntitlementsInput(v *GetEntitlementsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetEntitlementsInput(v *GetEntitlementsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

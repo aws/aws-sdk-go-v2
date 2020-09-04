@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpCreateEnvironmentEC2) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCloud9WorkspaceManagementService.CreateEnvironmentEC2")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateEnvironmentEC2Input(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateEnvironmentEC2Input(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpCreateEnvironmentMembership) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCloud9WorkspaceManagementService.CreateEnvironmentMembership")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateEnvironmentMembershipInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateEnvironmentMembershipInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpDeleteEnvironment) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCloud9WorkspaceManagementService.DeleteEnvironment")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteEnvironmentInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteEnvironmentInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpDeleteEnvironmentMembership) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCloud9WorkspaceManagementService.DeleteEnvironmentMembership")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteEnvironmentMembershipInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteEnvironmentMembershipInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpDescribeEnvironmentMemberships) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCloud9WorkspaceManagementService.DescribeEnvironmentMemberships")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeEnvironmentMembershipsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeEnvironmentMembershipsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpDescribeEnvironments) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCloud9WorkspaceManagementService.DescribeEnvironments")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeEnvironmentsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeEnvironmentsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson11_serializeOpDescribeEnvironmentStatus) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCloud9WorkspaceManagementService.DescribeEnvironmentStatus")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeEnvironmentStatusInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeEnvironmentStatusInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -366,7 +366,7 @@ func (m *awsAwsjson11_serializeOpListEnvironments) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCloud9WorkspaceManagementService.ListEnvironments")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListEnvironmentsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListEnvironmentsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -412,7 +412,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCloud9WorkspaceManagementService.ListTagsForResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -458,7 +458,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCloud9WorkspaceManagementService.TagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -504,7 +504,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCloud9WorkspaceManagementService.UntagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -550,7 +550,7 @@ func (m *awsAwsjson11_serializeOpUpdateEnvironment) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCloud9WorkspaceManagementService.UpdateEnvironment")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateEnvironmentInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateEnvironmentInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -596,7 +596,7 @@ func (m *awsAwsjson11_serializeOpUpdateEnvironmentMembership) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCloud9WorkspaceManagementService.UpdateEnvironmentMembership")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateEnvironmentMembershipInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateEnvironmentMembershipInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -686,7 +686,7 @@ func awsAwsjson11_serializeDocumentTagList(v []*types.Tag, value smithyjson.Valu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateEnvironmentEC2Input(v *CreateEnvironmentEC2Input, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateEnvironmentEC2Input(v *CreateEnvironmentEC2Input, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -735,7 +735,7 @@ func awsAwsjson11_serializeDocumentCreateEnvironmentEC2Input(v *CreateEnvironmen
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateEnvironmentMembershipInput(v *CreateEnvironmentMembershipInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateEnvironmentMembershipInput(v *CreateEnvironmentMembershipInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -757,7 +757,7 @@ func awsAwsjson11_serializeDocumentCreateEnvironmentMembershipInput(v *CreateEnv
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteEnvironmentInput(v *DeleteEnvironmentInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteEnvironmentInput(v *DeleteEnvironmentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -769,7 +769,7 @@ func awsAwsjson11_serializeDocumentDeleteEnvironmentInput(v *DeleteEnvironmentIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteEnvironmentMembershipInput(v *DeleteEnvironmentMembershipInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteEnvironmentMembershipInput(v *DeleteEnvironmentMembershipInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -786,7 +786,7 @@ func awsAwsjson11_serializeDocumentDeleteEnvironmentMembershipInput(v *DeleteEnv
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeEnvironmentMembershipsInput(v *DescribeEnvironmentMembershipsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeEnvironmentMembershipsInput(v *DescribeEnvironmentMembershipsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -820,7 +820,7 @@ func awsAwsjson11_serializeDocumentDescribeEnvironmentMembershipsInput(v *Descri
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeEnvironmentsInput(v *DescribeEnvironmentsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeEnvironmentsInput(v *DescribeEnvironmentsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -834,7 +834,7 @@ func awsAwsjson11_serializeDocumentDescribeEnvironmentsInput(v *DescribeEnvironm
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeEnvironmentStatusInput(v *DescribeEnvironmentStatusInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeEnvironmentStatusInput(v *DescribeEnvironmentStatusInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -846,7 +846,7 @@ func awsAwsjson11_serializeDocumentDescribeEnvironmentStatusInput(v *DescribeEnv
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListEnvironmentsInput(v *ListEnvironmentsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListEnvironmentsInput(v *ListEnvironmentsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -863,7 +863,7 @@ func awsAwsjson11_serializeDocumentListEnvironmentsInput(v *ListEnvironmentsInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -875,7 +875,7 @@ func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResour
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -894,7 +894,7 @@ func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -913,7 +913,7 @@ func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateEnvironmentInput(v *UpdateEnvironmentInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateEnvironmentInput(v *UpdateEnvironmentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -935,7 +935,7 @@ func awsAwsjson11_serializeDocumentUpdateEnvironmentInput(v *UpdateEnvironmentIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateEnvironmentMembershipInput(v *UpdateEnvironmentMembershipInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateEnvironmentMembershipInput(v *UpdateEnvironmentMembershipInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

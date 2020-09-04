@@ -52,7 +52,7 @@ func (m *awsRestjson1_serializeOpBatchPutMessage) HandleSerialize(ctx context.Co
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentBatchPutMessageInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentBatchPutMessageInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -67,7 +67,7 @@ func (m *awsRestjson1_serializeOpBatchPutMessage) HandleSerialize(ctx context.Co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsBatchPutMessageInput(v *BatchPutMessageInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsBatchPutMessageInput(v *BatchPutMessageInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -75,7 +75,7 @@ func awsRestjson1_serializeHttpBindingsBatchPutMessageInput(v *BatchPutMessageIn
 	return nil
 }
 
-func awsRestjson1_serializeDocumentBatchPutMessageInput(v *BatchPutMessageInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentBatchPutMessageInput(v *BatchPutMessageInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -127,7 +127,7 @@ func (m *awsRestjson1_serializeOpBatchUpdateDetector) HandleSerialize(ctx contex
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentBatchUpdateDetectorInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentBatchUpdateDetectorInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -142,7 +142,7 @@ func (m *awsRestjson1_serializeOpBatchUpdateDetector) HandleSerialize(ctx contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsBatchUpdateDetectorInput(v *BatchUpdateDetectorInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsBatchUpdateDetectorInput(v *BatchUpdateDetectorInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -150,7 +150,7 @@ func awsRestjson1_serializeHttpBindingsBatchUpdateDetectorInput(v *BatchUpdateDe
 	return nil
 }
 
-func awsRestjson1_serializeDocumentBatchUpdateDetectorInput(v *BatchUpdateDetectorInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentBatchUpdateDetectorInput(v *BatchUpdateDetectorInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -199,7 +199,7 @@ func (m *awsRestjson1_serializeOpDescribeDetector) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDescribeDetectorInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeDetectorInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -210,7 +210,7 @@ func (m *awsRestjson1_serializeOpDescribeDetector) HandleSerialize(ctx context.C
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDescribeDetectorInput(v *DescribeDetectorInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDescribeDetectorInput(v *DescribeDetectorInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -263,7 +263,7 @@ func (m *awsRestjson1_serializeOpListDetectors) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListDetectorsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListDetectorsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsRestjson1_serializeOpListDetectors) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListDetectorsInput(v *ListDetectorsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListDetectorsInput(v *ListDetectorsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}

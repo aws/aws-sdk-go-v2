@@ -63,7 +63,7 @@ func (m *awsAwsquery_deserializeOpCloneReceiptRuleSet) HandleDeserialize(ctx con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCloneReceiptRuleSetOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCloneReceiptRuleSetOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -155,7 +155,7 @@ func (m *awsAwsquery_deserializeOpCreateConfigurationSet) HandleDeserialize(ctx 
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateConfigurationSetOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateConfigurationSetOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -247,7 +247,7 @@ func (m *awsAwsquery_deserializeOpCreateConfigurationSetEventDestination) Handle
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateConfigurationSetEventDestinationOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateConfigurationSetEventDestinationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -348,7 +348,7 @@ func (m *awsAwsquery_deserializeOpCreateConfigurationSetTrackingOptions) HandleD
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateConfigurationSetTrackingOptionsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateConfigurationSetTrackingOptionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -535,7 +535,7 @@ func (m *awsAwsquery_deserializeOpCreateReceiptFilter) HandleDeserialize(ctx con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateReceiptFilterOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateReceiptFilterOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -624,7 +624,7 @@ func (m *awsAwsquery_deserializeOpCreateReceiptRule) HandleDeserialize(ctx conte
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateReceiptRuleOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateReceiptRuleOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -728,7 +728,7 @@ func (m *awsAwsquery_deserializeOpCreateReceiptRuleSet) HandleDeserialize(ctx co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateReceiptRuleSetOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateReceiptRuleSetOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -817,7 +817,7 @@ func (m *awsAwsquery_deserializeOpCreateTemplate) HandleDeserialize(ctx context.
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateTemplateOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateTemplateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -909,7 +909,7 @@ func (m *awsAwsquery_deserializeOpDeleteConfigurationSet) HandleDeserialize(ctx 
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteConfigurationSetOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDeleteConfigurationSetOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -995,7 +995,7 @@ func (m *awsAwsquery_deserializeOpDeleteConfigurationSetEventDestination) Handle
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteConfigurationSetEventDestinationOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDeleteConfigurationSetEventDestinationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1084,7 +1084,7 @@ func (m *awsAwsquery_deserializeOpDeleteConfigurationSetTrackingOptions) HandleD
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteConfigurationSetTrackingOptionsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDeleteConfigurationSetTrackingOptionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1256,7 +1256,7 @@ func (m *awsAwsquery_deserializeOpDeleteIdentity) HandleDeserialize(ctx context.
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteIdentityOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDeleteIdentityOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1339,7 +1339,7 @@ func (m *awsAwsquery_deserializeOpDeleteIdentityPolicy) HandleDeserialize(ctx co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteIdentityPolicyOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDeleteIdentityPolicyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1422,7 +1422,7 @@ func (m *awsAwsquery_deserializeOpDeleteReceiptFilter) HandleDeserialize(ctx con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteReceiptFilterOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDeleteReceiptFilterOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1505,7 +1505,7 @@ func (m *awsAwsquery_deserializeOpDeleteReceiptRule) HandleDeserialize(ctx conte
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteReceiptRuleOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDeleteReceiptRuleOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1591,7 +1591,7 @@ func (m *awsAwsquery_deserializeOpDeleteReceiptRuleSet) HandleDeserialize(ctx co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteReceiptRuleSetOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDeleteReceiptRuleSetOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1677,7 +1677,7 @@ func (m *awsAwsquery_deserializeOpDeleteTemplate) HandleDeserialize(ctx context.
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteTemplateOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDeleteTemplateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1843,7 +1843,7 @@ func (m *awsAwsquery_deserializeOpDescribeActiveReceiptRuleSet) HandleDeserializ
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeActiveReceiptRuleSetOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeActiveReceiptRuleSetOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1926,7 +1926,7 @@ func (m *awsAwsquery_deserializeOpDescribeConfigurationSet) HandleDeserialize(ct
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeConfigurationSetOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeConfigurationSetOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2012,7 +2012,7 @@ func (m *awsAwsquery_deserializeOpDescribeReceiptRule) HandleDeserialize(ctx con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeReceiptRuleOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeReceiptRuleOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2101,7 +2101,7 @@ func (m *awsAwsquery_deserializeOpDescribeReceiptRuleSet) HandleDeserialize(ctx 
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeReceiptRuleSetOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeReceiptRuleSetOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2187,7 +2187,7 @@ func (m *awsAwsquery_deserializeOpGetAccountSendingEnabled) HandleDeserialize(ct
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetAccountSendingEnabledOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetAccountSendingEnabledOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2270,7 +2270,7 @@ func (m *awsAwsquery_deserializeOpGetCustomVerificationEmailTemplate) HandleDese
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetCustomVerificationEmailTemplateOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetCustomVerificationEmailTemplateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2356,7 +2356,7 @@ func (m *awsAwsquery_deserializeOpGetIdentityDkimAttributes) HandleDeserialize(c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetIdentityDkimAttributesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetIdentityDkimAttributesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2439,7 +2439,7 @@ func (m *awsAwsquery_deserializeOpGetIdentityMailFromDomainAttributes) HandleDes
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetIdentityMailFromDomainAttributesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetIdentityMailFromDomainAttributesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2522,7 +2522,7 @@ func (m *awsAwsquery_deserializeOpGetIdentityNotificationAttributes) HandleDeser
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetIdentityNotificationAttributesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetIdentityNotificationAttributesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2605,7 +2605,7 @@ func (m *awsAwsquery_deserializeOpGetIdentityPolicies) HandleDeserialize(ctx con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetIdentityPoliciesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetIdentityPoliciesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2688,7 +2688,7 @@ func (m *awsAwsquery_deserializeOpGetIdentityVerificationAttributes) HandleDeser
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetIdentityVerificationAttributesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetIdentityVerificationAttributesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2771,7 +2771,7 @@ func (m *awsAwsquery_deserializeOpGetSendQuota) HandleDeserialize(ctx context.Co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetSendQuotaOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetSendQuotaOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2854,7 +2854,7 @@ func (m *awsAwsquery_deserializeOpGetSendStatistics) HandleDeserialize(ctx conte
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetSendStatisticsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetSendStatisticsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2937,7 +2937,7 @@ func (m *awsAwsquery_deserializeOpGetTemplate) HandleDeserialize(ctx context.Con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetTemplateOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetTemplateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3023,7 +3023,7 @@ func (m *awsAwsquery_deserializeOpListConfigurationSets) HandleDeserialize(ctx c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentListConfigurationSetsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentListConfigurationSetsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3106,7 +3106,7 @@ func (m *awsAwsquery_deserializeOpListCustomVerificationEmailTemplates) HandleDe
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentListCustomVerificationEmailTemplatesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentListCustomVerificationEmailTemplatesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3189,7 +3189,7 @@ func (m *awsAwsquery_deserializeOpListIdentities) HandleDeserialize(ctx context.
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentListIdentitiesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentListIdentitiesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3272,7 +3272,7 @@ func (m *awsAwsquery_deserializeOpListIdentityPolicies) HandleDeserialize(ctx co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentListIdentityPoliciesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentListIdentityPoliciesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3355,7 +3355,7 @@ func (m *awsAwsquery_deserializeOpListReceiptFilters) HandleDeserialize(ctx cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentListReceiptFiltersOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentListReceiptFiltersOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3438,7 +3438,7 @@ func (m *awsAwsquery_deserializeOpListReceiptRuleSets) HandleDeserialize(ctx con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentListReceiptRuleSetsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentListReceiptRuleSetsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3521,7 +3521,7 @@ func (m *awsAwsquery_deserializeOpListTemplates) HandleDeserialize(ctx context.C
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentListTemplatesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentListTemplatesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3604,7 +3604,7 @@ func (m *awsAwsquery_deserializeOpListVerifiedEmailAddresses) HandleDeserialize(
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentListVerifiedEmailAddressesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentListVerifiedEmailAddressesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3687,7 +3687,7 @@ func (m *awsAwsquery_deserializeOpPutConfigurationSetDeliveryOptions) HandleDese
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentPutConfigurationSetDeliveryOptionsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentPutConfigurationSetDeliveryOptionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3776,7 +3776,7 @@ func (m *awsAwsquery_deserializeOpPutIdentityPolicy) HandleDeserialize(ctx conte
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentPutIdentityPolicyOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentPutIdentityPolicyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3862,7 +3862,7 @@ func (m *awsAwsquery_deserializeOpReorderReceiptRuleSet) HandleDeserialize(ctx c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentReorderReceiptRuleSetOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentReorderReceiptRuleSetOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3951,7 +3951,7 @@ func (m *awsAwsquery_deserializeOpSendBounce) HandleDeserialize(ctx context.Cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentSendBounceOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentSendBounceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4037,7 +4037,7 @@ func (m *awsAwsquery_deserializeOpSendBulkTemplatedEmail) HandleDeserialize(ctx 
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentSendBulkTemplatedEmailOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentSendBulkTemplatedEmailOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4138,7 +4138,7 @@ func (m *awsAwsquery_deserializeOpSendCustomVerificationEmail) HandleDeserialize
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentSendCustomVerificationEmailOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentSendCustomVerificationEmailOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4236,7 +4236,7 @@ func (m *awsAwsquery_deserializeOpSendEmail) HandleDeserialize(ctx context.Conte
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentSendEmailOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentSendEmailOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4334,7 +4334,7 @@ func (m *awsAwsquery_deserializeOpSendRawEmail) HandleDeserialize(ctx context.Co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentSendRawEmailOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentSendRawEmailOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4432,7 +4432,7 @@ func (m *awsAwsquery_deserializeOpSendTemplatedEmail) HandleDeserialize(ctx cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentSendTemplatedEmailOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentSendTemplatedEmailOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4533,7 +4533,7 @@ func (m *awsAwsquery_deserializeOpSetActiveReceiptRuleSet) HandleDeserialize(ctx
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentSetActiveReceiptRuleSetOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentSetActiveReceiptRuleSetOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4619,7 +4619,7 @@ func (m *awsAwsquery_deserializeOpSetIdentityDkimEnabled) HandleDeserialize(ctx 
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentSetIdentityDkimEnabledOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentSetIdentityDkimEnabledOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4702,7 +4702,7 @@ func (m *awsAwsquery_deserializeOpSetIdentityFeedbackForwardingEnabled) HandleDe
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentSetIdentityFeedbackForwardingEnabledOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentSetIdentityFeedbackForwardingEnabledOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4785,7 +4785,7 @@ func (m *awsAwsquery_deserializeOpSetIdentityHeadersInNotificationsEnabled) Hand
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentSetIdentityHeadersInNotificationsEnabledOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentSetIdentityHeadersInNotificationsEnabledOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4868,7 +4868,7 @@ func (m *awsAwsquery_deserializeOpSetIdentityMailFromDomain) HandleDeserialize(c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentSetIdentityMailFromDomainOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentSetIdentityMailFromDomainOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4951,7 +4951,7 @@ func (m *awsAwsquery_deserializeOpSetIdentityNotificationTopic) HandleDeserializ
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentSetIdentityNotificationTopicOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentSetIdentityNotificationTopicOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5034,7 +5034,7 @@ func (m *awsAwsquery_deserializeOpSetReceiptRulePosition) HandleDeserialize(ctx 
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentSetReceiptRulePositionOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentSetReceiptRulePositionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5123,7 +5123,7 @@ func (m *awsAwsquery_deserializeOpTestRenderTemplate) HandleDeserialize(ctx cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentTestRenderTemplateOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentTestRenderTemplateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5298,7 +5298,7 @@ func (m *awsAwsquery_deserializeOpUpdateConfigurationSetEventDestination) Handle
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentUpdateConfigurationSetEventDestinationOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentUpdateConfigurationSetEventDestinationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5568,7 +5568,7 @@ func (m *awsAwsquery_deserializeOpUpdateConfigurationSetTrackingOptions) HandleD
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentUpdateConfigurationSetTrackingOptionsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentUpdateConfigurationSetTrackingOptionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5752,7 +5752,7 @@ func (m *awsAwsquery_deserializeOpUpdateReceiptRule) HandleDeserialize(ctx conte
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentUpdateReceiptRuleOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentUpdateReceiptRuleOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5853,7 +5853,7 @@ func (m *awsAwsquery_deserializeOpUpdateTemplate) HandleDeserialize(ctx context.
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentUpdateTemplateOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentUpdateTemplateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5942,7 +5942,7 @@ func (m *awsAwsquery_deserializeOpVerifyDomainDkim) HandleDeserialize(ctx contex
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentVerifyDomainDkimOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentVerifyDomainDkimOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -6025,7 +6025,7 @@ func (m *awsAwsquery_deserializeOpVerifyDomainIdentity) HandleDeserialize(ctx co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentVerifyDomainIdentityOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentVerifyDomainIdentityOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -6191,7 +6191,7 @@ func (m *awsAwsquery_deserializeOpVerifyEmailIdentity) HandleDeserialize(ctx con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentVerifyEmailIdentityOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentVerifyEmailIdentityOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -12705,7 +12705,7 @@ func awsAwsquery_deserializeDocumentWorkmailAction(v **types.WorkmailAction, dec
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCloneReceiptRuleSetOutput(v **CloneReceiptRuleSetOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCloneReceiptRuleSetOutput(v **CloneReceiptRuleSetOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12735,7 +12735,7 @@ func awsAwsquery_deserializeDocumentCloneReceiptRuleSetOutput(v **CloneReceiptRu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateConfigurationSetEventDestinationOutput(v **CreateConfigurationSetEventDestinationOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateConfigurationSetEventDestinationOutput(v **CreateConfigurationSetEventDestinationOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12765,7 +12765,7 @@ func awsAwsquery_deserializeDocumentCreateConfigurationSetEventDestinationOutput
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateConfigurationSetOutput(v **CreateConfigurationSetOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateConfigurationSetOutput(v **CreateConfigurationSetOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12795,7 +12795,7 @@ func awsAwsquery_deserializeDocumentCreateConfigurationSetOutput(v **CreateConfi
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateConfigurationSetTrackingOptionsOutput(v **CreateConfigurationSetTrackingOptionsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateConfigurationSetTrackingOptionsOutput(v **CreateConfigurationSetTrackingOptionsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12855,7 +12855,7 @@ func awsAwsquery_deserializeDocumentCreateCustomVerificationEmailTemplateOutput(
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateReceiptFilterOutput(v **CreateReceiptFilterOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateReceiptFilterOutput(v **CreateReceiptFilterOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12885,7 +12885,7 @@ func awsAwsquery_deserializeDocumentCreateReceiptFilterOutput(v **CreateReceiptF
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateReceiptRuleOutput(v **CreateReceiptRuleOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateReceiptRuleOutput(v **CreateReceiptRuleOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12915,7 +12915,7 @@ func awsAwsquery_deserializeDocumentCreateReceiptRuleOutput(v **CreateReceiptRul
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateReceiptRuleSetOutput(v **CreateReceiptRuleSetOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateReceiptRuleSetOutput(v **CreateReceiptRuleSetOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12945,7 +12945,7 @@ func awsAwsquery_deserializeDocumentCreateReceiptRuleSetOutput(v **CreateReceipt
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateTemplateOutput(v **CreateTemplateOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateTemplateOutput(v **CreateTemplateOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12975,7 +12975,7 @@ func awsAwsquery_deserializeDocumentCreateTemplateOutput(v **CreateTemplateOutpu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteConfigurationSetEventDestinationOutput(v **DeleteConfigurationSetEventDestinationOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDeleteConfigurationSetEventDestinationOutput(v **DeleteConfigurationSetEventDestinationOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13005,7 +13005,7 @@ func awsAwsquery_deserializeDocumentDeleteConfigurationSetEventDestinationOutput
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteConfigurationSetOutput(v **DeleteConfigurationSetOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDeleteConfigurationSetOutput(v **DeleteConfigurationSetOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13035,7 +13035,7 @@ func awsAwsquery_deserializeDocumentDeleteConfigurationSetOutput(v **DeleteConfi
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteConfigurationSetTrackingOptionsOutput(v **DeleteConfigurationSetTrackingOptionsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDeleteConfigurationSetTrackingOptionsOutput(v **DeleteConfigurationSetTrackingOptionsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13095,7 +13095,7 @@ func awsAwsquery_deserializeDocumentDeleteCustomVerificationEmailTemplateOutput(
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteIdentityOutput(v **DeleteIdentityOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDeleteIdentityOutput(v **DeleteIdentityOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13125,7 +13125,7 @@ func awsAwsquery_deserializeDocumentDeleteIdentityOutput(v **DeleteIdentityOutpu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteIdentityPolicyOutput(v **DeleteIdentityPolicyOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDeleteIdentityPolicyOutput(v **DeleteIdentityPolicyOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13155,7 +13155,7 @@ func awsAwsquery_deserializeDocumentDeleteIdentityPolicyOutput(v **DeleteIdentit
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteReceiptFilterOutput(v **DeleteReceiptFilterOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDeleteReceiptFilterOutput(v **DeleteReceiptFilterOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13185,7 +13185,7 @@ func awsAwsquery_deserializeDocumentDeleteReceiptFilterOutput(v **DeleteReceiptF
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteReceiptRuleOutput(v **DeleteReceiptRuleOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDeleteReceiptRuleOutput(v **DeleteReceiptRuleOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13215,7 +13215,7 @@ func awsAwsquery_deserializeDocumentDeleteReceiptRuleOutput(v **DeleteReceiptRul
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteReceiptRuleSetOutput(v **DeleteReceiptRuleSetOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDeleteReceiptRuleSetOutput(v **DeleteReceiptRuleSetOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13245,7 +13245,7 @@ func awsAwsquery_deserializeDocumentDeleteReceiptRuleSetOutput(v **DeleteReceipt
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteTemplateOutput(v **DeleteTemplateOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDeleteTemplateOutput(v **DeleteTemplateOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13305,7 +13305,7 @@ func awsAwsquery_deserializeDocumentDeleteVerifiedEmailAddressOutput(v **DeleteV
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeActiveReceiptRuleSetOutput(v **DescribeActiveReceiptRuleSetOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeActiveReceiptRuleSetOutput(v **DescribeActiveReceiptRuleSetOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13347,7 +13347,7 @@ func awsAwsquery_deserializeDocumentDescribeActiveReceiptRuleSetOutput(v **Descr
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeConfigurationSetOutput(v **DescribeConfigurationSetOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeConfigurationSetOutput(v **DescribeConfigurationSetOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13407,7 +13407,7 @@ func awsAwsquery_deserializeDocumentDescribeConfigurationSetOutput(v **DescribeC
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeReceiptRuleOutput(v **DescribeReceiptRuleOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeReceiptRuleOutput(v **DescribeReceiptRuleOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13443,7 +13443,7 @@ func awsAwsquery_deserializeDocumentDescribeReceiptRuleOutput(v **DescribeReceip
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeReceiptRuleSetOutput(v **DescribeReceiptRuleSetOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeReceiptRuleSetOutput(v **DescribeReceiptRuleSetOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13485,7 +13485,7 @@ func awsAwsquery_deserializeDocumentDescribeReceiptRuleSetOutput(v **DescribeRec
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetAccountSendingEnabledOutput(v **GetAccountSendingEnabledOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetAccountSendingEnabledOutput(v **GetAccountSendingEnabledOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13531,7 +13531,7 @@ func awsAwsquery_deserializeDocumentGetAccountSendingEnabledOutput(v **GetAccoun
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetCustomVerificationEmailTemplateOutput(v **GetCustomVerificationEmailTemplateOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetCustomVerificationEmailTemplateOutput(v **GetCustomVerificationEmailTemplateOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13639,7 +13639,7 @@ func awsAwsquery_deserializeDocumentGetCustomVerificationEmailTemplateOutput(v *
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetIdentityDkimAttributesOutput(v **GetIdentityDkimAttributesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetIdentityDkimAttributesOutput(v **GetIdentityDkimAttributesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13675,7 +13675,7 @@ func awsAwsquery_deserializeDocumentGetIdentityDkimAttributesOutput(v **GetIdent
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetIdentityMailFromDomainAttributesOutput(v **GetIdentityMailFromDomainAttributesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetIdentityMailFromDomainAttributesOutput(v **GetIdentityMailFromDomainAttributesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13711,7 +13711,7 @@ func awsAwsquery_deserializeDocumentGetIdentityMailFromDomainAttributesOutput(v 
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetIdentityNotificationAttributesOutput(v **GetIdentityNotificationAttributesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetIdentityNotificationAttributesOutput(v **GetIdentityNotificationAttributesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13747,7 +13747,7 @@ func awsAwsquery_deserializeDocumentGetIdentityNotificationAttributesOutput(v **
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetIdentityPoliciesOutput(v **GetIdentityPoliciesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetIdentityPoliciesOutput(v **GetIdentityPoliciesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13783,7 +13783,7 @@ func awsAwsquery_deserializeDocumentGetIdentityPoliciesOutput(v **GetIdentityPol
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetIdentityVerificationAttributesOutput(v **GetIdentityVerificationAttributesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetIdentityVerificationAttributesOutput(v **GetIdentityVerificationAttributesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13819,7 +13819,7 @@ func awsAwsquery_deserializeDocumentGetIdentityVerificationAttributesOutput(v **
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetSendQuotaOutput(v **GetSendQuotaOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetSendQuotaOutput(v **GetSendQuotaOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13900,7 +13900,7 @@ func awsAwsquery_deserializeDocumentGetSendQuotaOutput(v **GetSendQuotaOutput, d
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetSendStatisticsOutput(v **GetSendStatisticsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetSendStatisticsOutput(v **GetSendStatisticsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13936,7 +13936,7 @@ func awsAwsquery_deserializeDocumentGetSendStatisticsOutput(v **GetSendStatistic
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetTemplateOutput(v **GetTemplateOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetTemplateOutput(v **GetTemplateOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13972,7 +13972,7 @@ func awsAwsquery_deserializeDocumentGetTemplateOutput(v **GetTemplateOutput, dec
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentListConfigurationSetsOutput(v **ListConfigurationSetsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentListConfigurationSetsOutput(v **ListConfigurationSetsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14021,7 +14021,7 @@ func awsAwsquery_deserializeDocumentListConfigurationSetsOutput(v **ListConfigur
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentListCustomVerificationEmailTemplatesOutput(v **ListCustomVerificationEmailTemplatesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentListCustomVerificationEmailTemplatesOutput(v **ListCustomVerificationEmailTemplatesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14070,7 +14070,7 @@ func awsAwsquery_deserializeDocumentListCustomVerificationEmailTemplatesOutput(v
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentListIdentitiesOutput(v **ListIdentitiesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentListIdentitiesOutput(v **ListIdentitiesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14119,7 +14119,7 @@ func awsAwsquery_deserializeDocumentListIdentitiesOutput(v **ListIdentitiesOutpu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentListIdentityPoliciesOutput(v **ListIdentityPoliciesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentListIdentityPoliciesOutput(v **ListIdentityPoliciesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14155,7 +14155,7 @@ func awsAwsquery_deserializeDocumentListIdentityPoliciesOutput(v **ListIdentityP
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentListReceiptFiltersOutput(v **ListReceiptFiltersOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentListReceiptFiltersOutput(v **ListReceiptFiltersOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14191,7 +14191,7 @@ func awsAwsquery_deserializeDocumentListReceiptFiltersOutput(v **ListReceiptFilt
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentListReceiptRuleSetsOutput(v **ListReceiptRuleSetsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentListReceiptRuleSetsOutput(v **ListReceiptRuleSetsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14240,7 +14240,7 @@ func awsAwsquery_deserializeDocumentListReceiptRuleSetsOutput(v **ListReceiptRul
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentListTemplatesOutput(v **ListTemplatesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentListTemplatesOutput(v **ListTemplatesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14289,7 +14289,7 @@ func awsAwsquery_deserializeDocumentListTemplatesOutput(v **ListTemplatesOutput,
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentListVerifiedEmailAddressesOutput(v **ListVerifiedEmailAddressesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentListVerifiedEmailAddressesOutput(v **ListVerifiedEmailAddressesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14325,7 +14325,7 @@ func awsAwsquery_deserializeDocumentListVerifiedEmailAddressesOutput(v **ListVer
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentPutConfigurationSetDeliveryOptionsOutput(v **PutConfigurationSetDeliveryOptionsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentPutConfigurationSetDeliveryOptionsOutput(v **PutConfigurationSetDeliveryOptionsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14355,7 +14355,7 @@ func awsAwsquery_deserializeDocumentPutConfigurationSetDeliveryOptionsOutput(v *
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentPutIdentityPolicyOutput(v **PutIdentityPolicyOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentPutIdentityPolicyOutput(v **PutIdentityPolicyOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14385,7 +14385,7 @@ func awsAwsquery_deserializeDocumentPutIdentityPolicyOutput(v **PutIdentityPolic
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentReorderReceiptRuleSetOutput(v **ReorderReceiptRuleSetOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentReorderReceiptRuleSetOutput(v **ReorderReceiptRuleSetOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14415,7 +14415,7 @@ func awsAwsquery_deserializeDocumentReorderReceiptRuleSetOutput(v **ReorderRecei
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentSendBounceOutput(v **SendBounceOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentSendBounceOutput(v **SendBounceOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14458,7 +14458,7 @@ func awsAwsquery_deserializeDocumentSendBounceOutput(v **SendBounceOutput, decod
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentSendBulkTemplatedEmailOutput(v **SendBulkTemplatedEmailOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentSendBulkTemplatedEmailOutput(v **SendBulkTemplatedEmailOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14494,7 +14494,7 @@ func awsAwsquery_deserializeDocumentSendBulkTemplatedEmailOutput(v **SendBulkTem
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentSendCustomVerificationEmailOutput(v **SendCustomVerificationEmailOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentSendCustomVerificationEmailOutput(v **SendCustomVerificationEmailOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14537,7 +14537,7 @@ func awsAwsquery_deserializeDocumentSendCustomVerificationEmailOutput(v **SendCu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentSendEmailOutput(v **SendEmailOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentSendEmailOutput(v **SendEmailOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14580,7 +14580,7 @@ func awsAwsquery_deserializeDocumentSendEmailOutput(v **SendEmailOutput, decoder
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentSendRawEmailOutput(v **SendRawEmailOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentSendRawEmailOutput(v **SendRawEmailOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14623,7 +14623,7 @@ func awsAwsquery_deserializeDocumentSendRawEmailOutput(v **SendRawEmailOutput, d
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentSendTemplatedEmailOutput(v **SendTemplatedEmailOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentSendTemplatedEmailOutput(v **SendTemplatedEmailOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14666,7 +14666,7 @@ func awsAwsquery_deserializeDocumentSendTemplatedEmailOutput(v **SendTemplatedEm
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentSetActiveReceiptRuleSetOutput(v **SetActiveReceiptRuleSetOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentSetActiveReceiptRuleSetOutput(v **SetActiveReceiptRuleSetOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14696,7 +14696,7 @@ func awsAwsquery_deserializeDocumentSetActiveReceiptRuleSetOutput(v **SetActiveR
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentSetIdentityDkimEnabledOutput(v **SetIdentityDkimEnabledOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentSetIdentityDkimEnabledOutput(v **SetIdentityDkimEnabledOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14726,7 +14726,7 @@ func awsAwsquery_deserializeDocumentSetIdentityDkimEnabledOutput(v **SetIdentity
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentSetIdentityFeedbackForwardingEnabledOutput(v **SetIdentityFeedbackForwardingEnabledOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentSetIdentityFeedbackForwardingEnabledOutput(v **SetIdentityFeedbackForwardingEnabledOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14756,7 +14756,7 @@ func awsAwsquery_deserializeDocumentSetIdentityFeedbackForwardingEnabledOutput(v
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentSetIdentityHeadersInNotificationsEnabledOutput(v **SetIdentityHeadersInNotificationsEnabledOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentSetIdentityHeadersInNotificationsEnabledOutput(v **SetIdentityHeadersInNotificationsEnabledOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14786,7 +14786,7 @@ func awsAwsquery_deserializeDocumentSetIdentityHeadersInNotificationsEnabledOutp
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentSetIdentityMailFromDomainOutput(v **SetIdentityMailFromDomainOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentSetIdentityMailFromDomainOutput(v **SetIdentityMailFromDomainOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14816,7 +14816,7 @@ func awsAwsquery_deserializeDocumentSetIdentityMailFromDomainOutput(v **SetIdent
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentSetIdentityNotificationTopicOutput(v **SetIdentityNotificationTopicOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentSetIdentityNotificationTopicOutput(v **SetIdentityNotificationTopicOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14846,7 +14846,7 @@ func awsAwsquery_deserializeDocumentSetIdentityNotificationTopicOutput(v **SetId
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentSetReceiptRulePositionOutput(v **SetReceiptRulePositionOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentSetReceiptRulePositionOutput(v **SetReceiptRulePositionOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14876,7 +14876,7 @@ func awsAwsquery_deserializeDocumentSetReceiptRulePositionOutput(v **SetReceiptR
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentTestRenderTemplateOutput(v **TestRenderTemplateOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentTestRenderTemplateOutput(v **TestRenderTemplateOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14949,7 +14949,7 @@ func awsAwsquery_deserializeDocumentUpdateAccountSendingEnabledOutput(v **Update
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentUpdateConfigurationSetEventDestinationOutput(v **UpdateConfigurationSetEventDestinationOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentUpdateConfigurationSetEventDestinationOutput(v **UpdateConfigurationSetEventDestinationOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15039,7 +15039,7 @@ func awsAwsquery_deserializeDocumentUpdateConfigurationSetSendingEnabledOutput(v
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentUpdateConfigurationSetTrackingOptionsOutput(v **UpdateConfigurationSetTrackingOptionsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentUpdateConfigurationSetTrackingOptionsOutput(v **UpdateConfigurationSetTrackingOptionsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15099,7 +15099,7 @@ func awsAwsquery_deserializeDocumentUpdateCustomVerificationEmailTemplateOutput(
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentUpdateReceiptRuleOutput(v **UpdateReceiptRuleOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentUpdateReceiptRuleOutput(v **UpdateReceiptRuleOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15129,7 +15129,7 @@ func awsAwsquery_deserializeDocumentUpdateReceiptRuleOutput(v **UpdateReceiptRul
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentUpdateTemplateOutput(v **UpdateTemplateOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentUpdateTemplateOutput(v **UpdateTemplateOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15159,7 +15159,7 @@ func awsAwsquery_deserializeDocumentUpdateTemplateOutput(v **UpdateTemplateOutpu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentVerifyDomainDkimOutput(v **VerifyDomainDkimOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentVerifyDomainDkimOutput(v **VerifyDomainDkimOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15195,7 +15195,7 @@ func awsAwsquery_deserializeDocumentVerifyDomainDkimOutput(v **VerifyDomainDkimO
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentVerifyDomainIdentityOutput(v **VerifyDomainIdentityOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentVerifyDomainIdentityOutput(v **VerifyDomainIdentityOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15268,7 +15268,7 @@ func awsAwsquery_deserializeDocumentVerifyEmailAddressOutput(v **VerifyEmailAddr
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentVerifyEmailIdentityOutput(v **VerifyEmailIdentityOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentVerifyEmailIdentityOutput(v **VerifyEmailIdentityOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

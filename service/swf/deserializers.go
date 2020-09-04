@@ -53,7 +53,7 @@ func (m *awsAwsjson10_deserializeOpCountClosedWorkflowExecutions) HandleDeserial
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentCountClosedWorkflowExecutionsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentCountClosedWorkflowExecutionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -156,7 +156,7 @@ func (m *awsAwsjson10_deserializeOpCountOpenWorkflowExecutions) HandleDeserializ
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentCountOpenWorkflowExecutionsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentCountOpenWorkflowExecutionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -259,7 +259,7 @@ func (m *awsAwsjson10_deserializeOpCountPendingActivityTasks) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentCountPendingActivityTasksOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentCountPendingActivityTasksOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -362,7 +362,7 @@ func (m *awsAwsjson10_deserializeOpCountPendingDecisionTasks) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentCountPendingDecisionTasksOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentCountPendingDecisionTasksOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -783,7 +783,7 @@ func (m *awsAwsjson10_deserializeOpDescribeActivityType) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentDescribeActivityTypeOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentDescribeActivityTypeOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -886,7 +886,7 @@ func (m *awsAwsjson10_deserializeOpDescribeDomain) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentDescribeDomainOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentDescribeDomainOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -989,7 +989,7 @@ func (m *awsAwsjson10_deserializeOpDescribeWorkflowExecution) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentDescribeWorkflowExecutionOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentDescribeWorkflowExecutionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1092,7 +1092,7 @@ func (m *awsAwsjson10_deserializeOpDescribeWorkflowType) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentDescribeWorkflowTypeOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentDescribeWorkflowTypeOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1195,7 +1195,7 @@ func (m *awsAwsjson10_deserializeOpGetWorkflowExecutionHistory) HandleDeserializ
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentGetWorkflowExecutionHistoryOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentGetWorkflowExecutionHistoryOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1298,7 +1298,7 @@ func (m *awsAwsjson10_deserializeOpListActivityTypes) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentListActivityTypesOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentListActivityTypesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1401,7 +1401,7 @@ func (m *awsAwsjson10_deserializeOpListClosedWorkflowExecutions) HandleDeseriali
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentListClosedWorkflowExecutionsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentListClosedWorkflowExecutionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1504,7 +1504,7 @@ func (m *awsAwsjson10_deserializeOpListDomains) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentListDomainsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentListDomainsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1604,7 +1604,7 @@ func (m *awsAwsjson10_deserializeOpListOpenWorkflowExecutions) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentListOpenWorkflowExecutionsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentListOpenWorkflowExecutionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1707,7 +1707,7 @@ func (m *awsAwsjson10_deserializeOpListTagsForResource) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentListTagsForResourceOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentListTagsForResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1813,7 +1813,7 @@ func (m *awsAwsjson10_deserializeOpListWorkflowTypes) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentListWorkflowTypesOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentListWorkflowTypesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1916,7 +1916,7 @@ func (m *awsAwsjson10_deserializeOpPollForActivityTask) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentPollForActivityTaskOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentPollForActivityTaskOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2022,7 +2022,7 @@ func (m *awsAwsjson10_deserializeOpPollForDecisionTask) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentPollForDecisionTaskOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentPollForDecisionTaskOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2128,7 +2128,7 @@ func (m *awsAwsjson10_deserializeOpRecordActivityTaskHeartbeat) HandleDeserializ
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentRecordActivityTaskHeartbeatOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentRecordActivityTaskHeartbeatOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3176,7 +3176,7 @@ func (m *awsAwsjson10_deserializeOpStartWorkflowExecution) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentStartWorkflowExecutionOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentStartWorkflowExecutionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -12473,7 +12473,7 @@ func awsAwsjson10_deserializeDocumentWorkflowTypeInfoList(v *[]*types.WorkflowTy
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentCountClosedWorkflowExecutionsOutput(v **CountClosedWorkflowExecutionsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentCountClosedWorkflowExecutionsOutput(v **CountClosedWorkflowExecutionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12554,7 +12554,7 @@ func awsAwsjson10_deserializeDocumentCountClosedWorkflowExecutionsOutput(v **Cou
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentCountOpenWorkflowExecutionsOutput(v **CountOpenWorkflowExecutionsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentCountOpenWorkflowExecutionsOutput(v **CountOpenWorkflowExecutionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12635,7 +12635,7 @@ func awsAwsjson10_deserializeDocumentCountOpenWorkflowExecutionsOutput(v **Count
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentCountPendingActivityTasksOutput(v **CountPendingActivityTasksOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentCountPendingActivityTasksOutput(v **CountPendingActivityTasksOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12716,7 +12716,7 @@ func awsAwsjson10_deserializeDocumentCountPendingActivityTasksOutput(v **CountPe
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentCountPendingDecisionTasksOutput(v **CountPendingDecisionTasksOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentCountPendingDecisionTasksOutput(v **CountPendingDecisionTasksOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -12950,7 +12950,7 @@ func awsAwsjson10_deserializeDocumentDeprecateWorkflowTypeOutput(v **DeprecateWo
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentDescribeActivityTypeOutput(v **DescribeActivityTypeOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentDescribeActivityTypeOutput(v **DescribeActivityTypeOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13011,7 +13011,7 @@ func awsAwsjson10_deserializeDocumentDescribeActivityTypeOutput(v **DescribeActi
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentDescribeDomainOutput(v **DescribeDomainOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentDescribeDomainOutput(v **DescribeDomainOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13072,7 +13072,7 @@ func awsAwsjson10_deserializeDocumentDescribeDomainOutput(v **DescribeDomainOutp
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentDescribeWorkflowExecutionOutput(v **DescribeWorkflowExecutionOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentDescribeWorkflowExecutionOutput(v **DescribeWorkflowExecutionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13168,7 +13168,7 @@ func awsAwsjson10_deserializeDocumentDescribeWorkflowExecutionOutput(v **Describ
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentDescribeWorkflowTypeOutput(v **DescribeWorkflowTypeOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentDescribeWorkflowTypeOutput(v **DescribeWorkflowTypeOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13229,7 +13229,7 @@ func awsAwsjson10_deserializeDocumentDescribeWorkflowTypeOutput(v **DescribeWork
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentGetWorkflowExecutionHistoryOutput(v **GetWorkflowExecutionHistoryOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentGetWorkflowExecutionHistoryOutput(v **GetWorkflowExecutionHistoryOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13298,7 +13298,7 @@ func awsAwsjson10_deserializeDocumentGetWorkflowExecutionHistoryOutput(v **GetWo
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentListActivityTypesOutput(v **ListActivityTypesOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentListActivityTypesOutput(v **ListActivityTypesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13367,7 +13367,7 @@ func awsAwsjson10_deserializeDocumentListActivityTypesOutput(v **ListActivityTyp
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentListClosedWorkflowExecutionsOutput(v **ListClosedWorkflowExecutionsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentListClosedWorkflowExecutionsOutput(v **ListClosedWorkflowExecutionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13436,7 +13436,7 @@ func awsAwsjson10_deserializeDocumentListClosedWorkflowExecutionsOutput(v **List
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentListDomainsOutput(v **ListDomainsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentListDomainsOutput(v **ListDomainsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13505,7 +13505,7 @@ func awsAwsjson10_deserializeDocumentListDomainsOutput(v **ListDomainsOutput, de
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentListOpenWorkflowExecutionsOutput(v **ListOpenWorkflowExecutionsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentListOpenWorkflowExecutionsOutput(v **ListOpenWorkflowExecutionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13574,7 +13574,7 @@ func awsAwsjson10_deserializeDocumentListOpenWorkflowExecutionsOutput(v **ListOp
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13630,7 +13630,7 @@ func awsAwsjson10_deserializeDocumentListTagsForResourceOutput(v **ListTagsForRe
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentListWorkflowTypesOutput(v **ListWorkflowTypesOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentListWorkflowTypesOutput(v **ListWorkflowTypesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13699,7 +13699,7 @@ func awsAwsjson10_deserializeDocumentListWorkflowTypesOutput(v **ListWorkflowTyp
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentPollForActivityTaskOutput(v **PollForActivityTaskOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentPollForActivityTaskOutput(v **PollForActivityTaskOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13816,7 +13816,7 @@ func awsAwsjson10_deserializeDocumentPollForActivityTaskOutput(v **PollForActivi
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentPollForDecisionTaskOutput(v **PollForDecisionTaskOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentPollForDecisionTaskOutput(v **PollForDecisionTaskOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -13942,7 +13942,7 @@ func awsAwsjson10_deserializeDocumentPollForDecisionTaskOutput(v **PollForDecisi
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentRecordActivityTaskHeartbeatOutput(v **RecordActivityTaskHeartbeatOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentRecordActivityTaskHeartbeatOutput(v **RecordActivityTaskHeartbeatOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14465,7 +14465,7 @@ func awsAwsjson10_deserializeDocumentSignalWorkflowExecutionOutput(v **SignalWor
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentStartWorkflowExecutionOutput(v **StartWorkflowExecutionOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentStartWorkflowExecutionOutput(v **StartWorkflowExecutionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

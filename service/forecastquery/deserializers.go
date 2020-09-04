@@ -51,7 +51,7 @@ func (m *awsAwsjson11_deserializeOpQueryForecast) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentQueryForecastOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentQueryForecastOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -807,7 +807,7 @@ func awsAwsjson11_deserializeDocumentTimeSeries(v *[]*types.DataPoint, decoder *
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentQueryForecastOutput(v **QueryForecastOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentQueryForecastOutput(v **QueryForecastOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

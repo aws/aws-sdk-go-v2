@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpCancelDataRepositoryTask) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSimbaAPIService_v20180301.CancelDataRepositoryTask")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCancelDataRepositoryTaskInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCancelDataRepositoryTaskInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpCreateBackup) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSimbaAPIService_v20180301.CreateBackup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateBackupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateBackupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpCreateDataRepositoryTask) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSimbaAPIService_v20180301.CreateDataRepositoryTask")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateDataRepositoryTaskInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateDataRepositoryTaskInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpCreateFileSystem) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSimbaAPIService_v20180301.CreateFileSystem")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateFileSystemInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateFileSystemInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpCreateFileSystemFromBackup) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSimbaAPIService_v20180301.CreateFileSystemFromBackup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateFileSystemFromBackupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateFileSystemFromBackupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpDeleteBackup) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSimbaAPIService_v20180301.DeleteBackup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteBackupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteBackupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson11_serializeOpDeleteFileSystem) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSimbaAPIService_v20180301.DeleteFileSystem")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteFileSystemInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteFileSystemInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -366,7 +366,7 @@ func (m *awsAwsjson11_serializeOpDescribeBackups) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSimbaAPIService_v20180301.DescribeBackups")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeBackupsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeBackupsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -412,7 +412,7 @@ func (m *awsAwsjson11_serializeOpDescribeDataRepositoryTasks) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSimbaAPIService_v20180301.DescribeDataRepositoryTasks")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeDataRepositoryTasksInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeDataRepositoryTasksInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -458,7 +458,7 @@ func (m *awsAwsjson11_serializeOpDescribeFileSystems) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSimbaAPIService_v20180301.DescribeFileSystems")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeFileSystemsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeFileSystemsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -504,7 +504,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSimbaAPIService_v20180301.ListTagsForResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -550,7 +550,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSimbaAPIService_v20180301.TagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -596,7 +596,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSimbaAPIService_v20180301.UntagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -642,7 +642,7 @@ func (m *awsAwsjson11_serializeOpUpdateFileSystem) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSimbaAPIService_v20180301.UpdateFileSystem")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateFileSystemInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateFileSystemInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1213,7 +1213,7 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemWindowsConfiguration(v *types
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCancelDataRepositoryTaskInput(v *CancelDataRepositoryTaskInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCancelDataRepositoryTaskInput(v *CancelDataRepositoryTaskInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1225,7 +1225,7 @@ func awsAwsjson11_serializeDocumentCancelDataRepositoryTaskInput(v *CancelDataRe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateBackupInput(v *CreateBackupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateBackupInput(v *CreateBackupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1249,7 +1249,7 @@ func awsAwsjson11_serializeDocumentCreateBackupInput(v *CreateBackupInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateDataRepositoryTaskInput(v *CreateDataRepositoryTaskInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateDataRepositoryTaskInput(v *CreateDataRepositoryTaskInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1292,7 +1292,7 @@ func awsAwsjson11_serializeDocumentCreateDataRepositoryTaskInput(v *CreateDataRe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateFileSystemFromBackupInput(v *CreateFileSystemFromBackupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateFileSystemFromBackupInput(v *CreateFileSystemFromBackupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1349,7 +1349,7 @@ func awsAwsjson11_serializeDocumentCreateFileSystemFromBackupInput(v *CreateFile
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateFileSystemInput(v *CreateFileSystemInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateFileSystemInput(v *CreateFileSystemInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1416,7 +1416,7 @@ func awsAwsjson11_serializeDocumentCreateFileSystemInput(v *CreateFileSystemInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteBackupInput(v *DeleteBackupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteBackupInput(v *DeleteBackupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1433,7 +1433,7 @@ func awsAwsjson11_serializeDocumentDeleteBackupInput(v *DeleteBackupInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteFileSystemInput(v *DeleteFileSystemInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteFileSystemInput(v *DeleteFileSystemInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1464,7 +1464,7 @@ func awsAwsjson11_serializeDocumentDeleteFileSystemInput(v *DeleteFileSystemInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeBackupsInput(v *DescribeBackupsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeBackupsInput(v *DescribeBackupsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1495,7 +1495,7 @@ func awsAwsjson11_serializeDocumentDescribeBackupsInput(v *DescribeBackupsInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeDataRepositoryTasksInput(v *DescribeDataRepositoryTasksInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeDataRepositoryTasksInput(v *DescribeDataRepositoryTasksInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1526,7 +1526,7 @@ func awsAwsjson11_serializeDocumentDescribeDataRepositoryTasksInput(v *DescribeD
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeFileSystemsInput(v *DescribeFileSystemsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeFileSystemsInput(v *DescribeFileSystemsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1550,7 +1550,7 @@ func awsAwsjson11_serializeDocumentDescribeFileSystemsInput(v *DescribeFileSyste
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1572,7 +1572,7 @@ func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResour
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1591,7 +1591,7 @@ func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1610,7 +1610,7 @@ func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateFileSystemInput(v *UpdateFileSystemInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateFileSystemInput(v *UpdateFileSystemInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

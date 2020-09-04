@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpAssociateIpGroups) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.AssociateIpGroups")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAssociateIpGroupsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAssociateIpGroupsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpAuthorizeIpRules) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.AuthorizeIpRules")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAuthorizeIpRulesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAuthorizeIpRulesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpCopyWorkspaceImage) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.CopyWorkspaceImage")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCopyWorkspaceImageInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCopyWorkspaceImageInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpCreateIpGroup) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.CreateIpGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateIpGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateIpGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpCreateTags) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.CreateTags")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateTagsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateTagsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpCreateWorkspaces) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.CreateWorkspaces")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateWorkspacesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateWorkspacesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson11_serializeOpDeleteIpGroup) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.DeleteIpGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteIpGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteIpGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -366,7 +366,7 @@ func (m *awsAwsjson11_serializeOpDeleteTags) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.DeleteTags")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteTagsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteTagsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -412,7 +412,7 @@ func (m *awsAwsjson11_serializeOpDeleteWorkspaceImage) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.DeleteWorkspaceImage")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteWorkspaceImageInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteWorkspaceImageInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -458,7 +458,7 @@ func (m *awsAwsjson11_serializeOpDeregisterWorkspaceDirectory) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.DeregisterWorkspaceDirectory")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeregisterWorkspaceDirectoryInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeregisterWorkspaceDirectoryInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -543,7 +543,7 @@ func (m *awsAwsjson11_serializeOpDescribeAccountModifications) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.DescribeAccountModifications")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeAccountModificationsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeAccountModificationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -589,7 +589,7 @@ func (m *awsAwsjson11_serializeOpDescribeClientProperties) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.DescribeClientProperties")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeClientPropertiesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeClientPropertiesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -635,7 +635,7 @@ func (m *awsAwsjson11_serializeOpDescribeIpGroups) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.DescribeIpGroups")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeIpGroupsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeIpGroupsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -681,7 +681,7 @@ func (m *awsAwsjson11_serializeOpDescribeTags) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.DescribeTags")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeTagsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeTagsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -727,7 +727,7 @@ func (m *awsAwsjson11_serializeOpDescribeWorkspaceBundles) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.DescribeWorkspaceBundles")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeWorkspaceBundlesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeWorkspaceBundlesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -773,7 +773,7 @@ func (m *awsAwsjson11_serializeOpDescribeWorkspaceDirectories) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.DescribeWorkspaceDirectories")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeWorkspaceDirectoriesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeWorkspaceDirectoriesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -819,7 +819,7 @@ func (m *awsAwsjson11_serializeOpDescribeWorkspaceImagePermissions) HandleSerial
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.DescribeWorkspaceImagePermissions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeWorkspaceImagePermissionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeWorkspaceImagePermissionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -865,7 +865,7 @@ func (m *awsAwsjson11_serializeOpDescribeWorkspaceImages) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.DescribeWorkspaceImages")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeWorkspaceImagesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeWorkspaceImagesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -911,7 +911,7 @@ func (m *awsAwsjson11_serializeOpDescribeWorkspaces) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.DescribeWorkspaces")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeWorkspacesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeWorkspacesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -957,7 +957,7 @@ func (m *awsAwsjson11_serializeOpDescribeWorkspacesConnectionStatus) HandleSeria
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.DescribeWorkspacesConnectionStatus")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeWorkspacesConnectionStatusInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeWorkspacesConnectionStatusInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1003,7 +1003,7 @@ func (m *awsAwsjson11_serializeOpDescribeWorkspaceSnapshots) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.DescribeWorkspaceSnapshots")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeWorkspaceSnapshotsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeWorkspaceSnapshotsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1049,7 +1049,7 @@ func (m *awsAwsjson11_serializeOpDisassociateIpGroups) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.DisassociateIpGroups")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDisassociateIpGroupsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDisassociateIpGroupsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1095,7 +1095,7 @@ func (m *awsAwsjson11_serializeOpImportWorkspaceImage) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.ImportWorkspaceImage")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentImportWorkspaceImageInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentImportWorkspaceImageInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1141,7 +1141,7 @@ func (m *awsAwsjson11_serializeOpListAvailableManagementCidrRanges) HandleSerial
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.ListAvailableManagementCidrRanges")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListAvailableManagementCidrRangesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListAvailableManagementCidrRangesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1187,7 +1187,7 @@ func (m *awsAwsjson11_serializeOpMigrateWorkspace) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.MigrateWorkspace")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentMigrateWorkspaceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentMigrateWorkspaceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1233,7 +1233,7 @@ func (m *awsAwsjson11_serializeOpModifyAccount) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.ModifyAccount")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentModifyAccountInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentModifyAccountInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1279,7 +1279,7 @@ func (m *awsAwsjson11_serializeOpModifyClientProperties) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.ModifyClientProperties")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentModifyClientPropertiesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentModifyClientPropertiesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1325,7 +1325,7 @@ func (m *awsAwsjson11_serializeOpModifySelfservicePermissions) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.ModifySelfservicePermissions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentModifySelfservicePermissionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentModifySelfservicePermissionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1371,7 +1371,7 @@ func (m *awsAwsjson11_serializeOpModifyWorkspaceAccessProperties) HandleSerializ
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.ModifyWorkspaceAccessProperties")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentModifyWorkspaceAccessPropertiesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentModifyWorkspaceAccessPropertiesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1417,7 +1417,7 @@ func (m *awsAwsjson11_serializeOpModifyWorkspaceCreationProperties) HandleSerial
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.ModifyWorkspaceCreationProperties")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentModifyWorkspaceCreationPropertiesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentModifyWorkspaceCreationPropertiesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1463,7 +1463,7 @@ func (m *awsAwsjson11_serializeOpModifyWorkspaceProperties) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.ModifyWorkspaceProperties")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentModifyWorkspacePropertiesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentModifyWorkspacePropertiesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1509,7 +1509,7 @@ func (m *awsAwsjson11_serializeOpModifyWorkspaceState) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.ModifyWorkspaceState")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentModifyWorkspaceStateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentModifyWorkspaceStateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1555,7 +1555,7 @@ func (m *awsAwsjson11_serializeOpRebootWorkspaces) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.RebootWorkspaces")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRebootWorkspacesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRebootWorkspacesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1601,7 +1601,7 @@ func (m *awsAwsjson11_serializeOpRebuildWorkspaces) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.RebuildWorkspaces")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRebuildWorkspacesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRebuildWorkspacesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1647,7 +1647,7 @@ func (m *awsAwsjson11_serializeOpRegisterWorkspaceDirectory) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.RegisterWorkspaceDirectory")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRegisterWorkspaceDirectoryInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRegisterWorkspaceDirectoryInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1693,7 +1693,7 @@ func (m *awsAwsjson11_serializeOpRestoreWorkspace) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.RestoreWorkspace")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRestoreWorkspaceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRestoreWorkspaceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1739,7 +1739,7 @@ func (m *awsAwsjson11_serializeOpRevokeIpRules) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.RevokeIpRules")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRevokeIpRulesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRevokeIpRulesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1785,7 +1785,7 @@ func (m *awsAwsjson11_serializeOpStartWorkspaces) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.StartWorkspaces")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartWorkspacesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartWorkspacesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1831,7 +1831,7 @@ func (m *awsAwsjson11_serializeOpStopWorkspaces) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.StopWorkspaces")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopWorkspacesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopWorkspacesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1877,7 +1877,7 @@ func (m *awsAwsjson11_serializeOpTerminateWorkspaces) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.TerminateWorkspaces")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTerminateWorkspacesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTerminateWorkspacesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1923,7 +1923,7 @@ func (m *awsAwsjson11_serializeOpUpdateRulesOfIpGroup) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.UpdateRulesOfIpGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateRulesOfIpGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateRulesOfIpGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1969,7 +1969,7 @@ func (m *awsAwsjson11_serializeOpUpdateWorkspaceImagePermission) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkspacesService.UpdateWorkspaceImagePermission")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateWorkspaceImagePermissionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateWorkspaceImagePermissionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2550,7 +2550,7 @@ func awsAwsjson11_serializeDocumentWorkspaceRequestList(v []*types.WorkspaceRequ
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssociateIpGroupsInput(v *AssociateIpGroupsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAssociateIpGroupsInput(v *AssociateIpGroupsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2569,7 +2569,7 @@ func awsAwsjson11_serializeDocumentAssociateIpGroupsInput(v *AssociateIpGroupsIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAuthorizeIpRulesInput(v *AuthorizeIpRulesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAuthorizeIpRulesInput(v *AuthorizeIpRulesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2588,7 +2588,7 @@ func awsAwsjson11_serializeDocumentAuthorizeIpRulesInput(v *AuthorizeIpRulesInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCopyWorkspaceImageInput(v *CopyWorkspaceImageInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCopyWorkspaceImageInput(v *CopyWorkspaceImageInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2622,7 +2622,7 @@ func awsAwsjson11_serializeDocumentCopyWorkspaceImageInput(v *CopyWorkspaceImage
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateIpGroupInput(v *CreateIpGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateIpGroupInput(v *CreateIpGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2653,7 +2653,7 @@ func awsAwsjson11_serializeDocumentCreateIpGroupInput(v *CreateIpGroupInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateTagsInput(v *CreateTagsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateTagsInput(v *CreateTagsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2672,7 +2672,7 @@ func awsAwsjson11_serializeDocumentCreateTagsInput(v *CreateTagsInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateWorkspacesInput(v *CreateWorkspacesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateWorkspacesInput(v *CreateWorkspacesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2686,7 +2686,7 @@ func awsAwsjson11_serializeDocumentCreateWorkspacesInput(v *CreateWorkspacesInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteIpGroupInput(v *DeleteIpGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteIpGroupInput(v *DeleteIpGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2698,7 +2698,7 @@ func awsAwsjson11_serializeDocumentDeleteIpGroupInput(v *DeleteIpGroupInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteTagsInput(v *DeleteTagsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteTagsInput(v *DeleteTagsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2717,7 +2717,7 @@ func awsAwsjson11_serializeDocumentDeleteTagsInput(v *DeleteTagsInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteWorkspaceImageInput(v *DeleteWorkspaceImageInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteWorkspaceImageInput(v *DeleteWorkspaceImageInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2729,7 +2729,7 @@ func awsAwsjson11_serializeDocumentDeleteWorkspaceImageInput(v *DeleteWorkspaceI
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeregisterWorkspaceDirectoryInput(v *DeregisterWorkspaceDirectoryInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeregisterWorkspaceDirectoryInput(v *DeregisterWorkspaceDirectoryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2741,14 +2741,14 @@ func awsAwsjson11_serializeDocumentDeregisterWorkspaceDirectoryInput(v *Deregist
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeAccountInput(v *DescribeAccountInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeAccountInput(v *DescribeAccountInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeAccountModificationsInput(v *DescribeAccountModificationsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeAccountModificationsInput(v *DescribeAccountModificationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2760,7 +2760,7 @@ func awsAwsjson11_serializeDocumentDescribeAccountModificationsInput(v *Describe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeClientPropertiesInput(v *DescribeClientPropertiesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeClientPropertiesInput(v *DescribeClientPropertiesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2774,7 +2774,7 @@ func awsAwsjson11_serializeDocumentDescribeClientPropertiesInput(v *DescribeClie
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeIpGroupsInput(v *DescribeIpGroupsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeIpGroupsInput(v *DescribeIpGroupsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2798,7 +2798,7 @@ func awsAwsjson11_serializeDocumentDescribeIpGroupsInput(v *DescribeIpGroupsInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeTagsInput(v *DescribeTagsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeTagsInput(v *DescribeTagsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2810,7 +2810,7 @@ func awsAwsjson11_serializeDocumentDescribeTagsInput(v *DescribeTagsInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeWorkspaceBundlesInput(v *DescribeWorkspaceBundlesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeWorkspaceBundlesInput(v *DescribeWorkspaceBundlesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2834,7 +2834,7 @@ func awsAwsjson11_serializeDocumentDescribeWorkspaceBundlesInput(v *DescribeWork
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeWorkspaceDirectoriesInput(v *DescribeWorkspaceDirectoriesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeWorkspaceDirectoriesInput(v *DescribeWorkspaceDirectoriesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2858,7 +2858,7 @@ func awsAwsjson11_serializeDocumentDescribeWorkspaceDirectoriesInput(v *Describe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeWorkspaceImagePermissionsInput(v *DescribeWorkspaceImagePermissionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeWorkspaceImagePermissionsInput(v *DescribeWorkspaceImagePermissionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2880,7 +2880,7 @@ func awsAwsjson11_serializeDocumentDescribeWorkspaceImagePermissionsInput(v *Des
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeWorkspaceImagesInput(v *DescribeWorkspaceImagesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeWorkspaceImagesInput(v *DescribeWorkspaceImagesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2909,7 +2909,7 @@ func awsAwsjson11_serializeDocumentDescribeWorkspaceImagesInput(v *DescribeWorks
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeWorkspacesConnectionStatusInput(v *DescribeWorkspacesConnectionStatusInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeWorkspacesConnectionStatusInput(v *DescribeWorkspacesConnectionStatusInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2928,7 +2928,7 @@ func awsAwsjson11_serializeDocumentDescribeWorkspacesConnectionStatusInput(v *De
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeWorkspacesInput(v *DescribeWorkspacesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeWorkspacesInput(v *DescribeWorkspacesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2967,7 +2967,7 @@ func awsAwsjson11_serializeDocumentDescribeWorkspacesInput(v *DescribeWorkspaces
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeWorkspaceSnapshotsInput(v *DescribeWorkspaceSnapshotsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeWorkspaceSnapshotsInput(v *DescribeWorkspaceSnapshotsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2979,7 +2979,7 @@ func awsAwsjson11_serializeDocumentDescribeWorkspaceSnapshotsInput(v *DescribeWo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDisassociateIpGroupsInput(v *DisassociateIpGroupsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDisassociateIpGroupsInput(v *DisassociateIpGroupsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2998,7 +2998,7 @@ func awsAwsjson11_serializeDocumentDisassociateIpGroupsInput(v *DisassociateIpGr
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentImportWorkspaceImageInput(v *ImportWorkspaceImageInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentImportWorkspaceImageInput(v *ImportWorkspaceImageInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3032,7 +3032,7 @@ func awsAwsjson11_serializeDocumentImportWorkspaceImageInput(v *ImportWorkspaceI
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListAvailableManagementCidrRangesInput(v *ListAvailableManagementCidrRangesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListAvailableManagementCidrRangesInput(v *ListAvailableManagementCidrRangesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3054,7 +3054,7 @@ func awsAwsjson11_serializeDocumentListAvailableManagementCidrRangesInput(v *Lis
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentMigrateWorkspaceInput(v *MigrateWorkspaceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentMigrateWorkspaceInput(v *MigrateWorkspaceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3071,7 +3071,7 @@ func awsAwsjson11_serializeDocumentMigrateWorkspaceInput(v *MigrateWorkspaceInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentModifyAccountInput(v *ModifyAccountInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentModifyAccountInput(v *ModifyAccountInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3088,7 +3088,7 @@ func awsAwsjson11_serializeDocumentModifyAccountInput(v *ModifyAccountInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentModifyClientPropertiesInput(v *ModifyClientPropertiesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentModifyClientPropertiesInput(v *ModifyClientPropertiesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3107,7 +3107,7 @@ func awsAwsjson11_serializeDocumentModifyClientPropertiesInput(v *ModifyClientPr
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentModifySelfservicePermissionsInput(v *ModifySelfservicePermissionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentModifySelfservicePermissionsInput(v *ModifySelfservicePermissionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3126,7 +3126,7 @@ func awsAwsjson11_serializeDocumentModifySelfservicePermissionsInput(v *ModifySe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentModifyWorkspaceAccessPropertiesInput(v *ModifyWorkspaceAccessPropertiesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentModifyWorkspaceAccessPropertiesInput(v *ModifyWorkspaceAccessPropertiesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3145,7 +3145,7 @@ func awsAwsjson11_serializeDocumentModifyWorkspaceAccessPropertiesInput(v *Modif
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentModifyWorkspaceCreationPropertiesInput(v *ModifyWorkspaceCreationPropertiesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentModifyWorkspaceCreationPropertiesInput(v *ModifyWorkspaceCreationPropertiesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3164,7 +3164,7 @@ func awsAwsjson11_serializeDocumentModifyWorkspaceCreationPropertiesInput(v *Mod
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentModifyWorkspacePropertiesInput(v *ModifyWorkspacePropertiesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentModifyWorkspacePropertiesInput(v *ModifyWorkspacePropertiesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3183,7 +3183,7 @@ func awsAwsjson11_serializeDocumentModifyWorkspacePropertiesInput(v *ModifyWorks
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentModifyWorkspaceStateInput(v *ModifyWorkspaceStateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentModifyWorkspaceStateInput(v *ModifyWorkspaceStateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3200,7 +3200,7 @@ func awsAwsjson11_serializeDocumentModifyWorkspaceStateInput(v *ModifyWorkspaceS
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRebootWorkspacesInput(v *RebootWorkspacesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRebootWorkspacesInput(v *RebootWorkspacesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3214,7 +3214,7 @@ func awsAwsjson11_serializeDocumentRebootWorkspacesInput(v *RebootWorkspacesInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRebuildWorkspacesInput(v *RebuildWorkspacesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRebuildWorkspacesInput(v *RebuildWorkspacesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3228,7 +3228,7 @@ func awsAwsjson11_serializeDocumentRebuildWorkspacesInput(v *RebuildWorkspacesIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRegisterWorkspaceDirectoryInput(v *RegisterWorkspaceDirectoryInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRegisterWorkspaceDirectoryInput(v *RegisterWorkspaceDirectoryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3269,7 +3269,7 @@ func awsAwsjson11_serializeDocumentRegisterWorkspaceDirectoryInput(v *RegisterWo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRestoreWorkspaceInput(v *RestoreWorkspaceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRestoreWorkspaceInput(v *RestoreWorkspaceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3281,7 +3281,7 @@ func awsAwsjson11_serializeDocumentRestoreWorkspaceInput(v *RestoreWorkspaceInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRevokeIpRulesInput(v *RevokeIpRulesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRevokeIpRulesInput(v *RevokeIpRulesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3300,7 +3300,7 @@ func awsAwsjson11_serializeDocumentRevokeIpRulesInput(v *RevokeIpRulesInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartWorkspacesInput(v *StartWorkspacesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartWorkspacesInput(v *StartWorkspacesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3314,7 +3314,7 @@ func awsAwsjson11_serializeDocumentStartWorkspacesInput(v *StartWorkspacesInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopWorkspacesInput(v *StopWorkspacesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopWorkspacesInput(v *StopWorkspacesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3328,7 +3328,7 @@ func awsAwsjson11_serializeDocumentStopWorkspacesInput(v *StopWorkspacesInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTerminateWorkspacesInput(v *TerminateWorkspacesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTerminateWorkspacesInput(v *TerminateWorkspacesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3342,7 +3342,7 @@ func awsAwsjson11_serializeDocumentTerminateWorkspacesInput(v *TerminateWorkspac
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateRulesOfIpGroupInput(v *UpdateRulesOfIpGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateRulesOfIpGroupInput(v *UpdateRulesOfIpGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3361,7 +3361,7 @@ func awsAwsjson11_serializeDocumentUpdateRulesOfIpGroupInput(v *UpdateRulesOfIpG
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateWorkspaceImagePermissionInput(v *UpdateWorkspaceImagePermissionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateWorkspaceImagePermissionInput(v *UpdateWorkspaceImagePermissionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
