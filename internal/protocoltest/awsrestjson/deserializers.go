@@ -370,7 +370,7 @@ func (m *awsRestjson1_deserializeOpGreetingWithErrors) HandleDeserialize(ctx con
 	output := &GreetingWithErrorsOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsGreetingWithErrorsOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsGreetingWithErrorsOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -438,7 +438,7 @@ func awsRestjson1_deserializeOpErrorGreetingWithErrors(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsGreetingWithErrorsOutput(v *GreetingWithErrorsOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsGreetingWithErrorsOutput(v *GreetingWithErrorsOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -477,12 +477,12 @@ func (m *awsRestjson1_deserializeOpHttpPayloadTraits) HandleDeserialize(ctx cont
 	output := &HttpPayloadTraitsOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsHttpPayloadTraitsOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsHttpPayloadTraitsOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeDocumentHttpPayloadTraitsOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentHttpPayloadTraitsOutput(output, response.Body)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -541,7 +541,7 @@ func awsRestjson1_deserializeOpErrorHttpPayloadTraits(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsHttpPayloadTraitsOutput(v *HttpPayloadTraitsOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsHttpPayloadTraitsOutput(v *HttpPayloadTraitsOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -553,7 +553,7 @@ func awsRestjson1_deserializeHttpBindingsHttpPayloadTraitsOutput(v *HttpPayloadT
 
 	return nil
 }
-func awsRestjson1_deserializeDocumentHttpPayloadTraitsOutput(v *HttpPayloadTraitsOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentHttpPayloadTraitsOutput(v *HttpPayloadTraitsOutput, body io.ReadCloser) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
@@ -594,12 +594,12 @@ func (m *awsRestjson1_deserializeOpHttpPayloadTraitsWithMediaType) HandleDeseria
 	output := &HttpPayloadTraitsWithMediaTypeOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeDocumentHttpPayloadTraitsWithMediaTypeOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentHttpPayloadTraitsWithMediaTypeOutput(output, response.Body)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -658,7 +658,7 @@ func awsRestjson1_deserializeOpErrorHttpPayloadTraitsWithMediaType(response *smi
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(v *HttpPayloadTraitsWithMediaTypeOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(v *HttpPayloadTraitsWithMediaTypeOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -670,7 +670,7 @@ func awsRestjson1_deserializeHttpBindingsHttpPayloadTraitsWithMediaTypeOutput(v 
 
 	return nil
 }
-func awsRestjson1_deserializeDocumentHttpPayloadTraitsWithMediaTypeOutput(v *HttpPayloadTraitsWithMediaTypeOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentHttpPayloadTraitsWithMediaTypeOutput(v *HttpPayloadTraitsWithMediaTypeOutput, body io.ReadCloser) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
@@ -783,7 +783,7 @@ func awsRestjson1_deserializeOpErrorHttpPayloadWithStructure(response *smithyhtt
 	}
 }
 
-func awsRestjson1_deserializeDocumentHttpPayloadWithStructureOutput(v **HttpPayloadWithStructureOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentHttpPayloadWithStructureOutput(v **HttpPayloadWithStructureOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -865,7 +865,7 @@ func (m *awsRestjson1_deserializeOpHttpPrefixHeaders) HandleDeserialize(ctx cont
 	output := &HttpPrefixHeadersOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsHttpPrefixHeadersOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsHttpPrefixHeadersOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -924,7 +924,7 @@ func awsRestjson1_deserializeOpErrorHttpPrefixHeaders(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsHttpPrefixHeadersOutput(v *HttpPrefixHeadersOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsHttpPrefixHeadersOutput(v *HttpPrefixHeadersOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -973,7 +973,7 @@ func (m *awsRestjson1_deserializeOpHttpPrefixHeadersResponse) HandleDeserialize(
 	output := &HttpPrefixHeadersResponseOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsHttpPrefixHeadersResponseOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsHttpPrefixHeadersResponseOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -1032,7 +1032,7 @@ func awsRestjson1_deserializeOpErrorHttpPrefixHeadersResponse(response *smithyht
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsHttpPrefixHeadersResponseOutput(v *HttpPrefixHeadersResponseOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsHttpPrefixHeadersResponseOutput(v *HttpPrefixHeadersResponseOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -1324,7 +1324,7 @@ func (m *awsRestjson1_deserializeOpIgnoreQueryParamsInResponse) HandleDeserializ
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentIgnoreQueryParamsInResponseOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentIgnoreQueryParamsInResponseOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1388,7 +1388,7 @@ func awsRestjson1_deserializeOpErrorIgnoreQueryParamsInResponse(response *smithy
 	}
 }
 
-func awsRestjson1_deserializeDocumentIgnoreQueryParamsInResponseOutput(v **IgnoreQueryParamsInResponseOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentIgnoreQueryParamsInResponseOutput(v **IgnoreQueryParamsInResponseOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1486,7 +1486,7 @@ func (m *awsRestjson1_deserializeOpInlineDocument) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentInlineDocumentOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentInlineDocumentOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1550,7 +1550,7 @@ func awsRestjson1_deserializeOpErrorInlineDocument(response *smithyhttp.Response
 	}
 }
 
-func awsRestjson1_deserializeDocumentInlineDocumentOutput(v **InlineDocumentOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentInlineDocumentOutput(v **InlineDocumentOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1717,7 +1717,7 @@ func awsRestjson1_deserializeOpErrorInlineDocumentAsPayload(response *smithyhttp
 	}
 }
 
-func awsRestjson1_deserializeDocumentInlineDocumentAsPayloadOutput(v **InlineDocumentAsPayloadOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentInlineDocumentAsPayloadOutput(v **InlineDocumentAsPayloadOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1799,7 +1799,7 @@ func (m *awsRestjson1_deserializeOpInputAndOutputWithHeaders) HandleDeserialize(
 	output := &InputAndOutputWithHeadersOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsInputAndOutputWithHeadersOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsInputAndOutputWithHeadersOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -1858,7 +1858,7 @@ func awsRestjson1_deserializeOpErrorInputAndOutputWithHeaders(response *smithyht
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsInputAndOutputWithHeadersOutput(v *InputAndOutputWithHeadersOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsInputAndOutputWithHeadersOutput(v *InputAndOutputWithHeadersOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -2090,7 +2090,7 @@ func (m *awsRestjson1_deserializeOpJsonBlobs) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentJsonBlobsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentJsonBlobsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2154,7 +2154,7 @@ func awsRestjson1_deserializeOpErrorJsonBlobs(response *smithyhttp.Response) err
 	}
 }
 
-func awsRestjson1_deserializeDocumentJsonBlobsOutput(v **JsonBlobsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentJsonBlobsOutput(v **JsonBlobsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2245,7 +2245,7 @@ func (m *awsRestjson1_deserializeOpJsonEnums) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentJsonEnumsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentJsonEnumsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2309,7 +2309,7 @@ func awsRestjson1_deserializeOpErrorJsonEnums(response *smithyhttp.Response) err
 	}
 }
 
-func awsRestjson1_deserializeDocumentJsonEnumsOutput(v **JsonEnumsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentJsonEnumsOutput(v **JsonEnumsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2448,7 +2448,7 @@ func (m *awsRestjson1_deserializeOpJsonLists) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentJsonListsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentJsonListsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2512,7 +2512,7 @@ func awsRestjson1_deserializeOpErrorJsonLists(response *smithyhttp.Response) err
 	}
 }
 
-func awsRestjson1_deserializeDocumentJsonListsOutput(v **JsonListsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentJsonListsOutput(v **JsonListsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2637,7 +2637,7 @@ func (m *awsRestjson1_deserializeOpJsonMaps) HandleDeserialize(ctx context.Conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentJsonMapsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentJsonMapsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2701,7 +2701,7 @@ func awsRestjson1_deserializeOpErrorJsonMaps(response *smithyhttp.Response) erro
 	}
 }
 
-func awsRestjson1_deserializeDocumentJsonMapsOutput(v **JsonMapsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentJsonMapsOutput(v **JsonMapsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2791,7 +2791,7 @@ func (m *awsRestjson1_deserializeOpJsonTimestamps) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentJsonTimestampsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentJsonTimestampsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2855,7 +2855,7 @@ func awsRestjson1_deserializeOpErrorJsonTimestamps(response *smithyhttp.Response
 	}
 }
 
-func awsRestjson1_deserializeDocumentJsonTimestampsOutput(v **JsonTimestampsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentJsonTimestampsOutput(v **JsonTimestampsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3008,7 +3008,7 @@ func (m *awsRestjson1_deserializeOpJsonUnions) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentJsonUnionsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentJsonUnionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3072,7 +3072,7 @@ func awsRestjson1_deserializeOpErrorJsonUnions(response *smithyhttp.Response) er
 	}
 }
 
-func awsRestjson1_deserializeDocumentJsonUnionsOutput(v **JsonUnionsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentJsonUnionsOutput(v **JsonUnionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3154,7 +3154,7 @@ func (m *awsRestjson1_deserializeOpMediaTypeHeader) HandleDeserialize(ctx contex
 	output := &MediaTypeHeaderOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsMediaTypeHeaderOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsMediaTypeHeaderOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -3213,7 +3213,7 @@ func awsRestjson1_deserializeOpErrorMediaTypeHeader(response *smithyhttp.Respons
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsMediaTypeHeaderOutput(v *MediaTypeHeaderOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsMediaTypeHeaderOutput(v *MediaTypeHeaderOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -3416,7 +3416,7 @@ func (m *awsRestjson1_deserializeOpNullAndEmptyHeadersClient) HandleDeserialize(
 	output := &NullAndEmptyHeadersClientOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsNullAndEmptyHeadersClientOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsNullAndEmptyHeadersClientOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -3475,7 +3475,7 @@ func awsRestjson1_deserializeOpErrorNullAndEmptyHeadersClient(response *smithyht
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsNullAndEmptyHeadersClientOutput(v *NullAndEmptyHeadersClientOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsNullAndEmptyHeadersClientOutput(v *NullAndEmptyHeadersClientOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -3535,7 +3535,7 @@ func (m *awsRestjson1_deserializeOpNullAndEmptyHeadersServer) HandleDeserialize(
 	output := &NullAndEmptyHeadersServerOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsNullAndEmptyHeadersServerOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsNullAndEmptyHeadersServerOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -3594,7 +3594,7 @@ func awsRestjson1_deserializeOpErrorNullAndEmptyHeadersServer(response *smithyht
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsNullAndEmptyHeadersServerOutput(v *NullAndEmptyHeadersServerOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsNullAndEmptyHeadersServerOutput(v *NullAndEmptyHeadersServerOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -3822,7 +3822,7 @@ func (m *awsRestjson1_deserializeOpRecursiveShapes) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentRecursiveShapesOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentRecursiveShapesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3886,7 +3886,7 @@ func awsRestjson1_deserializeOpErrorRecursiveShapes(response *smithyhttp.Respons
 	}
 }
 
-func awsRestjson1_deserializeDocumentRecursiveShapesOutput(v **RecursiveShapesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentRecursiveShapesOutput(v **RecursiveShapesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3968,7 +3968,7 @@ func (m *awsRestjson1_deserializeOpSimpleScalarProperties) HandleDeserialize(ctx
 	output := &SimpleScalarPropertiesOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsSimpleScalarPropertiesOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsSimpleScalarPropertiesOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -3981,7 +3981,7 @@ func (m *awsRestjson1_deserializeOpSimpleScalarProperties) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentSimpleScalarPropertiesOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentSimpleScalarPropertiesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4045,7 +4045,7 @@ func awsRestjson1_deserializeOpErrorSimpleScalarProperties(response *smithyhttp.
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsSimpleScalarPropertiesOutput(v *SimpleScalarPropertiesOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsSimpleScalarPropertiesOutput(v *SimpleScalarPropertiesOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -4057,7 +4057,7 @@ func awsRestjson1_deserializeHttpBindingsSimpleScalarPropertiesOutput(v *SimpleS
 
 	return nil
 }
-func awsRestjson1_deserializeDocumentSimpleScalarPropertiesOutput(v **SimpleScalarPropertiesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentSimpleScalarPropertiesOutput(v **SimpleScalarPropertiesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4275,12 +4275,12 @@ func (m *awsRestjson1_deserializeOpStreamingTraits) HandleDeserialize(ctx contex
 	output := &StreamingTraitsOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsStreamingTraitsOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsStreamingTraitsOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeDocumentStreamingTraitsOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentStreamingTraitsOutput(output, response.Body)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -4339,7 +4339,7 @@ func awsRestjson1_deserializeOpErrorStreamingTraits(response *smithyhttp.Respons
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsStreamingTraitsOutput(v *StreamingTraitsOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsStreamingTraitsOutput(v *StreamingTraitsOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -4351,7 +4351,7 @@ func awsRestjson1_deserializeHttpBindingsStreamingTraitsOutput(v *StreamingTrait
 
 	return nil
 }
-func awsRestjson1_deserializeDocumentStreamingTraitsOutput(v *StreamingTraitsOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentStreamingTraitsOutput(v *StreamingTraitsOutput, body io.ReadCloser) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
@@ -4386,12 +4386,12 @@ func (m *awsRestjson1_deserializeOpStreamingTraitsRequireLength) HandleDeseriali
 	output := &StreamingTraitsRequireLengthOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsStreamingTraitsRequireLengthOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsStreamingTraitsRequireLengthOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeDocumentStreamingTraitsRequireLengthOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentStreamingTraitsRequireLengthOutput(output, response.Body)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -4450,7 +4450,7 @@ func awsRestjson1_deserializeOpErrorStreamingTraitsRequireLength(response *smith
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsStreamingTraitsRequireLengthOutput(v *StreamingTraitsRequireLengthOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsStreamingTraitsRequireLengthOutput(v *StreamingTraitsRequireLengthOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -4462,7 +4462,7 @@ func awsRestjson1_deserializeHttpBindingsStreamingTraitsRequireLengthOutput(v *S
 
 	return nil
 }
-func awsRestjson1_deserializeDocumentStreamingTraitsRequireLengthOutput(v *StreamingTraitsRequireLengthOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentStreamingTraitsRequireLengthOutput(v *StreamingTraitsRequireLengthOutput, body io.ReadCloser) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
@@ -4497,12 +4497,12 @@ func (m *awsRestjson1_deserializeOpStreamingTraitsWithMediaType) HandleDeseriali
 	output := &StreamingTraitsWithMediaTypeOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsStreamingTraitsWithMediaTypeOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsStreamingTraitsWithMediaTypeOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeDocumentStreamingTraitsWithMediaTypeOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentStreamingTraitsWithMediaTypeOutput(output, response.Body)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -4561,7 +4561,7 @@ func awsRestjson1_deserializeOpErrorStreamingTraitsWithMediaType(response *smith
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsStreamingTraitsWithMediaTypeOutput(v *StreamingTraitsWithMediaTypeOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsStreamingTraitsWithMediaTypeOutput(v *StreamingTraitsWithMediaTypeOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -4573,7 +4573,7 @@ func awsRestjson1_deserializeHttpBindingsStreamingTraitsWithMediaTypeOutput(v *S
 
 	return nil
 }
-func awsRestjson1_deserializeDocumentStreamingTraitsWithMediaTypeOutput(v *StreamingTraitsWithMediaTypeOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentStreamingTraitsWithMediaTypeOutput(v *StreamingTraitsWithMediaTypeOutput, body io.ReadCloser) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
@@ -4608,7 +4608,7 @@ func (m *awsRestjson1_deserializeOpTimestampFormatHeaders) HandleDeserialize(ctx
 	output := &TimestampFormatHeadersOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsTimestampFormatHeadersOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsTimestampFormatHeadersOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -4667,7 +4667,7 @@ func awsRestjson1_deserializeOpErrorTimestampFormatHeaders(response *smithyhttp.
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsTimestampFormatHeadersOutput(v *TimestampFormatHeadersOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsTimestampFormatHeadersOutput(v *TimestampFormatHeadersOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -4739,7 +4739,7 @@ func awsRestjson1_deserializeHttpBindingsTimestampFormatHeadersOutput(v *Timesta
 
 	return nil
 }
-func awsRestjson1_deserializeHttpBindingsComplexError(v *types.ComplexError, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsComplexError(v *types.ComplexError, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -4773,7 +4773,7 @@ func awsRestjson1_deserializeErrorComplexError(response *smithyhttp.Response, er
 
 	errorBody.Seek(0, io.SeekStart)
 
-	if err := awsRestjson1_deserializeHttpBindingsComplexError(output, response); err != nil {
+	if err := awsRestjson1_deserializeOpHttpBindingsComplexError(output, response); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
 	}
 

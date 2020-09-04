@@ -133,7 +133,7 @@ func (m *awsRestjson1_deserializeOpGetPlaybackConfiguration) HandleDeserialize(c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetPlaybackConfigurationOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -197,7 +197,7 @@ func awsRestjson1_deserializeOpErrorGetPlaybackConfiguration(response *smithyhtt
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetPlaybackConfigurationOutput(v **GetPlaybackConfigurationOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetPlaybackConfigurationOutput(v **GetPlaybackConfigurationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -438,7 +438,7 @@ func (m *awsRestjson1_deserializeOpListPlaybackConfigurations) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListPlaybackConfigurationsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListPlaybackConfigurationsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -502,7 +502,7 @@ func awsRestjson1_deserializeOpErrorListPlaybackConfigurations(response *smithyh
 	}
 }
 
-func awsRestjson1_deserializeDocumentListPlaybackConfigurationsOutput(v **ListPlaybackConfigurationsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListPlaybackConfigurationsOutput(v **ListPlaybackConfigurationsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -605,7 +605,7 @@ func (m *awsRestjson1_deserializeOpListTagsForResource) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListTagsForResourceOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -672,7 +672,7 @@ func awsRestjson1_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -762,7 +762,7 @@ func (m *awsRestjson1_deserializeOpPutPlaybackConfiguration) HandleDeserialize(c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentPutPlaybackConfigurationOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -826,7 +826,7 @@ func awsRestjson1_deserializeOpErrorPutPlaybackConfiguration(response *smithyhtt
 	}
 }
 
-func awsRestjson1_deserializeDocumentPutPlaybackConfigurationOutput(v **PutPlaybackConfigurationOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentPutPlaybackConfigurationOutput(v **PutPlaybackConfigurationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

@@ -45,7 +45,7 @@ func (m *awsAwsjson11_serializeOpAcceptDomainTransferFromAnotherAwsAccount) Hand
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.AcceptDomainTransferFromAnotherAwsAccount")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAcceptDomainTransferFromAnotherAwsAccountInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAcceptDomainTransferFromAnotherAwsAccountInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -91,7 +91,7 @@ func (m *awsAwsjson11_serializeOpCancelDomainTransferToAnotherAwsAccount) Handle
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.CancelDomainTransferToAnotherAwsAccount")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCancelDomainTransferToAnotherAwsAccountInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCancelDomainTransferToAnotherAwsAccountInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -137,7 +137,7 @@ func (m *awsAwsjson11_serializeOpCheckDomainAvailability) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.CheckDomainAvailability")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCheckDomainAvailabilityInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCheckDomainAvailabilityInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -183,7 +183,7 @@ func (m *awsAwsjson11_serializeOpCheckDomainTransferability) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.CheckDomainTransferability")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCheckDomainTransferabilityInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCheckDomainTransferabilityInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -229,7 +229,7 @@ func (m *awsAwsjson11_serializeOpDeleteTagsForDomain) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.DeleteTagsForDomain")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteTagsForDomainInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteTagsForDomainInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -275,7 +275,7 @@ func (m *awsAwsjson11_serializeOpDisableDomainAutoRenew) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.DisableDomainAutoRenew")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDisableDomainAutoRenewInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDisableDomainAutoRenewInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -321,7 +321,7 @@ func (m *awsAwsjson11_serializeOpDisableDomainTransferLock) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.DisableDomainTransferLock")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDisableDomainTransferLockInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDisableDomainTransferLockInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -367,7 +367,7 @@ func (m *awsAwsjson11_serializeOpEnableDomainAutoRenew) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.EnableDomainAutoRenew")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentEnableDomainAutoRenewInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentEnableDomainAutoRenewInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -413,7 +413,7 @@ func (m *awsAwsjson11_serializeOpEnableDomainTransferLock) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.EnableDomainTransferLock")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentEnableDomainTransferLockInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentEnableDomainTransferLockInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -459,7 +459,7 @@ func (m *awsAwsjson11_serializeOpGetContactReachabilityStatus) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.GetContactReachabilityStatus")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetContactReachabilityStatusInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetContactReachabilityStatusInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -505,7 +505,7 @@ func (m *awsAwsjson11_serializeOpGetDomainDetail) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.GetDomainDetail")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetDomainDetailInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetDomainDetailInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -551,7 +551,7 @@ func (m *awsAwsjson11_serializeOpGetDomainSuggestions) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.GetDomainSuggestions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetDomainSuggestionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetDomainSuggestionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -597,7 +597,7 @@ func (m *awsAwsjson11_serializeOpGetOperationDetail) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.GetOperationDetail")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetOperationDetailInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetOperationDetailInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -643,7 +643,7 @@ func (m *awsAwsjson11_serializeOpListDomains) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.ListDomains")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListDomainsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListDomainsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -689,7 +689,7 @@ func (m *awsAwsjson11_serializeOpListOperations) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.ListOperations")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListOperationsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListOperationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -735,7 +735,7 @@ func (m *awsAwsjson11_serializeOpListTagsForDomain) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.ListTagsForDomain")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsForDomainInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsForDomainInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -781,7 +781,7 @@ func (m *awsAwsjson11_serializeOpRegisterDomain) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.RegisterDomain")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRegisterDomainInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRegisterDomainInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -827,7 +827,7 @@ func (m *awsAwsjson11_serializeOpRejectDomainTransferFromAnotherAwsAccount) Hand
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.RejectDomainTransferFromAnotherAwsAccount")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRejectDomainTransferFromAnotherAwsAccountInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRejectDomainTransferFromAnotherAwsAccountInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -873,7 +873,7 @@ func (m *awsAwsjson11_serializeOpRenewDomain) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.RenewDomain")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRenewDomainInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRenewDomainInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -919,7 +919,7 @@ func (m *awsAwsjson11_serializeOpResendContactReachabilityEmail) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.ResendContactReachabilityEmail")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentResendContactReachabilityEmailInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentResendContactReachabilityEmailInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -965,7 +965,7 @@ func (m *awsAwsjson11_serializeOpRetrieveDomainAuthCode) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.RetrieveDomainAuthCode")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRetrieveDomainAuthCodeInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRetrieveDomainAuthCodeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1011,7 +1011,7 @@ func (m *awsAwsjson11_serializeOpTransferDomain) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.TransferDomain")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTransferDomainInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTransferDomainInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1057,7 +1057,7 @@ func (m *awsAwsjson11_serializeOpTransferDomainToAnotherAwsAccount) HandleSerial
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.TransferDomainToAnotherAwsAccount")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTransferDomainToAnotherAwsAccountInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTransferDomainToAnotherAwsAccountInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1103,7 +1103,7 @@ func (m *awsAwsjson11_serializeOpUpdateDomainContact) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.UpdateDomainContact")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateDomainContactInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateDomainContactInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1149,7 +1149,7 @@ func (m *awsAwsjson11_serializeOpUpdateDomainContactPrivacy) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.UpdateDomainContactPrivacy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateDomainContactPrivacyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateDomainContactPrivacyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1195,7 +1195,7 @@ func (m *awsAwsjson11_serializeOpUpdateDomainNameservers) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.UpdateDomainNameservers")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateDomainNameserversInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateDomainNameserversInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1241,7 +1241,7 @@ func (m *awsAwsjson11_serializeOpUpdateTagsForDomain) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.UpdateTagsForDomain")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateTagsForDomainInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateTagsForDomainInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1287,7 +1287,7 @@ func (m *awsAwsjson11_serializeOpViewBilling) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.ViewBilling")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentViewBillingInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentViewBillingInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1515,7 +1515,7 @@ func awsAwsjson11_serializeDocumentTagList(v []*types.Tag, value smithyjson.Valu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAcceptDomainTransferFromAnotherAwsAccountInput(v *AcceptDomainTransferFromAnotherAwsAccountInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAcceptDomainTransferFromAnotherAwsAccountInput(v *AcceptDomainTransferFromAnotherAwsAccountInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1532,7 +1532,7 @@ func awsAwsjson11_serializeDocumentAcceptDomainTransferFromAnotherAwsAccountInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCancelDomainTransferToAnotherAwsAccountInput(v *CancelDomainTransferToAnotherAwsAccountInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCancelDomainTransferToAnotherAwsAccountInput(v *CancelDomainTransferToAnotherAwsAccountInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1544,7 +1544,7 @@ func awsAwsjson11_serializeDocumentCancelDomainTransferToAnotherAwsAccountInput(
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCheckDomainAvailabilityInput(v *CheckDomainAvailabilityInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCheckDomainAvailabilityInput(v *CheckDomainAvailabilityInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1561,7 +1561,7 @@ func awsAwsjson11_serializeDocumentCheckDomainAvailabilityInput(v *CheckDomainAv
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCheckDomainTransferabilityInput(v *CheckDomainTransferabilityInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCheckDomainTransferabilityInput(v *CheckDomainTransferabilityInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1578,7 +1578,7 @@ func awsAwsjson11_serializeDocumentCheckDomainTransferabilityInput(v *CheckDomai
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteTagsForDomainInput(v *DeleteTagsForDomainInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteTagsForDomainInput(v *DeleteTagsForDomainInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1597,7 +1597,7 @@ func awsAwsjson11_serializeDocumentDeleteTagsForDomainInput(v *DeleteTagsForDoma
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDisableDomainAutoRenewInput(v *DisableDomainAutoRenewInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDisableDomainAutoRenewInput(v *DisableDomainAutoRenewInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1609,7 +1609,7 @@ func awsAwsjson11_serializeDocumentDisableDomainAutoRenewInput(v *DisableDomainA
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDisableDomainTransferLockInput(v *DisableDomainTransferLockInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDisableDomainTransferLockInput(v *DisableDomainTransferLockInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1621,7 +1621,7 @@ func awsAwsjson11_serializeDocumentDisableDomainTransferLockInput(v *DisableDoma
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentEnableDomainAutoRenewInput(v *EnableDomainAutoRenewInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentEnableDomainAutoRenewInput(v *EnableDomainAutoRenewInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1633,7 +1633,7 @@ func awsAwsjson11_serializeDocumentEnableDomainAutoRenewInput(v *EnableDomainAut
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentEnableDomainTransferLockInput(v *EnableDomainTransferLockInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentEnableDomainTransferLockInput(v *EnableDomainTransferLockInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1645,7 +1645,7 @@ func awsAwsjson11_serializeDocumentEnableDomainTransferLockInput(v *EnableDomain
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetContactReachabilityStatusInput(v *GetContactReachabilityStatusInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetContactReachabilityStatusInput(v *GetContactReachabilityStatusInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1657,7 +1657,7 @@ func awsAwsjson11_serializeDocumentGetContactReachabilityStatusInput(v *GetConta
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetDomainDetailInput(v *GetDomainDetailInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetDomainDetailInput(v *GetDomainDetailInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1669,7 +1669,7 @@ func awsAwsjson11_serializeDocumentGetDomainDetailInput(v *GetDomainDetailInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetDomainSuggestionsInput(v *GetDomainSuggestionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetDomainSuggestionsInput(v *GetDomainSuggestionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1691,7 +1691,7 @@ func awsAwsjson11_serializeDocumentGetDomainSuggestionsInput(v *GetDomainSuggest
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetOperationDetailInput(v *GetOperationDetailInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetOperationDetailInput(v *GetOperationDetailInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1703,7 +1703,7 @@ func awsAwsjson11_serializeDocumentGetOperationDetailInput(v *GetOperationDetail
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListDomainsInput(v *ListDomainsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListDomainsInput(v *ListDomainsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1720,7 +1720,7 @@ func awsAwsjson11_serializeDocumentListDomainsInput(v *ListDomainsInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListOperationsInput(v *ListOperationsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListOperationsInput(v *ListOperationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1742,7 +1742,7 @@ func awsAwsjson11_serializeDocumentListOperationsInput(v *ListOperationsInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsForDomainInput(v *ListTagsForDomainInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTagsForDomainInput(v *ListTagsForDomainInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1754,7 +1754,7 @@ func awsAwsjson11_serializeDocumentListTagsForDomainInput(v *ListTagsForDomainIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRegisterDomainInput(v *RegisterDomainInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRegisterDomainInput(v *RegisterDomainInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1817,7 +1817,7 @@ func awsAwsjson11_serializeDocumentRegisterDomainInput(v *RegisterDomainInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRejectDomainTransferFromAnotherAwsAccountInput(v *RejectDomainTransferFromAnotherAwsAccountInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRejectDomainTransferFromAnotherAwsAccountInput(v *RejectDomainTransferFromAnotherAwsAccountInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1829,7 +1829,7 @@ func awsAwsjson11_serializeDocumentRejectDomainTransferFromAnotherAwsAccountInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRenewDomainInput(v *RenewDomainInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRenewDomainInput(v *RenewDomainInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1851,7 +1851,7 @@ func awsAwsjson11_serializeDocumentRenewDomainInput(v *RenewDomainInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentResendContactReachabilityEmailInput(v *ResendContactReachabilityEmailInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentResendContactReachabilityEmailInput(v *ResendContactReachabilityEmailInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1863,7 +1863,7 @@ func awsAwsjson11_serializeDocumentResendContactReachabilityEmailInput(v *Resend
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRetrieveDomainAuthCodeInput(v *RetrieveDomainAuthCodeInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRetrieveDomainAuthCodeInput(v *RetrieveDomainAuthCodeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1875,7 +1875,7 @@ func awsAwsjson11_serializeDocumentRetrieveDomainAuthCodeInput(v *RetrieveDomain
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTransferDomainInput(v *TransferDomainInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTransferDomainInput(v *TransferDomainInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1950,7 +1950,7 @@ func awsAwsjson11_serializeDocumentTransferDomainInput(v *TransferDomainInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTransferDomainToAnotherAwsAccountInput(v *TransferDomainToAnotherAwsAccountInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTransferDomainToAnotherAwsAccountInput(v *TransferDomainToAnotherAwsAccountInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1967,7 +1967,7 @@ func awsAwsjson11_serializeDocumentTransferDomainToAnotherAwsAccountInput(v *Tra
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateDomainContactInput(v *UpdateDomainContactInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateDomainContactInput(v *UpdateDomainContactInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2000,7 +2000,7 @@ func awsAwsjson11_serializeDocumentUpdateDomainContactInput(v *UpdateDomainConta
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateDomainContactPrivacyInput(v *UpdateDomainContactPrivacyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateDomainContactPrivacyInput(v *UpdateDomainContactPrivacyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2027,7 +2027,7 @@ func awsAwsjson11_serializeDocumentUpdateDomainContactPrivacyInput(v *UpdateDoma
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateDomainNameserversInput(v *UpdateDomainNameserversInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateDomainNameserversInput(v *UpdateDomainNameserversInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2051,7 +2051,7 @@ func awsAwsjson11_serializeDocumentUpdateDomainNameserversInput(v *UpdateDomainN
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateTagsForDomainInput(v *UpdateTagsForDomainInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateTagsForDomainInput(v *UpdateTagsForDomainInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2070,7 +2070,7 @@ func awsAwsjson11_serializeDocumentUpdateTagsForDomainInput(v *UpdateTagsForDoma
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentViewBillingInput(v *ViewBillingInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentViewBillingInput(v *ViewBillingInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

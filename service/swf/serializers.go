@@ -45,7 +45,7 @@ func (m *awsAwsjson10_serializeOpCountClosedWorkflowExecutions) HandleSerialize(
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.CountClosedWorkflowExecutions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentCountClosedWorkflowExecutionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentCountClosedWorkflowExecutionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -91,7 +91,7 @@ func (m *awsAwsjson10_serializeOpCountOpenWorkflowExecutions) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.CountOpenWorkflowExecutions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentCountOpenWorkflowExecutionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentCountOpenWorkflowExecutionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -137,7 +137,7 @@ func (m *awsAwsjson10_serializeOpCountPendingActivityTasks) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.CountPendingActivityTasks")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentCountPendingActivityTasksInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentCountPendingActivityTasksInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -183,7 +183,7 @@ func (m *awsAwsjson10_serializeOpCountPendingDecisionTasks) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.CountPendingDecisionTasks")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentCountPendingDecisionTasksInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentCountPendingDecisionTasksInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -229,7 +229,7 @@ func (m *awsAwsjson10_serializeOpDeprecateActivityType) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.DeprecateActivityType")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentDeprecateActivityTypeInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentDeprecateActivityTypeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -275,7 +275,7 @@ func (m *awsAwsjson10_serializeOpDeprecateDomain) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.DeprecateDomain")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentDeprecateDomainInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentDeprecateDomainInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -321,7 +321,7 @@ func (m *awsAwsjson10_serializeOpDeprecateWorkflowType) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.DeprecateWorkflowType")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentDeprecateWorkflowTypeInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentDeprecateWorkflowTypeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -367,7 +367,7 @@ func (m *awsAwsjson10_serializeOpDescribeActivityType) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.DescribeActivityType")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentDescribeActivityTypeInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentDescribeActivityTypeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -413,7 +413,7 @@ func (m *awsAwsjson10_serializeOpDescribeDomain) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.DescribeDomain")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentDescribeDomainInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentDescribeDomainInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -459,7 +459,7 @@ func (m *awsAwsjson10_serializeOpDescribeWorkflowExecution) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.DescribeWorkflowExecution")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentDescribeWorkflowExecutionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentDescribeWorkflowExecutionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -505,7 +505,7 @@ func (m *awsAwsjson10_serializeOpDescribeWorkflowType) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.DescribeWorkflowType")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentDescribeWorkflowTypeInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentDescribeWorkflowTypeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -551,7 +551,7 @@ func (m *awsAwsjson10_serializeOpGetWorkflowExecutionHistory) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.GetWorkflowExecutionHistory")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentGetWorkflowExecutionHistoryInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentGetWorkflowExecutionHistoryInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -597,7 +597,7 @@ func (m *awsAwsjson10_serializeOpListActivityTypes) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.ListActivityTypes")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentListActivityTypesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentListActivityTypesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -643,7 +643,7 @@ func (m *awsAwsjson10_serializeOpListClosedWorkflowExecutions) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.ListClosedWorkflowExecutions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentListClosedWorkflowExecutionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentListClosedWorkflowExecutionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -689,7 +689,7 @@ func (m *awsAwsjson10_serializeOpListDomains) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.ListDomains")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentListDomainsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentListDomainsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -735,7 +735,7 @@ func (m *awsAwsjson10_serializeOpListOpenWorkflowExecutions) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.ListOpenWorkflowExecutions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentListOpenWorkflowExecutionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentListOpenWorkflowExecutionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -781,7 +781,7 @@ func (m *awsAwsjson10_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.ListTagsForResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -827,7 +827,7 @@ func (m *awsAwsjson10_serializeOpListWorkflowTypes) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.ListWorkflowTypes")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentListWorkflowTypesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentListWorkflowTypesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -873,7 +873,7 @@ func (m *awsAwsjson10_serializeOpPollForActivityTask) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.PollForActivityTask")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentPollForActivityTaskInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentPollForActivityTaskInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -919,7 +919,7 @@ func (m *awsAwsjson10_serializeOpPollForDecisionTask) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.PollForDecisionTask")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentPollForDecisionTaskInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentPollForDecisionTaskInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -965,7 +965,7 @@ func (m *awsAwsjson10_serializeOpRecordActivityTaskHeartbeat) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.RecordActivityTaskHeartbeat")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentRecordActivityTaskHeartbeatInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentRecordActivityTaskHeartbeatInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1011,7 +1011,7 @@ func (m *awsAwsjson10_serializeOpRegisterActivityType) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.RegisterActivityType")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentRegisterActivityTypeInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentRegisterActivityTypeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1057,7 +1057,7 @@ func (m *awsAwsjson10_serializeOpRegisterDomain) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.RegisterDomain")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentRegisterDomainInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentRegisterDomainInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1103,7 +1103,7 @@ func (m *awsAwsjson10_serializeOpRegisterWorkflowType) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.RegisterWorkflowType")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentRegisterWorkflowTypeInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentRegisterWorkflowTypeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1149,7 +1149,7 @@ func (m *awsAwsjson10_serializeOpRequestCancelWorkflowExecution) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.RequestCancelWorkflowExecution")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentRequestCancelWorkflowExecutionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentRequestCancelWorkflowExecutionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1195,7 +1195,7 @@ func (m *awsAwsjson10_serializeOpRespondActivityTaskCanceled) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.RespondActivityTaskCanceled")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentRespondActivityTaskCanceledInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentRespondActivityTaskCanceledInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1241,7 +1241,7 @@ func (m *awsAwsjson10_serializeOpRespondActivityTaskCompleted) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.RespondActivityTaskCompleted")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentRespondActivityTaskCompletedInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentRespondActivityTaskCompletedInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1287,7 +1287,7 @@ func (m *awsAwsjson10_serializeOpRespondActivityTaskFailed) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.RespondActivityTaskFailed")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentRespondActivityTaskFailedInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentRespondActivityTaskFailedInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1333,7 +1333,7 @@ func (m *awsAwsjson10_serializeOpRespondDecisionTaskCompleted) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.RespondDecisionTaskCompleted")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentRespondDecisionTaskCompletedInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentRespondDecisionTaskCompletedInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1379,7 +1379,7 @@ func (m *awsAwsjson10_serializeOpSignalWorkflowExecution) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.SignalWorkflowExecution")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentSignalWorkflowExecutionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentSignalWorkflowExecutionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1425,7 +1425,7 @@ func (m *awsAwsjson10_serializeOpStartWorkflowExecution) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.StartWorkflowExecution")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentStartWorkflowExecutionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentStartWorkflowExecutionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1471,7 +1471,7 @@ func (m *awsAwsjson10_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.TagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1517,7 +1517,7 @@ func (m *awsAwsjson10_serializeOpTerminateWorkflowExecution) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.TerminateWorkflowExecution")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentTerminateWorkflowExecutionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentTerminateWorkflowExecutionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1563,7 +1563,7 @@ func (m *awsAwsjson10_serializeOpUndeprecateActivityType) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.UndeprecateActivityType")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentUndeprecateActivityTypeInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentUndeprecateActivityTypeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1609,7 +1609,7 @@ func (m *awsAwsjson10_serializeOpUndeprecateDomain) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.UndeprecateDomain")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentUndeprecateDomainInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentUndeprecateDomainInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1655,7 +1655,7 @@ func (m *awsAwsjson10_serializeOpUndeprecateWorkflowType) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.UndeprecateWorkflowType")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentUndeprecateWorkflowTypeInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentUndeprecateWorkflowTypeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1701,7 +1701,7 @@ func (m *awsAwsjson10_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("SimpleWorkflowService.UntagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2408,7 +2408,7 @@ func awsAwsjson10_serializeDocumentWorkflowTypeFilter(v *types.WorkflowTypeFilte
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentCountClosedWorkflowExecutionsInput(v *CountClosedWorkflowExecutionsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentCountClosedWorkflowExecutionsInput(v *CountClosedWorkflowExecutionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2462,7 +2462,7 @@ func awsAwsjson10_serializeDocumentCountClosedWorkflowExecutionsInput(v *CountCl
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentCountOpenWorkflowExecutionsInput(v *CountOpenWorkflowExecutionsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentCountOpenWorkflowExecutionsInput(v *CountOpenWorkflowExecutionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2502,7 +2502,7 @@ func awsAwsjson10_serializeDocumentCountOpenWorkflowExecutionsInput(v *CountOpen
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentCountPendingActivityTasksInput(v *CountPendingActivityTasksInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentCountPendingActivityTasksInput(v *CountPendingActivityTasksInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2521,7 +2521,7 @@ func awsAwsjson10_serializeDocumentCountPendingActivityTasksInput(v *CountPendin
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentCountPendingDecisionTasksInput(v *CountPendingDecisionTasksInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentCountPendingDecisionTasksInput(v *CountPendingDecisionTasksInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2540,7 +2540,7 @@ func awsAwsjson10_serializeDocumentCountPendingDecisionTasksInput(v *CountPendin
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDeprecateActivityTypeInput(v *DeprecateActivityTypeInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentDeprecateActivityTypeInput(v *DeprecateActivityTypeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2559,7 +2559,7 @@ func awsAwsjson10_serializeDocumentDeprecateActivityTypeInput(v *DeprecateActivi
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDeprecateDomainInput(v *DeprecateDomainInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentDeprecateDomainInput(v *DeprecateDomainInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2571,7 +2571,7 @@ func awsAwsjson10_serializeDocumentDeprecateDomainInput(v *DeprecateDomainInput,
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDeprecateWorkflowTypeInput(v *DeprecateWorkflowTypeInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentDeprecateWorkflowTypeInput(v *DeprecateWorkflowTypeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2590,7 +2590,7 @@ func awsAwsjson10_serializeDocumentDeprecateWorkflowTypeInput(v *DeprecateWorkfl
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDescribeActivityTypeInput(v *DescribeActivityTypeInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentDescribeActivityTypeInput(v *DescribeActivityTypeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2609,7 +2609,7 @@ func awsAwsjson10_serializeDocumentDescribeActivityTypeInput(v *DescribeActivity
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDescribeDomainInput(v *DescribeDomainInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentDescribeDomainInput(v *DescribeDomainInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2621,7 +2621,7 @@ func awsAwsjson10_serializeDocumentDescribeDomainInput(v *DescribeDomainInput, v
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDescribeWorkflowExecutionInput(v *DescribeWorkflowExecutionInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentDescribeWorkflowExecutionInput(v *DescribeWorkflowExecutionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2640,7 +2640,7 @@ func awsAwsjson10_serializeDocumentDescribeWorkflowExecutionInput(v *DescribeWor
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentDescribeWorkflowTypeInput(v *DescribeWorkflowTypeInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentDescribeWorkflowTypeInput(v *DescribeWorkflowTypeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2659,7 +2659,7 @@ func awsAwsjson10_serializeDocumentDescribeWorkflowTypeInput(v *DescribeWorkflow
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentGetWorkflowExecutionHistoryInput(v *GetWorkflowExecutionHistoryInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentGetWorkflowExecutionHistoryInput(v *GetWorkflowExecutionHistoryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2693,7 +2693,7 @@ func awsAwsjson10_serializeDocumentGetWorkflowExecutionHistoryInput(v *GetWorkfl
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentListActivityTypesInput(v *ListActivityTypesInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentListActivityTypesInput(v *ListActivityTypesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2730,7 +2730,7 @@ func awsAwsjson10_serializeDocumentListActivityTypesInput(v *ListActivityTypesIn
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentListClosedWorkflowExecutionsInput(v *ListClosedWorkflowExecutionsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentListClosedWorkflowExecutionsInput(v *ListClosedWorkflowExecutionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2799,7 +2799,7 @@ func awsAwsjson10_serializeDocumentListClosedWorkflowExecutionsInput(v *ListClos
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentListDomainsInput(v *ListDomainsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentListDomainsInput(v *ListDomainsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2826,7 +2826,7 @@ func awsAwsjson10_serializeDocumentListDomainsInput(v *ListDomainsInput, value s
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentListOpenWorkflowExecutionsInput(v *ListOpenWorkflowExecutionsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentListOpenWorkflowExecutionsInput(v *ListOpenWorkflowExecutionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2881,7 +2881,7 @@ func awsAwsjson10_serializeDocumentListOpenWorkflowExecutionsInput(v *ListOpenWo
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2893,7 +2893,7 @@ func awsAwsjson10_serializeDocumentListTagsForResourceInput(v *ListTagsForResour
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentListWorkflowTypesInput(v *ListWorkflowTypesInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentListWorkflowTypesInput(v *ListWorkflowTypesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2930,7 +2930,7 @@ func awsAwsjson10_serializeDocumentListWorkflowTypesInput(v *ListWorkflowTypesIn
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentPollForActivityTaskInput(v *PollForActivityTaskInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentPollForActivityTaskInput(v *PollForActivityTaskInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2954,7 +2954,7 @@ func awsAwsjson10_serializeDocumentPollForActivityTaskInput(v *PollForActivityTa
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentPollForDecisionTaskInput(v *PollForDecisionTaskInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentPollForDecisionTaskInput(v *PollForDecisionTaskInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2993,7 +2993,7 @@ func awsAwsjson10_serializeDocumentPollForDecisionTaskInput(v *PollForDecisionTa
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentRecordActivityTaskHeartbeatInput(v *RecordActivityTaskHeartbeatInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentRecordActivityTaskHeartbeatInput(v *RecordActivityTaskHeartbeatInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3010,7 +3010,7 @@ func awsAwsjson10_serializeDocumentRecordActivityTaskHeartbeatInput(v *RecordAct
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentRegisterActivityTypeInput(v *RegisterActivityTypeInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentRegisterActivityTypeInput(v *RegisterActivityTypeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3069,7 +3069,7 @@ func awsAwsjson10_serializeDocumentRegisterActivityTypeInput(v *RegisterActivity
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentRegisterDomainInput(v *RegisterDomainInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentRegisterDomainInput(v *RegisterDomainInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3098,7 +3098,7 @@ func awsAwsjson10_serializeDocumentRegisterDomainInput(v *RegisterDomainInput, v
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentRegisterWorkflowTypeInput(v *RegisterWorkflowTypeInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentRegisterWorkflowTypeInput(v *RegisterWorkflowTypeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3157,7 +3157,7 @@ func awsAwsjson10_serializeDocumentRegisterWorkflowTypeInput(v *RegisterWorkflow
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentRequestCancelWorkflowExecutionInput(v *RequestCancelWorkflowExecutionInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentRequestCancelWorkflowExecutionInput(v *RequestCancelWorkflowExecutionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3179,7 +3179,7 @@ func awsAwsjson10_serializeDocumentRequestCancelWorkflowExecutionInput(v *Reques
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentRespondActivityTaskCanceledInput(v *RespondActivityTaskCanceledInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentRespondActivityTaskCanceledInput(v *RespondActivityTaskCanceledInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3196,7 +3196,7 @@ func awsAwsjson10_serializeDocumentRespondActivityTaskCanceledInput(v *RespondAc
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentRespondActivityTaskCompletedInput(v *RespondActivityTaskCompletedInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentRespondActivityTaskCompletedInput(v *RespondActivityTaskCompletedInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3213,7 +3213,7 @@ func awsAwsjson10_serializeDocumentRespondActivityTaskCompletedInput(v *RespondA
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentRespondActivityTaskFailedInput(v *RespondActivityTaskFailedInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentRespondActivityTaskFailedInput(v *RespondActivityTaskFailedInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3235,7 +3235,7 @@ func awsAwsjson10_serializeDocumentRespondActivityTaskFailedInput(v *RespondActi
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentRespondDecisionTaskCompletedInput(v *RespondDecisionTaskCompletedInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentRespondDecisionTaskCompletedInput(v *RespondDecisionTaskCompletedInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3259,7 +3259,7 @@ func awsAwsjson10_serializeDocumentRespondDecisionTaskCompletedInput(v *RespondD
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentSignalWorkflowExecutionInput(v *SignalWorkflowExecutionInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentSignalWorkflowExecutionInput(v *SignalWorkflowExecutionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3291,7 +3291,7 @@ func awsAwsjson10_serializeDocumentSignalWorkflowExecutionInput(v *SignalWorkflo
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentStartWorkflowExecutionInput(v *StartWorkflowExecutionInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentStartWorkflowExecutionInput(v *StartWorkflowExecutionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3359,7 +3359,7 @@ func awsAwsjson10_serializeDocumentStartWorkflowExecutionInput(v *StartWorkflowE
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3378,7 +3378,7 @@ func awsAwsjson10_serializeDocumentTagResourceInput(v *TagResourceInput, value s
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentTerminateWorkflowExecutionInput(v *TerminateWorkflowExecutionInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentTerminateWorkflowExecutionInput(v *TerminateWorkflowExecutionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3415,7 +3415,7 @@ func awsAwsjson10_serializeDocumentTerminateWorkflowExecutionInput(v *TerminateW
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentUndeprecateActivityTypeInput(v *UndeprecateActivityTypeInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentUndeprecateActivityTypeInput(v *UndeprecateActivityTypeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3434,7 +3434,7 @@ func awsAwsjson10_serializeDocumentUndeprecateActivityTypeInput(v *UndeprecateAc
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentUndeprecateDomainInput(v *UndeprecateDomainInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentUndeprecateDomainInput(v *UndeprecateDomainInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3446,7 +3446,7 @@ func awsAwsjson10_serializeDocumentUndeprecateDomainInput(v *UndeprecateDomainIn
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentUndeprecateWorkflowTypeInput(v *UndeprecateWorkflowTypeInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentUndeprecateWorkflowTypeInput(v *UndeprecateWorkflowTypeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3465,7 +3465,7 @@ func awsAwsjson10_serializeDocumentUndeprecateWorkflowTypeInput(v *UndeprecateWo
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

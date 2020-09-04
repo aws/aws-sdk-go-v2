@@ -159,7 +159,7 @@ func (m *awsAwsjson11_deserializeOpDescribeTextTranslationJob) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeTextTranslationJobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeTextTranslationJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -265,7 +265,7 @@ func (m *awsAwsjson11_deserializeOpGetTerminology) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetTerminologyOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetTerminologyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -374,7 +374,7 @@ func (m *awsAwsjson11_deserializeOpImportTerminology) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentImportTerminologyOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentImportTerminologyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -483,7 +483,7 @@ func (m *awsAwsjson11_deserializeOpListTerminologies) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListTerminologiesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListTerminologiesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -589,7 +589,7 @@ func (m *awsAwsjson11_deserializeOpListTextTranslationJobs) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListTextTranslationJobsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListTextTranslationJobsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -698,7 +698,7 @@ func (m *awsAwsjson11_deserializeOpStartTextTranslationJob) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStartTextTranslationJobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStartTextTranslationJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -810,7 +810,7 @@ func (m *awsAwsjson11_deserializeOpStopTextTranslationJob) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStopTextTranslationJobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStopTextTranslationJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -916,7 +916,7 @@ func (m *awsAwsjson11_deserializeOpTranslateText) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentTranslateTextOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentTranslateTextOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3313,7 +3313,7 @@ func awsAwsjson11_deserializeDocumentDeleteTerminologyOutput(v **DeleteTerminolo
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeTextTranslationJobOutput(v **DescribeTextTranslationJobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeTextTranslationJobOutput(v **DescribeTextTranslationJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3369,7 +3369,7 @@ func awsAwsjson11_deserializeDocumentDescribeTextTranslationJobOutput(v **Descri
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetTerminologyOutput(v **GetTerminologyOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetTerminologyOutput(v **GetTerminologyOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3430,7 +3430,7 @@ func awsAwsjson11_deserializeDocumentGetTerminologyOutput(v **GetTerminologyOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentImportTerminologyOutput(v **ImportTerminologyOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentImportTerminologyOutput(v **ImportTerminologyOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3486,7 +3486,7 @@ func awsAwsjson11_deserializeDocumentImportTerminologyOutput(v **ImportTerminolo
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListTerminologiesOutput(v **ListTerminologiesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListTerminologiesOutput(v **ListTerminologiesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3555,7 +3555,7 @@ func awsAwsjson11_deserializeDocumentListTerminologiesOutput(v **ListTerminologi
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListTextTranslationJobsOutput(v **ListTextTranslationJobsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListTextTranslationJobsOutput(v **ListTextTranslationJobsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3624,7 +3624,7 @@ func awsAwsjson11_deserializeDocumentListTextTranslationJobsOutput(v **ListTextT
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStartTextTranslationJobOutput(v **StartTextTranslationJobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStartTextTranslationJobOutput(v **StartTextTranslationJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3701,7 +3701,7 @@ func awsAwsjson11_deserializeDocumentStartTextTranslationJobOutput(v **StartText
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStopTextTranslationJobOutput(v **StopTextTranslationJobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStopTextTranslationJobOutput(v **StopTextTranslationJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3778,7 +3778,7 @@ func awsAwsjson11_deserializeDocumentStopTextTranslationJobOutput(v **StopTextTr
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentTranslateTextOutput(v **TranslateTextOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentTranslateTextOutput(v **TranslateTextOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

@@ -48,7 +48,7 @@ func (m *awsAwsquery_serializeOpAssumeRole) HandleSerialize(ctx context.Context,
 	body.Key("Action").String("AssumeRole")
 	body.Key("Version").String("2011-06-15")
 
-	if err := awsAwsquery_serializeDocumentAssumeRoleInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentAssumeRoleInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -103,7 +103,7 @@ func (m *awsAwsquery_serializeOpAssumeRoleWithSAML) HandleSerialize(ctx context.
 	body.Key("Action").String("AssumeRoleWithSAML")
 	body.Key("Version").String("2011-06-15")
 
-	if err := awsAwsquery_serializeDocumentAssumeRoleWithSAMLInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentAssumeRoleWithSAMLInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -158,7 +158,7 @@ func (m *awsAwsquery_serializeOpAssumeRoleWithWebIdentity) HandleSerialize(ctx c
 	body.Key("Action").String("AssumeRoleWithWebIdentity")
 	body.Key("Version").String("2011-06-15")
 
-	if err := awsAwsquery_serializeDocumentAssumeRoleWithWebIdentityInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentAssumeRoleWithWebIdentityInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -213,7 +213,7 @@ func (m *awsAwsquery_serializeOpDecodeAuthorizationMessage) HandleSerialize(ctx 
 	body.Key("Action").String("DecodeAuthorizationMessage")
 	body.Key("Version").String("2011-06-15")
 
-	if err := awsAwsquery_serializeDocumentDecodeAuthorizationMessageInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDecodeAuthorizationMessageInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -268,7 +268,7 @@ func (m *awsAwsquery_serializeOpGetAccessKeyInfo) HandleSerialize(ctx context.Co
 	body.Key("Action").String("GetAccessKeyInfo")
 	body.Key("Version").String("2011-06-15")
 
-	if err := awsAwsquery_serializeDocumentGetAccessKeyInfoInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetAccessKeyInfoInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -376,7 +376,7 @@ func (m *awsAwsquery_serializeOpGetFederationToken) HandleSerialize(ctx context.
 	body.Key("Action").String("GetFederationToken")
 	body.Key("Version").String("2011-06-15")
 
-	if err := awsAwsquery_serializeDocumentGetFederationTokenInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetFederationTokenInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -431,7 +431,7 @@ func (m *awsAwsquery_serializeOpGetSessionToken) HandleSerialize(ctx context.Con
 	body.Key("Action").String("GetSessionToken")
 	body.Key("Version").String("2011-06-15")
 
-	if err := awsAwsquery_serializeDocumentGetSessionTokenInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetSessionTokenInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -532,7 +532,7 @@ func awsAwsquery_serializeDocumentTagListType(v []*types.Tag, value query.Value)
 	return nil
 }
 
-func awsAwsquery_serializeDocumentAssumeRoleInput(v *AssumeRoleInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentAssumeRoleInput(v *AssumeRoleInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -595,7 +595,7 @@ func awsAwsquery_serializeDocumentAssumeRoleInput(v *AssumeRoleInput, value quer
 	return nil
 }
 
-func awsAwsquery_serializeDocumentAssumeRoleWithSAMLInput(v *AssumeRoleWithSAMLInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentAssumeRoleWithSAMLInput(v *AssumeRoleWithSAMLInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -634,7 +634,7 @@ func awsAwsquery_serializeDocumentAssumeRoleWithSAMLInput(v *AssumeRoleWithSAMLI
 	return nil
 }
 
-func awsAwsquery_serializeDocumentAssumeRoleWithWebIdentityInput(v *AssumeRoleWithWebIdentityInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentAssumeRoleWithWebIdentityInput(v *AssumeRoleWithWebIdentityInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -678,7 +678,7 @@ func awsAwsquery_serializeDocumentAssumeRoleWithWebIdentityInput(v *AssumeRoleWi
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDecodeAuthorizationMessageInput(v *DecodeAuthorizationMessageInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDecodeAuthorizationMessageInput(v *DecodeAuthorizationMessageInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -690,7 +690,7 @@ func awsAwsquery_serializeDocumentDecodeAuthorizationMessageInput(v *DecodeAutho
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetAccessKeyInfoInput(v *GetAccessKeyInfoInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetAccessKeyInfoInput(v *GetAccessKeyInfoInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -702,14 +702,14 @@ func awsAwsquery_serializeDocumentGetAccessKeyInfoInput(v *GetAccessKeyInfoInput
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetCallerIdentityInput(v *GetCallerIdentityInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetCallerIdentityInput(v *GetCallerIdentityInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetFederationTokenInput(v *GetFederationTokenInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetFederationTokenInput(v *GetFederationTokenInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -745,7 +745,7 @@ func awsAwsquery_serializeDocumentGetFederationTokenInput(v *GetFederationTokenI
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetSessionTokenInput(v *GetSessionTokenInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetSessionTokenInput(v *GetSessionTokenInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 

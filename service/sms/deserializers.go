@@ -53,7 +53,7 @@ func (m *awsAwsjson11_deserializeOpCreateApp) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateAppOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateAppOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -165,7 +165,7 @@ func (m *awsAwsjson11_deserializeOpCreateReplicationJob) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateReplicationJobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateReplicationJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -289,7 +289,7 @@ func (m *awsAwsjson11_deserializeOpDeleteApp) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteAppOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteAppOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -401,7 +401,7 @@ func (m *awsAwsjson11_deserializeOpDeleteAppLaunchConfiguration) HandleDeseriali
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteAppLaunchConfigurationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteAppLaunchConfigurationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -513,7 +513,7 @@ func (m *awsAwsjson11_deserializeOpDeleteAppReplicationConfiguration) HandleDese
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteAppReplicationConfigurationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteAppReplicationConfigurationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -625,7 +625,7 @@ func (m *awsAwsjson11_deserializeOpDeleteReplicationJob) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteReplicationJobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteReplicationJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -737,7 +737,7 @@ func (m *awsAwsjson11_deserializeOpDeleteServerCatalog) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteServerCatalogOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteServerCatalogOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -846,7 +846,7 @@ func (m *awsAwsjson11_deserializeOpDisassociateConnector) HandleDeserialize(ctx 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDisassociateConnectorOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDisassociateConnectorOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -955,7 +955,7 @@ func (m *awsAwsjson11_deserializeOpGenerateChangeSet) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGenerateChangeSetOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGenerateChangeSetOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1067,7 +1067,7 @@ func (m *awsAwsjson11_deserializeOpGenerateTemplate) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGenerateTemplateOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGenerateTemplateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1179,7 +1179,7 @@ func (m *awsAwsjson11_deserializeOpGetApp) HandleDeserialize(ctx context.Context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetAppOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetAppOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1291,7 +1291,7 @@ func (m *awsAwsjson11_deserializeOpGetAppLaunchConfiguration) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetAppLaunchConfigurationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetAppLaunchConfigurationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1403,7 +1403,7 @@ func (m *awsAwsjson11_deserializeOpGetAppReplicationConfiguration) HandleDeseria
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetAppReplicationConfigurationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetAppReplicationConfigurationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1515,7 +1515,7 @@ func (m *awsAwsjson11_deserializeOpGetConnectors) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetConnectorsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetConnectorsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1615,7 +1615,7 @@ func (m *awsAwsjson11_deserializeOpGetReplicationJobs) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetReplicationJobsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetReplicationJobsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1721,7 +1721,7 @@ func (m *awsAwsjson11_deserializeOpGetReplicationRuns) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetReplicationRunsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetReplicationRunsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1827,7 +1827,7 @@ func (m *awsAwsjson11_deserializeOpGetServers) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetServersOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetServersOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1927,7 +1927,7 @@ func (m *awsAwsjson11_deserializeOpImportServerCatalog) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentImportServerCatalogOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentImportServerCatalogOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2039,7 +2039,7 @@ func (m *awsAwsjson11_deserializeOpLaunchApp) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentLaunchAppOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentLaunchAppOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2151,7 +2151,7 @@ func (m *awsAwsjson11_deserializeOpListApps) HandleDeserialize(ctx context.Conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListAppsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListAppsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2263,7 +2263,7 @@ func (m *awsAwsjson11_deserializeOpPutAppLaunchConfiguration) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentPutAppLaunchConfigurationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentPutAppLaunchConfigurationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2375,7 +2375,7 @@ func (m *awsAwsjson11_deserializeOpPutAppReplicationConfiguration) HandleDeseria
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentPutAppReplicationConfigurationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentPutAppReplicationConfigurationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2487,7 +2487,7 @@ func (m *awsAwsjson11_deserializeOpStartAppReplication) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStartAppReplicationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStartAppReplicationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2599,7 +2599,7 @@ func (m *awsAwsjson11_deserializeOpStartOnDemandReplicationRun) HandleDeserializ
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStartOnDemandReplicationRunOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStartOnDemandReplicationRunOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2711,7 +2711,7 @@ func (m *awsAwsjson11_deserializeOpStopAppReplication) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStopAppReplicationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStopAppReplicationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2823,7 +2823,7 @@ func (m *awsAwsjson11_deserializeOpTerminateApp) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentTerminateAppOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentTerminateAppOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2935,7 +2935,7 @@ func (m *awsAwsjson11_deserializeOpUpdateApp) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateAppOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateAppOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3047,7 +3047,7 @@ func (m *awsAwsjson11_deserializeOpUpdateReplicationJob) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateReplicationJobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateReplicationJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -6843,7 +6843,7 @@ func awsAwsjson11_deserializeDocumentVmServerAddress(v **types.VmServerAddress, 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateAppOutput(v **CreateAppOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateAppOutput(v **CreateAppOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6909,7 +6909,7 @@ func awsAwsjson11_deserializeDocumentCreateAppOutput(v **CreateAppOutput, decode
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateReplicationJobOutput(v **CreateReplicationJobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateReplicationJobOutput(v **CreateReplicationJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6973,7 +6973,7 @@ func awsAwsjson11_deserializeDocumentCreateReplicationJobOutput(v **CreateReplic
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteAppLaunchConfigurationOutput(v **DeleteAppLaunchConfigurationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteAppLaunchConfigurationOutput(v **DeleteAppLaunchConfigurationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7024,7 +7024,7 @@ func awsAwsjson11_deserializeDocumentDeleteAppLaunchConfigurationOutput(v **Dele
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteAppOutput(v **DeleteAppOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteAppOutput(v **DeleteAppOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7075,7 +7075,7 @@ func awsAwsjson11_deserializeDocumentDeleteAppOutput(v **DeleteAppOutput, decode
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteAppReplicationConfigurationOutput(v **DeleteAppReplicationConfigurationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteAppReplicationConfigurationOutput(v **DeleteAppReplicationConfigurationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7126,7 +7126,7 @@ func awsAwsjson11_deserializeDocumentDeleteAppReplicationConfigurationOutput(v *
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteReplicationJobOutput(v **DeleteReplicationJobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteReplicationJobOutput(v **DeleteReplicationJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7177,7 +7177,7 @@ func awsAwsjson11_deserializeDocumentDeleteReplicationJobOutput(v **DeleteReplic
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteServerCatalogOutput(v **DeleteServerCatalogOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteServerCatalogOutput(v **DeleteServerCatalogOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7228,7 +7228,7 @@ func awsAwsjson11_deserializeDocumentDeleteServerCatalogOutput(v **DeleteServerC
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDisassociateConnectorOutput(v **DisassociateConnectorOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDisassociateConnectorOutput(v **DisassociateConnectorOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7279,7 +7279,7 @@ func awsAwsjson11_deserializeDocumentDisassociateConnectorOutput(v **Disassociat
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGenerateChangeSetOutput(v **GenerateChangeSetOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGenerateChangeSetOutput(v **GenerateChangeSetOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7335,7 +7335,7 @@ func awsAwsjson11_deserializeDocumentGenerateChangeSetOutput(v **GenerateChangeS
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGenerateTemplateOutput(v **GenerateTemplateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGenerateTemplateOutput(v **GenerateTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7391,7 +7391,7 @@ func awsAwsjson11_deserializeDocumentGenerateTemplateOutput(v **GenerateTemplate
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetAppLaunchConfigurationOutput(v **GetAppLaunchConfigurationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetAppLaunchConfigurationOutput(v **GetAppLaunchConfigurationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7473,7 +7473,7 @@ func awsAwsjson11_deserializeDocumentGetAppLaunchConfigurationOutput(v **GetAppL
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetAppOutput(v **GetAppOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetAppOutput(v **GetAppOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7539,7 +7539,7 @@ func awsAwsjson11_deserializeDocumentGetAppOutput(v **GetAppOutput, decoder *jso
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetAppReplicationConfigurationOutput(v **GetAppReplicationConfigurationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetAppReplicationConfigurationOutput(v **GetAppReplicationConfigurationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7595,7 +7595,7 @@ func awsAwsjson11_deserializeDocumentGetAppReplicationConfigurationOutput(v **Ge
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetConnectorsOutput(v **GetConnectorsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetConnectorsOutput(v **GetConnectorsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7664,7 +7664,7 @@ func awsAwsjson11_deserializeDocumentGetConnectorsOutput(v **GetConnectorsOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetReplicationJobsOutput(v **GetReplicationJobsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetReplicationJobsOutput(v **GetReplicationJobsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7733,7 +7733,7 @@ func awsAwsjson11_deserializeDocumentGetReplicationJobsOutput(v **GetReplication
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetReplicationRunsOutput(v **GetReplicationRunsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetReplicationRunsOutput(v **GetReplicationRunsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7807,7 +7807,7 @@ func awsAwsjson11_deserializeDocumentGetReplicationRunsOutput(v **GetReplication
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetServersOutput(v **GetServersOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetServersOutput(v **GetServersOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7906,7 +7906,7 @@ func awsAwsjson11_deserializeDocumentGetServersOutput(v **GetServersOutput, deco
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentImportServerCatalogOutput(v **ImportServerCatalogOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentImportServerCatalogOutput(v **ImportServerCatalogOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7957,7 +7957,7 @@ func awsAwsjson11_deserializeDocumentImportServerCatalogOutput(v **ImportServerC
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentLaunchAppOutput(v **LaunchAppOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentLaunchAppOutput(v **LaunchAppOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8008,7 +8008,7 @@ func awsAwsjson11_deserializeDocumentLaunchAppOutput(v **LaunchAppOutput, decode
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListAppsOutput(v **ListAppsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListAppsOutput(v **ListAppsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8077,7 +8077,7 @@ func awsAwsjson11_deserializeDocumentListAppsOutput(v **ListAppsOutput, decoder 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentPutAppLaunchConfigurationOutput(v **PutAppLaunchConfigurationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentPutAppLaunchConfigurationOutput(v **PutAppLaunchConfigurationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8128,7 +8128,7 @@ func awsAwsjson11_deserializeDocumentPutAppLaunchConfigurationOutput(v **PutAppL
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentPutAppReplicationConfigurationOutput(v **PutAppReplicationConfigurationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentPutAppReplicationConfigurationOutput(v **PutAppReplicationConfigurationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8179,7 +8179,7 @@ func awsAwsjson11_deserializeDocumentPutAppReplicationConfigurationOutput(v **Pu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStartAppReplicationOutput(v **StartAppReplicationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStartAppReplicationOutput(v **StartAppReplicationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8230,7 +8230,7 @@ func awsAwsjson11_deserializeDocumentStartAppReplicationOutput(v **StartAppRepli
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStartOnDemandReplicationRunOutput(v **StartOnDemandReplicationRunOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStartOnDemandReplicationRunOutput(v **StartOnDemandReplicationRunOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8294,7 +8294,7 @@ func awsAwsjson11_deserializeDocumentStartOnDemandReplicationRunOutput(v **Start
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStopAppReplicationOutput(v **StopAppReplicationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStopAppReplicationOutput(v **StopAppReplicationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8345,7 +8345,7 @@ func awsAwsjson11_deserializeDocumentStopAppReplicationOutput(v **StopAppReplica
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentTerminateAppOutput(v **TerminateAppOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentTerminateAppOutput(v **TerminateAppOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8396,7 +8396,7 @@ func awsAwsjson11_deserializeDocumentTerminateAppOutput(v **TerminateAppOutput, 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateAppOutput(v **UpdateAppOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateAppOutput(v **UpdateAppOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8462,7 +8462,7 @@ func awsAwsjson11_deserializeDocumentUpdateAppOutput(v **UpdateAppOutput, decode
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateReplicationJobOutput(v **UpdateReplicationJobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateReplicationJobOutput(v **UpdateReplicationJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

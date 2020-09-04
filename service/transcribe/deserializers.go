@@ -53,7 +53,7 @@ func (m *awsAwsjson11_deserializeOpCreateMedicalVocabulary) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateMedicalVocabularyOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateMedicalVocabularyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -162,7 +162,7 @@ func (m *awsAwsjson11_deserializeOpCreateVocabulary) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateVocabularyOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateVocabularyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -271,7 +271,7 @@ func (m *awsAwsjson11_deserializeOpCreateVocabularyFilter) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateVocabularyFilterOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateVocabularyFilterOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -919,7 +919,7 @@ func (m *awsAwsjson11_deserializeOpGetMedicalTranscriptionJob) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetMedicalTranscriptionJobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetMedicalTranscriptionJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1028,7 +1028,7 @@ func (m *awsAwsjson11_deserializeOpGetMedicalVocabulary) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetMedicalVocabularyOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetMedicalVocabularyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1137,7 +1137,7 @@ func (m *awsAwsjson11_deserializeOpGetTranscriptionJob) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetTranscriptionJobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetTranscriptionJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1246,7 +1246,7 @@ func (m *awsAwsjson11_deserializeOpGetVocabulary) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetVocabularyOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetVocabularyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1355,7 +1355,7 @@ func (m *awsAwsjson11_deserializeOpGetVocabularyFilter) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetVocabularyFilterOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetVocabularyFilterOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1464,7 +1464,7 @@ func (m *awsAwsjson11_deserializeOpListMedicalTranscriptionJobs) HandleDeseriali
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListMedicalTranscriptionJobsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListMedicalTranscriptionJobsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1570,7 +1570,7 @@ func (m *awsAwsjson11_deserializeOpListMedicalVocabularies) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListMedicalVocabulariesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListMedicalVocabulariesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1676,7 +1676,7 @@ func (m *awsAwsjson11_deserializeOpListTranscriptionJobs) HandleDeserialize(ctx 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListTranscriptionJobsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListTranscriptionJobsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1782,7 +1782,7 @@ func (m *awsAwsjson11_deserializeOpListVocabularies) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListVocabulariesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListVocabulariesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1888,7 +1888,7 @@ func (m *awsAwsjson11_deserializeOpListVocabularyFilters) HandleDeserialize(ctx 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListVocabularyFiltersOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListVocabularyFiltersOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1994,7 +1994,7 @@ func (m *awsAwsjson11_deserializeOpStartMedicalTranscriptionJob) HandleDeseriali
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStartMedicalTranscriptionJobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStartMedicalTranscriptionJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2103,7 +2103,7 @@ func (m *awsAwsjson11_deserializeOpStartTranscriptionJob) HandleDeserialize(ctx 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStartTranscriptionJobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStartTranscriptionJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2212,7 +2212,7 @@ func (m *awsAwsjson11_deserializeOpUpdateMedicalVocabulary) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateMedicalVocabularyOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateMedicalVocabularyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2324,7 +2324,7 @@ func (m *awsAwsjson11_deserializeOpUpdateVocabulary) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateVocabularyOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateVocabularyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2436,7 +2436,7 @@ func (m *awsAwsjson11_deserializeOpUpdateVocabularyFilter) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateVocabularyFilterOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateVocabularyFilterOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4791,7 +4791,7 @@ func awsAwsjson11_deserializeDocumentVocabularyInfo(v **types.VocabularyInfo, de
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateMedicalVocabularyOutput(v **CreateMedicalVocabularyOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateMedicalVocabularyOutput(v **CreateMedicalVocabularyOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4911,7 +4911,7 @@ func awsAwsjson11_deserializeDocumentCreateMedicalVocabularyOutput(v **CreateMed
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateVocabularyFilterOutput(v **CreateVocabularyFilterOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateVocabularyFilterOutput(v **CreateVocabularyFilterOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5005,7 +5005,7 @@ func awsAwsjson11_deserializeDocumentCreateVocabularyFilterOutput(v **CreateVoca
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateVocabularyOutput(v **CreateVocabularyOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateVocabularyOutput(v **CreateVocabularyOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5380,7 +5380,7 @@ func awsAwsjson11_deserializeDocumentDeleteVocabularyOutput(v **DeleteVocabulary
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetMedicalTranscriptionJobOutput(v **GetMedicalTranscriptionJobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetMedicalTranscriptionJobOutput(v **GetMedicalTranscriptionJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5436,7 +5436,7 @@ func awsAwsjson11_deserializeDocumentGetMedicalTranscriptionJobOutput(v **GetMed
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetMedicalVocabularyOutput(v **GetMedicalVocabularyOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetMedicalVocabularyOutput(v **GetMedicalVocabularyOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5569,7 +5569,7 @@ func awsAwsjson11_deserializeDocumentGetMedicalVocabularyOutput(v **GetMedicalVo
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetTranscriptionJobOutput(v **GetTranscriptionJobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetTranscriptionJobOutput(v **GetTranscriptionJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5625,7 +5625,7 @@ func awsAwsjson11_deserializeDocumentGetTranscriptionJobOutput(v **GetTranscript
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetVocabularyFilterOutput(v **GetVocabularyFilterOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetVocabularyFilterOutput(v **GetVocabularyFilterOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5732,7 +5732,7 @@ func awsAwsjson11_deserializeDocumentGetVocabularyFilterOutput(v **GetVocabulary
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetVocabularyOutput(v **GetVocabularyOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetVocabularyOutput(v **GetVocabularyOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5865,7 +5865,7 @@ func awsAwsjson11_deserializeDocumentGetVocabularyOutput(v **GetVocabularyOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListMedicalTranscriptionJobsOutput(v **ListMedicalTranscriptionJobsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListMedicalTranscriptionJobsOutput(v **ListMedicalTranscriptionJobsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5947,7 +5947,7 @@ func awsAwsjson11_deserializeDocumentListMedicalTranscriptionJobsOutput(v **List
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListMedicalVocabulariesOutput(v **ListMedicalVocabulariesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListMedicalVocabulariesOutput(v **ListMedicalVocabulariesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6029,7 +6029,7 @@ func awsAwsjson11_deserializeDocumentListMedicalVocabulariesOutput(v **ListMedic
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListTranscriptionJobsOutput(v **ListTranscriptionJobsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListTranscriptionJobsOutput(v **ListTranscriptionJobsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6111,7 +6111,7 @@ func awsAwsjson11_deserializeDocumentListTranscriptionJobsOutput(v **ListTranscr
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListVocabulariesOutput(v **ListVocabulariesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListVocabulariesOutput(v **ListVocabulariesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6193,7 +6193,7 @@ func awsAwsjson11_deserializeDocumentListVocabulariesOutput(v **ListVocabularies
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListVocabularyFiltersOutput(v **ListVocabularyFiltersOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListVocabularyFiltersOutput(v **ListVocabularyFiltersOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6262,7 +6262,7 @@ func awsAwsjson11_deserializeDocumentListVocabularyFiltersOutput(v **ListVocabul
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStartMedicalTranscriptionJobOutput(v **StartMedicalTranscriptionJobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStartMedicalTranscriptionJobOutput(v **StartMedicalTranscriptionJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6318,7 +6318,7 @@ func awsAwsjson11_deserializeDocumentStartMedicalTranscriptionJobOutput(v **Star
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStartTranscriptionJobOutput(v **StartTranscriptionJobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStartTranscriptionJobOutput(v **StartTranscriptionJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6374,7 +6374,7 @@ func awsAwsjson11_deserializeDocumentStartTranscriptionJobOutput(v **StartTransc
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateMedicalVocabularyOutput(v **UpdateMedicalVocabularyOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateMedicalVocabularyOutput(v **UpdateMedicalVocabularyOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6481,7 +6481,7 @@ func awsAwsjson11_deserializeDocumentUpdateMedicalVocabularyOutput(v **UpdateMed
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateVocabularyFilterOutput(v **UpdateVocabularyFilterOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateVocabularyFilterOutput(v **UpdateVocabularyFilterOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6575,7 +6575,7 @@ func awsAwsjson11_deserializeDocumentUpdateVocabularyFilterOutput(v **UpdateVoca
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateVocabularyOutput(v **UpdateVocabularyOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateVocabularyOutput(v **UpdateVocabularyOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

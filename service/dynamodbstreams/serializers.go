@@ -43,7 +43,7 @@ func (m *awsAwsjson10_serializeOpDescribeStream) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDBStreams_20120810.DescribeStream")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentDescribeStreamInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentDescribeStreamInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -89,7 +89,7 @@ func (m *awsAwsjson10_serializeOpGetRecords) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDBStreams_20120810.GetRecords")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentGetRecordsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentGetRecordsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -135,7 +135,7 @@ func (m *awsAwsjson10_serializeOpGetShardIterator) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDBStreams_20120810.GetShardIterator")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentGetShardIteratorInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentGetShardIteratorInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -181,7 +181,7 @@ func (m *awsAwsjson10_serializeOpListStreams) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DynamoDBStreams_20120810.ListStreams")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson10_serializeDocumentListStreamsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson10_serializeOpDocumentListStreamsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -196,7 +196,7 @@ func (m *awsAwsjson10_serializeOpListStreams) HandleSerialize(ctx context.Contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsAwsjson10_serializeDocumentDescribeStreamInput(v *DescribeStreamInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentDescribeStreamInput(v *DescribeStreamInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -218,7 +218,7 @@ func awsAwsjson10_serializeDocumentDescribeStreamInput(v *DescribeStreamInput, v
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentGetRecordsInput(v *GetRecordsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentGetRecordsInput(v *GetRecordsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -235,7 +235,7 @@ func awsAwsjson10_serializeDocumentGetRecordsInput(v *GetRecordsInput, value smi
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentGetShardIteratorInput(v *GetShardIteratorInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentGetShardIteratorInput(v *GetShardIteratorInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -262,7 +262,7 @@ func awsAwsjson10_serializeDocumentGetShardIteratorInput(v *GetShardIteratorInpu
 	return nil
 }
 
-func awsAwsjson10_serializeDocumentListStreamsInput(v *ListStreamsInput, value smithyjson.Value) error {
+func awsAwsjson10_serializeOpDocumentListStreamsInput(v *ListStreamsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

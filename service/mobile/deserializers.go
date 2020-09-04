@@ -54,7 +54,7 @@ func (m *awsRestjson1_deserializeOpCreateProject) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentCreateProjectOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentCreateProjectOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -139,7 +139,7 @@ func awsRestjson1_deserializeOpErrorCreateProject(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateProjectOutput(v **CreateProjectOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateProjectOutput(v **CreateProjectOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -229,7 +229,7 @@ func (m *awsRestjson1_deserializeOpDeleteProject) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDeleteProjectOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDeleteProjectOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -308,7 +308,7 @@ func awsRestjson1_deserializeOpErrorDeleteProject(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentDeleteProjectOutput(v **DeleteProjectOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDeleteProjectOutput(v **DeleteProjectOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -403,7 +403,7 @@ func (m *awsRestjson1_deserializeOpDescribeBundle) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDescribeBundleOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDescribeBundleOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -485,7 +485,7 @@ func awsRestjson1_deserializeOpErrorDescribeBundle(response *smithyhttp.Response
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeBundleOutput(v **DescribeBundleOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeBundleOutput(v **DescribeBundleOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -575,7 +575,7 @@ func (m *awsRestjson1_deserializeOpDescribeProject) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDescribeProjectOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDescribeProjectOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -657,7 +657,7 @@ func awsRestjson1_deserializeOpErrorDescribeProject(response *smithyhttp.Respons
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeProjectOutput(v **DescribeProjectOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeProjectOutput(v **DescribeProjectOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -747,7 +747,7 @@ func (m *awsRestjson1_deserializeOpExportBundle) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentExportBundleOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentExportBundleOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -829,7 +829,7 @@ func awsRestjson1_deserializeOpErrorExportBundle(response *smithyhttp.Response) 
 	}
 }
 
-func awsRestjson1_deserializeDocumentExportBundleOutput(v **ExportBundleOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentExportBundleOutput(v **ExportBundleOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -927,7 +927,7 @@ func (m *awsRestjson1_deserializeOpExportProject) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentExportProjectOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentExportProjectOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1009,7 +1009,7 @@ func awsRestjson1_deserializeOpErrorExportProject(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentExportProjectOutput(v **ExportProjectOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentExportProjectOutput(v **ExportProjectOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1133,7 +1133,7 @@ func (m *awsRestjson1_deserializeOpListBundles) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListBundlesOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListBundlesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1212,7 +1212,7 @@ func awsRestjson1_deserializeOpErrorListBundles(response *smithyhttp.Response) e
 	}
 }
 
-func awsRestjson1_deserializeDocumentListBundlesOutput(v **ListBundlesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListBundlesOutput(v **ListBundlesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1315,7 +1315,7 @@ func (m *awsRestjson1_deserializeOpListProjects) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListProjectsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListProjectsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1394,7 +1394,7 @@ func awsRestjson1_deserializeOpErrorListProjects(response *smithyhttp.Response) 
 	}
 }
 
-func awsRestjson1_deserializeDocumentListProjectsOutput(v **ListProjectsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListProjectsOutput(v **ListProjectsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1497,7 +1497,7 @@ func (m *awsRestjson1_deserializeOpUpdateProject) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentUpdateProjectOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentUpdateProjectOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1585,7 +1585,7 @@ func awsRestjson1_deserializeOpErrorUpdateProject(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentUpdateProjectOutput(v **UpdateProjectOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUpdateProjectOutput(v **UpdateProjectOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1641,7 +1641,7 @@ func awsRestjson1_deserializeDocumentUpdateProjectOutput(v **UpdateProjectOutput
 	return nil
 }
 
-func awsRestjson1_deserializeHttpBindingsLimitExceededException(v *types.LimitExceededException, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsLimitExceededException(v *types.LimitExceededException, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -1653,7 +1653,7 @@ func awsRestjson1_deserializeHttpBindingsLimitExceededException(v *types.LimitEx
 
 	return nil
 }
-func awsRestjson1_deserializeHttpBindingsServiceUnavailableException(v *types.ServiceUnavailableException, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsServiceUnavailableException(v *types.ServiceUnavailableException, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -1665,7 +1665,7 @@ func awsRestjson1_deserializeHttpBindingsServiceUnavailableException(v *types.Se
 
 	return nil
 }
-func awsRestjson1_deserializeHttpBindingsTooManyRequestsException(v *types.TooManyRequestsException, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsTooManyRequestsException(v *types.TooManyRequestsException, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -1774,7 +1774,7 @@ func awsRestjson1_deserializeErrorLimitExceededException(response *smithyhttp.Re
 
 	errorBody.Seek(0, io.SeekStart)
 
-	if err := awsRestjson1_deserializeHttpBindingsLimitExceededException(output, response); err != nil {
+	if err := awsRestjson1_deserializeOpHttpBindingsLimitExceededException(output, response); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
 	}
 
@@ -1828,7 +1828,7 @@ func awsRestjson1_deserializeErrorServiceUnavailableException(response *smithyht
 
 	errorBody.Seek(0, io.SeekStart)
 
-	if err := awsRestjson1_deserializeHttpBindingsServiceUnavailableException(output, response); err != nil {
+	if err := awsRestjson1_deserializeOpHttpBindingsServiceUnavailableException(output, response); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
 	}
 
@@ -1857,7 +1857,7 @@ func awsRestjson1_deserializeErrorTooManyRequestsException(response *smithyhttp.
 
 	errorBody.Seek(0, io.SeekStart)
 
-	if err := awsRestjson1_deserializeHttpBindingsTooManyRequestsException(output, response); err != nil {
+	if err := awsRestjson1_deserializeOpHttpBindingsTooManyRequestsException(output, response); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
 	}
 

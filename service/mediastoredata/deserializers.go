@@ -136,7 +136,7 @@ func (m *awsRestjson1_deserializeOpDescribeObject) HandleDeserialize(ctx context
 	output := &DescribeObjectOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsDescribeObjectOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsDescribeObjectOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
@@ -204,7 +204,7 @@ func awsRestjson1_deserializeOpErrorDescribeObject(response *smithyhttp.Response
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsDescribeObjectOutput(v *DescribeObjectOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsDescribeObjectOutput(v *DescribeObjectOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -271,12 +271,12 @@ func (m *awsRestjson1_deserializeOpGetObject) HandleDeserialize(ctx context.Cont
 	output := &GetObjectOutput{}
 	out.Result = output
 
-	err = awsRestjson1_deserializeHttpBindingsGetObjectOutput(output, response)
+	err = awsRestjson1_deserializeOpHttpBindingsGetObjectOutput(output, response)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	err = awsRestjson1_deserializeDocumentGetObjectOutput(output, response.Body)
+	err = awsRestjson1_deserializeOpDocumentGetObjectOutput(output, response.Body)
 	if err != nil {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
 	}
@@ -347,7 +347,7 @@ func awsRestjson1_deserializeOpErrorGetObject(response *smithyhttp.Response) err
 	}
 }
 
-func awsRestjson1_deserializeHttpBindingsGetObjectOutput(v *GetObjectOutput, response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpHttpBindingsGetObjectOutput(v *GetObjectOutput, response *smithyhttp.Response) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization for nil %T", v)
 	}
@@ -392,7 +392,7 @@ func awsRestjson1_deserializeHttpBindingsGetObjectOutput(v *GetObjectOutput, res
 
 	return nil
 }
-func awsRestjson1_deserializeDocumentGetObjectOutput(v *GetObjectOutput, body io.ReadCloser) error {
+func awsRestjson1_deserializeOpDocumentGetObjectOutput(v *GetObjectOutput, body io.ReadCloser) error {
 	if v == nil {
 		return fmt.Errorf("unsupported deserialization of nil %T", v)
 	}
@@ -435,7 +435,7 @@ func (m *awsRestjson1_deserializeOpListItems) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListItemsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListItemsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -505,7 +505,7 @@ func awsRestjson1_deserializeOpErrorListItems(response *smithyhttp.Response) err
 	}
 }
 
-func awsRestjson1_deserializeDocumentListItemsOutput(v **ListItemsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListItemsOutput(v **ListItemsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -608,7 +608,7 @@ func (m *awsRestjson1_deserializeOpPutObject) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentPutObjectOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentPutObjectOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -678,7 +678,7 @@ func awsRestjson1_deserializeOpErrorPutObject(response *smithyhttp.Response) err
 	}
 }
 
-func awsRestjson1_deserializeDocumentPutObjectOutput(v **PutObjectOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentPutObjectOutput(v **PutObjectOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

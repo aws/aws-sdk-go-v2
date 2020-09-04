@@ -494,7 +494,7 @@ func validate__listOfBrokerEBSVolumeInfo(v []*types.BrokerEBSVolumeInfo) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "__listOfBrokerEBSVolumeInfo"}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfBrokerEBSVolumeInfo"}
 	for i := range v {
 		if err := validateBrokerEBSVolumeInfo(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))

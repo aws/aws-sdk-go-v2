@@ -46,7 +46,7 @@ func (m *awsRestjson1_serializeOpGetRoleCredentials) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsGetRoleCredentialsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsGetRoleCredentialsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -57,7 +57,7 @@ func (m *awsRestjson1_serializeOpGetRoleCredentials) HandleSerialize(ctx context
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsGetRoleCredentialsInput(v *GetRoleCredentialsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetRoleCredentialsInput(v *GetRoleCredentialsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -115,7 +115,7 @@ func (m *awsRestjson1_serializeOpListAccountRoles) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListAccountRolesInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListAccountRolesInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -126,7 +126,7 @@ func (m *awsRestjson1_serializeOpListAccountRoles) HandleSerialize(ctx context.C
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListAccountRolesInput(v *ListAccountRolesInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListAccountRolesInput(v *ListAccountRolesInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -188,7 +188,7 @@ func (m *awsRestjson1_serializeOpListAccounts) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListAccountsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListAccountsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -199,7 +199,7 @@ func (m *awsRestjson1_serializeOpListAccounts) HandleSerialize(ctx context.Conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListAccountsInput(v *ListAccountsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListAccountsInput(v *ListAccountsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -257,7 +257,7 @@ func (m *awsRestjson1_serializeOpLogout) HandleSerialize(ctx context.Context, in
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsLogoutInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsLogoutInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -268,7 +268,7 @@ func (m *awsRestjson1_serializeOpLogout) HandleSerialize(ctx context.Context, in
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsLogoutInput(v *LogoutInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsLogoutInput(v *LogoutInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}

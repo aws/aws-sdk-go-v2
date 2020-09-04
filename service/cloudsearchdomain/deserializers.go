@@ -52,7 +52,7 @@ func (m *awsRestjson1_deserializeOpSearch) HandleDeserialize(ctx context.Context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentSearchOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentSearchOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -119,7 +119,7 @@ func awsRestjson1_deserializeOpErrorSearch(response *smithyhttp.Response) error 
 	}
 }
 
-func awsRestjson1_deserializeDocumentSearchOutput(v **SearchOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentSearchOutput(v **SearchOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -224,7 +224,7 @@ func (m *awsRestjson1_deserializeOpSuggest) HandleDeserialize(ctx context.Contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentSuggestOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentSuggestOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -291,7 +291,7 @@ func awsRestjson1_deserializeOpErrorSuggest(response *smithyhttp.Response) error
 	}
 }
 
-func awsRestjson1_deserializeDocumentSuggestOutput(v **SuggestOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentSuggestOutput(v **SuggestOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -386,7 +386,7 @@ func (m *awsRestjson1_deserializeOpUploadDocuments) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentUploadDocumentsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentUploadDocumentsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -453,7 +453,7 @@ func awsRestjson1_deserializeOpErrorUploadDocuments(response *smithyhttp.Respons
 	}
 }
 
-func awsRestjson1_deserializeDocumentUploadDocumentsOutput(v **UploadDocumentsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentUploadDocumentsOutput(v **UploadDocumentsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

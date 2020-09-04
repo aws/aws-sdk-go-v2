@@ -45,7 +45,7 @@ func (m *awsAwsjson11_serializeOpActivatePipeline) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DataPipeline.ActivatePipeline")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentActivatePipelineInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentActivatePipelineInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -91,7 +91,7 @@ func (m *awsAwsjson11_serializeOpAddTags) HandleSerialize(ctx context.Context, i
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DataPipeline.AddTags")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAddTagsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAddTagsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -137,7 +137,7 @@ func (m *awsAwsjson11_serializeOpCreatePipeline) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DataPipeline.CreatePipeline")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreatePipelineInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreatePipelineInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -183,7 +183,7 @@ func (m *awsAwsjson11_serializeOpDeactivatePipeline) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DataPipeline.DeactivatePipeline")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeactivatePipelineInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeactivatePipelineInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -229,7 +229,7 @@ func (m *awsAwsjson11_serializeOpDeletePipeline) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DataPipeline.DeletePipeline")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeletePipelineInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeletePipelineInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -275,7 +275,7 @@ func (m *awsAwsjson11_serializeOpDescribeObjects) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DataPipeline.DescribeObjects")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeObjectsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeObjectsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -321,7 +321,7 @@ func (m *awsAwsjson11_serializeOpDescribePipelines) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DataPipeline.DescribePipelines")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribePipelinesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribePipelinesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -367,7 +367,7 @@ func (m *awsAwsjson11_serializeOpEvaluateExpression) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DataPipeline.EvaluateExpression")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentEvaluateExpressionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentEvaluateExpressionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -413,7 +413,7 @@ func (m *awsAwsjson11_serializeOpGetPipelineDefinition) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DataPipeline.GetPipelineDefinition")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetPipelineDefinitionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetPipelineDefinitionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -459,7 +459,7 @@ func (m *awsAwsjson11_serializeOpListPipelines) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DataPipeline.ListPipelines")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListPipelinesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListPipelinesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -505,7 +505,7 @@ func (m *awsAwsjson11_serializeOpPollForTask) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DataPipeline.PollForTask")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPollForTaskInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPollForTaskInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -551,7 +551,7 @@ func (m *awsAwsjson11_serializeOpPutPipelineDefinition) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DataPipeline.PutPipelineDefinition")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutPipelineDefinitionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutPipelineDefinitionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -597,7 +597,7 @@ func (m *awsAwsjson11_serializeOpQueryObjects) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DataPipeline.QueryObjects")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentQueryObjectsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentQueryObjectsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -643,7 +643,7 @@ func (m *awsAwsjson11_serializeOpRemoveTags) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DataPipeline.RemoveTags")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRemoveTagsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRemoveTagsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -689,7 +689,7 @@ func (m *awsAwsjson11_serializeOpReportTaskProgress) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DataPipeline.ReportTaskProgress")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentReportTaskProgressInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentReportTaskProgressInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -735,7 +735,7 @@ func (m *awsAwsjson11_serializeOpReportTaskRunnerHeartbeat) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DataPipeline.ReportTaskRunnerHeartbeat")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentReportTaskRunnerHeartbeatInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentReportTaskRunnerHeartbeatInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -781,7 +781,7 @@ func (m *awsAwsjson11_serializeOpSetStatus) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DataPipeline.SetStatus")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSetStatusInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSetStatusInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -827,7 +827,7 @@ func (m *awsAwsjson11_serializeOpSetTaskStatus) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DataPipeline.SetTaskStatus")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSetTaskStatusInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSetTaskStatusInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -873,7 +873,7 @@ func (m *awsAwsjson11_serializeOpValidatePipelineDefinition) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("DataPipeline.ValidatePipelineDefinition")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentValidatePipelineDefinitionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentValidatePipelineDefinitionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1222,7 +1222,7 @@ func awsAwsjson11_serializeDocumentTagList(v []*types.Tag, value smithyjson.Valu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentActivatePipelineInput(v *ActivatePipelineInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentActivatePipelineInput(v *ActivatePipelineInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1246,7 +1246,7 @@ func awsAwsjson11_serializeDocumentActivatePipelineInput(v *ActivatePipelineInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAddTagsInput(v *AddTagsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAddTagsInput(v *AddTagsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1265,7 +1265,7 @@ func awsAwsjson11_serializeDocumentAddTagsInput(v *AddTagsInput, value smithyjso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreatePipelineInput(v *CreatePipelineInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreatePipelineInput(v *CreatePipelineInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1294,7 +1294,7 @@ func awsAwsjson11_serializeDocumentCreatePipelineInput(v *CreatePipelineInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeactivatePipelineInput(v *DeactivatePipelineInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeactivatePipelineInput(v *DeactivatePipelineInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1311,7 +1311,7 @@ func awsAwsjson11_serializeDocumentDeactivatePipelineInput(v *DeactivatePipeline
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeletePipelineInput(v *DeletePipelineInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeletePipelineInput(v *DeletePipelineInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1323,7 +1323,7 @@ func awsAwsjson11_serializeDocumentDeletePipelineInput(v *DeletePipelineInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeObjectsInput(v *DescribeObjectsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeObjectsInput(v *DescribeObjectsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1352,7 +1352,7 @@ func awsAwsjson11_serializeDocumentDescribeObjectsInput(v *DescribeObjectsInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribePipelinesInput(v *DescribePipelinesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribePipelinesInput(v *DescribePipelinesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1366,7 +1366,7 @@ func awsAwsjson11_serializeDocumentDescribePipelinesInput(v *DescribePipelinesIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentEvaluateExpressionInput(v *EvaluateExpressionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentEvaluateExpressionInput(v *EvaluateExpressionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1388,7 +1388,7 @@ func awsAwsjson11_serializeDocumentEvaluateExpressionInput(v *EvaluateExpression
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetPipelineDefinitionInput(v *GetPipelineDefinitionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetPipelineDefinitionInput(v *GetPipelineDefinitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1405,7 +1405,7 @@ func awsAwsjson11_serializeDocumentGetPipelineDefinitionInput(v *GetPipelineDefi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListPipelinesInput(v *ListPipelinesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListPipelinesInput(v *ListPipelinesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1417,7 +1417,7 @@ func awsAwsjson11_serializeDocumentListPipelinesInput(v *ListPipelinesInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPollForTaskInput(v *PollForTaskInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPollForTaskInput(v *PollForTaskInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1441,7 +1441,7 @@ func awsAwsjson11_serializeDocumentPollForTaskInput(v *PollForTaskInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutPipelineDefinitionInput(v *PutPipelineDefinitionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutPipelineDefinitionInput(v *PutPipelineDefinitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1474,7 +1474,7 @@ func awsAwsjson11_serializeDocumentPutPipelineDefinitionInput(v *PutPipelineDefi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentQueryObjectsInput(v *QueryObjectsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentQueryObjectsInput(v *QueryObjectsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1508,7 +1508,7 @@ func awsAwsjson11_serializeDocumentQueryObjectsInput(v *QueryObjectsInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRemoveTagsInput(v *RemoveTagsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRemoveTagsInput(v *RemoveTagsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1527,7 +1527,7 @@ func awsAwsjson11_serializeDocumentRemoveTagsInput(v *RemoveTagsInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentReportTaskProgressInput(v *ReportTaskProgressInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentReportTaskProgressInput(v *ReportTaskProgressInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1546,7 +1546,7 @@ func awsAwsjson11_serializeDocumentReportTaskProgressInput(v *ReportTaskProgress
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentReportTaskRunnerHeartbeatInput(v *ReportTaskRunnerHeartbeatInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentReportTaskRunnerHeartbeatInput(v *ReportTaskRunnerHeartbeatInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1568,7 +1568,7 @@ func awsAwsjson11_serializeDocumentReportTaskRunnerHeartbeatInput(v *ReportTaskR
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSetStatusInput(v *SetStatusInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSetStatusInput(v *SetStatusInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1592,7 +1592,7 @@ func awsAwsjson11_serializeDocumentSetStatusInput(v *SetStatusInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSetTaskStatusInput(v *SetTaskStatusInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSetTaskStatusInput(v *SetTaskStatusInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1624,7 +1624,7 @@ func awsAwsjson11_serializeDocumentSetTaskStatusInput(v *SetTaskStatusInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentValidatePipelineDefinitionInput(v *ValidatePipelineDefinitionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentValidatePipelineDefinitionInput(v *ValidatePipelineDefinitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

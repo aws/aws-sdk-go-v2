@@ -52,7 +52,7 @@ func (m *awsAwsjson11_deserializeOpCreateCostCategoryDefinition) HandleDeseriali
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateCostCategoryDefinitionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateCostCategoryDefinitionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -155,7 +155,7 @@ func (m *awsAwsjson11_deserializeOpDeleteCostCategoryDefinition) HandleDeseriali
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteCostCategoryDefinitionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteCostCategoryDefinitionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -258,7 +258,7 @@ func (m *awsAwsjson11_deserializeOpDescribeCostCategoryDefinition) HandleDeseria
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeCostCategoryDefinitionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeCostCategoryDefinitionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -361,7 +361,7 @@ func (m *awsAwsjson11_deserializeOpGetCostAndUsage) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetCostAndUsageOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetCostAndUsageOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -473,7 +473,7 @@ func (m *awsAwsjson11_deserializeOpGetCostAndUsageWithResources) HandleDeseriali
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetCostAndUsageWithResourcesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetCostAndUsageWithResourcesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -585,7 +585,7 @@ func (m *awsAwsjson11_deserializeOpGetCostForecast) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetCostForecastOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetCostForecastOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -688,7 +688,7 @@ func (m *awsAwsjson11_deserializeOpGetDimensionValues) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetDimensionValuesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetDimensionValuesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -800,7 +800,7 @@ func (m *awsAwsjson11_deserializeOpGetReservationCoverage) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetReservationCoverageOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetReservationCoverageOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -906,7 +906,7 @@ func (m *awsAwsjson11_deserializeOpGetReservationPurchaseRecommendation) HandleD
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetReservationPurchaseRecommendationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetReservationPurchaseRecommendationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1012,7 +1012,7 @@ func (m *awsAwsjson11_deserializeOpGetReservationUtilization) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetReservationUtilizationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetReservationUtilizationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1118,7 +1118,7 @@ func (m *awsAwsjson11_deserializeOpGetRightsizingRecommendation) HandleDeseriali
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetRightsizingRecommendationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetRightsizingRecommendationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1221,7 +1221,7 @@ func (m *awsAwsjson11_deserializeOpGetSavingsPlansCoverage) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetSavingsPlansCoverageOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetSavingsPlansCoverageOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1327,7 +1327,7 @@ func (m *awsAwsjson11_deserializeOpGetSavingsPlansPurchaseRecommendation) Handle
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetSavingsPlansPurchaseRecommendationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetSavingsPlansPurchaseRecommendationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1430,7 +1430,7 @@ func (m *awsAwsjson11_deserializeOpGetSavingsPlansUtilization) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetSavingsPlansUtilizationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetSavingsPlansUtilizationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1533,7 +1533,7 @@ func (m *awsAwsjson11_deserializeOpGetSavingsPlansUtilizationDetails) HandleDese
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetSavingsPlansUtilizationDetailsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetSavingsPlansUtilizationDetailsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1639,7 +1639,7 @@ func (m *awsAwsjson11_deserializeOpGetTags) HandleDeserialize(ctx context.Contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetTagsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetTagsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1751,7 +1751,7 @@ func (m *awsAwsjson11_deserializeOpGetUsageForecast) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetUsageForecastOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetUsageForecastOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1857,7 +1857,7 @@ func (m *awsAwsjson11_deserializeOpListCostCategoryDefinitions) HandleDeserializ
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListCostCategoryDefinitionsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListCostCategoryDefinitionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1957,7 +1957,7 @@ func (m *awsAwsjson11_deserializeOpUpdateCostCategoryDefinition) HandleDeseriali
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateCostCategoryDefinitionOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateCostCategoryDefinitionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -10002,7 +10002,7 @@ func awsAwsjson11_deserializeDocumentValues(v *[]*string, decoder *json.Decoder)
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateCostCategoryDefinitionOutput(v **CreateCostCategoryDefinitionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateCostCategoryDefinitionOutput(v **CreateCostCategoryDefinitionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10079,7 +10079,7 @@ func awsAwsjson11_deserializeDocumentCreateCostCategoryDefinitionOutput(v **Crea
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteCostCategoryDefinitionOutput(v **DeleteCostCategoryDefinitionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteCostCategoryDefinitionOutput(v **DeleteCostCategoryDefinitionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10156,7 +10156,7 @@ func awsAwsjson11_deserializeDocumentDeleteCostCategoryDefinitionOutput(v **Dele
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeCostCategoryDefinitionOutput(v **DescribeCostCategoryDefinitionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeCostCategoryDefinitionOutput(v **DescribeCostCategoryDefinitionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10212,7 +10212,7 @@ func awsAwsjson11_deserializeDocumentDescribeCostCategoryDefinitionOutput(v **De
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetCostAndUsageOutput(v **GetCostAndUsageOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetCostAndUsageOutput(v **GetCostAndUsageOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10286,7 +10286,7 @@ func awsAwsjson11_deserializeDocumentGetCostAndUsageOutput(v **GetCostAndUsageOu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetCostAndUsageWithResourcesOutput(v **GetCostAndUsageWithResourcesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetCostAndUsageWithResourcesOutput(v **GetCostAndUsageWithResourcesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10360,7 +10360,7 @@ func awsAwsjson11_deserializeDocumentGetCostAndUsageWithResourcesOutput(v **GetC
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetCostForecastOutput(v **GetCostForecastOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetCostForecastOutput(v **GetCostForecastOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10421,7 +10421,7 @@ func awsAwsjson11_deserializeDocumentGetCostForecastOutput(v **GetCostForecastOu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetDimensionValuesOutput(v **GetDimensionValuesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetDimensionValuesOutput(v **GetDimensionValuesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10524,7 +10524,7 @@ func awsAwsjson11_deserializeDocumentGetDimensionValuesOutput(v **GetDimensionVa
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetReservationCoverageOutput(v **GetReservationCoverageOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetReservationCoverageOutput(v **GetReservationCoverageOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10598,7 +10598,7 @@ func awsAwsjson11_deserializeDocumentGetReservationCoverageOutput(v **GetReserva
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetReservationPurchaseRecommendationOutput(v **GetReservationPurchaseRecommendationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetReservationPurchaseRecommendationOutput(v **GetReservationPurchaseRecommendationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10672,7 +10672,7 @@ func awsAwsjson11_deserializeDocumentGetReservationPurchaseRecommendationOutput(
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetReservationUtilizationOutput(v **GetReservationUtilizationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetReservationUtilizationOutput(v **GetReservationUtilizationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10746,7 +10746,7 @@ func awsAwsjson11_deserializeDocumentGetReservationUtilizationOutput(v **GetRese
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetRightsizingRecommendationOutput(v **GetRightsizingRecommendationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetRightsizingRecommendationOutput(v **GetRightsizingRecommendationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10830,7 +10830,7 @@ func awsAwsjson11_deserializeDocumentGetRightsizingRecommendationOutput(v **GetR
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetSavingsPlansCoverageOutput(v **GetSavingsPlansCoverageOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetSavingsPlansCoverageOutput(v **GetSavingsPlansCoverageOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10899,7 +10899,7 @@ func awsAwsjson11_deserializeDocumentGetSavingsPlansCoverageOutput(v **GetSaving
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetSavingsPlansPurchaseRecommendationOutput(v **GetSavingsPlansPurchaseRecommendationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetSavingsPlansPurchaseRecommendationOutput(v **GetSavingsPlansPurchaseRecommendationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -10973,7 +10973,7 @@ func awsAwsjson11_deserializeDocumentGetSavingsPlansPurchaseRecommendationOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetSavingsPlansUtilizationDetailsOutput(v **GetSavingsPlansUtilizationDetailsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetSavingsPlansUtilizationDetailsOutput(v **GetSavingsPlansUtilizationDetailsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11052,7 +11052,7 @@ func awsAwsjson11_deserializeDocumentGetSavingsPlansUtilizationDetailsOutput(v *
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetSavingsPlansUtilizationOutput(v **GetSavingsPlansUtilizationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetSavingsPlansUtilizationOutput(v **GetSavingsPlansUtilizationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11113,7 +11113,7 @@ func awsAwsjson11_deserializeDocumentGetSavingsPlansUtilizationOutput(v **GetSav
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetTagsOutput(v **GetTagsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetTagsOutput(v **GetTagsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11216,7 +11216,7 @@ func awsAwsjson11_deserializeDocumentGetTagsOutput(v **GetTagsOutput, decoder *j
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetUsageForecastOutput(v **GetUsageForecastOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetUsageForecastOutput(v **GetUsageForecastOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11277,7 +11277,7 @@ func awsAwsjson11_deserializeDocumentGetUsageForecastOutput(v **GetUsageForecast
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListCostCategoryDefinitionsOutput(v **ListCostCategoryDefinitionsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListCostCategoryDefinitionsOutput(v **ListCostCategoryDefinitionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -11346,7 +11346,7 @@ func awsAwsjson11_deserializeDocumentListCostCategoryDefinitionsOutput(v **ListC
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateCostCategoryDefinitionOutput(v **UpdateCostCategoryDefinitionOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateCostCategoryDefinitionOutput(v **UpdateCostCategoryDefinitionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

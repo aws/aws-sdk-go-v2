@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpBatchCheckLayerAvailability) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.BatchCheckLayerAvailability")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchCheckLayerAvailabilityInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchCheckLayerAvailabilityInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpBatchDeleteImage) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.BatchDeleteImage")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchDeleteImageInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchDeleteImageInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpBatchGetImage) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.BatchGetImage")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchGetImageInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchGetImageInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpCompleteLayerUpload) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.CompleteLayerUpload")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCompleteLayerUploadInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCompleteLayerUploadInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpCreateRepository) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.CreateRepository")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateRepositoryInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateRepositoryInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpDeleteLifecyclePolicy) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.DeleteLifecyclePolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteLifecyclePolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteLifecyclePolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson11_serializeOpDeleteRepository) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.DeleteRepository")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteRepositoryInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteRepositoryInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -366,7 +366,7 @@ func (m *awsAwsjson11_serializeOpDeleteRepositoryPolicy) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.DeleteRepositoryPolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteRepositoryPolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteRepositoryPolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -412,7 +412,7 @@ func (m *awsAwsjson11_serializeOpDescribeImages) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.DescribeImages")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeImagesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeImagesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -458,7 +458,7 @@ func (m *awsAwsjson11_serializeOpDescribeImageScanFindings) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.DescribeImageScanFindings")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeImageScanFindingsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeImageScanFindingsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -504,7 +504,7 @@ func (m *awsAwsjson11_serializeOpDescribeRepositories) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.DescribeRepositories")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeRepositoriesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeRepositoriesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -550,7 +550,7 @@ func (m *awsAwsjson11_serializeOpGetAuthorizationToken) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.GetAuthorizationToken")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetAuthorizationTokenInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetAuthorizationTokenInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -596,7 +596,7 @@ func (m *awsAwsjson11_serializeOpGetDownloadUrlForLayer) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.GetDownloadUrlForLayer")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetDownloadUrlForLayerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetDownloadUrlForLayerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -642,7 +642,7 @@ func (m *awsAwsjson11_serializeOpGetLifecyclePolicy) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.GetLifecyclePolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetLifecyclePolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetLifecyclePolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -688,7 +688,7 @@ func (m *awsAwsjson11_serializeOpGetLifecyclePolicyPreview) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.GetLifecyclePolicyPreview")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetLifecyclePolicyPreviewInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetLifecyclePolicyPreviewInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -734,7 +734,7 @@ func (m *awsAwsjson11_serializeOpGetRepositoryPolicy) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.GetRepositoryPolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetRepositoryPolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetRepositoryPolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -780,7 +780,7 @@ func (m *awsAwsjson11_serializeOpInitiateLayerUpload) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.InitiateLayerUpload")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentInitiateLayerUploadInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentInitiateLayerUploadInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -826,7 +826,7 @@ func (m *awsAwsjson11_serializeOpListImages) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.ListImages")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListImagesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListImagesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -872,7 +872,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.ListTagsForResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -918,7 +918,7 @@ func (m *awsAwsjson11_serializeOpPutImage) HandleSerialize(ctx context.Context, 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.PutImage")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutImageInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutImageInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -964,7 +964,7 @@ func (m *awsAwsjson11_serializeOpPutImageScanningConfiguration) HandleSerialize(
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.PutImageScanningConfiguration")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutImageScanningConfigurationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutImageScanningConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1010,7 +1010,7 @@ func (m *awsAwsjson11_serializeOpPutImageTagMutability) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.PutImageTagMutability")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutImageTagMutabilityInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutImageTagMutabilityInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1056,7 +1056,7 @@ func (m *awsAwsjson11_serializeOpPutLifecyclePolicy) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.PutLifecyclePolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutLifecyclePolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutLifecyclePolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1102,7 +1102,7 @@ func (m *awsAwsjson11_serializeOpSetRepositoryPolicy) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.SetRepositoryPolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSetRepositoryPolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSetRepositoryPolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1148,7 +1148,7 @@ func (m *awsAwsjson11_serializeOpStartImageScan) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.StartImageScan")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartImageScanInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartImageScanInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1194,7 +1194,7 @@ func (m *awsAwsjson11_serializeOpStartLifecyclePolicyPreview) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.StartLifecyclePolicyPreview")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartLifecyclePolicyPreviewInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartLifecyclePolicyPreviewInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1240,7 +1240,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.TagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1286,7 +1286,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.UntagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1332,7 +1332,7 @@ func (m *awsAwsjson11_serializeOpUploadLayerPart) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerRegistry_V20150921.UploadLayerPart")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUploadLayerPartInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUploadLayerPartInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1570,7 +1570,7 @@ func awsAwsjson11_serializeDocumentTagList(v []*types.Tag, value smithyjson.Valu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchCheckLayerAvailabilityInput(v *BatchCheckLayerAvailabilityInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchCheckLayerAvailabilityInput(v *BatchCheckLayerAvailabilityInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1594,7 +1594,7 @@ func awsAwsjson11_serializeDocumentBatchCheckLayerAvailabilityInput(v *BatchChec
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchDeleteImageInput(v *BatchDeleteImageInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchDeleteImageInput(v *BatchDeleteImageInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1618,7 +1618,7 @@ func awsAwsjson11_serializeDocumentBatchDeleteImageInput(v *BatchDeleteImageInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchGetImageInput(v *BatchGetImageInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchGetImageInput(v *BatchGetImageInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1649,7 +1649,7 @@ func awsAwsjson11_serializeDocumentBatchGetImageInput(v *BatchGetImageInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCompleteLayerUploadInput(v *CompleteLayerUploadInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCompleteLayerUploadInput(v *CompleteLayerUploadInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1678,7 +1678,7 @@ func awsAwsjson11_serializeDocumentCompleteLayerUploadInput(v *CompleteLayerUplo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateRepositoryInput(v *CreateRepositoryInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateRepositoryInput(v *CreateRepositoryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1716,7 +1716,7 @@ func awsAwsjson11_serializeDocumentCreateRepositoryInput(v *CreateRepositoryInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteLifecyclePolicyInput(v *DeleteLifecyclePolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteLifecyclePolicyInput(v *DeleteLifecyclePolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1733,7 +1733,7 @@ func awsAwsjson11_serializeDocumentDeleteLifecyclePolicyInput(v *DeleteLifecycle
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteRepositoryInput(v *DeleteRepositoryInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteRepositoryInput(v *DeleteRepositoryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1755,7 +1755,7 @@ func awsAwsjson11_serializeDocumentDeleteRepositoryInput(v *DeleteRepositoryInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteRepositoryPolicyInput(v *DeleteRepositoryPolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteRepositoryPolicyInput(v *DeleteRepositoryPolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1772,7 +1772,7 @@ func awsAwsjson11_serializeDocumentDeleteRepositoryPolicyInput(v *DeleteReposito
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeImageScanFindingsInput(v *DescribeImageScanFindingsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeImageScanFindingsInput(v *DescribeImageScanFindingsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1806,7 +1806,7 @@ func awsAwsjson11_serializeDocumentDescribeImageScanFindingsInput(v *DescribeIma
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeImagesInput(v *DescribeImagesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeImagesInput(v *DescribeImagesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1847,7 +1847,7 @@ func awsAwsjson11_serializeDocumentDescribeImagesInput(v *DescribeImagesInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeRepositoriesInput(v *DescribeRepositoriesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeRepositoriesInput(v *DescribeRepositoriesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1876,7 +1876,7 @@ func awsAwsjson11_serializeDocumentDescribeRepositoriesInput(v *DescribeReposito
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetAuthorizationTokenInput(v *GetAuthorizationTokenInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetAuthorizationTokenInput(v *GetAuthorizationTokenInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1890,7 +1890,7 @@ func awsAwsjson11_serializeDocumentGetAuthorizationTokenInput(v *GetAuthorizatio
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetDownloadUrlForLayerInput(v *GetDownloadUrlForLayerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetDownloadUrlForLayerInput(v *GetDownloadUrlForLayerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1912,7 +1912,7 @@ func awsAwsjson11_serializeDocumentGetDownloadUrlForLayerInput(v *GetDownloadUrl
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetLifecyclePolicyInput(v *GetLifecyclePolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetLifecyclePolicyInput(v *GetLifecyclePolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1929,7 +1929,7 @@ func awsAwsjson11_serializeDocumentGetLifecyclePolicyInput(v *GetLifecyclePolicy
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetLifecyclePolicyPreviewInput(v *GetLifecyclePolicyPreviewInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetLifecyclePolicyPreviewInput(v *GetLifecyclePolicyPreviewInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1970,7 +1970,7 @@ func awsAwsjson11_serializeDocumentGetLifecyclePolicyPreviewInput(v *GetLifecycl
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetRepositoryPolicyInput(v *GetRepositoryPolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetRepositoryPolicyInput(v *GetRepositoryPolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1987,7 +1987,7 @@ func awsAwsjson11_serializeDocumentGetRepositoryPolicyInput(v *GetRepositoryPoli
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentInitiateLayerUploadInput(v *InitiateLayerUploadInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentInitiateLayerUploadInput(v *InitiateLayerUploadInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2004,7 +2004,7 @@ func awsAwsjson11_serializeDocumentInitiateLayerUploadInput(v *InitiateLayerUplo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListImagesInput(v *ListImagesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListImagesInput(v *ListImagesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2038,7 +2038,7 @@ func awsAwsjson11_serializeDocumentListImagesInput(v *ListImagesInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2050,7 +2050,7 @@ func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResour
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutImageInput(v *PutImageInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutImageInput(v *PutImageInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2087,7 +2087,7 @@ func awsAwsjson11_serializeDocumentPutImageInput(v *PutImageInput, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutImageScanningConfigurationInput(v *PutImageScanningConfigurationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutImageScanningConfigurationInput(v *PutImageScanningConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2111,7 +2111,7 @@ func awsAwsjson11_serializeDocumentPutImageScanningConfigurationInput(v *PutImag
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutImageTagMutabilityInput(v *PutImageTagMutabilityInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutImageTagMutabilityInput(v *PutImageTagMutabilityInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2133,7 +2133,7 @@ func awsAwsjson11_serializeDocumentPutImageTagMutabilityInput(v *PutImageTagMuta
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutLifecyclePolicyInput(v *PutLifecyclePolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutLifecyclePolicyInput(v *PutLifecyclePolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2155,7 +2155,7 @@ func awsAwsjson11_serializeDocumentPutLifecyclePolicyInput(v *PutLifecyclePolicy
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSetRepositoryPolicyInput(v *SetRepositoryPolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSetRepositoryPolicyInput(v *SetRepositoryPolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2182,7 +2182,7 @@ func awsAwsjson11_serializeDocumentSetRepositoryPolicyInput(v *SetRepositoryPoli
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartImageScanInput(v *StartImageScanInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartImageScanInput(v *StartImageScanInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2206,7 +2206,7 @@ func awsAwsjson11_serializeDocumentStartImageScanInput(v *StartImageScanInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartLifecyclePolicyPreviewInput(v *StartLifecyclePolicyPreviewInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartLifecyclePolicyPreviewInput(v *StartLifecyclePolicyPreviewInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2228,7 +2228,7 @@ func awsAwsjson11_serializeDocumentStartLifecyclePolicyPreviewInput(v *StartLife
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2247,7 +2247,7 @@ func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2266,7 +2266,7 @@ func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUploadLayerPartInput(v *UploadLayerPartInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUploadLayerPartInput(v *UploadLayerPartInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

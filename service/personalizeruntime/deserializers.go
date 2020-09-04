@@ -52,7 +52,7 @@ func (m *awsRestjson1_deserializeOpGetPersonalizedRanking) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetPersonalizedRankingOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetPersonalizedRankingOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -122,7 +122,7 @@ func awsRestjson1_deserializeOpErrorGetPersonalizedRanking(response *smithyhttp.
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetPersonalizedRankingOutput(v **GetPersonalizedRankingOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetPersonalizedRankingOutput(v **GetPersonalizedRankingOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -212,7 +212,7 @@ func (m *awsRestjson1_deserializeOpGetRecommendations) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetRecommendationsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetRecommendationsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -282,7 +282,7 @@ func awsRestjson1_deserializeOpErrorGetRecommendations(response *smithyhttp.Resp
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetRecommendationsOutput(v **GetRecommendationsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetRecommendationsOutput(v **GetRecommendationsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

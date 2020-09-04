@@ -45,7 +45,7 @@ func (m *awsAwsjson11_serializeOpAcceptMatch) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.AcceptMatch")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAcceptMatchInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAcceptMatchInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -91,7 +91,7 @@ func (m *awsAwsjson11_serializeOpClaimGameServer) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.ClaimGameServer")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentClaimGameServerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentClaimGameServerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -137,7 +137,7 @@ func (m *awsAwsjson11_serializeOpCreateAlias) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.CreateAlias")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateAliasInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateAliasInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -183,7 +183,7 @@ func (m *awsAwsjson11_serializeOpCreateBuild) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.CreateBuild")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateBuildInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateBuildInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -229,7 +229,7 @@ func (m *awsAwsjson11_serializeOpCreateFleet) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.CreateFleet")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateFleetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateFleetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -275,7 +275,7 @@ func (m *awsAwsjson11_serializeOpCreateGameServerGroup) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.CreateGameServerGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateGameServerGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateGameServerGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -321,7 +321,7 @@ func (m *awsAwsjson11_serializeOpCreateGameSession) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.CreateGameSession")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateGameSessionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateGameSessionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -367,7 +367,7 @@ func (m *awsAwsjson11_serializeOpCreateGameSessionQueue) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.CreateGameSessionQueue")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateGameSessionQueueInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateGameSessionQueueInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -413,7 +413,7 @@ func (m *awsAwsjson11_serializeOpCreateMatchmakingConfiguration) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.CreateMatchmakingConfiguration")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateMatchmakingConfigurationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateMatchmakingConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -459,7 +459,7 @@ func (m *awsAwsjson11_serializeOpCreateMatchmakingRuleSet) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.CreateMatchmakingRuleSet")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateMatchmakingRuleSetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateMatchmakingRuleSetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -505,7 +505,7 @@ func (m *awsAwsjson11_serializeOpCreatePlayerSession) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.CreatePlayerSession")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreatePlayerSessionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreatePlayerSessionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -551,7 +551,7 @@ func (m *awsAwsjson11_serializeOpCreatePlayerSessions) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.CreatePlayerSessions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreatePlayerSessionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreatePlayerSessionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -597,7 +597,7 @@ func (m *awsAwsjson11_serializeOpCreateScript) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.CreateScript")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateScriptInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateScriptInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -643,7 +643,7 @@ func (m *awsAwsjson11_serializeOpCreateVpcPeeringAuthorization) HandleSerialize(
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.CreateVpcPeeringAuthorization")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateVpcPeeringAuthorizationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateVpcPeeringAuthorizationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -689,7 +689,7 @@ func (m *awsAwsjson11_serializeOpCreateVpcPeeringConnection) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.CreateVpcPeeringConnection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateVpcPeeringConnectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateVpcPeeringConnectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -735,7 +735,7 @@ func (m *awsAwsjson11_serializeOpDeleteAlias) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DeleteAlias")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteAliasInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteAliasInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -781,7 +781,7 @@ func (m *awsAwsjson11_serializeOpDeleteBuild) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DeleteBuild")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteBuildInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteBuildInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -827,7 +827,7 @@ func (m *awsAwsjson11_serializeOpDeleteFleet) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DeleteFleet")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteFleetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteFleetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -873,7 +873,7 @@ func (m *awsAwsjson11_serializeOpDeleteGameServerGroup) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DeleteGameServerGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteGameServerGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteGameServerGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -919,7 +919,7 @@ func (m *awsAwsjson11_serializeOpDeleteGameSessionQueue) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DeleteGameSessionQueue")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteGameSessionQueueInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteGameSessionQueueInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -965,7 +965,7 @@ func (m *awsAwsjson11_serializeOpDeleteMatchmakingConfiguration) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DeleteMatchmakingConfiguration")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteMatchmakingConfigurationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteMatchmakingConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1011,7 +1011,7 @@ func (m *awsAwsjson11_serializeOpDeleteMatchmakingRuleSet) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DeleteMatchmakingRuleSet")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteMatchmakingRuleSetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteMatchmakingRuleSetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1057,7 +1057,7 @@ func (m *awsAwsjson11_serializeOpDeleteScalingPolicy) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DeleteScalingPolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteScalingPolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteScalingPolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1103,7 +1103,7 @@ func (m *awsAwsjson11_serializeOpDeleteScript) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DeleteScript")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteScriptInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteScriptInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1149,7 +1149,7 @@ func (m *awsAwsjson11_serializeOpDeleteVpcPeeringAuthorization) HandleSerialize(
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DeleteVpcPeeringAuthorization")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteVpcPeeringAuthorizationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteVpcPeeringAuthorizationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1195,7 +1195,7 @@ func (m *awsAwsjson11_serializeOpDeleteVpcPeeringConnection) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DeleteVpcPeeringConnection")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteVpcPeeringConnectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteVpcPeeringConnectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1241,7 +1241,7 @@ func (m *awsAwsjson11_serializeOpDeregisterGameServer) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DeregisterGameServer")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeregisterGameServerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeregisterGameServerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1287,7 +1287,7 @@ func (m *awsAwsjson11_serializeOpDescribeAlias) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeAlias")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeAliasInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeAliasInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1333,7 +1333,7 @@ func (m *awsAwsjson11_serializeOpDescribeBuild) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeBuild")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeBuildInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeBuildInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1379,7 +1379,7 @@ func (m *awsAwsjson11_serializeOpDescribeEC2InstanceLimits) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeEC2InstanceLimits")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeEC2InstanceLimitsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeEC2InstanceLimitsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1425,7 +1425,7 @@ func (m *awsAwsjson11_serializeOpDescribeFleetAttributes) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeFleetAttributes")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeFleetAttributesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeFleetAttributesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1471,7 +1471,7 @@ func (m *awsAwsjson11_serializeOpDescribeFleetCapacity) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeFleetCapacity")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeFleetCapacityInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeFleetCapacityInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1517,7 +1517,7 @@ func (m *awsAwsjson11_serializeOpDescribeFleetEvents) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeFleetEvents")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeFleetEventsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeFleetEventsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1563,7 +1563,7 @@ func (m *awsAwsjson11_serializeOpDescribeFleetPortSettings) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeFleetPortSettings")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeFleetPortSettingsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeFleetPortSettingsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1609,7 +1609,7 @@ func (m *awsAwsjson11_serializeOpDescribeFleetUtilization) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeFleetUtilization")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeFleetUtilizationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeFleetUtilizationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1655,7 +1655,7 @@ func (m *awsAwsjson11_serializeOpDescribeGameServer) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeGameServer")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeGameServerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeGameServerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1701,7 +1701,7 @@ func (m *awsAwsjson11_serializeOpDescribeGameServerGroup) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeGameServerGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeGameServerGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeGameServerGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1747,7 +1747,7 @@ func (m *awsAwsjson11_serializeOpDescribeGameSessionDetails) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeGameSessionDetails")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeGameSessionDetailsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeGameSessionDetailsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1793,7 +1793,7 @@ func (m *awsAwsjson11_serializeOpDescribeGameSessionPlacement) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeGameSessionPlacement")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeGameSessionPlacementInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeGameSessionPlacementInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1839,7 +1839,7 @@ func (m *awsAwsjson11_serializeOpDescribeGameSessionQueues) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeGameSessionQueues")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeGameSessionQueuesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeGameSessionQueuesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1885,7 +1885,7 @@ func (m *awsAwsjson11_serializeOpDescribeGameSessions) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeGameSessions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeGameSessionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeGameSessionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1931,7 +1931,7 @@ func (m *awsAwsjson11_serializeOpDescribeInstances) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeInstances")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeInstancesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeInstancesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1977,7 +1977,7 @@ func (m *awsAwsjson11_serializeOpDescribeMatchmaking) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeMatchmaking")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeMatchmakingInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeMatchmakingInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2023,7 +2023,7 @@ func (m *awsAwsjson11_serializeOpDescribeMatchmakingConfigurations) HandleSerial
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeMatchmakingConfigurations")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeMatchmakingConfigurationsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeMatchmakingConfigurationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2069,7 +2069,7 @@ func (m *awsAwsjson11_serializeOpDescribeMatchmakingRuleSets) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeMatchmakingRuleSets")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeMatchmakingRuleSetsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeMatchmakingRuleSetsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2115,7 +2115,7 @@ func (m *awsAwsjson11_serializeOpDescribePlayerSessions) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribePlayerSessions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribePlayerSessionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribePlayerSessionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2161,7 +2161,7 @@ func (m *awsAwsjson11_serializeOpDescribeRuntimeConfiguration) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeRuntimeConfiguration")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeRuntimeConfigurationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeRuntimeConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2207,7 +2207,7 @@ func (m *awsAwsjson11_serializeOpDescribeScalingPolicies) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeScalingPolicies")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeScalingPoliciesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeScalingPoliciesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2253,7 +2253,7 @@ func (m *awsAwsjson11_serializeOpDescribeScript) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeScript")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeScriptInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeScriptInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2338,7 +2338,7 @@ func (m *awsAwsjson11_serializeOpDescribeVpcPeeringConnections) HandleSerialize(
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeVpcPeeringConnections")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeVpcPeeringConnectionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeVpcPeeringConnectionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2384,7 +2384,7 @@ func (m *awsAwsjson11_serializeOpGetGameSessionLogUrl) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.GetGameSessionLogUrl")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetGameSessionLogUrlInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetGameSessionLogUrlInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2430,7 +2430,7 @@ func (m *awsAwsjson11_serializeOpGetInstanceAccess) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.GetInstanceAccess")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetInstanceAccessInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetInstanceAccessInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2476,7 +2476,7 @@ func (m *awsAwsjson11_serializeOpListAliases) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.ListAliases")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListAliasesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListAliasesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2522,7 +2522,7 @@ func (m *awsAwsjson11_serializeOpListBuilds) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.ListBuilds")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListBuildsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListBuildsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2568,7 +2568,7 @@ func (m *awsAwsjson11_serializeOpListFleets) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.ListFleets")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListFleetsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListFleetsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2614,7 +2614,7 @@ func (m *awsAwsjson11_serializeOpListGameServerGroups) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.ListGameServerGroups")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListGameServerGroupsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListGameServerGroupsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2660,7 +2660,7 @@ func (m *awsAwsjson11_serializeOpListGameServers) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.ListGameServers")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListGameServersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListGameServersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2706,7 +2706,7 @@ func (m *awsAwsjson11_serializeOpListScripts) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.ListScripts")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListScriptsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListScriptsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2752,7 +2752,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.ListTagsForResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2798,7 +2798,7 @@ func (m *awsAwsjson11_serializeOpPutScalingPolicy) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.PutScalingPolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutScalingPolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutScalingPolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2844,7 +2844,7 @@ func (m *awsAwsjson11_serializeOpRegisterGameServer) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.RegisterGameServer")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRegisterGameServerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRegisterGameServerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2890,7 +2890,7 @@ func (m *awsAwsjson11_serializeOpRequestUploadCredentials) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.RequestUploadCredentials")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRequestUploadCredentialsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRequestUploadCredentialsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2936,7 +2936,7 @@ func (m *awsAwsjson11_serializeOpResolveAlias) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.ResolveAlias")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentResolveAliasInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentResolveAliasInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2982,7 +2982,7 @@ func (m *awsAwsjson11_serializeOpResumeGameServerGroup) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.ResumeGameServerGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentResumeGameServerGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentResumeGameServerGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3028,7 +3028,7 @@ func (m *awsAwsjson11_serializeOpSearchGameSessions) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.SearchGameSessions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSearchGameSessionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSearchGameSessionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3074,7 +3074,7 @@ func (m *awsAwsjson11_serializeOpStartFleetActions) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.StartFleetActions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartFleetActionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartFleetActionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3120,7 +3120,7 @@ func (m *awsAwsjson11_serializeOpStartGameSessionPlacement) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.StartGameSessionPlacement")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartGameSessionPlacementInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartGameSessionPlacementInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3166,7 +3166,7 @@ func (m *awsAwsjson11_serializeOpStartMatchBackfill) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.StartMatchBackfill")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartMatchBackfillInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartMatchBackfillInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3212,7 +3212,7 @@ func (m *awsAwsjson11_serializeOpStartMatchmaking) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.StartMatchmaking")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartMatchmakingInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartMatchmakingInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3258,7 +3258,7 @@ func (m *awsAwsjson11_serializeOpStopFleetActions) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.StopFleetActions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopFleetActionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopFleetActionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3304,7 +3304,7 @@ func (m *awsAwsjson11_serializeOpStopGameSessionPlacement) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.StopGameSessionPlacement")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopGameSessionPlacementInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopGameSessionPlacementInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3350,7 +3350,7 @@ func (m *awsAwsjson11_serializeOpStopMatchmaking) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.StopMatchmaking")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopMatchmakingInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopMatchmakingInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3396,7 +3396,7 @@ func (m *awsAwsjson11_serializeOpSuspendGameServerGroup) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.SuspendGameServerGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSuspendGameServerGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSuspendGameServerGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3442,7 +3442,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.TagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3488,7 +3488,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.UntagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3534,7 +3534,7 @@ func (m *awsAwsjson11_serializeOpUpdateAlias) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.UpdateAlias")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateAliasInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateAliasInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3580,7 +3580,7 @@ func (m *awsAwsjson11_serializeOpUpdateBuild) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.UpdateBuild")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateBuildInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateBuildInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3626,7 +3626,7 @@ func (m *awsAwsjson11_serializeOpUpdateFleetAttributes) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.UpdateFleetAttributes")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateFleetAttributesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateFleetAttributesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3672,7 +3672,7 @@ func (m *awsAwsjson11_serializeOpUpdateFleetCapacity) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.UpdateFleetCapacity")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateFleetCapacityInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateFleetCapacityInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3718,7 +3718,7 @@ func (m *awsAwsjson11_serializeOpUpdateFleetPortSettings) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.UpdateFleetPortSettings")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateFleetPortSettingsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateFleetPortSettingsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3764,7 +3764,7 @@ func (m *awsAwsjson11_serializeOpUpdateGameServer) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.UpdateGameServer")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateGameServerInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateGameServerInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3810,7 +3810,7 @@ func (m *awsAwsjson11_serializeOpUpdateGameServerGroup) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.UpdateGameServerGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateGameServerGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateGameServerGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3856,7 +3856,7 @@ func (m *awsAwsjson11_serializeOpUpdateGameSession) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.UpdateGameSession")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateGameSessionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateGameSessionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3902,7 +3902,7 @@ func (m *awsAwsjson11_serializeOpUpdateGameSessionQueue) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.UpdateGameSessionQueue")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateGameSessionQueueInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateGameSessionQueueInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3948,7 +3948,7 @@ func (m *awsAwsjson11_serializeOpUpdateMatchmakingConfiguration) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.UpdateMatchmakingConfiguration")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateMatchmakingConfigurationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateMatchmakingConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3994,7 +3994,7 @@ func (m *awsAwsjson11_serializeOpUpdateRuntimeConfiguration) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.UpdateRuntimeConfiguration")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateRuntimeConfigurationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateRuntimeConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4040,7 +4040,7 @@ func (m *awsAwsjson11_serializeOpUpdateScript) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.UpdateScript")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateScriptInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateScriptInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4086,7 +4086,7 @@ func (m *awsAwsjson11_serializeOpValidateMatchmakingRuleSet) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.ValidateMatchmakingRuleSet")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentValidateMatchmakingRuleSetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentValidateMatchmakingRuleSetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4917,7 +4917,7 @@ func awsAwsjson11_serializeDocumentVpcSubnets(v []*string, value smithyjson.Valu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAcceptMatchInput(v *AcceptMatchInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAcceptMatchInput(v *AcceptMatchInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4941,7 +4941,7 @@ func awsAwsjson11_serializeDocumentAcceptMatchInput(v *AcceptMatchInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentClaimGameServerInput(v *ClaimGameServerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentClaimGameServerInput(v *ClaimGameServerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4963,7 +4963,7 @@ func awsAwsjson11_serializeDocumentClaimGameServerInput(v *ClaimGameServerInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateAliasInput(v *CreateAliasInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateAliasInput(v *CreateAliasInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4994,7 +4994,7 @@ func awsAwsjson11_serializeDocumentCreateAliasInput(v *CreateAliasInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateBuildInput(v *CreateBuildInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateBuildInput(v *CreateBuildInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5030,7 +5030,7 @@ func awsAwsjson11_serializeDocumentCreateBuildInput(v *CreateBuildInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateFleetInput(v *CreateFleetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateFleetInput(v *CreateFleetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5146,7 +5146,7 @@ func awsAwsjson11_serializeDocumentCreateFleetInput(v *CreateFleetInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateGameServerGroupInput(v *CreateGameServerGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateGameServerGroupInput(v *CreateGameServerGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5218,7 +5218,7 @@ func awsAwsjson11_serializeDocumentCreateGameServerGroupInput(v *CreateGameServe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateGameSessionInput(v *CreateGameSessionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateGameSessionInput(v *CreateGameSessionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5272,7 +5272,7 @@ func awsAwsjson11_serializeDocumentCreateGameSessionInput(v *CreateGameSessionIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateGameSessionQueueInput(v *CreateGameSessionQueueInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateGameSessionQueueInput(v *CreateGameSessionQueueInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5310,7 +5310,7 @@ func awsAwsjson11_serializeDocumentCreateGameSessionQueueInput(v *CreateGameSess
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateMatchmakingConfigurationInput(v *CreateMatchmakingConfigurationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateMatchmakingConfigurationInput(v *CreateMatchmakingConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5393,7 +5393,7 @@ func awsAwsjson11_serializeDocumentCreateMatchmakingConfigurationInput(v *Create
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateMatchmakingRuleSetInput(v *CreateMatchmakingRuleSetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateMatchmakingRuleSetInput(v *CreateMatchmakingRuleSetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5417,7 +5417,7 @@ func awsAwsjson11_serializeDocumentCreateMatchmakingRuleSetInput(v *CreateMatchm
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreatePlayerSessionInput(v *CreatePlayerSessionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreatePlayerSessionInput(v *CreatePlayerSessionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5439,7 +5439,7 @@ func awsAwsjson11_serializeDocumentCreatePlayerSessionInput(v *CreatePlayerSessi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreatePlayerSessionsInput(v *CreatePlayerSessionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreatePlayerSessionsInput(v *CreatePlayerSessionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5465,7 +5465,7 @@ func awsAwsjson11_serializeDocumentCreatePlayerSessionsInput(v *CreatePlayerSess
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateScriptInput(v *CreateScriptInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateScriptInput(v *CreateScriptInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5501,7 +5501,7 @@ func awsAwsjson11_serializeDocumentCreateScriptInput(v *CreateScriptInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateVpcPeeringAuthorizationInput(v *CreateVpcPeeringAuthorizationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateVpcPeeringAuthorizationInput(v *CreateVpcPeeringAuthorizationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5518,7 +5518,7 @@ func awsAwsjson11_serializeDocumentCreateVpcPeeringAuthorizationInput(v *CreateV
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateVpcPeeringConnectionInput(v *CreateVpcPeeringConnectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateVpcPeeringConnectionInput(v *CreateVpcPeeringConnectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5540,7 +5540,7 @@ func awsAwsjson11_serializeDocumentCreateVpcPeeringConnectionInput(v *CreateVpcP
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteAliasInput(v *DeleteAliasInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteAliasInput(v *DeleteAliasInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5552,7 +5552,7 @@ func awsAwsjson11_serializeDocumentDeleteAliasInput(v *DeleteAliasInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteBuildInput(v *DeleteBuildInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteBuildInput(v *DeleteBuildInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5564,7 +5564,7 @@ func awsAwsjson11_serializeDocumentDeleteBuildInput(v *DeleteBuildInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteFleetInput(v *DeleteFleetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteFleetInput(v *DeleteFleetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5576,7 +5576,7 @@ func awsAwsjson11_serializeDocumentDeleteFleetInput(v *DeleteFleetInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteGameServerGroupInput(v *DeleteGameServerGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteGameServerGroupInput(v *DeleteGameServerGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5593,7 +5593,7 @@ func awsAwsjson11_serializeDocumentDeleteGameServerGroupInput(v *DeleteGameServe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteGameSessionQueueInput(v *DeleteGameSessionQueueInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteGameSessionQueueInput(v *DeleteGameSessionQueueInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5605,7 +5605,7 @@ func awsAwsjson11_serializeDocumentDeleteGameSessionQueueInput(v *DeleteGameSess
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteMatchmakingConfigurationInput(v *DeleteMatchmakingConfigurationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteMatchmakingConfigurationInput(v *DeleteMatchmakingConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5617,7 +5617,7 @@ func awsAwsjson11_serializeDocumentDeleteMatchmakingConfigurationInput(v *Delete
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteMatchmakingRuleSetInput(v *DeleteMatchmakingRuleSetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteMatchmakingRuleSetInput(v *DeleteMatchmakingRuleSetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5629,7 +5629,7 @@ func awsAwsjson11_serializeDocumentDeleteMatchmakingRuleSetInput(v *DeleteMatchm
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteScalingPolicyInput(v *DeleteScalingPolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteScalingPolicyInput(v *DeleteScalingPolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5646,7 +5646,7 @@ func awsAwsjson11_serializeDocumentDeleteScalingPolicyInput(v *DeleteScalingPoli
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteScriptInput(v *DeleteScriptInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteScriptInput(v *DeleteScriptInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5658,7 +5658,7 @@ func awsAwsjson11_serializeDocumentDeleteScriptInput(v *DeleteScriptInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteVpcPeeringAuthorizationInput(v *DeleteVpcPeeringAuthorizationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteVpcPeeringAuthorizationInput(v *DeleteVpcPeeringAuthorizationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5675,7 +5675,7 @@ func awsAwsjson11_serializeDocumentDeleteVpcPeeringAuthorizationInput(v *DeleteV
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteVpcPeeringConnectionInput(v *DeleteVpcPeeringConnectionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteVpcPeeringConnectionInput(v *DeleteVpcPeeringConnectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5692,7 +5692,7 @@ func awsAwsjson11_serializeDocumentDeleteVpcPeeringConnectionInput(v *DeleteVpcP
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeregisterGameServerInput(v *DeregisterGameServerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeregisterGameServerInput(v *DeregisterGameServerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5709,7 +5709,7 @@ func awsAwsjson11_serializeDocumentDeregisterGameServerInput(v *DeregisterGameSe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeAliasInput(v *DescribeAliasInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeAliasInput(v *DescribeAliasInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5721,7 +5721,7 @@ func awsAwsjson11_serializeDocumentDescribeAliasInput(v *DescribeAliasInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeBuildInput(v *DescribeBuildInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeBuildInput(v *DescribeBuildInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5733,7 +5733,7 @@ func awsAwsjson11_serializeDocumentDescribeBuildInput(v *DescribeBuildInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeEC2InstanceLimitsInput(v *DescribeEC2InstanceLimitsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeEC2InstanceLimitsInput(v *DescribeEC2InstanceLimitsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5745,7 +5745,7 @@ func awsAwsjson11_serializeDocumentDescribeEC2InstanceLimitsInput(v *DescribeEC2
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeFleetAttributesInput(v *DescribeFleetAttributesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeFleetAttributesInput(v *DescribeFleetAttributesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5769,7 +5769,7 @@ func awsAwsjson11_serializeDocumentDescribeFleetAttributesInput(v *DescribeFleet
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeFleetCapacityInput(v *DescribeFleetCapacityInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeFleetCapacityInput(v *DescribeFleetCapacityInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5793,7 +5793,7 @@ func awsAwsjson11_serializeDocumentDescribeFleetCapacityInput(v *DescribeFleetCa
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeFleetEventsInput(v *DescribeFleetEventsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeFleetEventsInput(v *DescribeFleetEventsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5825,7 +5825,7 @@ func awsAwsjson11_serializeDocumentDescribeFleetEventsInput(v *DescribeFleetEven
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeFleetPortSettingsInput(v *DescribeFleetPortSettingsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeFleetPortSettingsInput(v *DescribeFleetPortSettingsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5837,7 +5837,7 @@ func awsAwsjson11_serializeDocumentDescribeFleetPortSettingsInput(v *DescribeFle
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeFleetUtilizationInput(v *DescribeFleetUtilizationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeFleetUtilizationInput(v *DescribeFleetUtilizationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5861,7 +5861,7 @@ func awsAwsjson11_serializeDocumentDescribeFleetUtilizationInput(v *DescribeFlee
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeGameServerGroupInput(v *DescribeGameServerGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeGameServerGroupInput(v *DescribeGameServerGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5873,7 +5873,7 @@ func awsAwsjson11_serializeDocumentDescribeGameServerGroupInput(v *DescribeGameS
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeGameServerInput(v *DescribeGameServerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeGameServerInput(v *DescribeGameServerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5890,7 +5890,7 @@ func awsAwsjson11_serializeDocumentDescribeGameServerInput(v *DescribeGameServer
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeGameSessionDetailsInput(v *DescribeGameSessionDetailsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeGameSessionDetailsInput(v *DescribeGameSessionDetailsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5927,7 +5927,7 @@ func awsAwsjson11_serializeDocumentDescribeGameSessionDetailsInput(v *DescribeGa
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeGameSessionPlacementInput(v *DescribeGameSessionPlacementInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeGameSessionPlacementInput(v *DescribeGameSessionPlacementInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5939,7 +5939,7 @@ func awsAwsjson11_serializeDocumentDescribeGameSessionPlacementInput(v *Describe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeGameSessionQueuesInput(v *DescribeGameSessionQueuesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeGameSessionQueuesInput(v *DescribeGameSessionQueuesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5963,7 +5963,7 @@ func awsAwsjson11_serializeDocumentDescribeGameSessionQueuesInput(v *DescribeGam
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeGameSessionsInput(v *DescribeGameSessionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeGameSessionsInput(v *DescribeGameSessionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6000,7 +6000,7 @@ func awsAwsjson11_serializeDocumentDescribeGameSessionsInput(v *DescribeGameSess
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeInstancesInput(v *DescribeInstancesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeInstancesInput(v *DescribeInstancesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6027,7 +6027,7 @@ func awsAwsjson11_serializeDocumentDescribeInstancesInput(v *DescribeInstancesIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeMatchmakingConfigurationsInput(v *DescribeMatchmakingConfigurationsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeMatchmakingConfigurationsInput(v *DescribeMatchmakingConfigurationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6056,7 +6056,7 @@ func awsAwsjson11_serializeDocumentDescribeMatchmakingConfigurationsInput(v *Des
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeMatchmakingInput(v *DescribeMatchmakingInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeMatchmakingInput(v *DescribeMatchmakingInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6070,7 +6070,7 @@ func awsAwsjson11_serializeDocumentDescribeMatchmakingInput(v *DescribeMatchmaki
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeMatchmakingRuleSetsInput(v *DescribeMatchmakingRuleSetsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeMatchmakingRuleSetsInput(v *DescribeMatchmakingRuleSetsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6094,7 +6094,7 @@ func awsAwsjson11_serializeDocumentDescribeMatchmakingRuleSetsInput(v *DescribeM
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribePlayerSessionsInput(v *DescribePlayerSessionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribePlayerSessionsInput(v *DescribePlayerSessionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6131,7 +6131,7 @@ func awsAwsjson11_serializeDocumentDescribePlayerSessionsInput(v *DescribePlayer
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeRuntimeConfigurationInput(v *DescribeRuntimeConfigurationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeRuntimeConfigurationInput(v *DescribeRuntimeConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6143,7 +6143,7 @@ func awsAwsjson11_serializeDocumentDescribeRuntimeConfigurationInput(v *Describe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeScalingPoliciesInput(v *DescribeScalingPoliciesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeScalingPoliciesInput(v *DescribeScalingPoliciesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6170,7 +6170,7 @@ func awsAwsjson11_serializeDocumentDescribeScalingPoliciesInput(v *DescribeScali
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeScriptInput(v *DescribeScriptInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeScriptInput(v *DescribeScriptInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6182,14 +6182,14 @@ func awsAwsjson11_serializeDocumentDescribeScriptInput(v *DescribeScriptInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeVpcPeeringAuthorizationsInput(v *DescribeVpcPeeringAuthorizationsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeVpcPeeringAuthorizationsInput(v *DescribeVpcPeeringAuthorizationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeVpcPeeringConnectionsInput(v *DescribeVpcPeeringConnectionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeVpcPeeringConnectionsInput(v *DescribeVpcPeeringConnectionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6201,7 +6201,7 @@ func awsAwsjson11_serializeDocumentDescribeVpcPeeringConnectionsInput(v *Describ
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetGameSessionLogUrlInput(v *GetGameSessionLogUrlInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetGameSessionLogUrlInput(v *GetGameSessionLogUrlInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6213,7 +6213,7 @@ func awsAwsjson11_serializeDocumentGetGameSessionLogUrlInput(v *GetGameSessionLo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetInstanceAccessInput(v *GetInstanceAccessInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetInstanceAccessInput(v *GetInstanceAccessInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6230,7 +6230,7 @@ func awsAwsjson11_serializeDocumentGetInstanceAccessInput(v *GetInstanceAccessIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListAliasesInput(v *ListAliasesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListAliasesInput(v *ListAliasesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6257,7 +6257,7 @@ func awsAwsjson11_serializeDocumentListAliasesInput(v *ListAliasesInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListBuildsInput(v *ListBuildsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListBuildsInput(v *ListBuildsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6279,7 +6279,7 @@ func awsAwsjson11_serializeDocumentListBuildsInput(v *ListBuildsInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListFleetsInput(v *ListFleetsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListFleetsInput(v *ListFleetsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6306,7 +6306,7 @@ func awsAwsjson11_serializeDocumentListFleetsInput(v *ListFleetsInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListGameServerGroupsInput(v *ListGameServerGroupsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListGameServerGroupsInput(v *ListGameServerGroupsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6323,7 +6323,7 @@ func awsAwsjson11_serializeDocumentListGameServerGroupsInput(v *ListGameServerGr
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListGameServersInput(v *ListGameServersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListGameServersInput(v *ListGameServersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6350,7 +6350,7 @@ func awsAwsjson11_serializeDocumentListGameServersInput(v *ListGameServersInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListScriptsInput(v *ListScriptsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListScriptsInput(v *ListScriptsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6367,7 +6367,7 @@ func awsAwsjson11_serializeDocumentListScriptsInput(v *ListScriptsInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6379,7 +6379,7 @@ func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResour
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutScalingPolicyInput(v *PutScalingPolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutScalingPolicyInput(v *PutScalingPolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6438,7 +6438,7 @@ func awsAwsjson11_serializeDocumentPutScalingPolicyInput(v *PutScalingPolicyInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRegisterGameServerInput(v *RegisterGameServerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRegisterGameServerInput(v *RegisterGameServerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6482,7 +6482,7 @@ func awsAwsjson11_serializeDocumentRegisterGameServerInput(v *RegisterGameServer
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRequestUploadCredentialsInput(v *RequestUploadCredentialsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRequestUploadCredentialsInput(v *RequestUploadCredentialsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6494,7 +6494,7 @@ func awsAwsjson11_serializeDocumentRequestUploadCredentialsInput(v *RequestUploa
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentResolveAliasInput(v *ResolveAliasInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentResolveAliasInput(v *ResolveAliasInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6506,7 +6506,7 @@ func awsAwsjson11_serializeDocumentResolveAliasInput(v *ResolveAliasInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentResumeGameServerGroupInput(v *ResumeGameServerGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentResumeGameServerGroupInput(v *ResumeGameServerGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6525,7 +6525,7 @@ func awsAwsjson11_serializeDocumentResumeGameServerGroupInput(v *ResumeGameServe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSearchGameSessionsInput(v *SearchGameSessionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSearchGameSessionsInput(v *SearchGameSessionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6562,7 +6562,7 @@ func awsAwsjson11_serializeDocumentSearchGameSessionsInput(v *SearchGameSessions
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartFleetActionsInput(v *StartFleetActionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartFleetActionsInput(v *StartFleetActionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6581,7 +6581,7 @@ func awsAwsjson11_serializeDocumentStartFleetActionsInput(v *StartFleetActionsIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartGameSessionPlacementInput(v *StartGameSessionPlacementInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartGameSessionPlacementInput(v *StartGameSessionPlacementInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6634,7 +6634,7 @@ func awsAwsjson11_serializeDocumentStartGameSessionPlacementInput(v *StartGameSe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartMatchBackfillInput(v *StartMatchBackfillInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartMatchBackfillInput(v *StartMatchBackfillInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6663,7 +6663,7 @@ func awsAwsjson11_serializeDocumentStartMatchBackfillInput(v *StartMatchBackfill
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartMatchmakingInput(v *StartMatchmakingInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartMatchmakingInput(v *StartMatchmakingInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6687,7 +6687,7 @@ func awsAwsjson11_serializeDocumentStartMatchmakingInput(v *StartMatchmakingInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopFleetActionsInput(v *StopFleetActionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopFleetActionsInput(v *StopFleetActionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6706,7 +6706,7 @@ func awsAwsjson11_serializeDocumentStopFleetActionsInput(v *StopFleetActionsInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopGameSessionPlacementInput(v *StopGameSessionPlacementInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopGameSessionPlacementInput(v *StopGameSessionPlacementInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6718,7 +6718,7 @@ func awsAwsjson11_serializeDocumentStopGameSessionPlacementInput(v *StopGameSess
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopMatchmakingInput(v *StopMatchmakingInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopMatchmakingInput(v *StopMatchmakingInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6730,7 +6730,7 @@ func awsAwsjson11_serializeDocumentStopMatchmakingInput(v *StopMatchmakingInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSuspendGameServerGroupInput(v *SuspendGameServerGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSuspendGameServerGroupInput(v *SuspendGameServerGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6749,7 +6749,7 @@ func awsAwsjson11_serializeDocumentSuspendGameServerGroupInput(v *SuspendGameSer
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6768,7 +6768,7 @@ func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6787,7 +6787,7 @@ func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateAliasInput(v *UpdateAliasInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateAliasInput(v *UpdateAliasInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6816,7 +6816,7 @@ func awsAwsjson11_serializeDocumentUpdateAliasInput(v *UpdateAliasInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateBuildInput(v *UpdateBuildInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateBuildInput(v *UpdateBuildInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6838,7 +6838,7 @@ func awsAwsjson11_serializeDocumentUpdateBuildInput(v *UpdateBuildInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateFleetAttributesInput(v *UpdateFleetAttributesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateFleetAttributesInput(v *UpdateFleetAttributesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6879,7 +6879,7 @@ func awsAwsjson11_serializeDocumentUpdateFleetAttributesInput(v *UpdateFleetAttr
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateFleetCapacityInput(v *UpdateFleetCapacityInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateFleetCapacityInput(v *UpdateFleetCapacityInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6906,7 +6906,7 @@ func awsAwsjson11_serializeDocumentUpdateFleetCapacityInput(v *UpdateFleetCapaci
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateFleetPortSettingsInput(v *UpdateFleetPortSettingsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateFleetPortSettingsInput(v *UpdateFleetPortSettingsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6932,7 +6932,7 @@ func awsAwsjson11_serializeDocumentUpdateFleetPortSettingsInput(v *UpdateFleetPo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateGameServerGroupInput(v *UpdateGameServerGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateGameServerGroupInput(v *UpdateGameServerGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -6966,7 +6966,7 @@ func awsAwsjson11_serializeDocumentUpdateGameServerGroupInput(v *UpdateGameServe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateGameServerInput(v *UpdateGameServerInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateGameServerInput(v *UpdateGameServerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -7003,7 +7003,7 @@ func awsAwsjson11_serializeDocumentUpdateGameServerInput(v *UpdateGameServerInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateGameSessionInput(v *UpdateGameSessionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateGameSessionInput(v *UpdateGameSessionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -7035,7 +7035,7 @@ func awsAwsjson11_serializeDocumentUpdateGameSessionInput(v *UpdateGameSessionIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateGameSessionQueueInput(v *UpdateGameSessionQueueInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateGameSessionQueueInput(v *UpdateGameSessionQueueInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -7066,7 +7066,7 @@ func awsAwsjson11_serializeDocumentUpdateGameSessionQueueInput(v *UpdateGameSess
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateMatchmakingConfigurationInput(v *UpdateMatchmakingConfigurationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateMatchmakingConfigurationInput(v *UpdateMatchmakingConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -7142,7 +7142,7 @@ func awsAwsjson11_serializeDocumentUpdateMatchmakingConfigurationInput(v *Update
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateRuntimeConfigurationInput(v *UpdateRuntimeConfigurationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateRuntimeConfigurationInput(v *UpdateRuntimeConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -7161,7 +7161,7 @@ func awsAwsjson11_serializeDocumentUpdateRuntimeConfigurationInput(v *UpdateRunt
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateScriptInput(v *UpdateScriptInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateScriptInput(v *UpdateScriptInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -7195,7 +7195,7 @@ func awsAwsjson11_serializeDocumentUpdateScriptInput(v *UpdateScriptInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentValidateMatchmakingRuleSetInput(v *ValidateMatchmakingRuleSetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentValidateMatchmakingRuleSetInput(v *ValidateMatchmakingRuleSetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

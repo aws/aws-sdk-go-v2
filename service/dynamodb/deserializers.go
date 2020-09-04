@@ -53,7 +53,7 @@ func (m *awsAwsjson10_deserializeOpBatchGetItem) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentBatchGetItemOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentBatchGetItemOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -165,7 +165,7 @@ func (m *awsAwsjson10_deserializeOpBatchWriteItem) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentBatchWriteItemOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentBatchWriteItemOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -280,7 +280,7 @@ func (m *awsAwsjson10_deserializeOpCreateBackup) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentCreateBackupOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentCreateBackupOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -398,7 +398,7 @@ func (m *awsAwsjson10_deserializeOpCreateGlobalTable) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentCreateGlobalTableOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentCreateGlobalTableOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -510,7 +510,7 @@ func (m *awsAwsjson10_deserializeOpCreateTable) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentCreateTableOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentCreateTableOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -619,7 +619,7 @@ func (m *awsAwsjson10_deserializeOpDeleteBackup) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentDeleteBackupOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentDeleteBackupOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -731,7 +731,7 @@ func (m *awsAwsjson10_deserializeOpDeleteItem) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentDeleteItemOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentDeleteItemOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -852,7 +852,7 @@ func (m *awsAwsjson10_deserializeOpDeleteTable) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentDeleteTableOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentDeleteTableOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -964,7 +964,7 @@ func (m *awsAwsjson10_deserializeOpDescribeBackup) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentDescribeBackupOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentDescribeBackupOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1070,7 +1070,7 @@ func (m *awsAwsjson10_deserializeOpDescribeContinuousBackups) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentDescribeContinuousBackupsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentDescribeContinuousBackupsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1176,7 +1176,7 @@ func (m *awsAwsjson10_deserializeOpDescribeContributorInsights) HandleDeserializ
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentDescribeContributorInsightsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentDescribeContributorInsightsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1279,7 +1279,7 @@ func (m *awsAwsjson10_deserializeOpDescribeEndpoints) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentDescribeEndpointsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentDescribeEndpointsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1376,7 +1376,7 @@ func (m *awsAwsjson10_deserializeOpDescribeGlobalTable) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentDescribeGlobalTableOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentDescribeGlobalTableOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1482,7 +1482,7 @@ func (m *awsAwsjson10_deserializeOpDescribeGlobalTableSettings) HandleDeserializ
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentDescribeGlobalTableSettingsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentDescribeGlobalTableSettingsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1588,7 +1588,7 @@ func (m *awsAwsjson10_deserializeOpDescribeLimits) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentDescribeLimitsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentDescribeLimitsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1691,7 +1691,7 @@ func (m *awsAwsjson10_deserializeOpDescribeTable) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentDescribeTableOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentDescribeTableOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1797,7 +1797,7 @@ func (m *awsAwsjson10_deserializeOpDescribeTableReplicaAutoScaling) HandleDeseri
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentDescribeTableReplicaAutoScalingOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentDescribeTableReplicaAutoScalingOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1900,7 +1900,7 @@ func (m *awsAwsjson10_deserializeOpDescribeTimeToLive) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentDescribeTimeToLiveOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentDescribeTimeToLiveOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2006,7 +2006,7 @@ func (m *awsAwsjson10_deserializeOpGetItem) HandleDeserialize(ctx context.Contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentGetItemOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentGetItemOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2118,7 +2118,7 @@ func (m *awsAwsjson10_deserializeOpListBackups) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentListBackupsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentListBackupsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2221,7 +2221,7 @@ func (m *awsAwsjson10_deserializeOpListContributorInsights) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentListContributorInsightsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentListContributorInsightsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2324,7 +2324,7 @@ func (m *awsAwsjson10_deserializeOpListGlobalTables) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentListGlobalTablesOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentListGlobalTablesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2427,7 +2427,7 @@ func (m *awsAwsjson10_deserializeOpListTables) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentListTablesOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentListTablesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2530,7 +2530,7 @@ func (m *awsAwsjson10_deserializeOpListTagsOfResource) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentListTagsOfResourceOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentListTagsOfResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2636,7 +2636,7 @@ func (m *awsAwsjson10_deserializeOpPutItem) HandleDeserialize(ctx context.Contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentPutItemOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentPutItemOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2757,7 +2757,7 @@ func (m *awsAwsjson10_deserializeOpQuery) HandleDeserialize(ctx context.Context,
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentQueryOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentQueryOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2869,7 +2869,7 @@ func (m *awsAwsjson10_deserializeOpRestoreTableFromBackup) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentRestoreTableFromBackupOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentRestoreTableFromBackupOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2987,7 +2987,7 @@ func (m *awsAwsjson10_deserializeOpRestoreTableToPointInTime) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentRestoreTableToPointInTimeOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentRestoreTableToPointInTimeOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3108,7 +3108,7 @@ func (m *awsAwsjson10_deserializeOpScan) HandleDeserialize(ctx context.Context, 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentScanOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentScanOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3332,7 +3332,7 @@ func (m *awsAwsjson10_deserializeOpTransactGetItems) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentTransactGetItemsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentTransactGetItemsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3447,7 +3447,7 @@ func (m *awsAwsjson10_deserializeOpTransactWriteItems) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentTransactWriteItemsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentTransactWriteItemsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3680,7 +3680,7 @@ func (m *awsAwsjson10_deserializeOpUpdateContinuousBackups) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentUpdateContinuousBackupsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentUpdateContinuousBackupsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3789,7 +3789,7 @@ func (m *awsAwsjson10_deserializeOpUpdateContributorInsights) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentUpdateContributorInsightsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentUpdateContributorInsightsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3892,7 +3892,7 @@ func (m *awsAwsjson10_deserializeOpUpdateGlobalTable) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentUpdateGlobalTableOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentUpdateGlobalTableOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4007,7 +4007,7 @@ func (m *awsAwsjson10_deserializeOpUpdateGlobalTableSettings) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentUpdateGlobalTableSettingsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentUpdateGlobalTableSettingsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4125,7 +4125,7 @@ func (m *awsAwsjson10_deserializeOpUpdateItem) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentUpdateItemOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentUpdateItemOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4246,7 +4246,7 @@ func (m *awsAwsjson10_deserializeOpUpdateTable) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentUpdateTableOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentUpdateTableOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4358,7 +4358,7 @@ func (m *awsAwsjson10_deserializeOpUpdateTableReplicaAutoScaling) HandleDeserial
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentUpdateTableReplicaAutoScalingOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentUpdateTableReplicaAutoScalingOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4467,7 +4467,7 @@ func (m *awsAwsjson10_deserializeOpUpdateTimeToLive) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentUpdateTimeToLiveOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentUpdateTimeToLiveOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -14122,7 +14122,7 @@ func awsAwsjson10_deserializeDocumentWriteRequests(v *[]*types.WriteRequest, dec
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentBatchGetItemOutput(v **BatchGetItemOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentBatchGetItemOutput(v **BatchGetItemOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14188,7 +14188,7 @@ func awsAwsjson10_deserializeDocumentBatchGetItemOutput(v **BatchGetItemOutput, 
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentBatchWriteItemOutput(v **BatchWriteItemOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentBatchWriteItemOutput(v **BatchWriteItemOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14254,7 +14254,7 @@ func awsAwsjson10_deserializeDocumentBatchWriteItemOutput(v **BatchWriteItemOutp
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentCreateBackupOutput(v **CreateBackupOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentCreateBackupOutput(v **CreateBackupOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14310,7 +14310,7 @@ func awsAwsjson10_deserializeDocumentCreateBackupOutput(v **CreateBackupOutput, 
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentCreateGlobalTableOutput(v **CreateGlobalTableOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentCreateGlobalTableOutput(v **CreateGlobalTableOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14366,7 +14366,7 @@ func awsAwsjson10_deserializeDocumentCreateGlobalTableOutput(v **CreateGlobalTab
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentCreateTableOutput(v **CreateTableOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentCreateTableOutput(v **CreateTableOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14422,7 +14422,7 @@ func awsAwsjson10_deserializeDocumentCreateTableOutput(v **CreateTableOutput, de
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentDeleteBackupOutput(v **DeleteBackupOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentDeleteBackupOutput(v **DeleteBackupOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14478,7 +14478,7 @@ func awsAwsjson10_deserializeDocumentDeleteBackupOutput(v **DeleteBackupOutput, 
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentDeleteItemOutput(v **DeleteItemOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentDeleteItemOutput(v **DeleteItemOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14544,7 +14544,7 @@ func awsAwsjson10_deserializeDocumentDeleteItemOutput(v **DeleteItemOutput, deco
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentDeleteTableOutput(v **DeleteTableOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentDeleteTableOutput(v **DeleteTableOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14600,7 +14600,7 @@ func awsAwsjson10_deserializeDocumentDeleteTableOutput(v **DeleteTableOutput, de
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentDescribeBackupOutput(v **DescribeBackupOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentDescribeBackupOutput(v **DescribeBackupOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14656,7 +14656,7 @@ func awsAwsjson10_deserializeDocumentDescribeBackupOutput(v **DescribeBackupOutp
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentDescribeContinuousBackupsOutput(v **DescribeContinuousBackupsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentDescribeContinuousBackupsOutput(v **DescribeContinuousBackupsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14712,7 +14712,7 @@ func awsAwsjson10_deserializeDocumentDescribeContinuousBackupsOutput(v **Describ
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentDescribeContributorInsightsOutput(v **DescribeContributorInsightsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentDescribeContributorInsightsOutput(v **DescribeContributorInsightsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14829,7 +14829,7 @@ func awsAwsjson10_deserializeDocumentDescribeContributorInsightsOutput(v **Descr
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentDescribeEndpointsOutput(v **DescribeEndpointsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentDescribeEndpointsOutput(v **DescribeEndpointsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14885,7 +14885,7 @@ func awsAwsjson10_deserializeDocumentDescribeEndpointsOutput(v **DescribeEndpoin
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentDescribeGlobalTableOutput(v **DescribeGlobalTableOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentDescribeGlobalTableOutput(v **DescribeGlobalTableOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -14941,7 +14941,7 @@ func awsAwsjson10_deserializeDocumentDescribeGlobalTableOutput(v **DescribeGloba
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentDescribeGlobalTableSettingsOutput(v **DescribeGlobalTableSettingsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentDescribeGlobalTableSettingsOutput(v **DescribeGlobalTableSettingsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15010,7 +15010,7 @@ func awsAwsjson10_deserializeDocumentDescribeGlobalTableSettingsOutput(v **Descr
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentDescribeLimitsOutput(v **DescribeLimitsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentDescribeLimitsOutput(v **DescribeLimitsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15129,7 +15129,7 @@ func awsAwsjson10_deserializeDocumentDescribeLimitsOutput(v **DescribeLimitsOutp
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentDescribeTableOutput(v **DescribeTableOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentDescribeTableOutput(v **DescribeTableOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15185,7 +15185,7 @@ func awsAwsjson10_deserializeDocumentDescribeTableOutput(v **DescribeTableOutput
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentDescribeTableReplicaAutoScalingOutput(v **DescribeTableReplicaAutoScalingOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentDescribeTableReplicaAutoScalingOutput(v **DescribeTableReplicaAutoScalingOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15241,7 +15241,7 @@ func awsAwsjson10_deserializeDocumentDescribeTableReplicaAutoScalingOutput(v **D
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentDescribeTimeToLiveOutput(v **DescribeTimeToLiveOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentDescribeTimeToLiveOutput(v **DescribeTimeToLiveOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15297,7 +15297,7 @@ func awsAwsjson10_deserializeDocumentDescribeTimeToLiveOutput(v **DescribeTimeTo
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentGetItemOutput(v **GetItemOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentGetItemOutput(v **GetItemOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15358,7 +15358,7 @@ func awsAwsjson10_deserializeDocumentGetItemOutput(v **GetItemOutput, decoder *j
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentListBackupsOutput(v **ListBackupsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentListBackupsOutput(v **ListBackupsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15427,7 +15427,7 @@ func awsAwsjson10_deserializeDocumentListBackupsOutput(v **ListBackupsOutput, de
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentListContributorInsightsOutput(v **ListContributorInsightsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentListContributorInsightsOutput(v **ListContributorInsightsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15496,7 +15496,7 @@ func awsAwsjson10_deserializeDocumentListContributorInsightsOutput(v **ListContr
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentListGlobalTablesOutput(v **ListGlobalTablesOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentListGlobalTablesOutput(v **ListGlobalTablesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15565,7 +15565,7 @@ func awsAwsjson10_deserializeDocumentListGlobalTablesOutput(v **ListGlobalTables
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentListTablesOutput(v **ListTablesOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentListTablesOutput(v **ListTablesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15634,7 +15634,7 @@ func awsAwsjson10_deserializeDocumentListTablesOutput(v **ListTablesOutput, deco
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentListTagsOfResourceOutput(v **ListTagsOfResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentListTagsOfResourceOutput(v **ListTagsOfResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15703,7 +15703,7 @@ func awsAwsjson10_deserializeDocumentListTagsOfResourceOutput(v **ListTagsOfReso
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentPutItemOutput(v **PutItemOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentPutItemOutput(v **PutItemOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15769,7 +15769,7 @@ func awsAwsjson10_deserializeDocumentPutItemOutput(v **PutItemOutput, decoder *j
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentQueryOutput(v **QueryOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentQueryOutput(v **QueryOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15869,7 +15869,7 @@ func awsAwsjson10_deserializeDocumentQueryOutput(v **QueryOutput, decoder *json.
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentRestoreTableFromBackupOutput(v **RestoreTableFromBackupOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentRestoreTableFromBackupOutput(v **RestoreTableFromBackupOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15925,7 +15925,7 @@ func awsAwsjson10_deserializeDocumentRestoreTableFromBackupOutput(v **RestoreTab
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentRestoreTableToPointInTimeOutput(v **RestoreTableToPointInTimeOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentRestoreTableToPointInTimeOutput(v **RestoreTableToPointInTimeOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -15981,7 +15981,7 @@ func awsAwsjson10_deserializeDocumentRestoreTableToPointInTimeOutput(v **Restore
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentScanOutput(v **ScanOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentScanOutput(v **ScanOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16132,7 +16132,7 @@ func awsAwsjson10_deserializeDocumentTagResourceOutput(v **TagResourceOutput, de
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentTransactGetItemsOutput(v **TransactGetItemsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentTransactGetItemsOutput(v **TransactGetItemsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16193,7 +16193,7 @@ func awsAwsjson10_deserializeDocumentTransactGetItemsOutput(v **TransactGetItems
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentTransactWriteItemsOutput(v **TransactWriteItemsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentTransactWriteItemsOutput(v **TransactWriteItemsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16305,7 +16305,7 @@ func awsAwsjson10_deserializeDocumentUntagResourceOutput(v **UntagResourceOutput
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentUpdateContinuousBackupsOutput(v **UpdateContinuousBackupsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentUpdateContinuousBackupsOutput(v **UpdateContinuousBackupsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16361,7 +16361,7 @@ func awsAwsjson10_deserializeDocumentUpdateContinuousBackupsOutput(v **UpdateCon
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentUpdateContributorInsightsOutput(v **UpdateContributorInsightsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentUpdateContributorInsightsOutput(v **UpdateContributorInsightsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16451,7 +16451,7 @@ func awsAwsjson10_deserializeDocumentUpdateContributorInsightsOutput(v **UpdateC
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentUpdateGlobalTableOutput(v **UpdateGlobalTableOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentUpdateGlobalTableOutput(v **UpdateGlobalTableOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16507,7 +16507,7 @@ func awsAwsjson10_deserializeDocumentUpdateGlobalTableOutput(v **UpdateGlobalTab
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentUpdateGlobalTableSettingsOutput(v **UpdateGlobalTableSettingsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentUpdateGlobalTableSettingsOutput(v **UpdateGlobalTableSettingsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16576,7 +16576,7 @@ func awsAwsjson10_deserializeDocumentUpdateGlobalTableSettingsOutput(v **UpdateG
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentUpdateItemOutput(v **UpdateItemOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentUpdateItemOutput(v **UpdateItemOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16642,7 +16642,7 @@ func awsAwsjson10_deserializeDocumentUpdateItemOutput(v **UpdateItemOutput, deco
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentUpdateTableOutput(v **UpdateTableOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentUpdateTableOutput(v **UpdateTableOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16698,7 +16698,7 @@ func awsAwsjson10_deserializeDocumentUpdateTableOutput(v **UpdateTableOutput, de
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentUpdateTableReplicaAutoScalingOutput(v **UpdateTableReplicaAutoScalingOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentUpdateTableReplicaAutoScalingOutput(v **UpdateTableReplicaAutoScalingOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -16754,7 +16754,7 @@ func awsAwsjson10_deserializeDocumentUpdateTableReplicaAutoScalingOutput(v **Upd
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentUpdateTimeToLiveOutput(v **UpdateTimeToLiveOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentUpdateTimeToLiveOutput(v **UpdateTimeToLiveOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

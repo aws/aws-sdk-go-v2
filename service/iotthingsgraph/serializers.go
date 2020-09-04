@@ -45,7 +45,7 @@ func (m *awsAwsjson11_serializeOpAssociateEntityToThing) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.AssociateEntityToThing")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAssociateEntityToThingInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAssociateEntityToThingInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -91,7 +91,7 @@ func (m *awsAwsjson11_serializeOpCreateFlowTemplate) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.CreateFlowTemplate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateFlowTemplateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateFlowTemplateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -137,7 +137,7 @@ func (m *awsAwsjson11_serializeOpCreateSystemInstance) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.CreateSystemInstance")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateSystemInstanceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateSystemInstanceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -183,7 +183,7 @@ func (m *awsAwsjson11_serializeOpCreateSystemTemplate) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.CreateSystemTemplate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateSystemTemplateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateSystemTemplateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -229,7 +229,7 @@ func (m *awsAwsjson11_serializeOpDeleteFlowTemplate) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.DeleteFlowTemplate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteFlowTemplateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteFlowTemplateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -314,7 +314,7 @@ func (m *awsAwsjson11_serializeOpDeleteSystemInstance) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.DeleteSystemInstance")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteSystemInstanceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteSystemInstanceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -360,7 +360,7 @@ func (m *awsAwsjson11_serializeOpDeleteSystemTemplate) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.DeleteSystemTemplate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteSystemTemplateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteSystemTemplateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -406,7 +406,7 @@ func (m *awsAwsjson11_serializeOpDeploySystemInstance) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.DeploySystemInstance")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeploySystemInstanceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeploySystemInstanceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -452,7 +452,7 @@ func (m *awsAwsjson11_serializeOpDeprecateFlowTemplate) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.DeprecateFlowTemplate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeprecateFlowTemplateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeprecateFlowTemplateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -498,7 +498,7 @@ func (m *awsAwsjson11_serializeOpDeprecateSystemTemplate) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.DeprecateSystemTemplate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeprecateSystemTemplateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeprecateSystemTemplateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -544,7 +544,7 @@ func (m *awsAwsjson11_serializeOpDescribeNamespace) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.DescribeNamespace")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeNamespaceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeNamespaceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -590,7 +590,7 @@ func (m *awsAwsjson11_serializeOpDissociateEntityFromThing) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.DissociateEntityFromThing")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDissociateEntityFromThingInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDissociateEntityFromThingInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -636,7 +636,7 @@ func (m *awsAwsjson11_serializeOpGetEntities) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.GetEntities")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetEntitiesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetEntitiesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -682,7 +682,7 @@ func (m *awsAwsjson11_serializeOpGetFlowTemplate) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.GetFlowTemplate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetFlowTemplateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetFlowTemplateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -728,7 +728,7 @@ func (m *awsAwsjson11_serializeOpGetFlowTemplateRevisions) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.GetFlowTemplateRevisions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetFlowTemplateRevisionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetFlowTemplateRevisionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -813,7 +813,7 @@ func (m *awsAwsjson11_serializeOpGetSystemInstance) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.GetSystemInstance")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetSystemInstanceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetSystemInstanceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -859,7 +859,7 @@ func (m *awsAwsjson11_serializeOpGetSystemTemplate) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.GetSystemTemplate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetSystemTemplateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetSystemTemplateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -905,7 +905,7 @@ func (m *awsAwsjson11_serializeOpGetSystemTemplateRevisions) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.GetSystemTemplateRevisions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetSystemTemplateRevisionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetSystemTemplateRevisionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -951,7 +951,7 @@ func (m *awsAwsjson11_serializeOpGetUploadStatus) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.GetUploadStatus")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetUploadStatusInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetUploadStatusInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -997,7 +997,7 @@ func (m *awsAwsjson11_serializeOpListFlowExecutionMessages) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.ListFlowExecutionMessages")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListFlowExecutionMessagesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListFlowExecutionMessagesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1043,7 +1043,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.ListTagsForResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1089,7 +1089,7 @@ func (m *awsAwsjson11_serializeOpSearchEntities) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.SearchEntities")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSearchEntitiesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSearchEntitiesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1135,7 +1135,7 @@ func (m *awsAwsjson11_serializeOpSearchFlowExecutions) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.SearchFlowExecutions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSearchFlowExecutionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSearchFlowExecutionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1181,7 +1181,7 @@ func (m *awsAwsjson11_serializeOpSearchFlowTemplates) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.SearchFlowTemplates")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSearchFlowTemplatesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSearchFlowTemplatesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1227,7 +1227,7 @@ func (m *awsAwsjson11_serializeOpSearchSystemInstances) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.SearchSystemInstances")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSearchSystemInstancesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSearchSystemInstancesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1273,7 +1273,7 @@ func (m *awsAwsjson11_serializeOpSearchSystemTemplates) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.SearchSystemTemplates")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSearchSystemTemplatesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSearchSystemTemplatesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1319,7 +1319,7 @@ func (m *awsAwsjson11_serializeOpSearchThings) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.SearchThings")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSearchThingsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSearchThingsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1365,7 +1365,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.TagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1411,7 +1411,7 @@ func (m *awsAwsjson11_serializeOpUndeploySystemInstance) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.UndeploySystemInstance")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUndeploySystemInstanceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUndeploySystemInstanceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1457,7 +1457,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.UntagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1503,7 +1503,7 @@ func (m *awsAwsjson11_serializeOpUpdateFlowTemplate) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.UpdateFlowTemplate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateFlowTemplateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateFlowTemplateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1549,7 +1549,7 @@ func (m *awsAwsjson11_serializeOpUpdateSystemTemplate) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.UpdateSystemTemplate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateSystemTemplateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateSystemTemplateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1595,7 +1595,7 @@ func (m *awsAwsjson11_serializeOpUploadEntityDefinitions) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("IotThingsGraphFrontEndService.UploadEntityDefinitions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUploadEntityDefinitionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUploadEntityDefinitionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1923,7 +1923,7 @@ func awsAwsjson11_serializeDocumentUrns(v []*string, value smithyjson.Value) err
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssociateEntityToThingInput(v *AssociateEntityToThingInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAssociateEntityToThingInput(v *AssociateEntityToThingInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1945,7 +1945,7 @@ func awsAwsjson11_serializeDocumentAssociateEntityToThingInput(v *AssociateEntit
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateFlowTemplateInput(v *CreateFlowTemplateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateFlowTemplateInput(v *CreateFlowTemplateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1964,7 +1964,7 @@ func awsAwsjson11_serializeDocumentCreateFlowTemplateInput(v *CreateFlowTemplate
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateSystemInstanceInput(v *CreateSystemInstanceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateSystemInstanceInput(v *CreateSystemInstanceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2012,7 +2012,7 @@ func awsAwsjson11_serializeDocumentCreateSystemInstanceInput(v *CreateSystemInst
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateSystemTemplateInput(v *CreateSystemTemplateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateSystemTemplateInput(v *CreateSystemTemplateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2031,7 +2031,7 @@ func awsAwsjson11_serializeDocumentCreateSystemTemplateInput(v *CreateSystemTemp
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteFlowTemplateInput(v *DeleteFlowTemplateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteFlowTemplateInput(v *DeleteFlowTemplateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2043,26 +2043,14 @@ func awsAwsjson11_serializeDocumentDeleteFlowTemplateInput(v *DeleteFlowTemplate
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteNamespaceInput(v *DeleteNamespaceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteNamespaceInput(v *DeleteNamespaceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteSystemInstanceInput(v *DeleteSystemInstanceInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Id != nil {
-		ok := object.Key("id")
-		ok.String(*v.Id)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentDeleteSystemTemplateInput(v *DeleteSystemTemplateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteSystemInstanceInput(v *DeleteSystemInstanceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2074,7 +2062,7 @@ func awsAwsjson11_serializeDocumentDeleteSystemTemplateInput(v *DeleteSystemTemp
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeploySystemInstanceInput(v *DeploySystemInstanceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteSystemTemplateInput(v *DeleteSystemTemplateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2086,7 +2074,7 @@ func awsAwsjson11_serializeDocumentDeploySystemInstanceInput(v *DeploySystemInst
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeprecateFlowTemplateInput(v *DeprecateFlowTemplateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeploySystemInstanceInput(v *DeploySystemInstanceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2098,7 +2086,7 @@ func awsAwsjson11_serializeDocumentDeprecateFlowTemplateInput(v *DeprecateFlowTe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeprecateSystemTemplateInput(v *DeprecateSystemTemplateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeprecateFlowTemplateInput(v *DeprecateFlowTemplateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2110,7 +2098,19 @@ func awsAwsjson11_serializeDocumentDeprecateSystemTemplateInput(v *DeprecateSyst
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeNamespaceInput(v *DescribeNamespaceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeprecateSystemTemplateInput(v *DeprecateSystemTemplateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Id != nil {
+		ok := object.Key("id")
+		ok.String(*v.Id)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDescribeNamespaceInput(v *DescribeNamespaceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2122,7 +2122,7 @@ func awsAwsjson11_serializeDocumentDescribeNamespaceInput(v *DescribeNamespaceIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDissociateEntityFromThingInput(v *DissociateEntityFromThingInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDissociateEntityFromThingInput(v *DissociateEntityFromThingInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2139,7 +2139,7 @@ func awsAwsjson11_serializeDocumentDissociateEntityFromThingInput(v *DissociateE
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetEntitiesInput(v *GetEntitiesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetEntitiesInput(v *GetEntitiesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2158,7 +2158,7 @@ func awsAwsjson11_serializeDocumentGetEntitiesInput(v *GetEntitiesInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetFlowTemplateInput(v *GetFlowTemplateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetFlowTemplateInput(v *GetFlowTemplateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2175,7 +2175,7 @@ func awsAwsjson11_serializeDocumentGetFlowTemplateInput(v *GetFlowTemplateInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetFlowTemplateRevisionsInput(v *GetFlowTemplateRevisionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetFlowTemplateRevisionsInput(v *GetFlowTemplateRevisionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2197,14 +2197,14 @@ func awsAwsjson11_serializeDocumentGetFlowTemplateRevisionsInput(v *GetFlowTempl
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetNamespaceDeletionStatusInput(v *GetNamespaceDeletionStatusInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetNamespaceDeletionStatusInput(v *GetNamespaceDeletionStatusInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetSystemInstanceInput(v *GetSystemInstanceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetSystemInstanceInput(v *GetSystemInstanceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2216,7 +2216,7 @@ func awsAwsjson11_serializeDocumentGetSystemInstanceInput(v *GetSystemInstanceIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetSystemTemplateInput(v *GetSystemTemplateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetSystemTemplateInput(v *GetSystemTemplateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2233,7 +2233,7 @@ func awsAwsjson11_serializeDocumentGetSystemTemplateInput(v *GetSystemTemplateIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetSystemTemplateRevisionsInput(v *GetSystemTemplateRevisionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetSystemTemplateRevisionsInput(v *GetSystemTemplateRevisionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2255,7 +2255,7 @@ func awsAwsjson11_serializeDocumentGetSystemTemplateRevisionsInput(v *GetSystemT
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetUploadStatusInput(v *GetUploadStatusInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetUploadStatusInput(v *GetUploadStatusInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2267,7 +2267,7 @@ func awsAwsjson11_serializeDocumentGetUploadStatusInput(v *GetUploadStatusInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListFlowExecutionMessagesInput(v *ListFlowExecutionMessagesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListFlowExecutionMessagesInput(v *ListFlowExecutionMessagesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2289,7 +2289,7 @@ func awsAwsjson11_serializeDocumentListFlowExecutionMessagesInput(v *ListFlowExe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2311,7 +2311,7 @@ func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResour
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSearchEntitiesInput(v *SearchEntitiesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSearchEntitiesInput(v *SearchEntitiesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2347,7 +2347,7 @@ func awsAwsjson11_serializeDocumentSearchEntitiesInput(v *SearchEntitiesInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSearchFlowExecutionsInput(v *SearchFlowExecutionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSearchFlowExecutionsInput(v *SearchFlowExecutionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2384,7 +2384,7 @@ func awsAwsjson11_serializeDocumentSearchFlowExecutionsInput(v *SearchFlowExecut
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSearchFlowTemplatesInput(v *SearchFlowTemplatesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSearchFlowTemplatesInput(v *SearchFlowTemplatesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2408,7 +2408,7 @@ func awsAwsjson11_serializeDocumentSearchFlowTemplatesInput(v *SearchFlowTemplat
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSearchSystemInstancesInput(v *SearchSystemInstancesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSearchSystemInstancesInput(v *SearchSystemInstancesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2432,7 +2432,7 @@ func awsAwsjson11_serializeDocumentSearchSystemInstancesInput(v *SearchSystemIns
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSearchSystemTemplatesInput(v *SearchSystemTemplatesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSearchSystemTemplatesInput(v *SearchSystemTemplatesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2456,7 +2456,7 @@ func awsAwsjson11_serializeDocumentSearchSystemTemplatesInput(v *SearchSystemTem
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSearchThingsInput(v *SearchThingsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSearchThingsInput(v *SearchThingsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2483,7 +2483,7 @@ func awsAwsjson11_serializeDocumentSearchThingsInput(v *SearchThingsInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2502,7 +2502,7 @@ func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUndeploySystemInstanceInput(v *UndeploySystemInstanceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUndeploySystemInstanceInput(v *UndeploySystemInstanceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2514,7 +2514,7 @@ func awsAwsjson11_serializeDocumentUndeploySystemInstanceInput(v *UndeploySystem
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2533,7 +2533,7 @@ func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateFlowTemplateInput(v *UpdateFlowTemplateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateFlowTemplateInput(v *UpdateFlowTemplateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2557,7 +2557,7 @@ func awsAwsjson11_serializeDocumentUpdateFlowTemplateInput(v *UpdateFlowTemplate
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateSystemTemplateInput(v *UpdateSystemTemplateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateSystemTemplateInput(v *UpdateSystemTemplateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2581,7 +2581,7 @@ func awsAwsjson11_serializeDocumentUpdateSystemTemplateInput(v *UpdateSystemTemp
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUploadEntityDefinitionsInput(v *UploadEntityDefinitionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUploadEntityDefinitionsInput(v *UploadEntityDefinitionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

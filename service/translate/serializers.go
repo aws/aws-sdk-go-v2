@@ -45,7 +45,7 @@ func (m *awsAwsjson11_serializeOpDeleteTerminology) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShineFrontendService_20170701.DeleteTerminology")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteTerminologyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteTerminologyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -91,7 +91,7 @@ func (m *awsAwsjson11_serializeOpDescribeTextTranslationJob) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShineFrontendService_20170701.DescribeTextTranslationJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeTextTranslationJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeTextTranslationJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -137,7 +137,7 @@ func (m *awsAwsjson11_serializeOpGetTerminology) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShineFrontendService_20170701.GetTerminology")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetTerminologyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetTerminologyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -183,7 +183,7 @@ func (m *awsAwsjson11_serializeOpImportTerminology) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShineFrontendService_20170701.ImportTerminology")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentImportTerminologyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentImportTerminologyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -229,7 +229,7 @@ func (m *awsAwsjson11_serializeOpListTerminologies) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShineFrontendService_20170701.ListTerminologies")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTerminologiesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTerminologiesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -275,7 +275,7 @@ func (m *awsAwsjson11_serializeOpListTextTranslationJobs) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShineFrontendService_20170701.ListTextTranslationJobs")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTextTranslationJobsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTextTranslationJobsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -321,7 +321,7 @@ func (m *awsAwsjson11_serializeOpStartTextTranslationJob) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShineFrontendService_20170701.StartTextTranslationJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStartTextTranslationJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStartTextTranslationJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -367,7 +367,7 @@ func (m *awsAwsjson11_serializeOpStopTextTranslationJob) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShineFrontendService_20170701.StopTextTranslationJob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopTextTranslationJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopTextTranslationJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -413,7 +413,7 @@ func (m *awsAwsjson11_serializeOpTranslateText) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSShineFrontendService_20170701.TranslateText")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTranslateTextInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTranslateTextInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -548,7 +548,7 @@ func awsAwsjson11_serializeDocumentTextTranslationJobFilter(v *types.TextTransla
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteTerminologyInput(v *DeleteTerminologyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteTerminologyInput(v *DeleteTerminologyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -560,7 +560,7 @@ func awsAwsjson11_serializeDocumentDeleteTerminologyInput(v *DeleteTerminologyIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeTextTranslationJobInput(v *DescribeTextTranslationJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeTextTranslationJobInput(v *DescribeTextTranslationJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -572,7 +572,7 @@ func awsAwsjson11_serializeDocumentDescribeTextTranslationJobInput(v *DescribeTe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetTerminologyInput(v *GetTerminologyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetTerminologyInput(v *GetTerminologyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -589,7 +589,7 @@ func awsAwsjson11_serializeDocumentGetTerminologyInput(v *GetTerminologyInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentImportTerminologyInput(v *ImportTerminologyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentImportTerminologyInput(v *ImportTerminologyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -625,7 +625,7 @@ func awsAwsjson11_serializeDocumentImportTerminologyInput(v *ImportTerminologyIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTerminologiesInput(v *ListTerminologiesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTerminologiesInput(v *ListTerminologiesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -642,7 +642,7 @@ func awsAwsjson11_serializeDocumentListTerminologiesInput(v *ListTerminologiesIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTextTranslationJobsInput(v *ListTextTranslationJobsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTextTranslationJobsInput(v *ListTextTranslationJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -666,7 +666,7 @@ func awsAwsjson11_serializeDocumentListTextTranslationJobsInput(v *ListTextTrans
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStartTextTranslationJobInput(v *StartTextTranslationJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStartTextTranslationJobInput(v *StartTextTranslationJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -721,7 +721,7 @@ func awsAwsjson11_serializeDocumentStartTextTranslationJobInput(v *StartTextTran
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopTextTranslationJobInput(v *StopTextTranslationJobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopTextTranslationJobInput(v *StopTextTranslationJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -733,7 +733,7 @@ func awsAwsjson11_serializeDocumentStopTextTranslationJobInput(v *StopTextTransl
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTranslateTextInput(v *TranslateTextInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTranslateTextInput(v *TranslateTextInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

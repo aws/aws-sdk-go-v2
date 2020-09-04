@@ -52,7 +52,7 @@ func (m *awsRestjson1_serializeOpAssociateRepository) HandleSerialize(ctx contex
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentAssociateRepositoryInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentAssociateRepositoryInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -67,7 +67,7 @@ func (m *awsRestjson1_serializeOpAssociateRepository) HandleSerialize(ctx contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsAssociateRepositoryInput(v *AssociateRepositoryInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsAssociateRepositoryInput(v *AssociateRepositoryInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -75,7 +75,7 @@ func awsRestjson1_serializeHttpBindingsAssociateRepositoryInput(v *AssociateRepo
 	return nil
 }
 
-func awsRestjson1_serializeDocumentAssociateRepositoryInput(v *AssociateRepositoryInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentAssociateRepositoryInput(v *AssociateRepositoryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -129,7 +129,7 @@ func (m *awsRestjson1_serializeOpDescribeCodeReview) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDescribeCodeReviewInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeCodeReviewInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -140,7 +140,7 @@ func (m *awsRestjson1_serializeOpDescribeCodeReview) HandleSerialize(ctx context
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDescribeCodeReviewInput(v *DescribeCodeReviewInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDescribeCodeReviewInput(v *DescribeCodeReviewInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -189,7 +189,7 @@ func (m *awsRestjson1_serializeOpDescribeRecommendationFeedback) HandleSerialize
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDescribeRecommendationFeedbackInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeRecommendationFeedbackInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -200,7 +200,7 @@ func (m *awsRestjson1_serializeOpDescribeRecommendationFeedback) HandleSerialize
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDescribeRecommendationFeedbackInput(v *DescribeRecommendationFeedbackInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDescribeRecommendationFeedbackInput(v *DescribeRecommendationFeedbackInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -257,7 +257,7 @@ func (m *awsRestjson1_serializeOpDescribeRepositoryAssociation) HandleSerialize(
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDescribeRepositoryAssociationInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeRepositoryAssociationInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -268,7 +268,7 @@ func (m *awsRestjson1_serializeOpDescribeRepositoryAssociation) HandleSerialize(
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDescribeRepositoryAssociationInput(v *DescribeRepositoryAssociationInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDescribeRepositoryAssociationInput(v *DescribeRepositoryAssociationInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -317,7 +317,7 @@ func (m *awsRestjson1_serializeOpDisassociateRepository) HandleSerialize(ctx con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDisassociateRepositoryInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDisassociateRepositoryInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -328,7 +328,7 @@ func (m *awsRestjson1_serializeOpDisassociateRepository) HandleSerialize(ctx con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDisassociateRepositoryInput(v *DisassociateRepositoryInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDisassociateRepositoryInput(v *DisassociateRepositoryInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -377,7 +377,7 @@ func (m *awsRestjson1_serializeOpListCodeReviews) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListCodeReviewsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListCodeReviewsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -388,7 +388,7 @@ func (m *awsRestjson1_serializeOpListCodeReviews) HandleSerialize(ctx context.Co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListCodeReviewsInput(v *ListCodeReviewsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListCodeReviewsInput(v *ListCodeReviewsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -464,7 +464,7 @@ func (m *awsRestjson1_serializeOpListRecommendationFeedback) HandleSerialize(ctx
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListRecommendationFeedbackInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListRecommendationFeedbackInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -475,7 +475,7 @@ func (m *awsRestjson1_serializeOpListRecommendationFeedback) HandleSerialize(ctx
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListRecommendationFeedbackInput(v *ListRecommendationFeedbackInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListRecommendationFeedbackInput(v *ListRecommendationFeedbackInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -550,7 +550,7 @@ func (m *awsRestjson1_serializeOpListRecommendations) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListRecommendationsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListRecommendationsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -561,7 +561,7 @@ func (m *awsRestjson1_serializeOpListRecommendations) HandleSerialize(ctx contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListRecommendationsInput(v *ListRecommendationsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListRecommendationsInput(v *ListRecommendationsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -618,7 +618,7 @@ func (m *awsRestjson1_serializeOpListRepositoryAssociations) HandleSerialize(ctx
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListRepositoryAssociationsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListRepositoryAssociationsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -629,7 +629,7 @@ func (m *awsRestjson1_serializeOpListRepositoryAssociations) HandleSerialize(ctx
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListRepositoryAssociationsInput(v *ListRepositoryAssociationsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListRepositoryAssociationsInput(v *ListRepositoryAssociationsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -713,7 +713,7 @@ func (m *awsRestjson1_serializeOpPutRecommendationFeedback) HandleSerialize(ctx 
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentPutRecommendationFeedbackInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentPutRecommendationFeedbackInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -728,7 +728,7 @@ func (m *awsRestjson1_serializeOpPutRecommendationFeedback) HandleSerialize(ctx 
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsPutRecommendationFeedbackInput(v *PutRecommendationFeedbackInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsPutRecommendationFeedbackInput(v *PutRecommendationFeedbackInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -736,7 +736,7 @@ func awsRestjson1_serializeHttpBindingsPutRecommendationFeedbackInput(v *PutReco
 	return nil
 }
 
-func awsRestjson1_serializeDocumentPutRecommendationFeedbackInput(v *PutRecommendationFeedbackInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentPutRecommendationFeedbackInput(v *PutRecommendationFeedbackInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

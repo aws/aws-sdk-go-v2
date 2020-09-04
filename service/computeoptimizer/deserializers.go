@@ -54,7 +54,7 @@ func (m *awsAwsjson10_deserializeOpDescribeRecommendationExportJobs) HandleDeser
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentDescribeRecommendationExportJobsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentDescribeRecommendationExportJobsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -175,7 +175,7 @@ func (m *awsAwsjson10_deserializeOpExportAutoScalingGroupRecommendations) Handle
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentExportAutoScalingGroupRecommendationsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentExportAutoScalingGroupRecommendationsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -296,7 +296,7 @@ func (m *awsAwsjson10_deserializeOpExportEC2InstanceRecommendations) HandleDeser
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentExportEC2InstanceRecommendationsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentExportEC2InstanceRecommendationsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -417,7 +417,7 @@ func (m *awsAwsjson10_deserializeOpGetAutoScalingGroupRecommendations) HandleDes
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentGetAutoScalingGroupRecommendationsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentGetAutoScalingGroupRecommendationsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -538,7 +538,7 @@ func (m *awsAwsjson10_deserializeOpGetEC2InstanceRecommendations) HandleDeserial
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentGetEC2InstanceRecommendationsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentGetEC2InstanceRecommendationsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -659,7 +659,7 @@ func (m *awsAwsjson10_deserializeOpGetEC2RecommendationProjectedMetrics) HandleD
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentGetEC2RecommendationProjectedMetricsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentGetEC2RecommendationProjectedMetricsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -780,7 +780,7 @@ func (m *awsAwsjson10_deserializeOpGetEnrollmentStatus) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentGetEnrollmentStatusOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentGetEnrollmentStatusOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -895,7 +895,7 @@ func (m *awsAwsjson10_deserializeOpGetRecommendationSummaries) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentGetRecommendationSummariesOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentGetRecommendationSummariesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1013,7 +1013,7 @@ func (m *awsAwsjson10_deserializeOpUpdateEnrollmentStatus) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentUpdateEnrollmentStatusOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentUpdateEnrollmentStatusOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4088,7 +4088,7 @@ func awsAwsjson10_deserializeDocumentUtilizationMetrics(v *[]*types.UtilizationM
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentDescribeRecommendationExportJobsOutput(v **DescribeRecommendationExportJobsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentDescribeRecommendationExportJobsOutput(v **DescribeRecommendationExportJobsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4157,7 +4157,7 @@ func awsAwsjson10_deserializeDocumentDescribeRecommendationExportJobsOutput(v **
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentExportAutoScalingGroupRecommendationsOutput(v **ExportAutoScalingGroupRecommendationsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentExportAutoScalingGroupRecommendationsOutput(v **ExportAutoScalingGroupRecommendationsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4226,7 +4226,7 @@ func awsAwsjson10_deserializeDocumentExportAutoScalingGroupRecommendationsOutput
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentExportEC2InstanceRecommendationsOutput(v **ExportEC2InstanceRecommendationsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentExportEC2InstanceRecommendationsOutput(v **ExportEC2InstanceRecommendationsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4295,7 +4295,7 @@ func awsAwsjson10_deserializeDocumentExportEC2InstanceRecommendationsOutput(v **
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentGetAutoScalingGroupRecommendationsOutput(v **GetAutoScalingGroupRecommendationsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentGetAutoScalingGroupRecommendationsOutput(v **GetAutoScalingGroupRecommendationsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4369,7 +4369,7 @@ func awsAwsjson10_deserializeDocumentGetAutoScalingGroupRecommendationsOutput(v 
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentGetEC2InstanceRecommendationsOutput(v **GetEC2InstanceRecommendationsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentGetEC2InstanceRecommendationsOutput(v **GetEC2InstanceRecommendationsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4443,7 +4443,7 @@ func awsAwsjson10_deserializeDocumentGetEC2InstanceRecommendationsOutput(v **Get
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentGetEC2RecommendationProjectedMetricsOutput(v **GetEC2RecommendationProjectedMetricsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentGetEC2RecommendationProjectedMetricsOutput(v **GetEC2RecommendationProjectedMetricsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4499,7 +4499,7 @@ func awsAwsjson10_deserializeDocumentGetEC2RecommendationProjectedMetricsOutput(
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentGetEnrollmentStatusOutput(v **GetEnrollmentStatusOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentGetEnrollmentStatusOutput(v **GetEnrollmentStatusOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4589,7 +4589,7 @@ func awsAwsjson10_deserializeDocumentGetEnrollmentStatusOutput(v **GetEnrollment
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentGetRecommendationSummariesOutput(v **GetRecommendationSummariesOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentGetRecommendationSummariesOutput(v **GetRecommendationSummariesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4658,7 +4658,7 @@ func awsAwsjson10_deserializeDocumentGetRecommendationSummariesOutput(v **GetRec
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentUpdateEnrollmentStatusOutput(v **UpdateEnrollmentStatusOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentUpdateEnrollmentStatusOutput(v **UpdateEnrollmentStatusOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

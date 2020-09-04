@@ -52,7 +52,7 @@ func (m *awsRestjson1_serializeOpCreateCanary) HandleSerialize(ctx context.Conte
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentCreateCanaryInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentCreateCanaryInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -67,7 +67,7 @@ func (m *awsRestjson1_serializeOpCreateCanary) HandleSerialize(ctx context.Conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsCreateCanaryInput(v *CreateCanaryInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsCreateCanaryInput(v *CreateCanaryInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -75,7 +75,7 @@ func awsRestjson1_serializeHttpBindingsCreateCanaryInput(v *CreateCanaryInput, e
 	return nil
 }
 
-func awsRestjson1_serializeDocumentCreateCanaryInput(v *CreateCanaryInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentCreateCanaryInput(v *CreateCanaryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -182,7 +182,7 @@ func (m *awsRestjson1_serializeOpDeleteCanary) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDeleteCanaryInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteCanaryInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -193,7 +193,7 @@ func (m *awsRestjson1_serializeOpDeleteCanary) HandleSerialize(ctx context.Conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDeleteCanaryInput(v *DeleteCanaryInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDeleteCanaryInput(v *DeleteCanaryInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -245,7 +245,7 @@ func (m *awsRestjson1_serializeOpDescribeCanaries) HandleSerialize(ctx context.C
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentDescribeCanariesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentDescribeCanariesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -260,7 +260,7 @@ func (m *awsRestjson1_serializeOpDescribeCanaries) HandleSerialize(ctx context.C
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDescribeCanariesInput(v *DescribeCanariesInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDescribeCanariesInput(v *DescribeCanariesInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -268,7 +268,7 @@ func awsRestjson1_serializeHttpBindingsDescribeCanariesInput(v *DescribeCanaries
 	return nil
 }
 
-func awsRestjson1_serializeDocumentDescribeCanariesInput(v *DescribeCanariesInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentDescribeCanariesInput(v *DescribeCanariesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -323,7 +323,7 @@ func (m *awsRestjson1_serializeOpDescribeCanariesLastRun) HandleSerialize(ctx co
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentDescribeCanariesLastRunInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentDescribeCanariesLastRunInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -338,7 +338,7 @@ func (m *awsRestjson1_serializeOpDescribeCanariesLastRun) HandleSerialize(ctx co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDescribeCanariesLastRunInput(v *DescribeCanariesLastRunInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDescribeCanariesLastRunInput(v *DescribeCanariesLastRunInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -346,7 +346,7 @@ func awsRestjson1_serializeHttpBindingsDescribeCanariesLastRunInput(v *DescribeC
 	return nil
 }
 
-func awsRestjson1_serializeDocumentDescribeCanariesLastRunInput(v *DescribeCanariesLastRunInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentDescribeCanariesLastRunInput(v *DescribeCanariesLastRunInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -401,7 +401,7 @@ func (m *awsRestjson1_serializeOpDescribeRuntimeVersions) HandleSerialize(ctx co
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentDescribeRuntimeVersionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentDescribeRuntimeVersionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -416,7 +416,7 @@ func (m *awsRestjson1_serializeOpDescribeRuntimeVersions) HandleSerialize(ctx co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDescribeRuntimeVersionsInput(v *DescribeRuntimeVersionsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDescribeRuntimeVersionsInput(v *DescribeRuntimeVersionsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -424,7 +424,7 @@ func awsRestjson1_serializeHttpBindingsDescribeRuntimeVersionsInput(v *DescribeR
 	return nil
 }
 
-func awsRestjson1_serializeDocumentDescribeRuntimeVersionsInput(v *DescribeRuntimeVersionsInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentDescribeRuntimeVersionsInput(v *DescribeRuntimeVersionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -476,7 +476,7 @@ func (m *awsRestjson1_serializeOpGetCanary) HandleSerialize(ctx context.Context,
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsGetCanaryInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsGetCanaryInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -487,7 +487,7 @@ func (m *awsRestjson1_serializeOpGetCanary) HandleSerialize(ctx context.Context,
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsGetCanaryInput(v *GetCanaryInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetCanaryInput(v *GetCanaryInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -536,14 +536,14 @@ func (m *awsRestjson1_serializeOpGetCanaryRuns) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsGetCanaryRunsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsGetCanaryRunsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentGetCanaryRunsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentGetCanaryRunsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -558,7 +558,7 @@ func (m *awsRestjson1_serializeOpGetCanaryRuns) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsGetCanaryRunsInput(v *GetCanaryRunsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetCanaryRunsInput(v *GetCanaryRunsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -572,7 +572,7 @@ func awsRestjson1_serializeHttpBindingsGetCanaryRunsInput(v *GetCanaryRunsInput,
 	return nil
 }
 
-func awsRestjson1_serializeDocumentGetCanaryRunsInput(v *GetCanaryRunsInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentGetCanaryRunsInput(v *GetCanaryRunsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -624,7 +624,7 @@ func (m *awsRestjson1_serializeOpListTagsForResource) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListTagsForResourceInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -635,7 +635,7 @@ func (m *awsRestjson1_serializeOpListTagsForResource) HandleSerialize(ctx contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListTagsForResourceInput(v *ListTagsForResourceInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsForResourceInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -684,7 +684,7 @@ func (m *awsRestjson1_serializeOpStartCanary) HandleSerialize(ctx context.Contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsStartCanaryInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsStartCanaryInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -695,7 +695,7 @@ func (m *awsRestjson1_serializeOpStartCanary) HandleSerialize(ctx context.Contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsStartCanaryInput(v *StartCanaryInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsStartCanaryInput(v *StartCanaryInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -744,7 +744,7 @@ func (m *awsRestjson1_serializeOpStopCanary) HandleSerialize(ctx context.Context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsStopCanaryInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsStopCanaryInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -755,7 +755,7 @@ func (m *awsRestjson1_serializeOpStopCanary) HandleSerialize(ctx context.Context
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsStopCanaryInput(v *StopCanaryInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsStopCanaryInput(v *StopCanaryInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -804,14 +804,14 @@ func (m *awsRestjson1_serializeOpTagResource) HandleSerialize(ctx context.Contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsTagResourceInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsTagResourceInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -826,7 +826,7 @@ func (m *awsRestjson1_serializeOpTagResource) HandleSerialize(ctx context.Contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsTagResourceInput(v *TagResourceInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -840,7 +840,7 @@ func awsRestjson1_serializeHttpBindingsTagResourceInput(v *TagResourceInput, enc
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -889,7 +889,7 @@ func (m *awsRestjson1_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsUntagResourceInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsUntagResourceInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -900,7 +900,7 @@ func (m *awsRestjson1_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsUntagResourceInput(v *UntagResourceInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -958,14 +958,14 @@ func (m *awsRestjson1_serializeOpUpdateCanary) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsUpdateCanaryInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateCanaryInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentUpdateCanaryInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentUpdateCanaryInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -980,7 +980,7 @@ func (m *awsRestjson1_serializeOpUpdateCanary) HandleSerialize(ctx context.Conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsUpdateCanaryInput(v *UpdateCanaryInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsUpdateCanaryInput(v *UpdateCanaryInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -994,7 +994,7 @@ func awsRestjson1_serializeHttpBindingsUpdateCanaryInput(v *UpdateCanaryInput, e
 	return nil
 }
 
-func awsRestjson1_serializeDocumentUpdateCanaryInput(v *UpdateCanaryInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentUpdateCanaryInput(v *UpdateCanaryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

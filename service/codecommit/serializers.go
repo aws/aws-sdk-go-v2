@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpAssociateApprovalRuleTemplateWithRepository) Ha
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.AssociateApprovalRuleTemplateWithRepository")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAssociateApprovalRuleTemplateWithRepositoryInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAssociateApprovalRuleTemplateWithRepositoryInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpBatchAssociateApprovalRuleTemplateWithRepositor
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.BatchAssociateApprovalRuleTemplateWithRepositories")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchAssociateApprovalRuleTemplateWithRepositoriesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchAssociateApprovalRuleTemplateWithRepositoriesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpBatchDescribeMergeConflicts) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.BatchDescribeMergeConflicts")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchDescribeMergeConflictsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchDescribeMergeConflictsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpBatchDisassociateApprovalRuleTemplateFromReposi
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.BatchDisassociateApprovalRuleTemplateFromRepositories")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchDisassociateApprovalRuleTemplateFromRepositoriesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchDisassociateApprovalRuleTemplateFromRepositoriesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpBatchGetCommits) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.BatchGetCommits")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchGetCommitsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchGetCommitsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpBatchGetRepositories) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.BatchGetRepositories")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchGetRepositoriesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchGetRepositoriesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson11_serializeOpCreateApprovalRuleTemplate) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.CreateApprovalRuleTemplate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateApprovalRuleTemplateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateApprovalRuleTemplateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -366,7 +366,7 @@ func (m *awsAwsjson11_serializeOpCreateBranch) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.CreateBranch")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateBranchInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateBranchInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -412,7 +412,7 @@ func (m *awsAwsjson11_serializeOpCreateCommit) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.CreateCommit")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateCommitInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateCommitInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -458,7 +458,7 @@ func (m *awsAwsjson11_serializeOpCreatePullRequest) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.CreatePullRequest")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreatePullRequestInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreatePullRequestInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -504,7 +504,7 @@ func (m *awsAwsjson11_serializeOpCreatePullRequestApprovalRule) HandleSerialize(
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.CreatePullRequestApprovalRule")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreatePullRequestApprovalRuleInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreatePullRequestApprovalRuleInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -550,7 +550,7 @@ func (m *awsAwsjson11_serializeOpCreateRepository) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.CreateRepository")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateRepositoryInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateRepositoryInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -596,7 +596,7 @@ func (m *awsAwsjson11_serializeOpCreateUnreferencedMergeCommit) HandleSerialize(
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.CreateUnreferencedMergeCommit")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateUnreferencedMergeCommitInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateUnreferencedMergeCommitInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -642,7 +642,7 @@ func (m *awsAwsjson11_serializeOpDeleteApprovalRuleTemplate) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.DeleteApprovalRuleTemplate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteApprovalRuleTemplateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteApprovalRuleTemplateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -688,7 +688,7 @@ func (m *awsAwsjson11_serializeOpDeleteBranch) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.DeleteBranch")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteBranchInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteBranchInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -734,7 +734,7 @@ func (m *awsAwsjson11_serializeOpDeleteCommentContent) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.DeleteCommentContent")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteCommentContentInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteCommentContentInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -780,7 +780,7 @@ func (m *awsAwsjson11_serializeOpDeleteFile) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.DeleteFile")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteFileInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteFileInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -826,7 +826,7 @@ func (m *awsAwsjson11_serializeOpDeletePullRequestApprovalRule) HandleSerialize(
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.DeletePullRequestApprovalRule")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeletePullRequestApprovalRuleInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeletePullRequestApprovalRuleInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -872,7 +872,7 @@ func (m *awsAwsjson11_serializeOpDeleteRepository) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.DeleteRepository")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteRepositoryInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteRepositoryInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -918,7 +918,7 @@ func (m *awsAwsjson11_serializeOpDescribeMergeConflicts) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.DescribeMergeConflicts")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeMergeConflictsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeMergeConflictsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -964,7 +964,7 @@ func (m *awsAwsjson11_serializeOpDescribePullRequestEvents) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.DescribePullRequestEvents")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribePullRequestEventsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribePullRequestEventsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1010,7 +1010,7 @@ func (m *awsAwsjson11_serializeOpDisassociateApprovalRuleTemplateFromRepository)
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.DisassociateApprovalRuleTemplateFromRepository")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDisassociateApprovalRuleTemplateFromRepositoryInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDisassociateApprovalRuleTemplateFromRepositoryInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1056,7 +1056,7 @@ func (m *awsAwsjson11_serializeOpEvaluatePullRequestApprovalRules) HandleSeriali
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.EvaluatePullRequestApprovalRules")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentEvaluatePullRequestApprovalRulesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentEvaluatePullRequestApprovalRulesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1102,7 +1102,7 @@ func (m *awsAwsjson11_serializeOpGetApprovalRuleTemplate) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.GetApprovalRuleTemplate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetApprovalRuleTemplateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetApprovalRuleTemplateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1148,7 +1148,7 @@ func (m *awsAwsjson11_serializeOpGetBlob) HandleSerialize(ctx context.Context, i
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.GetBlob")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetBlobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetBlobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1194,7 +1194,7 @@ func (m *awsAwsjson11_serializeOpGetBranch) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.GetBranch")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetBranchInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetBranchInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1240,7 +1240,7 @@ func (m *awsAwsjson11_serializeOpGetComment) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.GetComment")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetCommentInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetCommentInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1286,7 +1286,7 @@ func (m *awsAwsjson11_serializeOpGetCommentReactions) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.GetCommentReactions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetCommentReactionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetCommentReactionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1332,7 +1332,7 @@ func (m *awsAwsjson11_serializeOpGetCommentsForComparedCommit) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.GetCommentsForComparedCommit")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetCommentsForComparedCommitInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetCommentsForComparedCommitInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1378,7 +1378,7 @@ func (m *awsAwsjson11_serializeOpGetCommentsForPullRequest) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.GetCommentsForPullRequest")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetCommentsForPullRequestInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetCommentsForPullRequestInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1424,7 +1424,7 @@ func (m *awsAwsjson11_serializeOpGetCommit) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.GetCommit")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetCommitInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetCommitInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1470,7 +1470,7 @@ func (m *awsAwsjson11_serializeOpGetDifferences) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.GetDifferences")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetDifferencesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetDifferencesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1516,7 +1516,7 @@ func (m *awsAwsjson11_serializeOpGetFile) HandleSerialize(ctx context.Context, i
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.GetFile")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetFileInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetFileInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1562,7 +1562,7 @@ func (m *awsAwsjson11_serializeOpGetFolder) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.GetFolder")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetFolderInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetFolderInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1608,7 +1608,7 @@ func (m *awsAwsjson11_serializeOpGetMergeCommit) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.GetMergeCommit")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetMergeCommitInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetMergeCommitInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1654,7 +1654,7 @@ func (m *awsAwsjson11_serializeOpGetMergeConflicts) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.GetMergeConflicts")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetMergeConflictsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetMergeConflictsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1700,7 +1700,7 @@ func (m *awsAwsjson11_serializeOpGetMergeOptions) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.GetMergeOptions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetMergeOptionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetMergeOptionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1746,7 +1746,7 @@ func (m *awsAwsjson11_serializeOpGetPullRequest) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.GetPullRequest")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetPullRequestInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetPullRequestInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1792,7 +1792,7 @@ func (m *awsAwsjson11_serializeOpGetPullRequestApprovalStates) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.GetPullRequestApprovalStates")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetPullRequestApprovalStatesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetPullRequestApprovalStatesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1838,7 +1838,7 @@ func (m *awsAwsjson11_serializeOpGetPullRequestOverrideState) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.GetPullRequestOverrideState")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetPullRequestOverrideStateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetPullRequestOverrideStateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1884,7 +1884,7 @@ func (m *awsAwsjson11_serializeOpGetRepository) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.GetRepository")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetRepositoryInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetRepositoryInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1930,7 +1930,7 @@ func (m *awsAwsjson11_serializeOpGetRepositoryTriggers) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.GetRepositoryTriggers")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetRepositoryTriggersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetRepositoryTriggersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1976,7 +1976,7 @@ func (m *awsAwsjson11_serializeOpListApprovalRuleTemplates) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.ListApprovalRuleTemplates")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListApprovalRuleTemplatesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListApprovalRuleTemplatesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2022,7 +2022,7 @@ func (m *awsAwsjson11_serializeOpListAssociatedApprovalRuleTemplatesForRepositor
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.ListAssociatedApprovalRuleTemplatesForRepository")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListAssociatedApprovalRuleTemplatesForRepositoryInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListAssociatedApprovalRuleTemplatesForRepositoryInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2068,7 +2068,7 @@ func (m *awsAwsjson11_serializeOpListBranches) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.ListBranches")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListBranchesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListBranchesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2114,7 +2114,7 @@ func (m *awsAwsjson11_serializeOpListPullRequests) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.ListPullRequests")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListPullRequestsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListPullRequestsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2160,7 +2160,7 @@ func (m *awsAwsjson11_serializeOpListRepositories) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.ListRepositories")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListRepositoriesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListRepositoriesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2206,7 +2206,7 @@ func (m *awsAwsjson11_serializeOpListRepositoriesForApprovalRuleTemplate) Handle
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.ListRepositoriesForApprovalRuleTemplate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListRepositoriesForApprovalRuleTemplateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListRepositoriesForApprovalRuleTemplateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2252,7 +2252,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.ListTagsForResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2298,7 +2298,7 @@ func (m *awsAwsjson11_serializeOpMergeBranchesByFastForward) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.MergeBranchesByFastForward")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentMergeBranchesByFastForwardInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentMergeBranchesByFastForwardInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2344,7 +2344,7 @@ func (m *awsAwsjson11_serializeOpMergeBranchesBySquash) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.MergeBranchesBySquash")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentMergeBranchesBySquashInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentMergeBranchesBySquashInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2390,7 +2390,7 @@ func (m *awsAwsjson11_serializeOpMergeBranchesByThreeWay) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.MergeBranchesByThreeWay")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentMergeBranchesByThreeWayInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentMergeBranchesByThreeWayInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2436,7 +2436,7 @@ func (m *awsAwsjson11_serializeOpMergePullRequestByFastForward) HandleSerialize(
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.MergePullRequestByFastForward")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentMergePullRequestByFastForwardInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentMergePullRequestByFastForwardInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2482,7 +2482,7 @@ func (m *awsAwsjson11_serializeOpMergePullRequestBySquash) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.MergePullRequestBySquash")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentMergePullRequestBySquashInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentMergePullRequestBySquashInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2528,7 +2528,7 @@ func (m *awsAwsjson11_serializeOpMergePullRequestByThreeWay) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.MergePullRequestByThreeWay")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentMergePullRequestByThreeWayInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentMergePullRequestByThreeWayInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2574,7 +2574,7 @@ func (m *awsAwsjson11_serializeOpOverridePullRequestApprovalRules) HandleSeriali
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.OverridePullRequestApprovalRules")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentOverridePullRequestApprovalRulesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentOverridePullRequestApprovalRulesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2620,7 +2620,7 @@ func (m *awsAwsjson11_serializeOpPostCommentForComparedCommit) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.PostCommentForComparedCommit")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPostCommentForComparedCommitInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPostCommentForComparedCommitInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2666,7 +2666,7 @@ func (m *awsAwsjson11_serializeOpPostCommentForPullRequest) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.PostCommentForPullRequest")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPostCommentForPullRequestInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPostCommentForPullRequestInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2712,7 +2712,7 @@ func (m *awsAwsjson11_serializeOpPostCommentReply) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.PostCommentReply")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPostCommentReplyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPostCommentReplyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2758,7 +2758,7 @@ func (m *awsAwsjson11_serializeOpPutCommentReaction) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.PutCommentReaction")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutCommentReactionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutCommentReactionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2804,7 +2804,7 @@ func (m *awsAwsjson11_serializeOpPutFile) HandleSerialize(ctx context.Context, i
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.PutFile")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutFileInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutFileInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2850,7 +2850,7 @@ func (m *awsAwsjson11_serializeOpPutRepositoryTriggers) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.PutRepositoryTriggers")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutRepositoryTriggersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutRepositoryTriggersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2896,7 +2896,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.TagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2942,7 +2942,7 @@ func (m *awsAwsjson11_serializeOpTestRepositoryTriggers) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.TestRepositoryTriggers")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTestRepositoryTriggersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTestRepositoryTriggersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2988,7 +2988,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.UntagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3034,7 +3034,7 @@ func (m *awsAwsjson11_serializeOpUpdateApprovalRuleTemplateContent) HandleSerial
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.UpdateApprovalRuleTemplateContent")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateApprovalRuleTemplateContentInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateApprovalRuleTemplateContentInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3080,7 +3080,7 @@ func (m *awsAwsjson11_serializeOpUpdateApprovalRuleTemplateDescription) HandleSe
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.UpdateApprovalRuleTemplateDescription")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateApprovalRuleTemplateDescriptionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateApprovalRuleTemplateDescriptionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3126,7 +3126,7 @@ func (m *awsAwsjson11_serializeOpUpdateApprovalRuleTemplateName) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.UpdateApprovalRuleTemplateName")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateApprovalRuleTemplateNameInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateApprovalRuleTemplateNameInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3172,7 +3172,7 @@ func (m *awsAwsjson11_serializeOpUpdateComment) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.UpdateComment")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateCommentInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateCommentInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3218,7 +3218,7 @@ func (m *awsAwsjson11_serializeOpUpdateDefaultBranch) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.UpdateDefaultBranch")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateDefaultBranchInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateDefaultBranchInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3264,7 +3264,7 @@ func (m *awsAwsjson11_serializeOpUpdatePullRequestApprovalRuleContent) HandleSer
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.UpdatePullRequestApprovalRuleContent")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdatePullRequestApprovalRuleContentInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdatePullRequestApprovalRuleContentInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3310,7 +3310,7 @@ func (m *awsAwsjson11_serializeOpUpdatePullRequestApprovalState) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.UpdatePullRequestApprovalState")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdatePullRequestApprovalStateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdatePullRequestApprovalStateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3356,7 +3356,7 @@ func (m *awsAwsjson11_serializeOpUpdatePullRequestDescription) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.UpdatePullRequestDescription")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdatePullRequestDescriptionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdatePullRequestDescriptionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3402,7 +3402,7 @@ func (m *awsAwsjson11_serializeOpUpdatePullRequestStatus) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.UpdatePullRequestStatus")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdatePullRequestStatusInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdatePullRequestStatusInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3448,7 +3448,7 @@ func (m *awsAwsjson11_serializeOpUpdatePullRequestTitle) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.UpdatePullRequestTitle")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdatePullRequestTitleInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdatePullRequestTitleInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3494,7 +3494,7 @@ func (m *awsAwsjson11_serializeOpUpdateRepositoryDescription) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.UpdateRepositoryDescription")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateRepositoryDescriptionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateRepositoryDescriptionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3540,7 +3540,7 @@ func (m *awsAwsjson11_serializeOpUpdateRepositoryName) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeCommit_20150413.UpdateRepositoryName")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateRepositoryNameInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateRepositoryNameInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3968,7 +3968,7 @@ func awsAwsjson11_serializeDocumentTargetList(v []*types.Target, value smithyjso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssociateApprovalRuleTemplateWithRepositoryInput(v *AssociateApprovalRuleTemplateWithRepositoryInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAssociateApprovalRuleTemplateWithRepositoryInput(v *AssociateApprovalRuleTemplateWithRepositoryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3985,7 +3985,7 @@ func awsAwsjson11_serializeDocumentAssociateApprovalRuleTemplateWithRepositoryIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchAssociateApprovalRuleTemplateWithRepositoriesInput(v *BatchAssociateApprovalRuleTemplateWithRepositoriesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchAssociateApprovalRuleTemplateWithRepositoriesInput(v *BatchAssociateApprovalRuleTemplateWithRepositoriesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4004,7 +4004,7 @@ func awsAwsjson11_serializeDocumentBatchAssociateApprovalRuleTemplateWithReposit
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchDescribeMergeConflictsInput(v *BatchDescribeMergeConflictsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchDescribeMergeConflictsInput(v *BatchDescribeMergeConflictsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4063,7 +4063,7 @@ func awsAwsjson11_serializeDocumentBatchDescribeMergeConflictsInput(v *BatchDesc
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchDisassociateApprovalRuleTemplateFromRepositoriesInput(v *BatchDisassociateApprovalRuleTemplateFromRepositoriesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchDisassociateApprovalRuleTemplateFromRepositoriesInput(v *BatchDisassociateApprovalRuleTemplateFromRepositoriesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4082,7 +4082,7 @@ func awsAwsjson11_serializeDocumentBatchDisassociateApprovalRuleTemplateFromRepo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchGetCommitsInput(v *BatchGetCommitsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchGetCommitsInput(v *BatchGetCommitsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4101,7 +4101,7 @@ func awsAwsjson11_serializeDocumentBatchGetCommitsInput(v *BatchGetCommitsInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchGetRepositoriesInput(v *BatchGetRepositoriesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchGetRepositoriesInput(v *BatchGetRepositoriesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4115,7 +4115,7 @@ func awsAwsjson11_serializeDocumentBatchGetRepositoriesInput(v *BatchGetReposito
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateApprovalRuleTemplateInput(v *CreateApprovalRuleTemplateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateApprovalRuleTemplateInput(v *CreateApprovalRuleTemplateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4137,7 +4137,7 @@ func awsAwsjson11_serializeDocumentCreateApprovalRuleTemplateInput(v *CreateAppr
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateBranchInput(v *CreateBranchInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateBranchInput(v *CreateBranchInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4159,7 +4159,7 @@ func awsAwsjson11_serializeDocumentCreateBranchInput(v *CreateBranchInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateCommitInput(v *CreateCommitInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateCommitInput(v *CreateCommitInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4222,7 +4222,7 @@ func awsAwsjson11_serializeDocumentCreateCommitInput(v *CreateCommitInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreatePullRequestApprovalRuleInput(v *CreatePullRequestApprovalRuleInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreatePullRequestApprovalRuleInput(v *CreatePullRequestApprovalRuleInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4244,7 +4244,7 @@ func awsAwsjson11_serializeDocumentCreatePullRequestApprovalRuleInput(v *CreateP
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreatePullRequestInput(v *CreatePullRequestInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreatePullRequestInput(v *CreatePullRequestInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4273,7 +4273,7 @@ func awsAwsjson11_serializeDocumentCreatePullRequestInput(v *CreatePullRequestIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateRepositoryInput(v *CreateRepositoryInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateRepositoryInput(v *CreateRepositoryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4297,7 +4297,7 @@ func awsAwsjson11_serializeDocumentCreateRepositoryInput(v *CreateRepositoryInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateUnreferencedMergeCommitInput(v *CreateUnreferencedMergeCommitInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateUnreferencedMergeCommitInput(v *CreateUnreferencedMergeCommitInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4361,7 +4361,7 @@ func awsAwsjson11_serializeDocumentCreateUnreferencedMergeCommitInput(v *CreateU
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteApprovalRuleTemplateInput(v *DeleteApprovalRuleTemplateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteApprovalRuleTemplateInput(v *DeleteApprovalRuleTemplateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4373,7 +4373,7 @@ func awsAwsjson11_serializeDocumentDeleteApprovalRuleTemplateInput(v *DeleteAppr
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteBranchInput(v *DeleteBranchInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteBranchInput(v *DeleteBranchInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4390,7 +4390,7 @@ func awsAwsjson11_serializeDocumentDeleteBranchInput(v *DeleteBranchInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteCommentContentInput(v *DeleteCommentContentInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteCommentContentInput(v *DeleteCommentContentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4402,7 +4402,7 @@ func awsAwsjson11_serializeDocumentDeleteCommentContentInput(v *DeleteCommentCon
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteFileInput(v *DeleteFileInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteFileInput(v *DeleteFileInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4449,7 +4449,7 @@ func awsAwsjson11_serializeDocumentDeleteFileInput(v *DeleteFileInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeletePullRequestApprovalRuleInput(v *DeletePullRequestApprovalRuleInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeletePullRequestApprovalRuleInput(v *DeletePullRequestApprovalRuleInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4466,7 +4466,7 @@ func awsAwsjson11_serializeDocumentDeletePullRequestApprovalRuleInput(v *DeleteP
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteRepositoryInput(v *DeleteRepositoryInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteRepositoryInput(v *DeleteRepositoryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4478,7 +4478,7 @@ func awsAwsjson11_serializeDocumentDeleteRepositoryInput(v *DeleteRepositoryInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeMergeConflictsInput(v *DescribeMergeConflictsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeMergeConflictsInput(v *DescribeMergeConflictsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4530,7 +4530,7 @@ func awsAwsjson11_serializeDocumentDescribeMergeConflictsInput(v *DescribeMergeC
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribePullRequestEventsInput(v *DescribePullRequestEventsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribePullRequestEventsInput(v *DescribePullRequestEventsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4562,7 +4562,7 @@ func awsAwsjson11_serializeDocumentDescribePullRequestEventsInput(v *DescribePul
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDisassociateApprovalRuleTemplateFromRepositoryInput(v *DisassociateApprovalRuleTemplateFromRepositoryInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDisassociateApprovalRuleTemplateFromRepositoryInput(v *DisassociateApprovalRuleTemplateFromRepositoryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4579,7 +4579,7 @@ func awsAwsjson11_serializeDocumentDisassociateApprovalRuleTemplateFromRepositor
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentEvaluatePullRequestApprovalRulesInput(v *EvaluatePullRequestApprovalRulesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentEvaluatePullRequestApprovalRulesInput(v *EvaluatePullRequestApprovalRulesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4596,7 +4596,7 @@ func awsAwsjson11_serializeDocumentEvaluatePullRequestApprovalRulesInput(v *Eval
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetApprovalRuleTemplateInput(v *GetApprovalRuleTemplateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetApprovalRuleTemplateInput(v *GetApprovalRuleTemplateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4608,7 +4608,7 @@ func awsAwsjson11_serializeDocumentGetApprovalRuleTemplateInput(v *GetApprovalRu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetBlobInput(v *GetBlobInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetBlobInput(v *GetBlobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4625,7 +4625,7 @@ func awsAwsjson11_serializeDocumentGetBlobInput(v *GetBlobInput, value smithyjso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetBranchInput(v *GetBranchInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetBranchInput(v *GetBranchInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4642,7 +4642,7 @@ func awsAwsjson11_serializeDocumentGetBranchInput(v *GetBranchInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetCommentInput(v *GetCommentInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetCommentInput(v *GetCommentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4654,7 +4654,7 @@ func awsAwsjson11_serializeDocumentGetCommentInput(v *GetCommentInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetCommentReactionsInput(v *GetCommentReactionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetCommentReactionsInput(v *GetCommentReactionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4681,7 +4681,7 @@ func awsAwsjson11_serializeDocumentGetCommentReactionsInput(v *GetCommentReactio
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetCommentsForComparedCommitInput(v *GetCommentsForComparedCommitInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetCommentsForComparedCommitInput(v *GetCommentsForComparedCommitInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4713,7 +4713,7 @@ func awsAwsjson11_serializeDocumentGetCommentsForComparedCommitInput(v *GetComme
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetCommentsForPullRequestInput(v *GetCommentsForPullRequestInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetCommentsForPullRequestInput(v *GetCommentsForPullRequestInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4750,7 +4750,7 @@ func awsAwsjson11_serializeDocumentGetCommentsForPullRequestInput(v *GetComments
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetCommitInput(v *GetCommitInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetCommitInput(v *GetCommitInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4767,7 +4767,7 @@ func awsAwsjson11_serializeDocumentGetCommitInput(v *GetCommitInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetDifferencesInput(v *GetDifferencesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetDifferencesInput(v *GetDifferencesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4809,7 +4809,7 @@ func awsAwsjson11_serializeDocumentGetDifferencesInput(v *GetDifferencesInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetFileInput(v *GetFileInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetFileInput(v *GetFileInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4831,7 +4831,7 @@ func awsAwsjson11_serializeDocumentGetFileInput(v *GetFileInput, value smithyjso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetFolderInput(v *GetFolderInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetFolderInput(v *GetFolderInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4853,7 +4853,7 @@ func awsAwsjson11_serializeDocumentGetFolderInput(v *GetFolderInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetMergeCommitInput(v *GetMergeCommitInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetMergeCommitInput(v *GetMergeCommitInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4885,7 +4885,7 @@ func awsAwsjson11_serializeDocumentGetMergeCommitInput(v *GetMergeCommitInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetMergeConflictsInput(v *GetMergeConflictsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetMergeConflictsInput(v *GetMergeConflictsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4932,7 +4932,7 @@ func awsAwsjson11_serializeDocumentGetMergeConflictsInput(v *GetMergeConflictsIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetMergeOptionsInput(v *GetMergeOptionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetMergeOptionsInput(v *GetMergeOptionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4964,7 +4964,7 @@ func awsAwsjson11_serializeDocumentGetMergeOptionsInput(v *GetMergeOptionsInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetPullRequestApprovalStatesInput(v *GetPullRequestApprovalStatesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetPullRequestApprovalStatesInput(v *GetPullRequestApprovalStatesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4981,7 +4981,7 @@ func awsAwsjson11_serializeDocumentGetPullRequestApprovalStatesInput(v *GetPullR
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetPullRequestInput(v *GetPullRequestInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetPullRequestInput(v *GetPullRequestInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4993,7 +4993,7 @@ func awsAwsjson11_serializeDocumentGetPullRequestInput(v *GetPullRequestInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetPullRequestOverrideStateInput(v *GetPullRequestOverrideStateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetPullRequestOverrideStateInput(v *GetPullRequestOverrideStateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5010,7 +5010,7 @@ func awsAwsjson11_serializeDocumentGetPullRequestOverrideStateInput(v *GetPullRe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetRepositoryInput(v *GetRepositoryInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetRepositoryInput(v *GetRepositoryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5022,7 +5022,7 @@ func awsAwsjson11_serializeDocumentGetRepositoryInput(v *GetRepositoryInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetRepositoryTriggersInput(v *GetRepositoryTriggersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetRepositoryTriggersInput(v *GetRepositoryTriggersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5034,7 +5034,7 @@ func awsAwsjson11_serializeDocumentGetRepositoryTriggersInput(v *GetRepositoryTr
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListApprovalRuleTemplatesInput(v *ListApprovalRuleTemplatesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListApprovalRuleTemplatesInput(v *ListApprovalRuleTemplatesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5051,7 +5051,7 @@ func awsAwsjson11_serializeDocumentListApprovalRuleTemplatesInput(v *ListApprova
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListAssociatedApprovalRuleTemplatesForRepositoryInput(v *ListAssociatedApprovalRuleTemplatesForRepositoryInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListAssociatedApprovalRuleTemplatesForRepositoryInput(v *ListAssociatedApprovalRuleTemplatesForRepositoryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5073,7 +5073,7 @@ func awsAwsjson11_serializeDocumentListAssociatedApprovalRuleTemplatesForReposit
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListBranchesInput(v *ListBranchesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListBranchesInput(v *ListBranchesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5090,7 +5090,7 @@ func awsAwsjson11_serializeDocumentListBranchesInput(v *ListBranchesInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListPullRequestsInput(v *ListPullRequestsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListPullRequestsInput(v *ListPullRequestsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5122,7 +5122,7 @@ func awsAwsjson11_serializeDocumentListPullRequestsInput(v *ListPullRequestsInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListRepositoriesForApprovalRuleTemplateInput(v *ListRepositoriesForApprovalRuleTemplateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListRepositoriesForApprovalRuleTemplateInput(v *ListRepositoriesForApprovalRuleTemplateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5144,7 +5144,7 @@ func awsAwsjson11_serializeDocumentListRepositoriesForApprovalRuleTemplateInput(
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListRepositoriesInput(v *ListRepositoriesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListRepositoriesInput(v *ListRepositoriesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5166,7 +5166,7 @@ func awsAwsjson11_serializeDocumentListRepositoriesInput(v *ListRepositoriesInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5183,7 +5183,7 @@ func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResour
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentMergeBranchesByFastForwardInput(v *MergeBranchesByFastForwardInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentMergeBranchesByFastForwardInput(v *MergeBranchesByFastForwardInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5210,71 +5210,7 @@ func awsAwsjson11_serializeDocumentMergeBranchesByFastForwardInput(v *MergeBranc
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentMergeBranchesBySquashInput(v *MergeBranchesBySquashInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.AuthorName != nil {
-		ok := object.Key("authorName")
-		ok.String(*v.AuthorName)
-	}
-
-	if v.CommitMessage != nil {
-		ok := object.Key("commitMessage")
-		ok.String(*v.CommitMessage)
-	}
-
-	if len(v.ConflictDetailLevel) > 0 {
-		ok := object.Key("conflictDetailLevel")
-		ok.String(string(v.ConflictDetailLevel))
-	}
-
-	if v.ConflictResolution != nil {
-		ok := object.Key("conflictResolution")
-		if err := awsAwsjson11_serializeDocumentConflictResolution(v.ConflictResolution, ok); err != nil {
-			return err
-		}
-	}
-
-	if len(v.ConflictResolutionStrategy) > 0 {
-		ok := object.Key("conflictResolutionStrategy")
-		ok.String(string(v.ConflictResolutionStrategy))
-	}
-
-	if v.DestinationCommitSpecifier != nil {
-		ok := object.Key("destinationCommitSpecifier")
-		ok.String(*v.DestinationCommitSpecifier)
-	}
-
-	if v.Email != nil {
-		ok := object.Key("email")
-		ok.String(*v.Email)
-	}
-
-	if v.KeepEmptyFolders != nil {
-		ok := object.Key("keepEmptyFolders")
-		ok.Boolean(*v.KeepEmptyFolders)
-	}
-
-	if v.RepositoryName != nil {
-		ok := object.Key("repositoryName")
-		ok.String(*v.RepositoryName)
-	}
-
-	if v.SourceCommitSpecifier != nil {
-		ok := object.Key("sourceCommitSpecifier")
-		ok.String(*v.SourceCommitSpecifier)
-	}
-
-	if v.TargetBranch != nil {
-		ok := object.Key("targetBranch")
-		ok.String(*v.TargetBranch)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentMergeBranchesByThreeWayInput(v *MergeBranchesByThreeWayInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentMergeBranchesBySquashInput(v *MergeBranchesBySquashInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5338,7 +5274,71 @@ func awsAwsjson11_serializeDocumentMergeBranchesByThreeWayInput(v *MergeBranches
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentMergePullRequestByFastForwardInput(v *MergePullRequestByFastForwardInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentMergeBranchesByThreeWayInput(v *MergeBranchesByThreeWayInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuthorName != nil {
+		ok := object.Key("authorName")
+		ok.String(*v.AuthorName)
+	}
+
+	if v.CommitMessage != nil {
+		ok := object.Key("commitMessage")
+		ok.String(*v.CommitMessage)
+	}
+
+	if len(v.ConflictDetailLevel) > 0 {
+		ok := object.Key("conflictDetailLevel")
+		ok.String(string(v.ConflictDetailLevel))
+	}
+
+	if v.ConflictResolution != nil {
+		ok := object.Key("conflictResolution")
+		if err := awsAwsjson11_serializeDocumentConflictResolution(v.ConflictResolution, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ConflictResolutionStrategy) > 0 {
+		ok := object.Key("conflictResolutionStrategy")
+		ok.String(string(v.ConflictResolutionStrategy))
+	}
+
+	if v.DestinationCommitSpecifier != nil {
+		ok := object.Key("destinationCommitSpecifier")
+		ok.String(*v.DestinationCommitSpecifier)
+	}
+
+	if v.Email != nil {
+		ok := object.Key("email")
+		ok.String(*v.Email)
+	}
+
+	if v.KeepEmptyFolders != nil {
+		ok := object.Key("keepEmptyFolders")
+		ok.Boolean(*v.KeepEmptyFolders)
+	}
+
+	if v.RepositoryName != nil {
+		ok := object.Key("repositoryName")
+		ok.String(*v.RepositoryName)
+	}
+
+	if v.SourceCommitSpecifier != nil {
+		ok := object.Key("sourceCommitSpecifier")
+		ok.String(*v.SourceCommitSpecifier)
+	}
+
+	if v.TargetBranch != nil {
+		ok := object.Key("targetBranch")
+		ok.String(*v.TargetBranch)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentMergePullRequestByFastForwardInput(v *MergePullRequestByFastForwardInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5360,7 +5360,7 @@ func awsAwsjson11_serializeDocumentMergePullRequestByFastForwardInput(v *MergePu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentMergePullRequestBySquashInput(v *MergePullRequestBySquashInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentMergePullRequestBySquashInput(v *MergePullRequestBySquashInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5419,7 +5419,7 @@ func awsAwsjson11_serializeDocumentMergePullRequestBySquashInput(v *MergePullReq
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentMergePullRequestByThreeWayInput(v *MergePullRequestByThreeWayInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentMergePullRequestByThreeWayInput(v *MergePullRequestByThreeWayInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5478,7 +5478,7 @@ func awsAwsjson11_serializeDocumentMergePullRequestByThreeWayInput(v *MergePullR
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentOverridePullRequestApprovalRulesInput(v *OverridePullRequestApprovalRulesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentOverridePullRequestApprovalRulesInput(v *OverridePullRequestApprovalRulesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5500,7 +5500,7 @@ func awsAwsjson11_serializeDocumentOverridePullRequestApprovalRulesInput(v *Over
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPostCommentForComparedCommitInput(v *PostCommentForComparedCommitInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPostCommentForComparedCommitInput(v *PostCommentForComparedCommitInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5539,7 +5539,7 @@ func awsAwsjson11_serializeDocumentPostCommentForComparedCommitInput(v *PostComm
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPostCommentForPullRequestInput(v *PostCommentForPullRequestInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPostCommentForPullRequestInput(v *PostCommentForPullRequestInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5583,7 +5583,7 @@ func awsAwsjson11_serializeDocumentPostCommentForPullRequestInput(v *PostComment
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPostCommentReplyInput(v *PostCommentReplyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPostCommentReplyInput(v *PostCommentReplyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5605,7 +5605,7 @@ func awsAwsjson11_serializeDocumentPostCommentReplyInput(v *PostCommentReplyInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutCommentReactionInput(v *PutCommentReactionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutCommentReactionInput(v *PutCommentReactionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5622,7 +5622,7 @@ func awsAwsjson11_serializeDocumentPutCommentReactionInput(v *PutCommentReaction
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutFileInput(v *PutFileInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutFileInput(v *PutFileInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5674,7 +5674,7 @@ func awsAwsjson11_serializeDocumentPutFileInput(v *PutFileInput, value smithyjso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutRepositoryTriggersInput(v *PutRepositoryTriggersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutRepositoryTriggersInput(v *PutRepositoryTriggersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5693,7 +5693,7 @@ func awsAwsjson11_serializeDocumentPutRepositoryTriggersInput(v *PutRepositoryTr
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5712,7 +5712,7 @@ func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTestRepositoryTriggersInput(v *TestRepositoryTriggersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTestRepositoryTriggersInput(v *TestRepositoryTriggersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5731,7 +5731,7 @@ func awsAwsjson11_serializeDocumentTestRepositoryTriggersInput(v *TestRepository
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5750,7 +5750,7 @@ func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateApprovalRuleTemplateContentInput(v *UpdateApprovalRuleTemplateContentInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateApprovalRuleTemplateContentInput(v *UpdateApprovalRuleTemplateContentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5772,7 +5772,7 @@ func awsAwsjson11_serializeDocumentUpdateApprovalRuleTemplateContentInput(v *Upd
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateApprovalRuleTemplateDescriptionInput(v *UpdateApprovalRuleTemplateDescriptionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateApprovalRuleTemplateDescriptionInput(v *UpdateApprovalRuleTemplateDescriptionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5789,7 +5789,7 @@ func awsAwsjson11_serializeDocumentUpdateApprovalRuleTemplateDescriptionInput(v 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateApprovalRuleTemplateNameInput(v *UpdateApprovalRuleTemplateNameInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateApprovalRuleTemplateNameInput(v *UpdateApprovalRuleTemplateNameInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5806,7 +5806,7 @@ func awsAwsjson11_serializeDocumentUpdateApprovalRuleTemplateNameInput(v *Update
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateCommentInput(v *UpdateCommentInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateCommentInput(v *UpdateCommentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5823,7 +5823,7 @@ func awsAwsjson11_serializeDocumentUpdateCommentInput(v *UpdateCommentInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateDefaultBranchInput(v *UpdateDefaultBranchInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateDefaultBranchInput(v *UpdateDefaultBranchInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5840,7 +5840,7 @@ func awsAwsjson11_serializeDocumentUpdateDefaultBranchInput(v *UpdateDefaultBran
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdatePullRequestApprovalRuleContentInput(v *UpdatePullRequestApprovalRuleContentInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdatePullRequestApprovalRuleContentInput(v *UpdatePullRequestApprovalRuleContentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5867,7 +5867,7 @@ func awsAwsjson11_serializeDocumentUpdatePullRequestApprovalRuleContentInput(v *
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdatePullRequestApprovalStateInput(v *UpdatePullRequestApprovalStateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdatePullRequestApprovalStateInput(v *UpdatePullRequestApprovalStateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5889,7 +5889,7 @@ func awsAwsjson11_serializeDocumentUpdatePullRequestApprovalStateInput(v *Update
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdatePullRequestDescriptionInput(v *UpdatePullRequestDescriptionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdatePullRequestDescriptionInput(v *UpdatePullRequestDescriptionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5906,7 +5906,7 @@ func awsAwsjson11_serializeDocumentUpdatePullRequestDescriptionInput(v *UpdatePu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdatePullRequestStatusInput(v *UpdatePullRequestStatusInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdatePullRequestStatusInput(v *UpdatePullRequestStatusInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5923,7 +5923,7 @@ func awsAwsjson11_serializeDocumentUpdatePullRequestStatusInput(v *UpdatePullReq
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdatePullRequestTitleInput(v *UpdatePullRequestTitleInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdatePullRequestTitleInput(v *UpdatePullRequestTitleInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5940,7 +5940,7 @@ func awsAwsjson11_serializeDocumentUpdatePullRequestTitleInput(v *UpdatePullRequ
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateRepositoryDescriptionInput(v *UpdateRepositoryDescriptionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateRepositoryDescriptionInput(v *UpdateRepositoryDescriptionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5957,7 +5957,7 @@ func awsAwsjson11_serializeDocumentUpdateRepositoryDescriptionInput(v *UpdateRep
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateRepositoryNameInput(v *UpdateRepositoryNameInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateRepositoryNameInput(v *UpdateRepositoryNameInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

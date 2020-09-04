@@ -1332,7 +1332,7 @@ type CustomDeliveryConfiguration struct {
 	// The types of endpoints to send the campaign or treatment to. Each valid value
 	// maps to a type of channel that you can associate with an endpoint by using the
 	// ChannelType property of an endpoint.
-	EndpointTypes []__EndpointTypesElement
+	EndpointTypes []EndpointTypesElement
 }
 
 // The settings for a custom message activity. This type of activity calls an AWS
@@ -1341,7 +1341,7 @@ type CustomMessageActivity struct {
 	// The types of endpoints to send the custom message to. Each valid value maps to a
 	// type of channel that you can associate with an endpoint by using the ChannelType
 	// property of an endpoint.
-	EndpointTypes []__EndpointTypesElement
+	EndpointTypes []EndpointTypesElement
 	// The unique identifier for the version of the message template to use for the
 	// message. If specified, this value must match the identifier for an existing
 	// template version. To retrieve a list of versions and version identifiers for a

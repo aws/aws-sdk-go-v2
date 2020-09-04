@@ -45,7 +45,7 @@ func (m *awsAwsjson11_serializeOpDescribeAffectedAccountsForOrganization) Handle
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHealth_20160804.DescribeAffectedAccountsForOrganization")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeAffectedAccountsForOrganizationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeAffectedAccountsForOrganizationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -91,7 +91,7 @@ func (m *awsAwsjson11_serializeOpDescribeAffectedEntities) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHealth_20160804.DescribeAffectedEntities")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeAffectedEntitiesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeAffectedEntitiesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -137,7 +137,7 @@ func (m *awsAwsjson11_serializeOpDescribeAffectedEntitiesForOrganization) Handle
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHealth_20160804.DescribeAffectedEntitiesForOrganization")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeAffectedEntitiesForOrganizationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeAffectedEntitiesForOrganizationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -183,7 +183,7 @@ func (m *awsAwsjson11_serializeOpDescribeEntityAggregates) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHealth_20160804.DescribeEntityAggregates")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeEntityAggregatesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeEntityAggregatesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -229,7 +229,7 @@ func (m *awsAwsjson11_serializeOpDescribeEventAggregates) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHealth_20160804.DescribeEventAggregates")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeEventAggregatesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeEventAggregatesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -275,7 +275,7 @@ func (m *awsAwsjson11_serializeOpDescribeEventDetails) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHealth_20160804.DescribeEventDetails")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeEventDetailsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeEventDetailsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -321,7 +321,7 @@ func (m *awsAwsjson11_serializeOpDescribeEventDetailsForOrganization) HandleSeri
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHealth_20160804.DescribeEventDetailsForOrganization")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeEventDetailsForOrganizationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeEventDetailsForOrganizationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -367,7 +367,7 @@ func (m *awsAwsjson11_serializeOpDescribeEvents) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHealth_20160804.DescribeEvents")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeEventsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeEventsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -413,7 +413,7 @@ func (m *awsAwsjson11_serializeOpDescribeEventsForOrganization) HandleSerialize(
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHealth_20160804.DescribeEventsForOrganization")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeEventsForOrganizationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeEventsForOrganizationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -459,7 +459,7 @@ func (m *awsAwsjson11_serializeOpDescribeEventTypes) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSHealth_20160804.DescribeEventTypes")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeEventTypesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeEventTypesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1161,7 +1161,7 @@ func awsAwsjson11_serializeDocumentTagSet(v map[string]*string, value smithyjson
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeAffectedAccountsForOrganizationInput(v *DescribeAffectedAccountsForOrganizationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeAffectedAccountsForOrganizationInput(v *DescribeAffectedAccountsForOrganizationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1183,7 +1183,7 @@ func awsAwsjson11_serializeDocumentDescribeAffectedAccountsForOrganizationInput(
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeAffectedEntitiesForOrganizationInput(v *DescribeAffectedEntitiesForOrganizationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeAffectedEntitiesForOrganizationInput(v *DescribeAffectedEntitiesForOrganizationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1212,7 +1212,7 @@ func awsAwsjson11_serializeDocumentDescribeAffectedEntitiesForOrganizationInput(
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeAffectedEntitiesInput(v *DescribeAffectedEntitiesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeAffectedEntitiesInput(v *DescribeAffectedEntitiesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1241,7 +1241,7 @@ func awsAwsjson11_serializeDocumentDescribeAffectedEntitiesInput(v *DescribeAffe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeEntityAggregatesInput(v *DescribeEntityAggregatesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeEntityAggregatesInput(v *DescribeEntityAggregatesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1255,7 +1255,7 @@ func awsAwsjson11_serializeDocumentDescribeEntityAggregatesInput(v *DescribeEnti
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeEventAggregatesInput(v *DescribeEventAggregatesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeEventAggregatesInput(v *DescribeEventAggregatesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1284,7 +1284,7 @@ func awsAwsjson11_serializeDocumentDescribeEventAggregatesInput(v *DescribeEvent
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeEventDetailsForOrganizationInput(v *DescribeEventDetailsForOrganizationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeEventDetailsForOrganizationInput(v *DescribeEventDetailsForOrganizationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1303,7 +1303,7 @@ func awsAwsjson11_serializeDocumentDescribeEventDetailsForOrganizationInput(v *D
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeEventDetailsInput(v *DescribeEventDetailsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeEventDetailsInput(v *DescribeEventDetailsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1322,7 +1322,7 @@ func awsAwsjson11_serializeDocumentDescribeEventDetailsInput(v *DescribeEventDet
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeEventsForOrganizationInput(v *DescribeEventsForOrganizationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeEventsForOrganizationInput(v *DescribeEventsForOrganizationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1351,7 +1351,7 @@ func awsAwsjson11_serializeDocumentDescribeEventsForOrganizationInput(v *Describ
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeEventsInput(v *DescribeEventsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeEventsInput(v *DescribeEventsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1380,7 +1380,7 @@ func awsAwsjson11_serializeDocumentDescribeEventsInput(v *DescribeEventsInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeEventTypesInput(v *DescribeEventTypesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeEventTypesInput(v *DescribeEventTypesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

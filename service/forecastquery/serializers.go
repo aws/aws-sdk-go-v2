@@ -43,7 +43,7 @@ func (m *awsAwsjson11_serializeOpQueryForecast) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonForecastRuntime.QueryForecast")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentQueryForecastInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentQueryForecastInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -73,7 +73,7 @@ func awsAwsjson11_serializeDocumentFilters(v map[string]*string, value smithyjso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentQueryForecastInput(v *QueryForecastInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentQueryForecastInput(v *QueryForecastInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

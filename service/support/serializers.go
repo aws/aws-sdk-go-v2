@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpAddAttachmentsToSet) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSupport_20130415.AddAttachmentsToSet")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAddAttachmentsToSetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAddAttachmentsToSetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpAddCommunicationToCase) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSupport_20130415.AddCommunicationToCase")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAddCommunicationToCaseInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAddCommunicationToCaseInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpCreateCase) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSupport_20130415.CreateCase")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateCaseInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateCaseInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpDescribeAttachment) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSupport_20130415.DescribeAttachment")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeAttachmentInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeAttachmentInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpDescribeCases) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSupport_20130415.DescribeCases")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeCasesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeCasesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpDescribeCommunications) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSupport_20130415.DescribeCommunications")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeCommunicationsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeCommunicationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson11_serializeOpDescribeServices) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSupport_20130415.DescribeServices")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeServicesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeServicesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -366,7 +366,7 @@ func (m *awsAwsjson11_serializeOpDescribeSeverityLevels) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSupport_20130415.DescribeSeverityLevels")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeSeverityLevelsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeSeverityLevelsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -412,7 +412,7 @@ func (m *awsAwsjson11_serializeOpDescribeTrustedAdvisorCheckRefreshStatuses) Han
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSupport_20130415.DescribeTrustedAdvisorCheckRefreshStatuses")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeTrustedAdvisorCheckRefreshStatusesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeTrustedAdvisorCheckRefreshStatusesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -458,7 +458,7 @@ func (m *awsAwsjson11_serializeOpDescribeTrustedAdvisorCheckResult) HandleSerial
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSupport_20130415.DescribeTrustedAdvisorCheckResult")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeTrustedAdvisorCheckResultInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeTrustedAdvisorCheckResultInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -504,7 +504,7 @@ func (m *awsAwsjson11_serializeOpDescribeTrustedAdvisorChecks) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSupport_20130415.DescribeTrustedAdvisorChecks")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeTrustedAdvisorChecksInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeTrustedAdvisorChecksInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -550,7 +550,7 @@ func (m *awsAwsjson11_serializeOpDescribeTrustedAdvisorCheckSummaries) HandleSer
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSupport_20130415.DescribeTrustedAdvisorCheckSummaries")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeTrustedAdvisorCheckSummariesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeTrustedAdvisorCheckSummariesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -596,7 +596,7 @@ func (m *awsAwsjson11_serializeOpRefreshTrustedAdvisorCheck) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSupport_20130415.RefreshTrustedAdvisorCheck")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRefreshTrustedAdvisorCheckInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRefreshTrustedAdvisorCheckInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -642,7 +642,7 @@ func (m *awsAwsjson11_serializeOpResolveCase) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSupport_20130415.ResolveCase")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentResolveCaseInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentResolveCaseInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -751,7 +751,7 @@ func awsAwsjson11_serializeDocumentStringList(v []*string, value smithyjson.Valu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAddAttachmentsToSetInput(v *AddAttachmentsToSetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAddAttachmentsToSetInput(v *AddAttachmentsToSetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -770,7 +770,7 @@ func awsAwsjson11_serializeDocumentAddAttachmentsToSetInput(v *AddAttachmentsToS
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAddCommunicationToCaseInput(v *AddCommunicationToCaseInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAddCommunicationToCaseInput(v *AddCommunicationToCaseInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -799,7 +799,7 @@ func awsAwsjson11_serializeDocumentAddCommunicationToCaseInput(v *AddCommunicati
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateCaseInput(v *CreateCaseInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateCaseInput(v *CreateCaseInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -853,7 +853,7 @@ func awsAwsjson11_serializeDocumentCreateCaseInput(v *CreateCaseInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeAttachmentInput(v *DescribeAttachmentInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeAttachmentInput(v *DescribeAttachmentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -865,7 +865,7 @@ func awsAwsjson11_serializeDocumentDescribeAttachmentInput(v *DescribeAttachment
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeCasesInput(v *DescribeCasesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeCasesInput(v *DescribeCasesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -919,7 +919,7 @@ func awsAwsjson11_serializeDocumentDescribeCasesInput(v *DescribeCasesInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeCommunicationsInput(v *DescribeCommunicationsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeCommunicationsInput(v *DescribeCommunicationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -951,7 +951,7 @@ func awsAwsjson11_serializeDocumentDescribeCommunicationsInput(v *DescribeCommun
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeServicesInput(v *DescribeServicesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeServicesInput(v *DescribeServicesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -970,7 +970,7 @@ func awsAwsjson11_serializeDocumentDescribeServicesInput(v *DescribeServicesInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeSeverityLevelsInput(v *DescribeSeverityLevelsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeSeverityLevelsInput(v *DescribeSeverityLevelsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -982,7 +982,7 @@ func awsAwsjson11_serializeDocumentDescribeSeverityLevelsInput(v *DescribeSeveri
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeTrustedAdvisorCheckRefreshStatusesInput(v *DescribeTrustedAdvisorCheckRefreshStatusesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeTrustedAdvisorCheckRefreshStatusesInput(v *DescribeTrustedAdvisorCheckRefreshStatusesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -996,7 +996,7 @@ func awsAwsjson11_serializeDocumentDescribeTrustedAdvisorCheckRefreshStatusesInp
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeTrustedAdvisorCheckResultInput(v *DescribeTrustedAdvisorCheckResultInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeTrustedAdvisorCheckResultInput(v *DescribeTrustedAdvisorCheckResultInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1013,7 +1013,7 @@ func awsAwsjson11_serializeDocumentDescribeTrustedAdvisorCheckResultInput(v *Des
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeTrustedAdvisorChecksInput(v *DescribeTrustedAdvisorChecksInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeTrustedAdvisorChecksInput(v *DescribeTrustedAdvisorChecksInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1025,7 +1025,7 @@ func awsAwsjson11_serializeDocumentDescribeTrustedAdvisorChecksInput(v *Describe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeTrustedAdvisorCheckSummariesInput(v *DescribeTrustedAdvisorCheckSummariesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeTrustedAdvisorCheckSummariesInput(v *DescribeTrustedAdvisorCheckSummariesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1039,7 +1039,7 @@ func awsAwsjson11_serializeDocumentDescribeTrustedAdvisorCheckSummariesInput(v *
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRefreshTrustedAdvisorCheckInput(v *RefreshTrustedAdvisorCheckInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRefreshTrustedAdvisorCheckInput(v *RefreshTrustedAdvisorCheckInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1051,7 +1051,7 @@ func awsAwsjson11_serializeDocumentRefreshTrustedAdvisorCheckInput(v *RefreshTru
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentResolveCaseInput(v *ResolveCaseInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentResolveCaseInput(v *ResolveCaseInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

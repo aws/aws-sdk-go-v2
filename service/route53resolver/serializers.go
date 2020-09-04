@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpAssociateResolverEndpointIpAddress) HandleSeria
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.AssociateResolverEndpointIpAddress")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAssociateResolverEndpointIpAddressInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAssociateResolverEndpointIpAddressInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpAssociateResolverRule) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.AssociateResolverRule")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAssociateResolverRuleInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAssociateResolverRuleInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpCreateResolverEndpoint) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.CreateResolverEndpoint")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateResolverEndpointInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateResolverEndpointInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpCreateResolverRule) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.CreateResolverRule")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateResolverRuleInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateResolverRuleInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpDeleteResolverEndpoint) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.DeleteResolverEndpoint")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteResolverEndpointInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteResolverEndpointInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpDeleteResolverRule) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.DeleteResolverRule")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteResolverRuleInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteResolverRuleInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson11_serializeOpDisassociateResolverEndpointIpAddress) HandleSe
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.DisassociateResolverEndpointIpAddress")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDisassociateResolverEndpointIpAddressInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDisassociateResolverEndpointIpAddressInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -366,7 +366,7 @@ func (m *awsAwsjson11_serializeOpDisassociateResolverRule) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.DisassociateResolverRule")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDisassociateResolverRuleInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDisassociateResolverRuleInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -412,7 +412,7 @@ func (m *awsAwsjson11_serializeOpGetResolverEndpoint) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.GetResolverEndpoint")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetResolverEndpointInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetResolverEndpointInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -458,7 +458,7 @@ func (m *awsAwsjson11_serializeOpGetResolverRule) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.GetResolverRule")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetResolverRuleInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetResolverRuleInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -504,7 +504,7 @@ func (m *awsAwsjson11_serializeOpGetResolverRuleAssociation) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.GetResolverRuleAssociation")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetResolverRuleAssociationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetResolverRuleAssociationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -550,7 +550,7 @@ func (m *awsAwsjson11_serializeOpGetResolverRulePolicy) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.GetResolverRulePolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetResolverRulePolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetResolverRulePolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -596,7 +596,7 @@ func (m *awsAwsjson11_serializeOpListResolverEndpointIpAddresses) HandleSerializ
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.ListResolverEndpointIpAddresses")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListResolverEndpointIpAddressesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListResolverEndpointIpAddressesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -642,7 +642,7 @@ func (m *awsAwsjson11_serializeOpListResolverEndpoints) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.ListResolverEndpoints")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListResolverEndpointsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListResolverEndpointsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -688,7 +688,7 @@ func (m *awsAwsjson11_serializeOpListResolverRuleAssociations) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.ListResolverRuleAssociations")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListResolverRuleAssociationsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListResolverRuleAssociationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -734,7 +734,7 @@ func (m *awsAwsjson11_serializeOpListResolverRules) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.ListResolverRules")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListResolverRulesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListResolverRulesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -780,7 +780,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.ListTagsForResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -826,7 +826,7 @@ func (m *awsAwsjson11_serializeOpPutResolverRulePolicy) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.PutResolverRulePolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutResolverRulePolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutResolverRulePolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -872,7 +872,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.TagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -918,7 +918,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.UntagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -964,7 +964,7 @@ func (m *awsAwsjson11_serializeOpUpdateResolverEndpoint) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.UpdateResolverEndpoint")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateResolverEndpointInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateResolverEndpointInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1010,7 +1010,7 @@ func (m *awsAwsjson11_serializeOpUpdateResolverRule) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Resolver.UpdateResolverRule")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateResolverRuleInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateResolverRuleInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1254,7 +1254,7 @@ func awsAwsjson11_serializeDocumentTargetList(v []*types.TargetAddress, value sm
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssociateResolverEndpointIpAddressInput(v *AssociateResolverEndpointIpAddressInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAssociateResolverEndpointIpAddressInput(v *AssociateResolverEndpointIpAddressInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1273,7 +1273,7 @@ func awsAwsjson11_serializeDocumentAssociateResolverEndpointIpAddressInput(v *As
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssociateResolverRuleInput(v *AssociateResolverRuleInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAssociateResolverRuleInput(v *AssociateResolverRuleInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1295,7 +1295,7 @@ func awsAwsjson11_serializeDocumentAssociateResolverRuleInput(v *AssociateResolv
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateResolverEndpointInput(v *CreateResolverEndpointInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateResolverEndpointInput(v *CreateResolverEndpointInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1338,7 +1338,7 @@ func awsAwsjson11_serializeDocumentCreateResolverEndpointInput(v *CreateResolver
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateResolverRuleInput(v *CreateResolverRuleInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateResolverRuleInput(v *CreateResolverRuleInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1384,7 +1384,7 @@ func awsAwsjson11_serializeDocumentCreateResolverRuleInput(v *CreateResolverRule
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteResolverEndpointInput(v *DeleteResolverEndpointInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteResolverEndpointInput(v *DeleteResolverEndpointInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1396,7 +1396,7 @@ func awsAwsjson11_serializeDocumentDeleteResolverEndpointInput(v *DeleteResolver
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteResolverRuleInput(v *DeleteResolverRuleInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteResolverRuleInput(v *DeleteResolverRuleInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1408,7 +1408,7 @@ func awsAwsjson11_serializeDocumentDeleteResolverRuleInput(v *DeleteResolverRule
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDisassociateResolverEndpointIpAddressInput(v *DisassociateResolverEndpointIpAddressInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDisassociateResolverEndpointIpAddressInput(v *DisassociateResolverEndpointIpAddressInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1427,7 +1427,7 @@ func awsAwsjson11_serializeDocumentDisassociateResolverEndpointIpAddressInput(v 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDisassociateResolverRuleInput(v *DisassociateResolverRuleInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDisassociateResolverRuleInput(v *DisassociateResolverRuleInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1444,7 +1444,7 @@ func awsAwsjson11_serializeDocumentDisassociateResolverRuleInput(v *Disassociate
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetResolverEndpointInput(v *GetResolverEndpointInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetResolverEndpointInput(v *GetResolverEndpointInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1456,7 +1456,7 @@ func awsAwsjson11_serializeDocumentGetResolverEndpointInput(v *GetResolverEndpoi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetResolverRuleAssociationInput(v *GetResolverRuleAssociationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetResolverRuleAssociationInput(v *GetResolverRuleAssociationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1468,7 +1468,7 @@ func awsAwsjson11_serializeDocumentGetResolverRuleAssociationInput(v *GetResolve
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetResolverRuleInput(v *GetResolverRuleInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetResolverRuleInput(v *GetResolverRuleInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1480,7 +1480,7 @@ func awsAwsjson11_serializeDocumentGetResolverRuleInput(v *GetResolverRuleInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetResolverRulePolicyInput(v *GetResolverRulePolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetResolverRulePolicyInput(v *GetResolverRulePolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1492,7 +1492,7 @@ func awsAwsjson11_serializeDocumentGetResolverRulePolicyInput(v *GetResolverRule
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListResolverEndpointIpAddressesInput(v *ListResolverEndpointIpAddressesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListResolverEndpointIpAddressesInput(v *ListResolverEndpointIpAddressesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1514,7 +1514,7 @@ func awsAwsjson11_serializeDocumentListResolverEndpointIpAddressesInput(v *ListR
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListResolverEndpointsInput(v *ListResolverEndpointsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListResolverEndpointsInput(v *ListResolverEndpointsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1538,7 +1538,7 @@ func awsAwsjson11_serializeDocumentListResolverEndpointsInput(v *ListResolverEnd
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListResolverRuleAssociationsInput(v *ListResolverRuleAssociationsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListResolverRuleAssociationsInput(v *ListResolverRuleAssociationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1562,7 +1562,7 @@ func awsAwsjson11_serializeDocumentListResolverRuleAssociationsInput(v *ListReso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListResolverRulesInput(v *ListResolverRulesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListResolverRulesInput(v *ListResolverRulesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1586,7 +1586,7 @@ func awsAwsjson11_serializeDocumentListResolverRulesInput(v *ListResolverRulesIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1608,7 +1608,7 @@ func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResour
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutResolverRulePolicyInput(v *PutResolverRulePolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutResolverRulePolicyInput(v *PutResolverRulePolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1625,7 +1625,7 @@ func awsAwsjson11_serializeDocumentPutResolverRulePolicyInput(v *PutResolverRule
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1644,7 +1644,7 @@ func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1663,7 +1663,7 @@ func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateResolverEndpointInput(v *UpdateResolverEndpointInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateResolverEndpointInput(v *UpdateResolverEndpointInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1680,7 +1680,7 @@ func awsAwsjson11_serializeDocumentUpdateResolverEndpointInput(v *UpdateResolver
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateResolverRuleInput(v *UpdateResolverRuleInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateResolverRuleInput(v *UpdateResolverRuleInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

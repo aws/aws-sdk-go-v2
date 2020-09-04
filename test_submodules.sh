@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 
 BASE_PATH=$1
 TEST_CMD=$2

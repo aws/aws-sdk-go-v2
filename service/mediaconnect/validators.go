@@ -494,7 +494,7 @@ func validate__listOfAddOutputRequest(v []*types.AddOutputRequest) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "__listOfAddOutputRequest"}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfAddOutputRequest"}
 	for i := range v {
 		if err := validateAddOutputRequest(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
@@ -511,7 +511,7 @@ func validate__listOfGrantEntitlementRequest(v []*types.GrantEntitlementRequest)
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "__listOfGrantEntitlementRequest"}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfGrantEntitlementRequest"}
 	for i := range v {
 		if err := validateGrantEntitlementRequest(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
@@ -528,7 +528,7 @@ func validate__listOfSetSourceRequest(v []*types.SetSourceRequest) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "__listOfSetSourceRequest"}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfSetSourceRequest"}
 	for i := range v {
 		if err := validateSetSourceRequest(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
@@ -545,7 +545,7 @@ func validate__listOfVpcInterfaceRequest(v []*types.VpcInterfaceRequest) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "__listOfVpcInterfaceRequest"}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfVpcInterfaceRequest"}
 	for i := range v {
 		if err := validateVpcInterfaceRequest(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))

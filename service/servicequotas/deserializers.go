@@ -53,7 +53,7 @@ func (m *awsAwsjson11_deserializeOpAssociateServiceQuotaTemplate) HandleDeserial
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentAssociateServiceQuotaTemplateOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentAssociateServiceQuotaTemplateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -174,7 +174,7 @@ func (m *awsAwsjson11_deserializeOpDeleteServiceQuotaIncreaseRequestFromTemplate
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteServiceQuotaIncreaseRequestFromTemplateOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteServiceQuotaIncreaseRequestFromTemplateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -298,7 +298,7 @@ func (m *awsAwsjson11_deserializeOpDisassociateServiceQuotaTemplate) HandleDeser
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDisassociateServiceQuotaTemplateOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDisassociateServiceQuotaTemplateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -419,7 +419,7 @@ func (m *awsAwsjson11_deserializeOpGetAssociationForServiceQuotaTemplate) Handle
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetAssociationForServiceQuotaTemplateOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetAssociationForServiceQuotaTemplateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -540,7 +540,7 @@ func (m *awsAwsjson11_deserializeOpGetAWSDefaultServiceQuota) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetAWSDefaultServiceQuotaOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetAWSDefaultServiceQuotaOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -652,7 +652,7 @@ func (m *awsAwsjson11_deserializeOpGetRequestedServiceQuotaChange) HandleDeseria
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetRequestedServiceQuotaChangeOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetRequestedServiceQuotaChangeOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -764,7 +764,7 @@ func (m *awsAwsjson11_deserializeOpGetServiceQuota) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetServiceQuotaOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetServiceQuotaOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -876,7 +876,7 @@ func (m *awsAwsjson11_deserializeOpGetServiceQuotaIncreaseRequestFromTemplate) H
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetServiceQuotaIncreaseRequestFromTemplateOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetServiceQuotaIncreaseRequestFromTemplateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1000,7 +1000,7 @@ func (m *awsAwsjson11_deserializeOpListAWSDefaultServiceQuotas) HandleDeserializ
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListAWSDefaultServiceQuotasOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListAWSDefaultServiceQuotasOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1115,7 +1115,7 @@ func (m *awsAwsjson11_deserializeOpListRequestedServiceQuotaChangeHistory) Handl
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListRequestedServiceQuotaChangeHistoryOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListRequestedServiceQuotaChangeHistoryOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1230,7 +1230,7 @@ func (m *awsAwsjson11_deserializeOpListRequestedServiceQuotaChangeHistoryByQuota
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListRequestedServiceQuotaChangeHistoryByQuotaOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListRequestedServiceQuotaChangeHistoryByQuotaOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1345,7 +1345,7 @@ func (m *awsAwsjson11_deserializeOpListServiceQuotaIncreaseRequestsInTemplate) H
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListServiceQuotaIncreaseRequestsInTemplateOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListServiceQuotaIncreaseRequestsInTemplateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1466,7 +1466,7 @@ func (m *awsAwsjson11_deserializeOpListServiceQuotas) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListServiceQuotasOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListServiceQuotasOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1581,7 +1581,7 @@ func (m *awsAwsjson11_deserializeOpListServices) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListServicesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListServicesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1693,7 +1693,7 @@ func (m *awsAwsjson11_deserializeOpPutServiceQuotaIncreaseRequestIntoTemplate) H
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentPutServiceQuotaIncreaseRequestIntoTemplateOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentPutServiceQuotaIncreaseRequestIntoTemplateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1820,7 +1820,7 @@ func (m *awsAwsjson11_deserializeOpRequestServiceQuotaIncrease) HandleDeserializ
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentRequestServiceQuotaIncreaseOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentRequestServiceQuotaIncreaseOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4395,7 +4395,7 @@ func awsAwsjson11_deserializeDocumentTooManyRequestsException(v **types.TooManyR
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAssociateServiceQuotaTemplateOutput(v **AssociateServiceQuotaTemplateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAssociateServiceQuotaTemplateOutput(v **AssociateServiceQuotaTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4446,7 +4446,7 @@ func awsAwsjson11_deserializeDocumentAssociateServiceQuotaTemplateOutput(v **Ass
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteServiceQuotaIncreaseRequestFromTemplateOutput(v **DeleteServiceQuotaIncreaseRequestFromTemplateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteServiceQuotaIncreaseRequestFromTemplateOutput(v **DeleteServiceQuotaIncreaseRequestFromTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4497,7 +4497,7 @@ func awsAwsjson11_deserializeDocumentDeleteServiceQuotaIncreaseRequestFromTempla
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDisassociateServiceQuotaTemplateOutput(v **DisassociateServiceQuotaTemplateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDisassociateServiceQuotaTemplateOutput(v **DisassociateServiceQuotaTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4548,7 +4548,7 @@ func awsAwsjson11_deserializeDocumentDisassociateServiceQuotaTemplateOutput(v **
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetAssociationForServiceQuotaTemplateOutput(v **GetAssociationForServiceQuotaTemplateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetAssociationForServiceQuotaTemplateOutput(v **GetAssociationForServiceQuotaTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4612,7 +4612,7 @@ func awsAwsjson11_deserializeDocumentGetAssociationForServiceQuotaTemplateOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetAWSDefaultServiceQuotaOutput(v **GetAWSDefaultServiceQuotaOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetAWSDefaultServiceQuotaOutput(v **GetAWSDefaultServiceQuotaOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4668,7 +4668,7 @@ func awsAwsjson11_deserializeDocumentGetAWSDefaultServiceQuotaOutput(v **GetAWSD
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetRequestedServiceQuotaChangeOutput(v **GetRequestedServiceQuotaChangeOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetRequestedServiceQuotaChangeOutput(v **GetRequestedServiceQuotaChangeOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4724,7 +4724,7 @@ func awsAwsjson11_deserializeDocumentGetRequestedServiceQuotaChangeOutput(v **Ge
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetServiceQuotaIncreaseRequestFromTemplateOutput(v **GetServiceQuotaIncreaseRequestFromTemplateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetServiceQuotaIncreaseRequestFromTemplateOutput(v **GetServiceQuotaIncreaseRequestFromTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4780,7 +4780,7 @@ func awsAwsjson11_deserializeDocumentGetServiceQuotaIncreaseRequestFromTemplateO
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetServiceQuotaOutput(v **GetServiceQuotaOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetServiceQuotaOutput(v **GetServiceQuotaOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4836,7 +4836,7 @@ func awsAwsjson11_deserializeDocumentGetServiceQuotaOutput(v **GetServiceQuotaOu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListAWSDefaultServiceQuotasOutput(v **ListAWSDefaultServiceQuotasOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListAWSDefaultServiceQuotasOutput(v **ListAWSDefaultServiceQuotasOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4905,7 +4905,7 @@ func awsAwsjson11_deserializeDocumentListAWSDefaultServiceQuotasOutput(v **ListA
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListRequestedServiceQuotaChangeHistoryByQuotaOutput(v **ListRequestedServiceQuotaChangeHistoryByQuotaOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListRequestedServiceQuotaChangeHistoryByQuotaOutput(v **ListRequestedServiceQuotaChangeHistoryByQuotaOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4974,7 +4974,7 @@ func awsAwsjson11_deserializeDocumentListRequestedServiceQuotaChangeHistoryByQuo
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListRequestedServiceQuotaChangeHistoryOutput(v **ListRequestedServiceQuotaChangeHistoryOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListRequestedServiceQuotaChangeHistoryOutput(v **ListRequestedServiceQuotaChangeHistoryOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5043,7 +5043,7 @@ func awsAwsjson11_deserializeDocumentListRequestedServiceQuotaChangeHistoryOutpu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListServiceQuotaIncreaseRequestsInTemplateOutput(v **ListServiceQuotaIncreaseRequestsInTemplateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListServiceQuotaIncreaseRequestsInTemplateOutput(v **ListServiceQuotaIncreaseRequestsInTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5112,7 +5112,7 @@ func awsAwsjson11_deserializeDocumentListServiceQuotaIncreaseRequestsInTemplateO
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListServiceQuotasOutput(v **ListServiceQuotasOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListServiceQuotasOutput(v **ListServiceQuotasOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5181,7 +5181,7 @@ func awsAwsjson11_deserializeDocumentListServiceQuotasOutput(v **ListServiceQuot
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListServicesOutput(v **ListServicesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListServicesOutput(v **ListServicesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5250,7 +5250,7 @@ func awsAwsjson11_deserializeDocumentListServicesOutput(v **ListServicesOutput, 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentPutServiceQuotaIncreaseRequestIntoTemplateOutput(v **PutServiceQuotaIncreaseRequestIntoTemplateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentPutServiceQuotaIncreaseRequestIntoTemplateOutput(v **PutServiceQuotaIncreaseRequestIntoTemplateOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5306,7 +5306,7 @@ func awsAwsjson11_deserializeDocumentPutServiceQuotaIncreaseRequestIntoTemplateO
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentRequestServiceQuotaIncreaseOutput(v **RequestServiceQuotaIncreaseOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentRequestServiceQuotaIncreaseOutput(v **RequestServiceQuotaIncreaseOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

@@ -49,14 +49,14 @@ func (m *awsRestjson1_serializeOpCancelQuantumTask) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsCancelQuantumTaskInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsCancelQuantumTaskInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentCancelQuantumTaskInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentCancelQuantumTaskInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -71,7 +71,7 @@ func (m *awsRestjson1_serializeOpCancelQuantumTask) HandleSerialize(ctx context.
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsCancelQuantumTaskInput(v *CancelQuantumTaskInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsCancelQuantumTaskInput(v *CancelQuantumTaskInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -85,7 +85,7 @@ func awsRestjson1_serializeHttpBindingsCancelQuantumTaskInput(v *CancelQuantumTa
 	return nil
 }
 
-func awsRestjson1_serializeDocumentCancelQuantumTaskInput(v *CancelQuantumTaskInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentCancelQuantumTaskInput(v *CancelQuantumTaskInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -135,7 +135,7 @@ func (m *awsRestjson1_serializeOpCreateQuantumTask) HandleSerialize(ctx context.
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentCreateQuantumTaskInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentCreateQuantumTaskInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -150,7 +150,7 @@ func (m *awsRestjson1_serializeOpCreateQuantumTask) HandleSerialize(ctx context.
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsCreateQuantumTaskInput(v *CreateQuantumTaskInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsCreateQuantumTaskInput(v *CreateQuantumTaskInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -158,7 +158,7 @@ func awsRestjson1_serializeHttpBindingsCreateQuantumTaskInput(v *CreateQuantumTa
 	return nil
 }
 
-func awsRestjson1_serializeDocumentCreateQuantumTaskInput(v *CreateQuantumTaskInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentCreateQuantumTaskInput(v *CreateQuantumTaskInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -235,7 +235,7 @@ func (m *awsRestjson1_serializeOpGetDevice) HandleSerialize(ctx context.Context,
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsGetDeviceInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsGetDeviceInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -246,7 +246,7 @@ func (m *awsRestjson1_serializeOpGetDevice) HandleSerialize(ctx context.Context,
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsGetDeviceInput(v *GetDeviceInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetDeviceInput(v *GetDeviceInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -295,7 +295,7 @@ func (m *awsRestjson1_serializeOpGetQuantumTask) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsGetQuantumTaskInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsGetQuantumTaskInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -306,7 +306,7 @@ func (m *awsRestjson1_serializeOpGetQuantumTask) HandleSerialize(ctx context.Con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsGetQuantumTaskInput(v *GetQuantumTaskInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetQuantumTaskInput(v *GetQuantumTaskInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -358,7 +358,7 @@ func (m *awsRestjson1_serializeOpSearchDevices) HandleSerialize(ctx context.Cont
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentSearchDevicesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentSearchDevicesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -373,7 +373,7 @@ func (m *awsRestjson1_serializeOpSearchDevices) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsSearchDevicesInput(v *SearchDevicesInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsSearchDevicesInput(v *SearchDevicesInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -381,7 +381,7 @@ func awsRestjson1_serializeHttpBindingsSearchDevicesInput(v *SearchDevicesInput,
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSearchDevicesInput(v *SearchDevicesInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentSearchDevicesInput(v *SearchDevicesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -443,7 +443,7 @@ func (m *awsRestjson1_serializeOpSearchQuantumTasks) HandleSerialize(ctx context
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentSearchQuantumTasksInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentSearchQuantumTasksInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -458,7 +458,7 @@ func (m *awsRestjson1_serializeOpSearchQuantumTasks) HandleSerialize(ctx context
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsSearchQuantumTasksInput(v *SearchQuantumTasksInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsSearchQuantumTasksInput(v *SearchQuantumTasksInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -466,7 +466,7 @@ func awsRestjson1_serializeHttpBindingsSearchQuantumTasksInput(v *SearchQuantumT
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSearchQuantumTasksInput(v *SearchQuantumTasksInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentSearchQuantumTasksInput(v *SearchQuantumTasksInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

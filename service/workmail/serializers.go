@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpAssociateDelegateToResource) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.AssociateDelegateToResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAssociateDelegateToResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAssociateDelegateToResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpAssociateMemberToGroup) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.AssociateMemberToGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAssociateMemberToGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAssociateMemberToGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpCreateAlias) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.CreateAlias")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateAliasInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateAliasInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpCreateGroup) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.CreateGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpCreateResource) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.CreateResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpCreateUser) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.CreateUser")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateUserInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateUserInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson11_serializeOpDeleteAlias) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.DeleteAlias")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteAliasInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteAliasInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -366,7 +366,7 @@ func (m *awsAwsjson11_serializeOpDeleteGroup) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.DeleteGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -412,7 +412,7 @@ func (m *awsAwsjson11_serializeOpDeleteMailboxPermissions) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.DeleteMailboxPermissions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteMailboxPermissionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteMailboxPermissionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -458,7 +458,7 @@ func (m *awsAwsjson11_serializeOpDeleteResource) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.DeleteResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -504,7 +504,7 @@ func (m *awsAwsjson11_serializeOpDeleteUser) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.DeleteUser")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteUserInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteUserInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -550,7 +550,7 @@ func (m *awsAwsjson11_serializeOpDeregisterFromWorkMail) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.DeregisterFromWorkMail")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeregisterFromWorkMailInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeregisterFromWorkMailInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -596,7 +596,7 @@ func (m *awsAwsjson11_serializeOpDescribeGroup) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.DescribeGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -642,7 +642,7 @@ func (m *awsAwsjson11_serializeOpDescribeOrganization) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.DescribeOrganization")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeOrganizationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeOrganizationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -688,7 +688,7 @@ func (m *awsAwsjson11_serializeOpDescribeResource) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.DescribeResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -734,7 +734,7 @@ func (m *awsAwsjson11_serializeOpDescribeUser) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.DescribeUser")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeUserInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeUserInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -780,7 +780,7 @@ func (m *awsAwsjson11_serializeOpDisassociateDelegateFromResource) HandleSeriali
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.DisassociateDelegateFromResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDisassociateDelegateFromResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDisassociateDelegateFromResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -826,7 +826,7 @@ func (m *awsAwsjson11_serializeOpDisassociateMemberFromGroup) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.DisassociateMemberFromGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDisassociateMemberFromGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDisassociateMemberFromGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -872,7 +872,7 @@ func (m *awsAwsjson11_serializeOpGetMailboxDetails) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.GetMailboxDetails")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetMailboxDetailsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetMailboxDetailsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -918,7 +918,7 @@ func (m *awsAwsjson11_serializeOpListAliases) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.ListAliases")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListAliasesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListAliasesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -964,7 +964,7 @@ func (m *awsAwsjson11_serializeOpListGroupMembers) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.ListGroupMembers")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListGroupMembersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListGroupMembersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1010,7 +1010,7 @@ func (m *awsAwsjson11_serializeOpListGroups) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.ListGroups")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListGroupsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListGroupsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1056,7 +1056,7 @@ func (m *awsAwsjson11_serializeOpListMailboxPermissions) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.ListMailboxPermissions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListMailboxPermissionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListMailboxPermissionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1102,7 +1102,7 @@ func (m *awsAwsjson11_serializeOpListOrganizations) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.ListOrganizations")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListOrganizationsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListOrganizationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1148,7 +1148,7 @@ func (m *awsAwsjson11_serializeOpListResourceDelegates) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.ListResourceDelegates")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListResourceDelegatesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListResourceDelegatesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1194,7 +1194,7 @@ func (m *awsAwsjson11_serializeOpListResources) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.ListResources")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListResourcesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListResourcesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1240,7 +1240,7 @@ func (m *awsAwsjson11_serializeOpListUsers) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.ListUsers")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListUsersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListUsersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1286,7 +1286,7 @@ func (m *awsAwsjson11_serializeOpPutMailboxPermissions) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.PutMailboxPermissions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutMailboxPermissionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutMailboxPermissionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1332,7 +1332,7 @@ func (m *awsAwsjson11_serializeOpRegisterToWorkMail) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.RegisterToWorkMail")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRegisterToWorkMailInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRegisterToWorkMailInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1378,7 +1378,7 @@ func (m *awsAwsjson11_serializeOpResetPassword) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.ResetPassword")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentResetPasswordInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentResetPasswordInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1424,7 +1424,7 @@ func (m *awsAwsjson11_serializeOpUpdateMailboxQuota) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.UpdateMailboxQuota")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateMailboxQuotaInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateMailboxQuotaInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1470,7 +1470,7 @@ func (m *awsAwsjson11_serializeOpUpdatePrimaryEmailAddress) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.UpdatePrimaryEmailAddress")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdatePrimaryEmailAddressInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdatePrimaryEmailAddressInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1516,7 +1516,7 @@ func (m *awsAwsjson11_serializeOpUpdateResource) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.UpdateResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1564,7 +1564,7 @@ func awsAwsjson11_serializeDocumentPermissionValues(v []types.PermissionType, va
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssociateDelegateToResourceInput(v *AssociateDelegateToResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAssociateDelegateToResourceInput(v *AssociateDelegateToResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1586,7 +1586,7 @@ func awsAwsjson11_serializeDocumentAssociateDelegateToResourceInput(v *Associate
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssociateMemberToGroupInput(v *AssociateMemberToGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAssociateMemberToGroupInput(v *AssociateMemberToGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1608,7 +1608,7 @@ func awsAwsjson11_serializeDocumentAssociateMemberToGroupInput(v *AssociateMembe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateAliasInput(v *CreateAliasInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateAliasInput(v *CreateAliasInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1630,7 +1630,7 @@ func awsAwsjson11_serializeDocumentCreateAliasInput(v *CreateAliasInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateGroupInput(v *CreateGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateGroupInput(v *CreateGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1647,7 +1647,7 @@ func awsAwsjson11_serializeDocumentCreateGroupInput(v *CreateGroupInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateResourceInput(v *CreateResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateResourceInput(v *CreateResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1669,7 +1669,7 @@ func awsAwsjson11_serializeDocumentCreateResourceInput(v *CreateResourceInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateUserInput(v *CreateUserInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateUserInput(v *CreateUserInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1696,7 +1696,7 @@ func awsAwsjson11_serializeDocumentCreateUserInput(v *CreateUserInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteAliasInput(v *DeleteAliasInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteAliasInput(v *DeleteAliasInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1718,7 +1718,7 @@ func awsAwsjson11_serializeDocumentDeleteAliasInput(v *DeleteAliasInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteGroupInput(v *DeleteGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteGroupInput(v *DeleteGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1735,7 +1735,7 @@ func awsAwsjson11_serializeDocumentDeleteGroupInput(v *DeleteGroupInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteMailboxPermissionsInput(v *DeleteMailboxPermissionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteMailboxPermissionsInput(v *DeleteMailboxPermissionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1757,7 +1757,7 @@ func awsAwsjson11_serializeDocumentDeleteMailboxPermissionsInput(v *DeleteMailbo
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteResourceInput(v *DeleteResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteResourceInput(v *DeleteResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1774,7 +1774,7 @@ func awsAwsjson11_serializeDocumentDeleteResourceInput(v *DeleteResourceInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteUserInput(v *DeleteUserInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteUserInput(v *DeleteUserInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1791,7 +1791,7 @@ func awsAwsjson11_serializeDocumentDeleteUserInput(v *DeleteUserInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeregisterFromWorkMailInput(v *DeregisterFromWorkMailInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeregisterFromWorkMailInput(v *DeregisterFromWorkMailInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1808,7 +1808,7 @@ func awsAwsjson11_serializeDocumentDeregisterFromWorkMailInput(v *DeregisterFrom
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeGroupInput(v *DescribeGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeGroupInput(v *DescribeGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1825,7 +1825,7 @@ func awsAwsjson11_serializeDocumentDescribeGroupInput(v *DescribeGroupInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeOrganizationInput(v *DescribeOrganizationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeOrganizationInput(v *DescribeOrganizationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1837,7 +1837,7 @@ func awsAwsjson11_serializeDocumentDescribeOrganizationInput(v *DescribeOrganiza
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeResourceInput(v *DescribeResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeResourceInput(v *DescribeResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1854,7 +1854,7 @@ func awsAwsjson11_serializeDocumentDescribeResourceInput(v *DescribeResourceInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeUserInput(v *DescribeUserInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeUserInput(v *DescribeUserInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1871,7 +1871,7 @@ func awsAwsjson11_serializeDocumentDescribeUserInput(v *DescribeUserInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDisassociateDelegateFromResourceInput(v *DisassociateDelegateFromResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDisassociateDelegateFromResourceInput(v *DisassociateDelegateFromResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1893,7 +1893,7 @@ func awsAwsjson11_serializeDocumentDisassociateDelegateFromResourceInput(v *Disa
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDisassociateMemberFromGroupInput(v *DisassociateMemberFromGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDisassociateMemberFromGroupInput(v *DisassociateMemberFromGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1915,7 +1915,7 @@ func awsAwsjson11_serializeDocumentDisassociateMemberFromGroupInput(v *Disassoci
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetMailboxDetailsInput(v *GetMailboxDetailsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetMailboxDetailsInput(v *GetMailboxDetailsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1932,7 +1932,7 @@ func awsAwsjson11_serializeDocumentGetMailboxDetailsInput(v *GetMailboxDetailsIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListAliasesInput(v *ListAliasesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListAliasesInput(v *ListAliasesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1959,7 +1959,7 @@ func awsAwsjson11_serializeDocumentListAliasesInput(v *ListAliasesInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListGroupMembersInput(v *ListGroupMembersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListGroupMembersInput(v *ListGroupMembersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1986,7 +1986,7 @@ func awsAwsjson11_serializeDocumentListGroupMembersInput(v *ListGroupMembersInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListGroupsInput(v *ListGroupsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListGroupsInput(v *ListGroupsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2008,7 +2008,7 @@ func awsAwsjson11_serializeDocumentListGroupsInput(v *ListGroupsInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListMailboxPermissionsInput(v *ListMailboxPermissionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListMailboxPermissionsInput(v *ListMailboxPermissionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2035,7 +2035,7 @@ func awsAwsjson11_serializeDocumentListMailboxPermissionsInput(v *ListMailboxPer
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListOrganizationsInput(v *ListOrganizationsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListOrganizationsInput(v *ListOrganizationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2052,7 +2052,7 @@ func awsAwsjson11_serializeDocumentListOrganizationsInput(v *ListOrganizationsIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListResourceDelegatesInput(v *ListResourceDelegatesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListResourceDelegatesInput(v *ListResourceDelegatesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2079,7 +2079,7 @@ func awsAwsjson11_serializeDocumentListResourceDelegatesInput(v *ListResourceDel
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListResourcesInput(v *ListResourcesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListResourcesInput(v *ListResourcesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2101,7 +2101,7 @@ func awsAwsjson11_serializeDocumentListResourcesInput(v *ListResourcesInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListUsersInput(v *ListUsersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListUsersInput(v *ListUsersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2123,7 +2123,7 @@ func awsAwsjson11_serializeDocumentListUsersInput(v *ListUsersInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutMailboxPermissionsInput(v *PutMailboxPermissionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutMailboxPermissionsInput(v *PutMailboxPermissionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2152,7 +2152,7 @@ func awsAwsjson11_serializeDocumentPutMailboxPermissionsInput(v *PutMailboxPermi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRegisterToWorkMailInput(v *RegisterToWorkMailInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRegisterToWorkMailInput(v *RegisterToWorkMailInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2174,7 +2174,7 @@ func awsAwsjson11_serializeDocumentRegisterToWorkMailInput(v *RegisterToWorkMail
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentResetPasswordInput(v *ResetPasswordInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentResetPasswordInput(v *ResetPasswordInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2196,7 +2196,7 @@ func awsAwsjson11_serializeDocumentResetPasswordInput(v *ResetPasswordInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateMailboxQuotaInput(v *UpdateMailboxQuotaInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateMailboxQuotaInput(v *UpdateMailboxQuotaInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2218,7 +2218,7 @@ func awsAwsjson11_serializeDocumentUpdateMailboxQuotaInput(v *UpdateMailboxQuota
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdatePrimaryEmailAddressInput(v *UpdatePrimaryEmailAddressInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdatePrimaryEmailAddressInput(v *UpdatePrimaryEmailAddressInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2240,7 +2240,7 @@ func awsAwsjson11_serializeDocumentUpdatePrimaryEmailAddressInput(v *UpdatePrima
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateResourceInput(v *UpdateResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateResourceInput(v *UpdateResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

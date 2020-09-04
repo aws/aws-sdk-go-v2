@@ -49,7 +49,7 @@ func (m *awsAwsquery_serializeOpAddPermission) HandleSerialize(ctx context.Conte
 	body.Key("Action").String("AddPermission")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentAddPermissionInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentAddPermissionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -104,7 +104,7 @@ func (m *awsAwsquery_serializeOpCheckIfPhoneNumberIsOptedOut) HandleSerialize(ct
 	body.Key("Action").String("CheckIfPhoneNumberIsOptedOut")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentCheckIfPhoneNumberIsOptedOutInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCheckIfPhoneNumberIsOptedOutInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -159,7 +159,7 @@ func (m *awsAwsquery_serializeOpConfirmSubscription) HandleSerialize(ctx context
 	body.Key("Action").String("ConfirmSubscription")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentConfirmSubscriptionInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentConfirmSubscriptionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -214,7 +214,7 @@ func (m *awsAwsquery_serializeOpCreatePlatformApplication) HandleSerialize(ctx c
 	body.Key("Action").String("CreatePlatformApplication")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentCreatePlatformApplicationInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreatePlatformApplicationInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -269,7 +269,7 @@ func (m *awsAwsquery_serializeOpCreatePlatformEndpoint) HandleSerialize(ctx cont
 	body.Key("Action").String("CreatePlatformEndpoint")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentCreatePlatformEndpointInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreatePlatformEndpointInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -324,7 +324,7 @@ func (m *awsAwsquery_serializeOpCreateTopic) HandleSerialize(ctx context.Context
 	body.Key("Action").String("CreateTopic")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentCreateTopicInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateTopicInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -379,7 +379,7 @@ func (m *awsAwsquery_serializeOpDeleteEndpoint) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("DeleteEndpoint")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentDeleteEndpointInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteEndpointInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -434,7 +434,7 @@ func (m *awsAwsquery_serializeOpDeletePlatformApplication) HandleSerialize(ctx c
 	body.Key("Action").String("DeletePlatformApplication")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentDeletePlatformApplicationInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeletePlatformApplicationInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -489,7 +489,7 @@ func (m *awsAwsquery_serializeOpDeleteTopic) HandleSerialize(ctx context.Context
 	body.Key("Action").String("DeleteTopic")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentDeleteTopicInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteTopicInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -544,7 +544,7 @@ func (m *awsAwsquery_serializeOpGetEndpointAttributes) HandleSerialize(ctx conte
 	body.Key("Action").String("GetEndpointAttributes")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentGetEndpointAttributesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetEndpointAttributesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -599,7 +599,7 @@ func (m *awsAwsquery_serializeOpGetPlatformApplicationAttributes) HandleSerializ
 	body.Key("Action").String("GetPlatformApplicationAttributes")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentGetPlatformApplicationAttributesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetPlatformApplicationAttributesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -654,7 +654,7 @@ func (m *awsAwsquery_serializeOpGetSMSAttributes) HandleSerialize(ctx context.Co
 	body.Key("Action").String("GetSMSAttributes")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentGetSMSAttributesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetSMSAttributesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -709,7 +709,7 @@ func (m *awsAwsquery_serializeOpGetSubscriptionAttributes) HandleSerialize(ctx c
 	body.Key("Action").String("GetSubscriptionAttributes")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentGetSubscriptionAttributesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetSubscriptionAttributesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -764,7 +764,7 @@ func (m *awsAwsquery_serializeOpGetTopicAttributes) HandleSerialize(ctx context.
 	body.Key("Action").String("GetTopicAttributes")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentGetTopicAttributesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetTopicAttributesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -819,7 +819,7 @@ func (m *awsAwsquery_serializeOpListEndpointsByPlatformApplication) HandleSerial
 	body.Key("Action").String("ListEndpointsByPlatformApplication")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentListEndpointsByPlatformApplicationInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListEndpointsByPlatformApplicationInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -874,7 +874,7 @@ func (m *awsAwsquery_serializeOpListPhoneNumbersOptedOut) HandleSerialize(ctx co
 	body.Key("Action").String("ListPhoneNumbersOptedOut")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentListPhoneNumbersOptedOutInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListPhoneNumbersOptedOutInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -929,7 +929,7 @@ func (m *awsAwsquery_serializeOpListPlatformApplications) HandleSerialize(ctx co
 	body.Key("Action").String("ListPlatformApplications")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentListPlatformApplicationsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListPlatformApplicationsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -984,7 +984,7 @@ func (m *awsAwsquery_serializeOpListSubscriptions) HandleSerialize(ctx context.C
 	body.Key("Action").String("ListSubscriptions")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentListSubscriptionsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListSubscriptionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1039,7 +1039,7 @@ func (m *awsAwsquery_serializeOpListSubscriptionsByTopic) HandleSerialize(ctx co
 	body.Key("Action").String("ListSubscriptionsByTopic")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentListSubscriptionsByTopicInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListSubscriptionsByTopicInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1094,7 +1094,7 @@ func (m *awsAwsquery_serializeOpListTagsForResource) HandleSerialize(ctx context
 	body.Key("Action").String("ListTagsForResource")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentListTagsForResourceInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListTagsForResourceInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1149,7 +1149,7 @@ func (m *awsAwsquery_serializeOpListTopics) HandleSerialize(ctx context.Context,
 	body.Key("Action").String("ListTopics")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentListTopicsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListTopicsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1204,7 +1204,7 @@ func (m *awsAwsquery_serializeOpOptInPhoneNumber) HandleSerialize(ctx context.Co
 	body.Key("Action").String("OptInPhoneNumber")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentOptInPhoneNumberInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentOptInPhoneNumberInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1259,7 +1259,7 @@ func (m *awsAwsquery_serializeOpPublish) HandleSerialize(ctx context.Context, in
 	body.Key("Action").String("Publish")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentPublishInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentPublishInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1314,7 +1314,7 @@ func (m *awsAwsquery_serializeOpRemovePermission) HandleSerialize(ctx context.Co
 	body.Key("Action").String("RemovePermission")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentRemovePermissionInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentRemovePermissionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1369,7 +1369,7 @@ func (m *awsAwsquery_serializeOpSetEndpointAttributes) HandleSerialize(ctx conte
 	body.Key("Action").String("SetEndpointAttributes")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentSetEndpointAttributesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSetEndpointAttributesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1424,7 +1424,7 @@ func (m *awsAwsquery_serializeOpSetPlatformApplicationAttributes) HandleSerializ
 	body.Key("Action").String("SetPlatformApplicationAttributes")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentSetPlatformApplicationAttributesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSetPlatformApplicationAttributesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1479,7 +1479,7 @@ func (m *awsAwsquery_serializeOpSetSMSAttributes) HandleSerialize(ctx context.Co
 	body.Key("Action").String("SetSMSAttributes")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentSetSMSAttributesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSetSMSAttributesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1534,7 +1534,7 @@ func (m *awsAwsquery_serializeOpSetSubscriptionAttributes) HandleSerialize(ctx c
 	body.Key("Action").String("SetSubscriptionAttributes")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentSetSubscriptionAttributesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSetSubscriptionAttributesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1589,7 +1589,7 @@ func (m *awsAwsquery_serializeOpSetTopicAttributes) HandleSerialize(ctx context.
 	body.Key("Action").String("SetTopicAttributes")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentSetTopicAttributesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSetTopicAttributesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1644,7 +1644,7 @@ func (m *awsAwsquery_serializeOpSubscribe) HandleSerialize(ctx context.Context, 
 	body.Key("Action").String("Subscribe")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentSubscribeInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSubscribeInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1699,7 +1699,7 @@ func (m *awsAwsquery_serializeOpTagResource) HandleSerialize(ctx context.Context
 	body.Key("Action").String("TagResource")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentTagResourceInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentTagResourceInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1754,7 +1754,7 @@ func (m *awsAwsquery_serializeOpUnsubscribe) HandleSerialize(ctx context.Context
 	body.Key("Action").String("Unsubscribe")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentUnsubscribeInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUnsubscribeInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1809,7 +1809,7 @@ func (m *awsAwsquery_serializeOpUntagResource) HandleSerialize(ctx context.Conte
 	body.Key("Action").String("UntagResource")
 	body.Key("Version").String("2010-03-31")
 
-	if err := awsAwsquery_serializeDocumentUntagResourceInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUntagResourceInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2040,7 +2040,7 @@ func awsAwsquery_serializeDocumentTopicAttributesMap(v map[string]*string, value
 	return nil
 }
 
-func awsAwsquery_serializeDocumentAddPermissionInput(v *AddPermissionInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentAddPermissionInput(v *AddPermissionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2071,7 +2071,7 @@ func awsAwsquery_serializeDocumentAddPermissionInput(v *AddPermissionInput, valu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCheckIfPhoneNumberIsOptedOutInput(v *CheckIfPhoneNumberIsOptedOutInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCheckIfPhoneNumberIsOptedOutInput(v *CheckIfPhoneNumberIsOptedOutInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2083,7 +2083,7 @@ func awsAwsquery_serializeDocumentCheckIfPhoneNumberIsOptedOutInput(v *CheckIfPh
 	return nil
 }
 
-func awsAwsquery_serializeDocumentConfirmSubscriptionInput(v *ConfirmSubscriptionInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentConfirmSubscriptionInput(v *ConfirmSubscriptionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2105,7 +2105,7 @@ func awsAwsquery_serializeDocumentConfirmSubscriptionInput(v *ConfirmSubscriptio
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreatePlatformApplicationInput(v *CreatePlatformApplicationInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreatePlatformApplicationInput(v *CreatePlatformApplicationInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2129,7 +2129,7 @@ func awsAwsquery_serializeDocumentCreatePlatformApplicationInput(v *CreatePlatfo
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreatePlatformEndpointInput(v *CreatePlatformEndpointInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreatePlatformEndpointInput(v *CreatePlatformEndpointInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2158,7 +2158,7 @@ func awsAwsquery_serializeDocumentCreatePlatformEndpointInput(v *CreatePlatformE
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateTopicInput(v *CreateTopicInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateTopicInput(v *CreateTopicInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2184,7 +2184,7 @@ func awsAwsquery_serializeDocumentCreateTopicInput(v *CreateTopicInput, value qu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteEndpointInput(v *DeleteEndpointInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteEndpointInput(v *DeleteEndpointInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2196,7 +2196,7 @@ func awsAwsquery_serializeDocumentDeleteEndpointInput(v *DeleteEndpointInput, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeletePlatformApplicationInput(v *DeletePlatformApplicationInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeletePlatformApplicationInput(v *DeletePlatformApplicationInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2208,7 +2208,7 @@ func awsAwsquery_serializeDocumentDeletePlatformApplicationInput(v *DeletePlatfo
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteTopicInput(v *DeleteTopicInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteTopicInput(v *DeleteTopicInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2220,7 +2220,7 @@ func awsAwsquery_serializeDocumentDeleteTopicInput(v *DeleteTopicInput, value qu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetEndpointAttributesInput(v *GetEndpointAttributesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetEndpointAttributesInput(v *GetEndpointAttributesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2232,7 +2232,7 @@ func awsAwsquery_serializeDocumentGetEndpointAttributesInput(v *GetEndpointAttri
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetPlatformApplicationAttributesInput(v *GetPlatformApplicationAttributesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetPlatformApplicationAttributesInput(v *GetPlatformApplicationAttributesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2244,7 +2244,7 @@ func awsAwsquery_serializeDocumentGetPlatformApplicationAttributesInput(v *GetPl
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetSMSAttributesInput(v *GetSMSAttributesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetSMSAttributesInput(v *GetSMSAttributesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2258,7 +2258,7 @@ func awsAwsquery_serializeDocumentGetSMSAttributesInput(v *GetSMSAttributesInput
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetSubscriptionAttributesInput(v *GetSubscriptionAttributesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetSubscriptionAttributesInput(v *GetSubscriptionAttributesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2270,7 +2270,7 @@ func awsAwsquery_serializeDocumentGetSubscriptionAttributesInput(v *GetSubscript
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetTopicAttributesInput(v *GetTopicAttributesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetTopicAttributesInput(v *GetTopicAttributesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2282,7 +2282,7 @@ func awsAwsquery_serializeDocumentGetTopicAttributesInput(v *GetTopicAttributesI
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListEndpointsByPlatformApplicationInput(v *ListEndpointsByPlatformApplicationInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListEndpointsByPlatformApplicationInput(v *ListEndpointsByPlatformApplicationInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2299,7 +2299,7 @@ func awsAwsquery_serializeDocumentListEndpointsByPlatformApplicationInput(v *Lis
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListPhoneNumbersOptedOutInput(v *ListPhoneNumbersOptedOutInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListPhoneNumbersOptedOutInput(v *ListPhoneNumbersOptedOutInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2311,7 +2311,7 @@ func awsAwsquery_serializeDocumentListPhoneNumbersOptedOutInput(v *ListPhoneNumb
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListPlatformApplicationsInput(v *ListPlatformApplicationsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListPlatformApplicationsInput(v *ListPlatformApplicationsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2323,7 +2323,7 @@ func awsAwsquery_serializeDocumentListPlatformApplicationsInput(v *ListPlatformA
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListSubscriptionsByTopicInput(v *ListSubscriptionsByTopicInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListSubscriptionsByTopicInput(v *ListSubscriptionsByTopicInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2340,7 +2340,7 @@ func awsAwsquery_serializeDocumentListSubscriptionsByTopicInput(v *ListSubscript
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListSubscriptionsInput(v *ListSubscriptionsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListSubscriptionsInput(v *ListSubscriptionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2352,7 +2352,7 @@ func awsAwsquery_serializeDocumentListSubscriptionsInput(v *ListSubscriptionsInp
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2364,7 +2364,7 @@ func awsAwsquery_serializeDocumentListTagsForResourceInput(v *ListTagsForResourc
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListTopicsInput(v *ListTopicsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListTopicsInput(v *ListTopicsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2376,7 +2376,7 @@ func awsAwsquery_serializeDocumentListTopicsInput(v *ListTopicsInput, value quer
 	return nil
 }
 
-func awsAwsquery_serializeDocumentOptInPhoneNumberInput(v *OptInPhoneNumberInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentOptInPhoneNumberInput(v *OptInPhoneNumberInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2388,7 +2388,7 @@ func awsAwsquery_serializeDocumentOptInPhoneNumberInput(v *OptInPhoneNumberInput
 	return nil
 }
 
-func awsAwsquery_serializeDocumentPublishInput(v *PublishInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentPublishInput(v *PublishInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2432,7 +2432,7 @@ func awsAwsquery_serializeDocumentPublishInput(v *PublishInput, value query.Valu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentRemovePermissionInput(v *RemovePermissionInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentRemovePermissionInput(v *RemovePermissionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2449,7 +2449,7 @@ func awsAwsquery_serializeDocumentRemovePermissionInput(v *RemovePermissionInput
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSetEndpointAttributesInput(v *SetEndpointAttributesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSetEndpointAttributesInput(v *SetEndpointAttributesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2468,7 +2468,7 @@ func awsAwsquery_serializeDocumentSetEndpointAttributesInput(v *SetEndpointAttri
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSetPlatformApplicationAttributesInput(v *SetPlatformApplicationAttributesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSetPlatformApplicationAttributesInput(v *SetPlatformApplicationAttributesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2487,7 +2487,7 @@ func awsAwsquery_serializeDocumentSetPlatformApplicationAttributesInput(v *SetPl
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSetSMSAttributesInput(v *SetSMSAttributesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSetSMSAttributesInput(v *SetSMSAttributesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2501,7 +2501,7 @@ func awsAwsquery_serializeDocumentSetSMSAttributesInput(v *SetSMSAttributesInput
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSetSubscriptionAttributesInput(v *SetSubscriptionAttributesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSetSubscriptionAttributesInput(v *SetSubscriptionAttributesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2523,7 +2523,7 @@ func awsAwsquery_serializeDocumentSetSubscriptionAttributesInput(v *SetSubscript
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSetTopicAttributesInput(v *SetTopicAttributesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSetTopicAttributesInput(v *SetTopicAttributesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2545,7 +2545,7 @@ func awsAwsquery_serializeDocumentSetTopicAttributesInput(v *SetTopicAttributesI
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSubscribeInput(v *SubscribeInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSubscribeInput(v *SubscribeInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2579,7 +2579,7 @@ func awsAwsquery_serializeDocumentSubscribeInput(v *SubscribeInput, value query.
 	return nil
 }
 
-func awsAwsquery_serializeDocumentTagResourceInput(v *TagResourceInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentTagResourceInput(v *TagResourceInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2598,7 +2598,7 @@ func awsAwsquery_serializeDocumentTagResourceInput(v *TagResourceInput, value qu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUnsubscribeInput(v *UnsubscribeInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUnsubscribeInput(v *UnsubscribeInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -2610,7 +2610,7 @@ func awsAwsquery_serializeDocumentUnsubscribeInput(v *UnsubscribeInput, value qu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUntagResourceInput(v *UntagResourceInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 

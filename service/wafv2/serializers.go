@@ -45,7 +45,7 @@ func (m *awsAwsjson11_serializeOpAssociateWebACL) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.AssociateWebACL")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAssociateWebACLInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAssociateWebACLInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -91,7 +91,7 @@ func (m *awsAwsjson11_serializeOpCheckCapacity) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.CheckCapacity")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCheckCapacityInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCheckCapacityInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -137,7 +137,7 @@ func (m *awsAwsjson11_serializeOpCreateIPSet) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.CreateIPSet")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateIPSetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateIPSetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -183,7 +183,7 @@ func (m *awsAwsjson11_serializeOpCreateRegexPatternSet) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.CreateRegexPatternSet")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateRegexPatternSetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateRegexPatternSetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -229,7 +229,7 @@ func (m *awsAwsjson11_serializeOpCreateRuleGroup) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.CreateRuleGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateRuleGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateRuleGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -275,7 +275,7 @@ func (m *awsAwsjson11_serializeOpCreateWebACL) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.CreateWebACL")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateWebACLInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateWebACLInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -321,7 +321,7 @@ func (m *awsAwsjson11_serializeOpDeleteFirewallManagerRuleGroups) HandleSerializ
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.DeleteFirewallManagerRuleGroups")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteFirewallManagerRuleGroupsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteFirewallManagerRuleGroupsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -367,7 +367,7 @@ func (m *awsAwsjson11_serializeOpDeleteIPSet) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.DeleteIPSet")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteIPSetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteIPSetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -413,7 +413,7 @@ func (m *awsAwsjson11_serializeOpDeleteLoggingConfiguration) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.DeleteLoggingConfiguration")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteLoggingConfigurationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteLoggingConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -459,7 +459,7 @@ func (m *awsAwsjson11_serializeOpDeletePermissionPolicy) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.DeletePermissionPolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeletePermissionPolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeletePermissionPolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -505,7 +505,7 @@ func (m *awsAwsjson11_serializeOpDeleteRegexPatternSet) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.DeleteRegexPatternSet")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteRegexPatternSetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteRegexPatternSetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -551,7 +551,7 @@ func (m *awsAwsjson11_serializeOpDeleteRuleGroup) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.DeleteRuleGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteRuleGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteRuleGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -597,7 +597,7 @@ func (m *awsAwsjson11_serializeOpDeleteWebACL) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.DeleteWebACL")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteWebACLInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteWebACLInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -643,7 +643,7 @@ func (m *awsAwsjson11_serializeOpDescribeManagedRuleGroup) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.DescribeManagedRuleGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeManagedRuleGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeManagedRuleGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -689,7 +689,7 @@ func (m *awsAwsjson11_serializeOpDisassociateWebACL) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.DisassociateWebACL")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDisassociateWebACLInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDisassociateWebACLInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -735,7 +735,7 @@ func (m *awsAwsjson11_serializeOpGetIPSet) HandleSerialize(ctx context.Context, 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.GetIPSet")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetIPSetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetIPSetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -781,7 +781,7 @@ func (m *awsAwsjson11_serializeOpGetLoggingConfiguration) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.GetLoggingConfiguration")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetLoggingConfigurationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetLoggingConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -827,7 +827,7 @@ func (m *awsAwsjson11_serializeOpGetPermissionPolicy) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.GetPermissionPolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetPermissionPolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetPermissionPolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -873,7 +873,7 @@ func (m *awsAwsjson11_serializeOpGetRateBasedStatementManagedKeys) HandleSeriali
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.GetRateBasedStatementManagedKeys")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetRateBasedStatementManagedKeysInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetRateBasedStatementManagedKeysInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -919,7 +919,7 @@ func (m *awsAwsjson11_serializeOpGetRegexPatternSet) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.GetRegexPatternSet")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetRegexPatternSetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetRegexPatternSetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -965,7 +965,7 @@ func (m *awsAwsjson11_serializeOpGetRuleGroup) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.GetRuleGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetRuleGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetRuleGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1011,7 +1011,7 @@ func (m *awsAwsjson11_serializeOpGetSampledRequests) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.GetSampledRequests")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetSampledRequestsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetSampledRequestsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1057,7 +1057,7 @@ func (m *awsAwsjson11_serializeOpGetWebACL) HandleSerialize(ctx context.Context,
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.GetWebACL")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetWebACLInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetWebACLInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1103,7 +1103,7 @@ func (m *awsAwsjson11_serializeOpGetWebACLForResource) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.GetWebACLForResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetWebACLForResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetWebACLForResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1149,7 +1149,7 @@ func (m *awsAwsjson11_serializeOpListAvailableManagedRuleGroups) HandleSerialize
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.ListAvailableManagedRuleGroups")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListAvailableManagedRuleGroupsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListAvailableManagedRuleGroupsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1195,7 +1195,7 @@ func (m *awsAwsjson11_serializeOpListIPSets) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.ListIPSets")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListIPSetsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListIPSetsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1241,7 +1241,7 @@ func (m *awsAwsjson11_serializeOpListLoggingConfigurations) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.ListLoggingConfigurations")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListLoggingConfigurationsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListLoggingConfigurationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1287,7 +1287,7 @@ func (m *awsAwsjson11_serializeOpListRegexPatternSets) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.ListRegexPatternSets")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListRegexPatternSetsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListRegexPatternSetsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1333,7 +1333,7 @@ func (m *awsAwsjson11_serializeOpListResourcesForWebACL) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.ListResourcesForWebACL")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListResourcesForWebACLInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListResourcesForWebACLInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1379,7 +1379,7 @@ func (m *awsAwsjson11_serializeOpListRuleGroups) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.ListRuleGroups")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListRuleGroupsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListRuleGroupsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1425,7 +1425,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.ListTagsForResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1471,7 +1471,7 @@ func (m *awsAwsjson11_serializeOpListWebACLs) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.ListWebACLs")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListWebACLsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListWebACLsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1517,7 +1517,7 @@ func (m *awsAwsjson11_serializeOpPutLoggingConfiguration) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.PutLoggingConfiguration")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutLoggingConfigurationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutLoggingConfigurationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1563,7 +1563,7 @@ func (m *awsAwsjson11_serializeOpPutPermissionPolicy) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.PutPermissionPolicy")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutPermissionPolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutPermissionPolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1609,7 +1609,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.TagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1655,7 +1655,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.UntagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1701,7 +1701,7 @@ func (m *awsAwsjson11_serializeOpUpdateIPSet) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.UpdateIPSet")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateIPSetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateIPSetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1747,7 +1747,7 @@ func (m *awsAwsjson11_serializeOpUpdateRegexPatternSet) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.UpdateRegexPatternSet")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateRegexPatternSetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateRegexPatternSetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1793,7 +1793,7 @@ func (m *awsAwsjson11_serializeOpUpdateRuleGroup) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.UpdateRuleGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateRuleGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateRuleGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1839,7 +1839,7 @@ func (m *awsAwsjson11_serializeOpUpdateWebACL) HandleSerialize(ctx context.Conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSWAF_20190729.UpdateWebACL")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateWebACLInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateWebACLInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2833,7 +2833,7 @@ func awsAwsjson11_serializeDocumentXssMatchStatement(v *types.XssMatchStatement,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAssociateWebACLInput(v *AssociateWebACLInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAssociateWebACLInput(v *AssociateWebACLInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2850,7 +2850,7 @@ func awsAwsjson11_serializeDocumentAssociateWebACLInput(v *AssociateWebACLInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCheckCapacityInput(v *CheckCapacityInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCheckCapacityInput(v *CheckCapacityInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2869,7 +2869,7 @@ func awsAwsjson11_serializeDocumentCheckCapacityInput(v *CheckCapacityInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateIPSetInput(v *CreateIPSetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateIPSetInput(v *CreateIPSetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2910,7 +2910,7 @@ func awsAwsjson11_serializeDocumentCreateIPSetInput(v *CreateIPSetInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateRegexPatternSetInput(v *CreateRegexPatternSetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateRegexPatternSetInput(v *CreateRegexPatternSetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2946,7 +2946,7 @@ func awsAwsjson11_serializeDocumentCreateRegexPatternSetInput(v *CreateRegexPatt
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateRuleGroupInput(v *CreateRuleGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateRuleGroupInput(v *CreateRuleGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2994,7 +2994,7 @@ func awsAwsjson11_serializeDocumentCreateRuleGroupInput(v *CreateRuleGroupInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateWebACLInput(v *CreateWebACLInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateWebACLInput(v *CreateWebACLInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3044,7 +3044,7 @@ func awsAwsjson11_serializeDocumentCreateWebACLInput(v *CreateWebACLInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteFirewallManagerRuleGroupsInput(v *DeleteFirewallManagerRuleGroupsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteFirewallManagerRuleGroupsInput(v *DeleteFirewallManagerRuleGroupsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3061,7 +3061,7 @@ func awsAwsjson11_serializeDocumentDeleteFirewallManagerRuleGroupsInput(v *Delet
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteIPSetInput(v *DeleteIPSetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteIPSetInput(v *DeleteIPSetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3088,7 +3088,7 @@ func awsAwsjson11_serializeDocumentDeleteIPSetInput(v *DeleteIPSetInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteLoggingConfigurationInput(v *DeleteLoggingConfigurationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteLoggingConfigurationInput(v *DeleteLoggingConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3100,7 +3100,7 @@ func awsAwsjson11_serializeDocumentDeleteLoggingConfigurationInput(v *DeleteLogg
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeletePermissionPolicyInput(v *DeletePermissionPolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeletePermissionPolicyInput(v *DeletePermissionPolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3112,7 +3112,7 @@ func awsAwsjson11_serializeDocumentDeletePermissionPolicyInput(v *DeletePermissi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteRegexPatternSetInput(v *DeleteRegexPatternSetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteRegexPatternSetInput(v *DeleteRegexPatternSetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3139,7 +3139,7 @@ func awsAwsjson11_serializeDocumentDeleteRegexPatternSetInput(v *DeleteRegexPatt
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteRuleGroupInput(v *DeleteRuleGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteRuleGroupInput(v *DeleteRuleGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3166,7 +3166,7 @@ func awsAwsjson11_serializeDocumentDeleteRuleGroupInput(v *DeleteRuleGroupInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteWebACLInput(v *DeleteWebACLInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteWebACLInput(v *DeleteWebACLInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3193,7 +3193,7 @@ func awsAwsjson11_serializeDocumentDeleteWebACLInput(v *DeleteWebACLInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeManagedRuleGroupInput(v *DescribeManagedRuleGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeManagedRuleGroupInput(v *DescribeManagedRuleGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3215,7 +3215,7 @@ func awsAwsjson11_serializeDocumentDescribeManagedRuleGroupInput(v *DescribeMana
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDisassociateWebACLInput(v *DisassociateWebACLInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDisassociateWebACLInput(v *DisassociateWebACLInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3227,7 +3227,7 @@ func awsAwsjson11_serializeDocumentDisassociateWebACLInput(v *DisassociateWebACL
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetIPSetInput(v *GetIPSetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetIPSetInput(v *GetIPSetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3249,7 +3249,7 @@ func awsAwsjson11_serializeDocumentGetIPSetInput(v *GetIPSetInput, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetLoggingConfigurationInput(v *GetLoggingConfigurationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetLoggingConfigurationInput(v *GetLoggingConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3261,7 +3261,7 @@ func awsAwsjson11_serializeDocumentGetLoggingConfigurationInput(v *GetLoggingCon
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetPermissionPolicyInput(v *GetPermissionPolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetPermissionPolicyInput(v *GetPermissionPolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3273,7 +3273,7 @@ func awsAwsjson11_serializeDocumentGetPermissionPolicyInput(v *GetPermissionPoli
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetRateBasedStatementManagedKeysInput(v *GetRateBasedStatementManagedKeysInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetRateBasedStatementManagedKeysInput(v *GetRateBasedStatementManagedKeysInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3300,7 +3300,7 @@ func awsAwsjson11_serializeDocumentGetRateBasedStatementManagedKeysInput(v *GetR
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetRegexPatternSetInput(v *GetRegexPatternSetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetRegexPatternSetInput(v *GetRegexPatternSetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3322,7 +3322,7 @@ func awsAwsjson11_serializeDocumentGetRegexPatternSetInput(v *GetRegexPatternSet
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetRuleGroupInput(v *GetRuleGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetRuleGroupInput(v *GetRuleGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3344,7 +3344,7 @@ func awsAwsjson11_serializeDocumentGetRuleGroupInput(v *GetRuleGroupInput, value
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetSampledRequestsInput(v *GetSampledRequestsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetSampledRequestsInput(v *GetSampledRequestsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3378,7 +3378,7 @@ func awsAwsjson11_serializeDocumentGetSampledRequestsInput(v *GetSampledRequests
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetWebACLForResourceInput(v *GetWebACLForResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetWebACLForResourceInput(v *GetWebACLForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3390,7 +3390,7 @@ func awsAwsjson11_serializeDocumentGetWebACLForResourceInput(v *GetWebACLForReso
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetWebACLInput(v *GetWebACLInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetWebACLInput(v *GetWebACLInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3412,7 +3412,7 @@ func awsAwsjson11_serializeDocumentGetWebACLInput(v *GetWebACLInput, value smith
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListAvailableManagedRuleGroupsInput(v *ListAvailableManagedRuleGroupsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListAvailableManagedRuleGroupsInput(v *ListAvailableManagedRuleGroupsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3434,7 +3434,7 @@ func awsAwsjson11_serializeDocumentListAvailableManagedRuleGroupsInput(v *ListAv
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListIPSetsInput(v *ListIPSetsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListIPSetsInput(v *ListIPSetsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3456,7 +3456,7 @@ func awsAwsjson11_serializeDocumentListIPSetsInput(v *ListIPSetsInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListLoggingConfigurationsInput(v *ListLoggingConfigurationsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListLoggingConfigurationsInput(v *ListLoggingConfigurationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3478,7 +3478,7 @@ func awsAwsjson11_serializeDocumentListLoggingConfigurationsInput(v *ListLogging
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListRegexPatternSetsInput(v *ListRegexPatternSetsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListRegexPatternSetsInput(v *ListRegexPatternSetsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3500,7 +3500,7 @@ func awsAwsjson11_serializeDocumentListRegexPatternSetsInput(v *ListRegexPattern
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListResourcesForWebACLInput(v *ListResourcesForWebACLInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListResourcesForWebACLInput(v *ListResourcesForWebACLInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3517,7 +3517,7 @@ func awsAwsjson11_serializeDocumentListResourcesForWebACLInput(v *ListResourcesF
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListRuleGroupsInput(v *ListRuleGroupsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListRuleGroupsInput(v *ListRuleGroupsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3539,7 +3539,7 @@ func awsAwsjson11_serializeDocumentListRuleGroupsInput(v *ListRuleGroupsInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3561,7 +3561,7 @@ func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResour
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListWebACLsInput(v *ListWebACLsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListWebACLsInput(v *ListWebACLsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3583,7 +3583,7 @@ func awsAwsjson11_serializeDocumentListWebACLsInput(v *ListWebACLsInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutLoggingConfigurationInput(v *PutLoggingConfigurationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutLoggingConfigurationInput(v *PutLoggingConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3597,7 +3597,7 @@ func awsAwsjson11_serializeDocumentPutLoggingConfigurationInput(v *PutLoggingCon
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutPermissionPolicyInput(v *PutPermissionPolicyInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutPermissionPolicyInput(v *PutPermissionPolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3614,7 +3614,7 @@ func awsAwsjson11_serializeDocumentPutPermissionPolicyInput(v *PutPermissionPoli
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3633,7 +3633,7 @@ func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3652,7 +3652,7 @@ func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateIPSetInput(v *UpdateIPSetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateIPSetInput(v *UpdateIPSetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3691,7 +3691,7 @@ func awsAwsjson11_serializeDocumentUpdateIPSetInput(v *UpdateIPSetInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateRegexPatternSetInput(v *UpdateRegexPatternSetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateRegexPatternSetInput(v *UpdateRegexPatternSetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3730,7 +3730,7 @@ func awsAwsjson11_serializeDocumentUpdateRegexPatternSetInput(v *UpdateRegexPatt
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateRuleGroupInput(v *UpdateRuleGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateRuleGroupInput(v *UpdateRuleGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3776,7 +3776,7 @@ func awsAwsjson11_serializeDocumentUpdateRuleGroupInput(v *UpdateRuleGroupInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateWebACLInput(v *UpdateWebACLInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateWebACLInput(v *UpdateWebACLInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

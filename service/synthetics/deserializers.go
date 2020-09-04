@@ -54,7 +54,7 @@ func (m *awsRestjson1_deserializeOpCreateCanary) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentCreateCanaryOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentCreateCanaryOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -124,7 +124,7 @@ func awsRestjson1_deserializeOpErrorCreateCanary(response *smithyhttp.Response) 
 	}
 }
 
-func awsRestjson1_deserializeDocumentCreateCanaryOutput(v **CreateCanaryOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCreateCanaryOutput(v **CreateCanaryOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -306,7 +306,7 @@ func (m *awsRestjson1_deserializeOpDescribeCanaries) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDescribeCanariesOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDescribeCanariesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -376,7 +376,7 @@ func awsRestjson1_deserializeOpErrorDescribeCanaries(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeCanariesOutput(v **DescribeCanariesOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeCanariesOutput(v **DescribeCanariesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -479,7 +479,7 @@ func (m *awsRestjson1_deserializeOpDescribeCanariesLastRun) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDescribeCanariesLastRunOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDescribeCanariesLastRunOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -549,7 +549,7 @@ func awsRestjson1_deserializeOpErrorDescribeCanariesLastRun(response *smithyhttp
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeCanariesLastRunOutput(v **DescribeCanariesLastRunOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeCanariesLastRunOutput(v **DescribeCanariesLastRunOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -652,7 +652,7 @@ func (m *awsRestjson1_deserializeOpDescribeRuntimeVersions) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentDescribeRuntimeVersionsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentDescribeRuntimeVersionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -722,7 +722,7 @@ func awsRestjson1_deserializeOpErrorDescribeRuntimeVersions(response *smithyhttp
 	}
 }
 
-func awsRestjson1_deserializeDocumentDescribeRuntimeVersionsOutput(v **DescribeRuntimeVersionsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentDescribeRuntimeVersionsOutput(v **DescribeRuntimeVersionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -825,7 +825,7 @@ func (m *awsRestjson1_deserializeOpGetCanary) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetCanaryOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetCanaryOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -895,7 +895,7 @@ func awsRestjson1_deserializeOpErrorGetCanary(response *smithyhttp.Response) err
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetCanaryOutput(v **GetCanaryOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetCanaryOutput(v **GetCanaryOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -985,7 +985,7 @@ func (m *awsRestjson1_deserializeOpGetCanaryRuns) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetCanaryRunsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetCanaryRunsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1058,7 +1058,7 @@ func awsRestjson1_deserializeOpErrorGetCanaryRuns(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetCanaryRunsOutput(v **GetCanaryRunsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetCanaryRunsOutput(v **GetCanaryRunsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1161,7 +1161,7 @@ func (m *awsRestjson1_deserializeOpListTagsForResource) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListTagsForResourceOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1234,7 +1234,7 @@ func awsRestjson1_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

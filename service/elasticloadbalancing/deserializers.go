@@ -64,7 +64,7 @@ func (m *awsAwsquery_deserializeOpAddTags) HandleDeserialize(ctx context.Context
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentAddTagsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentAddTagsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -156,7 +156,7 @@ func (m *awsAwsquery_deserializeOpApplySecurityGroupsToLoadBalancer) HandleDeser
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentApplySecurityGroupsToLoadBalancerOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentApplySecurityGroupsToLoadBalancerOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -248,7 +248,7 @@ func (m *awsAwsquery_deserializeOpAttachLoadBalancerToSubnets) HandleDeserialize
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentAttachLoadBalancerToSubnetsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentAttachLoadBalancerToSubnetsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -343,7 +343,7 @@ func (m *awsAwsquery_deserializeOpConfigureHealthCheck) HandleDeserialize(ctx co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentConfigureHealthCheckOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentConfigureHealthCheckOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -429,7 +429,7 @@ func (m *awsAwsquery_deserializeOpCreateAppCookieStickinessPolicy) HandleDeseria
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateAppCookieStickinessPolicyOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateAppCookieStickinessPolicyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -524,7 +524,7 @@ func (m *awsAwsquery_deserializeOpCreateLBCookieStickinessPolicy) HandleDeserial
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateLBCookieStickinessPolicyOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateLBCookieStickinessPolicyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -619,7 +619,7 @@ func (m *awsAwsquery_deserializeOpCreateLoadBalancer) HandleDeserialize(ctx cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateLoadBalancerOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateLoadBalancerOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -738,7 +738,7 @@ func (m *awsAwsquery_deserializeOpCreateLoadBalancerListeners) HandleDeserialize
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateLoadBalancerListenersOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateLoadBalancerListenersOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -836,7 +836,7 @@ func (m *awsAwsquery_deserializeOpCreateLoadBalancerPolicy) HandleDeserialize(ct
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateLoadBalancerPolicyOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateLoadBalancerPolicyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -934,7 +934,7 @@ func (m *awsAwsquery_deserializeOpDeleteLoadBalancer) HandleDeserialize(ctx cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteLoadBalancerOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDeleteLoadBalancerOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1017,7 +1017,7 @@ func (m *awsAwsquery_deserializeOpDeleteLoadBalancerListeners) HandleDeserialize
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteLoadBalancerListenersOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDeleteLoadBalancerListenersOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1103,7 +1103,7 @@ func (m *awsAwsquery_deserializeOpDeleteLoadBalancerPolicy) HandleDeserialize(ct
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteLoadBalancerPolicyOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDeleteLoadBalancerPolicyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1192,7 +1192,7 @@ func (m *awsAwsquery_deserializeOpDeregisterInstancesFromLoadBalancer) HandleDes
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDeregisterInstancesFromLoadBalancerOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDeregisterInstancesFromLoadBalancerOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1281,7 +1281,7 @@ func (m *awsAwsquery_deserializeOpDescribeAccountLimits) HandleDeserialize(ctx c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeAccountLimitsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeAccountLimitsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1364,7 +1364,7 @@ func (m *awsAwsquery_deserializeOpDescribeInstanceHealth) HandleDeserialize(ctx 
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeInstanceHealthOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeInstanceHealthOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1453,7 +1453,7 @@ func (m *awsAwsquery_deserializeOpDescribeLoadBalancerAttributes) HandleDeserial
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeLoadBalancerAttributesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeLoadBalancerAttributesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1542,7 +1542,7 @@ func (m *awsAwsquery_deserializeOpDescribeLoadBalancerPolicies) HandleDeserializ
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeLoadBalancerPoliciesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeLoadBalancerPoliciesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1631,7 +1631,7 @@ func (m *awsAwsquery_deserializeOpDescribeLoadBalancerPolicyTypes) HandleDeseria
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeLoadBalancerPolicyTypesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeLoadBalancerPolicyTypesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1717,7 +1717,7 @@ func (m *awsAwsquery_deserializeOpDescribeLoadBalancers) HandleDeserialize(ctx c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeLoadBalancersOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeLoadBalancersOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1806,7 +1806,7 @@ func (m *awsAwsquery_deserializeOpDescribeTags) HandleDeserialize(ctx context.Co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeTagsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeTagsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1892,7 +1892,7 @@ func (m *awsAwsquery_deserializeOpDetachLoadBalancerFromSubnets) HandleDeseriali
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDetachLoadBalancerFromSubnetsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDetachLoadBalancerFromSubnetsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1981,7 +1981,7 @@ func (m *awsAwsquery_deserializeOpDisableAvailabilityZonesForLoadBalancer) Handl
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDisableAvailabilityZonesForLoadBalancerOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDisableAvailabilityZonesForLoadBalancerOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2070,7 +2070,7 @@ func (m *awsAwsquery_deserializeOpEnableAvailabilityZonesForLoadBalancer) Handle
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentEnableAvailabilityZonesForLoadBalancerOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentEnableAvailabilityZonesForLoadBalancerOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2156,7 +2156,7 @@ func (m *awsAwsquery_deserializeOpModifyLoadBalancerAttributes) HandleDeserializ
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentModifyLoadBalancerAttributesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentModifyLoadBalancerAttributesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2248,7 +2248,7 @@ func (m *awsAwsquery_deserializeOpRegisterInstancesWithLoadBalancer) HandleDeser
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentRegisterInstancesWithLoadBalancerOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentRegisterInstancesWithLoadBalancerOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2337,7 +2337,7 @@ func (m *awsAwsquery_deserializeOpRemoveTags) HandleDeserialize(ctx context.Cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentRemoveTagsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentRemoveTagsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2423,7 +2423,7 @@ func (m *awsAwsquery_deserializeOpSetLoadBalancerListenerSSLCertificate) HandleD
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentSetLoadBalancerListenerSSLCertificateOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentSetLoadBalancerListenerSSLCertificateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2521,7 +2521,7 @@ func (m *awsAwsquery_deserializeOpSetLoadBalancerPoliciesForBackendServer) Handl
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentSetLoadBalancerPoliciesForBackendServerOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentSetLoadBalancerPoliciesForBackendServerOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2613,7 +2613,7 @@ func (m *awsAwsquery_deserializeOpSetLoadBalancerPoliciesOfListener) HandleDeser
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentSetLoadBalancerPoliciesOfListenerOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentSetLoadBalancerPoliciesOfListenerOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -7128,7 +7128,7 @@ func awsAwsquery_deserializeDocumentUnsupportedProtocolException(v **types.Unsup
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentAddTagsOutput(v **AddTagsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentAddTagsOutput(v **AddTagsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7158,7 +7158,7 @@ func awsAwsquery_deserializeDocumentAddTagsOutput(v **AddTagsOutput, decoder smi
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentApplySecurityGroupsToLoadBalancerOutput(v **ApplySecurityGroupsToLoadBalancerOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentApplySecurityGroupsToLoadBalancerOutput(v **ApplySecurityGroupsToLoadBalancerOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7194,7 +7194,7 @@ func awsAwsquery_deserializeDocumentApplySecurityGroupsToLoadBalancerOutput(v **
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentAttachLoadBalancerToSubnetsOutput(v **AttachLoadBalancerToSubnetsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentAttachLoadBalancerToSubnetsOutput(v **AttachLoadBalancerToSubnetsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7230,7 +7230,7 @@ func awsAwsquery_deserializeDocumentAttachLoadBalancerToSubnetsOutput(v **Attach
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentConfigureHealthCheckOutput(v **ConfigureHealthCheckOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentConfigureHealthCheckOutput(v **ConfigureHealthCheckOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7266,7 +7266,7 @@ func awsAwsquery_deserializeDocumentConfigureHealthCheckOutput(v **ConfigureHeal
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateAppCookieStickinessPolicyOutput(v **CreateAppCookieStickinessPolicyOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateAppCookieStickinessPolicyOutput(v **CreateAppCookieStickinessPolicyOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7296,7 +7296,7 @@ func awsAwsquery_deserializeDocumentCreateAppCookieStickinessPolicyOutput(v **Cr
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateLBCookieStickinessPolicyOutput(v **CreateLBCookieStickinessPolicyOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateLBCookieStickinessPolicyOutput(v **CreateLBCookieStickinessPolicyOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7326,7 +7326,7 @@ func awsAwsquery_deserializeDocumentCreateLBCookieStickinessPolicyOutput(v **Cre
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateLoadBalancerListenersOutput(v **CreateLoadBalancerListenersOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateLoadBalancerListenersOutput(v **CreateLoadBalancerListenersOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7356,7 +7356,7 @@ func awsAwsquery_deserializeDocumentCreateLoadBalancerListenersOutput(v **Create
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateLoadBalancerOutput(v **CreateLoadBalancerOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateLoadBalancerOutput(v **CreateLoadBalancerOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7399,7 +7399,7 @@ func awsAwsquery_deserializeDocumentCreateLoadBalancerOutput(v **CreateLoadBalan
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateLoadBalancerPolicyOutput(v **CreateLoadBalancerPolicyOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateLoadBalancerPolicyOutput(v **CreateLoadBalancerPolicyOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7429,7 +7429,7 @@ func awsAwsquery_deserializeDocumentCreateLoadBalancerPolicyOutput(v **CreateLoa
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteLoadBalancerListenersOutput(v **DeleteLoadBalancerListenersOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDeleteLoadBalancerListenersOutput(v **DeleteLoadBalancerListenersOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7459,7 +7459,7 @@ func awsAwsquery_deserializeDocumentDeleteLoadBalancerListenersOutput(v **Delete
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteLoadBalancerOutput(v **DeleteLoadBalancerOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDeleteLoadBalancerOutput(v **DeleteLoadBalancerOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7489,7 +7489,7 @@ func awsAwsquery_deserializeDocumentDeleteLoadBalancerOutput(v **DeleteLoadBalan
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteLoadBalancerPolicyOutput(v **DeleteLoadBalancerPolicyOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDeleteLoadBalancerPolicyOutput(v **DeleteLoadBalancerPolicyOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7519,7 +7519,7 @@ func awsAwsquery_deserializeDocumentDeleteLoadBalancerPolicyOutput(v **DeleteLoa
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeregisterInstancesFromLoadBalancerOutput(v **DeregisterInstancesFromLoadBalancerOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDeregisterInstancesFromLoadBalancerOutput(v **DeregisterInstancesFromLoadBalancerOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7555,7 +7555,7 @@ func awsAwsquery_deserializeDocumentDeregisterInstancesFromLoadBalancerOutput(v 
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeAccountLimitsOutput(v **DescribeAccountLimitsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeAccountLimitsOutput(v **DescribeAccountLimitsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7604,7 +7604,7 @@ func awsAwsquery_deserializeDocumentDescribeAccountLimitsOutput(v **DescribeAcco
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeInstanceHealthOutput(v **DescribeInstanceHealthOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeInstanceHealthOutput(v **DescribeInstanceHealthOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7640,7 +7640,7 @@ func awsAwsquery_deserializeDocumentDescribeInstanceHealthOutput(v **DescribeIns
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeLoadBalancerAttributesOutput(v **DescribeLoadBalancerAttributesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeLoadBalancerAttributesOutput(v **DescribeLoadBalancerAttributesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7676,7 +7676,7 @@ func awsAwsquery_deserializeDocumentDescribeLoadBalancerAttributesOutput(v **Des
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeLoadBalancerPoliciesOutput(v **DescribeLoadBalancerPoliciesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeLoadBalancerPoliciesOutput(v **DescribeLoadBalancerPoliciesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7712,7 +7712,7 @@ func awsAwsquery_deserializeDocumentDescribeLoadBalancerPoliciesOutput(v **Descr
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeLoadBalancerPolicyTypesOutput(v **DescribeLoadBalancerPolicyTypesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeLoadBalancerPolicyTypesOutput(v **DescribeLoadBalancerPolicyTypesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7748,7 +7748,7 @@ func awsAwsquery_deserializeDocumentDescribeLoadBalancerPolicyTypesOutput(v **De
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeLoadBalancersOutput(v **DescribeLoadBalancersOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeLoadBalancersOutput(v **DescribeLoadBalancersOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7797,7 +7797,7 @@ func awsAwsquery_deserializeDocumentDescribeLoadBalancersOutput(v **DescribeLoad
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeTagsOutput(v **DescribeTagsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeTagsOutput(v **DescribeTagsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7833,7 +7833,7 @@ func awsAwsquery_deserializeDocumentDescribeTagsOutput(v **DescribeTagsOutput, d
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDetachLoadBalancerFromSubnetsOutput(v **DetachLoadBalancerFromSubnetsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDetachLoadBalancerFromSubnetsOutput(v **DetachLoadBalancerFromSubnetsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7869,7 +7869,7 @@ func awsAwsquery_deserializeDocumentDetachLoadBalancerFromSubnetsOutput(v **Deta
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDisableAvailabilityZonesForLoadBalancerOutput(v **DisableAvailabilityZonesForLoadBalancerOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDisableAvailabilityZonesForLoadBalancerOutput(v **DisableAvailabilityZonesForLoadBalancerOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7905,7 +7905,7 @@ func awsAwsquery_deserializeDocumentDisableAvailabilityZonesForLoadBalancerOutpu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentEnableAvailabilityZonesForLoadBalancerOutput(v **EnableAvailabilityZonesForLoadBalancerOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentEnableAvailabilityZonesForLoadBalancerOutput(v **EnableAvailabilityZonesForLoadBalancerOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7941,7 +7941,7 @@ func awsAwsquery_deserializeDocumentEnableAvailabilityZonesForLoadBalancerOutput
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentModifyLoadBalancerAttributesOutput(v **ModifyLoadBalancerAttributesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentModifyLoadBalancerAttributesOutput(v **ModifyLoadBalancerAttributesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7990,7 +7990,7 @@ func awsAwsquery_deserializeDocumentModifyLoadBalancerAttributesOutput(v **Modif
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentRegisterInstancesWithLoadBalancerOutput(v **RegisterInstancesWithLoadBalancerOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentRegisterInstancesWithLoadBalancerOutput(v **RegisterInstancesWithLoadBalancerOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8026,7 +8026,7 @@ func awsAwsquery_deserializeDocumentRegisterInstancesWithLoadBalancerOutput(v **
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentRemoveTagsOutput(v **RemoveTagsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentRemoveTagsOutput(v **RemoveTagsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8056,7 +8056,7 @@ func awsAwsquery_deserializeDocumentRemoveTagsOutput(v **RemoveTagsOutput, decod
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentSetLoadBalancerListenerSSLCertificateOutput(v **SetLoadBalancerListenerSSLCertificateOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentSetLoadBalancerListenerSSLCertificateOutput(v **SetLoadBalancerListenerSSLCertificateOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8086,7 +8086,7 @@ func awsAwsquery_deserializeDocumentSetLoadBalancerListenerSSLCertificateOutput(
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentSetLoadBalancerPoliciesForBackendServerOutput(v **SetLoadBalancerPoliciesForBackendServerOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentSetLoadBalancerPoliciesForBackendServerOutput(v **SetLoadBalancerPoliciesForBackendServerOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8116,7 +8116,7 @@ func awsAwsquery_deserializeDocumentSetLoadBalancerPoliciesForBackendServerOutpu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentSetLoadBalancerPoliciesOfListenerOutput(v **SetLoadBalancerPoliciesOfListenerOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentSetLoadBalancerPoliciesOfListenerOutput(v **SetLoadBalancerPoliciesOfListenerOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

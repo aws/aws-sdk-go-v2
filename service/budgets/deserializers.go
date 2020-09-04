@@ -53,7 +53,7 @@ func (m *awsAwsjson11_deserializeOpCreateBudget) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateBudgetOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateBudgetOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -165,7 +165,7 @@ func (m *awsAwsjson11_deserializeOpCreateNotification) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateNotificationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateNotificationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -280,7 +280,7 @@ func (m *awsAwsjson11_deserializeOpCreateSubscriber) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateSubscriberOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateSubscriberOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -395,7 +395,7 @@ func (m *awsAwsjson11_deserializeOpDeleteBudget) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteBudgetOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteBudgetOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -504,7 +504,7 @@ func (m *awsAwsjson11_deserializeOpDeleteNotification) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteNotificationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteNotificationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -613,7 +613,7 @@ func (m *awsAwsjson11_deserializeOpDeleteSubscriber) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteSubscriberOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteSubscriberOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -722,7 +722,7 @@ func (m *awsAwsjson11_deserializeOpDescribeBudget) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeBudgetOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeBudgetOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -831,7 +831,7 @@ func (m *awsAwsjson11_deserializeOpDescribeBudgetPerformanceHistory) HandleDeser
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeBudgetPerformanceHistoryOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeBudgetPerformanceHistoryOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -946,7 +946,7 @@ func (m *awsAwsjson11_deserializeOpDescribeBudgets) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeBudgetsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeBudgetsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1061,7 +1061,7 @@ func (m *awsAwsjson11_deserializeOpDescribeNotificationsForBudget) HandleDeseria
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeNotificationsForBudgetOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeNotificationsForBudgetOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1176,7 +1176,7 @@ func (m *awsAwsjson11_deserializeOpDescribeSubscribersForNotification) HandleDes
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeSubscribersForNotificationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeSubscribersForNotificationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1291,7 +1291,7 @@ func (m *awsAwsjson11_deserializeOpUpdateBudget) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateBudgetOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateBudgetOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1400,7 +1400,7 @@ func (m *awsAwsjson11_deserializeOpUpdateNotification) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateNotificationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateNotificationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1512,7 +1512,7 @@ func (m *awsAwsjson11_deserializeOpUpdateSubscriber) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateSubscriberOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateSubscriberOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3560,7 +3560,7 @@ func awsAwsjson11_deserializeDocumentTimePeriod(v **types.TimePeriod, decoder *j
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateBudgetOutput(v **CreateBudgetOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateBudgetOutput(v **CreateBudgetOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3611,7 +3611,7 @@ func awsAwsjson11_deserializeDocumentCreateBudgetOutput(v **CreateBudgetOutput, 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateNotificationOutput(v **CreateNotificationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateNotificationOutput(v **CreateNotificationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3662,7 +3662,7 @@ func awsAwsjson11_deserializeDocumentCreateNotificationOutput(v **CreateNotifica
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateSubscriberOutput(v **CreateSubscriberOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateSubscriberOutput(v **CreateSubscriberOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3713,7 +3713,7 @@ func awsAwsjson11_deserializeDocumentCreateSubscriberOutput(v **CreateSubscriber
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteBudgetOutput(v **DeleteBudgetOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteBudgetOutput(v **DeleteBudgetOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3764,7 +3764,7 @@ func awsAwsjson11_deserializeDocumentDeleteBudgetOutput(v **DeleteBudgetOutput, 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteNotificationOutput(v **DeleteNotificationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteNotificationOutput(v **DeleteNotificationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3815,7 +3815,7 @@ func awsAwsjson11_deserializeDocumentDeleteNotificationOutput(v **DeleteNotifica
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteSubscriberOutput(v **DeleteSubscriberOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteSubscriberOutput(v **DeleteSubscriberOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3866,7 +3866,7 @@ func awsAwsjson11_deserializeDocumentDeleteSubscriberOutput(v **DeleteSubscriber
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeBudgetOutput(v **DescribeBudgetOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeBudgetOutput(v **DescribeBudgetOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3922,7 +3922,7 @@ func awsAwsjson11_deserializeDocumentDescribeBudgetOutput(v **DescribeBudgetOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeBudgetPerformanceHistoryOutput(v **DescribeBudgetPerformanceHistoryOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeBudgetPerformanceHistoryOutput(v **DescribeBudgetPerformanceHistoryOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3991,7 +3991,7 @@ func awsAwsjson11_deserializeDocumentDescribeBudgetPerformanceHistoryOutput(v **
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeBudgetsOutput(v **DescribeBudgetsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeBudgetsOutput(v **DescribeBudgetsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4060,7 +4060,7 @@ func awsAwsjson11_deserializeDocumentDescribeBudgetsOutput(v **DescribeBudgetsOu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeNotificationsForBudgetOutput(v **DescribeNotificationsForBudgetOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeNotificationsForBudgetOutput(v **DescribeNotificationsForBudgetOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4129,7 +4129,7 @@ func awsAwsjson11_deserializeDocumentDescribeNotificationsForBudgetOutput(v **De
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeSubscribersForNotificationOutput(v **DescribeSubscribersForNotificationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeSubscribersForNotificationOutput(v **DescribeSubscribersForNotificationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4198,7 +4198,7 @@ func awsAwsjson11_deserializeDocumentDescribeSubscribersForNotificationOutput(v 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateBudgetOutput(v **UpdateBudgetOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateBudgetOutput(v **UpdateBudgetOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4249,7 +4249,7 @@ func awsAwsjson11_deserializeDocumentUpdateBudgetOutput(v **UpdateBudgetOutput, 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateNotificationOutput(v **UpdateNotificationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateNotificationOutput(v **UpdateNotificationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4300,7 +4300,7 @@ func awsAwsjson11_deserializeDocumentUpdateNotificationOutput(v **UpdateNotifica
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateSubscriberOutput(v **UpdateSubscriberOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateSubscriberOutput(v **UpdateSubscriberOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

@@ -51,7 +51,7 @@ func (m *awsRestxml_serializeOpAllQueryStringTypes) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsAllQueryStringTypesInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsAllQueryStringTypesInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -62,7 +62,7 @@ func (m *awsRestxml_serializeOpAllQueryStringTypes) HandleSerialize(ctx context.
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsAllQueryStringTypesInput(v *AllQueryStringTypesInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsAllQueryStringTypesInput(v *AllQueryStringTypesInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -214,7 +214,7 @@ func (m *awsRestxml_serializeOpConstantAndVariableQueryString) HandleSerialize(c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsConstantAndVariableQueryStringInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsConstantAndVariableQueryStringInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -225,7 +225,7 @@ func (m *awsRestxml_serializeOpConstantAndVariableQueryString) HandleSerialize(c
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsConstantAndVariableQueryStringInput(v *ConstantAndVariableQueryStringInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsConstantAndVariableQueryStringInput(v *ConstantAndVariableQueryStringInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -276,7 +276,7 @@ func (m *awsRestxml_serializeOpConstantQueryString) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsConstantQueryStringInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsConstantQueryStringInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -287,7 +287,7 @@ func (m *awsRestxml_serializeOpConstantQueryString) HandleSerialize(ctx context.
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsConstantQueryStringInput(v *ConstantQueryStringInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsConstantQueryStringInput(v *ConstantQueryStringInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -343,7 +343,7 @@ func (m *awsRestxml_serializeOpEmptyInputAndEmptyOutput) HandleSerialize(ctx con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsEmptyInputAndEmptyOutputInput(v *EmptyInputAndEmptyOutputInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsEmptyInputAndEmptyOutputInput(v *EmptyInputAndEmptyOutputInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -396,7 +396,7 @@ func (m *awsRestxml_serializeOpFlattenedXmlMap) HandleSerialize(ctx context.Cont
 		},
 		Attr: rootAttr,
 	}
-	if err := awsRestxml_serializeDocumentFlattenedXmlMapInput(input, xmlEncoder.RootElement(root)); err != nil {
+	if err := awsRestxml_serializeOpDocumentFlattenedXmlMapInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
@@ -410,7 +410,7 @@ func (m *awsRestxml_serializeOpFlattenedXmlMap) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsFlattenedXmlMapInput(v *FlattenedXmlMapInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsFlattenedXmlMapInput(v *FlattenedXmlMapInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -418,7 +418,7 @@ func awsRestxml_serializeHttpBindingsFlattenedXmlMapInput(v *FlattenedXmlMapInpu
 	return nil
 }
 
-func awsRestxml_serializeDocumentFlattenedXmlMapInput(v *FlattenedXmlMapInput, value smithyxml.Value) error {
+func awsRestxml_serializeOpDocumentFlattenedXmlMapInput(v *FlattenedXmlMapInput, value smithyxml.Value) error {
 	defer value.Close()
 	if v.MyMap != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -481,7 +481,7 @@ func (m *awsRestxml_serializeOpFlattenedXmlMapWithXmlName) HandleSerialize(ctx c
 		},
 		Attr: rootAttr,
 	}
-	if err := awsRestxml_serializeDocumentFlattenedXmlMapWithXmlNameInput(input, xmlEncoder.RootElement(root)); err != nil {
+	if err := awsRestxml_serializeOpDocumentFlattenedXmlMapWithXmlNameInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
@@ -495,7 +495,7 @@ func (m *awsRestxml_serializeOpFlattenedXmlMapWithXmlName) HandleSerialize(ctx c
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsFlattenedXmlMapWithXmlNameInput(v *FlattenedXmlMapWithXmlNameInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsFlattenedXmlMapWithXmlNameInput(v *FlattenedXmlMapWithXmlNameInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -503,7 +503,7 @@ func awsRestxml_serializeHttpBindingsFlattenedXmlMapWithXmlNameInput(v *Flattene
 	return nil
 }
 
-func awsRestxml_serializeDocumentFlattenedXmlMapWithXmlNameInput(v *FlattenedXmlMapWithXmlNameInput, value smithyxml.Value) error {
+func awsRestxml_serializeOpDocumentFlattenedXmlMapWithXmlNameInput(v *FlattenedXmlMapWithXmlNameInput, value smithyxml.Value) error {
 	defer value.Close()
 	if v.MyMap != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -563,7 +563,7 @@ func (m *awsRestxml_serializeOpGreetingWithErrors) HandleSerialize(ctx context.C
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsGreetingWithErrorsInput(v *GreetingWithErrorsInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsGreetingWithErrorsInput(v *GreetingWithErrorsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -606,7 +606,7 @@ func (m *awsRestxml_serializeOpHttpPayloadTraits) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsHttpPayloadTraitsInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsHttpPayloadTraitsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -628,7 +628,7 @@ func (m *awsRestxml_serializeOpHttpPayloadTraits) HandleSerialize(ctx context.Co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsHttpPayloadTraitsInput(v *HttpPayloadTraitsInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsHttpPayloadTraitsInput(v *HttpPayloadTraitsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -678,7 +678,7 @@ func (m *awsRestxml_serializeOpHttpPayloadTraitsWithMediaType) HandleSerialize(c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsHttpPayloadTraitsWithMediaTypeInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsHttpPayloadTraitsWithMediaTypeInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -700,7 +700,7 @@ func (m *awsRestxml_serializeOpHttpPayloadTraitsWithMediaType) HandleSerialize(c
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsHttpPayloadTraitsWithMediaTypeInput(v *HttpPayloadTraitsWithMediaTypeInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsHttpPayloadTraitsWithMediaTypeInput(v *HttpPayloadTraitsWithMediaTypeInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -779,7 +779,7 @@ func (m *awsRestxml_serializeOpHttpPayloadWithStructure) HandleSerialize(ctx con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsHttpPayloadWithStructureInput(v *HttpPayloadWithStructureInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsHttpPayloadWithStructureInput(v *HttpPayloadWithStructureInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -851,7 +851,7 @@ func (m *awsRestxml_serializeOpHttpPayloadWithXmlName) HandleSerialize(ctx conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsHttpPayloadWithXmlNameInput(v *HttpPayloadWithXmlNameInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsHttpPayloadWithXmlNameInput(v *HttpPayloadWithXmlNameInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -924,7 +924,7 @@ func (m *awsRestxml_serializeOpHttpPayloadWithXmlNamespace) HandleSerialize(ctx 
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsHttpPayloadWithXmlNamespaceInput(v *HttpPayloadWithXmlNamespaceInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsHttpPayloadWithXmlNamespaceInput(v *HttpPayloadWithXmlNamespaceInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -997,7 +997,7 @@ func (m *awsRestxml_serializeOpHttpPayloadWithXmlNamespaceAndPrefix) HandleSeria
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsHttpPayloadWithXmlNamespaceAndPrefixInput(v *HttpPayloadWithXmlNamespaceAndPrefixInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsHttpPayloadWithXmlNamespaceAndPrefixInput(v *HttpPayloadWithXmlNamespaceAndPrefixInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1040,7 +1040,7 @@ func (m *awsRestxml_serializeOpHttpPrefixHeaders) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsHttpPrefixHeadersInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsHttpPrefixHeadersInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1051,7 +1051,7 @@ func (m *awsRestxml_serializeOpHttpPrefixHeaders) HandleSerialize(ctx context.Co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsHttpPrefixHeadersInput(v *HttpPrefixHeadersInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsHttpPrefixHeadersInput(v *HttpPrefixHeadersInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1110,7 +1110,7 @@ func (m *awsRestxml_serializeOpHttpRequestWithGreedyLabelInPath) HandleSerialize
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsHttpRequestWithGreedyLabelInPathInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsHttpRequestWithGreedyLabelInPathInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1121,7 +1121,7 @@ func (m *awsRestxml_serializeOpHttpRequestWithGreedyLabelInPath) HandleSerialize
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsHttpRequestWithGreedyLabelInPathInput(v *HttpRequestWithGreedyLabelInPathInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsHttpRequestWithGreedyLabelInPathInput(v *HttpRequestWithGreedyLabelInPathInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1176,7 +1176,7 @@ func (m *awsRestxml_serializeOpHttpRequestWithLabels) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsHttpRequestWithLabelsInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsHttpRequestWithLabelsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1187,7 +1187,7 @@ func (m *awsRestxml_serializeOpHttpRequestWithLabels) HandleSerialize(ctx contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsHttpRequestWithLabelsInput(v *HttpRequestWithLabelsInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsHttpRequestWithLabelsInput(v *HttpRequestWithLabelsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1278,7 +1278,7 @@ func (m *awsRestxml_serializeOpHttpRequestWithLabelsAndTimestampFormat) HandleSe
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsHttpRequestWithLabelsAndTimestampFormatInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsHttpRequestWithLabelsAndTimestampFormatInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1289,7 +1289,7 @@ func (m *awsRestxml_serializeOpHttpRequestWithLabelsAndTimestampFormat) HandleSe
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsHttpRequestWithLabelsAndTimestampFormatInput(v *HttpRequestWithLabelsAndTimestampFormatInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsHttpRequestWithLabelsAndTimestampFormatInput(v *HttpRequestWithLabelsAndTimestampFormatInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1381,7 +1381,7 @@ func (m *awsRestxml_serializeOpIgnoreQueryParamsInResponse) HandleSerialize(ctx 
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsIgnoreQueryParamsInResponseInput(v *IgnoreQueryParamsInResponseInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsIgnoreQueryParamsInResponseInput(v *IgnoreQueryParamsInResponseInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1424,7 +1424,7 @@ func (m *awsRestxml_serializeOpInputAndOutputWithHeaders) HandleSerialize(ctx co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsInputAndOutputWithHeadersInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsInputAndOutputWithHeadersInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1435,7 +1435,7 @@ func (m *awsRestxml_serializeOpInputAndOutputWithHeaders) HandleSerialize(ctx co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsInputAndOutputWithHeadersInput(v *InputAndOutputWithHeadersInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsInputAndOutputWithHeadersInput(v *InputAndOutputWithHeadersInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1591,7 +1591,7 @@ func (m *awsRestxml_serializeOpNoInputAndNoOutput) HandleSerialize(ctx context.C
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsNoInputAndNoOutputInput(v *NoInputAndNoOutputInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsNoInputAndNoOutputInput(v *NoInputAndNoOutputInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1641,7 +1641,7 @@ func (m *awsRestxml_serializeOpNoInputAndOutput) HandleSerialize(ctx context.Con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsNoInputAndOutputInput(v *NoInputAndOutputInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsNoInputAndOutputInput(v *NoInputAndOutputInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1684,7 +1684,7 @@ func (m *awsRestxml_serializeOpNullAndEmptyHeadersClient) HandleSerialize(ctx co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsNullAndEmptyHeadersClientInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsNullAndEmptyHeadersClientInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1695,7 +1695,7 @@ func (m *awsRestxml_serializeOpNullAndEmptyHeadersClient) HandleSerialize(ctx co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsNullAndEmptyHeadersClientInput(v *NullAndEmptyHeadersClientInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsNullAndEmptyHeadersClientInput(v *NullAndEmptyHeadersClientInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1761,7 +1761,7 @@ func (m *awsRestxml_serializeOpNullAndEmptyHeadersServer) HandleSerialize(ctx co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsNullAndEmptyHeadersServerInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsNullAndEmptyHeadersServerInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1772,7 +1772,7 @@ func (m *awsRestxml_serializeOpNullAndEmptyHeadersServer) HandleSerialize(ctx co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsNullAndEmptyHeadersServerInput(v *NullAndEmptyHeadersServerInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsNullAndEmptyHeadersServerInput(v *NullAndEmptyHeadersServerInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1838,7 +1838,7 @@ func (m *awsRestxml_serializeOpOmitsNullSerializesEmptyString) HandleSerialize(c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsOmitsNullSerializesEmptyStringInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsOmitsNullSerializesEmptyStringInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1849,7 +1849,7 @@ func (m *awsRestxml_serializeOpOmitsNullSerializesEmptyString) HandleSerialize(c
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsOmitsNullSerializesEmptyStringInput(v *OmitsNullSerializesEmptyStringInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsOmitsNullSerializesEmptyStringInput(v *OmitsNullSerializesEmptyStringInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1900,7 +1900,7 @@ func (m *awsRestxml_serializeOpQueryIdempotencyTokenAutoFill) HandleSerialize(ct
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsQueryIdempotencyTokenAutoFillInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsQueryIdempotencyTokenAutoFillInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1911,7 +1911,7 @@ func (m *awsRestxml_serializeOpQueryIdempotencyTokenAutoFill) HandleSerialize(ct
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsQueryIdempotencyTokenAutoFillInput(v *QueryIdempotencyTokenAutoFillInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsQueryIdempotencyTokenAutoFillInput(v *QueryIdempotencyTokenAutoFillInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1968,7 +1968,7 @@ func (m *awsRestxml_serializeOpRecursiveShapes) HandleSerialize(ctx context.Cont
 		},
 		Attr: rootAttr,
 	}
-	if err := awsRestxml_serializeDocumentRecursiveShapesInput(input, xmlEncoder.RootElement(root)); err != nil {
+	if err := awsRestxml_serializeOpDocumentRecursiveShapesInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
@@ -1982,7 +1982,7 @@ func (m *awsRestxml_serializeOpRecursiveShapes) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsRecursiveShapesInput(v *RecursiveShapesInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsRecursiveShapesInput(v *RecursiveShapesInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1990,7 +1990,7 @@ func awsRestxml_serializeHttpBindingsRecursiveShapesInput(v *RecursiveShapesInpu
 	return nil
 }
 
-func awsRestxml_serializeDocumentRecursiveShapesInput(v *RecursiveShapesInput, value smithyxml.Value) error {
+func awsRestxml_serializeOpDocumentRecursiveShapesInput(v *RecursiveShapesInput, value smithyxml.Value) error {
 	defer value.Close()
 	if v.Nested != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -2043,7 +2043,7 @@ func (m *awsRestxml_serializeOpSimpleScalarProperties) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsSimpleScalarPropertiesInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsSimpleScalarPropertiesInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2057,7 +2057,7 @@ func (m *awsRestxml_serializeOpSimpleScalarProperties) HandleSerialize(ctx conte
 		},
 		Attr: rootAttr,
 	}
-	if err := awsRestxml_serializeDocumentSimpleScalarPropertiesInput(input, xmlEncoder.RootElement(root)); err != nil {
+	if err := awsRestxml_serializeOpDocumentSimpleScalarPropertiesInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
@@ -2071,7 +2071,7 @@ func (m *awsRestxml_serializeOpSimpleScalarProperties) HandleSerialize(ctx conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsSimpleScalarPropertiesInput(v *SimpleScalarPropertiesInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsSimpleScalarPropertiesInput(v *SimpleScalarPropertiesInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -2086,7 +2086,7 @@ func awsRestxml_serializeHttpBindingsSimpleScalarPropertiesInput(v *SimpleScalar
 	return nil
 }
 
-func awsRestxml_serializeDocumentSimpleScalarPropertiesInput(v *SimpleScalarPropertiesInput, value smithyxml.Value) error {
+func awsRestxml_serializeOpDocumentSimpleScalarPropertiesInput(v *SimpleScalarPropertiesInput, value smithyxml.Value) error {
 	defer value.Close()
 	if v.ByteValue != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -2225,7 +2225,7 @@ func (m *awsRestxml_serializeOpTimestampFormatHeaders) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestxml_serializeHttpBindingsTimestampFormatHeadersInput(input, restEncoder); err != nil {
+	if err := awsRestxml_serializeOpHttpBindingsTimestampFormatHeadersInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2236,7 +2236,7 @@ func (m *awsRestxml_serializeOpTimestampFormatHeaders) HandleSerialize(ctx conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsTimestampFormatHeadersInput(v *TimestampFormatHeadersInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsTimestampFormatHeadersInput(v *TimestampFormatHeadersInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -2329,7 +2329,7 @@ func (m *awsRestxml_serializeOpXmlAttributes) HandleSerialize(ctx context.Contex
 		},
 		Attr: rootAttr,
 	}
-	if err := awsRestxml_serializeDocumentXmlAttributesInput(input, xmlEncoder.RootElement(root)); err != nil {
+	if err := awsRestxml_serializeOpDocumentXmlAttributesInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
@@ -2343,7 +2343,7 @@ func (m *awsRestxml_serializeOpXmlAttributes) HandleSerialize(ctx context.Contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsXmlAttributesInput(v *XmlAttributesInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsXmlAttributesInput(v *XmlAttributesInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -2351,7 +2351,7 @@ func awsRestxml_serializeHttpBindingsXmlAttributesInput(v *XmlAttributesInput, e
 	return nil
 }
 
-func awsRestxml_serializeDocumentXmlAttributesInput(v *XmlAttributesInput, value smithyxml.Value) error {
+func awsRestxml_serializeOpDocumentXmlAttributesInput(v *XmlAttributesInput, value smithyxml.Value) error {
 	defer value.Close()
 	if v.Foo != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -2436,7 +2436,7 @@ func (m *awsRestxml_serializeOpXmlAttributesOnPayload) HandleSerialize(ctx conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsXmlAttributesOnPayloadInput(v *XmlAttributesOnPayloadInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsXmlAttributesOnPayloadInput(v *XmlAttributesOnPayloadInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -2489,7 +2489,7 @@ func (m *awsRestxml_serializeOpXmlBlobs) HandleSerialize(ctx context.Context, in
 		},
 		Attr: rootAttr,
 	}
-	if err := awsRestxml_serializeDocumentXmlBlobsInput(input, xmlEncoder.RootElement(root)); err != nil {
+	if err := awsRestxml_serializeOpDocumentXmlBlobsInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
@@ -2503,7 +2503,7 @@ func (m *awsRestxml_serializeOpXmlBlobs) HandleSerialize(ctx context.Context, in
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsXmlBlobsInput(v *XmlBlobsInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsXmlBlobsInput(v *XmlBlobsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -2511,7 +2511,7 @@ func awsRestxml_serializeHttpBindingsXmlBlobsInput(v *XmlBlobsInput, encoder *ht
 	return nil
 }
 
-func awsRestxml_serializeDocumentXmlBlobsInput(v *XmlBlobsInput, value smithyxml.Value) error {
+func awsRestxml_serializeOpDocumentXmlBlobsInput(v *XmlBlobsInput, value smithyxml.Value) error {
 	defer value.Close()
 	if v.Data != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -2572,7 +2572,7 @@ func (m *awsRestxml_serializeOpXmlEnums) HandleSerialize(ctx context.Context, in
 		},
 		Attr: rootAttr,
 	}
-	if err := awsRestxml_serializeDocumentXmlEnumsInput(input, xmlEncoder.RootElement(root)); err != nil {
+	if err := awsRestxml_serializeOpDocumentXmlEnumsInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
@@ -2586,7 +2586,7 @@ func (m *awsRestxml_serializeOpXmlEnums) HandleSerialize(ctx context.Context, in
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsXmlEnumsInput(v *XmlEnumsInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsXmlEnumsInput(v *XmlEnumsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -2594,7 +2594,7 @@ func awsRestxml_serializeHttpBindingsXmlEnumsInput(v *XmlEnumsInput, encoder *ht
 	return nil
 }
 
-func awsRestxml_serializeDocumentXmlEnumsInput(v *XmlEnumsInput, value smithyxml.Value) error {
+func awsRestxml_serializeOpDocumentXmlEnumsInput(v *XmlEnumsInput, value smithyxml.Value) error {
 	defer value.Close()
 	if len(v.FooEnum1) > 0 {
 		rootAttr := []smithyxml.Attr{}
@@ -2716,7 +2716,7 @@ func (m *awsRestxml_serializeOpXmlLists) HandleSerialize(ctx context.Context, in
 		},
 		Attr: rootAttr,
 	}
-	if err := awsRestxml_serializeDocumentXmlListsInput(input, xmlEncoder.RootElement(root)); err != nil {
+	if err := awsRestxml_serializeOpDocumentXmlListsInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
@@ -2730,7 +2730,7 @@ func (m *awsRestxml_serializeOpXmlLists) HandleSerialize(ctx context.Context, in
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsXmlListsInput(v *XmlListsInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsXmlListsInput(v *XmlListsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -2738,7 +2738,7 @@ func awsRestxml_serializeHttpBindingsXmlListsInput(v *XmlListsInput, encoder *ht
 	return nil
 }
 
-func awsRestxml_serializeDocumentXmlListsInput(v *XmlListsInput, value smithyxml.Value) error {
+func awsRestxml_serializeOpDocumentXmlListsInput(v *XmlListsInput, value smithyxml.Value) error {
 	defer value.Close()
 	if v.BooleanList != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -2931,7 +2931,7 @@ func (m *awsRestxml_serializeOpXmlMaps) HandleSerialize(ctx context.Context, in 
 		},
 		Attr: rootAttr,
 	}
-	if err := awsRestxml_serializeDocumentXmlMapsInput(input, xmlEncoder.RootElement(root)); err != nil {
+	if err := awsRestxml_serializeOpDocumentXmlMapsInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
@@ -2945,7 +2945,7 @@ func (m *awsRestxml_serializeOpXmlMaps) HandleSerialize(ctx context.Context, in 
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsXmlMapsInput(v *XmlMapsInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsXmlMapsInput(v *XmlMapsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -2953,7 +2953,7 @@ func awsRestxml_serializeHttpBindingsXmlMapsInput(v *XmlMapsInput, encoder *http
 	return nil
 }
 
-func awsRestxml_serializeDocumentXmlMapsInput(v *XmlMapsInput, value smithyxml.Value) error {
+func awsRestxml_serializeOpDocumentXmlMapsInput(v *XmlMapsInput, value smithyxml.Value) error {
 	defer value.Close()
 	if v.MyMap != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -3016,7 +3016,7 @@ func (m *awsRestxml_serializeOpXmlMapsXmlName) HandleSerialize(ctx context.Conte
 		},
 		Attr: rootAttr,
 	}
-	if err := awsRestxml_serializeDocumentXmlMapsXmlNameInput(input, xmlEncoder.RootElement(root)); err != nil {
+	if err := awsRestxml_serializeOpDocumentXmlMapsXmlNameInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
@@ -3030,7 +3030,7 @@ func (m *awsRestxml_serializeOpXmlMapsXmlName) HandleSerialize(ctx context.Conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsXmlMapsXmlNameInput(v *XmlMapsXmlNameInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsXmlMapsXmlNameInput(v *XmlMapsXmlNameInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -3038,7 +3038,7 @@ func awsRestxml_serializeHttpBindingsXmlMapsXmlNameInput(v *XmlMapsXmlNameInput,
 	return nil
 }
 
-func awsRestxml_serializeDocumentXmlMapsXmlNameInput(v *XmlMapsXmlNameInput, value smithyxml.Value) error {
+func awsRestxml_serializeOpDocumentXmlMapsXmlNameInput(v *XmlMapsXmlNameInput, value smithyxml.Value) error {
 	defer value.Close()
 	if v.MyMap != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -3102,7 +3102,7 @@ func (m *awsRestxml_serializeOpXmlNamespaces) HandleSerialize(ctx context.Contex
 		},
 		Attr: rootAttr,
 	}
-	if err := awsRestxml_serializeDocumentXmlNamespacesInput(input, xmlEncoder.RootElement(root)); err != nil {
+	if err := awsRestxml_serializeOpDocumentXmlNamespacesInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
@@ -3116,7 +3116,7 @@ func (m *awsRestxml_serializeOpXmlNamespaces) HandleSerialize(ctx context.Contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsXmlNamespacesInput(v *XmlNamespacesInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsXmlNamespacesInput(v *XmlNamespacesInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -3124,7 +3124,7 @@ func awsRestxml_serializeHttpBindingsXmlNamespacesInput(v *XmlNamespacesInput, e
 	return nil
 }
 
-func awsRestxml_serializeDocumentXmlNamespacesInput(v *XmlNamespacesInput, value smithyxml.Value) error {
+func awsRestxml_serializeOpDocumentXmlNamespacesInput(v *XmlNamespacesInput, value smithyxml.Value) error {
 	defer value.Close()
 	if v.Nested != nil {
 		rootAttr := []smithyxml.Attr{}
@@ -3187,7 +3187,7 @@ func (m *awsRestxml_serializeOpXmlTimestamps) HandleSerialize(ctx context.Contex
 		},
 		Attr: rootAttr,
 	}
-	if err := awsRestxml_serializeDocumentXmlTimestampsInput(input, xmlEncoder.RootElement(root)); err != nil {
+	if err := awsRestxml_serializeOpDocumentXmlTimestampsInput(input, xmlEncoder.RootElement(root)); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
@@ -3201,7 +3201,7 @@ func (m *awsRestxml_serializeOpXmlTimestamps) HandleSerialize(ctx context.Contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestxml_serializeHttpBindingsXmlTimestampsInput(v *XmlTimestampsInput, encoder *httpbinding.Encoder) error {
+func awsRestxml_serializeOpHttpBindingsXmlTimestampsInput(v *XmlTimestampsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -3209,7 +3209,7 @@ func awsRestxml_serializeHttpBindingsXmlTimestampsInput(v *XmlTimestampsInput, e
 	return nil
 }
 
-func awsRestxml_serializeDocumentXmlTimestampsInput(v *XmlTimestampsInput, value smithyxml.Value) error {
+func awsRestxml_serializeOpDocumentXmlTimestampsInput(v *XmlTimestampsInput, value smithyxml.Value) error {
 	defer value.Close()
 	if v.DateTime != nil {
 		rootAttr := []smithyxml.Attr{}

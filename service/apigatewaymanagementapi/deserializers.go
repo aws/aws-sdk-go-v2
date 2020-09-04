@@ -142,7 +142,7 @@ func (m *awsRestjson1_deserializeOpGetConnection) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetConnectionOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetConnectionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -215,7 +215,7 @@ func awsRestjson1_deserializeOpErrorGetConnection(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetConnectionOutput(v **GetConnectionOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetConnectionOutput(v **GetConnectionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

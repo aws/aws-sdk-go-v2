@@ -429,7 +429,7 @@ func (m *awsRestjson1_deserializeOpGetConfigurationSetEventDestinations) HandleD
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetConfigurationSetEventDestinationsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetConfigurationSetEventDestinationsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -505,7 +505,7 @@ func awsRestjson1_deserializeOpErrorGetConfigurationSetEventDestinations(respons
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetConfigurationSetEventDestinationsOutput(v **GetConfigurationSetEventDestinationsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetConfigurationSetEventDestinationsOutput(v **GetConfigurationSetEventDestinationsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -595,7 +595,7 @@ func (m *awsRestjson1_deserializeOpListConfigurationSets) HandleDeserialize(ctx 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentListConfigurationSetsOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentListConfigurationSetsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -668,7 +668,7 @@ func awsRestjson1_deserializeOpErrorListConfigurationSets(response *smithyhttp.R
 	}
 }
 
-func awsRestjson1_deserializeDocumentListConfigurationSetsOutput(v **ListConfigurationSetsOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentListConfigurationSetsOutput(v **ListConfigurationSetsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -771,7 +771,7 @@ func (m *awsRestjson1_deserializeOpSendVoiceMessage) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentSendVoiceMessageOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentSendVoiceMessageOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -844,7 +844,7 @@ func awsRestjson1_deserializeOpErrorSendVoiceMessage(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeDocumentSendVoiceMessageOutput(v **SendVoiceMessageOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentSendVoiceMessageOutput(v **SendVoiceMessageOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

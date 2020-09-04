@@ -49,7 +49,7 @@ func (m *awsAwsquery_serializeOpCancelUpdateStack) HandleSerialize(ctx context.C
 	body.Key("Action").String("CancelUpdateStack")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentCancelUpdateStackInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCancelUpdateStackInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -104,7 +104,7 @@ func (m *awsAwsquery_serializeOpContinueUpdateRollback) HandleSerialize(ctx cont
 	body.Key("Action").String("ContinueUpdateRollback")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentContinueUpdateRollbackInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentContinueUpdateRollbackInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -159,7 +159,7 @@ func (m *awsAwsquery_serializeOpCreateChangeSet) HandleSerialize(ctx context.Con
 	body.Key("Action").String("CreateChangeSet")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentCreateChangeSetInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateChangeSetInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -214,7 +214,7 @@ func (m *awsAwsquery_serializeOpCreateStack) HandleSerialize(ctx context.Context
 	body.Key("Action").String("CreateStack")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentCreateStackInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateStackInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -269,7 +269,7 @@ func (m *awsAwsquery_serializeOpCreateStackInstances) HandleSerialize(ctx contex
 	body.Key("Action").String("CreateStackInstances")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentCreateStackInstancesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateStackInstancesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -324,7 +324,7 @@ func (m *awsAwsquery_serializeOpCreateStackSet) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("CreateStackSet")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentCreateStackSetInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateStackSetInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -379,7 +379,7 @@ func (m *awsAwsquery_serializeOpDeleteChangeSet) HandleSerialize(ctx context.Con
 	body.Key("Action").String("DeleteChangeSet")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentDeleteChangeSetInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteChangeSetInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -434,7 +434,7 @@ func (m *awsAwsquery_serializeOpDeleteStack) HandleSerialize(ctx context.Context
 	body.Key("Action").String("DeleteStack")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentDeleteStackInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteStackInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -489,7 +489,7 @@ func (m *awsAwsquery_serializeOpDeleteStackInstances) HandleSerialize(ctx contex
 	body.Key("Action").String("DeleteStackInstances")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentDeleteStackInstancesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteStackInstancesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -544,7 +544,7 @@ func (m *awsAwsquery_serializeOpDeleteStackSet) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("DeleteStackSet")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentDeleteStackSetInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteStackSetInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -599,7 +599,7 @@ func (m *awsAwsquery_serializeOpDeregisterType) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("DeregisterType")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentDeregisterTypeInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeregisterTypeInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -654,7 +654,7 @@ func (m *awsAwsquery_serializeOpDescribeAccountLimits) HandleSerialize(ctx conte
 	body.Key("Action").String("DescribeAccountLimits")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentDescribeAccountLimitsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeAccountLimitsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -709,7 +709,7 @@ func (m *awsAwsquery_serializeOpDescribeChangeSet) HandleSerialize(ctx context.C
 	body.Key("Action").String("DescribeChangeSet")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentDescribeChangeSetInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeChangeSetInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -764,7 +764,7 @@ func (m *awsAwsquery_serializeOpDescribeStackDriftDetectionStatus) HandleSeriali
 	body.Key("Action").String("DescribeStackDriftDetectionStatus")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentDescribeStackDriftDetectionStatusInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeStackDriftDetectionStatusInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -819,7 +819,7 @@ func (m *awsAwsquery_serializeOpDescribeStackEvents) HandleSerialize(ctx context
 	body.Key("Action").String("DescribeStackEvents")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentDescribeStackEventsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeStackEventsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -874,7 +874,7 @@ func (m *awsAwsquery_serializeOpDescribeStackInstance) HandleSerialize(ctx conte
 	body.Key("Action").String("DescribeStackInstance")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentDescribeStackInstanceInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeStackInstanceInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -929,7 +929,7 @@ func (m *awsAwsquery_serializeOpDescribeStackResource) HandleSerialize(ctx conte
 	body.Key("Action").String("DescribeStackResource")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentDescribeStackResourceInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeStackResourceInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -984,7 +984,7 @@ func (m *awsAwsquery_serializeOpDescribeStackResourceDrifts) HandleSerialize(ctx
 	body.Key("Action").String("DescribeStackResourceDrifts")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentDescribeStackResourceDriftsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeStackResourceDriftsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1039,7 +1039,7 @@ func (m *awsAwsquery_serializeOpDescribeStackResources) HandleSerialize(ctx cont
 	body.Key("Action").String("DescribeStackResources")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentDescribeStackResourcesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeStackResourcesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1094,7 +1094,7 @@ func (m *awsAwsquery_serializeOpDescribeStacks) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("DescribeStacks")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentDescribeStacksInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeStacksInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1149,7 +1149,7 @@ func (m *awsAwsquery_serializeOpDescribeStackSet) HandleSerialize(ctx context.Co
 	body.Key("Action").String("DescribeStackSet")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentDescribeStackSetInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeStackSetInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1204,7 +1204,7 @@ func (m *awsAwsquery_serializeOpDescribeStackSetOperation) HandleSerialize(ctx c
 	body.Key("Action").String("DescribeStackSetOperation")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentDescribeStackSetOperationInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeStackSetOperationInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1259,7 +1259,7 @@ func (m *awsAwsquery_serializeOpDescribeType) HandleSerialize(ctx context.Contex
 	body.Key("Action").String("DescribeType")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentDescribeTypeInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeTypeInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1314,7 +1314,7 @@ func (m *awsAwsquery_serializeOpDescribeTypeRegistration) HandleSerialize(ctx co
 	body.Key("Action").String("DescribeTypeRegistration")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentDescribeTypeRegistrationInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeTypeRegistrationInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1369,7 +1369,7 @@ func (m *awsAwsquery_serializeOpDetectStackDrift) HandleSerialize(ctx context.Co
 	body.Key("Action").String("DetectStackDrift")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentDetectStackDriftInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDetectStackDriftInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1424,7 +1424,7 @@ func (m *awsAwsquery_serializeOpDetectStackResourceDrift) HandleSerialize(ctx co
 	body.Key("Action").String("DetectStackResourceDrift")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentDetectStackResourceDriftInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDetectStackResourceDriftInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1479,7 +1479,7 @@ func (m *awsAwsquery_serializeOpDetectStackSetDrift) HandleSerialize(ctx context
 	body.Key("Action").String("DetectStackSetDrift")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentDetectStackSetDriftInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDetectStackSetDriftInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1534,7 +1534,7 @@ func (m *awsAwsquery_serializeOpEstimateTemplateCost) HandleSerialize(ctx contex
 	body.Key("Action").String("EstimateTemplateCost")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentEstimateTemplateCostInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentEstimateTemplateCostInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1589,7 +1589,7 @@ func (m *awsAwsquery_serializeOpExecuteChangeSet) HandleSerialize(ctx context.Co
 	body.Key("Action").String("ExecuteChangeSet")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentExecuteChangeSetInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentExecuteChangeSetInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1644,7 +1644,7 @@ func (m *awsAwsquery_serializeOpGetStackPolicy) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("GetStackPolicy")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentGetStackPolicyInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetStackPolicyInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1699,7 +1699,7 @@ func (m *awsAwsquery_serializeOpGetTemplate) HandleSerialize(ctx context.Context
 	body.Key("Action").String("GetTemplate")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentGetTemplateInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetTemplateInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1754,7 +1754,7 @@ func (m *awsAwsquery_serializeOpGetTemplateSummary) HandleSerialize(ctx context.
 	body.Key("Action").String("GetTemplateSummary")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentGetTemplateSummaryInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentGetTemplateSummaryInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1809,7 +1809,7 @@ func (m *awsAwsquery_serializeOpListChangeSets) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("ListChangeSets")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentListChangeSetsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListChangeSetsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1864,7 +1864,7 @@ func (m *awsAwsquery_serializeOpListExports) HandleSerialize(ctx context.Context
 	body.Key("Action").String("ListExports")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentListExportsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListExportsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1919,7 +1919,7 @@ func (m *awsAwsquery_serializeOpListImports) HandleSerialize(ctx context.Context
 	body.Key("Action").String("ListImports")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentListImportsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListImportsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1974,7 +1974,7 @@ func (m *awsAwsquery_serializeOpListStackInstances) HandleSerialize(ctx context.
 	body.Key("Action").String("ListStackInstances")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentListStackInstancesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListStackInstancesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2029,7 +2029,7 @@ func (m *awsAwsquery_serializeOpListStackResources) HandleSerialize(ctx context.
 	body.Key("Action").String("ListStackResources")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentListStackResourcesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListStackResourcesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2084,7 +2084,7 @@ func (m *awsAwsquery_serializeOpListStacks) HandleSerialize(ctx context.Context,
 	body.Key("Action").String("ListStacks")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentListStacksInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListStacksInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2139,7 +2139,7 @@ func (m *awsAwsquery_serializeOpListStackSetOperationResults) HandleSerialize(ct
 	body.Key("Action").String("ListStackSetOperationResults")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentListStackSetOperationResultsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListStackSetOperationResultsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2194,7 +2194,7 @@ func (m *awsAwsquery_serializeOpListStackSetOperations) HandleSerialize(ctx cont
 	body.Key("Action").String("ListStackSetOperations")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentListStackSetOperationsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListStackSetOperationsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2249,7 +2249,7 @@ func (m *awsAwsquery_serializeOpListStackSets) HandleSerialize(ctx context.Conte
 	body.Key("Action").String("ListStackSets")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentListStackSetsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListStackSetsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2304,7 +2304,7 @@ func (m *awsAwsquery_serializeOpListTypeRegistrations) HandleSerialize(ctx conte
 	body.Key("Action").String("ListTypeRegistrations")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentListTypeRegistrationsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListTypeRegistrationsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2359,7 +2359,7 @@ func (m *awsAwsquery_serializeOpListTypes) HandleSerialize(ctx context.Context, 
 	body.Key("Action").String("ListTypes")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentListTypesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListTypesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2414,7 +2414,7 @@ func (m *awsAwsquery_serializeOpListTypeVersions) HandleSerialize(ctx context.Co
 	body.Key("Action").String("ListTypeVersions")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentListTypeVersionsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListTypeVersionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2469,7 +2469,7 @@ func (m *awsAwsquery_serializeOpRecordHandlerProgress) HandleSerialize(ctx conte
 	body.Key("Action").String("RecordHandlerProgress")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentRecordHandlerProgressInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentRecordHandlerProgressInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2524,7 +2524,7 @@ func (m *awsAwsquery_serializeOpRegisterType) HandleSerialize(ctx context.Contex
 	body.Key("Action").String("RegisterType")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentRegisterTypeInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentRegisterTypeInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2579,7 +2579,7 @@ func (m *awsAwsquery_serializeOpSetStackPolicy) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("SetStackPolicy")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentSetStackPolicyInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSetStackPolicyInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2634,7 +2634,7 @@ func (m *awsAwsquery_serializeOpSetTypeDefaultVersion) HandleSerialize(ctx conte
 	body.Key("Action").String("SetTypeDefaultVersion")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentSetTypeDefaultVersionInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSetTypeDefaultVersionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2689,7 +2689,7 @@ func (m *awsAwsquery_serializeOpSignalResource) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("SignalResource")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentSignalResourceInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSignalResourceInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2744,7 +2744,7 @@ func (m *awsAwsquery_serializeOpStopStackSetOperation) HandleSerialize(ctx conte
 	body.Key("Action").String("StopStackSetOperation")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentStopStackSetOperationInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentStopStackSetOperationInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2799,7 +2799,7 @@ func (m *awsAwsquery_serializeOpUpdateStack) HandleSerialize(ctx context.Context
 	body.Key("Action").String("UpdateStack")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentUpdateStackInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUpdateStackInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2854,7 +2854,7 @@ func (m *awsAwsquery_serializeOpUpdateStackInstances) HandleSerialize(ctx contex
 	body.Key("Action").String("UpdateStackInstances")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentUpdateStackInstancesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUpdateStackInstancesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2909,7 +2909,7 @@ func (m *awsAwsquery_serializeOpUpdateStackSet) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("UpdateStackSet")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentUpdateStackSetInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUpdateStackSetInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2964,7 +2964,7 @@ func (m *awsAwsquery_serializeOpUpdateTerminationProtection) HandleSerialize(ctx
 	body.Key("Action").String("UpdateTerminationProtection")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentUpdateTerminationProtectionInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUpdateTerminationProtectionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3019,7 +3019,7 @@ func (m *awsAwsquery_serializeOpValidateTemplate) HandleSerialize(ctx context.Co
 	body.Key("Action").String("ValidateTemplate")
 	body.Key("Version").String("2010-05-15")
 
-	if err := awsAwsquery_serializeDocumentValidateTemplateInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentValidateTemplateInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3528,7 +3528,7 @@ func awsAwsquery_serializeDocumentTags(v []*types.Tag, value query.Value) error 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCancelUpdateStackInput(v *CancelUpdateStackInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCancelUpdateStackInput(v *CancelUpdateStackInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3545,7 +3545,7 @@ func awsAwsquery_serializeDocumentCancelUpdateStackInput(v *CancelUpdateStackInp
 	return nil
 }
 
-func awsAwsquery_serializeDocumentContinueUpdateRollbackInput(v *ContinueUpdateRollbackInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentContinueUpdateRollbackInput(v *ContinueUpdateRollbackInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3574,7 +3574,7 @@ func awsAwsquery_serializeDocumentContinueUpdateRollbackInput(v *ContinueUpdateR
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateChangeSetInput(v *CreateChangeSetInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateChangeSetInput(v *CreateChangeSetInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3675,7 +3675,7 @@ func awsAwsquery_serializeDocumentCreateChangeSetInput(v *CreateChangeSetInput, 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateStackInput(v *CreateStackInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateStackInput(v *CreateStackInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3779,7 +3779,7 @@ func awsAwsquery_serializeDocumentCreateStackInput(v *CreateStackInput, value qu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateStackInstancesInput(v *CreateStackInstancesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateStackInstancesInput(v *CreateStackInstancesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3831,7 +3831,7 @@ func awsAwsquery_serializeDocumentCreateStackInstancesInput(v *CreateStackInstan
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateStackSetInput(v *CreateStackSetInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateStackSetInput(v *CreateStackSetInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3906,7 +3906,7 @@ func awsAwsquery_serializeDocumentCreateStackSetInput(v *CreateStackSetInput, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteChangeSetInput(v *DeleteChangeSetInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteChangeSetInput(v *DeleteChangeSetInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3923,7 +3923,7 @@ func awsAwsquery_serializeDocumentDeleteChangeSetInput(v *DeleteChangeSetInput, 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteStackInput(v *DeleteStackInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteStackInput(v *DeleteStackInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3952,7 +3952,7 @@ func awsAwsquery_serializeDocumentDeleteStackInput(v *DeleteStackInput, value qu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteStackInstancesInput(v *DeleteStackInstancesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteStackInstancesInput(v *DeleteStackInstancesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4002,7 +4002,7 @@ func awsAwsquery_serializeDocumentDeleteStackInstancesInput(v *DeleteStackInstan
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteStackSetInput(v *DeleteStackSetInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteStackSetInput(v *DeleteStackSetInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4014,7 +4014,7 @@ func awsAwsquery_serializeDocumentDeleteStackSetInput(v *DeleteStackSetInput, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeregisterTypeInput(v *DeregisterTypeInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeregisterTypeInput(v *DeregisterTypeInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4041,7 +4041,7 @@ func awsAwsquery_serializeDocumentDeregisterTypeInput(v *DeregisterTypeInput, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeAccountLimitsInput(v *DescribeAccountLimitsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeAccountLimitsInput(v *DescribeAccountLimitsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4053,7 +4053,7 @@ func awsAwsquery_serializeDocumentDescribeAccountLimitsInput(v *DescribeAccountL
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeChangeSetInput(v *DescribeChangeSetInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeChangeSetInput(v *DescribeChangeSetInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4075,7 +4075,7 @@ func awsAwsquery_serializeDocumentDescribeChangeSetInput(v *DescribeChangeSetInp
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeStackDriftDetectionStatusInput(v *DescribeStackDriftDetectionStatusInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeStackDriftDetectionStatusInput(v *DescribeStackDriftDetectionStatusInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4087,7 +4087,7 @@ func awsAwsquery_serializeDocumentDescribeStackDriftDetectionStatusInput(v *Desc
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeStackEventsInput(v *DescribeStackEventsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeStackEventsInput(v *DescribeStackEventsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4104,7 +4104,7 @@ func awsAwsquery_serializeDocumentDescribeStackEventsInput(v *DescribeStackEvent
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeStackInstanceInput(v *DescribeStackInstanceInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeStackInstanceInput(v *DescribeStackInstanceInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4126,7 +4126,7 @@ func awsAwsquery_serializeDocumentDescribeStackInstanceInput(v *DescribeStackIns
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeStackResourceDriftsInput(v *DescribeStackResourceDriftsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeStackResourceDriftsInput(v *DescribeStackResourceDriftsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4155,7 +4155,7 @@ func awsAwsquery_serializeDocumentDescribeStackResourceDriftsInput(v *DescribeSt
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeStackResourceInput(v *DescribeStackResourceInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeStackResourceInput(v *DescribeStackResourceInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4172,7 +4172,7 @@ func awsAwsquery_serializeDocumentDescribeStackResourceInput(v *DescribeStackRes
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeStackResourcesInput(v *DescribeStackResourcesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeStackResourcesInput(v *DescribeStackResourcesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4194,7 +4194,7 @@ func awsAwsquery_serializeDocumentDescribeStackResourcesInput(v *DescribeStackRe
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeStackSetInput(v *DescribeStackSetInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeStackSetInput(v *DescribeStackSetInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4206,7 +4206,7 @@ func awsAwsquery_serializeDocumentDescribeStackSetInput(v *DescribeStackSetInput
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeStackSetOperationInput(v *DescribeStackSetOperationInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeStackSetOperationInput(v *DescribeStackSetOperationInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4223,7 +4223,7 @@ func awsAwsquery_serializeDocumentDescribeStackSetOperationInput(v *DescribeStac
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeStacksInput(v *DescribeStacksInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeStacksInput(v *DescribeStacksInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4240,7 +4240,7 @@ func awsAwsquery_serializeDocumentDescribeStacksInput(v *DescribeStacksInput, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeTypeInput(v *DescribeTypeInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeTypeInput(v *DescribeTypeInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4267,7 +4267,7 @@ func awsAwsquery_serializeDocumentDescribeTypeInput(v *DescribeTypeInput, value 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeTypeRegistrationInput(v *DescribeTypeRegistrationInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeTypeRegistrationInput(v *DescribeTypeRegistrationInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4279,7 +4279,7 @@ func awsAwsquery_serializeDocumentDescribeTypeRegistrationInput(v *DescribeTypeR
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDetectStackDriftInput(v *DetectStackDriftInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDetectStackDriftInput(v *DetectStackDriftInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4298,7 +4298,7 @@ func awsAwsquery_serializeDocumentDetectStackDriftInput(v *DetectStackDriftInput
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDetectStackResourceDriftInput(v *DetectStackResourceDriftInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDetectStackResourceDriftInput(v *DetectStackResourceDriftInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4315,7 +4315,7 @@ func awsAwsquery_serializeDocumentDetectStackResourceDriftInput(v *DetectStackRe
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDetectStackSetDriftInput(v *DetectStackSetDriftInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDetectStackSetDriftInput(v *DetectStackSetDriftInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4339,7 +4339,7 @@ func awsAwsquery_serializeDocumentDetectStackSetDriftInput(v *DetectStackSetDrif
 	return nil
 }
 
-func awsAwsquery_serializeDocumentEstimateTemplateCostInput(v *EstimateTemplateCostInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentEstimateTemplateCostInput(v *EstimateTemplateCostInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4363,7 +4363,7 @@ func awsAwsquery_serializeDocumentEstimateTemplateCostInput(v *EstimateTemplateC
 	return nil
 }
 
-func awsAwsquery_serializeDocumentExecuteChangeSetInput(v *ExecuteChangeSetInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentExecuteChangeSetInput(v *ExecuteChangeSetInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4385,7 +4385,7 @@ func awsAwsquery_serializeDocumentExecuteChangeSetInput(v *ExecuteChangeSetInput
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetStackPolicyInput(v *GetStackPolicyInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetStackPolicyInput(v *GetStackPolicyInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4397,7 +4397,7 @@ func awsAwsquery_serializeDocumentGetStackPolicyInput(v *GetStackPolicyInput, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetTemplateInput(v *GetTemplateInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetTemplateInput(v *GetTemplateInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4419,7 +4419,7 @@ func awsAwsquery_serializeDocumentGetTemplateInput(v *GetTemplateInput, value qu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentGetTemplateSummaryInput(v *GetTemplateSummaryInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentGetTemplateSummaryInput(v *GetTemplateSummaryInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4446,7 +4446,7 @@ func awsAwsquery_serializeDocumentGetTemplateSummaryInput(v *GetTemplateSummaryI
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListChangeSetsInput(v *ListChangeSetsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListChangeSetsInput(v *ListChangeSetsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4463,7 +4463,7 @@ func awsAwsquery_serializeDocumentListChangeSetsInput(v *ListChangeSetsInput, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListExportsInput(v *ListExportsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListExportsInput(v *ListExportsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4475,7 +4475,7 @@ func awsAwsquery_serializeDocumentListExportsInput(v *ListExportsInput, value qu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListImportsInput(v *ListImportsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListImportsInput(v *ListImportsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4492,7 +4492,7 @@ func awsAwsquery_serializeDocumentListImportsInput(v *ListImportsInput, value qu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListStackInstancesInput(v *ListStackInstancesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListStackInstancesInput(v *ListStackInstancesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4531,7 +4531,7 @@ func awsAwsquery_serializeDocumentListStackInstancesInput(v *ListStackInstancesI
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListStackResourcesInput(v *ListStackResourcesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListStackResourcesInput(v *ListStackResourcesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4548,7 +4548,7 @@ func awsAwsquery_serializeDocumentListStackResourcesInput(v *ListStackResourcesI
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListStackSetOperationResultsInput(v *ListStackSetOperationResultsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListStackSetOperationResultsInput(v *ListStackSetOperationResultsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4575,7 +4575,7 @@ func awsAwsquery_serializeDocumentListStackSetOperationResultsInput(v *ListStack
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListStackSetOperationsInput(v *ListStackSetOperationsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListStackSetOperationsInput(v *ListStackSetOperationsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4597,7 +4597,7 @@ func awsAwsquery_serializeDocumentListStackSetOperationsInput(v *ListStackSetOpe
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListStackSetsInput(v *ListStackSetsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListStackSetsInput(v *ListStackSetsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4619,7 +4619,7 @@ func awsAwsquery_serializeDocumentListStackSetsInput(v *ListStackSetsInput, valu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListStacksInput(v *ListStacksInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListStacksInput(v *ListStacksInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4638,7 +4638,7 @@ func awsAwsquery_serializeDocumentListStacksInput(v *ListStacksInput, value quer
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListTypeRegistrationsInput(v *ListTypeRegistrationsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListTypeRegistrationsInput(v *ListTypeRegistrationsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4675,7 +4675,7 @@ func awsAwsquery_serializeDocumentListTypeRegistrationsInput(v *ListTypeRegistra
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListTypesInput(v *ListTypesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListTypesInput(v *ListTypesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4707,7 +4707,7 @@ func awsAwsquery_serializeDocumentListTypesInput(v *ListTypesInput, value query.
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListTypeVersionsInput(v *ListTypeVersionsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListTypeVersionsInput(v *ListTypeVersionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4744,7 +4744,7 @@ func awsAwsquery_serializeDocumentListTypeVersionsInput(v *ListTypeVersionsInput
 	return nil
 }
 
-func awsAwsquery_serializeDocumentRecordHandlerProgressInput(v *RecordHandlerProgressInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentRecordHandlerProgressInput(v *RecordHandlerProgressInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4786,7 +4786,7 @@ func awsAwsquery_serializeDocumentRecordHandlerProgressInput(v *RecordHandlerPro
 	return nil
 }
 
-func awsAwsquery_serializeDocumentRegisterTypeInput(v *RegisterTypeInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentRegisterTypeInput(v *RegisterTypeInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4825,7 +4825,7 @@ func awsAwsquery_serializeDocumentRegisterTypeInput(v *RegisterTypeInput, value 
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSetStackPolicyInput(v *SetStackPolicyInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSetStackPolicyInput(v *SetStackPolicyInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4847,7 +4847,7 @@ func awsAwsquery_serializeDocumentSetStackPolicyInput(v *SetStackPolicyInput, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSetTypeDefaultVersionInput(v *SetTypeDefaultVersionInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSetTypeDefaultVersionInput(v *SetTypeDefaultVersionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4874,7 +4874,7 @@ func awsAwsquery_serializeDocumentSetTypeDefaultVersionInput(v *SetTypeDefaultVe
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSignalResourceInput(v *SignalResourceInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentSignalResourceInput(v *SignalResourceInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4901,7 +4901,7 @@ func awsAwsquery_serializeDocumentSignalResourceInput(v *SignalResourceInput, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentStopStackSetOperationInput(v *StopStackSetOperationInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentStopStackSetOperationInput(v *StopStackSetOperationInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4918,7 +4918,7 @@ func awsAwsquery_serializeDocumentStopStackSetOperationInput(v *StopStackSetOper
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUpdateStackInput(v *UpdateStackInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUpdateStackInput(v *UpdateStackInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5017,7 +5017,7 @@ func awsAwsquery_serializeDocumentUpdateStackInput(v *UpdateStackInput, value qu
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUpdateStackInstancesInput(v *UpdateStackInstancesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUpdateStackInstancesInput(v *UpdateStackInstancesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5069,7 +5069,7 @@ func awsAwsquery_serializeDocumentUpdateStackInstancesInput(v *UpdateStackInstan
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUpdateStackSetInput(v *UpdateStackSetInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUpdateStackSetInput(v *UpdateStackSetInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5177,7 +5177,7 @@ func awsAwsquery_serializeDocumentUpdateStackSetInput(v *UpdateStackSetInput, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUpdateTerminationProtectionInput(v *UpdateTerminationProtectionInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUpdateTerminationProtectionInput(v *UpdateTerminationProtectionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -5194,7 +5194,7 @@ func awsAwsquery_serializeDocumentUpdateTerminationProtectionInput(v *UpdateTerm
 	return nil
 }
 
-func awsAwsquery_serializeDocumentValidateTemplateInput(v *ValidateTemplateInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentValidateTemplateInput(v *ValidateTemplateInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 

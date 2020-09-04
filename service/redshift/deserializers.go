@@ -65,7 +65,7 @@ func (m *awsAwsquery_deserializeOpAcceptReservedNodeExchange) HandleDeserialize(
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentAcceptReservedNodeExchangeOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentAcceptReservedNodeExchangeOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -169,7 +169,7 @@ func (m *awsAwsquery_deserializeOpAuthorizeClusterSecurityGroupIngress) HandleDe
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentAuthorizeClusterSecurityGroupIngressOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentAuthorizeClusterSecurityGroupIngressOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -264,7 +264,7 @@ func (m *awsAwsquery_deserializeOpAuthorizeSnapshotAccess) HandleDeserialize(ctx
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentAuthorizeSnapshotAccessOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentAuthorizeSnapshotAccessOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -365,7 +365,7 @@ func (m *awsAwsquery_deserializeOpBatchDeleteClusterSnapshots) HandleDeserialize
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentBatchDeleteClusterSnapshotsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentBatchDeleteClusterSnapshotsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -451,7 +451,7 @@ func (m *awsAwsquery_deserializeOpBatchModifyClusterSnapshots) HandleDeserialize
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentBatchModifyClusterSnapshotsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentBatchModifyClusterSnapshotsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -540,7 +540,7 @@ func (m *awsAwsquery_deserializeOpCancelResize) HandleDeserialize(ctx context.Co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCancelResizeOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCancelResizeOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -635,7 +635,7 @@ func (m *awsAwsquery_deserializeOpCopyClusterSnapshot) HandleDeserialize(ctx con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCopyClusterSnapshotOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCopyClusterSnapshotOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -733,7 +733,7 @@ func (m *awsAwsquery_deserializeOpCreateCluster) HandleDeserialize(ctx context.C
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateClusterOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateClusterOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -882,7 +882,7 @@ func (m *awsAwsquery_deserializeOpCreateClusterParameterGroup) HandleDeserialize
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateClusterParameterGroupOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateClusterParameterGroupOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -977,7 +977,7 @@ func (m *awsAwsquery_deserializeOpCreateClusterSecurityGroup) HandleDeserialize(
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateClusterSecurityGroupOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateClusterSecurityGroupOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1072,7 +1072,7 @@ func (m *awsAwsquery_deserializeOpCreateClusterSnapshot) HandleDeserialize(ctx c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateClusterSnapshotOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateClusterSnapshotOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1176,7 +1176,7 @@ func (m *awsAwsquery_deserializeOpCreateClusterSubnetGroup) HandleDeserialize(ct
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateClusterSubnetGroupOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateClusterSubnetGroupOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1283,7 +1283,7 @@ func (m *awsAwsquery_deserializeOpCreateEventSubscription) HandleDeserialize(ctx
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateEventSubscriptionOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateEventSubscriptionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1399,7 +1399,7 @@ func (m *awsAwsquery_deserializeOpCreateHsmClientCertificate) HandleDeserialize(
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateHsmClientCertificateOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateHsmClientCertificateOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1494,7 +1494,7 @@ func (m *awsAwsquery_deserializeOpCreateHsmConfiguration) HandleDeserialize(ctx 
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateHsmConfigurationOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateHsmConfigurationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1589,7 +1589,7 @@ func (m *awsAwsquery_deserializeOpCreateScheduledAction) HandleDeserialize(ctx c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateScheduledActionOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateScheduledActionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1690,7 +1690,7 @@ func (m *awsAwsquery_deserializeOpCreateSnapshotCopyGrant) HandleDeserialize(ctx
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateSnapshotCopyGrantOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateSnapshotCopyGrantOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1791,7 +1791,7 @@ func (m *awsAwsquery_deserializeOpCreateSnapshotSchedule) HandleDeserialize(ctx 
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateSnapshotScheduleOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateSnapshotScheduleOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1981,7 +1981,7 @@ func (m *awsAwsquery_deserializeOpCreateUsageLimit) HandleDeserialize(ctx contex
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentCreateUsageLimitOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentCreateUsageLimitOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2085,7 +2085,7 @@ func (m *awsAwsquery_deserializeOpDeleteCluster) HandleDeserialize(ctx context.C
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteClusterOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDeleteClusterOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2361,7 +2361,7 @@ func (m *awsAwsquery_deserializeOpDeleteClusterSnapshot) HandleDeserialize(ctx c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDeleteClusterSnapshotOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDeleteClusterSnapshotOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3254,7 +3254,7 @@ func (m *awsAwsquery_deserializeOpDescribeAccountAttributes) HandleDeserialize(c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeAccountAttributesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeAccountAttributesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3337,7 +3337,7 @@ func (m *awsAwsquery_deserializeOpDescribeClusterDbRevisions) HandleDeserialize(
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeClusterDbRevisionsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeClusterDbRevisionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3426,7 +3426,7 @@ func (m *awsAwsquery_deserializeOpDescribeClusterParameterGroups) HandleDeserial
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeClusterParameterGroupsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeClusterParameterGroupsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3515,7 +3515,7 @@ func (m *awsAwsquery_deserializeOpDescribeClusterParameters) HandleDeserialize(c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeClusterParametersOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeClusterParametersOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3601,7 +3601,7 @@ func (m *awsAwsquery_deserializeOpDescribeClusters) HandleDeserialize(ctx contex
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeClustersOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeClustersOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3690,7 +3690,7 @@ func (m *awsAwsquery_deserializeOpDescribeClusterSecurityGroups) HandleDeseriali
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeClusterSecurityGroupsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeClusterSecurityGroupsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3779,7 +3779,7 @@ func (m *awsAwsquery_deserializeOpDescribeClusterSnapshots) HandleDeserialize(ct
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeClusterSnapshotsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeClusterSnapshotsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3871,7 +3871,7 @@ func (m *awsAwsquery_deserializeOpDescribeClusterSubnetGroups) HandleDeserialize
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeClusterSubnetGroupsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeClusterSubnetGroupsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3960,7 +3960,7 @@ func (m *awsAwsquery_deserializeOpDescribeClusterTracks) HandleDeserialize(ctx c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeClusterTracksOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeClusterTracksOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4049,7 +4049,7 @@ func (m *awsAwsquery_deserializeOpDescribeClusterVersions) HandleDeserialize(ctx
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeClusterVersionsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeClusterVersionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4132,7 +4132,7 @@ func (m *awsAwsquery_deserializeOpDescribeDefaultClusterParameters) HandleDeseri
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeDefaultClusterParametersOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeDefaultClusterParametersOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4215,7 +4215,7 @@ func (m *awsAwsquery_deserializeOpDescribeEventCategories) HandleDeserialize(ctx
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeEventCategoriesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeEventCategoriesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4298,7 +4298,7 @@ func (m *awsAwsquery_deserializeOpDescribeEvents) HandleDeserialize(ctx context.
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeEventsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeEventsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4381,7 +4381,7 @@ func (m *awsAwsquery_deserializeOpDescribeEventSubscriptions) HandleDeserialize(
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeEventSubscriptionsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeEventSubscriptionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4470,7 +4470,7 @@ func (m *awsAwsquery_deserializeOpDescribeHsmClientCertificates) HandleDeseriali
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeHsmClientCertificatesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeHsmClientCertificatesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4559,7 +4559,7 @@ func (m *awsAwsquery_deserializeOpDescribeHsmConfigurations) HandleDeserialize(c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeHsmConfigurationsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeHsmConfigurationsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4648,7 +4648,7 @@ func (m *awsAwsquery_deserializeOpDescribeLoggingStatus) HandleDeserialize(ctx c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeLoggingStatusOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeLoggingStatusOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4734,7 +4734,7 @@ func (m *awsAwsquery_deserializeOpDescribeNodeConfigurationOptions) HandleDeseri
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeNodeConfigurationOptionsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeNodeConfigurationOptionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4829,7 +4829,7 @@ func (m *awsAwsquery_deserializeOpDescribeOrderableClusterOptions) HandleDeseria
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeOrderableClusterOptionsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeOrderableClusterOptionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4912,7 +4912,7 @@ func (m *awsAwsquery_deserializeOpDescribeReservedNodeOfferings) HandleDeseriali
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeReservedNodeOfferingsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeReservedNodeOfferingsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5004,7 +5004,7 @@ func (m *awsAwsquery_deserializeOpDescribeReservedNodes) HandleDeserialize(ctx c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeReservedNodesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeReservedNodesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5093,7 +5093,7 @@ func (m *awsAwsquery_deserializeOpDescribeResize) HandleDeserialize(ctx context.
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeResizeOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeResizeOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5182,7 +5182,7 @@ func (m *awsAwsquery_deserializeOpDescribeScheduledActions) HandleDeserialize(ct
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeScheduledActionsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeScheduledActionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5271,7 +5271,7 @@ func (m *awsAwsquery_deserializeOpDescribeSnapshotCopyGrants) HandleDeserialize(
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeSnapshotCopyGrantsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeSnapshotCopyGrantsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5360,7 +5360,7 @@ func (m *awsAwsquery_deserializeOpDescribeSnapshotSchedules) HandleDeserialize(c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeSnapshotSchedulesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeSnapshotSchedulesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5443,7 +5443,7 @@ func (m *awsAwsquery_deserializeOpDescribeStorage) HandleDeserialize(ctx context
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeStorageOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeStorageOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5526,7 +5526,7 @@ func (m *awsAwsquery_deserializeOpDescribeTableRestoreStatus) HandleDeserialize(
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeTableRestoreStatusOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeTableRestoreStatusOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5615,7 +5615,7 @@ func (m *awsAwsquery_deserializeOpDescribeTags) HandleDeserialize(ctx context.Co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeTagsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeTagsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5704,7 +5704,7 @@ func (m *awsAwsquery_deserializeOpDescribeUsageLimits) HandleDeserialize(ctx con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDescribeUsageLimitsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDescribeUsageLimitsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5793,7 +5793,7 @@ func (m *awsAwsquery_deserializeOpDisableLogging) HandleDeserialize(ctx context.
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDisableLoggingOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDisableLoggingOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5879,7 +5879,7 @@ func (m *awsAwsquery_deserializeOpDisableSnapshotCopy) HandleDeserialize(ctx con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDisableSnapshotCopyOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDisableSnapshotCopyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5974,7 +5974,7 @@ func (m *awsAwsquery_deserializeOpEnableLogging) HandleDeserialize(ctx context.C
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentEnableLoggingOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentEnableLoggingOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -6075,7 +6075,7 @@ func (m *awsAwsquery_deserializeOpEnableSnapshotCopy) HandleDeserialize(ctx cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentEnableSnapshotCopyOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentEnableSnapshotCopyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -6191,7 +6191,7 @@ func (m *awsAwsquery_deserializeOpGetClusterCredentials) HandleDeserialize(ctx c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetClusterCredentialsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetClusterCredentialsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -6280,7 +6280,7 @@ func (m *awsAwsquery_deserializeOpGetReservedNodeExchangeOfferings) HandleDeseri
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetReservedNodeExchangeOfferingsOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetReservedNodeExchangeOfferingsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -6381,7 +6381,7 @@ func (m *awsAwsquery_deserializeOpModifyCluster) HandleDeserialize(ctx context.C
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentModifyClusterOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentModifyClusterOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -6521,7 +6521,7 @@ func (m *awsAwsquery_deserializeOpModifyClusterDbRevision) HandleDeserialize(ctx
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentModifyClusterDbRevisionOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentModifyClusterDbRevisionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -6613,7 +6613,7 @@ func (m *awsAwsquery_deserializeOpModifyClusterIamRoles) HandleDeserialize(ctx c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentModifyClusterIamRolesOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentModifyClusterIamRolesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -6702,7 +6702,7 @@ func (m *awsAwsquery_deserializeOpModifyClusterMaintenance) HandleDeserialize(ct
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentModifyClusterMaintenanceOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentModifyClusterMaintenanceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -6791,7 +6791,7 @@ func (m *awsAwsquery_deserializeOpModifyClusterParameterGroup) HandleDeserialize
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentModifyClusterParameterGroupOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentModifyClusterParameterGroupOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -6880,7 +6880,7 @@ func (m *awsAwsquery_deserializeOpModifyClusterSnapshot) HandleDeserialize(ctx c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentModifyClusterSnapshotOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentModifyClusterSnapshotOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -7064,7 +7064,7 @@ func (m *awsAwsquery_deserializeOpModifyClusterSubnetGroup) HandleDeserialize(ct
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentModifyClusterSubnetGroupOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentModifyClusterSubnetGroupOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -7165,7 +7165,7 @@ func (m *awsAwsquery_deserializeOpModifyEventSubscription) HandleDeserialize(ctx
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentModifyEventSubscriptionOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentModifyEventSubscriptionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -7275,7 +7275,7 @@ func (m *awsAwsquery_deserializeOpModifyScheduledAction) HandleDeserialize(ctx c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentModifyScheduledActionOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentModifyScheduledActionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -7373,7 +7373,7 @@ func (m *awsAwsquery_deserializeOpModifySnapshotCopyRetentionPeriod) HandleDeser
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentModifySnapshotCopyRetentionPeriodOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentModifySnapshotCopyRetentionPeriodOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -7471,7 +7471,7 @@ func (m *awsAwsquery_deserializeOpModifySnapshotSchedule) HandleDeserialize(ctx 
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentModifySnapshotScheduleOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentModifySnapshotScheduleOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -7563,7 +7563,7 @@ func (m *awsAwsquery_deserializeOpModifyUsageLimit) HandleDeserialize(ctx contex
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentModifyUsageLimitOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentModifyUsageLimitOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -7655,7 +7655,7 @@ func (m *awsAwsquery_deserializeOpPauseCluster) HandleDeserialize(ctx context.Co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentPauseClusterOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentPauseClusterOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -7744,7 +7744,7 @@ func (m *awsAwsquery_deserializeOpPurchaseReservedNodeOffering) HandleDeserializ
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentPurchaseReservedNodeOfferingOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentPurchaseReservedNodeOfferingOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -7839,7 +7839,7 @@ func (m *awsAwsquery_deserializeOpRebootCluster) HandleDeserialize(ctx context.C
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentRebootClusterOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentRebootClusterOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -7928,7 +7928,7 @@ func (m *awsAwsquery_deserializeOpResetClusterParameterGroup) HandleDeserialize(
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentResetClusterParameterGroupOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentResetClusterParameterGroupOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -8017,7 +8017,7 @@ func (m *awsAwsquery_deserializeOpResizeCluster) HandleDeserialize(ctx context.C
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentResizeClusterOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentResizeClusterOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -8127,7 +8127,7 @@ func (m *awsAwsquery_deserializeOpRestoreFromClusterSnapshot) HandleDeserialize(
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentRestoreFromClusterSnapshotOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentRestoreFromClusterSnapshotOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -8285,7 +8285,7 @@ func (m *awsAwsquery_deserializeOpRestoreTableFromClusterSnapshot) HandleDeseria
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentRestoreTableFromClusterSnapshotOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentRestoreTableFromClusterSnapshotOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -8389,7 +8389,7 @@ func (m *awsAwsquery_deserializeOpResumeCluster) HandleDeserialize(ctx context.C
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentResumeClusterOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentResumeClusterOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -8478,7 +8478,7 @@ func (m *awsAwsquery_deserializeOpRevokeClusterSecurityGroupIngress) HandleDeser
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentRevokeClusterSecurityGroupIngressOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentRevokeClusterSecurityGroupIngressOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -8570,7 +8570,7 @@ func (m *awsAwsquery_deserializeOpRevokeSnapshotAccess) HandleDeserialize(ctx co
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentRevokeSnapshotAccessOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentRevokeSnapshotAccessOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -8662,7 +8662,7 @@ func (m *awsAwsquery_deserializeOpRotateEncryptionKey) HandleDeserialize(ctx con
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentRotateEncryptionKeyOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentRotateEncryptionKeyOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -26287,7 +26287,7 @@ func awsAwsquery_deserializeDocumentVpcSecurityGroupMembershipListUnwrapped(v *[
 	*v = sv
 	return nil
 }
-func awsAwsquery_deserializeDocumentAcceptReservedNodeExchangeOutput(v **AcceptReservedNodeExchangeOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentAcceptReservedNodeExchangeOutput(v **AcceptReservedNodeExchangeOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -26323,7 +26323,7 @@ func awsAwsquery_deserializeDocumentAcceptReservedNodeExchangeOutput(v **AcceptR
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentAuthorizeClusterSecurityGroupIngressOutput(v **AuthorizeClusterSecurityGroupIngressOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentAuthorizeClusterSecurityGroupIngressOutput(v **AuthorizeClusterSecurityGroupIngressOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -26359,7 +26359,7 @@ func awsAwsquery_deserializeDocumentAuthorizeClusterSecurityGroupIngressOutput(v
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentAuthorizeSnapshotAccessOutput(v **AuthorizeSnapshotAccessOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentAuthorizeSnapshotAccessOutput(v **AuthorizeSnapshotAccessOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -26395,7 +26395,7 @@ func awsAwsquery_deserializeDocumentAuthorizeSnapshotAccessOutput(v **AuthorizeS
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentBatchDeleteClusterSnapshotsOutput(v **BatchDeleteClusterSnapshotsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentBatchDeleteClusterSnapshotsOutput(v **BatchDeleteClusterSnapshotsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -26437,7 +26437,7 @@ func awsAwsquery_deserializeDocumentBatchDeleteClusterSnapshotsOutput(v **BatchD
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentBatchModifyClusterSnapshotsOutput(v **BatchModifyClusterSnapshotsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentBatchModifyClusterSnapshotsOutput(v **BatchModifyClusterSnapshotsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -26479,7 +26479,7 @@ func awsAwsquery_deserializeDocumentBatchModifyClusterSnapshotsOutput(v **BatchM
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCancelResizeOutput(v **CancelResizeOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCancelResizeOutput(v **CancelResizeOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -26724,7 +26724,7 @@ func awsAwsquery_deserializeDocumentCancelResizeOutput(v **CancelResizeOutput, d
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCopyClusterSnapshotOutput(v **CopyClusterSnapshotOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCopyClusterSnapshotOutput(v **CopyClusterSnapshotOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -26760,7 +26760,7 @@ func awsAwsquery_deserializeDocumentCopyClusterSnapshotOutput(v **CopyClusterSna
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateClusterOutput(v **CreateClusterOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateClusterOutput(v **CreateClusterOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -26796,7 +26796,7 @@ func awsAwsquery_deserializeDocumentCreateClusterOutput(v **CreateClusterOutput,
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateClusterParameterGroupOutput(v **CreateClusterParameterGroupOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateClusterParameterGroupOutput(v **CreateClusterParameterGroupOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -26832,7 +26832,7 @@ func awsAwsquery_deserializeDocumentCreateClusterParameterGroupOutput(v **Create
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateClusterSecurityGroupOutput(v **CreateClusterSecurityGroupOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateClusterSecurityGroupOutput(v **CreateClusterSecurityGroupOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -26868,7 +26868,7 @@ func awsAwsquery_deserializeDocumentCreateClusterSecurityGroupOutput(v **CreateC
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateClusterSnapshotOutput(v **CreateClusterSnapshotOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateClusterSnapshotOutput(v **CreateClusterSnapshotOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -26904,7 +26904,7 @@ func awsAwsquery_deserializeDocumentCreateClusterSnapshotOutput(v **CreateCluste
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateClusterSubnetGroupOutput(v **CreateClusterSubnetGroupOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateClusterSubnetGroupOutput(v **CreateClusterSubnetGroupOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -26940,7 +26940,7 @@ func awsAwsquery_deserializeDocumentCreateClusterSubnetGroupOutput(v **CreateClu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateEventSubscriptionOutput(v **CreateEventSubscriptionOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateEventSubscriptionOutput(v **CreateEventSubscriptionOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -26976,7 +26976,7 @@ func awsAwsquery_deserializeDocumentCreateEventSubscriptionOutput(v **CreateEven
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateHsmClientCertificateOutput(v **CreateHsmClientCertificateOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateHsmClientCertificateOutput(v **CreateHsmClientCertificateOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -27012,7 +27012,7 @@ func awsAwsquery_deserializeDocumentCreateHsmClientCertificateOutput(v **CreateH
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateHsmConfigurationOutput(v **CreateHsmConfigurationOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateHsmConfigurationOutput(v **CreateHsmConfigurationOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -27048,7 +27048,7 @@ func awsAwsquery_deserializeDocumentCreateHsmConfigurationOutput(v **CreateHsmCo
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateScheduledActionOutput(v **CreateScheduledActionOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateScheduledActionOutput(v **CreateScheduledActionOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -27189,7 +27189,7 @@ func awsAwsquery_deserializeDocumentCreateScheduledActionOutput(v **CreateSchedu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateSnapshotCopyGrantOutput(v **CreateSnapshotCopyGrantOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateSnapshotCopyGrantOutput(v **CreateSnapshotCopyGrantOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -27225,7 +27225,7 @@ func awsAwsquery_deserializeDocumentCreateSnapshotCopyGrantOutput(v **CreateSnap
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateSnapshotScheduleOutput(v **CreateSnapshotScheduleOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateSnapshotScheduleOutput(v **CreateSnapshotScheduleOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -27352,7 +27352,7 @@ func awsAwsquery_deserializeDocumentCreateTagsOutput(v **CreateTagsOutput, decod
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentCreateUsageLimitOutput(v **CreateUsageLimitOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentCreateUsageLimitOutput(v **CreateUsageLimitOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -27483,7 +27483,7 @@ func awsAwsquery_deserializeDocumentCreateUsageLimitOutput(v **CreateUsageLimitO
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteClusterOutput(v **DeleteClusterOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDeleteClusterOutput(v **DeleteClusterOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -27579,7 +27579,7 @@ func awsAwsquery_deserializeDocumentDeleteClusterSecurityGroupOutput(v **DeleteC
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDeleteClusterSnapshotOutput(v **DeleteClusterSnapshotOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDeleteClusterSnapshotOutput(v **DeleteClusterSnapshotOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -27885,7 +27885,7 @@ func awsAwsquery_deserializeDocumentDeleteUsageLimitOutput(v **DeleteUsageLimitO
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeAccountAttributesOutput(v **DescribeAccountAttributesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeAccountAttributesOutput(v **DescribeAccountAttributesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -27921,7 +27921,7 @@ func awsAwsquery_deserializeDocumentDescribeAccountAttributesOutput(v **Describe
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeClusterDbRevisionsOutput(v **DescribeClusterDbRevisionsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeClusterDbRevisionsOutput(v **DescribeClusterDbRevisionsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -27970,7 +27970,7 @@ func awsAwsquery_deserializeDocumentDescribeClusterDbRevisionsOutput(v **Describ
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeClusterParameterGroupsOutput(v **DescribeClusterParameterGroupsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeClusterParameterGroupsOutput(v **DescribeClusterParameterGroupsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -28019,7 +28019,7 @@ func awsAwsquery_deserializeDocumentDescribeClusterParameterGroupsOutput(v **Des
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeClusterParametersOutput(v **DescribeClusterParametersOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeClusterParametersOutput(v **DescribeClusterParametersOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -28068,7 +28068,7 @@ func awsAwsquery_deserializeDocumentDescribeClusterParametersOutput(v **Describe
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeClusterSecurityGroupsOutput(v **DescribeClusterSecurityGroupsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeClusterSecurityGroupsOutput(v **DescribeClusterSecurityGroupsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -28117,7 +28117,7 @@ func awsAwsquery_deserializeDocumentDescribeClusterSecurityGroupsOutput(v **Desc
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeClusterSnapshotsOutput(v **DescribeClusterSnapshotsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeClusterSnapshotsOutput(v **DescribeClusterSnapshotsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -28166,7 +28166,7 @@ func awsAwsquery_deserializeDocumentDescribeClusterSnapshotsOutput(v **DescribeC
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeClustersOutput(v **DescribeClustersOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeClustersOutput(v **DescribeClustersOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -28215,7 +28215,7 @@ func awsAwsquery_deserializeDocumentDescribeClustersOutput(v **DescribeClustersO
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeClusterSubnetGroupsOutput(v **DescribeClusterSubnetGroupsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeClusterSubnetGroupsOutput(v **DescribeClusterSubnetGroupsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -28264,7 +28264,7 @@ func awsAwsquery_deserializeDocumentDescribeClusterSubnetGroupsOutput(v **Descri
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeClusterTracksOutput(v **DescribeClusterTracksOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeClusterTracksOutput(v **DescribeClusterTracksOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -28313,7 +28313,7 @@ func awsAwsquery_deserializeDocumentDescribeClusterTracksOutput(v **DescribeClus
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeClusterVersionsOutput(v **DescribeClusterVersionsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeClusterVersionsOutput(v **DescribeClusterVersionsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -28362,7 +28362,7 @@ func awsAwsquery_deserializeDocumentDescribeClusterVersionsOutput(v **DescribeCl
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeDefaultClusterParametersOutput(v **DescribeDefaultClusterParametersOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeDefaultClusterParametersOutput(v **DescribeDefaultClusterParametersOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -28398,7 +28398,7 @@ func awsAwsquery_deserializeDocumentDescribeDefaultClusterParametersOutput(v **D
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeEventCategoriesOutput(v **DescribeEventCategoriesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeEventCategoriesOutput(v **DescribeEventCategoriesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -28434,7 +28434,7 @@ func awsAwsquery_deserializeDocumentDescribeEventCategoriesOutput(v **DescribeEv
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeEventsOutput(v **DescribeEventsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeEventsOutput(v **DescribeEventsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -28483,7 +28483,7 @@ func awsAwsquery_deserializeDocumentDescribeEventsOutput(v **DescribeEventsOutpu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeEventSubscriptionsOutput(v **DescribeEventSubscriptionsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeEventSubscriptionsOutput(v **DescribeEventSubscriptionsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -28532,7 +28532,7 @@ func awsAwsquery_deserializeDocumentDescribeEventSubscriptionsOutput(v **Describ
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeHsmClientCertificatesOutput(v **DescribeHsmClientCertificatesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeHsmClientCertificatesOutput(v **DescribeHsmClientCertificatesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -28581,7 +28581,7 @@ func awsAwsquery_deserializeDocumentDescribeHsmClientCertificatesOutput(v **Desc
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeHsmConfigurationsOutput(v **DescribeHsmConfigurationsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeHsmConfigurationsOutput(v **DescribeHsmConfigurationsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -28630,7 +28630,7 @@ func awsAwsquery_deserializeDocumentDescribeHsmConfigurationsOutput(v **Describe
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeLoggingStatusOutput(v **DescribeLoggingStatusOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeLoggingStatusOutput(v **DescribeLoggingStatusOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -28749,7 +28749,7 @@ func awsAwsquery_deserializeDocumentDescribeLoggingStatusOutput(v **DescribeLogg
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeNodeConfigurationOptionsOutput(v **DescribeNodeConfigurationOptionsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeNodeConfigurationOptionsOutput(v **DescribeNodeConfigurationOptionsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -28798,7 +28798,7 @@ func awsAwsquery_deserializeDocumentDescribeNodeConfigurationOptionsOutput(v **D
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeOrderableClusterOptionsOutput(v **DescribeOrderableClusterOptionsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeOrderableClusterOptionsOutput(v **DescribeOrderableClusterOptionsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -28847,7 +28847,7 @@ func awsAwsquery_deserializeDocumentDescribeOrderableClusterOptionsOutput(v **De
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeReservedNodeOfferingsOutput(v **DescribeReservedNodeOfferingsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeReservedNodeOfferingsOutput(v **DescribeReservedNodeOfferingsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -28896,7 +28896,7 @@ func awsAwsquery_deserializeDocumentDescribeReservedNodeOfferingsOutput(v **Desc
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeReservedNodesOutput(v **DescribeReservedNodesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeReservedNodesOutput(v **DescribeReservedNodesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -28945,7 +28945,7 @@ func awsAwsquery_deserializeDocumentDescribeReservedNodesOutput(v **DescribeRese
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeResizeOutput(v **DescribeResizeOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeResizeOutput(v **DescribeResizeOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -29190,7 +29190,7 @@ func awsAwsquery_deserializeDocumentDescribeResizeOutput(v **DescribeResizeOutpu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeScheduledActionsOutput(v **DescribeScheduledActionsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeScheduledActionsOutput(v **DescribeScheduledActionsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -29239,7 +29239,7 @@ func awsAwsquery_deserializeDocumentDescribeScheduledActionsOutput(v **DescribeS
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeSnapshotCopyGrantsOutput(v **DescribeSnapshotCopyGrantsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeSnapshotCopyGrantsOutput(v **DescribeSnapshotCopyGrantsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -29288,7 +29288,7 @@ func awsAwsquery_deserializeDocumentDescribeSnapshotCopyGrantsOutput(v **Describ
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeSnapshotSchedulesOutput(v **DescribeSnapshotSchedulesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeSnapshotSchedulesOutput(v **DescribeSnapshotSchedulesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -29337,7 +29337,7 @@ func awsAwsquery_deserializeDocumentDescribeSnapshotSchedulesOutput(v **Describe
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeStorageOutput(v **DescribeStorageOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeStorageOutput(v **DescribeStorageOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -29401,7 +29401,7 @@ func awsAwsquery_deserializeDocumentDescribeStorageOutput(v **DescribeStorageOut
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeTableRestoreStatusOutput(v **DescribeTableRestoreStatusOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeTableRestoreStatusOutput(v **DescribeTableRestoreStatusOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -29450,7 +29450,7 @@ func awsAwsquery_deserializeDocumentDescribeTableRestoreStatusOutput(v **Describ
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeTagsOutput(v **DescribeTagsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeTagsOutput(v **DescribeTagsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -29499,7 +29499,7 @@ func awsAwsquery_deserializeDocumentDescribeTagsOutput(v **DescribeTagsOutput, d
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDescribeUsageLimitsOutput(v **DescribeUsageLimitsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDescribeUsageLimitsOutput(v **DescribeUsageLimitsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -29548,7 +29548,7 @@ func awsAwsquery_deserializeDocumentDescribeUsageLimitsOutput(v **DescribeUsageL
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDisableLoggingOutput(v **DisableLoggingOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDisableLoggingOutput(v **DisableLoggingOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -29667,7 +29667,7 @@ func awsAwsquery_deserializeDocumentDisableLoggingOutput(v **DisableLoggingOutpu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDisableSnapshotCopyOutput(v **DisableSnapshotCopyOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDisableSnapshotCopyOutput(v **DisableSnapshotCopyOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -29703,7 +29703,7 @@ func awsAwsquery_deserializeDocumentDisableSnapshotCopyOutput(v **DisableSnapsho
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentEnableLoggingOutput(v **EnableLoggingOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentEnableLoggingOutput(v **EnableLoggingOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -29822,7 +29822,7 @@ func awsAwsquery_deserializeDocumentEnableLoggingOutput(v **EnableLoggingOutput,
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentEnableSnapshotCopyOutput(v **EnableSnapshotCopyOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentEnableSnapshotCopyOutput(v **EnableSnapshotCopyOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -29858,7 +29858,7 @@ func awsAwsquery_deserializeDocumentEnableSnapshotCopyOutput(v **EnableSnapshotC
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetClusterCredentialsOutput(v **GetClusterCredentialsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetClusterCredentialsOutput(v **GetClusterCredentialsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -29931,7 +29931,7 @@ func awsAwsquery_deserializeDocumentGetClusterCredentialsOutput(v **GetClusterCr
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetReservedNodeExchangeOfferingsOutput(v **GetReservedNodeExchangeOfferingsOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetReservedNodeExchangeOfferingsOutput(v **GetReservedNodeExchangeOfferingsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -29980,7 +29980,7 @@ func awsAwsquery_deserializeDocumentGetReservedNodeExchangeOfferingsOutput(v **G
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentModifyClusterDbRevisionOutput(v **ModifyClusterDbRevisionOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentModifyClusterDbRevisionOutput(v **ModifyClusterDbRevisionOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -30016,7 +30016,7 @@ func awsAwsquery_deserializeDocumentModifyClusterDbRevisionOutput(v **ModifyClus
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentModifyClusterIamRolesOutput(v **ModifyClusterIamRolesOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentModifyClusterIamRolesOutput(v **ModifyClusterIamRolesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -30052,7 +30052,7 @@ func awsAwsquery_deserializeDocumentModifyClusterIamRolesOutput(v **ModifyCluste
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentModifyClusterMaintenanceOutput(v **ModifyClusterMaintenanceOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentModifyClusterMaintenanceOutput(v **ModifyClusterMaintenanceOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -30088,7 +30088,7 @@ func awsAwsquery_deserializeDocumentModifyClusterMaintenanceOutput(v **ModifyClu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentModifyClusterOutput(v **ModifyClusterOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentModifyClusterOutput(v **ModifyClusterOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -30124,7 +30124,7 @@ func awsAwsquery_deserializeDocumentModifyClusterOutput(v **ModifyClusterOutput,
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentModifyClusterParameterGroupOutput(v **ModifyClusterParameterGroupOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentModifyClusterParameterGroupOutput(v **ModifyClusterParameterGroupOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -30180,7 +30180,7 @@ func awsAwsquery_deserializeDocumentModifyClusterParameterGroupOutput(v **Modify
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentModifyClusterSnapshotOutput(v **ModifyClusterSnapshotOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentModifyClusterSnapshotOutput(v **ModifyClusterSnapshotOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -30246,7 +30246,7 @@ func awsAwsquery_deserializeDocumentModifyClusterSnapshotScheduleOutput(v **Modi
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentModifyClusterSubnetGroupOutput(v **ModifyClusterSubnetGroupOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentModifyClusterSubnetGroupOutput(v **ModifyClusterSubnetGroupOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -30282,7 +30282,7 @@ func awsAwsquery_deserializeDocumentModifyClusterSubnetGroupOutput(v **ModifyClu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentModifyEventSubscriptionOutput(v **ModifyEventSubscriptionOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentModifyEventSubscriptionOutput(v **ModifyEventSubscriptionOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -30318,7 +30318,7 @@ func awsAwsquery_deserializeDocumentModifyEventSubscriptionOutput(v **ModifyEven
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentModifyScheduledActionOutput(v **ModifyScheduledActionOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentModifyScheduledActionOutput(v **ModifyScheduledActionOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -30459,7 +30459,7 @@ func awsAwsquery_deserializeDocumentModifyScheduledActionOutput(v **ModifySchedu
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentModifySnapshotCopyRetentionPeriodOutput(v **ModifySnapshotCopyRetentionPeriodOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentModifySnapshotCopyRetentionPeriodOutput(v **ModifySnapshotCopyRetentionPeriodOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -30495,7 +30495,7 @@ func awsAwsquery_deserializeDocumentModifySnapshotCopyRetentionPeriodOutput(v **
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentModifySnapshotScheduleOutput(v **ModifySnapshotScheduleOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentModifySnapshotScheduleOutput(v **ModifySnapshotScheduleOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -30592,7 +30592,7 @@ func awsAwsquery_deserializeDocumentModifySnapshotScheduleOutput(v **ModifySnaps
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentModifyUsageLimitOutput(v **ModifyUsageLimitOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentModifyUsageLimitOutput(v **ModifyUsageLimitOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -30723,7 +30723,7 @@ func awsAwsquery_deserializeDocumentModifyUsageLimitOutput(v **ModifyUsageLimitO
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentPauseClusterOutput(v **PauseClusterOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentPauseClusterOutput(v **PauseClusterOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -30759,7 +30759,7 @@ func awsAwsquery_deserializeDocumentPauseClusterOutput(v **PauseClusterOutput, d
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentPurchaseReservedNodeOfferingOutput(v **PurchaseReservedNodeOfferingOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentPurchaseReservedNodeOfferingOutput(v **PurchaseReservedNodeOfferingOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -30795,7 +30795,7 @@ func awsAwsquery_deserializeDocumentPurchaseReservedNodeOfferingOutput(v **Purch
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentRebootClusterOutput(v **RebootClusterOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentRebootClusterOutput(v **RebootClusterOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -30831,7 +30831,7 @@ func awsAwsquery_deserializeDocumentRebootClusterOutput(v **RebootClusterOutput,
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentResetClusterParameterGroupOutput(v **ResetClusterParameterGroupOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentResetClusterParameterGroupOutput(v **ResetClusterParameterGroupOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -30887,7 +30887,7 @@ func awsAwsquery_deserializeDocumentResetClusterParameterGroupOutput(v **ResetCl
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentResizeClusterOutput(v **ResizeClusterOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentResizeClusterOutput(v **ResizeClusterOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -30923,7 +30923,7 @@ func awsAwsquery_deserializeDocumentResizeClusterOutput(v **ResizeClusterOutput,
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentRestoreFromClusterSnapshotOutput(v **RestoreFromClusterSnapshotOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentRestoreFromClusterSnapshotOutput(v **RestoreFromClusterSnapshotOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -30959,7 +30959,7 @@ func awsAwsquery_deserializeDocumentRestoreFromClusterSnapshotOutput(v **Restore
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentRestoreTableFromClusterSnapshotOutput(v **RestoreTableFromClusterSnapshotOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentRestoreTableFromClusterSnapshotOutput(v **RestoreTableFromClusterSnapshotOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -30995,7 +30995,7 @@ func awsAwsquery_deserializeDocumentRestoreTableFromClusterSnapshotOutput(v **Re
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentResumeClusterOutput(v **ResumeClusterOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentResumeClusterOutput(v **ResumeClusterOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -31031,7 +31031,7 @@ func awsAwsquery_deserializeDocumentResumeClusterOutput(v **ResumeClusterOutput,
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentRevokeClusterSecurityGroupIngressOutput(v **RevokeClusterSecurityGroupIngressOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentRevokeClusterSecurityGroupIngressOutput(v **RevokeClusterSecurityGroupIngressOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -31067,7 +31067,7 @@ func awsAwsquery_deserializeDocumentRevokeClusterSecurityGroupIngressOutput(v **
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentRevokeSnapshotAccessOutput(v **RevokeSnapshotAccessOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentRevokeSnapshotAccessOutput(v **RevokeSnapshotAccessOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -31103,7 +31103,7 @@ func awsAwsquery_deserializeDocumentRevokeSnapshotAccessOutput(v **RevokeSnapsho
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentRotateEncryptionKeyOutput(v **RotateEncryptionKeyOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentRotateEncryptionKeyOutput(v **RotateEncryptionKeyOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

@@ -1,11 +1,16 @@
 github.com/aws/aws-sdk-go-v2 v0.21.1-0.20200820194649-74a617e66b47 h1:QTwCKdl5MXbWHORPH16B8YW7/dYUvtQ5ynGiiKxNsps=
 github.com/aws/aws-sdk-go-v2 v0.21.1-0.20200820194649-74a617e66b47/go.mod h1:chhOohXGwMYjzhDGHlgDzTepjLf0wUhlutmMIirdiBQ=
+github.com/aws/aws-sdk-go-v2 v0.24.1-0.20200828232643-9cee6f194dae h1:/RnGV80+HdGEth2m1OHdTEtxddvprKmd2boGuE9i/Zo=
+github.com/aws/aws-sdk-go-v2 v0.24.1-0.20200828232643-9cee6f194dae/go.mod h1:7zJxC7S/5mRImnc1ar4ijZMoMxiK/VGDdQzOZeT/y/o=
 github.com/awslabs/smithy-go v0.0.0-20200820191216-588c85568291/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
 github.com/awslabs/smithy-go v0.0.0-20200820192257-b29a2bc72e74 h1:G/RQUW+EoxUd5xXPMBWyzPPxArT9XRFSpwXBnJCMq9o=
 github.com/awslabs/smithy-go v0.0.0-20200820192257-b29a2bc72e74/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
 github.com/awslabs/smithy-go v0.0.0-20200825193951-1f2465f8442d/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
 github.com/awslabs/smithy-go v0.0.0-20200827001424-5fb68d03f931 h1:aOVIC7mMrGscwocQEPMhsW31+nXUQj9ckxRY+syJQOk=
 github.com/awslabs/smithy-go v0.0.0-20200827001424-5fb68d03f931/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
+github.com/awslabs/smithy-go v0.0.0-20200828214850-b1c39f43623b/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
+github.com/awslabs/smithy-go v0.0.0-20200831191241-f0896471bee5 h1:n9PpVdUGNGElGcoWbvEpy/QE+KGYFsK3yOWtNnOPp4I=
+github.com/awslabs/smithy-go v0.0.0-20200831191241-f0896471bee5/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/go-sql-driver/mysql v1.5.0/go.mod h1:DCzpHaOWr8IXmIStZouvnhqoel9Qv2LBy8hT2VhHyBg=
 github.com/google/go-cmp v0.4.1 h1:/exdXoGamhu5ONeUJH0deniYLWYvQwW66yvlfiiKTu0=

@@ -44,7 +44,7 @@ func (m *awsAwsjson11_serializeOpCreateCertificateAuthority) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ACMPrivateCA.CreateCertificateAuthority")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateCertificateAuthorityInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateCertificateAuthorityInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -90,7 +90,7 @@ func (m *awsAwsjson11_serializeOpCreateCertificateAuthorityAuditReport) HandleSe
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ACMPrivateCA.CreateCertificateAuthorityAuditReport")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateCertificateAuthorityAuditReportInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateCertificateAuthorityAuditReportInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -136,7 +136,7 @@ func (m *awsAwsjson11_serializeOpCreatePermission) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ACMPrivateCA.CreatePermission")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreatePermissionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreatePermissionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -182,7 +182,7 @@ func (m *awsAwsjson11_serializeOpDeleteCertificateAuthority) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ACMPrivateCA.DeleteCertificateAuthority")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteCertificateAuthorityInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteCertificateAuthorityInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -228,7 +228,7 @@ func (m *awsAwsjson11_serializeOpDeletePermission) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ACMPrivateCA.DeletePermission")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeletePermissionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeletePermissionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -274,7 +274,7 @@ func (m *awsAwsjson11_serializeOpDescribeCertificateAuthority) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ACMPrivateCA.DescribeCertificateAuthority")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeCertificateAuthorityInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeCertificateAuthorityInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -320,7 +320,7 @@ func (m *awsAwsjson11_serializeOpDescribeCertificateAuthorityAuditReport) Handle
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ACMPrivateCA.DescribeCertificateAuthorityAuditReport")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeCertificateAuthorityAuditReportInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeCertificateAuthorityAuditReportInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -366,7 +366,7 @@ func (m *awsAwsjson11_serializeOpGetCertificate) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ACMPrivateCA.GetCertificate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetCertificateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetCertificateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -412,7 +412,7 @@ func (m *awsAwsjson11_serializeOpGetCertificateAuthorityCertificate) HandleSeria
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ACMPrivateCA.GetCertificateAuthorityCertificate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetCertificateAuthorityCertificateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetCertificateAuthorityCertificateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -458,7 +458,7 @@ func (m *awsAwsjson11_serializeOpGetCertificateAuthorityCsr) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ACMPrivateCA.GetCertificateAuthorityCsr")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetCertificateAuthorityCsrInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetCertificateAuthorityCsrInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -504,7 +504,7 @@ func (m *awsAwsjson11_serializeOpImportCertificateAuthorityCertificate) HandleSe
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ACMPrivateCA.ImportCertificateAuthorityCertificate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentImportCertificateAuthorityCertificateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentImportCertificateAuthorityCertificateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -550,7 +550,7 @@ func (m *awsAwsjson11_serializeOpIssueCertificate) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ACMPrivateCA.IssueCertificate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentIssueCertificateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentIssueCertificateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -596,7 +596,7 @@ func (m *awsAwsjson11_serializeOpListCertificateAuthorities) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ACMPrivateCA.ListCertificateAuthorities")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListCertificateAuthoritiesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListCertificateAuthoritiesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -642,7 +642,7 @@ func (m *awsAwsjson11_serializeOpListPermissions) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ACMPrivateCA.ListPermissions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListPermissionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListPermissionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -688,7 +688,7 @@ func (m *awsAwsjson11_serializeOpListTags) HandleSerialize(ctx context.Context, 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ACMPrivateCA.ListTags")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -734,7 +734,7 @@ func (m *awsAwsjson11_serializeOpRestoreCertificateAuthority) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ACMPrivateCA.RestoreCertificateAuthority")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRestoreCertificateAuthorityInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRestoreCertificateAuthorityInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -780,7 +780,7 @@ func (m *awsAwsjson11_serializeOpRevokeCertificate) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ACMPrivateCA.RevokeCertificate")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRevokeCertificateInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRevokeCertificateInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -826,7 +826,7 @@ func (m *awsAwsjson11_serializeOpTagCertificateAuthority) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ACMPrivateCA.TagCertificateAuthority")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTagCertificateAuthorityInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTagCertificateAuthorityInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -872,7 +872,7 @@ func (m *awsAwsjson11_serializeOpUntagCertificateAuthority) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ACMPrivateCA.UntagCertificateAuthority")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUntagCertificateAuthorityInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUntagCertificateAuthorityInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -918,7 +918,7 @@ func (m *awsAwsjson11_serializeOpUpdateCertificateAuthority) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("ACMPrivateCA.UpdateCertificateAuthority")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateCertificateAuthorityInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateCertificateAuthorityInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1137,7 +1137,7 @@ func awsAwsjson11_serializeDocumentValidity(v *types.Validity, value smithyjson.
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateCertificateAuthorityAuditReportInput(v *CreateCertificateAuthorityAuditReportInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateCertificateAuthorityAuditReportInput(v *CreateCertificateAuthorityAuditReportInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1159,7 +1159,7 @@ func awsAwsjson11_serializeDocumentCreateCertificateAuthorityAuditReportInput(v 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateCertificateAuthorityInput(v *CreateCertificateAuthorityInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateCertificateAuthorityInput(v *CreateCertificateAuthorityInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1197,7 +1197,7 @@ func awsAwsjson11_serializeDocumentCreateCertificateAuthorityInput(v *CreateCert
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreatePermissionInput(v *CreatePermissionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreatePermissionInput(v *CreatePermissionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1226,7 +1226,7 @@ func awsAwsjson11_serializeDocumentCreatePermissionInput(v *CreatePermissionInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteCertificateAuthorityInput(v *DeleteCertificateAuthorityInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteCertificateAuthorityInput(v *DeleteCertificateAuthorityInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1243,7 +1243,7 @@ func awsAwsjson11_serializeDocumentDeleteCertificateAuthorityInput(v *DeleteCert
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeletePermissionInput(v *DeletePermissionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeletePermissionInput(v *DeletePermissionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1265,7 +1265,7 @@ func awsAwsjson11_serializeDocumentDeletePermissionInput(v *DeletePermissionInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeCertificateAuthorityAuditReportInput(v *DescribeCertificateAuthorityAuditReportInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeCertificateAuthorityAuditReportInput(v *DescribeCertificateAuthorityAuditReportInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1282,7 +1282,7 @@ func awsAwsjson11_serializeDocumentDescribeCertificateAuthorityAuditReportInput(
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeCertificateAuthorityInput(v *DescribeCertificateAuthorityInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeCertificateAuthorityInput(v *DescribeCertificateAuthorityInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1294,7 +1294,7 @@ func awsAwsjson11_serializeDocumentDescribeCertificateAuthorityInput(v *Describe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetCertificateAuthorityCertificateInput(v *GetCertificateAuthorityCertificateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetCertificateAuthorityCertificateInput(v *GetCertificateAuthorityCertificateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1306,7 +1306,7 @@ func awsAwsjson11_serializeDocumentGetCertificateAuthorityCertificateInput(v *Ge
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetCertificateAuthorityCsrInput(v *GetCertificateAuthorityCsrInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetCertificateAuthorityCsrInput(v *GetCertificateAuthorityCsrInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1318,7 +1318,7 @@ func awsAwsjson11_serializeDocumentGetCertificateAuthorityCsrInput(v *GetCertifi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetCertificateInput(v *GetCertificateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetCertificateInput(v *GetCertificateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1335,7 +1335,7 @@ func awsAwsjson11_serializeDocumentGetCertificateInput(v *GetCertificateInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentImportCertificateAuthorityCertificateInput(v *ImportCertificateAuthorityCertificateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentImportCertificateAuthorityCertificateInput(v *ImportCertificateAuthorityCertificateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1357,7 +1357,7 @@ func awsAwsjson11_serializeDocumentImportCertificateAuthorityCertificateInput(v 
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentIssueCertificateInput(v *IssueCertificateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentIssueCertificateInput(v *IssueCertificateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1396,7 +1396,7 @@ func awsAwsjson11_serializeDocumentIssueCertificateInput(v *IssueCertificateInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListCertificateAuthoritiesInput(v *ListCertificateAuthoritiesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListCertificateAuthoritiesInput(v *ListCertificateAuthoritiesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1413,7 +1413,7 @@ func awsAwsjson11_serializeDocumentListCertificateAuthoritiesInput(v *ListCertif
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListPermissionsInput(v *ListPermissionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListPermissionsInput(v *ListPermissionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1435,7 +1435,7 @@ func awsAwsjson11_serializeDocumentListPermissionsInput(v *ListPermissionsInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsInput(v *ListTagsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTagsInput(v *ListTagsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1457,7 +1457,7 @@ func awsAwsjson11_serializeDocumentListTagsInput(v *ListTagsInput, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRestoreCertificateAuthorityInput(v *RestoreCertificateAuthorityInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRestoreCertificateAuthorityInput(v *RestoreCertificateAuthorityInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1469,7 +1469,7 @@ func awsAwsjson11_serializeDocumentRestoreCertificateAuthorityInput(v *RestoreCe
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRevokeCertificateInput(v *RevokeCertificateInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRevokeCertificateInput(v *RevokeCertificateInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1491,7 +1491,7 @@ func awsAwsjson11_serializeDocumentRevokeCertificateInput(v *RevokeCertificateIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagCertificateAuthorityInput(v *TagCertificateAuthorityInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTagCertificateAuthorityInput(v *TagCertificateAuthorityInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1510,7 +1510,7 @@ func awsAwsjson11_serializeDocumentTagCertificateAuthorityInput(v *TagCertificat
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUntagCertificateAuthorityInput(v *UntagCertificateAuthorityInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUntagCertificateAuthorityInput(v *UntagCertificateAuthorityInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1529,7 +1529,7 @@ func awsAwsjson11_serializeDocumentUntagCertificateAuthorityInput(v *UntagCertif
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateCertificateAuthorityInput(v *UpdateCertificateAuthorityInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateCertificateAuthorityInput(v *UpdateCertificateAuthorityInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

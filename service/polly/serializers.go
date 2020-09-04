@@ -49,7 +49,7 @@ func (m *awsRestjson1_serializeOpDeleteLexicon) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDeleteLexiconInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteLexiconInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -60,7 +60,7 @@ func (m *awsRestjson1_serializeOpDeleteLexicon) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDeleteLexiconInput(v *DeleteLexiconInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDeleteLexiconInput(v *DeleteLexiconInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -109,7 +109,7 @@ func (m *awsRestjson1_serializeOpDescribeVoices) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDescribeVoicesInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeVoicesInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -120,7 +120,7 @@ func (m *awsRestjson1_serializeOpDescribeVoices) HandleSerialize(ctx context.Con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDescribeVoicesInput(v *DescribeVoicesInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDescribeVoicesInput(v *DescribeVoicesInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -179,7 +179,7 @@ func (m *awsRestjson1_serializeOpGetLexicon) HandleSerialize(ctx context.Context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsGetLexiconInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsGetLexiconInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -190,7 +190,7 @@ func (m *awsRestjson1_serializeOpGetLexicon) HandleSerialize(ctx context.Context
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsGetLexiconInput(v *GetLexiconInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetLexiconInput(v *GetLexiconInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -239,7 +239,7 @@ func (m *awsRestjson1_serializeOpGetSpeechSynthesisTask) HandleSerialize(ctx con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsGetSpeechSynthesisTaskInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsGetSpeechSynthesisTaskInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -250,7 +250,7 @@ func (m *awsRestjson1_serializeOpGetSpeechSynthesisTask) HandleSerialize(ctx con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsGetSpeechSynthesisTaskInput(v *GetSpeechSynthesisTaskInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetSpeechSynthesisTaskInput(v *GetSpeechSynthesisTaskInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -299,7 +299,7 @@ func (m *awsRestjson1_serializeOpListLexicons) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListLexiconsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListLexiconsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -310,7 +310,7 @@ func (m *awsRestjson1_serializeOpListLexicons) HandleSerialize(ctx context.Conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListLexiconsInput(v *ListLexiconsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListLexiconsInput(v *ListLexiconsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -357,7 +357,7 @@ func (m *awsRestjson1_serializeOpListSpeechSynthesisTasks) HandleSerialize(ctx c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListSpeechSynthesisTasksInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListSpeechSynthesisTasksInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -368,7 +368,7 @@ func (m *awsRestjson1_serializeOpListSpeechSynthesisTasks) HandleSerialize(ctx c
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListSpeechSynthesisTasksInput(v *ListSpeechSynthesisTasksInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListSpeechSynthesisTasksInput(v *ListSpeechSynthesisTasksInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -423,14 +423,14 @@ func (m *awsRestjson1_serializeOpPutLexicon) HandleSerialize(ctx context.Context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsPutLexiconInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsPutLexiconInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentPutLexiconInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentPutLexiconInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -445,7 +445,7 @@ func (m *awsRestjson1_serializeOpPutLexicon) HandleSerialize(ctx context.Context
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsPutLexiconInput(v *PutLexiconInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsPutLexiconInput(v *PutLexiconInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -459,7 +459,7 @@ func awsRestjson1_serializeHttpBindingsPutLexiconInput(v *PutLexiconInput, encod
 	return nil
 }
 
-func awsRestjson1_serializeDocumentPutLexiconInput(v *PutLexiconInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentPutLexiconInput(v *PutLexiconInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -509,7 +509,7 @@ func (m *awsRestjson1_serializeOpStartSpeechSynthesisTask) HandleSerialize(ctx c
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentStartSpeechSynthesisTaskInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentStartSpeechSynthesisTaskInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -524,7 +524,7 @@ func (m *awsRestjson1_serializeOpStartSpeechSynthesisTask) HandleSerialize(ctx c
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsStartSpeechSynthesisTaskInput(v *StartSpeechSynthesisTaskInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsStartSpeechSynthesisTaskInput(v *StartSpeechSynthesisTaskInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -532,7 +532,7 @@ func awsRestjson1_serializeHttpBindingsStartSpeechSynthesisTaskInput(v *StartSpe
 	return nil
 }
 
-func awsRestjson1_serializeDocumentStartSpeechSynthesisTaskInput(v *StartSpeechSynthesisTaskInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentStartSpeechSynthesisTaskInput(v *StartSpeechSynthesisTaskInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -641,7 +641,7 @@ func (m *awsRestjson1_serializeOpSynthesizeSpeech) HandleSerialize(ctx context.C
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentSynthesizeSpeechInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentSynthesizeSpeechInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -656,7 +656,7 @@ func (m *awsRestjson1_serializeOpSynthesizeSpeech) HandleSerialize(ctx context.C
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsSynthesizeSpeechInput(v *SynthesizeSpeechInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsSynthesizeSpeechInput(v *SynthesizeSpeechInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -664,7 +664,7 @@ func awsRestjson1_serializeHttpBindingsSynthesizeSpeechInput(v *SynthesizeSpeech
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSynthesizeSpeechInput(v *SynthesizeSpeechInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentSynthesizeSpeechInput(v *SynthesizeSpeechInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

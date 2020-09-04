@@ -49,7 +49,7 @@ func (m *awsRestjson1_serializeOpCompleteSnapshot) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsCompleteSnapshotInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsCompleteSnapshotInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -60,7 +60,7 @@ func (m *awsRestjson1_serializeOpCompleteSnapshot) HandleSerialize(ctx context.C
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsCompleteSnapshotInput(v *CompleteSnapshotInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsCompleteSnapshotInput(v *CompleteSnapshotInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -131,7 +131,7 @@ func (m *awsRestjson1_serializeOpGetSnapshotBlock) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsGetSnapshotBlockInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsGetSnapshotBlockInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -142,7 +142,7 @@ func (m *awsRestjson1_serializeOpGetSnapshotBlock) HandleSerialize(ctx context.C
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsGetSnapshotBlockInput(v *GetSnapshotBlockInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetSnapshotBlockInput(v *GetSnapshotBlockInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -201,7 +201,7 @@ func (m *awsRestjson1_serializeOpListChangedBlocks) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListChangedBlocksInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListChangedBlocksInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -212,7 +212,7 @@ func (m *awsRestjson1_serializeOpListChangedBlocks) HandleSerialize(ctx context.
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListChangedBlocksInput(v *ListChangedBlocksInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListChangedBlocksInput(v *ListChangedBlocksInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -277,7 +277,7 @@ func (m *awsRestjson1_serializeOpListSnapshotBlocks) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListSnapshotBlocksInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListSnapshotBlocksInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -288,7 +288,7 @@ func (m *awsRestjson1_serializeOpListSnapshotBlocks) HandleSerialize(ctx context
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListSnapshotBlocksInput(v *ListSnapshotBlocksInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListSnapshotBlocksInput(v *ListSnapshotBlocksInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -349,7 +349,7 @@ func (m *awsRestjson1_serializeOpPutSnapshotBlock) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsPutSnapshotBlockInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsPutSnapshotBlockInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -371,7 +371,7 @@ func (m *awsRestjson1_serializeOpPutSnapshotBlock) HandleSerialize(ctx context.C
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsPutSnapshotBlockInput(v *PutSnapshotBlockInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsPutSnapshotBlockInput(v *PutSnapshotBlockInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -451,7 +451,7 @@ func (m *awsRestjson1_serializeOpStartSnapshot) HandleSerialize(ctx context.Cont
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentStartSnapshotInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentStartSnapshotInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -466,7 +466,7 @@ func (m *awsRestjson1_serializeOpStartSnapshot) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsStartSnapshotInput(v *StartSnapshotInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsStartSnapshotInput(v *StartSnapshotInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -474,7 +474,7 @@ func awsRestjson1_serializeHttpBindingsStartSnapshotInput(v *StartSnapshotInput,
 	return nil
 }
 
-func awsRestjson1_serializeDocumentStartSnapshotInput(v *StartSnapshotInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentStartSnapshotInput(v *StartSnapshotInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

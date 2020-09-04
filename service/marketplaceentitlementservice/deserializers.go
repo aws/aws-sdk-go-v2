@@ -53,7 +53,7 @@ func (m *awsAwsjson11_deserializeOpGetEntitlements) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetEntitlementsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetEntitlementsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -658,7 +658,7 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetEntitlementsOutput(v **GetEntitlementsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetEntitlementsOutput(v **GetEntitlementsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

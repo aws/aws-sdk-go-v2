@@ -52,7 +52,7 @@ func (m *awsRestjson1_deserializeOpGetScreenData) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentGetScreenDataOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentGetScreenDataOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -137,7 +137,7 @@ func awsRestjson1_deserializeOpErrorGetScreenData(response *smithyhttp.Response)
 	}
 }
 
-func awsRestjson1_deserializeDocumentGetScreenDataOutput(v **GetScreenDataOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentGetScreenDataOutput(v **GetScreenDataOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -257,7 +257,7 @@ func (m *awsRestjson1_deserializeOpInvokeScreenAutomation) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentInvokeScreenAutomationOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentInvokeScreenAutomationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -348,7 +348,7 @@ func awsRestjson1_deserializeOpErrorInvokeScreenAutomation(response *smithyhttp.
 	}
 }
 
-func awsRestjson1_deserializeDocumentInvokeScreenAutomationOutput(v **InvokeScreenAutomationOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentInvokeScreenAutomationOutput(v **InvokeScreenAutomationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

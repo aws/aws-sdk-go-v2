@@ -16,6 +16,7 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	smithyxml "github.com/awslabs/smithy-go/xml"
 	"io"
+	"strconv"
 	"strings"
 )
 
@@ -63,7 +64,7 @@ func (m *awsAwsquery_deserializeOpAssumeRole) HandleDeserialize(ctx context.Cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentAssumeRoleOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentAssumeRoleOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -155,7 +156,7 @@ func (m *awsAwsquery_deserializeOpAssumeRoleWithSAML) HandleDeserialize(ctx cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentAssumeRoleWithSAMLOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentAssumeRoleWithSAMLOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -256,7 +257,7 @@ func (m *awsAwsquery_deserializeOpAssumeRoleWithWebIdentity) HandleDeserialize(c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentAssumeRoleWithWebIdentityOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentAssumeRoleWithWebIdentityOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -360,7 +361,7 @@ func (m *awsAwsquery_deserializeOpDecodeAuthorizationMessage) HandleDeserialize(
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentDecodeAuthorizationMessageOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentDecodeAuthorizationMessageOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -446,7 +447,7 @@ func (m *awsAwsquery_deserializeOpGetAccessKeyInfo) HandleDeserialize(ctx contex
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetAccessKeyInfoOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetAccessKeyInfoOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -529,7 +530,7 @@ func (m *awsAwsquery_deserializeOpGetCallerIdentity) HandleDeserialize(ctx conte
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetCallerIdentityOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetCallerIdentityOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -612,7 +613,7 @@ func (m *awsAwsquery_deserializeOpGetFederationToken) HandleDeserialize(ctx cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetFederationTokenOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetFederationTokenOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -704,7 +705,7 @@ func (m *awsAwsquery_deserializeOpGetSessionToken) HandleDeserialize(ctx context
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsAwsquery_deserializeDocumentGetSessionTokenOutput(&output, decoder)
+	err = awsAwsquery_deserializeOpDocumentGetSessionTokenOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1552,7 +1553,7 @@ func awsAwsquery_deserializeDocumentRegionDisabledException(v **types.RegionDisa
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentAssumeRoleOutput(v **AssumeRoleOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentAssumeRoleOutput(v **AssumeRoleOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1611,7 +1612,7 @@ func awsAwsquery_deserializeDocumentAssumeRoleOutput(v **AssumeRoleOutput, decod
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentAssumeRoleWithSAMLOutput(v **AssumeRoleWithSAMLOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentAssumeRoleWithSAMLOutput(v **AssumeRoleWithSAMLOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1735,7 +1736,7 @@ func awsAwsquery_deserializeDocumentAssumeRoleWithSAMLOutput(v **AssumeRoleWithS
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentAssumeRoleWithWebIdentityOutput(v **AssumeRoleWithWebIdentityOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentAssumeRoleWithWebIdentityOutput(v **AssumeRoleWithWebIdentityOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1833,7 +1834,7 @@ func awsAwsquery_deserializeDocumentAssumeRoleWithWebIdentityOutput(v **AssumeRo
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentDecodeAuthorizationMessageOutput(v **DecodeAuthorizationMessageOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentDecodeAuthorizationMessageOutput(v **DecodeAuthorizationMessageOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1876,7 +1877,7 @@ func awsAwsquery_deserializeDocumentDecodeAuthorizationMessageOutput(v **DecodeA
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetAccessKeyInfoOutput(v **GetAccessKeyInfoOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetAccessKeyInfoOutput(v **GetAccessKeyInfoOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1919,7 +1920,7 @@ func awsAwsquery_deserializeDocumentGetAccessKeyInfoOutput(v **GetAccessKeyInfoO
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetCallerIdentityOutput(v **GetCallerIdentityOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetCallerIdentityOutput(v **GetCallerIdentityOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1988,7 +1989,7 @@ func awsAwsquery_deserializeDocumentGetCallerIdentityOutput(v **GetCallerIdentit
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetFederationTokenOutput(v **GetFederationTokenOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetFederationTokenOutput(v **GetFederationTokenOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2047,7 +2048,7 @@ func awsAwsquery_deserializeDocumentGetFederationTokenOutput(v **GetFederationTo
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentGetSessionTokenOutput(v **GetSessionTokenOutput, decoder smithyxml.NodeDecoder) error {
+func awsAwsquery_deserializeOpDocumentGetSessionTokenOutput(v **GetSessionTokenOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

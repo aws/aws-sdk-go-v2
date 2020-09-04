@@ -67,7 +67,7 @@ func (m *awsEc2query_deserializeOpEmptyInputAndEmptyOutput) HandleDeserialize(ct
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsEc2query_deserializeDocumentEmptyInputAndEmptyOutputOutput(&output, decoder)
+	err = awsEc2query_deserializeOpDocumentEmptyInputAndEmptyOutputOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -150,7 +150,7 @@ func (m *awsEc2query_deserializeOpGreetingWithErrors) HandleDeserialize(ctx cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsEc2query_deserializeDocumentGreetingWithErrorsOutput(&output, decoder)
+	err = awsEc2query_deserializeOpDocumentGreetingWithErrorsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -239,7 +239,7 @@ func (m *awsEc2query_deserializeOpIgnoresWrappingXmlName) HandleDeserialize(ctx 
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsEc2query_deserializeDocumentIgnoresWrappingXmlNameOutput(&output, decoder)
+	err = awsEc2query_deserializeOpDocumentIgnoresWrappingXmlNameOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -405,7 +405,7 @@ func (m *awsEc2query_deserializeOpNoInputAndOutput) HandleDeserialize(ctx contex
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsEc2query_deserializeDocumentNoInputAndOutputOutput(&output, decoder)
+	err = awsEc2query_deserializeOpDocumentNoInputAndOutputOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -737,7 +737,7 @@ func (m *awsEc2query_deserializeOpRecursiveXmlShapes) HandleDeserialize(ctx cont
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsEc2query_deserializeDocumentRecursiveXmlShapesOutput(&output, decoder)
+	err = awsEc2query_deserializeOpDocumentRecursiveXmlShapesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -903,7 +903,7 @@ func (m *awsEc2query_deserializeOpSimpleScalarXmlProperties) HandleDeserialize(c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsEc2query_deserializeDocumentSimpleScalarXmlPropertiesOutput(&output, decoder)
+	err = awsEc2query_deserializeOpDocumentSimpleScalarXmlPropertiesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -986,7 +986,7 @@ func (m *awsEc2query_deserializeOpXmlBlobs) HandleDeserialize(ctx context.Contex
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsEc2query_deserializeDocumentXmlBlobsOutput(&output, decoder)
+	err = awsEc2query_deserializeOpDocumentXmlBlobsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1069,7 +1069,7 @@ func (m *awsEc2query_deserializeOpXmlEnums) HandleDeserialize(ctx context.Contex
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsEc2query_deserializeDocumentXmlEnumsOutput(&output, decoder)
+	err = awsEc2query_deserializeOpDocumentXmlEnumsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1152,7 +1152,7 @@ func (m *awsEc2query_deserializeOpXmlLists) HandleDeserialize(ctx context.Contex
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsEc2query_deserializeDocumentXmlListsOutput(&output, decoder)
+	err = awsEc2query_deserializeOpDocumentXmlListsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1235,7 +1235,7 @@ func (m *awsEc2query_deserializeOpXmlNamespaces) HandleDeserialize(ctx context.C
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsEc2query_deserializeDocumentXmlNamespacesOutput(&output, decoder)
+	err = awsEc2query_deserializeOpDocumentXmlNamespacesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1318,7 +1318,7 @@ func (m *awsEc2query_deserializeOpXmlTimestamps) HandleDeserialize(ctx context.C
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsEc2query_deserializeDocumentXmlTimestampsOutput(&output, decoder)
+	err = awsEc2query_deserializeOpDocumentXmlTimestampsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2640,7 +2640,7 @@ func awsEc2query_deserializeDocumentTimestampListUnwrapped(v *[]*time.Time, deco
 	*v = sv
 	return nil
 }
-func awsEc2query_deserializeDocumentEmptyInputAndEmptyOutputOutput(v **EmptyInputAndEmptyOutputOutput, decoder smithyxml.NodeDecoder) error {
+func awsEc2query_deserializeOpDocumentEmptyInputAndEmptyOutputOutput(v **EmptyInputAndEmptyOutputOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2670,7 +2670,7 @@ func awsEc2query_deserializeDocumentEmptyInputAndEmptyOutputOutput(v **EmptyInpu
 	return nil
 }
 
-func awsEc2query_deserializeDocumentGreetingWithErrorsOutput(v **GreetingWithErrorsOutput, decoder smithyxml.NodeDecoder) error {
+func awsEc2query_deserializeOpDocumentGreetingWithErrorsOutput(v **GreetingWithErrorsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2713,7 +2713,7 @@ func awsEc2query_deserializeDocumentGreetingWithErrorsOutput(v **GreetingWithErr
 	return nil
 }
 
-func awsEc2query_deserializeDocumentIgnoresWrappingXmlNameOutput(v **IgnoresWrappingXmlNameOutput, decoder smithyxml.NodeDecoder) error {
+func awsEc2query_deserializeOpDocumentIgnoresWrappingXmlNameOutput(v **IgnoresWrappingXmlNameOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2786,7 +2786,7 @@ func awsEc2query_deserializeDocumentNestedStructuresOutput(v **NestedStructuresO
 	return nil
 }
 
-func awsEc2query_deserializeDocumentNoInputAndOutputOutput(v **NoInputAndOutputOutput, decoder smithyxml.NodeDecoder) error {
+func awsEc2query_deserializeOpDocumentNoInputAndOutputOutput(v **NoInputAndOutputOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2906,7 +2906,7 @@ func awsEc2query_deserializeDocumentQueryTimestampsOutput(v **QueryTimestampsOut
 	return nil
 }
 
-func awsEc2query_deserializeDocumentRecursiveXmlShapesOutput(v **RecursiveXmlShapesOutput, decoder smithyxml.NodeDecoder) error {
+func awsEc2query_deserializeOpDocumentRecursiveXmlShapesOutput(v **RecursiveXmlShapesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2972,7 +2972,7 @@ func awsEc2query_deserializeDocumentSimpleInputParamsOutput(v **SimpleInputParam
 	return nil
 }
 
-func awsEc2query_deserializeDocumentSimpleScalarXmlPropertiesOutput(v **SimpleScalarXmlPropertiesOutput, decoder smithyxml.NodeDecoder) error {
+func awsEc2query_deserializeOpDocumentSimpleScalarXmlPropertiesOutput(v **SimpleScalarXmlPropertiesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3162,7 +3162,7 @@ func awsEc2query_deserializeDocumentSimpleScalarXmlPropertiesOutput(v **SimpleSc
 	return nil
 }
 
-func awsEc2query_deserializeDocumentXmlBlobsOutput(v **XmlBlobsOutput, decoder smithyxml.NodeDecoder) error {
+func awsEc2query_deserializeOpDocumentXmlBlobsOutput(v **XmlBlobsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3203,7 +3203,7 @@ func awsEc2query_deserializeDocumentXmlBlobsOutput(v **XmlBlobsOutput, decoder s
 	return nil
 }
 
-func awsEc2query_deserializeDocumentXmlEnumsOutput(v **XmlEnumsOutput, decoder smithyxml.NodeDecoder) error {
+func awsEc2query_deserializeOpDocumentXmlEnumsOutput(v **XmlEnumsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3290,7 +3290,7 @@ func awsEc2query_deserializeDocumentXmlEnumsOutput(v **XmlEnumsOutput, decoder s
 	return nil
 }
 
-func awsEc2query_deserializeDocumentXmlListsOutput(v **XmlListsOutput, decoder smithyxml.NodeDecoder) error {
+func awsEc2query_deserializeOpDocumentXmlListsOutput(v **XmlListsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3386,7 +3386,7 @@ func awsEc2query_deserializeDocumentXmlListsOutput(v **XmlListsOutput, decoder s
 	return nil
 }
 
-func awsEc2query_deserializeDocumentXmlNamespacesOutput(v **XmlNamespacesOutput, decoder smithyxml.NodeDecoder) error {
+func awsEc2query_deserializeOpDocumentXmlNamespacesOutput(v **XmlNamespacesOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3422,7 +3422,7 @@ func awsEc2query_deserializeDocumentXmlNamespacesOutput(v **XmlNamespacesOutput,
 	return nil
 }
 
-func awsEc2query_deserializeDocumentXmlTimestampsOutput(v **XmlTimestampsOutput, decoder smithyxml.NodeDecoder) error {
+func awsEc2query_deserializeOpDocumentXmlTimestampsOutput(v **XmlTimestampsOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

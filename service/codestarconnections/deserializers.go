@@ -51,7 +51,7 @@ func (m *awsAwsjson10_deserializeOpCreateConnection) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentCreateConnectionOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentCreateConnectionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -157,7 +157,7 @@ func (m *awsAwsjson10_deserializeOpCreateHost) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentCreateHostOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentCreateHostOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -257,7 +257,7 @@ func (m *awsAwsjson10_deserializeOpDeleteConnection) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentDeleteConnectionOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentDeleteConnectionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -357,7 +357,7 @@ func (m *awsAwsjson10_deserializeOpDeleteHost) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentDeleteHostOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentDeleteHostOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -460,7 +460,7 @@ func (m *awsAwsjson10_deserializeOpGetConnection) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentGetConnectionOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentGetConnectionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -563,7 +563,7 @@ func (m *awsAwsjson10_deserializeOpGetHost) HandleDeserialize(ctx context.Contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentGetHostOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentGetHostOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -663,7 +663,7 @@ func (m *awsAwsjson10_deserializeOpListConnections) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentListConnectionsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentListConnectionsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -760,7 +760,7 @@ func (m *awsAwsjson10_deserializeOpListHosts) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentListHostsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentListHostsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -857,7 +857,7 @@ func (m *awsAwsjson10_deserializeOpListTagsForResource) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentListTagsForResourceOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentListTagsForResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -957,7 +957,7 @@ func (m *awsAwsjson10_deserializeOpTagResource) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentTagResourceOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentTagResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1060,7 +1060,7 @@ func (m *awsAwsjson10_deserializeOpUntagResource) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentUntagResourceOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentUntagResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2059,7 +2059,7 @@ func awsAwsjson10_deserializeDocumentVpcConfiguration(v **types.VpcConfiguration
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentCreateConnectionOutput(v **CreateConnectionOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentCreateConnectionOutput(v **CreateConnectionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2128,7 +2128,7 @@ func awsAwsjson10_deserializeDocumentCreateConnectionOutput(v **CreateConnection
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentCreateHostOutput(v **CreateHostOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentCreateHostOutput(v **CreateHostOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2192,7 +2192,7 @@ func awsAwsjson10_deserializeDocumentCreateHostOutput(v **CreateHostOutput, deco
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentDeleteConnectionOutput(v **DeleteConnectionOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnectionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2243,7 +2243,7 @@ func awsAwsjson10_deserializeDocumentDeleteConnectionOutput(v **DeleteConnection
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentDeleteHostOutput(v **DeleteHostOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentDeleteHostOutput(v **DeleteHostOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2294,7 +2294,7 @@ func awsAwsjson10_deserializeDocumentDeleteHostOutput(v **DeleteHostOutput, deco
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentGetConnectionOutput(v **GetConnectionOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentGetConnectionOutput(v **GetConnectionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2350,7 +2350,7 @@ func awsAwsjson10_deserializeDocumentGetConnectionOutput(v **GetConnectionOutput
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentGetHostOutput(v **GetHostOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentGetHostOutput(v **GetHostOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2458,7 +2458,7 @@ func awsAwsjson10_deserializeDocumentGetHostOutput(v **GetHostOutput, decoder *j
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentListConnectionsOutput(v **ListConnectionsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentListConnectionsOutput(v **ListConnectionsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2527,7 +2527,7 @@ func awsAwsjson10_deserializeDocumentListConnectionsOutput(v **ListConnectionsOu
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentListHostsOutput(v **ListHostsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentListHostsOutput(v **ListHostsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2596,7 +2596,7 @@ func awsAwsjson10_deserializeDocumentListHostsOutput(v **ListHostsOutput, decode
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2652,7 +2652,7 @@ func awsAwsjson10_deserializeDocumentListTagsForResourceOutput(v **ListTagsForRe
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentTagResourceOutput(v **TagResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentTagResourceOutput(v **TagResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2703,7 +2703,7 @@ func awsAwsjson10_deserializeDocumentTagResourceOutput(v **TagResourceOutput, de
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentUntagResourceOutput(v **UntagResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentUntagResourceOutput(v **UntagResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

@@ -53,7 +53,7 @@ func (m *awsAwsjson10_deserializeOpDescribeStream) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentDescribeStreamOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentDescribeStreamOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -156,7 +156,7 @@ func (m *awsAwsjson10_deserializeOpGetRecords) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentGetRecordsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentGetRecordsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -268,7 +268,7 @@ func (m *awsAwsjson10_deserializeOpGetShardIterator) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentGetShardIteratorOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentGetShardIteratorOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -374,7 +374,7 @@ func (m *awsAwsjson10_deserializeOpListStreams) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson10_deserializeDocumentListStreamsOutput(&output, decoder)
+	err = awsAwsjson10_deserializeOpDocumentListStreamsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2316,7 +2316,7 @@ func awsAwsjson10_deserializeDocumentTrimmedDataAccessException(v **types.Trimme
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentDescribeStreamOutput(v **DescribeStreamOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentDescribeStreamOutput(v **DescribeStreamOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2372,7 +2372,7 @@ func awsAwsjson10_deserializeDocumentDescribeStreamOutput(v **DescribeStreamOutp
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentGetRecordsOutput(v **GetRecordsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentGetRecordsOutput(v **GetRecordsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2441,7 +2441,7 @@ func awsAwsjson10_deserializeDocumentGetRecordsOutput(v **GetRecordsOutput, deco
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentGetShardIteratorOutput(v **GetShardIteratorOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentGetShardIteratorOutput(v **GetShardIteratorOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2505,7 +2505,7 @@ func awsAwsjson10_deserializeDocumentGetShardIteratorOutput(v **GetShardIterator
 	return nil
 }
 
-func awsAwsjson10_deserializeDocumentListStreamsOutput(v **ListStreamsOutput, decoder *json.Decoder) error {
+func awsAwsjson10_deserializeOpDocumentListStreamsOutput(v **ListStreamsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

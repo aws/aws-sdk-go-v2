@@ -48,7 +48,7 @@ func (m *awsRestjson1_serializeOpDescribeJobExecution) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDescribeJobExecutionInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeJobExecutionInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -59,7 +59,7 @@ func (m *awsRestjson1_serializeOpDescribeJobExecution) HandleSerialize(ctx conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDescribeJobExecutionInput(v *DescribeJobExecutionInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDescribeJobExecutionInput(v *DescribeJobExecutionInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -122,7 +122,7 @@ func (m *awsRestjson1_serializeOpGetPendingJobExecutions) HandleSerialize(ctx co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsGetPendingJobExecutionsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsGetPendingJobExecutionsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -133,7 +133,7 @@ func (m *awsRestjson1_serializeOpGetPendingJobExecutions) HandleSerialize(ctx co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsGetPendingJobExecutionsInput(v *GetPendingJobExecutionsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetPendingJobExecutionsInput(v *GetPendingJobExecutionsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -182,14 +182,14 @@ func (m *awsRestjson1_serializeOpStartNextPendingJobExecution) HandleSerialize(c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsStartNextPendingJobExecutionInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsStartNextPendingJobExecutionInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentStartNextPendingJobExecutionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentStartNextPendingJobExecutionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -204,7 +204,7 @@ func (m *awsRestjson1_serializeOpStartNextPendingJobExecution) HandleSerialize(c
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsStartNextPendingJobExecutionInput(v *StartNextPendingJobExecutionInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsStartNextPendingJobExecutionInput(v *StartNextPendingJobExecutionInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -218,7 +218,7 @@ func awsRestjson1_serializeHttpBindingsStartNextPendingJobExecutionInput(v *Star
 	return nil
 }
 
-func awsRestjson1_serializeDocumentStartNextPendingJobExecutionInput(v *StartNextPendingJobExecutionInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentStartNextPendingJobExecutionInput(v *StartNextPendingJobExecutionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -272,14 +272,14 @@ func (m *awsRestjson1_serializeOpUpdateJobExecution) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsUpdateJobExecutionInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateJobExecutionInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentUpdateJobExecutionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentUpdateJobExecutionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -294,7 +294,7 @@ func (m *awsRestjson1_serializeOpUpdateJobExecution) HandleSerialize(ctx context
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsUpdateJobExecutionInput(v *UpdateJobExecutionInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsUpdateJobExecutionInput(v *UpdateJobExecutionInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -314,7 +314,7 @@ func awsRestjson1_serializeHttpBindingsUpdateJobExecutionInput(v *UpdateJobExecu
 	return nil
 }
 
-func awsRestjson1_serializeDocumentUpdateJobExecutionInput(v *UpdateJobExecutionInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentUpdateJobExecutionInput(v *UpdateJobExecutionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

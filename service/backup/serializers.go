@@ -53,7 +53,7 @@ func (m *awsRestjson1_serializeOpCreateBackupPlan) HandleSerialize(ctx context.C
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentCreateBackupPlanInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentCreateBackupPlanInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -68,7 +68,7 @@ func (m *awsRestjson1_serializeOpCreateBackupPlan) HandleSerialize(ctx context.C
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsCreateBackupPlanInput(v *CreateBackupPlanInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsCreateBackupPlanInput(v *CreateBackupPlanInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -76,7 +76,7 @@ func awsRestjson1_serializeHttpBindingsCreateBackupPlanInput(v *CreateBackupPlan
 	return nil
 }
 
-func awsRestjson1_serializeDocumentCreateBackupPlanInput(v *CreateBackupPlanInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentCreateBackupPlanInput(v *CreateBackupPlanInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -137,14 +137,14 @@ func (m *awsRestjson1_serializeOpCreateBackupSelection) HandleSerialize(ctx cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsCreateBackupSelectionInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsCreateBackupSelectionInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentCreateBackupSelectionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentCreateBackupSelectionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -159,7 +159,7 @@ func (m *awsRestjson1_serializeOpCreateBackupSelection) HandleSerialize(ctx cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsCreateBackupSelectionInput(v *CreateBackupSelectionInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsCreateBackupSelectionInput(v *CreateBackupSelectionInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -173,7 +173,7 @@ func awsRestjson1_serializeHttpBindingsCreateBackupSelectionInput(v *CreateBacku
 	return nil
 }
 
-func awsRestjson1_serializeDocumentCreateBackupSelectionInput(v *CreateBackupSelectionInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentCreateBackupSelectionInput(v *CreateBackupSelectionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -227,14 +227,14 @@ func (m *awsRestjson1_serializeOpCreateBackupVault) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsCreateBackupVaultInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsCreateBackupVaultInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentCreateBackupVaultInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentCreateBackupVaultInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -249,7 +249,7 @@ func (m *awsRestjson1_serializeOpCreateBackupVault) HandleSerialize(ctx context.
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsCreateBackupVaultInput(v *CreateBackupVaultInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsCreateBackupVaultInput(v *CreateBackupVaultInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -263,7 +263,7 @@ func awsRestjson1_serializeHttpBindingsCreateBackupVaultInput(v *CreateBackupVau
 	return nil
 }
 
-func awsRestjson1_serializeDocumentCreateBackupVaultInput(v *CreateBackupVaultInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentCreateBackupVaultInput(v *CreateBackupVaultInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -322,7 +322,7 @@ func (m *awsRestjson1_serializeOpDeleteBackupPlan) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDeleteBackupPlanInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteBackupPlanInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -333,7 +333,7 @@ func (m *awsRestjson1_serializeOpDeleteBackupPlan) HandleSerialize(ctx context.C
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDeleteBackupPlanInput(v *DeleteBackupPlanInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDeleteBackupPlanInput(v *DeleteBackupPlanInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -382,7 +382,7 @@ func (m *awsRestjson1_serializeOpDeleteBackupSelection) HandleSerialize(ctx cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDeleteBackupSelectionInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteBackupSelectionInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -393,7 +393,7 @@ func (m *awsRestjson1_serializeOpDeleteBackupSelection) HandleSerialize(ctx cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDeleteBackupSelectionInput(v *DeleteBackupSelectionInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDeleteBackupSelectionInput(v *DeleteBackupSelectionInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -448,7 +448,7 @@ func (m *awsRestjson1_serializeOpDeleteBackupVault) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDeleteBackupVaultInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteBackupVaultInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -459,7 +459,7 @@ func (m *awsRestjson1_serializeOpDeleteBackupVault) HandleSerialize(ctx context.
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDeleteBackupVaultInput(v *DeleteBackupVaultInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDeleteBackupVaultInput(v *DeleteBackupVaultInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -508,7 +508,7 @@ func (m *awsRestjson1_serializeOpDeleteBackupVaultAccessPolicy) HandleSerialize(
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDeleteBackupVaultAccessPolicyInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteBackupVaultAccessPolicyInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -519,7 +519,7 @@ func (m *awsRestjson1_serializeOpDeleteBackupVaultAccessPolicy) HandleSerialize(
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDeleteBackupVaultAccessPolicyInput(v *DeleteBackupVaultAccessPolicyInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDeleteBackupVaultAccessPolicyInput(v *DeleteBackupVaultAccessPolicyInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -568,7 +568,7 @@ func (m *awsRestjson1_serializeOpDeleteBackupVaultNotifications) HandleSerialize
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDeleteBackupVaultNotificationsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteBackupVaultNotificationsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -579,7 +579,7 @@ func (m *awsRestjson1_serializeOpDeleteBackupVaultNotifications) HandleSerialize
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDeleteBackupVaultNotificationsInput(v *DeleteBackupVaultNotificationsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDeleteBackupVaultNotificationsInput(v *DeleteBackupVaultNotificationsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -628,7 +628,7 @@ func (m *awsRestjson1_serializeOpDeleteRecoveryPoint) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDeleteRecoveryPointInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteRecoveryPointInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -639,7 +639,7 @@ func (m *awsRestjson1_serializeOpDeleteRecoveryPoint) HandleSerialize(ctx contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDeleteRecoveryPointInput(v *DeleteRecoveryPointInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDeleteRecoveryPointInput(v *DeleteRecoveryPointInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -694,7 +694,7 @@ func (m *awsRestjson1_serializeOpDescribeBackupJob) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDescribeBackupJobInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeBackupJobInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -705,7 +705,7 @@ func (m *awsRestjson1_serializeOpDescribeBackupJob) HandleSerialize(ctx context.
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDescribeBackupJobInput(v *DescribeBackupJobInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDescribeBackupJobInput(v *DescribeBackupJobInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -754,7 +754,7 @@ func (m *awsRestjson1_serializeOpDescribeBackupVault) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDescribeBackupVaultInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeBackupVaultInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -765,7 +765,7 @@ func (m *awsRestjson1_serializeOpDescribeBackupVault) HandleSerialize(ctx contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDescribeBackupVaultInput(v *DescribeBackupVaultInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDescribeBackupVaultInput(v *DescribeBackupVaultInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -814,7 +814,7 @@ func (m *awsRestjson1_serializeOpDescribeCopyJob) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDescribeCopyJobInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeCopyJobInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -825,7 +825,7 @@ func (m *awsRestjson1_serializeOpDescribeCopyJob) HandleSerialize(ctx context.Co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDescribeCopyJobInput(v *DescribeCopyJobInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDescribeCopyJobInput(v *DescribeCopyJobInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -874,7 +874,7 @@ func (m *awsRestjson1_serializeOpDescribeProtectedResource) HandleSerialize(ctx 
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDescribeProtectedResourceInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeProtectedResourceInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -885,7 +885,7 @@ func (m *awsRestjson1_serializeOpDescribeProtectedResource) HandleSerialize(ctx 
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDescribeProtectedResourceInput(v *DescribeProtectedResourceInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDescribeProtectedResourceInput(v *DescribeProtectedResourceInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -934,7 +934,7 @@ func (m *awsRestjson1_serializeOpDescribeRecoveryPoint) HandleSerialize(ctx cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDescribeRecoveryPointInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeRecoveryPointInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -945,7 +945,7 @@ func (m *awsRestjson1_serializeOpDescribeRecoveryPoint) HandleSerialize(ctx cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDescribeRecoveryPointInput(v *DescribeRecoveryPointInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDescribeRecoveryPointInput(v *DescribeRecoveryPointInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1007,7 +1007,7 @@ func (m *awsRestjson1_serializeOpDescribeRegionSettings) HandleSerialize(ctx con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDescribeRegionSettingsInput(v *DescribeRegionSettingsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDescribeRegionSettingsInput(v *DescribeRegionSettingsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1050,7 +1050,7 @@ func (m *awsRestjson1_serializeOpDescribeRestoreJob) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsDescribeRestoreJobInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeRestoreJobInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1061,7 +1061,7 @@ func (m *awsRestjson1_serializeOpDescribeRestoreJob) HandleSerialize(ctx context
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsDescribeRestoreJobInput(v *DescribeRestoreJobInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDescribeRestoreJobInput(v *DescribeRestoreJobInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1110,7 +1110,7 @@ func (m *awsRestjson1_serializeOpExportBackupPlanTemplate) HandleSerialize(ctx c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsExportBackupPlanTemplateInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsExportBackupPlanTemplateInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1121,7 +1121,7 @@ func (m *awsRestjson1_serializeOpExportBackupPlanTemplate) HandleSerialize(ctx c
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsExportBackupPlanTemplateInput(v *ExportBackupPlanTemplateInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsExportBackupPlanTemplateInput(v *ExportBackupPlanTemplateInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1170,7 +1170,7 @@ func (m *awsRestjson1_serializeOpGetBackupPlan) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsGetBackupPlanInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsGetBackupPlanInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1181,7 +1181,7 @@ func (m *awsRestjson1_serializeOpGetBackupPlan) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsGetBackupPlanInput(v *GetBackupPlanInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetBackupPlanInput(v *GetBackupPlanInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1237,7 +1237,7 @@ func (m *awsRestjson1_serializeOpGetBackupPlanFromJSON) HandleSerialize(ctx cont
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentGetBackupPlanFromJSONInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentGetBackupPlanFromJSONInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1252,7 +1252,7 @@ func (m *awsRestjson1_serializeOpGetBackupPlanFromJSON) HandleSerialize(ctx cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsGetBackupPlanFromJSONInput(v *GetBackupPlanFromJSONInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetBackupPlanFromJSONInput(v *GetBackupPlanFromJSONInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1260,7 +1260,7 @@ func awsRestjson1_serializeHttpBindingsGetBackupPlanFromJSONInput(v *GetBackupPl
 	return nil
 }
 
-func awsRestjson1_serializeDocumentGetBackupPlanFromJSONInput(v *GetBackupPlanFromJSONInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentGetBackupPlanFromJSONInput(v *GetBackupPlanFromJSONInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1307,7 +1307,7 @@ func (m *awsRestjson1_serializeOpGetBackupPlanFromTemplate) HandleSerialize(ctx 
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsGetBackupPlanFromTemplateInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsGetBackupPlanFromTemplateInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1318,7 +1318,7 @@ func (m *awsRestjson1_serializeOpGetBackupPlanFromTemplate) HandleSerialize(ctx 
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsGetBackupPlanFromTemplateInput(v *GetBackupPlanFromTemplateInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetBackupPlanFromTemplateInput(v *GetBackupPlanFromTemplateInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1367,7 +1367,7 @@ func (m *awsRestjson1_serializeOpGetBackupSelection) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsGetBackupSelectionInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsGetBackupSelectionInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1378,7 +1378,7 @@ func (m *awsRestjson1_serializeOpGetBackupSelection) HandleSerialize(ctx context
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsGetBackupSelectionInput(v *GetBackupSelectionInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetBackupSelectionInput(v *GetBackupSelectionInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1433,7 +1433,7 @@ func (m *awsRestjson1_serializeOpGetBackupVaultAccessPolicy) HandleSerialize(ctx
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsGetBackupVaultAccessPolicyInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsGetBackupVaultAccessPolicyInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1444,7 +1444,7 @@ func (m *awsRestjson1_serializeOpGetBackupVaultAccessPolicy) HandleSerialize(ctx
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsGetBackupVaultAccessPolicyInput(v *GetBackupVaultAccessPolicyInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetBackupVaultAccessPolicyInput(v *GetBackupVaultAccessPolicyInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1493,7 +1493,7 @@ func (m *awsRestjson1_serializeOpGetBackupVaultNotifications) HandleSerialize(ct
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsGetBackupVaultNotificationsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsGetBackupVaultNotificationsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1504,7 +1504,7 @@ func (m *awsRestjson1_serializeOpGetBackupVaultNotifications) HandleSerialize(ct
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsGetBackupVaultNotificationsInput(v *GetBackupVaultNotificationsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetBackupVaultNotificationsInput(v *GetBackupVaultNotificationsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1553,7 +1553,7 @@ func (m *awsRestjson1_serializeOpGetRecoveryPointRestoreMetadata) HandleSerializ
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsGetRecoveryPointRestoreMetadataInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsGetRecoveryPointRestoreMetadataInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1564,7 +1564,7 @@ func (m *awsRestjson1_serializeOpGetRecoveryPointRestoreMetadata) HandleSerializ
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsGetRecoveryPointRestoreMetadataInput(v *GetRecoveryPointRestoreMetadataInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetRecoveryPointRestoreMetadataInput(v *GetRecoveryPointRestoreMetadataInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1626,7 +1626,7 @@ func (m *awsRestjson1_serializeOpGetSupportedResourceTypes) HandleSerialize(ctx 
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsGetSupportedResourceTypesInput(v *GetSupportedResourceTypesInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetSupportedResourceTypesInput(v *GetSupportedResourceTypesInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1669,7 +1669,7 @@ func (m *awsRestjson1_serializeOpListBackupJobs) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListBackupJobsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListBackupJobsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1680,7 +1680,7 @@ func (m *awsRestjson1_serializeOpListBackupJobs) HandleSerialize(ctx context.Con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListBackupJobsInput(v *ListBackupJobsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListBackupJobsInput(v *ListBackupJobsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1759,7 +1759,7 @@ func (m *awsRestjson1_serializeOpListBackupPlans) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListBackupPlansInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListBackupPlansInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1770,7 +1770,7 @@ func (m *awsRestjson1_serializeOpListBackupPlans) HandleSerialize(ctx context.Co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListBackupPlansInput(v *ListBackupPlansInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListBackupPlansInput(v *ListBackupPlansInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1825,7 +1825,7 @@ func (m *awsRestjson1_serializeOpListBackupPlanTemplates) HandleSerialize(ctx co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListBackupPlanTemplatesInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListBackupPlanTemplatesInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1836,7 +1836,7 @@ func (m *awsRestjson1_serializeOpListBackupPlanTemplates) HandleSerialize(ctx co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListBackupPlanTemplatesInput(v *ListBackupPlanTemplatesInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListBackupPlanTemplatesInput(v *ListBackupPlanTemplatesInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1887,7 +1887,7 @@ func (m *awsRestjson1_serializeOpListBackupPlanVersions) HandleSerialize(ctx con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListBackupPlanVersionsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListBackupPlanVersionsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1898,7 +1898,7 @@ func (m *awsRestjson1_serializeOpListBackupPlanVersions) HandleSerialize(ctx con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListBackupPlanVersionsInput(v *ListBackupPlanVersionsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListBackupPlanVersionsInput(v *ListBackupPlanVersionsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1955,7 +1955,7 @@ func (m *awsRestjson1_serializeOpListBackupSelections) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListBackupSelectionsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListBackupSelectionsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1966,7 +1966,7 @@ func (m *awsRestjson1_serializeOpListBackupSelections) HandleSerialize(ctx conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListBackupSelectionsInput(v *ListBackupSelectionsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListBackupSelectionsInput(v *ListBackupSelectionsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -2023,7 +2023,7 @@ func (m *awsRestjson1_serializeOpListBackupVaults) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListBackupVaultsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListBackupVaultsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2034,7 +2034,7 @@ func (m *awsRestjson1_serializeOpListBackupVaults) HandleSerialize(ctx context.C
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListBackupVaultsInput(v *ListBackupVaultsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListBackupVaultsInput(v *ListBackupVaultsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -2085,7 +2085,7 @@ func (m *awsRestjson1_serializeOpListCopyJobs) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListCopyJobsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListCopyJobsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2096,7 +2096,7 @@ func (m *awsRestjson1_serializeOpListCopyJobs) HandleSerialize(ctx context.Conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListCopyJobsInput(v *ListCopyJobsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListCopyJobsInput(v *ListCopyJobsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -2175,7 +2175,7 @@ func (m *awsRestjson1_serializeOpListProtectedResources) HandleSerialize(ctx con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListProtectedResourcesInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListProtectedResourcesInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2186,7 +2186,7 @@ func (m *awsRestjson1_serializeOpListProtectedResources) HandleSerialize(ctx con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListProtectedResourcesInput(v *ListProtectedResourcesInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListProtectedResourcesInput(v *ListProtectedResourcesInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -2237,7 +2237,7 @@ func (m *awsRestjson1_serializeOpListRecoveryPointsByBackupVault) HandleSerializ
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListRecoveryPointsByBackupVaultInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListRecoveryPointsByBackupVaultInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2248,7 +2248,7 @@ func (m *awsRestjson1_serializeOpListRecoveryPointsByBackupVault) HandleSerializ
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListRecoveryPointsByBackupVaultInput(v *ListRecoveryPointsByBackupVaultInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListRecoveryPointsByBackupVaultInput(v *ListRecoveryPointsByBackupVaultInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -2325,7 +2325,7 @@ func (m *awsRestjson1_serializeOpListRecoveryPointsByResource) HandleSerialize(c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListRecoveryPointsByResourceInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListRecoveryPointsByResourceInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2336,7 +2336,7 @@ func (m *awsRestjson1_serializeOpListRecoveryPointsByResource) HandleSerialize(c
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListRecoveryPointsByResourceInput(v *ListRecoveryPointsByResourceInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListRecoveryPointsByResourceInput(v *ListRecoveryPointsByResourceInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -2393,7 +2393,7 @@ func (m *awsRestjson1_serializeOpListRestoreJobs) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListRestoreJobsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListRestoreJobsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2404,7 +2404,7 @@ func (m *awsRestjson1_serializeOpListRestoreJobs) HandleSerialize(ctx context.Co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListRestoreJobsInput(v *ListRestoreJobsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListRestoreJobsInput(v *ListRestoreJobsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -2471,7 +2471,7 @@ func (m *awsRestjson1_serializeOpListTags) HandleSerialize(ctx context.Context, 
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsListTagsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsListTagsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2482,7 +2482,7 @@ func (m *awsRestjson1_serializeOpListTags) HandleSerialize(ctx context.Context, 
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsListTagsInput(v *ListTagsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListTagsInput(v *ListTagsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -2539,14 +2539,14 @@ func (m *awsRestjson1_serializeOpPutBackupVaultAccessPolicy) HandleSerialize(ctx
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsPutBackupVaultAccessPolicyInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsPutBackupVaultAccessPolicyInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentPutBackupVaultAccessPolicyInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentPutBackupVaultAccessPolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2561,7 +2561,7 @@ func (m *awsRestjson1_serializeOpPutBackupVaultAccessPolicy) HandleSerialize(ctx
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsPutBackupVaultAccessPolicyInput(v *PutBackupVaultAccessPolicyInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsPutBackupVaultAccessPolicyInput(v *PutBackupVaultAccessPolicyInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -2575,7 +2575,7 @@ func awsRestjson1_serializeHttpBindingsPutBackupVaultAccessPolicyInput(v *PutBac
 	return nil
 }
 
-func awsRestjson1_serializeDocumentPutBackupVaultAccessPolicyInput(v *PutBackupVaultAccessPolicyInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentPutBackupVaultAccessPolicyInput(v *PutBackupVaultAccessPolicyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2622,14 +2622,14 @@ func (m *awsRestjson1_serializeOpPutBackupVaultNotifications) HandleSerialize(ct
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsPutBackupVaultNotificationsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsPutBackupVaultNotificationsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentPutBackupVaultNotificationsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentPutBackupVaultNotificationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2644,7 +2644,7 @@ func (m *awsRestjson1_serializeOpPutBackupVaultNotifications) HandleSerialize(ct
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsPutBackupVaultNotificationsInput(v *PutBackupVaultNotificationsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsPutBackupVaultNotificationsInput(v *PutBackupVaultNotificationsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -2658,7 +2658,7 @@ func awsRestjson1_serializeHttpBindingsPutBackupVaultNotificationsInput(v *PutBa
 	return nil
 }
 
-func awsRestjson1_serializeDocumentPutBackupVaultNotificationsInput(v *PutBackupVaultNotificationsInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentPutBackupVaultNotificationsInput(v *PutBackupVaultNotificationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2715,7 +2715,7 @@ func (m *awsRestjson1_serializeOpStartBackupJob) HandleSerialize(ctx context.Con
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentStartBackupJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentStartBackupJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2730,7 +2730,7 @@ func (m *awsRestjson1_serializeOpStartBackupJob) HandleSerialize(ctx context.Con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsStartBackupJobInput(v *StartBackupJobInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsStartBackupJobInput(v *StartBackupJobInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -2738,7 +2738,7 @@ func awsRestjson1_serializeHttpBindingsStartBackupJobInput(v *StartBackupJobInpu
 	return nil
 }
 
-func awsRestjson1_serializeDocumentStartBackupJobInput(v *StartBackupJobInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentStartBackupJobInput(v *StartBackupJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2827,7 +2827,7 @@ func (m *awsRestjson1_serializeOpStartCopyJob) HandleSerialize(ctx context.Conte
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentStartCopyJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentStartCopyJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2842,7 +2842,7 @@ func (m *awsRestjson1_serializeOpStartCopyJob) HandleSerialize(ctx context.Conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsStartCopyJobInput(v *StartCopyJobInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsStartCopyJobInput(v *StartCopyJobInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -2850,7 +2850,7 @@ func awsRestjson1_serializeHttpBindingsStartCopyJobInput(v *StartCopyJobInput, e
 	return nil
 }
 
-func awsRestjson1_serializeDocumentStartCopyJobInput(v *StartCopyJobInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentStartCopyJobInput(v *StartCopyJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -2927,7 +2927,7 @@ func (m *awsRestjson1_serializeOpStartRestoreJob) HandleSerialize(ctx context.Co
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentStartRestoreJobInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentStartRestoreJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2942,7 +2942,7 @@ func (m *awsRestjson1_serializeOpStartRestoreJob) HandleSerialize(ctx context.Co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsStartRestoreJobInput(v *StartRestoreJobInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsStartRestoreJobInput(v *StartRestoreJobInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -2950,7 +2950,7 @@ func awsRestjson1_serializeHttpBindingsStartRestoreJobInput(v *StartRestoreJobIn
 	return nil
 }
 
-func awsRestjson1_serializeDocumentStartRestoreJobInput(v *StartRestoreJobInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentStartRestoreJobInput(v *StartRestoreJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3019,7 +3019,7 @@ func (m *awsRestjson1_serializeOpStopBackupJob) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsStopBackupJobInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsStopBackupJobInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3030,7 +3030,7 @@ func (m *awsRestjson1_serializeOpStopBackupJob) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsStopBackupJobInput(v *StopBackupJobInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsStopBackupJobInput(v *StopBackupJobInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -3079,14 +3079,14 @@ func (m *awsRestjson1_serializeOpTagResource) HandleSerialize(ctx context.Contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsTagResourceInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsTagResourceInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3101,7 +3101,7 @@ func (m *awsRestjson1_serializeOpTagResource) HandleSerialize(ctx context.Contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsTagResourceInput(v *TagResourceInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsTagResourceInput(v *TagResourceInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -3115,7 +3115,7 @@ func awsRestjson1_serializeHttpBindingsTagResourceInput(v *TagResourceInput, enc
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3164,14 +3164,14 @@ func (m *awsRestjson1_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsUntagResourceInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsUntagResourceInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3186,7 +3186,7 @@ func (m *awsRestjson1_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsUntagResourceInput(v *UntagResourceInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -3200,7 +3200,7 @@ func awsRestjson1_serializeHttpBindingsUntagResourceInput(v *UntagResourceInput,
 	return nil
 }
 
-func awsRestjson1_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3249,14 +3249,14 @@ func (m *awsRestjson1_serializeOpUpdateBackupPlan) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsUpdateBackupPlanInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateBackupPlanInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentUpdateBackupPlanInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentUpdateBackupPlanInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3271,7 +3271,7 @@ func (m *awsRestjson1_serializeOpUpdateBackupPlan) HandleSerialize(ctx context.C
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsUpdateBackupPlanInput(v *UpdateBackupPlanInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsUpdateBackupPlanInput(v *UpdateBackupPlanInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -3285,7 +3285,7 @@ func awsRestjson1_serializeHttpBindingsUpdateBackupPlanInput(v *UpdateBackupPlan
 	return nil
 }
 
-func awsRestjson1_serializeDocumentUpdateBackupPlanInput(v *UpdateBackupPlanInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentUpdateBackupPlanInput(v *UpdateBackupPlanInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3334,14 +3334,14 @@ func (m *awsRestjson1_serializeOpUpdateRecoveryPointLifecycle) HandleSerialize(c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsUpdateRecoveryPointLifecycleInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateRecoveryPointLifecycleInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentUpdateRecoveryPointLifecycleInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentUpdateRecoveryPointLifecycleInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3356,7 +3356,7 @@ func (m *awsRestjson1_serializeOpUpdateRecoveryPointLifecycle) HandleSerialize(c
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsUpdateRecoveryPointLifecycleInput(v *UpdateRecoveryPointLifecycleInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsUpdateRecoveryPointLifecycleInput(v *UpdateRecoveryPointLifecycleInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -3376,7 +3376,7 @@ func awsRestjson1_serializeHttpBindingsUpdateRecoveryPointLifecycleInput(v *Upda
 	return nil
 }
 
-func awsRestjson1_serializeDocumentUpdateRecoveryPointLifecycleInput(v *UpdateRecoveryPointLifecycleInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentUpdateRecoveryPointLifecycleInput(v *UpdateRecoveryPointLifecycleInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3428,7 +3428,7 @@ func (m *awsRestjson1_serializeOpUpdateRegionSettings) HandleSerialize(ctx conte
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeDocumentUpdateRegionSettingsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentUpdateRegionSettingsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3443,7 +3443,7 @@ func (m *awsRestjson1_serializeOpUpdateRegionSettings) HandleSerialize(ctx conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsUpdateRegionSettingsInput(v *UpdateRegionSettingsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsUpdateRegionSettingsInput(v *UpdateRegionSettingsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -3451,7 +3451,7 @@ func awsRestjson1_serializeHttpBindingsUpdateRegionSettingsInput(v *UpdateRegion
 	return nil
 }
 
-func awsRestjson1_serializeDocumentUpdateRegionSettingsInput(v *UpdateRegionSettingsInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentUpdateRegionSettingsInput(v *UpdateRegionSettingsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

@@ -53,7 +53,7 @@ func (m *awsAwsjson11_deserializeOpDescribeEntitiesDetectionV2Job) HandleDeseria
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeEntitiesDetectionV2JobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeEntitiesDetectionV2JobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -162,7 +162,7 @@ func (m *awsAwsjson11_deserializeOpDescribeICD10CMInferenceJob) HandleDeserializ
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeICD10CMInferenceJobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeICD10CMInferenceJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -271,7 +271,7 @@ func (m *awsAwsjson11_deserializeOpDescribePHIDetectionJob) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribePHIDetectionJobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribePHIDetectionJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -380,7 +380,7 @@ func (m *awsAwsjson11_deserializeOpDescribeRxNormInferenceJob) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeRxNormInferenceJobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeRxNormInferenceJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -489,7 +489,7 @@ func (m *awsAwsjson11_deserializeOpDetectEntities) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDetectEntitiesOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDetectEntitiesOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -604,7 +604,7 @@ func (m *awsAwsjson11_deserializeOpDetectEntitiesV2) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDetectEntitiesV2Output(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDetectEntitiesV2Output(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -719,7 +719,7 @@ func (m *awsAwsjson11_deserializeOpDetectPHI) HandleDeserialize(ctx context.Cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDetectPHIOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDetectPHIOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -834,7 +834,7 @@ func (m *awsAwsjson11_deserializeOpInferICD10CM) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentInferICD10CMOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentInferICD10CMOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -949,7 +949,7 @@ func (m *awsAwsjson11_deserializeOpInferRxNorm) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentInferRxNormOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentInferRxNormOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1064,7 +1064,7 @@ func (m *awsAwsjson11_deserializeOpListEntitiesDetectionV2Jobs) HandleDeserializ
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListEntitiesDetectionV2JobsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListEntitiesDetectionV2JobsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1173,7 +1173,7 @@ func (m *awsAwsjson11_deserializeOpListICD10CMInferenceJobs) HandleDeserialize(c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListICD10CMInferenceJobsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListICD10CMInferenceJobsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1282,7 +1282,7 @@ func (m *awsAwsjson11_deserializeOpListPHIDetectionJobs) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListPHIDetectionJobsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListPHIDetectionJobsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1391,7 +1391,7 @@ func (m *awsAwsjson11_deserializeOpListRxNormInferenceJobs) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListRxNormInferenceJobsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListRxNormInferenceJobsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1500,7 +1500,7 @@ func (m *awsAwsjson11_deserializeOpStartEntitiesDetectionV2Job) HandleDeserializ
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStartEntitiesDetectionV2JobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStartEntitiesDetectionV2JobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1609,7 +1609,7 @@ func (m *awsAwsjson11_deserializeOpStartICD10CMInferenceJob) HandleDeserialize(c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStartICD10CMInferenceJobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStartICD10CMInferenceJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1718,7 +1718,7 @@ func (m *awsAwsjson11_deserializeOpStartPHIDetectionJob) HandleDeserialize(ctx c
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStartPHIDetectionJobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStartPHIDetectionJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1827,7 +1827,7 @@ func (m *awsAwsjson11_deserializeOpStartRxNormInferenceJob) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStartRxNormInferenceJobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStartRxNormInferenceJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1936,7 +1936,7 @@ func (m *awsAwsjson11_deserializeOpStopEntitiesDetectionV2Job) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStopEntitiesDetectionV2JobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStopEntitiesDetectionV2JobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2042,7 +2042,7 @@ func (m *awsAwsjson11_deserializeOpStopICD10CMInferenceJob) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStopICD10CMInferenceJobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStopICD10CMInferenceJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2148,7 +2148,7 @@ func (m *awsAwsjson11_deserializeOpStopPHIDetectionJob) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStopPHIDetectionJobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStopPHIDetectionJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2254,7 +2254,7 @@ func (m *awsAwsjson11_deserializeOpStopRxNormInferenceJob) HandleDeserialize(ctx
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStopRxNormInferenceJobOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStopRxNormInferenceJobOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5540,7 +5540,7 @@ func awsAwsjson11_deserializeDocumentValidationException(v **types.ValidationExc
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeEntitiesDetectionV2JobOutput(v **DescribeEntitiesDetectionV2JobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeEntitiesDetectionV2JobOutput(v **DescribeEntitiesDetectionV2JobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5596,7 +5596,7 @@ func awsAwsjson11_deserializeDocumentDescribeEntitiesDetectionV2JobOutput(v **De
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeICD10CMInferenceJobOutput(v **DescribeICD10CMInferenceJobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeICD10CMInferenceJobOutput(v **DescribeICD10CMInferenceJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5652,7 +5652,7 @@ func awsAwsjson11_deserializeDocumentDescribeICD10CMInferenceJobOutput(v **Descr
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribePHIDetectionJobOutput(v **DescribePHIDetectionJobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribePHIDetectionJobOutput(v **DescribePHIDetectionJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5708,7 +5708,7 @@ func awsAwsjson11_deserializeDocumentDescribePHIDetectionJobOutput(v **DescribeP
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeRxNormInferenceJobOutput(v **DescribeRxNormInferenceJobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeRxNormInferenceJobOutput(v **DescribeRxNormInferenceJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5764,7 +5764,7 @@ func awsAwsjson11_deserializeDocumentDescribeRxNormInferenceJobOutput(v **Descri
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDetectEntitiesOutput(v **DetectEntitiesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDetectEntitiesOutput(v **DetectEntitiesOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5851,7 +5851,7 @@ func awsAwsjson11_deserializeDocumentDetectEntitiesOutput(v **DetectEntitiesOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDetectEntitiesV2Output(v **DetectEntitiesV2Output, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDetectEntitiesV2Output(v **DetectEntitiesV2Output, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5938,7 +5938,7 @@ func awsAwsjson11_deserializeDocumentDetectEntitiesV2Output(v **DetectEntitiesV2
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDetectPHIOutput(v **DetectPHIOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDetectPHIOutput(v **DetectPHIOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6020,7 +6020,7 @@ func awsAwsjson11_deserializeDocumentDetectPHIOutput(v **DetectPHIOutput, decode
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentInferICD10CMOutput(v **InferICD10CMOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentInferICD10CMOutput(v **InferICD10CMOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6102,7 +6102,7 @@ func awsAwsjson11_deserializeDocumentInferICD10CMOutput(v **InferICD10CMOutput, 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentInferRxNormOutput(v **InferRxNormOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentInferRxNormOutput(v **InferRxNormOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6184,7 +6184,7 @@ func awsAwsjson11_deserializeDocumentInferRxNormOutput(v **InferRxNormOutput, de
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListEntitiesDetectionV2JobsOutput(v **ListEntitiesDetectionV2JobsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListEntitiesDetectionV2JobsOutput(v **ListEntitiesDetectionV2JobsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6253,7 +6253,7 @@ func awsAwsjson11_deserializeDocumentListEntitiesDetectionV2JobsOutput(v **ListE
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListICD10CMInferenceJobsOutput(v **ListICD10CMInferenceJobsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListICD10CMInferenceJobsOutput(v **ListICD10CMInferenceJobsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6322,7 +6322,7 @@ func awsAwsjson11_deserializeDocumentListICD10CMInferenceJobsOutput(v **ListICD1
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListPHIDetectionJobsOutput(v **ListPHIDetectionJobsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListPHIDetectionJobsOutput(v **ListPHIDetectionJobsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6391,7 +6391,7 @@ func awsAwsjson11_deserializeDocumentListPHIDetectionJobsOutput(v **ListPHIDetec
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListRxNormInferenceJobsOutput(v **ListRxNormInferenceJobsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListRxNormInferenceJobsOutput(v **ListRxNormInferenceJobsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6460,7 +6460,7 @@ func awsAwsjson11_deserializeDocumentListRxNormInferenceJobsOutput(v **ListRxNor
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStartEntitiesDetectionV2JobOutput(v **StartEntitiesDetectionV2JobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStartEntitiesDetectionV2JobOutput(v **StartEntitiesDetectionV2JobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6524,7 +6524,7 @@ func awsAwsjson11_deserializeDocumentStartEntitiesDetectionV2JobOutput(v **Start
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStartICD10CMInferenceJobOutput(v **StartICD10CMInferenceJobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStartICD10CMInferenceJobOutput(v **StartICD10CMInferenceJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6588,7 +6588,7 @@ func awsAwsjson11_deserializeDocumentStartICD10CMInferenceJobOutput(v **StartICD
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStartPHIDetectionJobOutput(v **StartPHIDetectionJobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStartPHIDetectionJobOutput(v **StartPHIDetectionJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6652,7 +6652,7 @@ func awsAwsjson11_deserializeDocumentStartPHIDetectionJobOutput(v **StartPHIDete
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStartRxNormInferenceJobOutput(v **StartRxNormInferenceJobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStartRxNormInferenceJobOutput(v **StartRxNormInferenceJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6716,7 +6716,7 @@ func awsAwsjson11_deserializeDocumentStartRxNormInferenceJobOutput(v **StartRxNo
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStopEntitiesDetectionV2JobOutput(v **StopEntitiesDetectionV2JobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStopEntitiesDetectionV2JobOutput(v **StopEntitiesDetectionV2JobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6780,7 +6780,7 @@ func awsAwsjson11_deserializeDocumentStopEntitiesDetectionV2JobOutput(v **StopEn
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStopICD10CMInferenceJobOutput(v **StopICD10CMInferenceJobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStopICD10CMInferenceJobOutput(v **StopICD10CMInferenceJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6844,7 +6844,7 @@ func awsAwsjson11_deserializeDocumentStopICD10CMInferenceJobOutput(v **StopICD10
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStopPHIDetectionJobOutput(v **StopPHIDetectionJobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStopPHIDetectionJobOutput(v **StopPHIDetectionJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -6908,7 +6908,7 @@ func awsAwsjson11_deserializeDocumentStopPHIDetectionJobOutput(v **StopPHIDetect
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStopRxNormInferenceJobOutput(v **StopRxNormInferenceJobOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStopRxNormInferenceJobOutput(v **StopRxNormInferenceJobOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

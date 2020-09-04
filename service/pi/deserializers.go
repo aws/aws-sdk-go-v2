@@ -53,7 +53,7 @@ func (m *awsAwsjson11_deserializeOpDescribeDimensionKeys) HandleDeserialize(ctx 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeDimensionKeysOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeDimensionKeysOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -159,7 +159,7 @@ func (m *awsAwsjson11_deserializeOpGetResourceMetrics) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetResourceMetricsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetResourceMetricsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1145,7 +1145,7 @@ func awsAwsjson11_deserializeDocumentResponseResourceMetricKey(v **types.Respons
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeDimensionKeysOutput(v **DescribeDimensionKeysOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeDimensionKeysOutput(v **DescribeDimensionKeysOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1253,7 +1253,7 @@ func awsAwsjson11_deserializeDocumentDescribeDimensionKeysOutput(v **DescribeDim
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetResourceMetricsOutput(v **GetResourceMetricsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetResourceMetricsOutput(v **GetResourceMetricsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

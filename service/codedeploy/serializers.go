@@ -45,7 +45,7 @@ func (m *awsAwsjson11_serializeOpAddTagsToOnPremisesInstances) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.AddTagsToOnPremisesInstances")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentAddTagsToOnPremisesInstancesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentAddTagsToOnPremisesInstancesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -91,7 +91,7 @@ func (m *awsAwsjson11_serializeOpBatchGetApplicationRevisions) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.BatchGetApplicationRevisions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchGetApplicationRevisionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchGetApplicationRevisionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -137,7 +137,7 @@ func (m *awsAwsjson11_serializeOpBatchGetApplications) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.BatchGetApplications")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchGetApplicationsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchGetApplicationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -183,7 +183,7 @@ func (m *awsAwsjson11_serializeOpBatchGetDeploymentGroups) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.BatchGetDeploymentGroups")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchGetDeploymentGroupsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchGetDeploymentGroupsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -229,7 +229,7 @@ func (m *awsAwsjson11_serializeOpBatchGetDeploymentInstances) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.BatchGetDeploymentInstances")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchGetDeploymentInstancesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchGetDeploymentInstancesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -275,7 +275,7 @@ func (m *awsAwsjson11_serializeOpBatchGetDeployments) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.BatchGetDeployments")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchGetDeploymentsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchGetDeploymentsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -321,7 +321,7 @@ func (m *awsAwsjson11_serializeOpBatchGetDeploymentTargets) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.BatchGetDeploymentTargets")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchGetDeploymentTargetsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchGetDeploymentTargetsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -367,7 +367,7 @@ func (m *awsAwsjson11_serializeOpBatchGetOnPremisesInstances) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.BatchGetOnPremisesInstances")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentBatchGetOnPremisesInstancesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentBatchGetOnPremisesInstancesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -413,7 +413,7 @@ func (m *awsAwsjson11_serializeOpContinueDeployment) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.ContinueDeployment")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentContinueDeploymentInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentContinueDeploymentInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -459,7 +459,7 @@ func (m *awsAwsjson11_serializeOpCreateApplication) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.CreateApplication")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateApplicationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateApplicationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -505,7 +505,7 @@ func (m *awsAwsjson11_serializeOpCreateDeployment) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.CreateDeployment")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateDeploymentInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateDeploymentInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -551,7 +551,7 @@ func (m *awsAwsjson11_serializeOpCreateDeploymentConfig) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.CreateDeploymentConfig")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateDeploymentConfigInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateDeploymentConfigInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -597,7 +597,7 @@ func (m *awsAwsjson11_serializeOpCreateDeploymentGroup) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.CreateDeploymentGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateDeploymentGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateDeploymentGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -643,7 +643,7 @@ func (m *awsAwsjson11_serializeOpDeleteApplication) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.DeleteApplication")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteApplicationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteApplicationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -689,7 +689,7 @@ func (m *awsAwsjson11_serializeOpDeleteDeploymentConfig) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.DeleteDeploymentConfig")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteDeploymentConfigInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteDeploymentConfigInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -735,7 +735,7 @@ func (m *awsAwsjson11_serializeOpDeleteDeploymentGroup) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.DeleteDeploymentGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteDeploymentGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteDeploymentGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -781,7 +781,7 @@ func (m *awsAwsjson11_serializeOpDeleteGitHubAccountToken) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.DeleteGitHubAccountToken")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteGitHubAccountTokenInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteGitHubAccountTokenInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -827,7 +827,7 @@ func (m *awsAwsjson11_serializeOpDeleteResourcesByExternalId) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.DeleteResourcesByExternalId")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteResourcesByExternalIdInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteResourcesByExternalIdInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -873,7 +873,7 @@ func (m *awsAwsjson11_serializeOpDeregisterOnPremisesInstance) HandleSerialize(c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.DeregisterOnPremisesInstance")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeregisterOnPremisesInstanceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeregisterOnPremisesInstanceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -919,7 +919,7 @@ func (m *awsAwsjson11_serializeOpGetApplication) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.GetApplication")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetApplicationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetApplicationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -965,7 +965,7 @@ func (m *awsAwsjson11_serializeOpGetApplicationRevision) HandleSerialize(ctx con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.GetApplicationRevision")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetApplicationRevisionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetApplicationRevisionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1011,7 +1011,7 @@ func (m *awsAwsjson11_serializeOpGetDeployment) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.GetDeployment")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetDeploymentInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetDeploymentInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1057,7 +1057,7 @@ func (m *awsAwsjson11_serializeOpGetDeploymentConfig) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.GetDeploymentConfig")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetDeploymentConfigInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetDeploymentConfigInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1103,7 +1103,7 @@ func (m *awsAwsjson11_serializeOpGetDeploymentGroup) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.GetDeploymentGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetDeploymentGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetDeploymentGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1149,7 +1149,7 @@ func (m *awsAwsjson11_serializeOpGetDeploymentInstance) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.GetDeploymentInstance")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetDeploymentInstanceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetDeploymentInstanceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1195,7 +1195,7 @@ func (m *awsAwsjson11_serializeOpGetDeploymentTarget) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.GetDeploymentTarget")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetDeploymentTargetInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetDeploymentTargetInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1241,7 +1241,7 @@ func (m *awsAwsjson11_serializeOpGetOnPremisesInstance) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.GetOnPremisesInstance")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentGetOnPremisesInstanceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentGetOnPremisesInstanceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1287,7 +1287,7 @@ func (m *awsAwsjson11_serializeOpListApplicationRevisions) HandleSerialize(ctx c
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.ListApplicationRevisions")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListApplicationRevisionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListApplicationRevisionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1333,7 +1333,7 @@ func (m *awsAwsjson11_serializeOpListApplications) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.ListApplications")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListApplicationsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListApplicationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1379,7 +1379,7 @@ func (m *awsAwsjson11_serializeOpListDeploymentConfigs) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.ListDeploymentConfigs")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListDeploymentConfigsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListDeploymentConfigsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1425,7 +1425,7 @@ func (m *awsAwsjson11_serializeOpListDeploymentGroups) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.ListDeploymentGroups")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListDeploymentGroupsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListDeploymentGroupsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1471,7 +1471,7 @@ func (m *awsAwsjson11_serializeOpListDeploymentInstances) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.ListDeploymentInstances")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListDeploymentInstancesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListDeploymentInstancesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1517,7 +1517,7 @@ func (m *awsAwsjson11_serializeOpListDeployments) HandleSerialize(ctx context.Co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.ListDeployments")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListDeploymentsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListDeploymentsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1563,7 +1563,7 @@ func (m *awsAwsjson11_serializeOpListDeploymentTargets) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.ListDeploymentTargets")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListDeploymentTargetsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListDeploymentTargetsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1609,7 +1609,7 @@ func (m *awsAwsjson11_serializeOpListGitHubAccountTokenNames) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.ListGitHubAccountTokenNames")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListGitHubAccountTokenNamesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListGitHubAccountTokenNamesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1655,7 +1655,7 @@ func (m *awsAwsjson11_serializeOpListOnPremisesInstances) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.ListOnPremisesInstances")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListOnPremisesInstancesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListOnPremisesInstancesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1701,7 +1701,7 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.ListTagsForResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1747,7 +1747,7 @@ func (m *awsAwsjson11_serializeOpPutLifecycleEventHookExecutionStatus) HandleSer
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.PutLifecycleEventHookExecutionStatus")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentPutLifecycleEventHookExecutionStatusInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentPutLifecycleEventHookExecutionStatusInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1793,7 +1793,7 @@ func (m *awsAwsjson11_serializeOpRegisterApplicationRevision) HandleSerialize(ct
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.RegisterApplicationRevision")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRegisterApplicationRevisionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRegisterApplicationRevisionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1839,7 +1839,7 @@ func (m *awsAwsjson11_serializeOpRegisterOnPremisesInstance) HandleSerialize(ctx
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.RegisterOnPremisesInstance")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRegisterOnPremisesInstanceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRegisterOnPremisesInstanceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1885,7 +1885,7 @@ func (m *awsAwsjson11_serializeOpRemoveTagsFromOnPremisesInstances) HandleSerial
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.RemoveTagsFromOnPremisesInstances")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRemoveTagsFromOnPremisesInstancesInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRemoveTagsFromOnPremisesInstancesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1931,7 +1931,7 @@ func (m *awsAwsjson11_serializeOpSkipWaitTimeForInstanceTermination) HandleSeria
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.SkipWaitTimeForInstanceTermination")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentSkipWaitTimeForInstanceTerminationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentSkipWaitTimeForInstanceTerminationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1977,7 +1977,7 @@ func (m *awsAwsjson11_serializeOpStopDeployment) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.StopDeployment")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentStopDeploymentInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentStopDeploymentInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2023,7 +2023,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.TagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2069,7 +2069,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.UntagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2115,7 +2115,7 @@ func (m *awsAwsjson11_serializeOpUpdateApplication) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.UpdateApplication")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateApplicationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateApplicationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2161,7 +2161,7 @@ func (m *awsAwsjson11_serializeOpUpdateDeploymentGroup) HandleSerialize(ctx cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodeDeploy_20141006.UpdateDeploymentGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateDeploymentGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateDeploymentGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3217,7 +3217,7 @@ func awsAwsjson11_serializeDocumentTriggerEventTypeList(v []types.TriggerEventTy
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentAddTagsToOnPremisesInstancesInput(v *AddTagsToOnPremisesInstancesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentAddTagsToOnPremisesInstancesInput(v *AddTagsToOnPremisesInstancesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3238,7 +3238,7 @@ func awsAwsjson11_serializeDocumentAddTagsToOnPremisesInstancesInput(v *AddTagsT
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchGetApplicationRevisionsInput(v *BatchGetApplicationRevisionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchGetApplicationRevisionsInput(v *BatchGetApplicationRevisionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3257,7 +3257,7 @@ func awsAwsjson11_serializeDocumentBatchGetApplicationRevisionsInput(v *BatchGet
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchGetApplicationsInput(v *BatchGetApplicationsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchGetApplicationsInput(v *BatchGetApplicationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3271,7 +3271,7 @@ func awsAwsjson11_serializeDocumentBatchGetApplicationsInput(v *BatchGetApplicat
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchGetDeploymentGroupsInput(v *BatchGetDeploymentGroupsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchGetDeploymentGroupsInput(v *BatchGetDeploymentGroupsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3290,7 +3290,7 @@ func awsAwsjson11_serializeDocumentBatchGetDeploymentGroupsInput(v *BatchGetDepl
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchGetDeploymentInstancesInput(v *BatchGetDeploymentInstancesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchGetDeploymentInstancesInput(v *BatchGetDeploymentInstancesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3309,7 +3309,7 @@ func awsAwsjson11_serializeDocumentBatchGetDeploymentInstancesInput(v *BatchGetD
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchGetDeploymentsInput(v *BatchGetDeploymentsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchGetDeploymentsInput(v *BatchGetDeploymentsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3323,7 +3323,7 @@ func awsAwsjson11_serializeDocumentBatchGetDeploymentsInput(v *BatchGetDeploymen
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchGetDeploymentTargetsInput(v *BatchGetDeploymentTargetsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchGetDeploymentTargetsInput(v *BatchGetDeploymentTargetsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3342,7 +3342,7 @@ func awsAwsjson11_serializeDocumentBatchGetDeploymentTargetsInput(v *BatchGetDep
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentBatchGetOnPremisesInstancesInput(v *BatchGetOnPremisesInstancesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentBatchGetOnPremisesInstancesInput(v *BatchGetOnPremisesInstancesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3356,7 +3356,7 @@ func awsAwsjson11_serializeDocumentBatchGetOnPremisesInstancesInput(v *BatchGetO
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentContinueDeploymentInput(v *ContinueDeploymentInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentContinueDeploymentInput(v *ContinueDeploymentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3373,7 +3373,7 @@ func awsAwsjson11_serializeDocumentContinueDeploymentInput(v *ContinueDeployment
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateApplicationInput(v *CreateApplicationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateApplicationInput(v *CreateApplicationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3397,7 +3397,7 @@ func awsAwsjson11_serializeDocumentCreateApplicationInput(v *CreateApplicationIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateDeploymentConfigInput(v *CreateDeploymentConfigInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateDeploymentConfigInput(v *CreateDeploymentConfigInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3428,7 +3428,7 @@ func awsAwsjson11_serializeDocumentCreateDeploymentConfigInput(v *CreateDeployme
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateDeploymentGroupInput(v *CreateDeploymentGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateDeploymentGroupInput(v *CreateDeploymentGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3546,7 +3546,7 @@ func awsAwsjson11_serializeDocumentCreateDeploymentGroupInput(v *CreateDeploymen
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateDeploymentInput(v *CreateDeploymentInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateDeploymentInput(v *CreateDeploymentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3609,7 +3609,7 @@ func awsAwsjson11_serializeDocumentCreateDeploymentInput(v *CreateDeploymentInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteApplicationInput(v *DeleteApplicationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteApplicationInput(v *DeleteApplicationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3621,7 +3621,7 @@ func awsAwsjson11_serializeDocumentDeleteApplicationInput(v *DeleteApplicationIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteDeploymentConfigInput(v *DeleteDeploymentConfigInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteDeploymentConfigInput(v *DeleteDeploymentConfigInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3633,7 +3633,7 @@ func awsAwsjson11_serializeDocumentDeleteDeploymentConfigInput(v *DeleteDeployme
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteDeploymentGroupInput(v *DeleteDeploymentGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteDeploymentGroupInput(v *DeleteDeploymentGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3650,7 +3650,7 @@ func awsAwsjson11_serializeDocumentDeleteDeploymentGroupInput(v *DeleteDeploymen
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteGitHubAccountTokenInput(v *DeleteGitHubAccountTokenInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteGitHubAccountTokenInput(v *DeleteGitHubAccountTokenInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3662,7 +3662,7 @@ func awsAwsjson11_serializeDocumentDeleteGitHubAccountTokenInput(v *DeleteGitHub
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteResourcesByExternalIdInput(v *DeleteResourcesByExternalIdInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteResourcesByExternalIdInput(v *DeleteResourcesByExternalIdInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3674,7 +3674,7 @@ func awsAwsjson11_serializeDocumentDeleteResourcesByExternalIdInput(v *DeleteRes
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeregisterOnPremisesInstanceInput(v *DeregisterOnPremisesInstanceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeregisterOnPremisesInstanceInput(v *DeregisterOnPremisesInstanceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3686,7 +3686,7 @@ func awsAwsjson11_serializeDocumentDeregisterOnPremisesInstanceInput(v *Deregist
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetApplicationInput(v *GetApplicationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetApplicationInput(v *GetApplicationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3698,7 +3698,7 @@ func awsAwsjson11_serializeDocumentGetApplicationInput(v *GetApplicationInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetApplicationRevisionInput(v *GetApplicationRevisionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetApplicationRevisionInput(v *GetApplicationRevisionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3717,7 +3717,7 @@ func awsAwsjson11_serializeDocumentGetApplicationRevisionInput(v *GetApplication
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetDeploymentConfigInput(v *GetDeploymentConfigInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetDeploymentConfigInput(v *GetDeploymentConfigInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3729,7 +3729,7 @@ func awsAwsjson11_serializeDocumentGetDeploymentConfigInput(v *GetDeploymentConf
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetDeploymentGroupInput(v *GetDeploymentGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetDeploymentGroupInput(v *GetDeploymentGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3746,7 +3746,7 @@ func awsAwsjson11_serializeDocumentGetDeploymentGroupInput(v *GetDeploymentGroup
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetDeploymentInput(v *GetDeploymentInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetDeploymentInput(v *GetDeploymentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3758,7 +3758,7 @@ func awsAwsjson11_serializeDocumentGetDeploymentInput(v *GetDeploymentInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetDeploymentInstanceInput(v *GetDeploymentInstanceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetDeploymentInstanceInput(v *GetDeploymentInstanceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3775,7 +3775,7 @@ func awsAwsjson11_serializeDocumentGetDeploymentInstanceInput(v *GetDeploymentIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetDeploymentTargetInput(v *GetDeploymentTargetInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetDeploymentTargetInput(v *GetDeploymentTargetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3792,7 +3792,7 @@ func awsAwsjson11_serializeDocumentGetDeploymentTargetInput(v *GetDeploymentTarg
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentGetOnPremisesInstanceInput(v *GetOnPremisesInstanceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentGetOnPremisesInstanceInput(v *GetOnPremisesInstanceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3804,7 +3804,7 @@ func awsAwsjson11_serializeDocumentGetOnPremisesInstanceInput(v *GetOnPremisesIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListApplicationRevisionsInput(v *ListApplicationRevisionsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListApplicationRevisionsInput(v *ListApplicationRevisionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3846,7 +3846,7 @@ func awsAwsjson11_serializeDocumentListApplicationRevisionsInput(v *ListApplicat
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListApplicationsInput(v *ListApplicationsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListApplicationsInput(v *ListApplicationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3858,7 +3858,7 @@ func awsAwsjson11_serializeDocumentListApplicationsInput(v *ListApplicationsInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListDeploymentConfigsInput(v *ListDeploymentConfigsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListDeploymentConfigsInput(v *ListDeploymentConfigsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3870,7 +3870,7 @@ func awsAwsjson11_serializeDocumentListDeploymentConfigsInput(v *ListDeploymentC
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListDeploymentGroupsInput(v *ListDeploymentGroupsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListDeploymentGroupsInput(v *ListDeploymentGroupsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3887,7 +3887,7 @@ func awsAwsjson11_serializeDocumentListDeploymentGroupsInput(v *ListDeploymentGr
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListDeploymentInstancesInput(v *ListDeploymentInstancesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListDeploymentInstancesInput(v *ListDeploymentInstancesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3918,7 +3918,7 @@ func awsAwsjson11_serializeDocumentListDeploymentInstancesInput(v *ListDeploymen
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListDeploymentsInput(v *ListDeploymentsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListDeploymentsInput(v *ListDeploymentsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3959,7 +3959,7 @@ func awsAwsjson11_serializeDocumentListDeploymentsInput(v *ListDeploymentsInput,
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListDeploymentTargetsInput(v *ListDeploymentTargetsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListDeploymentTargetsInput(v *ListDeploymentTargetsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3983,7 +3983,7 @@ func awsAwsjson11_serializeDocumentListDeploymentTargetsInput(v *ListDeploymentT
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListGitHubAccountTokenNamesInput(v *ListGitHubAccountTokenNamesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListGitHubAccountTokenNamesInput(v *ListGitHubAccountTokenNamesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -3995,7 +3995,7 @@ func awsAwsjson11_serializeDocumentListGitHubAccountTokenNamesInput(v *ListGitHu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListOnPremisesInstancesInput(v *ListOnPremisesInstancesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListOnPremisesInstancesInput(v *ListOnPremisesInstancesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4019,7 +4019,7 @@ func awsAwsjson11_serializeDocumentListOnPremisesInstancesInput(v *ListOnPremise
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4036,7 +4036,7 @@ func awsAwsjson11_serializeDocumentListTagsForResourceInput(v *ListTagsForResour
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentPutLifecycleEventHookExecutionStatusInput(v *PutLifecycleEventHookExecutionStatusInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentPutLifecycleEventHookExecutionStatusInput(v *PutLifecycleEventHookExecutionStatusInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4058,7 +4058,7 @@ func awsAwsjson11_serializeDocumentPutLifecycleEventHookExecutionStatusInput(v *
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRegisterApplicationRevisionInput(v *RegisterApplicationRevisionInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRegisterApplicationRevisionInput(v *RegisterApplicationRevisionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4082,7 +4082,7 @@ func awsAwsjson11_serializeDocumentRegisterApplicationRevisionInput(v *RegisterA
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRegisterOnPremisesInstanceInput(v *RegisterOnPremisesInstanceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRegisterOnPremisesInstanceInput(v *RegisterOnPremisesInstanceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4104,7 +4104,7 @@ func awsAwsjson11_serializeDocumentRegisterOnPremisesInstanceInput(v *RegisterOn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRemoveTagsFromOnPremisesInstancesInput(v *RemoveTagsFromOnPremisesInstancesInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRemoveTagsFromOnPremisesInstancesInput(v *RemoveTagsFromOnPremisesInstancesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4125,7 +4125,7 @@ func awsAwsjson11_serializeDocumentRemoveTagsFromOnPremisesInstancesInput(v *Rem
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentSkipWaitTimeForInstanceTerminationInput(v *SkipWaitTimeForInstanceTerminationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentSkipWaitTimeForInstanceTerminationInput(v *SkipWaitTimeForInstanceTerminationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4137,7 +4137,7 @@ func awsAwsjson11_serializeDocumentSkipWaitTimeForInstanceTerminationInput(v *Sk
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentStopDeploymentInput(v *StopDeploymentInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentStopDeploymentInput(v *StopDeploymentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4154,7 +4154,7 @@ func awsAwsjson11_serializeDocumentStopDeploymentInput(v *StopDeploymentInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4173,7 +4173,7 @@ func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4192,7 +4192,7 @@ func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateApplicationInput(v *UpdateApplicationInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateApplicationInput(v *UpdateApplicationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -4209,7 +4209,7 @@ func awsAwsjson11_serializeDocumentUpdateApplicationInput(v *UpdateApplicationIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateDeploymentGroupInput(v *UpdateDeploymentGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateDeploymentGroupInput(v *UpdateDeploymentGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

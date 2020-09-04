@@ -53,7 +53,7 @@ func (m *awsRestjson1_deserializeOpBatchExecuteStatement) HandleDeserialize(ctx 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentBatchExecuteStatementOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentBatchExecuteStatementOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -132,7 +132,7 @@ func awsRestjson1_deserializeOpErrorBatchExecuteStatement(response *smithyhttp.R
 	}
 }
 
-func awsRestjson1_deserializeDocumentBatchExecuteStatementOutput(v **BatchExecuteStatementOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentBatchExecuteStatementOutput(v **BatchExecuteStatementOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -222,7 +222,7 @@ func (m *awsRestjson1_deserializeOpBeginTransaction) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentBeginTransactionOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentBeginTransactionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -301,7 +301,7 @@ func awsRestjson1_deserializeOpErrorBeginTransaction(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeDocumentBeginTransactionOutput(v **BeginTransactionOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentBeginTransactionOutput(v **BeginTransactionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -399,7 +399,7 @@ func (m *awsRestjson1_deserializeOpCommitTransaction) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentCommitTransactionOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentCommitTransactionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -481,7 +481,7 @@ func awsRestjson1_deserializeOpErrorCommitTransaction(response *smithyhttp.Respo
 	}
 }
 
-func awsRestjson1_deserializeDocumentCommitTransactionOutput(v **CommitTransactionOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentCommitTransactionOutput(v **CommitTransactionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -579,7 +579,7 @@ func (m *awsRestjson1_deserializeOpExecuteSql) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentExecuteSqlOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentExecuteSqlOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -655,7 +655,7 @@ func awsRestjson1_deserializeOpErrorExecuteSql(response *smithyhttp.Response) er
 	}
 }
 
-func awsRestjson1_deserializeDocumentExecuteSqlOutput(v **ExecuteSqlOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentExecuteSqlOutput(v **ExecuteSqlOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -745,7 +745,7 @@ func (m *awsRestjson1_deserializeOpExecuteStatement) HandleDeserialize(ctx conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentExecuteStatementOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentExecuteStatementOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -824,7 +824,7 @@ func awsRestjson1_deserializeOpErrorExecuteStatement(response *smithyhttp.Respon
 	}
 }
 
-func awsRestjson1_deserializeDocumentExecuteStatementOutput(v **ExecuteStatementOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentExecuteStatementOutput(v **ExecuteStatementOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -941,7 +941,7 @@ func (m *awsRestjson1_deserializeOpRollbackTransaction) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsRestjson1_deserializeDocumentRollbackTransactionOutput(&output, decoder)
+	err = awsRestjson1_deserializeOpDocumentRollbackTransactionOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1023,7 +1023,7 @@ func awsRestjson1_deserializeOpErrorRollbackTransaction(response *smithyhttp.Res
 	}
 }
 
-func awsRestjson1_deserializeDocumentRollbackTransactionOutput(v **RollbackTransactionOutput, decoder *json.Decoder) error {
+func awsRestjson1_deserializeOpDocumentRollbackTransactionOutput(v **RollbackTransactionOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

@@ -49,7 +49,7 @@ func (m *awsAwsquery_serializeOpAbortEnvironmentUpdate) HandleSerialize(ctx cont
 	body.Key("Action").String("AbortEnvironmentUpdate")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentAbortEnvironmentUpdateInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentAbortEnvironmentUpdateInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -104,7 +104,7 @@ func (m *awsAwsquery_serializeOpApplyEnvironmentManagedAction) HandleSerialize(c
 	body.Key("Action").String("ApplyEnvironmentManagedAction")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentApplyEnvironmentManagedActionInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentApplyEnvironmentManagedActionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -159,7 +159,7 @@ func (m *awsAwsquery_serializeOpAssociateEnvironmentOperationsRole) HandleSerial
 	body.Key("Action").String("AssociateEnvironmentOperationsRole")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentAssociateEnvironmentOperationsRoleInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentAssociateEnvironmentOperationsRoleInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -214,7 +214,7 @@ func (m *awsAwsquery_serializeOpCheckDNSAvailability) HandleSerialize(ctx contex
 	body.Key("Action").String("CheckDNSAvailability")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentCheckDNSAvailabilityInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCheckDNSAvailabilityInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -269,7 +269,7 @@ func (m *awsAwsquery_serializeOpComposeEnvironments) HandleSerialize(ctx context
 	body.Key("Action").String("ComposeEnvironments")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentComposeEnvironmentsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentComposeEnvironmentsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -324,7 +324,7 @@ func (m *awsAwsquery_serializeOpCreateApplication) HandleSerialize(ctx context.C
 	body.Key("Action").String("CreateApplication")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateApplicationInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateApplicationInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -379,7 +379,7 @@ func (m *awsAwsquery_serializeOpCreateApplicationVersion) HandleSerialize(ctx co
 	body.Key("Action").String("CreateApplicationVersion")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateApplicationVersionInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateApplicationVersionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -434,7 +434,7 @@ func (m *awsAwsquery_serializeOpCreateConfigurationTemplate) HandleSerialize(ctx
 	body.Key("Action").String("CreateConfigurationTemplate")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateConfigurationTemplateInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateConfigurationTemplateInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -489,7 +489,7 @@ func (m *awsAwsquery_serializeOpCreateEnvironment) HandleSerialize(ctx context.C
 	body.Key("Action").String("CreateEnvironment")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreateEnvironmentInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreateEnvironmentInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -544,7 +544,7 @@ func (m *awsAwsquery_serializeOpCreatePlatformVersion) HandleSerialize(ctx conte
 	body.Key("Action").String("CreatePlatformVersion")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentCreatePlatformVersionInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentCreatePlatformVersionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -652,7 +652,7 @@ func (m *awsAwsquery_serializeOpDeleteApplication) HandleSerialize(ctx context.C
 	body.Key("Action").String("DeleteApplication")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteApplicationInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteApplicationInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -707,7 +707,7 @@ func (m *awsAwsquery_serializeOpDeleteApplicationVersion) HandleSerialize(ctx co
 	body.Key("Action").String("DeleteApplicationVersion")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteApplicationVersionInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteApplicationVersionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -762,7 +762,7 @@ func (m *awsAwsquery_serializeOpDeleteConfigurationTemplate) HandleSerialize(ctx
 	body.Key("Action").String("DeleteConfigurationTemplate")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteConfigurationTemplateInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteConfigurationTemplateInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -817,7 +817,7 @@ func (m *awsAwsquery_serializeOpDeleteEnvironmentConfiguration) HandleSerialize(
 	body.Key("Action").String("DeleteEnvironmentConfiguration")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeleteEnvironmentConfigurationInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeleteEnvironmentConfigurationInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -872,7 +872,7 @@ func (m *awsAwsquery_serializeOpDeletePlatformVersion) HandleSerialize(ctx conte
 	body.Key("Action").String("DeletePlatformVersion")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDeletePlatformVersionInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDeletePlatformVersionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -980,7 +980,7 @@ func (m *awsAwsquery_serializeOpDescribeApplications) HandleSerialize(ctx contex
 	body.Key("Action").String("DescribeApplications")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeApplicationsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeApplicationsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1035,7 +1035,7 @@ func (m *awsAwsquery_serializeOpDescribeApplicationVersions) HandleSerialize(ctx
 	body.Key("Action").String("DescribeApplicationVersions")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeApplicationVersionsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeApplicationVersionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1090,7 +1090,7 @@ func (m *awsAwsquery_serializeOpDescribeConfigurationOptions) HandleSerialize(ct
 	body.Key("Action").String("DescribeConfigurationOptions")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeConfigurationOptionsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeConfigurationOptionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1145,7 +1145,7 @@ func (m *awsAwsquery_serializeOpDescribeConfigurationSettings) HandleSerialize(c
 	body.Key("Action").String("DescribeConfigurationSettings")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeConfigurationSettingsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeConfigurationSettingsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1200,7 +1200,7 @@ func (m *awsAwsquery_serializeOpDescribeEnvironmentHealth) HandleSerialize(ctx c
 	body.Key("Action").String("DescribeEnvironmentHealth")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeEnvironmentHealthInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeEnvironmentHealthInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1255,7 +1255,7 @@ func (m *awsAwsquery_serializeOpDescribeEnvironmentManagedActionHistory) HandleS
 	body.Key("Action").String("DescribeEnvironmentManagedActionHistory")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeEnvironmentManagedActionHistoryInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeEnvironmentManagedActionHistoryInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1310,7 +1310,7 @@ func (m *awsAwsquery_serializeOpDescribeEnvironmentManagedActions) HandleSeriali
 	body.Key("Action").String("DescribeEnvironmentManagedActions")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeEnvironmentManagedActionsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeEnvironmentManagedActionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1365,7 +1365,7 @@ func (m *awsAwsquery_serializeOpDescribeEnvironmentResources) HandleSerialize(ct
 	body.Key("Action").String("DescribeEnvironmentResources")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeEnvironmentResourcesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeEnvironmentResourcesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1420,7 +1420,7 @@ func (m *awsAwsquery_serializeOpDescribeEnvironments) HandleSerialize(ctx contex
 	body.Key("Action").String("DescribeEnvironments")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeEnvironmentsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeEnvironmentsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1475,7 +1475,7 @@ func (m *awsAwsquery_serializeOpDescribeEvents) HandleSerialize(ctx context.Cont
 	body.Key("Action").String("DescribeEvents")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeEventsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeEventsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1530,7 +1530,7 @@ func (m *awsAwsquery_serializeOpDescribeInstancesHealth) HandleSerialize(ctx con
 	body.Key("Action").String("DescribeInstancesHealth")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribeInstancesHealthInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribeInstancesHealthInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1585,7 +1585,7 @@ func (m *awsAwsquery_serializeOpDescribePlatformVersion) HandleSerialize(ctx con
 	body.Key("Action").String("DescribePlatformVersion")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDescribePlatformVersionInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDescribePlatformVersionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1640,7 +1640,7 @@ func (m *awsAwsquery_serializeOpDisassociateEnvironmentOperationsRole) HandleSer
 	body.Key("Action").String("DisassociateEnvironmentOperationsRole")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentDisassociateEnvironmentOperationsRoleInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentDisassociateEnvironmentOperationsRoleInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1748,7 +1748,7 @@ func (m *awsAwsquery_serializeOpListPlatformBranches) HandleSerialize(ctx contex
 	body.Key("Action").String("ListPlatformBranches")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentListPlatformBranchesInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListPlatformBranchesInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1803,7 +1803,7 @@ func (m *awsAwsquery_serializeOpListPlatformVersions) HandleSerialize(ctx contex
 	body.Key("Action").String("ListPlatformVersions")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentListPlatformVersionsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListPlatformVersionsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1858,7 +1858,7 @@ func (m *awsAwsquery_serializeOpListTagsForResource) HandleSerialize(ctx context
 	body.Key("Action").String("ListTagsForResource")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentListTagsForResourceInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentListTagsForResourceInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1913,7 +1913,7 @@ func (m *awsAwsquery_serializeOpRebuildEnvironment) HandleSerialize(ctx context.
 	body.Key("Action").String("RebuildEnvironment")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentRebuildEnvironmentInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentRebuildEnvironmentInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1968,7 +1968,7 @@ func (m *awsAwsquery_serializeOpRequestEnvironmentInfo) HandleSerialize(ctx cont
 	body.Key("Action").String("RequestEnvironmentInfo")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentRequestEnvironmentInfoInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentRequestEnvironmentInfoInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2023,7 +2023,7 @@ func (m *awsAwsquery_serializeOpRestartAppServer) HandleSerialize(ctx context.Co
 	body.Key("Action").String("RestartAppServer")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentRestartAppServerInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentRestartAppServerInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2078,7 +2078,7 @@ func (m *awsAwsquery_serializeOpRetrieveEnvironmentInfo) HandleSerialize(ctx con
 	body.Key("Action").String("RetrieveEnvironmentInfo")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentRetrieveEnvironmentInfoInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentRetrieveEnvironmentInfoInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2133,7 +2133,7 @@ func (m *awsAwsquery_serializeOpSwapEnvironmentCNAMEs) HandleSerialize(ctx conte
 	body.Key("Action").String("SwapEnvironmentCNAMEs")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentSwapEnvironmentCNAMEsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentSwapEnvironmentCNAMEsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2188,7 +2188,7 @@ func (m *awsAwsquery_serializeOpTerminateEnvironment) HandleSerialize(ctx contex
 	body.Key("Action").String("TerminateEnvironment")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentTerminateEnvironmentInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentTerminateEnvironmentInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2243,7 +2243,7 @@ func (m *awsAwsquery_serializeOpUpdateApplication) HandleSerialize(ctx context.C
 	body.Key("Action").String("UpdateApplication")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentUpdateApplicationInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUpdateApplicationInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2298,7 +2298,7 @@ func (m *awsAwsquery_serializeOpUpdateApplicationResourceLifecycle) HandleSerial
 	body.Key("Action").String("UpdateApplicationResourceLifecycle")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentUpdateApplicationResourceLifecycleInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUpdateApplicationResourceLifecycleInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2353,7 +2353,7 @@ func (m *awsAwsquery_serializeOpUpdateApplicationVersion) HandleSerialize(ctx co
 	body.Key("Action").String("UpdateApplicationVersion")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentUpdateApplicationVersionInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUpdateApplicationVersionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2408,7 +2408,7 @@ func (m *awsAwsquery_serializeOpUpdateConfigurationTemplate) HandleSerialize(ctx
 	body.Key("Action").String("UpdateConfigurationTemplate")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentUpdateConfigurationTemplateInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUpdateConfigurationTemplateInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2463,7 +2463,7 @@ func (m *awsAwsquery_serializeOpUpdateEnvironment) HandleSerialize(ctx context.C
 	body.Key("Action").String("UpdateEnvironment")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentUpdateEnvironmentInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUpdateEnvironmentInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2518,7 +2518,7 @@ func (m *awsAwsquery_serializeOpUpdateTagsForResource) HandleSerialize(ctx conte
 	body.Key("Action").String("UpdateTagsForResource")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentUpdateTagsForResourceInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentUpdateTagsForResourceInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2573,7 +2573,7 @@ func (m *awsAwsquery_serializeOpValidateConfigurationSettings) HandleSerialize(c
 	body.Key("Action").String("ValidateConfigurationSettings")
 	body.Key("Version").String("2010-12-01")
 
-	if err := awsAwsquery_serializeDocumentValidateConfigurationSettingsInput(input, bodyEncoder.Value); err != nil {
+	if err := awsAwsquery_serializeOpDocumentValidateConfigurationSettingsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3163,7 +3163,7 @@ func awsAwsquery_serializeDocumentVersionLabelsList(v []*string, value query.Val
 	return nil
 }
 
-func awsAwsquery_serializeDocumentAbortEnvironmentUpdateInput(v *AbortEnvironmentUpdateInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentAbortEnvironmentUpdateInput(v *AbortEnvironmentUpdateInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3180,7 +3180,7 @@ func awsAwsquery_serializeDocumentAbortEnvironmentUpdateInput(v *AbortEnvironmen
 	return nil
 }
 
-func awsAwsquery_serializeDocumentApplyEnvironmentManagedActionInput(v *ApplyEnvironmentManagedActionInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentApplyEnvironmentManagedActionInput(v *ApplyEnvironmentManagedActionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3202,7 +3202,7 @@ func awsAwsquery_serializeDocumentApplyEnvironmentManagedActionInput(v *ApplyEnv
 	return nil
 }
 
-func awsAwsquery_serializeDocumentAssociateEnvironmentOperationsRoleInput(v *AssociateEnvironmentOperationsRoleInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentAssociateEnvironmentOperationsRoleInput(v *AssociateEnvironmentOperationsRoleInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3219,7 +3219,7 @@ func awsAwsquery_serializeDocumentAssociateEnvironmentOperationsRoleInput(v *Ass
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCheckDNSAvailabilityInput(v *CheckDNSAvailabilityInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCheckDNSAvailabilityInput(v *CheckDNSAvailabilityInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3231,7 +3231,7 @@ func awsAwsquery_serializeDocumentCheckDNSAvailabilityInput(v *CheckDNSAvailabil
 	return nil
 }
 
-func awsAwsquery_serializeDocumentComposeEnvironmentsInput(v *ComposeEnvironmentsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentComposeEnvironmentsInput(v *ComposeEnvironmentsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3255,7 +3255,7 @@ func awsAwsquery_serializeDocumentComposeEnvironmentsInput(v *ComposeEnvironment
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateApplicationInput(v *CreateApplicationInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateApplicationInput(v *CreateApplicationInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3286,7 +3286,7 @@ func awsAwsquery_serializeDocumentCreateApplicationInput(v *CreateApplicationInp
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateApplicationVersionInput(v *CreateApplicationVersionInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateApplicationVersionInput(v *CreateApplicationVersionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3346,7 +3346,7 @@ func awsAwsquery_serializeDocumentCreateApplicationVersionInput(v *CreateApplica
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateConfigurationTemplateInput(v *CreateConfigurationTemplateInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateConfigurationTemplateInput(v *CreateConfigurationTemplateInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3404,7 +3404,7 @@ func awsAwsquery_serializeDocumentCreateConfigurationTemplateInput(v *CreateConf
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreateEnvironmentInput(v *CreateEnvironmentInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreateEnvironmentInput(v *CreateEnvironmentInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3489,7 +3489,7 @@ func awsAwsquery_serializeDocumentCreateEnvironmentInput(v *CreateEnvironmentInp
 	return nil
 }
 
-func awsAwsquery_serializeDocumentCreatePlatformVersionInput(v *CreatePlatformVersionInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentCreatePlatformVersionInput(v *CreatePlatformVersionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3539,7 +3539,7 @@ func awsAwsquery_serializeDocumentCreateStorageLocationInput(v *CreateStorageLoc
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteApplicationInput(v *DeleteApplicationInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteApplicationInput(v *DeleteApplicationInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3556,7 +3556,7 @@ func awsAwsquery_serializeDocumentDeleteApplicationInput(v *DeleteApplicationInp
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteApplicationVersionInput(v *DeleteApplicationVersionInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteApplicationVersionInput(v *DeleteApplicationVersionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3578,7 +3578,7 @@ func awsAwsquery_serializeDocumentDeleteApplicationVersionInput(v *DeleteApplica
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteConfigurationTemplateInput(v *DeleteConfigurationTemplateInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteConfigurationTemplateInput(v *DeleteConfigurationTemplateInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3595,7 +3595,7 @@ func awsAwsquery_serializeDocumentDeleteConfigurationTemplateInput(v *DeleteConf
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeleteEnvironmentConfigurationInput(v *DeleteEnvironmentConfigurationInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeleteEnvironmentConfigurationInput(v *DeleteEnvironmentConfigurationInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3612,7 +3612,7 @@ func awsAwsquery_serializeDocumentDeleteEnvironmentConfigurationInput(v *DeleteE
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDeletePlatformVersionInput(v *DeletePlatformVersionInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDeletePlatformVersionInput(v *DeletePlatformVersionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3631,7 +3631,7 @@ func awsAwsquery_serializeDocumentDescribeAccountAttributesInput(v *DescribeAcco
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeApplicationsInput(v *DescribeApplicationsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeApplicationsInput(v *DescribeApplicationsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3645,7 +3645,7 @@ func awsAwsquery_serializeDocumentDescribeApplicationsInput(v *DescribeApplicati
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeApplicationVersionsInput(v *DescribeApplicationVersionsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeApplicationVersionsInput(v *DescribeApplicationVersionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3674,7 +3674,7 @@ func awsAwsquery_serializeDocumentDescribeApplicationVersionsInput(v *DescribeAp
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeConfigurationOptionsInput(v *DescribeConfigurationOptionsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeConfigurationOptionsInput(v *DescribeConfigurationOptionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3713,7 +3713,7 @@ func awsAwsquery_serializeDocumentDescribeConfigurationOptionsInput(v *DescribeC
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeConfigurationSettingsInput(v *DescribeConfigurationSettingsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeConfigurationSettingsInput(v *DescribeConfigurationSettingsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3735,7 +3735,7 @@ func awsAwsquery_serializeDocumentDescribeConfigurationSettingsInput(v *Describe
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeEnvironmentHealthInput(v *DescribeEnvironmentHealthInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeEnvironmentHealthInput(v *DescribeEnvironmentHealthInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3759,7 +3759,7 @@ func awsAwsquery_serializeDocumentDescribeEnvironmentHealthInput(v *DescribeEnvi
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeEnvironmentManagedActionHistoryInput(v *DescribeEnvironmentManagedActionHistoryInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeEnvironmentManagedActionHistoryInput(v *DescribeEnvironmentManagedActionHistoryInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3786,7 +3786,7 @@ func awsAwsquery_serializeDocumentDescribeEnvironmentManagedActionHistoryInput(v
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeEnvironmentManagedActionsInput(v *DescribeEnvironmentManagedActionsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeEnvironmentManagedActionsInput(v *DescribeEnvironmentManagedActionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3808,7 +3808,7 @@ func awsAwsquery_serializeDocumentDescribeEnvironmentManagedActionsInput(v *Desc
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeEnvironmentResourcesInput(v *DescribeEnvironmentResourcesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeEnvironmentResourcesInput(v *DescribeEnvironmentResourcesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3825,7 +3825,7 @@ func awsAwsquery_serializeDocumentDescribeEnvironmentResourcesInput(v *DescribeE
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeEnvironmentsInput(v *DescribeEnvironmentsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeEnvironmentsInput(v *DescribeEnvironmentsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3876,7 +3876,7 @@ func awsAwsquery_serializeDocumentDescribeEnvironmentsInput(v *DescribeEnvironme
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeEventsInput(v *DescribeEventsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeEventsInput(v *DescribeEventsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3943,7 +3943,7 @@ func awsAwsquery_serializeDocumentDescribeEventsInput(v *DescribeEventsInput, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribeInstancesHealthInput(v *DescribeInstancesHealthInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribeInstancesHealthInput(v *DescribeInstancesHealthInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3972,7 +3972,7 @@ func awsAwsquery_serializeDocumentDescribeInstancesHealthInput(v *DescribeInstan
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDescribePlatformVersionInput(v *DescribePlatformVersionInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDescribePlatformVersionInput(v *DescribePlatformVersionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -3984,7 +3984,7 @@ func awsAwsquery_serializeDocumentDescribePlatformVersionInput(v *DescribePlatfo
 	return nil
 }
 
-func awsAwsquery_serializeDocumentDisassociateEnvironmentOperationsRoleInput(v *DisassociateEnvironmentOperationsRoleInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentDisassociateEnvironmentOperationsRoleInput(v *DisassociateEnvironmentOperationsRoleInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4003,7 +4003,7 @@ func awsAwsquery_serializeDocumentListAvailableSolutionStacksInput(v *ListAvaila
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListPlatformBranchesInput(v *ListPlatformBranchesInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListPlatformBranchesInput(v *ListPlatformBranchesInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4027,7 +4027,7 @@ func awsAwsquery_serializeDocumentListPlatformBranchesInput(v *ListPlatformBranc
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListPlatformVersionsInput(v *ListPlatformVersionsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListPlatformVersionsInput(v *ListPlatformVersionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4051,7 +4051,7 @@ func awsAwsquery_serializeDocumentListPlatformVersionsInput(v *ListPlatformVersi
 	return nil
 }
 
-func awsAwsquery_serializeDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4063,7 +4063,7 @@ func awsAwsquery_serializeDocumentListTagsForResourceInput(v *ListTagsForResourc
 	return nil
 }
 
-func awsAwsquery_serializeDocumentRebuildEnvironmentInput(v *RebuildEnvironmentInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentRebuildEnvironmentInput(v *RebuildEnvironmentInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4080,46 +4080,7 @@ func awsAwsquery_serializeDocumentRebuildEnvironmentInput(v *RebuildEnvironmentI
 	return nil
 }
 
-func awsAwsquery_serializeDocumentRequestEnvironmentInfoInput(v *RequestEnvironmentInfoInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.EnvironmentId != nil {
-		objectKey := object.Key("EnvironmentId")
-		objectKey.String(*v.EnvironmentId)
-	}
-
-	if v.EnvironmentName != nil {
-		objectKey := object.Key("EnvironmentName")
-		objectKey.String(*v.EnvironmentName)
-	}
-
-	if len(v.InfoType) > 0 {
-		objectKey := object.Key("InfoType")
-		objectKey.String(string(v.InfoType))
-	}
-
-	return nil
-}
-
-func awsAwsquery_serializeDocumentRestartAppServerInput(v *RestartAppServerInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.EnvironmentId != nil {
-		objectKey := object.Key("EnvironmentId")
-		objectKey.String(*v.EnvironmentId)
-	}
-
-	if v.EnvironmentName != nil {
-		objectKey := object.Key("EnvironmentName")
-		objectKey.String(*v.EnvironmentName)
-	}
-
-	return nil
-}
-
-func awsAwsquery_serializeDocumentRetrieveEnvironmentInfoInput(v *RetrieveEnvironmentInfoInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentRequestEnvironmentInfoInput(v *RequestEnvironmentInfoInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4141,7 +4102,46 @@ func awsAwsquery_serializeDocumentRetrieveEnvironmentInfoInput(v *RetrieveEnviro
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSwapEnvironmentCNAMEsInput(v *SwapEnvironmentCNAMEsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentRestartAppServerInput(v *RestartAppServerInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.EnvironmentId != nil {
+		objectKey := object.Key("EnvironmentId")
+		objectKey.String(*v.EnvironmentId)
+	}
+
+	if v.EnvironmentName != nil {
+		objectKey := object.Key("EnvironmentName")
+		objectKey.String(*v.EnvironmentName)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentRetrieveEnvironmentInfoInput(v *RetrieveEnvironmentInfoInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.EnvironmentId != nil {
+		objectKey := object.Key("EnvironmentId")
+		objectKey.String(*v.EnvironmentId)
+	}
+
+	if v.EnvironmentName != nil {
+		objectKey := object.Key("EnvironmentName")
+		objectKey.String(*v.EnvironmentName)
+	}
+
+	if len(v.InfoType) > 0 {
+		objectKey := object.Key("InfoType")
+		objectKey.String(string(v.InfoType))
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentSwapEnvironmentCNAMEsInput(v *SwapEnvironmentCNAMEsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4168,7 +4168,7 @@ func awsAwsquery_serializeDocumentSwapEnvironmentCNAMEsInput(v *SwapEnvironmentC
 	return nil
 }
 
-func awsAwsquery_serializeDocumentTerminateEnvironmentInput(v *TerminateEnvironmentInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentTerminateEnvironmentInput(v *TerminateEnvironmentInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4195,7 +4195,7 @@ func awsAwsquery_serializeDocumentTerminateEnvironmentInput(v *TerminateEnvironm
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUpdateApplicationInput(v *UpdateApplicationInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUpdateApplicationInput(v *UpdateApplicationInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4212,7 +4212,7 @@ func awsAwsquery_serializeDocumentUpdateApplicationInput(v *UpdateApplicationInp
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUpdateApplicationResourceLifecycleInput(v *UpdateApplicationResourceLifecycleInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUpdateApplicationResourceLifecycleInput(v *UpdateApplicationResourceLifecycleInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4231,7 +4231,7 @@ func awsAwsquery_serializeDocumentUpdateApplicationResourceLifecycleInput(v *Upd
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUpdateApplicationVersionInput(v *UpdateApplicationVersionInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUpdateApplicationVersionInput(v *UpdateApplicationVersionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4253,7 +4253,7 @@ func awsAwsquery_serializeDocumentUpdateApplicationVersionInput(v *UpdateApplica
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUpdateConfigurationTemplateInput(v *UpdateConfigurationTemplateInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUpdateConfigurationTemplateInput(v *UpdateConfigurationTemplateInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4289,7 +4289,7 @@ func awsAwsquery_serializeDocumentUpdateConfigurationTemplateInput(v *UpdateConf
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUpdateEnvironmentInput(v *UpdateEnvironmentInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUpdateEnvironmentInput(v *UpdateEnvironmentInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4362,7 +4362,7 @@ func awsAwsquery_serializeDocumentUpdateEnvironmentInput(v *UpdateEnvironmentInp
 	return nil
 }
 
-func awsAwsquery_serializeDocumentUpdateTagsForResourceInput(v *UpdateTagsForResourceInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentUpdateTagsForResourceInput(v *UpdateTagsForResourceInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 
@@ -4388,7 +4388,7 @@ func awsAwsquery_serializeDocumentUpdateTagsForResourceInput(v *UpdateTagsForRes
 	return nil
 }
 
-func awsAwsquery_serializeDocumentValidateConfigurationSettingsInput(v *ValidateConfigurationSettingsInput, value query.Value) error {
+func awsAwsquery_serializeOpDocumentValidateConfigurationSettingsInput(v *ValidateConfigurationSettingsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
 

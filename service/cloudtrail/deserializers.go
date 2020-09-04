@@ -53,7 +53,7 @@ func (m *awsAwsjson11_deserializeOpAddTags) HandleDeserialize(ctx context.Contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentAddTagsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentAddTagsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -177,7 +177,7 @@ func (m *awsAwsjson11_deserializeOpCreateTrail) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateTrailOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateTrailOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -355,7 +355,7 @@ func (m *awsAwsjson11_deserializeOpDeleteTrail) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteTrailOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteTrailOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -473,7 +473,7 @@ func (m *awsAwsjson11_deserializeOpDescribeTrails) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDescribeTrailsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDescribeTrailsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -579,7 +579,7 @@ func (m *awsAwsjson11_deserializeOpGetEventSelectors) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetEventSelectorsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetEventSelectorsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -688,7 +688,7 @@ func (m *awsAwsjson11_deserializeOpGetInsightSelectors) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetInsightSelectorsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetInsightSelectorsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -800,7 +800,7 @@ func (m *awsAwsjson11_deserializeOpGetTrail) HandleDeserialize(ctx context.Conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetTrailOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetTrailOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -909,7 +909,7 @@ func (m *awsAwsjson11_deserializeOpGetTrailStatus) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetTrailStatusOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetTrailStatusOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1018,7 +1018,7 @@ func (m *awsAwsjson11_deserializeOpListPublicKeys) HandleDeserialize(ctx context
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListPublicKeysOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListPublicKeysOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1127,7 +1127,7 @@ func (m *awsAwsjson11_deserializeOpListTags) HandleDeserialize(ctx context.Conte
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListTagsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListTagsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1245,7 +1245,7 @@ func (m *awsAwsjson11_deserializeOpListTrails) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListTrailsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListTrailsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1348,7 +1348,7 @@ func (m *awsAwsjson11_deserializeOpLookupEvents) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentLookupEventsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentLookupEventsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1466,7 +1466,7 @@ func (m *awsAwsjson11_deserializeOpPutEventSelectors) HandleDeserialize(ctx cont
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentPutEventSelectorsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentPutEventSelectorsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1587,7 +1587,7 @@ func (m *awsAwsjson11_deserializeOpPutInsightSelectors) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentPutInsightSelectorsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentPutInsightSelectorsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1711,7 +1711,7 @@ func (m *awsAwsjson11_deserializeOpRemoveTags) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentRemoveTagsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentRemoveTagsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1832,7 +1832,7 @@ func (m *awsAwsjson11_deserializeOpStartLogging) HandleDeserialize(ctx context.C
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStartLoggingOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStartLoggingOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1950,7 +1950,7 @@ func (m *awsAwsjson11_deserializeOpStopLogging) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentStopLoggingOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentStopLoggingOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2068,7 +2068,7 @@ func (m *awsAwsjson11_deserializeOpUpdateTrail) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateTrailOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateTrailOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -7525,7 +7525,7 @@ func awsAwsjson11_deserializeDocumentUnsupportedOperationException(v **types.Uns
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentAddTagsOutput(v **AddTagsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAddTagsOutput(v **AddTagsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7576,7 +7576,7 @@ func awsAwsjson11_deserializeDocumentAddTagsOutput(v **AddTagsOutput, decoder *j
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateTrailOutput(v **CreateTrailOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateTrailOutput(v **CreateTrailOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7796,7 +7796,7 @@ func awsAwsjson11_deserializeDocumentCreateTrailOutput(v **CreateTrailOutput, de
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteTrailOutput(v **DeleteTrailOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteTrailOutput(v **DeleteTrailOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7847,7 +7847,7 @@ func awsAwsjson11_deserializeDocumentDeleteTrailOutput(v **DeleteTrailOutput, de
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDescribeTrailsOutput(v **DescribeTrailsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeTrailsOutput(v **DescribeTrailsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7903,7 +7903,7 @@ func awsAwsjson11_deserializeDocumentDescribeTrailsOutput(v **DescribeTrailsOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetEventSelectorsOutput(v **GetEventSelectorsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetEventSelectorsOutput(v **GetEventSelectorsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -7972,7 +7972,7 @@ func awsAwsjson11_deserializeDocumentGetEventSelectorsOutput(v **GetEventSelecto
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetInsightSelectorsOutput(v **GetInsightSelectorsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetInsightSelectorsOutput(v **GetInsightSelectorsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8041,7 +8041,7 @@ func awsAwsjson11_deserializeDocumentGetInsightSelectorsOutput(v **GetInsightSel
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetTrailOutput(v **GetTrailOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetTrailOutput(v **GetTrailOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8097,7 +8097,7 @@ func awsAwsjson11_deserializeDocumentGetTrailOutput(v **GetTrailOutput, decoder 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetTrailStatusOutput(v **GetTrailStatusOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetTrailStatusOutput(v **GetTrailStatusOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8393,7 +8393,7 @@ func awsAwsjson11_deserializeDocumentGetTrailStatusOutput(v **GetTrailStatusOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListPublicKeysOutput(v **ListPublicKeysOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListPublicKeysOutput(v **ListPublicKeysOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8462,7 +8462,7 @@ func awsAwsjson11_deserializeDocumentListPublicKeysOutput(v **ListPublicKeysOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListTagsOutput(v **ListTagsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListTagsOutput(v **ListTagsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8531,7 +8531,7 @@ func awsAwsjson11_deserializeDocumentListTagsOutput(v **ListTagsOutput, decoder 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListTrailsOutput(v **ListTrailsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListTrailsOutput(v **ListTrailsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8600,7 +8600,7 @@ func awsAwsjson11_deserializeDocumentListTrailsOutput(v **ListTrailsOutput, deco
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentLookupEventsOutput(v **LookupEventsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentLookupEventsOutput(v **LookupEventsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8669,7 +8669,7 @@ func awsAwsjson11_deserializeDocumentLookupEventsOutput(v **LookupEventsOutput, 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentPutEventSelectorsOutput(v **PutEventSelectorsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentPutEventSelectorsOutput(v **PutEventSelectorsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8738,7 +8738,7 @@ func awsAwsjson11_deserializeDocumentPutEventSelectorsOutput(v **PutEventSelecto
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentPutInsightSelectorsOutput(v **PutInsightSelectorsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentPutInsightSelectorsOutput(v **PutInsightSelectorsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8807,7 +8807,7 @@ func awsAwsjson11_deserializeDocumentPutInsightSelectorsOutput(v **PutInsightSel
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentRemoveTagsOutput(v **RemoveTagsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentRemoveTagsOutput(v **RemoveTagsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8858,7 +8858,7 @@ func awsAwsjson11_deserializeDocumentRemoveTagsOutput(v **RemoveTagsOutput, deco
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStartLoggingOutput(v **StartLoggingOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStartLoggingOutput(v **StartLoggingOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8909,7 +8909,7 @@ func awsAwsjson11_deserializeDocumentStartLoggingOutput(v **StartLoggingOutput, 
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStopLoggingOutput(v **StopLoggingOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentStopLoggingOutput(v **StopLoggingOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -8960,7 +8960,7 @@ func awsAwsjson11_deserializeDocumentStopLoggingOutput(v **StopLoggingOutput, de
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateTrailOutput(v **UpdateTrailOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateTrailOutput(v **UpdateTrailOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

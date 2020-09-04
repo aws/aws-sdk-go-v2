@@ -45,7 +45,7 @@ func (m *awsAwsjson11_serializeOpCreateCluster) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonDAXV3.CreateCluster")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateClusterInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateClusterInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -91,7 +91,7 @@ func (m *awsAwsjson11_serializeOpCreateParameterGroup) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonDAXV3.CreateParameterGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateParameterGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateParameterGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -137,7 +137,7 @@ func (m *awsAwsjson11_serializeOpCreateSubnetGroup) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonDAXV3.CreateSubnetGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentCreateSubnetGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentCreateSubnetGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -183,7 +183,7 @@ func (m *awsAwsjson11_serializeOpDecreaseReplicationFactor) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonDAXV3.DecreaseReplicationFactor")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDecreaseReplicationFactorInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDecreaseReplicationFactorInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -229,7 +229,7 @@ func (m *awsAwsjson11_serializeOpDeleteCluster) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonDAXV3.DeleteCluster")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteClusterInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteClusterInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -275,7 +275,7 @@ func (m *awsAwsjson11_serializeOpDeleteParameterGroup) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonDAXV3.DeleteParameterGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteParameterGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteParameterGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -321,7 +321,7 @@ func (m *awsAwsjson11_serializeOpDeleteSubnetGroup) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonDAXV3.DeleteSubnetGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDeleteSubnetGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDeleteSubnetGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -367,7 +367,7 @@ func (m *awsAwsjson11_serializeOpDescribeClusters) HandleSerialize(ctx context.C
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonDAXV3.DescribeClusters")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeClustersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeClustersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -413,7 +413,7 @@ func (m *awsAwsjson11_serializeOpDescribeDefaultParameters) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonDAXV3.DescribeDefaultParameters")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeDefaultParametersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeDefaultParametersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -459,7 +459,7 @@ func (m *awsAwsjson11_serializeOpDescribeEvents) HandleSerialize(ctx context.Con
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonDAXV3.DescribeEvents")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeEventsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeEventsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -505,7 +505,7 @@ func (m *awsAwsjson11_serializeOpDescribeParameterGroups) HandleSerialize(ctx co
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonDAXV3.DescribeParameterGroups")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeParameterGroupsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeParameterGroupsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -551,7 +551,7 @@ func (m *awsAwsjson11_serializeOpDescribeParameters) HandleSerialize(ctx context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonDAXV3.DescribeParameters")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeParametersInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeParametersInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -597,7 +597,7 @@ func (m *awsAwsjson11_serializeOpDescribeSubnetGroups) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonDAXV3.DescribeSubnetGroups")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentDescribeSubnetGroupsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentDescribeSubnetGroupsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -643,7 +643,7 @@ func (m *awsAwsjson11_serializeOpIncreaseReplicationFactor) HandleSerialize(ctx 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonDAXV3.IncreaseReplicationFactor")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentIncreaseReplicationFactorInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentIncreaseReplicationFactorInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -689,7 +689,7 @@ func (m *awsAwsjson11_serializeOpListTags) HandleSerialize(ctx context.Context, 
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonDAXV3.ListTags")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentListTagsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentListTagsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -735,7 +735,7 @@ func (m *awsAwsjson11_serializeOpRebootNode) HandleSerialize(ctx context.Context
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonDAXV3.RebootNode")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentRebootNodeInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentRebootNodeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -781,7 +781,7 @@ func (m *awsAwsjson11_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonDAXV3.TagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentTagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -827,7 +827,7 @@ func (m *awsAwsjson11_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonDAXV3.UntagResource")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUntagResourceInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -873,7 +873,7 @@ func (m *awsAwsjson11_serializeOpUpdateCluster) HandleSerialize(ctx context.Cont
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonDAXV3.UpdateCluster")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateClusterInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateClusterInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -919,7 +919,7 @@ func (m *awsAwsjson11_serializeOpUpdateParameterGroup) HandleSerialize(ctx conte
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonDAXV3.UpdateParameterGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateParameterGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateParameterGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -965,7 +965,7 @@ func (m *awsAwsjson11_serializeOpUpdateSubnetGroup) HandleSerialize(ctx context.
 	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonDAXV3.UpdateSubnetGroup")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeDocumentUpdateSubnetGroupInput(input, jsonEncoder.Value); err != nil {
+	if err := awsAwsjson11_serializeOpDocumentUpdateSubnetGroupInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1180,7 +1180,7 @@ func awsAwsjson11_serializeDocumentTagList(v []*types.Tag, value smithyjson.Valu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateClusterInput(v *CreateClusterInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1260,7 +1260,7 @@ func awsAwsjson11_serializeDocumentCreateClusterInput(v *CreateClusterInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateParameterGroupInput(v *CreateParameterGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateParameterGroupInput(v *CreateParameterGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1277,7 +1277,7 @@ func awsAwsjson11_serializeDocumentCreateParameterGroupInput(v *CreateParameterG
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentCreateSubnetGroupInput(v *CreateSubnetGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentCreateSubnetGroupInput(v *CreateSubnetGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1301,7 +1301,7 @@ func awsAwsjson11_serializeDocumentCreateSubnetGroupInput(v *CreateSubnetGroupIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDecreaseReplicationFactorInput(v *DecreaseReplicationFactorInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDecreaseReplicationFactorInput(v *DecreaseReplicationFactorInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1332,7 +1332,7 @@ func awsAwsjson11_serializeDocumentDecreaseReplicationFactorInput(v *DecreaseRep
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteClusterInput(v *DeleteClusterInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteClusterInput(v *DeleteClusterInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1344,7 +1344,7 @@ func awsAwsjson11_serializeDocumentDeleteClusterInput(v *DeleteClusterInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteParameterGroupInput(v *DeleteParameterGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteParameterGroupInput(v *DeleteParameterGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1356,7 +1356,7 @@ func awsAwsjson11_serializeDocumentDeleteParameterGroupInput(v *DeleteParameterG
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDeleteSubnetGroupInput(v *DeleteSubnetGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDeleteSubnetGroupInput(v *DeleteSubnetGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1368,7 +1368,7 @@ func awsAwsjson11_serializeDocumentDeleteSubnetGroupInput(v *DeleteSubnetGroupIn
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeClustersInput(v *DescribeClustersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeClustersInput(v *DescribeClustersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1392,7 +1392,7 @@ func awsAwsjson11_serializeDocumentDescribeClustersInput(v *DescribeClustersInpu
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeDefaultParametersInput(v *DescribeDefaultParametersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeDefaultParametersInput(v *DescribeDefaultParametersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1409,7 +1409,7 @@ func awsAwsjson11_serializeDocumentDescribeDefaultParametersInput(v *DescribeDef
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeEventsInput(v *DescribeEventsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeEventsInput(v *DescribeEventsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1451,7 +1451,7 @@ func awsAwsjson11_serializeDocumentDescribeEventsInput(v *DescribeEventsInput, v
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeParameterGroupsInput(v *DescribeParameterGroupsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeParameterGroupsInput(v *DescribeParameterGroupsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1475,7 +1475,7 @@ func awsAwsjson11_serializeDocumentDescribeParameterGroupsInput(v *DescribeParam
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeParametersInput(v *DescribeParametersInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeParametersInput(v *DescribeParametersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1502,7 +1502,7 @@ func awsAwsjson11_serializeDocumentDescribeParametersInput(v *DescribeParameters
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentDescribeSubnetGroupsInput(v *DescribeSubnetGroupsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentDescribeSubnetGroupsInput(v *DescribeSubnetGroupsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1526,7 +1526,7 @@ func awsAwsjson11_serializeDocumentDescribeSubnetGroupsInput(v *DescribeSubnetGr
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentIncreaseReplicationFactorInput(v *IncreaseReplicationFactorInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentIncreaseReplicationFactorInput(v *IncreaseReplicationFactorInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1550,7 +1550,7 @@ func awsAwsjson11_serializeDocumentIncreaseReplicationFactorInput(v *IncreaseRep
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentListTagsInput(v *ListTagsInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentListTagsInput(v *ListTagsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1567,7 +1567,7 @@ func awsAwsjson11_serializeDocumentListTagsInput(v *ListTagsInput, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentRebootNodeInput(v *RebootNodeInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentRebootNodeInput(v *RebootNodeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1584,7 +1584,7 @@ func awsAwsjson11_serializeDocumentRebootNodeInput(v *RebootNodeInput, value smi
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentTagResourceInput(v *TagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1603,7 +1603,7 @@ func awsAwsjson11_serializeDocumentTagResourceInput(v *TagResourceInput, value s
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUntagResourceInput(v *UntagResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1622,7 +1622,7 @@ func awsAwsjson11_serializeDocumentUntagResourceInput(v *UntagResourceInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateClusterInput(v *UpdateClusterInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateClusterInput(v *UpdateClusterInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1666,7 +1666,7 @@ func awsAwsjson11_serializeDocumentUpdateClusterInput(v *UpdateClusterInput, val
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateParameterGroupInput(v *UpdateParameterGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateParameterGroupInput(v *UpdateParameterGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -1685,7 +1685,7 @@ func awsAwsjson11_serializeDocumentUpdateParameterGroupInput(v *UpdateParameterG
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentUpdateSubnetGroupInput(v *UpdateSubnetGroupInput, value smithyjson.Value) error {
+func awsAwsjson11_serializeOpDocumentUpdateSubnetGroupInput(v *UpdateSubnetGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

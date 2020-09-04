@@ -53,7 +53,7 @@ func (m *awsAwsjson11_deserializeOpCreateLicenseConfiguration) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentCreateLicenseConfigurationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentCreateLicenseConfigurationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -168,7 +168,7 @@ func (m *awsAwsjson11_deserializeOpDeleteLicenseConfiguration) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentDeleteLicenseConfigurationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentDeleteLicenseConfigurationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -280,7 +280,7 @@ func (m *awsAwsjson11_deserializeOpGetLicenseConfiguration) HandleDeserialize(ct
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetLicenseConfigurationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetLicenseConfigurationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -392,7 +392,7 @@ func (m *awsAwsjson11_deserializeOpGetServiceSettings) HandleDeserialize(ctx con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentGetServiceSettingsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentGetServiceSettingsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -501,7 +501,7 @@ func (m *awsAwsjson11_deserializeOpListAssociationsForLicenseConfiguration) Hand
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListAssociationsForLicenseConfigurationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListAssociationsForLicenseConfigurationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -616,7 +616,7 @@ func (m *awsAwsjson11_deserializeOpListFailuresForLicenseConfigurationOperations
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListFailuresForLicenseConfigurationOperationsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListFailuresForLicenseConfigurationOperationsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -728,7 +728,7 @@ func (m *awsAwsjson11_deserializeOpListLicenseConfigurations) HandleDeserialize(
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListLicenseConfigurationsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListLicenseConfigurationsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -843,7 +843,7 @@ func (m *awsAwsjson11_deserializeOpListLicenseSpecificationsForResource) HandleD
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListLicenseSpecificationsForResourceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListLicenseSpecificationsForResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -955,7 +955,7 @@ func (m *awsAwsjson11_deserializeOpListResourceInventory) HandleDeserialize(ctx 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListResourceInventoryOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListResourceInventoryOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1073,7 +1073,7 @@ func (m *awsAwsjson11_deserializeOpListTagsForResource) HandleDeserialize(ctx co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListTagsForResourceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1185,7 +1185,7 @@ func (m *awsAwsjson11_deserializeOpListUsageForLicenseConfiguration) HandleDeser
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentListUsageForLicenseConfigurationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentListUsageForLicenseConfigurationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1300,7 +1300,7 @@ func (m *awsAwsjson11_deserializeOpTagResource) HandleDeserialize(ctx context.Co
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentTagResourceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentTagResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1412,7 +1412,7 @@ func (m *awsAwsjson11_deserializeOpUntagResource) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUntagResourceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUntagResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1524,7 +1524,7 @@ func (m *awsAwsjson11_deserializeOpUpdateLicenseConfiguration) HandleDeserialize
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateLicenseConfigurationOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateLicenseConfigurationOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1636,7 +1636,7 @@ func (m *awsAwsjson11_deserializeOpUpdateLicenseSpecificationsForResource) Handl
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateLicenseSpecificationsForResourceOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateLicenseSpecificationsForResourceOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1754,7 +1754,7 @@ func (m *awsAwsjson11_deserializeOpUpdateServiceSettings) HandleDeserialize(ctx 
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentUpdateServiceSettingsOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentUpdateServiceSettingsOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4707,7 +4707,7 @@ func awsAwsjson11_deserializeDocumentTagList(v *[]*types.Tag, decoder *json.Deco
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentCreateLicenseConfigurationOutput(v **CreateLicenseConfigurationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateLicenseConfigurationOutput(v **CreateLicenseConfigurationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4771,7 +4771,7 @@ func awsAwsjson11_deserializeDocumentCreateLicenseConfigurationOutput(v **Create
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDeleteLicenseConfigurationOutput(v **DeleteLicenseConfigurationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteLicenseConfigurationOutput(v **DeleteLicenseConfigurationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -4822,7 +4822,7 @@ func awsAwsjson11_deserializeDocumentDeleteLicenseConfigurationOutput(v **Delete
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetLicenseConfigurationOutput(v **GetLicenseConfigurationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetLicenseConfigurationOutput(v **GetLicenseConfigurationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5041,7 +5041,7 @@ func awsAwsjson11_deserializeDocumentGetLicenseConfigurationOutput(v **GetLicens
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentGetServiceSettingsOutput(v **GetServiceSettingsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetServiceSettingsOutput(v **GetServiceSettingsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5149,7 +5149,7 @@ func awsAwsjson11_deserializeDocumentGetServiceSettingsOutput(v **GetServiceSett
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListAssociationsForLicenseConfigurationOutput(v **ListAssociationsForLicenseConfigurationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListAssociationsForLicenseConfigurationOutput(v **ListAssociationsForLicenseConfigurationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5218,7 +5218,7 @@ func awsAwsjson11_deserializeDocumentListAssociationsForLicenseConfigurationOutp
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListFailuresForLicenseConfigurationOperationsOutput(v **ListFailuresForLicenseConfigurationOperationsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListFailuresForLicenseConfigurationOperationsOutput(v **ListFailuresForLicenseConfigurationOperationsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5287,7 +5287,7 @@ func awsAwsjson11_deserializeDocumentListFailuresForLicenseConfigurationOperatio
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListLicenseConfigurationsOutput(v **ListLicenseConfigurationsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListLicenseConfigurationsOutput(v **ListLicenseConfigurationsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5356,7 +5356,7 @@ func awsAwsjson11_deserializeDocumentListLicenseConfigurationsOutput(v **ListLic
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListLicenseSpecificationsForResourceOutput(v **ListLicenseSpecificationsForResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListLicenseSpecificationsForResourceOutput(v **ListLicenseSpecificationsForResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5425,7 +5425,7 @@ func awsAwsjson11_deserializeDocumentListLicenseSpecificationsForResourceOutput(
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListResourceInventoryOutput(v **ListResourceInventoryOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListResourceInventoryOutput(v **ListResourceInventoryOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5494,7 +5494,7 @@ func awsAwsjson11_deserializeDocumentListResourceInventoryOutput(v **ListResourc
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5550,7 +5550,7 @@ func awsAwsjson11_deserializeDocumentListTagsForResourceOutput(v **ListTagsForRe
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentListUsageForLicenseConfigurationOutput(v **ListUsageForLicenseConfigurationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListUsageForLicenseConfigurationOutput(v **ListUsageForLicenseConfigurationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5619,7 +5619,7 @@ func awsAwsjson11_deserializeDocumentListUsageForLicenseConfigurationOutput(v **
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentTagResourceOutput(v **TagResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentTagResourceOutput(v **TagResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5670,7 +5670,7 @@ func awsAwsjson11_deserializeDocumentTagResourceOutput(v **TagResourceOutput, de
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUntagResourceOutput(v **UntagResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUntagResourceOutput(v **UntagResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5721,7 +5721,7 @@ func awsAwsjson11_deserializeDocumentUntagResourceOutput(v **UntagResourceOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateLicenseConfigurationOutput(v **UpdateLicenseConfigurationOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateLicenseConfigurationOutput(v **UpdateLicenseConfigurationOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5772,7 +5772,7 @@ func awsAwsjson11_deserializeDocumentUpdateLicenseConfigurationOutput(v **Update
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateLicenseSpecificationsForResourceOutput(v **UpdateLicenseSpecificationsForResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateLicenseSpecificationsForResourceOutput(v **UpdateLicenseSpecificationsForResourceOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -5823,7 +5823,7 @@ func awsAwsjson11_deserializeDocumentUpdateLicenseSpecificationsForResourceOutpu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentUpdateServiceSettingsOutput(v **UpdateServiceSettingsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateServiceSettingsOutput(v **UpdateServiceSettingsOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}

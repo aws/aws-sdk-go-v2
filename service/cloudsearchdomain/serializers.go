@@ -46,7 +46,7 @@ func (m *awsRestjson1_serializeOpSearch) HandleSerialize(ctx context.Context, in
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsSearchInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsSearchInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -57,7 +57,7 @@ func (m *awsRestjson1_serializeOpSearch) HandleSerialize(ctx context.Context, in
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsSearchInput(v *SearchInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsSearchInput(v *SearchInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -156,7 +156,7 @@ func (m *awsRestjson1_serializeOpSuggest) HandleSerialize(ctx context.Context, i
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsSuggestInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsSuggestInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -167,7 +167,7 @@ func (m *awsRestjson1_serializeOpSuggest) HandleSerialize(ctx context.Context, i
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsSuggestInput(v *SuggestInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsSuggestInput(v *SuggestInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -222,7 +222,7 @@ func (m *awsRestjson1_serializeOpUploadDocuments) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeHttpBindingsUploadDocumentsInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsUploadDocumentsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -244,7 +244,7 @@ func (m *awsRestjson1_serializeOpUploadDocuments) HandleSerialize(ctx context.Co
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeHttpBindingsUploadDocumentsInput(v *UploadDocumentsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsUploadDocumentsInput(v *UploadDocumentsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}

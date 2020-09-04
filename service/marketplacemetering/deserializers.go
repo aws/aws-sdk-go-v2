@@ -53,7 +53,7 @@ func (m *awsAwsjson11_deserializeOpBatchMeterUsage) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentBatchMeterUsageOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentBatchMeterUsageOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -171,7 +171,7 @@ func (m *awsAwsjson11_deserializeOpMeterUsage) HandleDeserialize(ctx context.Con
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentMeterUsageOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentMeterUsageOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -292,7 +292,7 @@ func (m *awsAwsjson11_deserializeOpRegisterUsage) HandleDeserialize(ctx context.
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentRegisterUsageOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentRegisterUsageOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -413,7 +413,7 @@ func (m *awsAwsjson11_deserializeOpResolveCustomer) HandleDeserialize(ctx contex
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
 
-	err = awsAwsjson11_deserializeDocumentResolveCustomerOutput(&output, decoder)
+	err = awsAwsjson11_deserializeOpDocumentResolveCustomerOutput(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2095,7 +2095,7 @@ func awsAwsjson11_deserializeDocumentUsageRecordResultList(v *[]*types.UsageReco
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentBatchMeterUsageOutput(v **BatchMeterUsageOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentBatchMeterUsageOutput(v **BatchMeterUsageOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2156,7 +2156,7 @@ func awsAwsjson11_deserializeDocumentBatchMeterUsageOutput(v **BatchMeterUsageOu
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentMeterUsageOutput(v **MeterUsageOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentMeterUsageOutput(v **MeterUsageOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2220,7 +2220,7 @@ func awsAwsjson11_deserializeDocumentMeterUsageOutput(v **MeterUsageOutput, deco
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentRegisterUsageOutput(v **RegisterUsageOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentRegisterUsageOutput(v **RegisterUsageOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2301,7 +2301,7 @@ func awsAwsjson11_deserializeDocumentRegisterUsageOutput(v **RegisterUsageOutput
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentResolveCustomerOutput(v **ResolveCustomerOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentResolveCustomerOutput(v **ResolveCustomerOutput, decoder *json.Decoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
