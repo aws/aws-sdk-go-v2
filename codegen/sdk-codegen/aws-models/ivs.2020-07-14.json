@@ -1,0 +1,1793 @@
+{
+  "smithy": "1.0",
+  "metadata": {
+    "suppressions": [
+      {
+        "id": "HttpMethodSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpResponseCodeSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "PaginatedTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpHeaderTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpUriConflict",
+        "namespace": "*"
+      },
+      {
+        "id": "Service",
+        "namespace": "*"
+      }
+    ]
+  },
+  "shapes": {
+    "com.amazonaws.ivs#AccessDeniedException": {
+      "type": "structure",
+      "members": {
+        "exceptionMessage": {
+          "target": "com.amazonaws.ivs#errorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>User does not have sufficient access to perform this action.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 403
+      }
+    },
+    "com.amazonaws.ivs#AmazonInteractiveVideoService": {
+      "type": "service",
+      "version": "2020-07-14",
+      "operations": [
+        {
+          "target": "com.amazonaws.ivs#BatchGetChannel"
+        },
+        {
+          "target": "com.amazonaws.ivs#BatchGetStreamKey"
+        },
+        {
+          "target": "com.amazonaws.ivs#CreateChannel"
+        },
+        {
+          "target": "com.amazonaws.ivs#CreateStreamKey"
+        },
+        {
+          "target": "com.amazonaws.ivs#DeleteChannel"
+        },
+        {
+          "target": "com.amazonaws.ivs#DeleteStreamKey"
+        },
+        {
+          "target": "com.amazonaws.ivs#GetChannel"
+        },
+        {
+          "target": "com.amazonaws.ivs#GetStream"
+        },
+        {
+          "target": "com.amazonaws.ivs#GetStreamKey"
+        },
+        {
+          "target": "com.amazonaws.ivs#ListChannels"
+        },
+        {
+          "target": "com.amazonaws.ivs#ListStreamKeys"
+        },
+        {
+          "target": "com.amazonaws.ivs#ListStreams"
+        },
+        {
+          "target": "com.amazonaws.ivs#ListTagsForResource"
+        },
+        {
+          "target": "com.amazonaws.ivs#PutMetadata"
+        },
+        {
+          "target": "com.amazonaws.ivs#StopStream"
+        },
+        {
+          "target": "com.amazonaws.ivs#TagResource"
+        },
+        {
+          "target": "com.amazonaws.ivs#UntagResource"
+        },
+        {
+          "target": "com.amazonaws.ivs#UpdateChannel"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "ivs",
+          "arnNamespace": "ivs",
+          "cloudFormationName": "Ivs",
+          "cloudTrailEventSource": "ivs.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "ivs"
+        },
+        "aws.protocols#restJson1": {},
+        "smithy.api#documentation": "<p>\n            <b>Introduction</b>\n         </p>\n\n         <p>The Amazon Interactive Video Service (IVS) API is REST compatible, using a standard HTTP\n      API and an <a href=\"http://aws.amazon.com/sns\">AWS SNS</a> event stream for responses. JSON\n      is used for both requests and responses, including errors.</p>\n\n         <p>The API is an AWS regional service, currently in these regions: us-west-2, us-east-1, and\n      eu-west-1.</p>\n         <p>\n            <i>\n               <b>All API request parameters and URLs are case sensitive.\n        </b>\n            </i>\n         </p>\n\n         <p>For a summary of notable documentation changes in each release, see <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/doc-history.html\"> Document\n      History</a>.</p>\n    \n         <p>\n            <b>Service Endpoints</b>\n         </p>\n         <p>The following are the Amazon IVS service endpoints (all HTTPS): </p>\n         <p>Region name: US West (Oregon)</p>\n         <ul>\n            <li>\n               <p>Region: <code>us-west-2</code>\n               </p>\n            </li>\n            <li>\n               <p>Endpoint: <code>ivs.us-west-2.amazonaws.com</code>\n               </p>\n            </li>\n         </ul>\n         <p>Region name: US East (Virginia)</p>\n         <ul>\n            <li>\n               <p>Region: <code>us-east-1</code>\n               </p>\n            </li>\n            <li>\n               <p>Endpoint: <code>ivs.us-east-1.amazonaws.com</code>\n               </p>\n            </li>\n         </ul>\n         <p>Region name: EU West (Dublin)</p>\n         <ul>\n            <li>\n               <p>Region: <code>eu-west-1</code>\n               </p>\n            </li>\n            <li>\n               <p>Endpoint: <code>ivs.eu-west-1.amazonaws.com</code>\n               </p>\n            </li>\n         </ul>\n    \n         <p>\n            <b>Allowed Header Values</b>\n         </p>\n\n         <ul>\n            <li>\n               <p>\n                  <code>\n                     <b>Accept:</b>\n                  </code> application/json</p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <b>Accept-Encoding:</b>\n                  </code> gzip, deflate</p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <b>Content-Type:</b>\n                  </code>application/json</p>\n            </li>\n         </ul>\n\n         <p>\n            <b>Resources</b>\n         </p>\n         <p>The following resources contain information about your IVS live stream (see <a href=\"https://docs.aws.amazon.com/ivs/latest/userguide/GSIVS.html\"> Getting Started with Amazon\n        IVS</a>):</p>\n\n         <ul>\n            <li>\n               <p>Channel — Stores configuration data related to your live stream. You first create a\n          channel and then use the channel’s stream key to start your live stream. See the <a>Channel</a> endpoints for more information. </p>\n            </li>\n            <li>\n               <p>Stream key — An identifier assigned by Amazon IVS when you create a channel, which is\n          then used to authorize streaming. See the <a>StreamKey</a> endpoints for more\n          information. <i>\n                     <b>Treat the stream key like a secret, since it\n              allows anyone to stream to the channel.</b>\n                  </i>\n               </p>\n            </li>\n         </ul>\n\n\n\n         <p>\n            <b>Tagging</b>\n         </p>\n\n         <p>A <i>tag</i> is a metadata label that you assign to an AWS resource. A tag\n      comprises a <i>key</i> and a <i>value</i>, both set by you. For\n      example, you might set a tag as <code>topic:nature</code> to label a particular video\n      category. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n        Resources</a> for more information, including restrictions that apply to tags.</p>\n\n         <p>Tags can help you identify and organize your AWS resources. For example, you can use the\n      same tag for different resources to indicate that they are related. You can also use tags to\n      manage access (see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">\n        Access Tags</a>). </p>\n\n         <p>The Amazon IVS API has these tag-related endpoints: <a>TagResource</a>, <a>UntagResource</a>, and <a>ListTagsForResource</a>. The following\n      resources support tagging: Channels and Stream Keys.</p>\n\n         <p>\n            <b>API Endpoints</b>\n         </p>\n\n         <p>\n            <a>Channel</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateChannel</a> — Creates a new channel and an associated stream\n          key to start streaming.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetChannel</a> — Gets the channel configuration for the specified\n          channel ARN (Amazon Resource Name).</p>\n            </li>\n            <li>\n               <p>\n                  <a>BatchGetChannel</a> — Performs <a>GetChannel</a> on\n          multiple ARNs simultaneously.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListChannels</a> — Gets summary information about all channels in\n          your account, in the AWS region where the API request is processed. This list can be\n          filtered to match a specified string.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateChannel</a> — Updates a channel's configuration. This does\n          not affect an ongoing stream of this channel. You must stop and restart the stream for the\n          changes to take effect.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteChannel</a> — Deletes the specified channel.</p>\n            </li>\n         </ul>\n\n         <p>\n            <a>StreamKey</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateStreamKey</a> — Creates a stream key, used to initiate a\n          stream, for the specified channel ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>GetStreamKey</a> — Gets stream key information for the specified\n          ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>BatchGetStreamKey</a> — Performs <a>GetStreamKey</a> on\n          multiple ARNs simultaneously.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStreamKeys</a> — Gets summary information about stream keys\n          for the specified channel.</p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteStreamKey</a> — Deletes the stream key for the specified\n          ARN, so it can no longer be used to stream.</p>\n            </li>\n         </ul>\n\n\n         <p>\n            <a>Stream</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>GetStream</a> — Gets information about the active (live) stream on\n          a specified channel.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStreams</a> — Gets summary information about live streams in\n          your account, in the AWS region where the API request is processed.</p>\n            </li>\n            <li>\n               <p>\n                  <a>StopStream</a> — Disconnects the incoming RTMPS stream for the specified channel.  Can be used in conjunction\n          with <a>DeleteStreamKey</a> to prevent further streaming to a channel.</p>\n            </li>\n            <li>\n               <p>\n                  <a>PutMetadata</a> — Inserts metadata into an RTMPS stream for the specified\n          channel. A maximum of 5 requests per second per channel is allowed, each with a maximum\n          1KB payload.</p>\n            </li>\n         </ul>\n\n    \n\n         <p>\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\"> AWS\n      Tags</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>TagResource</a> — Adds or updates tags for the AWS resource with the specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>UntagResource</a> — Removes tags from the resource with the specified ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <a>ListTagsForResource</a> — Gets information about AWS tags for the specified ARN.</p>\n            </li>\n         </ul>",
+        "smithy.api#title": "Amazon Interactive Video Service"
+      }
+    },
+    "com.amazonaws.ivs#BatchError": {
+      "type": "structure",
+      "members": {
+        "code": {
+          "target": "com.amazonaws.ivs#errorCode",
+          "traits": {
+            "smithy.api#documentation": "<p>Error code.</p>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.ivs#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel ARN.</p>"
+          }
+        },
+        "message": {
+          "target": "com.amazonaws.ivs#errorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>Error message, determined by the application.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Error related to a specific channel, specified by its ARN.</p>"
+      }
+    },
+    "com.amazonaws.ivs#BatchErrors": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ivs#BatchError"
+      }
+    },
+    "com.amazonaws.ivs#BatchGetChannel": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ivs#BatchGetChannelRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ivs#BatchGetChannelResponse"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Performs <a>GetChannel</a> on multiple ARNs simultaneously.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/BatchGetChannel",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.ivs#BatchGetChannelRequest": {
+      "type": "structure",
+      "members": {
+        "arns": {
+          "target": "com.amazonaws.ivs#ChannelArnList",
+          "traits": {
+            "smithy.api#documentation": "<p>Array of ARNs, one per channel.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#BatchGetChannelResponse": {
+      "type": "structure",
+      "members": {
+        "errors": {
+          "target": "com.amazonaws.ivs#BatchErrors",
+          "traits": {
+            "smithy.api#documentation": "<p>Each error object is related to a specific ARN in the request.</p>"
+          }
+        },
+        "channels": {
+          "target": "com.amazonaws.ivs#Channels"
+        }
+      }
+    },
+    "com.amazonaws.ivs#BatchGetStreamKey": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ivs#BatchGetStreamKeyRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ivs#BatchGetStreamKeyResponse"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Performs <a>GetStreamKey</a> on multiple ARNs simultaneously.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/BatchGetStreamKey",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.ivs#BatchGetStreamKeyRequest": {
+      "type": "structure",
+      "members": {
+        "arns": {
+          "target": "com.amazonaws.ivs#StreamKeyArnList",
+          "traits": {
+            "smithy.api#documentation": "<p>Array of ARNs, one per channel.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#BatchGetStreamKeyResponse": {
+      "type": "structure",
+      "members": {
+        "streamKeys": {
+          "target": "com.amazonaws.ivs#StreamKeys"
+        },
+        "errors": {
+          "target": "com.amazonaws.ivs#BatchErrors"
+        }
+      }
+    },
+    "com.amazonaws.ivs#Channel": {
+      "type": "structure",
+      "members": {
+        "playbackUrl": {
+          "target": "com.amazonaws.ivs#PlaybackURL",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel playback URL.</p>"
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.ivs#ChannelType",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel type, which determines the allowable resolution and bitrate. <i>If you\n        exceed the allowable resolution or bitrate, the stream probably will disconnect\n        immediately.</i> Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STANDARD</code>: Multiple qualities are generated from the original input, to\n          automatically give viewers the best experience for their devices and network conditions.\n          Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BASIC</code>: Amazon IVS delivers the original input to viewers. The viewer’s\n          video-quality choice is limited to the original input. Vertical resolution can be up to\n          480 and bitrate can be up to 1.5 Mbps.</p>\n            </li>\n         </ul>\n         <p>Default: <code>STANDARD</code>.</p>"
+          }
+        },
+        "ingestEndpoint": {
+          "target": "com.amazonaws.ivs#IngestEndpoint",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel ingest endpoint, part of the definition of an ingest server, used when you set up\n      streaming software.</p>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.ivs#ChannelArn",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel ARN.</p>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.ivs#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.ivs#ChannelName",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel name.</p>"
+          }
+        },
+        "latencyMode": {
+          "target": "com.amazonaws.ivs#ChannelLatencyMode",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel latency mode. Default: <code>LOW</code>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Object specifying a channel.</p>"
+      }
+    },
+    "com.amazonaws.ivs#ChannelArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        },
+        "smithy.api#pattern": "^arn:aws:[is]vs:[a-z0-9-]+:[0-9]+:channel/[a-zA-Z0-9-]+$"
+      }
+    },
+    "com.amazonaws.ivs#ChannelArnList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ivs#ChannelArn"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 50
+        }
+      }
+    },
+    "com.amazonaws.ivs#ChannelLatencyMode": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "NORMAL",
+            "name": "NormalLatency"
+          },
+          {
+            "value": "LOW",
+            "name": "LowLatency"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.ivs#ChannelList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ivs#ChannelSummary"
+      }
+    },
+    "com.amazonaws.ivs#ChannelName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 128
+        },
+        "smithy.api#pattern": "^[a-zA-Z0-9-_]*$"
+      }
+    },
+    "com.amazonaws.ivs#ChannelNotBroadcasting": {
+      "type": "structure",
+      "members": {
+        "exceptionMessage": {
+          "target": "com.amazonaws.ivs#errorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>The stream is offline for the given channel ARN.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
+      }
+    },
+    "com.amazonaws.ivs#ChannelSummary": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "target": "com.amazonaws.ivs#ChannelArn",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel ARN.</p>"
+          }
+        },
+        "latencyMode": {
+          "target": "com.amazonaws.ivs#ChannelLatencyMode",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel latency mode. Default: <code>LOW</code>.</p>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.ivs#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.ivs#ChannelName",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel name.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Summary information about a channel.</p>"
+      }
+    },
+    "com.amazonaws.ivs#ChannelType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "BASIC",
+            "name": "BasicChannelType"
+          },
+          {
+            "value": "STANDARD",
+            "name": "StandardChannelType"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.ivs#Channels": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ivs#Channel"
+      }
+    },
+    "com.amazonaws.ivs#ConflictException": {
+      "type": "structure",
+      "members": {
+        "exceptionMessage": {
+          "target": "com.amazonaws.ivs#errorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>Updating or deleting a resource can cause an inconsistent state.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 409
+      }
+    },
+    "com.amazonaws.ivs#CreateChannel": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ivs#CreateChannelRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ivs#CreateChannelResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ivs#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ivs#PendingVerification"
+        },
+        {
+          "target": "com.amazonaws.ivs#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a new channel and an associated stream key to start streaming.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/CreateChannel",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.ivs#CreateChannelRequest": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.ivs#ChannelName",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel name.</p>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.ivs#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>See <a>Channel$tags</a>.</p>"
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.ivs#ChannelType",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel type, which determines the allowable resolution and bitrate. <i>If you\n        exceed the allowable resolution or bitrate, the stream probably will disconnect\n        immediately.</i> Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STANDARD</code>: Multiple qualities are generated from the original input, to\n          automatically give viewers the best experience for their devices and network conditions.\n          Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BASIC</code>: Amazon IVS delivers the original input to viewers. The viewer’s\n          video-quality choice is limited to the original input. Vertical resolution can be up to\n          480 and bitrate can be up to 1.5 Mbps.</p>\n            </li>\n         </ul>\n         <p>Default: <code>STANDARD</code>.</p>"
+          }
+        },
+        "latencyMode": {
+          "target": "com.amazonaws.ivs#ChannelLatencyMode",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel latency mode. Default: <code>LOW</code>.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#CreateChannelResponse": {
+      "type": "structure",
+      "members": {
+        "channel": {
+          "target": "com.amazonaws.ivs#Channel"
+        },
+        "streamKey": {
+          "target": "com.amazonaws.ivs#StreamKey"
+        }
+      }
+    },
+    "com.amazonaws.ivs#CreateStreamKey": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ivs#CreateStreamKeyRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ivs#CreateStreamKeyResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ivs#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ivs#PendingVerification"
+        },
+        {
+          "target": "com.amazonaws.ivs#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a stream key, used to initiate a stream, for the specified channel ARN.</p>\n         <p>Note that <a>CreateChannel</a> creates a stream key. If you subsequently use\n      CreateStreamKey on the same channel, it will fail because a stream key already exists and\n      there is a limit of 1 stream key per channel. To reset the stream key on a channel, use <a>DeleteStreamKey</a> and then CreateStreamKey.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/CreateStreamKey",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.ivs#CreateStreamKeyRequest": {
+      "type": "structure",
+      "members": {
+        "channelArn": {
+          "target": "com.amazonaws.ivs#ChannelArn",
+          "traits": {
+            "smithy.api#documentation": "<p>ARN of the channel for which to create the stream key.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.ivs#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>See <a>Channel$tags</a>.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#CreateStreamKeyResponse": {
+      "type": "structure",
+      "members": {
+        "streamKey": {
+          "target": "com.amazonaws.ivs#StreamKey",
+          "traits": {
+            "smithy.api#documentation": "<p>Stream key used to authenticate an RTMPS stream for ingestion.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#DeleteChannel": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ivs#DeleteChannelRequest"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ivs#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.ivs#PendingVerification"
+        },
+        {
+          "target": "com.amazonaws.ivs#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes the specified channel and its associated stream keys.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/DeleteChannel",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.ivs#DeleteChannelRequest": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "target": "com.amazonaws.ivs#ChannelArn",
+          "traits": {
+            "smithy.api#documentation": "<p>ARN of the channel to be deleted.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#DeleteStreamKey": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ivs#DeleteStreamKeyRequest"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ivs#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ivs#PendingVerification"
+        },
+        {
+          "target": "com.amazonaws.ivs#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes the stream key for the specified ARN, so it can no longer be used to\n      stream.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/DeleteStreamKey",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.ivs#DeleteStreamKeyRequest": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "target": "com.amazonaws.ivs#StreamKeyArn",
+          "traits": {
+            "smithy.api#documentation": "<p>ARN of the stream key to be deleted.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#GetChannel": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ivs#GetChannelRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ivs#GetChannelResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ivs#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Gets the channel configuration for the specified channel ARN. See also <a>BatchGetChannel</a>.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/GetChannel",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.ivs#GetChannelRequest": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "target": "com.amazonaws.ivs#ChannelArn",
+          "traits": {
+            "smithy.api#documentation": "<p>ARN of the channel for which the configuration is to be retrieved.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#GetChannelResponse": {
+      "type": "structure",
+      "members": {
+        "channel": {
+          "target": "com.amazonaws.ivs#Channel"
+        }
+      }
+    },
+    "com.amazonaws.ivs#GetStream": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ivs#GetStreamRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ivs#GetStreamResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ivs#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ChannelNotBroadcasting"
+        },
+        {
+          "target": "com.amazonaws.ivs#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Gets information about the active (live) stream on a specified channel.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/GetStream",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.ivs#GetStreamKey": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ivs#GetStreamKeyRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ivs#GetStreamKeyResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ivs#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Gets stream-key information for a specified ARN.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/GetStreamKey",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.ivs#GetStreamKeyRequest": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "target": "com.amazonaws.ivs#StreamKeyArn",
+          "traits": {
+            "smithy.api#documentation": "<p>ARN for the stream key to be retrieved.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#GetStreamKeyResponse": {
+      "type": "structure",
+      "members": {
+        "streamKey": {
+          "target": "com.amazonaws.ivs#StreamKey"
+        }
+      }
+    },
+    "com.amazonaws.ivs#GetStreamRequest": {
+      "type": "structure",
+      "members": {
+        "channelArn": {
+          "target": "com.amazonaws.ivs#ChannelArn",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel ARN for stream to be accessed.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#GetStreamResponse": {
+      "type": "structure",
+      "members": {
+        "stream": {
+          "target": "com.amazonaws.ivs#Stream"
+        }
+      }
+    },
+    "com.amazonaws.ivs#IngestEndpoint": {
+      "type": "string"
+    },
+    "com.amazonaws.ivs#InternalServerException": {
+      "type": "structure",
+      "members": {
+        "exceptionMessage": {
+          "target": "com.amazonaws.ivs#errorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>Unexpected error during processing of request.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 500
+      }
+    },
+    "com.amazonaws.ivs#ListChannels": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ivs#ListChannelsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ivs#ListChannelsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ivs#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Gets summary information about all channels in your account, in the AWS region where the\n      API request is processed. This list can be filtered to match a specified string.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/ListChannels",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "pageSize": "maxResults"
+        }
+      }
+    },
+    "com.amazonaws.ivs#ListChannelsRequest": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "target": "com.amazonaws.ivs#MaxChannelResults",
+          "traits": {
+            "smithy.api#documentation": "<p>Maximum number of channels to return.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.ivs#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The first channel to retrieve. This is used for pagination; see the <code>nextToken</code>\n      response field.</p>"
+          }
+        },
+        "filterByName": {
+          "target": "com.amazonaws.ivs#ChannelName",
+          "traits": {
+            "smithy.api#documentation": "<p>Filters the channel list to match the specified name.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#ListChannelsResponse": {
+      "type": "structure",
+      "members": {
+        "channels": {
+          "target": "com.amazonaws.ivs#ChannelList",
+          "traits": {
+            "smithy.api#documentation": "<p>List of the matching channels.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.ivs#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If there are more channels than <code>maxResults</code>, use <code>nextToken</code> in the\n      request to get the next set.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#ListStreamKeys": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ivs#ListStreamKeysRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ivs#ListStreamKeysResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ivs#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Gets summary information about stream keys for the specified channel.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/ListStreamKeys",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "pageSize": "maxResults"
+        }
+      }
+    },
+    "com.amazonaws.ivs#ListStreamKeysRequest": {
+      "type": "structure",
+      "members": {
+        "channelArn": {
+          "target": "com.amazonaws.ivs#ChannelArn",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel ARN used to filter the list.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.ivs#MaxStreamKeyResults",
+          "traits": {
+            "smithy.api#documentation": "<p>Maximum number of streamKeys to return.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.ivs#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The first stream key to retrieve. This is used for pagination; see the\n        <code>nextToken</code> response field.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#ListStreamKeysResponse": {
+      "type": "structure",
+      "members": {
+        "streamKeys": {
+          "target": "com.amazonaws.ivs#StreamKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>List of stream keys.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.ivs#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If there are more stream keys than <code>maxResults</code>, use <code>nextToken</code> in\n      the request to get the next set.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#ListStreams": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ivs#ListStreamsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ivs#ListStreamsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ivs#AccessDeniedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Gets summary information about live streams in your account, in the AWS region where the\n      API request is processed.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/ListStreams",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "pageSize": "maxResults"
+        }
+      }
+    },
+    "com.amazonaws.ivs#ListStreamsRequest": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "target": "com.amazonaws.ivs#MaxStreamResults",
+          "traits": {
+            "smithy.api#documentation": "<p>Maximum number of streams to return.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.ivs#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The first stream to retrieve. This is used for pagination; see the <code>nextToken</code>\n      response field.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#ListStreamsResponse": {
+      "type": "structure",
+      "members": {
+        "streams": {
+          "target": "com.amazonaws.ivs#StreamList",
+          "traits": {
+            "smithy.api#documentation": "<p>List of streams.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.ivs#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If there are more streams than <code>maxResults</code>, use <code>nextToken</code> in the\n      request to get the next set.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#ListTagsForResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ivs#ListTagsForResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ivs#ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ivs#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Gets information about AWS tags for the specified ARN.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/tags/{resourceArn}",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "pageSize": "maxResults"
+        }
+      }
+    },
+    "com.amazonaws.ivs#ListTagsForResourceRequest": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.ivs#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The first tag to retrieve. This is used for pagination; see the <code>nextToken</code>\n      response field.</p>"
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.ivs#MaxTagResults",
+          "traits": {
+            "smithy.api#documentation": "<p>Maximum number of tags to return.</p>"
+          }
+        },
+        "resourceArn": {
+          "target": "com.amazonaws.ivs#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the resource to be retrieved.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.ivs#String",
+          "traits": {
+            "smithy.api#documentation": "<p>If there are more tags than <code>maxResults</code>, use <code>nextToken</code> in the\n      request to get the next set.</p>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.ivs#Tags",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#MaxChannelResults": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 1,
+          "max": 50
+        }
+      }
+    },
+    "com.amazonaws.ivs#MaxStreamKeyResults": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 1,
+          "max": 50
+        }
+      }
+    },
+    "com.amazonaws.ivs#MaxStreamResults": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 1,
+          "max": 50
+        }
+      }
+    },
+    "com.amazonaws.ivs#MaxTagResults": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 1,
+          "max": 50
+        }
+      }
+    },
+    "com.amazonaws.ivs#PaginationToken": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 500
+        }
+      }
+    },
+    "com.amazonaws.ivs#PendingVerification": {
+      "type": "structure",
+      "members": {
+        "exceptionMessage": {
+          "target": "com.amazonaws.ivs#errorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p> Your account is pending verification. </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 403
+      }
+    },
+    "com.amazonaws.ivs#PlaybackURL": {
+      "type": "string"
+    },
+    "com.amazonaws.ivs#PutMetadata": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ivs#PutMetadataRequest"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ivs#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ChannelNotBroadcasting"
+        },
+        {
+          "target": "com.amazonaws.ivs#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Inserts metadata into an RTMPS stream for the specified channel. A maximum of 5 requests\n      per second per channel is allowed, each with a maximum 1KB payload.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/PutMetadata",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.ivs#PutMetadataRequest": {
+      "type": "structure",
+      "members": {
+        "metadata": {
+          "target": "com.amazonaws.ivs#StreamMetadata",
+          "traits": {
+            "smithy.api#documentation": "<p>Metadata to insert into the stream. Maximum: 1 KB per request.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "channelArn": {
+          "target": "com.amazonaws.ivs#ChannelArn",
+          "traits": {
+            "smithy.api#documentation": "<p>ARN of the channel into which metadata is inserted. This channel must have an active\n      stream.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#ResourceArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        },
+        "smithy.api#pattern": "^arn:aws:[is]vs:[a-z0-9-]+:[0-9]+:[a-z-]/[a-zA-Z0-9-]+$"
+      }
+    },
+    "com.amazonaws.ivs#ResourceNotFoundException": {
+      "type": "structure",
+      "members": {
+        "exceptionMessage": {
+          "target": "com.amazonaws.ivs#errorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>Request references a resource which does not exist.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
+      }
+    },
+    "com.amazonaws.ivs#ServiceQuotaExceededException": {
+      "type": "structure",
+      "members": {
+        "exceptionMessage": {
+          "target": "com.amazonaws.ivs#errorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>Request would cause a service quota to be exceeded.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 402
+      }
+    },
+    "com.amazonaws.ivs#StopStream": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ivs#StopStreamRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ivs#StopStreamResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ivs#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ChannelNotBroadcasting"
+        },
+        {
+          "target": "com.amazonaws.ivs#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ivs#StreamUnavailable"
+        },
+        {
+          "target": "com.amazonaws.ivs#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Disconnects the incoming RTMPS stream for the specified channel. Can be used in conjunction with <a>DeleteStreamKey</a> to\n      prevent further streaming to a channel.</p>\n         <note>\n            <p>Many streaming client-software libraries automatically reconnect a dropped RTMPS\n        session, so to stop the stream permanently, you may want to first revoke the\n          <code>streamKey</code> attached to the channel.</p>\n         </note>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/StopStream",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.ivs#StopStreamRequest": {
+      "type": "structure",
+      "members": {
+        "channelArn": {
+          "target": "com.amazonaws.ivs#ChannelArn",
+          "traits": {
+            "smithy.api#documentation": "<p>ARN of the channel for which the stream is to be stopped.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#StopStreamResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.ivs#Stream": {
+      "type": "structure",
+      "members": {
+        "startTime": {
+          "target": "com.amazonaws.ivs#StreamStartTime",
+          "traits": {
+            "smithy.api#documentation": "<p>ISO-8601 formatted timestamp of the stream’s start.</p>"
+          }
+        },
+        "playbackUrl": {
+          "target": "com.amazonaws.ivs#PlaybackURL",
+          "traits": {
+            "smithy.api#documentation": "<p>URL of the video master manifest, required by the video player to play the HLS\n      stream.</p>"
+          }
+        },
+        "state": {
+          "target": "com.amazonaws.ivs#StreamState",
+          "traits": {
+            "smithy.api#documentation": "<p>The stream’s state.</p>"
+          }
+        },
+        "viewerCount": {
+          "target": "com.amazonaws.ivs#StreamViewerCount",
+          "traits": {
+            "smithy.api#documentation": "<p>Number of current viewers of the stream.</p>"
+          }
+        },
+        "channelArn": {
+          "target": "com.amazonaws.ivs#ChannelArn",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel ARN for the stream.</p>"
+          }
+        },
+        "health": {
+          "target": "com.amazonaws.ivs#StreamHealth",
+          "traits": {
+            "smithy.api#documentation": "<p>The stream’s health.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Specifies a live video stream that has been ingested and distributed.</p>"
+      }
+    },
+    "com.amazonaws.ivs#StreamHealth": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "HEALTHY",
+            "name": "StreamHealthy"
+          },
+          {
+            "value": "STARVING",
+            "name": "Starving"
+          },
+          {
+            "value": "UNKNOWN",
+            "name": "Unknown"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.ivs#StreamKey": {
+      "type": "structure",
+      "members": {
+        "channelArn": {
+          "target": "com.amazonaws.ivs#ChannelArn",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel ARN for the stream.</p>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.ivs#StreamKeyArn",
+          "traits": {
+            "smithy.api#documentation": "<p>Stream-key ARN.</p>"
+          }
+        },
+        "value": {
+          "target": "com.amazonaws.ivs#StreamKeyValue",
+          "traits": {
+            "smithy.api#documentation": "<p>Stream-key value.</p>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.ivs#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>\n         </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Object specifying a stream key.</p>"
+      }
+    },
+    "com.amazonaws.ivs#StreamKeyArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        },
+        "smithy.api#pattern": "^arn:aws:[is]vs:[a-z0-9-]+:[0-9]+:stream-key/[a-zA-Z0-9-]+$"
+      }
+    },
+    "com.amazonaws.ivs#StreamKeyArnList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ivs#StreamKeyArn"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 50
+        }
+      }
+    },
+    "com.amazonaws.ivs#StreamKeyList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ivs#StreamKeySummary"
+      }
+    },
+    "com.amazonaws.ivs#StreamKeySummary": {
+      "type": "structure",
+      "members": {
+        "channelArn": {
+          "target": "com.amazonaws.ivs#ChannelArn",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel ARN for the stream.</p>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.ivs#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>Array of 1-50 maps, each of the form <code>string:string (key:value)</code>\n         </p>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.ivs#StreamKeyArn",
+          "traits": {
+            "smithy.api#documentation": "<p>Stream-key ARN.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Summary information about a stream key.</p>"
+      }
+    },
+    "com.amazonaws.ivs#StreamKeyValue": {
+      "type": "string"
+    },
+    "com.amazonaws.ivs#StreamKeys": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ivs#StreamKey"
+      }
+    },
+    "com.amazonaws.ivs#StreamList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ivs#StreamSummary"
+      }
+    },
+    "com.amazonaws.ivs#StreamMetadata": {
+      "type": "string"
+    },
+    "com.amazonaws.ivs#StreamStartTime": {
+      "type": "timestamp"
+    },
+    "com.amazonaws.ivs#StreamState": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "LIVE",
+            "name": "StreamLive"
+          },
+          {
+            "value": "OFFLINE",
+            "name": "StreamOffline"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.ivs#StreamSummary": {
+      "type": "structure",
+      "members": {
+        "state": {
+          "target": "com.amazonaws.ivs#StreamState",
+          "traits": {
+            "smithy.api#documentation": "<p>The stream’s state.</p>"
+          }
+        },
+        "health": {
+          "target": "com.amazonaws.ivs#StreamHealth",
+          "traits": {
+            "smithy.api#documentation": "<p>The stream’s health.</p>"
+          }
+        },
+        "channelArn": {
+          "target": "com.amazonaws.ivs#ChannelArn",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel ARN for the stream.</p>"
+          }
+        },
+        "viewerCount": {
+          "target": "com.amazonaws.ivs#StreamViewerCount",
+          "traits": {
+            "smithy.api#documentation": "<p>Number of current viewers of the stream.</p>"
+          }
+        },
+        "startTime": {
+          "target": "com.amazonaws.ivs#StreamStartTime",
+          "traits": {
+            "smithy.api#documentation": "<p>ISO-8601 formatted timestamp of the stream’s start.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Summary information about a stream.</p>"
+      }
+    },
+    "com.amazonaws.ivs#StreamUnavailable": {
+      "type": "structure",
+      "members": {
+        "exceptionMessage": {
+          "target": "com.amazonaws.ivs#errorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>The stream is temporarily unavailable.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 503
+      }
+    },
+    "com.amazonaws.ivs#StreamViewerCount": {
+      "type": "long"
+    },
+    "com.amazonaws.ivs#String": {
+      "type": "string"
+    },
+    "com.amazonaws.ivs#TagKey": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        }
+      }
+    },
+    "com.amazonaws.ivs#TagKeyList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.ivs#TagKey"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 50
+        }
+      }
+    },
+    "com.amazonaws.ivs#TagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ivs#TagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ivs#TagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ivs#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Adds or updates tags for the AWS resource with the specified ARN.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/tags/{resourceArn}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.ivs#TagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "com.amazonaws.ivs#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>ARN of the resource for which tags are to be added or updated.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.ivs#Tags",
+          "traits": {
+            "smithy.api#documentation": "<p>Array of tags to be added or updated.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.ivs#TagValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 256
+        }
+      }
+    },
+    "com.amazonaws.ivs#Tags": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.ivs#TagKey"
+      },
+      "value": {
+        "target": "com.amazonaws.ivs#TagValue"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 50
+        }
+      }
+    },
+    "com.amazonaws.ivs#ThrottlingException": {
+      "type": "structure",
+      "members": {
+        "exceptionMessage": {
+          "target": "com.amazonaws.ivs#errorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>Request was denied due to request throttling.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 429
+      }
+    },
+    "com.amazonaws.ivs#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ivs#UntagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ivs#UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ivs#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes tags from the resource with the specified ARN.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/tags/{resourceArn}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.ivs#UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "com.amazonaws.ivs#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>ARN of the resource for which tags are to be removed.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "tagKeys": {
+          "target": "com.amazonaws.ivs#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>Array of tags to be removed.</p>",
+            "smithy.api#httpQuery": "tagKeys",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.ivs#UpdateChannel": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.ivs#UpdateChannelRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.ivs#UpdateChannelResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.ivs#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.ivs#PendingVerification"
+        },
+        {
+          "target": "com.amazonaws.ivs#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.ivs#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates a channel's configuration. This does not affect an ongoing stream of this channel.\n      You must stop and restart the stream for the changes to take effect.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/UpdateChannel",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.ivs#UpdateChannelRequest": {
+      "type": "structure",
+      "members": {
+        "latencyMode": {
+          "target": "com.amazonaws.ivs#ChannelLatencyMode",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel latency mode. Default: <code>LOW</code>.</p>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.ivs#ChannelArn",
+          "traits": {
+            "smithy.api#documentation": "<p>ARN of the channel to be updated.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.ivs#ChannelName",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel name.</p>"
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.ivs#ChannelType",
+          "traits": {
+            "smithy.api#documentation": "<p>Channel type, which determines the allowable resolution and bitrate. <i>If you\n        exceed the allowable resolution or bitrate, the stream probably will disconnect\n        immediately.</i> Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STANDARD</code>: Multiple qualities are generated from the original input, to\n          automatically give viewers the best experience for their devices and network conditions.\n          Vertical resolution can be up to 1080 and bitrate can be up to 8.5 Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BASIC</code>: Amazon IVS delivers the original input to viewers. The viewer’s\n          video-quality choice is limited to the original input. Vertical resolution can be up to\n          480 and bitrate can be up to 1.5 Mbps.</p>\n            </li>\n         </ul>\n         <p>Default: <code>STANDARD</code>.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.ivs#UpdateChannelResponse": {
+      "type": "structure",
+      "members": {
+        "channel": {
+          "target": "com.amazonaws.ivs#Channel"
+        }
+      }
+    },
+    "com.amazonaws.ivs#ValidationException": {
+      "type": "structure",
+      "members": {
+        "exceptionMessage": {
+          "target": "com.amazonaws.ivs#errorMessage",
+          "traits": {
+            "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an AWS service.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.ivs#errorCode": {
+      "type": "string"
+    },
+    "com.amazonaws.ivs#errorMessage": {
+      "type": "string"
+    }
+  }
+}
