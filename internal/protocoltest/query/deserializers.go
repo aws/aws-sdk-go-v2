@@ -2324,7 +2324,8 @@ func awsAwsquery_deserializeDocumentRenamedListMembersUnwrapped(v *[]*string, de
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -2392,7 +2393,8 @@ func awsAwsquery_deserializeDocumentStructureListUnwrapped(v *[]*types.Structure
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.StructureListMember
 		t := decoder.StartEl
 		_ = t
@@ -2685,7 +2687,8 @@ func awsAwsquery_deserializeDocumentXmlNamespacedListUnwrapped(v *[]*string, dec
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -2818,7 +2821,8 @@ func awsAwsquery_deserializeDocumentBooleanListUnwrapped(v *[]*bool, decoder smi
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *bool
 		t := decoder.StartEl
 		_ = t
@@ -2894,7 +2898,8 @@ func awsAwsquery_deserializeDocumentFooEnumListUnwrapped(v *[]types.FooEnum, dec
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv types.FooEnum
 		t := decoder.StartEl
 		_ = t
@@ -3054,7 +3059,8 @@ func awsAwsquery_deserializeDocumentFooEnumSetUnwrapped(v *[]types.FooEnum, deco
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv types.FooEnum
 		t := decoder.StartEl
 		_ = t
@@ -3179,7 +3185,8 @@ func awsAwsquery_deserializeDocumentIntegerListUnwrapped(v *[]*int32, decoder sm
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *int32
 		t := decoder.StartEl
 		_ = t
@@ -3248,7 +3255,8 @@ func awsAwsquery_deserializeDocumentNestedStringListUnwrapped(v *[][]*string, de
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv []*string
 		t := decoder.StartEl
 		_ = t
@@ -3317,7 +3325,8 @@ func awsAwsquery_deserializeDocumentStringListUnwrapped(v *[]*string, decoder sm
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -3396,7 +3405,8 @@ func awsAwsquery_deserializeDocumentStringSetUnwrapped(v *[]*string, decoder smi
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -3476,7 +3486,8 @@ func awsAwsquery_deserializeDocumentTimestampListUnwrapped(v *[]*time.Time, deco
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *time.Time
 		t := decoder.StartEl
 		_ = t

@@ -3037,7 +3037,8 @@ func awsAwsquery_deserializeDocumentAnalysisSchemeStatusListUnwrapped(v *[]*type
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.AnalysisSchemeStatus
 		t := decoder.StartEl
 		_ = t
@@ -4001,7 +4002,8 @@ func awsAwsquery_deserializeDocumentDomainStatusListUnwrapped(v *[]*types.Domain
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.DomainStatus
 		t := decoder.StartEl
 		_ = t
@@ -4409,7 +4411,8 @@ func awsAwsquery_deserializeDocumentExpressionStatusListUnwrapped(v *[]*types.Ex
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ExpressionStatus
 		t := decoder.StartEl
 		_ = t
@@ -4478,7 +4481,8 @@ func awsAwsquery_deserializeDocumentFieldNameListUnwrapped(v *[]*string, decoder
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -4717,7 +4721,8 @@ func awsAwsquery_deserializeDocumentIndexFieldStatusListUnwrapped(v *[]*types.In
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.IndexFieldStatus
 		t := decoder.StartEl
 		_ = t
@@ -6088,7 +6093,8 @@ func awsAwsquery_deserializeDocumentSuggesterStatusListUnwrapped(v *[]*types.Sug
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.SuggesterStatus
 		t := decoder.StartEl
 		_ = t

@@ -2528,7 +2528,8 @@ func awsRestxml_deserializeDocumentAccessPointListUnwrapped(v *[]*types.AccessPo
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.AccessPoint
 		t := decoder.StartEl
 		_ = t
@@ -3145,7 +3146,8 @@ func awsRestxml_deserializeDocumentJobFailureListUnwrapped(v *[]*types.JobFailur
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.JobFailure
 		t := decoder.StartEl
 		_ = t
@@ -3350,7 +3352,8 @@ func awsRestxml_deserializeDocumentJobListDescriptorListUnwrapped(v *[]*types.Jo
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.JobListDescriptor
 		t := decoder.StartEl
 		_ = t
@@ -3460,7 +3463,8 @@ func awsRestxml_deserializeDocumentJobManifestFieldListUnwrapped(v *[]types.JobM
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv types.JobManifestFieldName
 		t := decoder.StartEl
 		_ = t
@@ -4724,7 +4728,8 @@ func awsRestxml_deserializeDocumentS3GrantListUnwrapped(v *[]*types.S3Grant, dec
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.S3Grant
 		t := decoder.StartEl
 		_ = t
@@ -5444,7 +5449,8 @@ func awsRestxml_deserializeDocumentS3TagSetUnwrapped(v *[]*types.S3Tag, decoder 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.S3Tag
 		t := decoder.StartEl
 		_ = t
