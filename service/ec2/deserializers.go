@@ -34229,7 +34229,8 @@ func awsEc2query_deserializeDocumentAccountAttributeListUnwrapped(v *[]*types.Ac
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.AccountAttribute
 		t := decoder.StartEl
 		_ = t
@@ -34330,7 +34331,8 @@ func awsEc2query_deserializeDocumentAccountAttributeValueListUnwrapped(v *[]*typ
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.AccountAttributeValue
 		t := decoder.StartEl
 		_ = t
@@ -34470,7 +34472,8 @@ func awsEc2query_deserializeDocumentActiveInstanceSetUnwrapped(v *[]*types.Activ
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ActiveInstance
 		t := decoder.StartEl
 		_ = t
@@ -34720,7 +34723,8 @@ func awsEc2query_deserializeDocumentAddressListUnwrapped(v *[]*types.Address, de
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Address
 		t := decoder.StartEl
 		_ = t
@@ -34834,7 +34838,8 @@ func awsEc2query_deserializeDocumentAllowedPrincipalSetUnwrapped(v *[]*types.All
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.AllowedPrincipal
 		t := decoder.StartEl
 		_ = t
@@ -34900,7 +34905,8 @@ func awsEc2query_deserializeDocumentArchitectureTypeListUnwrapped(v *[]types.Arc
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv types.ArchitectureType
 		t := decoder.StartEl
 		_ = t
@@ -35008,7 +35014,8 @@ func awsEc2query_deserializeDocumentAssignedPrivateIpAddressListUnwrapped(v *[]*
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.AssignedPrivateIpAddress
 		t := decoder.StartEl
 		_ = t
@@ -35122,7 +35129,8 @@ func awsEc2query_deserializeDocumentAssociatedTargetNetworkSetUnwrapped(v *[]*ty
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.AssociatedTargetNetwork
 		t := decoder.StartEl
 		_ = t
@@ -35429,7 +35437,8 @@ func awsEc2query_deserializeDocumentAuthorizationRuleSetUnwrapped(v *[]*types.Au
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.AuthorizationRule
 		t := decoder.StartEl
 		_ = t
@@ -35653,7 +35662,8 @@ func awsEc2query_deserializeDocumentAvailabilityZoneListUnwrapped(v *[]*types.Av
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.AvailabilityZone
 		t := decoder.StartEl
 		_ = t
@@ -35754,7 +35764,8 @@ func awsEc2query_deserializeDocumentAvailabilityZoneMessageListUnwrapped(v *[]*t
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.AvailabilityZoneMessage
 		t := decoder.StartEl
 		_ = t
@@ -35865,7 +35876,8 @@ func awsEc2query_deserializeDocumentAvailableInstanceCapacityListUnwrapped(v *[]
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.InstanceCapacity
 		t := decoder.StartEl
 		_ = t
@@ -35998,7 +36010,8 @@ func awsEc2query_deserializeDocumentBlockDeviceMappingListUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.BlockDeviceMapping
 		t := decoder.StartEl
 		_ = t
@@ -36240,7 +36253,8 @@ func awsEc2query_deserializeDocumentBundleTaskListUnwrapped(v *[]*types.BundleTa
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.BundleTask
 		t := decoder.StartEl
 		_ = t
@@ -36380,7 +36394,8 @@ func awsEc2query_deserializeDocumentByoipCidrSetUnwrapped(v *[]*types.ByoipCidr,
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ByoipCidr
 		t := decoder.StartEl
 		_ = t
@@ -36494,7 +36509,8 @@ func awsEc2query_deserializeDocumentCancelledSpotInstanceRequestListUnwrapped(v 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CancelledSpotInstanceRequest
 		t := decoder.StartEl
 		_ = t
@@ -36657,7 +36673,8 @@ func awsEc2query_deserializeDocumentCancelSpotFleetRequestsErrorSetUnwrapped(v *
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CancelSpotFleetRequestsErrorItem
 		t := decoder.StartEl
 		_ = t
@@ -36784,7 +36801,8 @@ func awsEc2query_deserializeDocumentCancelSpotFleetRequestsSuccessSetUnwrapped(v
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CancelSpotFleetRequestsSuccessItem
 		t := decoder.StartEl
 		_ = t
@@ -37177,7 +37195,8 @@ func awsEc2query_deserializeDocumentCapacityReservationGroupSetUnwrapped(v *[]*t
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CapacityReservationGroup
 		t := decoder.StartEl
 		_ = t
@@ -37278,7 +37297,8 @@ func awsEc2query_deserializeDocumentCapacityReservationSetUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CapacityReservation
 		t := decoder.StartEl
 		_ = t
@@ -37527,7 +37547,8 @@ func awsEc2query_deserializeDocumentCidrBlockSetUnwrapped(v *[]*types.CidrBlock,
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CidrBlock
 		t := decoder.StartEl
 		_ = t
@@ -37644,7 +37665,8 @@ func awsEc2query_deserializeDocumentClassicLinkDnsSupportListUnwrapped(v *[]*typ
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ClassicLinkDnsSupport
 		t := decoder.StartEl
 		_ = t
@@ -37770,7 +37792,8 @@ func awsEc2query_deserializeDocumentClassicLinkInstanceListUnwrapped(v *[]*types
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ClassicLinkInstance
 		t := decoder.StartEl
 		_ = t
@@ -37871,7 +37894,8 @@ func awsEc2query_deserializeDocumentClassicLoadBalancersUnwrapped(v *[]*types.Cl
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ClassicLoadBalancer
 		t := decoder.StartEl
 		_ = t
@@ -38082,7 +38106,8 @@ func awsEc2query_deserializeDocumentClientVpnAuthenticationListUnwrapped(v *[]*t
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ClientVpnAuthentication
 		t := decoder.StartEl
 		_ = t
@@ -38388,7 +38413,8 @@ func awsEc2query_deserializeDocumentClientVpnConnectionSetUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ClientVpnConnection
 		t := decoder.StartEl
 		_ = t
@@ -38907,7 +38933,8 @@ func awsEc2query_deserializeDocumentClientVpnRouteSetUnwrapped(v *[]*types.Clien
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ClientVpnRoute
 		t := decoder.StartEl
 		_ = t
@@ -39029,7 +39056,8 @@ func awsEc2query_deserializeDocumentClientVpnSecurityGroupIdSetUnwrapped(v *[]*s
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -39176,7 +39204,8 @@ func awsEc2query_deserializeDocumentCoipAddressUsageSetUnwrapped(v *[]*types.Coi
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CoipAddressUsage
 		t := decoder.StartEl
 		_ = t
@@ -39315,7 +39344,8 @@ func awsEc2query_deserializeDocumentCoipPoolSetUnwrapped(v *[]*types.CoipPool, d
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CoipPool
 		t := decoder.StartEl
 		_ = t
@@ -39559,7 +39589,8 @@ func awsEc2query_deserializeDocumentConnectionNotificationSetUnwrapped(v *[]*typ
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ConnectionNotification
 		t := decoder.StartEl
 		_ = t
@@ -39729,7 +39760,8 @@ func awsEc2query_deserializeDocumentCoreCountListUnwrapped(v *[]*int32, decoder 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *int32
 		t := decoder.StartEl
 		_ = t
@@ -39937,7 +39969,8 @@ func awsEc2query_deserializeDocumentCreateFleetErrorsSetUnwrapped(v *[]*types.Cr
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CreateFleetError
 		t := decoder.StartEl
 		_ = t
@@ -40076,7 +40109,8 @@ func awsEc2query_deserializeDocumentCreateFleetInstancesSetUnwrapped(v *[]*types
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CreateFleetInstance
 		t := decoder.StartEl
 		_ = t
@@ -40190,7 +40224,8 @@ func awsEc2query_deserializeDocumentCreateVolumePermissionListUnwrapped(v *[]*ty
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CreateVolumePermission
 		t := decoder.StartEl
 		_ = t
@@ -40418,7 +40453,8 @@ func awsEc2query_deserializeDocumentCustomerGatewayListUnwrapped(v *[]*types.Cus
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CustomerGateway
 		t := decoder.StartEl
 		_ = t
@@ -40581,7 +40617,8 @@ func awsEc2query_deserializeDocumentDeleteFleetErrorSetUnwrapped(v *[]*types.Del
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.DeleteFleetErrorItem
 		t := decoder.StartEl
 		_ = t
@@ -40708,7 +40745,8 @@ func awsEc2query_deserializeDocumentDeleteFleetSuccessSetUnwrapped(v *[]*types.D
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.DeleteFleetSuccessItem
 		t := decoder.StartEl
 		_ = t
@@ -40845,7 +40883,8 @@ func awsEc2query_deserializeDocumentDeleteLaunchTemplateVersionsResponseErrorSet
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.DeleteLaunchTemplateVersionsResponseErrorItem
 		t := decoder.StartEl
 		_ = t
@@ -40976,7 +41015,8 @@ func awsEc2query_deserializeDocumentDeleteLaunchTemplateVersionsResponseSuccessS
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.DeleteLaunchTemplateVersionsResponseSuccessItem
 		t := decoder.StartEl
 		_ = t
@@ -41090,7 +41130,8 @@ func awsEc2query_deserializeDocumentDescribeConversionTaskListUnwrapped(v *[]*ty
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ConversionTask
 		t := decoder.StartEl
 		_ = t
@@ -41341,7 +41382,8 @@ func awsEc2query_deserializeDocumentDescribeFastSnapshotRestoreSuccessSetUnwrapp
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.DescribeFastSnapshotRestoreSuccessItem
 		t := decoder.StartEl
 		_ = t
@@ -41474,7 +41516,8 @@ func awsEc2query_deserializeDocumentDescribeFleetsErrorSetUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.DescribeFleetError
 		t := decoder.StartEl
 		_ = t
@@ -41613,7 +41656,8 @@ func awsEc2query_deserializeDocumentDescribeFleetsInstancesSetUnwrapped(v *[]*ty
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.DescribeFleetsInstances
 		t := decoder.StartEl
 		_ = t
@@ -41720,7 +41764,8 @@ func awsEc2query_deserializeDocumentDhcpConfigurationListUnwrapped(v *[]*types.D
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.DhcpConfiguration
 		t := decoder.StartEl
 		_ = t
@@ -41778,7 +41823,8 @@ func awsEc2query_deserializeDocumentDhcpConfigurationValueListUnwrapped(v *[]*ty
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.AttributeValue
 		t := decoder.StartEl
 		_ = t
@@ -41904,7 +41950,8 @@ func awsEc2query_deserializeDocumentDhcpOptionsListUnwrapped(v *[]*types.DhcpOpt
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.DhcpOptions
 		t := decoder.StartEl
 		_ = t
@@ -42054,7 +42101,8 @@ func awsEc2query_deserializeDocumentDisableFastSnapshotRestoreErrorSetUnwrapped(
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.DisableFastSnapshotRestoreErrorItem
 		t := decoder.StartEl
 		_ = t
@@ -42217,7 +42265,8 @@ func awsEc2query_deserializeDocumentDisableFastSnapshotRestoreStateErrorSetUnwra
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.DisableFastSnapshotRestoreStateErrorItem
 		t := decoder.StartEl
 		_ = t
@@ -42468,7 +42517,8 @@ func awsEc2query_deserializeDocumentDisableFastSnapshotRestoreSuccessSetUnwrappe
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.DisableFastSnapshotRestoreSuccessItem
 		t := decoder.StartEl
 		_ = t
@@ -42749,7 +42799,8 @@ func awsEc2query_deserializeDocumentDiskInfoListUnwrapped(v *[]*types.DiskInfo, 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.DiskInfo
 		t := decoder.StartEl
 		_ = t
@@ -42863,7 +42914,8 @@ func awsEc2query_deserializeDocumentDnsEntrySetUnwrapped(v *[]*types.DnsEntry, d
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.DnsEntry
 		t := decoder.StartEl
 		_ = t
@@ -43407,7 +43459,8 @@ func awsEc2query_deserializeDocumentEgressOnlyInternetGatewayListUnwrapped(v *[]
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.EgressOnlyInternetGateway
 		t := decoder.StartEl
 		_ = t
@@ -43547,7 +43600,8 @@ func awsEc2query_deserializeDocumentElasticGpuAssociationListUnwrapped(v *[]*typ
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ElasticGpuAssociation
 		t := decoder.StartEl
 		_ = t
@@ -43755,7 +43809,8 @@ func awsEc2query_deserializeDocumentElasticGpuSetUnwrapped(v *[]*types.ElasticGp
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ElasticGpus
 		t := decoder.StartEl
 		_ = t
@@ -43856,7 +43911,8 @@ func awsEc2query_deserializeDocumentElasticGpuSpecificationResponseListUnwrapped
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ElasticGpuSpecificationResponse
 		t := decoder.StartEl
 		_ = t
@@ -44000,7 +44056,8 @@ func awsEc2query_deserializeDocumentElasticInferenceAcceleratorAssociationListUn
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ElasticInferenceAcceleratorAssociation
 		t := decoder.StartEl
 		_ = t
@@ -44107,7 +44164,8 @@ func awsEc2query_deserializeDocumentEnableFastSnapshotRestoreErrorSetUnwrapped(v
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.EnableFastSnapshotRestoreErrorItem
 		t := decoder.StartEl
 		_ = t
@@ -44270,7 +44328,8 @@ func awsEc2query_deserializeDocumentEnableFastSnapshotRestoreStateErrorSetUnwrap
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.EnableFastSnapshotRestoreStateErrorItem
 		t := decoder.StartEl
 		_ = t
@@ -44521,7 +44580,8 @@ func awsEc2query_deserializeDocumentEnableFastSnapshotRestoreSuccessSetUnwrapped
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.EnableFastSnapshotRestoreSuccessItem
 		t := decoder.StartEl
 		_ = t
@@ -44579,7 +44639,8 @@ func awsEc2query_deserializeDocumentEndpointSetUnwrapped(v *[]*types.ClientVpnEn
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ClientVpnEndpoint
 		t := decoder.StartEl
 		_ = t
@@ -44637,7 +44698,8 @@ func awsEc2query_deserializeDocumentErrorSetUnwrapped(v *[]*types.ValidationErro
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ValidationError
 		t := decoder.StartEl
 		_ = t
@@ -44884,7 +44946,8 @@ func awsEc2query_deserializeDocumentExportImageTaskListUnwrapped(v *[]*types.Exp
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ExportImageTask
 		t := decoder.StartEl
 		_ = t
@@ -45042,7 +45105,8 @@ func awsEc2query_deserializeDocumentExportTaskListUnwrapped(v *[]*types.ExportTa
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ExportTask
 		t := decoder.StartEl
 		_ = t
@@ -45287,7 +45351,8 @@ func awsEc2query_deserializeDocumentFailedQueuedPurchaseDeletionSetUnwrapped(v *
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.FailedQueuedPurchaseDeletion
 		t := decoder.StartEl
 		_ = t
@@ -45697,7 +45762,8 @@ func awsEc2query_deserializeDocumentFleetLaunchTemplateConfigListUnwrapped(v *[]
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.FleetLaunchTemplateConfig
 		t := decoder.StartEl
 		_ = t
@@ -45877,7 +45943,8 @@ func awsEc2query_deserializeDocumentFleetLaunchTemplateOverridesListUnwrapped(v 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.FleetLaunchTemplateOverrides
 		t := decoder.StartEl
 		_ = t
@@ -46004,7 +46071,8 @@ func awsEc2query_deserializeDocumentFleetSetUnwrapped(v *[]*types.FleetData, dec
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.FleetData
 		t := decoder.StartEl
 		_ = t
@@ -46275,7 +46343,8 @@ func awsEc2query_deserializeDocumentFlowLogSetUnwrapped(v *[]*types.FlowLog, dec
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.FlowLog
 		t := decoder.StartEl
 		_ = t
@@ -46412,7 +46481,8 @@ func awsEc2query_deserializeDocumentFpgaDeviceInfoListUnwrapped(v *[]*types.Fpga
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.FpgaDeviceInfo
 		t := decoder.StartEl
 		_ = t
@@ -46809,7 +46879,8 @@ func awsEc2query_deserializeDocumentFpgaImageListUnwrapped(v *[]*types.FpgaImage
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.FpgaImage
 		t := decoder.StartEl
 		_ = t
@@ -47055,7 +47126,8 @@ func awsEc2query_deserializeDocumentGpuDeviceInfoListUnwrapped(v *[]*types.GpuDe
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.GpuDeviceInfo
 		t := decoder.StartEl
 		_ = t
@@ -47269,7 +47341,8 @@ func awsEc2query_deserializeDocumentGroupIdentifierListUnwrapped(v *[]*types.Gro
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.GroupIdentifier
 		t := decoder.StartEl
 		_ = t
@@ -47327,7 +47400,8 @@ func awsEc2query_deserializeDocumentGroupIdentifierSetUnwrapped(v *[]*types.Secu
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.SecurityGroupIdentifier
 		t := decoder.StartEl
 		_ = t
@@ -47393,7 +47467,8 @@ func awsEc2query_deserializeDocumentGroupIdStringListUnwrapped(v *[]*string, dec
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -47636,7 +47711,8 @@ func awsEc2query_deserializeDocumentHistoryRecordsUnwrapped(v *[]*types.HistoryR
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.HistoryRecord
 		t := decoder.StartEl
 		_ = t
@@ -47694,7 +47770,8 @@ func awsEc2query_deserializeDocumentHistoryRecordSetUnwrapped(v *[]*types.Histor
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.HistoryRecordEntry
 		t := decoder.StartEl
 		_ = t
@@ -48055,7 +48132,8 @@ func awsEc2query_deserializeDocumentHostInstanceListUnwrapped(v *[]*types.HostIn
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.HostInstance
 		t := decoder.StartEl
 		_ = t
@@ -48113,7 +48191,8 @@ func awsEc2query_deserializeDocumentHostListUnwrapped(v *[]*types.Host, decoder 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Host
 		t := decoder.StartEl
 		_ = t
@@ -48296,7 +48375,8 @@ func awsEc2query_deserializeDocumentHostOfferingSetUnwrapped(v *[]*types.HostOff
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.HostOffering
 		t := decoder.StartEl
 		_ = t
@@ -48675,7 +48755,8 @@ func awsEc2query_deserializeDocumentHostReservationSetUnwrapped(v *[]*types.Host
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.HostReservation
 		t := decoder.StartEl
 		_ = t
@@ -48881,7 +48962,8 @@ func awsEc2query_deserializeDocumentIamInstanceProfileAssociationSetUnwrapped(v 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.IamInstanceProfileAssociation
 		t := decoder.StartEl
 		_ = t
@@ -49135,7 +49217,8 @@ func awsEc2query_deserializeDocumentIdFormatListUnwrapped(v *[]*types.IdFormat, 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.IdFormat
 		t := decoder.StartEl
 		_ = t
@@ -49193,7 +49276,8 @@ func awsEc2query_deserializeDocumentIKEVersionsListUnwrapped(v *[]*types.IKEVers
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.IKEVersionsListValue
 		t := decoder.StartEl
 		_ = t
@@ -49640,7 +49724,8 @@ func awsEc2query_deserializeDocumentImageListUnwrapped(v *[]*types.Image, decode
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Image
 		t := decoder.StartEl
 		_ = t
@@ -49741,7 +49826,8 @@ func awsEc2query_deserializeDocumentImportImageLicenseSpecificationListResponseU
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ImportImageLicenseConfigurationResponse
 		t := decoder.StartEl
 		_ = t
@@ -50006,7 +50092,8 @@ func awsEc2query_deserializeDocumentImportImageTaskListUnwrapped(v *[]*types.Imp
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ImportImageTask
 		t := decoder.StartEl
 		_ = t
@@ -50250,7 +50337,8 @@ func awsEc2query_deserializeDocumentImportInstanceVolumeDetailSetUnwrapped(v *[]
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ImportInstanceVolumeDetailItem
 		t := decoder.StartEl
 		_ = t
@@ -50376,7 +50464,8 @@ func awsEc2query_deserializeDocumentImportSnapshotTaskListUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ImportSnapshotTask
 		t := decoder.StartEl
 		_ = t
@@ -50628,7 +50717,8 @@ func awsEc2query_deserializeDocumentInferenceDeviceInfoListUnwrapped(v *[]*types
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.InferenceDeviceInfo
 		t := decoder.StartEl
 		_ = t
@@ -51274,7 +51364,8 @@ func awsEc2query_deserializeDocumentInstanceBlockDeviceMappingListUnwrapped(v *[
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.InstanceBlockDeviceMapping
 		t := decoder.StartEl
 		_ = t
@@ -51469,7 +51560,8 @@ func awsEc2query_deserializeDocumentInstanceCountListUnwrapped(v *[]*types.Insta
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.InstanceCount
 		t := decoder.StartEl
 		_ = t
@@ -51583,7 +51675,8 @@ func awsEc2query_deserializeDocumentInstanceCreditSpecificationListUnwrapped(v *
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.InstanceCreditSpecification
 		t := decoder.StartEl
 		_ = t
@@ -51761,7 +51854,8 @@ func awsEc2query_deserializeDocumentInstanceIdSetUnwrapped(v *[]*string, decoder
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -51834,7 +51928,8 @@ func awsEc2query_deserializeDocumentInstanceIdsSetUnwrapped(v *[]*string, decode
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -51942,7 +52037,8 @@ func awsEc2query_deserializeDocumentInstanceIpv6AddressListUnwrapped(v *[]*types
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.InstanceIpv6Address
 		t := decoder.StartEl
 		_ = t
@@ -52000,7 +52096,8 @@ func awsEc2query_deserializeDocumentInstanceListUnwrapped(v *[]*types.Instance, 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Instance
 		t := decoder.StartEl
 		_ = t
@@ -52193,7 +52290,8 @@ func awsEc2query_deserializeDocumentInstanceMonitoringListUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.InstanceMonitoring
 		t := decoder.StartEl
 		_ = t
@@ -52632,7 +52730,8 @@ func awsEc2query_deserializeDocumentInstanceNetworkInterfaceListUnwrapped(v *[]*
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.InstanceNetworkInterface
 		t := decoder.StartEl
 		_ = t
@@ -52886,7 +52985,8 @@ func awsEc2query_deserializeDocumentInstanceNetworkInterfaceSpecificationListUnw
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.InstanceNetworkInterfaceSpecification
 		t := decoder.StartEl
 		_ = t
@@ -53022,7 +53122,8 @@ func awsEc2query_deserializeDocumentInstancePrivateIpAddressListUnwrapped(v *[]*
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.InstancePrivateIpAddress
 		t := decoder.StartEl
 		_ = t
@@ -53195,7 +53296,8 @@ func awsEc2query_deserializeDocumentInstanceStateChangeListUnwrapped(v *[]*types
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.InstanceStateChange
 		t := decoder.StartEl
 		_ = t
@@ -53419,7 +53521,8 @@ func awsEc2query_deserializeDocumentInstanceStatusDetailsListUnwrapped(v *[]*typ
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.InstanceStatusDetails
 		t := decoder.StartEl
 		_ = t
@@ -53597,7 +53700,8 @@ func awsEc2query_deserializeDocumentInstanceStatusEventListUnwrapped(v *[]*types
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.InstanceStatusEvent
 		t := decoder.StartEl
 		_ = t
@@ -53655,7 +53759,8 @@ func awsEc2query_deserializeDocumentInstanceStatusListUnwrapped(v *[]*types.Inst
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.InstanceStatus
 		t := decoder.StartEl
 		_ = t
@@ -53823,7 +53928,8 @@ func awsEc2query_deserializeDocumentInstanceTagKeySetUnwrapped(v *[]*string, dec
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -54202,7 +54308,8 @@ func awsEc2query_deserializeDocumentInstanceTypeInfoListUnwrapped(v *[]*types.In
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.InstanceTypeInfo
 		t := decoder.StartEl
 		_ = t
@@ -54329,7 +54436,8 @@ func awsEc2query_deserializeDocumentInstanceTypeOfferingsListUnwrapped(v *[]*typ
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.InstanceTypeOffering
 		t := decoder.StartEl
 		_ = t
@@ -54447,7 +54555,8 @@ func awsEc2query_deserializeDocumentInstanceUsageSetUnwrapped(v *[]*types.Instan
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.InstanceUsage
 		t := decoder.StartEl
 		_ = t
@@ -54629,7 +54738,8 @@ func awsEc2query_deserializeDocumentInternetGatewayAttachmentListUnwrapped(v *[]
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.InternetGatewayAttachment
 		t := decoder.StartEl
 		_ = t
@@ -54687,7 +54797,8 @@ func awsEc2query_deserializeDocumentInternetGatewayListUnwrapped(v *[]*types.Int
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.InternetGateway
 		t := decoder.StartEl
 		_ = t
@@ -54846,7 +54957,8 @@ func awsEc2query_deserializeDocumentIpPermissionListUnwrapped(v *[]*types.IpPerm
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.IpPermission
 		t := decoder.StartEl
 		_ = t
@@ -54960,7 +55072,8 @@ func awsEc2query_deserializeDocumentIpRangeListUnwrapped(v *[]*types.IpRange, de
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.IpRange
 		t := decoder.StartEl
 		_ = t
@@ -55026,7 +55139,8 @@ func awsEc2query_deserializeDocumentIpRangesUnwrapped(v *[]*string, decoder smit
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -55099,7 +55213,8 @@ func awsEc2query_deserializeDocumentIpv6AddressListUnwrapped(v *[]*string, decod
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -55220,7 +55335,8 @@ func awsEc2query_deserializeDocumentIpv6CidrAssociationSetUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Ipv6CidrAssociation
 		t := decoder.StartEl
 		_ = t
@@ -55321,7 +55437,8 @@ func awsEc2query_deserializeDocumentIpv6CidrBlockSetUnwrapped(v *[]*types.Ipv6Ci
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Ipv6CidrBlock
 		t := decoder.StartEl
 		_ = t
@@ -55447,7 +55564,8 @@ func awsEc2query_deserializeDocumentIpv6PoolSetUnwrapped(v *[]*types.Ipv6Pool, d
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Ipv6Pool
 		t := decoder.StartEl
 		_ = t
@@ -55561,7 +55679,8 @@ func awsEc2query_deserializeDocumentIpv6RangeListUnwrapped(v *[]*types.Ipv6Range
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Ipv6Range
 		t := decoder.StartEl
 		_ = t
@@ -55694,7 +55813,8 @@ func awsEc2query_deserializeDocumentKeyPairListUnwrapped(v *[]*types.KeyPairInfo
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.KeyPairInfo
 		t := decoder.StartEl
 		_ = t
@@ -55864,7 +55984,8 @@ func awsEc2query_deserializeDocumentLaunchPermissionListUnwrapped(v *[]*types.La
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.LaunchPermission
 		t := decoder.StartEl
 		_ = t
@@ -56108,7 +56229,8 @@ func awsEc2query_deserializeDocumentLaunchSpecsListUnwrapped(v *[]*types.SpotFle
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.SpotFleetLaunchSpecification
 		t := decoder.StartEl
 		_ = t
@@ -56409,7 +56531,8 @@ func awsEc2query_deserializeDocumentLaunchTemplateBlockDeviceMappingListUnwrappe
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.LaunchTemplateBlockDeviceMapping
 		t := decoder.StartEl
 		_ = t
@@ -56558,7 +56681,8 @@ func awsEc2query_deserializeDocumentLaunchTemplateConfigListUnwrapped(v *[]*type
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.LaunchTemplateConfig
 		t := decoder.StartEl
 		_ = t
@@ -56875,7 +56999,8 @@ func awsEc2query_deserializeDocumentLaunchTemplateElasticInferenceAcceleratorRes
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.LaunchTemplateElasticInferenceAcceleratorResponse
 		t := decoder.StartEl
 		_ = t
@@ -57366,7 +57491,8 @@ func awsEc2query_deserializeDocumentLaunchTemplateInstanceNetworkInterfaceSpecif
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.LaunchTemplateInstanceNetworkInterfaceSpecification
 		t := decoder.StartEl
 		_ = t
@@ -57467,7 +57593,8 @@ func awsEc2query_deserializeDocumentLaunchTemplateLicenseListUnwrapped(v *[]*typ
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.LaunchTemplateLicenseConfiguration
 		t := decoder.StartEl
 		_ = t
@@ -57641,7 +57768,8 @@ func awsEc2query_deserializeDocumentLaunchTemplateOverridesListUnwrapped(v *[]*t
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.LaunchTemplateOverrides
 		t := decoder.StartEl
 		_ = t
@@ -57837,7 +57965,8 @@ func awsEc2query_deserializeDocumentLaunchTemplateSetUnwrapped(v *[]*types.Launc
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.LaunchTemplate
 		t := decoder.StartEl
 		_ = t
@@ -58093,7 +58222,8 @@ func awsEc2query_deserializeDocumentLaunchTemplateTagSpecificationListUnwrapped(
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.LaunchTemplateTagSpecification
 		t := decoder.StartEl
 		_ = t
@@ -58289,7 +58419,8 @@ func awsEc2query_deserializeDocumentLaunchTemplateVersionSetUnwrapped(v *[]*type
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.LaunchTemplateVersion
 		t := decoder.StartEl
 		_ = t
@@ -58390,7 +58521,8 @@ func awsEc2query_deserializeDocumentLicenseListUnwrapped(v *[]*types.LicenseConf
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.LicenseConfiguration
 		t := decoder.StartEl
 		_ = t
@@ -58546,7 +58678,8 @@ func awsEc2query_deserializeDocumentLoadPermissionListUnwrapped(v *[]*types.Load
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.LoadPermission
 		t := decoder.StartEl
 		_ = t
@@ -58787,7 +58920,8 @@ func awsEc2query_deserializeDocumentLocalGatewayRouteListUnwrapped(v *[]*types.L
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.LocalGatewayRoute
 		t := decoder.StartEl
 		_ = t
@@ -58933,7 +59067,8 @@ func awsEc2query_deserializeDocumentLocalGatewayRouteTableSetUnwrapped(v *[]*typ
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.LocalGatewayRouteTable
 		t := decoder.StartEl
 		_ = t
@@ -59092,7 +59227,8 @@ func awsEc2query_deserializeDocumentLocalGatewayRouteTableVirtualInterfaceGroupA
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.LocalGatewayRouteTableVirtualInterfaceGroupAssociation
 		t := decoder.StartEl
 		_ = t
@@ -59251,7 +59387,8 @@ func awsEc2query_deserializeDocumentLocalGatewayRouteTableVpcAssociationSetUnwra
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.LocalGatewayRouteTableVpcAssociation
 		t := decoder.StartEl
 		_ = t
@@ -59309,7 +59446,8 @@ func awsEc2query_deserializeDocumentLocalGatewaySetUnwrapped(v *[]*types.LocalGa
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.LocalGateway
 		t := decoder.StartEl
 		_ = t
@@ -59574,7 +59712,8 @@ func awsEc2query_deserializeDocumentLocalGatewayVirtualInterfaceGroupSetUnwrappe
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.LocalGatewayVirtualInterfaceGroup
 		t := decoder.StartEl
 		_ = t
@@ -59640,7 +59779,8 @@ func awsEc2query_deserializeDocumentLocalGatewayVirtualInterfaceIdSetUnwrapped(v
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -59705,7 +59845,8 @@ func awsEc2query_deserializeDocumentLocalGatewayVirtualInterfaceSetUnwrapped(v *
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.LocalGatewayVirtualInterface
 		t := decoder.StartEl
 		_ = t
@@ -59924,7 +60065,8 @@ func awsEc2query_deserializeDocumentManagedPrefixListSetUnwrapped(v *[]*types.Ma
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ManagedPrefixList
 		t := decoder.StartEl
 		_ = t
@@ -60128,7 +60270,8 @@ func awsEc2query_deserializeDocumentMovingAddressStatusSetUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.MovingAddressStatus
 		t := decoder.StartEl
 		_ = t
@@ -60428,7 +60571,8 @@ func awsEc2query_deserializeDocumentNatGatewayAddressListUnwrapped(v *[]*types.N
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.NatGatewayAddress
 		t := decoder.StartEl
 		_ = t
@@ -60486,7 +60630,8 @@ func awsEc2query_deserializeDocumentNatGatewayListUnwrapped(v *[]*types.NatGatew
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.NatGateway
 		t := decoder.StartEl
 		_ = t
@@ -60716,7 +60861,8 @@ func awsEc2query_deserializeDocumentNetworkAclAssociationListUnwrapped(v *[]*typ
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.NetworkAclAssociation
 		t := decoder.StartEl
 		_ = t
@@ -60901,7 +61047,8 @@ func awsEc2query_deserializeDocumentNetworkAclEntryListUnwrapped(v *[]*types.Net
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.NetworkAclEntry
 		t := decoder.StartEl
 		_ = t
@@ -60959,7 +61106,8 @@ func awsEc2query_deserializeDocumentNetworkAclListUnwrapped(v *[]*types.NetworkA
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.NetworkAcl
 		t := decoder.StartEl
 		_ = t
@@ -61693,7 +61841,8 @@ func awsEc2query_deserializeDocumentNetworkInterfaceIpv6AddressesListUnwrapped(v
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.NetworkInterfaceIpv6Address
 		t := decoder.StartEl
 		_ = t
@@ -61751,7 +61900,8 @@ func awsEc2query_deserializeDocumentNetworkInterfaceListUnwrapped(v *[]*types.Ne
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.NetworkInterface
 		t := decoder.StartEl
 		_ = t
@@ -61910,7 +62060,8 @@ func awsEc2query_deserializeDocumentNetworkInterfacePermissionListUnwrapped(v *[
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.NetworkInterfacePermission
 		t := decoder.StartEl
 		_ = t
@@ -62102,7 +62253,8 @@ func awsEc2query_deserializeDocumentNetworkInterfacePrivateIpAddressListUnwrappe
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.NetworkInterfacePrivateIpAddress
 		t := decoder.StartEl
 		_ = t
@@ -62172,7 +62324,8 @@ func awsEc2query_deserializeDocumentOccurrenceDaySetUnwrapped(v *[]*int32, decod
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *int32
 		t := decoder.StartEl
 		_ = t
@@ -62637,7 +62790,8 @@ func awsEc2query_deserializeDocumentPhase1DHGroupNumbersListUnwrapped(v *[]*type
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Phase1DHGroupNumbersListValue
 		t := decoder.StartEl
 		_ = t
@@ -62742,7 +62896,8 @@ func awsEc2query_deserializeDocumentPhase1EncryptionAlgorithmsListUnwrapped(v *[
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Phase1EncryptionAlgorithmsListValue
 		t := decoder.StartEl
 		_ = t
@@ -62843,7 +62998,8 @@ func awsEc2query_deserializeDocumentPhase1IntegrityAlgorithmsListUnwrapped(v *[]
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Phase1IntegrityAlgorithmsListValue
 		t := decoder.StartEl
 		_ = t
@@ -62944,7 +63100,8 @@ func awsEc2query_deserializeDocumentPhase2DHGroupNumbersListUnwrapped(v *[]*type
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Phase2DHGroupNumbersListValue
 		t := decoder.StartEl
 		_ = t
@@ -63049,7 +63206,8 @@ func awsEc2query_deserializeDocumentPhase2EncryptionAlgorithmsListUnwrapped(v *[
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Phase2EncryptionAlgorithmsListValue
 		t := decoder.StartEl
 		_ = t
@@ -63150,7 +63308,8 @@ func awsEc2query_deserializeDocumentPhase2IntegrityAlgorithmsListUnwrapped(v *[]
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Phase2IntegrityAlgorithmsListValue
 		t := decoder.StartEl
 		_ = t
@@ -63530,7 +63689,8 @@ func awsEc2query_deserializeDocumentPlacementGroupListUnwrapped(v *[]*types.Plac
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.PlacementGroup
 		t := decoder.StartEl
 		_ = t
@@ -63596,7 +63756,8 @@ func awsEc2query_deserializeDocumentPlacementGroupStrategyListUnwrapped(v *[]typ
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv types.PlacementGroupStrategy
 		t := decoder.StartEl
 		_ = t
@@ -63747,7 +63908,8 @@ func awsEc2query_deserializeDocumentPoolCidrBlocksSetUnwrapped(v *[]*types.PoolC
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.PoolCidrBlock
 		t := decoder.StartEl
 		_ = t
@@ -63987,7 +64149,8 @@ func awsEc2query_deserializeDocumentPrefixListAssociationSetUnwrapped(v *[]*type
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.PrefixListAssociation
 		t := decoder.StartEl
 		_ = t
@@ -64101,7 +64264,8 @@ func awsEc2query_deserializeDocumentPrefixListEntrySetUnwrapped(v *[]*types.Pref
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.PrefixListEntry
 		t := decoder.StartEl
 		_ = t
@@ -64215,7 +64379,8 @@ func awsEc2query_deserializeDocumentPrefixListIdListUnwrapped(v *[]*types.Prefix
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.PrefixListId
 		t := decoder.StartEl
 		_ = t
@@ -64281,7 +64446,8 @@ func awsEc2query_deserializeDocumentPrefixListIdSetUnwrapped(v *[]*string, decod
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -64346,7 +64512,8 @@ func awsEc2query_deserializeDocumentPrefixListSetUnwrapped(v *[]*types.PrefixLis
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.PrefixList
 		t := decoder.StartEl
 		_ = t
@@ -64497,7 +64664,8 @@ func awsEc2query_deserializeDocumentPriceScheduleListUnwrapped(v *[]*types.Price
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.PriceSchedule
 		t := decoder.StartEl
 		_ = t
@@ -64619,7 +64787,8 @@ func awsEc2query_deserializeDocumentPricingDetailsListUnwrapped(v *[]*types.Pric
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.PricingDetail
 		t := decoder.StartEl
 		_ = t
@@ -64726,7 +64895,8 @@ func awsEc2query_deserializeDocumentPrincipalIdFormatListUnwrapped(v *[]*types.P
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.PrincipalIdFormat
 		t := decoder.StartEl
 		_ = t
@@ -64925,7 +65095,8 @@ func awsEc2query_deserializeDocumentPrivateIpAddressSpecificationListUnwrapped(v
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.PrivateIpAddressSpecification
 		t := decoder.StartEl
 		_ = t
@@ -65092,7 +65263,8 @@ func awsEc2query_deserializeDocumentProductCodeListUnwrapped(v *[]*types.Product
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ProductCode
 		t := decoder.StartEl
 		_ = t
@@ -65193,7 +65365,8 @@ func awsEc2query_deserializeDocumentPropagatingVgwListUnwrapped(v *[]*types.Prop
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.PropagatingVgw
 		t := decoder.StartEl
 		_ = t
@@ -65559,7 +65732,8 @@ func awsEc2query_deserializeDocumentPublicIpv4PoolRangeSetUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.PublicIpv4PoolRange
 		t := decoder.StartEl
 		_ = t
@@ -65617,7 +65791,8 @@ func awsEc2query_deserializeDocumentPublicIpv4PoolSetUnwrapped(v *[]*types.Publi
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.PublicIpv4Pool
 		t := decoder.StartEl
 		_ = t
@@ -65806,7 +65981,8 @@ func awsEc2query_deserializeDocumentPurchasedScheduledInstanceSetUnwrapped(v *[]
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ScheduledInstance
 		t := decoder.StartEl
 		_ = t
@@ -65864,7 +66040,8 @@ func awsEc2query_deserializeDocumentPurchaseSetUnwrapped(v *[]*types.Purchase, d
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Purchase
 		t := decoder.StartEl
 		_ = t
@@ -65982,7 +66159,8 @@ func awsEc2query_deserializeDocumentRecurringChargesListUnwrapped(v *[]*types.Re
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.RecurringCharge
 		t := decoder.StartEl
 		_ = t
@@ -66109,7 +66287,8 @@ func awsEc2query_deserializeDocumentRegionListUnwrapped(v *[]*types.Region, deco
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Region
 		t := decoder.StartEl
 		_ = t
@@ -66248,7 +66427,8 @@ func awsEc2query_deserializeDocumentReservationListUnwrapped(v *[]*types.Reserva
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Reservation
 		t := decoder.StartEl
 		_ = t
@@ -66424,7 +66604,8 @@ func awsEc2query_deserializeDocumentReservedInstanceReservationValueSetUnwrapped
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ReservedInstanceReservationValue
 		t := decoder.StartEl
 		_ = t
@@ -66898,7 +67079,8 @@ func awsEc2query_deserializeDocumentReservedInstancesListUnwrapped(v *[]*types.R
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ReservedInstances
 		t := decoder.StartEl
 		_ = t
@@ -67103,7 +67285,8 @@ func awsEc2query_deserializeDocumentReservedInstancesListingListUnwrapped(v *[]*
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ReservedInstancesListing
 		t := decoder.StartEl
 		_ = t
@@ -67306,7 +67489,8 @@ func awsEc2query_deserializeDocumentReservedInstancesModificationListUnwrapped(v
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ReservedInstancesModification
 		t := decoder.StartEl
 		_ = t
@@ -67413,7 +67597,8 @@ func awsEc2query_deserializeDocumentReservedInstancesModificationResultListUnwra
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ReservedInstancesModificationResult
 		t := decoder.StartEl
 		_ = t
@@ -67697,7 +67882,8 @@ func awsEc2query_deserializeDocumentReservedInstancesOfferingListUnwrapped(v *[]
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ReservedInstancesOffering
 		t := decoder.StartEl
 		_ = t
@@ -67755,7 +67941,8 @@ func awsEc2query_deserializeDocumentReservedIntancesIdsUnwrapped(v *[]*types.Res
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ReservedInstancesId
 		t := decoder.StartEl
 		_ = t
@@ -67877,7 +68064,8 @@ func awsEc2query_deserializeDocumentResponseHostIdListUnwrapped(v *[]*string, de
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -67950,7 +68138,8 @@ func awsEc2query_deserializeDocumentResponseHostIdSetUnwrapped(v *[]*string, dec
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -68278,7 +68467,8 @@ func awsEc2query_deserializeDocumentRootDeviceTypeListUnwrapped(v *[]types.RootD
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv types.RootDeviceType
 		t := decoder.StartEl
 		_ = t
@@ -68555,7 +68745,8 @@ func awsEc2query_deserializeDocumentRouteListUnwrapped(v *[]*types.Route, decode
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Route
 		t := decoder.StartEl
 		_ = t
@@ -68810,7 +69001,8 @@ func awsEc2query_deserializeDocumentRouteTableAssociationListUnwrapped(v *[]*typ
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.RouteTableAssociation
 		t := decoder.StartEl
 		_ = t
@@ -68924,7 +69116,8 @@ func awsEc2query_deserializeDocumentRouteTableListUnwrapped(v *[]*types.RouteTab
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.RouteTable
 		t := decoder.StartEl
 		_ = t
@@ -69587,7 +69780,8 @@ func awsEc2query_deserializeDocumentScheduledInstanceAvailabilitySetUnwrapped(v 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ScheduledInstanceAvailability
 		t := decoder.StartEl
 		_ = t
@@ -69740,7 +69934,8 @@ func awsEc2query_deserializeDocumentScheduledInstanceSetUnwrapped(v *[]*types.Sc
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ScheduledInstance
 		t := decoder.StartEl
 		_ = t
@@ -69975,7 +70170,8 @@ func awsEc2query_deserializeDocumentSecurityGroupIdStringListUnwrapped(v *[]*str
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -70040,7 +70236,8 @@ func awsEc2query_deserializeDocumentSecurityGroupListUnwrapped(v *[]*types.Secur
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.SecurityGroup
 		t := decoder.StartEl
 		_ = t
@@ -70167,7 +70364,8 @@ func awsEc2query_deserializeDocumentSecurityGroupReferencesUnwrapped(v *[]*types
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.SecurityGroupReference
 		t := decoder.StartEl
 		_ = t
@@ -70375,7 +70573,8 @@ func awsEc2query_deserializeDocumentServiceConfigurationSetUnwrapped(v *[]*types
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ServiceConfiguration
 		t := decoder.StartEl
 		_ = t
@@ -70600,7 +70799,8 @@ func awsEc2query_deserializeDocumentServiceDetailSetUnwrapped(v *[]*types.Servic
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ServiceDetail
 		t := decoder.StartEl
 		_ = t
@@ -70701,7 +70901,8 @@ func awsEc2query_deserializeDocumentServiceTypeDetailSetUnwrapped(v *[]*types.Se
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ServiceTypeDetail
 		t := decoder.StartEl
 		_ = t
@@ -71132,7 +71333,8 @@ func awsEc2query_deserializeDocumentSnapshotDetailListUnwrapped(v *[]*types.Snap
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.SnapshotDetail
 		t := decoder.StartEl
 		_ = t
@@ -71354,7 +71556,8 @@ func awsEc2query_deserializeDocumentSnapshotListUnwrapped(v *[]*types.Snapshot, 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Snapshot
 		t := decoder.StartEl
 		_ = t
@@ -71412,7 +71615,8 @@ func awsEc2query_deserializeDocumentSnapshotSetUnwrapped(v *[]*types.SnapshotInf
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.SnapshotInfo
 		t := decoder.StartEl
 		_ = t
@@ -72432,7 +72636,8 @@ func awsEc2query_deserializeDocumentSpotFleetRequestConfigSetUnwrapped(v *[]*typ
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.SpotFleetRequestConfig
 		t := decoder.StartEl
 		_ = t
@@ -72539,7 +72744,8 @@ func awsEc2query_deserializeDocumentSpotFleetTagSpecificationListUnwrapped(v *[]
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.SpotFleetTagSpecification
 		t := decoder.StartEl
 		_ = t
@@ -72862,7 +73068,8 @@ func awsEc2query_deserializeDocumentSpotInstanceRequestListUnwrapped(v *[]*types
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.SpotInstanceRequest
 		t := decoder.StartEl
 		_ = t
@@ -73352,7 +73559,8 @@ func awsEc2query_deserializeDocumentSpotPriceHistoryListUnwrapped(v *[]*types.Sp
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.SpotPrice
 		t := decoder.StartEl
 		_ = t
@@ -73505,7 +73713,8 @@ func awsEc2query_deserializeDocumentStaleIpPermissionSetUnwrapped(v *[]*types.St
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.StaleIpPermission
 		t := decoder.StartEl
 		_ = t
@@ -73657,7 +73866,8 @@ func awsEc2query_deserializeDocumentStaleSecurityGroupSetUnwrapped(v *[]*types.S
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.StaleSecurityGroup
 		t := decoder.StartEl
 		_ = t
@@ -74116,7 +74326,8 @@ func awsEc2query_deserializeDocumentSubnetAssociationListUnwrapped(v *[]*types.S
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.SubnetAssociation
 		t := decoder.StartEl
 		_ = t
@@ -74292,7 +74503,8 @@ func awsEc2query_deserializeDocumentSubnetIpv6CidrBlockAssociationSetUnwrapped(v
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.SubnetIpv6CidrBlockAssociation
 		t := decoder.StartEl
 		_ = t
@@ -74350,7 +74562,8 @@ func awsEc2query_deserializeDocumentSubnetListUnwrapped(v *[]*types.Subnet, deco
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Subnet
 		t := decoder.StartEl
 		_ = t
@@ -74451,7 +74664,8 @@ func awsEc2query_deserializeDocumentSuccessfulInstanceCreditSpecificationSetUnwr
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.SuccessfulInstanceCreditSpecificationItem
 		t := decoder.StartEl
 		_ = t
@@ -74552,7 +74766,8 @@ func awsEc2query_deserializeDocumentSuccessfulQueuedPurchaseDeletionSetUnwrapped
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.SuccessfulQueuedPurchaseDeletion
 		t := decoder.StartEl
 		_ = t
@@ -74748,7 +74963,8 @@ func awsEc2query_deserializeDocumentTagDescriptionListUnwrapped(v *[]*types.TagD
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TagDescription
 		t := decoder.StartEl
 		_ = t
@@ -74806,7 +75022,8 @@ func awsEc2query_deserializeDocumentTagListUnwrapped(v *[]*types.Tag, decoder sm
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Tag
 		t := decoder.StartEl
 		_ = t
@@ -74913,7 +75130,8 @@ func awsEc2query_deserializeDocumentTagSpecificationListUnwrapped(v *[]*types.Ta
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TagSpecification
 		t := decoder.StartEl
 		_ = t
@@ -75168,7 +75386,8 @@ func awsEc2query_deserializeDocumentTargetGroupsUnwrapped(v *[]*types.TargetGrou
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TargetGroup
 		t := decoder.StartEl
 		_ = t
@@ -75356,7 +75575,8 @@ func awsEc2query_deserializeDocumentTargetNetworkSetUnwrapped(v *[]*types.Target
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TargetNetwork
 		t := decoder.StartEl
 		_ = t
@@ -75456,7 +75676,8 @@ func awsEc2query_deserializeDocumentTargetReservationValueSetUnwrapped(v *[]*typ
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TargetReservationValue
 		t := decoder.StartEl
 		_ = t
@@ -75569,7 +75790,8 @@ func awsEc2query_deserializeDocumentTerminateConnectionStatusSetUnwrapped(v *[]*
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TerminateConnectionStatus
 		t := decoder.StartEl
 		_ = t
@@ -75639,7 +75861,8 @@ func awsEc2query_deserializeDocumentThreadsPerCoreListUnwrapped(v *[]*int32, dec
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *int32
 		t := decoder.StartEl
 		_ = t
@@ -75955,7 +76178,8 @@ func awsEc2query_deserializeDocumentTrafficMirrorFilterRuleListUnwrapped(v *[]*t
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TrafficMirrorFilterRule
 		t := decoder.StartEl
 		_ = t
@@ -76013,7 +76237,8 @@ func awsEc2query_deserializeDocumentTrafficMirrorFilterSetUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TrafficMirrorFilter
 		t := decoder.StartEl
 		_ = t
@@ -76079,7 +76304,8 @@ func awsEc2query_deserializeDocumentTrafficMirrorNetworkServiceListUnwrapped(v *
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv types.TrafficMirrorNetworkService
 		t := decoder.StartEl
 		_ = t
@@ -76373,7 +76599,8 @@ func awsEc2query_deserializeDocumentTrafficMirrorSessionSetUnwrapped(v *[]*types
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TrafficMirrorSession
 		t := decoder.StartEl
 		_ = t
@@ -76545,7 +76772,8 @@ func awsEc2query_deserializeDocumentTrafficMirrorTargetSetUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TrafficMirrorTarget
 		t := decoder.StartEl
 		_ = t
@@ -77028,7 +77256,8 @@ func awsEc2query_deserializeDocumentTransitGatewayAttachmentListUnwrapped(v *[]*
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TransitGatewayAttachment
 		t := decoder.StartEl
 		_ = t
@@ -77142,7 +77371,8 @@ func awsEc2query_deserializeDocumentTransitGatewayAttachmentPropagationListUnwra
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TransitGatewayAttachmentPropagation
 		t := decoder.StartEl
 		_ = t
@@ -77200,7 +77430,8 @@ func awsEc2query_deserializeDocumentTransitGatewayListUnwrapped(v *[]*types.Tran
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TransitGateway
 		t := decoder.StartEl
 		_ = t
@@ -77549,7 +77780,8 @@ func awsEc2query_deserializeDocumentTransitGatewayMulticastDomainAssociationList
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TransitGatewayMulticastDomainAssociation
 		t := decoder.StartEl
 		_ = t
@@ -77695,7 +77927,8 @@ func awsEc2query_deserializeDocumentTransitGatewayMulticastDomainListUnwrapped(v
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TransitGatewayMulticastDomain
 		t := decoder.StartEl
 		_ = t
@@ -77919,7 +78152,8 @@ func awsEc2query_deserializeDocumentTransitGatewayMulticastGroupListUnwrapped(v 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TransitGatewayMulticastGroup
 		t := decoder.StartEl
 		_ = t
@@ -78349,7 +78583,8 @@ func awsEc2query_deserializeDocumentTransitGatewayPeeringAttachmentListUnwrapped
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TransitGatewayPeeringAttachment
 		t := decoder.StartEl
 		_ = t
@@ -78646,7 +78881,8 @@ func awsEc2query_deserializeDocumentTransitGatewayRouteAttachmentListUnwrapped(v
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TransitGatewayRouteAttachment
 		t := decoder.StartEl
 		_ = t
@@ -78704,7 +78940,8 @@ func awsEc2query_deserializeDocumentTransitGatewayRouteListUnwrapped(v *[]*types
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TransitGatewayRoute
 		t := decoder.StartEl
 		_ = t
@@ -78968,7 +79205,8 @@ func awsEc2query_deserializeDocumentTransitGatewayRouteTableAssociationListUnwra
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TransitGatewayRouteTableAssociation
 		t := decoder.StartEl
 		_ = t
@@ -79026,7 +79264,8 @@ func awsEc2query_deserializeDocumentTransitGatewayRouteTableListUnwrapped(v *[]*
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TransitGatewayRouteTable
 		t := decoder.StartEl
 		_ = t
@@ -79166,7 +79405,8 @@ func awsEc2query_deserializeDocumentTransitGatewayRouteTablePropagationListUnwra
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TransitGatewayRouteTablePropagation
 		t := decoder.StartEl
 		_ = t
@@ -79354,7 +79594,8 @@ func awsEc2query_deserializeDocumentTransitGatewayVpcAttachmentListUnwrapped(v *
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TransitGatewayVpcAttachment
 		t := decoder.StartEl
 		_ = t
@@ -79681,7 +79922,8 @@ func awsEc2query_deserializeDocumentTunnelOptionsListUnwrapped(v *[]*types.Tunne
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TunnelOption
 		t := decoder.StartEl
 		_ = t
@@ -79844,7 +80086,8 @@ func awsEc2query_deserializeDocumentUnsuccessfulInstanceCreditSpecificationSetUn
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.UnsuccessfulInstanceCreditSpecificationItem
 		t := decoder.StartEl
 		_ = t
@@ -80007,7 +80250,8 @@ func awsEc2query_deserializeDocumentUnsuccessfulItemListUnwrapped(v *[]*types.Un
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.UnsuccessfulItem
 		t := decoder.StartEl
 		_ = t
@@ -80065,7 +80309,8 @@ func awsEc2query_deserializeDocumentUnsuccessfulItemSetUnwrapped(v *[]*types.Uns
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.UnsuccessfulItem
 		t := decoder.StartEl
 		_ = t
@@ -80131,7 +80376,8 @@ func awsEc2query_deserializeDocumentUsageClassTypeListUnwrapped(v *[]types.Usage
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv types.UsageClassType
 		t := decoder.StartEl
 		_ = t
@@ -80373,7 +80619,8 @@ func awsEc2query_deserializeDocumentUserIdGroupPairListUnwrapped(v *[]*types.Use
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.UserIdGroupPair
 		t := decoder.StartEl
 		_ = t
@@ -80431,7 +80678,8 @@ func awsEc2query_deserializeDocumentUserIdGroupPairSetUnwrapped(v *[]*types.User
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.UserIdGroupPair
 		t := decoder.StartEl
 		_ = t
@@ -80589,7 +80837,8 @@ func awsEc2query_deserializeDocumentValueStringListUnwrapped(v *[]*string, decod
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -80863,7 +81112,8 @@ func awsEc2query_deserializeDocumentVgwTelemetryListUnwrapped(v *[]*types.VgwTel
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.VgwTelemetry
 		t := decoder.StartEl
 		_ = t
@@ -80929,7 +81179,8 @@ func awsEc2query_deserializeDocumentVirtualizationTypeListUnwrapped(v *[]types.V
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv types.VirtualizationType
 		t := decoder.StartEl
 		_ = t
@@ -81341,7 +81592,8 @@ func awsEc2query_deserializeDocumentVolumeAttachmentListUnwrapped(v *[]*types.Vo
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.VolumeAttachment
 		t := decoder.StartEl
 		_ = t
@@ -81399,7 +81651,8 @@ func awsEc2query_deserializeDocumentVolumeListUnwrapped(v *[]*types.Volume, deco
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Volume
 		t := decoder.StartEl
 		_ = t
@@ -81671,7 +81924,8 @@ func awsEc2query_deserializeDocumentVolumeModificationListUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.VolumeModification
 		t := decoder.StartEl
 		_ = t
@@ -81811,7 +82065,8 @@ func awsEc2query_deserializeDocumentVolumeStatusActionsListUnwrapped(v *[]*types
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.VolumeStatusAction
 		t := decoder.StartEl
 		_ = t
@@ -81925,7 +82180,8 @@ func awsEc2query_deserializeDocumentVolumeStatusAttachmentStatusListUnwrapped(v 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.VolumeStatusAttachmentStatus
 		t := decoder.StartEl
 		_ = t
@@ -82039,7 +82295,8 @@ func awsEc2query_deserializeDocumentVolumeStatusDetailsListUnwrapped(v *[]*types
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.VolumeStatusDetails
 		t := decoder.StartEl
 		_ = t
@@ -82213,7 +82470,8 @@ func awsEc2query_deserializeDocumentVolumeStatusEventsListUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.VolumeStatusEvent
 		t := decoder.StartEl
 		_ = t
@@ -82413,7 +82671,8 @@ func awsEc2query_deserializeDocumentVolumeStatusListUnwrapped(v *[]*types.Volume
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.VolumeStatusItem
 		t := decoder.StartEl
 		_ = t
@@ -82669,7 +82928,8 @@ func awsEc2query_deserializeDocumentVpcAttachmentListUnwrapped(v *[]*types.VpcAt
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.VpcAttachment
 		t := decoder.StartEl
 		_ = t
@@ -82789,7 +83049,8 @@ func awsEc2query_deserializeDocumentVpcCidrBlockAssociationSetUnwrapped(v *[]*ty
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.VpcCidrBlockAssociation
 		t := decoder.StartEl
 		_ = t
@@ -82968,7 +83229,8 @@ func awsEc2query_deserializeDocumentVpcClassicLinkListUnwrapped(v *[]*types.VpcC
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.VpcClassicLink
 		t := decoder.StartEl
 		_ = t
@@ -83349,7 +83611,8 @@ func awsEc2query_deserializeDocumentVpcEndpointConnectionSetUnwrapped(v *[]*type
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.VpcEndpointConnection
 		t := decoder.StartEl
 		_ = t
@@ -83407,7 +83670,8 @@ func awsEc2query_deserializeDocumentVpcEndpointSetUnwrapped(v *[]*types.VpcEndpo
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.VpcEndpoint
 		t := decoder.StartEl
 		_ = t
@@ -83553,7 +83817,8 @@ func awsEc2query_deserializeDocumentVpcIpv6CidrBlockAssociationSetUnwrapped(v *[
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.VpcIpv6CidrBlockAssociation
 		t := decoder.StartEl
 		_ = t
@@ -83611,7 +83876,8 @@ func awsEc2query_deserializeDocumentVpcListUnwrapped(v *[]*types.Vpc, decoder sm
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Vpc
 		t := decoder.StartEl
 		_ = t
@@ -83753,7 +84019,8 @@ func awsEc2query_deserializeDocumentVpcPeeringConnectionListUnwrapped(v *[]*type
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.VpcPeeringConnection
 		t := decoder.StartEl
 		_ = t
@@ -84203,7 +84470,8 @@ func awsEc2query_deserializeDocumentVpnConnectionListUnwrapped(v *[]*types.VpnCo
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.VpnConnection
 		t := decoder.StartEl
 		_ = t
@@ -84440,7 +84708,8 @@ func awsEc2query_deserializeDocumentVpnGatewayListUnwrapped(v *[]*types.VpnGatew
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.VpnGateway
 		t := decoder.StartEl
 		_ = t
@@ -84567,7 +84836,8 @@ func awsEc2query_deserializeDocumentVpnStaticRouteListUnwrapped(v *[]*types.VpnS
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.VpnStaticRoute
 		t := decoder.StartEl
 		_ = t

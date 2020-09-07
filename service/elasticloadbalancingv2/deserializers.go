@@ -4640,7 +4640,8 @@ func awsAwsquery_deserializeDocumentActionsUnwrapped(v *[]*types.Action, decoder
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Action
 		t := decoder.StartEl
 		_ = t
@@ -4749,7 +4750,8 @@ func awsAwsquery_deserializeDocumentAlpnPolicyNameUnwrapped(v *[]*string, decode
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -5447,7 +5449,8 @@ func awsAwsquery_deserializeDocumentAvailabilityZonesUnwrapped(v *[]*types.Avail
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.AvailabilityZone
 		t := decoder.StartEl
 		_ = t
@@ -5564,7 +5567,8 @@ func awsAwsquery_deserializeDocumentCertificateListUnwrapped(v *[]*types.Certifi
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Certificate
 		t := decoder.StartEl
 		_ = t
@@ -5725,7 +5729,8 @@ func awsAwsquery_deserializeDocumentCiphersUnwrapped(v *[]*types.Cipher, decoder
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Cipher
 		t := decoder.StartEl
 		_ = t
@@ -6587,7 +6592,8 @@ func awsAwsquery_deserializeDocumentLimitsUnwrapped(v *[]*types.Limit, decoder s
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Limit
 		t := decoder.StartEl
 		_ = t
@@ -6805,7 +6811,8 @@ func awsAwsquery_deserializeDocumentListenersUnwrapped(v *[]*types.Listener, dec
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Listener
 		t := decoder.StartEl
 		_ = t
@@ -6871,7 +6878,8 @@ func awsAwsquery_deserializeDocumentListOfStringUnwrapped(v *[]*string, decoder 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -7174,7 +7182,8 @@ func awsAwsquery_deserializeDocumentLoadBalancerAddressesUnwrapped(v *[]*types.L
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.LoadBalancerAddress
 		t := decoder.StartEl
 		_ = t
@@ -7240,7 +7249,8 @@ func awsAwsquery_deserializeDocumentLoadBalancerArnsUnwrapped(v *[]*string, deco
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -7361,7 +7371,8 @@ func awsAwsquery_deserializeDocumentLoadBalancerAttributesUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.LoadBalancerAttribute
 		t := decoder.StartEl
 		_ = t
@@ -7462,7 +7473,8 @@ func awsAwsquery_deserializeDocumentLoadBalancersUnwrapped(v *[]*types.LoadBalan
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.LoadBalancer
 		t := decoder.StartEl
 		_ = t
@@ -7833,7 +7845,8 @@ func awsAwsquery_deserializeDocumentQueryStringKeyValuePairListUnwrapped(v *[]*t
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.QueryStringKeyValuePair
 		t := decoder.StartEl
 		_ = t
@@ -8211,7 +8224,8 @@ func awsAwsquery_deserializeDocumentRuleConditionListUnwrapped(v *[]*types.RuleC
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.RuleCondition
 		t := decoder.StartEl
 		_ = t
@@ -8312,7 +8326,8 @@ func awsAwsquery_deserializeDocumentRulesUnwrapped(v *[]*types.Rule, decoder smi
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Rule
 		t := decoder.StartEl
 		_ = t
@@ -8378,7 +8393,8 @@ func awsAwsquery_deserializeDocumentSecurityGroupsUnwrapped(v *[]*string, decode
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -8479,7 +8495,8 @@ func awsAwsquery_deserializeDocumentSslPoliciesUnwrapped(v *[]*types.SslPolicy, 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.SslPolicy
 		t := decoder.StartEl
 		_ = t
@@ -8643,7 +8660,8 @@ func awsAwsquery_deserializeDocumentSslProtocolsUnwrapped(v *[]*string, decoder 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -8856,7 +8874,8 @@ func awsAwsquery_deserializeDocumentTagDescriptionsUnwrapped(v *[]*types.TagDesc
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TagDescription
 		t := decoder.StartEl
 		_ = t
@@ -8914,7 +8933,8 @@ func awsAwsquery_deserializeDocumentTagListUnwrapped(v *[]*types.Tag, decoder sm
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Tag
 		t := decoder.StartEl
 		_ = t
@@ -9391,7 +9411,8 @@ func awsAwsquery_deserializeDocumentTargetGroupAttributesUnwrapped(v *[]*types.T
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TargetGroupAttribute
 		t := decoder.StartEl
 		_ = t
@@ -9449,7 +9470,8 @@ func awsAwsquery_deserializeDocumentTargetGroupListUnwrapped(v *[]*types.TargetG
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TargetGroupTuple
 		t := decoder.StartEl
 		_ = t
@@ -9550,7 +9572,8 @@ func awsAwsquery_deserializeDocumentTargetGroupsUnwrapped(v *[]*types.TargetGrou
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TargetGroup
 		t := decoder.StartEl
 		_ = t
@@ -9855,7 +9878,8 @@ func awsAwsquery_deserializeDocumentTargetHealthDescriptionsUnwrapped(v *[]*type
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TargetHealthDescription
 		t := decoder.StartEl
 		_ = t

@@ -13980,7 +13980,8 @@ func awsAwsquery_deserializeDocumentAccessDetailsUnwrapped(v *[]*types.AccessDet
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.AccessDetail
 		t := decoder.StartEl
 		_ = t
@@ -14296,7 +14297,8 @@ func awsAwsquery_deserializeDocumentAccessKeyMetadataListTypeUnwrapped(v *[]*typ
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.AccessKeyMetadata
 		t := decoder.StartEl
 		_ = t
@@ -14362,7 +14364,8 @@ func awsAwsquery_deserializeDocumentAccountAliasListTypeUnwrapped(v *[]*string, 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -14435,7 +14438,8 @@ func awsAwsquery_deserializeDocumentArnListTypeUnwrapped(v *[]*string, decoder s
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -14556,7 +14560,8 @@ func awsAwsquery_deserializeDocumentAttachedPoliciesListTypeUnwrapped(v *[]*type
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.AttachedPolicy
 		t := decoder.StartEl
 		_ = t
@@ -14670,7 +14675,8 @@ func awsAwsquery_deserializeDocumentCertificateListTypeUnwrapped(v *[]*types.Sig
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.SigningCertificate
 		t := decoder.StartEl
 		_ = t
@@ -14736,7 +14742,8 @@ func awsAwsquery_deserializeDocumentClientIDListTypeUnwrapped(v *[]*string, deco
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -14852,7 +14859,8 @@ func awsAwsquery_deserializeDocumentContextKeyNamesResultListTypeUnwrapped(v *[]
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -15320,7 +15328,8 @@ func awsAwsquery_deserializeDocumentEntityDetailsListTypeUnwrapped(v *[]*types.E
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.EntityDetails
 		t := decoder.StartEl
 		_ = t
@@ -15761,7 +15770,8 @@ func awsAwsquery_deserializeDocumentEvaluationResultsListTypeUnwrapped(v *[]*typ
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.EvaluationResult
 		t := decoder.StartEl
 		_ = t
@@ -16029,7 +16039,8 @@ func awsAwsquery_deserializeDocumentGroupDetailListTypeUnwrapped(v *[]*types.Gro
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.GroupDetail
 		t := decoder.StartEl
 		_ = t
@@ -16087,7 +16098,8 @@ func awsAwsquery_deserializeDocumentGroupListTypeUnwrapped(v *[]*types.Group, de
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Group
 		t := decoder.StartEl
 		_ = t
@@ -16153,7 +16165,8 @@ func awsAwsquery_deserializeDocumentGroupNameListTypeUnwrapped(v *[]*string, dec
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -16323,7 +16336,8 @@ func awsAwsquery_deserializeDocumentInstanceProfileListTypeUnwrapped(v *[]*types
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.InstanceProfile
 		t := decoder.StartEl
 		_ = t
@@ -16731,7 +16745,8 @@ func awsAwsquery_deserializeDocumentListPolicyGrantingServiceAccessResponseListT
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ListPoliciesGrantingServiceAccessEntry
 		t := decoder.StartEl
 		_ = t
@@ -17149,7 +17164,8 @@ func awsAwsquery_deserializeDocumentManagedPolicyDetailListTypeUnwrapped(v *[]*t
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ManagedPolicyDetail
 		t := decoder.StartEl
 		_ = t
@@ -17280,7 +17296,8 @@ func awsAwsquery_deserializeDocumentMfaDeviceListTypeUnwrapped(v *[]*types.MFADe
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.MFADevice
 		t := decoder.StartEl
 		_ = t
@@ -17424,7 +17441,8 @@ func awsAwsquery_deserializeDocumentOpenIDConnectProviderListTypeUnwrapped(v *[]
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.OpenIDConnectProviderListEntry
 		t := decoder.StartEl
 		_ = t
@@ -18058,7 +18076,8 @@ func awsAwsquery_deserializeDocumentPolicyDetailListTypeUnwrapped(v *[]*types.Po
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.PolicyDetail
 		t := decoder.StartEl
 		_ = t
@@ -18116,7 +18135,8 @@ func awsAwsquery_deserializeDocumentPolicyDocumentVersionListTypeUnwrapped(v *[]
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.PolicyVersion
 		t := decoder.StartEl
 		_ = t
@@ -18312,7 +18332,8 @@ func awsAwsquery_deserializeDocumentPolicyGrantingServiceAccessListTypeUnwrapped
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.PolicyGrantingServiceAccess
 		t := decoder.StartEl
 		_ = t
@@ -18426,7 +18447,8 @@ func awsAwsquery_deserializeDocumentPolicyGroupListTypeUnwrapped(v *[]*types.Pol
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.PolicyGroup
 		t := decoder.StartEl
 		_ = t
@@ -18484,7 +18506,8 @@ func awsAwsquery_deserializeDocumentPolicyListTypeUnwrapped(v *[]*types.Policy, 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Policy
 		t := decoder.StartEl
 		_ = t
@@ -18550,7 +18573,8 @@ func awsAwsquery_deserializeDocumentPolicyNameListTypeUnwrapped(v *[]*string, de
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -18714,7 +18738,8 @@ func awsAwsquery_deserializeDocumentPolicyRoleListTypeUnwrapped(v *[]*types.Poli
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.PolicyRole
 		t := decoder.StartEl
 		_ = t
@@ -18828,7 +18853,8 @@ func awsAwsquery_deserializeDocumentPolicyUserListTypeUnwrapped(v *[]*types.Poli
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.PolicyUser
 		t := decoder.StartEl
 		_ = t
@@ -19162,7 +19188,8 @@ func awsAwsquery_deserializeDocumentResourceSpecificResultListTypeUnwrapped(v *[
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ResourceSpecificResult
 		t := decoder.StartEl
 		_ = t
@@ -19528,7 +19555,8 @@ func awsAwsquery_deserializeDocumentRoleDetailListTypeUnwrapped(v *[]*types.Role
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.RoleDetail
 		t := decoder.StartEl
 		_ = t
@@ -19646,7 +19674,8 @@ func awsAwsquery_deserializeDocumentRoleListTypeUnwrapped(v *[]*types.Role, deco
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Role
 		t := decoder.StartEl
 		_ = t
@@ -19704,7 +19733,8 @@ func awsAwsquery_deserializeDocumentRoleUsageListTypeUnwrapped(v *[]*types.RoleU
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.RoleUsageType
 		t := decoder.StartEl
 		_ = t
@@ -19888,7 +19918,8 @@ func awsAwsquery_deserializeDocumentSAMLProviderListTypeUnwrapped(v *[]*types.SA
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.SAMLProviderListEntry
 		t := decoder.StartEl
 		_ = t
@@ -20124,7 +20155,8 @@ func awsAwsquery_deserializeDocumentServerCertificateMetadataListTypeUnwrapped(v
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ServerCertificateMetadata
 		t := decoder.StartEl
 		_ = t
@@ -20390,7 +20422,8 @@ func awsAwsquery_deserializeDocumentServicesLastAccessedUnwrapped(v *[]*types.Se
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ServiceLastAccessed
 		t := decoder.StartEl
 		_ = t
@@ -20685,7 +20718,8 @@ func awsAwsquery_deserializeDocumentServiceSpecificCredentialsListTypeUnwrapped(
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ServiceSpecificCredentialMetadata
 		t := decoder.StartEl
 		_ = t
@@ -20954,7 +20988,8 @@ func awsAwsquery_deserializeDocumentSSHPublicKeyListTypeUnwrapped(v *[]*types.SS
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.SSHPublicKeyMetadata
 		t := decoder.StartEl
 		_ = t
@@ -21166,7 +21201,8 @@ func awsAwsquery_deserializeDocumentStatementListTypeUnwrapped(v *[]*types.State
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Statement
 		t := decoder.StartEl
 		_ = t
@@ -21225,7 +21261,7 @@ func awsAwsquery_deserializeDocumentSummaryMapTypeUnwrapped(v *map[string]*int32
 			return err
 		}
 		if done {
-			sv[*ek] = ev
+			sv[string(ek)] = ev
 			break
 		}
 		switch {
@@ -21368,7 +21404,8 @@ func awsAwsquery_deserializeDocumentTagListTypeUnwrapped(v *[]*types.Tag, decode
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Tag
 		t := decoder.StartEl
 		_ = t
@@ -21434,7 +21471,8 @@ func awsAwsquery_deserializeDocumentThumbprintListTypeUnwrapped(v *[]*string, de
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -21585,7 +21623,8 @@ func awsAwsquery_deserializeDocumentTrackedActionsLastAccessedUnwrapped(v *[]*ty
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TrackedActionLastAccessed
 		t := decoder.StartEl
 		_ = t
@@ -21986,7 +22025,8 @@ func awsAwsquery_deserializeDocumentUserDetailListTypeUnwrapped(v *[]*types.User
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.UserDetail
 		t := decoder.StartEl
 		_ = t
@@ -22044,7 +22084,8 @@ func awsAwsquery_deserializeDocumentUserListTypeUnwrapped(v *[]*types.User, deco
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.User
 		t := decoder.StartEl
 		_ = t
@@ -22190,7 +22231,8 @@ func awsAwsquery_deserializeDocumentVirtualMFADeviceListTypeUnwrapped(v *[]*type
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.VirtualMFADevice
 		t := decoder.StartEl
 		_ = t

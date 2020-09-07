@@ -7628,7 +7628,8 @@ func awsAwsquery_deserializeDocumentAvailabilityZonesListUnwrapped(v *[]*string,
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -8096,7 +8097,8 @@ func awsAwsquery_deserializeDocumentCacheClusterListUnwrapped(v *[]*types.CacheC
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CacheCluster
 		t := decoder.StartEl
 		_ = t
@@ -8292,7 +8294,8 @@ func awsAwsquery_deserializeDocumentCacheEngineVersionListUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CacheEngineVersion
 		t := decoder.StartEl
 		_ = t
@@ -8476,7 +8479,8 @@ func awsAwsquery_deserializeDocumentCacheNodeIdsListUnwrapped(v *[]*string, deco
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -8541,7 +8545,8 @@ func awsAwsquery_deserializeDocumentCacheNodeListUnwrapped(v *[]*types.CacheNode
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CacheNode
 		t := decoder.StartEl
 		_ = t
@@ -8742,7 +8747,8 @@ func awsAwsquery_deserializeDocumentCacheNodeTypeSpecificParametersListUnwrapped
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CacheNodeTypeSpecificParameter
 		t := decoder.StartEl
 		_ = t
@@ -8856,7 +8862,8 @@ func awsAwsquery_deserializeDocumentCacheNodeTypeSpecificValueListUnwrapped(v *[
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CacheNodeTypeSpecificValue
 		t := decoder.StartEl
 		_ = t
@@ -9068,7 +9075,8 @@ func awsAwsquery_deserializeDocumentCacheNodeUpdateStatusListUnwrapped(v *[]*typ
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CacheNodeUpdateStatus
 		t := decoder.StartEl
 		_ = t
@@ -9267,7 +9275,8 @@ func awsAwsquery_deserializeDocumentCacheParameterGroupListUnwrapped(v *[]*types
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CacheParameterGroup
 		t := decoder.StartEl
 		_ = t
@@ -9660,7 +9669,8 @@ func awsAwsquery_deserializeDocumentCacheSecurityGroupMembershipListUnwrapped(v 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CacheSecurityGroupMembership
 		t := decoder.StartEl
 		_ = t
@@ -9804,7 +9814,8 @@ func awsAwsquery_deserializeDocumentCacheSecurityGroupsUnwrapped(v *[]*types.Cac
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CacheSecurityGroup
 		t := decoder.StartEl
 		_ = t
@@ -10122,7 +10133,8 @@ func awsAwsquery_deserializeDocumentCacheSubnetGroupsUnwrapped(v *[]*types.Cache
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CacheSubnetGroup
 		t := decoder.StartEl
 		_ = t
@@ -10231,7 +10243,8 @@ func awsAwsquery_deserializeDocumentClusterIdListUnwrapped(v *[]*string, decoder
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -10408,7 +10421,8 @@ func awsAwsquery_deserializeDocumentEC2SecurityGroupListUnwrapped(v *[]*types.EC
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.EC2SecurityGroup
 		t := decoder.StartEl
 		_ = t
@@ -10680,7 +10694,8 @@ func awsAwsquery_deserializeDocumentEventListUnwrapped(v *[]*types.Event, decode
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Event
 		t := decoder.StartEl
 		_ = t
@@ -10794,7 +10809,8 @@ func awsAwsquery_deserializeDocumentGlobalNodeGroupListUnwrapped(v *[]*types.Glo
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.GlobalNodeGroup
 		t := decoder.StartEl
 		_ = t
@@ -11148,7 +11164,8 @@ func awsAwsquery_deserializeDocumentGlobalReplicationGroupListUnwrapped(v *[]*ty
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.GlobalReplicationGroup
 		t := decoder.StartEl
 		_ = t
@@ -11301,7 +11318,8 @@ func awsAwsquery_deserializeDocumentGlobalReplicationGroupMemberListUnwrapped(v 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.GlobalReplicationGroupMember
 		t := decoder.StartEl
 		_ = t
@@ -12140,7 +12158,8 @@ func awsAwsquery_deserializeDocumentNodeGroupListUnwrapped(v *[]*types.NodeGroup
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.NodeGroup
 		t := decoder.StartEl
 		_ = t
@@ -12286,7 +12305,8 @@ func awsAwsquery_deserializeDocumentNodeGroupMemberListUnwrapped(v *[]*types.Nod
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.NodeGroupMember
 		t := decoder.StartEl
 		_ = t
@@ -12511,7 +12531,8 @@ func awsAwsquery_deserializeDocumentNodeGroupMemberUpdateStatusListUnwrapped(v *
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.NodeGroupMemberUpdateStatus
 		t := decoder.StartEl
 		_ = t
@@ -12704,7 +12725,8 @@ func awsAwsquery_deserializeDocumentNodeGroupUpdateStatusListUnwrapped(v *[]*typ
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.NodeGroupUpdateStatus
 		t := decoder.StartEl
 		_ = t
@@ -12970,7 +12992,8 @@ func awsAwsquery_deserializeDocumentNodeSnapshotListUnwrapped(v *[]*types.NodeSn
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.NodeSnapshot
 		t := decoder.StartEl
 		_ = t
@@ -13036,7 +13059,8 @@ func awsAwsquery_deserializeDocumentNodeTypeListUnwrapped(v *[]*string, decoder 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -13350,7 +13374,8 @@ func awsAwsquery_deserializeDocumentParametersListUnwrapped(v *[]*types.Paramete
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Parameter
 		t := decoder.StartEl
 		_ = t
@@ -13582,7 +13607,8 @@ func awsAwsquery_deserializeDocumentProcessedUpdateActionListUnwrapped(v *[]*typ
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ProcessedUpdateAction
 		t := decoder.StartEl
 		_ = t
@@ -13700,7 +13726,8 @@ func awsAwsquery_deserializeDocumentRecurringChargeListUnwrapped(v *[]*types.Rec
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.RecurringCharge
 		t := decoder.StartEl
 		_ = t
@@ -14132,7 +14159,8 @@ func awsAwsquery_deserializeDocumentReplicationGroupListUnwrapped(v *[]*types.Re
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ReplicationGroup
 		t := decoder.StartEl
 		_ = t
@@ -14606,7 +14634,8 @@ func awsAwsquery_deserializeDocumentReservedCacheNodeListUnwrapped(v *[]*types.R
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ReservedCacheNode
 		t := decoder.StartEl
 		_ = t
@@ -14889,7 +14918,8 @@ func awsAwsquery_deserializeDocumentReservedCacheNodesOfferingListUnwrapped(v *[
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ReservedCacheNodesOffering
 		t := decoder.StartEl
 		_ = t
@@ -15082,7 +15112,8 @@ func awsAwsquery_deserializeDocumentSecurityGroupMembershipListUnwrapped(v *[]*t
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.SecurityGroupMembership
 		t := decoder.StartEl
 		_ = t
@@ -15384,7 +15415,8 @@ func awsAwsquery_deserializeDocumentServiceUpdateListUnwrapped(v *[]*types.Servi
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ServiceUpdate
 		t := decoder.StartEl
 		_ = t
@@ -16002,7 +16034,8 @@ func awsAwsquery_deserializeDocumentSnapshotListUnwrapped(v *[]*types.Snapshot, 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Snapshot
 		t := decoder.StartEl
 		_ = t
@@ -16238,7 +16271,8 @@ func awsAwsquery_deserializeDocumentSubnetListUnwrapped(v *[]*types.Subnet, deco
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Subnet
 		t := decoder.StartEl
 		_ = t
@@ -16352,7 +16386,8 @@ func awsAwsquery_deserializeDocumentTagListUnwrapped(v *[]*types.Tag, decoder sm
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Tag
 		t := decoder.StartEl
 		_ = t
@@ -16634,7 +16669,8 @@ func awsAwsquery_deserializeDocumentUnprocessedUpdateActionListUnwrapped(v *[]*t
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.UnprocessedUpdateAction
 		t := decoder.StartEl
 		_ = t
@@ -16945,7 +16981,8 @@ func awsAwsquery_deserializeDocumentUpdateActionListUnwrapped(v *[]*types.Update
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.UpdateAction
 		t := decoder.StartEl
 		_ = t

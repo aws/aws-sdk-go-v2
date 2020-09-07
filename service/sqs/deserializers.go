@@ -2039,7 +2039,8 @@ func awsAwsquery_deserializeDocumentBatchResultErrorEntryListUnwrapped(v *[]*typ
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.BatchResultErrorEntry
 		t := decoder.StartEl
 		_ = t
@@ -2103,7 +2104,8 @@ func awsAwsquery_deserializeDocumentBinaryListUnwrapped(v *[][]byte, decoder smi
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv []byte
 		t := decoder.StartEl
 		_ = t
@@ -2209,7 +2211,8 @@ func awsAwsquery_deserializeDocumentChangeMessageVisibilityBatchResultEntryListU
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ChangeMessageVisibilityBatchResultEntry
 		t := decoder.StartEl
 		_ = t
@@ -2310,7 +2313,8 @@ func awsAwsquery_deserializeDocumentDeleteMessageBatchResultEntryListUnwrapped(v
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.DeleteMessageBatchResultEntry
 		t := decoder.StartEl
 		_ = t
@@ -2781,7 +2785,8 @@ func awsAwsquery_deserializeDocumentMessageListUnwrapped(v *[]*types.Message, de
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Message
 		t := decoder.StartEl
 		_ = t
@@ -2870,7 +2875,7 @@ func awsAwsquery_deserializeDocumentMessageSystemAttributeMapUnwrapped(v *map[st
 			return err
 		}
 		if done {
-			sv[*ek] = ev
+			sv[string(ek)] = ev
 			break
 		}
 		switch {
@@ -3014,7 +3019,7 @@ func awsAwsquery_deserializeDocumentQueueAttributeMapUnwrapped(v *map[string]*st
 			return err
 		}
 		if done {
-			sv[*ek] = ev
+			sv[string(ek)] = ev
 			break
 		}
 		switch {
@@ -3195,7 +3200,8 @@ func awsAwsquery_deserializeDocumentQueueUrlListUnwrapped(v *[]*string, decoder 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -3398,7 +3404,8 @@ func awsAwsquery_deserializeDocumentSendMessageBatchResultEntryListUnwrapped(v *
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.SendMessageBatchResultEntry
 		t := decoder.StartEl
 		_ = t
@@ -3464,7 +3471,8 @@ func awsAwsquery_deserializeDocumentStringListUnwrapped(v *[]*string, decoder sm
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t

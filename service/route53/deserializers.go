@@ -9932,7 +9932,8 @@ func awsRestxml_deserializeDocumentCheckerIpRangesUnwrapped(v *[]*string, decode
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -10005,7 +10006,8 @@ func awsRestxml_deserializeDocumentChildHealthCheckListUnwrapped(v *[]*string, d
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -10537,7 +10539,8 @@ func awsRestxml_deserializeDocumentDelegationSetNameServersUnwrapped(v *[]*strin
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -10688,7 +10691,8 @@ func awsRestxml_deserializeDocumentDelegationSetsUnwrapped(v *[]*types.Delegatio
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.DelegationSet
 		t := decoder.StartEl
 		_ = t
@@ -10802,7 +10806,8 @@ func awsRestxml_deserializeDocumentDimensionListUnwrapped(v *[]*types.Dimension,
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Dimension
 		t := decoder.StartEl
 		_ = t
@@ -10868,7 +10873,8 @@ func awsRestxml_deserializeDocumentErrorMessagesUnwrapped(v *[]*string, decoder 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -11110,7 +11116,8 @@ func awsRestxml_deserializeDocumentGeoLocationDetailsListUnwrapped(v *[]*types.G
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.GeoLocationDetails
 		t := decoder.StartEl
 		_ = t
@@ -11665,7 +11672,8 @@ func awsRestxml_deserializeDocumentHealthCheckObservationsUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.HealthCheckObservation
 		t := decoder.StartEl
 		_ = t
@@ -11731,7 +11739,8 @@ func awsRestxml_deserializeDocumentHealthCheckRegionListUnwrapped(v *[]types.Hea
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv types.HealthCheckRegion
 		t := decoder.StartEl
 		_ = t
@@ -11796,7 +11805,8 @@ func awsRestxml_deserializeDocumentHealthChecksUnwrapped(v *[]*types.HealthCheck
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.HealthCheck
 		t := decoder.StartEl
 		_ = t
@@ -12342,7 +12352,8 @@ func awsRestxml_deserializeDocumentHostedZonesUnwrapped(v *[]*types.HostedZone, 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.HostedZone
 		t := decoder.StartEl
 		_ = t
@@ -12400,7 +12411,8 @@ func awsRestxml_deserializeDocumentHostedZoneSummariesUnwrapped(v *[]*types.Host
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.HostedZoneSummary
 		t := decoder.StartEl
 		_ = t
@@ -13683,7 +13695,8 @@ func awsRestxml_deserializeDocumentQueryLoggingConfigsUnwrapped(v *[]*types.Quer
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.QueryLoggingConfig
 		t := decoder.StartEl
 		_ = t
@@ -13749,7 +13762,8 @@ func awsRestxml_deserializeDocumentRecordDataUnwrapped(v *[]*string, decoder smi
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -13857,7 +13871,8 @@ func awsRestxml_deserializeDocumentResourceRecordsUnwrapped(v *[]*types.Resource
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ResourceRecord
 		t := decoder.StartEl
 		_ = t
@@ -14104,7 +14119,8 @@ func awsRestxml_deserializeDocumentResourceRecordSetsUnwrapped(v *[]*types.Resou
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ResourceRecordSet
 		t := decoder.StartEl
 		_ = t
@@ -14224,7 +14240,8 @@ func awsRestxml_deserializeDocumentResourceTagSetListUnwrapped(v *[]*types.Resou
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ResourceTagSet
 		t := decoder.StartEl
 		_ = t
@@ -14458,7 +14475,8 @@ func awsRestxml_deserializeDocumentTagListUnwrapped(v *[]*types.Tag, decoder smi
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Tag
 		t := decoder.StartEl
 		_ = t
@@ -14817,7 +14835,8 @@ func awsRestxml_deserializeDocumentTrafficPoliciesUnwrapped(v *[]*types.TrafficP
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TrafficPolicy
 		t := decoder.StartEl
 		_ = t
@@ -15228,7 +15247,8 @@ func awsRestxml_deserializeDocumentTrafficPolicyInstancesUnwrapped(v *[]*types.T
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TrafficPolicyInstance
 		t := decoder.StartEl
 		_ = t
@@ -15329,7 +15349,8 @@ func awsRestxml_deserializeDocumentTrafficPolicySummariesUnwrapped(v *[]*types.T
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.TrafficPolicySummary
 		t := decoder.StartEl
 		_ = t
@@ -15632,7 +15653,8 @@ func awsRestxml_deserializeDocumentVPCsUnwrapped(v *[]*types.VPC, decoder smithy
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.VPC
 		t := decoder.StartEl
 		_ = t

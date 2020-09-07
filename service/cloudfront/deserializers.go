@@ -11794,7 +11794,8 @@ func awsRestxml_deserializeDocumentAliasICPRecordalsUnwrapped(v *[]*types.AliasI
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.AliasICPRecordal
 		t := decoder.StartEl
 		_ = t
@@ -11860,7 +11861,8 @@ func awsRestxml_deserializeDocumentAliasListUnwrapped(v *[]*string, decoder smit
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -11992,7 +11994,8 @@ func awsRestxml_deserializeDocumentAwsAccountNumberListUnwrapped(v *[]*string, d
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -12315,7 +12318,8 @@ func awsRestxml_deserializeDocumentCacheBehaviorListUnwrapped(v *[]*types.CacheB
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CacheBehavior
 		t := decoder.StartEl
 		_ = t
@@ -13023,7 +13027,8 @@ func awsRestxml_deserializeDocumentCachePolicySummaryListUnwrapped(v *[]*types.C
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CachePolicySummary
 		t := decoder.StartEl
 		_ = t
@@ -13509,7 +13514,8 @@ func awsRestxml_deserializeDocumentCloudFrontOriginAccessIdentitySummaryListUnwr
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CloudFrontOriginAccessIdentitySummary
 		t := decoder.StartEl
 		_ = t
@@ -13731,7 +13737,8 @@ func awsRestxml_deserializeDocumentContentTypeProfileListUnwrapped(v *[]*types.C
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.ContentTypeProfile
 		t := decoder.StartEl
 		_ = t
@@ -13850,7 +13857,8 @@ func awsRestxml_deserializeDocumentCookieNameListUnwrapped(v *[]*string, decoder
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -14107,7 +14115,8 @@ func awsRestxml_deserializeDocumentCustomErrorResponseListUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.CustomErrorResponse
 		t := decoder.StartEl
 		_ = t
@@ -15081,7 +15090,8 @@ func awsRestxml_deserializeDocumentDistributionIdListSummaryUnwrapped(v *[]*stri
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -15538,7 +15548,8 @@ func awsRestxml_deserializeDocumentDistributionSummaryListUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.DistributionSummary
 		t := decoder.StartEl
 		_ = t
@@ -15711,7 +15722,8 @@ func awsRestxml_deserializeDocumentEncryptionEntityListUnwrapped(v *[]*types.Enc
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.EncryptionEntity
 		t := decoder.StartEl
 		_ = t
@@ -16517,7 +16529,8 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionProfileSummaryListUnwrapp
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.FieldLevelEncryptionProfileSummary
 		t := decoder.StartEl
 		_ = t
@@ -16660,7 +16673,8 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionSummaryListUnwrapped(v *[
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.FieldLevelEncryptionSummary
 		t := decoder.StartEl
 		_ = t
@@ -16726,7 +16740,8 @@ func awsRestxml_deserializeDocumentFieldPatternListUnwrapped(v *[]*string, decod
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -16982,7 +16997,8 @@ func awsRestxml_deserializeDocumentHeaderListUnwrapped(v *[]*string, decoder smi
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -17628,7 +17644,8 @@ func awsRestxml_deserializeDocumentInvalidationSummaryListUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.InvalidationSummary
 		t := decoder.StartEl
 		_ = t
@@ -18640,7 +18657,8 @@ func awsRestxml_deserializeDocumentKeyPairIdListUnwrapped(v *[]*string, decoder 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -18830,7 +18848,8 @@ func awsRestxml_deserializeDocumentLambdaFunctionAssociationListUnwrapped(v *[]*
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.LambdaFunctionAssociation
 		t := decoder.StartEl
 		_ = t
@@ -18949,7 +18968,8 @@ func awsRestxml_deserializeDocumentLocationListUnwrapped(v *[]*string, decoder s
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -19110,7 +19130,8 @@ func awsRestxml_deserializeDocumentMethodsListUnwrapped(v *[]types.Method, decod
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv types.Method
 		t := decoder.StartEl
 		_ = t
@@ -19868,7 +19889,8 @@ func awsRestxml_deserializeDocumentOriginCustomHeadersListUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.OriginCustomHeader
 		t := decoder.StartEl
 		_ = t
@@ -20017,7 +20039,8 @@ func awsRestxml_deserializeDocumentOriginGroupListUnwrapped(v *[]*types.OriginGr
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.OriginGroup
 		t := decoder.StartEl
 		_ = t
@@ -20118,7 +20141,8 @@ func awsRestxml_deserializeDocumentOriginGroupMemberListUnwrapped(v *[]*types.Or
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.OriginGroupMember
 		t := decoder.StartEl
 		_ = t
@@ -20282,7 +20306,8 @@ func awsRestxml_deserializeDocumentOriginListUnwrapped(v *[]*types.Origin, decod
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Origin
 		t := decoder.StartEl
 		_ = t
@@ -20845,7 +20870,8 @@ func awsRestxml_deserializeDocumentOriginRequestPolicySummaryListUnwrapped(v *[]
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.OriginRequestPolicySummary
 		t := decoder.StartEl
 		_ = t
@@ -21081,7 +21107,8 @@ func awsRestxml_deserializeDocumentPathListUnwrapped(v *[]*string, decoder smith
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -21658,7 +21685,8 @@ func awsRestxml_deserializeDocumentPublicKeySummaryListUnwrapped(v *[]*types.Pub
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.PublicKeySummary
 		t := decoder.StartEl
 		_ = t
@@ -21867,7 +21895,8 @@ func awsRestxml_deserializeDocumentQueryArgProfileListUnwrapped(v *[]*types.Quer
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.QueryArgProfile
 		t := decoder.StartEl
 		_ = t
@@ -22039,7 +22068,8 @@ func awsRestxml_deserializeDocumentQueryStringCacheKeysListUnwrapped(v *[]*strin
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -22165,7 +22195,8 @@ func awsRestxml_deserializeDocumentQueryStringNamesListUnwrapped(v *[]*string, d
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -22414,7 +22445,8 @@ func awsRestxml_deserializeDocumentSignerListUnwrapped(v *[]*types.Signer, decod
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Signer
 		t := decoder.StartEl
 		_ = t
@@ -22480,7 +22512,8 @@ func awsRestxml_deserializeDocumentSslProtocolsListUnwrapped(v *[]types.SslProto
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv types.SslProtocol
 		t := decoder.StartEl
 		_ = t
@@ -22557,7 +22590,8 @@ func awsRestxml_deserializeDocumentStatusCodeListUnwrapped(v *[]*int32, decoder 
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *int32
 		t := decoder.StartEl
 		_ = t
@@ -23256,7 +23290,8 @@ func awsRestxml_deserializeDocumentStreamingDistributionSummaryListUnwrapped(v *
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.StreamingDistributionSummary
 		t := decoder.StartEl
 		_ = t
@@ -23442,7 +23477,8 @@ func awsRestxml_deserializeDocumentTagListUnwrapped(v *[]*types.Tag, decoder smi
 		sv = *v
 	}
 
-	for {
+	switch {
+	case true:
 		var mv *types.Tag
 		t := decoder.StartEl
 		_ = t
