@@ -25,6 +25,7 @@ import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.SimpleShape;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.shapes.UnionShape;
+import software.amazon.smithy.model.traits.EnumTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 import software.amazon.smithy.model.traits.XmlAttributeTrait;
 import software.amazon.smithy.model.traits.XmlFlattenedTrait;
@@ -243,8 +244,16 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
                 getUnwrappedMapDelegateFunctionName(context, shape), symbol, () -> {
                     // initialize the output member variable
                     generatesIntializerForOutputVariable(context, shape);
-                    writer.write("var ek $P", symbolProvider.toSymbol(shape.getKey()));
-                    writer.write("var ev $P", symbolProvider.toSymbol(shape.getValue()));
+                    MemberShape valueShape = shape.getValue();
+                    MemberShape keyShape = shape.getKey();
+
+                    Symbol keySymbol = context.getSymbolProvider().toSymbol(keyShape);
+                    Symbol valueSymbol = context.getSymbolProvider().toSymbol(valueShape);
+
+                    Shape targetKey = context.getModel().expectShape(keyShape.getTarget());
+
+                    writer.write("var ek $P", keySymbol);
+                    writer.write("var ev $P", valueSymbol);
                     writer.insertTrailingNewline();
 
                     // Iterate through the decoder. The member visitor will handle popping xml tokens
@@ -254,12 +263,15 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
                         writer.write("if err != nil { return err }");
                         writer.openBlock("if done {", "}", () -> {
                             // set the key value pair in map
-                            writer.write("sv[*ek] = ev");
+                            if (keyShape.hasTrait(EnumTrait.class) || targetKey.hasTrait(EnumTrait.class)) {
+                                writer.write("sv[string(ek)] = ev");
+                            } else {
+                                writer.write("sv[*ek] = ev");
+                            }
                             writer.write("break");
                         });
 
                         writer.openBlock("switch {", "}", () -> {
-                            MemberShape keyShape = shape.getKey();
                             writer.addUseImports(SmithyGoDependency.STRINGS);
                             writer.openBlock("case strings.EqualFold($S, t.Name.Local):", "", getSerializedMemberName(keyShape), () -> {
                                 String dest = "ek";
@@ -267,7 +279,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
                                         getMemberDeserVisitor(keyShape, dest, false));
                             });
 
-                            MemberShape valueShape = shape.getValue();
+//                            MemberShape valueShape = shape.getValue();
                             writer.openBlock("case strings.EqualFold($S, t.Name.Local):", "", getSerializedMemberName(valueShape), () -> {
                                 String dest = "ev";
                                 context.getModel().expectShape(valueShape.getTarget()).accept(

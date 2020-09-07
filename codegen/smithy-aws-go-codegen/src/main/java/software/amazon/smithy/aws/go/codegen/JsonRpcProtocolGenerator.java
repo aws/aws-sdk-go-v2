@@ -72,6 +72,7 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
             return;
         }
 
+        writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
         writer.write("jsonEncoder := smithyjson.NewEncoder()");
         writer.openBlock("if err := $L(input, jsonEncoder.Value); err != nil {", "}", functionName, () -> {
             writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
