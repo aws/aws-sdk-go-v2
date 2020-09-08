@@ -62,9 +62,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
     public Void blobShape(BlobShape shape) {
         GoWriter writer = context.getWriter();
         writer.write("var data string");
-        writer.write("err := decoder.Decoder.DecodeElement(&data, &t)");
-        writer.write("if err != nil { return err }");
-        writer.insertTrailingNewline();
+        handleString(shape, () -> writer.write("data = xtv"));
 
         writer.addUseImports(SmithyGoDependency.BASE64);
         writer.write("$L, err = base64.StdEncoding.DecodeString(data)", dataDest);

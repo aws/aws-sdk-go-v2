@@ -160,7 +160,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
 
             writer.openBlock("for {", "}", () -> {
                 writer.addUseImports(SmithyGoDependency.STRINGS);
-                writer.openBlock("if strings.EqualFold($S, t.Name.Local) {", "}", serializedMemberName, () -> {
+                writer.openBlock("if strings.EqualFold($S, t.Name.Local) {", "} else {", serializedMemberName, () -> {
                     writer.write("var col $P", context.getSymbolProvider().toSymbol(target));
                     target.accept(getMemberDeserVisitor(member, "col", false));
                     writer.write("sv = append(sv, col)");
@@ -170,6 +170,9 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
                         writer.write("break");
                     }
                 });
+
+                writer.write(" break }");
+
             });
             writer.write("decoder = originalDecoder");
         });
