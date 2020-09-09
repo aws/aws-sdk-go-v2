@@ -3152,7 +3152,8 @@ func awsAwsquery_deserializeDocumentAlarmHistoryItem(v **types.AlarmHistoryItem,
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("AlarmName", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -3160,6 +3161,9 @@ func awsAwsquery_deserializeDocumentAlarmHistoryItem(v **types.AlarmHistoryItem,
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.AlarmName = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -3186,6 +3190,9 @@ func awsAwsquery_deserializeDocumentAlarmHistoryItem(v **types.AlarmHistoryItem,
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.HistoryData = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -3212,6 +3219,9 @@ func awsAwsquery_deserializeDocumentAlarmHistoryItem(v **types.AlarmHistoryItem,
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.HistorySummary = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -3240,6 +3250,7 @@ func awsAwsquery_deserializeDocumentAlarmHistoryItem(v **types.AlarmHistoryItem,
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -3322,7 +3333,8 @@ func awsAwsquery_deserializeDocumentAnomalyDetector(v **types.AnomalyDetector, d
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Configuration", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -3342,6 +3354,9 @@ func awsAwsquery_deserializeDocumentAnomalyDetector(v **types.AnomalyDetector, d
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.MetricName = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -3355,6 +3370,9 @@ func awsAwsquery_deserializeDocumentAnomalyDetector(v **types.AnomalyDetector, d
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Namespace = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -3368,6 +3386,9 @@ func awsAwsquery_deserializeDocumentAnomalyDetector(v **types.AnomalyDetector, d
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Stat = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -3392,6 +3413,7 @@ func awsAwsquery_deserializeDocumentAnomalyDetector(v **types.AnomalyDetector, d
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -3416,7 +3438,8 @@ func awsAwsquery_deserializeDocumentAnomalyDetectorConfiguration(v **types.Anoma
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("ExcludedTimeRanges", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -3430,6 +3453,9 @@ func awsAwsquery_deserializeDocumentAnomalyDetectorConfiguration(v **types.Anoma
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.MetricTimezone = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -3441,6 +3467,7 @@ func awsAwsquery_deserializeDocumentAnomalyDetectorConfiguration(v **types.Anoma
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -3639,7 +3666,8 @@ func awsAwsquery_deserializeDocumentCompositeAlarm(v **types.CompositeAlarm, dec
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("ActionsEnabled", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -3669,6 +3697,9 @@ func awsAwsquery_deserializeDocumentCompositeAlarm(v **types.CompositeAlarm, dec
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.AlarmArn = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -3699,6 +3730,9 @@ func awsAwsquery_deserializeDocumentCompositeAlarm(v **types.CompositeAlarm, dec
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.AlarmDescription = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -3712,6 +3746,9 @@ func awsAwsquery_deserializeDocumentCompositeAlarm(v **types.CompositeAlarm, dec
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.AlarmName = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -3725,6 +3762,9 @@ func awsAwsquery_deserializeDocumentCompositeAlarm(v **types.CompositeAlarm, dec
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.AlarmRule = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -3750,6 +3790,9 @@ func awsAwsquery_deserializeDocumentCompositeAlarm(v **types.CompositeAlarm, dec
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.StateReason = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -3763,6 +3806,9 @@ func awsAwsquery_deserializeDocumentCompositeAlarm(v **types.CompositeAlarm, dec
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.StateReasonData = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -3804,6 +3850,7 @@ func awsAwsquery_deserializeDocumentCompositeAlarm(v **types.CompositeAlarm, dec
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -3886,7 +3933,8 @@ func awsAwsquery_deserializeDocumentConcurrentModificationException(v **types.Co
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -3894,6 +3942,9 @@ func awsAwsquery_deserializeDocumentConcurrentModificationException(v **types.Co
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -3905,6 +3956,7 @@ func awsAwsquery_deserializeDocumentConcurrentModificationException(v **types.Co
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -3987,7 +4039,8 @@ func awsAwsquery_deserializeDocumentDashboardEntry(v **types.DashboardEntry, dec
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("DashboardArn", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -3995,6 +4048,9 @@ func awsAwsquery_deserializeDocumentDashboardEntry(v **types.DashboardEntry, dec
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.DashboardArn = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -4008,6 +4064,9 @@ func awsAwsquery_deserializeDocumentDashboardEntry(v **types.DashboardEntry, dec
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.DashboardName = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -4053,6 +4112,7 @@ func awsAwsquery_deserializeDocumentDashboardEntry(v **types.DashboardEntry, dec
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -4077,7 +4137,8 @@ func awsAwsquery_deserializeDocumentDashboardInvalidInputError(v **types.Dashboa
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("dashboardValidationMessages", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -4091,6 +4152,9 @@ func awsAwsquery_deserializeDocumentDashboardInvalidInputError(v **types.Dashboa
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -4102,6 +4166,7 @@ func awsAwsquery_deserializeDocumentDashboardInvalidInputError(v **types.Dashboa
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -4126,7 +4191,8 @@ func awsAwsquery_deserializeDocumentDashboardNotFoundError(v **types.DashboardNo
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("message", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -4134,6 +4200,9 @@ func awsAwsquery_deserializeDocumentDashboardNotFoundError(v **types.DashboardNo
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -4145,6 +4214,7 @@ func awsAwsquery_deserializeDocumentDashboardNotFoundError(v **types.DashboardNo
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -4169,7 +4239,8 @@ func awsAwsquery_deserializeDocumentDashboardValidationMessage(v **types.Dashboa
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("DataPath", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -4177,6 +4248,9 @@ func awsAwsquery_deserializeDocumentDashboardValidationMessage(v **types.Dashboa
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.DataPath = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -4190,6 +4264,9 @@ func awsAwsquery_deserializeDocumentDashboardValidationMessage(v **types.Dashboa
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -4201,6 +4278,7 @@ func awsAwsquery_deserializeDocumentDashboardValidationMessage(v **types.Dashboa
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -4283,7 +4361,8 @@ func awsAwsquery_deserializeDocumentDatapoint(v **types.Datapoint, decoder smith
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Average", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -4410,6 +4489,7 @@ func awsAwsquery_deserializeDocumentDatapoint(v **types.Datapoint, decoder smith
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -4529,6 +4609,9 @@ func awsAwsquery_deserializeDocumentDatapointValueMapUnwrapped(v *map[string]*fl
 				return err
 			}
 			if done {
+				if val == nil {
+					ek = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -4661,7 +4744,8 @@ func awsAwsquery_deserializeDocumentDimension(v **types.Dimension, decoder smith
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Name", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -4669,6 +4753,9 @@ func awsAwsquery_deserializeDocumentDimension(v **types.Dimension, decoder smith
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Name = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -4682,6 +4769,9 @@ func awsAwsquery_deserializeDocumentDimension(v **types.Dimension, decoder smith
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Value = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -4693,6 +4783,7 @@ func awsAwsquery_deserializeDocumentDimension(v **types.Dimension, decoder smith
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -4775,7 +4866,8 @@ func awsAwsquery_deserializeDocumentInsightRule(v **types.InsightRule, decoder s
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Definition", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -4783,6 +4875,9 @@ func awsAwsquery_deserializeDocumentInsightRule(v **types.InsightRule, decoder s
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Definition = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -4796,6 +4891,9 @@ func awsAwsquery_deserializeDocumentInsightRule(v **types.InsightRule, decoder s
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Name = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -4809,6 +4907,9 @@ func awsAwsquery_deserializeDocumentInsightRule(v **types.InsightRule, decoder s
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Schema = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -4822,6 +4923,9 @@ func awsAwsquery_deserializeDocumentInsightRule(v **types.InsightRule, decoder s
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.State = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -4833,6 +4937,7 @@ func awsAwsquery_deserializeDocumentInsightRule(v **types.InsightRule, decoder s
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -4857,7 +4962,8 @@ func awsAwsquery_deserializeDocumentInsightRuleContributor(v **types.InsightRule
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("ApproximateAggregateValue", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -4892,6 +4998,7 @@ func awsAwsquery_deserializeDocumentInsightRuleContributor(v **types.InsightRule
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -4916,7 +5023,8 @@ func awsAwsquery_deserializeDocumentInsightRuleContributorDatapoint(v **types.In
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("ApproximateValue", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -4956,6 +5064,7 @@ func awsAwsquery_deserializeDocumentInsightRuleContributorDatapoint(v **types.In
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -5049,6 +5158,9 @@ func awsAwsquery_deserializeDocumentInsightRuleContributorKeyLabels(v *[]*string
 					return err
 				}
 				if done {
+					if val == nil {
+						col = ptr.String("")
+					}
 					break
 				}
 				if val != nil {
@@ -5081,6 +5193,9 @@ func awsAwsquery_deserializeDocumentInsightRuleContributorKeyLabelsUnwrapped(v *
 			return err
 		}
 		if done {
+			if val == nil {
+				mv = ptr.String("")
+			}
 			break
 		}
 		if val != nil {
@@ -5122,6 +5237,9 @@ func awsAwsquery_deserializeDocumentInsightRuleContributorKeys(v *[]*string, dec
 					return err
 				}
 				if done {
+					if val == nil {
+						col = ptr.String("")
+					}
 					break
 				}
 				if val != nil {
@@ -5154,6 +5272,9 @@ func awsAwsquery_deserializeDocumentInsightRuleContributorKeysUnwrapped(v *[]*st
 			return err
 		}
 		if done {
+			if val == nil {
+				mv = ptr.String("")
+			}
 			break
 		}
 		if val != nil {
@@ -5242,7 +5363,8 @@ func awsAwsquery_deserializeDocumentInsightRuleMetricDatapoint(v **types.Insight
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Average", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -5384,6 +5506,7 @@ func awsAwsquery_deserializeDocumentInsightRuleMetricDatapoint(v **types.Insight
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -5524,7 +5647,8 @@ func awsAwsquery_deserializeDocumentInternalServiceFault(v **types.InternalServi
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -5532,6 +5656,9 @@ func awsAwsquery_deserializeDocumentInternalServiceFault(v **types.InternalServi
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -5543,6 +5670,7 @@ func awsAwsquery_deserializeDocumentInternalServiceFault(v **types.InternalServi
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -5567,7 +5695,8 @@ func awsAwsquery_deserializeDocumentInvalidFormatFault(v **types.InvalidFormatFa
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("message", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -5575,6 +5704,9 @@ func awsAwsquery_deserializeDocumentInvalidFormatFault(v **types.InvalidFormatFa
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -5586,6 +5718,7 @@ func awsAwsquery_deserializeDocumentInvalidFormatFault(v **types.InvalidFormatFa
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -5610,7 +5743,8 @@ func awsAwsquery_deserializeDocumentInvalidNextToken(v **types.InvalidNextToken,
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("message", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -5618,6 +5752,9 @@ func awsAwsquery_deserializeDocumentInvalidNextToken(v **types.InvalidNextToken,
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -5629,6 +5766,7 @@ func awsAwsquery_deserializeDocumentInvalidNextToken(v **types.InvalidNextToken,
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -5653,7 +5791,8 @@ func awsAwsquery_deserializeDocumentInvalidParameterCombinationException(v **typ
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("message", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -5661,6 +5800,9 @@ func awsAwsquery_deserializeDocumentInvalidParameterCombinationException(v **typ
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -5672,6 +5814,7 @@ func awsAwsquery_deserializeDocumentInvalidParameterCombinationException(v **typ
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -5696,7 +5839,8 @@ func awsAwsquery_deserializeDocumentInvalidParameterValueException(v **types.Inv
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("message", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -5704,6 +5848,9 @@ func awsAwsquery_deserializeDocumentInvalidParameterValueException(v **types.Inv
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -5715,6 +5862,7 @@ func awsAwsquery_deserializeDocumentInvalidParameterValueException(v **types.Inv
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -5739,7 +5887,8 @@ func awsAwsquery_deserializeDocumentLimitExceededException(v **types.LimitExceed
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -5747,6 +5896,9 @@ func awsAwsquery_deserializeDocumentLimitExceededException(v **types.LimitExceed
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -5758,6 +5910,7 @@ func awsAwsquery_deserializeDocumentLimitExceededException(v **types.LimitExceed
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -5782,7 +5935,8 @@ func awsAwsquery_deserializeDocumentLimitExceededFault(v **types.LimitExceededFa
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("message", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -5790,6 +5944,9 @@ func awsAwsquery_deserializeDocumentLimitExceededFault(v **types.LimitExceededFa
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -5801,6 +5958,7 @@ func awsAwsquery_deserializeDocumentLimitExceededFault(v **types.LimitExceededFa
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -5825,7 +5983,8 @@ func awsAwsquery_deserializeDocumentMessageData(v **types.MessageData, decoder s
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Code", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -5833,6 +5992,9 @@ func awsAwsquery_deserializeDocumentMessageData(v **types.MessageData, decoder s
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Code = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -5846,6 +6008,9 @@ func awsAwsquery_deserializeDocumentMessageData(v **types.MessageData, decoder s
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Value = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -5857,6 +6022,7 @@ func awsAwsquery_deserializeDocumentMessageData(v **types.MessageData, decoder s
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -5881,7 +6047,8 @@ func awsAwsquery_deserializeDocumentMetric(v **types.Metric, decoder smithyxml.N
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Dimensions", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -5895,6 +6062,9 @@ func awsAwsquery_deserializeDocumentMetric(v **types.Metric, decoder smithyxml.N
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.MetricName = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -5908,6 +6078,9 @@ func awsAwsquery_deserializeDocumentMetric(v **types.Metric, decoder smithyxml.N
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Namespace = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -5919,6 +6092,7 @@ func awsAwsquery_deserializeDocumentMetric(v **types.Metric, decoder smithyxml.N
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -5943,7 +6117,8 @@ func awsAwsquery_deserializeDocumentMetricAlarm(v **types.MetricAlarm, decoder s
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("ActionsEnabled", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -5973,6 +6148,9 @@ func awsAwsquery_deserializeDocumentMetricAlarm(v **types.MetricAlarm, decoder s
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.AlarmArn = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -6003,6 +6181,9 @@ func awsAwsquery_deserializeDocumentMetricAlarm(v **types.MetricAlarm, decoder s
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.AlarmDescription = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -6016,6 +6197,9 @@ func awsAwsquery_deserializeDocumentMetricAlarm(v **types.MetricAlarm, decoder s
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.AlarmName = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -6065,6 +6249,9 @@ func awsAwsquery_deserializeDocumentMetricAlarm(v **types.MetricAlarm, decoder s
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.EvaluateLowSampleCountPercentile = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -6095,6 +6282,9 @@ func awsAwsquery_deserializeDocumentMetricAlarm(v **types.MetricAlarm, decoder s
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.ExtendedStatistic = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -6114,6 +6304,9 @@ func awsAwsquery_deserializeDocumentMetricAlarm(v **types.MetricAlarm, decoder s
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.MetricName = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -6133,6 +6326,9 @@ func awsAwsquery_deserializeDocumentMetricAlarm(v **types.MetricAlarm, decoder s
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Namespace = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -6169,6 +6365,9 @@ func awsAwsquery_deserializeDocumentMetricAlarm(v **types.MetricAlarm, decoder s
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.StateReason = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -6182,6 +6381,9 @@ func awsAwsquery_deserializeDocumentMetricAlarm(v **types.MetricAlarm, decoder s
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.StateReasonData = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -6255,6 +6457,9 @@ func awsAwsquery_deserializeDocumentMetricAlarm(v **types.MetricAlarm, decoder s
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.ThresholdMetricId = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -6268,6 +6473,9 @@ func awsAwsquery_deserializeDocumentMetricAlarm(v **types.MetricAlarm, decoder s
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.TreatMissingData = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -6292,6 +6500,7 @@ func awsAwsquery_deserializeDocumentMetricAlarm(v **types.MetricAlarm, decoder s
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -6432,7 +6641,8 @@ func awsAwsquery_deserializeDocumentMetricDataQuery(v **types.MetricDataQuery, d
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Expression", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -6440,6 +6650,9 @@ func awsAwsquery_deserializeDocumentMetricDataQuery(v **types.MetricDataQuery, d
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Expression = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -6453,6 +6666,9 @@ func awsAwsquery_deserializeDocumentMetricDataQuery(v **types.MetricDataQuery, d
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Id = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -6466,6 +6682,9 @@ func awsAwsquery_deserializeDocumentMetricDataQuery(v **types.MetricDataQuery, d
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Label = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -6516,6 +6735,7 @@ func awsAwsquery_deserializeDocumentMetricDataQuery(v **types.MetricDataQuery, d
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -6540,7 +6760,8 @@ func awsAwsquery_deserializeDocumentMetricDataResult(v **types.MetricDataResult,
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Id", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -6548,6 +6769,9 @@ func awsAwsquery_deserializeDocumentMetricDataResult(v **types.MetricDataResult,
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Id = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -6561,6 +6785,9 @@ func awsAwsquery_deserializeDocumentMetricDataResult(v **types.MetricDataResult,
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Label = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -6603,6 +6830,7 @@ func awsAwsquery_deserializeDocumentMetricDataResult(v **types.MetricDataResult,
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -6801,7 +7029,8 @@ func awsAwsquery_deserializeDocumentMetricStat(v **types.MetricStat, decoder smi
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Metric", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -6832,6 +7061,9 @@ func awsAwsquery_deserializeDocumentMetricStat(v **types.MetricStat, decoder smi
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Stat = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -6856,6 +7088,7 @@ func awsAwsquery_deserializeDocumentMetricStat(v **types.MetricStat, decoder smi
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -6880,7 +7113,8 @@ func awsAwsquery_deserializeDocumentMissingRequiredParameterException(v **types.
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("message", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -6888,6 +7122,9 @@ func awsAwsquery_deserializeDocumentMissingRequiredParameterException(v **types.
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -6899,6 +7136,7 @@ func awsAwsquery_deserializeDocumentMissingRequiredParameterException(v **types.
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -6923,7 +7161,8 @@ func awsAwsquery_deserializeDocumentPartialFailure(v **types.PartialFailure, dec
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("ExceptionType", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -6931,6 +7170,9 @@ func awsAwsquery_deserializeDocumentPartialFailure(v **types.PartialFailure, dec
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.ExceptionType = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -6944,6 +7186,9 @@ func awsAwsquery_deserializeDocumentPartialFailure(v **types.PartialFailure, dec
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.FailureCode = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -6957,6 +7202,9 @@ func awsAwsquery_deserializeDocumentPartialFailure(v **types.PartialFailure, dec
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.FailureDescription = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -6970,6 +7218,9 @@ func awsAwsquery_deserializeDocumentPartialFailure(v **types.PartialFailure, dec
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.FailureResource = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -6981,6 +7232,7 @@ func awsAwsquery_deserializeDocumentPartialFailure(v **types.PartialFailure, dec
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -7005,7 +7257,8 @@ func awsAwsquery_deserializeDocumentRange(v **types.Range, decoder smithyxml.Nod
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("EndTime", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -7045,6 +7298,7 @@ func awsAwsquery_deserializeDocumentRange(v **types.Range, decoder smithyxml.Nod
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -7080,6 +7334,9 @@ func awsAwsquery_deserializeDocumentResourceList(v *[]*string, decoder smithyxml
 					return err
 				}
 				if done {
+					if val == nil {
+						col = ptr.String("")
+					}
 					break
 				}
 				if val != nil {
@@ -7112,6 +7369,9 @@ func awsAwsquery_deserializeDocumentResourceListUnwrapped(v *[]*string, decoder 
 			return err
 		}
 		if done {
+			if val == nil {
+				mv = ptr.String("")
+			}
 			break
 		}
 		if val != nil {
@@ -7142,7 +7402,8 @@ func awsAwsquery_deserializeDocumentResourceNotFound(v **types.ResourceNotFound,
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("message", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -7150,6 +7411,9 @@ func awsAwsquery_deserializeDocumentResourceNotFound(v **types.ResourceNotFound,
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -7161,6 +7425,7 @@ func awsAwsquery_deserializeDocumentResourceNotFound(v **types.ResourceNotFound,
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -7185,7 +7450,8 @@ func awsAwsquery_deserializeDocumentResourceNotFoundException(v **types.Resource
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Message", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -7193,6 +7459,9 @@ func awsAwsquery_deserializeDocumentResourceNotFoundException(v **types.Resource
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -7206,6 +7475,9 @@ func awsAwsquery_deserializeDocumentResourceNotFoundException(v **types.Resource
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.ResourceId = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -7219,6 +7491,9 @@ func awsAwsquery_deserializeDocumentResourceNotFoundException(v **types.Resource
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.ResourceType = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -7230,6 +7505,7 @@ func awsAwsquery_deserializeDocumentResourceNotFoundException(v **types.Resource
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -7254,7 +7530,8 @@ func awsAwsquery_deserializeDocumentTag(v **types.Tag, decoder smithyxml.NodeDec
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Key", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -7262,6 +7539,9 @@ func awsAwsquery_deserializeDocumentTag(v **types.Tag, decoder smithyxml.NodeDec
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Key = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -7275,6 +7555,9 @@ func awsAwsquery_deserializeDocumentTag(v **types.Tag, decoder smithyxml.NodeDec
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Value = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -7286,6 +7569,7 @@ func awsAwsquery_deserializeDocumentTag(v **types.Tag, decoder smithyxml.NodeDec
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -7449,12 +7733,14 @@ func awsAwsquery_deserializeDocumentDeleteAlarmsOutput(v **DeleteAlarmsOutput, d
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -7479,12 +7765,14 @@ func awsAwsquery_deserializeOpDocumentDeleteAnomalyDetectorOutput(v **DeleteAnom
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -7509,12 +7797,14 @@ func awsAwsquery_deserializeOpDocumentDeleteDashboardsOutput(v **DeleteDashboard
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -7539,7 +7829,8 @@ func awsAwsquery_deserializeOpDocumentDeleteInsightRulesOutput(v **DeleteInsight
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Failures", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -7551,6 +7842,7 @@ func awsAwsquery_deserializeOpDocumentDeleteInsightRulesOutput(v **DeleteInsight
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -7575,7 +7867,8 @@ func awsAwsquery_deserializeOpDocumentDescribeAlarmHistoryOutput(v **DescribeAla
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("AlarmHistoryItems", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -7589,6 +7882,9 @@ func awsAwsquery_deserializeOpDocumentDescribeAlarmHistoryOutput(v **DescribeAla
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.NextToken = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -7600,6 +7896,7 @@ func awsAwsquery_deserializeOpDocumentDescribeAlarmHistoryOutput(v **DescribeAla
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -7624,7 +7921,8 @@ func awsAwsquery_deserializeOpDocumentDescribeAlarmsForMetricOutput(v **Describe
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("MetricAlarms", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -7636,6 +7934,7 @@ func awsAwsquery_deserializeOpDocumentDescribeAlarmsForMetricOutput(v **Describe
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -7660,7 +7959,8 @@ func awsAwsquery_deserializeOpDocumentDescribeAlarmsOutput(v **DescribeAlarmsOut
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("CompositeAlarms", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -7680,6 +7980,9 @@ func awsAwsquery_deserializeOpDocumentDescribeAlarmsOutput(v **DescribeAlarmsOut
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.NextToken = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -7691,6 +7994,7 @@ func awsAwsquery_deserializeOpDocumentDescribeAlarmsOutput(v **DescribeAlarmsOut
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -7715,7 +8019,8 @@ func awsAwsquery_deserializeOpDocumentDescribeAnomalyDetectorsOutput(v **Describ
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("AnomalyDetectors", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -7729,6 +8034,9 @@ func awsAwsquery_deserializeOpDocumentDescribeAnomalyDetectorsOutput(v **Describ
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.NextToken = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -7740,6 +8048,7 @@ func awsAwsquery_deserializeOpDocumentDescribeAnomalyDetectorsOutput(v **Describ
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -7764,7 +8073,8 @@ func awsAwsquery_deserializeOpDocumentDescribeInsightRulesOutput(v **DescribeIns
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("InsightRules", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -7778,6 +8088,9 @@ func awsAwsquery_deserializeOpDocumentDescribeInsightRulesOutput(v **DescribeIns
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.NextToken = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -7789,6 +8102,7 @@ func awsAwsquery_deserializeOpDocumentDescribeInsightRulesOutput(v **DescribeIns
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -7813,12 +8127,14 @@ func awsAwsquery_deserializeDocumentDisableAlarmActionsOutput(v **DisableAlarmAc
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -7843,7 +8159,8 @@ func awsAwsquery_deserializeOpDocumentDisableInsightRulesOutput(v **DisableInsig
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Failures", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -7855,6 +8172,7 @@ func awsAwsquery_deserializeOpDocumentDisableInsightRulesOutput(v **DisableInsig
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -7879,12 +8197,14 @@ func awsAwsquery_deserializeDocumentEnableAlarmActionsOutput(v **EnableAlarmActi
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -7909,7 +8229,8 @@ func awsAwsquery_deserializeOpDocumentEnableInsightRulesOutput(v **EnableInsight
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Failures", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -7921,6 +8242,7 @@ func awsAwsquery_deserializeOpDocumentEnableInsightRulesOutput(v **EnableInsight
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -7945,7 +8267,8 @@ func awsAwsquery_deserializeOpDocumentGetDashboardOutput(v **GetDashboardOutput,
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("DashboardArn", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -7953,6 +8276,9 @@ func awsAwsquery_deserializeOpDocumentGetDashboardOutput(v **GetDashboardOutput,
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.DashboardArn = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -7966,6 +8292,9 @@ func awsAwsquery_deserializeOpDocumentGetDashboardOutput(v **GetDashboardOutput,
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.DashboardBody = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -7979,6 +8308,9 @@ func awsAwsquery_deserializeOpDocumentGetDashboardOutput(v **GetDashboardOutput,
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.DashboardName = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -7990,6 +8322,7 @@ func awsAwsquery_deserializeOpDocumentGetDashboardOutput(v **GetDashboardOutput,
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -8014,7 +8347,8 @@ func awsAwsquery_deserializeOpDocumentGetInsightRuleReportOutput(v **GetInsightR
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("AggregateValue", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -8039,6 +8373,9 @@ func awsAwsquery_deserializeOpDocumentGetInsightRuleReportOutput(v **GetInsightR
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.AggregationStatistic = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -8085,6 +8422,7 @@ func awsAwsquery_deserializeOpDocumentGetInsightRuleReportOutput(v **GetInsightR
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -8109,7 +8447,8 @@ func awsAwsquery_deserializeOpDocumentGetMetricDataOutput(v **GetMetricDataOutpu
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Messages", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -8129,6 +8468,9 @@ func awsAwsquery_deserializeOpDocumentGetMetricDataOutput(v **GetMetricDataOutpu
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.NextToken = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -8140,6 +8482,7 @@ func awsAwsquery_deserializeOpDocumentGetMetricDataOutput(v **GetMetricDataOutpu
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -8164,7 +8507,8 @@ func awsAwsquery_deserializeOpDocumentGetMetricStatisticsOutput(v **GetMetricSta
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Datapoints", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -8178,6 +8522,9 @@ func awsAwsquery_deserializeOpDocumentGetMetricStatisticsOutput(v **GetMetricSta
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Label = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -8189,6 +8536,7 @@ func awsAwsquery_deserializeOpDocumentGetMetricStatisticsOutput(v **GetMetricSta
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -8213,7 +8561,8 @@ func awsAwsquery_deserializeOpDocumentGetMetricWidgetImageOutput(v **GetMetricWi
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("MetricWidgetImage", t.Name.Local):
 			var data string
@@ -8230,6 +8579,7 @@ func awsAwsquery_deserializeOpDocumentGetMetricWidgetImageOutput(v **GetMetricWi
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -8254,7 +8604,8 @@ func awsAwsquery_deserializeOpDocumentListDashboardsOutput(v **ListDashboardsOut
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("DashboardEntries", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -8268,6 +8619,9 @@ func awsAwsquery_deserializeOpDocumentListDashboardsOutput(v **ListDashboardsOut
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.NextToken = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -8279,6 +8633,7 @@ func awsAwsquery_deserializeOpDocumentListDashboardsOutput(v **ListDashboardsOut
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -8303,7 +8658,8 @@ func awsAwsquery_deserializeOpDocumentListMetricsOutput(v **ListMetricsOutput, d
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Metrics", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -8317,6 +8673,9 @@ func awsAwsquery_deserializeOpDocumentListMetricsOutput(v **ListMetricsOutput, d
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.NextToken = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -8328,6 +8687,7 @@ func awsAwsquery_deserializeOpDocumentListMetricsOutput(v **ListMetricsOutput, d
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -8352,7 +8712,8 @@ func awsAwsquery_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsForR
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Tags", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -8364,6 +8725,7 @@ func awsAwsquery_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsForR
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -8388,12 +8750,14 @@ func awsAwsquery_deserializeOpDocumentPutAnomalyDetectorOutput(v **PutAnomalyDet
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -8418,12 +8782,14 @@ func awsAwsquery_deserializeDocumentPutCompositeAlarmOutput(v **PutCompositeAlar
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -8448,7 +8814,8 @@ func awsAwsquery_deserializeOpDocumentPutDashboardOutput(v **PutDashboardOutput,
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("DashboardValidationMessages", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -8460,6 +8827,7 @@ func awsAwsquery_deserializeOpDocumentPutDashboardOutput(v **PutDashboardOutput,
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -8484,12 +8852,14 @@ func awsAwsquery_deserializeOpDocumentPutInsightRuleOutput(v **PutInsightRuleOut
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -8514,12 +8884,14 @@ func awsAwsquery_deserializeDocumentPutMetricAlarmOutput(v **PutMetricAlarmOutpu
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -8544,12 +8916,14 @@ func awsAwsquery_deserializeDocumentPutMetricDataOutput(v **PutMetricDataOutput,
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -8574,12 +8948,14 @@ func awsAwsquery_deserializeDocumentSetAlarmStateOutput(v **SetAlarmStateOutput,
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -8604,12 +8980,14 @@ func awsAwsquery_deserializeOpDocumentTagResourceOutput(v **TagResourceOutput, d
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -8634,12 +9012,14 @@ func awsAwsquery_deserializeOpDocumentUntagResourceOutput(v **UntagResourceOutpu
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		default:
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
