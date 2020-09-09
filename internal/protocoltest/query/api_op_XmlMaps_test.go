@@ -27,7 +27,7 @@ func TestClient_XmlMaps_awsAwsqueryDeserialize(t *testing.T) {
 		Body          []byte
 		ExpectResult  *XmlMapsOutput
 	}{
-		// Serializes XML maps
+		// Tests for XML map serialization
 		"QueryXmlMaps": {
 			StatusCode: 200,
 			Header: http.Header{

@@ -57,7 +57,7 @@ func (m *awsAwsquery_serializeOpEmptyInputAndEmptyOutput) HandleSerialize(ctx co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -110,7 +110,7 @@ func (m *awsAwsquery_serializeOpFlattenedXmlMap) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -163,7 +163,7 @@ func (m *awsAwsquery_serializeOpFlattenedXmlMapWithXmlName) HandleSerialize(ctx 
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -216,7 +216,7 @@ func (m *awsAwsquery_serializeOpGreetingWithErrors) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -269,7 +269,7 @@ func (m *awsAwsquery_serializeOpIgnoresWrappingXmlName) HandleSerialize(ctx cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -324,7 +324,7 @@ func (m *awsAwsquery_serializeOpNestedStructures) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -377,7 +377,7 @@ func (m *awsAwsquery_serializeOpNoInputAndNoOutput) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -430,7 +430,7 @@ func (m *awsAwsquery_serializeOpNoInputAndOutput) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -485,7 +485,7 @@ func (m *awsAwsquery_serializeOpQueryIdempotencyTokenAutoFill) HandleSerialize(c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -540,7 +540,7 @@ func (m *awsAwsquery_serializeOpQueryLists) HandleSerialize(ctx context.Context,
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -595,7 +595,7 @@ func (m *awsAwsquery_serializeOpQueryMaps) HandleSerialize(ctx context.Context, 
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -650,7 +650,7 @@ func (m *awsAwsquery_serializeOpQueryTimestamps) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -703,7 +703,7 @@ func (m *awsAwsquery_serializeOpRecursiveXmlShapes) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -758,7 +758,7 @@ func (m *awsAwsquery_serializeOpSimpleInputParams) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -811,7 +811,7 @@ func (m *awsAwsquery_serializeOpSimpleScalarXmlProperties) HandleSerialize(ctx c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -864,7 +864,7 @@ func (m *awsAwsquery_serializeOpXmlBlobs) HandleSerialize(ctx context.Context, i
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -917,7 +917,7 @@ func (m *awsAwsquery_serializeOpXmlEnums) HandleSerialize(ctx context.Context, i
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -970,7 +970,7 @@ func (m *awsAwsquery_serializeOpXmlLists) HandleSerialize(ctx context.Context, i
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1023,7 +1023,7 @@ func (m *awsAwsquery_serializeOpXmlMaps) HandleSerialize(ctx context.Context, in
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1076,7 +1076,7 @@ func (m *awsAwsquery_serializeOpXmlMapsXmlName) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1129,7 +1129,7 @@ func (m *awsAwsquery_serializeOpXmlNamespaces) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1182,7 +1182,7 @@ func (m *awsAwsquery_serializeOpXmlTimestamps) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
