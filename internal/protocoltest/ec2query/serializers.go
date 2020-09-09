@@ -56,7 +56,7 @@ func (m *awsEc2query_serializeOpEmptyInputAndEmptyOutput) HandleSerialize(ctx co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -109,7 +109,7 @@ func (m *awsEc2query_serializeOpGreetingWithErrors) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -162,7 +162,7 @@ func (m *awsEc2query_serializeOpIgnoresWrappingXmlName) HandleSerialize(ctx cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -217,7 +217,7 @@ func (m *awsEc2query_serializeOpNestedStructures) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -270,7 +270,7 @@ func (m *awsEc2query_serializeOpNoInputAndOutput) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -325,7 +325,7 @@ func (m *awsEc2query_serializeOpQueryIdempotencyTokenAutoFill) HandleSerialize(c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -380,7 +380,7 @@ func (m *awsEc2query_serializeOpQueryLists) HandleSerialize(ctx context.Context,
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -435,7 +435,7 @@ func (m *awsEc2query_serializeOpQueryTimestamps) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -488,7 +488,7 @@ func (m *awsEc2query_serializeOpRecursiveXmlShapes) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -543,7 +543,7 @@ func (m *awsEc2query_serializeOpSimpleInputParams) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -596,7 +596,7 @@ func (m *awsEc2query_serializeOpSimpleScalarXmlProperties) HandleSerialize(ctx c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -649,7 +649,7 @@ func (m *awsEc2query_serializeOpXmlBlobs) HandleSerialize(ctx context.Context, i
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -702,7 +702,7 @@ func (m *awsEc2query_serializeOpXmlEnums) HandleSerialize(ctx context.Context, i
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -755,7 +755,7 @@ func (m *awsEc2query_serializeOpXmlLists) HandleSerialize(ctx context.Context, i
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -808,7 +808,7 @@ func (m *awsEc2query_serializeOpXmlNamespaces) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -861,7 +861,7 @@ func (m *awsEc2query_serializeOpXmlTimestamps) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bodyWriter); err != nil {
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 

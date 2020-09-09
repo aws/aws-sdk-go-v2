@@ -34,7 +34,7 @@ func TestClient_XmlMaps_awsRestxmlSerialize(t *testing.T) {
 		BodyMediaType string
 		BodyAssert    func(io.Reader) error
 	}{
-		// Serializes XML maps
+		// Tests for XML map serialization
 		"XmlMaps": {
 			Params: &XmlMapsInput{
 				MyMap: map[string]*types.GreetingStruct{
@@ -147,7 +147,7 @@ func TestClient_XmlMaps_awsRestxmlDeserialize(t *testing.T) {
 		Body          []byte
 		ExpectResult  *XmlMapsOutput
 	}{
-		// Serializes XML maps
+		// Tests for XML map serialization
 		"XmlMaps": {
 			StatusCode: 200,
 			Header: http.Header{

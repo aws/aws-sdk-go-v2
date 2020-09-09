@@ -77,7 +77,7 @@ class AwsQuery extends HttpRpcProtocolGenerator {
             writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
         }).write("");
 
-        writer.openBlock("if request, err = request.SetStream(bodyWriter); err != nil {",
+        writer.openBlock("if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {",
                 "}", () -> {
             writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
         });
