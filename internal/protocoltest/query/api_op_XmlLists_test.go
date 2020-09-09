@@ -29,7 +29,7 @@ func TestClient_XmlLists_awsAwsqueryDeserialize(t *testing.T) {
 		Body          []byte
 		ExpectResult  *XmlListsOutput
 	}{
-		// Serializes XML lists
+		// Tests for XML list serialization
 		"QueryXmlLists": {
 			StatusCode: 200,
 			Header: http.Header{

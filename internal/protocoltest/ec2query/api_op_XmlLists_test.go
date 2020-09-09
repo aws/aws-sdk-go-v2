@@ -29,7 +29,7 @@ func TestClient_XmlLists_awsEc2queryDeserialize(t *testing.T) {
 		Body          []byte
 		ExpectResult  *XmlListsOutput
 	}{
-		// Serializes XML lists
+		// Tests for XML list serialization
 		"Ec2XmlLists": {
 			StatusCode: 200,
 			Header: http.Header{

@@ -36,7 +36,7 @@ func TestClient_XmlLists_awsRestxmlSerialize(t *testing.T) {
 		BodyMediaType string
 		BodyAssert    func(io.Reader) error
 	}{
-		// Serializes XML lists
+		// Tests for XML list serialization
 		"XmlLists": {
 			Params: &XmlListsInput{
 				StringList: []*string{
@@ -235,7 +235,7 @@ func TestClient_XmlLists_awsRestxmlDeserialize(t *testing.T) {
 		Body          []byte
 		ExpectResult  *XmlListsOutput
 	}{
-		// Serializes XML lists
+		// Tests for XML list serialization
 		"XmlLists": {
 			StatusCode: 200,
 			Header: http.Header{
