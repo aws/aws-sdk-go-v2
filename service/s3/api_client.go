@@ -7,6 +7,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	"github.com/awslabs/smithy-go/middleware"
 	"net/http"
 )
@@ -69,6 +70,11 @@ type Options struct {
 	// failures. When nil the API client will use a default retryer.
 	Retryer retry.Retryer
 
+	// Allows you to enable the client to use path-style addressing, i.e.,
+	// http://s3.amazonaws.com/BUCKET/KEY. By default, the S3 clientwill use virtual
+	// hosted bucket addressing when possible(http://BUCKET.s3.amazonaws.com/KEY).
+	UsePathStyle bool
+
 	// The HTTP client to invoke API calls with. Defaults to client's default HTTP
 	// implementation if nil.
 	HTTPClient HTTPClient
@@ -100,6 +106,10 @@ func (o Options) GetRegion() string {
 
 func (o Options) GetRetryer() retry.Retryer {
 	return o.Retryer
+}
+
+func (o Options) GetUsePathStyle() bool {
+	return o.UsePathStyle
 }
 
 type HTTPClient interface {
@@ -150,4 +160,8 @@ func addClientUserAgent(stack *middleware.Stack) {
 func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) {
 	signer := v4.Signer{}
 	stack.Finalize.Add(v4.NewSignHTTPRequestMiddleware(o.Credentials, signer), middleware.After)
+}
+
+func updateEndpointFromConfig(stack *middleware.Stack, options Options) {
+	s3cust.UpdateEndpointFromConfig(stack, s3cust.UpdateEndpointFromConfigOptions{UsePathStyle: options.UsePathStyle})
 }
