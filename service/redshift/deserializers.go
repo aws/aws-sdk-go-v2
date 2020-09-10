@@ -12388,7 +12388,8 @@ func awsAwsquery_deserializeDocumentAccountsWithRestoreAccessListUnwrapped(v *[]
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.AccountWithRestoreAccess
 		t := decoder.StartEl
 		_ = t
@@ -12510,7 +12511,8 @@ func awsAwsquery_deserializeDocumentAssociatedClusterListUnwrapped(v *[]*types.C
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.ClusterAssociatedToSchedule
 		t := decoder.StartEl
 		_ = t
@@ -12568,7 +12570,8 @@ func awsAwsquery_deserializeDocumentAttributeListUnwrapped(v *[]*types.AccountAt
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.AccountAttribute
 		t := decoder.StartEl
 		_ = t
@@ -12626,7 +12629,8 @@ func awsAwsquery_deserializeDocumentAttributeValueListUnwrapped(v *[]*types.Attr
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.AttributeValueTarget
 		t := decoder.StartEl
 		_ = t
@@ -12930,7 +12934,8 @@ func awsAwsquery_deserializeDocumentAvailabilityZoneListUnwrapped(v *[]*types.Av
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.AvailabilityZone
 		t := decoder.StartEl
 		_ = t
@@ -13084,7 +13089,8 @@ func awsAwsquery_deserializeDocumentBatchSnapshotOperationErrorListUnwrapped(v *
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.SnapshotErrorMessage
 		t := decoder.StartEl
 		_ = t
@@ -13142,7 +13148,8 @@ func awsAwsquery_deserializeDocumentBatchSnapshotOperationErrorsUnwrapped(v *[]*
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.SnapshotErrorMessage
 		t := decoder.StartEl
 		_ = t
@@ -14055,7 +14062,8 @@ func awsAwsquery_deserializeDocumentClusterDbRevisionsListUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.ClusterDbRevision
 		t := decoder.StartEl
 		_ = t
@@ -14177,7 +14185,8 @@ func awsAwsquery_deserializeDocumentClusterIamRoleListUnwrapped(v *[]*types.Clus
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.ClusterIamRole
 		t := decoder.StartEl
 		_ = t
@@ -14235,7 +14244,8 @@ func awsAwsquery_deserializeDocumentClusterListUnwrapped(v *[]*types.Cluster, de
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.Cluster
 		t := decoder.StartEl
 		_ = t
@@ -14373,7 +14383,8 @@ func awsAwsquery_deserializeDocumentClusterNodesListUnwrapped(v *[]*types.Cluste
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.ClusterNode
 		t := decoder.StartEl
 		_ = t
@@ -14827,7 +14838,8 @@ func awsAwsquery_deserializeDocumentClusterParameterGroupStatusListUnwrapped(v *
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.ClusterParameterGroupStatus
 		t := decoder.StartEl
 		_ = t
@@ -14965,7 +14977,8 @@ func awsAwsquery_deserializeDocumentClusterParameterStatusListUnwrapped(v *[]*ty
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.ClusterParameterStatus
 		t := decoder.StartEl
 		_ = t
@@ -15265,7 +15278,8 @@ func awsAwsquery_deserializeDocumentClusterSecurityGroupMembershipListUnwrapped(
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.ClusterSecurityGroupMembership
 		t := decoder.StartEl
 		_ = t
@@ -15419,7 +15433,8 @@ func awsAwsquery_deserializeDocumentClusterSecurityGroupsUnwrapped(v *[]*types.C
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.ClusterSecurityGroup
 		t := decoder.StartEl
 		_ = t
@@ -15971,7 +15986,8 @@ func awsAwsquery_deserializeDocumentClusterSubnetGroupsUnwrapped(v *[]*types.Clu
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.ClusterSubnetGroup
 		t := decoder.StartEl
 		_ = t
@@ -16157,7 +16173,8 @@ func awsAwsquery_deserializeDocumentClusterVersionListUnwrapped(v *[]*types.Clus
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.ClusterVersion
 		t := decoder.StartEl
 		_ = t
@@ -16548,7 +16565,8 @@ func awsAwsquery_deserializeDocumentDeferredMaintenanceWindowsListUnwrapped(v *[
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.DeferredMaintenanceWindow
 		t := decoder.StartEl
 		_ = t
@@ -16788,7 +16806,8 @@ func awsAwsquery_deserializeDocumentEC2SecurityGroupListUnwrapped(v *[]*types.EC
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.EC2SecurityGroup
 		t := decoder.StartEl
 		_ = t
@@ -16910,7 +16929,8 @@ func awsAwsquery_deserializeDocumentEligibleTracksToUpdateListUnwrapped(v *[]*ty
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.UpdateTarget
 		t := decoder.StartEl
 		_ = t
@@ -17176,7 +17196,8 @@ func awsAwsquery_deserializeDocumentEventCategoriesListUnwrapped(v *[]*string, d
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -17298,7 +17319,8 @@ func awsAwsquery_deserializeDocumentEventCategoriesMapListUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.EventCategoriesMap
 		t := decoder.StartEl
 		_ = t
@@ -17442,7 +17464,8 @@ func awsAwsquery_deserializeDocumentEventInfoMapListUnwrapped(v *[]*types.EventI
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.EventInfoMap
 		t := decoder.StartEl
 		_ = t
@@ -17500,7 +17523,8 @@ func awsAwsquery_deserializeDocumentEventListUnwrapped(v *[]*types.Event, decode
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.Event
 		t := decoder.StartEl
 		_ = t
@@ -17785,7 +17809,8 @@ func awsAwsquery_deserializeDocumentEventSubscriptionsListUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.EventSubscription
 		t := decoder.StartEl
 		_ = t
@@ -17961,7 +17986,8 @@ func awsAwsquery_deserializeDocumentHsmClientCertificateListUnwrapped(v *[]*type
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.HsmClientCertificate
 		t := decoder.StartEl
 		_ = t
@@ -18265,7 +18291,8 @@ func awsAwsquery_deserializeDocumentHsmConfigurationListUnwrapped(v *[]*types.Hs
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.HsmConfiguration
 		t := decoder.StartEl
 		_ = t
@@ -18510,7 +18537,8 @@ func awsAwsquery_deserializeDocumentImportTablesCompletedUnwrapped(v *[]*string,
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -18589,7 +18617,8 @@ func awsAwsquery_deserializeDocumentImportTablesInProgressUnwrapped(v *[]*string
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -18668,7 +18697,8 @@ func awsAwsquery_deserializeDocumentImportTablesNotStartedUnwrapped(v *[]*string
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -20198,7 +20228,8 @@ func awsAwsquery_deserializeDocumentIPRangeListUnwrapped(v *[]*types.IPRange, de
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.IPRange
 		t := decoder.StartEl
 		_ = t
@@ -20469,7 +20500,8 @@ func awsAwsquery_deserializeDocumentNodeConfigurationOptionListUnwrapped(v *[]*t
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.NodeConfigurationOption
 		t := decoder.StartEl
 		_ = t
@@ -20709,7 +20741,8 @@ func awsAwsquery_deserializeDocumentOrderableClusterOptionsListUnwrapped(v *[]*t
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.OrderableClusterOption
 		t := decoder.StartEl
 		_ = t
@@ -20940,7 +20973,8 @@ func awsAwsquery_deserializeDocumentParameterGroupListUnwrapped(v *[]*types.Clus
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.ClusterParameterGroup
 		t := decoder.StartEl
 		_ = t
@@ -20998,7 +21032,8 @@ func awsAwsquery_deserializeDocumentParametersListUnwrapped(v *[]*types.Paramete
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.Parameter
 		t := decoder.StartEl
 		_ = t
@@ -21115,7 +21150,8 @@ func awsAwsquery_deserializeDocumentPendingActionsListUnwrapped(v *[]*string, de
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -21458,7 +21494,8 @@ func awsAwsquery_deserializeDocumentRecurringChargeListUnwrapped(v *[]*types.Rec
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.RecurringCharge
 		t := decoder.StartEl
 		_ = t
@@ -21844,7 +21881,8 @@ func awsAwsquery_deserializeDocumentReservedNodeListUnwrapped(v *[]*types.Reserv
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.ReservedNode
 		t := decoder.StartEl
 		_ = t
@@ -22116,7 +22154,8 @@ func awsAwsquery_deserializeDocumentReservedNodeOfferingListUnwrapped(v *[]*type
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.ReservedNodeOffering
 		t := decoder.StartEl
 		_ = t
@@ -22554,7 +22593,8 @@ func awsAwsquery_deserializeDocumentRestorableNodeTypeListUnwrapped(v *[]*string
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -22884,7 +22924,8 @@ func awsAwsquery_deserializeDocumentRevisionTargetsListUnwrapped(v *[]*types.Rev
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.RevisionTarget
 		t := decoder.StartEl
 		_ = t
@@ -23145,7 +23186,8 @@ func awsAwsquery_deserializeDocumentScheduledActionListUnwrapped(v *[]*types.Sch
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.ScheduledAction
 		t := decoder.StartEl
 		_ = t
@@ -23311,7 +23353,8 @@ func awsAwsquery_deserializeDocumentScheduledActionTimeListUnwrapped(v *[]*time.
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *time.Time
 		t := decoder.StartEl
 		_ = t
@@ -23489,7 +23532,8 @@ func awsAwsquery_deserializeDocumentScheduleDefinitionListUnwrapped(v *[]*string
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -23617,7 +23661,8 @@ func awsAwsquery_deserializeDocumentScheduledSnapshotTimeListUnwrapped(v *[]*tim
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *time.Time
 		t := decoder.StartEl
 		_ = t
@@ -24491,7 +24536,8 @@ func awsAwsquery_deserializeDocumentSnapshotCopyGrantListUnwrapped(v *[]*types.S
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.SnapshotCopyGrant
 		t := decoder.StartEl
 		_ = t
@@ -24752,7 +24798,8 @@ func awsAwsquery_deserializeDocumentSnapshotIdentifierListUnwrapped(v *[]*string
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -24820,7 +24867,8 @@ func awsAwsquery_deserializeDocumentSnapshotListUnwrapped(v *[]*types.Snapshot, 
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.Snapshot
 		t := decoder.StartEl
 		_ = t
@@ -25031,7 +25079,8 @@ func awsAwsquery_deserializeDocumentSnapshotScheduleListUnwrapped(v *[]*types.Sn
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.SnapshotSchedule
 		t := decoder.StartEl
 		_ = t
@@ -25388,7 +25437,8 @@ func awsAwsquery_deserializeDocumentSourceIdsListUnwrapped(v *[]*string, decoder
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -25622,7 +25672,8 @@ func awsAwsquery_deserializeDocumentSubnetListUnwrapped(v *[]*types.Subnet, deco
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.Subnet
 		t := decoder.StartEl
 		_ = t
@@ -25968,7 +26019,8 @@ func awsAwsquery_deserializeDocumentSupportedOperationListUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.SupportedOperation
 		t := decoder.StartEl
 		_ = t
@@ -26074,7 +26126,8 @@ func awsAwsquery_deserializeDocumentSupportedPlatformsListUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.SupportedPlatform
 		t := decoder.StartEl
 		_ = t
@@ -26484,7 +26537,8 @@ func awsAwsquery_deserializeDocumentTableRestoreStatusListUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.TableRestoreStatus
 		t := decoder.StartEl
 		_ = t
@@ -26676,7 +26730,8 @@ func awsAwsquery_deserializeDocumentTaggedResourceListUnwrapped(v *[]*types.Tagg
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.TaggedResource
 		t := decoder.StartEl
 		_ = t
@@ -26782,7 +26837,8 @@ func awsAwsquery_deserializeDocumentTagListUnwrapped(v *[]*types.Tag, decoder sm
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.Tag
 		t := decoder.StartEl
 		_ = t
@@ -26840,7 +26896,8 @@ func awsAwsquery_deserializeDocumentTrackListUnwrapped(v *[]*types.MaintenanceTr
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.MaintenanceTrack
 		t := decoder.StartEl
 		_ = t
@@ -27395,7 +27452,8 @@ func awsAwsquery_deserializeDocumentUsageLimitsUnwrapped(v *[]*types.UsageLimit,
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.UsageLimit
 		t := decoder.StartEl
 		_ = t
@@ -27517,7 +27575,8 @@ func awsAwsquery_deserializeDocumentVpcSecurityGroupMembershipListUnwrapped(v *[
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.VpcSecurityGroupMembership
 		t := decoder.StartEl
 		_ = t

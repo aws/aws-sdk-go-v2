@@ -3301,7 +3301,8 @@ func awsAwsquery_deserializeDocumentAlarmHistoryItemsUnwrapped(v *[]*types.Alarm
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.AlarmHistoryItem
 		t := decoder.StartEl
 		_ = t
@@ -3518,7 +3519,8 @@ func awsAwsquery_deserializeDocumentAnomalyDetectorExcludedTimeRangesUnwrapped(v
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.Range
 		t := decoder.StartEl
 		_ = t
@@ -3576,7 +3578,8 @@ func awsAwsquery_deserializeDocumentAnomalyDetectorsUnwrapped(v *[]*types.Anomal
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.AnomalyDetector
 		t := decoder.StartEl
 		_ = t
@@ -3634,7 +3637,8 @@ func awsAwsquery_deserializeDocumentBatchFailuresUnwrapped(v *[]*types.PartialFa
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.PartialFailure
 		t := decoder.StartEl
 		_ = t
@@ -3901,7 +3905,8 @@ func awsAwsquery_deserializeDocumentCompositeAlarmsUnwrapped(v *[]*types.Composi
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.CompositeAlarm
 		t := decoder.StartEl
 		_ = t
@@ -4007,7 +4012,8 @@ func awsAwsquery_deserializeDocumentDashboardEntriesUnwrapped(v *[]*types.Dashbo
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.DashboardEntry
 		t := decoder.StartEl
 		_ = t
@@ -4329,7 +4335,8 @@ func awsAwsquery_deserializeDocumentDashboardValidationMessagesUnwrapped(v *[]*t
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.DashboardValidationMessage
 		t := decoder.StartEl
 		_ = t
@@ -4540,7 +4547,8 @@ func awsAwsquery_deserializeDocumentDatapointsUnwrapped(v *[]*types.Datapoint, d
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.Datapoint
 		t := decoder.StartEl
 		_ = t
@@ -4701,7 +4709,8 @@ func awsAwsquery_deserializeDocumentDatapointValuesUnwrapped(v *[]*float64, deco
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *float64
 		t := decoder.StartEl
 		_ = t
@@ -4834,7 +4843,8 @@ func awsAwsquery_deserializeDocumentDimensionsUnwrapped(v *[]*types.Dimension, d
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.Dimension
 		t := decoder.StartEl
 		_ = t
@@ -5115,7 +5125,8 @@ func awsAwsquery_deserializeDocumentInsightRuleContributorDatapointsUnwrapped(v 
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.InsightRuleContributorDatapoint
 		t := decoder.StartEl
 		_ = t
@@ -5184,7 +5195,8 @@ func awsAwsquery_deserializeDocumentInsightRuleContributorKeyLabelsUnwrapped(v *
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -5263,7 +5275,8 @@ func awsAwsquery_deserializeDocumentInsightRuleContributorKeysUnwrapped(v *[]*st
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -5331,7 +5344,8 @@ func awsAwsquery_deserializeDocumentInsightRuleContributorsUnwrapped(v *[]*types
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.InsightRuleContributor
 		t := decoder.StartEl
 		_ = t
@@ -5557,7 +5571,8 @@ func awsAwsquery_deserializeDocumentInsightRuleMetricDatapointsUnwrapped(v *[]*t
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.InsightRuleMetricDatapoint
 		t := decoder.StartEl
 		_ = t
@@ -5615,7 +5630,8 @@ func awsAwsquery_deserializeDocumentInsightRulesUnwrapped(v *[]*types.InsightRul
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.InsightRule
 		t := decoder.StartEl
 		_ = t
@@ -6551,7 +6567,8 @@ func awsAwsquery_deserializeDocumentMetricAlarmsUnwrapped(v *[]*types.MetricAlar
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.MetricAlarm
 		t := decoder.StartEl
 		_ = t
@@ -6609,7 +6626,8 @@ func awsAwsquery_deserializeDocumentMetricDataQueriesUnwrapped(v *[]*types.Metri
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.MetricDataQuery
 		t := decoder.StartEl
 		_ = t
@@ -6881,7 +6899,8 @@ func awsAwsquery_deserializeDocumentMetricDataResultMessagesUnwrapped(v *[]*type
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.MessageData
 		t := decoder.StartEl
 		_ = t
@@ -6939,7 +6958,8 @@ func awsAwsquery_deserializeDocumentMetricDataResultsUnwrapped(v *[]*types.Metri
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.MetricDataResult
 		t := decoder.StartEl
 		_ = t
@@ -6997,7 +7017,8 @@ func awsAwsquery_deserializeDocumentMetricsUnwrapped(v *[]*types.Metric, decoder
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.Metric
 		t := decoder.StartEl
 		_ = t
@@ -7360,7 +7381,8 @@ func awsAwsquery_deserializeDocumentResourceListUnwrapped(v *[]*string, decoder 
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -7620,7 +7642,8 @@ func awsAwsquery_deserializeDocumentTagListUnwrapped(v *[]*types.Tag, decoder sm
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.Tag
 		t := decoder.StartEl
 		_ = t
@@ -7690,7 +7713,8 @@ func awsAwsquery_deserializeDocumentTimestampsUnwrapped(v *[]*time.Time, decoder
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *time.Time
 		t := decoder.StartEl
 		_ = t
