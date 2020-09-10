@@ -7521,7 +7521,8 @@ func awsAwsquery_deserializeDocumentAddressListUnwrapped(v *[]*string, decoder s
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -7842,7 +7843,8 @@ func awsAwsquery_deserializeDocumentBulkEmailDestinationStatusListUnwrapped(v *[
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.BulkEmailDestinationStatus
 		t := decoder.StartEl
 		_ = t
@@ -8079,7 +8081,8 @@ func awsAwsquery_deserializeDocumentCloudWatchDimensionConfigurationsUnwrapped(v
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.CloudWatchDimensionConfiguration
 		t := decoder.StartEl
 		_ = t
@@ -8313,7 +8316,8 @@ func awsAwsquery_deserializeDocumentConfigurationSetsUnwrapped(v *[]*types.Confi
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.ConfigurationSet
 		t := decoder.StartEl
 		_ = t
@@ -8723,7 +8727,8 @@ func awsAwsquery_deserializeDocumentCustomVerificationEmailTemplatesUnwrapped(v 
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.CustomVerificationEmailTemplate
 		t := decoder.StartEl
 		_ = t
@@ -9154,7 +9159,8 @@ func awsAwsquery_deserializeDocumentEventDestinationsUnwrapped(v *[]*types.Event
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.EventDestination
 		t := decoder.StartEl
 		_ = t
@@ -9220,7 +9226,8 @@ func awsAwsquery_deserializeDocumentEventTypesUnwrapped(v *[]types.EventType, de
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv types.EventType
 		t := decoder.StartEl
 		_ = t
@@ -9427,7 +9434,8 @@ func awsAwsquery_deserializeDocumentIdentityListUnwrapped(v *[]*string, decoder 
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -11136,7 +11144,8 @@ func awsAwsquery_deserializeDocumentPolicyNameListUnwrapped(v *[]*string, decode
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -11326,7 +11335,8 @@ func awsAwsquery_deserializeDocumentReceiptActionsListUnwrapped(v *[]*types.Rece
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.ReceiptAction
 		t := decoder.StartEl
 		_ = t
@@ -11438,7 +11448,8 @@ func awsAwsquery_deserializeDocumentReceiptFilterListUnwrapped(v *[]*types.Recei
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.ReceiptFilter
 		t := decoder.StartEl
 		_ = t
@@ -11727,7 +11738,8 @@ func awsAwsquery_deserializeDocumentReceiptRuleSetsListsUnwrapped(v *[]*types.Re
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.ReceiptRuleSetMetadata
 		t := decoder.StartEl
 		_ = t
@@ -11785,7 +11797,8 @@ func awsAwsquery_deserializeDocumentReceiptRulesListUnwrapped(v *[]*types.Receip
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.ReceiptRule
 		t := decoder.StartEl
 		_ = t
@@ -11854,7 +11867,8 @@ func awsAwsquery_deserializeDocumentRecipientsListUnwrapped(v *[]*string, decode
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -12344,7 +12358,8 @@ func awsAwsquery_deserializeDocumentSendDataPointListUnwrapped(v *[]*types.SendD
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.SendDataPoint
 		t := decoder.StartEl
 		_ = t
@@ -12797,7 +12812,8 @@ func awsAwsquery_deserializeDocumentTemplateMetadataListUnwrapped(v *[]*types.Te
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.TemplateMetadata
 		t := decoder.StartEl
 		_ = t
@@ -13122,7 +13138,8 @@ func awsAwsquery_deserializeDocumentVerificationTokenListUnwrapped(v *[]*string,
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t

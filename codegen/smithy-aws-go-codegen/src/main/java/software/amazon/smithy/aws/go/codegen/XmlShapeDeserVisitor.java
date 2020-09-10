@@ -190,7 +190,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
                 getUnwrappedMapDelegateFunctionName(context, shape), symbol, () -> {
                     // initialize the output member variable
                     generatesIntializerForOutputVariable(context, shape);
-                    writer.openBlock("for {", "}", () -> {
+                    writer.openBlock(" switch { default: ", "}", () -> {
                         writer.write("var mv $P", memberSymbol);
                         writer.write("t := decoder.StartEl");
                         writer.write("_ = t");

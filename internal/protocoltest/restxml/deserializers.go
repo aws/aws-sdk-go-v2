@@ -4808,7 +4808,8 @@ func awsRestxml_deserializeDocumentRenamedListMembersUnwrapped(v *[]*string, dec
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -4876,7 +4877,8 @@ func awsRestxml_deserializeDocumentStructureListUnwrapped(v *[]*types.StructureL
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.StructureListMember
 		t := decoder.StartEl
 		_ = t
@@ -5228,7 +5230,8 @@ func awsRestxml_deserializeDocumentXmlNamespacedListUnwrapped(v *[]*string, deco
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -5361,7 +5364,8 @@ func awsRestxml_deserializeDocumentBooleanListUnwrapped(v *[]*bool, decoder smit
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *bool
 		t := decoder.StartEl
 		_ = t
@@ -5437,7 +5441,8 @@ func awsRestxml_deserializeDocumentFooEnumListUnwrapped(v *[]types.FooEnum, deco
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv types.FooEnum
 		t := decoder.StartEl
 		_ = t
@@ -5597,7 +5602,8 @@ func awsRestxml_deserializeDocumentFooEnumSetUnwrapped(v *[]types.FooEnum, decod
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv types.FooEnum
 		t := decoder.StartEl
 		_ = t
@@ -5722,7 +5728,8 @@ func awsRestxml_deserializeDocumentIntegerListUnwrapped(v *[]*int32, decoder smi
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *int32
 		t := decoder.StartEl
 		_ = t
@@ -5791,7 +5798,8 @@ func awsRestxml_deserializeDocumentNestedStringListUnwrapped(v *[][]*string, dec
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv []*string
 		t := decoder.StartEl
 		_ = t
@@ -5860,7 +5868,8 @@ func awsRestxml_deserializeDocumentStringListUnwrapped(v *[]*string, decoder smi
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -5939,7 +5948,8 @@ func awsRestxml_deserializeDocumentStringSetUnwrapped(v *[]*string, decoder smit
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -6019,7 +6029,8 @@ func awsRestxml_deserializeDocumentTimestampListUnwrapped(v *[]*time.Time, decod
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *time.Time
 		t := decoder.StartEl
 		_ = t

@@ -3644,7 +3644,8 @@ func awsAwsquery_deserializeDocumentAdditionalAttributesUnwrapped(v *[]*types.Ad
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.AdditionalAttribute
 		t := decoder.StartEl
 		_ = t
@@ -3702,7 +3703,8 @@ func awsAwsquery_deserializeDocumentAppCookieStickinessPoliciesUnwrapped(v *[]*t
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.AppCookieStickinessPolicy
 		t := decoder.StartEl
 		_ = t
@@ -3835,7 +3837,8 @@ func awsAwsquery_deserializeDocumentAvailabilityZonesUnwrapped(v *[]*string, dec
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -3958,7 +3961,8 @@ func awsAwsquery_deserializeDocumentBackendServerDescriptionsUnwrapped(v *[]*typ
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.BackendServerDescription
 		t := decoder.StartEl
 		_ = t
@@ -4630,7 +4634,8 @@ func awsAwsquery_deserializeDocumentInstancesUnwrapped(v *[]*types.Instance, dec
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.Instance
 		t := decoder.StartEl
 		_ = t
@@ -4784,7 +4789,8 @@ func awsAwsquery_deserializeDocumentInstanceStatesUnwrapped(v *[]*types.Instance
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.InstanceState
 		t := decoder.StartEl
 		_ = t
@@ -5082,7 +5088,8 @@ func awsAwsquery_deserializeDocumentLBCookieStickinessPoliciesUnwrapped(v *[]*ty
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.LBCookieStickinessPolicy
 		t := decoder.StartEl
 		_ = t
@@ -5269,7 +5276,8 @@ func awsAwsquery_deserializeDocumentLimitsUnwrapped(v *[]*types.Limit, decoder s
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.Limit
 		t := decoder.StartEl
 		_ = t
@@ -5485,7 +5493,8 @@ func awsAwsquery_deserializeDocumentListenerDescriptionsUnwrapped(v *[]*types.Li
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.ListenerDescription
 		t := decoder.StartEl
 		_ = t
@@ -5900,7 +5909,8 @@ func awsAwsquery_deserializeDocumentLoadBalancerDescriptionsUnwrapped(v *[]*type
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.LoadBalancerDescription
 		t := decoder.StartEl
 		_ = t
@@ -6120,7 +6130,8 @@ func awsAwsquery_deserializeDocumentPolicyAttributeDescriptionsUnwrapped(v *[]*t
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.PolicyAttributeDescription
 		t := decoder.StartEl
 		_ = t
@@ -6290,7 +6301,8 @@ func awsAwsquery_deserializeDocumentPolicyAttributeTypeDescriptionsUnwrapped(v *
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.PolicyAttributeTypeDescription
 		t := decoder.StartEl
 		_ = t
@@ -6418,7 +6430,8 @@ func awsAwsquery_deserializeDocumentPolicyDescriptionsUnwrapped(v *[]*types.Poli
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.PolicyDescription
 		t := decoder.StartEl
 		_ = t
@@ -6487,7 +6500,8 @@ func awsAwsquery_deserializeDocumentPolicyNamesUnwrapped(v *[]*string, decoder s
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -6673,7 +6687,8 @@ func awsAwsquery_deserializeDocumentPolicyTypeDescriptionsUnwrapped(v *[]*types.
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.PolicyTypeDescription
 		t := decoder.StartEl
 		_ = t
@@ -6790,7 +6805,8 @@ func awsAwsquery_deserializeDocumentSecurityGroupsUnwrapped(v *[]*string, decode
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -6981,7 +6997,8 @@ func awsAwsquery_deserializeDocumentSubnetsUnwrapped(v *[]*string, decoder smith
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -7167,7 +7184,8 @@ func awsAwsquery_deserializeDocumentTagDescriptionsUnwrapped(v *[]*types.TagDesc
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.TagDescription
 		t := decoder.StartEl
 		_ = t
@@ -7225,7 +7243,8 @@ func awsAwsquery_deserializeDocumentTagListUnwrapped(v *[]*types.Tag, decoder sm
 		sv = *v
 	}
 
-	for {
+	switch {
+	default:
 		var mv *types.Tag
 		t := decoder.StartEl
 		_ = t
