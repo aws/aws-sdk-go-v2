@@ -4769,7 +4769,7 @@ func awsAwsquery_deserializeDocumentListOfEndpointsUnwrapped(v *[]*types.Endpoin
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.Endpoint
 		t := decoder.StartEl
 		_ = t
@@ -4828,7 +4828,7 @@ func awsAwsquery_deserializeDocumentListOfPlatformApplicationsUnwrapped(v *[]*ty
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.PlatformApplication
 		t := decoder.StartEl
 		_ = t
@@ -5036,7 +5036,7 @@ func awsAwsquery_deserializeDocumentPhoneNumberListUnwrapped(v *[]*string, decod
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -5553,7 +5553,7 @@ func awsAwsquery_deserializeDocumentSubscriptionsListUnwrapped(v *[]*types.Subsc
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.Subscription
 		t := decoder.StartEl
 		_ = t
@@ -5724,7 +5724,7 @@ func awsAwsquery_deserializeDocumentTagListUnwrapped(v *[]*types.Tag, decoder sm
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.Tag
 		t := decoder.StartEl
 		_ = t
@@ -6065,7 +6065,7 @@ func awsAwsquery_deserializeDocumentTopicsListUnwrapped(v *[]*types.Topic, decod
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.Topic
 		t := decoder.StartEl
 		_ = t

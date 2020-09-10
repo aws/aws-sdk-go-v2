@@ -1738,7 +1738,7 @@ func awsEc2query_deserializeDocumentRenamedListMembersUnwrapped(v *[]*string, de
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -1807,7 +1807,7 @@ func awsEc2query_deserializeDocumentStructureListUnwrapped(v *[]*types.Structure
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.StructureListMember
 		t := decoder.StartEl
 		_ = t
@@ -1941,7 +1941,7 @@ func awsEc2query_deserializeDocumentXmlNamespacedListUnwrapped(v *[]*string, dec
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -2075,7 +2075,7 @@ func awsEc2query_deserializeDocumentBooleanListUnwrapped(v *[]*bool, decoder smi
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *bool
 		t := decoder.StartEl
 		_ = t
@@ -2152,7 +2152,7 @@ func awsEc2query_deserializeDocumentFooEnumListUnwrapped(v *[]types.FooEnum, dec
 	}
 
 	switch {
-	case true:
+	default:
 		var mv types.FooEnum
 		t := decoder.StartEl
 		_ = t
@@ -2313,7 +2313,7 @@ func awsEc2query_deserializeDocumentFooEnumSetUnwrapped(v *[]types.FooEnum, deco
 	}
 
 	switch {
-	case true:
+	default:
 		var mv types.FooEnum
 		t := decoder.StartEl
 		_ = t
@@ -2391,7 +2391,7 @@ func awsEc2query_deserializeDocumentIntegerListUnwrapped(v *[]*int32, decoder sm
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *int32
 		t := decoder.StartEl
 		_ = t
@@ -2461,7 +2461,7 @@ func awsEc2query_deserializeDocumentNestedStringListUnwrapped(v *[][]*string, de
 	}
 
 	switch {
-	case true:
+	default:
 		var mv []*string
 		t := decoder.StartEl
 		_ = t
@@ -2531,7 +2531,7 @@ func awsEc2query_deserializeDocumentStringListUnwrapped(v *[]*string, decoder sm
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -2611,7 +2611,7 @@ func awsEc2query_deserializeDocumentStringSetUnwrapped(v *[]*string, decoder smi
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -2692,7 +2692,7 @@ func awsEc2query_deserializeDocumentTimestampListUnwrapped(v *[]*time.Time, deco
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *time.Time
 		t := decoder.StartEl
 		_ = t

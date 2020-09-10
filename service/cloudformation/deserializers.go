@@ -5645,7 +5645,7 @@ func awsAwsquery_deserializeDocumentAccountLimitListUnwrapped(v *[]*types.Accoun
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.AccountLimit
 		t := decoder.StartEl
 		_ = t
@@ -5715,7 +5715,7 @@ func awsAwsquery_deserializeDocumentAccountListUnwrapped(v *[]*string, decoder s
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -5795,7 +5795,7 @@ func awsAwsquery_deserializeDocumentAllowedValuesUnwrapped(v *[]*string, decoder
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -5984,7 +5984,7 @@ func awsAwsquery_deserializeDocumentCapabilitiesUnwrapped(v *[]types.Capability,
 	}
 
 	switch {
-	case true:
+	default:
 		var mv types.Capability
 		t := decoder.StartEl
 		_ = t
@@ -6149,7 +6149,7 @@ func awsAwsquery_deserializeDocumentChangesUnwrapped(v *[]*types.Change, decoder
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.Change
 		t := decoder.StartEl
 		_ = t
@@ -6256,7 +6256,7 @@ func awsAwsquery_deserializeDocumentChangeSetSummariesUnwrapped(v *[]*types.Chan
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.ChangeSetSummary
 		t := decoder.StartEl
 		_ = t
@@ -6658,7 +6658,7 @@ func awsAwsquery_deserializeDocumentExportsUnwrapped(v *[]*types.Export, decoder
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.Export
 		t := decoder.StartEl
 		_ = t
@@ -6728,7 +6728,7 @@ func awsAwsquery_deserializeDocumentImportsUnwrapped(v *[]*string, decoder smith
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -7112,7 +7112,7 @@ func awsAwsquery_deserializeDocumentLogicalResourceIdsUnwrapped(v *[]*string, de
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -7240,7 +7240,7 @@ func awsAwsquery_deserializeDocumentNotificationARNsUnwrapped(v *[]*string, deco
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -7512,7 +7512,7 @@ func awsAwsquery_deserializeDocumentOrganizationalUnitIdListUnwrapped(v *[]*stri
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -7677,7 +7677,7 @@ func awsAwsquery_deserializeDocumentOutputsUnwrapped(v *[]*types.Output, decoder
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.Output
 		t := decoder.StartEl
 		_ = t
@@ -7988,7 +7988,7 @@ func awsAwsquery_deserializeDocumentParameterDeclarationsUnwrapped(v *[]*types.P
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.ParameterDeclaration
 		t := decoder.StartEl
 		_ = t
@@ -8047,7 +8047,7 @@ func awsAwsquery_deserializeDocumentParametersUnwrapped(v *[]*types.Parameter, d
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.Parameter
 		t := decoder.StartEl
 		_ = t
@@ -8106,7 +8106,7 @@ func awsAwsquery_deserializeDocumentPhysicalResourceIdContextUnwrapped(v *[]*typ
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.PhysicalResourceIdContextKeyValuePair
 		t := decoder.StartEl
 		_ = t
@@ -8322,7 +8322,7 @@ func awsAwsquery_deserializeDocumentPropertyDifferencesUnwrapped(v *[]*types.Pro
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.PropertyDifference
 		t := decoder.StartEl
 		_ = t
@@ -8392,7 +8392,7 @@ func awsAwsquery_deserializeDocumentRegionListUnwrapped(v *[]*string, decoder sm
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -8472,7 +8472,7 @@ func awsAwsquery_deserializeDocumentRegistrationTokenListUnwrapped(v *[]*string,
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -8739,7 +8739,7 @@ func awsAwsquery_deserializeDocumentResourceChangeDetailsUnwrapped(v *[]*types.R
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.ResourceChangeDetail
 		t := decoder.StartEl
 		_ = t
@@ -8809,7 +8809,7 @@ func awsAwsquery_deserializeDocumentResourceIdentifiersUnwrapped(v *[]*string, d
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -8878,7 +8878,7 @@ func awsAwsquery_deserializeDocumentResourceIdentifierSummariesUnwrapped(v *[]*t
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.ResourceIdentifierSummary
 		t := decoder.StartEl
 		_ = t
@@ -9082,7 +9082,7 @@ func awsAwsquery_deserializeDocumentResourceTypesUnwrapped(v *[]*string, decoder
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -9270,7 +9270,7 @@ func awsAwsquery_deserializeDocumentRollbackTriggersUnwrapped(v *[]*types.Rollba
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.RollbackTrigger
 		t := decoder.StartEl
 		_ = t
@@ -9337,7 +9337,7 @@ func awsAwsquery_deserializeDocumentScopeUnwrapped(v *[]types.ResourceAttribute,
 	}
 
 	switch {
-	case true:
+	default:
 		var mv types.ResourceAttribute
 		t := decoder.StartEl
 		_ = t
@@ -10048,7 +10048,7 @@ func awsAwsquery_deserializeDocumentStackEventsUnwrapped(v *[]*types.StackEvent,
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.StackEvent
 		t := decoder.StartEl
 		_ = t
@@ -10383,7 +10383,7 @@ func awsAwsquery_deserializeDocumentStackInstanceSummariesUnwrapped(v *[]*types.
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.StackInstanceSummary
 		t := decoder.StartEl
 		_ = t
@@ -11289,7 +11289,7 @@ func awsAwsquery_deserializeDocumentStackResourceDriftsUnwrapped(v *[]*types.Sta
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.StackResourceDrift
 		t := decoder.StartEl
 		_ = t
@@ -11348,7 +11348,7 @@ func awsAwsquery_deserializeDocumentStackResourcesUnwrapped(v *[]*types.StackRes
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.StackResource
 		t := decoder.StartEl
 		_ = t
@@ -11407,7 +11407,7 @@ func awsAwsquery_deserializeDocumentStackResourceSummariesUnwrapped(v *[]*types.
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.StackResourceSummary
 		t := decoder.StartEl
 		_ = t
@@ -11598,7 +11598,7 @@ func awsAwsquery_deserializeDocumentStacksUnwrapped(v *[]*types.Stack, decoder s
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.Stack
 		t := decoder.StartEl
 		_ = t
@@ -12415,7 +12415,7 @@ func awsAwsquery_deserializeDocumentStackSetOperationResultSummariesUnwrapped(v 
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.StackSetOperationResultSummary
 		t := decoder.StartEl
 		_ = t
@@ -12589,7 +12589,7 @@ func awsAwsquery_deserializeDocumentStackSetOperationSummariesUnwrapped(v *[]*ty
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.StackSetOperationSummary
 		t := decoder.StartEl
 		_ = t
@@ -12756,7 +12756,7 @@ func awsAwsquery_deserializeDocumentStackSetSummariesUnwrapped(v *[]*types.Stack
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.StackSetSummary
 		t := decoder.StartEl
 		_ = t
@@ -12957,7 +12957,7 @@ func awsAwsquery_deserializeDocumentStackSummariesUnwrapped(v *[]*types.StackSum
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.StackSummary
 		t := decoder.StartEl
 		_ = t
@@ -13222,7 +13222,7 @@ func awsAwsquery_deserializeDocumentStageListUnwrapped(v *[]types.TemplateStage,
 	}
 
 	switch {
-	case true:
+	default:
 		var mv types.TemplateStage
 		t := decoder.StartEl
 		_ = t
@@ -13400,7 +13400,7 @@ func awsAwsquery_deserializeDocumentTagsUnwrapped(v *[]*types.Tag, decoder smith
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.Tag
 		t := decoder.StartEl
 		_ = t
@@ -13555,7 +13555,7 @@ func awsAwsquery_deserializeDocumentTemplateParametersUnwrapped(v *[]*types.Temp
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.TemplateParameter
 		t := decoder.StartEl
 		_ = t
@@ -13673,7 +13673,7 @@ func awsAwsquery_deserializeDocumentTransformsListUnwrapped(v *[]*string, decode
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -13790,7 +13790,7 @@ func awsAwsquery_deserializeDocumentTypeSummariesUnwrapped(v *[]*types.TypeSumma
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.TypeSummary
 		t := decoder.StartEl
 		_ = t
@@ -13975,7 +13975,7 @@ func awsAwsquery_deserializeDocumentTypeVersionSummariesUnwrapped(v *[]*types.Ty
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.TypeVersionSummary
 		t := decoder.StartEl
 		_ = t

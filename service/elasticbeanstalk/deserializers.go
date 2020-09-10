@@ -4921,7 +4921,7 @@ func awsAwsquery_deserializeDocumentApplicationDescriptionListUnwrapped(v *[]*ty
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.ApplicationDescription
 		t := decoder.StartEl
 		_ = t
@@ -5283,7 +5283,7 @@ func awsAwsquery_deserializeDocumentApplicationVersionDescriptionListUnwrapped(v
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.ApplicationVersionDescription
 		t := decoder.StartEl
 		_ = t
@@ -5434,7 +5434,7 @@ func awsAwsquery_deserializeDocumentAutoScalingGroupListUnwrapped(v *[]*types.Au
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.AutoScalingGroup
 		t := decoder.StartEl
 		_ = t
@@ -5493,7 +5493,7 @@ func awsAwsquery_deserializeDocumentAvailableSolutionStackDetailsListUnwrapped(v
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.SolutionStackDescription
 		t := decoder.StartEl
 		_ = t
@@ -5563,7 +5563,7 @@ func awsAwsquery_deserializeDocumentAvailableSolutionStackNamesListUnwrapped(v *
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -5691,7 +5691,7 @@ func awsAwsquery_deserializeDocumentCausesUnwrapped(v *[]*string, decoder smithy
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -5996,7 +5996,7 @@ func awsAwsquery_deserializeDocumentConfigurationOptionDescriptionsListUnwrapped
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.ConfigurationOptionDescription
 		t := decoder.StartEl
 		_ = t
@@ -6066,7 +6066,7 @@ func awsAwsquery_deserializeDocumentConfigurationOptionPossibleValuesUnwrapped(v
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -6231,7 +6231,7 @@ func awsAwsquery_deserializeDocumentConfigurationOptionSettingsListUnwrapped(v *
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.ConfigurationOptionSetting
 		t := decoder.StartEl
 		_ = t
@@ -6471,7 +6471,7 @@ func awsAwsquery_deserializeDocumentConfigurationSettingsDescriptionListUnwrappe
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.ConfigurationSettingsDescription
 		t := decoder.StartEl
 		_ = t
@@ -6541,7 +6541,7 @@ func awsAwsquery_deserializeDocumentConfigurationTemplateNamesListUnwrapped(v *[
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -6842,7 +6842,7 @@ func awsAwsquery_deserializeDocumentCustomAmiListUnwrapped(v *[]*types.CustomAmi
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.CustomAmi
 		t := decoder.StartEl
 		_ = t
@@ -7378,7 +7378,7 @@ func awsAwsquery_deserializeDocumentEnvironmentDescriptionsListUnwrapped(v *[]*t
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.EnvironmentDescription
 		t := decoder.StartEl
 		_ = t
@@ -7531,7 +7531,7 @@ func awsAwsquery_deserializeDocumentEnvironmentInfoDescriptionListUnwrapped(v *[
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.EnvironmentInfoDescription
 		t := decoder.StartEl
 		_ = t
@@ -7654,7 +7654,7 @@ func awsAwsquery_deserializeDocumentEnvironmentLinksUnwrapped(v *[]*types.Enviro
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.EnvironmentLink
 		t := decoder.StartEl
 		_ = t
@@ -8095,7 +8095,7 @@ func awsAwsquery_deserializeDocumentEventDescriptionListUnwrapped(v *[]*types.Ev
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.EventDescription
 		t := decoder.StartEl
 		_ = t
@@ -8202,7 +8202,7 @@ func awsAwsquery_deserializeDocumentInstanceHealthListUnwrapped(v *[]*types.Sing
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.SingleInstanceHealth
 		t := decoder.StartEl
 		_ = t
@@ -8429,7 +8429,7 @@ func awsAwsquery_deserializeDocumentInstanceListUnwrapped(v *[]*types.Instance, 
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.Instance
 		t := decoder.StartEl
 		_ = t
@@ -8800,7 +8800,7 @@ func awsAwsquery_deserializeDocumentLaunchConfigurationListUnwrapped(v *[]*types
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.LaunchConfiguration
 		t := decoder.StartEl
 		_ = t
@@ -8907,7 +8907,7 @@ func awsAwsquery_deserializeDocumentLaunchTemplateListUnwrapped(v *[]*types.Laun
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.LaunchTemplate
 		t := decoder.StartEl
 		_ = t
@@ -9043,7 +9043,7 @@ func awsAwsquery_deserializeDocumentLoadAverageUnwrapped(v *[]*float64, decoder 
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *float64
 		t := decoder.StartEl
 		_ = t
@@ -9231,7 +9231,7 @@ func awsAwsquery_deserializeDocumentLoadBalancerListUnwrapped(v *[]*types.LoadBa
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.LoadBalancer
 		t := decoder.StartEl
 		_ = t
@@ -9290,7 +9290,7 @@ func awsAwsquery_deserializeDocumentLoadBalancerListenersDescriptionUnwrapped(v 
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.Listener
 		t := decoder.StartEl
 		_ = t
@@ -9609,7 +9609,7 @@ func awsAwsquery_deserializeDocumentManagedActionHistoryItemsUnwrapped(v *[]*typ
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.ManagedActionHistoryItem
 		t := decoder.StartEl
 		_ = t
@@ -9716,7 +9716,7 @@ func awsAwsquery_deserializeDocumentManagedActionsUnwrapped(v *[]*types.ManagedA
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.ManagedAction
 		t := decoder.StartEl
 		_ = t
@@ -10152,7 +10152,7 @@ func awsAwsquery_deserializeDocumentPlatformBranchSummaryListUnwrapped(v *[]*typ
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.PlatformBranchSummary
 		t := decoder.StartEl
 		_ = t
@@ -10592,7 +10592,7 @@ func awsAwsquery_deserializeDocumentPlatformFrameworksUnwrapped(v *[]*types.Plat
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.PlatformFramework
 		t := decoder.StartEl
 		_ = t
@@ -10715,7 +10715,7 @@ func awsAwsquery_deserializeDocumentPlatformProgrammingLanguagesUnwrapped(v *[]*
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.PlatformProgrammingLanguage
 		t := decoder.StartEl
 		_ = t
@@ -10975,7 +10975,7 @@ func awsAwsquery_deserializeDocumentPlatformSummaryListUnwrapped(v *[]*types.Pla
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.PlatformSummary
 		t := decoder.StartEl
 		_ = t
@@ -11146,7 +11146,7 @@ func awsAwsquery_deserializeDocumentQueueListUnwrapped(v *[]*types.Queue, decode
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.Queue
 		t := decoder.StartEl
 		_ = t
@@ -11790,7 +11790,7 @@ func awsAwsquery_deserializeDocumentSolutionStackFileTypeListUnwrapped(v *[]*str
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -12092,7 +12092,7 @@ func awsAwsquery_deserializeDocumentSupportedAddonListUnwrapped(v *[]*string, de
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -12172,7 +12172,7 @@ func awsAwsquery_deserializeDocumentSupportedTierListUnwrapped(v *[]*string, dec
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
@@ -12349,7 +12349,7 @@ func awsAwsquery_deserializeDocumentTagListUnwrapped(v *[]*types.Tag, decoder sm
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.Tag
 		t := decoder.StartEl
 		_ = t
@@ -12792,7 +12792,7 @@ func awsAwsquery_deserializeDocumentTriggerListUnwrapped(v *[]*types.Trigger, de
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.Trigger
 		t := decoder.StartEl
 		_ = t
@@ -12944,7 +12944,7 @@ func awsAwsquery_deserializeDocumentValidationMessagesListUnwrapped(v *[]*types.
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *types.ValidationMessage
 		t := decoder.StartEl
 		_ = t
@@ -13014,7 +13014,7 @@ func awsAwsquery_deserializeDocumentVersionLabelsListUnwrapped(v *[]*string, dec
 	}
 
 	switch {
-	case true:
+	default:
 		var mv *string
 		t := decoder.StartEl
 		_ = t
