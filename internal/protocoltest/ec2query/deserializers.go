@@ -1721,6 +1721,8 @@ func awsEc2query_deserializeDocumentRenamedListMembers(v *[]*string, decoder smi
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -1789,6 +1791,8 @@ func awsEc2query_deserializeDocumentStructureList(v *[]*types.StructureListMembe
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -1924,6 +1928,8 @@ func awsEc2query_deserializeDocumentXmlNamespacedList(v *[]*string, decoder smit
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -2058,6 +2064,8 @@ func awsEc2query_deserializeDocumentBooleanList(v *[]*bool, decoder smithyxml.No
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -2135,6 +2143,8 @@ func awsEc2query_deserializeDocumentFooEnumList(v *[]types.FooEnum, decoder smit
 					col = types.FooEnum(xtv)
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -2296,6 +2306,8 @@ func awsEc2query_deserializeDocumentFooEnumSet(v *[]types.FooEnum, decoder smith
 					col = types.FooEnum(xtv)
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -2374,6 +2386,8 @@ func awsEc2query_deserializeDocumentIntegerList(v *[]*int32, decoder smithyxml.N
 					col = ptr.Int32(int32(i64))
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -2443,6 +2457,8 @@ func awsEc2query_deserializeDocumentNestedStringList(v *[][]*string, decoder smi
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -2514,6 +2530,8 @@ func awsEc2query_deserializeDocumentStringList(v *[]*string, decoder smithyxml.N
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -2594,6 +2612,8 @@ func awsEc2query_deserializeDocumentStringSet(v *[]*string, decoder smithyxml.No
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -2675,6 +2695,8 @@ func awsEc2query_deserializeDocumentTimestampList(v *[]*time.Time, decoder smith
 					col = &t
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -3296,9 +3318,16 @@ func awsEc2query_deserializeOpDocumentXmlBlobsOutput(v **XmlBlobsOutput, decoder
 		switch {
 		case strings.EqualFold("data", t.Name.Local):
 			var data string
-			err := decoder.Decoder.DecodeElement(&data, &t)
+			val, done, err := decoder.Value()
 			if err != nil {
 				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				data = xtv
 			}
 			sv.Data, err = base64.StdEncoding.DecodeString(data)
 			if err != nil {

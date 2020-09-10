@@ -13964,6 +13964,8 @@ func awsAwsquery_deserializeDocumentAccessDetails(v *[]*types.AccessDetail, deco
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -14281,6 +14283,8 @@ func awsAwsquery_deserializeDocumentAccessKeyMetadataListType(v *[]*types.Access
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -14348,6 +14352,8 @@ func awsAwsquery_deserializeDocumentAccountAliasListType(v *[]*string, decoder s
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -14422,6 +14428,8 @@ func awsAwsquery_deserializeDocumentArnListType(v *[]*string, decoder smithyxml.
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -14544,6 +14552,8 @@ func awsAwsquery_deserializeDocumentAttachedPoliciesListType(v *[]*types.Attache
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -14659,6 +14669,8 @@ func awsAwsquery_deserializeDocumentCertificateListType(v *[]*types.SigningCerti
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -14726,6 +14738,8 @@ func awsAwsquery_deserializeDocumentClientIDListType(v *[]*string, decoder smith
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -14843,6 +14857,8 @@ func awsAwsquery_deserializeDocumentContextKeyNamesResultListType(v *[]*string, 
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -15312,6 +15328,8 @@ func awsAwsquery_deserializeDocumentEntityDetailsListType(v *[]*types.EntityDeta
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -15754,6 +15772,8 @@ func awsAwsquery_deserializeDocumentEvaluationResultsListType(v *[]*types.Evalua
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -16023,6 +16043,8 @@ func awsAwsquery_deserializeDocumentGroupDetailListType(v *[]*types.GroupDetail,
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -16081,6 +16103,8 @@ func awsAwsquery_deserializeDocumentGroupListType(v *[]*types.Group, decoder smi
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -16149,6 +16173,8 @@ func awsAwsquery_deserializeDocumentGroupNameListType(v *[]*string, decoder smit
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -16319,6 +16345,8 @@ func awsAwsquery_deserializeDocumentInstanceProfileListType(v *[]*types.Instance
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -16728,6 +16756,8 @@ func awsAwsquery_deserializeDocumentListPolicyGrantingServiceAccessResponseListT
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -17148,6 +17178,8 @@ func awsAwsquery_deserializeDocumentManagedPolicyDetailListType(v *[]*types.Mana
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -17279,6 +17311,8 @@ func awsAwsquery_deserializeDocumentMfaDeviceListType(v *[]*types.MFADevice, dec
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -17424,6 +17458,8 @@ func awsAwsquery_deserializeDocumentOpenIDConnectProviderListType(v *[]*types.Op
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -18060,6 +18096,8 @@ func awsAwsquery_deserializeDocumentPolicyDetailListType(v *[]*types.PolicyDetai
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -18118,6 +18156,8 @@ func awsAwsquery_deserializeDocumentPolicyDocumentVersionListType(v *[]*types.Po
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -18316,6 +18356,8 @@ func awsAwsquery_deserializeDocumentPolicyGrantingServiceAccessListType(v *[]*ty
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -18431,6 +18473,8 @@ func awsAwsquery_deserializeDocumentPolicyGroupListType(v *[]*types.PolicyGroup,
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -18489,6 +18533,8 @@ func awsAwsquery_deserializeDocumentPolicyListType(v *[]*types.Policy, decoder s
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -18557,6 +18603,8 @@ func awsAwsquery_deserializeDocumentPolicyNameListType(v *[]*string, decoder smi
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -18722,6 +18770,8 @@ func awsAwsquery_deserializeDocumentPolicyRoleListType(v *[]*types.PolicyRole, d
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -18836,6 +18886,8 @@ func awsAwsquery_deserializeDocumentPolicyUserListType(v *[]*types.PolicyUser, d
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -19171,6 +19223,8 @@ func awsAwsquery_deserializeDocumentResourceSpecificResultListType(v *[]*types.R
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -19539,6 +19593,8 @@ func awsAwsquery_deserializeDocumentRoleDetailListType(v *[]*types.RoleDetail, d
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -19658,6 +19714,8 @@ func awsAwsquery_deserializeDocumentRoleListType(v *[]*types.Role, decoder smith
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -19716,6 +19774,8 @@ func awsAwsquery_deserializeDocumentRoleUsageListType(v *[]*types.RoleUsageType,
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -19901,6 +19961,8 @@ func awsAwsquery_deserializeDocumentSAMLProviderListType(v *[]*types.SAMLProvide
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -20138,6 +20200,8 @@ func awsAwsquery_deserializeDocumentServerCertificateMetadataListType(v *[]*type
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -20405,6 +20469,8 @@ func awsAwsquery_deserializeDocumentServicesLastAccessed(v *[]*types.ServiceLast
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -20702,6 +20768,8 @@ func awsAwsquery_deserializeDocumentServiceSpecificCredentialsListType(v *[]*typ
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -20972,6 +21040,8 @@ func awsAwsquery_deserializeDocumentSSHPublicKeyListType(v *[]*types.SSHPublicKe
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -21185,6 +21255,8 @@ func awsAwsquery_deserializeDocumentStatementListType(v *[]*types.Statement, dec
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -21388,6 +21460,8 @@ func awsAwsquery_deserializeDocumentTagListType(v *[]*types.Tag, decoder smithyx
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -21455,6 +21529,8 @@ func awsAwsquery_deserializeDocumentThumbprintListType(v *[]*string, decoder smi
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -21606,6 +21682,8 @@ func awsAwsquery_deserializeDocumentTrackedActionsLastAccessed(v *[]*types.Track
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -22009,6 +22087,8 @@ func awsAwsquery_deserializeDocumentUserDetailListType(v *[]*types.UserDetail, d
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -22068,6 +22148,8 @@ func awsAwsquery_deserializeDocumentUserListType(v *[]*types.User, decoder smith
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -22121,9 +22203,16 @@ func awsAwsquery_deserializeDocumentVirtualMFADevice(v **types.VirtualMFADevice,
 		switch {
 		case strings.EqualFold("Base32StringSeed", t.Name.Local):
 			var data string
-			err := decoder.Decoder.DecodeElement(&data, &t)
+			val, done, err := decoder.Value()
 			if err != nil {
 				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				data = xtv
 			}
 			sv.Base32StringSeed, err = base64.StdEncoding.DecodeString(data)
 			if err != nil {
@@ -22149,9 +22238,16 @@ func awsAwsquery_deserializeDocumentVirtualMFADevice(v **types.VirtualMFADevice,
 
 		case strings.EqualFold("QRCodePNG", t.Name.Local):
 			var data string
-			err := decoder.Decoder.DecodeElement(&data, &t)
+			val, done, err := decoder.Value()
 			if err != nil {
 				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				data = xtv
 			}
 			sv.QRCodePNG, err = base64.StdEncoding.DecodeString(data)
 			if err != nil {
@@ -22214,6 +22310,8 @@ func awsAwsquery_deserializeDocumentVirtualMFADeviceListType(v *[]*types.Virtual
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -24261,9 +24359,16 @@ func awsAwsquery_deserializeOpDocumentGetCredentialReportOutput(v **GetCredentia
 		switch {
 		case strings.EqualFold("Content", t.Name.Local):
 			var data string
-			err := decoder.Decoder.DecodeElement(&data, &t)
+			val, done, err := decoder.Value()
 			if err != nil {
 				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				data = xtv
 			}
 			sv.Content, err = base64.StdEncoding.DecodeString(data)
 			if err != nil {

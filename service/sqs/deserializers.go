@@ -2023,6 +2023,8 @@ func awsAwsquery_deserializeDocumentBatchResultErrorEntryList(v *[]*types.BatchR
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -2079,15 +2081,24 @@ func awsAwsquery_deserializeDocumentBinaryList(v *[][]byte, decoder smithyxml.No
 			if strings.EqualFold("BinaryListValue", t.Name.Local) {
 				var col []byte
 				var data string
-				err := decoder.Decoder.DecodeElement(&data, &t)
+				val, done, err := decoder.Value()
 				if err != nil {
 					return err
+				}
+				if done {
+					break
+				}
+				if val != nil {
+					xtv := string(val)
+					data = xtv
 				}
 				col, err = base64.StdEncoding.DecodeString(data)
 				if err != nil {
 					return err
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -2110,9 +2121,16 @@ func awsAwsquery_deserializeDocumentBinaryListUnwrapped(v *[][]byte, decoder smi
 		t := decoder.StartEl
 		_ = t
 		var data string
-		err := decoder.Decoder.DecodeElement(&data, &t)
+		val, done, err := decoder.Value()
 		if err != nil {
 			return err
+		}
+		if done {
+			break
+		}
+		if val != nil {
+			xtv := string(val)
+			data = xtv
 		}
 		mv, err = base64.StdEncoding.DecodeString(data)
 		if err != nil {
@@ -2194,6 +2212,8 @@ func awsAwsquery_deserializeDocumentChangeMessageVisibilityBatchResultEntryList(
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -2296,6 +2316,8 @@ func awsAwsquery_deserializeDocumentDeleteMessageBatchResultEntryList(v *[]*type
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -2613,9 +2635,16 @@ func awsAwsquery_deserializeDocumentMessageAttributeValue(v **types.MessageAttri
 
 		case strings.EqualFold("BinaryValue", t.Name.Local):
 			var data string
-			err := decoder.Decoder.DecodeElement(&data, &t)
+			val, done, err := decoder.Value()
 			if err != nil {
 				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				data = xtv
 			}
 			sv.BinaryValue, err = base64.StdEncoding.DecodeString(data)
 			if err != nil {
@@ -2768,6 +2797,8 @@ func awsAwsquery_deserializeDocumentMessageList(v *[]*types.Message, decoder smi
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -3184,6 +3215,8 @@ func awsAwsquery_deserializeDocumentQueueUrlList(v *[]*string, decoder smithyxml
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -3388,6 +3421,8 @@ func awsAwsquery_deserializeDocumentSendMessageBatchResultEntryList(v *[]*types.
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -3455,6 +3490,8 @@ func awsAwsquery_deserializeDocumentStringList(v *[]*string, decoder smithyxml.N
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder

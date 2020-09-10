@@ -3181,9 +3181,16 @@ func awsRestxml_deserializeOpDocumentXmlBlobsOutput(v **XmlBlobsOutput, decoder 
 		switch {
 		case strings.EqualFold("data", t.Name.Local):
 			var data string
-			err := decoder.Decoder.DecodeElement(&data, &t)
+			val, done, err := decoder.Value()
 			if err != nil {
 				return err
+			}
+			if done {
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				data = xtv
 			}
 			sv.Data, err = base64.StdEncoding.DecodeString(data)
 			if err != nil {
@@ -4792,6 +4799,8 @@ func awsRestxml_deserializeDocumentRenamedListMembers(v *[]*string, decoder smit
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -4860,6 +4869,8 @@ func awsRestxml_deserializeDocumentStructureList(v *[]*types.StructureListMember
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -5214,6 +5225,8 @@ func awsRestxml_deserializeDocumentXmlNamespacedList(v *[]*string, decoder smith
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -5348,6 +5361,8 @@ func awsRestxml_deserializeDocumentBooleanList(v *[]*bool, decoder smithyxml.Nod
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -5425,6 +5440,8 @@ func awsRestxml_deserializeDocumentFooEnumList(v *[]types.FooEnum, decoder smith
 					col = types.FooEnum(xtv)
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -5586,6 +5603,8 @@ func awsRestxml_deserializeDocumentFooEnumSet(v *[]types.FooEnum, decoder smithy
 					col = types.FooEnum(xtv)
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -5712,6 +5731,8 @@ func awsRestxml_deserializeDocumentIntegerList(v *[]*int32, decoder smithyxml.No
 					col = ptr.Int32(int32(i64))
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -5781,6 +5802,8 @@ func awsRestxml_deserializeDocumentNestedStringList(v *[][]*string, decoder smit
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -5852,6 +5875,8 @@ func awsRestxml_deserializeDocumentStringList(v *[]*string, decoder smithyxml.No
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -5932,6 +5957,8 @@ func awsRestxml_deserializeDocumentStringSet(v *[]*string, decoder smithyxml.Nod
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -6013,6 +6040,8 @@ func awsRestxml_deserializeDocumentTimestampList(v *[]*time.Time, decoder smithy
 					col = &t
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder

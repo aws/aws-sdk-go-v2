@@ -11778,6 +11778,8 @@ func awsRestxml_deserializeDocumentAliasICPRecordals(v *[]*types.AliasICPRecorda
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -11845,6 +11847,8 @@ func awsRestxml_deserializeDocumentAliasList(v *[]*string, decoder smithyxml.Nod
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -11978,6 +11982,8 @@ func awsRestxml_deserializeDocumentAwsAccountNumberList(v *[]*string, decoder sm
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -12301,6 +12307,8 @@ func awsRestxml_deserializeDocumentCacheBehaviorList(v *[]*types.CacheBehavior, 
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -13011,6 +13019,8 @@ func awsRestxml_deserializeDocumentCachePolicySummaryList(v *[]*types.CachePolic
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -13498,6 +13508,8 @@ func awsRestxml_deserializeDocumentCloudFrontOriginAccessIdentitySummaryList(v *
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -13721,6 +13733,8 @@ func awsRestxml_deserializeDocumentContentTypeProfileList(v *[]*types.ContentTyp
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -13841,6 +13855,8 @@ func awsRestxml_deserializeDocumentCookieNameList(v *[]*string, decoder smithyxm
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -14098,6 +14114,8 @@ func awsRestxml_deserializeDocumentCustomErrorResponseList(v *[]*types.CustomErr
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -15074,6 +15092,8 @@ func awsRestxml_deserializeDocumentDistributionIdListSummary(v *[]*string, decod
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -15532,6 +15552,8 @@ func awsRestxml_deserializeDocumentDistributionSummaryList(v *[]*types.Distribut
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -15705,6 +15727,8 @@ func awsRestxml_deserializeDocumentEncryptionEntityList(v *[]*types.EncryptionEn
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -16513,6 +16537,8 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionProfileSummaryList(v *[]*
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -16657,6 +16683,8 @@ func awsRestxml_deserializeDocumentFieldLevelEncryptionSummaryList(v *[]*types.F
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -16724,6 +16752,8 @@ func awsRestxml_deserializeDocumentFieldPatternList(v *[]*string, decoder smithy
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -16981,6 +17011,8 @@ func awsRestxml_deserializeDocumentHeaderList(v *[]*string, decoder smithyxml.No
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -17627,6 +17659,8 @@ func awsRestxml_deserializeDocumentInvalidationSummaryList(v *[]*types.Invalidat
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -18641,6 +18675,8 @@ func awsRestxml_deserializeDocumentKeyPairIdList(v *[]*string, decoder smithyxml
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -18832,6 +18868,8 @@ func awsRestxml_deserializeDocumentLambdaFunctionAssociationList(v *[]*types.Lam
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -18952,6 +18990,8 @@ func awsRestxml_deserializeDocumentLocationList(v *[]*string, decoder smithyxml.
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -19114,6 +19154,8 @@ func awsRestxml_deserializeDocumentMethodsList(v *[]types.Method, decoder smithy
 					col = types.Method(xtv)
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -19873,6 +19915,8 @@ func awsRestxml_deserializeDocumentOriginCustomHeadersList(v *[]*types.OriginCus
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -20023,6 +20067,8 @@ func awsRestxml_deserializeDocumentOriginGroupList(v *[]*types.OriginGroup, deco
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -20124,6 +20170,8 @@ func awsRestxml_deserializeDocumentOriginGroupMemberList(v *[]*types.OriginGroup
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -20289,6 +20337,8 @@ func awsRestxml_deserializeDocumentOriginList(v *[]*types.Origin, decoder smithy
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -20854,6 +20904,8 @@ func awsRestxml_deserializeDocumentOriginRequestPolicySummaryList(v *[]*types.Or
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -21091,6 +21143,8 @@ func awsRestxml_deserializeDocumentPathList(v *[]*string, decoder smithyxml.Node
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -21669,6 +21723,8 @@ func awsRestxml_deserializeDocumentPublicKeySummaryList(v *[]*types.PublicKeySum
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -21879,6 +21935,8 @@ func awsRestxml_deserializeDocumentQueryArgProfileList(v *[]*types.QueryArgProfi
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -22052,6 +22110,8 @@ func awsRestxml_deserializeDocumentQueryStringCacheKeysList(v *[]*string, decode
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -22179,6 +22239,8 @@ func awsRestxml_deserializeDocumentQueryStringNamesList(v *[]*string, decoder sm
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -22429,6 +22491,8 @@ func awsRestxml_deserializeDocumentSignerList(v *[]*types.Signer, decoder smithy
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -22496,6 +22560,8 @@ func awsRestxml_deserializeDocumentSslProtocolsList(v *[]types.SslProtocol, deco
 					col = types.SslProtocol(xtv)
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -22574,6 +22640,8 @@ func awsRestxml_deserializeDocumentStatusCodeList(v *[]*int32, decoder smithyxml
 					col = ptr.Int32(int32(i64))
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -23274,6 +23342,8 @@ func awsRestxml_deserializeDocumentStreamingDistributionSummaryList(v *[]*types.
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -23460,6 +23530,8 @@ func awsRestxml_deserializeDocumentTagList(v *[]*types.Tag, decoder smithyxml.No
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}

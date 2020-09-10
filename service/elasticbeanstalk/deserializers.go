@@ -4904,6 +4904,8 @@ func awsAwsquery_deserializeDocumentApplicationDescriptionList(v *[]*types.Appli
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -5266,6 +5268,8 @@ func awsAwsquery_deserializeDocumentApplicationVersionDescriptionList(v *[]*type
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -5417,6 +5421,8 @@ func awsAwsquery_deserializeDocumentAutoScalingGroupList(v *[]*types.AutoScaling
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -5475,6 +5481,8 @@ func awsAwsquery_deserializeDocumentAvailableSolutionStackDetailsList(v *[]*type
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -5546,6 +5554,8 @@ func awsAwsquery_deserializeDocumentAvailableSolutionStackNamesList(v *[]*string
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -5674,6 +5684,8 @@ func awsAwsquery_deserializeDocumentCauses(v *[]*string, decoder smithyxml.NodeD
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -5979,6 +5991,8 @@ func awsAwsquery_deserializeDocumentConfigurationOptionDescriptionsList(v *[]*ty
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -6049,6 +6063,8 @@ func awsAwsquery_deserializeDocumentConfigurationOptionPossibleValues(v *[]*stri
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -6213,6 +6229,8 @@ func awsAwsquery_deserializeDocumentConfigurationOptionSettingsList(v *[]*types.
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -6454,6 +6472,8 @@ func awsAwsquery_deserializeDocumentConfigurationSettingsDescriptionList(v *[]*t
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -6524,6 +6544,8 @@ func awsAwsquery_deserializeDocumentConfigurationTemplateNamesList(v *[]*string,
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -6824,6 +6846,8 @@ func awsAwsquery_deserializeDocumentCustomAmiList(v *[]*types.CustomAmi, decoder
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -7361,6 +7385,8 @@ func awsAwsquery_deserializeDocumentEnvironmentDescriptionsList(v *[]*types.Envi
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -7514,6 +7540,8 @@ func awsAwsquery_deserializeDocumentEnvironmentInfoDescriptionList(v *[]*types.E
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -7636,6 +7664,8 @@ func awsAwsquery_deserializeDocumentEnvironmentLinks(v *[]*types.EnvironmentLink
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -8078,6 +8108,8 @@ func awsAwsquery_deserializeDocumentEventDescriptionList(v *[]*types.EventDescri
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -8184,6 +8216,8 @@ func awsAwsquery_deserializeDocumentInstanceHealthList(v *[]*types.SingleInstanc
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -8411,6 +8445,8 @@ func awsAwsquery_deserializeDocumentInstanceList(v *[]*types.Instance, decoder s
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -8783,6 +8819,8 @@ func awsAwsquery_deserializeDocumentLaunchConfigurationList(v *[]*types.LaunchCo
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -8889,6 +8927,8 @@ func awsAwsquery_deserializeDocumentLaunchTemplateList(v *[]*types.LaunchTemplat
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -9026,6 +9066,8 @@ func awsAwsquery_deserializeDocumentLoadAverage(v *[]*float64, decoder smithyxml
 					col = &f64
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -9214,6 +9256,8 @@ func awsAwsquery_deserializeDocumentLoadBalancerList(v *[]*types.LoadBalancer, d
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -9272,6 +9316,8 @@ func awsAwsquery_deserializeDocumentLoadBalancerListenersDescription(v *[]*types
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -9592,6 +9638,8 @@ func awsAwsquery_deserializeDocumentManagedActionHistoryItems(v *[]*types.Manage
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -9698,6 +9746,8 @@ func awsAwsquery_deserializeDocumentManagedActions(v *[]*types.ManagedAction, de
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -10134,6 +10184,8 @@ func awsAwsquery_deserializeDocumentPlatformBranchSummaryList(v *[]*types.Platfo
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -10575,6 +10627,8 @@ func awsAwsquery_deserializeDocumentPlatformFrameworks(v *[]*types.PlatformFrame
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -10697,6 +10751,8 @@ func awsAwsquery_deserializeDocumentPlatformProgrammingLanguages(v *[]*types.Pla
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -10958,6 +11014,8 @@ func awsAwsquery_deserializeDocumentPlatformSummaryList(v *[]*types.PlatformSumm
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -11128,6 +11186,8 @@ func awsAwsquery_deserializeDocumentQueueList(v *[]*types.Queue, decoder smithyx
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -11773,6 +11833,8 @@ func awsAwsquery_deserializeDocumentSolutionStackFileTypeList(v *[]*string, deco
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -12075,6 +12137,8 @@ func awsAwsquery_deserializeDocumentSupportedAddonList(v *[]*string, decoder smi
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -12155,6 +12219,8 @@ func awsAwsquery_deserializeDocumentSupportedTierList(v *[]*string, decoder smit
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -12331,6 +12397,8 @@ func awsAwsquery_deserializeDocumentTagList(v *[]*types.Tag, decoder smithyxml.N
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -12775,6 +12843,8 @@ func awsAwsquery_deserializeDocumentTriggerList(v *[]*types.Trigger, decoder smi
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -12927,6 +12997,8 @@ func awsAwsquery_deserializeDocumentValidationMessagesList(v *[]*types.Validatio
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -12997,6 +13069,8 @@ func awsAwsquery_deserializeDocumentVersionLabelsList(v *[]*string, decoder smit
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder

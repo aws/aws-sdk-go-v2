@@ -9916,6 +9916,8 @@ func awsRestxml_deserializeDocumentCheckerIpRanges(v *[]*string, decoder smithyx
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -9990,6 +9992,8 @@ func awsRestxml_deserializeDocumentChildHealthCheckList(v *[]*string, decoder sm
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -10523,6 +10527,8 @@ func awsRestxml_deserializeDocumentDelegationSetNameServers(v *[]*string, decode
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -10675,6 +10681,8 @@ func awsRestxml_deserializeDocumentDelegationSets(v *[]*types.DelegationSet, dec
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -10790,6 +10798,8 @@ func awsRestxml_deserializeDocumentDimensionList(v *[]*types.Dimension, decoder 
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -10857,6 +10867,8 @@ func awsRestxml_deserializeDocumentErrorMessages(v *[]*string, decoder smithyxml
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -11099,6 +11111,8 @@ func awsRestxml_deserializeDocumentGeoLocationDetailsList(v *[]*types.GeoLocatio
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -11656,6 +11670,8 @@ func awsRestxml_deserializeDocumentHealthCheckObservations(v *[]*types.HealthChe
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -11723,6 +11739,8 @@ func awsRestxml_deserializeDocumentHealthCheckRegionList(v *[]types.HealthCheckR
 					col = types.HealthCheckRegion(xtv)
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -11788,6 +11806,8 @@ func awsRestxml_deserializeDocumentHealthChecks(v *[]*types.HealthCheck, decoder
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -12336,6 +12356,8 @@ func awsRestxml_deserializeDocumentHostedZones(v *[]*types.HostedZone, decoder s
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -12394,6 +12416,8 @@ func awsRestxml_deserializeDocumentHostedZoneSummaries(v *[]*types.HostedZoneSum
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -13679,6 +13703,8 @@ func awsRestxml_deserializeDocumentQueryLoggingConfigs(v *[]*types.QueryLoggingC
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -13746,6 +13772,8 @@ func awsRestxml_deserializeDocumentRecordData(v *[]*string, decoder smithyxml.No
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -13854,6 +13882,8 @@ func awsRestxml_deserializeDocumentResourceRecords(v *[]*types.ResourceRecord, d
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -14103,6 +14133,8 @@ func awsRestxml_deserializeDocumentResourceRecordSets(v *[]*types.ResourceRecord
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -14223,6 +14255,8 @@ func awsRestxml_deserializeDocumentResourceTagSetList(v *[]*types.ResourceTagSet
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -14458,6 +14492,8 @@ func awsRestxml_deserializeDocumentTagList(v *[]*types.Tag, decoder smithyxml.No
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -14818,6 +14854,8 @@ func awsRestxml_deserializeDocumentTrafficPolicies(v *[]*types.TrafficPolicy, de
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -15231,6 +15269,8 @@ func awsRestxml_deserializeDocumentTrafficPolicyInstances(v *[]*types.TrafficPol
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -15332,6 +15372,8 @@ func awsRestxml_deserializeDocumentTrafficPolicySummaries(v *[]*types.TrafficPol
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -15636,6 +15678,8 @@ func awsRestxml_deserializeDocumentVPCs(v *[]*types.VPC, decoder smithyxml.NodeD
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
