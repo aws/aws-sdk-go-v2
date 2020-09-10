@@ -1030,7 +1030,8 @@ func awsAwsquery_deserializeDocumentAssumedRoleUser(v **types.AssumedRoleUser, d
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Arn", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -1038,6 +1039,9 @@ func awsAwsquery_deserializeDocumentAssumedRoleUser(v **types.AssumedRoleUser, d
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Arn = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1051,6 +1055,9 @@ func awsAwsquery_deserializeDocumentAssumedRoleUser(v **types.AssumedRoleUser, d
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.AssumedRoleId = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1062,6 +1069,7 @@ func awsAwsquery_deserializeDocumentAssumedRoleUser(v **types.AssumedRoleUser, d
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -1086,7 +1094,8 @@ func awsAwsquery_deserializeDocumentCredentials(v **types.Credentials, decoder s
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("AccessKeyId", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -1094,6 +1103,9 @@ func awsAwsquery_deserializeDocumentCredentials(v **types.Credentials, decoder s
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.AccessKeyId = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1124,6 +1136,9 @@ func awsAwsquery_deserializeDocumentCredentials(v **types.Credentials, decoder s
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.SecretAccessKey = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1137,6 +1152,9 @@ func awsAwsquery_deserializeDocumentCredentials(v **types.Credentials, decoder s
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.SessionToken = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1148,6 +1166,7 @@ func awsAwsquery_deserializeDocumentCredentials(v **types.Credentials, decoder s
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -1172,7 +1191,8 @@ func awsAwsquery_deserializeDocumentExpiredTokenException(v **types.ExpiredToken
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("message", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -1180,6 +1200,9 @@ func awsAwsquery_deserializeDocumentExpiredTokenException(v **types.ExpiredToken
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1191,6 +1214,7 @@ func awsAwsquery_deserializeDocumentExpiredTokenException(v **types.ExpiredToken
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -1215,7 +1239,8 @@ func awsAwsquery_deserializeDocumentFederatedUser(v **types.FederatedUser, decod
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Arn", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -1223,6 +1248,9 @@ func awsAwsquery_deserializeDocumentFederatedUser(v **types.FederatedUser, decod
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Arn = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1236,6 +1264,9 @@ func awsAwsquery_deserializeDocumentFederatedUser(v **types.FederatedUser, decod
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.FederatedUserId = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1247,6 +1278,7 @@ func awsAwsquery_deserializeDocumentFederatedUser(v **types.FederatedUser, decod
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -1271,7 +1303,8 @@ func awsAwsquery_deserializeDocumentIDPCommunicationErrorException(v **types.IDP
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("message", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -1279,6 +1312,9 @@ func awsAwsquery_deserializeDocumentIDPCommunicationErrorException(v **types.IDP
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1290,6 +1326,7 @@ func awsAwsquery_deserializeDocumentIDPCommunicationErrorException(v **types.IDP
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -1314,7 +1351,8 @@ func awsAwsquery_deserializeDocumentIDPRejectedClaimException(v **types.IDPRejec
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("message", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -1322,6 +1360,9 @@ func awsAwsquery_deserializeDocumentIDPRejectedClaimException(v **types.IDPRejec
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1333,6 +1374,7 @@ func awsAwsquery_deserializeDocumentIDPRejectedClaimException(v **types.IDPRejec
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -1357,7 +1399,8 @@ func awsAwsquery_deserializeDocumentInvalidAuthorizationMessageException(v **typ
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("message", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -1365,6 +1408,9 @@ func awsAwsquery_deserializeDocumentInvalidAuthorizationMessageException(v **typ
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1376,6 +1422,7 @@ func awsAwsquery_deserializeDocumentInvalidAuthorizationMessageException(v **typ
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -1400,7 +1447,8 @@ func awsAwsquery_deserializeDocumentInvalidIdentityTokenException(v **types.Inva
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("message", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -1408,6 +1456,9 @@ func awsAwsquery_deserializeDocumentInvalidIdentityTokenException(v **types.Inva
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1419,6 +1470,7 @@ func awsAwsquery_deserializeDocumentInvalidIdentityTokenException(v **types.Inva
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -1443,7 +1495,8 @@ func awsAwsquery_deserializeDocumentMalformedPolicyDocumentException(v **types.M
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("message", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -1451,6 +1504,9 @@ func awsAwsquery_deserializeDocumentMalformedPolicyDocumentException(v **types.M
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1462,6 +1518,7 @@ func awsAwsquery_deserializeDocumentMalformedPolicyDocumentException(v **types.M
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -1486,7 +1543,8 @@ func awsAwsquery_deserializeDocumentPackedPolicyTooLargeException(v **types.Pack
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("message", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -1494,6 +1552,9 @@ func awsAwsquery_deserializeDocumentPackedPolicyTooLargeException(v **types.Pack
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1505,6 +1566,7 @@ func awsAwsquery_deserializeDocumentPackedPolicyTooLargeException(v **types.Pack
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -1529,7 +1591,8 @@ func awsAwsquery_deserializeDocumentRegionDisabledException(v **types.RegionDisa
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("message", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -1537,6 +1600,9 @@ func awsAwsquery_deserializeDocumentRegionDisabledException(v **types.RegionDisa
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Message = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1548,6 +1614,7 @@ func awsAwsquery_deserializeDocumentRegionDisabledException(v **types.RegionDisa
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -1572,7 +1639,8 @@ func awsAwsquery_deserializeOpDocumentAssumeRoleOutput(v **AssumeRoleOutput, dec
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("AssumedRoleUser", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -1607,6 +1675,7 @@ func awsAwsquery_deserializeOpDocumentAssumeRoleOutput(v **AssumeRoleOutput, dec
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -1631,7 +1700,8 @@ func awsAwsquery_deserializeOpDocumentAssumeRoleWithSAMLOutput(v **AssumeRoleWit
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("AssumedRoleUser", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -1645,6 +1715,9 @@ func awsAwsquery_deserializeOpDocumentAssumeRoleWithSAMLOutput(v **AssumeRoleWit
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Audience = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1664,6 +1737,9 @@ func awsAwsquery_deserializeOpDocumentAssumeRoleWithSAMLOutput(v **AssumeRoleWit
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Issuer = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1677,6 +1753,9 @@ func awsAwsquery_deserializeOpDocumentAssumeRoleWithSAMLOutput(v **AssumeRoleWit
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.NameQualifier = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1707,6 +1786,9 @@ func awsAwsquery_deserializeOpDocumentAssumeRoleWithSAMLOutput(v **AssumeRoleWit
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Subject = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1720,6 +1802,9 @@ func awsAwsquery_deserializeOpDocumentAssumeRoleWithSAMLOutput(v **AssumeRoleWit
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.SubjectType = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1731,6 +1816,7 @@ func awsAwsquery_deserializeOpDocumentAssumeRoleWithSAMLOutput(v **AssumeRoleWit
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -1755,7 +1841,8 @@ func awsAwsquery_deserializeOpDocumentAssumeRoleWithWebIdentityOutput(v **Assume
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("AssumedRoleUser", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -1769,6 +1856,9 @@ func awsAwsquery_deserializeOpDocumentAssumeRoleWithWebIdentityOutput(v **Assume
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Audience = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1805,6 +1895,9 @@ func awsAwsquery_deserializeOpDocumentAssumeRoleWithWebIdentityOutput(v **Assume
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Provider = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1818,6 +1911,9 @@ func awsAwsquery_deserializeOpDocumentAssumeRoleWithWebIdentityOutput(v **Assume
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.SubjectFromWebIdentityToken = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1829,6 +1925,7 @@ func awsAwsquery_deserializeOpDocumentAssumeRoleWithWebIdentityOutput(v **Assume
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -1853,7 +1950,8 @@ func awsAwsquery_deserializeOpDocumentDecodeAuthorizationMessageOutput(v **Decod
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("DecodedMessage", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -1861,6 +1959,9 @@ func awsAwsquery_deserializeOpDocumentDecodeAuthorizationMessageOutput(v **Decod
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.DecodedMessage = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1872,6 +1973,7 @@ func awsAwsquery_deserializeOpDocumentDecodeAuthorizationMessageOutput(v **Decod
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -1896,7 +1998,8 @@ func awsAwsquery_deserializeOpDocumentGetAccessKeyInfoOutput(v **GetAccessKeyInf
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Account", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -1904,6 +2007,9 @@ func awsAwsquery_deserializeOpDocumentGetAccessKeyInfoOutput(v **GetAccessKeyInf
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Account = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1915,6 +2021,7 @@ func awsAwsquery_deserializeOpDocumentGetAccessKeyInfoOutput(v **GetAccessKeyInf
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -1939,7 +2046,8 @@ func awsAwsquery_deserializeOpDocumentGetCallerIdentityOutput(v **GetCallerIdent
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Account", t.Name.Local):
 			val, done, err := decoder.Value()
@@ -1947,6 +2055,9 @@ func awsAwsquery_deserializeOpDocumentGetCallerIdentityOutput(v **GetCallerIdent
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Account = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1960,6 +2071,9 @@ func awsAwsquery_deserializeOpDocumentGetCallerIdentityOutput(v **GetCallerIdent
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.Arn = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1973,6 +2087,9 @@ func awsAwsquery_deserializeOpDocumentGetCallerIdentityOutput(v **GetCallerIdent
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.UserId = ptr.String("")
+				}
 				break
 			}
 			if val != nil {
@@ -1984,6 +2101,7 @@ func awsAwsquery_deserializeOpDocumentGetCallerIdentityOutput(v **GetCallerIdent
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -2008,7 +2126,8 @@ func awsAwsquery_deserializeOpDocumentGetFederationTokenOutput(v **GetFederation
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Credentials", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -2043,6 +2162,7 @@ func awsAwsquery_deserializeOpDocumentGetFederationTokenOutput(v **GetFederation
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
@@ -2067,7 +2187,8 @@ func awsAwsquery_deserializeOpDocumentGetSessionTokenOutput(v **GetSessionTokenO
 		if done {
 			break
 		}
-		_ = t
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
 		case strings.EqualFold("Credentials", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
@@ -2079,6 +2200,7 @@ func awsAwsquery_deserializeOpDocumentGetSessionTokenOutput(v **GetSessionTokenO
 			// Do nothing and ignore the unexpected tag element
 
 		}
+		decoder = originalDecoder
 	}
 	*v = sv
 	return nil
