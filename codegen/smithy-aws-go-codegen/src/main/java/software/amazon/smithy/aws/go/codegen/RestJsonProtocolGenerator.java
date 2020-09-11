@@ -103,8 +103,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.write("jsonEncoder := smithyjson.NewEncoder()");
         writer.openBlock("if err := $L($L, jsonEncoder.Value); err != nil {", "}", functionName,
                 operand, () -> {
-            writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
-        });
+                    writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
+                });
 
         writer.addUseImports(SmithyGoDependency.BYTES);
         writer.write("payload := bytes.NewReader(jsonEncoder.Bytes())");
@@ -215,6 +215,12 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.addUseImports(SmithyGoDependency.JSON);
         writer.write("decoder := json.NewDecoder(body)");
         writer.write("decoder.UseNumber()");
+        writer.write("var shape interface{}");
+        writer.addUseImports(SmithyGoDependency.IO);
+        writer.openBlock("if err := decoder.Decode(&shape); err != nil && err != io.EOF {", "}", () -> {
+            writer.addUseImports(SmithyGoDependency.SMITHY);
+            writer.write("return out, metadata, &smithy.DeserializationError{Err: err}");
+        });
         writer.write("");
 
         writeMiddlewareDocumentBindingDeserializerDelegator(writer, targetShape, operand);
@@ -239,7 +245,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             String operand
     ) {
         String deserFuncName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, getProtocolName());
-        writer.write("err = $L(&$L, decoder)", deserFuncName, operand);
+        writer.write("err = $L(&$L, shape)", deserFuncName, operand);
         writer.openBlock("if err != nil {", "}", () -> {
             writer.addUseImports(SmithyGoDependency.BYTES);
             writer.addUseImports(SmithyGoDependency.SMITHY);
@@ -302,7 +308,15 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             String documentDeserFunctionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
                     shape, getProtocolName());
             initializeJsonDecoder(writer, "errorBody");
-            writer.write("err := $L(&output, decoder)", documentDeserFunctionName);
+            writer.write("var shape interface{}");
+            writer.openBlock("if err := decoder.Decode(&shape); err != nil {", "}", () -> {
+                writer.addUseImports(SmithyGoDependency.FMT);
+                writer.addUseImports(SmithyGoDependency.SMITHY);
+                writer.write("return &smithy.DeserializationError{Err: fmt.Errorf(\"failed to decode shape, %w\","
+                        + " err)}");
+            });
+            writer.write("");
+            writer.write("err := $L(&output, shape)", documentDeserFunctionName);
             writer.write("");
             handleDecodeError(writer);
             writer.write("errorBody.Seek(0, io.SeekStart)");

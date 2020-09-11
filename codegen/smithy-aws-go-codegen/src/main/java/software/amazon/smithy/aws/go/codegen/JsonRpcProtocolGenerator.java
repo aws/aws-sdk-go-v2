@@ -97,7 +97,14 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
         StructureShape output = ProtocolUtils.expectOutput(context.getModel(), operation);
         String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(output, getProtocolName());
         initializeJsonDecoder(writer, "response.Body");
-        writer.write("err = $L(&output, decoder)", functionName);
+        writer.write("var shape interface{}");
+        writer.addUseImports(SmithyGoDependency.IO);
+        writer.openBlock("if err := decoder.Decode(&shape); err != nil && err != io.EOF {", "}", () -> {
+            writer.addUseImports(SmithyGoDependency.SMITHY);
+            writer.write("return out, metadata, &smithy.DeserializationError{Err: err}");
+        });
+        writer.write("");
+        writer.write("err = $L(&output, shape)", functionName);
         handleDecodeError(writer, "out, metadata, ");
     }
 
@@ -116,8 +123,15 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
         String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, getProtocolName());
 
         initializeJsonDecoder(writer, "errorBody");
+        writer.write("var shape interface{}");
+        writer.addUseImports(SmithyGoDependency.IO);
+        writer.openBlock("if err := decoder.Decode(&shape); err != nil && err != io.EOF {", "}", () -> {
+            writer.addUseImports(SmithyGoDependency.SMITHY);
+            writer.write("return &smithy.DeserializationError{Err: err}");
+        });
+        writer.write("");
         writer.write("output := &$T{}", symbol);
-        writer.write("err := $L(&output, decoder)", functionName);
+        writer.write("err := $L(&output, shape)", functionName);
         writer.write("");
         handleDecodeError(writer);
         writer.write("errorBody.Seek(0, io.SeekStart)");

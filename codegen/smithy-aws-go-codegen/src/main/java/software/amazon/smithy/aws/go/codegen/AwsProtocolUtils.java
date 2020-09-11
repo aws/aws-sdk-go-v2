@@ -145,7 +145,6 @@ final class AwsProtocolUtils {
         writer.write("body := io.TeeReader($L, ringBuffer)", bodyLocation);
         writer.write("decoder := json.NewDecoder(body)");
         writer.write("decoder.UseNumber()");
-        writer.write("");
     }
 
     public static void handleDecodeError(GoWriter writer, String returnExtras) {
