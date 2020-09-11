@@ -67,8 +67,17 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
     @Override
     public Void blobShape(BlobShape shape) {
         GoWriter writer = context.getWriter();
-        writer.write("err := decoder.Decode(&$L)", dataDest);
-        writer.write("if err != nil { return err }");
+        writer.addUseImports(SmithyGoDependency.FMT);
+        writer.addUseImports(SmithyGoDependency.BASE64);
+        final String typeError = "return fmt.Errorf(\"expected $L to be []byte, got %T instead\", value)";
+        writer.openBlock("if value != nil {", "}", () -> {
+            writer.write("jtv, ok := value.(string)");
+            writer.openBlock("if !ok {", "}", () -> writer.write(typeError, shape.getId().getName()));
+            writer.write("dv, err := base64.StdEncoding.DecodeString(jtv)");
+            writer.openBlock("if err != nil {", "}", () -> writer.write("return fmt.Errorf(\"failed to base64 decode "
+                    + "$L, %w\", err)", shape.getId().getName()));
+            writer.write("$L = dv", dataDest);
+        });
         return null;
     }
 
@@ -76,25 +85,15 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
     public Void booleanShape(BooleanShape shape) {
         GoWriter writer = context.getWriter();
         writer.addUseImports(SmithyGoDependency.FMT);
-        consumeToken();
-        writer.openBlock("if val != nil {", "}", () -> {
-            writer.write("jtv, ok := val.(bool)");
+        writer.openBlock("if value != nil {", "}", () -> {
+            writer.write("jtv, ok := value.(bool)");
             writer.openBlock("if !ok {", "}", () -> {
-                writer.write("return fmt.Errorf(\"expected $L to be of type *bool, got %T instead\", val)",
+                writer.write("return fmt.Errorf(\"expected $L to be of type *bool, got %T instead\", value)",
                         shape.getId().getName());
             });
             writer.write("$L = &jtv", dataDest);
         });
         return null;
-    }
-
-    /**
-     * Consumes a single token into the variable "val", returning on any error.
-     */
-    private void consumeToken() {
-        GoWriter writer = context.getWriter();
-        writer.write("val, err := decoder.Token()");
-        writer.write("if err != nil { return err }");
     }
 
     @Override
@@ -153,12 +152,11 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
     private void handleNumber(Shape shape, Runnable r) {
         GoWriter writer = context.getWriter();
         writer.addUseImports(SmithyGoDependency.FMT);
-        consumeToken();
 
-        writer.openBlock("if val != nil {", "}", () -> {
-            writer.write("jtv, ok := val.(json.Number)");
+        writer.openBlock("if value != nil {", "}", () -> {
+            writer.write("jtv, ok := value.(json.Number)");
             writer.openBlock("if !ok {", "}", () -> {
-                writer.write("return fmt.Errorf(\"expected $L to be json.Number, got %T instead\", val)",
+                writer.write("return fmt.Errorf(\"expected $L to be json.Number, got %T instead\", value)",
                         shape.getId().getName());
             });
             r.run();
@@ -220,12 +218,11 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
     private void handleString(Shape shape, Runnable r) {
         GoWriter writer = context.getWriter();
         writer.addUseImports(SmithyGoDependency.FMT);
-        consumeToken();
 
-        writer.openBlock("if val != nil {", "}", () -> {
-            writer.write("jtv, ok := val.(string)");
+        writer.openBlock("if value != nil {", "}", () -> {
+            writer.write("jtv, ok := value.(string)");
             writer.openBlock("if !ok {", "}", () -> {
-                writer.write("return fmt.Errorf(\"expected $L to be of type string, got %T instead\", val)",
+                writer.write("return fmt.Errorf(\"expected $L to be of type string, got %T instead\", value)",
                         shape.getId().getName());
             });
             r.run();
@@ -343,7 +340,7 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
     private void writeDelegateFunction(Shape shape) {
         String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, context.getProtocolName());
         GoWriter writer = context.getWriter();
-        writer.openBlock("if err := $L(&$L, decoder); err != nil {", "}", functionName, dataDest, () -> {
+        writer.openBlock("if err := $L(&$L, value); err != nil {", "}", functionName, dataDest, () -> {
             writer.write("return err");
         });
     }
