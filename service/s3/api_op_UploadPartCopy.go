@@ -103,6 +103,7 @@ func (c *Client) UploadPartCopy(ctx context.Context, params *UploadPartCopyInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUploadPartCopyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUploadPartCopy(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -224,4 +225,12 @@ func newServiceMetadataMiddleware_opUploadPartCopy(region string) awsmiddleware.
 		SigningName:   "s3",
 		OperationName: "UploadPartCopy",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *UploadPartCopyInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

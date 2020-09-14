@@ -38,6 +38,7 @@ func (c *Client) DeleteBucketCors(ctx context.Context, params *DeleteBucketCorsI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteBucketCorsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBucketCors(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -80,4 +81,12 @@ func newServiceMetadataMiddleware_opDeleteBucketCors(region string) awsmiddlewar
 		SigningName:   "s3",
 		OperationName: "DeleteBucketCors",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *DeleteBucketCorsInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

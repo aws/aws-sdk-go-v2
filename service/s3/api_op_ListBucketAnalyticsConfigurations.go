@@ -56,6 +56,7 @@ func (c *Client) ListBucketAnalyticsConfigurations(ctx context.Context, params *
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListBucketAnalyticsConfigurationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListBucketAnalyticsConfigurations(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -115,4 +116,12 @@ func newServiceMetadataMiddleware_opListBucketAnalyticsConfigurations(region str
 		SigningName:   "s3",
 		OperationName: "ListBucketAnalyticsConfigurations",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *ListBucketAnalyticsConfigurationsInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

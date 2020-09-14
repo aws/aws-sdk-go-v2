@@ -70,6 +70,14 @@ type Options struct {
 	// failures. When nil the API client will use a default retryer.
 	Retryer retry.Retryer
 
+	// Set this to true to enable S3 Accelerate feature. For all operations compatible
+	// with S3 Accelerate will use the accelerate endpoint for requests. Requests not
+	// compatible will fall back to normal S3 requests. The bucket must be enable for
+	// accelerate to be used with S3 client with accelerate enabled. If the bucket is
+	// not enabled for accelerate an error will be returned. The bucket name must be
+	// DNS compatible to also work with accelerate.
+	UseAccelerate bool
+
 	// Allows you to enable the client to use path-style addressing, i.e.,
 	// http://s3.amazonaws.com/BUCKET/KEY. By default, the S3 clientwill use virtual
 	// hosted bucket addressing when possible(http://BUCKET.s3.amazonaws.com/KEY).
@@ -106,6 +114,10 @@ func (o Options) GetRegion() string {
 
 func (o Options) GetRetryer() retry.Retryer {
 	return o.Retryer
+}
+
+func (o Options) GetUseAccelerate() bool {
+	return o.UseAccelerate
 }
 
 func (o Options) GetUsePathStyle() bool {
@@ -162,6 +174,6 @@ func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) {
 	stack.Finalize.Add(v4.NewSignHTTPRequestMiddleware(o.Credentials, signer), middleware.After)
 }
 
-func updateEndpointFromConfig(stack *middleware.Stack, options Options) {
-	s3cust.UpdateEndpointFromConfig(stack, s3cust.UpdateEndpointFromConfigOptions{UsePathStyle: options.UsePathStyle})
+func addUpdateEndpointMiddleware(stack *middleware.Stack, options Options) {
+	s3cust.UpdateEndpoint(stack, s3cust.UpdateEndpointOptions{UsePathStyle: options.UsePathStyle, UseAccelerate: options.UseAccelerate, Region: options.Region})
 }

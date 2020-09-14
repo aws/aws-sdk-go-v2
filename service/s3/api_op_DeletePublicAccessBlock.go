@@ -44,6 +44,7 @@ func (c *Client) DeletePublicAccessBlock(ctx context.Context, params *DeletePubl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeletePublicAccessBlockValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePublicAccessBlock(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -86,4 +87,12 @@ func newServiceMetadataMiddleware_opDeletePublicAccessBlock(region string) awsmi
 		SigningName:   "s3",
 		OperationName: "DeletePublicAccessBlock",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *DeletePublicAccessBlockInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

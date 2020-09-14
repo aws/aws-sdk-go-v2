@@ -64,6 +64,7 @@ func (c *Client) PutBucketLogging(ctx context.Context, params *PutBucketLoggingI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutBucketLoggingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBucketLogging(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -110,4 +111,12 @@ func newServiceMetadataMiddleware_opPutBucketLogging(region string) awsmiddlewar
 		SigningName:   "s3",
 		OperationName: "PutBucketLogging",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *PutBucketLoggingInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

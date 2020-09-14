@@ -34,6 +34,7 @@ func (c *Client) GetObjectLegalHold(ctx context.Context, params *GetObjectLegalH
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetObjectLegalHoldValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetObjectLegalHold(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -98,4 +99,12 @@ func newServiceMetadataMiddleware_opGetObjectLegalHold(region string) awsmiddlew
 		SigningName:   "s3",
 		OperationName: "GetObjectLegalHold",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *GetObjectLegalHoldInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

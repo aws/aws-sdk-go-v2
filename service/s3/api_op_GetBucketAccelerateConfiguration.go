@@ -53,6 +53,7 @@ func (c *Client) GetBucketAccelerateConfiguration(ctx context.Context, params *G
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBucketAccelerateConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketAccelerateConfiguration(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -98,4 +99,12 @@ func newServiceMetadataMiddleware_opGetBucketAccelerateConfiguration(region stri
 		SigningName:   "s3",
 		OperationName: "GetBucketAccelerateConfiguration",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *GetBucketAccelerateConfigurationInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

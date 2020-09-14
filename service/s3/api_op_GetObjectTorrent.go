@@ -41,6 +41,7 @@ func (c *Client) GetObjectTorrent(ctx context.Context, params *GetObjectTorrentI
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	addOpGetObjectTorrentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetObjectTorrent(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -98,4 +99,12 @@ func newServiceMetadataMiddleware_opGetObjectTorrent(region string) awsmiddlewar
 		SigningName:   "s3",
 		OperationName: "GetObjectTorrent",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *GetObjectTorrentInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

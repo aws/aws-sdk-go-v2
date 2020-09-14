@@ -115,6 +115,7 @@ func (c *Client) CreateBucket(ctx context.Context, params *CreateBucketInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateBucketValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBucket(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -179,4 +180,12 @@ func newServiceMetadataMiddleware_opCreateBucket(region string) awsmiddleware.Re
 		SigningName:   "s3",
 		OperationName: "CreateBucket",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *CreateBucketInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

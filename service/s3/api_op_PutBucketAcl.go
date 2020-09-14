@@ -106,6 +106,7 @@ func (c *Client) PutBucketAcl(ctx context.Context, params *PutBucketAclInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutBucketAclValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBucketAcl(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -168,4 +169,12 @@ func newServiceMetadataMiddleware_opPutBucketAcl(region string) awsmiddleware.Re
 		SigningName:   "s3",
 		OperationName: "PutBucketAcl",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *PutBucketAclInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

@@ -46,6 +46,7 @@ func (c *Client) GetBucketNotificationConfiguration(ctx context.Context, params 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBucketNotificationConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketNotificationConfiguration(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -100,4 +101,12 @@ func newServiceMetadataMiddleware_opGetBucketNotificationConfiguration(region st
 		SigningName:   "s3",
 		OperationName: "GetBucketNotificationConfiguration",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *GetBucketNotificationConfigurationInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

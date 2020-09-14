@@ -241,6 +241,7 @@ func (c *Client) RestoreObject(ctx context.Context, params *RestoreObjectInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRestoreObjectValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreObject(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -311,4 +312,12 @@ func newServiceMetadataMiddleware_opRestoreObject(region string) awsmiddleware.R
 		SigningName:   "s3",
 		OperationName: "RestoreObject",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *RestoreObjectInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

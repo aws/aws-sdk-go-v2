@@ -50,6 +50,7 @@ func (c *Client) DeleteBucketMetricsConfiguration(ctx context.Context, params *D
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteBucketMetricsConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBucketMetricsConfiguration(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -94,4 +95,12 @@ func newServiceMetadataMiddleware_opDeleteBucketMetricsConfiguration(region stri
 		SigningName:   "s3",
 		OperationName: "DeleteBucketMetricsConfiguration",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *DeleteBucketMetricsConfigurationInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

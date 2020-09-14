@@ -46,6 +46,7 @@ func (c *Client) DeleteBucketReplication(ctx context.Context, params *DeleteBuck
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteBucketReplicationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBucketReplication(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -88,4 +89,12 @@ func newServiceMetadataMiddleware_opDeleteBucketReplication(region string) awsmi
 		SigningName:   "s3",
 		OperationName: "DeleteBucketReplication",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *DeleteBucketReplicationInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

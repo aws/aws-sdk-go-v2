@@ -42,6 +42,7 @@ func (c *Client) DeleteObjectTagging(ctx context.Context, params *DeleteObjectTa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteObjectTaggingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteObjectTagging(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -99,4 +100,12 @@ func newServiceMetadataMiddleware_opDeleteObjectTagging(region string) awsmiddle
 		SigningName:   "s3",
 		OperationName: "DeleteObjectTagging",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *DeleteObjectTaggingInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

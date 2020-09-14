@@ -40,6 +40,7 @@ func (c *Client) PutBucketRequestPayment(ctx context.Context, params *PutBucketR
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutBucketRequestPaymentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBucketRequestPayment(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -89,4 +90,12 @@ func newServiceMetadataMiddleware_opPutBucketRequestPayment(region string) awsmi
 		SigningName:   "s3",
 		OperationName: "PutBucketRequestPayment",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *PutBucketRequestPaymentInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

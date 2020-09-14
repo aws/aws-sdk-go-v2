@@ -48,6 +48,7 @@ func (c *Client) GetBucketInventoryConfiguration(ctx context.Context, params *Ge
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBucketInventoryConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketInventoryConfiguration(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -95,4 +96,12 @@ func newServiceMetadataMiddleware_opGetBucketInventoryConfiguration(region strin
 		SigningName:   "s3",
 		OperationName: "GetBucketInventoryConfiguration",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *GetBucketInventoryConfigurationInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

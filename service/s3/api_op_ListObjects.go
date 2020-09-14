@@ -43,6 +43,7 @@ func (c *Client) ListObjects(ctx context.Context, params *ListObjectsInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListObjectsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListObjects(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -147,4 +148,12 @@ func newServiceMetadataMiddleware_opListObjects(region string) awsmiddleware.Reg
 		SigningName:   "s3",
 		OperationName: "ListObjects",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *ListObjectsInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

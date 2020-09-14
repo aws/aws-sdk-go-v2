@@ -41,6 +41,7 @@ func (c *Client) GetBucketTagging(ctx context.Context, params *GetBucketTaggingI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBucketTaggingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketTagging(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -86,4 +87,12 @@ func newServiceMetadataMiddleware_opGetBucketTagging(region string) awsmiddlewar
 		SigningName:   "s3",
 		OperationName: "GetBucketTagging",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *GetBucketTaggingInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

@@ -49,6 +49,7 @@ func (c *Client) GetBucketReplication(ctx context.Context, params *GetBucketRepl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBucketReplicationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketReplication(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -95,4 +96,12 @@ func newServiceMetadataMiddleware_opGetBucketReplication(region string) awsmiddl
 		SigningName:   "s3",
 		OperationName: "GetBucketReplication",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *GetBucketReplicationInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

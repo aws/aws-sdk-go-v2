@@ -52,6 +52,7 @@ func (c *Client) GetPublicAccessBlock(ctx context.Context, params *GetPublicAcce
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetPublicAccessBlockValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetPublicAccessBlock(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -99,4 +100,12 @@ func newServiceMetadataMiddleware_opGetPublicAccessBlock(region string) awsmiddl
 		SigningName:   "s3",
 		OperationName: "GetPublicAccessBlock",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *GetPublicAccessBlockInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

@@ -148,6 +148,7 @@ func (c *Client) CopyObject(ctx context.Context, params *CopyObjectInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCopyObjectValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCopyObject(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -327,4 +328,12 @@ func newServiceMetadataMiddleware_opCopyObject(region string) awsmiddleware.Regi
 		SigningName:   "s3",
 		OperationName: "CopyObject",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *CopyObjectInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

@@ -46,6 +46,7 @@ func (c *Client) DeleteBucketWebsite(ctx context.Context, params *DeleteBucketWe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteBucketWebsiteValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBucketWebsite(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -88,4 +89,12 @@ func newServiceMetadataMiddleware_opDeleteBucketWebsite(region string) awsmiddle
 		SigningName:   "s3",
 		OperationName: "DeleteBucketWebsite",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *DeleteBucketWebsiteInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

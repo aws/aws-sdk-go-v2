@@ -42,6 +42,7 @@ func (c *Client) HeadBucket(ctx context.Context, params *HeadBucketInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpHeadBucketValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHeadBucket(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -84,4 +85,12 @@ func newServiceMetadataMiddleware_opHeadBucket(region string) awsmiddleware.Regi
 		SigningName:   "s3",
 		OperationName: "HeadBucket",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *HeadBucketInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

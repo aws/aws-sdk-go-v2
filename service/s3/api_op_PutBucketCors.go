@@ -67,6 +67,7 @@ func (c *Client) PutBucketCors(ctx context.Context, params *PutBucketCorsInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutBucketCorsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBucketCors(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -119,4 +120,12 @@ func newServiceMetadataMiddleware_opPutBucketCors(region string) awsmiddleware.R
 		SigningName:   "s3",
 		OperationName: "PutBucketCors",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *PutBucketCorsInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

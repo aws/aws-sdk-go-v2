@@ -47,6 +47,7 @@ func (c *Client) GetBucketEncryption(ctx context.Context, params *GetBucketEncry
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBucketEncryptionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketEncryption(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -93,4 +94,12 @@ func newServiceMetadataMiddleware_opGetBucketEncryption(region string) awsmiddle
 		SigningName:   "s3",
 		OperationName: "GetBucketEncryption",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *GetBucketEncryptionInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

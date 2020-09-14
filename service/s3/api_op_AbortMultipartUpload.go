@@ -56,6 +56,7 @@ func (c *Client) AbortMultipartUpload(ctx context.Context, params *AbortMultipar
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAbortMultipartUploadValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAbortMultipartUpload(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -121,4 +122,12 @@ func newServiceMetadataMiddleware_opAbortMultipartUpload(region string) awsmiddl
 		SigningName:   "s3",
 		OperationName: "AbortMultipartUpload",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *AbortMultipartUploadInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

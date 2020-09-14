@@ -40,6 +40,7 @@ func (c *Client) GetBucketVersioning(ctx context.Context, params *GetBucketVersi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBucketVersioningValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketVersioning(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -89,4 +90,12 @@ func newServiceMetadataMiddleware_opGetBucketVersioning(region string) awsmiddle
 		SigningName:   "s3",
 		OperationName: "GetBucketVersioning",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *GetBucketVersioningInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

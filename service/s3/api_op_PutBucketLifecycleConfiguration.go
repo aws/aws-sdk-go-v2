@@ -77,6 +77,7 @@ func (c *Client) PutBucketLifecycleConfiguration(ctx context.Context, params *Pu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutBucketLifecycleConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBucketLifecycleConfiguration(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -121,4 +122,12 @@ func newServiceMetadataMiddleware_opPutBucketLifecycleConfiguration(region strin
 		SigningName:   "s3",
 		OperationName: "PutBucketLifecycleConfiguration",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *PutBucketLifecycleConfigurationInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

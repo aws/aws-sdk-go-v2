@@ -36,6 +36,7 @@ func (c *Client) GetObjectLockConfiguration(ctx context.Context, params *GetObje
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetObjectLockConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetObjectLockConfiguration(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -81,4 +82,12 @@ func newServiceMetadataMiddleware_opGetObjectLockConfiguration(region string) aw
 		SigningName:   "s3",
 		OperationName: "GetObjectLockConfiguration",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *GetObjectLockConfigurationInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }

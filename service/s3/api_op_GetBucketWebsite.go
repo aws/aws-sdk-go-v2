@@ -46,6 +46,7 @@ func (c *Client) GetBucketWebsite(ctx context.Context, params *GetBucketWebsiteI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBucketWebsiteValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketWebsite(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
@@ -98,4 +99,12 @@ func newServiceMetadataMiddleware_opGetBucketWebsite(region string) awsmiddlewar
 		SigningName:   "s3",
 		OperationName: "GetBucketWebsite",
 	}
+}
+
+// GetBucket retrieves the Bucket member value if provided
+func (s *GetBucketWebsiteInput) GetBucket() (v string) {
+	if s.Bucket == nil {
+		return v
+	}
+	return *s.Bucket
 }
