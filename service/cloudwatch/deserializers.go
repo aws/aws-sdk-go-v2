@@ -8643,6 +8643,9 @@ func awsAwsquery_deserializeOpDocumentGetMetricWidgetImageOutput(v **GetMetricWi
 				return err
 			}
 			if done {
+				if val == nil {
+					sv.MetricWidgetImage = []byte{}
+				}
 				break
 			}
 			if val != nil {
