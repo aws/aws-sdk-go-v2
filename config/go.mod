@@ -2,7 +2,7 @@ module github.com/aws/aws-sdk-go-v2/config
 
 go 1.15
 
-require github.com/aws/aws-sdk-go-v2 v0.24.0
+require github.com/aws/aws-sdk-go-v2 v0.0.0-20200915201900-9bd330b7bf22
 
 require (
 	github.com/aws/aws-sdk-go-v2/credentials v0.0.0-20200915195926-9dd18af694c4
