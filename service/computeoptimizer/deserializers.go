@@ -47,8 +47,8 @@ func (m *awsAwsjson10_deserializeOpDescribeRecommendationExportJobs) HandleDeser
 	output := &DescribeRecommendationExportJobsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -82,8 +82,8 @@ func awsAwsjson10_deserializeOpErrorDescribeRecommendationExportJobs(response *s
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -168,8 +168,8 @@ func (m *awsAwsjson10_deserializeOpExportAutoScalingGroupRecommendations) Handle
 	output := &ExportAutoScalingGroupRecommendationsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -203,8 +203,8 @@ func awsAwsjson10_deserializeOpErrorExportAutoScalingGroupRecommendations(respon
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -289,8 +289,8 @@ func (m *awsAwsjson10_deserializeOpExportEC2InstanceRecommendations) HandleDeser
 	output := &ExportEC2InstanceRecommendationsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -324,8 +324,8 @@ func awsAwsjson10_deserializeOpErrorExportEC2InstanceRecommendations(response *s
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -410,8 +410,8 @@ func (m *awsAwsjson10_deserializeOpGetAutoScalingGroupRecommendations) HandleDes
 	output := &GetAutoScalingGroupRecommendationsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -445,8 +445,8 @@ func awsAwsjson10_deserializeOpErrorGetAutoScalingGroupRecommendations(response 
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -531,8 +531,8 @@ func (m *awsAwsjson10_deserializeOpGetEC2InstanceRecommendations) HandleDeserial
 	output := &GetEC2InstanceRecommendationsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -566,8 +566,8 @@ func awsAwsjson10_deserializeOpErrorGetEC2InstanceRecommendations(response *smit
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -652,8 +652,8 @@ func (m *awsAwsjson10_deserializeOpGetEC2RecommendationProjectedMetrics) HandleD
 	output := &GetEC2RecommendationProjectedMetricsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -687,8 +687,8 @@ func awsAwsjson10_deserializeOpErrorGetEC2RecommendationProjectedMetrics(respons
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -773,8 +773,8 @@ func (m *awsAwsjson10_deserializeOpGetEnrollmentStatus) HandleDeserialize(ctx co
 	output := &GetEnrollmentStatusOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -808,8 +808,8 @@ func awsAwsjson10_deserializeOpErrorGetEnrollmentStatus(response *smithyhttp.Res
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -888,8 +888,8 @@ func (m *awsAwsjson10_deserializeOpGetRecommendationSummaries) HandleDeserialize
 	output := &GetRecommendationSummariesOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -923,8 +923,8 @@ func awsAwsjson10_deserializeOpErrorGetRecommendationSummaries(response *smithyh
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -1006,8 +1006,8 @@ func (m *awsAwsjson10_deserializeOpUpdateEnrollmentStatus) HandleDeserialize(ctx
 	output := &UpdateEnrollmentStatusOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -1041,8 +1041,8 @@ func awsAwsjson10_deserializeOpErrorUpdateEnrollmentStatus(response *smithyhttp.
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -1096,8 +1096,8 @@ func awsAwsjson10_deserializeOpErrorUpdateEnrollmentStatus(response *smithyhttp.
 }
 
 func awsAwsjson10_deserializeErrorAccessDeniedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -1120,8 +1120,8 @@ func awsAwsjson10_deserializeErrorAccessDeniedException(response *smithyhttp.Res
 }
 
 func awsAwsjson10_deserializeErrorInternalServerException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -1144,8 +1144,8 @@ func awsAwsjson10_deserializeErrorInternalServerException(response *smithyhttp.R
 }
 
 func awsAwsjson10_deserializeErrorInvalidParameterValueException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -1168,8 +1168,8 @@ func awsAwsjson10_deserializeErrorInvalidParameterValueException(response *smith
 }
 
 func awsAwsjson10_deserializeErrorLimitExceededException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -1192,8 +1192,8 @@ func awsAwsjson10_deserializeErrorLimitExceededException(response *smithyhttp.Re
 }
 
 func awsAwsjson10_deserializeErrorMissingAuthenticationToken(response *smithyhttp.Response, errorBody *bytes.Reader) error {
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -1216,8 +1216,8 @@ func awsAwsjson10_deserializeErrorMissingAuthenticationToken(response *smithyhtt
 }
 
 func awsAwsjson10_deserializeErrorOptInRequiredException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -1240,8 +1240,8 @@ func awsAwsjson10_deserializeErrorOptInRequiredException(response *smithyhttp.Re
 }
 
 func awsAwsjson10_deserializeErrorResourceNotFoundException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -1264,8 +1264,8 @@ func awsAwsjson10_deserializeErrorResourceNotFoundException(response *smithyhttp
 }
 
 func awsAwsjson10_deserializeErrorServiceUnavailableException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -1288,8 +1288,8 @@ func awsAwsjson10_deserializeErrorServiceUnavailableException(response *smithyht
 }
 
 func awsAwsjson10_deserializeErrorThrottlingException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)

@@ -74,8 +74,8 @@ func awsRestjson1_deserializeOpErrorGetClip(response *smithyhttp.Response) error
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -184,8 +184,8 @@ func (m *awsRestjson1_deserializeOpGetDASHStreamingSessionURL) HandleDeserialize
 	output := &GetDASHStreamingSessionURLOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -220,8 +220,8 @@ func awsRestjson1_deserializeOpErrorGetDASHStreamingSessionURL(response *smithyh
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -370,8 +370,8 @@ func (m *awsRestjson1_deserializeOpGetHLSStreamingSessionURL) HandleDeserialize(
 	output := &GetHLSStreamingSessionURLOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -406,8 +406,8 @@ func awsRestjson1_deserializeOpErrorGetHLSStreamingSessionURL(response *smithyht
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -584,8 +584,8 @@ func awsRestjson1_deserializeOpErrorGetMediaForFragmentList(response *smithyhttp
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -679,8 +679,8 @@ func (m *awsRestjson1_deserializeOpListFragments) HandleDeserialize(ctx context.
 	output := &ListFragmentsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -715,8 +715,8 @@ func awsRestjson1_deserializeOpErrorListFragments(response *smithyhttp.Response)
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -834,8 +834,8 @@ func awsRestjson1_deserializeOpDocumentListFragmentsOutput(v **ListFragmentsOutp
 
 func awsRestjson1_deserializeErrorClientLimitExceededException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ClientLimitExceededException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -859,8 +859,8 @@ func awsRestjson1_deserializeErrorClientLimitExceededException(response *smithyh
 
 func awsRestjson1_deserializeErrorInvalidArgumentException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InvalidArgumentException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -884,8 +884,8 @@ func awsRestjson1_deserializeErrorInvalidArgumentException(response *smithyhttp.
 
 func awsRestjson1_deserializeErrorInvalidCodecPrivateDataException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InvalidCodecPrivateDataException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -909,8 +909,8 @@ func awsRestjson1_deserializeErrorInvalidCodecPrivateDataException(response *smi
 
 func awsRestjson1_deserializeErrorInvalidMediaFrameException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InvalidMediaFrameException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -934,8 +934,8 @@ func awsRestjson1_deserializeErrorInvalidMediaFrameException(response *smithyhtt
 
 func awsRestjson1_deserializeErrorMissingCodecPrivateDataException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.MissingCodecPrivateDataException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -959,8 +959,8 @@ func awsRestjson1_deserializeErrorMissingCodecPrivateDataException(response *smi
 
 func awsRestjson1_deserializeErrorNoDataRetentionException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.NoDataRetentionException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -984,8 +984,8 @@ func awsRestjson1_deserializeErrorNoDataRetentionException(response *smithyhttp.
 
 func awsRestjson1_deserializeErrorNotAuthorizedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.NotAuthorizedException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -1009,8 +1009,8 @@ func awsRestjson1_deserializeErrorNotAuthorizedException(response *smithyhttp.Re
 
 func awsRestjson1_deserializeErrorResourceNotFoundException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ResourceNotFoundException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -1034,8 +1034,8 @@ func awsRestjson1_deserializeErrorResourceNotFoundException(response *smithyhttp
 
 func awsRestjson1_deserializeErrorUnsupportedStreamMediaTypeException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.UnsupportedStreamMediaTypeException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)

@@ -46,8 +46,8 @@ func (m *awsRestjson1_deserializeOpCreateBackupPlan) HandleDeserialize(ctx conte
 	output := &CreateBackupPlanOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -82,8 +82,8 @@ func awsRestjson1_deserializeOpErrorCreateBackupPlan(response *smithyhttp.Respon
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -266,8 +266,8 @@ func (m *awsRestjson1_deserializeOpCreateBackupSelection) HandleDeserialize(ctx 
 	output := &CreateBackupSelectionOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -302,8 +302,8 @@ func awsRestjson1_deserializeOpErrorCreateBackupSelection(response *smithyhttp.R
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -473,8 +473,8 @@ func (m *awsRestjson1_deserializeOpCreateBackupVault) HandleDeserialize(ctx cont
 	output := &CreateBackupVaultOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -509,8 +509,8 @@ func awsRestjson1_deserializeOpErrorCreateBackupVault(response *smithyhttp.Respo
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -680,8 +680,8 @@ func (m *awsRestjson1_deserializeOpDeleteBackupPlan) HandleDeserialize(ctx conte
 	output := &DeleteBackupPlanOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -716,8 +716,8 @@ func awsRestjson1_deserializeOpErrorDeleteBackupPlan(response *smithyhttp.Respon
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -918,8 +918,8 @@ func awsRestjson1_deserializeOpErrorDeleteBackupSelection(response *smithyhttp.R
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -1010,8 +1010,8 @@ func awsRestjson1_deserializeOpErrorDeleteBackupVault(response *smithyhttp.Respo
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -1105,8 +1105,8 @@ func awsRestjson1_deserializeOpErrorDeleteBackupVaultAccessPolicy(response *smit
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -1197,8 +1197,8 @@ func awsRestjson1_deserializeOpErrorDeleteBackupVaultNotifications(response *smi
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -1289,8 +1289,8 @@ func awsRestjson1_deserializeOpErrorDeleteRecoveryPoint(response *smithyhttp.Res
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -1366,8 +1366,8 @@ func (m *awsRestjson1_deserializeOpDescribeBackupJob) HandleDeserialize(ctx cont
 	output := &DescribeBackupJobOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -1402,8 +1402,8 @@ func awsRestjson1_deserializeOpErrorDescribeBackupJob(response *smithyhttp.Respo
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -1780,8 +1780,8 @@ func (m *awsRestjson1_deserializeOpDescribeBackupVault) HandleDeserialize(ctx co
 	output := &DescribeBackupVaultOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -1816,8 +1816,8 @@ func awsRestjson1_deserializeOpErrorDescribeBackupVault(response *smithyhttp.Res
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -2027,8 +2027,8 @@ func (m *awsRestjson1_deserializeOpDescribeCopyJob) HandleDeserialize(ctx contex
 	output := &DescribeCopyJobOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -2063,8 +2063,8 @@ func awsRestjson1_deserializeOpErrorDescribeCopyJob(response *smithyhttp.Respons
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -2193,8 +2193,8 @@ func (m *awsRestjson1_deserializeOpDescribeProtectedResource) HandleDeserialize(
 	output := &DescribeProtectedResourceOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -2229,8 +2229,8 @@ func awsRestjson1_deserializeOpErrorDescribeProtectedResource(response *smithyht
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -2397,8 +2397,8 @@ func (m *awsRestjson1_deserializeOpDescribeRecoveryPoint) HandleDeserialize(ctx 
 	output := &DescribeRecoveryPointOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -2433,8 +2433,8 @@ func awsRestjson1_deserializeOpErrorDescribeRecoveryPoint(response *smithyhttp.R
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -2771,8 +2771,8 @@ func (m *awsRestjson1_deserializeOpDescribeRegionSettings) HandleDeserialize(ctx
 	output := &DescribeRegionSettingsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -2807,8 +2807,8 @@ func awsRestjson1_deserializeOpErrorDescribeRegionSettings(response *smithyhttp.
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -2928,8 +2928,8 @@ func (m *awsRestjson1_deserializeOpDescribeRestoreJob) HandleDeserialize(ctx con
 	output := &DescribeRestoreJobOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -2964,8 +2964,8 @@ func awsRestjson1_deserializeOpErrorDescribeRestoreJob(response *smithyhttp.Resp
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -3277,8 +3277,8 @@ func (m *awsRestjson1_deserializeOpExportBackupPlanTemplate) HandleDeserialize(c
 	output := &ExportBackupPlanTemplateOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -3313,8 +3313,8 @@ func awsRestjson1_deserializeOpErrorExportBackupPlanTemplate(response *smithyhtt
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -3451,8 +3451,8 @@ func (m *awsRestjson1_deserializeOpGetBackupPlan) HandleDeserialize(ctx context.
 	output := &GetBackupPlanOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -3487,8 +3487,8 @@ func awsRestjson1_deserializeOpErrorGetBackupPlan(response *smithyhttp.Response)
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -3720,8 +3720,8 @@ func (m *awsRestjson1_deserializeOpGetBackupPlanFromJSON) HandleDeserialize(ctx 
 	output := &GetBackupPlanFromJSONOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -3756,8 +3756,8 @@ func awsRestjson1_deserializeOpErrorGetBackupPlanFromJSON(response *smithyhttp.R
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -3889,8 +3889,8 @@ func (m *awsRestjson1_deserializeOpGetBackupPlanFromTemplate) HandleDeserialize(
 	output := &GetBackupPlanFromTemplateOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -3925,8 +3925,8 @@ func awsRestjson1_deserializeOpErrorGetBackupPlanFromTemplate(response *smithyht
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -4055,8 +4055,8 @@ func (m *awsRestjson1_deserializeOpGetBackupSelection) HandleDeserialize(ctx con
 	output := &GetBackupSelectionOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -4091,8 +4091,8 @@ func awsRestjson1_deserializeOpErrorGetBackupSelection(response *smithyhttp.Resp
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -4277,8 +4277,8 @@ func (m *awsRestjson1_deserializeOpGetBackupVaultAccessPolicy) HandleDeserialize
 	output := &GetBackupVaultAccessPolicyOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -4313,8 +4313,8 @@ func awsRestjson1_deserializeOpErrorGetBackupVaultAccessPolicy(response *smithyh
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -4477,8 +4477,8 @@ func (m *awsRestjson1_deserializeOpGetBackupVaultNotifications) HandleDeserializ
 	output := &GetBackupVaultNotificationsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -4513,8 +4513,8 @@ func awsRestjson1_deserializeOpErrorGetBackupVaultNotifications(response *smithy
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -4682,8 +4682,8 @@ func (m *awsRestjson1_deserializeOpGetRecoveryPointRestoreMetadata) HandleDeseri
 	output := &GetRecoveryPointRestoreMetadataOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -4718,8 +4718,8 @@ func awsRestjson1_deserializeOpErrorGetRecoveryPointRestoreMetadata(response *sm
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -4874,8 +4874,8 @@ func (m *awsRestjson1_deserializeOpGetSupportedResourceTypes) HandleDeserialize(
 	output := &GetSupportedResourceTypesOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -4910,8 +4910,8 @@ func awsRestjson1_deserializeOpErrorGetSupportedResourceTypes(response *smithyht
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -5031,8 +5031,8 @@ func (m *awsRestjson1_deserializeOpListBackupJobs) HandleDeserialize(ctx context
 	output := &ListBackupJobsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -5067,8 +5067,8 @@ func awsRestjson1_deserializeOpErrorListBackupJobs(response *smithyhttp.Response
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -5204,8 +5204,8 @@ func (m *awsRestjson1_deserializeOpListBackupPlans) HandleDeserialize(ctx contex
 	output := &ListBackupPlansOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -5240,8 +5240,8 @@ func awsRestjson1_deserializeOpErrorListBackupPlans(response *smithyhttp.Respons
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -5383,8 +5383,8 @@ func (m *awsRestjson1_deserializeOpListBackupPlanTemplates) HandleDeserialize(ct
 	output := &ListBackupPlanTemplatesOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -5419,8 +5419,8 @@ func awsRestjson1_deserializeOpErrorListBackupPlanTemplates(response *smithyhttp
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -5562,8 +5562,8 @@ func (m *awsRestjson1_deserializeOpListBackupPlanVersions) HandleDeserialize(ctx
 	output := &ListBackupPlanVersionsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -5598,8 +5598,8 @@ func awsRestjson1_deserializeOpErrorListBackupPlanVersions(response *smithyhttp.
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -5741,8 +5741,8 @@ func (m *awsRestjson1_deserializeOpListBackupSelections) HandleDeserialize(ctx c
 	output := &ListBackupSelectionsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -5777,8 +5777,8 @@ func awsRestjson1_deserializeOpErrorListBackupSelections(response *smithyhttp.Re
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -5920,8 +5920,8 @@ func (m *awsRestjson1_deserializeOpListBackupVaults) HandleDeserialize(ctx conte
 	output := &ListBackupVaultsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -5956,8 +5956,8 @@ func awsRestjson1_deserializeOpErrorListBackupVaults(response *smithyhttp.Respon
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -6099,8 +6099,8 @@ func (m *awsRestjson1_deserializeOpListCopyJobs) HandleDeserialize(ctx context.C
 	output := &ListCopyJobsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -6135,8 +6135,8 @@ func awsRestjson1_deserializeOpErrorListCopyJobs(response *smithyhttp.Response) 
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -6272,8 +6272,8 @@ func (m *awsRestjson1_deserializeOpListProtectedResources) HandleDeserialize(ctx
 	output := &ListProtectedResourcesOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -6308,8 +6308,8 @@ func awsRestjson1_deserializeOpErrorListProtectedResources(response *smithyhttp.
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -6445,8 +6445,8 @@ func (m *awsRestjson1_deserializeOpListRecoveryPointsByBackupVault) HandleDeseri
 	output := &ListRecoveryPointsByBackupVaultOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -6481,8 +6481,8 @@ func awsRestjson1_deserializeOpErrorListRecoveryPointsByBackupVault(response *sm
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -6624,8 +6624,8 @@ func (m *awsRestjson1_deserializeOpListRecoveryPointsByResource) HandleDeseriali
 	output := &ListRecoveryPointsByResourceOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -6660,8 +6660,8 @@ func awsRestjson1_deserializeOpErrorListRecoveryPointsByResource(response *smith
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -6803,8 +6803,8 @@ func (m *awsRestjson1_deserializeOpListRestoreJobs) HandleDeserialize(ctx contex
 	output := &ListRestoreJobsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -6839,8 +6839,8 @@ func awsRestjson1_deserializeOpErrorListRestoreJobs(response *smithyhttp.Respons
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -6982,8 +6982,8 @@ func (m *awsRestjson1_deserializeOpListTags) HandleDeserialize(ctx context.Conte
 	output := &ListTagsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -7018,8 +7018,8 @@ func awsRestjson1_deserializeOpErrorListTags(response *smithyhttp.Response) erro
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -7179,8 +7179,8 @@ func awsRestjson1_deserializeOpErrorPutBackupVaultAccessPolicy(response *smithyh
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -7271,8 +7271,8 @@ func awsRestjson1_deserializeOpErrorPutBackupVaultNotifications(response *smithy
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -7345,8 +7345,8 @@ func (m *awsRestjson1_deserializeOpStartBackupJob) HandleDeserialize(ctx context
 	output := &StartBackupJobOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -7381,8 +7381,8 @@ func awsRestjson1_deserializeOpErrorStartBackupJob(response *smithyhttp.Response
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -7552,8 +7552,8 @@ func (m *awsRestjson1_deserializeOpStartCopyJob) HandleDeserialize(ctx context.C
 	output := &StartCopyJobOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -7588,8 +7588,8 @@ func awsRestjson1_deserializeOpErrorStartCopyJob(response *smithyhttp.Response) 
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -7746,8 +7746,8 @@ func (m *awsRestjson1_deserializeOpStartRestoreJob) HandleDeserialize(ctx contex
 	output := &StartRestoreJobOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -7782,8 +7782,8 @@ func awsRestjson1_deserializeOpErrorStartRestoreJob(response *smithyhttp.Respons
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -7938,8 +7938,8 @@ func awsRestjson1_deserializeOpErrorStopBackupJob(response *smithyhttp.Response)
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -8033,8 +8033,8 @@ func awsRestjson1_deserializeOpErrorTagResource(response *smithyhttp.Response) e
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -8128,8 +8128,8 @@ func awsRestjson1_deserializeOpErrorUntagResource(response *smithyhttp.Response)
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -8202,8 +8202,8 @@ func (m *awsRestjson1_deserializeOpUpdateBackupPlan) HandleDeserialize(ctx conte
 	output := &UpdateBackupPlanOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -8238,8 +8238,8 @@ func awsRestjson1_deserializeOpErrorUpdateBackupPlan(response *smithyhttp.Respon
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -8419,8 +8419,8 @@ func (m *awsRestjson1_deserializeOpUpdateRecoveryPointLifecycle) HandleDeseriali
 	output := &UpdateRecoveryPointLifecycleOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -8455,8 +8455,8 @@ func awsRestjson1_deserializeOpErrorUpdateRecoveryPointLifecycle(response *smith
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -8634,8 +8634,8 @@ func awsRestjson1_deserializeOpErrorUpdateRegionSettings(response *smithyhttp.Re
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -8681,8 +8681,8 @@ func awsRestjson1_deserializeOpErrorUpdateRegionSettings(response *smithyhttp.Re
 
 func awsRestjson1_deserializeErrorAlreadyExistsException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.AlreadyExistsException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -8706,8 +8706,8 @@ func awsRestjson1_deserializeErrorAlreadyExistsException(response *smithyhttp.Re
 
 func awsRestjson1_deserializeErrorDependencyFailureException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.DependencyFailureException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -8731,8 +8731,8 @@ func awsRestjson1_deserializeErrorDependencyFailureException(response *smithyhtt
 
 func awsRestjson1_deserializeErrorInvalidParameterValueException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InvalidParameterValueException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -8756,8 +8756,8 @@ func awsRestjson1_deserializeErrorInvalidParameterValueException(response *smith
 
 func awsRestjson1_deserializeErrorInvalidRequestException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InvalidRequestException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -8781,8 +8781,8 @@ func awsRestjson1_deserializeErrorInvalidRequestException(response *smithyhttp.R
 
 func awsRestjson1_deserializeErrorLimitExceededException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.LimitExceededException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -8806,8 +8806,8 @@ func awsRestjson1_deserializeErrorLimitExceededException(response *smithyhttp.Re
 
 func awsRestjson1_deserializeErrorMissingParameterValueException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.MissingParameterValueException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -8831,8 +8831,8 @@ func awsRestjson1_deserializeErrorMissingParameterValueException(response *smith
 
 func awsRestjson1_deserializeErrorResourceNotFoundException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ResourceNotFoundException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -8856,8 +8856,8 @@ func awsRestjson1_deserializeErrorResourceNotFoundException(response *smithyhttp
 
 func awsRestjson1_deserializeErrorServiceUnavailableException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ServiceUnavailableException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)

@@ -13,6 +13,7 @@ import (
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	smithyxml "github.com/awslabs/smithy-go/xml"
+	"net/http"
 )
 
 type awsRestxml_serializeOpAbortMultipartUpload struct {
@@ -79,7 +80,7 @@ func awsRestxml_serializeOpHttpBindingsAbortMultipartUploadInput(v *AbortMultipa
 	}
 
 	if len(v.RequestPayer) > 0 {
-		locationName := "x-amz-request-payer"
+		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
@@ -176,7 +177,7 @@ func awsRestxml_serializeOpHttpBindingsCompleteMultipartUploadInput(v *CompleteM
 	}
 
 	if len(v.RequestPayer) > 0 {
-		locationName := "x-amz-request-payer"
+		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
@@ -239,7 +240,7 @@ func awsRestxml_serializeOpHttpBindingsCopyObjectInput(v *CopyObjectInput, encod
 	}
 
 	if len(v.ACL) > 0 {
-		locationName := "x-amz-acl"
+		locationName := "X-Amz-Acl"
 		encoder.SetHeader(locationName).String(string(v.ACL))
 	}
 
@@ -285,52 +286,52 @@ func awsRestxml_serializeOpHttpBindingsCopyObjectInput(v *CopyObjectInput, encod
 	}
 
 	if v.CopySource != nil {
-		locationName := "x-amz-copy-source"
+		locationName := "X-Amz-Copy-Source"
 		if len(*v.CopySource) > 0 {
 			encoder.SetHeader(locationName).String(*v.CopySource)
 		}
 	}
 
 	if v.CopySourceIfMatch != nil {
-		locationName := "x-amz-copy-source-if-match"
+		locationName := "X-Amz-Copy-Source-If-Match"
 		if len(*v.CopySourceIfMatch) > 0 {
 			encoder.SetHeader(locationName).String(*v.CopySourceIfMatch)
 		}
 	}
 
 	if v.CopySourceIfModifiedSince != nil {
-		locationName := "x-amz-copy-source-if-modified-since"
+		locationName := "X-Amz-Copy-Source-If-Modified-Since"
 		encoder.SetHeader(locationName).String(smithytime.FormatHTTPDate(*v.CopySourceIfModifiedSince))
 	}
 
 	if v.CopySourceIfNoneMatch != nil {
-		locationName := "x-amz-copy-source-if-none-match"
+		locationName := "X-Amz-Copy-Source-If-None-Match"
 		if len(*v.CopySourceIfNoneMatch) > 0 {
 			encoder.SetHeader(locationName).String(*v.CopySourceIfNoneMatch)
 		}
 	}
 
 	if v.CopySourceIfUnmodifiedSince != nil {
-		locationName := "x-amz-copy-source-if-unmodified-since"
+		locationName := "X-Amz-Copy-Source-If-Unmodified-Since"
 		encoder.SetHeader(locationName).String(smithytime.FormatHTTPDate(*v.CopySourceIfUnmodifiedSince))
 	}
 
 	if v.CopySourceSSECustomerAlgorithm != nil {
-		locationName := "x-amz-copy-source-server-side-encryption-customer-algorithm"
+		locationName := "X-Amz-Copy-Source-Server-Side-Encryption-Customer-Algorithm"
 		if len(*v.CopySourceSSECustomerAlgorithm) > 0 {
 			encoder.SetHeader(locationName).String(*v.CopySourceSSECustomerAlgorithm)
 		}
 	}
 
 	if v.CopySourceSSECustomerKey != nil {
-		locationName := "x-amz-copy-source-server-side-encryption-customer-key"
+		locationName := "X-Amz-Copy-Source-Server-Side-Encryption-Customer-Key"
 		if len(*v.CopySourceSSECustomerKey) > 0 {
 			encoder.SetHeader(locationName).String(*v.CopySourceSSECustomerKey)
 		}
 	}
 
 	if v.CopySourceSSECustomerKeyMD5 != nil {
-		locationName := "x-amz-copy-source-server-side-encryption-customer-key-MD5"
+		locationName := "X-Amz-Copy-Source-Server-Side-Encryption-Customer-Key-Md5"
 		if len(*v.CopySourceSSECustomerKeyMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.CopySourceSSECustomerKeyMD5)
 		}
@@ -342,28 +343,28 @@ func awsRestxml_serializeOpHttpBindingsCopyObjectInput(v *CopyObjectInput, encod
 	}
 
 	if v.GrantFullControl != nil {
-		locationName := "x-amz-grant-full-control"
+		locationName := "X-Amz-Grant-Full-Control"
 		if len(*v.GrantFullControl) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantFullControl)
 		}
 	}
 
 	if v.GrantRead != nil {
-		locationName := "x-amz-grant-read"
+		locationName := "X-Amz-Grant-Read"
 		if len(*v.GrantRead) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantRead)
 		}
 	}
 
 	if v.GrantReadACP != nil {
-		locationName := "x-amz-grant-read-acp"
+		locationName := "X-Amz-Grant-Read-Acp"
 		if len(*v.GrantReadACP) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantReadACP)
 		}
 	}
 
 	if v.GrantWriteACP != nil {
-		locationName := "x-amz-grant-write-acp"
+		locationName := "X-Amz-Grant-Write-Acp"
 		if len(*v.GrantWriteACP) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantWriteACP)
 		}
@@ -376,98 +377,98 @@ func awsRestxml_serializeOpHttpBindingsCopyObjectInput(v *CopyObjectInput, encod
 	}
 
 	if v.Metadata != nil {
-		hv := encoder.Headers("x-amz-meta-")
+		hv := encoder.Headers("X-Amz-Meta-")
 		for mapKey, mapVal := range v.Metadata {
 			if len(*mapVal) > 0 {
-				hv.SetHeader(mapKey).String(*mapVal)
+				hv.SetHeader(http.CanonicalHeaderKey(mapKey)).String(*mapVal)
 			}
 		}
 	}
 
 	if len(v.MetadataDirective) > 0 {
-		locationName := "x-amz-metadata-directive"
+		locationName := "X-Amz-Metadata-Directive"
 		encoder.SetHeader(locationName).String(string(v.MetadataDirective))
 	}
 
 	if len(v.ObjectLockLegalHoldStatus) > 0 {
-		locationName := "x-amz-object-lock-legal-hold"
+		locationName := "X-Amz-Object-Lock-Legal-Hold"
 		encoder.SetHeader(locationName).String(string(v.ObjectLockLegalHoldStatus))
 	}
 
 	if len(v.ObjectLockMode) > 0 {
-		locationName := "x-amz-object-lock-mode"
+		locationName := "X-Amz-Object-Lock-Mode"
 		encoder.SetHeader(locationName).String(string(v.ObjectLockMode))
 	}
 
 	if v.ObjectLockRetainUntilDate != nil {
-		locationName := "x-amz-object-lock-retain-until-date"
+		locationName := "X-Amz-Object-Lock-Retain-Until-Date"
 		encoder.SetHeader(locationName).String(smithytime.FormatDateTime(*v.ObjectLockRetainUntilDate))
 	}
 
 	if len(v.RequestPayer) > 0 {
-		locationName := "x-amz-request-payer"
+		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
 	if len(v.ServerSideEncryption) > 0 {
-		locationName := "x-amz-server-side-encryption"
+		locationName := "X-Amz-Server-Side-Encryption"
 		encoder.SetHeader(locationName).String(string(v.ServerSideEncryption))
 	}
 
 	if v.SSECustomerAlgorithm != nil {
-		locationName := "x-amz-server-side-encryption-customer-algorithm"
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Algorithm"
 		if len(*v.SSECustomerAlgorithm) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSECustomerAlgorithm)
 		}
 	}
 
 	if v.SSECustomerKey != nil {
-		locationName := "x-amz-server-side-encryption-customer-key"
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Key"
 		if len(*v.SSECustomerKey) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSECustomerKey)
 		}
 	}
 
 	if v.SSECustomerKeyMD5 != nil {
-		locationName := "x-amz-server-side-encryption-customer-key-MD5"
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Key-Md5"
 		if len(*v.SSECustomerKeyMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSECustomerKeyMD5)
 		}
 	}
 
 	if v.SSEKMSEncryptionContext != nil {
-		locationName := "x-amz-server-side-encryption-context"
+		locationName := "X-Amz-Server-Side-Encryption-Context"
 		if len(*v.SSEKMSEncryptionContext) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSEKMSEncryptionContext)
 		}
 	}
 
 	if v.SSEKMSKeyId != nil {
-		locationName := "x-amz-server-side-encryption-aws-kms-key-id"
+		locationName := "X-Amz-Server-Side-Encryption-Aws-Kms-Key-Id"
 		if len(*v.SSEKMSKeyId) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSEKMSKeyId)
 		}
 	}
 
 	if len(v.StorageClass) > 0 {
-		locationName := "x-amz-storage-class"
+		locationName := "X-Amz-Storage-Class"
 		encoder.SetHeader(locationName).String(string(v.StorageClass))
 	}
 
 	if v.Tagging != nil {
-		locationName := "x-amz-tagging"
+		locationName := "X-Amz-Tagging"
 		if len(*v.Tagging) > 0 {
 			encoder.SetHeader(locationName).String(*v.Tagging)
 		}
 	}
 
 	if len(v.TaggingDirective) > 0 {
-		locationName := "x-amz-tagging-directive"
+		locationName := "X-Amz-Tagging-Directive"
 		encoder.SetHeader(locationName).String(string(v.TaggingDirective))
 	}
 
 	if v.WebsiteRedirectLocation != nil {
-		locationName := "x-amz-website-redirect-location"
+		locationName := "X-Amz-Website-Redirect-Location"
 		if len(*v.WebsiteRedirectLocation) > 0 {
 			encoder.SetHeader(locationName).String(*v.WebsiteRedirectLocation)
 		}
@@ -550,7 +551,7 @@ func awsRestxml_serializeOpHttpBindingsCreateBucketInput(v *CreateBucketInput, e
 	}
 
 	if len(v.ACL) > 0 {
-		locationName := "x-amz-acl"
+		locationName := "X-Amz-Acl"
 		encoder.SetHeader(locationName).String(string(v.ACL))
 	}
 
@@ -561,42 +562,42 @@ func awsRestxml_serializeOpHttpBindingsCreateBucketInput(v *CreateBucketInput, e
 	}
 
 	if v.GrantFullControl != nil {
-		locationName := "x-amz-grant-full-control"
+		locationName := "X-Amz-Grant-Full-Control"
 		if len(*v.GrantFullControl) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantFullControl)
 		}
 	}
 
 	if v.GrantRead != nil {
-		locationName := "x-amz-grant-read"
+		locationName := "X-Amz-Grant-Read"
 		if len(*v.GrantRead) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantRead)
 		}
 	}
 
 	if v.GrantReadACP != nil {
-		locationName := "x-amz-grant-read-acp"
+		locationName := "X-Amz-Grant-Read-Acp"
 		if len(*v.GrantReadACP) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantReadACP)
 		}
 	}
 
 	if v.GrantWrite != nil {
-		locationName := "x-amz-grant-write"
+		locationName := "X-Amz-Grant-Write"
 		if len(*v.GrantWrite) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantWrite)
 		}
 	}
 
 	if v.GrantWriteACP != nil {
-		locationName := "x-amz-grant-write-acp"
+		locationName := "X-Amz-Grant-Write-Acp"
 		if len(*v.GrantWriteACP) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantWriteACP)
 		}
 	}
 
 	if v.ObjectLockEnabledForBucket != nil {
-		locationName := "x-amz-bucket-object-lock-enabled"
+		locationName := "X-Amz-Bucket-Object-Lock-Enabled"
 		encoder.SetHeader(locationName).Boolean(*v.ObjectLockEnabledForBucket)
 	}
 
@@ -655,7 +656,7 @@ func awsRestxml_serializeOpHttpBindingsCreateMultipartUploadInput(v *CreateMulti
 	}
 
 	if len(v.ACL) > 0 {
-		locationName := "x-amz-acl"
+		locationName := "X-Amz-Acl"
 		encoder.SetHeader(locationName).String(string(v.ACL))
 	}
 
@@ -706,28 +707,28 @@ func awsRestxml_serializeOpHttpBindingsCreateMultipartUploadInput(v *CreateMulti
 	}
 
 	if v.GrantFullControl != nil {
-		locationName := "x-amz-grant-full-control"
+		locationName := "X-Amz-Grant-Full-Control"
 		if len(*v.GrantFullControl) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantFullControl)
 		}
 	}
 
 	if v.GrantRead != nil {
-		locationName := "x-amz-grant-read"
+		locationName := "X-Amz-Grant-Read"
 		if len(*v.GrantRead) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantRead)
 		}
 	}
 
 	if v.GrantReadACP != nil {
-		locationName := "x-amz-grant-read-acp"
+		locationName := "X-Amz-Grant-Read-Acp"
 		if len(*v.GrantReadACP) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantReadACP)
 		}
 	}
 
 	if v.GrantWriteACP != nil {
-		locationName := "x-amz-grant-write-acp"
+		locationName := "X-Amz-Grant-Write-Acp"
 		if len(*v.GrantWriteACP) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantWriteACP)
 		}
@@ -740,88 +741,88 @@ func awsRestxml_serializeOpHttpBindingsCreateMultipartUploadInput(v *CreateMulti
 	}
 
 	if v.Metadata != nil {
-		hv := encoder.Headers("x-amz-meta-")
+		hv := encoder.Headers("X-Amz-Meta-")
 		for mapKey, mapVal := range v.Metadata {
 			if len(*mapVal) > 0 {
-				hv.SetHeader(mapKey).String(*mapVal)
+				hv.SetHeader(http.CanonicalHeaderKey(mapKey)).String(*mapVal)
 			}
 		}
 	}
 
 	if len(v.ObjectLockLegalHoldStatus) > 0 {
-		locationName := "x-amz-object-lock-legal-hold"
+		locationName := "X-Amz-Object-Lock-Legal-Hold"
 		encoder.SetHeader(locationName).String(string(v.ObjectLockLegalHoldStatus))
 	}
 
 	if len(v.ObjectLockMode) > 0 {
-		locationName := "x-amz-object-lock-mode"
+		locationName := "X-Amz-Object-Lock-Mode"
 		encoder.SetHeader(locationName).String(string(v.ObjectLockMode))
 	}
 
 	if v.ObjectLockRetainUntilDate != nil {
-		locationName := "x-amz-object-lock-retain-until-date"
+		locationName := "X-Amz-Object-Lock-Retain-Until-Date"
 		encoder.SetHeader(locationName).String(smithytime.FormatDateTime(*v.ObjectLockRetainUntilDate))
 	}
 
 	if len(v.RequestPayer) > 0 {
-		locationName := "x-amz-request-payer"
+		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
 	if len(v.ServerSideEncryption) > 0 {
-		locationName := "x-amz-server-side-encryption"
+		locationName := "X-Amz-Server-Side-Encryption"
 		encoder.SetHeader(locationName).String(string(v.ServerSideEncryption))
 	}
 
 	if v.SSECustomerAlgorithm != nil {
-		locationName := "x-amz-server-side-encryption-customer-algorithm"
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Algorithm"
 		if len(*v.SSECustomerAlgorithm) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSECustomerAlgorithm)
 		}
 	}
 
 	if v.SSECustomerKey != nil {
-		locationName := "x-amz-server-side-encryption-customer-key"
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Key"
 		if len(*v.SSECustomerKey) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSECustomerKey)
 		}
 	}
 
 	if v.SSECustomerKeyMD5 != nil {
-		locationName := "x-amz-server-side-encryption-customer-key-MD5"
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Key-Md5"
 		if len(*v.SSECustomerKeyMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSECustomerKeyMD5)
 		}
 	}
 
 	if v.SSEKMSEncryptionContext != nil {
-		locationName := "x-amz-server-side-encryption-context"
+		locationName := "X-Amz-Server-Side-Encryption-Context"
 		if len(*v.SSEKMSEncryptionContext) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSEKMSEncryptionContext)
 		}
 	}
 
 	if v.SSEKMSKeyId != nil {
-		locationName := "x-amz-server-side-encryption-aws-kms-key-id"
+		locationName := "X-Amz-Server-Side-Encryption-Aws-Kms-Key-Id"
 		if len(*v.SSEKMSKeyId) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSEKMSKeyId)
 		}
 	}
 
 	if len(v.StorageClass) > 0 {
-		locationName := "x-amz-storage-class"
+		locationName := "X-Amz-Storage-Class"
 		encoder.SetHeader(locationName).String(string(v.StorageClass))
 	}
 
 	if v.Tagging != nil {
-		locationName := "x-amz-tagging"
+		locationName := "X-Amz-Tagging"
 		if len(*v.Tagging) > 0 {
 			encoder.SetHeader(locationName).String(*v.Tagging)
 		}
 	}
 
 	if v.WebsiteRedirectLocation != nil {
-		locationName := "x-amz-website-redirect-location"
+		locationName := "X-Amz-Website-Redirect-Location"
 		if len(*v.WebsiteRedirectLocation) > 0 {
 			encoder.SetHeader(locationName).String(*v.WebsiteRedirectLocation)
 		}
@@ -1560,7 +1561,7 @@ func awsRestxml_serializeOpHttpBindingsDeleteObjectInput(v *DeleteObjectInput, e
 	}
 
 	if v.BypassGovernanceRetention != nil {
-		locationName := "x-amz-bypass-governance-retention"
+		locationName := "X-Amz-Bypass-Governance-Retention"
 		encoder.SetHeader(locationName).Boolean(*v.BypassGovernanceRetention)
 	}
 
@@ -1571,14 +1572,14 @@ func awsRestxml_serializeOpHttpBindingsDeleteObjectInput(v *DeleteObjectInput, e
 	}
 
 	if v.MFA != nil {
-		locationName := "x-amz-mfa"
+		locationName := "X-Amz-Mfa"
 		if len(*v.MFA) > 0 {
 			encoder.SetHeader(locationName).String(*v.MFA)
 		}
 	}
 
 	if len(v.RequestPayer) > 0 {
-		locationName := "x-amz-request-payer"
+		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
@@ -1669,19 +1670,19 @@ func awsRestxml_serializeOpHttpBindingsDeleteObjectsInput(v *DeleteObjectsInput,
 	}
 
 	if v.BypassGovernanceRetention != nil {
-		locationName := "x-amz-bypass-governance-retention"
+		locationName := "X-Amz-Bypass-Governance-Retention"
 		encoder.SetHeader(locationName).Boolean(*v.BypassGovernanceRetention)
 	}
 
 	if v.MFA != nil {
-		locationName := "x-amz-mfa"
+		locationName := "X-Amz-Mfa"
 		if len(*v.MFA) > 0 {
 			encoder.SetHeader(locationName).String(*v.MFA)
 		}
 	}
 
 	if len(v.RequestPayer) > 0 {
-		locationName := "x-amz-request-payer"
+		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
@@ -3009,7 +3010,7 @@ func awsRestxml_serializeOpHttpBindingsGetObjectInput(v *GetObjectInput, encoder
 	}
 
 	if len(v.RequestPayer) > 0 {
-		locationName := "x-amz-request-payer"
+		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
@@ -3038,21 +3039,21 @@ func awsRestxml_serializeOpHttpBindingsGetObjectInput(v *GetObjectInput, encoder
 	}
 
 	if v.SSECustomerAlgorithm != nil {
-		locationName := "x-amz-server-side-encryption-customer-algorithm"
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Algorithm"
 		if len(*v.SSECustomerAlgorithm) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSECustomerAlgorithm)
 		}
 	}
 
 	if v.SSECustomerKey != nil {
-		locationName := "x-amz-server-side-encryption-customer-key"
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Key"
 		if len(*v.SSECustomerKey) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSECustomerKey)
 		}
 	}
 
 	if v.SSECustomerKeyMD5 != nil {
-		locationName := "x-amz-server-side-encryption-customer-key-MD5"
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Key-Md5"
 		if len(*v.SSECustomerKeyMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSECustomerKeyMD5)
 		}
@@ -3129,7 +3130,7 @@ func awsRestxml_serializeOpHttpBindingsGetObjectAclInput(v *GetObjectAclInput, e
 	}
 
 	if len(v.RequestPayer) > 0 {
-		locationName := "x-amz-request-payer"
+		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
@@ -3204,7 +3205,7 @@ func awsRestxml_serializeOpHttpBindingsGetObjectLegalHoldInput(v *GetObjectLegal
 	}
 
 	if len(v.RequestPayer) > 0 {
-		locationName := "x-amz-request-payer"
+		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
@@ -3339,7 +3340,7 @@ func awsRestxml_serializeOpHttpBindingsGetObjectRetentionInput(v *GetObjectReten
 	}
 
 	if len(v.RequestPayer) > 0 {
-		locationName := "x-amz-request-payer"
+		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
@@ -3484,7 +3485,7 @@ func awsRestxml_serializeOpHttpBindingsGetObjectTorrentInput(v *GetObjectTorrent
 	}
 
 	if len(v.RequestPayer) > 0 {
-		locationName := "x-amz-request-payer"
+		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
@@ -3710,26 +3711,26 @@ func awsRestxml_serializeOpHttpBindingsHeadObjectInput(v *HeadObjectInput, encod
 	}
 
 	if len(v.RequestPayer) > 0 {
-		locationName := "x-amz-request-payer"
+		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
 	if v.SSECustomerAlgorithm != nil {
-		locationName := "x-amz-server-side-encryption-customer-algorithm"
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Algorithm"
 		if len(*v.SSECustomerAlgorithm) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSECustomerAlgorithm)
 		}
 	}
 
 	if v.SSECustomerKey != nil {
-		locationName := "x-amz-server-side-encryption-customer-key"
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Key"
 		if len(*v.SSECustomerKey) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSECustomerKey)
 		}
 	}
 
 	if v.SSECustomerKeyMD5 != nil {
-		locationName := "x-amz-server-side-encryption-customer-key-MD5"
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Key-Md5"
 		if len(*v.SSECustomerKeyMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSECustomerKeyMD5)
 		}
@@ -4146,7 +4147,7 @@ func awsRestxml_serializeOpHttpBindingsListObjectsInput(v *ListObjectsInput, enc
 	}
 
 	if len(v.RequestPayer) > 0 {
-		locationName := "x-amz-request-payer"
+		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
@@ -4235,7 +4236,7 @@ func awsRestxml_serializeOpHttpBindingsListObjectsV2Input(v *ListObjectsV2Input,
 	}
 
 	if len(v.RequestPayer) > 0 {
-		locationName := "x-amz-request-payer"
+		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
@@ -4402,7 +4403,7 @@ func awsRestxml_serializeOpHttpBindingsListPartsInput(v *ListPartsInput, encoder
 	}
 
 	if len(v.RequestPayer) > 0 {
-		locationName := "x-amz-request-payer"
+		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
@@ -4569,7 +4570,7 @@ func awsRestxml_serializeOpHttpBindingsPutBucketAclInput(v *PutBucketAclInput, e
 	}
 
 	if len(v.ACL) > 0 {
-		locationName := "x-amz-acl"
+		locationName := "X-Amz-Acl"
 		encoder.SetHeader(locationName).String(string(v.ACL))
 	}
 
@@ -4580,42 +4581,42 @@ func awsRestxml_serializeOpHttpBindingsPutBucketAclInput(v *PutBucketAclInput, e
 	}
 
 	if v.ContentMD5 != nil {
-		locationName := "Content-MD5"
+		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
 		}
 	}
 
 	if v.GrantFullControl != nil {
-		locationName := "x-amz-grant-full-control"
+		locationName := "X-Amz-Grant-Full-Control"
 		if len(*v.GrantFullControl) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantFullControl)
 		}
 	}
 
 	if v.GrantRead != nil {
-		locationName := "x-amz-grant-read"
+		locationName := "X-Amz-Grant-Read"
 		if len(*v.GrantRead) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantRead)
 		}
 	}
 
 	if v.GrantReadACP != nil {
-		locationName := "x-amz-grant-read-acp"
+		locationName := "X-Amz-Grant-Read-Acp"
 		if len(*v.GrantReadACP) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantReadACP)
 		}
 	}
 
 	if v.GrantWrite != nil {
-		locationName := "x-amz-grant-write"
+		locationName := "X-Amz-Grant-Write"
 		if len(*v.GrantWrite) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantWrite)
 		}
 	}
 
 	if v.GrantWriteACP != nil {
-		locationName := "x-amz-grant-write-acp"
+		locationName := "X-Amz-Grant-Write-Acp"
 		if len(*v.GrantWriteACP) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantWriteACP)
 		}
@@ -4790,7 +4791,7 @@ func awsRestxml_serializeOpHttpBindingsPutBucketCorsInput(v *PutBucketCorsInput,
 	}
 
 	if v.ContentMD5 != nil {
-		locationName := "Content-MD5"
+		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
 		}
@@ -4879,7 +4880,7 @@ func awsRestxml_serializeOpHttpBindingsPutBucketEncryptionInput(v *PutBucketEncr
 	}
 
 	if v.ContentMD5 != nil {
-		locationName := "Content-MD5"
+		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
 		}
@@ -5136,7 +5137,7 @@ func awsRestxml_serializeOpHttpBindingsPutBucketLoggingInput(v *PutBucketLogging
 	}
 
 	if v.ContentMD5 != nil {
-		locationName := "Content-MD5"
+		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
 		}
@@ -5388,12 +5389,12 @@ func awsRestxml_serializeOpHttpBindingsPutBucketPolicyInput(v *PutBucketPolicyIn
 	}
 
 	if v.ConfirmRemoveSelfBucketAccess != nil {
-		locationName := "x-amz-confirm-remove-self-bucket-access"
+		locationName := "X-Amz-Confirm-Remove-Self-Bucket-Access"
 		encoder.SetHeader(locationName).Boolean(*v.ConfirmRemoveSelfBucketAccess)
 	}
 
 	if v.ContentMD5 != nil {
-		locationName := "Content-MD5"
+		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
 		}
@@ -5498,14 +5499,14 @@ func awsRestxml_serializeOpHttpBindingsPutBucketReplicationInput(v *PutBucketRep
 	}
 
 	if v.ContentMD5 != nil {
-		locationName := "Content-MD5"
+		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
 		}
 	}
 
 	if v.Token != nil {
-		locationName := "x-amz-bucket-object-lock-token"
+		locationName := "X-Amz-Bucket-Object-Lock-Token"
 		if len(*v.Token) > 0 {
 			encoder.SetHeader(locationName).String(*v.Token)
 		}
@@ -5594,7 +5595,7 @@ func awsRestxml_serializeOpHttpBindingsPutBucketRequestPaymentInput(v *PutBucket
 	}
 
 	if v.ContentMD5 != nil {
-		locationName := "Content-MD5"
+		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
 		}
@@ -5683,7 +5684,7 @@ func awsRestxml_serializeOpHttpBindingsPutBucketTaggingInput(v *PutBucketTagging
 	}
 
 	if v.ContentMD5 != nil {
-		locationName := "Content-MD5"
+		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
 		}
@@ -5772,14 +5773,14 @@ func awsRestxml_serializeOpHttpBindingsPutBucketVersioningInput(v *PutBucketVers
 	}
 
 	if v.ContentMD5 != nil {
-		locationName := "Content-MD5"
+		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
 		}
 	}
 
 	if v.MFA != nil {
-		locationName := "x-amz-mfa"
+		locationName := "X-Amz-Mfa"
 		if len(*v.MFA) > 0 {
 			encoder.SetHeader(locationName).String(*v.MFA)
 		}
@@ -5868,7 +5869,7 @@ func awsRestxml_serializeOpHttpBindingsPutBucketWebsiteInput(v *PutBucketWebsite
 	}
 
 	if v.ContentMD5 != nil {
-		locationName := "Content-MD5"
+		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
 		}
@@ -5940,7 +5941,7 @@ func awsRestxml_serializeOpHttpBindingsPutObjectInput(v *PutObjectInput, encoder
 	}
 
 	if len(v.ACL) > 0 {
-		locationName := "x-amz-acl"
+		locationName := "X-Amz-Acl"
 		encoder.SetHeader(locationName).String(string(v.ACL))
 	}
 
@@ -5984,7 +5985,7 @@ func awsRestxml_serializeOpHttpBindingsPutObjectInput(v *PutObjectInput, encoder
 	}
 
 	if v.ContentMD5 != nil {
-		locationName := "Content-MD5"
+		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
 		}
@@ -6003,28 +6004,28 @@ func awsRestxml_serializeOpHttpBindingsPutObjectInput(v *PutObjectInput, encoder
 	}
 
 	if v.GrantFullControl != nil {
-		locationName := "x-amz-grant-full-control"
+		locationName := "X-Amz-Grant-Full-Control"
 		if len(*v.GrantFullControl) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantFullControl)
 		}
 	}
 
 	if v.GrantRead != nil {
-		locationName := "x-amz-grant-read"
+		locationName := "X-Amz-Grant-Read"
 		if len(*v.GrantRead) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantRead)
 		}
 	}
 
 	if v.GrantReadACP != nil {
-		locationName := "x-amz-grant-read-acp"
+		locationName := "X-Amz-Grant-Read-Acp"
 		if len(*v.GrantReadACP) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantReadACP)
 		}
 	}
 
 	if v.GrantWriteACP != nil {
-		locationName := "x-amz-grant-write-acp"
+		locationName := "X-Amz-Grant-Write-Acp"
 		if len(*v.GrantWriteACP) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantWriteACP)
 		}
@@ -6037,88 +6038,88 @@ func awsRestxml_serializeOpHttpBindingsPutObjectInput(v *PutObjectInput, encoder
 	}
 
 	if v.Metadata != nil {
-		hv := encoder.Headers("x-amz-meta-")
+		hv := encoder.Headers("X-Amz-Meta-")
 		for mapKey, mapVal := range v.Metadata {
 			if len(*mapVal) > 0 {
-				hv.SetHeader(mapKey).String(*mapVal)
+				hv.SetHeader(http.CanonicalHeaderKey(mapKey)).String(*mapVal)
 			}
 		}
 	}
 
 	if len(v.ObjectLockLegalHoldStatus) > 0 {
-		locationName := "x-amz-object-lock-legal-hold"
+		locationName := "X-Amz-Object-Lock-Legal-Hold"
 		encoder.SetHeader(locationName).String(string(v.ObjectLockLegalHoldStatus))
 	}
 
 	if len(v.ObjectLockMode) > 0 {
-		locationName := "x-amz-object-lock-mode"
+		locationName := "X-Amz-Object-Lock-Mode"
 		encoder.SetHeader(locationName).String(string(v.ObjectLockMode))
 	}
 
 	if v.ObjectLockRetainUntilDate != nil {
-		locationName := "x-amz-object-lock-retain-until-date"
+		locationName := "X-Amz-Object-Lock-Retain-Until-Date"
 		encoder.SetHeader(locationName).String(smithytime.FormatDateTime(*v.ObjectLockRetainUntilDate))
 	}
 
 	if len(v.RequestPayer) > 0 {
-		locationName := "x-amz-request-payer"
+		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
 	if len(v.ServerSideEncryption) > 0 {
-		locationName := "x-amz-server-side-encryption"
+		locationName := "X-Amz-Server-Side-Encryption"
 		encoder.SetHeader(locationName).String(string(v.ServerSideEncryption))
 	}
 
 	if v.SSECustomerAlgorithm != nil {
-		locationName := "x-amz-server-side-encryption-customer-algorithm"
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Algorithm"
 		if len(*v.SSECustomerAlgorithm) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSECustomerAlgorithm)
 		}
 	}
 
 	if v.SSECustomerKey != nil {
-		locationName := "x-amz-server-side-encryption-customer-key"
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Key"
 		if len(*v.SSECustomerKey) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSECustomerKey)
 		}
 	}
 
 	if v.SSECustomerKeyMD5 != nil {
-		locationName := "x-amz-server-side-encryption-customer-key-MD5"
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Key-Md5"
 		if len(*v.SSECustomerKeyMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSECustomerKeyMD5)
 		}
 	}
 
 	if v.SSEKMSEncryptionContext != nil {
-		locationName := "x-amz-server-side-encryption-context"
+		locationName := "X-Amz-Server-Side-Encryption-Context"
 		if len(*v.SSEKMSEncryptionContext) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSEKMSEncryptionContext)
 		}
 	}
 
 	if v.SSEKMSKeyId != nil {
-		locationName := "x-amz-server-side-encryption-aws-kms-key-id"
+		locationName := "X-Amz-Server-Side-Encryption-Aws-Kms-Key-Id"
 		if len(*v.SSEKMSKeyId) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSEKMSKeyId)
 		}
 	}
 
 	if len(v.StorageClass) > 0 {
-		locationName := "x-amz-storage-class"
+		locationName := "X-Amz-Storage-Class"
 		encoder.SetHeader(locationName).String(string(v.StorageClass))
 	}
 
 	if v.Tagging != nil {
-		locationName := "x-amz-tagging"
+		locationName := "X-Amz-Tagging"
 		if len(*v.Tagging) > 0 {
 			encoder.SetHeader(locationName).String(*v.Tagging)
 		}
 	}
 
 	if v.WebsiteRedirectLocation != nil {
-		locationName := "x-amz-website-redirect-location"
+		locationName := "X-Amz-Website-Redirect-Location"
 		if len(*v.WebsiteRedirectLocation) > 0 {
 			encoder.SetHeader(locationName).String(*v.WebsiteRedirectLocation)
 		}
@@ -6201,7 +6202,7 @@ func awsRestxml_serializeOpHttpBindingsPutObjectAclInput(v *PutObjectAclInput, e
 	}
 
 	if len(v.ACL) > 0 {
-		locationName := "x-amz-acl"
+		locationName := "X-Amz-Acl"
 		encoder.SetHeader(locationName).String(string(v.ACL))
 	}
 
@@ -6212,42 +6213,42 @@ func awsRestxml_serializeOpHttpBindingsPutObjectAclInput(v *PutObjectAclInput, e
 	}
 
 	if v.ContentMD5 != nil {
-		locationName := "Content-MD5"
+		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
 		}
 	}
 
 	if v.GrantFullControl != nil {
-		locationName := "x-amz-grant-full-control"
+		locationName := "X-Amz-Grant-Full-Control"
 		if len(*v.GrantFullControl) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantFullControl)
 		}
 	}
 
 	if v.GrantRead != nil {
-		locationName := "x-amz-grant-read"
+		locationName := "X-Amz-Grant-Read"
 		if len(*v.GrantRead) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantRead)
 		}
 	}
 
 	if v.GrantReadACP != nil {
-		locationName := "x-amz-grant-read-acp"
+		locationName := "X-Amz-Grant-Read-Acp"
 		if len(*v.GrantReadACP) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantReadACP)
 		}
 	}
 
 	if v.GrantWrite != nil {
-		locationName := "x-amz-grant-write"
+		locationName := "X-Amz-Grant-Write"
 		if len(*v.GrantWrite) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantWrite)
 		}
 	}
 
 	if v.GrantWriteACP != nil {
-		locationName := "x-amz-grant-write-acp"
+		locationName := "X-Amz-Grant-Write-Acp"
 		if len(*v.GrantWriteACP) > 0 {
 			encoder.SetHeader(locationName).String(*v.GrantWriteACP)
 		}
@@ -6260,7 +6261,7 @@ func awsRestxml_serializeOpHttpBindingsPutObjectAclInput(v *PutObjectAclInput, e
 	}
 
 	if len(v.RequestPayer) > 0 {
-		locationName := "x-amz-request-payer"
+		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
@@ -6351,7 +6352,7 @@ func awsRestxml_serializeOpHttpBindingsPutObjectLegalHoldInput(v *PutObjectLegal
 	}
 
 	if v.ContentMD5 != nil {
-		locationName := "Content-MD5"
+		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
 		}
@@ -6364,7 +6365,7 @@ func awsRestxml_serializeOpHttpBindingsPutObjectLegalHoldInput(v *PutObjectLegal
 	}
 
 	if len(v.RequestPayer) > 0 {
-		locationName := "x-amz-request-payer"
+		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
@@ -6455,19 +6456,19 @@ func awsRestxml_serializeOpHttpBindingsPutObjectLockConfigurationInput(v *PutObj
 	}
 
 	if v.ContentMD5 != nil {
-		locationName := "Content-MD5"
+		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
 		}
 	}
 
 	if len(v.RequestPayer) > 0 {
-		locationName := "x-amz-request-payer"
+		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
 	if v.Token != nil {
-		locationName := "x-amz-bucket-object-lock-token"
+		locationName := "X-Amz-Bucket-Object-Lock-Token"
 		if len(*v.Token) > 0 {
 			encoder.SetHeader(locationName).String(*v.Token)
 		}
@@ -6556,12 +6557,12 @@ func awsRestxml_serializeOpHttpBindingsPutObjectRetentionInput(v *PutObjectReten
 	}
 
 	if v.BypassGovernanceRetention != nil {
-		locationName := "x-amz-bypass-governance-retention"
+		locationName := "X-Amz-Bypass-Governance-Retention"
 		encoder.SetHeader(locationName).Boolean(*v.BypassGovernanceRetention)
 	}
 
 	if v.ContentMD5 != nil {
-		locationName := "Content-MD5"
+		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
 		}
@@ -6574,7 +6575,7 @@ func awsRestxml_serializeOpHttpBindingsPutObjectRetentionInput(v *PutObjectReten
 	}
 
 	if len(v.RequestPayer) > 0 {
-		locationName := "x-amz-request-payer"
+		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
@@ -6665,7 +6666,7 @@ func awsRestxml_serializeOpHttpBindingsPutObjectTaggingInput(v *PutObjectTagging
 	}
 
 	if v.ContentMD5 != nil {
-		locationName := "Content-MD5"
+		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
 		}
@@ -6764,7 +6765,7 @@ func awsRestxml_serializeOpHttpBindingsPutPublicAccessBlockInput(v *PutPublicAcc
 	}
 
 	if v.ContentMD5 != nil {
-		locationName := "Content-MD5"
+		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
 		}
@@ -6859,7 +6860,7 @@ func awsRestxml_serializeOpHttpBindingsRestoreObjectInput(v *RestoreObjectInput,
 	}
 
 	if len(v.RequestPayer) > 0 {
-		locationName := "x-amz-request-payer"
+		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
@@ -6944,7 +6945,7 @@ func awsRestxml_serializeOpHttpBindingsUploadPartInput(v *UploadPartInput, encod
 	}
 
 	if v.ContentMD5 != nil {
-		locationName := "Content-MD5"
+		locationName := "Content-Md5"
 		if len(*v.ContentMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.ContentMD5)
 		}
@@ -6961,26 +6962,26 @@ func awsRestxml_serializeOpHttpBindingsUploadPartInput(v *UploadPartInput, encod
 	}
 
 	if len(v.RequestPayer) > 0 {
-		locationName := "x-amz-request-payer"
+		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
 	if v.SSECustomerAlgorithm != nil {
-		locationName := "x-amz-server-side-encryption-customer-algorithm"
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Algorithm"
 		if len(*v.SSECustomerAlgorithm) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSECustomerAlgorithm)
 		}
 	}
 
 	if v.SSECustomerKey != nil {
-		locationName := "x-amz-server-side-encryption-customer-key"
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Key"
 		if len(*v.SSECustomerKey) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSECustomerKey)
 		}
 	}
 
 	if v.SSECustomerKeyMD5 != nil {
-		locationName := "x-amz-server-side-encryption-customer-key-MD5"
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Key-Md5"
 		if len(*v.SSECustomerKeyMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSECustomerKeyMD5)
 		}
@@ -7051,59 +7052,59 @@ func awsRestxml_serializeOpHttpBindingsUploadPartCopyInput(v *UploadPartCopyInpu
 	}
 
 	if v.CopySource != nil {
-		locationName := "x-amz-copy-source"
+		locationName := "X-Amz-Copy-Source"
 		if len(*v.CopySource) > 0 {
 			encoder.SetHeader(locationName).String(*v.CopySource)
 		}
 	}
 
 	if v.CopySourceIfMatch != nil {
-		locationName := "x-amz-copy-source-if-match"
+		locationName := "X-Amz-Copy-Source-If-Match"
 		if len(*v.CopySourceIfMatch) > 0 {
 			encoder.SetHeader(locationName).String(*v.CopySourceIfMatch)
 		}
 	}
 
 	if v.CopySourceIfModifiedSince != nil {
-		locationName := "x-amz-copy-source-if-modified-since"
+		locationName := "X-Amz-Copy-Source-If-Modified-Since"
 		encoder.SetHeader(locationName).String(smithytime.FormatHTTPDate(*v.CopySourceIfModifiedSince))
 	}
 
 	if v.CopySourceIfNoneMatch != nil {
-		locationName := "x-amz-copy-source-if-none-match"
+		locationName := "X-Amz-Copy-Source-If-None-Match"
 		if len(*v.CopySourceIfNoneMatch) > 0 {
 			encoder.SetHeader(locationName).String(*v.CopySourceIfNoneMatch)
 		}
 	}
 
 	if v.CopySourceIfUnmodifiedSince != nil {
-		locationName := "x-amz-copy-source-if-unmodified-since"
+		locationName := "X-Amz-Copy-Source-If-Unmodified-Since"
 		encoder.SetHeader(locationName).String(smithytime.FormatHTTPDate(*v.CopySourceIfUnmodifiedSince))
 	}
 
 	if v.CopySourceRange != nil {
-		locationName := "x-amz-copy-source-range"
+		locationName := "X-Amz-Copy-Source-Range"
 		if len(*v.CopySourceRange) > 0 {
 			encoder.SetHeader(locationName).String(*v.CopySourceRange)
 		}
 	}
 
 	if v.CopySourceSSECustomerAlgorithm != nil {
-		locationName := "x-amz-copy-source-server-side-encryption-customer-algorithm"
+		locationName := "X-Amz-Copy-Source-Server-Side-Encryption-Customer-Algorithm"
 		if len(*v.CopySourceSSECustomerAlgorithm) > 0 {
 			encoder.SetHeader(locationName).String(*v.CopySourceSSECustomerAlgorithm)
 		}
 	}
 
 	if v.CopySourceSSECustomerKey != nil {
-		locationName := "x-amz-copy-source-server-side-encryption-customer-key"
+		locationName := "X-Amz-Copy-Source-Server-Side-Encryption-Customer-Key"
 		if len(*v.CopySourceSSECustomerKey) > 0 {
 			encoder.SetHeader(locationName).String(*v.CopySourceSSECustomerKey)
 		}
 	}
 
 	if v.CopySourceSSECustomerKeyMD5 != nil {
-		locationName := "x-amz-copy-source-server-side-encryption-customer-key-MD5"
+		locationName := "X-Amz-Copy-Source-Server-Side-Encryption-Customer-Key-Md5"
 		if len(*v.CopySourceSSECustomerKeyMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.CopySourceSSECustomerKeyMD5)
 		}
@@ -7120,26 +7121,26 @@ func awsRestxml_serializeOpHttpBindingsUploadPartCopyInput(v *UploadPartCopyInpu
 	}
 
 	if len(v.RequestPayer) > 0 {
-		locationName := "x-amz-request-payer"
+		locationName := "X-Amz-Request-Payer"
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
 	if v.SSECustomerAlgorithm != nil {
-		locationName := "x-amz-server-side-encryption-customer-algorithm"
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Algorithm"
 		if len(*v.SSECustomerAlgorithm) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSECustomerAlgorithm)
 		}
 	}
 
 	if v.SSECustomerKey != nil {
-		locationName := "x-amz-server-side-encryption-customer-key"
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Key"
 		if len(*v.SSECustomerKey) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSECustomerKey)
 		}
 	}
 
 	if v.SSECustomerKeyMD5 != nil {
-		locationName := "x-amz-server-side-encryption-customer-key-MD5"
+		locationName := "X-Amz-Server-Side-Encryption-Customer-Key-Md5"
 		if len(*v.SSECustomerKeyMD5) > 0 {
 			encoder.SetHeader(locationName).String(*v.SSECustomerKeyMD5)
 		}

@@ -46,8 +46,8 @@ func (m *awsAwsquery_deserializeOpCancelUpdateStack) HandleDeserialize(ctx conte
 	output := &CancelUpdateStackOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -132,8 +132,8 @@ func (m *awsAwsquery_deserializeOpContinueUpdateRollback) HandleDeserialize(ctx 
 	output := &ContinueUpdateRollbackOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -218,8 +218,8 @@ func (m *awsAwsquery_deserializeOpCreateChangeSet) HandleDeserialize(ctx context
 	output := &CreateChangeSetOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -310,8 +310,8 @@ func (m *awsAwsquery_deserializeOpCreateStack) HandleDeserialize(ctx context.Con
 	output := &CreateStackOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -405,8 +405,8 @@ func (m *awsAwsquery_deserializeOpCreateStackInstances) HandleDeserialize(ctx co
 	output := &CreateStackInstancesOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -506,8 +506,8 @@ func (m *awsAwsquery_deserializeOpCreateStackSet) HandleDeserialize(ctx context.
 	output := &CreateStackSetOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -598,8 +598,8 @@ func (m *awsAwsquery_deserializeOpDeleteChangeSet) HandleDeserialize(ctx context
 	output := &DeleteChangeSetOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -684,8 +684,8 @@ func (m *awsAwsquery_deserializeOpDeleteStack) HandleDeserialize(ctx context.Con
 	output := &DeleteStackOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -770,8 +770,8 @@ func (m *awsAwsquery_deserializeOpDeleteStackInstances) HandleDeserialize(ctx co
 	output := &DeleteStackInstancesOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -868,8 +868,8 @@ func (m *awsAwsquery_deserializeOpDeleteStackSet) HandleDeserialize(ctx context.
 	output := &DeleteStackSetOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -957,8 +957,8 @@ func (m *awsAwsquery_deserializeOpDeregisterType) HandleDeserialize(ctx context.
 	output := &DeregisterTypeOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -1046,8 +1046,8 @@ func (m *awsAwsquery_deserializeOpDescribeAccountLimits) HandleDeserialize(ctx c
 	output := &DescribeAccountLimitsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -1129,8 +1129,8 @@ func (m *awsAwsquery_deserializeOpDescribeChangeSet) HandleDeserialize(ctx conte
 	output := &DescribeChangeSetOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -1215,8 +1215,8 @@ func (m *awsAwsquery_deserializeOpDescribeStackDriftDetectionStatus) HandleDeser
 	output := &DescribeStackDriftDetectionStatusOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -1298,8 +1298,8 @@ func (m *awsAwsquery_deserializeOpDescribeStackEvents) HandleDeserialize(ctx con
 	output := &DescribeStackEventsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -1381,8 +1381,8 @@ func (m *awsAwsquery_deserializeOpDescribeStackInstance) HandleDeserialize(ctx c
 	output := &DescribeStackInstanceOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -1470,8 +1470,8 @@ func (m *awsAwsquery_deserializeOpDescribeStackResource) HandleDeserialize(ctx c
 	output := &DescribeStackResourceOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -1553,8 +1553,8 @@ func (m *awsAwsquery_deserializeOpDescribeStackResourceDrifts) HandleDeserialize
 	output := &DescribeStackResourceDriftsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -1636,8 +1636,8 @@ func (m *awsAwsquery_deserializeOpDescribeStackResources) HandleDeserialize(ctx 
 	output := &DescribeStackResourcesOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -1719,8 +1719,8 @@ func (m *awsAwsquery_deserializeOpDescribeStacks) HandleDeserialize(ctx context.
 	output := &DescribeStacksOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -1802,8 +1802,8 @@ func (m *awsAwsquery_deserializeOpDescribeStackSet) HandleDeserialize(ctx contex
 	output := &DescribeStackSetOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -1888,8 +1888,8 @@ func (m *awsAwsquery_deserializeOpDescribeStackSetOperation) HandleDeserialize(c
 	output := &DescribeStackSetOperationOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -1977,8 +1977,8 @@ func (m *awsAwsquery_deserializeOpDescribeType) HandleDeserialize(ctx context.Co
 	output := &DescribeTypeOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -2066,8 +2066,8 @@ func (m *awsAwsquery_deserializeOpDescribeTypeRegistration) HandleDeserialize(ct
 	output := &DescribeTypeRegistrationOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -2152,8 +2152,8 @@ func (m *awsAwsquery_deserializeOpDetectStackDrift) HandleDeserialize(ctx contex
 	output := &DetectStackDriftOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -2235,8 +2235,8 @@ func (m *awsAwsquery_deserializeOpDetectStackResourceDrift) HandleDeserialize(ct
 	output := &DetectStackResourceDriftOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -2318,8 +2318,8 @@ func (m *awsAwsquery_deserializeOpDetectStackSetDrift) HandleDeserialize(ctx con
 	output := &DetectStackSetDriftOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -2410,8 +2410,8 @@ func (m *awsAwsquery_deserializeOpEstimateTemplateCost) HandleDeserialize(ctx co
 	output := &EstimateTemplateCostOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -2493,8 +2493,8 @@ func (m *awsAwsquery_deserializeOpExecuteChangeSet) HandleDeserialize(ctx contex
 	output := &ExecuteChangeSetOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -2588,8 +2588,8 @@ func (m *awsAwsquery_deserializeOpGetStackPolicy) HandleDeserialize(ctx context.
 	output := &GetStackPolicyOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -2671,8 +2671,8 @@ func (m *awsAwsquery_deserializeOpGetTemplate) HandleDeserialize(ctx context.Con
 	output := &GetTemplateOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -2757,8 +2757,8 @@ func (m *awsAwsquery_deserializeOpGetTemplateSummary) HandleDeserialize(ctx cont
 	output := &GetTemplateSummaryOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -2843,8 +2843,8 @@ func (m *awsAwsquery_deserializeOpListChangeSets) HandleDeserialize(ctx context.
 	output := &ListChangeSetsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -2926,8 +2926,8 @@ func (m *awsAwsquery_deserializeOpListExports) HandleDeserialize(ctx context.Con
 	output := &ListExportsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -3009,8 +3009,8 @@ func (m *awsAwsquery_deserializeOpListImports) HandleDeserialize(ctx context.Con
 	output := &ListImportsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -3092,8 +3092,8 @@ func (m *awsAwsquery_deserializeOpListStackInstances) HandleDeserialize(ctx cont
 	output := &ListStackInstancesOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -3178,8 +3178,8 @@ func (m *awsAwsquery_deserializeOpListStackResources) HandleDeserialize(ctx cont
 	output := &ListStackResourcesOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -3261,8 +3261,8 @@ func (m *awsAwsquery_deserializeOpListStacks) HandleDeserialize(ctx context.Cont
 	output := &ListStacksOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -3344,8 +3344,8 @@ func (m *awsAwsquery_deserializeOpListStackSetOperationResults) HandleDeserializ
 	output := &ListStackSetOperationResultsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -3433,8 +3433,8 @@ func (m *awsAwsquery_deserializeOpListStackSetOperations) HandleDeserialize(ctx 
 	output := &ListStackSetOperationsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -3519,8 +3519,8 @@ func (m *awsAwsquery_deserializeOpListStackSets) HandleDeserialize(ctx context.C
 	output := &ListStackSetsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -3602,8 +3602,8 @@ func (m *awsAwsquery_deserializeOpListTypeRegistrations) HandleDeserialize(ctx c
 	output := &ListTypeRegistrationsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -3688,8 +3688,8 @@ func (m *awsAwsquery_deserializeOpListTypes) HandleDeserialize(ctx context.Conte
 	output := &ListTypesOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -3774,8 +3774,8 @@ func (m *awsAwsquery_deserializeOpListTypeVersions) HandleDeserialize(ctx contex
 	output := &ListTypeVersionsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -3860,8 +3860,8 @@ func (m *awsAwsquery_deserializeOpRecordHandlerProgress) HandleDeserialize(ctx c
 	output := &RecordHandlerProgressOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -3949,8 +3949,8 @@ func (m *awsAwsquery_deserializeOpRegisterType) HandleDeserialize(ctx context.Co
 	output := &RegisterTypeOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -4035,8 +4035,8 @@ func (m *awsAwsquery_deserializeOpSetStackPolicy) HandleDeserialize(ctx context.
 	output := &SetStackPolicyOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -4118,8 +4118,8 @@ func (m *awsAwsquery_deserializeOpSetTypeDefaultVersion) HandleDeserialize(ctx c
 	output := &SetTypeDefaultVersionOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -4207,8 +4207,8 @@ func (m *awsAwsquery_deserializeOpSignalResource) HandleDeserialize(ctx context.
 	output := &SignalResourceOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -4290,8 +4290,8 @@ func (m *awsAwsquery_deserializeOpStopStackSetOperation) HandleDeserialize(ctx c
 	output := &StopStackSetOperationOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -4382,8 +4382,8 @@ func (m *awsAwsquery_deserializeOpUpdateStack) HandleDeserialize(ctx context.Con
 	output := &UpdateStackOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -4471,8 +4471,8 @@ func (m *awsAwsquery_deserializeOpUpdateStackInstances) HandleDeserialize(ctx co
 	output := &UpdateStackInstancesOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -4572,8 +4572,8 @@ func (m *awsAwsquery_deserializeOpUpdateStackSet) HandleDeserialize(ctx context.
 	output := &UpdateStackSetOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -4673,8 +4673,8 @@ func (m *awsAwsquery_deserializeOpUpdateTerminationProtection) HandleDeserialize
 	output := &UpdateTerminationProtectionOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -4756,8 +4756,8 @@ func (m *awsAwsquery_deserializeOpValidateTemplate) HandleDeserialize(ctx contex
 	output := &ValidateTemplateOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -4815,8 +4815,8 @@ func awsAwsquery_deserializeOpErrorValidateTemplate(response *smithyhttp.Respons
 
 func awsAwsquery_deserializeErrorAlreadyExistsException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.AlreadyExistsException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -4848,8 +4848,8 @@ func awsAwsquery_deserializeErrorAlreadyExistsException(response *smithyhttp.Res
 
 func awsAwsquery_deserializeErrorCFNRegistryException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.CFNRegistryException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -4881,8 +4881,8 @@ func awsAwsquery_deserializeErrorCFNRegistryException(response *smithyhttp.Respo
 
 func awsAwsquery_deserializeErrorChangeSetNotFoundException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ChangeSetNotFoundException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -4914,8 +4914,8 @@ func awsAwsquery_deserializeErrorChangeSetNotFoundException(response *smithyhttp
 
 func awsAwsquery_deserializeErrorCreatedButModifiedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.CreatedButModifiedException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -4947,8 +4947,8 @@ func awsAwsquery_deserializeErrorCreatedButModifiedException(response *smithyhtt
 
 func awsAwsquery_deserializeErrorInsufficientCapabilitiesException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InsufficientCapabilitiesException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -4980,8 +4980,8 @@ func awsAwsquery_deserializeErrorInsufficientCapabilitiesException(response *smi
 
 func awsAwsquery_deserializeErrorInvalidChangeSetStatusException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InvalidChangeSetStatusException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -5013,8 +5013,8 @@ func awsAwsquery_deserializeErrorInvalidChangeSetStatusException(response *smith
 
 func awsAwsquery_deserializeErrorInvalidOperationException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InvalidOperationException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -5046,8 +5046,8 @@ func awsAwsquery_deserializeErrorInvalidOperationException(response *smithyhttp.
 
 func awsAwsquery_deserializeErrorInvalidStateTransitionException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InvalidStateTransitionException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -5079,8 +5079,8 @@ func awsAwsquery_deserializeErrorInvalidStateTransitionException(response *smith
 
 func awsAwsquery_deserializeErrorLimitExceededException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.LimitExceededException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -5112,8 +5112,8 @@ func awsAwsquery_deserializeErrorLimitExceededException(response *smithyhttp.Res
 
 func awsAwsquery_deserializeErrorNameAlreadyExistsException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.NameAlreadyExistsException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -5145,8 +5145,8 @@ func awsAwsquery_deserializeErrorNameAlreadyExistsException(response *smithyhttp
 
 func awsAwsquery_deserializeErrorOperationIdAlreadyExistsException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.OperationIdAlreadyExistsException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -5178,8 +5178,8 @@ func awsAwsquery_deserializeErrorOperationIdAlreadyExistsException(response *smi
 
 func awsAwsquery_deserializeErrorOperationInProgressException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.OperationInProgressException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -5211,8 +5211,8 @@ func awsAwsquery_deserializeErrorOperationInProgressException(response *smithyht
 
 func awsAwsquery_deserializeErrorOperationNotFoundException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.OperationNotFoundException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -5244,8 +5244,8 @@ func awsAwsquery_deserializeErrorOperationNotFoundException(response *smithyhttp
 
 func awsAwsquery_deserializeErrorOperationStatusCheckFailedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.OperationStatusCheckFailedException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -5277,8 +5277,8 @@ func awsAwsquery_deserializeErrorOperationStatusCheckFailedException(response *s
 
 func awsAwsquery_deserializeErrorStackInstanceNotFoundException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.StackInstanceNotFoundException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -5310,8 +5310,8 @@ func awsAwsquery_deserializeErrorStackInstanceNotFoundException(response *smithy
 
 func awsAwsquery_deserializeErrorStackSetNotEmptyException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.StackSetNotEmptyException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -5343,8 +5343,8 @@ func awsAwsquery_deserializeErrorStackSetNotEmptyException(response *smithyhttp.
 
 func awsAwsquery_deserializeErrorStackSetNotFoundException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.StackSetNotFoundException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -5376,8 +5376,8 @@ func awsAwsquery_deserializeErrorStackSetNotFoundException(response *smithyhttp.
 
 func awsAwsquery_deserializeErrorStaleRequestException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.StaleRequestException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -5409,8 +5409,8 @@ func awsAwsquery_deserializeErrorStaleRequestException(response *smithyhttp.Resp
 
 func awsAwsquery_deserializeErrorTokenAlreadyExistsException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.TokenAlreadyExistsException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -5442,8 +5442,8 @@ func awsAwsquery_deserializeErrorTokenAlreadyExistsException(response *smithyhtt
 
 func awsAwsquery_deserializeErrorTypeNotFoundException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.TypeNotFoundException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)

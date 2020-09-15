@@ -46,8 +46,8 @@ func (m *awsRestxml_deserializeOpAssociateVPCWithHostedZone) HandleDeserialize(c
 	output := &AssociateVPCWithHostedZoneOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -191,8 +191,8 @@ func (m *awsRestxml_deserializeOpChangeResourceRecordSets) HandleDeserialize(ctx
 	output := &ChangeResourceRecordSetsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -402,8 +402,8 @@ func (m *awsRestxml_deserializeOpCreateHealthCheck) HandleDeserialize(ctx contex
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -549,8 +549,8 @@ func (m *awsRestxml_deserializeOpCreateHostedZone) HandleDeserialize(ctx context
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -732,8 +732,8 @@ func (m *awsRestxml_deserializeOpCreateQueryLoggingConfig) HandleDeserialize(ctx
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -888,8 +888,8 @@ func (m *awsRestxml_deserializeOpCreateReusableDelegationSet) HandleDeserialize(
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -1047,8 +1047,8 @@ func (m *awsRestxml_deserializeOpCreateTrafficPolicy) HandleDeserialize(ctx cont
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -1197,8 +1197,8 @@ func (m *awsRestxml_deserializeOpCreateTrafficPolicyInstance) HandleDeserialize(
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -1350,8 +1350,8 @@ func (m *awsRestxml_deserializeOpCreateTrafficPolicyVersion) HandleDeserialize(c
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -1498,8 +1498,8 @@ func (m *awsRestxml_deserializeOpCreateVPCAssociationAuthorization) HandleDeseri
 	output := &CreateVPCAssociationAuthorizationOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -1714,8 +1714,8 @@ func (m *awsRestxml_deserializeOpDeleteHostedZone) HandleDeserialize(ctx context
 	output := &DeleteHostedZoneOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -2182,8 +2182,8 @@ func (m *awsRestxml_deserializeOpDisassociateVPCFromHostedZone) HandleDeserializ
 	output := &DisassociateVPCFromHostedZoneOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -2318,8 +2318,8 @@ func (m *awsRestxml_deserializeOpGetAccountLimit) HandleDeserialize(ctx context.
 	output := &GetAccountLimitOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -2459,8 +2459,8 @@ func (m *awsRestxml_deserializeOpGetChange) HandleDeserialize(ctx context.Contex
 	output := &GetChangeOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -2586,8 +2586,8 @@ func (m *awsRestxml_deserializeOpGetCheckerIpRanges) HandleDeserialize(ctx conte
 	output := &GetCheckerIpRangesOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -2707,8 +2707,8 @@ func (m *awsRestxml_deserializeOpGetGeoLocation) HandleDeserialize(ctx context.C
 	output := &GetGeoLocationOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -2834,8 +2834,8 @@ func (m *awsRestxml_deserializeOpGetHealthCheck) HandleDeserialize(ctx context.C
 	output := &GetHealthCheckOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -2964,8 +2964,8 @@ func (m *awsRestxml_deserializeOpGetHealthCheckCount) HandleDeserialize(ctx cont
 	output := &GetHealthCheckCountOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -3096,8 +3096,8 @@ func (m *awsRestxml_deserializeOpGetHealthCheckLastFailureReason) HandleDeserial
 	output := &GetHealthCheckLastFailureReasonOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -3223,8 +3223,8 @@ func (m *awsRestxml_deserializeOpGetHealthCheckStatus) HandleDeserialize(ctx con
 	output := &GetHealthCheckStatusOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -3350,8 +3350,8 @@ func (m *awsRestxml_deserializeOpGetHostedZone) HandleDeserialize(ctx context.Co
 	output := &GetHostedZoneOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -3489,8 +3489,8 @@ func (m *awsRestxml_deserializeOpGetHostedZoneCount) HandleDeserialize(ctx conte
 	output := &GetHostedZoneCountOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -3624,8 +3624,8 @@ func (m *awsRestxml_deserializeOpGetHostedZoneLimit) HandleDeserialize(ctx conte
 	output := &GetHostedZoneLimitOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -3771,8 +3771,8 @@ func (m *awsRestxml_deserializeOpGetQueryLoggingConfig) HandleDeserialize(ctx co
 	output := &GetQueryLoggingConfigOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -3898,8 +3898,8 @@ func (m *awsRestxml_deserializeOpGetReusableDelegationSet) HandleDeserialize(ctx
 	output := &GetReusableDelegationSetOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -4028,8 +4028,8 @@ func (m *awsRestxml_deserializeOpGetReusableDelegationSetLimit) HandleDeserializ
 	output := &GetReusableDelegationSetLimitOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -4172,8 +4172,8 @@ func (m *awsRestxml_deserializeOpGetTrafficPolicy) HandleDeserialize(ctx context
 	output := &GetTrafficPolicyOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -4299,8 +4299,8 @@ func (m *awsRestxml_deserializeOpGetTrafficPolicyInstance) HandleDeserialize(ctx
 	output := &GetTrafficPolicyInstanceOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -4426,8 +4426,8 @@ func (m *awsRestxml_deserializeOpGetTrafficPolicyInstanceCount) HandleDeserializ
 	output := &GetTrafficPolicyInstanceCountOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -4558,8 +4558,8 @@ func (m *awsRestxml_deserializeOpListGeoLocations) HandleDeserialize(ctx context
 	output := &ListGeoLocationsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -4762,8 +4762,8 @@ func (m *awsRestxml_deserializeOpListHealthChecks) HandleDeserialize(ctx context
 	output := &ListHealthChecksOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -4953,8 +4953,8 @@ func (m *awsRestxml_deserializeOpListHostedZones) HandleDeserialize(ctx context.
 	output := &ListHostedZonesOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -5147,8 +5147,8 @@ func (m *awsRestxml_deserializeOpListHostedZonesByName) HandleDeserialize(ctx co
 	output := &ListHostedZonesByNameOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -5370,8 +5370,8 @@ func (m *awsRestxml_deserializeOpListHostedZonesByVPC) HandleDeserialize(ctx con
 	output := &ListHostedZonesByVPCOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -5529,8 +5529,8 @@ func (m *awsRestxml_deserializeOpListQueryLoggingConfigs) HandleDeserialize(ctx 
 	output := &ListQueryLoggingConfigsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -5675,8 +5675,8 @@ func (m *awsRestxml_deserializeOpListResourceRecordSets) HandleDeserialize(ctx c
 	output := &ListResourceRecordSetsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -5879,8 +5879,8 @@ func (m *awsRestxml_deserializeOpListReusableDelegationSets) HandleDeserialize(c
 	output := &ListReusableDelegationSetsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -6067,8 +6067,8 @@ func (m *awsRestxml_deserializeOpListTagsForResource) HandleDeserialize(ctx cont
 	output := &ListTagsForResourceOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -6203,8 +6203,8 @@ func (m *awsRestxml_deserializeOpListTagsForResources) HandleDeserialize(ctx con
 	output := &ListTagsForResourcesOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -6339,8 +6339,8 @@ func (m *awsRestxml_deserializeOpListTrafficPolicies) HandleDeserialize(ctx cont
 	output := &ListTrafficPoliciesOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -6511,8 +6511,8 @@ func (m *awsRestxml_deserializeOpListTrafficPolicyInstances) HandleDeserialize(c
 	output := &ListTrafficPolicyInstancesOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -6715,8 +6715,8 @@ func (m *awsRestxml_deserializeOpListTrafficPolicyInstancesByHostedZone) HandleD
 	output := &ListTrafficPolicyInstancesByHostedZoneOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -6906,8 +6906,8 @@ func (m *awsRestxml_deserializeOpListTrafficPolicyInstancesByPolicy) HandleDeser
 	output := &ListTrafficPolicyInstancesByPolicyOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -7113,8 +7113,8 @@ func (m *awsRestxml_deserializeOpListTrafficPolicyVersions) HandleDeserialize(ct
 	output := &ListTrafficPolicyVersionsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -7288,8 +7288,8 @@ func (m *awsRestxml_deserializeOpListVPCAssociationAuthorizations) HandleDeseria
 	output := &ListVPCAssociationAuthorizationsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -7450,8 +7450,8 @@ func (m *awsRestxml_deserializeOpTestDNSAnswer) HandleDeserialize(ctx context.Co
 	output := &TestDNSAnswerOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -7654,8 +7654,8 @@ func (m *awsRestxml_deserializeOpUpdateHealthCheck) HandleDeserialize(ctx contex
 	output := &UpdateHealthCheckOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -7784,8 +7784,8 @@ func (m *awsRestxml_deserializeOpUpdateHostedZoneComment) HandleDeserialize(ctx 
 	output := &UpdateHostedZoneCommentOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -7911,8 +7911,8 @@ func (m *awsRestxml_deserializeOpUpdateTrafficPolicyComment) HandleDeserialize(c
 	output := &UpdateTrafficPolicyCommentOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8041,8 +8041,8 @@ func (m *awsRestxml_deserializeOpUpdateTrafficPolicyInstance) HandleDeserialize(
 	output := &UpdateTrafficPolicyInstanceOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8153,8 +8153,8 @@ func awsRestxml_deserializeOpDocumentUpdateTrafficPolicyInstanceOutput(v **Updat
 
 func awsRestxml_deserializeErrorConcurrentModification(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ConcurrentModification{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8186,8 +8186,8 @@ func awsRestxml_deserializeErrorConcurrentModification(response *smithyhttp.Resp
 
 func awsRestxml_deserializeErrorConflictingDomainExists(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ConflictingDomainExists{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8219,8 +8219,8 @@ func awsRestxml_deserializeErrorConflictingDomainExists(response *smithyhttp.Res
 
 func awsRestxml_deserializeErrorConflictingTypes(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ConflictingTypes{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8252,8 +8252,8 @@ func awsRestxml_deserializeErrorConflictingTypes(response *smithyhttp.Response, 
 
 func awsRestxml_deserializeErrorDelegationSetAlreadyCreated(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.DelegationSetAlreadyCreated{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8285,8 +8285,8 @@ func awsRestxml_deserializeErrorDelegationSetAlreadyCreated(response *smithyhttp
 
 func awsRestxml_deserializeErrorDelegationSetAlreadyReusable(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.DelegationSetAlreadyReusable{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8318,8 +8318,8 @@ func awsRestxml_deserializeErrorDelegationSetAlreadyReusable(response *smithyhtt
 
 func awsRestxml_deserializeErrorDelegationSetInUse(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.DelegationSetInUse{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8351,8 +8351,8 @@ func awsRestxml_deserializeErrorDelegationSetInUse(response *smithyhttp.Response
 
 func awsRestxml_deserializeErrorDelegationSetNotAvailable(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.DelegationSetNotAvailable{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8384,8 +8384,8 @@ func awsRestxml_deserializeErrorDelegationSetNotAvailable(response *smithyhttp.R
 
 func awsRestxml_deserializeErrorDelegationSetNotReusable(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.DelegationSetNotReusable{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8417,8 +8417,8 @@ func awsRestxml_deserializeErrorDelegationSetNotReusable(response *smithyhttp.Re
 
 func awsRestxml_deserializeErrorHealthCheckAlreadyExists(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.HealthCheckAlreadyExists{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8450,8 +8450,8 @@ func awsRestxml_deserializeErrorHealthCheckAlreadyExists(response *smithyhttp.Re
 
 func awsRestxml_deserializeErrorHealthCheckInUse(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.HealthCheckInUse{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8483,8 +8483,8 @@ func awsRestxml_deserializeErrorHealthCheckInUse(response *smithyhttp.Response, 
 
 func awsRestxml_deserializeErrorHealthCheckVersionMismatch(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.HealthCheckVersionMismatch{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8516,8 +8516,8 @@ func awsRestxml_deserializeErrorHealthCheckVersionMismatch(response *smithyhttp.
 
 func awsRestxml_deserializeErrorHostedZoneAlreadyExists(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.HostedZoneAlreadyExists{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8549,8 +8549,8 @@ func awsRestxml_deserializeErrorHostedZoneAlreadyExists(response *smithyhttp.Res
 
 func awsRestxml_deserializeErrorHostedZoneNotEmpty(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.HostedZoneNotEmpty{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8582,8 +8582,8 @@ func awsRestxml_deserializeErrorHostedZoneNotEmpty(response *smithyhttp.Response
 
 func awsRestxml_deserializeErrorHostedZoneNotFound(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.HostedZoneNotFound{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8615,8 +8615,8 @@ func awsRestxml_deserializeErrorHostedZoneNotFound(response *smithyhttp.Response
 
 func awsRestxml_deserializeErrorHostedZoneNotPrivate(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.HostedZoneNotPrivate{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8648,8 +8648,8 @@ func awsRestxml_deserializeErrorHostedZoneNotPrivate(response *smithyhttp.Respon
 
 func awsRestxml_deserializeErrorIncompatibleVersion(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.IncompatibleVersion{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8681,8 +8681,8 @@ func awsRestxml_deserializeErrorIncompatibleVersion(response *smithyhttp.Respons
 
 func awsRestxml_deserializeErrorInsufficientCloudWatchLogsResourcePolicy(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InsufficientCloudWatchLogsResourcePolicy{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8714,8 +8714,8 @@ func awsRestxml_deserializeErrorInsufficientCloudWatchLogsResourcePolicy(respons
 
 func awsRestxml_deserializeErrorInvalidArgument(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InvalidArgument{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8747,8 +8747,8 @@ func awsRestxml_deserializeErrorInvalidArgument(response *smithyhttp.Response, e
 
 func awsRestxml_deserializeErrorInvalidChangeBatch(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InvalidChangeBatch{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8780,8 +8780,8 @@ func awsRestxml_deserializeErrorInvalidChangeBatch(response *smithyhttp.Response
 
 func awsRestxml_deserializeErrorInvalidDomainName(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InvalidDomainName{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8813,8 +8813,8 @@ func awsRestxml_deserializeErrorInvalidDomainName(response *smithyhttp.Response,
 
 func awsRestxml_deserializeErrorInvalidInput(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InvalidInput{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8846,8 +8846,8 @@ func awsRestxml_deserializeErrorInvalidInput(response *smithyhttp.Response, erro
 
 func awsRestxml_deserializeErrorInvalidPaginationToken(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InvalidPaginationToken{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8879,8 +8879,8 @@ func awsRestxml_deserializeErrorInvalidPaginationToken(response *smithyhttp.Resp
 
 func awsRestxml_deserializeErrorInvalidTrafficPolicyDocument(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InvalidTrafficPolicyDocument{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8912,8 +8912,8 @@ func awsRestxml_deserializeErrorInvalidTrafficPolicyDocument(response *smithyhtt
 
 func awsRestxml_deserializeErrorInvalidVPCId(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InvalidVPCId{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8945,8 +8945,8 @@ func awsRestxml_deserializeErrorInvalidVPCId(response *smithyhttp.Response, erro
 
 func awsRestxml_deserializeErrorLastVPCAssociation(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.LastVPCAssociation{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -8978,8 +8978,8 @@ func awsRestxml_deserializeErrorLastVPCAssociation(response *smithyhttp.Response
 
 func awsRestxml_deserializeErrorLimitsExceeded(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.LimitsExceeded{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9011,8 +9011,8 @@ func awsRestxml_deserializeErrorLimitsExceeded(response *smithyhttp.Response, er
 
 func awsRestxml_deserializeErrorNoSuchChange(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.NoSuchChange{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9044,8 +9044,8 @@ func awsRestxml_deserializeErrorNoSuchChange(response *smithyhttp.Response, erro
 
 func awsRestxml_deserializeErrorNoSuchCloudWatchLogsLogGroup(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.NoSuchCloudWatchLogsLogGroup{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9077,8 +9077,8 @@ func awsRestxml_deserializeErrorNoSuchCloudWatchLogsLogGroup(response *smithyhtt
 
 func awsRestxml_deserializeErrorNoSuchDelegationSet(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.NoSuchDelegationSet{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9110,8 +9110,8 @@ func awsRestxml_deserializeErrorNoSuchDelegationSet(response *smithyhttp.Respons
 
 func awsRestxml_deserializeErrorNoSuchGeoLocation(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.NoSuchGeoLocation{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9143,8 +9143,8 @@ func awsRestxml_deserializeErrorNoSuchGeoLocation(response *smithyhttp.Response,
 
 func awsRestxml_deserializeErrorNoSuchHealthCheck(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.NoSuchHealthCheck{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9176,8 +9176,8 @@ func awsRestxml_deserializeErrorNoSuchHealthCheck(response *smithyhttp.Response,
 
 func awsRestxml_deserializeErrorNoSuchHostedZone(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.NoSuchHostedZone{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9209,8 +9209,8 @@ func awsRestxml_deserializeErrorNoSuchHostedZone(response *smithyhttp.Response, 
 
 func awsRestxml_deserializeErrorNoSuchQueryLoggingConfig(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.NoSuchQueryLoggingConfig{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9242,8 +9242,8 @@ func awsRestxml_deserializeErrorNoSuchQueryLoggingConfig(response *smithyhttp.Re
 
 func awsRestxml_deserializeErrorNoSuchTrafficPolicy(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.NoSuchTrafficPolicy{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9275,8 +9275,8 @@ func awsRestxml_deserializeErrorNoSuchTrafficPolicy(response *smithyhttp.Respons
 
 func awsRestxml_deserializeErrorNoSuchTrafficPolicyInstance(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.NoSuchTrafficPolicyInstance{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9308,8 +9308,8 @@ func awsRestxml_deserializeErrorNoSuchTrafficPolicyInstance(response *smithyhttp
 
 func awsRestxml_deserializeErrorNotAuthorizedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.NotAuthorizedException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9341,8 +9341,8 @@ func awsRestxml_deserializeErrorNotAuthorizedException(response *smithyhttp.Resp
 
 func awsRestxml_deserializeErrorPriorRequestNotComplete(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.PriorRequestNotComplete{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9374,8 +9374,8 @@ func awsRestxml_deserializeErrorPriorRequestNotComplete(response *smithyhttp.Res
 
 func awsRestxml_deserializeErrorPublicZoneVPCAssociation(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.PublicZoneVPCAssociation{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9407,8 +9407,8 @@ func awsRestxml_deserializeErrorPublicZoneVPCAssociation(response *smithyhttp.Re
 
 func awsRestxml_deserializeErrorQueryLoggingConfigAlreadyExists(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.QueryLoggingConfigAlreadyExists{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9440,8 +9440,8 @@ func awsRestxml_deserializeErrorQueryLoggingConfigAlreadyExists(response *smithy
 
 func awsRestxml_deserializeErrorThrottlingException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ThrottlingException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9473,8 +9473,8 @@ func awsRestxml_deserializeErrorThrottlingException(response *smithyhttp.Respons
 
 func awsRestxml_deserializeErrorTooManyHealthChecks(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.TooManyHealthChecks{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9506,8 +9506,8 @@ func awsRestxml_deserializeErrorTooManyHealthChecks(response *smithyhttp.Respons
 
 func awsRestxml_deserializeErrorTooManyHostedZones(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.TooManyHostedZones{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9539,8 +9539,8 @@ func awsRestxml_deserializeErrorTooManyHostedZones(response *smithyhttp.Response
 
 func awsRestxml_deserializeErrorTooManyTrafficPolicies(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.TooManyTrafficPolicies{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9572,8 +9572,8 @@ func awsRestxml_deserializeErrorTooManyTrafficPolicies(response *smithyhttp.Resp
 
 func awsRestxml_deserializeErrorTooManyTrafficPolicyInstances(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.TooManyTrafficPolicyInstances{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9605,8 +9605,8 @@ func awsRestxml_deserializeErrorTooManyTrafficPolicyInstances(response *smithyht
 
 func awsRestxml_deserializeErrorTooManyTrafficPolicyVersionsForCurrentPolicy(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.TooManyTrafficPolicyVersionsForCurrentPolicy{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9638,8 +9638,8 @@ func awsRestxml_deserializeErrorTooManyTrafficPolicyVersionsForCurrentPolicy(res
 
 func awsRestxml_deserializeErrorTooManyVPCAssociationAuthorizations(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.TooManyVPCAssociationAuthorizations{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9671,8 +9671,8 @@ func awsRestxml_deserializeErrorTooManyVPCAssociationAuthorizations(response *sm
 
 func awsRestxml_deserializeErrorTrafficPolicyAlreadyExists(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.TrafficPolicyAlreadyExists{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9704,8 +9704,8 @@ func awsRestxml_deserializeErrorTrafficPolicyAlreadyExists(response *smithyhttp.
 
 func awsRestxml_deserializeErrorTrafficPolicyInstanceAlreadyExists(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.TrafficPolicyInstanceAlreadyExists{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9737,8 +9737,8 @@ func awsRestxml_deserializeErrorTrafficPolicyInstanceAlreadyExists(response *smi
 
 func awsRestxml_deserializeErrorTrafficPolicyInUse(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.TrafficPolicyInUse{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9770,8 +9770,8 @@ func awsRestxml_deserializeErrorTrafficPolicyInUse(response *smithyhttp.Response
 
 func awsRestxml_deserializeErrorVPCAssociationAuthorizationNotFound(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.VPCAssociationAuthorizationNotFound{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -9803,8 +9803,8 @@ func awsRestxml_deserializeErrorVPCAssociationAuthorizationNotFound(response *sm
 
 func awsRestxml_deserializeErrorVPCAssociationNotFound(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.VPCAssociationNotFound{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)

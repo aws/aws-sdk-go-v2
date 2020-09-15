@@ -63,7 +63,7 @@ func awsRestjson1_serializeOpHttpBindingsGetRoleCredentialsInput(v *GetRoleCrede
 	}
 
 	if v.AccessToken != nil {
-		locationName := "x-amz-sso_bearer_token"
+		locationName := "X-Amz-Sso_bearer_token"
 		if len(*v.AccessToken) > 0 {
 			encoder.SetHeader(locationName).String(*v.AccessToken)
 		}
@@ -132,7 +132,7 @@ func awsRestjson1_serializeOpHttpBindingsListAccountRolesInput(v *ListAccountRol
 	}
 
 	if v.AccessToken != nil {
-		locationName := "x-amz-sso_bearer_token"
+		locationName := "X-Amz-Sso_bearer_token"
 		if len(*v.AccessToken) > 0 {
 			encoder.SetHeader(locationName).String(*v.AccessToken)
 		}
@@ -205,7 +205,7 @@ func awsRestjson1_serializeOpHttpBindingsListAccountsInput(v *ListAccountsInput,
 	}
 
 	if v.AccessToken != nil {
-		locationName := "x-amz-sso_bearer_token"
+		locationName := "X-Amz-Sso_bearer_token"
 		if len(*v.AccessToken) > 0 {
 			encoder.SetHeader(locationName).String(*v.AccessToken)
 		}
@@ -274,7 +274,7 @@ func awsRestjson1_serializeOpHttpBindingsLogoutInput(v *LogoutInput, encoder *ht
 	}
 
 	if v.AccessToken != nil {
-		locationName := "x-amz-sso_bearer_token"
+		locationName := "X-Amz-Sso_bearer_token"
 		if len(*v.AccessToken) > 0 {
 			encoder.SetHeader(locationName).String(*v.AccessToken)
 		}

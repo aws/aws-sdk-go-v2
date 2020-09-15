@@ -49,8 +49,8 @@ func (m *awsEc2query_deserializeOpEmptyInputAndEmptyOutput) HandleDeserialize(ct
 	output := &EmptyInputAndEmptyOutputOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -132,8 +132,8 @@ func (m *awsEc2query_deserializeOpGreetingWithErrors) HandleDeserialize(ctx cont
 	output := &GreetingWithErrorsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -221,8 +221,8 @@ func (m *awsEc2query_deserializeOpIgnoresWrappingXmlName) HandleDeserialize(ctx 
 	output := &IgnoresWrappingXmlNameOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -304,8 +304,8 @@ func (m *awsEc2query_deserializeOpNestedStructures) HandleDeserialize(ctx contex
 	output := &NestedStructuresOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -387,8 +387,8 @@ func (m *awsEc2query_deserializeOpNoInputAndOutput) HandleDeserialize(ctx contex
 	output := &NoInputAndOutputOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -470,8 +470,8 @@ func (m *awsEc2query_deserializeOpQueryIdempotencyTokenAutoFill) HandleDeseriali
 	output := &QueryIdempotencyTokenAutoFillOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -553,8 +553,8 @@ func (m *awsEc2query_deserializeOpQueryLists) HandleDeserialize(ctx context.Cont
 	output := &QueryListsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -636,8 +636,8 @@ func (m *awsEc2query_deserializeOpQueryTimestamps) HandleDeserialize(ctx context
 	output := &QueryTimestampsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -719,8 +719,8 @@ func (m *awsEc2query_deserializeOpRecursiveXmlShapes) HandleDeserialize(ctx cont
 	output := &RecursiveXmlShapesOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -802,8 +802,8 @@ func (m *awsEc2query_deserializeOpSimpleInputParams) HandleDeserialize(ctx conte
 	output := &SimpleInputParamsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -885,8 +885,8 @@ func (m *awsEc2query_deserializeOpSimpleScalarXmlProperties) HandleDeserialize(c
 	output := &SimpleScalarXmlPropertiesOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -968,8 +968,8 @@ func (m *awsEc2query_deserializeOpXmlBlobs) HandleDeserialize(ctx context.Contex
 	output := &XmlBlobsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -1051,8 +1051,8 @@ func (m *awsEc2query_deserializeOpXmlEnums) HandleDeserialize(ctx context.Contex
 	output := &XmlEnumsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -1134,8 +1134,8 @@ func (m *awsEc2query_deserializeOpXmlLists) HandleDeserialize(ctx context.Contex
 	output := &XmlListsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -1217,8 +1217,8 @@ func (m *awsEc2query_deserializeOpXmlNamespaces) HandleDeserialize(ctx context.C
 	output := &XmlNamespacesOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -1300,8 +1300,8 @@ func (m *awsEc2query_deserializeOpXmlTimestamps) HandleDeserialize(ctx context.C
 	output := &XmlTimestampsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(response.Body, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -1359,8 +1359,8 @@ func awsEc2query_deserializeOpErrorXmlTimestamps(response *smithyhttp.Response) 
 
 func awsEc2query_deserializeErrorComplexError(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ComplexError{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)
@@ -1392,8 +1392,8 @@ func awsEc2query_deserializeErrorComplexError(response *smithyhttp.Response, err
 
 func awsEc2query_deserializeErrorInvalidGreeting(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InvalidGreeting{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 	body := io.TeeReader(errorBody, ringBuffer)
 	rootDecoder := xml.NewDecoder(body)
 	t, err := smithyxml.FetchRootElement(rootDecoder)

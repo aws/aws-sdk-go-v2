@@ -253,7 +253,7 @@ func awsRestjson1_serializeOpHttpBindingsPostContentInput(v *PostContentInput, e
 	}
 
 	if v.RequestAttributes != nil {
-		locationName := "x-amz-lex-request-attributes"
+		locationName := "X-Amz-Lex-Request-Attributes"
 		if len(*v.RequestAttributes) > 0 {
 			encoded := ptr.String(base64.StdEncoding.EncodeToString([]byte(*v.RequestAttributes)))
 			encoder.SetHeader(locationName).String(*encoded)
@@ -261,7 +261,7 @@ func awsRestjson1_serializeOpHttpBindingsPostContentInput(v *PostContentInput, e
 	}
 
 	if v.SessionAttributes != nil {
-		locationName := "x-amz-lex-session-attributes"
+		locationName := "X-Amz-Lex-Session-Attributes"
 		if len(*v.SessionAttributes) > 0 {
 			encoded := ptr.String(base64.StdEncoding.EncodeToString([]byte(*v.SessionAttributes)))
 			encoder.SetHeader(locationName).String(*encoded)

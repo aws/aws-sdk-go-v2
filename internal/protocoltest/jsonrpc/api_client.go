@@ -3,12 +3,14 @@
 package jsonrpc
 
 import (
+	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/awslabs/smithy-go/middleware"
 	"net/http"
+	"time"
 )
 
 const ServiceID = "Json Protocol"
@@ -26,6 +28,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	resolveRetryer(&options)
 
 	resolveHTTPClient(&options)
+
+	resolveHTTPSignerV4(&options)
 
 	resolveDefaultEndpointConfiguration(&options)
 
@@ -55,6 +59,9 @@ type Options struct {
 	// The service endpoint resolver.
 	EndpointResolver EndpointResolver
 
+	// Signature Version 4 (SigV4) Signer
+	HTTPSignerV4 HTTPSignerV4
+
 	// An integer value representing the logging level.
 	LogLevel aws.LogLevel
 
@@ -83,6 +90,10 @@ func (o Options) GetEndpointOptions() ResolverOptions {
 
 func (o Options) GetEndpointResolver() EndpointResolver {
 	return o.EndpointResolver
+}
+
+func (o Options) GetHTTPSignerV4() HTTPSignerV4 {
+	return o.HTTPSignerV4
 }
 
 func (o Options) GetLogLevel() aws.LogLevel {
@@ -147,6 +158,16 @@ func addClientUserAgent(stack *middleware.Stack) {
 }
 
 func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) {
-	signer := v4.Signer{}
-	stack.Finalize.Add(v4.NewSignHTTPRequestMiddleware(o.Credentials, signer), middleware.After)
+	stack.Finalize.Add(v4.NewSignHTTPRequestMiddleware(o.Credentials, o.HTTPSignerV4), middleware.After)
+}
+
+type HTTPSignerV4 interface {
+	SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error
+}
+
+func resolveHTTPSignerV4(o *Options) {
+	if o.HTTPSignerV4 != nil {
+		return
+	}
+	o.HTTPSignerV4 = v4.NewSigner()
 }

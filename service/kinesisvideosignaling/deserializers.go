@@ -45,8 +45,8 @@ func (m *awsRestjson1_deserializeOpGetIceServerConfig) HandleDeserialize(ctx con
 	output := &GetIceServerConfigOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -81,8 +81,8 @@ func awsRestjson1_deserializeOpErrorGetIceServerConfig(response *smithyhttp.Resp
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -217,8 +217,8 @@ func (m *awsRestjson1_deserializeOpSendAlexaOfferToMaster) HandleDeserialize(ctx
 	output := &SendAlexaOfferToMasterOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -253,8 +253,8 @@ func awsRestjson1_deserializeOpErrorSendAlexaOfferToMaster(response *smithyhttp.
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -367,8 +367,8 @@ func awsRestjson1_deserializeOpDocumentSendAlexaOfferToMasterOutput(v **SendAlex
 
 func awsRestjson1_deserializeErrorClientLimitExceededException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ClientLimitExceededException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -392,8 +392,8 @@ func awsRestjson1_deserializeErrorClientLimitExceededException(response *smithyh
 
 func awsRestjson1_deserializeErrorInvalidArgumentException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InvalidArgumentException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -417,8 +417,8 @@ func awsRestjson1_deserializeErrorInvalidArgumentException(response *smithyhttp.
 
 func awsRestjson1_deserializeErrorInvalidClientException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InvalidClientException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -442,8 +442,8 @@ func awsRestjson1_deserializeErrorInvalidClientException(response *smithyhttp.Re
 
 func awsRestjson1_deserializeErrorNotAuthorizedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.NotAuthorizedException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -467,8 +467,8 @@ func awsRestjson1_deserializeErrorNotAuthorizedException(response *smithyhttp.Re
 
 func awsRestjson1_deserializeErrorResourceNotFoundException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ResourceNotFoundException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -492,8 +492,8 @@ func awsRestjson1_deserializeErrorResourceNotFoundException(response *smithyhttp
 
 func awsRestjson1_deserializeErrorSessionExpiredException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.SessionExpiredException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
