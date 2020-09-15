@@ -1,21 +1,28 @@
 package middleware_test
 
 import (
+	"bytes"
 	"context"
 	"net/http"
 	"reflect"
-	"regexp"
 	"strings"
 	"testing"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/rand"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	smithymiddleware "github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
 func TestRequestInvocationIDMiddleware(t *testing.T) {
+	oReader := rand.Reader
+	defer func() {
+		rand.Reader = oReader
+	}()
+	rand.Reader = bytes.NewReader(make([]byte, 16))
+
 	mid := middleware.RequestInvocationIDMiddleware{}
 
 	in := smithymiddleware.BuildInput{Request: &smithyhttp.Request{Request: &http.Request{Header: make(http.Header)}}}
@@ -27,12 +34,9 @@ func TestRequestInvocationIDMiddleware(t *testing.T) {
 
 		value := req.Header.Get("amz-sdk-invocation-id")
 
-		match, err := regexp.MatchString(`[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$`, value)
-		if err != nil {
-			t.Fatalf("expected no error, got %v", err)
-		}
-		if !match {
-			t.Errorf("invocation id was not a UUIDv4")
+		expected := "00000000-0000-4000-8000-000000000000"
+		if value != expected {
+			t.Errorf("expect %v, got %v", expected, value)
 		}
 
 		return out, metadata, err

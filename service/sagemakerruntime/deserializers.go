@@ -74,8 +74,8 @@ func awsRestjson1_deserializeOpErrorInvokeEndpoint(response *smithyhttp.Response
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -156,8 +156,8 @@ func awsRestjson1_deserializeOpDocumentInvokeEndpointOutput(v *InvokeEndpointOut
 
 func awsRestjson1_deserializeErrorInternalFailure(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InternalFailure{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -181,8 +181,8 @@ func awsRestjson1_deserializeErrorInternalFailure(response *smithyhttp.Response,
 
 func awsRestjson1_deserializeErrorModelError(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ModelError{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -206,8 +206,8 @@ func awsRestjson1_deserializeErrorModelError(response *smithyhttp.Response, erro
 
 func awsRestjson1_deserializeErrorServiceUnavailable(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ServiceUnavailable{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -231,8 +231,8 @@ func awsRestjson1_deserializeErrorServiceUnavailable(response *smithyhttp.Respon
 
 func awsRestjson1_deserializeErrorValidationError(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ValidationError{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)

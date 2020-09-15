@@ -204,8 +204,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         }
 
         writer.addUseImports(SmithyGoDependency.SMITHY_IO);
-        writer.write("buff := make([]byte, 1024)");
-        writer.write("ringBuffer := smithyio.NewRingBuffer(buff)");
+        writer.write("var buff [1024]byte");
+        writer.write("ringBuffer := smithyio.NewRingBuffer(buff[:])");
         writer.write("");
 
         writer.addUseImports(SmithyGoDependency.IO);

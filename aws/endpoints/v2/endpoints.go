@@ -116,12 +116,10 @@ func (e Endpoint) resolve(partition, region string, def Endpoint, options Option
 	var u string
 	if e.Unresolveable != aws.TrueTernary {
 		// Only attempt to resolve the endpoint if it can be resolved.
-		hostname := e.Hostname
-
-		hostname = strings.Replace(hostname, "{region}", region, 1)
+		hostname := strings.Replace(e.Hostname, "{region}", region, 1)
 
 		scheme := getEndpointScheme(e.Protocols, options.DisableHTTPS)
-		u = fmt.Sprintf("%s://%s", scheme, hostname)
+		u = scheme + "://" + hostname
 	}
 
 	signingRegion := e.CredentialScope.Region

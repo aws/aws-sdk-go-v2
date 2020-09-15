@@ -84,7 +84,7 @@ func awsRestxml_serializeOpHttpBindingsCreateAccessPointInput(v *CreateAccessPoi
 	}
 
 	if v.AccountId != nil {
-		locationName := "x-amz-account-id"
+		locationName := "X-Amz-Account-Id"
 		if len(*v.AccountId) > 0 {
 			encoder.SetHeader(locationName).String(*v.AccountId)
 		}
@@ -210,7 +210,7 @@ func awsRestxml_serializeOpHttpBindingsCreateJobInput(v *CreateJobInput, encoder
 	}
 
 	if v.AccountId != nil {
-		locationName := "x-amz-account-id"
+		locationName := "X-Amz-Account-Id"
 		if len(*v.AccountId) > 0 {
 			encoder.SetHeader(locationName).String(*v.AccountId)
 		}
@@ -383,7 +383,7 @@ func awsRestxml_serializeOpHttpBindingsDeleteAccessPointInput(v *DeleteAccessPoi
 	}
 
 	if v.AccountId != nil {
-		locationName := "x-amz-account-id"
+		locationName := "X-Amz-Account-Id"
 		if len(*v.AccountId) > 0 {
 			encoder.SetHeader(locationName).String(*v.AccountId)
 		}
@@ -450,7 +450,7 @@ func awsRestxml_serializeOpHttpBindingsDeleteAccessPointPolicyInput(v *DeleteAcc
 	}
 
 	if v.AccountId != nil {
-		locationName := "x-amz-account-id"
+		locationName := "X-Amz-Account-Id"
 		if len(*v.AccountId) > 0 {
 			encoder.SetHeader(locationName).String(*v.AccountId)
 		}
@@ -517,7 +517,7 @@ func awsRestxml_serializeOpHttpBindingsDeleteJobTaggingInput(v *DeleteJobTagging
 	}
 
 	if v.AccountId != nil {
-		locationName := "x-amz-account-id"
+		locationName := "X-Amz-Account-Id"
 		if len(*v.AccountId) > 0 {
 			encoder.SetHeader(locationName).String(*v.AccountId)
 		}
@@ -584,7 +584,7 @@ func awsRestxml_serializeOpHttpBindingsDeletePublicAccessBlockInput(v *DeletePub
 	}
 
 	if v.AccountId != nil {
-		locationName := "x-amz-account-id"
+		locationName := "X-Amz-Account-Id"
 		if len(*v.AccountId) > 0 {
 			encoder.SetHeader(locationName).String(*v.AccountId)
 		}
@@ -645,7 +645,7 @@ func awsRestxml_serializeOpHttpBindingsDescribeJobInput(v *DescribeJobInput, enc
 	}
 
 	if v.AccountId != nil {
-		locationName := "x-amz-account-id"
+		locationName := "X-Amz-Account-Id"
 		if len(*v.AccountId) > 0 {
 			encoder.SetHeader(locationName).String(*v.AccountId)
 		}
@@ -712,7 +712,7 @@ func awsRestxml_serializeOpHttpBindingsGetAccessPointInput(v *GetAccessPointInpu
 	}
 
 	if v.AccountId != nil {
-		locationName := "x-amz-account-id"
+		locationName := "X-Amz-Account-Id"
 		if len(*v.AccountId) > 0 {
 			encoder.SetHeader(locationName).String(*v.AccountId)
 		}
@@ -779,7 +779,7 @@ func awsRestxml_serializeOpHttpBindingsGetAccessPointPolicyInput(v *GetAccessPoi
 	}
 
 	if v.AccountId != nil {
-		locationName := "x-amz-account-id"
+		locationName := "X-Amz-Account-Id"
 		if len(*v.AccountId) > 0 {
 			encoder.SetHeader(locationName).String(*v.AccountId)
 		}
@@ -846,7 +846,7 @@ func awsRestxml_serializeOpHttpBindingsGetAccessPointPolicyStatusInput(v *GetAcc
 	}
 
 	if v.AccountId != nil {
-		locationName := "x-amz-account-id"
+		locationName := "X-Amz-Account-Id"
 		if len(*v.AccountId) > 0 {
 			encoder.SetHeader(locationName).String(*v.AccountId)
 		}
@@ -913,7 +913,7 @@ func awsRestxml_serializeOpHttpBindingsGetJobTaggingInput(v *GetJobTaggingInput,
 	}
 
 	if v.AccountId != nil {
-		locationName := "x-amz-account-id"
+		locationName := "X-Amz-Account-Id"
 		if len(*v.AccountId) > 0 {
 			encoder.SetHeader(locationName).String(*v.AccountId)
 		}
@@ -980,7 +980,7 @@ func awsRestxml_serializeOpHttpBindingsGetPublicAccessBlockInput(v *GetPublicAcc
 	}
 
 	if v.AccountId != nil {
-		locationName := "x-amz-account-id"
+		locationName := "X-Amz-Account-Id"
 		if len(*v.AccountId) > 0 {
 			encoder.SetHeader(locationName).String(*v.AccountId)
 		}
@@ -1041,7 +1041,7 @@ func awsRestxml_serializeOpHttpBindingsListAccessPointsInput(v *ListAccessPoints
 	}
 
 	if v.AccountId != nil {
-		locationName := "x-amz-account-id"
+		locationName := "X-Amz-Account-Id"
 		if len(*v.AccountId) > 0 {
 			encoder.SetHeader(locationName).String(*v.AccountId)
 		}
@@ -1114,7 +1114,7 @@ func awsRestxml_serializeOpHttpBindingsListJobsInput(v *ListJobsInput, encoder *
 	}
 
 	if v.AccountId != nil {
-		locationName := "x-amz-account-id"
+		locationName := "X-Amz-Account-Id"
 		if len(*v.AccountId) > 0 {
 			encoder.SetHeader(locationName).String(*v.AccountId)
 		}
@@ -1206,7 +1206,7 @@ func awsRestxml_serializeOpHttpBindingsPutAccessPointPolicyInput(v *PutAccessPoi
 	}
 
 	if v.AccountId != nil {
-		locationName := "x-amz-account-id"
+		locationName := "X-Amz-Account-Id"
 		if len(*v.AccountId) > 0 {
 			encoder.SetHeader(locationName).String(*v.AccountId)
 		}
@@ -1306,7 +1306,7 @@ func awsRestxml_serializeOpHttpBindingsPutJobTaggingInput(v *PutJobTaggingInput,
 	}
 
 	if v.AccountId != nil {
-		locationName := "x-amz-account-id"
+		locationName := "X-Amz-Account-Id"
 		if len(*v.AccountId) > 0 {
 			encoder.SetHeader(locationName).String(*v.AccountId)
 		}
@@ -1413,7 +1413,7 @@ func awsRestxml_serializeOpHttpBindingsPutPublicAccessBlockInput(v *PutPublicAcc
 	}
 
 	if v.AccountId != nil {
-		locationName := "x-amz-account-id"
+		locationName := "X-Amz-Account-Id"
 		if len(*v.AccountId) > 0 {
 			encoder.SetHeader(locationName).String(*v.AccountId)
 		}
@@ -1474,7 +1474,7 @@ func awsRestxml_serializeOpHttpBindingsUpdateJobPriorityInput(v *UpdateJobPriori
 	}
 
 	if v.AccountId != nil {
-		locationName := "x-amz-account-id"
+		locationName := "X-Amz-Account-Id"
 		if len(*v.AccountId) > 0 {
 			encoder.SetHeader(locationName).String(*v.AccountId)
 		}
@@ -1545,7 +1545,7 @@ func awsRestxml_serializeOpHttpBindingsUpdateJobStatusInput(v *UpdateJobStatusIn
 	}
 
 	if v.AccountId != nil {
-		locationName := "x-amz-account-id"
+		locationName := "X-Amz-Account-Id"
 		if len(*v.AccountId) > 0 {
 			encoder.SetHeader(locationName).String(*v.AccountId)
 		}

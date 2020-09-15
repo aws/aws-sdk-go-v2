@@ -35,9 +35,9 @@ func TestStandaloneSign_CustomURIEscape(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
-	signer := v4.Signer{
-		DisableURIPathEscaping: true,
-	}
+	signer := v4.NewSigner(func(signer *v4.Signer) {
+		signer.DisableURIPathEscaping = true
+	})
 
 	host := "https://subdomain.us-east-1.es.amazonaws.com"
 	req, err := http.NewRequest("GET", host, nil)
@@ -64,7 +64,7 @@ func TestStandaloneSign(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
-	signer := v4.Signer{}
+	signer := v4.NewSigner()
 
 	for _, c := range standaloneSignCases {
 		host := fmt.Sprintf("https://%s.%s.%s.amazonaws.com",
@@ -103,7 +103,7 @@ func TestStandaloneSign_RawPath(t *testing.T) {
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
-	signer := v4.Signer{}
+	signer := v4.NewSigner()
 
 	for _, c := range standaloneSignCases {
 		host := fmt.Sprintf("https://%s.%s.%s.amazonaws.com",
