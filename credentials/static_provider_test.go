@@ -1,13 +1,15 @@
-package aws
+package credentials
 
 import (
 	"context"
 	"testing"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
-func TestStaticCredentialsProviderGet(t *testing.T) {
+func TestStaticCredentialsProvider(t *testing.T) {
 	s := StaticCredentialsProvider{
-		Value: Credentials{
+		Value: aws.Credentials{
 			AccessKeyID:     "AKID",
 			SecretAccessKey: "SECRET",
 			SessionToken:    "",
@@ -31,14 +33,19 @@ func TestStaticCredentialsProviderGet(t *testing.T) {
 
 func TestStaticCredentialsProviderIsExpired(t *testing.T) {
 	s := StaticCredentialsProvider{
-		Value: Credentials{
+		Value: aws.Credentials{
 			AccessKeyID:     "AKID",
 			SecretAccessKey: "SECRET",
 			SessionToken:    "",
 		},
 	}
 
-	if s.IsExpired() {
+	creds, err := s.Retrieve(context.Background())
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	if creds.Expired() {
 		t.Errorf("expect static credentials to never expire")
 	}
 }
