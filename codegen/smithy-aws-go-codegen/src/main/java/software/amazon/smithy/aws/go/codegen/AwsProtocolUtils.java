@@ -21,6 +21,7 @@ import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolTestGenerator;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestGenerator;
+import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestGenerator.ConfigValue;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestRequestGenerator;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestResponseErrorGenerator;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestResponseGenerator;
@@ -47,19 +48,12 @@ final class AwsProtocolUtils {
                         .value(writer -> writer.write("$S,", "us-west-2"))
                         .build(),
                 HttpProtocolUnitTestGenerator.ConfigValue.builder()
-                        .name(AddAwsConfigFields.HTTP_CLIENT_CONFIG_NAME)
-                        .value(writer -> {
-                            writer.addUseImports(AwsGoDependency.AWS_CORE);
-                            writer.write("aws.NewBuildableHTTPClient(),");
-                        })
-                        .build(),
-                HttpProtocolUnitTestGenerator.ConfigValue.builder()
                         .name(AddAwsConfigFields.ENDPOINT_RESOLVER_CONFIG_NAME)
                         .value(writer -> {
                             writer.addUseImports(AwsGoDependency.AWS_CORE);
                             writer.openBlock("$L(func(region string, options $L) (e aws.Endpoint, err error) {", "}),",
                                     EndpointGenerator.RESOLVER_FUNC_NAME, EndpointGenerator.RESOLVER_OPTIONS, () -> {
-                                        writer.write("e.URL = server.URL");
+                                        writer.write("e.URL = url");
                                         writer.write("e.SigningRegion = \"us-west-2\"");
                                         writer.write("return e, err");
                                     });
@@ -94,10 +88,19 @@ final class AwsProtocolUtils {
             );
         }
 
+        Set<ConfigValue> inputConfigValues = new TreeSet<>(configValues);
+        inputConfigValues.add(HttpProtocolUnitTestGenerator.ConfigValue.builder()
+                .name(AddAwsConfigFields.HTTP_CLIENT_CONFIG_NAME)
+                .value(writer -> {
+                    writer.addUseImports(AwsGoDependency.AWS_CORE);
+                    writer.write("aws.NewBuildableHTTPClient(),");
+                })
+                .build());
+
         new HttpProtocolTestGenerator(context,
                 (HttpProtocolUnitTestRequestGenerator.Builder) new HttpProtocolUnitTestRequestGenerator
                         .Builder()
-                        .addClientConfigValues(configValues),
+                        .addClientConfigValues(inputConfigValues),
                 (HttpProtocolUnitTestResponseGenerator.Builder) new HttpProtocolUnitTestResponseGenerator
                         .Builder()
                         .addClientConfigValues(configValues),
