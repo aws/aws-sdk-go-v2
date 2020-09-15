@@ -257,7 +257,8 @@ type credentialProcessResponse struct {
 	Expiration      *time.Time
 }
 
-// retrieveFn executes the 'credential_process' and returns the credentials.
+// Retrieve executes the credential process command and returns the
+// credentials, or error if the command fails.
 func (p *Provider) Retrieve(ctx context.Context) (aws.Credentials, error) {
 	out, err := p.executeCredentialProcess(ctx)
 	if err != nil {
