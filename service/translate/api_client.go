@@ -3,6 +3,7 @@
 package translate
 
 import (
+	"context"
 	cryptorand "crypto/rand"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
@@ -11,6 +12,7 @@ import (
 	"github.com/awslabs/smithy-go/middleware"
 	smithyrand "github.com/awslabs/smithy-go/rand"
 	"net/http"
+	"time"
 )
 
 const ServiceID = "Translate"
@@ -30,6 +32,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	resolveRetryer(&options)
 
 	resolveHTTPClient(&options)
+
+	resolveHTTPSignerV4(&options)
 
 	resolveDefaultEndpointConfiguration(&options)
 
@@ -60,6 +64,9 @@ type Options struct {
 
 	// The service endpoint resolver.
 	EndpointResolver EndpointResolver
+
+	// Signature Version 4 (SigV4) Signer
+	HTTPSignerV4 HTTPSignerV4
 
 	// Provides idempotency tokens values that will be automatically populated into
 	// idempotent API operations.
@@ -93,6 +100,10 @@ func (o Options) GetEndpointOptions() ResolverOptions {
 
 func (o Options) GetEndpointResolver() EndpointResolver {
 	return o.EndpointResolver
+}
+
+func (o Options) GetHTTPSignerV4() HTTPSignerV4 {
+	return o.HTTPSignerV4
 }
 
 func (o Options) GetIdempotencyTokenProvider() IdempotencyTokenProvider {
@@ -161,8 +172,18 @@ func addClientUserAgent(stack *middleware.Stack) {
 }
 
 func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) {
-	signer := v4.Signer{}
-	stack.Finalize.Add(v4.NewSignHTTPRequestMiddleware(o.Credentials, signer), middleware.After)
+	stack.Finalize.Add(v4.NewSignHTTPRequestMiddleware(o.Credentials, o.HTTPSignerV4), middleware.After)
+}
+
+type HTTPSignerV4 interface {
+	SignHTTP(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error
+}
+
+func resolveHTTPSignerV4(o *Options) {
+	if o.HTTPSignerV4 != nil {
+		return
+	}
+	o.HTTPSignerV4 = v4.NewSigner()
 }
 
 func resolveIdempotencyTokenProvider(o *Options) {

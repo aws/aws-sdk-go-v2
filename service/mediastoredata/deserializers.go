@@ -65,8 +65,8 @@ func awsRestjson1_deserializeOpErrorDeleteObject(response *smithyhttp.Response) 
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -159,8 +159,8 @@ func awsRestjson1_deserializeOpErrorDescribeObject(response *smithyhttp.Response
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -299,8 +299,8 @@ func awsRestjson1_deserializeOpErrorGetObject(response *smithyhttp.Response) err
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -427,8 +427,8 @@ func (m *awsRestjson1_deserializeOpListItems) HandleDeserialize(ctx context.Cont
 	output := &ListItemsOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -463,8 +463,8 @@ func awsRestjson1_deserializeOpErrorListItems(response *smithyhttp.Response) err
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -600,8 +600,8 @@ func (m *awsRestjson1_deserializeOpPutObject) HandleDeserialize(ctx context.Cont
 	output := &PutObjectOutput{}
 	out.Result = output
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(response.Body, ringBuffer)
 
@@ -636,8 +636,8 @@ func awsRestjson1_deserializeOpErrorPutObject(response *smithyhttp.Response) err
 		errorCode = restjson.SanitizeErrorCode(code)
 	}
 
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -770,8 +770,8 @@ func awsRestjson1_deserializeOpDocumentPutObjectOutput(v **PutObjectOutput, deco
 
 func awsRestjson1_deserializeErrorContainerNotFoundException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ContainerNotFoundException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -795,8 +795,8 @@ func awsRestjson1_deserializeErrorContainerNotFoundException(response *smithyhtt
 
 func awsRestjson1_deserializeErrorInternalServerError(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.InternalServerError{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -820,8 +820,8 @@ func awsRestjson1_deserializeErrorInternalServerError(response *smithyhttp.Respo
 
 func awsRestjson1_deserializeErrorObjectNotFoundException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ObjectNotFoundException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
@@ -845,8 +845,8 @@ func awsRestjson1_deserializeErrorObjectNotFoundException(response *smithyhttp.R
 
 func awsRestjson1_deserializeErrorRequestedRangeNotSatisfiableException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.RequestedRangeNotSatisfiableException{}
-	buff := make([]byte, 1024)
-	ringBuffer := smithyio.NewRingBuffer(buff)
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
