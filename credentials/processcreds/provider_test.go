@@ -1,4 +1,4 @@
-package processcreds_test
+package processcreds
 
 import (
 	"bytes"
@@ -10,17 +10,18 @@ import (
 	"io/ioutil"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"runtime"
 	"strings"
 	"testing"
 	"time"
-
-	"github.com/aws/aws-sdk-go-v2/aws/external"
-	"github.com/aws/aws-sdk-go-v2/aws/processcreds"
-	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 )
 
-func TestProcessProviderFromSessionCfg(t *testing.T) {
+// TODO these tests belong in the external configuration loading module, not
+// the process credential provider package, since this package has no knowledge
+// of external configuration.
+/*
+func TestProviderFromSessionCfg(t *testing.T) {
 	restoreEnv := awstesting.StashEnv()
 	defer awstesting.PopEnv(restoreEnv)
 
@@ -55,7 +56,7 @@ func TestProcessProviderFromSessionCfg(t *testing.T) {
 
 }
 
-func TestProcessProviderFromSessionWithProfileCfg(t *testing.T) {
+func TestProviderFromSessionWithProfileCfg(t *testing.T) {
 	restoreEnv := awstesting.StashEnv()
 	defer awstesting.PopEnv(restoreEnv)
 
@@ -83,7 +84,7 @@ func TestProcessProviderFromSessionWithProfileCfg(t *testing.T) {
 
 }
 
-func TestProcessProviderNotFromCredProcCfg(t *testing.T) {
+func TestProviderNotFromCredProcCfg(t *testing.T) {
 	restoreEnv := awstesting.StashEnv()
 	defer awstesting.PopEnv(restoreEnv)
 
@@ -115,7 +116,7 @@ func TestProcessProviderNotFromCredProcCfg(t *testing.T) {
 
 }
 
-func TestProcessProviderFromSessionCred(t *testing.T) {
+func TestProviderFromSessionCred(t *testing.T) {
 	restoreEnv := awstesting.StashEnv()
 	defer awstesting.PopEnv(restoreEnv)
 
@@ -149,7 +150,7 @@ func TestProcessProviderFromSessionCred(t *testing.T) {
 
 }
 
-func TestProcessProviderFromSessionWithProfileCred(t *testing.T) {
+func TestProviderFromSessionWithProfileCred(t *testing.T) {
 	restoreEnv := awstesting.StashEnv()
 	defer awstesting.PopEnv(restoreEnv)
 
@@ -176,7 +177,7 @@ func TestProcessProviderFromSessionWithProfileCred(t *testing.T) {
 
 }
 
-func TestProcessProviderNotFromCredProcCrd(t *testing.T) {
+func TestProviderNotFromCredProcCrd(t *testing.T) {
 	restoreEnv := awstesting.StashEnv()
 	defer awstesting.PopEnv(restoreEnv)
 
@@ -204,16 +205,13 @@ func TestProcessProviderNotFromCredProcCrd(t *testing.T) {
 	if e, a := "notFromCredProcSecret", v.SecretAccessKey; e != a {
 		t.Errorf("expected %v, got %v", e, a)
 	}
-
 }
+*/
 
-func TestProcessProviderBadCommand(t *testing.T) {
-	restoreEnv := awstesting.StashEnv()
-	defer awstesting.PopEnv(restoreEnv)
-
-	creds := processcreds.NewProvider("/bad/process")
-	_, err := creds.Retrieve(context.Background())
-	var pe *processcreds.ProviderError
+func TestProviderBadCommand(t *testing.T) {
+	provider := NewProvider("/bad/process")
+	_, err := provider.Retrieve(context.Background())
+	var pe *ProviderError
 	if ok := errors.As(err, &pe); !ok {
 		t.Fatalf("expect error to be of type %T", pe)
 	}
@@ -222,13 +220,10 @@ func TestProcessProviderBadCommand(t *testing.T) {
 	}
 }
 
-func TestProcessProviderMoreEmptyCommands(t *testing.T) {
-	restoreEnv := awstesting.StashEnv()
-	defer awstesting.PopEnv(restoreEnv)
-
-	provider := processcreds.NewProvider("")
+func TestProviderMoreEmptyCommands(t *testing.T) {
+	provider := NewProvider("")
 	_, err := provider.Retrieve(context.Background())
-	var pe *processcreds.ProviderError
+	var pe *ProviderError
 	if ok := errors.As(err, &pe); !ok {
 		t.Fatalf("expect error to be of type %T", pe)
 	}
@@ -237,32 +232,27 @@ func TestProcessProviderMoreEmptyCommands(t *testing.T) {
 	}
 }
 
-func TestProcessProviderExpectErrors(t *testing.T) {
-	restoreEnv := awstesting.StashEnv()
-	defer awstesting.PopEnv(restoreEnv)
-
-	provider := processcreds.NewProvider(
+func TestProviderExpectErrors(t *testing.T) {
+	provider := NewProvider(
 		fmt.Sprintf(
 			"%s %s",
 			getOSCat(),
-			strings.Join(
-				[]string{"testdata", "malformed.json"},
-				string(os.PathSeparator))))
+			filepath.Join("testdata", "malformed.json"),
+		))
 	_, err := provider.Retrieve(context.Background())
-	var pe *processcreds.ProviderError
+	var pe *ProviderError
 	if ok := errors.As(err, &pe); !ok {
 		t.Fatalf("expect error to be of type %T", pe)
 	}
-	if e, a := "parse failed of credential_process output", pe.Error(); !strings.Contains(a, e) {
+	if e, a := "parse failed of process output", pe.Error(); !strings.Contains(a, e) {
 		t.Errorf("expected %v, got %v", e, a)
 	}
 
-	provider = processcreds.NewProvider(
+	provider = NewProvider(
 		fmt.Sprintf("%s %s",
 			getOSCat(),
-			strings.Join(
-				[]string{"testdata", "wrongversion.json"},
-				string(os.PathSeparator))))
+			filepath.Join("testdata", "wrongversion.json"),
+		))
 	_, err = provider.Retrieve(context.Background())
 	if ok := errors.As(err, &pe); !ok {
 		t.Fatalf("expect error to be of type %T", pe)
@@ -271,13 +261,12 @@ func TestProcessProviderExpectErrors(t *testing.T) {
 		t.Errorf("expected %v, got %v", e, a)
 	}
 
-	provider = processcreds.NewProvider(
+	provider = NewProvider(
 		fmt.Sprintf(
 			"%s %s",
 			getOSCat(),
-			strings.Join(
-				[]string{"testdata", "missingkey.json"},
-				string(os.PathSeparator))))
+			filepath.Join("testdata", "missingkey.json"),
+		))
 	_, err = provider.Retrieve(context.Background())
 	if ok := errors.As(err, &pe); !ok {
 		t.Fatalf("expect error to be of type %T", pe)
@@ -286,13 +275,12 @@ func TestProcessProviderExpectErrors(t *testing.T) {
 		t.Errorf("expected %v, got %v", e, a)
 	}
 
-	provider = processcreds.NewProvider(
+	provider = NewProvider(
 		fmt.Sprintf(
 			"%s %s",
 			getOSCat(),
-			strings.Join(
-				[]string{"testdata", "missingsecret.json"},
-				string(os.PathSeparator))))
+			filepath.Join("testdata", "missingsecret.json"),
+		))
 	_, err = provider.Retrieve(context.Background())
 	if ok := errors.As(err, &pe); !ok {
 		t.Fatalf("expect error to be of type %T", pe)
@@ -302,21 +290,18 @@ func TestProcessProviderExpectErrors(t *testing.T) {
 	}
 }
 
-func TestProcessProviderTimeout(t *testing.T) {
-	restoreEnv := awstesting.StashEnv()
-	defer awstesting.PopEnv(restoreEnv)
-
+func TestProviderTimeout(t *testing.T) {
 	command := "/bin/sleep 2"
 	if runtime.GOOS == "windows" {
 		// "timeout" command does not work due to pipe redirection
 		command = "ping -n 2 127.0.0.1>nul"
 	}
 
-	provider := processcreds.NewProvider(command, func(options *processcreds.ProviderOptions) {
+	provider := NewProvider(command, func(options *Options) {
 		options.Timeout = time.Duration(1) * time.Second
 	})
 	_, err := provider.Retrieve(context.Background())
-	var pe *processcreds.ProviderError
+	var pe *ProviderError
 	if ok := errors.As(err, &pe); !ok {
 		t.Fatalf("expect error to be of type %T", pe)
 	}
@@ -325,17 +310,13 @@ func TestProcessProviderTimeout(t *testing.T) {
 	}
 }
 
-func TestProcessProviderWithLongSessionToken(t *testing.T) {
-	restoreEnv := awstesting.StashEnv()
-	defer awstesting.PopEnv(restoreEnv)
-
-	provider := processcreds.NewProvider(
+func TestProviderWithLongSessionToken(t *testing.T) {
+	provider := NewProvider(
 		fmt.Sprintf(
 			"%s %s",
 			getOSCat(),
-			strings.Join(
-				[]string{"testdata", "longsessiontoken.json"},
-				string(os.PathSeparator))))
+			filepath.Join("testdata", "longsessiontoken.json"),
+		))
 	v, err := provider.Retrieve(context.Background())
 	if err != nil {
 		t.Errorf("expected %v, got %v", "no error", err)
@@ -355,18 +336,14 @@ type credentialTest struct {
 	Expiration      string
 }
 
-func TestProcessProviderStatic(t *testing.T) {
-	restoreEnv := awstesting.StashEnv()
-	defer awstesting.PopEnv(restoreEnv)
-
+func TestProviderStatic(t *testing.T) {
 	// static
-	provider := processcreds.NewProvider(
+	provider := NewProvider(
 		fmt.Sprintf(
 			"%s %s",
 			getOSCat(),
-			strings.Join(
-				[]string{"testdata", "static.json"},
-				string(os.PathSeparator))))
+			filepath.Join("testdata", "static.json"),
+		))
 	v, err := provider.Retrieve(context.Background())
 	if err != nil {
 		t.Errorf("expected %v, got %v", "no error", err)
@@ -377,10 +354,7 @@ func TestProcessProviderStatic(t *testing.T) {
 
 }
 
-func TestProcessProviderNotExpired(t *testing.T) {
-	restoreEnv := awstesting.StashEnv()
-	defer awstesting.PopEnv(restoreEnv)
-
+func TestProviderNotExpired(t *testing.T) {
 	// non-static, not expired
 	exp := &credentialTest{}
 	exp.Version = 1
@@ -407,7 +381,7 @@ func TestProcessProviderNotExpired(t *testing.T) {
 			t.Errorf("expected %v, got %v", "no error", err)
 		}
 	}()
-	provider := processcreds.NewProvider(
+	provider := NewProvider(
 		fmt.Sprintf("%s %s", getOSCat(), tmpFile.Name()))
 	v, err := provider.Retrieve(context.Background())
 	if err != nil {
@@ -418,10 +392,7 @@ func TestProcessProviderNotExpired(t *testing.T) {
 	}
 }
 
-func TestProcessProviderExpired(t *testing.T) {
-	restoreEnv := awstesting.StashEnv()
-	defer awstesting.PopEnv(restoreEnv)
-
+func TestProviderExpired(t *testing.T) {
 	// non-static, expired
 	exp := &credentialTest{}
 	exp.Version = 1
@@ -448,7 +419,7 @@ func TestProcessProviderExpired(t *testing.T) {
 			t.Errorf("expected %v, got %v", "no error", err)
 		}
 	}()
-	provider := processcreds.NewProvider(
+	provider := NewProvider(
 		fmt.Sprintf("%s %s", getOSCat(), tmpFile.Name()))
 	v, err := provider.Retrieve(context.Background())
 	if err != nil {
@@ -459,10 +430,7 @@ func TestProcessProviderExpired(t *testing.T) {
 	}
 }
 
-func TestProcessProviderForceExpire(t *testing.T) {
-	restoreEnv := awstesting.StashEnv()
-	defer awstesting.PopEnv(restoreEnv)
-
+func TestProviderForceExpire(t *testing.T) {
 	// non-static, not expired
 
 	// setup test credentials file
@@ -492,7 +460,7 @@ func TestProcessProviderForceExpire(t *testing.T) {
 	}()
 
 	// get credentials from file
-	provider := processcreds.NewProvider(
+	provider := NewProvider(
 		fmt.Sprintf("%s %s", getOSCat(), tmpFile.Name()))
 	v, err := provider.Retrieve(context.Background())
 	if err != nil {
@@ -502,10 +470,7 @@ func TestProcessProviderForceExpire(t *testing.T) {
 		t.Errorf("expected %v, got %v", "not expired", "expired")
 	}
 
-	// force expire creds
-	provider.Invalidate()
-
-	// renew creds
+	// Re-retrieve credentials
 	v, err = provider.Retrieve(context.Background())
 	if err != nil {
 		t.Errorf("expected %v, got %v", "no error", err)
@@ -515,19 +480,19 @@ func TestProcessProviderForceExpire(t *testing.T) {
 	}
 }
 
-func TestProcessProviderAltConstruct(t *testing.T) {
-	restoreEnv := awstesting.StashEnv()
-	defer awstesting.PopEnv(restoreEnv)
-
+func TestProviderAltConstruct(t *testing.T) {
 	// constructing with exec.Cmd instead of string
-	myCommand := exec.Command(
-		fmt.Sprintf(
-			"%s %s",
+	cmdBuilder := NewCommandBuilderFunc(func(ctx context.Context) (*exec.Cmd, error) {
+		cmd := exec.CommandContext(ctx,
 			getOSCat(),
-			strings.Join(
-				[]string{"testdata", "static.json"},
-				string(os.PathSeparator))))
-	provider := processcreds.NewProviderCommand(myCommand, func(options *processcreds.ProviderOptions) {
+			filepath.Join("testdata", "static.json"),
+		)
+		cmd.Env = os.Environ()
+
+		return cmd, nil
+	})
+
+	provider := NewProviderCommand(cmdBuilder, func(options *Options) {
 		options.Timeout = time.Duration(1) * time.Second
 	})
 	v, err := provider.Retrieve(context.Background())
@@ -540,16 +505,12 @@ func TestProcessProviderAltConstruct(t *testing.T) {
 }
 
 func BenchmarkProcessProvider(b *testing.B) {
-	restoreEnv := awstesting.StashEnv()
-	defer awstesting.PopEnv(restoreEnv)
-
-	provider := processcreds.NewProvider(
+	provider := NewProvider(
 		fmt.Sprintf(
 			"%s %s",
 			getOSCat(),
-			strings.Join(
-				[]string{"testdata", "static.json"},
-				string(os.PathSeparator))))
+			filepath.Join("testdata", "static.json"),
+		))
 	_, err := provider.Retrieve(context.Background())
 	if err != nil {
 		b.Fatal(err)
@@ -563,7 +524,6 @@ func BenchmarkProcessProvider(b *testing.B) {
 			b.Fatal(err)
 		}
 		b.StopTimer()
-		provider.Invalidate()
 	}
 }
 

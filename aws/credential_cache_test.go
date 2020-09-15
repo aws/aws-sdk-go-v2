@@ -12,28 +12,28 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 )
 
-type stubProvider struct {
+type stubCredentialsProvider struct {
 	creds   Credentials
 	expires time.Time
 	err     error
 
-	onInvalidate func(*stubProvider)
+	onInvalidate func(*stubCredentialsProvider)
 }
 
-func (s *stubProvider) Retrieve(ctx context.Context) (Credentials, error) {
+func (s *stubCredentialsProvider) Retrieve(ctx context.Context) (Credentials, error) {
 	creds := s.creds
-	creds.Source = "stubProvider"
+	creds.Source = "stubCredentialsProvider"
 	creds.CanExpire = !s.expires.IsZero()
 	creds.Expires = s.expires
 
 	return creds, s.err
 }
 
-func (s *stubProvider) Invalidate() {
+func (s *stubCredentialsProvider) Invalidate() {
 	s.onInvalidate(s)
 }
 
-func TestSafeCredentialsProvider_Cache(t *testing.T) {
+func TestCredentialsCache_Cache(t *testing.T) {
 	expect := Credentials{
 		AccessKeyID:     "key",
 		SecretAccessKey: "secret",
@@ -42,14 +42,14 @@ func TestSafeCredentialsProvider_Cache(t *testing.T) {
 	}
 
 	var called bool
-	p := &SafeCredentialsProvider{
-		RetrieveFn: func() (Credentials, error) {
+	p := &CredentialsCache{
+		Provider: CredentialsProviderFunc(func(ctx context.Context) (Credentials, error) {
 			if called {
-				t.Fatalf("expect RetrieveFn to only be called once")
+				t.Fatalf("expect provider.Retrieve to only be called once")
 			}
 			called = true
 			return expect, nil
-		},
+		}),
 	}
 
 	for i := 0; i < 2; i++ {
@@ -58,12 +58,12 @@ func TestSafeCredentialsProvider_Cache(t *testing.T) {
 			t.Fatalf("expect no error, got %v", err)
 		}
 		if e, a := expect, creds; e != a {
-			t.Errorf("expect %v creds, got %v", e, a)
+			t.Errorf("expect %v credential, got %v", e, a)
 		}
 	}
 }
 
-func TestSafeCredentialsProvider_Expires(t *testing.T) {
+func TestCredentialsCache_Expires(t *testing.T) {
 	orig := sdk.NowTime
 	defer func() { sdk.NowTime = orig }()
 	var mockTime time.Time
@@ -108,11 +108,11 @@ func TestSafeCredentialsProvider_Expires(t *testing.T) {
 
 	for _, c := range cases {
 		var called int
-		p := &SafeCredentialsProvider{
-			RetrieveFn: func() (Credentials, error) {
+		p := &CredentialsCache{
+			Provider: CredentialsProviderFunc(func(ctx context.Context) (Credentials, error) {
 				called++
 				return c.Creds(), nil
-			},
+			}),
 		}
 
 		p.Retrieve(context.Background())
@@ -131,11 +131,11 @@ func TestSafeCredentialsProvider_Expires(t *testing.T) {
 	}
 }
 
-func TestSafeCredentialsProvider_Error(t *testing.T) {
-	p := &SafeCredentialsProvider{
-		RetrieveFn: func() (Credentials, error) {
+func TestCredentialsCache_Error(t *testing.T) {
+	p := &CredentialsCache{
+		Provider: CredentialsProviderFunc(func(ctx context.Context) (Credentials, error) {
 			return Credentials{}, fmt.Errorf("failed")
-		},
+		}),
 	}
 
 	creds, err := p.Retrieve(context.Background())
@@ -146,25 +146,25 @@ func TestSafeCredentialsProvider_Error(t *testing.T) {
 		t.Errorf("expect %q, got %q", e, a)
 	}
 	if e, a := (Credentials{}), creds; e != a {
-		t.Errorf("expect empty creds, got %v", a)
+		t.Errorf("expect empty credentials, got %v", a)
 	}
 }
 
-func TestSafeCredentialsProvider_Race(t *testing.T) {
+func TestCredentialsCache_Race(t *testing.T) {
 	expect := Credentials{
 		AccessKeyID:     "key",
 		SecretAccessKey: "secret",
 	}
 	var called bool
-	p := &SafeCredentialsProvider{
-		RetrieveFn: func() (Credentials, error) {
+	p := &CredentialsCache{
+		Provider: CredentialsProviderFunc(func(ctx context.Context) (Credentials, error) {
 			time.Sleep(time.Duration(rand.Intn(10)) * time.Millisecond)
 			if called {
-				t.Fatalf("expect RetrieveFn only called once")
+				t.Fatalf("expect provider.Retrieve only called once")
 			}
 			called = true
 			return expect, nil
-		},
+		}),
 	}
 
 	var wg sync.WaitGroup
@@ -188,38 +188,41 @@ func TestSafeCredentialsProvider_Race(t *testing.T) {
 	wg.Wait()
 }
 
-type stubSafeProviderConcurrent struct {
-	SafeCredentialsProvider
+type stubConcurrentProvider struct {
 	called uint32
 	done   chan struct{}
 }
 
-func TestSafeProviderRetrieveConcurrent(t *testing.T) {
-	stub := &stubSafeProviderConcurrent{
+func (s *stubConcurrentProvider) Retrieve(ctx context.Context) (Credentials, error) {
+	atomic.AddUint32(&s.called, 1)
+	<-s.done
+	return Credentials{
+		AccessKeyID:     "AKIAIOSFODNN7EXAMPLE",
+		SecretAccessKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+	}, nil
+}
+
+func TestCredentialsCache_RetrieveConcurrent(t *testing.T) {
+	stub := &stubConcurrentProvider{
 		done: make(chan struct{}),
 	}
-
-	stub.RetrieveFn = func() (Credentials, error) {
-		atomic.AddUint32(&stub.called, 1)
-		<-stub.done
-		return Credentials{
-			AccessKeyID:     "AKIAIOSFODNN7EXAMPLE",
-			SecretAccessKey: "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
-		}, nil
+	provider := CredentialsCache{
+		Provider: stub,
 	}
 
-	done := make(chan struct{})
+	var wg sync.WaitGroup
+	wg.Add(2)
 	for i := 0; i < 2; i++ {
 		go func() {
-			stub.Retrieve(context.Background())
-			done <- struct{}{}
+			provider.Retrieve(context.Background())
+			wg.Done()
 		}()
 	}
 
-	// Validates that a single call to Retrieve is shared between two calls to Get
+	// Validates that a single call to Retrieve is shared between two calls to
+	// Retrieve method call.
 	stub.done <- struct{}{}
-	<-done
-	<-done
+	wg.Wait()
 
 	if e, a := uint32(1), atomic.LoadUint32(&stub.called); e != a {
 		t.Errorf("expected %v, got %v", e, a)
