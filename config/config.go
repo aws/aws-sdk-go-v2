@@ -4,10 +4,10 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
-// DefaultConfigLoaders are a slice of functions that will read external configuration
+// DefaultLoaders are a slice of functions that will read external configuration
 // sources for configuration values. These values are read by the AWSConfigResolvers
 // using interfaces to extract specific information from the external configuration.
-var DefaultConfigLoaders = []ConfigLoader{
+var DefaultLoaders = []Loader{
 	LoadEnvConfig,
 	LoadSharedConfigIgnoreNotExist,
 }
@@ -36,12 +36,12 @@ var DefaultAWSConfigResolvers = []AWSConfigResolver{
 // to extract specific data from the Config.
 type Config interface{}
 
-// A ConfigLoader is used to load external configuration data and returns it as
+// A Loader is used to load external configuration data and returns it as
 // a generic Config type.
 //
 // The loader should return an error if it fails to load the external configuration
 // or the configuration data is malformed, or required components missing.
-type ConfigLoader func(Configs) (Config, error)
+type Loader func(Configs) (Config, error)
 
 // An AWSConfigResolver will extract configuration data from the Configs slice
 // using the provider interfaces to extract specific functionality. The extracted
@@ -68,7 +68,7 @@ type Configs []Config
 //
 // If a loader returns an error this method will stop iterating and return
 // that error.
-func (cs Configs) AppendFromLoaders(loaders []ConfigLoader) (Configs, error) {
+func (cs Configs) AppendFromLoaders(loaders []Loader) (Configs, error) {
 	for _, fn := range loaders {
 		cfg, err := fn(cs)
 		if err != nil {
@@ -139,7 +139,7 @@ func LoadDefaultAWSConfig(configs ...Config) (aws.Config, error) {
 	var cfgs Configs
 	cfgs = append(cfgs, configs...)
 
-	cfgs, err := cfgs.AppendFromLoaders(DefaultConfigLoaders)
+	cfgs, err := cfgs.AppendFromLoaders(DefaultLoaders)
 	if err != nil {
 		return aws.Config{}, err
 	}

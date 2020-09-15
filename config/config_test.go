@@ -13,7 +13,7 @@ func TestConfigs_SharedConfigOptions(t *testing.T) {
 	_, err := Configs{
 		WithSharedConfigProfile("profile-name"),
 		WithSharedConfigFiles([]string{"creds-file"}),
-	}.AppendFromLoaders([]ConfigLoader{
+	}.AppendFromLoaders([]Loader{
 		func(configs Configs) (Config, error) {
 			var profile string
 			var files []string
@@ -54,7 +54,7 @@ func TestConfigs_SharedConfigOptions(t *testing.T) {
 func TestConfigs_AppendFromLoaders(t *testing.T) {
 	expectCfg := WithRegion("mock-region")
 
-	cfgs, err := Configs{}.AppendFromLoaders([]ConfigLoader{
+	cfgs, err := Configs{}.AppendFromLoaders([]Loader{
 		func(configs Configs) (Config, error) {
 			if e, a := 0, len(configs); e != a {
 				t.Errorf("expect %v configs, got %v", e, a)
