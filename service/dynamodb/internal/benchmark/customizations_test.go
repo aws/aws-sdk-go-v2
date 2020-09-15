@@ -13,12 +13,11 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
-
 	awsOld "github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/corehandlers"
-	"github.com/aws/aws-sdk-go/aws/credentials"
+	credsOld "github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/request"
 	"github.com/aws/aws-sdk-go/aws/session"
 	ddbOld "github.com/aws/aws-sdk-go/service/dynamodb"
@@ -63,7 +62,7 @@ func benchCustomizationsOld(b *testing.B, c testData) {
 	}
 
 	sess, err := session.NewSession(&awsOld.Config{
-		Credentials: credentials.NewStaticCredentials("AKID", "SECRET", ""),
+		Credentials: credsOld.NewStaticCredentials("AKID", "SECRET", ""),
 		Region:      awsOld.String("us-west-2"),
 	})
 	sess.Handlers.Send.SwapNamed(request.NamedHandler{
@@ -126,7 +125,7 @@ func benchCustomizationsSmithy(b *testing.B, c testData) {
 
 	options := dynamodb.Options{
 		Region:      "us-west-2",
-		Credentials: aws.NewStaticCredentialsProvider("AKID", "SECRET", ""),
+		Credentials: unit.StubCredentialsProvider{},
 		HTTPClient: &mockClient{
 			ChecksumHeaderValue: []string{strconv.Itoa(c.respChecksum)},
 			ScanRespBody:        body,

@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/awslabs/smithy-go/middleware"
 	"github.com/awslabs/smithy-go/transport/http"
 
@@ -45,11 +46,7 @@ func TestUpdateEndpointBuild(t *testing.T) {
 
 	for name, c := range cases {
 		options := s3.Options{
-			Credentials: aws.StaticCredentialsProvider{
-				Value: aws.Credentials{
-					AccessKeyID: "AKID", SecretAccessKey: "SECRET", SessionToken: "SESSION",
-					Source: "unit test credentials",
-				}},
+			Credentials:  unit.StubCredentialsProvider{},
 			Retryer:      aws.NoOpRetryer{},
 			Region:       "mock-region",
 			UsePathStyle: c.usePathStyle,
