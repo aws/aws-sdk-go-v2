@@ -18,11 +18,9 @@
 package software.amazon.smithy.aws.go.codegen.customization;
 
 import java.util.List;
-import java.util.Optional;
-import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
-import software.amazon.smithy.aws.go.codegen.AwsSignatureVersion4;
+import java.util.stream.Collectors;
 import software.amazon.smithy.aws.traits.ServiceTrait;
-import software.amazon.smithy.codegen.core.Symbol;
+import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
@@ -36,10 +34,13 @@ import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
-import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.utils.ListUtils;
 
+/**
+ * S3UpdateEndpoint integration serves to apply customizations for S3 service,
+ * and modifies the resolved endpoint based on S3 client config or input shape values.
+ */
 public class S3UpdateEndpoint implements GoIntegration {
     private static final String USE_PATH_STYLE_OPTION = "UsePathStyle";
     private static final String UPDATE_ENDPOINT_ADDER = "addUpdateEndpointMiddleware";
@@ -85,12 +86,18 @@ public class S3UpdateEndpoint implements GoIntegration {
                     OperationShape operation = model.expectShape(operationId, OperationShape.class);
                     StructureShape input = model.expectShape(operation.getInput().get(), StructureShape.class);
 
-                    // get the member that targets "com.amazonaws.s3#BucketName" shape
-                    input.getAllMembers().values().stream().forEach((shape)->{
-                        if (shape.getTarget().getName().equals("BucketName")) {
-                            writer.write("case $P: return i.$L, true", symbolProvider.toSymbol(input), shape.getMemberName());
-                        }
-                    });
+                    List<MemberShape> targetBucketShape = input.getAllMembers().values().stream()
+                            .filter(m -> m.getTarget().getName().equals("BucketName"))
+                            .collect(Collectors.toList());
+                    // if model has multiple top level shapes targeting `BucketName`, we throw a codegen exception
+                    if (targetBucketShape.size()>1) {
+                        throw new CodegenException("BucketName shape should be targeted by only one input member, found " +
+                                targetBucketShape.size() +" for Input shape: "+ input.getId());
+                    }
+
+                    if (!targetBucketShape.isEmpty()) {
+                        writer.write("case $P: return i.$L, true", symbolProvider.toSymbol(input), targetBucketShape.get(0).getMemberName());
+                    }
                 });
                 writer.write("default: return nil, false");
             });
