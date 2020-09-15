@@ -215,12 +215,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.addUseImports(SmithyGoDependency.JSON);
         writer.write("decoder := json.NewDecoder(body)");
         writer.write("decoder.UseNumber()");
-        writer.write("var shape interface{}");
-        writer.addUseImports(SmithyGoDependency.IO);
-        writer.openBlock("if err := decoder.Decode(&shape); err != nil && err != io.EOF {", "}", () -> {
-            writer.addUseImports(SmithyGoDependency.SMITHY);
-            writer.write("return out, metadata, &smithy.DeserializationError{Err: err}");
-        });
+        AwsProtocolUtils.decodeJsonIntoInterface(writer, "out, metadata, ");
         writer.write("");
 
         writeMiddlewareDocumentBindingDeserializerDelegator(writer, targetShape, operand);
@@ -308,14 +303,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             String documentDeserFunctionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
                     shape, getProtocolName());
             initializeJsonDecoder(writer, "errorBody");
-            writer.write("var shape interface{}");
-            writer.openBlock("if err := decoder.Decode(&shape); err != nil {", "}", () -> {
-                writer.addUseImports(SmithyGoDependency.FMT);
-                writer.addUseImports(SmithyGoDependency.SMITHY);
-                writer.write("return &smithy.DeserializationError{Err: fmt.Errorf(\"failed to decode shape, %w\","
-                        + " err)}");
-            });
-            writer.write("");
+            AwsProtocolUtils.decodeJsonIntoInterface(writer, "");
             writer.write("err := $L(&output, shape)", documentDeserFunctionName);
             writer.write("");
             handleDecodeError(writer);
