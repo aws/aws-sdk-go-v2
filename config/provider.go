@@ -1,10 +1,10 @@
-package external
+package config
 
 import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/processcreds"
+	"github.com/aws/aws-sdk-go-v2/credentials/processcreds"
 )
 
 // SharedConfigProfileProvider provides access to the shared config profile
@@ -225,25 +225,25 @@ func (w WithAssumeRoleDuration) GetAssumeRoleDuration() (time.Duration, bool, er
 	return time.Duration(w), true, nil
 }
 
-// ProcessCredentialProviderOptions is an interface for retrieving a function for setting
-// the processcreds.ProviderOptions.
-type ProcessCredentialProviderOptions interface {
-	GetProcessCredentialProviderOptions() (func(*processcreds.ProviderOptions), bool, error)
+// ProcessCredentialOptions is an interface for retrieving a function for setting
+// the processcreds.Options.
+type ProcessCredentialOptions interface {
+	GetProcessCredentialOptions() (func(*processcreds.Options), bool, error)
 }
 
-// WithProcessCredentialProviderOptions wraps a function and satisfies the EC2RoleCredentialProviderOptions interface
-type WithProcessCredentialProviderOptions func(*processcreds.ProviderOptions)
+// WithProcessCredentialOptions wraps a function and satisfies the EC2RoleCredentialOptions interface
+type WithProcessCredentialOptions func(*processcreds.Options)
 
-// GetProcessCredentialProviderOptions returns the wrapped function
-func (w WithProcessCredentialProviderOptions) GetProcessCredentialProviderOptions() (func(*processcreds.ProviderOptions), bool, error) {
+// GetProcessCredentialOptions returns the wrapped function
+func (w WithProcessCredentialOptions) GetProcessCredentialOptions() (func(*processcreds.Options), bool, error) {
 	return w, true, nil
 }
 
-// GetProcessCredentialProviderOptions searches the slice of configs and returns the first function found
-func GetProcessCredentialProviderOptions(configs Configs) (f func(*processcreds.ProviderOptions), found bool, err error) {
+// GetProcessCredentialOptions searches the slice of configs and returns the first function found
+func GetProcessCredentialOptions(configs Configs) (f func(*processcreds.Options), found bool, err error) {
 	for _, config := range configs {
-		if p, ok := config.(ProcessCredentialProviderOptions); ok {
-			f, found, err = p.GetProcessCredentialProviderOptions()
+		if p, ok := config.(ProcessCredentialOptions); ok {
+			f, found, err = p.GetProcessCredentialOptions()
 			if err != nil {
 				return nil, false, err
 			}

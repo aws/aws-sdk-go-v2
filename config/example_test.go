@@ -1,4 +1,4 @@
-package external_test
+package config_test
 
 import (
 	"context"
@@ -7,17 +7,18 @@ import (
 	"path/filepath"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/external"
+	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/credentials"
 )
 
 func ExampleWithSharedConfigProfile() {
-	cfg, err := external.LoadDefaultAWSConfig(
+	cfg, err := config.LoadDefaultAWSConfig(
 		// Specify the shared configuration profile to load.
-		external.WithSharedConfigProfile("exampleProfile"),
+		config.WithSharedConfigProfile("exampleProfile"),
 
 		// Optionally specify the specific shared configuraiton
 		// files to load the profile from.
-		external.WithSharedConfigFiles([]string{
+		config.WithSharedConfigFiles([]string{
 			filepath.Join("testdata", "shared_config"),
 		}),
 	)
@@ -34,10 +35,10 @@ func ExampleWithSharedConfigProfile() {
 }
 
 func ExampleWithCredentialsProvider() {
-	cfg, err := external.LoadDefaultAWSConfig(
+	cfg, err := config.LoadDefaultAWSConfig(
 		// Hard coded credentials.
-		external.WithCredentialsProvider{
-			CredentialsProvider: aws.StaticCredentialsProvider{
+		config.WithCredentialsProvider{
+			CredentialsProvider: credentials.StaticCredentialsProvider{
 				Value: aws.Credentials{
 					AccessKeyID: "AKID", SecretAccessKey: "SECRET", SessionToken: "SESSION",
 					Source: "example hard coded credentials",

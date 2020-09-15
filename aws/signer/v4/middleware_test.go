@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -108,11 +109,10 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 	for i, tt := range cases {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
 			c := &SignHTTPRequestMiddleware{
-				credentialsProvider: aws.StaticCredentialsProvider{
-					Value: aws.Credentials{AccessKeyID: "key", SecretAccessKey: "secret"},
-				},
+				credentialsProvider: unit.StubCredentialsProvider{},
 				signer: httpSignerFunc(func(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error {
-					if e, a := (aws.Credentials{AccessKeyID: "key", SecretAccessKey: "secret", Source: "StaticCredentialsProvider"}), credentials; e != a {
+					expectCreds, _ := unit.StubCredentialsProvider{}.Retrieve(context.Background())
+					if e, a := expectCreds, credentials; e != a {
 						t.Errorf("expected %v, got %v", e, a)
 					}
 					if e, a := tt.hash, payloadHash; e != a {

@@ -1,4 +1,4 @@
-package external
+package config
 
 import (
 	"context"
@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/credentials"
 )
 
 func TestConfigs_SharedConfigOptions(t *testing.T) {
@@ -78,7 +79,7 @@ func TestConfigs_AppendFromLoaders(t *testing.T) {
 func TestConfigs_ResolveAWSConfig(t *testing.T) {
 	configSources := Configs{
 		WithRegion("mock-region"),
-		WithCredentialsProvider{aws.StaticCredentialsProvider{
+		WithCredentialsProvider{credentials.StaticCredentialsProvider{
 			Value: aws.Credentials{
 				AccessKeyID: "AKID", SecretAccessKey: "SECRET",
 				Source: "provider",
