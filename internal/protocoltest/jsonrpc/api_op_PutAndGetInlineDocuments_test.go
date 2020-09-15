@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/awslabs/smithy-go/middleware"
 	smithytesting "github.com/awslabs/smithy-go/testing"
+	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"io"
 	"io/ioutil"
@@ -73,6 +74,7 @@ func TestClient_PutAndGetInlineDocuments_awsAwsjson11Serialize(t *testing.T) {
 				w.WriteHeader(200)
 			}))
 			defer server.Close()
+			url := server.URL
 			client := New(Options{
 				APIOptions: []APIOptionFunc{
 					func(s *middleware.Stack) error {
@@ -81,7 +83,7 @@ func TestClient_PutAndGetInlineDocuments_awsAwsjson11Serialize(t *testing.T) {
 					},
 				},
 				EndpointResolver: EndpointResolverFunc(func(region string, options ResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = server.URL
+					e.URL = url
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),
@@ -142,27 +144,32 @@ func TestClient_PutAndGetInlineDocuments_awsAwsjson11Deserialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-				for k, vs := range c.Header {
-					for _, v := range vs {
-						w.Header().Add(k, v)
-					}
-				}
-				if len(c.BodyMediaType) != 0 && len(w.Header().Values("Content-Type")) == 0 {
-					w.Header().Set("Content-Type", c.BodyMediaType)
-				}
-				if len(c.Body) != 0 {
-					w.Header().Set("Content-Length", strconv.Itoa(len(c.Body)))
-				}
-				w.WriteHeader(c.StatusCode)
-				if len(c.Body) != 0 {
-					if _, err := io.Copy(w, bytes.NewReader(c.Body)); err != nil {
-						t.Errorf("failed to write response body, %v", err)
-					}
-				}
-			}))
-			defer server.Close()
+			url := "http://localhost:8888/"
 			client := New(Options{
+				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
+					headers := http.Header{}
+					for k, vs := range c.Header {
+						for _, v := range vs {
+							headers.Add(k, v)
+						}
+					}
+					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
+						headers.Set("Content-Type", c.BodyMediaType)
+					}
+					response := &http.Response{
+						StatusCode: c.StatusCode,
+						Header:     headers,
+						Request:    r,
+					}
+					if len(c.Body) != 0 {
+						response.ContentLength = int64(len(c.Body))
+						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+					} else {
+
+						response.Body = http.NoBody
+					}
+					return response, nil
+				}),
 				APIOptions: []APIOptionFunc{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
@@ -170,12 +177,11 @@ func TestClient_PutAndGetInlineDocuments_awsAwsjson11Deserialize(t *testing.T) {
 					},
 				},
 				EndpointResolver: EndpointResolverFunc(func(region string, options ResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = server.URL
+					e.URL = url
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),
-				HTTPClient: aws.NewBuildableHTTPClient(),
-				Region:     "us-west-2",
+				Region: "us-west-2",
 			})
 			var params PutAndGetInlineDocumentsInput
 			result, err := client.PutAndGetInlineDocuments(context.Background(), &params)
