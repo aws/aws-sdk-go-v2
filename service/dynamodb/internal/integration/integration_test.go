@@ -11,8 +11,8 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
+	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	ddbtypes "github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	"github.com/awslabs/smithy-go/middleware"
@@ -35,7 +35,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestInteg_ClientScan(t *testing.T) {
-	cfg, err := external.LoadDefaultAWSConfig()
+	cfg, err := config.LoadDefaultAWSConfig()
 	if err != nil {
 		log.Fatalf("failed to load config, %v", err)
 	}
