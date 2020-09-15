@@ -49,6 +49,7 @@ func (c *Client) GetBucketReplication(ctx context.Context, params *GetBucketRepl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBucketReplicationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketReplication(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

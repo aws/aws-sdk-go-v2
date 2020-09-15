@@ -46,6 +46,7 @@ func (c *Client) GetObjectTagging(ctx context.Context, params *GetObjectTaggingI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetObjectTaggingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetObjectTagging(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -55,6 +55,7 @@ func (c *Client) PutBucketVersioning(ctx context.Context, params *PutBucketVersi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutBucketVersioningValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBucketVersioning(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

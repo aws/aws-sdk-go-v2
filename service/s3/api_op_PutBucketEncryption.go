@@ -51,6 +51,7 @@ func (c *Client) PutBucketEncryption(ctx context.Context, params *PutBucketEncry
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutBucketEncryptionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBucketEncryption(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

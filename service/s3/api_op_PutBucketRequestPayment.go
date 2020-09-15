@@ -40,6 +40,7 @@ func (c *Client) PutBucketRequestPayment(ctx context.Context, params *PutBucketR
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutBucketRequestPaymentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBucketRequestPayment(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

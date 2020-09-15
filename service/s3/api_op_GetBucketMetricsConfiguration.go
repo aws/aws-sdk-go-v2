@@ -51,6 +51,7 @@ func (c *Client) GetBucketMetricsConfiguration(ctx context.Context, params *GetB
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBucketMetricsConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketMetricsConfiguration(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

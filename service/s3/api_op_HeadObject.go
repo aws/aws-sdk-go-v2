@@ -81,6 +81,7 @@ func (c *Client) HeadObject(ctx context.Context, params *HeadObjectInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpHeadObjectValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHeadObject(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

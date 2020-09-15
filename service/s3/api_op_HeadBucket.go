@@ -42,6 +42,7 @@ func (c *Client) HeadBucket(ctx context.Context, params *HeadBucketInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpHeadBucketValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHeadBucket(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

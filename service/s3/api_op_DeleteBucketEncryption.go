@@ -46,6 +46,7 @@ func (c *Client) DeleteBucketEncryption(ctx context.Context, params *DeleteBucke
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteBucketEncryptionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBucketEncryption(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

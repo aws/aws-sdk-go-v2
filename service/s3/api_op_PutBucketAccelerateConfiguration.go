@@ -57,6 +57,7 @@ func (c *Client) PutBucketAccelerateConfiguration(ctx context.Context, params *P
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutBucketAccelerateConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBucketAccelerateConfiguration(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

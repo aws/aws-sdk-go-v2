@@ -77,6 +77,7 @@ func (c *Client) PutBucketLifecycleConfiguration(ctx context.Context, params *Pu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutBucketLifecycleConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBucketLifecycleConfiguration(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
