@@ -301,14 +301,14 @@ func awsRestjson1_serializeOpHttpBindingsCompleteMultipartUploadInput(v *Complet
 	}
 
 	if v.ArchiveSize != nil {
-		locationName := "X-Amz-Archive-Size"
+		locationName := "x-amz-archive-size"
 		if len(*v.ArchiveSize) > 0 {
 			encoder.SetHeader(locationName).String(*v.ArchiveSize)
 		}
 	}
 
 	if v.Checksum != nil {
-		locationName := "X-Amz-Sha256-Tree-Hash"
+		locationName := "x-amz-sha256-tree-hash"
 		if len(*v.Checksum) > 0 {
 			encoder.SetHeader(locationName).String(*v.Checksum)
 		}
@@ -1351,14 +1351,14 @@ func awsRestjson1_serializeOpHttpBindingsInitiateMultipartUploadInput(v *Initiat
 	}
 
 	if v.ArchiveDescription != nil {
-		locationName := "X-Amz-Archive-Description"
+		locationName := "x-amz-archive-description"
 		if len(*v.ArchiveDescription) > 0 {
 			encoder.SetHeader(locationName).String(*v.ArchiveDescription)
 		}
 	}
 
 	if v.PartSize != nil {
-		locationName := "X-Amz-Part-Size"
+		locationName := "x-amz-part-size"
 		if len(*v.PartSize) > 0 {
 			encoder.SetHeader(locationName).String(*v.PartSize)
 		}
@@ -2351,14 +2351,14 @@ func awsRestjson1_serializeOpHttpBindingsUploadArchiveInput(v *UploadArchiveInpu
 	}
 
 	if v.ArchiveDescription != nil {
-		locationName := "X-Amz-Archive-Description"
+		locationName := "x-amz-archive-description"
 		if len(*v.ArchiveDescription) > 0 {
 			encoder.SetHeader(locationName).String(*v.ArchiveDescription)
 		}
 	}
 
 	if v.Checksum != nil {
-		locationName := "X-Amz-Sha256-Tree-Hash"
+		locationName := "x-amz-sha256-tree-hash"
 		if len(*v.Checksum) > 0 {
 			encoder.SetHeader(locationName).String(*v.Checksum)
 		}
@@ -2442,7 +2442,7 @@ func awsRestjson1_serializeOpHttpBindingsUploadMultipartPartInput(v *UploadMulti
 	}
 
 	if v.Checksum != nil {
-		locationName := "X-Amz-Sha256-Tree-Hash"
+		locationName := "x-amz-sha256-tree-hash"
 		if len(*v.Checksum) > 0 {
 			encoder.SetHeader(locationName).String(*v.Checksum)
 		}

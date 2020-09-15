@@ -73,6 +73,7 @@ func TestClient_HttpRequestWithLabels_awsRestjson1Serialize(t *testing.T) {
 				w.WriteHeader(200)
 			}))
 			defer server.Close()
+			url := server.URL
 			client := New(Options{
 				APIOptions: []APIOptionFunc{
 					func(s *middleware.Stack) error {
@@ -81,7 +82,7 @@ func TestClient_HttpRequestWithLabels_awsRestjson1Serialize(t *testing.T) {
 					},
 				},
 				EndpointResolver: EndpointResolverFunc(func(region string, options ResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = server.URL
+					e.URL = url
 					e.SigningRegion = "us-west-2"
 					return e, err
 				}),
