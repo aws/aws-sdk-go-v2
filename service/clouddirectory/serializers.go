@@ -78,7 +78,7 @@ func awsRestjson1_serializeOpHttpBindingsAddFacetToObjectInput(v *AddFacetToObje
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -178,7 +178,7 @@ func awsRestjson1_serializeOpHttpBindingsApplySchemaInput(v *ApplySchemaInput, e
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -262,7 +262,7 @@ func awsRestjson1_serializeOpHttpBindingsAttachObjectInput(v *AttachObjectInput,
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -360,7 +360,7 @@ func awsRestjson1_serializeOpHttpBindingsAttachPolicyInput(v *AttachPolicyInput,
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -453,7 +453,7 @@ func awsRestjson1_serializeOpHttpBindingsAttachToIndexInput(v *AttachToIndexInpu
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -546,7 +546,7 @@ func awsRestjson1_serializeOpHttpBindingsAttachTypedLinkInput(v *AttachTypedLink
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -653,12 +653,12 @@ func awsRestjson1_serializeOpHttpBindingsBatchReadInput(v *BatchReadInput, encod
 	}
 
 	if len(v.ConsistencyLevel) > 0 {
-		locationName := "X-Amz-Consistency-Level"
+		locationName := "x-amz-consistency-level"
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -744,7 +744,7 @@ func awsRestjson1_serializeOpHttpBindingsBatchWriteInput(v *BatchWriteInput, enc
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -830,7 +830,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateDirectoryInput(v *CreateDirectory
 	}
 
 	if v.SchemaArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.SchemaArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.SchemaArn)
 		}
@@ -914,7 +914,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateFacetInput(v *CreateFacetInput, e
 	}
 
 	if v.SchemaArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.SchemaArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.SchemaArn)
 		}
@@ -1015,7 +1015,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateIndexInput(v *CreateIndexInput, e
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -1118,7 +1118,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateObjectInput(v *CreateObjectInput,
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -1296,7 +1296,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateTypedLinkFacetInput(v *CreateType
 	}
 
 	if v.SchemaArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.SchemaArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.SchemaArn)
 		}
@@ -1371,7 +1371,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDirectoryInput(v *DeleteDirectory
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -1443,7 +1443,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteFacetInput(v *DeleteFacetInput, e
 	}
 
 	if v.SchemaArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.SchemaArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.SchemaArn)
 		}
@@ -1527,7 +1527,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteObjectInput(v *DeleteObjectInput,
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -1602,7 +1602,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteSchemaInput(v *DeleteSchemaInput,
 	}
 
 	if v.SchemaArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.SchemaArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.SchemaArn)
 		}
@@ -1674,7 +1674,7 @@ func awsRestjson1_serializeOpHttpBindingsDeleteTypedLinkFacetInput(v *DeleteType
 	}
 
 	if v.SchemaArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.SchemaArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.SchemaArn)
 		}
@@ -1758,7 +1758,7 @@ func awsRestjson1_serializeOpHttpBindingsDetachFromIndexInput(v *DetachFromIndex
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -1851,7 +1851,7 @@ func awsRestjson1_serializeOpHttpBindingsDetachObjectInput(v *DetachObjectInput,
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -1942,7 +1942,7 @@ func awsRestjson1_serializeOpHttpBindingsDetachPolicyInput(v *DetachPolicyInput,
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -2035,7 +2035,7 @@ func awsRestjson1_serializeOpHttpBindingsDetachTypedLinkInput(v *DetachTypedLink
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -2110,7 +2110,7 @@ func awsRestjson1_serializeOpHttpBindingsDisableDirectoryInput(v *DisableDirecto
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -2171,7 +2171,7 @@ func awsRestjson1_serializeOpHttpBindingsEnableDirectoryInput(v *EnableDirectory
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -2305,7 +2305,7 @@ func awsRestjson1_serializeOpHttpBindingsGetDirectoryInput(v *GetDirectoryInput,
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -2377,7 +2377,7 @@ func awsRestjson1_serializeOpHttpBindingsGetFacetInput(v *GetFacetInput, encoder
 	}
 
 	if v.SchemaArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.SchemaArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.SchemaArn)
 		}
@@ -2461,7 +2461,7 @@ func awsRestjson1_serializeOpHttpBindingsGetLinkAttributesInput(v *GetLinkAttrib
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -2559,12 +2559,12 @@ func awsRestjson1_serializeOpHttpBindingsGetObjectAttributesInput(v *GetObjectAt
 	}
 
 	if len(v.ConsistencyLevel) > 0 {
-		locationName := "X-Amz-Consistency-Level"
+		locationName := "x-amz-consistency-level"
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -2664,12 +2664,12 @@ func awsRestjson1_serializeOpHttpBindingsGetObjectInformationInput(v *GetObjectI
 	}
 
 	if len(v.ConsistencyLevel) > 0 {
-		locationName := "X-Amz-Consistency-Level"
+		locationName := "x-amz-consistency-level"
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -2744,7 +2744,7 @@ func awsRestjson1_serializeOpHttpBindingsGetSchemaAsJsonInput(v *GetSchemaAsJson
 	}
 
 	if v.SchemaArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.SchemaArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.SchemaArn)
 		}
@@ -2816,7 +2816,7 @@ func awsRestjson1_serializeOpHttpBindingsGetTypedLinkFacetInformationInput(v *Ge
 	}
 
 	if v.SchemaArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.SchemaArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.SchemaArn)
 		}
@@ -2988,12 +2988,12 @@ func awsRestjson1_serializeOpHttpBindingsListAttachedIndicesInput(v *ListAttache
 	}
 
 	if len(v.ConsistencyLevel) > 0 {
-		locationName := "X-Amz-Consistency-Level"
+		locationName := "x-amz-consistency-level"
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -3250,7 +3250,7 @@ func awsRestjson1_serializeOpHttpBindingsListFacetAttributesInput(v *ListFacetAt
 	}
 
 	if v.SchemaArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.SchemaArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.SchemaArn)
 		}
@@ -3344,7 +3344,7 @@ func awsRestjson1_serializeOpHttpBindingsListFacetNamesInput(v *ListFacetNamesIn
 	}
 
 	if v.SchemaArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.SchemaArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.SchemaArn)
 		}
@@ -3433,7 +3433,7 @@ func awsRestjson1_serializeOpHttpBindingsListIncomingTypedLinksInput(v *ListInco
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -3548,12 +3548,12 @@ func awsRestjson1_serializeOpHttpBindingsListIndexInput(v *ListIndexInput, encod
 	}
 
 	if len(v.ConsistencyLevel) > 0 {
-		locationName := "X-Amz-Consistency-Level"
+		locationName := "x-amz-consistency-level"
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -3739,12 +3739,12 @@ func awsRestjson1_serializeOpHttpBindingsListObjectAttributesInput(v *ListObject
 	}
 
 	if len(v.ConsistencyLevel) > 0 {
-		locationName := "X-Amz-Consistency-Level"
+		locationName := "x-amz-consistency-level"
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -3847,12 +3847,12 @@ func awsRestjson1_serializeOpHttpBindingsListObjectChildrenInput(v *ListObjectCh
 	}
 
 	if len(v.ConsistencyLevel) > 0 {
-		locationName := "X-Amz-Consistency-Level"
+		locationName := "x-amz-consistency-level"
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -3948,7 +3948,7 @@ func awsRestjson1_serializeOpHttpBindingsListObjectParentPathsInput(v *ListObjec
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -4044,12 +4044,12 @@ func awsRestjson1_serializeOpHttpBindingsListObjectParentsInput(v *ListObjectPar
 	}
 
 	if len(v.ConsistencyLevel) > 0 {
-		locationName := "X-Amz-Consistency-Level"
+		locationName := "x-amz-consistency-level"
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -4150,12 +4150,12 @@ func awsRestjson1_serializeOpHttpBindingsListObjectPoliciesInput(v *ListObjectPo
 	}
 
 	if len(v.ConsistencyLevel) > 0 {
-		locationName := "X-Amz-Consistency-Level"
+		locationName := "x-amz-consistency-level"
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -4251,7 +4251,7 @@ func awsRestjson1_serializeOpHttpBindingsListOutgoingTypedLinksInput(v *ListOutg
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -4366,12 +4366,12 @@ func awsRestjson1_serializeOpHttpBindingsListPolicyAttachmentsInput(v *ListPolic
 	}
 
 	if len(v.ConsistencyLevel) > 0 {
-		locationName := "X-Amz-Consistency-Level"
+		locationName := "x-amz-consistency-level"
 		encoder.SetHeader(locationName).String(string(v.ConsistencyLevel))
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -4633,7 +4633,7 @@ func awsRestjson1_serializeOpHttpBindingsListTypedLinkFacetAttributesInput(v *Li
 	}
 
 	if v.SchemaArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.SchemaArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.SchemaArn)
 		}
@@ -4727,7 +4727,7 @@ func awsRestjson1_serializeOpHttpBindingsListTypedLinkFacetNamesInput(v *ListTyp
 	}
 
 	if v.SchemaArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.SchemaArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.SchemaArn)
 		}
@@ -4816,7 +4816,7 @@ func awsRestjson1_serializeOpHttpBindingsLookupPolicyInput(v *LookupPolicyInput,
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -4912,7 +4912,7 @@ func awsRestjson1_serializeOpHttpBindingsPublishSchemaInput(v *PublishSchemaInpu
 	}
 
 	if v.DevelopmentSchemaArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DevelopmentSchemaArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DevelopmentSchemaArn)
 		}
@@ -5006,7 +5006,7 @@ func awsRestjson1_serializeOpHttpBindingsPutSchemaFromJsonInput(v *PutSchemaFrom
 	}
 
 	if v.SchemaArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.SchemaArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.SchemaArn)
 		}
@@ -5090,7 +5090,7 @@ func awsRestjson1_serializeOpHttpBindingsRemoveFacetFromObjectInput(v *RemoveFac
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -5343,7 +5343,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateFacetInput(v *UpdateFacetInput, e
 	}
 
 	if v.SchemaArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.SchemaArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.SchemaArn)
 		}
@@ -5439,7 +5439,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateLinkAttributesInput(v *UpdateLink
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -5532,7 +5532,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateObjectAttributesInput(v *UpdateOb
 	}
 
 	if v.DirectoryArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.DirectoryArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.DirectoryArn)
 		}
@@ -5625,7 +5625,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateSchemaInput(v *UpdateSchemaInput,
 	}
 
 	if v.SchemaArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.SchemaArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.SchemaArn)
 		}
@@ -5709,7 +5709,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateTypedLinkFacetInput(v *UpdateType
 	}
 
 	if v.SchemaArn != nil {
-		locationName := "X-Amz-Data-Partition"
+		locationName := "x-amz-data-partition"
 		if len(*v.SchemaArn) > 0 {
 			encoder.SetHeader(locationName).String(*v.SchemaArn)
 		}

@@ -1464,7 +1464,7 @@ func awsRestjson1_serializeOpHttpBindingsDescribeInputDeviceThumbnailInput(v *De
 	}
 
 	if len(v.Accept) > 0 {
-		locationName := "Accept"
+		locationName := "accept"
 		encoder.SetHeader(locationName).String(string(v.Accept))
 	}
 
