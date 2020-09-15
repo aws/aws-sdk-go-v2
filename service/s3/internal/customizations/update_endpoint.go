@@ -7,33 +7,33 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	"github.com/awslabs/smithy-go/transport/http"
 )
 
 // UpdateEndpointOptions provides the options for the UpdateEndpoint middleware setup.
 type UpdateEndpointOptions struct {
-	UsePathStyle  bool
-	UseAccelerate bool
+	// functional pointer to fetch bucket name from provided input.
+	// The function is intended to take an input value, and
+	// return a string pointer to value of string, and bool if
+	// input has no bucket member.
+	GetBucketFromInput func(interface{}) (*string, bool)
 
-	Region string
+	// use path style
+	UsePathStyle bool
 }
 
 // UpdateEndpoint adds the middleware to the middleware stack based on the UpdateEndpointOptions.
 func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) {
 	stack.Serialize.Insert(&updateEndpointMiddleware{
-		usePathStyle:  options.UsePathStyle,
-		useAccelerate: options.UseAccelerate,
-		region:        options.Region,
+		getBucketFromInput: options.GetBucketFromInput,
+		usePathStyle:       options.UsePathStyle,
 	}, "OperationSerializer", middleware.After)
 }
 
 type updateEndpointMiddleware struct {
-	usePathStyle  bool
-	useAccelerate bool
-
-	region string
+	getBucketFromInput func(interface{}) (*string, bool)
+	usePathStyle       bool
 }
 
 // ID returns the middleware ID.
@@ -50,63 +50,23 @@ func (u *updateEndpointMiddleware) HandleSerialize(
 	}
 
 	// Below customization only apply if bucket name is provided
-	iface, ok := in.Parameters.(bucketGetter)
-	if !ok {
-		return next.HandleSerialize(ctx, in)
-	}
-
-	bucket := iface.GetBucket()
-	if len(bucket) != 0 {
-		if err := u.updateEndpointFromConfig(req, bucket); err != nil {
+	bucket, ok := u.getBucketFromInput(in.Parameters)
+	if ok && bucket != nil {
+		if err := u.updateEndpointFromConfig(req, *bucket); err != nil {
 			return out, metadata, err
 		}
 	}
-
 	return next.HandleSerialize(ctx, in)
 }
 
 func (u updateEndpointMiddleware) updateEndpointFromConfig(req *http.Request, bucket string) error {
-	// if bucket len is zero, we ignore the following customizations
-	if u.useAccelerate {
-		if u.usePathStyle {
-			// TODO: log that accelerate is not compatible with aws.Config.S3ForcePathStyle, ignoring S3ForcePathStyle.
-		}
-
-		if !hostCompatibleBucketName(req.URL, bucket) {
-			return &smithy.SerializationError{
-				Err: fmt.Errorf("bucket name %s is not compatible with S3 Accelerate", bucket),
-			}
-		}
-
-		parts := strings.Split(req.URL.Host, ".")
-		if len(parts) < 3 {
-			return &smithy.SerializationError{
-				Err: fmt.Errorf("unable to update endpoint host for S3 accelerate, hostname invalid, %s",
-					req.URL.Host),
-			}
-		}
-
-		if parts[0] == "s3" || strings.HasPrefix(parts[0], "s3-") {
-			parts[0] = "s3-accelerate"
-		}
-		for i := 1; i+1 < len(parts); i++ {
-			if parts[i] == u.region {
-				parts = append(parts[:i], parts[i+1:]...)
-				break
-			}
-		}
-		req.URL.Host = strings.Join(parts, ".")
-		moveBucketNameToHost(req.URL, bucket)
-	} else if !u.usePathStyle {
+	if !u.usePathStyle {
 		if !hostCompatibleBucketName(req.URL, bucket) {
 			// bucket name must be valid to put into the host
-			return &smithy.SerializationError{
-				Err: fmt.Errorf("bucket name %s is not compatible with S3 Accelerate", bucket),
-			}
+			return fmt.Errorf("bucket name %s is not compatible with S3", bucket)
 		}
 		moveBucketNameToHost(req.URL, bucket)
 	}
-
 	return nil
 }
 
@@ -122,12 +82,6 @@ func removeBucketFromPath(u *url.URL, bucket string) {
 	if u.Path == "" {
 		u.Path = "/"
 	}
-}
-
-// bucketGetter is an accessor interface to grab the "Bucket" field from
-// an S3 type.
-type bucketGetter interface {
-	GetBucket() string
 }
 
 // hostCompatibleBucketName returns true if the request should
@@ -150,7 +104,33 @@ var reIPAddress = regexp.MustCompile(`^(\d+\.){3}\d+$`)
 // dnsCompatibleBucketName returns true if the bucket name is DNS compatible.
 // Buckets created outside of the classic region MUST be DNS compatible.
 func dnsCompatibleBucketName(bucket string) bool {
-	return reDomain.MatchString(bucket) &&
-		!reIPAddress.MatchString(bucket) &&
-		!strings.Contains(bucket, "..")
+	if strings.Contains(bucket, "..") {
+		return false
+	}
+
+	// checks for `^[a-z0-9][a-z0-9\.\-]{1,61}[a-z0-9]$` domain mapping
+	if !((bucket[0] > 96 && bucket[0] < 123) || (bucket[0] > 47 && bucket[0] < 58)) {
+		return false
+	}
+
+	for _, c := range bucket[1:] {
+		if !((c > 96 && c < 123) || (c > 47 && c < 58) || c == 46 || c == 45) {
+			return false
+		}
+	}
+
+	// checks for `^(\d+\.){3}\d+$` IPaddressing
+	v := strings.SplitN(bucket, ".", -1)
+	if len(v) == 4 {
+		for _, c := range bucket {
+			if !((c > 47 && c < 58) || c == 46) {
+				// we confirm that this is not a IP address
+				return true
+			}
+		}
+		// this is a IP address
+		return false
+	}
+
+	return true
 }

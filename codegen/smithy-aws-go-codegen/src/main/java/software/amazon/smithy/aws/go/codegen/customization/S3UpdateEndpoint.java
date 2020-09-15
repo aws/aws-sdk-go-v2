@@ -18,6 +18,7 @@
 package software.amazon.smithy.aws.go.codegen.customization;
 
 import java.util.List;
+import java.util.Optional;
 import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
 import software.amazon.smithy.aws.go.codegen.AwsSignatureVersion4;
 import software.amazon.smithy.aws.traits.ServiceTrait;
@@ -32,6 +33,7 @@ import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.shapes.ShapeId;
@@ -40,9 +42,9 @@ import software.amazon.smithy.utils.ListUtils;
 
 public class S3UpdateEndpoint implements GoIntegration {
     private static final String USE_PATH_STYLE_OPTION = "UsePathStyle";
-    private static final String USE_ACCELERATE_OPTION = "UseAccelerate";
     private static final String UPDATE_ENDPOINT_ADDER = "addUpdateEndpointMiddleware";
     private static final String UPDATE_ENDPOINT_INTERNAL_ADDER = "UpdateEndpoint";
+    private static final String GET_BUCKET_FROM_INPUT = "getBucketFromInput";
 
     /**
      * Gets the sort order of the customization from -128 to 127, with lowest
@@ -62,46 +64,48 @@ public class S3UpdateEndpoint implements GoIntegration {
             SymbolProvider symbolProvider,
             GoDelegator goDelegator
     ) {
-        if (!isS3Service(model, settings.getService(model))) {
+        ServiceShape service = settings.getService(model);
+        if (!isS3Service(model, service)) {
             return;
         }
 
-        goDelegator.useShapeWriter(settings.getService(model), this::writeMiddlewareHelper);
+        goDelegator.useShapeWriter(service, this::writeMiddlewareHelper);
 
-        // Generate getter's for an operation input that can be used to satisfy interfaces
-        for (ShapeId shapeId: settings.getService(model).getOperations()) {
-            OperationShape operation = model.expectShape(shapeId, OperationShape.class);
-            StructureShape input = model.expectShape(operation.getInput().get(), StructureShape.class);
-            goDelegator.useShapeWriter(operation, writer -> {
-                writeInputGetter(writer, symbolProvider, input);
-            });
-        }
+        goDelegator.useShapeWriter(service, writer -> {
+            writeInputGetter(writer, model, symbolProvider, service);
+        });
     }
 
-    private void writeInputGetter(GoWriter writer, SymbolProvider symbolProvider, StructureShape input) {
-        // generate bucketGetter if input has a member named Bucket
-        if (input.getMember("Bucket").isPresent()) {
-            // generateBucketGetter
-            // TODO: Look for alternatives so that these Getters are NOT exported?
-            Symbol inputSymbol = symbolProvider.toSymbol(input);
-            writer.writeDocs("GetBucket retrieves the Bucket member value if provided");
-            writer.openBlock("func (s $P) GetBucket() (v string) {", "}", inputSymbol, () -> {
-                writer.write("if s.Bucket == nil { return v }");
-                writer.write("return *s.Bucket");
+    private void writeInputGetter(GoWriter writer, Model model, SymbolProvider symbolProvider, ServiceShape service) {
+        writer.writeDocs("getBucketFromInput returns a boolean indicating if the input has a modeled bucket name, " +
+                " and a pointer to string denoting a provided bucket member value");
+        writer.openBlock("func getBucketFromInput(input interface{}) (*string, bool) {","}", ()-> {
+            writer.openBlock("switch i:= input.(type) {", "}", () -> {
+                service.getAllOperations().forEach((operationId)-> {
+                    OperationShape operation = model.expectShape(operationId, OperationShape.class);
+                    StructureShape input = model.expectShape(operation.getInput().get(), StructureShape.class);
+
+                    // get the member that targets "com.amazonaws.s3#BucketName" shape
+                    input.getAllMembers().values().stream().forEach((shape)->{
+                        if (shape.getTarget().getName().equals("BucketName")) {
+                            writer.write("case $P: return i.$L, true", symbolProvider.toSymbol(input), shape.getMemberName());
+                        }
+                    });
+                });
+                writer.write("default: return nil, false");
             });
-            writer.insertTrailingNewline();
-        }
+        });
     }
 
     private void writeMiddlewareHelper(GoWriter writer) {
         writer.openBlock("func $L(stack *middleware.Stack, options Options) {", "}", UPDATE_ENDPOINT_ADDER, () -> {
-            writer.write("$T(stack, $T{UsePathStyle: options.$L, UseAccelerate: options.$L, Region: options.Region})",
+            writer.write("$T(stack, $T{UsePathStyle: options.$L, GetBucketFromInput: $L})",
                     SymbolUtils.createValueSymbolBuilder(UPDATE_ENDPOINT_INTERNAL_ADDER,
                             AwsCustomGoDependency.S3_CUSTOMIZATION).build(),
                     SymbolUtils.createValueSymbolBuilder(UPDATE_ENDPOINT_INTERNAL_ADDER + "Options",
                             AwsCustomGoDependency.S3_CUSTOMIZATION).build(),
                     USE_PATH_STYLE_OPTION,
-                    USE_ACCELERATE_OPTION
+                    GET_BUCKET_FROM_INPUT
             );
         });
         writer.insertTrailingNewline();
@@ -120,24 +124,9 @@ public class S3UpdateEndpoint implements GoIntegration {
                                                 .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true)
                                                 .build())
                                         .documentation("Allows you to enable the client to use path-style addressing, "
-                                                + "i.e., `http://s3.amazonaws.com/BUCKET/KEY`. By default, the S3 client"
+                                                + "i.e., `https://s3.amazonaws.com/BUCKET/KEY`. By default, the S3 client "
                                                 + "will use virtual hosted bucket addressing when possible"
-                                                + "(`http://BUCKET.s3.amazonaws.com/KEY`).")
-                                        .build(),
-                                ConfigField.builder()
-                                        .name(USE_ACCELERATE_OPTION)
-                                        .type(SymbolUtils.createValueSymbolBuilder("bool")
-                                                .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true)
-                                                .build())
-                                        .documentation("Set this to `true` to enable S3 Accelerate feature. For all operations "
-                                                + "compatible with S3 Accelerate will use the accelerate endpoint for "
-                                                + "requests. Requests not compatible will fall back to normal S3 requests. "
-                                                + ""
-                                                + "The bucket must be enable for accelerate to be used with S3 client with "
-                                                + "accelerate enabled. If the bucket is not enabled for accelerate an error "
-                                                + "will be returned. The bucket name must be DNS compatible to also work "
-                                                + "with accelerate."
-                                        )
+                                                + "(`https://BUCKET.s3.amazonaws.com/KEY`).")
                                         .build()
                                 ))
                         .registerMiddleware(MiddlewareRegistrar.builder()

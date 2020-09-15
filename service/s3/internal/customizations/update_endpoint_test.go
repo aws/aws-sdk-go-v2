@@ -33,12 +33,6 @@ var (
 		{"a.b.c", "https://s3.mock-region.amazonaws.com/a.b.c", ""},
 		{"a..bc", "https://s3.mock-region.amazonaws.com/a..bc", ""},
 	}
-
-	accelerateTests = []s3BucketTest{
-		{"abc", "https://abc.s3-accelerate.amazonaws.com/", ""},
-		{"a.b.c", "https://s3.mock-region.amazonaws.com/a.b.c", "not compatible with S3 Accelerate"},
-		{"a$b$c", "https://s3.mock-region.amazonaws.com/a%24b%24c", "not compatible with S3 Accelerate"},
-	}
 )
 
 var unitcreds = aws.StaticCredentialsProvider{
@@ -46,18 +40,6 @@ var unitcreds = aws.StaticCredentialsProvider{
 		AccessKeyID: "AKID", SecretAccessKey: "SECRET", SessionToken: "SESSION",
 		Source: "unit test credentials",
 	},
-}
-
-func TestAccelerateBucketBuild(t *testing.T) {
-	options := s3.Options{
-		Credentials:   unitcreds,
-		Retryer:       aws.NoOpRetryer{},
-		UseAccelerate: true,
-		Region:        "mock-region",
-	}
-
-	s := s3.New(options)
-	runTests(t, s, accelerateTests)
 }
 
 func TestPathStyleBucketBuild(t *testing.T) {
