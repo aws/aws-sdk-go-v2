@@ -32,6 +32,7 @@ import software.amazon.smithy.model.knowledge.ServiceIndex;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.shapes.ShapeId;
+import software.amazon.smithy.model.traits.OptionalAuthTrait;
 import software.amazon.smithy.model.traits.Trait;
 import software.amazon.smithy.utils.ListUtils;
 
@@ -136,6 +137,6 @@ public final class AwsSignatureVersion4 implements GoIntegration {
     public static boolean hasSigV4AuthScheme(Model model, ServiceShape service, OperationShape operation) {
         ServiceIndex serviceIndex = model.getKnowledge(ServiceIndex.class);
         Map<ShapeId, Trait> auth = serviceIndex.getEffectiveAuthSchemes(service.getId(), operation.getId());
-        return auth.containsKey(SigV4Trait.ID);
+        return auth.containsKey(SigV4Trait.ID) && !operation.hasTrait(OptionalAuthTrait.class);
     }
 }
