@@ -100,11 +100,3 @@ func newServiceMetadataMiddleware_opGetObjectTorrent(region string) awsmiddlewar
 		OperationName: "GetObjectTorrent",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *GetObjectTorrentInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

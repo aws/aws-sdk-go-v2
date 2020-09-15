@@ -181,11 +181,3 @@ func newServiceMetadataMiddleware_opCreateBucket(region string) awsmiddleware.Re
 		OperationName: "CreateBucket",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *CreateBucketInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

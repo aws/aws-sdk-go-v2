@@ -98,11 +98,3 @@ func newServiceMetadataMiddleware_opPutBucketPolicy(region string) awsmiddleware
 		OperationName: "PutBucketPolicy",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *PutBucketPolicyInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

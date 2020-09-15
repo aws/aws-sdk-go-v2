@@ -82,11 +82,3 @@ func newServiceMetadataMiddleware_opDeleteBucketCors(region string) awsmiddlewar
 		OperationName: "DeleteBucketCors",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *DeleteBucketCorsInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

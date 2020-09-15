@@ -120,11 +120,3 @@ func newServiceMetadataMiddleware_opPutBucketTagging(region string) awsmiddlewar
 		OperationName: "PutBucketTagging",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *PutBucketTaggingInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

@@ -112,11 +112,3 @@ func newServiceMetadataMiddleware_opPutBucketLogging(region string) awsmiddlewar
 		OperationName: "PutBucketLogging",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *PutBucketLoggingInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

@@ -90,11 +90,3 @@ func newServiceMetadataMiddleware_opDeleteBucketReplication(region string) awsmi
 		OperationName: "DeleteBucketReplication",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *DeleteBucketReplicationInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

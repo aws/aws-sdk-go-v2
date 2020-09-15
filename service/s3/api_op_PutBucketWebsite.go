@@ -120,11 +120,3 @@ func newServiceMetadataMiddleware_opPutBucketWebsite(region string) awsmiddlewar
 		OperationName: "PutBucketWebsite",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *PutBucketWebsiteInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

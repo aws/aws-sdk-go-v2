@@ -121,11 +121,3 @@ func newServiceMetadataMiddleware_opPutBucketInventoryConfiguration(region strin
 		OperationName: "PutBucketInventoryConfiguration",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *PutBucketInventoryConfigurationInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

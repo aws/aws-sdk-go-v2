@@ -89,11 +89,3 @@ func newServiceMetadataMiddleware_opDeleteBucketLifecycle(region string) awsmidd
 		OperationName: "DeleteBucketLifecycle",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *DeleteBucketLifecycleInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

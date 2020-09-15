@@ -167,11 +167,3 @@ func newServiceMetadataMiddleware_opListObjectVersions(region string) awsmiddlew
 		OperationName: "ListObjectVersions",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *ListObjectVersionsInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

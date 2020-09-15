@@ -91,11 +91,3 @@ func newServiceMetadataMiddleware_opDeleteBucketEncryption(region string) awsmid
 		OperationName: "DeleteBucketEncryption",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *DeleteBucketEncryptionInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

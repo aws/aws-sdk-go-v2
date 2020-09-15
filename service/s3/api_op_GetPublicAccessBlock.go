@@ -101,11 +101,3 @@ func newServiceMetadataMiddleware_opGetPublicAccessBlock(region string) awsmiddl
 		OperationName: "GetPublicAccessBlock",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *GetPublicAccessBlockInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

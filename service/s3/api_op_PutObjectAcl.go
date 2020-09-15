@@ -192,11 +192,3 @@ func newServiceMetadataMiddleware_opPutObjectAcl(region string) awsmiddleware.Re
 		OperationName: "PutObjectAcl",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *PutObjectAclInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

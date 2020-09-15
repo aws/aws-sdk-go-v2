@@ -95,11 +95,3 @@ func newServiceMetadataMiddleware_opDeleteBucketPolicy(region string) awsmiddlew
 		OperationName: "DeleteBucketPolicy",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *DeleteBucketPolicyInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

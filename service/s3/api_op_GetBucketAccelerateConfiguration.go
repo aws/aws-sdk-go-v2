@@ -100,11 +100,3 @@ func newServiceMetadataMiddleware_opGetBucketAccelerateConfiguration(region stri
 		OperationName: "GetBucketAccelerateConfiguration",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *GetBucketAccelerateConfigurationInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

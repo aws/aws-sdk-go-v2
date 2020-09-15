@@ -92,11 +92,3 @@ func newServiceMetadataMiddleware_opGetBucketPolicyStatus(region string) awsmidd
 		OperationName: "GetBucketPolicyStatus",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *GetBucketPolicyStatusInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

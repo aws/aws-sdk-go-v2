@@ -100,11 +100,3 @@ func newServiceMetadataMiddleware_opGetObjectRetention(region string) awsmiddlew
 		OperationName: "GetObjectRetention",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *GetObjectRetentionInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

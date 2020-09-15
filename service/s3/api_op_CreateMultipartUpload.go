@@ -343,11 +343,3 @@ func newServiceMetadataMiddleware_opCreateMultipartUpload(region string) awsmidd
 		OperationName: "CreateMultipartUpload",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *CreateMultipartUploadInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

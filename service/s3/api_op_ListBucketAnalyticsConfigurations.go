@@ -117,11 +117,3 @@ func newServiceMetadataMiddleware_opListBucketAnalyticsConfigurations(region str
 		OperationName: "ListBucketAnalyticsConfigurations",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *ListBucketAnalyticsConfigurationsInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

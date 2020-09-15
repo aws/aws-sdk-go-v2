@@ -313,11 +313,3 @@ func newServiceMetadataMiddleware_opRestoreObject(region string) awsmiddleware.R
 		OperationName: "RestoreObject",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *RestoreObjectInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

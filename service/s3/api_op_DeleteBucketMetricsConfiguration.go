@@ -96,11 +96,3 @@ func newServiceMetadataMiddleware_opDeleteBucketMetricsConfiguration(region stri
 		OperationName: "DeleteBucketMetricsConfiguration",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *DeleteBucketMetricsConfigurationInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

@@ -109,11 +109,3 @@ func newServiceMetadataMiddleware_opPutObjectLegalHold(region string) awsmiddlew
 		OperationName: "PutObjectLegalHold",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *PutObjectLegalHoldInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

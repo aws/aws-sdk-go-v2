@@ -102,11 +102,3 @@ func newServiceMetadataMiddleware_opGetBucketNotificationConfiguration(region st
 		OperationName: "GetBucketNotificationConfiguration",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *GetBucketNotificationConfigurationInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

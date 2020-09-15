@@ -129,11 +129,3 @@ func newServiceMetadataMiddleware_opPutBucketReplication(region string) awsmiddl
 		OperationName: "PutBucketReplication",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *PutBucketReplicationInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

@@ -90,11 +90,3 @@ func newServiceMetadataMiddleware_opDeleteBucketWebsite(region string) awsmiddle
 		OperationName: "DeleteBucketWebsite",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *DeleteBucketWebsiteInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

@@ -91,11 +91,3 @@ func newServiceMetadataMiddleware_opPutBucketRequestPayment(region string) awsmi
 		OperationName: "PutBucketRequestPayment",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *PutBucketRequestPaymentInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

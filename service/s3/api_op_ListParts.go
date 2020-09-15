@@ -175,11 +175,3 @@ func newServiceMetadataMiddleware_opListParts(region string) awsmiddleware.Regis
 		OperationName: "ListParts",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *ListPartsInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

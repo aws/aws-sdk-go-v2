@@ -106,11 +106,3 @@ func newServiceMetadataMiddleware_opPutBucketEncryption(region string) awsmiddle
 		OperationName: "PutBucketEncryption",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *PutBucketEncryptionInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

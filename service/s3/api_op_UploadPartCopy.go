@@ -226,11 +226,3 @@ func newServiceMetadataMiddleware_opUploadPartCopy(region string) awsmiddleware.
 		OperationName: "UploadPartCopy",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *UploadPartCopyInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

@@ -140,11 +140,3 @@ func newServiceMetadataMiddleware_opDeleteObjects(region string) awsmiddleware.R
 		OperationName: "DeleteObjects",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *DeleteObjectsInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

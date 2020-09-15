@@ -107,11 +107,3 @@ func newServiceMetadataMiddleware_opGetObjectTagging(region string) awsmiddlewar
 		OperationName: "GetObjectTagging",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *GetObjectTaggingInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

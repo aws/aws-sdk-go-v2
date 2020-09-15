@@ -104,11 +104,3 @@ func newServiceMetadataMiddleware_opGetBucketLifecycleConfiguration(region strin
 		OperationName: "GetBucketLifecycleConfiguration",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *GetBucketLifecycleConfigurationInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

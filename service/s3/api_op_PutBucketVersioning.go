@@ -109,11 +109,3 @@ func newServiceMetadataMiddleware_opPutBucketVersioning(region string) awsmiddle
 		OperationName: "PutBucketVersioning",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *PutBucketVersioningInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}

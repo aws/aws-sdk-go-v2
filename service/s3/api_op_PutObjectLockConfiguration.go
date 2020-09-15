@@ -100,11 +100,3 @@ func newServiceMetadataMiddleware_opPutObjectLockConfiguration(region string) aw
 		OperationName: "PutObjectLockConfiguration",
 	}
 }
-
-// GetBucket retrieves the Bucket member value if provided
-func (s *PutObjectLockConfigurationInput) GetBucket() (v string) {
-	if s.Bucket == nil {
-		return v
-	}
-	return *s.Bucket
-}
