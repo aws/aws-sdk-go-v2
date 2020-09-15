@@ -5628,6 +5628,8 @@ func awsAwsquery_deserializeDocumentAccountLimitList(v *[]*types.AccountLimit, d
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -5698,6 +5700,8 @@ func awsAwsquery_deserializeDocumentAccountList(v *[]*string, decoder smithyxml.
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -5778,6 +5782,8 @@ func awsAwsquery_deserializeDocumentAllowedValues(v *[]*string, decoder smithyxm
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -5967,6 +5973,8 @@ func awsAwsquery_deserializeDocumentCapabilities(v *[]types.Capability, decoder 
 					col = types.Capability(xtv)
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -6132,6 +6140,8 @@ func awsAwsquery_deserializeDocumentChanges(v *[]*types.Change, decoder smithyxm
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -6238,6 +6248,8 @@ func awsAwsquery_deserializeDocumentChangeSetSummaries(v *[]*types.ChangeSetSumm
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -6641,6 +6653,8 @@ func awsAwsquery_deserializeDocumentExports(v *[]*types.Export, decoder smithyxm
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -6711,6 +6725,8 @@ func awsAwsquery_deserializeDocumentImports(v *[]*string, decoder smithyxml.Node
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -7095,6 +7111,8 @@ func awsAwsquery_deserializeDocumentLogicalResourceIds(v *[]*string, decoder smi
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -7223,6 +7241,8 @@ func awsAwsquery_deserializeDocumentNotificationARNs(v *[]*string, decoder smith
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -7495,6 +7515,8 @@ func awsAwsquery_deserializeDocumentOrganizationalUnitIdList(v *[]*string, decod
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -7659,6 +7681,8 @@ func awsAwsquery_deserializeDocumentOutputs(v *[]*types.Output, decoder smithyxm
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -7971,6 +7995,8 @@ func awsAwsquery_deserializeDocumentParameterDeclarations(v *[]*types.ParameterD
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -8030,6 +8056,8 @@ func awsAwsquery_deserializeDocumentParameters(v *[]*types.Parameter, decoder sm
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -8088,6 +8116,8 @@ func awsAwsquery_deserializeDocumentPhysicalResourceIdContext(v *[]*types.Physic
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -8305,6 +8335,8 @@ func awsAwsquery_deserializeDocumentPropertyDifferences(v *[]*types.PropertyDiff
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -8375,6 +8407,8 @@ func awsAwsquery_deserializeDocumentRegionList(v *[]*string, decoder smithyxml.N
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -8455,6 +8489,8 @@ func awsAwsquery_deserializeDocumentRegistrationTokenList(v *[]*string, decoder 
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -8722,6 +8758,8 @@ func awsAwsquery_deserializeDocumentResourceChangeDetails(v *[]*types.ResourceCh
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -8792,6 +8830,8 @@ func awsAwsquery_deserializeDocumentResourceIdentifiers(v *[]*string, decoder sm
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -8860,6 +8900,8 @@ func awsAwsquery_deserializeDocumentResourceIdentifierSummaries(v *[]*types.Reso
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -9065,6 +9107,8 @@ func awsAwsquery_deserializeDocumentResourceTypes(v *[]*string, decoder smithyxm
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -9253,6 +9297,8 @@ func awsAwsquery_deserializeDocumentRollbackTriggers(v *[]*types.RollbackTrigger
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -9320,6 +9366,8 @@ func awsAwsquery_deserializeDocumentScope(v *[]types.ResourceAttribute, decoder 
 					col = types.ResourceAttribute(xtv)
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -10031,6 +10079,8 @@ func awsAwsquery_deserializeDocumentStackEvents(v *[]*types.StackEvent, decoder 
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -10365,6 +10415,8 @@ func awsAwsquery_deserializeDocumentStackInstanceSummaries(v *[]*types.StackInst
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -11272,6 +11324,8 @@ func awsAwsquery_deserializeDocumentStackResourceDrifts(v *[]*types.StackResourc
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -11331,6 +11385,8 @@ func awsAwsquery_deserializeDocumentStackResources(v *[]*types.StackResource, de
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -11389,6 +11445,8 @@ func awsAwsquery_deserializeDocumentStackResourceSummaries(v *[]*types.StackReso
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -11580,6 +11638,8 @@ func awsAwsquery_deserializeDocumentStacks(v *[]*types.Stack, decoder smithyxml.
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -12398,6 +12458,8 @@ func awsAwsquery_deserializeDocumentStackSetOperationResultSummaries(v *[]*types
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -12572,6 +12634,8 @@ func awsAwsquery_deserializeDocumentStackSetOperationSummaries(v *[]*types.Stack
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -12738,6 +12802,8 @@ func awsAwsquery_deserializeDocumentStackSetSummaries(v *[]*types.StackSetSummar
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -12939,6 +13005,8 @@ func awsAwsquery_deserializeDocumentStackSummaries(v *[]*types.StackSummary, dec
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -13205,6 +13273,8 @@ func awsAwsquery_deserializeDocumentStageList(v *[]types.TemplateStage, decoder 
 					col = types.TemplateStage(xtv)
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -13383,6 +13453,8 @@ func awsAwsquery_deserializeDocumentTags(v *[]*types.Tag, decoder smithyxml.Node
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -13538,6 +13610,8 @@ func awsAwsquery_deserializeDocumentTemplateParameters(v *[]*types.TemplateParam
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -13656,6 +13730,8 @@ func awsAwsquery_deserializeDocumentTransformsList(v *[]*string, decoder smithyx
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -13772,6 +13848,8 @@ func awsAwsquery_deserializeDocumentTypeSummaries(v *[]*types.TypeSummary, decod
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -13957,6 +14035,8 @@ func awsAwsquery_deserializeDocumentTypeVersionSummaries(v *[]*types.TypeVersion
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}

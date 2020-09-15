@@ -2512,6 +2512,8 @@ func awsRestxml_deserializeDocumentAccessPointList(v *[]*types.AccessPoint, deco
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -3130,6 +3132,8 @@ func awsRestxml_deserializeDocumentJobFailureList(v *[]*types.JobFailure, decode
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -3336,6 +3340,8 @@ func awsRestxml_deserializeDocumentJobListDescriptorList(v *[]*types.JobListDesc
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -3447,6 +3453,8 @@ func awsRestxml_deserializeDocumentJobManifestFieldList(v *[]types.JobManifestFi
 					col = types.JobManifestFieldName(xtv)
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -4712,6 +4720,8 @@ func awsRestxml_deserializeDocumentS3GrantList(v *[]*types.S3Grant, decoder smit
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -5432,6 +5442,8 @@ func awsRestxml_deserializeDocumentS3TagSet(v *[]*types.S3Tag, decoder smithyxml
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}

@@ -3285,6 +3285,8 @@ func awsAwsquery_deserializeDocumentAlarmHistoryItems(v *[]*types.AlarmHistoryIt
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -3503,6 +3505,8 @@ func awsAwsquery_deserializeDocumentAnomalyDetectorExcludedTimeRanges(v *[]*type
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -3562,6 +3566,8 @@ func awsAwsquery_deserializeDocumentAnomalyDetectors(v *[]*types.AnomalyDetector
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -3620,6 +3626,8 @@ func awsAwsquery_deserializeDocumentBatchFailures(v *[]*types.PartialFailure, de
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -3889,6 +3897,8 @@ func awsAwsquery_deserializeDocumentCompositeAlarms(v *[]*types.CompositeAlarm, 
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -3995,6 +4005,8 @@ func awsAwsquery_deserializeDocumentDashboardEntries(v *[]*types.DashboardEntry,
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -4319,6 +4331,8 @@ func awsAwsquery_deserializeDocumentDashboardValidationMessages(v *[]*types.Dash
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -4531,6 +4545,8 @@ func awsAwsquery_deserializeDocumentDatapoints(v *[]*types.Datapoint, decoder sm
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -4693,6 +4709,8 @@ func awsAwsquery_deserializeDocumentDatapointValues(v *[]*float64, decoder smith
 					col = &f64
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -4826,6 +4844,8 @@ func awsAwsquery_deserializeDocumentDimensions(v *[]*types.Dimension, decoder sm
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -5109,6 +5129,8 @@ func awsAwsquery_deserializeDocumentInsightRuleContributorDatapoints(v *[]*types
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -5179,6 +5201,8 @@ func awsAwsquery_deserializeDocumentInsightRuleContributorKeyLabels(v *[]*string
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -5259,6 +5283,8 @@ func awsAwsquery_deserializeDocumentInsightRuleContributorKeys(v *[]*string, dec
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -5327,6 +5353,8 @@ func awsAwsquery_deserializeDocumentInsightRuleContributors(v *[]*types.InsightR
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -5555,6 +5583,8 @@ func awsAwsquery_deserializeDocumentInsightRuleMetricDatapoints(v *[]*types.Insi
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -5613,6 +5643,8 @@ func awsAwsquery_deserializeDocumentInsightRules(v *[]*types.InsightRule, decode
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -6551,6 +6583,8 @@ func awsAwsquery_deserializeDocumentMetricAlarms(v *[]*types.MetricAlarm, decode
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -6609,6 +6643,8 @@ func awsAwsquery_deserializeDocumentMetricDataQueries(v *[]*types.MetricDataQuer
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -6883,6 +6919,8 @@ func awsAwsquery_deserializeDocumentMetricDataResultMessages(v *[]*types.Message
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -6942,6 +6980,8 @@ func awsAwsquery_deserializeDocumentMetricDataResults(v *[]*types.MetricDataResu
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -7000,6 +7040,8 @@ func awsAwsquery_deserializeDocumentMetrics(v *[]*types.Metric, decoder smithyxm
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -7365,6 +7407,8 @@ func awsAwsquery_deserializeDocumentResourceList(v *[]*string, decoder smithyxml
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -7626,6 +7670,8 @@ func awsAwsquery_deserializeDocumentTagList(v *[]*types.Tag, decoder smithyxml.N
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -7697,6 +7743,8 @@ func awsAwsquery_deserializeDocumentTimestamps(v *[]*time.Time, decoder smithyxm
 					col = &t
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -8590,9 +8638,19 @@ func awsAwsquery_deserializeOpDocumentGetMetricWidgetImageOutput(v **GetMetricWi
 		switch {
 		case strings.EqualFold("MetricWidgetImage", t.Name.Local):
 			var data string
-			err := decoder.Decoder.DecodeElement(&data, &t)
+			val, done, err := decoder.Value()
 			if err != nil {
 				return err
+			}
+			if done {
+				if val == nil {
+					sv.MetricWidgetImage = []byte{}
+				}
+				break
+			}
+			if val != nil {
+				xtv := string(val)
+				data = xtv
 			}
 			sv.MetricWidgetImage, err = base64.StdEncoding.DecodeString(data)
 			if err != nil {

@@ -92,7 +92,7 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
     protected void serializeCollection(GenerationContext context, CollectionShape shape) {
         GoWriter writer = context.getWriter();
         Shape target = context.getModel().expectShape(shape.getMember().getTarget());
-
+        writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
         writer.write("array := value.Array()");
         writer.write("defer array.Close()");
         writer.write("");
@@ -127,6 +127,7 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
     protected void serializeMap(GenerationContext context, MapShape shape) {
         GoWriter writer = context.getWriter();
         Shape target = context.getModel().expectShape(shape.getValue().getTarget());
+        writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
 
         writer.write("object := value.Object()");
         writer.write("defer object.Close()");
@@ -153,6 +154,7 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
     @Override
     protected void serializeStructure(GenerationContext context, StructureShape shape) {
         GoWriter writer = context.getWriter();
+        writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
 
         writer.write("object := value.Object()");
         writer.write("defer object.Close()");
@@ -187,6 +189,7 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
         SymbolProvider symbolProvider = context.getSymbolProvider();
         Symbol symbol = symbolProvider.toSymbol(shape);
         writer.addUseImports(SmithyGoDependency.FMT);
+        writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
 
         writer.write("object := value.Object()");
         writer.write("defer object.Close()");
