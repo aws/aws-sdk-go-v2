@@ -46,6 +46,7 @@ func (c *Client) GetBucketWebsite(ctx context.Context, params *GetBucketWebsiteI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBucketWebsiteValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketWebsite(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

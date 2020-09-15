@@ -8,3 +8,4 @@ software.amazon.smithy.aws.go.codegen.AwsIdempotencyTokenProvider
 software.amazon.smithy.aws.go.codegen.AwsClientUserAgent
 software.amazon.smithy.aws.go.codegen.AwsSdkServiceId
 software.amazon.smithy.aws.go.codegen.customization.DynamoDBValidateResponseChecksum
+software.amazon.smithy.aws.go.codegen.customization.S3UpdateEndpoint

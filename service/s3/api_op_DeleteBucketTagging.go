@@ -37,6 +37,7 @@ func (c *Client) DeleteBucketTagging(ctx context.Context, params *DeleteBucketTa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteBucketTaggingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBucketTagging(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

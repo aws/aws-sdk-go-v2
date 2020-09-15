@@ -41,6 +41,7 @@ func (c *Client) GetObjectTorrent(ctx context.Context, params *GetObjectTorrentI
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	addOpGetObjectTorrentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetObjectTorrent(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

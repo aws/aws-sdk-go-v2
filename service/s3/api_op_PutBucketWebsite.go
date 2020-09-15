@@ -69,6 +69,7 @@ func (c *Client) PutBucketWebsite(ctx context.Context, params *PutBucketWebsiteI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutBucketWebsiteValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBucketWebsite(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

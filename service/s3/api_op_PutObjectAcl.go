@@ -104,6 +104,7 @@ func (c *Client) PutObjectAcl(ctx context.Context, params *PutObjectAclInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutObjectAclValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutObjectAcl(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -47,6 +47,7 @@ func (c *Client) GetBucketEncryption(ctx context.Context, params *GetBucketEncry
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBucketEncryptionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketEncryption(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

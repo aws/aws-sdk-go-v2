@@ -103,6 +103,7 @@ func (c *Client) UploadPartCopy(ctx context.Context, params *UploadPartCopyInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUploadPartCopyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUploadPartCopy(options.Region), middleware.Before)
+	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
