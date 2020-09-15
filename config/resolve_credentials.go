@@ -1,11 +1,12 @@
-package external
+package config
 
 import (
 	"fmt"
 	"net/url"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/processcreds"
+	"github.com/aws/aws-sdk-go-v2/credentials"
+	"github.com/aws/aws-sdk-go-v2/credentials/processcreds"
 )
 
 const (
@@ -74,7 +75,7 @@ func ResolveCredentialChain(cfg *aws.Config, configs Configs) (err error) {
 	case sharedProfileSet:
 		err = resolveCredsFromProfile(cfg, envConfig, sharedConfig, other)
 	case envConfig.Credentials.HasKeys():
-		cfg.Credentials = aws.StaticCredentialsProvider{Value: envConfig.Credentials}
+		cfg.Credentials = credentials.StaticCredentialsProvider{Value: envConfig.Credentials}
 	case len(envConfig.WebIdentityTokenFilePath) > 0:
 		err = assumeWebIdentity(cfg, envConfig.WebIdentityTokenFilePath, envConfig.RoleARN, envConfig.RoleSessionName, configs)
 	default:
@@ -92,7 +93,7 @@ func resolveCredsFromProfile(cfg *aws.Config, envConfig *EnvConfig, sharedConfig
 
 	case sharedConfig.Credentials.HasKeys():
 		// Static Credentials from Shared Config/Credentials file.
-		cfg.Credentials = aws.StaticCredentialsProvider{
+		cfg.Credentials = credentials.StaticCredentialsProvider{
 			Value: sharedConfig.Credentials,
 		}
 
@@ -134,9 +135,9 @@ func ecsContainerURI(path string) string {
 }
 
 func processCredentials(cfg *aws.Config, sharedConfig *SharedConfig, configs Configs) error {
-	var opts []func(*processcreds.ProviderOptions)
+	var opts []func(*processcreds.Options)
 
-	options, found, err := GetProcessCredentialProviderOptions(configs)
+	options, found, err := GetProcessCredentialOptions(configs)
 	if err != nil {
 		return err
 	}
@@ -182,7 +183,7 @@ func resolveCredsFromSource(cfg *aws.Config, envConfig *EnvConfig, sharedCfg *Sh
 		return resolveEC2RoleCredentials(cfg, configs)
 
 	case credSourceEnvironment:
-		cfg.Credentials = aws.StaticCredentialsProvider{Value: envConfig.Credentials}
+		cfg.Credentials = credentials.StaticCredentialsProvider{Value: envConfig.Credentials}
 
 	case credSourceECSContainer:
 		if len(envConfig.ContainerCredentialsRelativePath) == 0 {

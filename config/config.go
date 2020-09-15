@@ -1,4 +1,4 @@
-package external
+package config
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -124,7 +124,7 @@ func (cs Configs) ResolveConfig(f func(configs []interface{}) error) error {
 // The custom configurations must satisfy the respective providers for their data
 // or the custom data will be ignored by the resolvers and config loaders.
 //
-//    cfg, err := external.LoadDefaultAWSConfig(
+//    cfg, err := config.LoadDefaultAWSConfig(
 //       WithSharedConfigProfile("test-profile"),
 //    )
 //    if err != nil {

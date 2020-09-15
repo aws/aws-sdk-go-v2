@@ -1,4 +1,4 @@
-package external
+package config
 
 import (
 	"context"
@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/credentials"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 )
@@ -109,7 +110,7 @@ func TestResolveRegion(t *testing.T) {
 
 func TestResolveCredentialsProvider(t *testing.T) {
 	configs := Configs{
-		WithCredentialsProvider{aws.StaticCredentialsProvider{
+		WithCredentialsProvider{credentials.StaticCredentialsProvider{
 			Value: aws.Credentials{
 				AccessKeyID:     "AKID",
 				SecretAccessKey: "SECRET",
@@ -127,7 +128,7 @@ func TestResolveCredentialsProvider(t *testing.T) {
 		t.Fatalf("expected %v, got %v", e, a)
 	}
 
-	p := cfg.Credentials.(aws.StaticCredentialsProvider)
+	p := cfg.Credentials.(credentials.StaticCredentialsProvider)
 	if e, a := "AKID", p.Value.AccessKeyID; e != a {
 		t.Errorf("expect %v key, got %v", e, a)
 	}

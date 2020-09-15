@@ -27,9 +27,11 @@ SDK's Amazon DynamoDB client.
 
 	import (
 		"context"
+		"fmt"
+		"log"
+
 		"github.com/aws/aws-sdk-go-v2/aws"
-		"github.com/aws/aws-sdk-go-v2/aws/endpoints"
-		"github.com/aws/aws-sdk-go-v2/aws/external"
+		"github.com/aws/aws-sdk-go-v2/config"
 		"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	)
 
@@ -37,26 +39,23 @@ SDK's Amazon DynamoDB client.
 		// Using the SDK's default configuration, loading additional config
 		// and credentials values from the environment variables, shared
 		// credentials, and shared configuration files
-		cfg, err := external.LoadDefaultAWSConfig()
+		cfg, err := config.LoadDefaultAWSConfig()
 		if err != nil {
-			panic("unable to load SDK config, " + err.Error())
+			log.Fatalf("unable to load SDK config, %v", err)
 		}
 
 		// Set the AWS Region that the service clients should use
 		cfg.Region = "us-west-2"
 
 		// Using the Config value, create the DynamoDB client
-		svc := dynamodb.New(cfg)
-
-		// Build the request with its input parameters
-		req := svc.DescribeTableRequest(&dynamodb.DescribeTableInput{
-			TableName: aws.String("myTable"),
-		})
+		svc := dynamodb.NewFromConfig(cfg)
 
 		// Send the request, and get the response or error back
-		resp, err := req.Send(context.Background())
+		resp, err := svc.DescribeTable(&dynamodb.DescribeTableInput{
+			TableName: aws.String("myTable"),
+		})
 		if err != nil {
-			panic("failed to describe table, "+err.Error())
+			log.Fatalf("failed to describe table, %v", err)
 		}
 
 		fmt.Println("Response", resp)
