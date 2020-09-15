@@ -4752,6 +4752,8 @@ func awsAwsquery_deserializeDocumentListOfEndpoints(v *[]*types.Endpoint, decode
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -4810,6 +4812,8 @@ func awsAwsquery_deserializeDocumentListOfPlatformApplications(v *[]*types.Platf
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -5019,6 +5023,8 @@ func awsAwsquery_deserializeDocumentPhoneNumberList(v *[]*string, decoder smithy
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -5536,6 +5542,8 @@ func awsAwsquery_deserializeDocumentSubscriptionsList(v *[]*types.Subscription, 
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -5706,6 +5714,8 @@ func awsAwsquery_deserializeDocumentTagList(v *[]*types.Tag, decoder smithyxml.N
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -6047,6 +6057,8 @@ func awsAwsquery_deserializeDocumentTopicsList(v *[]*types.Topic, decoder smithy
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}

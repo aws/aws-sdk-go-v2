@@ -9420,6 +9420,8 @@ func awsRestxml_deserializeDocumentAllowedHeaders(v *[]*string, decoder smithyxm
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -9500,6 +9502,8 @@ func awsRestxml_deserializeDocumentAllowedMethods(v *[]*string, decoder smithyxm
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -9580,6 +9584,8 @@ func awsRestxml_deserializeDocumentAllowedOrigins(v *[]*string, decoder smithyxm
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -9762,6 +9768,8 @@ func awsRestxml_deserializeDocumentAnalyticsConfigurationList(v *[]*types.Analyt
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -10142,6 +10150,8 @@ func awsRestxml_deserializeDocumentBuckets(v *[]*types.Bucket, decoder smithyxml
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -10248,6 +10258,8 @@ func awsRestxml_deserializeDocumentCommonPrefixList(v *[]*types.CommonPrefix, de
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -10575,6 +10587,8 @@ func awsRestxml_deserializeDocumentCORSRules(v *[]*types.CORSRule, decoder smith
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -10809,6 +10823,8 @@ func awsRestxml_deserializeDocumentDeletedObjects(v *[]*types.DeletedObject, dec
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -11015,6 +11031,8 @@ func awsRestxml_deserializeDocumentDeleteMarkers(v *[]*types.DeleteMarkerEntry, 
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -11368,6 +11386,8 @@ func awsRestxml_deserializeDocumentErrors(v *[]*types.Error, decoder smithyxml.N
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -11435,6 +11455,8 @@ func awsRestxml_deserializeDocumentEventList(v *[]types.Event, decoder smithyxml
 					col = types.Event(xtv)
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -11557,6 +11579,8 @@ func awsRestxml_deserializeDocumentExposeHeaders(v *[]*string, decoder smithyxml
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -11686,6 +11710,8 @@ func awsRestxml_deserializeDocumentFilterRuleList(v *[]*types.FilterRule, decode
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -11903,6 +11929,8 @@ func awsRestxml_deserializeDocumentGrants(v *[]*types.Grant, decoder smithyxml.N
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -12176,6 +12204,8 @@ func awsRestxml_deserializeDocumentInventoryConfigurationList(v *[]*types.Invent
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -12373,6 +12403,8 @@ func awsRestxml_deserializeDocumentInventoryOptionalFields(v *[]types.InventoryO
 					col = types.InventoryOptionalField(xtv)
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -12658,6 +12690,8 @@ func awsRestxml_deserializeDocumentLambdaFunctionConfigurationList(v *[]*types.L
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -13027,6 +13061,8 @@ func awsRestxml_deserializeDocumentLifecycleRules(v *[]*types.LifecycleRule, dec
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -13315,6 +13351,8 @@ func awsRestxml_deserializeDocumentMetricsConfigurationList(v *[]*types.MetricsC
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -13540,6 +13578,8 @@ func awsRestxml_deserializeDocumentMultipartUploadList(v *[]*types.MultipartUplo
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -13709,6 +13749,8 @@ func awsRestxml_deserializeDocumentNoncurrentVersionTransitionList(v *[]*types.N
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -14051,6 +14093,8 @@ func awsRestxml_deserializeDocumentObjectList(v *[]*types.Object, decoder smithy
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -14488,6 +14532,8 @@ func awsRestxml_deserializeDocumentObjectVersionList(v *[]*types.ObjectVersion, 
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -14709,6 +14755,8 @@ func awsRestxml_deserializeDocumentParts(v *[]*types.Part, decoder smithyxml.Nod
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -14988,6 +15036,8 @@ func awsRestxml_deserializeDocumentQueueConfigurationList(v *[]*types.QueueConfi
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -15510,6 +15560,8 @@ func awsRestxml_deserializeDocumentReplicationRules(v *[]*types.ReplicationRule,
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -15712,6 +15764,8 @@ func awsRestxml_deserializeDocumentRoutingRules(v *[]*types.RoutingRule, decoder
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -15946,6 +16000,8 @@ func awsRestxml_deserializeDocumentServerSideEncryptionRules(v *[]*types.ServerS
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -16322,6 +16378,8 @@ func awsRestxml_deserializeDocumentTagSet(v *[]*types.Tag, decoder smithyxml.Nod
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -16431,6 +16489,8 @@ func awsRestxml_deserializeDocumentTargetGrants(v *[]*types.TargetGrant, decoder
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -16566,6 +16626,8 @@ func awsRestxml_deserializeDocumentTopicConfigurationList(v *[]*types.TopicConfi
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -16704,6 +16766,8 @@ func awsRestxml_deserializeDocumentTransitionList(v *[]*types.Transition, decode
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}

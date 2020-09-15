@@ -1,0 +1,2436 @@
+{
+  "smithy": "1.0",
+  "metadata": {
+    "suppressions": [
+      {
+        "id": "HttpMethodSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpResponseCodeSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "PaginatedTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpHeaderTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpUriConflict",
+        "namespace": "*"
+      },
+      {
+        "id": "Service",
+        "namespace": "*"
+      }
+    ]
+  },
+  "shapes": {
+    "com.amazonaws.snowball#AWSIESnowballJobManagementService": {
+      "type": "service",
+      "version": "2016-06-30",
+      "operations": [
+        {
+          "target": "com.amazonaws.snowball#CancelCluster"
+        },
+        {
+          "target": "com.amazonaws.snowball#CancelJob"
+        },
+        {
+          "target": "com.amazonaws.snowball#CreateAddress"
+        },
+        {
+          "target": "com.amazonaws.snowball#CreateCluster"
+        },
+        {
+          "target": "com.amazonaws.snowball#CreateJob"
+        },
+        {
+          "target": "com.amazonaws.snowball#DescribeAddress"
+        },
+        {
+          "target": "com.amazonaws.snowball#DescribeAddresses"
+        },
+        {
+          "target": "com.amazonaws.snowball#DescribeCluster"
+        },
+        {
+          "target": "com.amazonaws.snowball#DescribeJob"
+        },
+        {
+          "target": "com.amazonaws.snowball#GetJobManifest"
+        },
+        {
+          "target": "com.amazonaws.snowball#GetJobUnlockCode"
+        },
+        {
+          "target": "com.amazonaws.snowball#GetSnowballUsage"
+        },
+        {
+          "target": "com.amazonaws.snowball#GetSoftwareUpdates"
+        },
+        {
+          "target": "com.amazonaws.snowball#ListClusterJobs"
+        },
+        {
+          "target": "com.amazonaws.snowball#ListClusters"
+        },
+        {
+          "target": "com.amazonaws.snowball#ListCompatibleImages"
+        },
+        {
+          "target": "com.amazonaws.snowball#ListJobs"
+        },
+        {
+          "target": "com.amazonaws.snowball#UpdateCluster"
+        },
+        {
+          "target": "com.amazonaws.snowball#UpdateJob"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "Snowball",
+          "arnNamespace": "snowball",
+          "cloudFormationName": "Snowball",
+          "cloudTrailEventSource": "snowball.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "snowball"
+        },
+        "aws.protocols#awsJson1_1": {},
+        "smithy.api#documentation": "<p>AWS Snowball is a petabyte-scale data transport solution that uses secure devices to\n      transfer large amounts of data between your on-premises data centers and Amazon Simple Storage\n      Service (Amazon S3). The Snowball commands described here provide access to the same\n      functionality that is available in the AWS Snowball Management Console, which enables you to\n      create and manage jobs for Snowball. To transfer data locally with a Snowball device, you'll\n      need to use the Snowball client or the Amazon S3 API adapter for Snowball. For more\n      information, see the <a href=\"https://docs.aws.amazon.com/AWSImportExport/latest/ug/api-reference.html\">User Guide</a>.</p>",
+        "smithy.api#title": "Amazon Import/Export Snowball"
+      }
+    },
+    "com.amazonaws.snowball#Address": {
+      "type": "structure",
+      "members": {
+        "Street2": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The second line in a street address that a Snowball is to be delivered\n      to.</p>"
+          }
+        },
+        "Street3": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The third line in a street address that a Snowball is to be delivered\n      to.</p>"
+          }
+        },
+        "Country": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The country in an address that a Snowball is to be delivered to.</p>"
+          }
+        },
+        "Street1": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The first line in a street address that a Snowball is to be delivered\n      to.</p>"
+          }
+        },
+        "StateOrProvince": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The state or province in an address that a Snowball is to be delivered to.</p>"
+          }
+        },
+        "PrefectureOrDistrict": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>This field is no longer used and the value is ignored.</p>"
+          }
+        },
+        "IsRestricted": {
+          "target": "com.amazonaws.snowball#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>If the address you are creating is a primary address, then set this option to\n      true. This field is not supported in most regions.</p>"
+          }
+        },
+        "PostalCode": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The postal code in an address that a Snowball is to be delivered to.</p>"
+          }
+        },
+        "City": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The city in an address that a Snowball is to be delivered to.</p>"
+          }
+        },
+        "Landmark": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>This field is no longer used and the value is ignored.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of a person to receive a Snowball at an address.</p>"
+          }
+        },
+        "Company": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the company to receive a Snowball at an address.</p>"
+          }
+        },
+        "PhoneNumber": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The phone number associated with an address that a Snowball is to be delivered\n      to.</p>"
+          }
+        },
+        "AddressId": {
+          "target": "com.amazonaws.snowball#AddressId",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique ID for an address.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The address that you want the Snowball or Snowballs associated with a specific job to\n      be shipped to. Addresses are validated at the time of creation. The address you provide must\n      be located within the serviceable area of your region. Although no individual elements of the\n        <code>Address</code> are required, if the address is invalid or unsupported, then an\n      exception is thrown.</p>"
+      }
+    },
+    "com.amazonaws.snowball#AddressId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 40,
+          "max": 40
+        },
+        "smithy.api#pattern": "ADID[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+      }
+    },
+    "com.amazonaws.snowball#AddressList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.snowball#Address"
+      }
+    },
+    "com.amazonaws.snowball#AmiId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 12,
+          "max": 21
+        },
+        "smithy.api#pattern": "(ami-[0-9a-f]{8})|(ami-[0-9a-f]{17})"
+      }
+    },
+    "com.amazonaws.snowball#Boolean": {
+      "type": "boolean"
+    },
+    "com.amazonaws.snowball#CancelCluster": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.snowball#CancelClusterRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.snowball#CancelClusterResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.snowball#InvalidJobStateException"
+        },
+        {
+          "target": "com.amazonaws.snowball#InvalidResourceException"
+        },
+        {
+          "target": "com.amazonaws.snowball#KMSRequestFailedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Cancels a cluster job. You can only cancel a cluster job while it's in the\n        <code>AwaitingQuorum</code> status. You'll have at least an hour after creating a cluster\n      job to cancel it.</p>"
+      }
+    },
+    "com.amazonaws.snowball#CancelClusterRequest": {
+      "type": "structure",
+      "members": {
+        "ClusterId": {
+          "target": "com.amazonaws.snowball#ClusterId",
+          "traits": {
+            "smithy.api#documentation": "<p>The 39-character ID for the cluster that you want to cancel, for example\n        <code>CID123e4567-e89b-12d3-a456-426655440000</code>.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#CancelClusterResult": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.snowball#CancelJob": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.snowball#CancelJobRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.snowball#CancelJobResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.snowball#InvalidJobStateException"
+        },
+        {
+          "target": "com.amazonaws.snowball#InvalidResourceException"
+        },
+        {
+          "target": "com.amazonaws.snowball#KMSRequestFailedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Cancels the specified job. You can only cancel a job before its <code>JobState</code>\n      value changes to <code>PreparingAppliance</code>. Requesting the <code>ListJobs</code> or\n        <code>DescribeJob</code> action returns a job's <code>JobState</code> as part of the\n      response element data returned.</p>"
+      }
+    },
+    "com.amazonaws.snowball#CancelJobRequest": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "target": "com.amazonaws.snowball#JobId",
+          "traits": {
+            "smithy.api#documentation": "<p>The 39-character job ID for the job that you want to cancel, for example\n        <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#CancelJobResult": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.snowball#ClusterId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 39,
+          "max": 39
+        },
+        "smithy.api#pattern": "CID[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+      }
+    },
+    "com.amazonaws.snowball#ClusterLimitExceededException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.snowball#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Job creation failed. Currently, clusters support five nodes. If you have less than five\n      nodes for your cluster and you have more nodes to create for this cluster, try again and\n      create jobs until your cluster has exactly five notes.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.snowball#ClusterListEntry": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Defines an optional description of the cluster, for example <code>Environmental Data\n        Cluster-01</code>.</p>"
+          }
+        },
+        "ClusterId": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The 39-character ID for the cluster that you want to list, for example\n        <code>CID123e4567-e89b-12d3-a456-426655440000</code>.</p>"
+          }
+        },
+        "CreationDate": {
+          "target": "com.amazonaws.snowball#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The creation date for this cluster.</p>"
+          }
+        },
+        "ClusterState": {
+          "target": "com.amazonaws.snowball#ClusterState",
+          "traits": {
+            "smithy.api#documentation": "<p>The current state of this cluster. For information about the state of a specific node,\n      see <a>JobListEntry$JobState</a>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains a cluster's state, a cluster's ID, and other important information.</p>"
+      }
+    },
+    "com.amazonaws.snowball#ClusterListEntryList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.snowball#ClusterListEntry"
+      }
+    },
+    "com.amazonaws.snowball#ClusterMetadata": {
+      "type": "structure",
+      "members": {
+        "Notification": {
+          "target": "com.amazonaws.snowball#Notification",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Simple Notification Service (Amazon SNS) notification settings for this\n      cluster.</p>"
+          }
+        },
+        "Resources": {
+          "target": "com.amazonaws.snowball#JobResource",
+          "traits": {
+            "smithy.api#documentation": "<p>The arrays of <a>JobResource</a> objects that can include updated <a>S3Resource</a> objects or <a>LambdaResource</a> objects.</p>"
+          }
+        },
+        "ClusterState": {
+          "target": "com.amazonaws.snowball#ClusterState",
+          "traits": {
+            "smithy.api#documentation": "<p>The current status of the cluster.</p>"
+          }
+        },
+        "AddressId": {
+          "target": "com.amazonaws.snowball#AddressId",
+          "traits": {
+            "smithy.api#documentation": "<p>The automatically generated ID for a specific address.</p>"
+          }
+        },
+        "ClusterId": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The automatically generated ID for a cluster.</p>"
+          }
+        },
+        "JobType": {
+          "target": "com.amazonaws.snowball#JobType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of job for this cluster. Currently, the only job type supported for clusters\n      is <code>LOCAL_USE</code>.</p>"
+          }
+        },
+        "KmsKeyARN": {
+          "target": "com.amazonaws.snowball#KmsKeyARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>KmsKeyARN</code> Amazon Resource Name (ARN) associated with this cluster.\n      This ARN was created using the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html\">CreateKey</a> API action in AWS Key\n      Management Service (AWS KMS).</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The optional description of the cluster.</p>"
+          }
+        },
+        "RoleARN": {
+          "target": "com.amazonaws.snowball#RoleARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The role ARN associated with this cluster. This ARN was created using the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a>\n      API action in AWS Identity and Access Management (IAM).</p>"
+          }
+        },
+        "TaxDocuments": {
+          "target": "com.amazonaws.snowball#TaxDocuments",
+          "traits": {
+            "smithy.api#documentation": "<p>The tax documents required in your AWS Region.</p>"
+          }
+        },
+        "CreationDate": {
+          "target": "com.amazonaws.snowball#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The creation date for this cluster.</p>"
+          }
+        },
+        "ForwardingAddressId": {
+          "target": "com.amazonaws.snowball#AddressId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the address that you want a cluster shipped to, after it will be\n      shipped to its primary address. This field is not supported in most regions.</p>"
+          }
+        },
+        "ShippingOption": {
+          "target": "com.amazonaws.snowball#ShippingOption",
+          "traits": {
+            "smithy.api#documentation": "<p>The shipping speed for each node in this cluster. This speed doesn't dictate how soon\n      you'll get each Snowball Edge device, rather it represents how quickly each device moves to\n      its destination while in transit. Regional shipping speeds are as follows:</p>\n\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, devices shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically,\n          Snowball Edges shipped express are delivered in about a day. In addition, most countries\n          in the EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snowball Edges are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the US, you have access to one-day shipping and two-day shipping.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "SnowballType": {
+          "target": "com.amazonaws.snowball#SnowballType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of AWS Snowball device to use for this cluster. \n      </p>\n         <note>\n            <p>For cluster jobs, AWS Snowball currently supports only the <code>EDGE</code> device type.</p>\n         </note>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains metadata about a specific cluster.</p>"
+      }
+    },
+    "com.amazonaws.snowball#ClusterState": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "AwaitingQuorum",
+            "name": "AWAITING_QUORUM"
+          },
+          {
+            "value": "Pending",
+            "name": "PENDING"
+          },
+          {
+            "value": "InUse",
+            "name": "IN_USE"
+          },
+          {
+            "value": "Complete",
+            "name": "COMPLETE"
+          },
+          {
+            "value": "Cancelled",
+            "name": "CANCELLED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.snowball#CompatibleImage": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The optional name of a compatible image.</p>"
+          }
+        },
+        "AmiId": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier for an individual Snowball Edge AMI.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A JSON-formatted object that describes a compatible Amazon Machine Image (AMI),\n      including the ID and name for a Snowball Edge AMI. This AMI is compatible with the device's\n      physical hardware requirements, and it should be able to be run in an SBE1 instance on the\n      device.</p>"
+      }
+    },
+    "com.amazonaws.snowball#CompatibleImageList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.snowball#CompatibleImage"
+      }
+    },
+    "com.amazonaws.snowball#CreateAddress": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.snowball#CreateAddressRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.snowball#CreateAddressResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.snowball#InvalidAddressException"
+        },
+        {
+          "target": "com.amazonaws.snowball#UnsupportedAddressException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates an address for a Snowball to be shipped to. In most regions,\n      addresses are validated at the time of creation. The address you provide must be located\n      within the serviceable area of your region. If the address is invalid or unsupported, then an\n      exception is thrown.</p>"
+      }
+    },
+    "com.amazonaws.snowball#CreateAddressRequest": {
+      "type": "structure",
+      "members": {
+        "Address": {
+          "target": "com.amazonaws.snowball#Address",
+          "traits": {
+            "smithy.api#documentation": "<p>The address that you want the Snowball shipped to.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#CreateAddressResult": {
+      "type": "structure",
+      "members": {
+        "AddressId": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The automatically generated ID for a specific address. You'll use this ID when you\n      create a job to specify which address you want the Snowball for that job shipped to.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#CreateCluster": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.snowball#CreateClusterRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.snowball#CreateClusterResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.snowball#Ec2RequestFailedException"
+        },
+        {
+          "target": "com.amazonaws.snowball#InvalidInputCombinationException"
+        },
+        {
+          "target": "com.amazonaws.snowball#InvalidResourceException"
+        },
+        {
+          "target": "com.amazonaws.snowball#KMSRequestFailedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates an empty cluster. Each cluster supports five nodes. You use the <a>CreateJob</a> action separately to create the jobs for each of these nodes. The\n      cluster does not ship until these five node jobs have been created.</p>"
+      }
+    },
+    "com.amazonaws.snowball#CreateClusterRequest": {
+      "type": "structure",
+      "members": {
+        "AddressId": {
+          "target": "com.amazonaws.snowball#AddressId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID for the address that you want the cluster shipped to.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>An optional description of this specific cluster, for example <code>Environmental Data\n        Cluster-01</code>.</p>"
+          }
+        },
+        "RoleARN": {
+          "target": "com.amazonaws.snowball#RoleARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>RoleARN</code> that you want to associate with this cluster.\n        <code>RoleArn</code> values are created by using the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a> API action in AWS\n      Identity and Access Management (IAM).</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TaxDocuments": {
+          "target": "com.amazonaws.snowball#TaxDocuments",
+          "traits": {
+            "smithy.api#documentation": "<p>The tax documents required in your AWS Region.</p>"
+          }
+        },
+        "ForwardingAddressId": {
+          "target": "com.amazonaws.snowball#AddressId",
+          "traits": {
+            "smithy.api#documentation": "<p>The forwarding address ID for a cluster. This field is not supported in most\n      regions.</p>"
+          }
+        },
+        "ShippingOption": {
+          "target": "com.amazonaws.snowball#ShippingOption",
+          "traits": {
+            "smithy.api#documentation": "<p>The shipping speed for each node in this cluster. This speed doesn't dictate how soon\n      you'll get each Snowball Edge device, rather it represents how quickly each device moves to\n      its destination while in transit. Regional shipping speeds are as follows:\n    </p>\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, Snowballs shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically,\n          Snowballs shipped express are delivered in about a day. In addition, most countries in the\n          EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snowballs are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the United States of America (US), you have access to one-day shipping and\n          two-day shipping.</p>\n            </li>\n         </ul>\n\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, devices shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically,\n          Snowball Edges shipped express are delivered in about a day. In addition, most countries\n          in the EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snowball Edges are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the US, you have access to one-day shipping and two-day shipping.</p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        },
+        "SnowballType": {
+          "target": "com.amazonaws.snowball#SnowballType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of AWS Snowball device to use for this cluster. \n      \n    </p>\n         <note>\n            <p>For cluster jobs, AWS Snowball currently supports only the <code>EDGE</code> device type.</p>\n         </note>"
+          }
+        },
+        "Notification": {
+          "target": "com.amazonaws.snowball#Notification",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Simple Notification Service (Amazon SNS) notification settings for this\n      cluster.</p>"
+          }
+        },
+        "KmsKeyARN": {
+          "target": "com.amazonaws.snowball#KmsKeyARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>KmsKeyARN</code> value that you want to associate with this cluster.\n        <code>KmsKeyARN</code> values are created by using the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html\">CreateKey</a> API action in AWS Key\n      Management Service (AWS KMS). </p>"
+          }
+        },
+        "JobType": {
+          "target": "com.amazonaws.snowball#JobType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of job for this cluster. Currently, the only job type supported for clusters\n      is <code>LOCAL_USE</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Resources": {
+          "target": "com.amazonaws.snowball#JobResource",
+          "traits": {
+            "smithy.api#documentation": "<p>The resources associated with the cluster job. These resources include Amazon S3\n      buckets and optional AWS Lambda functions written in the Python language. </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#CreateClusterResult": {
+      "type": "structure",
+      "members": {
+        "ClusterId": {
+          "target": "com.amazonaws.snowball#ClusterId",
+          "traits": {
+            "smithy.api#documentation": "<p>The automatically generated ID for a cluster.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#CreateJob": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.snowball#CreateJobRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.snowball#CreateJobResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.snowball#ClusterLimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.snowball#Ec2RequestFailedException"
+        },
+        {
+          "target": "com.amazonaws.snowball#InvalidInputCombinationException"
+        },
+        {
+          "target": "com.amazonaws.snowball#InvalidResourceException"
+        },
+        {
+          "target": "com.amazonaws.snowball#KMSRequestFailedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a job to import or export data between Amazon S3 and your on-premises data\n      center. Your AWS account must have the right trust policies and permissions in place to create\n      a job for Snowball. If you're creating a job for a node in a cluster, you only need to provide\n      the <code>clusterId</code> value; the other job attributes are inherited from the cluster.\n    </p>"
+      }
+    },
+    "com.amazonaws.snowball#CreateJobRequest": {
+      "type": "structure",
+      "members": {
+        "ShippingOption": {
+          "target": "com.amazonaws.snowball#ShippingOption",
+          "traits": {
+            "smithy.api#documentation": "<p>The shipping speed for this job. This speed doesn't dictate how soon you'll get the\n      Snowball, rather it represents how quickly the Snowball moves to its destination while in\n      transit. Regional shipping speeds are as follows:</p>\n\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, Snowballs shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically,\n          Snowballs shipped express are delivered in about a day. In addition, most countries in the\n          EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snowballs are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the US, you have access to one-day shipping and two-day shipping.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "ForwardingAddressId": {
+          "target": "com.amazonaws.snowball#AddressId",
+          "traits": {
+            "smithy.api#documentation": "<p>The forwarding address ID for a job. This field is not supported in most\n      regions.</p>"
+          }
+        },
+        "SnowballCapacityPreference": {
+          "target": "com.amazonaws.snowball#SnowballCapacity",
+          "traits": {
+            "smithy.api#documentation": "<p>If your job is being created in one of the US regions, you have the option of\n      specifying what size Snowball you'd like for this job. In all other regions, Snowballs come\n      with 80 TB in storage capacity.</p>"
+          }
+        },
+        "KmsKeyARN": {
+          "target": "com.amazonaws.snowball#KmsKeyARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>KmsKeyARN</code> that you want to associate with this job.\n        <code>KmsKeyARN</code>s are created using the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html\">CreateKey</a> AWS Key Management\n      Service (KMS) API action.</p>"
+          }
+        },
+        "JobType": {
+          "target": "com.amazonaws.snowball#JobType",
+          "traits": {
+            "smithy.api#documentation": "<p>Defines the type of job that you're creating.\n      </p>"
+          }
+        },
+        "RoleARN": {
+          "target": "com.amazonaws.snowball#RoleARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>RoleARN</code> that you want to associate with this job.\n      <code>RoleArn</code>s are created using the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a> AWS Identity and\n      Access Management (IAM) API action.</p>"
+          }
+        },
+        "Notification": {
+          "target": "com.amazonaws.snowball#Notification",
+          "traits": {
+            "smithy.api#documentation": "<p>Defines the Amazon Simple Notification Service (Amazon SNS) notification settings for\n      this job.</p>"
+          }
+        },
+        "TaxDocuments": {
+          "target": "com.amazonaws.snowball#TaxDocuments",
+          "traits": {
+            "smithy.api#documentation": "<p>The tax documents required in your AWS Region.</p>"
+          }
+        },
+        "DeviceConfiguration": {
+          "target": "com.amazonaws.snowball#DeviceConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Defines the device configuration for an AWS Snowcone job.</p>"
+          }
+        },
+        "SnowballType": {
+          "target": "com.amazonaws.snowball#SnowballType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of AWS Snowball device to use for this job. \n      </p>\n         <note>\n            <p>For cluster jobs, AWS Snowball currently supports only the <code>EDGE</code> device type.</p>\n         </note>\n         <p>The type of AWS Snowball device to use for this job. Currently, the only supported\n      device type for cluster jobs is <code>EDGE</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html\">Snowball Edge Device\n      Options</a> in the Snowball Edge Developer Guide.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Defines an optional description of this specific job, for example <code>Important\n        Photos 2016-08-11</code>.</p>"
+          }
+        },
+        "Resources": {
+          "target": "com.amazonaws.snowball#JobResource",
+          "traits": {
+            "smithy.api#documentation": "<p>Defines the Amazon S3 buckets associated with this job.</p>\n\n         <p>With <code>IMPORT</code> jobs, you specify the bucket or buckets that your transferred\n      data will be imported into.</p>\n\n         <p>With <code>EXPORT</code> jobs, you specify the bucket or buckets that your transferred\n      data will be exported from. Optionally, you can also specify a <code>KeyRange</code> value. If\n      you choose to export a range, you define the length of the range by providing either an\n      inclusive <code>BeginMarker</code> value, an inclusive <code>EndMarker</code> value, or both.\n      Ranges are UTF-8 binary sorted.</p>"
+          }
+        },
+        "ClusterId": {
+          "target": "com.amazonaws.snowball#ClusterId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of a cluster. If you're creating a job for a node in a cluster, you need to\n      provide only this <code>clusterId</code> value. The other job attributes are inherited from\n      the cluster.</p>"
+          }
+        },
+        "AddressId": {
+          "target": "com.amazonaws.snowball#AddressId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID for the address that you want the Snowball shipped to.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#CreateJobResult": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "target": "com.amazonaws.snowball#JobId",
+          "traits": {
+            "smithy.api#documentation": "<p>The automatically generated ID for a job, for example\n        <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#DataTransfer": {
+      "type": "structure",
+      "members": {
+        "ObjectsTransferred": {
+          "target": "com.amazonaws.snowball#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of objects transferred between a Snowball and Amazon S3.</p>"
+          }
+        },
+        "BytesTransferred": {
+          "target": "com.amazonaws.snowball#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of bytes transferred between a Snowball and Amazon S3.</p>"
+          }
+        },
+        "TotalBytes": {
+          "target": "com.amazonaws.snowball#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The total bytes of data for a transfer between a Snowball and Amazon S3. This value is\n      set to 0 (zero) until all the keys that will be transferred have been listed.</p>"
+          }
+        },
+        "TotalObjects": {
+          "target": "com.amazonaws.snowball#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The total number of objects for a transfer between a Snowball and Amazon S3. This value\n      is set to 0 (zero) until all the keys that will be transferred have been listed.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Defines the real-time status of a Snowball's data transfer while the device is at AWS.\n      This data is only available while a job has a <code>JobState</code> value of\n        <code>InProgress</code>, for both import and export jobs.</p>"
+      }
+    },
+    "com.amazonaws.snowball#DescribeAddress": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.snowball#DescribeAddressRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.snowball#DescribeAddressResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.snowball#InvalidResourceException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Takes an <code>AddressId</code> and returns specific details about that address in the\n      form of an <code>Address</code> object.</p>"
+      }
+    },
+    "com.amazonaws.snowball#DescribeAddressRequest": {
+      "type": "structure",
+      "members": {
+        "AddressId": {
+          "target": "com.amazonaws.snowball#AddressId",
+          "traits": {
+            "smithy.api#documentation": "<p>The automatically generated ID for a specific address.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#DescribeAddressResult": {
+      "type": "structure",
+      "members": {
+        "Address": {
+          "target": "com.amazonaws.snowball#Address",
+          "traits": {
+            "smithy.api#documentation": "<p>The address that you want the Snowball or Snowballs associated with a specific job to\n      be shipped to.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#DescribeAddresses": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.snowball#DescribeAddressesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.snowball#DescribeAddressesResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.snowball#InvalidNextTokenException"
+        },
+        {
+          "target": "com.amazonaws.snowball#InvalidResourceException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns a specified number of <code>ADDRESS</code> objects. Calling this API in one of\n      the US regions will return addresses from the list of all addresses associated with this\n      account in all US regions.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "Addresses",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.snowball#DescribeAddressesRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>HTTP requests are stateless. To identify what object comes \"next\" in the list of\n        <code>ADDRESS</code> objects, you have the option of specifying a value for\n        <code>NextToken</code> as the starting point for your list of returned addresses.</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.snowball#ListLimit",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of <code>ADDRESS</code> objects to return.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#DescribeAddressesResult": {
+      "type": "structure",
+      "members": {
+        "Addresses": {
+          "target": "com.amazonaws.snowball#AddressList",
+          "traits": {
+            "smithy.api#documentation": "<p>The Snowball shipping addresses that were created for this account.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>HTTP requests are stateless. If you use the automatically generated\n        <code>NextToken</code> value in your next <code>DescribeAddresses</code> call, your list of\n      returned addresses will start from this point in the array.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#DescribeCluster": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.snowball#DescribeClusterRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.snowball#DescribeClusterResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.snowball#InvalidResourceException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns information about a specific cluster including shipping information, cluster\n      status, and other important metadata.</p>"
+      }
+    },
+    "com.amazonaws.snowball#DescribeClusterRequest": {
+      "type": "structure",
+      "members": {
+        "ClusterId": {
+          "target": "com.amazonaws.snowball#ClusterId",
+          "traits": {
+            "smithy.api#documentation": "<p>The automatically generated ID for a cluster.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#DescribeClusterResult": {
+      "type": "structure",
+      "members": {
+        "ClusterMetadata": {
+          "target": "com.amazonaws.snowball#ClusterMetadata",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about a specific cluster, including shipping information, cluster status,\n      and other important metadata.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#DescribeJob": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.snowball#DescribeJobRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.snowball#DescribeJobResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.snowball#InvalidResourceException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns information about a specific job including shipping information, job status,\n      and other important metadata. </p>"
+      }
+    },
+    "com.amazonaws.snowball#DescribeJobRequest": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "target": "com.amazonaws.snowball#JobId",
+          "traits": {
+            "smithy.api#documentation": "<p>The automatically generated ID for a job, for example\n        <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#DescribeJobResult": {
+      "type": "structure",
+      "members": {
+        "JobMetadata": {
+          "target": "com.amazonaws.snowball#JobMetadata",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about a specific job, including shipping information, job status, and other\n      important metadata.</p>"
+          }
+        },
+        "SubJobMetadata": {
+          "target": "com.amazonaws.snowball#JobMetadataList",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about a specific job part (in the case of an export job), including\n      shipping information, job status, and other important metadata.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#DeviceConfiguration": {
+      "type": "structure",
+      "members": {
+        "SnowconeDeviceConfiguration": {
+          "target": "com.amazonaws.snowball#SnowconeDeviceConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Returns information about the device configuration for an AWS Snowcone job.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The container for <code>SnowconeDeviceConfiguration</code>. </p>"
+      }
+    },
+    "com.amazonaws.snowball#Ec2AmiResource": {
+      "type": "structure",
+      "members": {
+        "AmiId": {
+          "target": "com.amazonaws.snowball#AmiId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the AMI in Amazon EC2.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "SnowballAmiId": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the AMI on the Snowball Edge device.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A JSON-formatted object that contains the IDs for an Amazon Machine Image (AMI),\n      including the Amazon EC2 AMI ID and the Snowball Edge AMI ID. Each AMI has these two IDs to\n      simplify identifying the AMI in both the AWS Cloud and on the device.</p>"
+      }
+    },
+    "com.amazonaws.snowball#Ec2AmiResourceList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.snowball#Ec2AmiResource"
+      }
+    },
+    "com.amazonaws.snowball#Ec2RequestFailedException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.snowball#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Your IAM user lacks the necessary Amazon EC2 permissions to perform the attempted\n      action.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.snowball#EventTriggerDefinition": {
+      "type": "structure",
+      "members": {
+        "EventResourceARN": {
+          "target": "com.amazonaws.snowball#ResourceARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for any local Amazon S3 resource that is an AWS Lambda\n      function's event trigger associated with this job.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The container for the <a>EventTriggerDefinition$EventResourceARN</a>.</p>"
+      }
+    },
+    "com.amazonaws.snowball#EventTriggerDefinitionList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.snowball#EventTriggerDefinition"
+      }
+    },
+    "com.amazonaws.snowball#GSTIN": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "\\d{2}[A-Z]{5}\\d{4}[A-Z]{1}[A-Z\\d]{1}[Z]{1}[A-Z\\d]{1}"
+      }
+    },
+    "com.amazonaws.snowball#GetJobManifest": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.snowball#GetJobManifestRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.snowball#GetJobManifestResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.snowball#InvalidJobStateException"
+        },
+        {
+          "target": "com.amazonaws.snowball#InvalidResourceException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns a link to an Amazon S3 presigned URL for the manifest file associated with the\n      specified <code>JobId</code> value. You can access the manifest file for up to 60 minutes\n      after this request has been made. To access the manifest file after 60 minutes have passed,\n      you'll have to make another call to the <code>GetJobManifest</code> action.</p>\n\n         <p>The manifest is an encrypted file that you can download after your job enters the\n        <code>WithCustomer</code> status. The manifest is decrypted by using the\n        <code>UnlockCode</code> code value, when you pass both values to the Snowball through the\n      Snowball client when the client is started for the first time.</p>\n\n\n         <p>As a best practice, we recommend that you don't save a copy of an\n        <code>UnlockCode</code> value in the same location as the manifest file for that job. Saving\n      these separately helps prevent unauthorized parties from gaining access to the Snowball\n      associated with that job.</p>\n\n\n         <p>The credentials of a given job, including its manifest file and unlock code, expire 90\n      days after the job is created.</p>"
+      }
+    },
+    "com.amazonaws.snowball#GetJobManifestRequest": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "target": "com.amazonaws.snowball#JobId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID for a job that you want to get the manifest file for, for example\n        <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#GetJobManifestResult": {
+      "type": "structure",
+      "members": {
+        "ManifestURI": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon S3 presigned URL for the manifest file associated with the specified\n        <code>JobId</code> value.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#GetJobUnlockCode": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.snowball#GetJobUnlockCodeRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.snowball#GetJobUnlockCodeResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.snowball#InvalidJobStateException"
+        },
+        {
+          "target": "com.amazonaws.snowball#InvalidResourceException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns the <code>UnlockCode</code> code value for the specified job. A particular\n        <code>UnlockCode</code> value can be accessed for up to 90 days after the associated job has\n      been created.</p>\n\n         <p>The <code>UnlockCode</code> value is a 29-character code with 25 alphanumeric\n      characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed\n      along with the manifest to the Snowball through the Snowball client when the client is started\n      for the first time.</p>\n\n         <p>As a best practice, we recommend that you don't save a copy of the\n        <code>UnlockCode</code> in the same location as the manifest file for that job. Saving these\n      separately helps prevent unauthorized parties from gaining access to the Snowball associated\n      with that job.</p>"
+      }
+    },
+    "com.amazonaws.snowball#GetJobUnlockCodeRequest": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "target": "com.amazonaws.snowball#JobId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID for the job that you want to get the <code>UnlockCode</code> value for, for\n      example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#GetJobUnlockCodeResult": {
+      "type": "structure",
+      "members": {
+        "UnlockCode": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>UnlockCode</code> value for the specified job. The <code>UnlockCode</code>\n      value can be accessed for up to 90 days after the job has been created.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#GetSnowballUsage": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.snowball#GetSnowballUsageRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.snowball#GetSnowballUsageResult"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Returns information about the Snowball service limit for your account, and also the\n      number of Snowballs your account has in use.</p>\n\n         <p>The default service limit for the number of Snowballs that you can have at one time is\n      1. If you want to increase your service limit, contact AWS Support.</p>"
+      }
+    },
+    "com.amazonaws.snowball#GetSnowballUsageRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.snowball#GetSnowballUsageResult": {
+      "type": "structure",
+      "members": {
+        "SnowballLimit": {
+          "target": "com.amazonaws.snowball#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The service limit for number of Snowballs this account can have at once. The default\n      service limit is 1 (one).</p>"
+          }
+        },
+        "SnowballsInUse": {
+          "target": "com.amazonaws.snowball#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of Snowballs that this account is currently using.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#GetSoftwareUpdates": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.snowball#GetSoftwareUpdatesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.snowball#GetSoftwareUpdatesResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.snowball#InvalidJobStateException"
+        },
+        {
+          "target": "com.amazonaws.snowball#InvalidResourceException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns an Amazon S3 presigned URL for an update file associated with a specified\n      <code>JobId</code>.</p>"
+      }
+    },
+    "com.amazonaws.snowball#GetSoftwareUpdatesRequest": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "target": "com.amazonaws.snowball#JobId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID for a job that you want to get the software update file for, for example\n      <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#GetSoftwareUpdatesResult": {
+      "type": "structure",
+      "members": {
+        "UpdatesURI": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon S3 presigned URL for the update file associated with the specified\n      <code>JobId</code> value. The software update will be available for 2 days after this request is made. \n      To access an update after the 2 days have passed, you'll have to make another call to <code>GetSoftwareUpdates</code>.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#INDTaxDocuments": {
+      "type": "structure",
+      "members": {
+        "GSTIN": {
+          "target": "com.amazonaws.snowball#GSTIN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Goods and Services Tax (GST) documents required in AWS Regions in India.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The tax documents required in AWS Regions in India.</p>"
+      }
+    },
+    "com.amazonaws.snowball#Integer": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {}
+      }
+    },
+    "com.amazonaws.snowball#InvalidAddressException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.snowball#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The address provided was invalid. Check the address with your region's carrier, and try\n      again.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.snowball#InvalidInputCombinationException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.snowball#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Job or cluster creation failed. One or more inputs were invalid. Confirm that the\n      <a>CreateClusterRequest$SnowballType</a> value supports your <a>CreateJobRequest$JobType</a>, and try again.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.snowball#InvalidJobStateException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.snowball#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The action can't be performed because the job's current state doesn't allow that action\n      to be performed.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.snowball#InvalidNextTokenException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.snowball#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The <code>NextToken</code> string was altered unexpectedly, and the operation has\n      stopped. Run the operation without changing the <code>NextToken</code> string, and try\n      again.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.snowball#InvalidResourceException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.snowball#String"
+        },
+        "ResourceType": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The provided resource value is invalid.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The specified resource can't be found. Check the information you provided in your last\n      request, and try again.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.snowball#JobId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 39,
+          "max": 39
+        },
+        "smithy.api#pattern": "(M|J)ID[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+      }
+    },
+    "com.amazonaws.snowball#JobListEntry": {
+      "type": "structure",
+      "members": {
+        "JobState": {
+          "target": "com.amazonaws.snowball#JobState",
+          "traits": {
+            "smithy.api#documentation": "<p>The current state of this job.</p>"
+          }
+        },
+        "JobId": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The automatically generated ID for a job, for example\n        <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>"
+          }
+        },
+        "IsMaster": {
+          "target": "com.amazonaws.snowball#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A value that indicates that this job is a master job. A master job represents a\n      successful request to create an export job. Master jobs aren't associated with any Snowballs.\n      Instead, each master job will have at least one job part, and each job part is associated with\n      a Snowball. It might take some time before the job parts associated with a particular master\n      job are listed, because they are created after the master job is created.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The optional description of this specific job, for example <code>Important Photos\n        2016-08-11</code>.</p>"
+          }
+        },
+        "SnowballType": {
+          "target": "com.amazonaws.snowball#SnowballType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of device used with this job.</p>"
+          }
+        },
+        "JobType": {
+          "target": "com.amazonaws.snowball#JobType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of job.</p>"
+          }
+        },
+        "CreationDate": {
+          "target": "com.amazonaws.snowball#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The creation date for this job.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Each <code>JobListEntry</code> object contains a job's state, a job's ID, and a value\n      that indicates whether the job is a job part, in the case of an export job.</p>"
+      }
+    },
+    "com.amazonaws.snowball#JobListEntryList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.snowball#JobListEntry"
+      }
+    },
+    "com.amazonaws.snowball#JobLogs": {
+      "type": "structure",
+      "members": {
+        "JobCompletionReportURI": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A link to an Amazon S3 presigned URL where the job completion report is\n      located.</p>"
+          }
+        },
+        "JobSuccessLogURI": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A link to an Amazon S3 presigned URL where the job success log is located.</p>"
+          }
+        },
+        "JobFailureLogURI": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A link to an Amazon S3 presigned URL where the job failure log is located.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains job logs. Whenever Snowball is used to import data into or export data out of\n      Amazon S3, you'll have the option of downloading a PDF job report. Job logs are returned as a\n      part of the response syntax of the <code>DescribeJob</code> action in the\n        <code>JobMetadata</code> data type. The job logs can be accessed for up to 60 minutes after\n      this request has been made. To access any of the job logs after 60 minutes have passed, you'll\n      have to make another call to the <code>DescribeJob</code> action.</p>\n\n         <p>For import jobs, the PDF job report becomes available at the end of the import process.\n      For export jobs, your job report typically becomes available while the Snowball for your job\n      part is being delivered to you.</p>\n\n         <p>The job report provides you insight into the state of your Amazon S3 data transfer. The\n      report includes details about your job or job part for your records.</p>\n\n         <p>For deeper visibility into the status of your transferred objects, you can look at the\n      two associated logs: a success log and a failure log. The logs are saved in comma-separated\n      value (CSV) format, and the name of each log includes the ID of the job or job part that the\n      log describes.</p>"
+      }
+    },
+    "com.amazonaws.snowball#JobMetadata": {
+      "type": "structure",
+      "members": {
+        "DataTransferProgress": {
+          "target": "com.amazonaws.snowball#DataTransfer",
+          "traits": {
+            "smithy.api#documentation": "<p>A value that defines the real-time status of a Snowball's data transfer while the\n      device is at AWS. This data is only available while a job has a <code>JobState</code> value of\n        <code>InProgress</code>, for both import and export jobs.</p>"
+          }
+        },
+        "Resources": {
+          "target": "com.amazonaws.snowball#JobResource",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of <code>S3Resource</code> objects. Each <code>S3Resource</code> object\n      represents an Amazon S3 bucket that your transferred data will be exported from or imported\n      into.</p>"
+          }
+        },
+        "JobLogInfo": {
+          "target": "com.amazonaws.snowball#JobLogs",
+          "traits": {
+            "smithy.api#documentation": "<p>Links to Amazon S3 presigned URLs for the job report and logs. For import jobs, the PDF\n      job report becomes available at the end of the import process. For export jobs, your job\n      report typically becomes available while the Snowball for your job part is being delivered to\n      you.</p>"
+          }
+        },
+        "Notification": {
+          "target": "com.amazonaws.snowball#Notification",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Simple Notification Service (Amazon SNS) notification settings associated\n      with a specific job. The <code>Notification</code> object is returned as a part of the\n      response syntax of the <code>DescribeJob</code> action in the <code>JobMetadata</code> data\n      type.</p>"
+          }
+        },
+        "JobState": {
+          "target": "com.amazonaws.snowball#JobState",
+          "traits": {
+            "smithy.api#documentation": "<p>The current status of the jobs.</p>"
+          }
+        },
+        "SnowballType": {
+          "target": "com.amazonaws.snowball#SnowballType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of device used with this job.</p>"
+          }
+        },
+        "ClusterId": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The 39-character ID for the cluster, for example\n        <code>CID123e4567-e89b-12d3-a456-426655440000</code>.</p>"
+          }
+        },
+        "TaxDocuments": {
+          "target": "com.amazonaws.snowball#TaxDocuments",
+          "traits": {
+            "smithy.api#documentation": "<p>The metadata associated with the tax documents required in your AWS Region.</p>"
+          }
+        },
+        "SnowballCapacityPreference": {
+          "target": "com.amazonaws.snowball#SnowballCapacity",
+          "traits": {
+            "smithy.api#documentation": "<p>The Snowball capacity preference for this job, specified at job creation. In US\n      regions, you can choose between 50 TB and 80 TB Snowballs. All other regions use 80 TB\n      capacity Snowballs.</p>"
+          }
+        },
+        "AddressId": {
+          "target": "com.amazonaws.snowball#AddressId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID for the address that you want the Snowball shipped to.</p>"
+          }
+        },
+        "CreationDate": {
+          "target": "com.amazonaws.snowball#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The creation date for this job.</p>"
+          }
+        },
+        "JobType": {
+          "target": "com.amazonaws.snowball#JobType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of job.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the job, provided at job creation.</p>"
+          }
+        },
+        "JobId": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The automatically generated ID for a job, for example\n        <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>"
+          }
+        },
+        "DeviceConfiguration": {
+          "target": "com.amazonaws.snowball#DeviceConfiguration"
+        },
+        "ShippingDetails": {
+          "target": "com.amazonaws.snowball#ShippingDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>A job's shipping information, including inbound and outbound tracking numbers and\n      shipping speed options.</p>"
+          }
+        },
+        "RoleARN": {
+          "target": "com.amazonaws.snowball#RoleARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The role ARN associated with this job. This ARN was created using the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a>\n      API action in AWS Identity and Access Management (IAM).</p>"
+          }
+        },
+        "ForwardingAddressId": {
+          "target": "com.amazonaws.snowball#AddressId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the address that you want a job shipped to, after it will be\n      shipped to its primary address. This field is not supported in most regions.</p>"
+          }
+        },
+        "KmsKeyARN": {
+          "target": "com.amazonaws.snowball#KmsKeyARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the AWS Key Management Service (AWS KMS) key\n      associated with this job. This ARN was created using the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html\">CreateKey</a> API action in AWS\n      KMS.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains information about a specific job including shipping information, job status,\n      and other important metadata. This information is returned as a part of the response syntax of\n      the <code>DescribeJob</code> action.</p>"
+      }
+    },
+    "com.amazonaws.snowball#JobMetadataList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.snowball#JobMetadata"
+      }
+    },
+    "com.amazonaws.snowball#JobResource": {
+      "type": "structure",
+      "members": {
+        "LambdaResources": {
+          "target": "com.amazonaws.snowball#LambdaResourceList",
+          "traits": {
+            "smithy.api#documentation": "<p>The Python-language Lambda functions for this job.</p>"
+          }
+        },
+        "Ec2AmiResources": {
+          "target": "com.amazonaws.snowball#Ec2AmiResourceList",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Machine Images (AMIs) associated with this job.</p>"
+          }
+        },
+        "S3Resources": {
+          "target": "com.amazonaws.snowball#S3ResourceList",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of <code>S3Resource</code> objects.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains an array of AWS resource objects. Each object represents an Amazon S3 bucket,\n      an AWS Lambda function, or an Amazon Machine Image (AMI) based on Amazon EC2 that is\n      associated with a particular job.</p>"
+      }
+    },
+    "com.amazonaws.snowball#JobState": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "New",
+            "name": "NEW"
+          },
+          {
+            "value": "PreparingAppliance",
+            "name": "PREPARING_APPLIANCE"
+          },
+          {
+            "value": "PreparingShipment",
+            "name": "PREPARING_SHIPMENT"
+          },
+          {
+            "value": "InTransitToCustomer",
+            "name": "IN_TRANSIT_TO_CUSTOMER"
+          },
+          {
+            "value": "WithCustomer",
+            "name": "WITH_CUSTOMER"
+          },
+          {
+            "value": "InTransitToAWS",
+            "name": "IN_TRANSIT_TO_AWS"
+          },
+          {
+            "value": "WithAWSSortingFacility",
+            "name": "WITH_AWS_SORTING_FACILITY"
+          },
+          {
+            "value": "WithAWS",
+            "name": "WITH_AWS"
+          },
+          {
+            "value": "InProgress",
+            "name": "IN_PROGRESS"
+          },
+          {
+            "value": "Complete",
+            "name": "COMPLETE"
+          },
+          {
+            "value": "Cancelled",
+            "name": "CANCELLED"
+          },
+          {
+            "value": "Listing",
+            "name": "LISTING"
+          },
+          {
+            "value": "Pending",
+            "name": "PENDING"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.snowball#JobStateList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.snowball#JobState"
+      }
+    },
+    "com.amazonaws.snowball#JobType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "IMPORT",
+            "name": "IMPORT"
+          },
+          {
+            "value": "EXPORT",
+            "name": "EXPORT"
+          },
+          {
+            "value": "LOCAL_USE",
+            "name": "LOCAL_USE"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.snowball#KMSRequestFailedException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.snowball#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The provided AWS Key Management Service key lacks the permissions to perform the\n      specified <a>CreateJob</a> or <a>UpdateJob</a> action.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.snowball#KeyRange": {
+      "type": "structure",
+      "members": {
+        "EndMarker": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The key that ends an optional key range for an export job. Ranges are inclusive and\n      UTF-8 binary sorted.</p>"
+          }
+        },
+        "BeginMarker": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The key that starts an optional key range for an export job. Ranges are inclusive and\n      UTF-8 binary sorted.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains a key range. For export jobs, a <code>S3Resource</code> object can have an\n      optional <code>KeyRange</code> value. The length of the range is defined at job creation, and\n      has either an inclusive <code>BeginMarker</code>, an inclusive <code>EndMarker</code>, or\n      both. Ranges are UTF-8 binary sorted.</p>"
+      }
+    },
+    "com.amazonaws.snowball#KmsKeyARN": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 255
+        },
+        "smithy.api#pattern": "arn:aws.*:kms:.*:[0-9]{12}:key/.*"
+      }
+    },
+    "com.amazonaws.snowball#LambdaResource": {
+      "type": "structure",
+      "members": {
+        "EventTriggers": {
+          "target": "com.amazonaws.snowball#EventTriggerDefinitionList",
+          "traits": {
+            "smithy.api#documentation": "<p>The array of ARNs for <a>S3Resource</a> objects to trigger the <a>LambdaResource</a> objects associated with this job.</p>"
+          }
+        },
+        "LambdaArn": {
+          "target": "com.amazonaws.snowball#ResourceARN",
+          "traits": {
+            "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that represents an AWS Lambda function to be triggered by\n      PUT object actions on the associated local Amazon S3 resource.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Identifies </p>"
+      }
+    },
+    "com.amazonaws.snowball#LambdaResourceList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.snowball#LambdaResource"
+      }
+    },
+    "com.amazonaws.snowball#ListClusterJobs": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.snowball#ListClusterJobsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.snowball#ListClusterJobsResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.snowball#InvalidNextTokenException"
+        },
+        {
+          "target": "com.amazonaws.snowball#InvalidResourceException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns an array of <code>JobListEntry</code> objects of the specified length. Each\n        <code>JobListEntry</code> object is for a job in the specified cluster and contains a job's\n      state, a job's ID, and other information.</p>"
+      }
+    },
+    "com.amazonaws.snowball#ListClusterJobsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>HTTP requests are stateless. To identify what object comes \"next\" in the list of\n        <code>JobListEntry</code> objects, you have the option of specifying <code>NextToken</code>\n      as the starting point for your returned list.</p>"
+          }
+        },
+        "ClusterId": {
+          "target": "com.amazonaws.snowball#ClusterId",
+          "traits": {
+            "smithy.api#documentation": "<p>The 39-character ID for the cluster that you want to list, for example\n        <code>CID123e4567-e89b-12d3-a456-426655440000</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.snowball#ListLimit",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of <code>JobListEntry</code> objects to return.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#ListClusterJobsResult": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>HTTP requests are stateless. If you use the automatically generated\n        <code>NextToken</code> value in your next <code>ListClusterJobsResult</code> call, your list\n      of returned jobs will start from this point in the array.</p>"
+          }
+        },
+        "JobListEntries": {
+          "target": "com.amazonaws.snowball#JobListEntryList",
+          "traits": {
+            "smithy.api#documentation": "<p>Each <code>JobListEntry</code> object contains a job's state, a job's ID, and a value\n      that indicates whether the job is a job part, in the case of export jobs. </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#ListClusters": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.snowball#ListClustersRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.snowball#ListClustersResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.snowball#InvalidNextTokenException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns an array of <code>ClusterListEntry</code> objects of the specified length. Each\n        <code>ClusterListEntry</code> object contains a cluster's state, a cluster's ID, and other\n      important status information.</p>"
+      }
+    },
+    "com.amazonaws.snowball#ListClustersRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "target": "com.amazonaws.snowball#ListLimit",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of <code>ClusterListEntry</code> objects to return.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>HTTP requests are stateless. To identify what object comes \"next\" in the list of\n        <code>ClusterListEntry</code> objects, you have the option of specifying\n        <code>NextToken</code> as the starting point for your returned list.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#ListClustersResult": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>HTTP requests are stateless. If you use the automatically generated\n        <code>NextToken</code> value in your next <code>ClusterListEntry</code> call, your list of\n      returned clusters will start from this point in the array.</p>"
+          }
+        },
+        "ClusterListEntries": {
+          "target": "com.amazonaws.snowball#ClusterListEntryList",
+          "traits": {
+            "smithy.api#documentation": "<p>Each <code>ClusterListEntry</code> object contains a cluster's state, a cluster's ID,\n      and other important status information.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#ListCompatibleImages": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.snowball#ListCompatibleImagesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.snowball#ListCompatibleImagesResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.snowball#Ec2RequestFailedException"
+        },
+        {
+          "target": "com.amazonaws.snowball#InvalidNextTokenException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs)\n      that are owned by your AWS account that would be supported for use on a Snowball Edge device.\n      Currently, supported AMIs are based on the CentOS 7 (x86_64) - with Updates HVM, Ubuntu Server\n      14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM) images, available on the AWS\n      Marketplace.</p>"
+      }
+    },
+    "com.amazonaws.snowball#ListCompatibleImagesRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "target": "com.amazonaws.snowball#ListLimit",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results for the list of compatible images. Currently, a Snowball\n      Edge device can store 10 AMIs.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>HTTP requests are stateless. To identify what object comes \"next\" in the list of\n      compatible images, you can specify a value for <code>NextToken</code> as the starting point\n      for your list of returned images.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#ListCompatibleImagesResult": {
+      "type": "structure",
+      "members": {
+        "CompatibleImages": {
+          "target": "com.amazonaws.snowball#CompatibleImageList",
+          "traits": {
+            "smithy.api#documentation": "<p>A JSON-formatted object that describes a compatible AMI, including the ID and name for\n      a Snowball Edge AMI.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Because HTTP requests are stateless, this is the starting point for your next list of\n      returned images.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#ListJobs": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.snowball#ListJobsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.snowball#ListJobsResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.snowball#InvalidNextTokenException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns an array of <code>JobListEntry</code> objects of the specified length. Each\n        <code>JobListEntry</code> object contains a job's state, a job's ID, and a value that\n      indicates whether the job is a job part, in the case of export jobs. Calling this API action\n      in one of the US regions will return jobs from the list of all jobs associated with this\n      account in all US regions.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "items": "JobListEntries",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.snowball#ListJobsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>HTTP requests are stateless. To identify what object comes \"next\" in the list of\n        <code>JobListEntry</code> objects, you have the option of specifying <code>NextToken</code>\n      as the starting point for your returned list.</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.snowball#ListLimit",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of <code>JobListEntry</code> objects to return.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#ListJobsResult": {
+      "type": "structure",
+      "members": {
+        "JobListEntries": {
+          "target": "com.amazonaws.snowball#JobListEntryList",
+          "traits": {
+            "smithy.api#documentation": "<p>Each <code>JobListEntry</code> object contains a job's state, a job's ID, and a value\n      that indicates whether the job is a job part, in the case of export jobs. </p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>HTTP requests are stateless. If you use this automatically generated\n        <code>NextToken</code> value in your next <code>ListJobs</code> call, your returned\n        <code>JobListEntry</code> objects will start from this point in the array.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#ListLimit": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {},
+        "smithy.api#range": {
+          "min": 0,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.snowball#Long": {
+      "type": "long"
+    },
+    "com.amazonaws.snowball#Notification": {
+      "type": "structure",
+      "members": {
+        "SnsTopicARN": {
+          "target": "com.amazonaws.snowball#SnsTopicARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The new SNS <code>TopicArn</code> that you want to associate with this job. You can\n      create Amazon Resource Names (ARNs) for topics by using the <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html\">CreateTopic</a> Amazon SNS API\n      action.</p>\n\n         <p>You can subscribe email addresses to an Amazon SNS topic through the AWS Management\n      Console, or by using the <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html\">Subscribe</a> AWS Simple Notification Service (SNS) API action.</p>"
+          }
+        },
+        "JobStatesToNotify": {
+          "target": "com.amazonaws.snowball#JobStateList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of job states that will trigger a notification for this job.</p>"
+          }
+        },
+        "NotifyAll": {
+          "target": "com.amazonaws.snowball#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Any change in job state will trigger a notification for this job.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The Amazon Simple Notification Service (Amazon SNS) notification settings associated\n      with a specific job. The <code>Notification</code> object is returned as a part of the\n      response syntax of the <code>DescribeJob</code> action in the <code>JobMetadata</code> data\n      type.</p>\n\n         <p>When the notification settings are defined during job creation, you can choose to\n      notify based on a specific set of job states using the <code>JobStatesToNotify</code> array of\n      strings, or you can specify that you want to have Amazon SNS notifications sent out for all\n      job states with <code>NotifyAll</code> set to true.</p>"
+      }
+    },
+    "com.amazonaws.snowball#ResourceARN": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 255
+        }
+      }
+    },
+    "com.amazonaws.snowball#RoleARN": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 255
+        },
+        "smithy.api#pattern": "arn:aws.*:iam::[0-9]{12}:role/.*"
+      }
+    },
+    "com.amazonaws.snowball#S3Resource": {
+      "type": "structure",
+      "members": {
+        "KeyRange": {
+          "target": "com.amazonaws.snowball#KeyRange",
+          "traits": {
+            "smithy.api#documentation": "<p>For export jobs, you can provide an optional <code>KeyRange</code> within a specific\n      Amazon S3 bucket. The length of the range is defined at job creation, and has either an\n      inclusive <code>BeginMarker</code>, an inclusive <code>EndMarker</code>, or both. Ranges are\n      UTF-8 binary sorted.</p>"
+          }
+        },
+        "BucketArn": {
+          "target": "com.amazonaws.snowball#ResourceARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Amazon S3 bucket.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Each <code>S3Resource</code> object represents an Amazon S3 bucket that your\n      transferred data will be exported from or imported into. For export jobs, this object can have\n      an optional <code>KeyRange</code> value. The length of the range is defined at job creation,\n      and has either an inclusive <code>BeginMarker</code>, an inclusive <code>EndMarker</code>, or\n      both. Ranges are UTF-8 binary sorted.</p>"
+      }
+    },
+    "com.amazonaws.snowball#S3ResourceList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.snowball#S3Resource"
+      }
+    },
+    "com.amazonaws.snowball#Shipment": {
+      "type": "structure",
+      "members": {
+        "TrackingNumber": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The tracking number for this job. Using this tracking number with your region's\n      carrier's website, you can track a Snowball as the carrier transports it.</p>\n         <p>For India, the carrier is Amazon Logistics. For all other regions, UPS is the\n      carrier.</p>"
+          }
+        },
+        "Status": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Status information for a shipment.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The <code>Status</code> and <code>TrackingNumber</code> information for an inbound or\n      outbound shipment.</p>"
+      }
+    },
+    "com.amazonaws.snowball#ShippingDetails": {
+      "type": "structure",
+      "members": {
+        "InboundShipment": {
+          "target": "com.amazonaws.snowball#Shipment",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Status</code> and <code>TrackingNumber</code> values for a Snowball being\n      returned to AWS for a particular job.</p>"
+          }
+        },
+        "OutboundShipment": {
+          "target": "com.amazonaws.snowball#Shipment",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Status</code> and <code>TrackingNumber</code> values for a Snowball being\n      delivered to the address that you specified for a particular job.</p>"
+          }
+        },
+        "ShippingOption": {
+          "target": "com.amazonaws.snowball#ShippingOption",
+          "traits": {
+            "smithy.api#documentation": "<p>The shipping speed for a particular job. This speed doesn't dictate how soon you'll get\n      the Snowball from the job's creation date. This speed represents how quickly it moves to its\n      destination while in transit. Regional shipping speeds are as follows:</p>\n\n         <ul>\n            <li>\n               <p>In Australia, you have access to express shipping. Typically, Snowballs shipped\n          express are delivered in about a day.</p>\n            </li>\n            <li>\n               <p>In the European Union (EU), you have access to express shipping. Typically,\n          Snowballs shipped express are delivered in about a day. In addition, most countries in the\n          EU have access to standard shipping, which typically takes less than a week, one\n          way.</p>\n            </li>\n            <li>\n               <p>In India, Snowballs are delivered in one to seven days.</p>\n            </li>\n            <li>\n               <p>In the United States of America (US), you have access to one-day shipping and\n          two-day shipping.</p>\n            </li>\n         </ul>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A job's shipping information, including inbound and outbound tracking numbers and\n      shipping speed options.</p>"
+      }
+    },
+    "com.amazonaws.snowball#ShippingOption": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "SECOND_DAY",
+            "name": "SECOND_DAY"
+          },
+          {
+            "value": "NEXT_DAY",
+            "name": "NEXT_DAY"
+          },
+          {
+            "value": "EXPRESS",
+            "name": "EXPRESS"
+          },
+          {
+            "value": "STANDARD",
+            "name": "STANDARD"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.snowball#SnowballCapacity": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "T50",
+            "name": "T50"
+          },
+          {
+            "value": "T80",
+            "name": "T80"
+          },
+          {
+            "value": "T100",
+            "name": "T100"
+          },
+          {
+            "value": "T42",
+            "name": "T42"
+          },
+          {
+            "value": "T98",
+            "name": "T98"
+          },
+          {
+            "value": "T8",
+            "name": "T8"
+          },
+          {
+            "value": "NoPreference",
+            "name": "NO_PREFERENCE"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.snowball#SnowballType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "STANDARD",
+            "name": "STANDARD"
+          },
+          {
+            "value": "EDGE",
+            "name": "EDGE"
+          },
+          {
+            "value": "EDGE_C",
+            "name": "EDGE_C"
+          },
+          {
+            "value": "EDGE_CG",
+            "name": "EDGE_CG"
+          },
+          {
+            "value": "EDGE_S",
+            "name": "EDGE_S"
+          },
+          {
+            "value": "SNC1_HDD",
+            "name": "SNC1_HDD"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.snowball#SnowconeDeviceConfiguration": {
+      "type": "structure",
+      "members": {
+        "WirelessConnection": {
+          "target": "com.amazonaws.snowball#WirelessConnection",
+          "traits": {
+            "smithy.api#documentation": "<p>Configures the wireless connection for the AWS Snowcone device.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Specifies the device configuration for an AWS Snowcone job. </p>"
+      }
+    },
+    "com.amazonaws.snowball#SnsTopicARN": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 255
+        },
+        "smithy.api#pattern": "arn:aws.*:sns:.*:[0-9]{12}:.*"
+      }
+    },
+    "com.amazonaws.snowball#String": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1
+        }
+      }
+    },
+    "com.amazonaws.snowball#TaxDocuments": {
+      "type": "structure",
+      "members": {
+        "IND": {
+          "target": "com.amazonaws.snowball#INDTaxDocuments"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The tax documents required in your AWS Region.</p>"
+      }
+    },
+    "com.amazonaws.snowball#Timestamp": {
+      "type": "timestamp"
+    },
+    "com.amazonaws.snowball#UnsupportedAddressException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.snowball#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The address is either outside the serviceable area for your region, or an error\n      occurred. Check the address with your region's carrier and try again. If the issue persists,\n      contact AWS Support.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.snowball#UpdateCluster": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.snowball#UpdateClusterRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.snowball#UpdateClusterResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.snowball#Ec2RequestFailedException"
+        },
+        {
+          "target": "com.amazonaws.snowball#InvalidInputCombinationException"
+        },
+        {
+          "target": "com.amazonaws.snowball#InvalidJobStateException"
+        },
+        {
+          "target": "com.amazonaws.snowball#InvalidResourceException"
+        },
+        {
+          "target": "com.amazonaws.snowball#KMSRequestFailedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>While a cluster's <code>ClusterState</code> value is in the <code>AwaitingQuorum</code>\n      state, you can update some of the information associated with a cluster. Once the cluster\n      changes to a different job state, usually 60 minutes after the cluster being created, this\n      action is no longer available.</p>"
+      }
+    },
+    "com.amazonaws.snowball#UpdateClusterRequest": {
+      "type": "structure",
+      "members": {
+        "ForwardingAddressId": {
+          "target": "com.amazonaws.snowball#AddressId",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated ID for the forwarding address for a cluster. This field is not\n      supported in most regions.</p>"
+          }
+        },
+        "ShippingOption": {
+          "target": "com.amazonaws.snowball#ShippingOption",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated shipping option value of this cluster's <a>ShippingDetails</a>\n      object.</p>"
+          }
+        },
+        "ClusterId": {
+          "target": "com.amazonaws.snowball#ClusterId",
+          "traits": {
+            "smithy.api#documentation": "<p>The cluster ID of the cluster that you want to update, for example\n        <code>CID123e4567-e89b-12d3-a456-426655440000</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated description of this cluster.</p>"
+          }
+        },
+        "Resources": {
+          "target": "com.amazonaws.snowball#JobResource",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated arrays of <a>JobResource</a> objects that can include updated\n        <a>S3Resource</a> objects or <a>LambdaResource</a> objects.</p>"
+          }
+        },
+        "AddressId": {
+          "target": "com.amazonaws.snowball#AddressId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the updated <a>Address</a> object.</p>"
+          }
+        },
+        "Notification": {
+          "target": "com.amazonaws.snowball#Notification",
+          "traits": {
+            "smithy.api#documentation": "<p>The new or updated <a>Notification</a> object.</p>"
+          }
+        },
+        "RoleARN": {
+          "target": "com.amazonaws.snowball#RoleARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The new role Amazon Resource Name (ARN) that you want to associate with this cluster.\n      To create a role ARN, use the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a> API action in AWS\n      Identity and Access Management (IAM).</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#UpdateClusterResult": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.snowball#UpdateJob": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.snowball#UpdateJobRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.snowball#UpdateJobResult"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.snowball#ClusterLimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.snowball#Ec2RequestFailedException"
+        },
+        {
+          "target": "com.amazonaws.snowball#InvalidInputCombinationException"
+        },
+        {
+          "target": "com.amazonaws.snowball#InvalidJobStateException"
+        },
+        {
+          "target": "com.amazonaws.snowball#InvalidResourceException"
+        },
+        {
+          "target": "com.amazonaws.snowball#KMSRequestFailedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>While a job's <code>JobState</code> value is <code>New</code>, you can update some of\n      the information associated with a job. Once the job changes to a different job state, usually\n      within 60 minutes of the job being created, this action is no longer available.</p>"
+      }
+    },
+    "com.amazonaws.snowball#UpdateJobRequest": {
+      "type": "structure",
+      "members": {
+        "ShippingOption": {
+          "target": "com.amazonaws.snowball#ShippingOption",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated shipping option value of this job's <a>ShippingDetails</a>\n      object.</p>"
+          }
+        },
+        "ForwardingAddressId": {
+          "target": "com.amazonaws.snowball#AddressId",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated ID for the forwarding address for a job. This field is not\n      supported in most regions.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.snowball#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated description of this job's <a>JobMetadata</a> object.</p>"
+          }
+        },
+        "AddressId": {
+          "target": "com.amazonaws.snowball#AddressId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the updated <a>Address</a> object.</p>"
+          }
+        },
+        "Notification": {
+          "target": "com.amazonaws.snowball#Notification",
+          "traits": {
+            "smithy.api#documentation": "<p>The new or updated <a>Notification</a> object.</p>"
+          }
+        },
+        "JobId": {
+          "target": "com.amazonaws.snowball#JobId",
+          "traits": {
+            "smithy.api#documentation": "<p>The job ID of the job that you want to update, for example\n        <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RoleARN": {
+          "target": "com.amazonaws.snowball#RoleARN",
+          "traits": {
+            "smithy.api#documentation": "<p>The new role Amazon Resource Name (ARN) that you want to associate with this job. To\n      create a role ARN, use the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a>AWS Identity and Access\n      Management (IAM) API action.</p>"
+          }
+        },
+        "SnowballCapacityPreference": {
+          "target": "com.amazonaws.snowball#SnowballCapacity",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated <code>SnowballCapacityPreference</code> of this job's <a>JobMetadata</a> object. The 50 TB Snowballs are only available in the US\n      regions.</p>"
+          }
+        },
+        "Resources": {
+          "target": "com.amazonaws.snowball#JobResource",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated <code>JobResource</code> object, or the updated <a>JobResource</a> object. </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.snowball#UpdateJobResult": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.snowball#WirelessConnection": {
+      "type": "structure",
+      "members": {
+        "IsWifiEnabled": {
+          "target": "com.amazonaws.snowball#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Enables the Wi-Fi adapter on an AWS Snowcone device.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Configures the wireless connection on an AWS Snowcone device.</p>"
+      }
+    }
+  }
+}

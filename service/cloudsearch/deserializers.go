@@ -3021,6 +3021,8 @@ func awsAwsquery_deserializeDocumentAnalysisSchemeStatusList(v *[]*types.Analysi
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -3986,6 +3988,8 @@ func awsAwsquery_deserializeDocumentDomainStatusList(v *[]*types.DomainStatus, d
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -4395,6 +4399,8 @@ func awsAwsquery_deserializeDocumentExpressionStatusList(v *[]*types.ExpressionS
 				}
 				sv = append(sv, col)
 				break
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -4465,6 +4471,8 @@ func awsAwsquery_deserializeDocumentFieldNameList(v *[]*string, decoder smithyxm
 					col = &xtv
 				}
 				sv = append(sv, col)
+			} else {
+				break
 			}
 		}
 		decoder = originalDecoder
@@ -4704,6 +4712,8 @@ func awsAwsquery_deserializeDocumentIndexFieldStatusList(v *[]*types.IndexFieldS
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
@@ -6076,6 +6086,8 @@ func awsAwsquery_deserializeDocumentSuggesterStatusList(v *[]*types.SuggesterSta
 					return err
 				}
 				sv = append(sv, col)
+				break
+			} else {
 				break
 			}
 		}
