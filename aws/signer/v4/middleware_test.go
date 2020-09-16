@@ -88,16 +88,25 @@ func (f httpSignerFunc) SignHTTP(ctx context.Context, credentials aws.Credential
 }
 
 func TestSignHTTPRequestMiddleware(t *testing.T) {
-	cases := []struct {
+	cases := map[string]struct {
+		creds       aws.CredentialsProvider
 		hash        string
 		expectedErr error
 	}{
-		0: {
-			hash: "0123456789abcdef",
+		"success": {
+			creds: unit.StubCredentialsProvider{},
+			hash:  "0123456789abcdef",
 		},
-		1: {
+		"error": {
+			creds:       unit.StubCredentialsProvider{},
 			hash:        "",
 			expectedErr: &SigningError{},
+		},
+		"anonymous creds": {
+			creds: aws.AnonymousCredentials{},
+		},
+		"nil creds": {
+			creds: aws.AnonymousCredentials{},
 		},
 	}
 
@@ -106,39 +115,47 @@ func TestSignHTTPRequestMiddleware(t *testing.T) {
 		signingRegion = "regionName"
 	)
 
-	for i, tt := range cases {
-		t.Run(strconv.Itoa(i), func(t *testing.T) {
+	for name, tt := range cases {
+		t.Run(name, func(t *testing.T) {
 			c := &SignHTTPRequestMiddleware{
-				credentialsProvider: unit.StubCredentialsProvider{},
-				signer: httpSignerFunc(func(ctx context.Context, credentials aws.Credentials, r *http.Request, payloadHash string, service string, region string, signingTime time.Time) error {
-					expectCreds, _ := unit.StubCredentialsProvider{}.Retrieve(context.Background())
-					if e, a := expectCreds, credentials; e != a {
-						t.Errorf("expected %v, got %v", e, a)
-					}
-					if e, a := tt.hash, payloadHash; e != a {
-						t.Errorf("expected %v, got %v", e, a)
-					}
-					if e, a := signingName, service; e != a {
-						t.Errorf("expected %v, got %v", e, a)
-					}
-					if e, a := signingRegion, region; e != a {
-						t.Errorf("expected %v, got %v", e, a)
-					}
-					return nil
-				}),
+				credentialsProvider: tt.creds,
+				signer: httpSignerFunc(
+					func(ctx context.Context,
+						credentials aws.Credentials, r *http.Request, payloadHash string,
+						service string, region string, signingTime time.Time,
+					) error {
+						expectCreds, _ := unit.StubCredentialsProvider{}.Retrieve(context.Background())
+						if e, a := expectCreds, credentials; e != a {
+							t.Errorf("expected %v, got %v", e, a)
+						}
+						if e, a := tt.hash, payloadHash; e != a {
+							t.Errorf("expected %v, got %v", e, a)
+						}
+						if e, a := signingName, service; e != a {
+							t.Errorf("expected %v, got %v", e, a)
+						}
+						if e, a := signingRegion, region; e != a {
+							t.Errorf("expected %v, got %v", e, a)
+						}
+						return nil
+					}),
 			}
 
 			next := middleware.FinalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
 				return out, metadata, err
 			})
 
-			ctx := awsmiddleware.SetSigningRegion(awsmiddleware.SetSigningName(context.Background(), signingName), signingRegion)
+			ctx := awsmiddleware.SetSigningRegion(
+				awsmiddleware.SetSigningName(context.Background(), signingName),
+				signingRegion)
 
 			if len(tt.hash) != 0 {
 				ctx = context.WithValue(ctx, payloadHashKey{}, tt.hash)
 			}
 
-			_, _, err := c.HandleFinalize(ctx, middleware.FinalizeInput{Request: &smithyhttp.Request{Request: &http.Request{}}}, next)
+			_, _, err := c.HandleFinalize(ctx, middleware.FinalizeInput{
+				Request: &smithyhttp.Request{Request: &http.Request{}},
+			}, next)
 			if err != nil && tt.expectedErr == nil {
 				t.Errorf("expected no error, got %v", err)
 			} else if err != nil && tt.expectedErr != nil {

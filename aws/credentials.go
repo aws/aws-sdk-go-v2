@@ -2,25 +2,71 @@ package aws
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 )
 
-//// AnonymousCredentials is an empty CredentialProvider that can be used as
-//// dummy placeholder credentials for requests that do not need signed.
-////
-//// This credentials can be used to configure a service to not sign requests
-//// when making service API calls. For example, when accessing public
-//// s3 buckets.
-////
-////     s3Cfg := cfg.Copy()
-////     s3cfg.Credentials = AnonymousCredentials
-////
-////     svc := s3.New(s3Cfg)
-//var AnonymousCredentials = StaticCredentialsProvider{
-//	Value: Credentials{Source: "AnonymousCredentials"},
-//}
+// AnonymousCredentials provides a sentinel CredentialsProvider that should be
+// used to instruct the SDK's signing middleware to not sign the request.
+//
+// Using `nil` credentials when configuring an API client will achieve the same
+// result. The AnonymousCredentials type allows you to configure the SDK's
+// external config loading to not attempt to source credentials from the shared
+// config or environment.
+//
+// For example you can use this CredentialsProvider with an API client's
+// Options to instruct the client not to sign a request for accessing public
+// S3 bucket objects.
+//
+// The following example demonstrates using the AnonymousCredentials to prevent
+// SDK's external config loading attempt to resolve credentials.
+//
+//     cfg, err := config.LoadDefaultAWsConfig(
+//          config.WithCredentialsProvider(aws.AnonymousCredentials{}))
+//     if err != nil {
+//          log.Fatalf("failed to load config, %v", err)
+//     }
+//
+//     client := s3.NewFromConfig(cfg)
+//
+// Alternatively you can leave the API client Option's `Credential` member to
+// nil. If using the `NewFromConfig` constructor you'll need to explicitly set
+// the `Credentials` member to nil, if the external config resolved a
+// credential provider.
+//
+//     client := s3.New(s3.Options{
+//          // Credentials defaults to a nil value.
+//     })
+//
+// This can also be configured for specific operations calls too.
+//
+//     cfg, err := config.LoadDefaultAWsConfig()
+//     if err != nil {
+//          log.Fatalf("failed to load config, %v", err)
+//     }
+//
+//     client := s3.NewFromConfig(config)
+//
+//     result, err := client.GetObject(context.TODO(), s3.GetObject{
+//          Bucket: aws.String("example-bucket"),
+//          Key: aws.String("example-key"),
+//     }, func(o *s3.Options) {
+//          o.Credentials = nil
+//          // Or
+//          o.Credentials = aws.AnonymousCredentials{}
+//     })
+type AnonymousCredentials struct{}
+
+// Retrieve implements the CredentialsProvider interface, but will always
+// return error, and cannot be used to sign a request. The AnonymousCredentials
+// type is used as a sentinel type instructing the AWS request signing
+// middleware to not sign a request.
+func (AnonymousCredentials) Retrieve(context.Context) (Credentials, error) {
+	return Credentials{Source: "AnonymousCredentials"},
+		fmt.Errorf("the AnonymousCredentials is not a valid credential provider, and cannot be used to sign AWS requests with.")
+}
 
 // A Credentials is the AWS credentials value for individual credential fields.
 type Credentials struct {
