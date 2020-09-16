@@ -29,7 +29,8 @@ func (m *acceptHeaderMiddleware) HandleBuild(
 	}
 
 	// all APIGateway operations must have Accept header set to application/json
-	req.Header.Add("Accept", "application/json")
+	const conHeader = "Accept"
+	req.Header[conHeader] = append(req.Header[conHeader][:0], "application/json")
 
 	return next.HandleBuild(ctx, in)
 }
