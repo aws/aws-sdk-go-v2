@@ -89,13 +89,14 @@ func ResolveCredentialChain(cfg *aws.Config, configs Configs) (err error) {
 	default:
 		err = resolveCredsFromProfile(cfg, envConfig, sharedConfig, other)
 	}
-
-	// Wrap the resolved provider in a cache so the SDK will cache credentials.
 	if err != nil {
-		cfg.Credentials = &aws.CredentialsCache{Provider: cfg.Credentials}
+		return err
 	}
 
-	return err
+	// Wrap the resolved provider in a cache so the SDK will cache credentials.
+	cfg.Credentials = &aws.CredentialsCache{Provider: cfg.Credentials}
+
+	return nil
 }
 
 func resolveCredsFromProfile(cfg *aws.Config, envConfig *EnvConfig, sharedConfig *SharedConfig, configs Configs) (err error) {
