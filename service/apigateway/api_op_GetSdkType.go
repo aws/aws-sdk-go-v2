@@ -32,6 +32,7 @@ func (c *Client) GetSdkType(ctx context.Context, params *GetSdkTypeInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetSdkTypeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSdkType(options.Region), middleware.Before)
+	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,7 @@ func (c *Client) DeleteBasePathMapping(ctx context.Context, params *DeleteBasePa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteBasePathMappingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBasePathMapping(options.Region), middleware.Before)
+	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -35,6 +35,7 @@ func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDeploymentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDeployment(options.Region), middleware.Before)
+	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
