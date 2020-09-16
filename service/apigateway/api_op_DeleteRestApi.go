@@ -32,6 +32,7 @@ func (c *Client) DeleteRestApi(ctx context.Context, params *DeleteRestApiInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteRestApiValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRestApi(options.Region), middleware.Before)
+	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) GetModels(ctx context.Context, params *GetModelsInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetModelsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetModels(options.Region), middleware.Before)
+	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

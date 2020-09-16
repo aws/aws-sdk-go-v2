@@ -33,6 +33,7 @@ func (c *Client) GetBasePathMappings(ctx context.Context, params *GetBasePathMap
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBasePathMappingsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBasePathMappings(options.Region), middleware.Before)
+	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
