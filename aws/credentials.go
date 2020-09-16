@@ -65,7 +65,7 @@ type AnonymousCredentials struct{}
 // middleware to not sign a request.
 func (AnonymousCredentials) Retrieve(context.Context) (Credentials, error) {
 	return Credentials{Source: "AnonymousCredentials"},
-		fmt.Errorf("the AnonymousCredentials is not a valid credential provider, and cannot be used to sign AWS requests with.")
+		fmt.Errorf("the AnonymousCredentials is not a valid credential provider, and cannot be used to sign AWS requests with")
 }
 
 // A Credentials is the AWS credentials value for individual credential fields.

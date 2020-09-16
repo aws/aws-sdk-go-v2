@@ -128,7 +128,12 @@ func TestResolveCredentialsProvider(t *testing.T) {
 		t.Fatalf("expected %v, got %v", e, a)
 	}
 
-	p := cfg.Credentials.(credentials.StaticCredentialsProvider)
+	cache, ok := cfg.Credentials.(*aws.CredentialsCache)
+	if !ok {
+		t.Fatalf("expect resolved credentials to be wrapped in cache, was not, %T", cfg.Credentials)
+	}
+
+	p := cache.Provider.(credentials.StaticCredentialsProvider)
 	if e, a := "AKID", p.Value.AccessKeyID; e != a {
 		t.Errorf("expect %v key, got %v", e, a)
 	}
