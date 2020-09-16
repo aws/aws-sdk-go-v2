@@ -45,6 +45,7 @@ public class BackfillOptionalAuthTrait implements GoIntegration {
 
     @Override
     public byte getOrder() {
+        // This integration should happen before other integrations that rely on the presence of this trait
         return -60;
     }
 
