@@ -15,7 +15,6 @@
 
 package software.amazon.smithy.aws.go.codegen.customization;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -25,6 +24,7 @@ import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.model.traits.OptionalAuthTrait;
+import software.amazon.smithy.utils.MapUtils;
 import software.amazon.smithy.utils.SetUtils;
 
 /**
@@ -33,21 +33,15 @@ import software.amazon.smithy.utils.SetUtils;
 public class BackfillOptionalAuthTrait implements GoIntegration {
     private static final Logger LOGGER = Logger.getLogger(BackfillOptionalAuthTrait.class.getName());
 
-    private static final Map<ShapeId, Set<ShapeId>> SERVICE_TO_OPERATION_MAP = new HashMap<>();
-
-    static {
-        SERVICE_TO_OPERATION_MAP.put(ShapeId.from("com.amazonaws.sts#AWSSecurityTokenServiceV20110615"), SetUtils.of(
-                ShapeId.from("com.amazonaws.sts#AssumeRoleWithSAML"),
-                ShapeId.from("com.amazonaws.sts#AssumeRoleWithWebIdentity")
-        ));
-        SERVICE_TO_OPERATION_MAP.put(ShapeId.from("com.amazonaws.cognitoidentity#AWSCognitoIdentityService"),
-                SetUtils.of(
-                        ShapeId.from("com.amazonaws.cognitoidentity#GetId"),
-                        ShapeId.from("com.amazonaws.cognitoidentity#GetOpenIdToken"),
-                        ShapeId.from("com.amazonaws.cognitoidentity#UnlinkIdentity"),
-                        ShapeId.from("com.amazonaws.cognitoidentity#GetCredentialsForIdentity")
-                ));
-    }
+    private static final Map<ShapeId, Set<ShapeId>> SERVICE_TO_OPERATION_MAP = MapUtils.of(
+            ShapeId.from("com.amazonaws.sts#AWSSecurityTokenServiceV20110615"), SetUtils.of(
+                    ShapeId.from("com.amazonaws.sts#AssumeRoleWithSAML"),
+                    ShapeId.from("com.amazonaws.sts#AssumeRoleWithWebIdentity")),
+            ShapeId.from("com.amazonaws.cognitoidentity#AWSCognitoIdentityService"), SetUtils.of(
+                    ShapeId.from("com.amazonaws.cognitoidentity#GetId"),
+                    ShapeId.from("com.amazonaws.cognitoidentity#GetOpenIdToken"),
+                    ShapeId.from("com.amazonaws.cognitoidentity#UnlinkIdentity"),
+                    ShapeId.from("com.amazonaws.cognitoidentity#GetCredentialsForIdentity")));
 
     @Override
     public byte getOrder() {
