@@ -1,6 +1,6 @@
 // +build integration
 
-package customizations_test
+package integration
 
 import (
 	"context"
