@@ -45,6 +45,10 @@ func ResolveCredentials(cfg *aws.Config, configs Configs) error {
 // ResolveCredentialProvider extracts the first instance of Credentials from the
 // config slices.
 //
+// The resolved CredentialProvider will be wrapped in a cache to ensure the
+// credentials are only refreshed when needed. This also protects the
+// credential provider to be used concurrently.
+//
 // Config providers used:
 // * CredentialsProviderProvider
 func ResolveCredentialProvider(cfg *aws.Config, configs Configs) (bool, error) {
@@ -56,13 +60,17 @@ func ResolveCredentialProvider(cfg *aws.Config, configs Configs) (bool, error) {
 		return false, nil
 	}
 
-	cfg.Credentials = credentials
+	cfg.Credentials = &aws.CredentialsCache{Provider: credentials}
 
 	return true, nil
 }
 
-// ResolveCredentialChain resolves a credential provider chain using EnvConfig and SharedConfig
-// if present in the slice cof provided configs.
+// ResolveCredentialChain resolves a credential provider chain using EnvConfig
+// and SharedConfig if present in the slice of provided configs.
+//
+// The resolved CredentialProvider will be wrapped in a cache to ensure the
+// credentials are only refreshed when needed. This also protects the
+// credential provider to be used concurrently.
 func ResolveCredentialChain(cfg *aws.Config, configs Configs) (err error) {
 	_, sharedProfileSet, err := GetSharedConfigProfile(configs)
 	if err != nil {
@@ -80,6 +88,11 @@ func ResolveCredentialChain(cfg *aws.Config, configs Configs) (err error) {
 		err = assumeWebIdentity(cfg, envConfig.WebIdentityTokenFilePath, envConfig.RoleARN, envConfig.RoleSessionName, configs)
 	default:
 		err = resolveCredsFromProfile(cfg, envConfig, sharedConfig, other)
+	}
+
+	// Wrap the resolved provider in a cache so the SDK will cache credentials.
+	if err != nil {
+		cfg.Credentials = &aws.CredentialsCache{Provider: cfg.Credentials}
 	}
 
 	return err
