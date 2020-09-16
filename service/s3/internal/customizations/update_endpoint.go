@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"net/url"
-	"regexp"
 	"strings"
 
 	"github.com/awslabs/smithy-go/middleware"
@@ -97,9 +96,6 @@ func hostCompatibleBucketName(u *url.URL, bucket string) bool {
 	// if the bucket is DNS compatible
 	return dnsCompatibleBucketName(bucket)
 }
-
-var reDomain = regexp.MustCompile(`^[a-z0-9][a-z0-9\.\-]{1,61}[a-z0-9]$`)
-var reIPAddress = regexp.MustCompile(`^(\d+\.){3}\d+$`)
 
 // dnsCompatibleBucketName returns true if the bucket name is DNS compatible.
 // Buckets created outside of the classic region MUST be DNS compatible.

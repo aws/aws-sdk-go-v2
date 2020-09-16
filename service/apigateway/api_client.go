@@ -8,6 +8,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	agcust "github.com/aws/aws-sdk-go-v2/service/apigateway/internal/customizations"
 	"github.com/awslabs/smithy-go/middleware"
 	"net/http"
 	"time"
@@ -175,4 +176,8 @@ func resolveHTTPSignerV4(o *Options) {
 		return
 	}
 	o.HTTPSignerV4 = v4.NewSigner()
+}
+
+func addAcceptHeader(stack *middleware.Stack) {
+	agcust.AddAcceptHeader(stack)
 }

@@ -31,6 +31,7 @@ func (c *Client) DeleteDocumentationVersion(ctx context.Context, params *DeleteD
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDocumentationVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDocumentationVersion(options.Region), middleware.Before)
+	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

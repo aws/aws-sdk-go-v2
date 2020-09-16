@@ -24,6 +24,7 @@ import software.amazon.smithy.go.codegen.GoDependency;
 public final class AwsCustomGoDependency extends AwsGoDependency {
     public static final GoDependency DYNAMODB_CUSTOMIZATION = aws("service/dynamodb/internal/customizations", "ddbcust");
     public static final GoDependency S3_CUSTOMIZATION = aws("service/s3/internal/customizations", "s3cust");
+    public static final GoDependency APIGATEWAY_CUSTOMIZATION = aws("service/apigateway/internal/customizations", "agcust");
 
     private AwsCustomGoDependency() {
         super();

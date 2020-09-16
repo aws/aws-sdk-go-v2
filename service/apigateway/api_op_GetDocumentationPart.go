@@ -32,6 +32,7 @@ func (c *Client) GetDocumentationPart(ctx context.Context, params *GetDocumentat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDocumentationPartValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDocumentationPart(options.Region), middleware.Before)
+	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
