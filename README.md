@@ -70,7 +70,7 @@ func main() {
 	// Using the SDK's default configuration, loading additional config
 	// and credentials values from the environment variables, shared
 	// credentials, and shared configuration files
-	cfg, err := external.LoadDefaultAWSConfig()
+	cfg, err := external.LoadDefaultConfig()
 	if err != nil {
 		panic("unable to load SDK config, " + err.Error())
 	}

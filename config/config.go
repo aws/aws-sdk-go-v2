@@ -116,7 +116,7 @@ func (cs Configs) ResolveConfig(f func(configs []interface{}) error) error {
 	return f(cfgs)
 }
 
-// LoadDefaultAWSConfig reads the SDK's default external configurations, and
+// LoadDefaultConfig reads the SDK's default external configurations, and
 // populates an AWS Config with the values from the external configurations.
 //
 // An optional variadic set of additional Config values can be provided as input
@@ -124,7 +124,7 @@ func (cs Configs) ResolveConfig(f func(configs []interface{}) error) error {
 // The custom configurations must satisfy the respective providers for their data
 // or the custom data will be ignored by the resolvers and config loaders.
 //
-//    cfg, err := config.LoadDefaultAWSConfig(
+//    cfg, err := config.LoadDefaultConfig(
 //       WithSharedConfigProfile("test-profile"),
 //    )
 //    if err != nil {
@@ -135,7 +135,7 @@ func (cs Configs) ResolveConfig(f func(configs []interface{}) error) error {
 // The default configuration sources are:
 // * Environment Variables
 // * Shared Configuration and Shared Credentials files.
-func LoadDefaultAWSConfig(configs ...Config) (aws.Config, error) {
+func LoadDefaultConfig(configs ...Config) (aws.Config, error) {
 	var cfgs Configs
 	cfgs = append(cfgs, configs...)
 

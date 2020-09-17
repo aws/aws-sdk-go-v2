@@ -12,7 +12,7 @@ import (
 )
 
 func ExampleWithSharedConfigProfile() {
-	cfg, err := config.LoadDefaultAWSConfig(
+	cfg, err := config.LoadDefaultConfig(
 		// Specify the shared configuration profile to load.
 		config.WithSharedConfigProfile("exampleProfile"),
 
@@ -35,7 +35,7 @@ func ExampleWithSharedConfigProfile() {
 }
 
 func ExampleWithCredentialsProvider() {
-	cfg, err := config.LoadDefaultAWSConfig(
+	cfg, err := config.LoadDefaultConfig(
 		// Hard coded credentials.
 		config.WithCredentialsProvider{
 			CredentialsProvider: credentials.StaticCredentialsProvider{

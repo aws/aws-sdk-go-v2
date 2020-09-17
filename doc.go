@@ -39,7 +39,7 @@ SDK's Amazon DynamoDB client.
 		// Using the SDK's default configuration, loading additional config
 		// and credentials values from the environment variables, shared
 		// credentials, and shared configuration files
-		cfg, err := config.LoadDefaultAWSConfig()
+		cfg, err := config.LoadDefaultConfig()
 		if err != nil {
 			log.Fatalf("unable to load SDK config, %v", err)
 		}
