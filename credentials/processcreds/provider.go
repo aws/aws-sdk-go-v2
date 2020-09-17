@@ -33,7 +33,7 @@ retrieve credentials. NOTE: If there are credentials in the profile you are
 using, the credential process will not be used.
 
     // Initialize a session to load credentials.
-	cfg, _ := config.LoadDefaultAWSConfig()
+	cfg, _ := config.LoadDefaultConfig()
 
     // Create S3 service client to use the credentials.
     svc := s3.NewFromConfig(cfg)

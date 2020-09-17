@@ -35,7 +35,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestInteg_ClientScan(t *testing.T) {
-	cfg, err := config.LoadDefaultAWSConfig()
+	cfg, err := config.LoadDefaultConfig()
 	if err != nil {
 		log.Fatalf("failed to load config, %v", err)
 	}
