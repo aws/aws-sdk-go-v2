@@ -11,10 +11,15 @@ import (
 // with the HTTP response value and the deserialized RequestID.
 type ResponseError struct {
 	*smithyhttp.ResponseError
+
+	// RequestID associated with response error
 	RequestID string
 }
 
+// ServiceRequestID returns the request id associated with Response Error
 func (e *ResponseError) ServiceRequestID() string { return e.RequestID }
+
+// Error returns the formatted error
 func (e *ResponseError) Error() string {
 	return fmt.Sprintf(
 		"https response error StatusCode: %d, RequsetID: %s, %v",
@@ -22,7 +27,7 @@ func (e *ResponseError) Error() string {
 }
 
 // As populates target and returns true if the type of target is a error type that
-// the ResponseError embeeds, (e.g. Smithy's HTTP ResponseError)
+// the ResponseError embeds, (e.g.AWS HTTP ResponseError)
 func (e *ResponseError) As(target interface{}) bool {
 	return errors.As(e.ResponseError, target)
 }
