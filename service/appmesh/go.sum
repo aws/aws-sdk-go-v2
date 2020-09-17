@@ -1,3 +1,5 @@
+github.com/aws/aws-sdk-go-v2 v0.0.0-20200917111458-b3170caebebe h1:LEIn9tnEowsyIjxRHoGK30K+oAucFSBf21kaxkiGc6k=
+github.com/aws/aws-sdk-go-v2 v0.0.0-20200917111458-b3170caebebe/go.mod h1:7zJxC7S/5mRImnc1ar4ijZMoMxiK/VGDdQzOZeT/y/o=
 github.com/aws/aws-sdk-go-v2 v0.24.1-0.20200828232643-9cee6f194dae h1:/RnGV80+HdGEth2m1OHdTEtxddvprKmd2boGuE9i/Zo=
 github.com/aws/aws-sdk-go-v2 v0.24.1-0.20200828232643-9cee6f194dae/go.mod h1:7zJxC7S/5mRImnc1ar4ijZMoMxiK/VGDdQzOZeT/y/o=
 github.com/aws/aws-sdk-go-v2 v0.24.1-0.20200915221138-5fac0febc537 h1:ts4GuPEZ36ASj4lKEHsCUEaWHGt0jhvPmzFm/Kw+m1s=
