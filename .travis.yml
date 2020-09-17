@@ -12,6 +12,9 @@ go:
 script:
     make ci-test-no-generate;
 
+before_install:
+  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then choco install make; fi
+
 matrix:
   allow_failures:
       - go: tip
