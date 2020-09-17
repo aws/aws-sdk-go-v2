@@ -53,13 +53,13 @@ unit: verify build test-protocols test-services test-ec2imds test-credentials te
 	@echo "go test SDK and vendor packages"
 	@go test -tags ${UNIT_TEST_TAGS} ${SDK_ALL_PKGS}
 
-unit-with-race-cover: verify build
+unit-with-race-cover: verify build test-protocols test-services test-config test-credentials
 	@echo "go test SDK and vendor packages"
 	@go test -tags ${UNIT_TEST_TAGS} -race -cpu=1,2,4 ${SDK_ALL_PKGS}
 
-ci-test: generate unit-with-race-cover ci-test-generate-validate test-protocols test-services
+ci-test: generate unit-with-race-cover ci-test-generate-validate
 
-ci-test-no-generate: unit-with-race-cover test-protocols test-services
+ci-test-no-generate: unit-with-race-cover
 
 ci-test-generate-validate:
 	@echo "CI test validate no generated code changes"
