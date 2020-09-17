@@ -491,7 +491,7 @@ func awsRestjson1_serializeOpHttpBindingsAttachPrincipalPolicyInput(v *AttachPri
 	}
 
 	if v.Principal != nil {
-		locationName := "x-amzn-iot-principal"
+		locationName := "X-Amzn-Iot-Principal"
 		if len(*v.Principal) > 0 {
 			encoder.SetHeader(locationName).String(*v.Principal)
 		}
@@ -616,7 +616,7 @@ func awsRestjson1_serializeOpHttpBindingsAttachThingPrincipalInput(v *AttachThin
 	}
 
 	if v.Principal != nil {
-		locationName := "x-amzn-principal"
+		locationName := "X-Amzn-Principal"
 		if len(*v.Principal) > 0 {
 			encoder.SetHeader(locationName).String(*v.Principal)
 		}
@@ -3382,7 +3382,7 @@ func awsRestjson1_serializeOpHttpBindingsCreateTopicRuleInput(v *CreateTopicRule
 	}
 
 	if v.Tags != nil {
-		locationName := "x-amz-tagging"
+		locationName := "X-Amz-Tagging"
 		if len(*v.Tags) > 0 {
 			encoder.SetHeader(locationName).String(*v.Tags)
 		}
@@ -6968,7 +6968,7 @@ func awsRestjson1_serializeOpHttpBindingsDetachPrincipalPolicyInput(v *DetachPri
 	}
 
 	if v.Principal != nil {
-		locationName := "x-amzn-iot-principal"
+		locationName := "X-Amzn-Iot-Principal"
 		if len(*v.Principal) > 0 {
 			encoder.SetHeader(locationName).String(*v.Principal)
 		}
@@ -7093,7 +7093,7 @@ func awsRestjson1_serializeOpHttpBindingsDetachThingPrincipalInput(v *DetachThin
 	}
 
 	if v.Principal != nil {
-		locationName := "x-amzn-principal"
+		locationName := "X-Amzn-Principal"
 		if len(*v.Principal) > 0 {
 			encoder.SetHeader(locationName).String(*v.Principal)
 		}
@@ -9712,7 +9712,7 @@ func awsRestjson1_serializeOpHttpBindingsListPolicyPrincipalsInput(v *ListPolicy
 	}
 
 	if v.PolicyName != nil {
-		locationName := "x-amzn-iot-policy"
+		locationName := "X-Amzn-Iot-Policy"
 		if len(*v.PolicyName) > 0 {
 			encoder.SetHeader(locationName).String(*v.PolicyName)
 		}
@@ -9845,7 +9845,7 @@ func awsRestjson1_serializeOpHttpBindingsListPrincipalPoliciesInput(v *ListPrinc
 	}
 
 	if v.Principal != nil {
-		locationName := "x-amzn-iot-principal"
+		locationName := "X-Amzn-Iot-Principal"
 		if len(*v.Principal) > 0 {
 			encoder.SetHeader(locationName).String(*v.Principal)
 		}
@@ -9914,7 +9914,7 @@ func awsRestjson1_serializeOpHttpBindingsListPrincipalThingsInput(v *ListPrincip
 	}
 
 	if v.Principal != nil {
-		locationName := "x-amzn-principal"
+		locationName := "X-Amzn-Principal"
 		if len(*v.Principal) > 0 {
 			encoder.SetHeader(locationName).String(*v.Principal)
 		}

@@ -199,6 +199,10 @@ func (s *SignHTTPRequestMiddleware) ID() string {
 func (s *SignHTTPRequestMiddleware) HandleFinalize(ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler) (
 	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 ) {
+	if !haveCredentialProvider(s.credentialsProvider) {
+		return next.HandleFinalize(ctx, in)
+	}
+
 	req, ok := in.Request.(*smithyHTTP.Request)
 	if !ok {
 		return out, metadata, &SigningError{Err: fmt.Errorf("unexpected request middleware type %T", in.Request)}
@@ -221,6 +225,19 @@ func (s *SignHTTPRequestMiddleware) HandleFinalize(ctx context.Context, in middl
 	}
 
 	return next.HandleFinalize(ctx, in)
+}
+
+func haveCredentialProvider(p aws.CredentialsProvider) bool {
+	if p == nil {
+		return false
+	}
+	switch p.(type) {
+	case aws.AnonymousCredentials,
+		*aws.AnonymousCredentials:
+		return false
+	}
+
+	return true
 }
 
 type payloadHashKey struct{}

@@ -2,6 +2,7 @@
 package unit
 
 import (
+	"context"
 	"crypto/rsa"
 	"math/big"
 
@@ -11,12 +12,20 @@ import (
 func init() {
 	config = aws.Config{}
 	config.Region = "mock-region"
-	config.Credentials = aws.StaticCredentialsProvider{
-		Value: aws.Credentials{
-			AccessKeyID: "AKID", SecretAccessKey: "SECRET", SessionToken: "SESSION",
-			Source: "unit test credentials",
-		},
-	}
+	config.Credentials = StubCredentialsProvider{}
+}
+
+// StubCredentialsProvider provides a stub credential provider that returns
+// static credentials that never expire.
+type StubCredentialsProvider struct{}
+
+// Retrieve satisfies the CredentialsProvider interface. Returns stub
+// credential value, and never error.
+func (StubCredentialsProvider) Retrieve(context.Context) (aws.Credentials, error) {
+	return aws.Credentials{
+		AccessKeyID: "AKID", SecretAccessKey: "SECRET", SessionToken: "SESSION",
+		Source: "unit test credentials",
+	}, nil
 }
 
 var config aws.Config

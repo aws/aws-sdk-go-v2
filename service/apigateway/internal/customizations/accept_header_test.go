@@ -9,6 +9,7 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway"
 
 	"github.com/awslabs/smithy-go/middleware"
@@ -43,14 +44,10 @@ func (m *mockClient) Do(*http.Request) (*http.Response, error) {
 
 func TestAddAcceptHeader(t *testing.T) {
 	options := apigateway.Options{
-		Credentials: aws.StaticCredentialsProvider{
-			Value: aws.Credentials{
-				AccessKeyID: "AKID", SecretAccessKey: "SECRET", SessionToken: "SESSION",
-				Source: "unit test credentials",
-			}},
-		Retryer:    aws.NoOpRetryer{},
-		HTTPClient: &mockClient{},
-		Region:     "mock-region",
+		Credentials: unit.StubCredentialsProvider{},
+		Retryer:     aws.NoOpRetryer{},
+		HTTPClient:  &mockClient{},
+		Region:      "mock-region",
 	}
 	svc := apigateway.New(options)
 	fm := requestRetrieverMiddleware{}

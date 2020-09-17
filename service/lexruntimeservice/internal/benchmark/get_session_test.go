@@ -8,11 +8,11 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	smithyClient "github.com/aws/aws-sdk-go-v2/service/lexruntimeservice"
 	v1Aws "github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/corehandlers"
-	"github.com/aws/aws-sdk-go/aws/credentials"
+	v1Creds "github.com/aws/aws-sdk-go/aws/credentials"
 	v1Request "github.com/aws/aws-sdk-go/aws/request"
 	v1Unit "github.com/aws/aws-sdk-go/awstesting/unit"
 	v1Client "github.com/aws/aws-sdk-go/service/lexruntimeservice"
@@ -38,7 +38,7 @@ func BenchmarkGetSession(b *testing.B) {
 
 func benchGetSessionOld(b *testing.B, respBytes []byte) {
 	sess := v1Unit.Session.Copy(&v1Aws.Config{
-		Credentials: credentials.NewStaticCredentials("AKID", "SECRET", ""),
+		Credentials: v1Creds.NewStaticCredentials("AKID", "SECRET", ""),
 		Region:      ptr.String("us-west-2"),
 	})
 	sess.Handlers.Send.SwapNamed(v1Request.NamedHandler{
@@ -77,7 +77,7 @@ func benchGetSessionSmithy(b *testing.B, respBytes []byte) {
 
 	client := smithyClient.New(smithyClient.Options{
 		Region:      "us-west-2",
-		Credentials: aws.NewStaticCredentialsProvider("AKID", "SECRET", ""),
+		Credentials: unit.StubCredentialsProvider{},
 		HTTPClient: smithyhttp.ClientDoFunc(
 			func(r *http.Request) (*http.Response, error) {
 				return newGetSessionHTTPResponse(respBytes), nil
