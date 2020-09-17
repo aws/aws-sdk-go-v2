@@ -33,7 +33,7 @@ const (
 	// endpoint discovery group
 	enableEndpointDiscoveryKey = `endpoint_discovery_enabled` // optional
 
-	// External Credential P/Crocess
+	// External Credential process
 	credentialProcessKey = `credential_process` // optional
 
 	// Web Identity Token File
