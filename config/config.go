@@ -83,7 +83,7 @@ func (cs Configs) AppendFromLoaders(loaders []Loader) (Configs, error) {
 
 // ResolveAWSConfig returns a AWS configuration populated with values by calling
 // the resolvers slice passed in. Each resolver is called in order. Any resolver
-// may overwrite the AWs Configuration value of a previous resolver.
+// may overwrite the AWS Configuration value of a previous resolver.
 //
 // If an resolver returns an error this method will return that error, and stop
 // iterating over the resolvers.
