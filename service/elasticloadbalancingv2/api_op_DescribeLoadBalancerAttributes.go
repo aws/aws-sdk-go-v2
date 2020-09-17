@@ -38,6 +38,7 @@ func (c *Client) DescribeLoadBalancerAttributes(ctx context.Context, params *Des
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeLoadBalancerAttributesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLoadBalancerAttributes(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

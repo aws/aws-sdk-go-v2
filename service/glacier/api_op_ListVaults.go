@@ -53,6 +53,7 @@ func (c *Client) ListVaults(ctx context.Context, params *ListVaultsInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListVaultsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListVaults(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -39,6 +39,7 @@ func (c *Client) ListShards(ctx context.Context, params *ListShardsInput, optFns
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListShards(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

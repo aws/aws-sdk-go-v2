@@ -44,6 +44,7 @@ func (c *Client) DetectDocumentText(ctx context.Context, params *DetectDocumentT
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDetectDocumentTextValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDetectDocumentText(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

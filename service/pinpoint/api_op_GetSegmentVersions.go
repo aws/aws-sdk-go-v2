@@ -34,6 +34,7 @@ func (c *Client) GetSegmentVersions(ctx context.Context, params *GetSegmentVersi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetSegmentVersionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSegmentVersions(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

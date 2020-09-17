@@ -33,6 +33,7 @@ func (c *Client) DeleteRecommenderConfiguration(ctx context.Context, params *Del
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteRecommenderConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRecommenderConfiguration(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

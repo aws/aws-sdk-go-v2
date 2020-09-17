@@ -70,6 +70,7 @@ func (c *Client) DeleteHostedZone(ctx context.Context, params *DeleteHostedZoneI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteHostedZoneValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteHostedZone(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -40,6 +40,7 @@ func (c *Client) UpdateAssetProperty(ctx context.Context, params *UpdateAssetPro
 	addIdempotencyToken_opUpdateAssetPropertyMiddleware(stack, options)
 	addOpUpdateAssetPropertyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAssetProperty(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

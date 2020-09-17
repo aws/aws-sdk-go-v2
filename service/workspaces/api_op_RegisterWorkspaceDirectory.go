@@ -38,6 +38,7 @@ func (c *Client) RegisterWorkspaceDirectory(ctx context.Context, params *Registe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterWorkspaceDirectoryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterWorkspaceDirectory(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,7 @@ func (c *Client) FlushStageAuthorizersCache(ctx context.Context, params *FlushSt
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpFlushStageAuthorizersCacheValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opFlushStageAuthorizersCache(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

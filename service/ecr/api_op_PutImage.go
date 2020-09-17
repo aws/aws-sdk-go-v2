@@ -39,6 +39,7 @@ func (c *Client) PutImage(ctx context.Context, params *PutImageInput, optFns ...
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutImageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutImage(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

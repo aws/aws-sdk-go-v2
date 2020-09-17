@@ -44,6 +44,7 @@ func (c *Client) SendContactMethodVerification(ctx context.Context, params *Send
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSendContactMethodVerificationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSendContactMethodVerification(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

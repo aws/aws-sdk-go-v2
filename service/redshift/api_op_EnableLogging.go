@@ -34,6 +34,7 @@ func (c *Client) EnableLogging(ctx context.Context, params *EnableLoggingInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpEnableLoggingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opEnableLogging(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

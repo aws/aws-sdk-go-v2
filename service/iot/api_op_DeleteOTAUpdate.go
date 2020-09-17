@@ -32,6 +32,7 @@ func (c *Client) DeleteOTAUpdate(ctx context.Context, params *DeleteOTAUpdateInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteOTAUpdateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteOTAUpdate(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

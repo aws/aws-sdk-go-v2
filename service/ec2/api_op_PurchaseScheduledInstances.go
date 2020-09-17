@@ -41,6 +41,7 @@ func (c *Client) PurchaseScheduledInstances(ctx context.Context, params *Purchas
 	addIdempotencyToken_opPurchaseScheduledInstancesMiddleware(stack, options)
 	addOpPurchaseScheduledInstancesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPurchaseScheduledInstances(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

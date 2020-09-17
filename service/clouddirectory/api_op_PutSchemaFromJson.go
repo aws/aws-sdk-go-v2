@@ -35,6 +35,7 @@ func (c *Client) PutSchemaFromJson(ctx context.Context, params *PutSchemaFromJso
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutSchemaFromJsonValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutSchemaFromJson(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

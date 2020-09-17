@@ -33,6 +33,7 @@ func (c *Client) ModifyCacheSubnetGroup(ctx context.Context, params *ModifyCache
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyCacheSubnetGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyCacheSubnetGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -35,6 +35,7 @@ func (c *Client) CreatePhoneNumberOrder(ctx context.Context, params *CreatePhone
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreatePhoneNumberOrderValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePhoneNumberOrder(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -35,6 +35,7 @@ func (c *Client) UpdateAccelerator(ctx context.Context, params *UpdateAccelerato
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateAcceleratorValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAccelerator(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

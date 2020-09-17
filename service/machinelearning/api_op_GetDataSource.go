@@ -37,6 +37,7 @@ func (c *Client) GetDataSource(ctx context.Context, params *GetDataSourceInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDataSourceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDataSource(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

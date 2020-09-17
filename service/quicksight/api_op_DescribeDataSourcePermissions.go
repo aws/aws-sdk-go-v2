@@ -33,6 +33,7 @@ func (c *Client) DescribeDataSourcePermissions(ctx context.Context, params *Desc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeDataSourcePermissionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDataSourcePermissions(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

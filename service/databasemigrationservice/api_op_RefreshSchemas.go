@@ -35,6 +35,7 @@ func (c *Client) RefreshSchemas(ctx context.Context, params *RefreshSchemasInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRefreshSchemasValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRefreshSchemas(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

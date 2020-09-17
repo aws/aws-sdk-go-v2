@@ -34,6 +34,7 @@ func (c *Client) UpdateLink(ctx context.Context, params *UpdateLinkInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateLinkValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateLink(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

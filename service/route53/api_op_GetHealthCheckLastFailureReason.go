@@ -33,6 +33,7 @@ func (c *Client) GetHealthCheckLastFailureReason(ctx context.Context, params *Ge
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetHealthCheckLastFailureReasonValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetHealthCheckLastFailureReason(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

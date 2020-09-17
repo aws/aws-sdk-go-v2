@@ -45,6 +45,7 @@ func (c *Client) NotifyMigrationTaskState(ctx context.Context, params *NotifyMig
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpNotifyMigrationTaskStateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opNotifyMigrationTaskState(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

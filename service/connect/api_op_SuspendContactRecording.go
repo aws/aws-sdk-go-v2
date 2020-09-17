@@ -37,6 +37,7 @@ func (c *Client) SuspendContactRecording(ctx context.Context, params *SuspendCon
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSuspendContactRecordingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSuspendContactRecording(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

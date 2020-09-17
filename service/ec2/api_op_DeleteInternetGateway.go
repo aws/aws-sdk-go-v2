@@ -33,6 +33,7 @@ func (c *Client) DeleteInternetGateway(ctx context.Context, params *DeleteIntern
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteInternetGatewayValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteInternetGateway(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

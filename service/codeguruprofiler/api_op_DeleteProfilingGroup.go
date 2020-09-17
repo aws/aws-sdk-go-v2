@@ -31,6 +31,7 @@ func (c *Client) DeleteProfilingGroup(ctx context.Context, params *DeleteProfili
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteProfilingGroupValidationMiddleware(stack)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

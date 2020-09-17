@@ -33,6 +33,7 @@ func (c *Client) UpdateUserProfile(ctx context.Context, params *UpdateUserProfil
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateUserProfileValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateUserProfile(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

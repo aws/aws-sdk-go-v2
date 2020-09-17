@@ -66,6 +66,7 @@ func (c *Client) CreateFunction(ctx context.Context, params *CreateFunctionInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateFunctionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFunction(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

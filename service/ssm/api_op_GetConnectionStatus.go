@@ -34,6 +34,7 @@ func (c *Client) GetConnectionStatus(ctx context.Context, params *GetConnectionS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetConnectionStatusValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetConnectionStatus(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

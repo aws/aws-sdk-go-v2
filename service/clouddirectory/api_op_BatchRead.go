@@ -33,6 +33,7 @@ func (c *Client) BatchRead(ctx context.Context, params *BatchReadInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchReadValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchRead(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

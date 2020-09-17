@@ -64,6 +64,7 @@ func (c *Client) CreateRegexMatchSet(ctx context.Context, params *CreateRegexMat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateRegexMatchSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRegexMatchSet(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

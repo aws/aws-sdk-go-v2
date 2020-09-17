@@ -33,6 +33,7 @@ func (c *Client) RetrieveDomainAuthCode(ctx context.Context, params *RetrieveDom
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRetrieveDomainAuthCodeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRetrieveDomainAuthCode(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

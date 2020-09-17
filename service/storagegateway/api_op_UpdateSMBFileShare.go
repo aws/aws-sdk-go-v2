@@ -43,6 +43,7 @@ func (c *Client) UpdateSMBFileShare(ctx context.Context, params *UpdateSMBFileSh
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateSMBFileShareValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSMBFileShare(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

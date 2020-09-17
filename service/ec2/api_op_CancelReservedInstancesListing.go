@@ -36,6 +36,7 @@ func (c *Client) CancelReservedInstancesListing(ctx context.Context, params *Can
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCancelReservedInstancesListingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCancelReservedInstancesListing(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

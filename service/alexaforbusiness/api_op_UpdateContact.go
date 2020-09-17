@@ -33,6 +33,7 @@ func (c *Client) UpdateContact(ctx context.Context, params *UpdateContactInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateContactValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateContact(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

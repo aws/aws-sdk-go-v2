@@ -35,6 +35,7 @@ func (c *Client) UpdateJob(ctx context.Context, params *UpdateJobInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

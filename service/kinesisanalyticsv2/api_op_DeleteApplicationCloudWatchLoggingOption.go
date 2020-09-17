@@ -34,6 +34,7 @@ func (c *Client) DeleteApplicationCloudWatchLoggingOption(ctx context.Context, p
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteApplicationCloudWatchLoggingOptionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteApplicationCloudWatchLoggingOption(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

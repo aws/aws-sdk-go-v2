@@ -35,6 +35,7 @@ func (c *Client) DeleteReceiptFilter(ctx context.Context, params *DeleteReceiptF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteReceiptFilterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteReceiptFilter(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

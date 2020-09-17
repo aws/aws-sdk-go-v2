@@ -34,6 +34,7 @@ func (c *Client) GetPatchBaseline(ctx context.Context, params *GetPatchBaselineI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetPatchBaselineValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetPatchBaseline(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

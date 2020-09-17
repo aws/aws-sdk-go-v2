@@ -32,6 +32,7 @@ func (c *Client) GetSolutionMetrics(ctx context.Context, params *GetSolutionMetr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetSolutionMetricsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSolutionMetrics(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

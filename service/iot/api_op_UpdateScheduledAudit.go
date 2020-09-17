@@ -34,6 +34,7 @@ func (c *Client) UpdateScheduledAudit(ctx context.Context, params *UpdateSchedul
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateScheduledAuditValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateScheduledAudit(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

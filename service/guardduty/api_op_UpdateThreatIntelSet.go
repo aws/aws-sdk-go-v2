@@ -32,6 +32,7 @@ func (c *Client) UpdateThreatIntelSet(ctx context.Context, params *UpdateThreatI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateThreatIntelSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateThreatIntelSet(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -35,6 +35,7 @@ func (c *Client) DeleteDBClusterSnapshot(ctx context.Context, params *DeleteDBCl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDBClusterSnapshotValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDBClusterSnapshot(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

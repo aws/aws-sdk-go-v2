@@ -33,6 +33,7 @@ func (c *Client) GetConsoleScreenshot(ctx context.Context, params *GetConsoleScr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetConsoleScreenshotValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetConsoleScreenshot(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

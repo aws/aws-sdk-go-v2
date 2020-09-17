@@ -34,6 +34,7 @@ func (c *Client) DeleteDeliveryChannel(ctx context.Context, params *DeleteDelive
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDeliveryChannelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDeliveryChannel(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

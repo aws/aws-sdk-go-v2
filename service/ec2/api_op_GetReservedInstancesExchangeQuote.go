@@ -37,6 +37,7 @@ func (c *Client) GetReservedInstancesExchangeQuote(ctx context.Context, params *
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetReservedInstancesExchangeQuoteValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetReservedInstancesExchangeQuote(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

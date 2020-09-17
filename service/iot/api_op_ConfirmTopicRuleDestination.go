@@ -36,6 +36,7 @@ func (c *Client) ConfirmTopicRuleDestination(ctx context.Context, params *Confir
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpConfirmTopicRuleDestinationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opConfirmTopicRuleDestination(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

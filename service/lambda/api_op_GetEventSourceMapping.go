@@ -35,6 +35,7 @@ func (c *Client) GetEventSourceMapping(ctx context.Context, params *GetEventSour
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetEventSourceMappingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetEventSourceMapping(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

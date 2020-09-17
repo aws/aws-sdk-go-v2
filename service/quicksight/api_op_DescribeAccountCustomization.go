@@ -33,6 +33,7 @@ func (c *Client) DescribeAccountCustomization(ctx context.Context, params *Descr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeAccountCustomizationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAccountCustomization(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -93,6 +93,7 @@ func (c *Client) CreateDeliveryStream(ctx context.Context, params *CreateDeliver
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDeliveryStreamValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDeliveryStream(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

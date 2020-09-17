@@ -63,6 +63,7 @@ func (c *Client) RegisterGameServer(ctx context.Context, params *RegisterGameSer
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterGameServerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterGameServer(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

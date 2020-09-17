@@ -34,6 +34,7 @@ func (c *Client) GetCommit(ctx context.Context, params *GetCommitInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetCommitValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetCommit(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

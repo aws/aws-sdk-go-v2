@@ -37,6 +37,7 @@ func (c *Client) GetCachePolicyConfig(ctx context.Context, params *GetCachePolic
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetCachePolicyConfigValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetCachePolicyConfig(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

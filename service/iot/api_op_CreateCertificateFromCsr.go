@@ -56,6 +56,7 @@ func (c *Client) CreateCertificateFromCsr(ctx context.Context, params *CreateCer
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateCertificateFromCsrValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCertificateFromCsr(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

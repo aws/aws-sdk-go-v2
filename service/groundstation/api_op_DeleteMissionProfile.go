@@ -31,6 +31,7 @@ func (c *Client) DeleteMissionProfile(ctx context.Context, params *DeleteMission
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteMissionProfileValidationMiddleware(stack)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

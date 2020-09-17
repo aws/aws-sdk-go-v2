@@ -33,6 +33,7 @@ func (c *Client) GetDocumentVersion(ctx context.Context, params *GetDocumentVers
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDocumentVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDocumentVersion(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

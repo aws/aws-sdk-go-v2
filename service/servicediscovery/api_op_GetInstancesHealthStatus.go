@@ -36,6 +36,7 @@ func (c *Client) GetInstancesHealthStatus(ctx context.Context, params *GetInstan
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetInstancesHealthStatusValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetInstancesHealthStatus(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

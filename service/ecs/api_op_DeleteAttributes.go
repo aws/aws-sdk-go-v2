@@ -33,6 +33,7 @@ func (c *Client) DeleteAttributes(ctx context.Context, params *DeleteAttributesI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteAttributesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAttributes(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

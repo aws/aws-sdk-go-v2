@@ -32,6 +32,7 @@ func (c *Client) ForgetSmartHomeAppliances(ctx context.Context, params *ForgetSm
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpForgetSmartHomeAppliancesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opForgetSmartHomeAppliances(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

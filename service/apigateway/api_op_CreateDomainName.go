@@ -34,6 +34,7 @@ func (c *Client) CreateDomainName(ctx context.Context, params *CreateDomainNameI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDomainNameValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDomainName(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

@@ -33,6 +33,7 @@ func (c *Client) ListGroupCertificateAuthorities(ctx context.Context, params *Li
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListGroupCertificateAuthoritiesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListGroupCertificateAuthorities(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

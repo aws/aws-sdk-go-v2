@@ -35,6 +35,7 @@ func (c *Client) CancelImageCreation(ctx context.Context, params *CancelImageCre
 	addIdempotencyToken_opCancelImageCreationMiddleware(stack, options)
 	addOpCancelImageCreationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCancelImageCreation(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

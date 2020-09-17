@@ -35,6 +35,7 @@ func (c *Client) CreateDevice(ctx context.Context, params *CreateDeviceInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDeviceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDevice(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

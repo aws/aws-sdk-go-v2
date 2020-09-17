@@ -32,6 +32,7 @@ func (c *Client) DeleteAuthorizer(ctx context.Context, params *DeleteAuthorizerI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteAuthorizerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAuthorizer(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

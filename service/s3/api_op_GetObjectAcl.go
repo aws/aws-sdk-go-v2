@@ -39,6 +39,7 @@ func (c *Client) GetObjectAcl(ctx context.Context, params *GetObjectAclInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetObjectAclValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetObjectAcl(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

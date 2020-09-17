@@ -33,6 +33,7 @@ func (c *Client) GetFunctionConcurrency(ctx context.Context, params *GetFunction
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetFunctionConcurrencyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetFunctionConcurrency(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

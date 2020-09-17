@@ -34,6 +34,7 @@ func (c *Client) UpdateAssociationStatus(ctx context.Context, params *UpdateAsso
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateAssociationStatusValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAssociationStatus(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

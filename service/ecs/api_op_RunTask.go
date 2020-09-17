@@ -58,6 +58,7 @@ func (c *Client) RunTask(ctx context.Context, params *RunTaskInput, optFns ...fu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRunTaskValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRunTask(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

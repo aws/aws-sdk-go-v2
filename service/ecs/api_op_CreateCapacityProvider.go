@@ -38,6 +38,7 @@ func (c *Client) CreateCapacityProvider(ctx context.Context, params *CreateCapac
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateCapacityProviderValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCapacityProvider(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

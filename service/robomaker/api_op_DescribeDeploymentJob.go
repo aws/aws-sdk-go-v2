@@ -34,6 +34,7 @@ func (c *Client) DescribeDeploymentJob(ctx context.Context, params *DescribeDepl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeDeploymentJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDeploymentJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

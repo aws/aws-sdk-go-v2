@@ -44,6 +44,7 @@ func (c *Client) CreateNFSFileShare(ctx context.Context, params *CreateNFSFileSh
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateNFSFileShareValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateNFSFileShare(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

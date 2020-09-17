@@ -33,6 +33,7 @@ func (c *Client) DeleteCacheParameterGroup(ctx context.Context, params *DeleteCa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteCacheParameterGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCacheParameterGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

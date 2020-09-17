@@ -35,6 +35,7 @@ func (c *Client) CreateDirectConnectGatewayAssociation(ctx context.Context, para
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDirectConnectGatewayAssociationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDirectConnectGatewayAssociation(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

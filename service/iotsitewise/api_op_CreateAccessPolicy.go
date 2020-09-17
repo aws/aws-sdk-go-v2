@@ -37,6 +37,7 @@ func (c *Client) CreateAccessPolicy(ctx context.Context, params *CreateAccessPol
 	addIdempotencyToken_opCreateAccessPolicyMiddleware(stack, options)
 	addOpCreateAccessPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAccessPolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

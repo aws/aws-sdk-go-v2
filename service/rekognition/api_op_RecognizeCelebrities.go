@@ -55,6 +55,7 @@ func (c *Client) RecognizeCelebrities(ctx context.Context, params *RecognizeCele
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRecognizeCelebritiesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRecognizeCelebrities(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

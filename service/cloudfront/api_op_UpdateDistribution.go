@@ -81,6 +81,7 @@ func (c *Client) UpdateDistribution(ctx context.Context, params *UpdateDistribut
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateDistributionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDistribution(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

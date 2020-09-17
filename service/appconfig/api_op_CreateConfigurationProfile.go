@@ -50,6 +50,7 @@ func (c *Client) CreateConfigurationProfile(ctx context.Context, params *CreateC
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateConfigurationProfileValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateConfigurationProfile(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

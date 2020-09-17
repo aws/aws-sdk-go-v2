@@ -55,6 +55,7 @@ func (c *Client) ModifyFleet(ctx context.Context, params *ModifyFleetInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyFleetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyFleet(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

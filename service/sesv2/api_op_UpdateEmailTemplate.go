@@ -37,6 +37,7 @@ func (c *Client) UpdateEmailTemplate(ctx context.Context, params *UpdateEmailTem
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateEmailTemplateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateEmailTemplate(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

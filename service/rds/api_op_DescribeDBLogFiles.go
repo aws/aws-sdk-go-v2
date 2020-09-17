@@ -33,6 +33,7 @@ func (c *Client) DescribeDBLogFiles(ctx context.Context, params *DescribeDBLogFi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeDBLogFilesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDBLogFiles(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

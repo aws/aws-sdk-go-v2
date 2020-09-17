@@ -36,6 +36,7 @@ func (c *Client) ReplaceNetworkAclAssociation(ctx context.Context, params *Repla
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpReplaceNetworkAclAssociationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opReplaceNetworkAclAssociation(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

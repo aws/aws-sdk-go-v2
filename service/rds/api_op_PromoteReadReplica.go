@@ -47,6 +47,7 @@ func (c *Client) PromoteReadReplica(ctx context.Context, params *PromoteReadRepl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPromoteReadReplicaValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPromoteReadReplica(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

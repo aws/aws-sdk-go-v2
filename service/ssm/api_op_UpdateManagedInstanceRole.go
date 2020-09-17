@@ -35,6 +35,7 @@ func (c *Client) UpdateManagedInstanceRole(ctx context.Context, params *UpdateMa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateManagedInstanceRoleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateManagedInstanceRole(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

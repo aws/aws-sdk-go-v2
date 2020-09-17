@@ -33,6 +33,7 @@ func (c *Client) CreateLogSubscription(ctx context.Context, params *CreateLogSub
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateLogSubscriptionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLogSubscription(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

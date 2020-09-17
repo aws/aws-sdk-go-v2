@@ -32,6 +32,7 @@ func (c *Client) DeleteCloudFrontOriginAccessIdentity(ctx context.Context, param
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteCloudFrontOriginAccessIdentityValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCloudFrontOriginAccessIdentity(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

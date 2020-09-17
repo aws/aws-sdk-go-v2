@@ -70,6 +70,7 @@ func (c *Client) DescribeFleetEvents(ctx context.Context, params *DescribeFleetE
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeFleetEventsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFleetEvents(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

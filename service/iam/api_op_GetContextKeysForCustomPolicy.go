@@ -41,6 +41,7 @@ func (c *Client) GetContextKeysForCustomPolicy(ctx context.Context, params *GetC
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetContextKeysForCustomPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetContextKeysForCustomPolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

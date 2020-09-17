@@ -50,6 +50,7 @@ func (c *Client) GetChangeTokenStatus(ctx context.Context, params *GetChangeToke
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetChangeTokenStatusValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetChangeTokenStatus(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

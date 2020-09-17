@@ -33,6 +33,7 @@ func (c *Client) UpdateGroupQuery(ctx context.Context, params *UpdateGroupQueryI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateGroupQueryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGroupQuery(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

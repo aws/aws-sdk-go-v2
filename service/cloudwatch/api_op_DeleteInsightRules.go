@@ -35,6 +35,7 @@ func (c *Client) DeleteInsightRules(ctx context.Context, params *DeleteInsightRu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteInsightRulesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteInsightRules(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -56,6 +56,7 @@ func (c *Client) CountPendingDecisionTasks(ctx context.Context, params *CountPen
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCountPendingDecisionTasksValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCountPendingDecisionTasks(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

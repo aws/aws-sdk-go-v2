@@ -35,6 +35,7 @@ func (c *Client) DescribeEventTracker(ctx context.Context, params *DescribeEvent
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeEventTrackerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEventTracker(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

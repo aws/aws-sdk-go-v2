@@ -35,6 +35,7 @@ func (c *Client) ListUsers(ctx context.Context, params *ListUsersInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListUsersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListUsers(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

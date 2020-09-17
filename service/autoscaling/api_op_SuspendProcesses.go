@@ -38,6 +38,7 @@ func (c *Client) SuspendProcesses(ctx context.Context, params *SuspendProcessesI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSuspendProcessesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSuspendProcesses(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

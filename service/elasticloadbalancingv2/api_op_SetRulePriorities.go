@@ -35,6 +35,7 @@ func (c *Client) SetRulePriorities(ctx context.Context, params *SetRulePrioritie
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSetRulePrioritiesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSetRulePriorities(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

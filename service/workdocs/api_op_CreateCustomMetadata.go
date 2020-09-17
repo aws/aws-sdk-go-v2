@@ -33,6 +33,7 @@ func (c *Client) CreateCustomMetadata(ctx context.Context, params *CreateCustomM
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateCustomMetadataValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCustomMetadata(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,7 @@ func (c *Client) GetVoiceConnectorEmergencyCallingConfiguration(ctx context.Cont
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetVoiceConnectorEmergencyCallingConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetVoiceConnectorEmergencyCallingConfiguration(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

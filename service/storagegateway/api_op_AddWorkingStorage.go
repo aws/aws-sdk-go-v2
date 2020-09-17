@@ -40,6 +40,7 @@ func (c *Client) AddWorkingStorage(ctx context.Context, params *AddWorkingStorag
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAddWorkingStorageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAddWorkingStorage(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

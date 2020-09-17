@@ -53,6 +53,7 @@ func (c *Client) DescribeSecret(ctx context.Context, params *DescribeSecretInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeSecretValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSecret(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

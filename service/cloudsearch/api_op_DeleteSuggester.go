@@ -35,6 +35,7 @@ func (c *Client) DeleteSuggester(ctx context.Context, params *DeleteSuggesterInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteSuggesterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSuggester(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

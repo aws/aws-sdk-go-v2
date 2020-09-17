@@ -33,6 +33,7 @@ func (c *Client) CreateTemplateAlias(ctx context.Context, params *CreateTemplate
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateTemplateAliasValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTemplateAlias(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) AcceptPortfolioShare(ctx context.Context, params *AcceptPortfol
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAcceptPortfolioShareValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptPortfolioShare(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

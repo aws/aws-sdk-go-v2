@@ -32,6 +32,7 @@ func (c *Client) DeleteThreatIntelSet(ctx context.Context, params *DeleteThreatI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteThreatIntelSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteThreatIntelSet(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

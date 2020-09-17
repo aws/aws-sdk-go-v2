@@ -33,6 +33,7 @@ func (c *Client) CreateAccessPoint(ctx context.Context, params *CreateAccessPoin
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateAccessPointValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAccessPoint(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

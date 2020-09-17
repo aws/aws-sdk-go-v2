@@ -33,6 +33,7 @@ func (c *Client) StartPipelineReprocessing(ctx context.Context, params *StartPip
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartPipelineReprocessingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartPipelineReprocessing(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

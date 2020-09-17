@@ -37,6 +37,7 @@ func (c *Client) CreateVpnGateway(ctx context.Context, params *CreateVpnGatewayI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateVpnGatewayValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVpnGateway(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

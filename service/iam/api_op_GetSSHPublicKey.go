@@ -39,6 +39,7 @@ func (c *Client) GetSSHPublicKey(ctx context.Context, params *GetSSHPublicKeyInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetSSHPublicKeyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSSHPublicKey(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

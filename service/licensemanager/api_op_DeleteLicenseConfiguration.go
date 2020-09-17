@@ -33,6 +33,7 @@ func (c *Client) DeleteLicenseConfiguration(ctx context.Context, params *DeleteL
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteLicenseConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteLicenseConfiguration(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

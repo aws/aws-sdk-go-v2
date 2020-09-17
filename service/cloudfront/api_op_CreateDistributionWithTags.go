@@ -33,6 +33,7 @@ func (c *Client) CreateDistributionWithTags(ctx context.Context, params *CreateD
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDistributionWithTagsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDistributionWithTags(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -40,6 +40,7 @@ func (c *Client) StopDBCluster(ctx context.Context, params *StopDBClusterInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopDBClusterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopDBCluster(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

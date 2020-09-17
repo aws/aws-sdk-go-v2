@@ -42,6 +42,7 @@ func (c *Client) CreateMeeting(ctx context.Context, params *CreateMeetingInput, 
 	addIdempotencyToken_opCreateMeetingMiddleware(stack, options)
 	addOpCreateMeetingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMeeting(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

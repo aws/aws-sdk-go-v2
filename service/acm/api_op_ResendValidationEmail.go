@@ -42,6 +42,7 @@ func (c *Client) ResendValidationEmail(ctx context.Context, params *ResendValida
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpResendValidationEmailValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opResendValidationEmail(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

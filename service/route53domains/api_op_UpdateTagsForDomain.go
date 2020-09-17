@@ -35,6 +35,7 @@ func (c *Client) UpdateTagsForDomain(ctx context.Context, params *UpdateTagsForD
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateTagsForDomainValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTagsForDomain(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

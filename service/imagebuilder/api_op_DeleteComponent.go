@@ -32,6 +32,7 @@ func (c *Client) DeleteComponent(ctx context.Context, params *DeleteComponentInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteComponentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteComponent(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

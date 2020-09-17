@@ -33,6 +33,7 @@ func (c *Client) UpdateMethodResponse(ctx context.Context, params *UpdateMethodR
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateMethodResponseValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMethodResponse(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

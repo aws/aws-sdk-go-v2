@@ -32,6 +32,7 @@ func (c *Client) DeleteRoomSkillParameter(ctx context.Context, params *DeleteRoo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteRoomSkillParameterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRoomSkillParameter(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -41,6 +41,7 @@ func (c *Client) DeleteAssetModel(ctx context.Context, params *DeleteAssetModelI
 	addIdempotencyToken_opDeleteAssetModelMiddleware(stack, options)
 	addOpDeleteAssetModelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAssetModel(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -38,6 +38,7 @@ func (c *Client) SetPlatformApplicationAttributes(ctx context.Context, params *S
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSetPlatformApplicationAttributesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSetPlatformApplicationAttributes(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

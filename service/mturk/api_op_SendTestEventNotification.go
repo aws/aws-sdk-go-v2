@@ -38,6 +38,7 @@ func (c *Client) SendTestEventNotification(ctx context.Context, params *SendTest
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSendTestEventNotificationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSendTestEventNotification(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

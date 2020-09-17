@@ -37,6 +37,7 @@ func (c *Client) AssociateS3Resources(ctx context.Context, params *AssociateS3Re
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateS3ResourcesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateS3Resources(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

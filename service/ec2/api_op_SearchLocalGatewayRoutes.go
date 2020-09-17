@@ -33,6 +33,7 @@ func (c *Client) SearchLocalGatewayRoutes(ctx context.Context, params *SearchLoc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSearchLocalGatewayRoutesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSearchLocalGatewayRoutes(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

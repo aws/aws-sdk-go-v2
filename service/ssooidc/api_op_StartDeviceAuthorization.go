@@ -30,6 +30,7 @@ func (c *Client) StartDeviceAuthorization(ctx context.Context, params *StartDevi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartDeviceAuthorizationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartDeviceAuthorization(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

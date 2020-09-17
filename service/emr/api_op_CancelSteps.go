@@ -38,6 +38,7 @@ func (c *Client) CancelSteps(ctx context.Context, params *CancelStepsInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCancelStepsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCancelSteps(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

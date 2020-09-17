@@ -37,6 +37,7 @@ func (c *Client) DeleteSigningCertificate(ctx context.Context, params *DeleteSig
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteSigningCertificateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSigningCertificate(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

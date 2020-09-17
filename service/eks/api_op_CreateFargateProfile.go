@@ -61,6 +61,7 @@ func (c *Client) CreateFargateProfile(ctx context.Context, params *CreateFargate
 	addIdempotencyToken_opCreateFargateProfileMiddleware(stack, options)
 	addOpCreateFargateProfileValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFargateProfile(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

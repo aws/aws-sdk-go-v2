@@ -40,6 +40,7 @@ func (c *Client) DescribeJournalS3Export(ctx context.Context, params *DescribeJo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeJournalS3ExportValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeJournalS3Export(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

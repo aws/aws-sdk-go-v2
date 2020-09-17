@@ -32,6 +32,7 @@ func (c *Client) ConfigureAgent(ctx context.Context, params *ConfigureAgentInput
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpConfigureAgentValidationMiddleware(stack)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

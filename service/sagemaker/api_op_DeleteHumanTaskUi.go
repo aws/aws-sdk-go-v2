@@ -35,6 +35,7 @@ func (c *Client) DeleteHumanTaskUi(ctx context.Context, params *DeleteHumanTaskU
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteHumanTaskUiValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteHumanTaskUi(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

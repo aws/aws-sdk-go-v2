@@ -32,6 +32,7 @@ func (c *Client) DeregisterTargetFromMaintenanceWindow(ctx context.Context, para
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeregisterTargetFromMaintenanceWindowValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterTargetFromMaintenanceWindow(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

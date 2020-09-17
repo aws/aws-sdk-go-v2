@@ -32,6 +32,7 @@ func (c *Client) DeleteBillingGroup(ctx context.Context, params *DeleteBillingGr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteBillingGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBillingGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

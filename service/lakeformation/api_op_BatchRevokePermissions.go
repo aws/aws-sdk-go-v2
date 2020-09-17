@@ -33,6 +33,7 @@ func (c *Client) BatchRevokePermissions(ctx context.Context, params *BatchRevoke
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchRevokePermissionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchRevokePermissions(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

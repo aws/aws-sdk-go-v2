@@ -62,6 +62,7 @@ func (c *Client) SearchFacesByImage(ctx context.Context, params *SearchFacesByIm
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSearchFacesByImageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSearchFacesByImage(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

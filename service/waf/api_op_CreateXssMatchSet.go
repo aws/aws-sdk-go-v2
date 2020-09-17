@@ -61,6 +61,7 @@ func (c *Client) CreateXssMatchSet(ctx context.Context, params *CreateXssMatchSe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateXssMatchSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateXssMatchSet(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

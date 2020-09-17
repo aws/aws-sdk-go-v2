@@ -42,6 +42,7 @@ func (c *Client) CreateTrial(ctx context.Context, params *CreateTrialInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateTrialValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTrial(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -36,6 +36,7 @@ func (c *Client) DeleteAccessPolicy(ctx context.Context, params *DeleteAccessPol
 	addIdempotencyToken_opDeleteAccessPolicyMiddleware(stack, options)
 	addOpDeleteAccessPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAccessPolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

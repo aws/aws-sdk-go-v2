@@ -32,6 +32,7 @@ func (c *Client) UpdateMesh(ctx context.Context, params *UpdateMeshInput, optFns
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateMeshValidationMiddleware(stack)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

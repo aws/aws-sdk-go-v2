@@ -45,6 +45,7 @@ func (c *Client) DeleteTable(ctx context.Context, params *DeleteTableInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteTableValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteTable(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addValidateResponseChecksum(stack, options)
 	addAcceptEncodingGzip(stack, options)
 

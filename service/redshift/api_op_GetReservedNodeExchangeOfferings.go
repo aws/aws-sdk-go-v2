@@ -34,6 +34,7 @@ func (c *Client) GetReservedNodeExchangeOfferings(ctx context.Context, params *G
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetReservedNodeExchangeOfferingsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetReservedNodeExchangeOfferings(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

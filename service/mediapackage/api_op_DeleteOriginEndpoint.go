@@ -32,6 +32,7 @@ func (c *Client) DeleteOriginEndpoint(ctx context.Context, params *DeleteOriginE
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteOriginEndpointValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteOriginEndpoint(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -35,6 +35,7 @@ func (c *Client) CreatePortfolio(ctx context.Context, params *CreatePortfolioInp
 	addIdempotencyToken_opCreatePortfolioMiddleware(stack, options)
 	addOpCreatePortfolioValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePortfolio(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

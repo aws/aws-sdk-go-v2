@@ -36,6 +36,7 @@ func (c *Client) DeleteCustomAvailabilityZone(ctx context.Context, params *Delet
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteCustomAvailabilityZoneValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCustomAvailabilityZone(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

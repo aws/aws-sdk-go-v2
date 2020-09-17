@@ -32,6 +32,7 @@ func (c *Client) GetTags(ctx context.Context, params *GetTagsInput, optFns ...fu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetTagsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetTags(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

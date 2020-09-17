@@ -35,6 +35,7 @@ func (c *Client) ListHumanLoops(ctx context.Context, params *ListHumanLoopsInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListHumanLoopsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListHumanLoops(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

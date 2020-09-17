@@ -34,6 +34,7 @@ func (c *Client) UnsubscribeFromDataset(ctx context.Context, params *Unsubscribe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUnsubscribeFromDatasetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUnsubscribeFromDataset(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

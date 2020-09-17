@@ -49,6 +49,7 @@ func (c *Client) AddRoleToInstanceProfile(ctx context.Context, params *AddRoleTo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAddRoleToInstanceProfileValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAddRoleToInstanceProfile(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

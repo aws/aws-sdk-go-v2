@@ -33,6 +33,7 @@ func (c *Client) CreateDBSnapshot(ctx context.Context, params *CreateDBSnapshotI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDBSnapshotValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDBSnapshot(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

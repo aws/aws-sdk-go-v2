@@ -33,6 +33,7 @@ func (c *Client) ListImagePipelineImages(ctx context.Context, params *ListImageP
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListImagePipelineImagesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListImagePipelineImages(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

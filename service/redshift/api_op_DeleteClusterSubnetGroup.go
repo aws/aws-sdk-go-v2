@@ -32,6 +32,7 @@ func (c *Client) DeleteClusterSubnetGroup(ctx context.Context, params *DeleteClu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteClusterSubnetGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteClusterSubnetGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

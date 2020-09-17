@@ -33,6 +33,7 @@ func (c *Client) RegisterAVSDevice(ctx context.Context, params *RegisterAVSDevic
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterAVSDeviceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterAVSDevice(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

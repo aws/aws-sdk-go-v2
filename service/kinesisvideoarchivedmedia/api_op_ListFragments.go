@@ -54,6 +54,7 @@ func (c *Client) ListFragments(ctx context.Context, params *ListFragmentsInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListFragmentsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListFragments(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

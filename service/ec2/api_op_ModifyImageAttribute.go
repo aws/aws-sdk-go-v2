@@ -39,6 +39,7 @@ func (c *Client) ModifyImageAttribute(ctx context.Context, params *ModifyImageAt
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyImageAttributeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyImageAttribute(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

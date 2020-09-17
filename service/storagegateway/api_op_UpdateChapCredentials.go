@@ -37,6 +37,7 @@ func (c *Client) UpdateChapCredentials(ctx context.Context, params *UpdateChapCr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateChapCredentialsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateChapCredentials(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

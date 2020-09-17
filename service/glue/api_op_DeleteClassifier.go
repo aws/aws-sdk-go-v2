@@ -32,6 +32,7 @@ func (c *Client) DeleteClassifier(ctx context.Context, params *DeleteClassifierI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteClassifierValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteClassifier(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

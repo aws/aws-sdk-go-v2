@@ -40,6 +40,7 @@ func (c *Client) StartQueryExecution(ctx context.Context, params *StartQueryExec
 	addIdempotencyToken_opStartQueryExecutionMiddleware(stack, options)
 	addOpStartQueryExecutionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartQueryExecution(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

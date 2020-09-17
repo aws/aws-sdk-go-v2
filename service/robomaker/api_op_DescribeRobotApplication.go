@@ -34,6 +34,7 @@ func (c *Client) DescribeRobotApplication(ctx context.Context, params *DescribeR
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeRobotApplicationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRobotApplication(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -37,6 +37,7 @@ func (c *Client) UpdateNumberOfDomainControllers(ctx context.Context, params *Up
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateNumberOfDomainControllersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateNumberOfDomainControllers(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

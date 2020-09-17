@@ -34,6 +34,7 @@ func (c *Client) ListRecoveryPointsByBackupVault(ctx context.Context, params *Li
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListRecoveryPointsByBackupVaultValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListRecoveryPointsByBackupVault(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

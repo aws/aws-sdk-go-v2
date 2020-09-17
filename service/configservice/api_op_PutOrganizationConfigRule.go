@@ -57,6 +57,7 @@ func (c *Client) PutOrganizationConfigRule(ctx context.Context, params *PutOrgan
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutOrganizationConfigRuleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutOrganizationConfigRule(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

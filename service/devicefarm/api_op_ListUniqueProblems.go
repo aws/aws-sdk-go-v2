@@ -37,6 +37,7 @@ func (c *Client) ListUniqueProblems(ctx context.Context, params *ListUniqueProbl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListUniqueProblemsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListUniqueProblems(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

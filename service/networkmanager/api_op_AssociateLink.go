@@ -35,6 +35,7 @@ func (c *Client) AssociateLink(ctx context.Context, params *AssociateLinkInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateLinkValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateLink(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

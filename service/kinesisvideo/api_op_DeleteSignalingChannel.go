@@ -34,6 +34,7 @@ func (c *Client) DeleteSignalingChannel(ctx context.Context, params *DeleteSigna
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteSignalingChannelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSignalingChannel(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

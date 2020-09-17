@@ -32,6 +32,7 @@ func (c *Client) DeleteTheme(ctx context.Context, params *DeleteThemeInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteThemeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteTheme(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

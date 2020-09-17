@@ -34,6 +34,7 @@ func (c *Client) DescribeAlarmsForMetric(ctx context.Context, params *DescribeAl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeAlarmsForMetricValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAlarmsForMetric(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

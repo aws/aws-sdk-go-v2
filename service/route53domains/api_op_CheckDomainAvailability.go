@@ -35,6 +35,7 @@ func (c *Client) CheckDomainAvailability(ctx context.Context, params *CheckDomai
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCheckDomainAvailabilityValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCheckDomainAvailability(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -37,6 +37,7 @@ func (c *Client) CreateStreamKey(ctx context.Context, params *CreateStreamKeyInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateStreamKeyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStreamKey(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

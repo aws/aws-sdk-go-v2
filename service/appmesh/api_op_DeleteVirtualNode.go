@@ -34,6 +34,7 @@ func (c *Client) DeleteVirtualNode(ctx context.Context, params *DeleteVirtualNod
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteVirtualNodeValidationMiddleware(stack)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

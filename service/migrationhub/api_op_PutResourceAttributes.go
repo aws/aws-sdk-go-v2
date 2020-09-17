@@ -51,6 +51,7 @@ func (c *Client) PutResourceAttributes(ctx context.Context, params *PutResourceA
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutResourceAttributesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutResourceAttributes(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

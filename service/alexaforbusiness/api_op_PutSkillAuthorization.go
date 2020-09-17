@@ -34,6 +34,7 @@ func (c *Client) PutSkillAuthorization(ctx context.Context, params *PutSkillAuth
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutSkillAuthorizationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutSkillAuthorization(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) UpdateChannelClass(ctx context.Context, params *UpdateChannelCl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateChannelClassValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateChannelClass(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

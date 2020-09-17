@@ -61,6 +61,7 @@ func (c *Client) PutRecord(ctx context.Context, params *PutRecordInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutRecordValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutRecord(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

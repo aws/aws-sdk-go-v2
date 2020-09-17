@@ -35,6 +35,7 @@ func (c *Client) StartNotebookInstance(ctx context.Context, params *StartNoteboo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartNotebookInstanceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartNotebookInstance(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

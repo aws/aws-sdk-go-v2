@@ -34,6 +34,7 @@ func (c *Client) GetHostedZone(ctx context.Context, params *GetHostedZoneInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetHostedZoneValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetHostedZone(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

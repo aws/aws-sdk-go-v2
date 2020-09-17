@@ -32,6 +32,7 @@ func (c *Client) UpdateAuditStreamConfiguration(ctx context.Context, params *Upd
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateAuditStreamConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAuditStreamConfiguration(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

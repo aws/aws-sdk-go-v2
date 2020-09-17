@@ -33,6 +33,7 @@ func (c *Client) CreateFieldLevelEncryptionProfile(ctx context.Context, params *
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateFieldLevelEncryptionProfileValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFieldLevelEncryptionProfile(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

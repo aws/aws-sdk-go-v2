@@ -42,6 +42,7 @@ func (c *Client) AttachLoadBalancerTlsCertificate(ctx context.Context, params *A
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAttachLoadBalancerTlsCertificateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAttachLoadBalancerTlsCertificate(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) PutDetector(ctx context.Context, params *PutDetectorInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutDetectorValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutDetector(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

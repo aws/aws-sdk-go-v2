@@ -37,6 +37,7 @@ func (c *Client) PutContainerPolicy(ctx context.Context, params *PutContainerPol
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutContainerPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutContainerPolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

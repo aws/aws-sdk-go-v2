@@ -33,6 +33,7 @@ func (c *Client) GetApiCache(ctx context.Context, params *GetApiCacheInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetApiCacheValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetApiCache(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

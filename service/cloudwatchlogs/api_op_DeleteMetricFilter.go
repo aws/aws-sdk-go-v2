@@ -32,6 +32,7 @@ func (c *Client) DeleteMetricFilter(ctx context.Context, params *DeleteMetricFil
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteMetricFilterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMetricFilter(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

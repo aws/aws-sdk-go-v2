@@ -34,6 +34,7 @@ func (c *Client) DescribeCodeBinding(ctx context.Context, params *DescribeCodeBi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeCodeBindingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCodeBinding(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

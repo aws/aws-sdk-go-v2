@@ -35,6 +35,7 @@ func (c *Client) UntagRole(ctx context.Context, params *UntagRoleInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUntagRoleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUntagRole(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

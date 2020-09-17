@@ -34,6 +34,7 @@ func (c *Client) UnsubscribeFromEvent(ctx context.Context, params *UnsubscribeFr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUnsubscribeFromEventValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUnsubscribeFromEvent(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

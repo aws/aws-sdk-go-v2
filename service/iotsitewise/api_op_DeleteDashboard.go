@@ -34,6 +34,7 @@ func (c *Client) DeleteDashboard(ctx context.Context, params *DeleteDashboardInp
 	addIdempotencyToken_opDeleteDashboardMiddleware(stack, options)
 	addOpDeleteDashboardValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDashboard(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

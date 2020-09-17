@@ -34,6 +34,7 @@ func (c *Client) BatchGetDeployments(ctx context.Context, params *BatchGetDeploy
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchGetDeploymentsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetDeployments(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

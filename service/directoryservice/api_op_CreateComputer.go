@@ -34,6 +34,7 @@ func (c *Client) CreateComputer(ctx context.Context, params *CreateComputerInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateComputerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateComputer(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

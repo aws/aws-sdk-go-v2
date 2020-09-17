@@ -35,6 +35,7 @@ func (c *Client) GetExclusionsPreview(ctx context.Context, params *GetExclusions
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetExclusionsPreviewValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetExclusionsPreview(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

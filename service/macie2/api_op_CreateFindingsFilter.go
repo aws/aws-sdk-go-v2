@@ -35,6 +35,7 @@ func (c *Client) CreateFindingsFilter(ctx context.Context, params *CreateFinding
 	addIdempotencyToken_opCreateFindingsFilterMiddleware(stack, options)
 	addOpCreateFindingsFilterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFindingsFilter(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

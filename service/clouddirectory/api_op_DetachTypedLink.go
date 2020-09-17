@@ -35,6 +35,7 @@ func (c *Client) DetachTypedLink(ctx context.Context, params *DetachTypedLinkInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDetachTypedLinkValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDetachTypedLink(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

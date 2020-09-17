@@ -33,6 +33,7 @@ func (c *Client) DisableAlarmActions(ctx context.Context, params *DisableAlarmAc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisableAlarmActionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisableAlarmActions(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

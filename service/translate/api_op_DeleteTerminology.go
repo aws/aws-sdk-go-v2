@@ -32,6 +32,7 @@ func (c *Client) DeleteTerminology(ctx context.Context, params *DeleteTerminolog
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteTerminologyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteTerminology(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

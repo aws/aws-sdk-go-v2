@@ -69,6 +69,7 @@ func (c *Client) UpdateAutoScalingGroup(ctx context.Context, params *UpdateAutoS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateAutoScalingGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAutoScalingGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

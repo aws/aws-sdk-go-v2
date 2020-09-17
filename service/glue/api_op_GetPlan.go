@@ -33,6 +33,7 @@ func (c *Client) GetPlan(ctx context.Context, params *GetPlanInput, optFns ...fu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetPlanValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetPlan(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

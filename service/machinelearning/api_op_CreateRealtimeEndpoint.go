@@ -35,6 +35,7 @@ func (c *Client) CreateRealtimeEndpoint(ctx context.Context, params *CreateRealt
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateRealtimeEndpointValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRealtimeEndpoint(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

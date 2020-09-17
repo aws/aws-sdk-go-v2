@@ -33,6 +33,7 @@ func (c *Client) DeleteJourney(ctx context.Context, params *DeleteJourneyInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteJourneyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteJourney(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

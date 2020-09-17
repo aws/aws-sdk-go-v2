@@ -38,6 +38,7 @@ func (c *Client) CreateAssessmentTemplate(ctx context.Context, params *CreateAss
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateAssessmentTemplateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAssessmentTemplate(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

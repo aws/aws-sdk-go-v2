@@ -40,6 +40,7 @@ func (c *Client) DeletePackageVersions(ctx context.Context, params *DeletePackag
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeletePackageVersionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePackageVersions(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

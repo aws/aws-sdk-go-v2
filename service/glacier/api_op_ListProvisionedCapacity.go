@@ -34,6 +34,7 @@ func (c *Client) ListProvisionedCapacity(ctx context.Context, params *ListProvis
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListProvisionedCapacityValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListProvisionedCapacity(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,7 @@ func (c *Client) ListVirtualServices(ctx context.Context, params *ListVirtualSer
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListVirtualServicesValidationMiddleware(stack)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

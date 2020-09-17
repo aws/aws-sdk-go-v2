@@ -37,6 +37,7 @@ func (c *Client) StopRelationalDatabase(ctx context.Context, params *StopRelatio
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopRelationalDatabaseValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopRelationalDatabase(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -40,6 +40,7 @@ func (c *Client) StopDominantLanguageDetectionJob(ctx context.Context, params *S
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopDominantLanguageDetectionJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopDominantLanguageDetectionJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

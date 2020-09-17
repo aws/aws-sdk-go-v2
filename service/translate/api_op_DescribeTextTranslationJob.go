@@ -35,6 +35,7 @@ func (c *Client) DescribeTextTranslationJob(ctx context.Context, params *Describ
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeTextTranslationJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTextTranslationJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

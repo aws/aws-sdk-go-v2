@@ -38,6 +38,7 @@ func (c *Client) GetQueueUrl(ctx context.Context, params *GetQueueUrlInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetQueueUrlValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetQueueUrl(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

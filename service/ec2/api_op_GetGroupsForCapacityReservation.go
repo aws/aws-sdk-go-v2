@@ -33,6 +33,7 @@ func (c *Client) GetGroupsForCapacityReservation(ctx context.Context, params *Ge
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetGroupsForCapacityReservationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetGroupsForCapacityReservation(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

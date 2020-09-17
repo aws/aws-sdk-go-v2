@@ -33,6 +33,7 @@ func (c *Client) DescribeClientVpnRoutes(ctx context.Context, params *DescribeCl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeClientVpnRoutesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeClientVpnRoutes(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

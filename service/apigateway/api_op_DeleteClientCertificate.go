@@ -32,6 +32,7 @@ func (c *Client) DeleteClientCertificate(ctx context.Context, params *DeleteClie
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteClientCertificateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteClientCertificate(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

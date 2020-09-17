@@ -58,6 +58,7 @@ func (c *Client) DeleteCustomKeyStore(ctx context.Context, params *DeleteCustomK
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteCustomKeyStoreValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCustomKeyStore(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

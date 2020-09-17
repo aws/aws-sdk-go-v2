@@ -33,6 +33,7 @@ func (c *Client) SetSubscriptionAttributes(ctx context.Context, params *SetSubsc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSetSubscriptionAttributesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSetSubscriptionAttributes(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) UpdateMultiplex(ctx context.Context, params *UpdateMultiplexInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateMultiplexValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMultiplex(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

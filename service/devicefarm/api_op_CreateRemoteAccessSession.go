@@ -33,6 +33,7 @@ func (c *Client) CreateRemoteAccessSession(ctx context.Context, params *CreateRe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateRemoteAccessSessionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRemoteAccessSession(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

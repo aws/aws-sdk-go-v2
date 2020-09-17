@@ -36,6 +36,7 @@ func (c *Client) CreateElasticsearchDomain(ctx context.Context, params *CreateEl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateElasticsearchDomainValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateElasticsearchDomain(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

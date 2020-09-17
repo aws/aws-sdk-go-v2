@@ -61,6 +61,7 @@ func (c *Client) UndeprecateWorkflowType(ctx context.Context, params *Undeprecat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUndeprecateWorkflowTypeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUndeprecateWorkflowType(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

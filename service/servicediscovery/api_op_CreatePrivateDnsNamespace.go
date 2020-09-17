@@ -42,6 +42,7 @@ func (c *Client) CreatePrivateDnsNamespace(ctx context.Context, params *CreatePr
 	addIdempotencyToken_opCreatePrivateDnsNamespaceMiddleware(stack, options)
 	addOpCreatePrivateDnsNamespaceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePrivateDnsNamespace(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

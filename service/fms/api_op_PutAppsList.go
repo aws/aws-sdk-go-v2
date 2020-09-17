@@ -33,6 +33,7 @@ func (c *Client) PutAppsList(ctx context.Context, params *PutAppsListInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutAppsListValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutAppsList(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

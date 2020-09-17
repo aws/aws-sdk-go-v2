@@ -33,6 +33,7 @@ func (c *Client) UpdateReservation(ctx context.Context, params *UpdateReservatio
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateReservationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateReservation(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

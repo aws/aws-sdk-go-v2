@@ -32,6 +32,7 @@ func (c *Client) DeleteMember(ctx context.Context, params *DeleteMemberInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteMemberValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMember(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

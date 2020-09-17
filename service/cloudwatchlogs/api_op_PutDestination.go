@@ -46,6 +46,7 @@ func (c *Client) PutDestination(ctx context.Context, params *PutDestinationInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutDestinationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutDestination(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -49,6 +49,7 @@ func (c *Client) CreateSnapshotFromVolumeRecoveryPoint(ctx context.Context, para
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateSnapshotFromVolumeRecoveryPointValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSnapshotFromVolumeRecoveryPoint(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

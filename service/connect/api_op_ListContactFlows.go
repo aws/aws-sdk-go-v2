@@ -34,6 +34,7 @@ func (c *Client) ListContactFlows(ctx context.Context, params *ListContactFlowsI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListContactFlowsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListContactFlows(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

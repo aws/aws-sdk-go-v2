@@ -48,6 +48,7 @@ func (c *Client) GetSampledRequests(ctx context.Context, params *GetSampledReque
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetSampledRequestsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSampledRequests(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

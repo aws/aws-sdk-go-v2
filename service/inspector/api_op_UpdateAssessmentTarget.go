@@ -34,6 +34,7 @@ func (c *Client) UpdateAssessmentTarget(ctx context.Context, params *UpdateAsses
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateAssessmentTargetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAssessmentTarget(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

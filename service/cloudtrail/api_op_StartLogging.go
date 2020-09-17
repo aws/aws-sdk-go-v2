@@ -36,6 +36,7 @@ func (c *Client) StartLogging(ctx context.Context, params *StartLoggingInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartLoggingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartLogging(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

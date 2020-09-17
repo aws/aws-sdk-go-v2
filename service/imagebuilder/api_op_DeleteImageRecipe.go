@@ -32,6 +32,7 @@ func (c *Client) DeleteImageRecipe(ctx context.Context, params *DeleteImageRecip
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteImageRecipeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteImageRecipe(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

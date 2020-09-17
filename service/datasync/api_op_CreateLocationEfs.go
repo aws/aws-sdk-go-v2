@@ -33,6 +33,7 @@ func (c *Client) CreateLocationEfs(ctx context.Context, params *CreateLocationEf
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateLocationEfsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLocationEfs(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,7 @@ func (c *Client) ListRevisionAssets(ctx context.Context, params *ListRevisionAss
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListRevisionAssetsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListRevisionAssets(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,7 @@ func (c *Client) AcknowledgeThirdPartyJob(ctx context.Context, params *Acknowled
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAcknowledgeThirdPartyJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAcknowledgeThirdPartyJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

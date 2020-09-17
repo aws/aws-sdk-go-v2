@@ -34,6 +34,7 @@ func (c *Client) GetImportJob(ctx context.Context, params *GetImportJobInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetImportJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetImportJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

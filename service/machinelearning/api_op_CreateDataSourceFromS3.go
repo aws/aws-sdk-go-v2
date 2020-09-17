@@ -60,6 +60,7 @@ func (c *Client) CreateDataSourceFromS3(ctx context.Context, params *CreateDataS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDataSourceFromS3ValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataSourceFromS3(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) DescribeObservation(ctx context.Context, params *DescribeObserv
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeObservationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeObservation(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -36,6 +36,7 @@ func (c *Client) RegisterDefaultPatchBaseline(ctx context.Context, params *Regis
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterDefaultPatchBaselineValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterDefaultPatchBaseline(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,7 @@ func (c *Client) SearchAddressBooks(ctx context.Context, params *SearchAddressBo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSearchAddressBooksValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSearchAddressBooks(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

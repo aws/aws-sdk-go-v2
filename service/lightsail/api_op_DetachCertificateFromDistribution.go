@@ -36,6 +36,7 @@ func (c *Client) DetachCertificateFromDistribution(ctx context.Context, params *
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDetachCertificateFromDistributionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDetachCertificateFromDistribution(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

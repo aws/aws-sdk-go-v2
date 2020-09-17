@@ -56,6 +56,7 @@ func (c *Client) UpdateSecretVersionStage(ctx context.Context, params *UpdateSec
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateSecretVersionStageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSecretVersionStage(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

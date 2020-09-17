@@ -34,6 +34,7 @@ func (c *Client) DeleteApnsVoipSandboxChannel(ctx context.Context, params *Delet
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteApnsVoipSandboxChannelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteApnsVoipSandboxChannel(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

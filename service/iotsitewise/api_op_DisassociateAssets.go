@@ -35,6 +35,7 @@ func (c *Client) DisassociateAssets(ctx context.Context, params *DisassociateAss
 	addIdempotencyToken_opDisassociateAssetsMiddleware(stack, options)
 	addOpDisassociateAssetsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateAssets(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

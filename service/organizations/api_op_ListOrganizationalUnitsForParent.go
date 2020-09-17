@@ -39,6 +39,7 @@ func (c *Client) ListOrganizationalUnitsForParent(ctx context.Context, params *L
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListOrganizationalUnitsForParentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListOrganizationalUnitsForParent(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) GroupResources(ctx context.Context, params *GroupResourcesInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGroupResourcesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGroupResources(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -44,6 +44,7 @@ func (c *Client) StartFaceDetection(ctx context.Context, params *StartFaceDetect
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartFaceDetectionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartFaceDetection(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

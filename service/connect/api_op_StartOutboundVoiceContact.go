@@ -40,6 +40,7 @@ func (c *Client) StartOutboundVoiceContact(ctx context.Context, params *StartOut
 	addIdempotencyToken_opStartOutboundVoiceContactMiddleware(stack, options)
 	addOpStartOutboundVoiceContactValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartOutboundVoiceContact(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

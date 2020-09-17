@@ -37,6 +37,7 @@ func (c *Client) StartBulkDeployment(ctx context.Context, params *StartBulkDeplo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartBulkDeploymentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartBulkDeployment(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

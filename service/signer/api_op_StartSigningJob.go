@@ -60,6 +60,7 @@ func (c *Client) StartSigningJob(ctx context.Context, params *StartSigningJobInp
 	addIdempotencyToken_opStartSigningJobMiddleware(stack, options)
 	addOpStartSigningJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartSigningJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

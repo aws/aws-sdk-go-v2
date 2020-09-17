@@ -34,6 +34,7 @@ func (c *Client) GetBackupPlan(ctx context.Context, params *GetBackupPlanInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBackupPlanValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBackupPlan(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

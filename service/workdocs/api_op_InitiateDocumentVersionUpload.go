@@ -39,6 +39,7 @@ func (c *Client) InitiateDocumentVersionUpload(ctx context.Context, params *Init
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpInitiateDocumentVersionUploadValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opInitiateDocumentVersionUpload(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

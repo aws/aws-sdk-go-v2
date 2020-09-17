@@ -48,6 +48,7 @@ func (c *Client) CreateStateMachine(ctx context.Context, params *CreateStateMach
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateStateMachineValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStateMachine(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

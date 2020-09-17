@@ -34,6 +34,7 @@ func (c *Client) ListPublishingDestinations(ctx context.Context, params *ListPub
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListPublishingDestinationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListPublishingDestinations(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

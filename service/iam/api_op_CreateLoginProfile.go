@@ -37,6 +37,7 @@ func (c *Client) CreateLoginProfile(ctx context.Context, params *CreateLoginProf
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateLoginProfileValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLoginProfile(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

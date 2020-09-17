@@ -33,6 +33,7 @@ func (c *Client) DeleteDevicePool(ctx context.Context, params *DeleteDevicePoolI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDevicePoolValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDevicePool(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

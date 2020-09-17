@@ -37,6 +37,7 @@ func (c *Client) DescribeCollection(ctx context.Context, params *DescribeCollect
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeCollectionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCollection(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,7 @@ func (c *Client) DescribeTransformJob(ctx context.Context, params *DescribeTrans
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeTransformJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTransformJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

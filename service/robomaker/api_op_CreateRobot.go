@@ -34,6 +34,7 @@ func (c *Client) CreateRobot(ctx context.Context, params *CreateRobotInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateRobotValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRobot(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

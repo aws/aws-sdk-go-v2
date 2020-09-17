@@ -61,6 +61,7 @@ func (c *Client) SetVaultNotifications(ctx context.Context, params *SetVaultNoti
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSetVaultNotificationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSetVaultNotifications(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

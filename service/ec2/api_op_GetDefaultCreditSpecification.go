@@ -36,6 +36,7 @@ func (c *Client) GetDefaultCreditSpecification(ctx context.Context, params *GetD
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDefaultCreditSpecificationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDefaultCreditSpecification(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

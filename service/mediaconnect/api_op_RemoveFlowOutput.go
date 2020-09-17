@@ -35,6 +35,7 @@ func (c *Client) RemoveFlowOutput(ctx context.Context, params *RemoveFlowOutputI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRemoveFlowOutputValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveFlowOutput(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

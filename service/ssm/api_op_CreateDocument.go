@@ -38,6 +38,7 @@ func (c *Client) CreateDocument(ctx context.Context, params *CreateDocumentInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDocumentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDocument(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

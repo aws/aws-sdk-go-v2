@@ -35,6 +35,7 @@ func (c *Client) TestAuthorization(ctx context.Context, params *TestAuthorizatio
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTestAuthorizationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTestAuthorization(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

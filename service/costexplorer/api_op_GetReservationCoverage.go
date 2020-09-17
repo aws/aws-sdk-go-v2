@@ -69,6 +69,7 @@ func (c *Client) GetReservationCoverage(ctx context.Context, params *GetReservat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetReservationCoverageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetReservationCoverage(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

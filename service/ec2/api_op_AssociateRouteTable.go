@@ -40,6 +40,7 @@ func (c *Client) AssociateRouteTable(ctx context.Context, params *AssociateRoute
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateRouteTableValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateRouteTable(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

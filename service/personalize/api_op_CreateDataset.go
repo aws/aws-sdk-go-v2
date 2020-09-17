@@ -63,6 +63,7 @@ func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDatasetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataset(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -65,6 +65,7 @@ func (c *Client) GenerateDataKeyPair(ctx context.Context, params *GenerateDataKe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGenerateDataKeyPairValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGenerateDataKeyPair(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

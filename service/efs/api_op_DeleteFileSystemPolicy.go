@@ -38,6 +38,7 @@ func (c *Client) DeleteFileSystemPolicy(ctx context.Context, params *DeleteFileS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteFileSystemPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFileSystemPolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

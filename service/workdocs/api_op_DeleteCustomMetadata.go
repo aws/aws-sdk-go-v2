@@ -32,6 +32,7 @@ func (c *Client) DeleteCustomMetadata(ctx context.Context, params *DeleteCustomM
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteCustomMetadataValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCustomMetadata(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -35,6 +35,7 @@ func (c *Client) BatchStopUpdateAction(ctx context.Context, params *BatchStopUpd
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchStopUpdateActionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchStopUpdateAction(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

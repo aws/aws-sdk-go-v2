@@ -32,6 +32,7 @@ func (c *Client) RevokeIpRules(ctx context.Context, params *RevokeIpRulesInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRevokeIpRulesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRevokeIpRules(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

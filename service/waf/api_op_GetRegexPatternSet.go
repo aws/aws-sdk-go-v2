@@ -39,6 +39,7 @@ func (c *Client) GetRegexPatternSet(ctx context.Context, params *GetRegexPattern
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetRegexPatternSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetRegexPatternSet(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) DeleteVirtualGateway(ctx context.Context, params *DeleteVirtual
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteVirtualGatewayValidationMiddleware(stack)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

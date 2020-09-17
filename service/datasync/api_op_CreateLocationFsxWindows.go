@@ -33,6 +33,7 @@ func (c *Client) CreateLocationFsxWindows(ctx context.Context, params *CreateLoc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateLocationFsxWindowsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLocationFsxWindows(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

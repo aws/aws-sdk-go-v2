@@ -38,6 +38,7 @@ func (c *Client) ModifyVpcEndpointServicePermissions(ctx context.Context, params
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyVpcEndpointServicePermissionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyVpcEndpointServicePermissions(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

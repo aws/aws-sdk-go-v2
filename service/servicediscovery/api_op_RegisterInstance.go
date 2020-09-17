@@ -69,6 +69,7 @@ func (c *Client) RegisterInstance(ctx context.Context, params *RegisterInstanceI
 	addIdempotencyToken_opRegisterInstanceMiddleware(stack, options)
 	addOpRegisterInstanceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterInstance(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

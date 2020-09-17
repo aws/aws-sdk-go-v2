@@ -59,6 +59,7 @@ func (c *Client) CreateTransformJob(ctx context.Context, params *CreateTransform
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateTransformJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTransformJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) GetUserPoolMfaConfig(ctx context.Context, params *GetUserPoolMf
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetUserPoolMfaConfigValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetUserPoolMfaConfig(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

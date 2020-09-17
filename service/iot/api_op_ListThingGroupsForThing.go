@@ -33,6 +33,7 @@ func (c *Client) ListThingGroupsForThing(ctx context.Context, params *ListThingG
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListThingGroupsForThingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListThingGroupsForThing(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

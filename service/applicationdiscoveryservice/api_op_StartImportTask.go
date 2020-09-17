@@ -56,6 +56,7 @@ func (c *Client) StartImportTask(ctx context.Context, params *StartImportTaskInp
 	addIdempotencyToken_opStartImportTaskMiddleware(stack, options)
 	addOpStartImportTaskValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartImportTask(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

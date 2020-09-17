@@ -40,6 +40,7 @@ func (c *Client) DeleteFargateProfile(ctx context.Context, params *DeleteFargate
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteFargateProfileValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFargateProfile(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

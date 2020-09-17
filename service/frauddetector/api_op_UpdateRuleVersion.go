@@ -34,6 +34,7 @@ func (c *Client) UpdateRuleVersion(ctx context.Context, params *UpdateRuleVersio
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateRuleVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRuleVersion(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

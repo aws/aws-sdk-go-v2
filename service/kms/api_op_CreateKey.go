@@ -87,6 +87,7 @@ func (c *Client) CreateKey(ctx context.Context, params *CreateKeyInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateKeyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateKey(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,7 @@ func (c *Client) DeleteWorkflow(ctx context.Context, params *DeleteWorkflowInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteWorkflowValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteWorkflow(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -38,6 +38,7 @@ func (c *Client) SearchThings(ctx context.Context, params *SearchThingsInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSearchThingsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSearchThings(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

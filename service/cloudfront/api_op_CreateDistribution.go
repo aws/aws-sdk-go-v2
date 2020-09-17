@@ -45,6 +45,7 @@ func (c *Client) CreateDistribution(ctx context.Context, params *CreateDistribut
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDistributionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDistribution(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

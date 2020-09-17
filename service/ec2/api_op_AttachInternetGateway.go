@@ -35,6 +35,7 @@ func (c *Client) AttachInternetGateway(ctx context.Context, params *AttachIntern
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAttachInternetGatewayValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAttachInternetGateway(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) UpdatePullRequestTitle(ctx context.Context, params *UpdatePullR
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdatePullRequestTitleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePullRequestTitle(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

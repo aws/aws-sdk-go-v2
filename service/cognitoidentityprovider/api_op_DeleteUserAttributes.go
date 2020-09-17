@@ -29,6 +29,7 @@ func (c *Client) DeleteUserAttributes(ctx context.Context, params *DeleteUserAtt
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteUserAttributesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteUserAttributes(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

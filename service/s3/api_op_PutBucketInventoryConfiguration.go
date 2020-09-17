@@ -73,6 +73,7 @@ func (c *Client) PutBucketInventoryConfiguration(ctx context.Context, params *Pu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutBucketInventoryConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBucketInventoryConfiguration(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

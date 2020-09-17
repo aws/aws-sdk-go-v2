@@ -34,6 +34,7 @@ func (c *Client) CreateStack(ctx context.Context, params *CreateStackInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateStackValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStack(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

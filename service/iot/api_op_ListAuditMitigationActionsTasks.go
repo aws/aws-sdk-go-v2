@@ -34,6 +34,7 @@ func (c *Client) ListAuditMitigationActionsTasks(ctx context.Context, params *Li
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListAuditMitigationActionsTasksValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListAuditMitigationActionsTasks(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

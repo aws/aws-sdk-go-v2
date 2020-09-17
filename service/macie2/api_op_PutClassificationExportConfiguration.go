@@ -34,6 +34,7 @@ func (c *Client) PutClassificationExportConfiguration(ctx context.Context, param
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutClassificationExportConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutClassificationExportConfiguration(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) DeleteVpcEndpointConnectionNotifications(ctx context.Context, p
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteVpcEndpointConnectionNotificationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVpcEndpointConnectionNotifications(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

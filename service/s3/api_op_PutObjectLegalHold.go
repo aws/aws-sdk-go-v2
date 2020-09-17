@@ -37,6 +37,7 @@ func (c *Client) PutObjectLegalHold(ctx context.Context, params *PutObjectLegalH
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutObjectLegalHoldValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutObjectLegalHold(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

@@ -42,6 +42,7 @@ func (c *Client) EnablePolicyType(ctx context.Context, params *EnablePolicyTypeI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpEnablePolicyTypeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opEnablePolicyType(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

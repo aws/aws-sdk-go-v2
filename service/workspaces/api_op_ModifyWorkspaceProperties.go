@@ -35,6 +35,7 @@ func (c *Client) ModifyWorkspaceProperties(ctx context.Context, params *ModifyWo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyWorkspacePropertiesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyWorkspaceProperties(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

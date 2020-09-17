@@ -32,6 +32,7 @@ func (c *Client) DisableSso(ctx context.Context, params *DisableSsoInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisableSsoValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisableSso(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

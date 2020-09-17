@@ -34,6 +34,7 @@ func (c *Client) GetVpcLink(ctx context.Context, params *GetVpcLinkInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetVpcLinkValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetVpcLink(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -40,6 +40,7 @@ func (c *Client) UpdateRecoveryPointLifecycle(ctx context.Context, params *Updat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateRecoveryPointLifecycleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRecoveryPointLifecycle(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -40,6 +40,7 @@ func (c *Client) UpdateTerminationProtection(ctx context.Context, params *Update
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateTerminationProtectionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTerminationProtection(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

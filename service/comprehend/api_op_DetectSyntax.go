@@ -34,6 +34,7 @@ func (c *Client) DetectSyntax(ctx context.Context, params *DetectSyntaxInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDetectSyntaxValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDetectSyntax(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

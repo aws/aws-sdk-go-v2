@@ -36,6 +36,7 @@ func (c *Client) CreateInfrastructureConfiguration(ctx context.Context, params *
 	addIdempotencyToken_opCreateInfrastructureConfigurationMiddleware(stack, options)
 	addOpCreateInfrastructureConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateInfrastructureConfiguration(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,7 @@ func (c *Client) DeleteProtocolsList(ctx context.Context, params *DeleteProtocol
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteProtocolsListValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteProtocolsList(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

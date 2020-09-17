@@ -33,6 +33,7 @@ func (c *Client) SearchIndex(ctx context.Context, params *SearchIndexInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSearchIndexValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSearchIndex(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

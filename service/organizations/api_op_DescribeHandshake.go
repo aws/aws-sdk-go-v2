@@ -38,6 +38,7 @@ func (c *Client) DescribeHandshake(ctx context.Context, params *DescribeHandshak
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeHandshakeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeHandshake(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

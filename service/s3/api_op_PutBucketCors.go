@@ -67,6 +67,7 @@ func (c *Client) PutBucketCors(ctx context.Context, params *PutBucketCorsInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutBucketCorsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBucketCors(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

@@ -35,6 +35,7 @@ func (c *Client) GetDedicatedIp(ctx context.Context, params *GetDedicatedIpInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDedicatedIpValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDedicatedIp(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

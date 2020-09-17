@@ -33,6 +33,7 @@ func (c *Client) ListProxySessions(ctx context.Context, params *ListProxySession
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListProxySessionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListProxySessions(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

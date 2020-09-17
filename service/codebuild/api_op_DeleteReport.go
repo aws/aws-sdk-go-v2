@@ -32,6 +32,7 @@ func (c *Client) DeleteReport(ctx context.Context, params *DeleteReportInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteReportValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteReport(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

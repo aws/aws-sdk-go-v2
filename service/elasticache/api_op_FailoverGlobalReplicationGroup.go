@@ -35,6 +35,7 @@ func (c *Client) FailoverGlobalReplicationGroup(ctx context.Context, params *Fai
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpFailoverGlobalReplicationGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opFailoverGlobalReplicationGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

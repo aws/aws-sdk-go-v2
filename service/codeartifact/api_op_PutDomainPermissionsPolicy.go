@@ -33,6 +33,7 @@ func (c *Client) PutDomainPermissionsPolicy(ctx context.Context, params *PutDoma
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutDomainPermissionsPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutDomainPermissionsPolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

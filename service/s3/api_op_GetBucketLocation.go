@@ -38,6 +38,7 @@ func (c *Client) GetBucketLocation(ctx context.Context, params *GetBucketLocatio
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBucketLocationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketLocation(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

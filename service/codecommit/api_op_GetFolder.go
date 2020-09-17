@@ -33,6 +33,7 @@ func (c *Client) GetFolder(ctx context.Context, params *GetFolderInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetFolderValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetFolder(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

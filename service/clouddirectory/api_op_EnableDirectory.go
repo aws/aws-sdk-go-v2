@@ -33,6 +33,7 @@ func (c *Client) EnableDirectory(ctx context.Context, params *EnableDirectoryInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpEnableDirectoryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opEnableDirectory(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

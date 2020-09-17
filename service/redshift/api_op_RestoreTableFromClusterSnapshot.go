@@ -43,6 +43,7 @@ func (c *Client) RestoreTableFromClusterSnapshot(ctx context.Context, params *Re
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRestoreTableFromClusterSnapshotValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreTableFromClusterSnapshot(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

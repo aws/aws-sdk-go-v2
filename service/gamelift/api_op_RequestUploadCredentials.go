@@ -51,6 +51,7 @@ func (c *Client) RequestUploadCredentials(ctx context.Context, params *RequestUp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRequestUploadCredentialsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRequestUploadCredentials(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

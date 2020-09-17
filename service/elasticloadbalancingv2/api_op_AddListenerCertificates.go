@@ -41,6 +41,7 @@ func (c *Client) AddListenerCertificates(ctx context.Context, params *AddListene
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAddListenerCertificatesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAddListenerCertificates(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

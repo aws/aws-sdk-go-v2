@@ -41,6 +41,7 @@ func (c *Client) GetMetricWidgetImage(ctx context.Context, params *GetMetricWidg
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetMetricWidgetImageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetMetricWidgetImage(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

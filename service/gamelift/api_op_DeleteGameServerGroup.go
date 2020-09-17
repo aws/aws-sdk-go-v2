@@ -67,6 +67,7 @@ func (c *Client) DeleteGameServerGroup(ctx context.Context, params *DeleteGameSe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteGameServerGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteGameServerGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

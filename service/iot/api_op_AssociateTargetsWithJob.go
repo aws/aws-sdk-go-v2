@@ -41,6 +41,7 @@ func (c *Client) AssociateTargetsWithJob(ctx context.Context, params *AssociateT
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateTargetsWithJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateTargetsWithJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,7 @@ func (c *Client) UpdateApnsChannel(ctx context.Context, params *UpdateApnsChanne
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateApnsChannelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateApnsChannel(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

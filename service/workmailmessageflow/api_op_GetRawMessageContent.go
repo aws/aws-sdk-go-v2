@@ -32,6 +32,7 @@ func (c *Client) GetRawMessageContent(ctx context.Context, params *GetRawMessage
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	addOpGetRawMessageContentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetRawMessageContent(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

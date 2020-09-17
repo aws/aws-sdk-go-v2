@@ -33,6 +33,7 @@ func (c *Client) DeleteConfigurationProfile(ctx context.Context, params *DeleteC
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteConfigurationProfileValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteConfigurationProfile(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) CreateFaq(ctx context.Context, params *CreateFaqInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateFaqValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFaq(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

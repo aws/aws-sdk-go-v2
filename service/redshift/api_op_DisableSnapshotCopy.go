@@ -37,6 +37,7 @@ func (c *Client) DisableSnapshotCopy(ctx context.Context, params *DisableSnapsho
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisableSnapshotCopyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisableSnapshotCopy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

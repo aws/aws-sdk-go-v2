@@ -35,6 +35,7 @@ func (c *Client) DescribeFlow(ctx context.Context, params *DescribeFlowInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeFlowValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFlow(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

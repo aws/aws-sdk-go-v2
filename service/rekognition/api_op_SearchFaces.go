@@ -45,6 +45,7 @@ func (c *Client) SearchFaces(ctx context.Context, params *SearchFacesInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSearchFacesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSearchFaces(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

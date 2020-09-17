@@ -35,6 +35,7 @@ func (c *Client) CheckIfPhoneNumberIsOptedOut(ctx context.Context, params *Check
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCheckIfPhoneNumberIsOptedOutValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCheckIfPhoneNumberIsOptedOut(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

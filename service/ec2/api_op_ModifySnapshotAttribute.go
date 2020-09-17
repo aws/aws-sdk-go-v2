@@ -43,6 +43,7 @@ func (c *Client) ModifySnapshotAttribute(ctx context.Context, params *ModifySnap
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifySnapshotAttributeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifySnapshotAttribute(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

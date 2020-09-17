@@ -37,6 +37,7 @@ func (c *Client) DeleteSolution(ctx context.Context, params *DeleteSolutionInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteSolutionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSolution(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

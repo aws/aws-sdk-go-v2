@@ -36,6 +36,7 @@ func (c *Client) DescribeAvailabilityMonitorTest(ctx context.Context, params *De
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeAvailabilityMonitorTestValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAvailabilityMonitorTest(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

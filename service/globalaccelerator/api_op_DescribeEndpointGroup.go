@@ -34,6 +34,7 @@ func (c *Client) DescribeEndpointGroup(ctx context.Context, params *DescribeEndp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeEndpointGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEndpointGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

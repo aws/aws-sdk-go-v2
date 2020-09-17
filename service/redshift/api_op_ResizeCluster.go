@@ -57,6 +57,7 @@ func (c *Client) ResizeCluster(ctx context.Context, params *ResizeClusterInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpResizeClusterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opResizeCluster(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

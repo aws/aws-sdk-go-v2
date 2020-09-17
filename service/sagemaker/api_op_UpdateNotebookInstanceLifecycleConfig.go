@@ -34,6 +34,7 @@ func (c *Client) UpdateNotebookInstanceLifecycleConfig(ctx context.Context, para
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateNotebookInstanceLifecycleConfigValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateNotebookInstanceLifecycleConfig(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

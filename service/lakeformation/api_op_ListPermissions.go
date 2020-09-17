@@ -39,6 +39,7 @@ func (c *Client) ListPermissions(ctx context.Context, params *ListPermissionsInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListPermissionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListPermissions(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

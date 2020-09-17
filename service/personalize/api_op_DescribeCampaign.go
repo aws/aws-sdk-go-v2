@@ -43,6 +43,7 @@ func (c *Client) DescribeCampaign(ctx context.Context, params *DescribeCampaignI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeCampaignValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCampaign(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

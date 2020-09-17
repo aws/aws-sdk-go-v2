@@ -65,6 +65,7 @@ func (c *Client) PutLifecycleHook(ctx context.Context, params *PutLifecycleHookI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutLifecycleHookValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutLifecycleHook(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

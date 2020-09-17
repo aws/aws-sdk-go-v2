@@ -32,6 +32,7 @@ func (c *Client) PurchaseProvisionedCapacity(ctx context.Context, params *Purcha
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPurchaseProvisionedCapacityValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPurchaseProvisionedCapacity(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

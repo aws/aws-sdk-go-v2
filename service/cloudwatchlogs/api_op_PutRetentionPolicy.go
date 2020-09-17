@@ -34,6 +34,7 @@ func (c *Client) PutRetentionPolicy(ctx context.Context, params *PutRetentionPol
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutRetentionPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutRetentionPolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

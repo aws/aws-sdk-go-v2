@@ -35,6 +35,7 @@ func (c *Client) CreateMitigationAction(ctx context.Context, params *CreateMitig
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateMitigationActionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMitigationAction(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

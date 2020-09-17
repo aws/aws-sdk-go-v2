@@ -39,6 +39,7 @@ func (c *Client) CreateCloudFrontOriginAccessIdentity(ctx context.Context, param
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateCloudFrontOriginAccessIdentityValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCloudFrontOriginAccessIdentity(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

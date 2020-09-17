@@ -37,6 +37,7 @@ func (c *Client) CreateHyperParameterTuningJob(ctx context.Context, params *Crea
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateHyperParameterTuningJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateHyperParameterTuningJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

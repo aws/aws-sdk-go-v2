@@ -42,6 +42,7 @@ func (c *Client) AssociateVpcCidrBlock(ctx context.Context, params *AssociateVpc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateVpcCidrBlockValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateVpcCidrBlock(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) ListAttendeeTags(ctx context.Context, params *ListAttendeeTagsI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListAttendeeTagsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListAttendeeTags(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

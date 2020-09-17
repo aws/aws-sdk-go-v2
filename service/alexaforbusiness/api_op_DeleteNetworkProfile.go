@@ -32,6 +32,7 @@ func (c *Client) DeleteNetworkProfile(ctx context.Context, params *DeleteNetwork
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteNetworkProfileValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteNetworkProfile(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -43,6 +43,7 @@ func (c *Client) DeliverConfigSnapshot(ctx context.Context, params *DeliverConfi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeliverConfigSnapshotValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeliverConfigSnapshot(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

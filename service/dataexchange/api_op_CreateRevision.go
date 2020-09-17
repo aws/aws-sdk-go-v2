@@ -33,6 +33,7 @@ func (c *Client) CreateRevision(ctx context.Context, params *CreateRevisionInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateRevisionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRevision(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

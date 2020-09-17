@@ -32,6 +32,7 @@ func (c *Client) DeprecateSystemTemplate(ctx context.Context, params *DeprecateS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeprecateSystemTemplateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeprecateSystemTemplate(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

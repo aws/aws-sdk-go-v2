@@ -33,6 +33,7 @@ func (c *Client) DescribeFpgaImageAttribute(ctx context.Context, params *Describ
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeFpgaImageAttributeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFpgaImageAttribute(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

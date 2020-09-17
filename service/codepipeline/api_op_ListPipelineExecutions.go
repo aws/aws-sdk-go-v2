@@ -33,6 +33,7 @@ func (c *Client) ListPipelineExecutions(ctx context.Context, params *ListPipelin
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListPipelineExecutionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListPipelineExecutions(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

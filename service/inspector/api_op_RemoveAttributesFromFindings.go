@@ -35,6 +35,7 @@ func (c *Client) RemoveAttributesFromFindings(ctx context.Context, params *Remov
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRemoveAttributesFromFindingsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveAttributesFromFindings(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

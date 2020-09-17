@@ -90,6 +90,7 @@ func (c *Client) Encrypt(ctx context.Context, params *EncryptInput, optFns ...fu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpEncryptValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opEncrypt(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

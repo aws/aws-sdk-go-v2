@@ -50,6 +50,7 @@ func (c *Client) ModifyIdentityIdFormat(ctx context.Context, params *ModifyIdent
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyIdentityIdFormatValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyIdentityIdFormat(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

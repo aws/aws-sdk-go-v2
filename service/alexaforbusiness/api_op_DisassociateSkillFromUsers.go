@@ -33,6 +33,7 @@ func (c *Client) DisassociateSkillFromUsers(ctx context.Context, params *Disasso
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisassociateSkillFromUsersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateSkillFromUsers(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

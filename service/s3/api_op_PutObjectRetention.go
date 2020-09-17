@@ -37,6 +37,7 @@ func (c *Client) PutObjectRetention(ctx context.Context, params *PutObjectRetent
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutObjectRetentionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutObjectRetention(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

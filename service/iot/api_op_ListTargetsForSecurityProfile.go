@@ -34,6 +34,7 @@ func (c *Client) ListTargetsForSecurityProfile(ctx context.Context, params *List
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListTargetsForSecurityProfileValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListTargetsForSecurityProfile(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -61,6 +61,7 @@ func (c *Client) DeleteObjects(ctx context.Context, params *DeleteObjectsInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteObjectsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteObjects(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

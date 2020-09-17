@@ -34,6 +34,7 @@ func (c *Client) BatchUpdateDetector(ctx context.Context, params *BatchUpdateDet
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchUpdateDetectorValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUpdateDetector(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

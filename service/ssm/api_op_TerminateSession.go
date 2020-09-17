@@ -34,6 +34,7 @@ func (c *Client) TerminateSession(ctx context.Context, params *TerminateSessionI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTerminateSessionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTerminateSession(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,7 @@ func (c *Client) ModifyInstanceEventStartTime(ctx context.Context, params *Modif
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyInstanceEventStartTimeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyInstanceEventStartTime(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

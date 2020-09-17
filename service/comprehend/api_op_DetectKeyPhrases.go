@@ -33,6 +33,7 @@ func (c *Client) DetectKeyPhrases(ctx context.Context, params *DetectKeyPhrasesI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDetectKeyPhrasesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDetectKeyPhrases(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

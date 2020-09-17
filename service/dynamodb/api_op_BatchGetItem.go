@@ -72,6 +72,7 @@ func (c *Client) BatchGetItem(ctx context.Context, params *BatchGetItemInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchGetItemValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetItem(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addValidateResponseChecksum(stack, options)
 	addAcceptEncodingGzip(stack, options)
 

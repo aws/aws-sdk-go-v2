@@ -42,6 +42,7 @@ func (c *Client) CreateDeploymentJob(ctx context.Context, params *CreateDeployme
 	addIdempotencyToken_opCreateDeploymentJobMiddleware(stack, options)
 	addOpCreateDeploymentJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDeploymentJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

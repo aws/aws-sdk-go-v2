@@ -37,6 +37,7 @@ func (c *Client) DeleteWorkerBlock(ctx context.Context, params *DeleteWorkerBloc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteWorkerBlockValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteWorkerBlock(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

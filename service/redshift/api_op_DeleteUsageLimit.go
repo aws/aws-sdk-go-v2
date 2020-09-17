@@ -32,6 +32,7 @@ func (c *Client) DeleteUsageLimit(ctx context.Context, params *DeleteUsageLimitI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteUsageLimitValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteUsageLimit(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

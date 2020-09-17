@@ -59,6 +59,7 @@ func (c *Client) PutAccountSetting(ctx context.Context, params *PutAccountSettin
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutAccountSettingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutAccountSetting(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

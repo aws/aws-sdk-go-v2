@@ -38,6 +38,7 @@ func (c *Client) AssociateAdminAccount(ctx context.Context, params *AssociateAdm
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateAdminAccountValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateAdminAccount(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

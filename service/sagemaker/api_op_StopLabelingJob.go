@@ -34,6 +34,7 @@ func (c *Client) StopLabelingJob(ctx context.Context, params *StopLabelingJobInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopLabelingJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopLabelingJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

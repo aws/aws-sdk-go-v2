@@ -52,6 +52,7 @@ func (c *Client) RegisterDomain(ctx context.Context, params *RegisterDomainInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterDomainValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterDomain(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

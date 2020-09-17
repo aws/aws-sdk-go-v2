@@ -41,6 +41,7 @@ func (c *Client) DefineIndexField(ctx context.Context, params *DefineIndexFieldI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDefineIndexFieldValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDefineIndexField(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

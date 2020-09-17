@@ -44,6 +44,7 @@ func (c *Client) CreateNodegroup(ctx context.Context, params *CreateNodegroupInp
 	addIdempotencyToken_opCreateNodegroupMiddleware(stack, options)
 	addOpCreateNodegroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateNodegroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

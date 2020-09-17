@@ -35,6 +35,7 @@ func (c *Client) DeleteRepository(ctx context.Context, params *DeleteRepositoryI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteRepositoryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRepository(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

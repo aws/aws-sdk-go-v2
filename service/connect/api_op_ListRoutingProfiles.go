@@ -34,6 +34,7 @@ func (c *Client) ListRoutingProfiles(ctx context.Context, params *ListRoutingPro
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListRoutingProfilesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListRoutingProfiles(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

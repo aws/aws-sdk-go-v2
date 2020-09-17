@@ -39,6 +39,7 @@ func (c *Client) ListDistributionsByOriginRequestPolicyId(ctx context.Context, p
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListDistributionsByOriginRequestPolicyIdValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListDistributionsByOriginRequestPolicyId(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

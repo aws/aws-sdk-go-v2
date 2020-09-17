@@ -36,6 +36,7 @@ func (c *Client) DiscoverInstances(ctx context.Context, params *DiscoverInstance
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDiscoverInstancesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDiscoverInstances(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

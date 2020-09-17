@@ -33,6 +33,7 @@ func (c *Client) DeleteConnection(ctx context.Context, params *DeleteConnectionI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteConnectionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteConnection(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

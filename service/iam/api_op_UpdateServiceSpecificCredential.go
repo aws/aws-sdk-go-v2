@@ -36,6 +36,7 @@ func (c *Client) UpdateServiceSpecificCredential(ctx context.Context, params *Up
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateServiceSpecificCredentialValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateServiceSpecificCredential(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) UpdateLifecyclePolicy(ctx context.Context, params *UpdateLifecy
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateLifecyclePolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateLifecyclePolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

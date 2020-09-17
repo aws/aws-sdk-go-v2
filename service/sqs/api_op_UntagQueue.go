@@ -39,6 +39,7 @@ func (c *Client) UntagQueue(ctx context.Context, params *UntagQueueInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUntagQueueValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUntagQueue(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

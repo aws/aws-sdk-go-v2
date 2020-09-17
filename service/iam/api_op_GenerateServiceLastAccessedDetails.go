@@ -79,6 +79,7 @@ func (c *Client) GenerateServiceLastAccessedDetails(ctx context.Context, params 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGenerateServiceLastAccessedDetailsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGenerateServiceLastAccessedDetails(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

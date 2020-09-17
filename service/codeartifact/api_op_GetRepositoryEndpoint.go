@@ -40,6 +40,7 @@ func (c *Client) GetRepositoryEndpoint(ctx context.Context, params *GetRepositor
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetRepositoryEndpointValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetRepositoryEndpoint(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -40,6 +40,7 @@ func (c *Client) DisassociateHealthCheck(ctx context.Context, params *Disassocia
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisassociateHealthCheckValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateHealthCheck(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

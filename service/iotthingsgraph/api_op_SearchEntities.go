@@ -34,6 +34,7 @@ func (c *Client) SearchEntities(ctx context.Context, params *SearchEntitiesInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSearchEntitiesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSearchEntities(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

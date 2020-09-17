@@ -38,6 +38,7 @@ func (c *Client) GetQueryLoggingConfig(ctx context.Context, params *GetQueryLogg
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetQueryLoggingConfigValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetQueryLoggingConfig(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

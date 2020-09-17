@@ -35,6 +35,7 @@ func (c *Client) DetectDominantLanguage(ctx context.Context, params *DetectDomin
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDetectDominantLanguageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDetectDominantLanguage(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

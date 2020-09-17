@@ -33,6 +33,7 @@ func (c *Client) UpdatePlacement(ctx context.Context, params *UpdatePlacementInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdatePlacementValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePlacement(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

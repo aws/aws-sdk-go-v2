@@ -57,6 +57,7 @@ func (c *Client) GetVaultLock(ctx context.Context, params *GetVaultLockInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetVaultLockValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetVaultLock(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

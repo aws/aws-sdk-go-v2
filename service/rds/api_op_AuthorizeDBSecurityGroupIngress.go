@@ -44,6 +44,7 @@ func (c *Client) AuthorizeDBSecurityGroupIngress(ctx context.Context, params *Au
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAuthorizeDBSecurityGroupIngressValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAuthorizeDBSecurityGroupIngress(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

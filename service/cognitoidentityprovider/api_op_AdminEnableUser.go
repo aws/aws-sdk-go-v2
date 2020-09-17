@@ -33,6 +33,7 @@ func (c *Client) AdminEnableUser(ctx context.Context, params *AdminEnableUserInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAdminEnableUserValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAdminEnableUser(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

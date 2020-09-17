@@ -34,6 +34,7 @@ func (c *Client) SubscribeToDataset(ctx context.Context, params *SubscribeToData
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSubscribeToDatasetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSubscribeToDataset(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

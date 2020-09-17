@@ -34,6 +34,7 @@ func (c *Client) AssociateIamInstanceProfile(ctx context.Context, params *Associ
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateIamInstanceProfileValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateIamInstanceProfile(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

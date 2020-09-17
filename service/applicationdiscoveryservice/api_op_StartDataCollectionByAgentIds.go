@@ -33,6 +33,7 @@ func (c *Client) StartDataCollectionByAgentIds(ctx context.Context, params *Star
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartDataCollectionByAgentIdsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartDataCollectionByAgentIds(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

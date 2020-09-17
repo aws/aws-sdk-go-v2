@@ -61,6 +61,7 @@ func (c *Client) TestFailover(ctx context.Context, params *TestFailoverInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTestFailoverValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTestFailover(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

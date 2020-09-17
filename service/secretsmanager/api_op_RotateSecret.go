@@ -89,6 +89,7 @@ func (c *Client) RotateSecret(ctx context.Context, params *RotateSecretInput, op
 	addIdempotencyToken_opRotateSecretMiddleware(stack, options)
 	addOpRotateSecretValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRotateSecret(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

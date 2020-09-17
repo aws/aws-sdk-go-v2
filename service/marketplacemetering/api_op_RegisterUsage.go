@@ -61,6 +61,7 @@ func (c *Client) RegisterUsage(ctx context.Context, params *RegisterUsageInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterUsageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterUsage(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

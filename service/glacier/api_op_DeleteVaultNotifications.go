@@ -47,6 +47,7 @@ func (c *Client) DeleteVaultNotifications(ctx context.Context, params *DeleteVau
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteVaultNotificationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVaultNotifications(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

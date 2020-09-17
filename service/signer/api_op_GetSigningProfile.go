@@ -33,6 +33,7 @@ func (c *Client) GetSigningProfile(ctx context.Context, params *GetSigningProfil
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetSigningProfileValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSigningProfile(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

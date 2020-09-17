@@ -33,6 +33,7 @@ func (c *Client) CreateScheduledAudit(ctx context.Context, params *CreateSchedul
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateScheduledAuditValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateScheduledAudit(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

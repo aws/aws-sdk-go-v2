@@ -51,6 +51,7 @@ func (c *Client) DeleteHIT(ctx context.Context, params *DeleteHITInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteHITValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteHIT(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

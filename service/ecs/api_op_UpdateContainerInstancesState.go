@@ -74,6 +74,7 @@ func (c *Client) UpdateContainerInstancesState(ctx context.Context, params *Upda
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateContainerInstancesStateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateContainerInstancesState(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

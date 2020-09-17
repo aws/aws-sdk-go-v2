@@ -38,6 +38,7 @@ func (c *Client) RegisterStreamConsumer(ctx context.Context, params *RegisterStr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterStreamConsumerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterStreamConsumer(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

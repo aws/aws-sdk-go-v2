@@ -34,6 +34,7 @@ func (c *Client) UpdateParameterGroup(ctx context.Context, params *UpdateParamet
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateParameterGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateParameterGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

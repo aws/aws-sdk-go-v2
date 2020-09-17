@@ -65,6 +65,7 @@ func (c *Client) GetInsightRuleReport(ctx context.Context, params *GetInsightRul
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetInsightRuleReportValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetInsightRuleReport(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

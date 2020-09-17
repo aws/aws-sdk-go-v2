@@ -34,6 +34,7 @@ func (c *Client) DeleteCommentContent(ctx context.Context, params *DeleteComment
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteCommentContentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCommentContent(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

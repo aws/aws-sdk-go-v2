@@ -33,6 +33,7 @@ func (c *Client) GetOnPremisesInstance(ctx context.Context, params *GetOnPremise
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetOnPremisesInstanceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetOnPremisesInstance(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

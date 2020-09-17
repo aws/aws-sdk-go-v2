@@ -36,6 +36,7 @@ func (c *Client) AllocatePrivateVirtualInterface(ctx context.Context, params *Al
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAllocatePrivateVirtualInterfaceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAllocatePrivateVirtualInterface(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

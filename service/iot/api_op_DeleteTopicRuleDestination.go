@@ -32,6 +32,7 @@ func (c *Client) DeleteTopicRuleDestination(ctx context.Context, params *DeleteT
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteTopicRuleDestinationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteTopicRuleDestination(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

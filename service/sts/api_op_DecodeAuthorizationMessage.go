@@ -61,6 +61,7 @@ func (c *Client) DecodeAuthorizationMessage(ctx context.Context, params *DecodeA
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDecodeAuthorizationMessageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDecodeAuthorizationMessage(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

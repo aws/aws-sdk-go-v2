@@ -37,6 +37,7 @@ func (c *Client) ListForecasts(ctx context.Context, params *ListForecastsInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListForecastsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListForecasts(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

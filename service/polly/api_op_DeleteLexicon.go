@@ -36,6 +36,7 @@ func (c *Client) DeleteLexicon(ctx context.Context, params *DeleteLexiconInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteLexiconValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteLexicon(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

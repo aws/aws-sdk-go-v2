@@ -32,6 +32,7 @@ func (c *Client) AssociateSkillWithUsers(ctx context.Context, params *AssociateS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateSkillWithUsersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateSkillWithUsers(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

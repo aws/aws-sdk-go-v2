@@ -35,6 +35,7 @@ func (c *Client) CreateDirectoryConfig(ctx context.Context, params *CreateDirect
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDirectoryConfigValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDirectoryConfig(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

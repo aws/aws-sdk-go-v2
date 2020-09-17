@@ -33,6 +33,7 @@ func (c *Client) DescribeBillingGroup(ctx context.Context, params *DescribeBilli
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeBillingGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeBillingGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

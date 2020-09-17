@@ -34,6 +34,7 @@ func (c *Client) UpdateVoiceTemplate(ctx context.Context, params *UpdateVoiceTem
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateVoiceTemplateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateVoiceTemplate(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

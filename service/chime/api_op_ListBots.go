@@ -34,6 +34,7 @@ func (c *Client) ListBots(ctx context.Context, params *ListBotsInput, optFns ...
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListBotsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListBots(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

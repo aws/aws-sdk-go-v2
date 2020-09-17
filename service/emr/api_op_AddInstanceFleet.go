@@ -34,6 +34,7 @@ func (c *Client) AddInstanceFleet(ctx context.Context, params *AddInstanceFleetI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAddInstanceFleetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAddInstanceFleet(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

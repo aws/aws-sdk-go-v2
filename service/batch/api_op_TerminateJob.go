@@ -34,6 +34,7 @@ func (c *Client) TerminateJob(ctx context.Context, params *TerminateJobInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTerminateJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTerminateJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

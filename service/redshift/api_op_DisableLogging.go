@@ -34,6 +34,7 @@ func (c *Client) DisableLogging(ctx context.Context, params *DisableLoggingInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisableLoggingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisableLogging(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

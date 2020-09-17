@@ -41,6 +41,7 @@ func (c *Client) BatchGetNamedQuery(ctx context.Context, params *BatchGetNamedQu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchGetNamedQueryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetNamedQuery(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) DeleteReservation(ctx context.Context, params *DeleteReservatio
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteReservationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteReservation(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

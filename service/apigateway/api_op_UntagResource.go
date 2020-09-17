@@ -32,6 +32,7 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUntagResourceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUntagResource(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

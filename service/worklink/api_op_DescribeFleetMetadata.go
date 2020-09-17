@@ -35,6 +35,7 @@ func (c *Client) DescribeFleetMetadata(ctx context.Context, params *DescribeFlee
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeFleetMetadataValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFleetMetadata(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -35,6 +35,7 @@ func (c *Client) SendTaskSuccess(ctx context.Context, params *SendTaskSuccessInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSendTaskSuccessValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSendTaskSuccess(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

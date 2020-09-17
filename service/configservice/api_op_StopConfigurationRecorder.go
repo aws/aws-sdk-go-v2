@@ -33,6 +33,7 @@ func (c *Client) StopConfigurationRecorder(ctx context.Context, params *StopConf
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopConfigurationRecorderValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopConfigurationRecorder(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

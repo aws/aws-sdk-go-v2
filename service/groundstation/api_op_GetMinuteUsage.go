@@ -32,6 +32,7 @@ func (c *Client) GetMinuteUsage(ctx context.Context, params *GetMinuteUsageInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetMinuteUsageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetMinuteUsage(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

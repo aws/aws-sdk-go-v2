@@ -62,6 +62,7 @@ func (c *Client) UpdateFleetAttributes(ctx context.Context, params *UpdateFleetA
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateFleetAttributesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFleetAttributes(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

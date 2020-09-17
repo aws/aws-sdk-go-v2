@@ -34,6 +34,7 @@ func (c *Client) ModifyVpcEndpointConnectionNotification(ctx context.Context, pa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyVpcEndpointConnectionNotificationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyVpcEndpointConnectionNotification(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

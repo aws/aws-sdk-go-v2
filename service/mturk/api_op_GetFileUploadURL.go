@@ -41,6 +41,7 @@ func (c *Client) GetFileUploadURL(ctx context.Context, params *GetFileUploadURLI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetFileUploadURLValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetFileUploadURL(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

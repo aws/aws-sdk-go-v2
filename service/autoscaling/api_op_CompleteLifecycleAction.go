@@ -58,6 +58,7 @@ func (c *Client) CompleteLifecycleAction(ctx context.Context, params *CompleteLi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCompleteLifecycleActionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCompleteLifecycleAction(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

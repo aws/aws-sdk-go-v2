@@ -33,6 +33,7 @@ func (c *Client) DeleteVerifiedEmailAddress(ctx context.Context, params *DeleteV
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteVerifiedEmailAddressValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVerifiedEmailAddress(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

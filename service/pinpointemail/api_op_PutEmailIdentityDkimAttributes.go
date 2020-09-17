@@ -32,6 +32,7 @@ func (c *Client) PutEmailIdentityDkimAttributes(ctx context.Context, params *Put
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutEmailIdentityDkimAttributesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutEmailIdentityDkimAttributes(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

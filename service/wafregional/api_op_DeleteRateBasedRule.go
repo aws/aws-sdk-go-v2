@@ -51,6 +51,7 @@ func (c *Client) DeleteRateBasedRule(ctx context.Context, params *DeleteRateBase
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteRateBasedRuleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRateBasedRule(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

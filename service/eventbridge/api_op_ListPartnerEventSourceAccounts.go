@@ -35,6 +35,7 @@ func (c *Client) ListPartnerEventSourceAccounts(ctx context.Context, params *Lis
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListPartnerEventSourceAccountsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListPartnerEventSourceAccounts(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

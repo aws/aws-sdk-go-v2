@@ -33,6 +33,7 @@ func (c *Client) CancelAuditMitigationActionsTask(ctx context.Context, params *C
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCancelAuditMitigationActionsTaskValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCancelAuditMitigationActionsTask(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,7 @@ func (c *Client) DisassociateResourceSharePermission(ctx context.Context, params
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisassociateResourceSharePermissionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateResourceSharePermission(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

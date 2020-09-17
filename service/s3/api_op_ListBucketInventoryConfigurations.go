@@ -56,6 +56,7 @@ func (c *Client) ListBucketInventoryConfigurations(ctx context.Context, params *
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListBucketInventoryConfigurationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListBucketInventoryConfigurations(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

@@ -40,6 +40,7 @@ func (c *Client) ExportEC2InstanceRecommendations(ctx context.Context, params *E
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpExportEC2InstanceRecommendationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opExportEC2InstanceRecommendations(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

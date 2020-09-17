@@ -36,6 +36,7 @@ func (c *Client) UpdatePipelineNotifications(ctx context.Context, params *Update
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdatePipelineNotificationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePipelineNotifications(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

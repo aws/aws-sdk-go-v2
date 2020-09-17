@@ -46,6 +46,7 @@ func (c *Client) ExportSnapshot(ctx context.Context, params *ExportSnapshotInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpExportSnapshotValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opExportSnapshot(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

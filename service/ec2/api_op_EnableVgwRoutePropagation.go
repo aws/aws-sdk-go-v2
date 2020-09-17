@@ -33,6 +33,7 @@ func (c *Client) EnableVgwRoutePropagation(ctx context.Context, params *EnableVg
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpEnableVgwRoutePropagationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opEnableVgwRoutePropagation(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

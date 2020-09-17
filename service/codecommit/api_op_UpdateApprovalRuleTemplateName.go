@@ -33,6 +33,7 @@ func (c *Client) UpdateApprovalRuleTemplateName(ctx context.Context, params *Upd
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateApprovalRuleTemplateNameValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateApprovalRuleTemplateName(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

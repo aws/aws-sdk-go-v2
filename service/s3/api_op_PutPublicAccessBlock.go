@@ -52,6 +52,7 @@ func (c *Client) PutPublicAccessBlock(ctx context.Context, params *PutPublicAcce
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutPublicAccessBlockValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutPublicAccessBlock(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

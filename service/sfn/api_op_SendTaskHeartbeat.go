@@ -47,6 +47,7 @@ func (c *Client) SendTaskHeartbeat(ctx context.Context, params *SendTaskHeartbea
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSendTaskHeartbeatValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSendTaskHeartbeat(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

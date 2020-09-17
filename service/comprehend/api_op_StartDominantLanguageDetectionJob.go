@@ -36,6 +36,7 @@ func (c *Client) StartDominantLanguageDetectionJob(ctx context.Context, params *
 	addIdempotencyToken_opStartDominantLanguageDetectionJobMiddleware(stack, options)
 	addOpStartDominantLanguageDetectionJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartDominantLanguageDetectionJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

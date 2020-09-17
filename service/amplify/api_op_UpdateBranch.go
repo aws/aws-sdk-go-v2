@@ -33,6 +33,7 @@ func (c *Client) UpdateBranch(ctx context.Context, params *UpdateBranchInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateBranchValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateBranch(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

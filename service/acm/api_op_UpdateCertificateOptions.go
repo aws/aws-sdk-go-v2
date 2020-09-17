@@ -36,6 +36,7 @@ func (c *Client) UpdateCertificateOptions(ctx context.Context, params *UpdateCer
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateCertificateOptionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCertificateOptions(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

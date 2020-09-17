@@ -38,6 +38,7 @@ func (c *Client) ListImports(ctx context.Context, params *ListImportsInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListImportsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListImports(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

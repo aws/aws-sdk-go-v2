@@ -35,6 +35,7 @@ func (c *Client) UpdateDevicePool(ctx context.Context, params *UpdateDevicePoolI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateDevicePoolValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDevicePool(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

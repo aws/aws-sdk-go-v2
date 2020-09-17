@@ -33,6 +33,7 @@ func (c *Client) GetDeploymentStatus(ctx context.Context, params *GetDeploymentS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDeploymentStatusValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDeploymentStatus(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

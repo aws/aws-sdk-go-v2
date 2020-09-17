@@ -39,6 +39,7 @@ func (c *Client) GetServiceGraph(ctx context.Context, params *GetServiceGraphInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetServiceGraphValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetServiceGraph(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

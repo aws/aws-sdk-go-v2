@@ -32,6 +32,7 @@ func (c *Client) ListTagsLogGroup(ctx context.Context, params *ListTagsLogGroupI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListTagsLogGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListTagsLogGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

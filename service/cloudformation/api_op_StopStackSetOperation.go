@@ -33,6 +33,7 @@ func (c *Client) StopStackSetOperation(ctx context.Context, params *StopStackSet
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopStackSetOperationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopStackSetOperation(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

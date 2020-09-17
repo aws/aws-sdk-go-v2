@@ -33,6 +33,7 @@ func (c *Client) GetClassifier(ctx context.Context, params *GetClassifierInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetClassifierValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetClassifier(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

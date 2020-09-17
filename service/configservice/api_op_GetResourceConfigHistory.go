@@ -45,6 +45,7 @@ func (c *Client) GetResourceConfigHistory(ctx context.Context, params *GetResour
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetResourceConfigHistoryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetResourceConfigHistory(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

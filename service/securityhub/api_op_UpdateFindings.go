@@ -36,6 +36,7 @@ func (c *Client) UpdateFindings(ctx context.Context, params *UpdateFindingsInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateFindingsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFindings(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,7 @@ func (c *Client) CreateSampleFindings(ctx context.Context, params *CreateSampleF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateSampleFindingsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSampleFindings(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -29,6 +29,7 @@ func (c *Client) VerifyUserAttribute(ctx context.Context, params *VerifyUserAttr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpVerifyUserAttributeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opVerifyUserAttribute(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

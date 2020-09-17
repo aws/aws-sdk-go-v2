@@ -70,6 +70,7 @@ func (c *Client) ListResourceRecordSets(ctx context.Context, params *ListResourc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListResourceRecordSetsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListResourceRecordSets(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

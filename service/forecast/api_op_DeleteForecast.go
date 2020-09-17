@@ -36,6 +36,7 @@ func (c *Client) DeleteForecast(ctx context.Context, params *DeleteForecastInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteForecastValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteForecast(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

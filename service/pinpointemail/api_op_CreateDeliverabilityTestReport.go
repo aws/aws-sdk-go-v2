@@ -40,6 +40,7 @@ func (c *Client) CreateDeliverabilityTestReport(ctx context.Context, params *Cre
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDeliverabilityTestReportValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDeliverabilityTestReport(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

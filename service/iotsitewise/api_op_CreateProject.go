@@ -34,6 +34,7 @@ func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, 
 	addIdempotencyToken_opCreateProjectMiddleware(stack, options)
 	addOpCreateProjectValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProject(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

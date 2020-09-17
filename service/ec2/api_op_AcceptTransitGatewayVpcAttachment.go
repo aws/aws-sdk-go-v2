@@ -36,6 +36,7 @@ func (c *Client) AcceptTransitGatewayVpcAttachment(ctx context.Context, params *
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAcceptTransitGatewayVpcAttachmentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptTransitGatewayVpcAttachment(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

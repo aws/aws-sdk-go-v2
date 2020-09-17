@@ -65,6 +65,7 @@ func (c *Client) AcceptMatch(ctx context.Context, params *AcceptMatchInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAcceptMatchValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptMatch(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

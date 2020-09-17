@@ -32,6 +32,7 @@ func (c *Client) DeleteRouteSettings(ctx context.Context, params *DeleteRouteSet
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteRouteSettingsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRouteSettings(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

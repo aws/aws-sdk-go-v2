@@ -40,6 +40,7 @@ func (c *Client) GetParametersByPath(ctx context.Context, params *GetParametersB
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetParametersByPathValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetParametersByPath(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

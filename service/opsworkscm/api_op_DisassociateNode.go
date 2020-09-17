@@ -40,6 +40,7 @@ func (c *Client) DisassociateNode(ctx context.Context, params *DisassociateNodeI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisassociateNodeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateNode(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

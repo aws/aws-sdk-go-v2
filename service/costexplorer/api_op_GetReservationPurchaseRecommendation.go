@@ -47,6 +47,7 @@ func (c *Client) GetReservationPurchaseRecommendation(ctx context.Context, param
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetReservationPurchaseRecommendationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetReservationPurchaseRecommendation(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

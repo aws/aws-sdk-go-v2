@@ -34,6 +34,7 @@ func (c *Client) ListLabelingJobsForWorkteam(ctx context.Context, params *ListLa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListLabelingJobsForWorkteamValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListLabelingJobsForWorkteam(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

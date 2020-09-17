@@ -33,6 +33,7 @@ func (c *Client) DeleteTapeArchive(ctx context.Context, params *DeleteTapeArchiv
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteTapeArchiveValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteTapeArchive(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

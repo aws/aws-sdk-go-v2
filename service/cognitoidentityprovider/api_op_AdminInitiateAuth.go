@@ -34,6 +34,7 @@ func (c *Client) AdminInitiateAuth(ctx context.Context, params *AdminInitiateAut
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAdminInitiateAuthValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAdminInitiateAuth(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

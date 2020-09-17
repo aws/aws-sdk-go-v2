@@ -109,6 +109,7 @@ func (c *Client) GetFederationToken(ctx context.Context, params *GetFederationTo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetFederationTokenValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetFederationToken(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -39,6 +39,7 @@ func (c *Client) GetItem(ctx context.Context, params *GetItemInput, optFns ...fu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetItemValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetItem(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addValidateResponseChecksum(stack, options)
 	addAcceptEncodingGzip(stack, options)
 

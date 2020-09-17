@@ -34,6 +34,7 @@ func (c *Client) GetApnsVoipChannel(ctx context.Context, params *GetApnsVoipChan
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetApnsVoipChannelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetApnsVoipChannel(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

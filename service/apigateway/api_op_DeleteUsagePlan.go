@@ -32,6 +32,7 @@ func (c *Client) DeleteUsagePlan(ctx context.Context, params *DeleteUsagePlanInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteUsagePlanValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteUsagePlan(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

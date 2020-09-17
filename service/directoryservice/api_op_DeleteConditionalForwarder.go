@@ -32,6 +32,7 @@ func (c *Client) DeleteConditionalForwarder(ctx context.Context, params *DeleteC
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteConditionalForwarderValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteConditionalForwarder(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

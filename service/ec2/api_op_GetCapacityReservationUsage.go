@@ -36,6 +36,7 @@ func (c *Client) GetCapacityReservationUsage(ctx context.Context, params *GetCap
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetCapacityReservationUsageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetCapacityReservationUsage(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

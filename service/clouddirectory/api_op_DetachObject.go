@@ -34,6 +34,7 @@ func (c *Client) DetachObject(ctx context.Context, params *DetachObjectInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDetachObjectValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDetachObject(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

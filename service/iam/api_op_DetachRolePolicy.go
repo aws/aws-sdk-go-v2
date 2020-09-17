@@ -37,6 +37,7 @@ func (c *Client) DetachRolePolicy(ctx context.Context, params *DetachRolePolicyI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDetachRolePolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDetachRolePolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

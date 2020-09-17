@@ -32,6 +32,7 @@ func (c *Client) DeleteHsmConfiguration(ctx context.Context, params *DeleteHsmCo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteHsmConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteHsmConfiguration(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

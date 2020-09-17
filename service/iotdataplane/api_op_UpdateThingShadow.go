@@ -35,6 +35,7 @@ func (c *Client) UpdateThingShadow(ctx context.Context, params *UpdateThingShado
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateThingShadowValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateThingShadow(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

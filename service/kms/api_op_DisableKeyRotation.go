@@ -42,6 +42,7 @@ func (c *Client) DisableKeyRotation(ctx context.Context, params *DisableKeyRotat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisableKeyRotationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisableKeyRotation(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

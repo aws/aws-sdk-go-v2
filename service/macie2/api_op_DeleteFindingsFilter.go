@@ -32,6 +32,7 @@ func (c *Client) DeleteFindingsFilter(ctx context.Context, params *DeleteFinding
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteFindingsFilterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFindingsFilter(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,7 @@ func (c *Client) ListAssociatedFleets(ctx context.Context, params *ListAssociate
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListAssociatedFleetsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListAssociatedFleets(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,7 @@ func (c *Client) DeleteSourceCredentials(ctx context.Context, params *DeleteSour
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteSourceCredentialsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSourceCredentials(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

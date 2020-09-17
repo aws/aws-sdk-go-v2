@@ -34,6 +34,7 @@ func (c *Client) UpdateGcmChannel(ctx context.Context, params *UpdateGcmChannelI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateGcmChannelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGcmChannel(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

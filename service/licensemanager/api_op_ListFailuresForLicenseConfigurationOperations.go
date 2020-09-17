@@ -33,6 +33,7 @@ func (c *Client) ListFailuresForLicenseConfigurationOperations(ctx context.Conte
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListFailuresForLicenseConfigurationOperationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListFailuresForLicenseConfigurationOperations(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

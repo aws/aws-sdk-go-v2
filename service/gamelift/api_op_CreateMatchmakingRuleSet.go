@@ -75,6 +75,7 @@ func (c *Client) CreateMatchmakingRuleSet(ctx context.Context, params *CreateMat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateMatchmakingRuleSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMatchmakingRuleSet(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

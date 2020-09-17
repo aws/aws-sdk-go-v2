@@ -33,6 +33,7 @@ func (c *Client) GetMapping(ctx context.Context, params *GetMappingInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetMappingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetMapping(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

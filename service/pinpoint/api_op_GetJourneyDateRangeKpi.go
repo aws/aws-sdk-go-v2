@@ -35,6 +35,7 @@ func (c *Client) GetJourneyDateRangeKpi(ctx context.Context, params *GetJourneyD
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetJourneyDateRangeKpiValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetJourneyDateRangeKpi(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

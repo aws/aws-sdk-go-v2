@@ -32,6 +32,7 @@ func (c *Client) DeleteRobotApplication(ctx context.Context, params *DeleteRobot
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteRobotApplicationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRobotApplication(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -35,6 +35,7 @@ func (c *Client) CreateProfile(ctx context.Context, params *CreateProfileInput, 
 	addIdempotencyToken_opCreateProfileMiddleware(stack, options)
 	addOpCreateProfileValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProfile(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

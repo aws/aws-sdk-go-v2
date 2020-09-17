@@ -41,6 +41,7 @@ func (c *Client) ModifyHosts(ctx context.Context, params *ModifyHostsInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyHostsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyHosts(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

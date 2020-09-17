@@ -41,6 +41,7 @@ func (c *Client) WithdrawByoipCidr(ctx context.Context, params *WithdrawByoipCid
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpWithdrawByoipCidrValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opWithdrawByoipCidr(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

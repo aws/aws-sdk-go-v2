@@ -37,6 +37,7 @@ func (c *Client) GetInstanceAccessDetails(ctx context.Context, params *GetInstan
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetInstanceAccessDetailsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetInstanceAccessDetails(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

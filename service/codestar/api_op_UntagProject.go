@@ -32,6 +32,7 @@ func (c *Client) UntagProject(ctx context.Context, params *UntagProjectInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUntagProjectValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUntagProject(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

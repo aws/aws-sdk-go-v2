@@ -34,6 +34,7 @@ func (c *Client) DeletePortfolio(ctx context.Context, params *DeletePortfolioInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeletePortfolioValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePortfolio(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

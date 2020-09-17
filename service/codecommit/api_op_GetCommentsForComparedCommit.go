@@ -36,6 +36,7 @@ func (c *Client) GetCommentsForComparedCommit(ctx context.Context, params *GetCo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetCommentsForComparedCommitValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetCommentsForComparedCommit(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

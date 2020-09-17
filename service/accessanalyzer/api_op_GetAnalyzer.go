@@ -32,6 +32,7 @@ func (c *Client) GetAnalyzer(ctx context.Context, params *GetAnalyzerInput, optF
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetAnalyzerValidationMiddleware(stack)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

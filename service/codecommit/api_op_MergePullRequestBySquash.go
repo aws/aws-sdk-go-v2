@@ -35,6 +35,7 @@ func (c *Client) MergePullRequestBySquash(ctx context.Context, params *MergePull
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpMergePullRequestBySquashValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opMergePullRequestBySquash(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

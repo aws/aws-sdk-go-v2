@@ -45,6 +45,7 @@ func (c *Client) StopStreamEncryption(ctx context.Context, params *StopStreamEnc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopStreamEncryptionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopStreamEncryption(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

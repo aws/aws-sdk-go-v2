@@ -38,6 +38,7 @@ func (c *Client) BatchGetQueryExecution(ctx context.Context, params *BatchGetQue
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchGetQueryExecutionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetQueryExecution(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

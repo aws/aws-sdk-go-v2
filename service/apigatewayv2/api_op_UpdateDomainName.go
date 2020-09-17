@@ -33,6 +33,7 @@ func (c *Client) UpdateDomainName(ctx context.Context, params *UpdateDomainNameI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateDomainNameValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDomainName(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

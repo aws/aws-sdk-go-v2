@@ -36,6 +36,7 @@ func (c *Client) StartDocumentClassificationJob(ctx context.Context, params *Sta
 	addIdempotencyToken_opStartDocumentClassificationJobMiddleware(stack, options)
 	addOpStartDocumentClassificationJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartDocumentClassificationJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

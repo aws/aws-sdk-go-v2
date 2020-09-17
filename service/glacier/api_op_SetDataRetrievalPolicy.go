@@ -39,6 +39,7 @@ func (c *Client) SetDataRetrievalPolicy(ctx context.Context, params *SetDataRetr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSetDataRetrievalPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSetDataRetrievalPolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

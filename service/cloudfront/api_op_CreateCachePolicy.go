@@ -53,6 +53,7 @@ func (c *Client) CreateCachePolicy(ctx context.Context, params *CreateCachePolic
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateCachePolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCachePolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

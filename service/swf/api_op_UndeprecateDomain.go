@@ -54,6 +54,7 @@ func (c *Client) UndeprecateDomain(ctx context.Context, params *UndeprecateDomai
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUndeprecateDomainValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUndeprecateDomain(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

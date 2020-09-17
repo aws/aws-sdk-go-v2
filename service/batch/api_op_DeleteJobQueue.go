@@ -35,6 +35,7 @@ func (c *Client) DeleteJobQueue(ctx context.Context, params *DeleteJobQueueInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteJobQueueValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteJobQueue(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

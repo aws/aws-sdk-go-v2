@@ -33,6 +33,7 @@ func (c *Client) CreateType(ctx context.Context, params *CreateTypeInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateTypeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateType(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,7 @@ func (c *Client) AcceptSharedDirectory(ctx context.Context, params *AcceptShared
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAcceptSharedDirectoryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptSharedDirectory(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) DescribeBackupVault(ctx context.Context, params *DescribeBackup
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeBackupVaultValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeBackupVault(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

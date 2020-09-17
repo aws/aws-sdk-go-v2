@@ -34,6 +34,7 @@ func (c *Client) RebalanceSlotsInGlobalReplicationGroup(ctx context.Context, par
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRebalanceSlotsInGlobalReplicationGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRebalanceSlotsInGlobalReplicationGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

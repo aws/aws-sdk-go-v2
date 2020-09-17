@@ -57,6 +57,7 @@ func (c *Client) DeleteArchive(ctx context.Context, params *DeleteArchiveInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteArchiveValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteArchive(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

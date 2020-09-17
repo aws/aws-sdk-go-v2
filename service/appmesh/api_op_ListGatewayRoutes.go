@@ -33,6 +33,7 @@ func (c *Client) ListGatewayRoutes(ctx context.Context, params *ListGatewayRoute
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListGatewayRoutesValidationMiddleware(stack)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

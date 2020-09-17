@@ -41,6 +41,7 @@ func (c *Client) GetChange(ctx context.Context, params *GetChangeInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetChangeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetChange(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

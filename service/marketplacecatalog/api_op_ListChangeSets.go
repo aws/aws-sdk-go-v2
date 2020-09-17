@@ -37,6 +37,7 @@ func (c *Client) ListChangeSets(ctx context.Context, params *ListChangeSetsInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListChangeSetsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListChangeSets(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

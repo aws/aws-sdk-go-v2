@@ -36,6 +36,7 @@ func (c *Client) DescribeTapes(ctx context.Context, params *DescribeTapesInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeTapesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTapes(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

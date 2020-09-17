@@ -71,6 +71,7 @@ func (c *Client) Invoke(ctx context.Context, params *InvokeInput, optFns ...func
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpInvokeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opInvoke(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

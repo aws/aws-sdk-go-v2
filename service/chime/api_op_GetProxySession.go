@@ -34,6 +34,7 @@ func (c *Client) GetProxySession(ctx context.Context, params *GetProxySessionInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetProxySessionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetProxySession(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

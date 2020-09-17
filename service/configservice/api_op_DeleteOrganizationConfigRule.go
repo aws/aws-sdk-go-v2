@@ -38,6 +38,7 @@ func (c *Client) DeleteOrganizationConfigRule(ctx context.Context, params *Delet
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteOrganizationConfigRuleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteOrganizationConfigRule(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) ListSmartHomeAppliances(ctx context.Context, params *ListSmartH
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListSmartHomeAppliancesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListSmartHomeAppliances(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

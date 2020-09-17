@@ -35,6 +35,7 @@ func (c *Client) DisableAddOn(ctx context.Context, params *DisableAddOnInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisableAddOnValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisableAddOn(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

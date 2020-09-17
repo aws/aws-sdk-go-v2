@@ -35,6 +35,7 @@ func (c *Client) DescribeAnomalyDetectors(ctx context.Context, params *DescribeA
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeAnomalyDetectorsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAnomalyDetectors(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

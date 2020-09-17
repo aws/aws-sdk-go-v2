@@ -35,6 +35,7 @@ func (c *Client) ListKeyPolicies(ctx context.Context, params *ListKeyPoliciesInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListKeyPoliciesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListKeyPolicies(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

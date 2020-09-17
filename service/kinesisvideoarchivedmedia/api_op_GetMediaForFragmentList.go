@@ -56,6 +56,7 @@ func (c *Client) GetMediaForFragmentList(ctx context.Context, params *GetMediaFo
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	addOpGetMediaForFragmentListValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetMediaForFragmentList(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

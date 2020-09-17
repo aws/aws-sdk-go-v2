@@ -33,6 +33,7 @@ func (c *Client) GetCampaignActivities(ctx context.Context, params *GetCampaignA
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetCampaignActivitiesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetCampaignActivities(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

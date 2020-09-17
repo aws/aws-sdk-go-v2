@@ -58,6 +58,7 @@ func (c *Client) ScheduleKeyDeletion(ctx context.Context, params *ScheduleKeyDel
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpScheduleKeyDeletionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opScheduleKeyDeletion(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

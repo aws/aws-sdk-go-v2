@@ -43,6 +43,7 @@ func (c *Client) CreateTrafficMirrorSession(ctx context.Context, params *CreateT
 	addIdempotencyToken_opCreateTrafficMirrorSessionMiddleware(stack, options)
 	addOpCreateTrafficMirrorSessionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTrafficMirrorSession(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

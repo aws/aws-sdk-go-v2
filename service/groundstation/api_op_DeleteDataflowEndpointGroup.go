@@ -31,6 +31,7 @@ func (c *Client) DeleteDataflowEndpointGroup(ctx context.Context, params *Delete
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDataflowEndpointGroupValidationMiddleware(stack)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

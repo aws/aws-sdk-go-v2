@@ -45,6 +45,7 @@ func (c *Client) AddAttachmentsToSet(ctx context.Context, params *AddAttachments
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAddAttachmentsToSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAddAttachmentsToSet(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

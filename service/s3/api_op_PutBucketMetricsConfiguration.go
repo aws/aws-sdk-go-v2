@@ -56,6 +56,7 @@ func (c *Client) PutBucketMetricsConfiguration(ctx context.Context, params *PutB
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutBucketMetricsConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBucketMetricsConfiguration(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

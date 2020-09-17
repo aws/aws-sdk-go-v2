@@ -34,6 +34,7 @@ func (c *Client) DeleteVirtualMFADevice(ctx context.Context, params *DeleteVirtu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteVirtualMFADeviceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVirtualMFADevice(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -36,6 +36,7 @@ func (c *Client) DescribeDBSubnetGroups(ctx context.Context, params *DescribeDBS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeDBSubnetGroupsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDBSubnetGroups(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

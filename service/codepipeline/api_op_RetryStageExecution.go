@@ -36,6 +36,7 @@ func (c *Client) RetryStageExecution(ctx context.Context, params *RetryStageExec
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRetryStageExecutionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRetryStageExecution(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

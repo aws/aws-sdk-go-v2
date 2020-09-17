@@ -33,6 +33,7 @@ func (c *Client) StartDataSourceSyncJob(ctx context.Context, params *StartDataSo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartDataSourceSyncJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartDataSourceSyncJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

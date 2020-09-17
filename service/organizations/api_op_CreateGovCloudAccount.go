@@ -137,6 +137,7 @@ func (c *Client) CreateGovCloudAccount(ctx context.Context, params *CreateGovClo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateGovCloudAccountValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGovCloudAccount(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

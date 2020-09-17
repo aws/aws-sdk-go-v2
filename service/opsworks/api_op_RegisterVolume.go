@@ -40,6 +40,7 @@ func (c *Client) RegisterVolume(ctx context.Context, params *RegisterVolumeInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterVolumeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterVolume(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

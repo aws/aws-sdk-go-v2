@@ -33,6 +33,7 @@ func (c *Client) UpdateIdentityProvider(ctx context.Context, params *UpdateIdent
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateIdentityProviderValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateIdentityProvider(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

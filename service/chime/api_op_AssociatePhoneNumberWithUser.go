@@ -32,6 +32,7 @@ func (c *Client) AssociatePhoneNumberWithUser(ctx context.Context, params *Assoc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociatePhoneNumberWithUserValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociatePhoneNumberWithUser(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

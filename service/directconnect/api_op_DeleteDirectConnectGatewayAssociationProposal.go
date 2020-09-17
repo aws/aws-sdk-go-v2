@@ -34,6 +34,7 @@ func (c *Client) DeleteDirectConnectGatewayAssociationProposal(ctx context.Conte
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDirectConnectGatewayAssociationProposalValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDirectConnectGatewayAssociationProposal(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

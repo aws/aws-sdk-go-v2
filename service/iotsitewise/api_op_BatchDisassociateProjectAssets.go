@@ -36,6 +36,7 @@ func (c *Client) BatchDisassociateProjectAssets(ctx context.Context, params *Bat
 	addIdempotencyToken_opBatchDisassociateProjectAssetsMiddleware(stack, options)
 	addOpBatchDisassociateProjectAssetsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDisassociateProjectAssets(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

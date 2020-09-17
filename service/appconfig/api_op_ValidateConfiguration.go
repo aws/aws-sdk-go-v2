@@ -32,6 +32,7 @@ func (c *Client) ValidateConfiguration(ctx context.Context, params *ValidateConf
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpValidateConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opValidateConfiguration(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

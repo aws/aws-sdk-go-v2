@@ -32,6 +32,7 @@ func (c *Client) UnassignIpv6Addresses(ctx context.Context, params *UnassignIpv6
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUnassignIpv6AddressesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUnassignIpv6Addresses(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

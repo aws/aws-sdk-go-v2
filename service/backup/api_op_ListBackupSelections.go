@@ -34,6 +34,7 @@ func (c *Client) ListBackupSelections(ctx context.Context, params *ListBackupSel
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListBackupSelectionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListBackupSelections(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) UpdateInputDevice(ctx context.Context, params *UpdateInputDevic
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateInputDeviceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateInputDevice(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

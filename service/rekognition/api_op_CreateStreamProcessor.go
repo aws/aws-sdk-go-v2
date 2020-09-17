@@ -44,6 +44,7 @@ func (c *Client) CreateStreamProcessor(ctx context.Context, params *CreateStream
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateStreamProcessorValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStreamProcessor(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

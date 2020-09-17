@@ -34,6 +34,7 @@ func (c *Client) DetachInternetGateway(ctx context.Context, params *DetachIntern
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDetachInternetGatewayValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDetachInternetGateway(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

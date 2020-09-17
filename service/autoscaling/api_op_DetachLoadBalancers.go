@@ -39,6 +39,7 @@ func (c *Client) DetachLoadBalancers(ctx context.Context, params *DetachLoadBala
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDetachLoadBalancersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDetachLoadBalancers(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

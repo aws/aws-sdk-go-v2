@@ -44,6 +44,7 @@ func (c *Client) SimulateCustomPolicy(ctx context.Context, params *SimulateCusto
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSimulateCustomPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSimulateCustomPolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

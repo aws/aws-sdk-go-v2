@@ -44,6 +44,7 @@ func (c *Client) CreateGlobalReplicationGroup(ctx context.Context, params *Creat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateGlobalReplicationGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGlobalReplicationGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

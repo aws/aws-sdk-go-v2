@@ -33,6 +33,7 @@ func (c *Client) DeleteDashboards(ctx context.Context, params *DeleteDashboardsI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDashboardsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDashboards(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

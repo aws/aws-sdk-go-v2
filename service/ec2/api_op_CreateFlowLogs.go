@@ -46,6 +46,7 @@ func (c *Client) CreateFlowLogs(ctx context.Context, params *CreateFlowLogsInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateFlowLogsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFlowLogs(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

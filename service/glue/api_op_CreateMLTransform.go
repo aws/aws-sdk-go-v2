@@ -43,6 +43,7 @@ func (c *Client) CreateMLTransform(ctx context.Context, params *CreateMLTransfor
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateMLTransformValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMLTransform(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

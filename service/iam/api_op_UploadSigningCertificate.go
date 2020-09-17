@@ -48,6 +48,7 @@ func (c *Client) UploadSigningCertificate(ctx context.Context, params *UploadSig
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUploadSigningCertificateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUploadSigningCertificate(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

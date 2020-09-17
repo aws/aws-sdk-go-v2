@@ -36,6 +36,7 @@ func (c *Client) StartSentimentDetectionJob(ctx context.Context, params *StartSe
 	addIdempotencyToken_opStartSentimentDetectionJobMiddleware(stack, options)
 	addOpStartSentimentDetectionJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartSentimentDetectionJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

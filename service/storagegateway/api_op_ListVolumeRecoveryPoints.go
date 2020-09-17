@@ -38,6 +38,7 @@ func (c *Client) ListVolumeRecoveryPoints(ctx context.Context, params *ListVolum
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListVolumeRecoveryPointsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListVolumeRecoveryPoints(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

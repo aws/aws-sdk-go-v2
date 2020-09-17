@@ -34,6 +34,7 @@ func (c *Client) InvokeAsync(ctx context.Context, params *InvokeAsyncInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpInvokeAsyncValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opInvokeAsync(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

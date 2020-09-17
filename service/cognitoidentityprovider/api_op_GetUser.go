@@ -30,6 +30,7 @@ func (c *Client) GetUser(ctx context.Context, params *GetUserInput, optFns ...fu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetUserValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetUser(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

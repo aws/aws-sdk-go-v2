@@ -37,6 +37,7 @@ func (c *Client) CreateSpotDatafeedSubscription(ctx context.Context, params *Cre
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateSpotDatafeedSubscriptionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSpotDatafeedSubscription(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

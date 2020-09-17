@@ -33,6 +33,7 @@ func (c *Client) GetRoomSkillParameter(ctx context.Context, params *GetRoomSkill
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetRoomSkillParameterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetRoomSkillParameter(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

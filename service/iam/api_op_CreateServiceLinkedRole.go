@@ -42,6 +42,7 @@ func (c *Client) CreateServiceLinkedRole(ctx context.Context, params *CreateServ
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateServiceLinkedRoleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateServiceLinkedRole(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

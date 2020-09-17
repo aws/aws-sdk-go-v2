@@ -33,6 +33,7 @@ func (c *Client) ResetNetworkInterfaceAttribute(ctx context.Context, params *Res
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpResetNetworkInterfaceAttributeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opResetNetworkInterfaceAttribute(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

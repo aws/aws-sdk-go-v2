@@ -32,6 +32,7 @@ func (c *Client) DeleteAppsList(ctx context.Context, params *DeleteAppsListInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteAppsListValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAppsList(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

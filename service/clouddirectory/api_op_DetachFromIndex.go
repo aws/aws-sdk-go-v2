@@ -33,6 +33,7 @@ func (c *Client) DetachFromIndex(ctx context.Context, params *DetachFromIndexInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDetachFromIndexValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDetachFromIndex(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -64,6 +64,7 @@ func (c *Client) RegisterActivityType(ctx context.Context, params *RegisterActiv
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterActivityTypeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterActivityType(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

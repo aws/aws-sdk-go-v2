@@ -73,6 +73,7 @@ func (c *Client) GetDocumentAnalysis(ctx context.Context, params *GetDocumentAna
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDocumentAnalysisValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDocumentAnalysis(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

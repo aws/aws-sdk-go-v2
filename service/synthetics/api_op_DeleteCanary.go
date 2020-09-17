@@ -58,6 +58,7 @@ func (c *Client) DeleteCanary(ctx context.Context, params *DeleteCanaryInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteCanaryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCanary(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

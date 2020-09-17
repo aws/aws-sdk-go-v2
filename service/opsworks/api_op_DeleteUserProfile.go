@@ -35,6 +35,7 @@ func (c *Client) DeleteUserProfile(ctx context.Context, params *DeleteUserProfil
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteUserProfileValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteUserProfile(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

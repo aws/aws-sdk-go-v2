@@ -33,6 +33,7 @@ func (c *Client) GetTopicAttributes(ctx context.Context, params *GetTopicAttribu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetTopicAttributesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetTopicAttributes(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,7 @@ func (c *Client) DeleteWorkteam(ctx context.Context, params *DeleteWorkteamInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteWorkteamValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteWorkteam(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

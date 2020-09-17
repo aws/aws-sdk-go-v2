@@ -39,6 +39,7 @@ func (c *Client) DeregisterImage(ctx context.Context, params *DeregisterImageInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeregisterImageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterImage(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

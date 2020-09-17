@@ -36,6 +36,7 @@ func (c *Client) UpdateDistributionConfiguration(ctx context.Context, params *Up
 	addIdempotencyToken_opUpdateDistributionConfigurationMiddleware(stack, options)
 	addOpUpdateDistributionConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDistributionConfiguration(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) CopyBackupToRegion(ctx context.Context, params *CopyBackupToReg
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCopyBackupToRegionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCopyBackupToRegion(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

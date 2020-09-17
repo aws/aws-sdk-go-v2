@@ -36,6 +36,7 @@ func (c *Client) CreateCustomAvailabilityZone(ctx context.Context, params *Creat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateCustomAvailabilityZoneValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCustomAvailabilityZone(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

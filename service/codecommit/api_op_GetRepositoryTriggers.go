@@ -33,6 +33,7 @@ func (c *Client) GetRepositoryTriggers(ctx context.Context, params *GetRepositor
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetRepositoryTriggersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetRepositoryTriggers(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

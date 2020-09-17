@@ -48,6 +48,7 @@ func (c *Client) RecordLifecycleActionHeartbeat(ctx context.Context, params *Rec
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRecordLifecycleActionHeartbeatValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRecordLifecycleActionHeartbeat(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

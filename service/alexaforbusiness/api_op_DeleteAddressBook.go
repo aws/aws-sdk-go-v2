@@ -32,6 +32,7 @@ func (c *Client) DeleteAddressBook(ctx context.Context, params *DeleteAddressBoo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteAddressBookValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAddressBook(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

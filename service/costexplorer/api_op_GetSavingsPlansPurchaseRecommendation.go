@@ -34,6 +34,7 @@ func (c *Client) GetSavingsPlansPurchaseRecommendation(ctx context.Context, para
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetSavingsPlansPurchaseRecommendationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSavingsPlansPurchaseRecommendation(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

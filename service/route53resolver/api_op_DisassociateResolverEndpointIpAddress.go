@@ -36,6 +36,7 @@ func (c *Client) DisassociateResolverEndpointIpAddress(ctx context.Context, para
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisassociateResolverEndpointIpAddressValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateResolverEndpointIpAddress(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

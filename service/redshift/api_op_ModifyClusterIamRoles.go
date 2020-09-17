@@ -35,6 +35,7 @@ func (c *Client) ModifyClusterIamRoles(ctx context.Context, params *ModifyCluste
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyClusterIamRolesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyClusterIamRoles(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

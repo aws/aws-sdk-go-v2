@@ -92,6 +92,7 @@ func (c *Client) RunInstances(ctx context.Context, params *RunInstancesInput, op
 	addIdempotencyToken_opRunInstancesMiddleware(stack, options)
 	addOpRunInstancesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRunInstances(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

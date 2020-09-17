@@ -43,6 +43,7 @@ func (c *Client) ListCreatedArtifacts(ctx context.Context, params *ListCreatedAr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListCreatedArtifactsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListCreatedArtifacts(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

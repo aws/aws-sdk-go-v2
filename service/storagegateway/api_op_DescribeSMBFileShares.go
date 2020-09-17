@@ -34,6 +34,7 @@ func (c *Client) DescribeSMBFileShares(ctx context.Context, params *DescribeSMBF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeSMBFileSharesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSMBFileShares(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,7 @@ func (c *Client) DeleteNotificationSubscription(ctx context.Context, params *Del
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteNotificationSubscriptionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteNotificationSubscription(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

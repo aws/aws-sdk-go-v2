@@ -50,6 +50,7 @@ func (c *Client) GetUtterancesView(ctx context.Context, params *GetUtterancesVie
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetUtterancesViewValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetUtterancesView(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

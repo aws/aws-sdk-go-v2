@@ -34,6 +34,7 @@ func (c *Client) UpdateVocabularyFilter(ctx context.Context, params *UpdateVocab
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateVocabularyFilterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateVocabularyFilter(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

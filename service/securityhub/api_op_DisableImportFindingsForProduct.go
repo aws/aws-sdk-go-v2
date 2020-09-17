@@ -34,6 +34,7 @@ func (c *Client) DisableImportFindingsForProduct(ctx context.Context, params *Di
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisableImportFindingsForProductValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisableImportFindingsForProduct(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

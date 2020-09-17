@@ -38,6 +38,7 @@ func (c *Client) RestoreWorkspace(ctx context.Context, params *RestoreWorkspaceI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRestoreWorkspaceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreWorkspace(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -36,6 +36,7 @@ func (c *Client) StopStack(ctx context.Context, params *StopStackInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopStackValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopStack(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

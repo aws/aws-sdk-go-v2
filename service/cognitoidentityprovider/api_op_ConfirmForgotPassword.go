@@ -30,6 +30,7 @@ func (c *Client) ConfirmForgotPassword(ctx context.Context, params *ConfirmForgo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpConfirmForgotPasswordValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opConfirmForgotPassword(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

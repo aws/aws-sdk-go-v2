@@ -33,6 +33,7 @@ func (c *Client) GetPullRequest(ctx context.Context, params *GetPullRequestInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetPullRequestValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetPullRequest(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

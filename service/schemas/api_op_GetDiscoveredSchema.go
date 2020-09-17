@@ -33,6 +33,7 @@ func (c *Client) GetDiscoveredSchema(ctx context.Context, params *GetDiscoveredS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDiscoveredSchemaValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDiscoveredSchema(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

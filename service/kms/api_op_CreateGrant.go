@@ -77,6 +77,7 @@ func (c *Client) CreateGrant(ctx context.Context, params *CreateGrantInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateGrantValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGrant(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

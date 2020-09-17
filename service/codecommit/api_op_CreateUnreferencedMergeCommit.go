@@ -39,6 +39,7 @@ func (c *Client) CreateUnreferencedMergeCommit(ctx context.Context, params *Crea
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateUnreferencedMergeCommitValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateUnreferencedMergeCommit(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

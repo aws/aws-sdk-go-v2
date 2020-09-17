@@ -40,6 +40,7 @@ func (c *Client) CreateInstance(ctx context.Context, params *CreateInstanceInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateInstanceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateInstance(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

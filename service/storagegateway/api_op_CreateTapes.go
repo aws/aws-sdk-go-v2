@@ -37,6 +37,7 @@ func (c *Client) CreateTapes(ctx context.Context, params *CreateTapesInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateTapesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTapes(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,7 @@ func (c *Client) TestRenderEmailTemplate(ctx context.Context, params *TestRender
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTestRenderEmailTemplateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTestRenderEmailTemplate(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

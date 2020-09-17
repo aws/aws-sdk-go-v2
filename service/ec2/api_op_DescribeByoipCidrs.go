@@ -36,6 +36,7 @@ func (c *Client) DescribeByoipCidrs(ctx context.Context, params *DescribeByoipCi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeByoipCidrsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeByoipCidrs(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

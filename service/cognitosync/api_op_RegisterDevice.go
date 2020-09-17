@@ -35,6 +35,7 @@ func (c *Client) RegisterDevice(ctx context.Context, params *RegisterDeviceInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterDeviceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterDevice(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

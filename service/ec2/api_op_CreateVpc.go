@@ -51,6 +51,7 @@ func (c *Client) CreateVpc(ctx context.Context, params *CreateVpcInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateVpcValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVpc(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

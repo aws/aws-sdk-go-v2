@@ -32,6 +32,7 @@ func (c *Client) CancelIngestion(ctx context.Context, params *CancelIngestionInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCancelIngestionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCancelIngestion(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

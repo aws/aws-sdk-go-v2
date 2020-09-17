@@ -33,6 +33,7 @@ func (c *Client) DeleteLifecyclePolicy(ctx context.Context, params *DeleteLifecy
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteLifecyclePolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteLifecyclePolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

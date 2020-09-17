@@ -33,6 +33,7 @@ func (c *Client) GetRelationalDatabaseEvents(ctx context.Context, params *GetRel
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetRelationalDatabaseEventsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetRelationalDatabaseEvents(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

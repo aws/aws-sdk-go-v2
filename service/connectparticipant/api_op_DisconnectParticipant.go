@@ -35,6 +35,7 @@ func (c *Client) DisconnectParticipant(ctx context.Context, params *DisconnectPa
 	addIdempotencyToken_opDisconnectParticipantMiddleware(stack, options)
 	addOpDisconnectParticipantValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisconnectParticipant(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

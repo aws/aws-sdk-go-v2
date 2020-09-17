@@ -39,6 +39,7 @@ func (c *Client) RebootInstances(ctx context.Context, params *RebootInstancesInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRebootInstancesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRebootInstances(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

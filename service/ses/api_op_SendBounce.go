@@ -39,6 +39,7 @@ func (c *Client) SendBounce(ctx context.Context, params *SendBounceInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSendBounceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSendBounce(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) ListIpRoutes(ctx context.Context, params *ListIpRoutesInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListIpRoutesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListIpRoutes(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

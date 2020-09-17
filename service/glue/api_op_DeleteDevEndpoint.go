@@ -32,6 +32,7 @@ func (c *Client) DeleteDevEndpoint(ctx context.Context, params *DeleteDevEndpoin
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDevEndpointValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDevEndpoint(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -43,6 +43,7 @@ func (c *Client) DescribeHapg(ctx context.Context, params *DescribeHapgInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeHapgValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeHapg(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

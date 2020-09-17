@@ -57,6 +57,7 @@ func (c *Client) RefreshCache(ctx context.Context, params *RefreshCacheInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRefreshCacheValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRefreshCache(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

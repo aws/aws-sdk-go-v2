@@ -33,6 +33,7 @@ func (c *Client) AddCustomAttributes(ctx context.Context, params *AddCustomAttri
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAddCustomAttributesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAddCustomAttributes(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

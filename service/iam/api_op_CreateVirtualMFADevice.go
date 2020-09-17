@@ -45,6 +45,7 @@ func (c *Client) CreateVirtualMFADevice(ctx context.Context, params *CreateVirtu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateVirtualMFADeviceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVirtualMFADevice(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

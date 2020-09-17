@@ -35,6 +35,7 @@ func (c *Client) DeleteMLModel(ctx context.Context, params *DeleteMLModelInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteMLModelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMLModel(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

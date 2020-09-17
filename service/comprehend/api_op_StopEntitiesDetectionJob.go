@@ -39,6 +39,7 @@ func (c *Client) StopEntitiesDetectionJob(ctx context.Context, params *StopEntit
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopEntitiesDetectionJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopEntitiesDetectionJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -41,6 +41,7 @@ func (c *Client) CreateCodeRepository(ctx context.Context, params *CreateCodeRep
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateCodeRepositoryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCodeRepository(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

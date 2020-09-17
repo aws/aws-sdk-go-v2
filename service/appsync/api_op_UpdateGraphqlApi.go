@@ -33,6 +33,7 @@ func (c *Client) UpdateGraphqlApi(ctx context.Context, params *UpdateGraphqlApiI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateGraphqlApiValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGraphqlApi(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

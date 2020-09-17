@@ -41,6 +41,7 @@ func (c *Client) CreateTrafficMirrorFilter(ctx context.Context, params *CreateTr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addIdempotencyToken_opCreateTrafficMirrorFilterMiddleware(stack, options)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTrafficMirrorFilter(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

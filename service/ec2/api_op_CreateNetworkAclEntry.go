@@ -46,6 +46,7 @@ func (c *Client) CreateNetworkAclEntry(ctx context.Context, params *CreateNetwor
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateNetworkAclEntryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateNetworkAclEntry(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

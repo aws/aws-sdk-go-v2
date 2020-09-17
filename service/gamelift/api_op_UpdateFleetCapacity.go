@@ -71,6 +71,7 @@ func (c *Client) UpdateFleetCapacity(ctx context.Context, params *UpdateFleetCap
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateFleetCapacityValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFleetCapacity(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

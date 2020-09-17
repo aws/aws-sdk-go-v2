@@ -49,6 +49,7 @@ func (c *Client) CreateVirtualNode(ctx context.Context, params *CreateVirtualNod
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateVirtualNodeValidationMiddleware(stack)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

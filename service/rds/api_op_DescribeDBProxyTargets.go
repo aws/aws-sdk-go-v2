@@ -33,6 +33,7 @@ func (c *Client) DescribeDBProxyTargets(ctx context.Context, params *DescribeDBP
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeDBProxyTargetsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDBProxyTargets(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

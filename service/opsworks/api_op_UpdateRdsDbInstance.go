@@ -36,6 +36,7 @@ func (c *Client) UpdateRdsDbInstance(ctx context.Context, params *UpdateRdsDbIns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateRdsDbInstanceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRdsDbInstance(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

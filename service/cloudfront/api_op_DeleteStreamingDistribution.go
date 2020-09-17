@@ -59,6 +59,7 @@ func (c *Client) DeleteStreamingDistribution(ctx context.Context, params *Delete
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteStreamingDistributionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteStreamingDistribution(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

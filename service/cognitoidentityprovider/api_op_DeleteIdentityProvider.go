@@ -32,6 +32,7 @@ func (c *Client) DeleteIdentityProvider(ctx context.Context, params *DeleteIdent
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteIdentityProviderValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteIdentityProvider(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

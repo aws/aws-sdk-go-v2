@@ -38,6 +38,7 @@ func (c *Client) DescribeTimeBasedAutoScaling(ctx context.Context, params *Descr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeTimeBasedAutoScalingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTimeBasedAutoScaling(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

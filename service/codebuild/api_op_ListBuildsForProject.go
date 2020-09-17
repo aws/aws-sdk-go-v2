@@ -34,6 +34,7 @@ func (c *Client) ListBuildsForProject(ctx context.Context, params *ListBuildsFor
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListBuildsForProjectValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListBuildsForProject(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

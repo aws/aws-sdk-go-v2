@@ -32,6 +32,7 @@ func (c *Client) DeleteSkillAuthorization(ctx context.Context, params *DeleteSki
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteSkillAuthorizationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSkillAuthorization(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

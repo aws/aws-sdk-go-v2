@@ -33,6 +33,7 @@ func (c *Client) UpdateRequestValidator(ctx context.Context, params *UpdateReque
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateRequestValidatorValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRequestValidator(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

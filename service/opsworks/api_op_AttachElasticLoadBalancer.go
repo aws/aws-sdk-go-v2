@@ -45,6 +45,7 @@ func (c *Client) AttachElasticLoadBalancer(ctx context.Context, params *AttachEl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAttachElasticLoadBalancerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAttachElasticLoadBalancer(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -46,6 +46,7 @@ func (c *Client) DisablePolicyType(ctx context.Context, params *DisablePolicyTyp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisablePolicyTypeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisablePolicyType(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

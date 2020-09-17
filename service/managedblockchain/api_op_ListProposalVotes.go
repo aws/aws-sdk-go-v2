@@ -34,6 +34,7 @@ func (c *Client) ListProposalVotes(ctx context.Context, params *ListProposalVote
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListProposalVotesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListProposalVotes(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

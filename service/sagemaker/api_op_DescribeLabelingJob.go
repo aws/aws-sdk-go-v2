@@ -34,6 +34,7 @@ func (c *Client) DescribeLabelingJob(ctx context.Context, params *DescribeLabeli
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeLabelingJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLabelingJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

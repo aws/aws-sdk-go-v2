@@ -34,6 +34,7 @@ func (c *Client) CreateLedger(ctx context.Context, params *CreateLedgerInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateLedgerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLedger(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

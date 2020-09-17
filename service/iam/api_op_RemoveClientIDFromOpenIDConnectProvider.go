@@ -35,6 +35,7 @@ func (c *Client) RemoveClientIDFromOpenIDConnectProvider(ctx context.Context, pa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRemoveClientIDFromOpenIDConnectProviderValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveClientIDFromOpenIDConnectProvider(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

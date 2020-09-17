@@ -50,6 +50,7 @@ func (c *Client) GetEventSelectors(ctx context.Context, params *GetEventSelector
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetEventSelectorsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetEventSelectors(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

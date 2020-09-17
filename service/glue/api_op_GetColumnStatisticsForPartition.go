@@ -33,6 +33,7 @@ func (c *Client) GetColumnStatisticsForPartition(ctx context.Context, params *Ge
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetColumnStatisticsForPartitionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetColumnStatisticsForPartition(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

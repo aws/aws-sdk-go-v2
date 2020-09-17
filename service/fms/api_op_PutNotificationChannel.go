@@ -33,6 +33,7 @@ func (c *Client) PutNotificationChannel(ctx context.Context, params *PutNotifica
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutNotificationChannelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutNotificationChannel(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

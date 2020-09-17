@@ -34,6 +34,7 @@ func (c *Client) BatchAssociateApprovalRuleTemplateWithRepositories(ctx context.
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchAssociateApprovalRuleTemplateWithRepositoriesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchAssociateApprovalRuleTemplateWithRepositories(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

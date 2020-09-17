@@ -40,6 +40,7 @@ func (c *Client) UpdateEmailIdentityPolicy(ctx context.Context, params *UpdateEm
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateEmailIdentityPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateEmailIdentityPolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

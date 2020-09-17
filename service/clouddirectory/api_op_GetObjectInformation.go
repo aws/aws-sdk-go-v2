@@ -33,6 +33,7 @@ func (c *Client) GetObjectInformation(ctx context.Context, params *GetObjectInfo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetObjectInformationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetObjectInformation(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

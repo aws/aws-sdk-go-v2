@@ -37,6 +37,7 @@ func (c *Client) AllocateConnectionOnInterconnect(ctx context.Context, params *A
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAllocateConnectionOnInterconnectValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAllocateConnectionOnInterconnect(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -35,6 +35,7 @@ func (c *Client) TerminateClientVpnConnections(ctx context.Context, params *Term
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTerminateClientVpnConnectionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTerminateClientVpnConnections(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

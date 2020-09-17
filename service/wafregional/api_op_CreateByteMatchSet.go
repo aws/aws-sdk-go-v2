@@ -63,6 +63,7 @@ func (c *Client) CreateByteMatchSet(ctx context.Context, params *CreateByteMatch
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateByteMatchSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateByteMatchSet(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

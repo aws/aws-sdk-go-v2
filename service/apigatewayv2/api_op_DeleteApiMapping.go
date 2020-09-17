@@ -32,6 +32,7 @@ func (c *Client) DeleteApiMapping(ctx context.Context, params *DeleteApiMappingI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteApiMappingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteApiMapping(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

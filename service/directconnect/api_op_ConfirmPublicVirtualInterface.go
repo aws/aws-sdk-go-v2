@@ -35,6 +35,7 @@ func (c *Client) ConfirmPublicVirtualInterface(ctx context.Context, params *Conf
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpConfirmPublicVirtualInterfaceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opConfirmPublicVirtualInterface(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

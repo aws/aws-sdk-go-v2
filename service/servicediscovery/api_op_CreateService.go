@@ -62,6 +62,7 @@ func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, 
 	addIdempotencyToken_opCreateServiceMiddleware(stack, options)
 	addOpCreateServiceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateService(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

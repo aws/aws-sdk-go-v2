@@ -33,6 +33,7 @@ func (c *Client) GetOutpostInstanceTypes(ctx context.Context, params *GetOutpost
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetOutpostInstanceTypesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetOutpostInstanceTypes(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,7 @@ func (c *Client) PreviewAgents(ctx context.Context, params *PreviewAgentsInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPreviewAgentsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPreviewAgents(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

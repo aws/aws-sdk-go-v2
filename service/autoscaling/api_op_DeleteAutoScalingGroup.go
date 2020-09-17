@@ -41,6 +41,7 @@ func (c *Client) DeleteAutoScalingGroup(ctx context.Context, params *DeleteAutoS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteAutoScalingGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAutoScalingGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

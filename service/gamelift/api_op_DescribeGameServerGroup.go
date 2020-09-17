@@ -56,6 +56,7 @@ func (c *Client) DescribeGameServerGroup(ctx context.Context, params *DescribeGa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeGameServerGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeGameServerGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

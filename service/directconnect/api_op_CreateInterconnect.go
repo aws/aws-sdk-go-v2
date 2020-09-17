@@ -50,6 +50,7 @@ func (c *Client) CreateInterconnect(ctx context.Context, params *CreateInterconn
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateInterconnectValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateInterconnect(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

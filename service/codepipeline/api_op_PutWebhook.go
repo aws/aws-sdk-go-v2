@@ -40,6 +40,7 @@ func (c *Client) PutWebhook(ctx context.Context, params *PutWebhookInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutWebhookValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutWebhook(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

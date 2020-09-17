@@ -106,6 +106,7 @@ func (c *Client) PutBucketAcl(ctx context.Context, params *PutBucketAclInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutBucketAclValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBucketAcl(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

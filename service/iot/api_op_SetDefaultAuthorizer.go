@@ -33,6 +33,7 @@ func (c *Client) SetDefaultAuthorizer(ctx context.Context, params *SetDefaultAut
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSetDefaultAuthorizerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSetDefaultAuthorizer(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

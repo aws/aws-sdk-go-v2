@@ -41,6 +41,7 @@ func (c *Client) CreateImage(ctx context.Context, params *CreateImageInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateImageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateImage(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

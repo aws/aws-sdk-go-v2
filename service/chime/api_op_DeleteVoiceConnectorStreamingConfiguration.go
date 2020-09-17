@@ -33,6 +33,7 @@ func (c *Client) DeleteVoiceConnectorStreamingConfiguration(ctx context.Context,
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteVoiceConnectorStreamingConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVoiceConnectorStreamingConfiguration(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,7 @@ func (c *Client) ExportBundle(ctx context.Context, params *ExportBundleInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpExportBundleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opExportBundle(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

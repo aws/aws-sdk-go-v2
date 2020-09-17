@@ -36,6 +36,7 @@ func (c *Client) CreateEgressOnlyInternetGateway(ctx context.Context, params *Cr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateEgressOnlyInternetGatewayValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEgressOnlyInternetGateway(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

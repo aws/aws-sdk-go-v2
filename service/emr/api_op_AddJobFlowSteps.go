@@ -49,6 +49,7 @@ func (c *Client) AddJobFlowSteps(ctx context.Context, params *AddJobFlowStepsInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAddJobFlowStepsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAddJobFlowSteps(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -37,6 +37,7 @@ func (c *Client) ReorderReceiptRuleSet(ctx context.Context, params *ReorderRecei
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpReorderReceiptRuleSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opReorderReceiptRuleSet(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

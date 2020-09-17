@@ -41,6 +41,7 @@ func (c *Client) DeleteMessageBatch(ctx context.Context, params *DeleteMessageBa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteMessageBatchValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMessageBatch(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

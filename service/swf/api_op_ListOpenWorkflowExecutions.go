@@ -66,6 +66,7 @@ func (c *Client) ListOpenWorkflowExecutions(ctx context.Context, params *ListOpe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListOpenWorkflowExecutionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListOpenWorkflowExecutions(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -35,6 +35,7 @@ func (c *Client) CreateIAMPolicyAssignment(ctx context.Context, params *CreateIA
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateIAMPolicyAssignmentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateIAMPolicyAssignment(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

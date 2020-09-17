@@ -35,6 +35,7 @@ func (c *Client) DisableRule(ctx context.Context, params *DisableRuleInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisableRuleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisableRule(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

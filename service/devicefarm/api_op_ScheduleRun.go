@@ -33,6 +33,7 @@ func (c *Client) ScheduleRun(ctx context.Context, params *ScheduleRunInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpScheduleRunValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opScheduleRun(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

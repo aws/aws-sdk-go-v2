@@ -33,6 +33,7 @@ func (c *Client) UpdateVpcLink(ctx context.Context, params *UpdateVpcLinkInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateVpcLinkValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateVpcLink(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

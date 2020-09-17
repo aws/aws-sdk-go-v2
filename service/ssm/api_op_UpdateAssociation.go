@@ -41,6 +41,7 @@ func (c *Client) UpdateAssociation(ctx context.Context, params *UpdateAssociatio
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateAssociationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAssociation(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

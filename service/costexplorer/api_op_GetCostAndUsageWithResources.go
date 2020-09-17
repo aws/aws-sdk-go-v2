@@ -45,6 +45,7 @@ func (c *Client) GetCostAndUsageWithResources(ctx context.Context, params *GetCo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetCostAndUsageWithResourcesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetCostAndUsageWithResources(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

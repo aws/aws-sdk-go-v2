@@ -37,6 +37,7 @@ func (c *Client) PutBotAlias(ctx context.Context, params *PutBotAliasInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutBotAliasValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBotAlias(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

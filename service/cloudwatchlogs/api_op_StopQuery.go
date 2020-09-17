@@ -34,6 +34,7 @@ func (c *Client) StopQuery(ctx context.Context, params *StopQueryInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopQueryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopQuery(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) GetKeyPolicy(ctx context.Context, params *GetKeyPolicyInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetKeyPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetKeyPolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

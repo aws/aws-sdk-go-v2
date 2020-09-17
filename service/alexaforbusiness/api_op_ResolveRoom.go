@@ -34,6 +34,7 @@ func (c *Client) ResolveRoom(ctx context.Context, params *ResolveRoomInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpResolveRoomValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opResolveRoom(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

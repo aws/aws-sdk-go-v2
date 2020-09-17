@@ -33,6 +33,7 @@ func (c *Client) ListBackendEnvironments(ctx context.Context, params *ListBacken
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListBackendEnvironmentsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListBackendEnvironments(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

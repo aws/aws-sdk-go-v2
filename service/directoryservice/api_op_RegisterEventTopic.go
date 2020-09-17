@@ -36,6 +36,7 @@ func (c *Client) RegisterEventTopic(ctx context.Context, params *RegisterEventTo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterEventTopicValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterEventTopic(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

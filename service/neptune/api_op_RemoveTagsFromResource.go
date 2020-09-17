@@ -32,6 +32,7 @@ func (c *Client) RemoveTagsFromResource(ctx context.Context, params *RemoveTagsF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRemoveTagsFromResourceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveTagsFromResource(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

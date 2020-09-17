@@ -33,6 +33,7 @@ func (c *Client) ListResolverEndpointIpAddresses(ctx context.Context, params *Li
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListResolverEndpointIpAddressesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListResolverEndpointIpAddresses(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

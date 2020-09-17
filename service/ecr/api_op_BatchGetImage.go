@@ -35,6 +35,7 @@ func (c *Client) BatchGetImage(ctx context.Context, params *BatchGetImageInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchGetImageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetImage(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

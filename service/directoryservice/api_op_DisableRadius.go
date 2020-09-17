@@ -33,6 +33,7 @@ func (c *Client) DisableRadius(ctx context.Context, params *DisableRadiusInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisableRadiusValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisableRadius(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

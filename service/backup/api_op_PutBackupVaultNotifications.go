@@ -33,6 +33,7 @@ func (c *Client) PutBackupVaultNotifications(ctx context.Context, params *PutBac
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutBackupVaultNotificationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBackupVaultNotifications(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

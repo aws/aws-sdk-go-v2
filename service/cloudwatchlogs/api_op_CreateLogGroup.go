@@ -55,6 +55,7 @@ func (c *Client) CreateLogGroup(ctx context.Context, params *CreateLogGroupInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateLogGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLogGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

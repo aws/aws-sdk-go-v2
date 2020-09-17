@@ -38,6 +38,7 @@ func (c *Client) CreateVoiceConnectorGroup(ctx context.Context, params *CreateVo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateVoiceConnectorGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVoiceConnectorGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

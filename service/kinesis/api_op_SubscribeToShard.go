@@ -42,6 +42,7 @@ func (c *Client) SubscribeToShard(ctx context.Context, params *SubscribeToShardI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSubscribeToShardValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSubscribeToShard(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

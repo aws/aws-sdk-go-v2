@@ -34,6 +34,7 @@ func (c *Client) DeleteStackSet(ctx context.Context, params *DeleteStackSetInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteStackSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteStackSet(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

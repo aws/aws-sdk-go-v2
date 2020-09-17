@@ -40,6 +40,7 @@ func (c *Client) AllocateTransitVirtualInterface(ctx context.Context, params *Al
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAllocateTransitVirtualInterfaceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAllocateTransitVirtualInterface(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

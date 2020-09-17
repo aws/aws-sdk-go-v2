@@ -34,6 +34,7 @@ func (c *Client) GetLifecyclePolicyPreview(ctx context.Context, params *GetLifec
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetLifecyclePolicyPreviewValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetLifecyclePolicyPreview(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

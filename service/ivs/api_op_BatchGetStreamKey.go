@@ -33,6 +33,7 @@ func (c *Client) BatchGetStreamKey(ctx context.Context, params *BatchGetStreamKe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchGetStreamKeyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetStreamKey(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

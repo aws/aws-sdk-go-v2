@@ -34,6 +34,7 @@ func (c *Client) CreatePublicKey(ctx context.Context, params *CreatePublicKeyInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreatePublicKeyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePublicKey(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

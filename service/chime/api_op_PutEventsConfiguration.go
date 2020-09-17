@@ -35,6 +35,7 @@ func (c *Client) PutEventsConfiguration(ctx context.Context, params *PutEventsCo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutEventsConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutEventsConfiguration(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

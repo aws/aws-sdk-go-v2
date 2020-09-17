@@ -40,6 +40,7 @@ func (c *Client) DeleteReplicationGroup(ctx context.Context, params *DeleteRepli
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteReplicationGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteReplicationGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

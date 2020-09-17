@@ -35,6 +35,7 @@ func (c *Client) ListTagsForVault(ctx context.Context, params *ListTagsForVaultI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListTagsForVaultValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListTagsForVault(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

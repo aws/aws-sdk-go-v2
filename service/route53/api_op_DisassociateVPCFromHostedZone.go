@@ -55,6 +55,7 @@ func (c *Client) DisassociateVPCFromHostedZone(ctx context.Context, params *Disa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisassociateVPCFromHostedZoneValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateVPCFromHostedZone(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

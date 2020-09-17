@@ -36,6 +36,7 @@ func (c *Client) GetIntent(ctx context.Context, params *GetIntentInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetIntentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetIntent(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

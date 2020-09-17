@@ -33,6 +33,7 @@ func (c *Client) EnableLDAPS(ctx context.Context, params *EnableLDAPSInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpEnableLDAPSValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opEnableLDAPS(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

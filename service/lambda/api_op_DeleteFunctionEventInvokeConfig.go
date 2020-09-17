@@ -34,6 +34,7 @@ func (c *Client) DeleteFunctionEventInvokeConfig(ctx context.Context, params *De
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteFunctionEventInvokeConfigValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFunctionEventInvokeConfig(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

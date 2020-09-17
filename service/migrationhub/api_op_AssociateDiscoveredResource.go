@@ -34,6 +34,7 @@ func (c *Client) AssociateDiscoveredResource(ctx context.Context, params *Associ
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateDiscoveredResourceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateDiscoveredResource(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

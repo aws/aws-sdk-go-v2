@@ -43,6 +43,7 @@ func (c *Client) AssociateVirtualInterface(ctx context.Context, params *Associat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateVirtualInterfaceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateVirtualInterface(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

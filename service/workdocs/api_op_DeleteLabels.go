@@ -32,6 +32,7 @@ func (c *Client) DeleteLabels(ctx context.Context, params *DeleteLabelsInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteLabelsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteLabels(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

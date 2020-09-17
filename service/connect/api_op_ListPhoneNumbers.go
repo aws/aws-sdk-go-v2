@@ -34,6 +34,7 @@ func (c *Client) ListPhoneNumbers(ctx context.Context, params *ListPhoneNumbersI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListPhoneNumbersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListPhoneNumbers(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

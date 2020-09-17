@@ -32,6 +32,7 @@ func (c *Client) DeletePreset(ctx context.Context, params *DeletePresetInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeletePresetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePreset(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

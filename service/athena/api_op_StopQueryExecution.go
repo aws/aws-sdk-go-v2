@@ -37,6 +37,7 @@ func (c *Client) StopQueryExecution(ctx context.Context, params *StopQueryExecut
 	addIdempotencyToken_opStopQueryExecutionMiddleware(stack, options)
 	addOpStopQueryExecutionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopQueryExecution(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

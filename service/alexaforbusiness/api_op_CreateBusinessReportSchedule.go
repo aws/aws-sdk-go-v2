@@ -36,6 +36,7 @@ func (c *Client) CreateBusinessReportSchedule(ctx context.Context, params *Creat
 	addIdempotencyToken_opCreateBusinessReportScheduleMiddleware(stack, options)
 	addOpCreateBusinessReportScheduleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBusinessReportSchedule(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

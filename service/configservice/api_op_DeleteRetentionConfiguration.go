@@ -32,6 +32,7 @@ func (c *Client) DeleteRetentionConfiguration(ctx context.Context, params *Delet
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteRetentionConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRetentionConfiguration(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

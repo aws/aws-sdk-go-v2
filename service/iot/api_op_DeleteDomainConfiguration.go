@@ -33,6 +33,7 @@ func (c *Client) DeleteDomainConfiguration(ctx context.Context, params *DeleteDo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDomainConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDomainConfiguration(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

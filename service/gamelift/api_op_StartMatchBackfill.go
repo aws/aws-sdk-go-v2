@@ -69,6 +69,7 @@ func (c *Client) StartMatchBackfill(ctx context.Context, params *StartMatchBackf
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartMatchBackfillValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartMatchBackfill(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

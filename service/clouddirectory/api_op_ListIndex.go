@@ -33,6 +33,7 @@ func (c *Client) ListIndex(ctx context.Context, params *ListIndexInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListIndexValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListIndex(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

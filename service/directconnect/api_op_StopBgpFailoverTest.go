@@ -33,6 +33,7 @@ func (c *Client) StopBgpFailoverTest(ctx context.Context, params *StopBgpFailove
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopBgpFailoverTestValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopBgpFailoverTest(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

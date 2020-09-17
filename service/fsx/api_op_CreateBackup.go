@@ -68,6 +68,7 @@ func (c *Client) CreateBackup(ctx context.Context, params *CreateBackupInput, op
 	addIdempotencyToken_opCreateBackupMiddleware(stack, options)
 	addOpCreateBackupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBackup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

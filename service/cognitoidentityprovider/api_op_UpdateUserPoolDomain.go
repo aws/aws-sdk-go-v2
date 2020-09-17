@@ -51,6 +51,7 @@ func (c *Client) UpdateUserPoolDomain(ctx context.Context, params *UpdateUserPoo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateUserPoolDomainValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateUserPoolDomain(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

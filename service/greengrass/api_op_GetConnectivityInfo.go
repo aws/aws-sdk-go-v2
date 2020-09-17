@@ -33,6 +33,7 @@ func (c *Client) GetConnectivityInfo(ctx context.Context, params *GetConnectivit
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetConnectivityInfoValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetConnectivityInfo(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

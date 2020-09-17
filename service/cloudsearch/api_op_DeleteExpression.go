@@ -36,6 +36,7 @@ func (c *Client) DeleteExpression(ctx context.Context, params *DeleteExpressionI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteExpressionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteExpression(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

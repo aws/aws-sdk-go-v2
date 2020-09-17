@@ -67,6 +67,7 @@ func (c *Client) GetMedia(ctx context.Context, params *GetMediaInput, optFns ...
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	addOpGetMediaValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetMedia(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

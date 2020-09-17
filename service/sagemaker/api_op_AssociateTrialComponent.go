@@ -34,6 +34,7 @@ func (c *Client) AssociateTrialComponent(ctx context.Context, params *AssociateT
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateTrialComponentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateTrialComponent(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -61,6 +61,7 @@ func (c *Client) CreateSolution(ctx context.Context, params *CreateSolutionInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateSolutionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSolution(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -37,6 +37,7 @@ func (c *Client) SynthesizeSpeech(ctx context.Context, params *SynthesizeSpeechI
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	addOpSynthesizeSpeechValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSynthesizeSpeech(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

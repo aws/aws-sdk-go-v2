@@ -35,6 +35,7 @@ func (c *Client) CreateConstraint(ctx context.Context, params *CreateConstraintI
 	addIdempotencyToken_opCreateConstraintMiddleware(stack, options)
 	addOpCreateConstraintValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateConstraint(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

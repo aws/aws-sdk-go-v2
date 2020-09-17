@@ -41,6 +41,7 @@ func (c *Client) ListObjectVersions(ctx context.Context, params *ListObjectVersi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListObjectVersionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListObjectVersions(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

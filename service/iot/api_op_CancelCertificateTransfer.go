@@ -38,6 +38,7 @@ func (c *Client) CancelCertificateTransfer(ctx context.Context, params *CancelCe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCancelCertificateTransferValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCancelCertificateTransfer(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -38,6 +38,7 @@ func (c *Client) AttachObject(ctx context.Context, params *AttachObjectInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAttachObjectValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAttachObject(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

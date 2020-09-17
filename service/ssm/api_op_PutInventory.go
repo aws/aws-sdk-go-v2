@@ -35,6 +35,7 @@ func (c *Client) PutInventory(ctx context.Context, params *PutInventoryInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutInventoryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutInventory(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

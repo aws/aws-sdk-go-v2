@@ -39,6 +39,7 @@ func (c *Client) GetLaunchTemplateData(ctx context.Context, params *GetLaunchTem
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetLaunchTemplateDataValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetLaunchTemplateData(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

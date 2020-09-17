@@ -65,6 +65,7 @@ func (c *Client) CreateDataSourceFromRedshift(ctx context.Context, params *Creat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDataSourceFromRedshiftValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataSourceFromRedshift(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

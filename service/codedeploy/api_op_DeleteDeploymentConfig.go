@@ -33,6 +33,7 @@ func (c *Client) DeleteDeploymentConfig(ctx context.Context, params *DeleteDeplo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDeploymentConfigValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDeploymentConfig(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

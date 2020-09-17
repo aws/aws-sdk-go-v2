@@ -31,6 +31,7 @@ func (c *Client) DeleteDocumentationPart(ctx context.Context, params *DeleteDocu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDocumentationPartValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDocumentationPart(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

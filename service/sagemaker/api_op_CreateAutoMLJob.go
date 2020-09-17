@@ -39,6 +39,7 @@ func (c *Client) CreateAutoMLJob(ctx context.Context, params *CreateAutoMLJobInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateAutoMLJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAutoMLJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

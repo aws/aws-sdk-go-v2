@@ -38,6 +38,7 @@ func (c *Client) CreateTapeWithBarcode(ctx context.Context, params *CreateTapeWi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateTapeWithBarcodeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTapeWithBarcode(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

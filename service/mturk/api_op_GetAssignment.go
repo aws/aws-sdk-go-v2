@@ -33,6 +33,7 @@ func (c *Client) GetAssignment(ctx context.Context, params *GetAssignmentInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetAssignmentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetAssignment(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) DeleteAccessLogSettings(ctx context.Context, params *DeleteAcce
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteAccessLogSettingsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAccessLogSettings(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

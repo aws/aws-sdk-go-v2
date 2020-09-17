@@ -40,6 +40,7 @@ func (c *Client) ListLocalDisks(ctx context.Context, params *ListLocalDisksInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListLocalDisksValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListLocalDisks(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

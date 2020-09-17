@@ -53,6 +53,7 @@ func (c *Client) RegisterType(ctx context.Context, params *RegisterTypeInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterTypeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterType(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

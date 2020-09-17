@@ -32,6 +32,7 @@ func (c *Client) AssociateIpGroups(ctx context.Context, params *AssociateIpGroup
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateIpGroupsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateIpGroups(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

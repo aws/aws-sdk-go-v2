@@ -37,6 +37,7 @@ func (c *Client) CloseInstancePublicPorts(ctx context.Context, params *CloseInst
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCloseInstancePublicPortsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCloseInstancePublicPorts(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

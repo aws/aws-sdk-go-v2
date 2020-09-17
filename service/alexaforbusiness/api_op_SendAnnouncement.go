@@ -36,6 +36,7 @@ func (c *Client) SendAnnouncement(ctx context.Context, params *SendAnnouncementI
 	addIdempotencyToken_opSendAnnouncementMiddleware(stack, options)
 	addOpSendAnnouncementValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSendAnnouncement(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

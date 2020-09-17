@@ -32,6 +32,7 @@ func (c *Client) GetContactAttributes(ctx context.Context, params *GetContactAtt
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetContactAttributesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetContactAttributes(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

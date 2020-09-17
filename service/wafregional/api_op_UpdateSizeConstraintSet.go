@@ -85,6 +85,7 @@ func (c *Client) UpdateSizeConstraintSet(ctx context.Context, params *UpdateSize
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateSizeConstraintSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSizeConstraintSet(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

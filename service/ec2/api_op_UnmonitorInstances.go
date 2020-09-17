@@ -36,6 +36,7 @@ func (c *Client) UnmonitorInstances(ctx context.Context, params *UnmonitorInstan
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUnmonitorInstancesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUnmonitorInstances(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

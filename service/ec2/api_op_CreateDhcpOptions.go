@@ -76,6 +76,7 @@ func (c *Client) CreateDhcpOptions(ctx context.Context, params *CreateDhcpOption
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDhcpOptionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDhcpOptions(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

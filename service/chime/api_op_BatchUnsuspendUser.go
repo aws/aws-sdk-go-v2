@@ -40,6 +40,7 @@ func (c *Client) BatchUnsuspendUser(ctx context.Context, params *BatchUnsuspendU
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchUnsuspendUserValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUnsuspendUser(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

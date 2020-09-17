@@ -241,6 +241,7 @@ func (c *Client) RestoreObject(ctx context.Context, params *RestoreObjectInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRestoreObjectValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreObject(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

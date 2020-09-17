@@ -33,6 +33,7 @@ func (c *Client) CreateRecommenderConfiguration(ctx context.Context, params *Cre
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateRecommenderConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRecommenderConfiguration(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

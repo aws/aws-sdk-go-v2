@@ -35,6 +35,7 @@ func (c *Client) DeleteBucket(ctx context.Context, params *DeleteBucketInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteBucketValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBucket(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

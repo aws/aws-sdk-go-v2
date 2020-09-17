@@ -65,6 +65,7 @@ func (c *Client) LabelParameterVersion(ctx context.Context, params *LabelParamet
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpLabelParameterVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opLabelParameterVersion(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

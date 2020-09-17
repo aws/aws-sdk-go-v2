@@ -33,6 +33,7 @@ func (c *Client) CopyWorkspaceImage(ctx context.Context, params *CopyWorkspaceIm
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCopyWorkspaceImageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCopyWorkspaceImage(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

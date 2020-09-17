@@ -39,6 +39,7 @@ func (c *Client) DescribeExpressions(ctx context.Context, params *DescribeExpres
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeExpressionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeExpressions(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

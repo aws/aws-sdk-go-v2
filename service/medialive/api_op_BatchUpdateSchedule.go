@@ -33,6 +33,7 @@ func (c *Client) BatchUpdateSchedule(ctx context.Context, params *BatchUpdateSch
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchUpdateScheduleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUpdateSchedule(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

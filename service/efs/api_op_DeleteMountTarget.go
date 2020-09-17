@@ -49,6 +49,7 @@ func (c *Client) DeleteMountTarget(ctx context.Context, params *DeleteMountTarge
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteMountTargetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMountTarget(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

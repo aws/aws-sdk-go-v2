@@ -77,6 +77,7 @@ func (c *Client) ChangeMessageVisibility(ctx context.Context, params *ChangeMess
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpChangeMessageVisibilityValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opChangeMessageVisibility(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

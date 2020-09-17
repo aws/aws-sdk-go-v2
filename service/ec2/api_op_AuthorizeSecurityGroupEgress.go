@@ -43,6 +43,7 @@ func (c *Client) AuthorizeSecurityGroupEgress(ctx context.Context, params *Autho
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAuthorizeSecurityGroupEgressValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAuthorizeSecurityGroupEgress(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

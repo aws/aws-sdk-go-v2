@@ -33,6 +33,7 @@ func (c *Client) ListCodeReviews(ctx context.Context, params *ListCodeReviewsInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListCodeReviewsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListCodeReviews(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

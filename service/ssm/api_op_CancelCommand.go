@@ -34,6 +34,7 @@ func (c *Client) CancelCommand(ctx context.Context, params *CancelCommandInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCancelCommandValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCancelCommand(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

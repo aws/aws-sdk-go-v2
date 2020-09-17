@@ -32,6 +32,7 @@ func (c *Client) DeleteUserPool(ctx context.Context, params *DeleteUserPoolInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteUserPoolValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteUserPool(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

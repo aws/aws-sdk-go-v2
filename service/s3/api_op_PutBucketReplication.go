@@ -75,6 +75,7 @@ func (c *Client) PutBucketReplication(ctx context.Context, params *PutBucketRepl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutBucketReplicationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBucketReplication(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

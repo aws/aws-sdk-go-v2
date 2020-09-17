@@ -38,6 +38,7 @@ func (c *Client) UpdateVolume(ctx context.Context, params *UpdateVolumeInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateVolumeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateVolume(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

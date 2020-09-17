@@ -33,6 +33,7 @@ func (c *Client) DissociatePackage(ctx context.Context, params *DissociatePackag
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDissociatePackageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDissociatePackage(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

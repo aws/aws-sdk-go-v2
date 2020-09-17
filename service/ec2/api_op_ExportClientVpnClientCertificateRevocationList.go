@@ -34,6 +34,7 @@ func (c *Client) ExportClientVpnClientCertificateRevocationList(ctx context.Cont
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpExportClientVpnClientCertificateRevocationListValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opExportClientVpnClientCertificateRevocationList(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

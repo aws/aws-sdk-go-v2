@@ -38,6 +38,7 @@ func (c *Client) CreateFpgaImage(ctx context.Context, params *CreateFpgaImageInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateFpgaImageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFpgaImage(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -42,6 +42,7 @@ func (c *Client) DeleteObjectTagging(ctx context.Context, params *DeleteObjectTa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteObjectTaggingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteObjectTagging(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

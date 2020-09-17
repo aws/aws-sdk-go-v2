@@ -35,6 +35,7 @@ func (c *Client) GetFacet(ctx context.Context, params *GetFacetInput, optFns ...
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetFacetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetFacet(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

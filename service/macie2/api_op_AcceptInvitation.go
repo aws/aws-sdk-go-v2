@@ -33,6 +33,7 @@ func (c *Client) AcceptInvitation(ctx context.Context, params *AcceptInvitationI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAcceptInvitationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptInvitation(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

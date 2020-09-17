@@ -35,6 +35,7 @@ func (c *Client) GetMergeOptions(ctx context.Context, params *GetMergeOptionsInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetMergeOptionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetMergeOptions(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

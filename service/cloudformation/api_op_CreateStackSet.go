@@ -35,6 +35,7 @@ func (c *Client) CreateStackSet(ctx context.Context, params *CreateStackSetInput
 	addIdempotencyToken_opCreateStackSetMiddleware(stack, options)
 	addOpCreateStackSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStackSet(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

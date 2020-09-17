@@ -33,6 +33,7 @@ func (c *Client) RegisterCrossAccountAccessRole(ctx context.Context, params *Reg
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterCrossAccountAccessRoleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterCrossAccountAccessRole(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

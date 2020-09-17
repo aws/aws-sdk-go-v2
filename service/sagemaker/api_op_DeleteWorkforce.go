@@ -35,6 +35,7 @@ func (c *Client) DeleteWorkforce(ctx context.Context, params *DeleteWorkforceInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteWorkforceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteWorkforce(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

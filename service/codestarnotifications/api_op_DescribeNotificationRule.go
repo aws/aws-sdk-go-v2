@@ -34,6 +34,7 @@ func (c *Client) DescribeNotificationRule(ctx context.Context, params *DescribeN
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeNotificationRuleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeNotificationRule(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

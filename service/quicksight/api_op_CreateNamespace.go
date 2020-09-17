@@ -40,6 +40,7 @@ func (c *Client) CreateNamespace(ctx context.Context, params *CreateNamespaceInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateNamespaceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateNamespace(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

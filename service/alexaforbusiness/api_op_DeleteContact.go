@@ -32,6 +32,7 @@ func (c *Client) DeleteContact(ctx context.Context, params *DeleteContactInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteContactValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteContact(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

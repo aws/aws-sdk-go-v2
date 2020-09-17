@@ -32,6 +32,7 @@ func (c *Client) GetImageRecipePolicy(ctx context.Context, params *GetImageRecip
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetImageRecipePolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetImageRecipePolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

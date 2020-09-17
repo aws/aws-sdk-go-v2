@@ -36,6 +36,7 @@ func (c *Client) ResetCacheParameterGroup(ctx context.Context, params *ResetCach
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpResetCacheParameterGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opResetCacheParameterGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

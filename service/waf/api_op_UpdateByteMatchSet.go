@@ -82,6 +82,7 @@ func (c *Client) UpdateByteMatchSet(ctx context.Context, params *UpdateByteMatch
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateByteMatchSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateByteMatchSet(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

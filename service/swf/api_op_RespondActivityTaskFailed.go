@@ -54,6 +54,7 @@ func (c *Client) RespondActivityTaskFailed(ctx context.Context, params *RespondA
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRespondActivityTaskFailedValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRespondActivityTaskFailed(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,7 @@ func (c *Client) EnableTopicRule(ctx context.Context, params *EnableTopicRuleInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpEnableTopicRuleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opEnableTopicRule(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

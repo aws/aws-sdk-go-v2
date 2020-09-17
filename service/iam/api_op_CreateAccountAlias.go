@@ -35,6 +35,7 @@ func (c *Client) CreateAccountAlias(ctx context.Context, params *CreateAccountAl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateAccountAliasValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAccountAlias(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

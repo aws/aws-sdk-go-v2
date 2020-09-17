@@ -38,6 +38,7 @@ func (c *Client) DeregisterElasticIp(ctx context.Context, params *DeregisterElas
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeregisterElasticIpValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterElasticIp(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

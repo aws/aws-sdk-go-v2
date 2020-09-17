@@ -130,6 +130,7 @@ func (c *Client) AssumeRoleWithSAML(ctx context.Context, params *AssumeRoleWithS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssumeRoleWithSAMLValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssumeRoleWithSAML(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

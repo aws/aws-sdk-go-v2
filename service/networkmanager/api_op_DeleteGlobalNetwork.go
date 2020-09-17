@@ -34,6 +34,7 @@ func (c *Client) DeleteGlobalNetwork(ctx context.Context, params *DeleteGlobalNe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteGlobalNetworkValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteGlobalNetwork(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

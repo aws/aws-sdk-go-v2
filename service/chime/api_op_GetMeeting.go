@@ -36,6 +36,7 @@ func (c *Client) GetMeeting(ctx context.Context, params *GetMeetingInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetMeetingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetMeeting(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

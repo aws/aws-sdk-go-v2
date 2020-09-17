@@ -43,6 +43,7 @@ func (c *Client) DeleteBot(ctx context.Context, params *DeleteBotInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteBotValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBot(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

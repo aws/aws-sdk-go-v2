@@ -45,6 +45,7 @@ func (c *Client) DeleteHealthCheck(ctx context.Context, params *DeleteHealthChec
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteHealthCheckValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteHealthCheck(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

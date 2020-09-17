@@ -33,6 +33,7 @@ func (c *Client) ListCommands(ctx context.Context, params *ListCommandsInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListCommandsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListCommands(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

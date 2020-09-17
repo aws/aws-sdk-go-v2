@@ -34,6 +34,7 @@ func (c *Client) ModifyTrafficMirrorFilterRule(ctx context.Context, params *Modi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyTrafficMirrorFilterRuleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyTrafficMirrorFilterRule(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

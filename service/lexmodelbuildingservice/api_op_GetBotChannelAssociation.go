@@ -36,6 +36,7 @@ func (c *Client) GetBotChannelAssociation(ctx context.Context, params *GetBotCha
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBotChannelAssociationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBotChannelAssociation(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,7 @@ func (c *Client) DeleteAssessmentRun(ctx context.Context, params *DeleteAssessme
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteAssessmentRunValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAssessmentRun(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

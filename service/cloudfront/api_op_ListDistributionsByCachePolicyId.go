@@ -39,6 +39,7 @@ func (c *Client) ListDistributionsByCachePolicyId(ctx context.Context, params *L
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListDistributionsByCachePolicyIdValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListDistributionsByCachePolicyId(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

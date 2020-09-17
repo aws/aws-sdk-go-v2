@@ -37,6 +37,7 @@ func (c *Client) CloneReceiptRuleSet(ctx context.Context, params *CloneReceiptRu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCloneReceiptRuleSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCloneReceiptRuleSet(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

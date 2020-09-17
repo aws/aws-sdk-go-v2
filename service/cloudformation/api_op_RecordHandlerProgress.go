@@ -36,6 +36,7 @@ func (c *Client) RecordHandlerProgress(ctx context.Context, params *RecordHandle
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRecordHandlerProgressValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRecordHandlerProgress(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

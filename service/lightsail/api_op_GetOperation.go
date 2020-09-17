@@ -35,6 +35,7 @@ func (c *Client) GetOperation(ctx context.Context, params *GetOperationInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetOperationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetOperation(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

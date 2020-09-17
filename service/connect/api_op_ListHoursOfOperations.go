@@ -34,6 +34,7 @@ func (c *Client) ListHoursOfOperations(ctx context.Context, params *ListHoursOfO
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListHoursOfOperationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListHoursOfOperations(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

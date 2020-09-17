@@ -69,6 +69,7 @@ func (c *Client) SuspendGameServerGroup(ctx context.Context, params *SuspendGame
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSuspendGameServerGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSuspendGameServerGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) GetPatchBaselineForPatchGroup(ctx context.Context, params *GetP
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetPatchBaselineForPatchGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetPatchBaselineForPatchGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

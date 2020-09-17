@@ -34,6 +34,7 @@ func (c *Client) ConfirmDevice(ctx context.Context, params *ConfirmDeviceInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpConfirmDeviceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opConfirmDevice(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

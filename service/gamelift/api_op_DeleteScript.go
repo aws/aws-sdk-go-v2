@@ -51,6 +51,7 @@ func (c *Client) DeleteScript(ctx context.Context, params *DeleteScriptInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteScriptValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteScript(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

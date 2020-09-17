@@ -33,6 +33,7 @@ func (c *Client) GetExport(ctx context.Context, params *GetExportInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetExportValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetExport(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

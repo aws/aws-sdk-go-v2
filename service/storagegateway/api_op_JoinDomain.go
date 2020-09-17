@@ -34,6 +34,7 @@ func (c *Client) JoinDomain(ctx context.Context, params *JoinDomainInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpJoinDomainValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opJoinDomain(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,7 @@ func (c *Client) UpdateListener(ctx context.Context, params *UpdateListenerInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateListenerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateListener(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

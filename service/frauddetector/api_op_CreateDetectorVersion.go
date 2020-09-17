@@ -33,6 +33,7 @@ func (c *Client) CreateDetectorVersion(ctx context.Context, params *CreateDetect
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDetectorVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDetectorVersion(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -37,6 +37,7 @@ func (c *Client) BatchDeleteImage(ctx context.Context, params *BatchDeleteImageI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchDeleteImageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDeleteImage(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) GetConferenceProvider(ctx context.Context, params *GetConferenc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetConferenceProviderValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetConferenceProvider(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

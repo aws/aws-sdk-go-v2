@@ -37,6 +37,7 @@ func (c *Client) CreateTaskSet(ctx context.Context, params *CreateTaskSetInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateTaskSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTaskSet(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,7 @@ func (c *Client) UpdateCrawlerSchedule(ctx context.Context, params *UpdateCrawle
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateCrawlerScheduleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCrawlerSchedule(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) DescribeUserHierarchyStructure(ctx context.Context, params *Des
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeUserHierarchyStructureValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeUserHierarchyStructure(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

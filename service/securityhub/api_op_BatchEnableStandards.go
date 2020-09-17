@@ -37,6 +37,7 @@ func (c *Client) BatchEnableStandards(ctx context.Context, params *BatchEnableSt
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchEnableStandardsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchEnableStandards(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

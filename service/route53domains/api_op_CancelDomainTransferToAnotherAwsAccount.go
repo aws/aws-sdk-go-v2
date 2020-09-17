@@ -46,6 +46,7 @@ func (c *Client) CancelDomainTransferToAnotherAwsAccount(ctx context.Context, pa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCancelDomainTransferToAnotherAwsAccountValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCancelDomainTransferToAnotherAwsAccount(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

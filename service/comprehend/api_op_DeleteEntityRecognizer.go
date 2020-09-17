@@ -37,6 +37,7 @@ func (c *Client) DeleteEntityRecognizer(ctx context.Context, params *DeleteEntit
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteEntityRecognizerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteEntityRecognizer(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

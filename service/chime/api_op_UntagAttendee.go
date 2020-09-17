@@ -32,6 +32,7 @@ func (c *Client) UntagAttendee(ctx context.Context, params *UntagAttendeeInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUntagAttendeeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUntagAttendee(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

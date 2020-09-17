@@ -37,6 +37,7 @@ func (c *Client) NotifyWorkers(ctx context.Context, params *NotifyWorkersInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpNotifyWorkersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opNotifyWorkers(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

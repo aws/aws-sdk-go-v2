@@ -40,6 +40,7 @@ func (c *Client) ListGrants(ctx context.Context, params *ListGrantsInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListGrantsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListGrants(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

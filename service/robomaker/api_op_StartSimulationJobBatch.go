@@ -37,6 +37,7 @@ func (c *Client) StartSimulationJobBatch(ctx context.Context, params *StartSimul
 	addIdempotencyToken_opStartSimulationJobBatchMiddleware(stack, options)
 	addOpStartSimulationJobBatchValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartSimulationJobBatch(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) DescribeProvisionedProductPlan(ctx context.Context, params *Des
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeProvisionedProductPlanValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeProvisionedProductPlan(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

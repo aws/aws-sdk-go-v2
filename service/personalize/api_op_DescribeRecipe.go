@@ -50,6 +50,7 @@ func (c *Client) DescribeRecipe(ctx context.Context, params *DescribeRecipeInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeRecipeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRecipe(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -51,6 +51,7 @@ func (c *Client) GetSecretValue(ctx context.Context, params *GetSecretValueInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetSecretValueValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSecretValue(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

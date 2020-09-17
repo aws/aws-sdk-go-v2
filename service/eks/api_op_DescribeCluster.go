@@ -39,6 +39,7 @@ func (c *Client) DescribeCluster(ctx context.Context, params *DescribeClusterInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeClusterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCluster(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

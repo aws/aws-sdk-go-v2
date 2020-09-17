@@ -68,6 +68,7 @@ func (c *Client) CreateHostedZone(ctx context.Context, params *CreateHostedZoneI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateHostedZoneValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateHostedZone(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

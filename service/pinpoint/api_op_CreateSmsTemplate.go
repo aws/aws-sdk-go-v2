@@ -33,6 +33,7 @@ func (c *Client) CreateSmsTemplate(ctx context.Context, params *CreateSmsTemplat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateSmsTemplateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSmsTemplate(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

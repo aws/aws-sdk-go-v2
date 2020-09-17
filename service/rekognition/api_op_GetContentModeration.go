@@ -61,6 +61,7 @@ func (c *Client) GetContentModeration(ctx context.Context, params *GetContentMod
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetContentModerationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetContentModeration(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

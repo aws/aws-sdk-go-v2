@@ -33,6 +33,7 @@ func (c *Client) UpdateJourneyState(ctx context.Context, params *UpdateJourneySt
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateJourneyStateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateJourneyState(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

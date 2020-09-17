@@ -36,6 +36,7 @@ func (c *Client) PutDestinationPolicy(ctx context.Context, params *PutDestinatio
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutDestinationPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutDestinationPolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -49,6 +49,7 @@ func (c *Client) AssignPrivateIpAddresses(ctx context.Context, params *AssignPri
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssignPrivateIpAddressesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssignPrivateIpAddresses(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

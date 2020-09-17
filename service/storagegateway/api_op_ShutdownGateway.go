@@ -48,6 +48,7 @@ func (c *Client) ShutdownGateway(ctx context.Context, params *ShutdownGatewayInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpShutdownGatewayValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opShutdownGateway(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

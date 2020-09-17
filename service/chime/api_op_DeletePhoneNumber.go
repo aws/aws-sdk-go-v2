@@ -35,6 +35,7 @@ func (c *Client) DeletePhoneNumber(ctx context.Context, params *DeletePhoneNumbe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeletePhoneNumberValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePhoneNumber(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

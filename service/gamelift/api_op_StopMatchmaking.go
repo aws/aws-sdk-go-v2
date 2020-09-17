@@ -54,6 +54,7 @@ func (c *Client) StopMatchmaking(ctx context.Context, params *StopMatchmakingInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopMatchmakingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopMatchmaking(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

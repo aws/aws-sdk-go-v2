@@ -33,6 +33,7 @@ func (c *Client) DescribeChangeSet(ctx context.Context, params *DescribeChangeSe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeChangeSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeChangeSet(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

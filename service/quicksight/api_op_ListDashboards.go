@@ -33,6 +33,7 @@ func (c *Client) ListDashboards(ctx context.Context, params *ListDashboardsInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListDashboardsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListDashboards(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

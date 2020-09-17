@@ -36,6 +36,7 @@ func (c *Client) DeactivatePipeline(ctx context.Context, params *DeactivatePipel
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeactivatePipelineValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeactivatePipeline(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

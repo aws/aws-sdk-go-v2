@@ -34,6 +34,7 @@ func (c *Client) CreateGatewayGroup(ctx context.Context, params *CreateGatewayGr
 	addIdempotencyToken_opCreateGatewayGroupMiddleware(stack, options)
 	addOpCreateGatewayGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGatewayGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

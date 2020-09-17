@@ -32,6 +32,7 @@ func (c *Client) RegisterRobot(ctx context.Context, params *RegisterRobotInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterRobotValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterRobot(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

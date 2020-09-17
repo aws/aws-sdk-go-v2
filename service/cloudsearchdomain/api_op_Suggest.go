@@ -48,6 +48,7 @@ func (c *Client) Suggest(ctx context.Context, params *SuggestInput, optFns ...fu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSuggestValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSuggest(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

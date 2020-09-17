@@ -152,6 +152,7 @@ func (c *Client) AssumeRoleWithWebIdentity(ctx context.Context, params *AssumeRo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssumeRoleWithWebIdentityValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssumeRoleWithWebIdentity(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

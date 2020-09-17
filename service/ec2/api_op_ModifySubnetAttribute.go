@@ -33,6 +33,7 @@ func (c *Client) ModifySubnetAttribute(ctx context.Context, params *ModifySubnet
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifySubnetAttributeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifySubnetAttribute(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) GetPolicyVersion(ctx context.Context, params *GetPolicyVersionI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetPolicyVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetPolicyVersion(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

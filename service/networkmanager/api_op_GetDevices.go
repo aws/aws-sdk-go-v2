@@ -33,6 +33,7 @@ func (c *Client) GetDevices(ctx context.Context, params *GetDevicesInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDevicesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDevices(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

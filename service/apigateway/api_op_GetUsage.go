@@ -32,6 +32,7 @@ func (c *Client) GetUsage(ctx context.Context, params *GetUsageInput, optFns ...
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetUsageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetUsage(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

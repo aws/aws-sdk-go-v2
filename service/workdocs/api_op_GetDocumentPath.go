@@ -37,6 +37,7 @@ func (c *Client) GetDocumentPath(ctx context.Context, params *GetDocumentPathInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDocumentPathValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDocumentPath(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

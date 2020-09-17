@@ -35,6 +35,7 @@ func (c *Client) FinalizeDeviceClaim(ctx context.Context, params *FinalizeDevice
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpFinalizeDeviceClaimValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opFinalizeDeviceClaim(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

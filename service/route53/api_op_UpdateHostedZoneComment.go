@@ -33,6 +33,7 @@ func (c *Client) UpdateHostedZoneComment(ctx context.Context, params *UpdateHost
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateHostedZoneCommentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateHostedZoneComment(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

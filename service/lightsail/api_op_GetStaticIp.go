@@ -33,6 +33,7 @@ func (c *Client) GetStaticIp(ctx context.Context, params *GetStaticIpInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetStaticIpValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetStaticIp(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

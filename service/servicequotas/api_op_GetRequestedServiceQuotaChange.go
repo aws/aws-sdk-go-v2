@@ -33,6 +33,7 @@ func (c *Client) GetRequestedServiceQuotaChange(ctx context.Context, params *Get
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetRequestedServiceQuotaChangeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetRequestedServiceQuotaChange(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

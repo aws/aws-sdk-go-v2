@@ -33,6 +33,7 @@ func (c *Client) CheckDomainTransferability(ctx context.Context, params *CheckDo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCheckDomainTransferabilityValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCheckDomainTransferability(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

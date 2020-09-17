@@ -33,6 +33,7 @@ func (c *Client) StopAutomationExecution(ctx context.Context, params *StopAutoma
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopAutomationExecutionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopAutomationExecution(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -37,6 +37,7 @@ func (c *Client) ReplaceRoute(ctx context.Context, params *ReplaceRouteInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpReplaceRouteValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opReplaceRoute(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

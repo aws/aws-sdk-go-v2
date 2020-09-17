@@ -37,6 +37,7 @@ func (c *Client) CreateClusterSecurityGroup(ctx context.Context, params *CreateC
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateClusterSecurityGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateClusterSecurityGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

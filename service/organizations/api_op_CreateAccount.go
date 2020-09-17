@@ -102,6 +102,7 @@ func (c *Client) CreateAccount(ctx context.Context, params *CreateAccountInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateAccountValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAccount(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

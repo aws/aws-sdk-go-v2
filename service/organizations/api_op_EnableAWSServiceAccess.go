@@ -50,6 +50,7 @@ func (c *Client) EnableAWSServiceAccess(ctx context.Context, params *EnableAWSSe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpEnableAWSServiceAccessValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opEnableAWSServiceAccess(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

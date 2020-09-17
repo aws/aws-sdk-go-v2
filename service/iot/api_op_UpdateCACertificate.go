@@ -33,6 +33,7 @@ func (c *Client) UpdateCACertificate(ctx context.Context, params *UpdateCACertif
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateCACertificateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCACertificate(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

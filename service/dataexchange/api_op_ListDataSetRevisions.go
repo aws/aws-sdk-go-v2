@@ -34,6 +34,7 @@ func (c *Client) ListDataSetRevisions(ctx context.Context, params *ListDataSetRe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListDataSetRevisionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListDataSetRevisions(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

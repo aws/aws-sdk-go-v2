@@ -35,6 +35,7 @@ func (c *Client) PurchaseOffering(ctx context.Context, params *PurchaseOfferingI
 	addIdempotencyToken_opPurchaseOfferingMiddleware(stack, options)
 	addOpPurchaseOfferingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPurchaseOffering(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

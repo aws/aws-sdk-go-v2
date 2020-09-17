@@ -45,6 +45,7 @@ func (c *Client) DeleteCapacityProvider(ctx context.Context, params *DeleteCapac
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteCapacityProviderValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCapacityProvider(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

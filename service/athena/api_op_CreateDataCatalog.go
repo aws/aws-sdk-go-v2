@@ -34,6 +34,7 @@ func (c *Client) CreateDataCatalog(ctx context.Context, params *CreateDataCatalo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDataCatalogValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataCatalog(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

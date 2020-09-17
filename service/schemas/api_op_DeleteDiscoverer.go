@@ -32,6 +32,7 @@ func (c *Client) DeleteDiscoverer(ctx context.Context, params *DeleteDiscovererI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDiscovererValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDiscoverer(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

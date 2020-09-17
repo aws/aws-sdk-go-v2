@@ -36,6 +36,7 @@ func (c *Client) DeleteDeviceUsageData(ctx context.Context, params *DeleteDevice
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDeviceUsageDataValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDeviceUsageData(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

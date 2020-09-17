@@ -33,6 +33,7 @@ func (c *Client) StartMonitoringSchedule(ctx context.Context, params *StartMonit
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartMonitoringScheduleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartMonitoringSchedule(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

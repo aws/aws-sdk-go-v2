@@ -33,6 +33,7 @@ func (c *Client) ResetJobBookmark(ctx context.Context, params *ResetJobBookmarkI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpResetJobBookmarkValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opResetJobBookmark(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

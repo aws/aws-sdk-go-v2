@@ -47,6 +47,7 @@ func (c *Client) CreateCacheParameterGroup(ctx context.Context, params *CreateCa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateCacheParameterGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCacheParameterGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

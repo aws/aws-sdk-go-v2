@@ -59,6 +59,7 @@ func (c *Client) ListMultipartUploads(ctx context.Context, params *ListMultipart
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListMultipartUploadsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListMultipartUploads(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

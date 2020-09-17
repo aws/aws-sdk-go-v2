@@ -77,6 +77,7 @@ func (c *Client) UpdateGameServer(ctx context.Context, params *UpdateGameServerI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateGameServerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGameServer(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,7 @@ func (c *Client) UpdateApiKey(ctx context.Context, params *UpdateApiKeyInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateApiKeyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateApiKey(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

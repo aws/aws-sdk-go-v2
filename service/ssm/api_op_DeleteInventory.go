@@ -37,6 +37,7 @@ func (c *Client) DeleteInventory(ctx context.Context, params *DeleteInventoryInp
 	addIdempotencyToken_opDeleteInventoryMiddleware(stack, options)
 	addOpDeleteInventoryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteInventory(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

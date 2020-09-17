@@ -36,6 +36,7 @@ func (c *Client) BundleInstance(ctx context.Context, params *BundleInstanceInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBundleInstanceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBundleInstance(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

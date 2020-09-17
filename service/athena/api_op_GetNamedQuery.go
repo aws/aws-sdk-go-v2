@@ -34,6 +34,7 @@ func (c *Client) GetNamedQuery(ctx context.Context, params *GetNamedQueryInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetNamedQueryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetNamedQuery(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

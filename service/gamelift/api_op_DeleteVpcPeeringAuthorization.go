@@ -49,6 +49,7 @@ func (c *Client) DeleteVpcPeeringAuthorization(ctx context.Context, params *Dele
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteVpcPeeringAuthorizationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVpcPeeringAuthorization(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

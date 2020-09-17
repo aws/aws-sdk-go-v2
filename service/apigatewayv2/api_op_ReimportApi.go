@@ -34,6 +34,7 @@ func (c *Client) ReimportApi(ctx context.Context, params *ReimportApiInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpReimportApiValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opReimportApi(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

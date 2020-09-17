@@ -49,6 +49,7 @@ func (c *Client) ModifyDBClusterParameterGroup(ctx context.Context, params *Modi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyDBClusterParameterGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyDBClusterParameterGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -41,6 +41,7 @@ func (c *Client) DeleteQualificationType(ctx context.Context, params *DeleteQual
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteQualificationTypeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteQualificationType(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,7 @@ func (c *Client) ModifyReplicationGroupShardConfiguration(ctx context.Context, p
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyReplicationGroupShardConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyReplicationGroupShardConfiguration(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

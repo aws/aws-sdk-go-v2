@@ -41,6 +41,7 @@ func (c *Client) StartTextTranslationJob(ctx context.Context, params *StartTextT
 	addIdempotencyToken_opStartTextTranslationJobMiddleware(stack, options)
 	addOpStartTextTranslationJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartTextTranslationJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

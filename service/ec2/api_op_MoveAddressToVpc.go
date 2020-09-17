@@ -39,6 +39,7 @@ func (c *Client) MoveAddressToVpc(ctx context.Context, params *MoveAddressToVpcI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpMoveAddressToVpcValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opMoveAddressToVpc(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

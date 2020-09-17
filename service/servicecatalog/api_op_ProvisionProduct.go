@@ -41,6 +41,7 @@ func (c *Client) ProvisionProduct(ctx context.Context, params *ProvisionProductI
 	addIdempotencyToken_opProvisionProductMiddleware(stack, options)
 	addOpProvisionProductValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opProvisionProduct(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

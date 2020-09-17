@@ -32,6 +32,7 @@ func (c *Client) DeleteDistribution(ctx context.Context, params *DeleteDistribut
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDistributionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDistribution(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

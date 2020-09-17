@@ -32,6 +32,7 @@ func (c *Client) DeleteResourceShare(ctx context.Context, params *DeleteResource
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteResourceShareValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteResourceShare(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

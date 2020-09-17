@@ -41,6 +41,7 @@ func (c *Client) ReleaseHosts(ctx context.Context, params *ReleaseHostsInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpReleaseHostsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opReleaseHosts(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

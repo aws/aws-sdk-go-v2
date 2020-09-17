@@ -33,6 +33,7 @@ func (c *Client) UpgradeElasticsearchDomain(ctx context.Context, params *Upgrade
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpgradeElasticsearchDomainValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpgradeElasticsearchDomain(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

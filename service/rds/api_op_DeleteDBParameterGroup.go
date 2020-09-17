@@ -33,6 +33,7 @@ func (c *Client) DeleteDBParameterGroup(ctx context.Context, params *DeleteDBPar
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDBParameterGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDBParameterGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

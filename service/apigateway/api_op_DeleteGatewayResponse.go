@@ -34,6 +34,7 @@ func (c *Client) DeleteGatewayResponse(ctx context.Context, params *DeleteGatewa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteGatewayResponseValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteGatewayResponse(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

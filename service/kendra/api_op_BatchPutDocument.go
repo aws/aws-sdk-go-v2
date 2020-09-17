@@ -40,6 +40,7 @@ func (c *Client) BatchPutDocument(ctx context.Context, params *BatchPutDocumentI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchPutDocumentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchPutDocument(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

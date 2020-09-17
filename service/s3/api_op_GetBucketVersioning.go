@@ -40,6 +40,7 @@ func (c *Client) GetBucketVersioning(ctx context.Context, params *GetBucketVersi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBucketVersioningValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketVersioning(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

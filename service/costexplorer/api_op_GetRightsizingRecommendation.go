@@ -39,6 +39,7 @@ func (c *Client) GetRightsizingRecommendation(ctx context.Context, params *GetRi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetRightsizingRecommendationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetRightsizingRecommendation(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

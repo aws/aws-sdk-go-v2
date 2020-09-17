@@ -38,6 +38,7 @@ func (c *Client) CreateBudget(ctx context.Context, params *CreateBudgetInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateBudgetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBudget(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

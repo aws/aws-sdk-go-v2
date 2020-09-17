@@ -33,6 +33,7 @@ func (c *Client) ClaimDevicesByClaimCode(ctx context.Context, params *ClaimDevic
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpClaimDevicesByClaimCodeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opClaimDevicesByClaimCode(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

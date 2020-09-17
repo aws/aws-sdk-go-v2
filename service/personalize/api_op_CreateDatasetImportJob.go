@@ -51,6 +51,7 @@ func (c *Client) CreateDatasetImportJob(ctx context.Context, params *CreateDatas
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDatasetImportJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDatasetImportJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

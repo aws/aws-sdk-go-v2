@@ -43,6 +43,7 @@ func (c *Client) ListAccountsForParent(ctx context.Context, params *ListAccounts
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListAccountsForParentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListAccountsForParent(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

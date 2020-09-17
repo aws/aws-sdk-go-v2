@@ -37,6 +37,7 @@ func (c *Client) CreatePatchBaseline(ctx context.Context, params *CreatePatchBas
 	addIdempotencyToken_opCreatePatchBaselineMiddleware(stack, options)
 	addOpCreatePatchBaselineValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePatchBaseline(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

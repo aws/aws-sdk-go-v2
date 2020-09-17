@@ -35,6 +35,7 @@ func (c *Client) CreateNetwork(ctx context.Context, params *CreateNetworkInput, 
 	addIdempotencyToken_opCreateNetworkMiddleware(stack, options)
 	addOpCreateNetworkValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateNetwork(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

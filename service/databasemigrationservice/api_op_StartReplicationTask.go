@@ -37,6 +37,7 @@ func (c *Client) StartReplicationTask(ctx context.Context, params *StartReplicat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartReplicationTaskValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartReplicationTask(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

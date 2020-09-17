@@ -51,6 +51,7 @@ func (c *Client) DeleteGeoMatchSet(ctx context.Context, params *DeleteGeoMatchSe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteGeoMatchSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteGeoMatchSet(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

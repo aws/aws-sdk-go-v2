@@ -33,6 +33,7 @@ func (c *Client) DeleteTrafficMirrorTarget(ctx context.Context, params *DeleteTr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteTrafficMirrorTargetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteTrafficMirrorTarget(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

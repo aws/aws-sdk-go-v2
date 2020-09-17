@@ -40,6 +40,7 @@ func (c *Client) GetIdentityPolicies(ctx context.Context, params *GetIdentityPol
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetIdentityPoliciesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetIdentityPolicies(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

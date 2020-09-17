@@ -34,6 +34,7 @@ func (c *Client) DeleteDirectoryConfig(ctx context.Context, params *DeleteDirect
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDirectoryConfigValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDirectoryConfig(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

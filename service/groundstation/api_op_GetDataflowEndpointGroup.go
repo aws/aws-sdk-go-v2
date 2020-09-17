@@ -32,6 +32,7 @@ func (c *Client) GetDataflowEndpointGroup(ctx context.Context, params *GetDatafl
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDataflowEndpointGroupValidationMiddleware(stack)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

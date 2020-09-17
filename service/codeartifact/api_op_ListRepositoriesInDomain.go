@@ -36,6 +36,7 @@ func (c *Client) ListRepositoriesInDomain(ctx context.Context, params *ListRepos
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListRepositoriesInDomainValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListRepositoriesInDomain(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) PutLoggingOptions(ctx context.Context, params *PutLoggingOption
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutLoggingOptionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutLoggingOptions(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

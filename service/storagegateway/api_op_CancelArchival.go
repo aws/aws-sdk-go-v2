@@ -34,6 +34,7 @@ func (c *Client) CancelArchival(ctx context.Context, params *CancelArchivalInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCancelArchivalValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCancelArchival(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

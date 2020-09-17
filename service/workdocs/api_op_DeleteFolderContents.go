@@ -32,6 +32,7 @@ func (c *Client) DeleteFolderContents(ctx context.Context, params *DeleteFolderC
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteFolderContentsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFolderContents(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

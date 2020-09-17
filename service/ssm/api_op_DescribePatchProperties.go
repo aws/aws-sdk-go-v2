@@ -44,6 +44,7 @@ func (c *Client) DescribePatchProperties(ctx context.Context, params *DescribePa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribePatchPropertiesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePatchProperties(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

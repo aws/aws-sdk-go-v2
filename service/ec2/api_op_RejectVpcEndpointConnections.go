@@ -34,6 +34,7 @@ func (c *Client) RejectVpcEndpointConnections(ctx context.Context, params *Rejec
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRejectVpcEndpointConnectionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRejectVpcEndpointConnections(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

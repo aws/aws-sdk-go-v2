@@ -36,6 +36,7 @@ func (c *Client) ListIncomingTypedLinks(ctx context.Context, params *ListIncomin
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListIncomingTypedLinksValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListIncomingTypedLinks(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

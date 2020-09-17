@@ -34,6 +34,7 @@ func (c *Client) DescribeGroups(ctx context.Context, params *DescribeGroupsInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeGroupsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeGroups(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

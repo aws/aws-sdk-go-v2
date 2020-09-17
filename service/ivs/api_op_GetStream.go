@@ -33,6 +33,7 @@ func (c *Client) GetStream(ctx context.Context, params *GetStreamInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetStreamValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetStream(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

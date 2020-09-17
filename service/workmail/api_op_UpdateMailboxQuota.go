@@ -32,6 +32,7 @@ func (c *Client) UpdateMailboxQuota(ctx context.Context, params *UpdateMailboxQu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateMailboxQuotaValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMailboxQuota(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

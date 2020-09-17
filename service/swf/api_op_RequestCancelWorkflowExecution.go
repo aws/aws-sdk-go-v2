@@ -55,6 +55,7 @@ func (c *Client) RequestCancelWorkflowExecution(ctx context.Context, params *Req
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRequestCancelWorkflowExecutionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRequestCancelWorkflowExecution(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

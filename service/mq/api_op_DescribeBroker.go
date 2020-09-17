@@ -34,6 +34,7 @@ func (c *Client) DescribeBroker(ctx context.Context, params *DescribeBrokerInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeBrokerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeBroker(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

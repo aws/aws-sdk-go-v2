@@ -34,6 +34,7 @@ func (c *Client) GetDimensionValues(ctx context.Context, params *GetDimensionVal
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDimensionValuesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDimensionValues(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

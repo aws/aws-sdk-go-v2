@@ -32,6 +32,7 @@ func (c *Client) CopyFpgaImage(ctx context.Context, params *CopyFpgaImageInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCopyFpgaImageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCopyFpgaImage(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

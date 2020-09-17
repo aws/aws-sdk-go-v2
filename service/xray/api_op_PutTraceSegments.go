@@ -79,6 +79,7 @@ func (c *Client) PutTraceSegments(ctx context.Context, params *PutTraceSegmentsI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutTraceSegmentsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutTraceSegments(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

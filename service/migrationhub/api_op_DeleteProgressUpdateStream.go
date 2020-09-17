@@ -56,6 +56,7 @@ func (c *Client) DeleteProgressUpdateStream(ctx context.Context, params *DeleteP
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteProgressUpdateStreamValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteProgressUpdateStream(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

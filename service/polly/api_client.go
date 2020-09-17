@@ -8,6 +8,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/awslabs/smithy-go/middleware"
 	"net/http"
 	"time"
@@ -175,4 +176,8 @@ func resolveHTTPSignerV4(o *Options) {
 		return
 	}
 	o.HTTPSignerV4 = v4.NewSigner()
+}
+
+func addResponseErrorWrapper(stack *middleware.Stack) {
+	awshttp.AddResponseErrorWrapper(stack)
 }

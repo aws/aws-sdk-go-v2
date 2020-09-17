@@ -40,6 +40,7 @@ func (c *Client) SetVisibleToAllUsers(ctx context.Context, params *SetVisibleToA
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSetVisibleToAllUsersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSetVisibleToAllUsers(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -40,6 +40,7 @@ func (c *Client) SetIdentityFeedbackForwardingEnabled(ctx context.Context, param
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSetIdentityFeedbackForwardingEnabledValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSetIdentityFeedbackForwardingEnabled(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

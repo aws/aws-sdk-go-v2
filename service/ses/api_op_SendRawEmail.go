@@ -97,6 +97,7 @@ func (c *Client) SendRawEmail(ctx context.Context, params *SendRawEmailInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSendRawEmailValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSendRawEmail(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

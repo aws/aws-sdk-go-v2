@@ -32,6 +32,7 @@ func (c *Client) AssociateTeamMember(ctx context.Context, params *AssociateTeamM
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateTeamMemberValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateTeamMember(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

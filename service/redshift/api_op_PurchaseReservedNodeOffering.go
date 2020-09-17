@@ -40,6 +40,7 @@ func (c *Client) PurchaseReservedNodeOffering(ctx context.Context, params *Purch
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPurchaseReservedNodeOfferingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPurchaseReservedNodeOffering(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

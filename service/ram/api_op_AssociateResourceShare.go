@@ -34,6 +34,7 @@ func (c *Client) AssociateResourceShare(ctx context.Context, params *AssociateRe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateResourceShareValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateResourceShare(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

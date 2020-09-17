@@ -33,6 +33,7 @@ func (c *Client) UpdateApplicationSettings(ctx context.Context, params *UpdateAp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateApplicationSettingsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateApplicationSettings(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

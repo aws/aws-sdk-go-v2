@@ -39,6 +39,7 @@ func (c *Client) DeleteServer(ctx context.Context, params *DeleteServerInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteServerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteServer(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

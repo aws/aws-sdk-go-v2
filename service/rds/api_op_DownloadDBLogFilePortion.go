@@ -32,6 +32,7 @@ func (c *Client) DownloadDBLogFilePortion(ctx context.Context, params *DownloadD
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDownloadDBLogFilePortionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDownloadDBLogFilePortion(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

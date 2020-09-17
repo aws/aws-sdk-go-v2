@@ -38,6 +38,7 @@ func (c *Client) DeleteBucketCors(ctx context.Context, params *DeleteBucketCorsI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteBucketCorsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBucketCors(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

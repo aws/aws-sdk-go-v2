@@ -39,6 +39,7 @@ func (c *Client) UpdateStackSet(ctx context.Context, params *UpdateStackSetInput
 	addIdempotencyToken_opUpdateStackSetMiddleware(stack, options)
 	addOpUpdateStackSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateStackSet(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -77,6 +77,7 @@ func (c *Client) ClaimGameServer(ctx context.Context, params *ClaimGameServerInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpClaimGameServerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opClaimGameServer(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

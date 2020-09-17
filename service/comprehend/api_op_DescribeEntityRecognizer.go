@@ -34,6 +34,7 @@ func (c *Client) DescribeEntityRecognizer(ctx context.Context, params *DescribeE
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeEntityRecognizerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEntityRecognizer(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

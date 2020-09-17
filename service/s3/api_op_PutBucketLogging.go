@@ -64,6 +64,7 @@ func (c *Client) PutBucketLogging(ctx context.Context, params *PutBucketLoggingI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutBucketLoggingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBucketLogging(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

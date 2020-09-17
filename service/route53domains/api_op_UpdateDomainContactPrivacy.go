@@ -50,6 +50,7 @@ func (c *Client) UpdateDomainContactPrivacy(ctx context.Context, params *UpdateD
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateDomainContactPrivacyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDomainContactPrivacy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

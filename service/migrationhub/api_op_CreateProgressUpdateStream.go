@@ -36,6 +36,7 @@ func (c *Client) CreateProgressUpdateStream(ctx context.Context, params *CreateP
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateProgressUpdateStreamValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProgressUpdateStream(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

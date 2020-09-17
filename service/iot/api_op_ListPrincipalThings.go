@@ -34,6 +34,7 @@ func (c *Client) ListPrincipalThings(ctx context.Context, params *ListPrincipalT
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListPrincipalThingsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListPrincipalThings(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

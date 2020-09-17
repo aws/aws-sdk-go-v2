@@ -37,6 +37,7 @@ func (c *Client) CreatePolicy(ctx context.Context, params *CreatePolicyInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreatePolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

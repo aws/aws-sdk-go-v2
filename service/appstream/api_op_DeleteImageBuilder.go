@@ -33,6 +33,7 @@ func (c *Client) DeleteImageBuilder(ctx context.Context, params *DeleteImageBuil
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteImageBuilderValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteImageBuilder(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

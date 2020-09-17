@@ -39,6 +39,7 @@ func (c *Client) RenewDomain(ctx context.Context, params *RenewDomainInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRenewDomainValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRenewDomain(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

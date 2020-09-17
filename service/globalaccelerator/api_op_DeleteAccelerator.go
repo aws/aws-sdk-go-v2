@@ -47,6 +47,7 @@ func (c *Client) DeleteAccelerator(ctx context.Context, params *DeleteAccelerato
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteAcceleratorValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAccelerator(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

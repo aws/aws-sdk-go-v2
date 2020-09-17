@@ -32,6 +32,7 @@ func (c *Client) CreateGroupVersion(ctx context.Context, params *CreateGroupVers
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateGroupVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGroupVersion(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

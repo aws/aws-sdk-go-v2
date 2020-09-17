@@ -79,6 +79,7 @@ func (c *Client) PutRecordBatch(ctx context.Context, params *PutRecordBatchInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutRecordBatchValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutRecordBatch(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

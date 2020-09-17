@@ -49,6 +49,7 @@ func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpQueryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opQuery(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

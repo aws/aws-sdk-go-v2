@@ -32,6 +32,7 @@ func (c *Client) DeleteRoomMembership(ctx context.Context, params *DeleteRoomMem
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteRoomMembershipValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRoomMembership(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

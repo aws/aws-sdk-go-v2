@@ -33,6 +33,7 @@ func (c *Client) DescribeThemeAlias(ctx context.Context, params *DescribeThemeAl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeThemeAliasValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeThemeAlias(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

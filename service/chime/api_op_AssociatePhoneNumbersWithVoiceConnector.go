@@ -33,6 +33,7 @@ func (c *Client) AssociatePhoneNumbersWithVoiceConnector(ctx context.Context, pa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociatePhoneNumbersWithVoiceConnectorValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociatePhoneNumbersWithVoiceConnector(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

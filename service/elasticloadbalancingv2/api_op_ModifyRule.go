@@ -37,6 +37,7 @@ func (c *Client) ModifyRule(ctx context.Context, params *ModifyRuleInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyRuleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyRule(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

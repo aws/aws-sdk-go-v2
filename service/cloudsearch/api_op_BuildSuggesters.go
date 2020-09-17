@@ -34,6 +34,7 @@ func (c *Client) BuildSuggesters(ctx context.Context, params *BuildSuggestersInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBuildSuggestersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBuildSuggesters(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

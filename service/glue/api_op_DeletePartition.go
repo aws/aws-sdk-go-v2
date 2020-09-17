@@ -32,6 +32,7 @@ func (c *Client) DeletePartition(ctx context.Context, params *DeletePartitionInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeletePartitionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePartition(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

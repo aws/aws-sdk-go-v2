@@ -35,6 +35,7 @@ func (c *Client) DissociateEntityFromThing(ctx context.Context, params *Dissocia
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDissociateEntityFromThingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDissociateEntityFromThing(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -35,6 +35,7 @@ func (c *Client) CreatePullRequest(ctx context.Context, params *CreatePullReques
 	addIdempotencyToken_opCreatePullRequestMiddleware(stack, options)
 	addOpCreatePullRequestValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePullRequest(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

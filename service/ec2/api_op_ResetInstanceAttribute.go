@@ -40,6 +40,7 @@ func (c *Client) ResetInstanceAttribute(ctx context.Context, params *ResetInstan
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpResetInstanceAttributeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opResetInstanceAttribute(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

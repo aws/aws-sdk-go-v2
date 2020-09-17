@@ -33,6 +33,7 @@ func (c *Client) DeleteDBInstance(ctx context.Context, params *DeleteDBInstanceI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDBInstanceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDBInstance(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

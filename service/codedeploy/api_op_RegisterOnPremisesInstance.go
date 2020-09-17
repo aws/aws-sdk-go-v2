@@ -33,6 +33,7 @@ func (c *Client) RegisterOnPremisesInstance(ctx context.Context, params *Registe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterOnPremisesInstanceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterOnPremisesInstance(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

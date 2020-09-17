@@ -44,6 +44,7 @@ func (c *Client) ResetDBClusterParameterGroup(ctx context.Context, params *Reset
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpResetDBClusterParameterGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opResetDBClusterParameterGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

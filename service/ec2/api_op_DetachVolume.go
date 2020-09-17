@@ -45,6 +45,7 @@ func (c *Client) DetachVolume(ctx context.Context, params *DetachVolumeInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDetachVolumeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDetachVolume(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

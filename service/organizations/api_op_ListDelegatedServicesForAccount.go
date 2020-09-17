@@ -36,6 +36,7 @@ func (c *Client) ListDelegatedServicesForAccount(ctx context.Context, params *Li
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListDelegatedServicesForAccountValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListDelegatedServicesForAccount(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

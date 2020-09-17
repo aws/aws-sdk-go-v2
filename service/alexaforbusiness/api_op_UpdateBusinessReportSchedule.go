@@ -34,6 +34,7 @@ func (c *Client) UpdateBusinessReportSchedule(ctx context.Context, params *Updat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateBusinessReportScheduleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateBusinessReportSchedule(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,7 @@ func (c *Client) CreateQualificationType(ctx context.Context, params *CreateQual
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateQualificationTypeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateQualificationType(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

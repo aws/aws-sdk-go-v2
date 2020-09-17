@@ -33,6 +33,7 @@ func (c *Client) DescribeOriginEndpoint(ctx context.Context, params *DescribeOri
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeOriginEndpointValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeOriginEndpoint(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

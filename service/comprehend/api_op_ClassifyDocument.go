@@ -34,6 +34,7 @@ func (c *Client) ClassifyDocument(ctx context.Context, params *ClassifyDocumentI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpClassifyDocumentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opClassifyDocument(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

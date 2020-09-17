@@ -44,6 +44,7 @@ func (c *Client) GetJobTagging(ctx context.Context, params *GetJobTaggingInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetJobTaggingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetJobTagging(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -38,6 +38,7 @@ func (c *Client) AttachDisk(ctx context.Context, params *AttachDiskInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAttachDiskValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAttachDisk(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

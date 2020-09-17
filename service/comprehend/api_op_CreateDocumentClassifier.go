@@ -39,6 +39,7 @@ func (c *Client) CreateDocumentClassifier(ctx context.Context, params *CreateDoc
 	addIdempotencyToken_opCreateDocumentClassifierMiddleware(stack, options)
 	addOpCreateDocumentClassifierValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDocumentClassifier(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

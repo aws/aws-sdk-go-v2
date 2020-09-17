@@ -34,6 +34,7 @@ func (c *Client) DisassociateWebsiteAuthorizationProvider(ctx context.Context, p
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisassociateWebsiteAuthorizationProviderValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateWebsiteAuthorizationProvider(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

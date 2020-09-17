@@ -34,6 +34,7 @@ func (c *Client) AcceptInboundCrossClusterSearchConnection(ctx context.Context, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAcceptInboundCrossClusterSearchConnectionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptInboundCrossClusterSearchConnection(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

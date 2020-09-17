@@ -35,6 +35,7 @@ func (c *Client) DeregisterTransitGateway(ctx context.Context, params *Deregiste
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeregisterTransitGatewayValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterTransitGateway(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

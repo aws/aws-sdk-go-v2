@@ -35,6 +35,7 @@ func (c *Client) PutMetricPolicy(ctx context.Context, params *PutMetricPolicyInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutMetricPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutMetricPolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

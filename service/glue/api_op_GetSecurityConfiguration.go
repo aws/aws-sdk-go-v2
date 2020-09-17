@@ -33,6 +33,7 @@ func (c *Client) GetSecurityConfiguration(ctx context.Context, params *GetSecuri
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetSecurityConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSecurityConfiguration(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

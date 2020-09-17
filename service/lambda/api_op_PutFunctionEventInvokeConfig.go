@@ -49,6 +49,7 @@ func (c *Client) PutFunctionEventInvokeConfig(ctx context.Context, params *PutFu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutFunctionEventInvokeConfigValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutFunctionEventInvokeConfig(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

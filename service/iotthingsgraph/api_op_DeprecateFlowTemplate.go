@@ -34,6 +34,7 @@ func (c *Client) DeprecateFlowTemplate(ctx context.Context, params *DeprecateFlo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeprecateFlowTemplateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeprecateFlowTemplate(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

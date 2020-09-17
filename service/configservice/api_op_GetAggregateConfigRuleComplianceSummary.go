@@ -35,6 +35,7 @@ func (c *Client) GetAggregateConfigRuleComplianceSummary(ctx context.Context, pa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetAggregateConfigRuleComplianceSummaryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetAggregateConfigRuleComplianceSummary(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

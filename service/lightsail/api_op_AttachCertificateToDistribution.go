@@ -42,6 +42,7 @@ func (c *Client) AttachCertificateToDistribution(ctx context.Context, params *At
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAttachCertificateToDistributionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAttachCertificateToDistribution(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

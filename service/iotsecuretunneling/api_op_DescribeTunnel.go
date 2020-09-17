@@ -33,6 +33,7 @@ func (c *Client) DescribeTunnel(ctx context.Context, params *DescribeTunnelInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeTunnelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTunnel(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

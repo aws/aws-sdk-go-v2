@@ -33,6 +33,7 @@ func (c *Client) GetOpsSummary(ctx context.Context, params *GetOpsSummaryInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetOpsSummaryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetOpsSummary(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

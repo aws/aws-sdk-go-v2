@@ -56,6 +56,7 @@ func (c *Client) ListActivityTypes(ctx context.Context, params *ListActivityType
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListActivityTypesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListActivityTypes(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

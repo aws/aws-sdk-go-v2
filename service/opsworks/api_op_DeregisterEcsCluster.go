@@ -39,6 +39,7 @@ func (c *Client) DeregisterEcsCluster(ctx context.Context, params *DeregisterEcs
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeregisterEcsClusterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterEcsCluster(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

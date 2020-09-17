@@ -45,6 +45,7 @@ func (c *Client) PutGroupPolicy(ctx context.Context, params *PutGroupPolicyInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutGroupPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutGroupPolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

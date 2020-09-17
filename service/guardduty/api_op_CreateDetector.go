@@ -39,6 +39,7 @@ func (c *Client) CreateDetector(ctx context.Context, params *CreateDetectorInput
 	addIdempotencyToken_opCreateDetectorMiddleware(stack, options)
 	addOpCreateDetectorValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDetector(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

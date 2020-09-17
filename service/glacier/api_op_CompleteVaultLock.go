@@ -44,6 +44,7 @@ func (c *Client) CompleteVaultLock(ctx context.Context, params *CompleteVaultLoc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCompleteVaultLockValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCompleteVaultLock(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -44,6 +44,7 @@ func (c *Client) UpdateGatewaySoftwareNow(ctx context.Context, params *UpdateGat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateGatewaySoftwareNowValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGatewaySoftwareNow(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -43,6 +43,7 @@ func (c *Client) AssociateClientVpnTargetNetwork(ctx context.Context, params *As
 	addIdempotencyToken_opAssociateClientVpnTargetNetworkMiddleware(stack, options)
 	addOpAssociateClientVpnTargetNetworkValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateClientVpnTargetNetwork(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

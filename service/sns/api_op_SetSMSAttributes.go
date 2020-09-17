@@ -37,6 +37,7 @@ func (c *Client) SetSMSAttributes(ctx context.Context, params *SetSMSAttributesI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSetSMSAttributesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSetSMSAttributes(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

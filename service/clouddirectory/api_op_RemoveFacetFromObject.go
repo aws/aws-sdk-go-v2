@@ -33,6 +33,7 @@ func (c *Client) RemoveFacetFromObject(ctx context.Context, params *RemoveFacetF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRemoveFacetFromObjectValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveFacetFromObject(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

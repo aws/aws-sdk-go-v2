@@ -36,6 +36,7 @@ func (c *Client) ModifyDocumentPermission(ctx context.Context, params *ModifyDoc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyDocumentPermissionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyDocumentPermission(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

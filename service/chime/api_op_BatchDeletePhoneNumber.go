@@ -36,6 +36,7 @@ func (c *Client) BatchDeletePhoneNumber(ctx context.Context, params *BatchDelete
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchDeletePhoneNumberValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDeletePhoneNumber(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

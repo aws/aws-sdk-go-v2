@@ -32,6 +32,7 @@ func (c *Client) DeleteGroupMembership(ctx context.Context, params *DeleteGroupM
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteGroupMembershipValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteGroupMembership(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -37,6 +37,7 @@ func (c *Client) UpdateSignalingChannel(ctx context.Context, params *UpdateSigna
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateSignalingChannelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSignalingChannel(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) RollbackTransaction(ctx context.Context, params *RollbackTransa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRollbackTransactionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRollbackTransaction(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

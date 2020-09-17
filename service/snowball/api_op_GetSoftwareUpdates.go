@@ -33,6 +33,7 @@ func (c *Client) GetSoftwareUpdates(ctx context.Context, params *GetSoftwareUpda
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetSoftwareUpdatesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSoftwareUpdates(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

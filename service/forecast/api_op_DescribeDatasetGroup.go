@@ -46,6 +46,7 @@ func (c *Client) DescribeDatasetGroup(ctx context.Context, params *DescribeDatas
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeDatasetGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDatasetGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

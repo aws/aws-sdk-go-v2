@@ -39,6 +39,7 @@ func (c *Client) DescribeConnectionLoa(ctx context.Context, params *DescribeConn
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeConnectionLoaValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConnectionLoa(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

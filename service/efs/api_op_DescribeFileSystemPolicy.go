@@ -33,6 +33,7 @@ func (c *Client) DescribeFileSystemPolicy(ctx context.Context, params *DescribeF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeFileSystemPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFileSystemPolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

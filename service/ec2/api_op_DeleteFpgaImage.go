@@ -32,6 +32,7 @@ func (c *Client) DeleteFpgaImage(ctx context.Context, params *DeleteFpgaImageInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteFpgaImageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFpgaImage(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

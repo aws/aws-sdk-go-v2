@@ -34,6 +34,7 @@ func (c *Client) BatchDisassociateServiceActionFromProvisioningArtifact(ctx cont
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchDisassociateServiceActionFromProvisioningArtifactValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDisassociateServiceActionFromProvisioningArtifact(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

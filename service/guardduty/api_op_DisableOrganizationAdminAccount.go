@@ -33,6 +33,7 @@ func (c *Client) DisableOrganizationAdminAccount(ctx context.Context, params *Di
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisableOrganizationAdminAccountValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisableOrganizationAdminAccount(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

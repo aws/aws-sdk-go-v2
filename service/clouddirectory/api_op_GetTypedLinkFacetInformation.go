@@ -34,6 +34,7 @@ func (c *Client) GetTypedLinkFacetInformation(ctx context.Context, params *GetTy
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetTypedLinkFacetInformationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetTypedLinkFacetInformation(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,7 @@ func (c *Client) RemoveAllResourcePermissions(ctx context.Context, params *Remov
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRemoveAllResourcePermissionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveAllResourcePermissions(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -35,6 +35,7 @@ func (c *Client) CreateSkillGroup(ctx context.Context, params *CreateSkillGroupI
 	addIdempotencyToken_opCreateSkillGroupMiddleware(stack, options)
 	addOpCreateSkillGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSkillGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

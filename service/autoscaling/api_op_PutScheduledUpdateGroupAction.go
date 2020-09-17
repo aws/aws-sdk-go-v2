@@ -38,6 +38,7 @@ func (c *Client) PutScheduledUpdateGroupAction(ctx context.Context, params *PutS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutScheduledUpdateGroupActionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutScheduledUpdateGroupAction(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

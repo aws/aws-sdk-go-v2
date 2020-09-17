@@ -44,6 +44,7 @@ func (c *Client) CreateDBInstanceReadReplica(ctx context.Context, params *Create
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDBInstanceReadReplicaValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDBInstanceReadReplica(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

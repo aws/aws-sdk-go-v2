@@ -33,6 +33,7 @@ func (c *Client) UpdateComment(ctx context.Context, params *UpdateCommentInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateCommentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateComment(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

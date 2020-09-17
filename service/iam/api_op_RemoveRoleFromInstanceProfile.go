@@ -40,6 +40,7 @@ func (c *Client) RemoveRoleFromInstanceProfile(ctx context.Context, params *Remo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRemoveRoleFromInstanceProfileValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveRoleFromInstanceProfile(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

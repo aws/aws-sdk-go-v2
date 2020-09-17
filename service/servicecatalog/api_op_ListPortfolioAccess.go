@@ -35,6 +35,7 @@ func (c *Client) ListPortfolioAccess(ctx context.Context, params *ListPortfolioA
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListPortfolioAccessValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListPortfolioAccess(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

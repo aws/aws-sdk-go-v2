@@ -50,6 +50,7 @@ func (c *Client) CreateDBParameterGroup(ctx context.Context, params *CreateDBPar
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDBParameterGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDBParameterGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

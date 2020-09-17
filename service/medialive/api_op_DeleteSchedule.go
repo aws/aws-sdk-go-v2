@@ -32,6 +32,7 @@ func (c *Client) DeleteSchedule(ctx context.Context, params *DeleteScheduleInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteScheduleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSchedule(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

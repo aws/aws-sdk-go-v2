@@ -33,6 +33,7 @@ func (c *Client) GetIntegration(ctx context.Context, params *GetIntegrationInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetIntegrationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetIntegration(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

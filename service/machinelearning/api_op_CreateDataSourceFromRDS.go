@@ -47,6 +47,7 @@ func (c *Client) CreateDataSourceFromRDS(ctx context.Context, params *CreateData
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDataSourceFromRDSValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataSourceFromRDS(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

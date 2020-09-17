@@ -34,6 +34,7 @@ func (c *Client) EnableTransitGatewayRouteTablePropagation(ctx context.Context, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpEnableTransitGatewayRouteTablePropagationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opEnableTransitGatewayRouteTablePropagation(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

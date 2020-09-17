@@ -41,6 +41,7 @@ func (c *Client) AttachRolePolicy(ctx context.Context, params *AttachRolePolicyI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAttachRolePolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAttachRolePolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

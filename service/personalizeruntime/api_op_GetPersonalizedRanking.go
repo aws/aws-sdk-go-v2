@@ -36,6 +36,7 @@ func (c *Client) GetPersonalizedRanking(ctx context.Context, params *GetPersonal
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetPersonalizedRankingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetPersonalizedRanking(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

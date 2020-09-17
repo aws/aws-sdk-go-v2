@@ -44,6 +44,7 @@ func (c *Client) RebootCacheCluster(ctx context.Context, params *RebootCacheClus
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRebootCacheClusterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRebootCacheCluster(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

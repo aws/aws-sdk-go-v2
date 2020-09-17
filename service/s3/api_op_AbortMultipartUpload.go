@@ -56,6 +56,7 @@ func (c *Client) AbortMultipartUpload(ctx context.Context, params *AbortMultipar
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAbortMultipartUploadValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAbortMultipartUpload(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

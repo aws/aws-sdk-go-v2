@@ -33,6 +33,7 @@ func (c *Client) ListPolicyPrincipals(ctx context.Context, params *ListPolicyPri
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListPolicyPrincipalsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListPolicyPrincipals(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

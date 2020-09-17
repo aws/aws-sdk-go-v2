@@ -41,6 +41,7 @@ func (c *Client) ListChildren(ctx context.Context, params *ListChildrenInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListChildrenValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListChildren(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

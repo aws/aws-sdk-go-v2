@@ -37,6 +37,7 @@ func (c *Client) CreateClientVpnEndpoint(ctx context.Context, params *CreateClie
 	addIdempotencyToken_opCreateClientVpnEndpointMiddleware(stack, options)
 	addOpCreateClientVpnEndpointValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateClientVpnEndpoint(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

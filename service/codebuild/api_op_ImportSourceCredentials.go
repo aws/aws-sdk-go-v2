@@ -34,6 +34,7 @@ func (c *Client) ImportSourceCredentials(ctx context.Context, params *ImportSour
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpImportSourceCredentialsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opImportSourceCredentials(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

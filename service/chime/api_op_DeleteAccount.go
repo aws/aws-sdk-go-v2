@@ -39,6 +39,7 @@ func (c *Client) DeleteAccount(ctx context.Context, params *DeleteAccountInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteAccountValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAccount(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

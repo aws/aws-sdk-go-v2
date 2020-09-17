@@ -34,6 +34,7 @@ func (c *Client) AcceptVpcEndpointConnections(ctx context.Context, params *Accep
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAcceptVpcEndpointConnectionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptVpcEndpointConnections(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

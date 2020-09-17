@@ -33,6 +33,7 @@ func (c *Client) DeleteFileShare(ctx context.Context, params *DeleteFileShareInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteFileShareValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFileShare(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

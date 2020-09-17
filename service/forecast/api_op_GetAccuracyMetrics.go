@@ -47,6 +47,7 @@ func (c *Client) GetAccuracyMetrics(ctx context.Context, params *GetAccuracyMetr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetAccuracyMetricsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetAccuracyMetrics(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

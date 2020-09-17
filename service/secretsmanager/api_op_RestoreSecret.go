@@ -42,6 +42,7 @@ func (c *Client) RestoreSecret(ctx context.Context, params *RestoreSecretInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRestoreSecretValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreSecret(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

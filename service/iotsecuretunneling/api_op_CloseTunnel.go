@@ -34,6 +34,7 @@ func (c *Client) CloseTunnel(ctx context.Context, params *CloseTunnelInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCloseTunnelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCloseTunnel(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

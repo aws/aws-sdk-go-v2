@@ -33,6 +33,7 @@ func (c *Client) DeleteAggregationAuthorization(ctx context.Context, params *Del
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteAggregationAuthorizationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAggregationAuthorization(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -53,6 +53,7 @@ func (c *Client) DeleteVpcPeeringConnection(ctx context.Context, params *DeleteV
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteVpcPeeringConnectionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVpcPeeringConnection(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -99,6 +99,7 @@ func (c *Client) UpdateSecret(ctx context.Context, params *UpdateSecretInput, op
 	addIdempotencyToken_opUpdateSecretMiddleware(stack, options)
 	addOpUpdateSecretValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSecret(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

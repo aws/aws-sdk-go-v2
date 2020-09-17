@@ -42,6 +42,7 @@ func (c *Client) UpdateOpenIDConnectProviderThumbprint(ctx context.Context, para
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateOpenIDConnectProviderThumbprintValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateOpenIDConnectProviderThumbprint(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

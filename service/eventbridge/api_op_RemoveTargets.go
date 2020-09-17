@@ -40,6 +40,7 @@ func (c *Client) RemoveTargets(ctx context.Context, params *RemoveTargetsInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRemoveTargetsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveTargets(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

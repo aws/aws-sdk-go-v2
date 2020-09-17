@@ -33,6 +33,7 @@ func (c *Client) CreateDynamicThingGroup(ctx context.Context, params *CreateDyna
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDynamicThingGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDynamicThingGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

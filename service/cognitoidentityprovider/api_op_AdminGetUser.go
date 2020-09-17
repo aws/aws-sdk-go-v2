@@ -35,6 +35,7 @@ func (c *Client) AdminGetUser(ctx context.Context, params *AdminGetUserInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAdminGetUserValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAdminGetUser(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

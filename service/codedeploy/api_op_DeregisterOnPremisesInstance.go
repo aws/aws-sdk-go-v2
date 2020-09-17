@@ -32,6 +32,7 @@ func (c *Client) DeregisterOnPremisesInstance(ctx context.Context, params *Dereg
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeregisterOnPremisesInstanceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterOnPremisesInstance(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,7 @@ func (c *Client) GetIdentityPoolRoles(ctx context.Context, params *GetIdentityPo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetIdentityPoolRolesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetIdentityPoolRoles(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

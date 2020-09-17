@@ -32,6 +32,7 @@ func (c *Client) StopFleet(ctx context.Context, params *StopFleetInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopFleetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopFleet(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

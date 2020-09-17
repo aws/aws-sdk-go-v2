@@ -39,6 +39,7 @@ func (c *Client) PutScalingPolicy(ctx context.Context, params *PutScalingPolicyI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutScalingPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutScalingPolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

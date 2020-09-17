@@ -33,6 +33,7 @@ func (c *Client) EnableVolumeIO(ctx context.Context, params *EnableVolumeIOInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpEnableVolumeIOValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opEnableVolumeIO(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

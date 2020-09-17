@@ -38,6 +38,7 @@ func (c *Client) DetachDisk(ctx context.Context, params *DetachDiskInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDetachDiskValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDetachDisk(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

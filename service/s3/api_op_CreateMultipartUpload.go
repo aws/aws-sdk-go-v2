@@ -171,6 +171,7 @@ func (c *Client) CreateMultipartUpload(ctx context.Context, params *CreateMultip
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateMultipartUploadValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMultipartUpload(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

@@ -35,6 +35,7 @@ func (c *Client) UpdateEmergencyContactSettings(ctx context.Context, params *Upd
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateEmergencyContactSettingsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateEmergencyContactSettings(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

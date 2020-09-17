@@ -33,6 +33,7 @@ func (c *Client) PurchaseReservedDBInstancesOffering(ctx context.Context, params
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPurchaseReservedDBInstancesOfferingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPurchaseReservedDBInstancesOffering(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

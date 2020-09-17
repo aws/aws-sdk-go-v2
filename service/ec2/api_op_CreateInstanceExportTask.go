@@ -38,6 +38,7 @@ func (c *Client) CreateInstanceExportTask(ctx context.Context, params *CreateIns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateInstanceExportTaskValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateInstanceExportTask(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

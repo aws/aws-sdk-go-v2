@@ -34,6 +34,7 @@ func (c *Client) BatchDetectSentiment(ctx context.Context, params *BatchDetectSe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchDetectSentimentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDetectSentiment(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

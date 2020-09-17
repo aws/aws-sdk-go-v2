@@ -33,6 +33,7 @@ func (c *Client) ModifyVpcAttribute(ctx context.Context, params *ModifyVpcAttrib
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyVpcAttributeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyVpcAttribute(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

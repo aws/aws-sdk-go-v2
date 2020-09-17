@@ -35,6 +35,7 @@ func (c *Client) PutApprovalResult(ctx context.Context, params *PutApprovalResul
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutApprovalResultValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutApprovalResult(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

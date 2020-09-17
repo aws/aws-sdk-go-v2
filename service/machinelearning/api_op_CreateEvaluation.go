@@ -45,6 +45,7 @@ func (c *Client) CreateEvaluation(ctx context.Context, params *CreateEvaluationI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateEvaluationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEvaluation(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -37,6 +37,7 @@ func (c *Client) CreateNotificationRule(ctx context.Context, params *CreateNotif
 	addIdempotencyToken_opCreateNotificationRuleMiddleware(stack, options)
 	addOpCreateNotificationRuleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateNotificationRule(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

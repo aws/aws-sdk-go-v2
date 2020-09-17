@@ -36,6 +36,7 @@ func (c *Client) BatchGetCrawlers(ctx context.Context, params *BatchGetCrawlersI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchGetCrawlersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetCrawlers(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

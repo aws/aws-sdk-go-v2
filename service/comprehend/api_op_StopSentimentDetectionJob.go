@@ -39,6 +39,7 @@ func (c *Client) StopSentimentDetectionJob(ctx context.Context, params *StopSent
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopSentimentDetectionJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopSentimentDetectionJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

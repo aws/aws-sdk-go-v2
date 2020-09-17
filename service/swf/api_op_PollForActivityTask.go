@@ -62,6 +62,7 @@ func (c *Client) PollForActivityTask(ctx context.Context, params *PollForActivit
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPollForActivityTaskValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPollForActivityTask(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

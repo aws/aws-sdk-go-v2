@@ -38,6 +38,7 @@ func (c *Client) GetBucketAcl(ctx context.Context, params *GetBucketAclInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBucketAclValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketAcl(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

@@ -34,6 +34,7 @@ func (c *Client) GetTableVersions(ctx context.Context, params *GetTableVersionsI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetTableVersionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetTableVersions(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

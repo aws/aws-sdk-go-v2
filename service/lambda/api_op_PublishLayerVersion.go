@@ -37,6 +37,7 @@ func (c *Client) PublishLayerVersion(ctx context.Context, params *PublishLayerVe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPublishLayerVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPublishLayerVersion(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

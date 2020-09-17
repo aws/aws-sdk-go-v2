@@ -33,6 +33,7 @@ func (c *Client) DescribeReplicationSubnetGroups(ctx context.Context, params *De
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeReplicationSubnetGroupsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReplicationSubnetGroups(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

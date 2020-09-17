@@ -39,6 +39,7 @@ func (c *Client) ModifyEventSubscription(ctx context.Context, params *ModifyEven
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyEventSubscriptionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyEventSubscription(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

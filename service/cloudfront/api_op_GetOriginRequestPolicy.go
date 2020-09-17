@@ -45,6 +45,7 @@ func (c *Client) GetOriginRequestPolicy(ctx context.Context, params *GetOriginRe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetOriginRequestPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetOriginRequestPolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

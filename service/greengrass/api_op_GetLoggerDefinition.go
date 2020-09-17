@@ -32,6 +32,7 @@ func (c *Client) GetLoggerDefinition(ctx context.Context, params *GetLoggerDefin
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetLoggerDefinitionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetLoggerDefinition(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

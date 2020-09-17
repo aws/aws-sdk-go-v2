@@ -37,6 +37,7 @@ func (c *Client) ListPredictors(ctx context.Context, params *ListPredictorsInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListPredictorsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListPredictors(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

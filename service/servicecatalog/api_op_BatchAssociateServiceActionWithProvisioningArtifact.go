@@ -33,6 +33,7 @@ func (c *Client) BatchAssociateServiceActionWithProvisioningArtifact(ctx context
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchAssociateServiceActionWithProvisioningArtifactValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchAssociateServiceActionWithProvisioningArtifact(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

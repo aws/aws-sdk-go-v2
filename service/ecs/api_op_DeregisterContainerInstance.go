@@ -43,6 +43,7 @@ func (c *Client) DeregisterContainerInstance(ctx context.Context, params *Deregi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeregisterContainerInstanceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterContainerInstance(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

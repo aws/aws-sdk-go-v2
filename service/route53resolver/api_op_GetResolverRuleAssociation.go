@@ -34,6 +34,7 @@ func (c *Client) GetResolverRuleAssociation(ctx context.Context, params *GetReso
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetResolverRuleAssociationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetResolverRuleAssociation(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

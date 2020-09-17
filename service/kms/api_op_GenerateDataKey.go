@@ -89,6 +89,7 @@ func (c *Client) GenerateDataKey(ctx context.Context, params *GenerateDataKeyInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGenerateDataKeyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGenerateDataKey(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

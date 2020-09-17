@@ -37,6 +37,7 @@ func (c *Client) ListDatasetImportJobs(ctx context.Context, params *ListDatasetI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListDatasetImportJobsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListDatasetImportJobs(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

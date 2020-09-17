@@ -35,6 +35,7 @@ func (c *Client) ModifyTargetGroup(ctx context.Context, params *ModifyTargetGrou
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyTargetGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyTargetGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,7 @@ func (c *Client) ListServerNeighbors(ctx context.Context, params *ListServerNeig
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListServerNeighborsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListServerNeighbors(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

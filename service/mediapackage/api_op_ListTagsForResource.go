@@ -31,6 +31,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListTagsForResourceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListTagsForResource(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

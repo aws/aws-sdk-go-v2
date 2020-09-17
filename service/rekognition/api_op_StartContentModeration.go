@@ -44,6 +44,7 @@ func (c *Client) StartContentModeration(ctx context.Context, params *StartConten
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartContentModerationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartContentModeration(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

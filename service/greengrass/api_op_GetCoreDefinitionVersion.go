@@ -33,6 +33,7 @@ func (c *Client) GetCoreDefinitionVersion(ctx context.Context, params *GetCoreDe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetCoreDefinitionVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetCoreDefinitionVersion(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

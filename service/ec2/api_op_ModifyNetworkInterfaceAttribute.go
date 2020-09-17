@@ -35,6 +35,7 @@ func (c *Client) ModifyNetworkInterfaceAttribute(ctx context.Context, params *Mo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyNetworkInterfaceAttributeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyNetworkInterfaceAttribute(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

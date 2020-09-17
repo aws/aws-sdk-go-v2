@@ -34,6 +34,7 @@ func (c *Client) AddAttributesToFindings(ctx context.Context, params *AddAttribu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAddAttributesToFindingsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAddAttributesToFindings(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

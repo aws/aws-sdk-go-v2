@@ -30,6 +30,7 @@ func (c *Client) ListAccountRoles(ctx context.Context, params *ListAccountRolesI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListAccountRolesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListAccountRoles(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

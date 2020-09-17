@@ -33,6 +33,7 @@ func (c *Client) TagMeeting(ctx context.Context, params *TagMeetingInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTagMeetingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTagMeeting(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

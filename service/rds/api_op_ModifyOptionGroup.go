@@ -33,6 +33,7 @@ func (c *Client) ModifyOptionGroup(ctx context.Context, params *ModifyOptionGrou
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyOptionGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyOptionGroup(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

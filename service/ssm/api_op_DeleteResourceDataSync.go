@@ -34,6 +34,7 @@ func (c *Client) DeleteResourceDataSync(ctx context.Context, params *DeleteResou
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteResourceDataSyncValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteResourceDataSync(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

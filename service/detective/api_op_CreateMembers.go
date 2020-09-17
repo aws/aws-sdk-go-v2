@@ -47,6 +47,7 @@ func (c *Client) CreateMembers(ctx context.Context, params *CreateMembersInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateMembersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMembers(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

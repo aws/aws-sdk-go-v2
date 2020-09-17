@@ -33,6 +33,7 @@ func (c *Client) DisassociateServiceActionFromProvisioningArtifact(ctx context.C
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisassociateServiceActionFromProvisioningArtifactValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateServiceActionFromProvisioningArtifact(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

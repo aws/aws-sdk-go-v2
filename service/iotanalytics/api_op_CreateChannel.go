@@ -34,6 +34,7 @@ func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateChannelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateChannel(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

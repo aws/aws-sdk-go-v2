@@ -37,6 +37,7 @@ func (c *Client) StartEntitiesDetectionV2Job(ctx context.Context, params *StartE
 	addIdempotencyToken_opStartEntitiesDetectionV2JobMiddleware(stack, options)
 	addOpStartEntitiesDetectionV2JobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartEntitiesDetectionV2Job(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) BatchGetCommits(ctx context.Context, params *BatchGetCommitsInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchGetCommitsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetCommits(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

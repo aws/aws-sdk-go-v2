@@ -35,6 +35,7 @@ func (c *Client) ApplyEnvironmentManagedAction(ctx context.Context, params *Appl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpApplyEnvironmentManagedActionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opApplyEnvironmentManagedAction(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

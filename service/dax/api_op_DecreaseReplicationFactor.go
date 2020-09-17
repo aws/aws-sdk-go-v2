@@ -35,6 +35,7 @@ func (c *Client) DecreaseReplicationFactor(ctx context.Context, params *Decrease
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDecreaseReplicationFactorValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDecreaseReplicationFactor(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

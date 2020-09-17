@@ -40,6 +40,7 @@ func (c *Client) PutConformancePack(ctx context.Context, params *PutConformanceP
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutConformancePackValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutConformancePack(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

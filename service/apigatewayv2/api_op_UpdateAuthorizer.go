@@ -33,6 +33,7 @@ func (c *Client) UpdateAuthorizer(ctx context.Context, params *UpdateAuthorizerI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateAuthorizerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAuthorizer(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

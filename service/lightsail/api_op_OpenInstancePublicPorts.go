@@ -38,6 +38,7 @@ func (c *Client) OpenInstancePublicPorts(ctx context.Context, params *OpenInstan
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpOpenInstancePublicPortsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opOpenInstancePublicPorts(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

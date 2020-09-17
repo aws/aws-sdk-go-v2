@@ -39,6 +39,7 @@ func (c *Client) TerminateJobFlows(ctx context.Context, params *TerminateJobFlow
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTerminateJobFlowsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTerminateJobFlows(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

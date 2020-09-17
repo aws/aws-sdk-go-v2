@@ -36,6 +36,7 @@ func (c *Client) DescribeCompilationJob(ctx context.Context, params *DescribeCom
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeCompilationJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCompilationJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

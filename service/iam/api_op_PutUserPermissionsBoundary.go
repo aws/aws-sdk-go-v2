@@ -41,6 +41,7 @@ func (c *Client) PutUserPermissionsBoundary(ctx context.Context, params *PutUser
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutUserPermissionsBoundaryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutUserPermissionsBoundary(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

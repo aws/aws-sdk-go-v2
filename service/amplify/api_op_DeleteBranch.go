@@ -33,6 +33,7 @@ func (c *Client) DeleteBranch(ctx context.Context, params *DeleteBranchInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteBranchValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBranch(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

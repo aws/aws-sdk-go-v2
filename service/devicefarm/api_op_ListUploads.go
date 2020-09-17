@@ -33,6 +33,7 @@ func (c *Client) ListUploads(ctx context.Context, params *ListUploadsInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListUploadsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListUploads(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

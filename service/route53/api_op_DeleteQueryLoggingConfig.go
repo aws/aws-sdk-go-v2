@@ -36,6 +36,7 @@ func (c *Client) DeleteQueryLoggingConfig(ctx context.Context, params *DeleteQue
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteQueryLoggingConfigValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteQueryLoggingConfig(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

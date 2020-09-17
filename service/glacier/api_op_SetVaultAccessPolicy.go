@@ -39,6 +39,7 @@ func (c *Client) SetVaultAccessPolicy(ctx context.Context, params *SetVaultAcces
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSetVaultAccessPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSetVaultAccessPolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

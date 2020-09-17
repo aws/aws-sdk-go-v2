@@ -35,6 +35,7 @@ func (c *Client) GetEffectivePermissionsForPath(ctx context.Context, params *Get
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetEffectivePermissionsForPathValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetEffectivePermissionsForPath(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

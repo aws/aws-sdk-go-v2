@@ -32,6 +32,7 @@ func (c *Client) DeleteAccessPointPolicy(ctx context.Context, params *DeleteAcce
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteAccessPointPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAccessPointPolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

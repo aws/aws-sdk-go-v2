@@ -36,6 +36,7 @@ func (c *Client) RegisterTransitGateway(ctx context.Context, params *RegisterTra
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterTransitGatewayValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterTransitGateway(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

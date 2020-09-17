@@ -33,6 +33,7 @@ func (c *Client) ListAssociationVersions(ctx context.Context, params *ListAssoci
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListAssociationVersionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListAssociationVersions(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

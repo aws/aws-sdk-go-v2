@@ -91,6 +91,7 @@ func (c *Client) UploadPart(ctx context.Context, params *UploadPartInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUploadPartValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUploadPart(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

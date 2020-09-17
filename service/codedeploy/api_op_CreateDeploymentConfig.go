@@ -33,6 +33,7 @@ func (c *Client) CreateDeploymentConfig(ctx context.Context, params *CreateDeplo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDeploymentConfigValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDeploymentConfig(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -38,6 +38,7 @@ func (c *Client) TestIdentityProvider(ctx context.Context, params *TestIdentityP
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTestIdentityProviderValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTestIdentityProvider(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

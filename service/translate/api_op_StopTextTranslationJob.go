@@ -39,6 +39,7 @@ func (c *Client) StopTextTranslationJob(ctx context.Context, params *StopTextTra
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopTextTranslationJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopTextTranslationJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

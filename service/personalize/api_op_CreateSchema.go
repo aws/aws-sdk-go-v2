@@ -38,6 +38,7 @@ func (c *Client) CreateSchema(ctx context.Context, params *CreateSchemaInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateSchemaValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSchema(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

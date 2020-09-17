@@ -35,6 +35,7 @@ func (c *Client) SearchSystemTemplates(ctx context.Context, params *SearchSystem
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSearchSystemTemplatesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSearchSystemTemplates(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

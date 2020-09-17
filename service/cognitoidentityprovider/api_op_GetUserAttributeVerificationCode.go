@@ -30,6 +30,7 @@ func (c *Client) GetUserAttributeVerificationCode(ctx context.Context, params *G
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetUserAttributeVerificationCodeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetUserAttributeVerificationCode(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

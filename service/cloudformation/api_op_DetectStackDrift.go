@@ -53,6 +53,7 @@ func (c *Client) DetectStackDrift(ctx context.Context, params *DetectStackDriftI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDetectStackDriftValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDetectStackDrift(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

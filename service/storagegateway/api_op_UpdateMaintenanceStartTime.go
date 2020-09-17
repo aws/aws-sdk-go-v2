@@ -33,6 +33,7 @@ func (c *Client) UpdateMaintenanceStartTime(ctx context.Context, params *UpdateM
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateMaintenanceStartTimeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMaintenanceStartTime(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

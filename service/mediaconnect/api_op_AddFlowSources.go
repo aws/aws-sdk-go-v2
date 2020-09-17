@@ -33,6 +33,7 @@ func (c *Client) AddFlowSources(ctx context.Context, params *AddFlowSourcesInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAddFlowSourcesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAddFlowSources(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

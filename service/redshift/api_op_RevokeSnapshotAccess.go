@@ -38,6 +38,7 @@ func (c *Client) RevokeSnapshotAccess(ctx context.Context, params *RevokeSnapsho
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRevokeSnapshotAccessValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRevokeSnapshotAccess(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

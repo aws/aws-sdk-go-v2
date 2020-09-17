@@ -33,6 +33,7 @@ func (c *Client) DeleteTrigger(ctx context.Context, params *DeleteTriggerInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteTriggerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteTrigger(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

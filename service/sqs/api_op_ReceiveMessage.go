@@ -78,6 +78,7 @@ func (c *Client) ReceiveMessage(ctx context.Context, params *ReceiveMessageInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpReceiveMessageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opReceiveMessage(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

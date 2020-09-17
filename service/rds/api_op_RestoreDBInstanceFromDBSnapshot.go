@@ -49,6 +49,7 @@ func (c *Client) RestoreDBInstanceFromDBSnapshot(ctx context.Context, params *Re
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRestoreDBInstanceFromDBSnapshotValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreDBInstanceFromDBSnapshot(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

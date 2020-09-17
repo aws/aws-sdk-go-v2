@@ -36,6 +36,7 @@ func (c *Client) GetObjectLockConfiguration(ctx context.Context, params *GetObje
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetObjectLockConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetObjectLockConfiguration(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

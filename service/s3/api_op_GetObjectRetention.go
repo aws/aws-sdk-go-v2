@@ -34,6 +34,7 @@ func (c *Client) GetObjectRetention(ctx context.Context, params *GetObjectRetent
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetObjectRetentionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetObjectRetention(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 	addUpdateEndpointMiddleware(stack, options)
 
 	for _, fn := range options.APIOptions {

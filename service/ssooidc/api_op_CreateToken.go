@@ -31,6 +31,7 @@ func (c *Client) CreateToken(ctx context.Context, params *CreateTokenInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateTokenValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateToken(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

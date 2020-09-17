@@ -42,6 +42,7 @@ func (c *Client) CancelKeyDeletion(ctx context.Context, params *CancelKeyDeletio
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCancelKeyDeletionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCancelKeyDeletion(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

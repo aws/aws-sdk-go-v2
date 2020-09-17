@@ -37,6 +37,7 @@ func (c *Client) StopTrainingDocumentClassifier(ctx context.Context, params *Sto
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopTrainingDocumentClassifierValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopTrainingDocumentClassifier(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

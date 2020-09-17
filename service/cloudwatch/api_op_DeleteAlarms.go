@@ -45,6 +45,7 @@ func (c *Client) DeleteAlarms(ctx context.Context, params *DeleteAlarmsInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteAlarmsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAlarms(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

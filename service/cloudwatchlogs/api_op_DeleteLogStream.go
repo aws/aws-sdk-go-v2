@@ -33,6 +33,7 @@ func (c *Client) DeleteLogStream(ctx context.Context, params *DeleteLogStreamInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteLogStreamValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteLogStream(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

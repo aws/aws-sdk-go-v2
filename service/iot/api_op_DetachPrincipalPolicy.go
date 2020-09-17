@@ -33,6 +33,7 @@ func (c *Client) DetachPrincipalPolicy(ctx context.Context, params *DetachPrinci
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDetachPrincipalPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDetachPrincipalPolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

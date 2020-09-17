@@ -33,6 +33,7 @@ func (c *Client) CreateDBProxy(ctx context.Context, params *CreateDBProxyInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDBProxyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDBProxy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

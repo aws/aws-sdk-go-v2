@@ -39,6 +39,7 @@ func (c *Client) PutComponentPolicy(ctx context.Context, params *PutComponentPol
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutComponentPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutComponentPolicy(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

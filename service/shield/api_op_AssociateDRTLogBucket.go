@@ -37,6 +37,7 @@ func (c *Client) AssociateDRTLogBucket(ctx context.Context, params *AssociateDRT
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateDRTLogBucketValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateDRTLogBucket(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

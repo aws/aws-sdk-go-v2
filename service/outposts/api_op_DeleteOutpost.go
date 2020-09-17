@@ -32,6 +32,7 @@ func (c *Client) DeleteOutpost(ctx context.Context, params *DeleteOutpostInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteOutpostValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteOutpost(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

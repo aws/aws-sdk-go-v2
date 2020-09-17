@@ -32,6 +32,7 @@ func (c *Client) CancelDeploymentJob(ctx context.Context, params *CancelDeployme
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCancelDeploymentJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCancelDeploymentJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

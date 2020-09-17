@@ -38,6 +38,7 @@ func (c *Client) CreateAsset(ctx context.Context, params *CreateAssetInput, optF
 	addIdempotencyToken_opCreateAssetMiddleware(stack, options)
 	addOpCreateAssetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAsset(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

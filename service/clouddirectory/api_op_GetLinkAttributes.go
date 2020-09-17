@@ -33,6 +33,7 @@ func (c *Client) GetLinkAttributes(ctx context.Context, params *GetLinkAttribute
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetLinkAttributesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetLinkAttributes(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

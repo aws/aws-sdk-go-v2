@@ -32,6 +32,7 @@ func (c *Client) DeleteRecoveryPoint(ctx context.Context, params *DeleteRecovery
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteRecoveryPointValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRecoveryPoint(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

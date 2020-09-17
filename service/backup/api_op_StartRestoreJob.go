@@ -35,6 +35,7 @@ func (c *Client) StartRestoreJob(ctx context.Context, params *StartRestoreJobInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartRestoreJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartRestoreJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

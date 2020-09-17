@@ -34,6 +34,7 @@ func (c *Client) UpdateReplicationJob(ctx context.Context, params *UpdateReplica
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateReplicationJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateReplicationJob(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -35,6 +35,7 @@ func (c *Client) DeleteConfigurationTemplate(ctx context.Context, params *Delete
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteConfigurationTemplateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteConfigurationTemplate(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

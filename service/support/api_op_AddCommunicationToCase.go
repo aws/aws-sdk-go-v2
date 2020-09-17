@@ -42,6 +42,7 @@ func (c *Client) AddCommunicationToCase(ctx context.Context, params *AddCommunic
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAddCommunicationToCaseValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAddCommunicationToCase(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

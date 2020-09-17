@@ -35,6 +35,7 @@ func (c *Client) PostCommentForComparedCommit(ctx context.Context, params *PostC
 	addIdempotencyToken_opPostCommentForComparedCommitMiddleware(stack, options)
 	addOpPostCommentForComparedCommitValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPostCommentForComparedCommit(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

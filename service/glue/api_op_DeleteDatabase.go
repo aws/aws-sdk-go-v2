@@ -40,6 +40,7 @@ func (c *Client) DeleteDatabase(ctx context.Context, params *DeleteDatabaseInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDatabaseValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDatabase(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

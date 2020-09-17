@@ -40,6 +40,7 @@ func (c *Client) DeleteUtterances(ctx context.Context, params *DeleteUtterancesI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteUtterancesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteUtterances(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

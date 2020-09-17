@@ -33,6 +33,7 @@ func (c *Client) CreateInvitations(ctx context.Context, params *CreateInvitation
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateInvitationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateInvitations(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

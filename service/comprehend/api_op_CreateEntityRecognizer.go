@@ -37,6 +37,7 @@ func (c *Client) CreateEntityRecognizer(ctx context.Context, params *CreateEntit
 	addIdempotencyToken_opCreateEntityRecognizerMiddleware(stack, options)
 	addOpCreateEntityRecognizerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEntityRecognizer(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

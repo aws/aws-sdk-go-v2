@@ -52,6 +52,7 @@ func (c *Client) RemoveAccountFromOrganization(ctx context.Context, params *Remo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRemoveAccountFromOrganizationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveAccountFromOrganization(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -49,6 +49,7 @@ func (c *Client) ListSecretVersionIds(ctx context.Context, params *ListSecretVer
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListSecretVersionIdsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListSecretVersionIds(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

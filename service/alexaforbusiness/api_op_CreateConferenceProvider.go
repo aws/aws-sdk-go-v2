@@ -35,6 +35,7 @@ func (c *Client) CreateConferenceProvider(ctx context.Context, params *CreateCon
 	addIdempotencyToken_opCreateConferenceProviderMiddleware(stack, options)
 	addOpCreateConferenceProviderValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateConferenceProvider(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

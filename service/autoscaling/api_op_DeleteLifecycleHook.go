@@ -34,6 +34,7 @@ func (c *Client) DeleteLifecycleHook(ctx context.Context, params *DeleteLifecycl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteLifecycleHookValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteLifecycleHook(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

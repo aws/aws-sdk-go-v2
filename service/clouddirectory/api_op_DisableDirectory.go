@@ -34,6 +34,7 @@ func (c *Client) DisableDirectory(ctx context.Context, params *DisableDirectoryI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisableDirectoryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisableDirectory(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

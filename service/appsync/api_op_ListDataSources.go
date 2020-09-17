@@ -33,6 +33,7 @@ func (c *Client) ListDataSources(ctx context.Context, params *ListDataSourcesInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListDataSourcesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListDataSources(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

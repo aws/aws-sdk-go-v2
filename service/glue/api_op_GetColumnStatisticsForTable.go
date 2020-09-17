@@ -33,6 +33,7 @@ func (c *Client) GetColumnStatisticsForTable(ctx context.Context, params *GetCol
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetColumnStatisticsForTableValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetColumnStatisticsForTable(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

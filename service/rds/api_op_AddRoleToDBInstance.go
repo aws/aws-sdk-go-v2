@@ -33,6 +33,7 @@ func (c *Client) AddRoleToDBInstance(ctx context.Context, params *AddRoleToDBIns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAddRoleToDBInstanceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAddRoleToDBInstance(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

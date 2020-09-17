@@ -33,6 +33,7 @@ func (c *Client) UpdateMLModel(ctx context.Context, params *UpdateMLModelInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateMLModelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMLModel(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

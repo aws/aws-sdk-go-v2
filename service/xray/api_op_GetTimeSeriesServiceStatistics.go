@@ -34,6 +34,7 @@ func (c *Client) GetTimeSeriesServiceStatistics(ctx context.Context, params *Get
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetTimeSeriesServiceStatisticsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetTimeSeriesServiceStatistics(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

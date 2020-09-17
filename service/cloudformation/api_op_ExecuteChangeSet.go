@@ -39,6 +39,7 @@ func (c *Client) ExecuteChangeSet(ctx context.Context, params *ExecuteChangeSetI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpExecuteChangeSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opExecuteChangeSet(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

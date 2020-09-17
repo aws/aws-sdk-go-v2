@@ -33,6 +33,7 @@ func (c *Client) CreateFolder(ctx context.Context, params *CreateFolderInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateFolderValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFolder(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

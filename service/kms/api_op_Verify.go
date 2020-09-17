@@ -56,6 +56,7 @@ func (c *Client) Verify(ctx context.Context, params *VerifyInput, optFns ...func
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpVerifyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opVerify(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

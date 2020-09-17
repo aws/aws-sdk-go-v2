@@ -40,6 +40,7 @@ func (c *Client) ExportAutoScalingGroupRecommendations(ctx context.Context, para
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpExportAutoScalingGroupRecommendationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opExportAutoScalingGroupRecommendations(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

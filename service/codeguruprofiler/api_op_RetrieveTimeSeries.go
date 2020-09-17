@@ -32,6 +32,7 @@ func (c *Client) RetrieveTimeSeries(ctx context.Context, params *RetrieveTimeSer
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRetrieveTimeSeriesValidationMiddleware(stack)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

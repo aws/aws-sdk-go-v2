@@ -33,6 +33,7 @@ func (c *Client) SearchUsers(ctx context.Context, params *SearchUsersInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSearchUsersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSearchUsers(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

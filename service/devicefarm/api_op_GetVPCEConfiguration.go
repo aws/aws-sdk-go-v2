@@ -34,6 +34,7 @@ func (c *Client) GetVPCEConfiguration(ctx context.Context, params *GetVPCEConfig
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetVPCEConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetVPCEConfiguration(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,7 @@ func (c *Client) UnshareApplication(ctx context.Context, params *UnshareApplicat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUnshareApplicationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUnshareApplication(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

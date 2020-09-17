@@ -39,6 +39,7 @@ func (c *Client) AdminSetUserPassword(ctx context.Context, params *AdminSetUserP
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAdminSetUserPasswordValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAdminSetUserPassword(options.Region), middleware.Before)
+	addResponseErrorWrapper(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
