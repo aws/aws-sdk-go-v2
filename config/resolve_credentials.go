@@ -100,6 +100,7 @@ func ResolveCredentialChain(cfg *aws.Config, configs Configs) (err error) {
 }
 
 func resolveCredsFromProfile(cfg *aws.Config, envConfig *EnvConfig, sharedConfig *SharedConfig, configs Configs) (err error) {
+
 	switch {
 	case sharedConfig.Source != nil:
 		// Assume IAM role with credentials source from a different profile.
