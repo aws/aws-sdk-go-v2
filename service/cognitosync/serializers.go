@@ -1239,7 +1239,7 @@ func awsRestjson1_serializeOpHttpBindingsUpdateRecordsInput(v *UpdateRecordsInpu
 	}
 
 	if v.ClientContext != nil {
-		locationName := "x-amz-Client-Context"
+		locationName := "X-Amz-Client-Context"
 		if len(*v.ClientContext) > 0 {
 			encoder.SetHeader(locationName).String(*v.ClientContext)
 		}
