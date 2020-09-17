@@ -47,7 +47,7 @@ gen-external-asserts:
 # Unit/CI Testing #
 ###################
 build:
-	go build -o /dev/null -tags ${ALL_TAGS} ${SDK_ALL_PKGS}
+	go test -tags ${ALL_TAGS} -run NONE ${SDK_ALL_PKGS}
 
 unit: verify build test-protocols test-services test-ec2imds test-credentials test-config
 	@echo "go test SDK and vendor packages"
@@ -70,11 +70,16 @@ ci-test-generate-validate:
 	if [ "$$gitstatus" != "" ] && [ "$$gitstatus" != "skipping validation" ]; then echo "$$gitstatus"; exit 1; fi
 	git update-index --no-assume-unchanged go.mod go.sum
 
+test-all:
+	./test_submodules.sh `pwd` "go test -tags ${ALL_TAGS} -count 1 ./..."
+
 
 test-protocols:
+	# TODO replace with module walker.
 	./test_submodules.sh `pwd`/internal/protocoltest "go test -count 1 -run NONE ./..."
 
 test-services:
+	# TODO replace with module walker.
 	./test_submodules.sh `pwd`/service "go test -count 1 -tags "integration,ec2env" -run NONE ./..."
 
 test-ec2imds:
@@ -85,6 +90,7 @@ test-credentials:
 
 test-config:
 	cd config && go test -run NONE -tags "integration,ec2env" ./... && go test -count 1 ./...
+
 
 mod_replace_local:
 	./mod_replace_local_submodules.sh `pwd` `pwd` `pwd`/../smithy-go
