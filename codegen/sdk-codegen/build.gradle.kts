@@ -20,7 +20,7 @@ import software.amazon.smithy.gradle.tasks.SmithyBuild
 import kotlin.streams.toList
 
 plugins {
-    id("software.amazon.smithy") version "0.5.0"
+    id("software.amazon.smithy") version "0.5.1"
 }
 
 dependencies {
