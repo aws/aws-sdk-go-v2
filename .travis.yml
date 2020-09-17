@@ -20,11 +20,16 @@ matrix:
   include:
     - language: go
       os: windows
-      go: 
-        - 1.15.x
-        - 1.14.x
+      go: 1.15.x
       script:
         - make ci-test-no-generate
+
+    - language: go
+      os: windows
+      go: 1.14.x
+      script:
+        - make ci-test-no-generate
+
 
     - language: java
       jdk: openjdk8
