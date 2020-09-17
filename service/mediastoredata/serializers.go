@@ -347,7 +347,7 @@ func awsRestjson1_serializeOpHttpBindingsPutObjectInput(v *PutObjectInput, encod
 	}
 
 	if len(v.StorageClass) > 0 {
-		locationName := "x-amz-storage-class"
+		locationName := "X-Amz-Storage-Class"
 		encoder.SetHeader(locationName).String(string(v.StorageClass))
 	}
 

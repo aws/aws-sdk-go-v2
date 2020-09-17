@@ -66,24 +66,24 @@ func awsRestjson1_serializeOpHttpBindingsCompleteSnapshotInput(v *CompleteSnapsh
 	}
 
 	if v.ChangedBlocksCount != nil {
-		locationName := "x-amz-ChangedBlocksCount"
+		locationName := "X-Amz-Changedblockscount"
 		encoder.SetHeader(locationName).Integer(*v.ChangedBlocksCount)
 	}
 
 	if v.Checksum != nil {
-		locationName := "x-amz-Checksum"
+		locationName := "X-Amz-Checksum"
 		if len(*v.Checksum) > 0 {
 			encoder.SetHeader(locationName).String(*v.Checksum)
 		}
 	}
 
 	if len(v.ChecksumAggregationMethod) > 0 {
-		locationName := "x-amz-Checksum-Aggregation-Method"
+		locationName := "X-Amz-Checksum-Aggregation-Method"
 		encoder.SetHeader(locationName).String(string(v.ChecksumAggregationMethod))
 	}
 
 	if len(v.ChecksumAlgorithm) > 0 {
-		locationName := "x-amz-Checksum-Algorithm"
+		locationName := "X-Amz-Checksum-Algorithm"
 		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
 	}
 
@@ -383,24 +383,24 @@ func awsRestjson1_serializeOpHttpBindingsPutSnapshotBlockInput(v *PutSnapshotBlo
 	}
 
 	if v.Checksum != nil {
-		locationName := "x-amz-Checksum"
+		locationName := "X-Amz-Checksum"
 		if len(*v.Checksum) > 0 {
 			encoder.SetHeader(locationName).String(*v.Checksum)
 		}
 	}
 
 	if len(v.ChecksumAlgorithm) > 0 {
-		locationName := "x-amz-Checksum-Algorithm"
+		locationName := "X-Amz-Checksum-Algorithm"
 		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
 	}
 
 	if v.DataLength != nil {
-		locationName := "x-amz-Data-Length"
+		locationName := "X-Amz-Data-Length"
 		encoder.SetHeader(locationName).Integer(*v.DataLength)
 	}
 
 	if v.Progress != nil {
-		locationName := "x-amz-Progress"
+		locationName := "X-Amz-Progress"
 		encoder.SetHeader(locationName).Integer(*v.Progress)
 	}
 

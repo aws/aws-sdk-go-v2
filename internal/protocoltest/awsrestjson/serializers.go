@@ -15,6 +15,7 @@ import (
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+	"net/http"
 	"time"
 )
 
@@ -674,7 +675,7 @@ func awsRestjson1_serializeOpHttpBindingsHttpPrefixHeadersInput(v *HttpPrefixHea
 		hv := encoder.Headers("X-Foo-")
 		for mapKey, mapVal := range v.FooMap {
 			if len(*mapVal) > 0 {
-				hv.SetHeader(mapKey).String(*mapVal)
+				hv.SetHeader(http.CanonicalHeaderKey(mapKey)).String(*mapVal)
 			}
 		}
 	}
@@ -1243,7 +1244,7 @@ func awsRestjson1_serializeOpHttpBindingsInputAndOutputWithHeadersInput(v *Input
 	}
 
 	if v.HeaderBooleanList != nil {
-		locationName := "X-BooleanList"
+		locationName := "X-Booleanlist"
 		for i := range v.HeaderBooleanList {
 			if v.HeaderBooleanList[i] != nil {
 				encoder.AddHeader(locationName).Boolean(*v.HeaderBooleanList[i])
@@ -1267,7 +1268,7 @@ func awsRestjson1_serializeOpHttpBindingsInputAndOutputWithHeadersInput(v *Input
 	}
 
 	if v.HeaderEnumList != nil {
-		locationName := "X-EnumList"
+		locationName := "X-Enumlist"
 		for i := range v.HeaderEnumList {
 			if len(v.HeaderEnumList[i]) > 0 {
 				encoder.AddHeader(locationName).String(string(v.HeaderEnumList[i]))
@@ -1291,7 +1292,7 @@ func awsRestjson1_serializeOpHttpBindingsInputAndOutputWithHeadersInput(v *Input
 	}
 
 	if v.HeaderIntegerList != nil {
-		locationName := "X-IntegerList"
+		locationName := "X-Integerlist"
 		for i := range v.HeaderIntegerList {
 			if v.HeaderIntegerList[i] != nil {
 				encoder.AddHeader(locationName).Integer(*v.HeaderIntegerList[i])
@@ -1317,7 +1318,7 @@ func awsRestjson1_serializeOpHttpBindingsInputAndOutputWithHeadersInput(v *Input
 	}
 
 	if v.HeaderStringList != nil {
-		locationName := "X-StringList"
+		locationName := "X-Stringlist"
 		for i := range v.HeaderStringList {
 			if v.HeaderStringList[i] != nil && len(*v.HeaderStringList[i]) > 0 {
 				encoder.AddHeader(locationName).String(*v.HeaderStringList[i])
@@ -1326,7 +1327,7 @@ func awsRestjson1_serializeOpHttpBindingsInputAndOutputWithHeadersInput(v *Input
 	}
 
 	if v.HeaderStringSet != nil {
-		locationName := "X-StringSet"
+		locationName := "X-Stringset"
 		for i := range v.HeaderStringSet {
 			if v.HeaderStringSet[i] != nil && len(*v.HeaderStringSet[i]) > 0 {
 				encoder.AddHeader(locationName).String(*v.HeaderStringSet[i])
@@ -1335,7 +1336,7 @@ func awsRestjson1_serializeOpHttpBindingsInputAndOutputWithHeadersInput(v *Input
 	}
 
 	if v.HeaderTimestampList != nil {
-		locationName := "X-TimestampList"
+		locationName := "X-Timestamplist"
 		for i := range v.HeaderTimestampList {
 			if v.HeaderTimestampList[i] != nil {
 				encoder.AddHeader(locationName).String(smithytime.FormatHTTPDate(*v.HeaderTimestampList[i]))
@@ -2793,37 +2794,37 @@ func awsRestjson1_serializeOpHttpBindingsTimestampFormatHeadersInput(v *Timestam
 	}
 
 	if v.DefaultFormat != nil {
-		locationName := "X-defaultFormat"
+		locationName := "X-Defaultformat"
 		encoder.SetHeader(locationName).String(smithytime.FormatHTTPDate(*v.DefaultFormat))
 	}
 
 	if v.MemberDateTime != nil {
-		locationName := "X-memberDateTime"
+		locationName := "X-Memberdatetime"
 		encoder.SetHeader(locationName).String(smithytime.FormatDateTime(*v.MemberDateTime))
 	}
 
 	if v.MemberEpochSeconds != nil {
-		locationName := "X-memberEpochSeconds"
+		locationName := "X-Memberepochseconds"
 		encoder.SetHeader(locationName).Double(smithytime.FormatEpochSeconds(*v.MemberEpochSeconds))
 	}
 
 	if v.MemberHttpDate != nil {
-		locationName := "X-memberHttpDate"
+		locationName := "X-Memberhttpdate"
 		encoder.SetHeader(locationName).String(smithytime.FormatHTTPDate(*v.MemberHttpDate))
 	}
 
 	if v.TargetDateTime != nil {
-		locationName := "X-targetDateTime"
+		locationName := "X-Targetdatetime"
 		encoder.SetHeader(locationName).String(smithytime.FormatDateTime(*v.TargetDateTime))
 	}
 
 	if v.TargetEpochSeconds != nil {
-		locationName := "X-targetEpochSeconds"
+		locationName := "X-Targetepochseconds"
 		encoder.SetHeader(locationName).Double(smithytime.FormatEpochSeconds(*v.TargetEpochSeconds))
 	}
 
 	if v.TargetHttpDate != nil {
-		locationName := "X-targetHttpDate"
+		locationName := "X-Targethttpdate"
 		encoder.SetHeader(locationName).String(smithytime.FormatHTTPDate(*v.TargetHttpDate))
 	}
 
