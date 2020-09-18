@@ -30,6 +30,7 @@ public class AwsGoDependency {
     public static final GoDependency AWS_RETRY = aws("aws/retry");
     public static final GoDependency AWS_SIGNER_V4 = aws("aws/signer/v4");
     public static final GoDependency AWS_ENDPOINTS = aws("aws/endpoints/v2", "endpoints");
+    public static final GoDependency AWS_HTTP_TRANSPORT = aws("aws/transport/http", "awshttp");
 
     public static final GoDependency REGEXP = SmithyGoDependency.stdlib("regexp");
 

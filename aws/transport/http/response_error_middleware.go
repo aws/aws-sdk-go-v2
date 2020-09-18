@@ -1,0 +1,83 @@
+package http
+
+import (
+	"bytes"
+	"context"
+	"errors"
+	"fmt"
+	"io"
+	"io/ioutil"
+
+	"github.com/awslabs/smithy-go/middleware"
+	smithyhttp "github.com/awslabs/smithy-go/transport/http"
+)
+
+// RequestIDRetriever provides an interface to retrive request id from a response body
+type RequestIDRetriever interface {
+	// GetRequestID takes in a io.Reader and returns a string, error
+	GetRequestID(resp *smithyhttp.Response, reader io.Reader) string
+}
+
+// AddResponseErrorWrapper adds response error wrapper middleware
+func AddResponseErrorWrapper(stack *middleware.Stack, requestIdRetriever RequestIDRetriever) {
+	// add error wrapper middleware before operation deserializers so that it can wrap the error response
+	// returned by operation deserializers
+	stack.Deserialize.Insert(&errorWrapperMiddleware{idRetriever: requestIdRetriever}, "OperationDeserializer", middleware.Before)
+}
+
+type errorWrapperMiddleware struct {
+	idRetriever RequestIDRetriever
+}
+
+// ID returns the middleware identifier
+func (m *errorWrapperMiddleware) ID() string {
+	return "AWSResponseErrorWrapperMiddleware"
+}
+
+func (m *errorWrapperMiddleware) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err == nil {
+		// Nothing to do when there is no error.
+		return out, metadata, err
+	}
+
+	resp, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		// No raw response to wrap with.
+		return out, metadata, err
+	}
+
+	slice := make([]byte, 0)
+	copyBuffer := bytes.NewBuffer(slice)
+	slice2 := make([]byte, 0)
+	copyBuffer2 := bytes.NewBuffer(slice2)
+	w := io.MultiWriter(copyBuffer, copyBuffer2)
+
+	if _, e := io.Copy(w, resp.Body); e != nil {
+		return out, metadata,
+			fmt.Errorf("error while copying response body to fetch request id, err: %w, originalErr: %w", e, err)
+	}
+
+	// close response Body
+	resp.Body.Close()
+
+	reqID := m.idRetriever.GetRequestID(resp, copyBuffer)
+
+	// reassign response body
+	resp.Body = ioutil.NopCloser(copyBuffer2)
+
+	// Wrap the returned smithy error with the request id retrieved from the metadata
+	if err != nil {
+		var respErr *smithyhttp.ResponseError
+		if errors.As(err, &respErr) {
+			err = &ResponseError{
+				ResponseError: respErr,
+				RequestID:     reqID,
+			}
+		}
+	}
+
+	return out, metadata, err
+}
