@@ -12,7 +12,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 	"github.com/aws/aws-sdk-go-v2/service/sts/types"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 type mockAssumeRoleWithWebIdentity func(ctx context.Context, params *sts.AssumeRoleWithWebIdentityInput, optFns ...func(*sts.Options)) (*sts.AssumeRoleWithWebIdentityOutput, error)
@@ -60,10 +59,10 @@ func TestWebIdentityProviderRetrieve(t *testing.T) {
 				}
 				return &sts.AssumeRoleWithWebIdentityOutput{
 					Credentials: &types.Credentials{
-						Expiration:      ptr.Time(sdk.NowTime()),
-						AccessKeyId:     ptr.String("access-key-id"),
-						SecretAccessKey: ptr.String("secret-access-key"),
-						SessionToken:    ptr.String("session-token"),
+						Expiration:      aws.Time(sdk.NowTime()),
+						AccessKeyId:     aws.String("access-key-id"),
+						SecretAccessKey: aws.String("secret-access-key"),
+						SessionToken:    aws.String("session-token"),
 					},
 				}, nil
 			},
@@ -92,10 +91,10 @@ func TestWebIdentityProviderRetrieve(t *testing.T) {
 
 				return &sts.AssumeRoleWithWebIdentityOutput{
 					Credentials: &types.Credentials{
-						Expiration:      ptr.Time(sdk.NowTime()),
-						AccessKeyId:     ptr.String("access-key-id"),
-						SecretAccessKey: ptr.String("secret-access-key"),
-						SessionToken:    ptr.String("session-token"),
+						Expiration:      aws.Time(sdk.NowTime()),
+						AccessKeyId:     aws.String("access-key-id"),
+						SecretAccessKey: aws.String("secret-access-key"),
+						SessionToken:    aws.String("session-token"),
 					},
 				}, nil
 			},

@@ -6,10 +6,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 	"github.com/aws/aws-sdk-go-v2/service/sts/types"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 type mockAssumeRole struct {
@@ -26,8 +26,8 @@ func (s *mockAssumeRole) AssumeRole(ctx context.Context, params *sts.AssumeRoleI
 		Credentials: &types.Credentials{
 			// Just reflect the role arn to the provider.
 			AccessKeyId:     params.RoleArn,
-			SecretAccessKey: ptr.String("assumedSecretAccessKey"),
-			SessionToken:    ptr.String("assumedSessionToken"),
+			SecretAccessKey: aws.String("assumedSecretAccessKey"),
+			SessionToken:    aws.String("assumedSessionToken"),
 			Expiration:      &expiry,
 		},
 	}, nil
@@ -68,7 +68,7 @@ func TestAssumeRoleProvider_WithTokenProvider(t *testing.T) {
 		},
 	}
 	p := stscreds.NewAssumeRoleProvider(stscreds.AssumeRoleOptions{Client: stub, RoleARN: roleARN}, func(options *stscreds.AssumeRoleOptions) {
-		options.SerialNumber = ptr.String("0123456789")
+		options.SerialNumber = aws.String("0123456789")
 		options.TokenProvider = func() (string, error) {
 			return tokenCode, nil
 		}
@@ -97,7 +97,7 @@ func TestAssumeRoleProvider_WithTokenProviderError(t *testing.T) {
 		},
 	}
 	p := stscreds.NewAssumeRoleProvider(stscreds.AssumeRoleOptions{Client: stub, RoleARN: roleARN}, func(options *stscreds.AssumeRoleOptions) {
-		options.SerialNumber = ptr.String("0123456789")
+		options.SerialNumber = aws.String("0123456789")
 		options.TokenProvider = func() (string, error) {
 			return "", fmt.Errorf("error occurred")
 		}
@@ -126,7 +126,7 @@ func TestAssumeRoleProvider_MFAWithNoToken(t *testing.T) {
 		},
 	}
 	p := stscreds.NewAssumeRoleProvider(stscreds.AssumeRoleOptions{Client: stub, RoleARN: roleARN}, func(options *stscreds.AssumeRoleOptions) {
-		options.SerialNumber = ptr.String("0123456789")
+		options.SerialNumber = aws.String("0123456789")
 	})
 
 	creds, err := p.Retrieve(context.Background())
