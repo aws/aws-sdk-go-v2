@@ -19,10 +19,10 @@ type RequestIDRetriever interface {
 }
 
 // AddResponseErrorWrapper adds response error wrapper middleware
-func AddResponseErrorWrapper(stack *middleware.Stack, requestIdRetriever RequestIDRetriever) {
+func AddResponseErrorWrapper(stack *middleware.Stack, requestIDRetriever RequestIDRetriever) {
 	// add error wrapper middleware before operation deserializers so that it can wrap the error response
 	// returned by operation deserializers
-	stack.Deserialize.Insert(&errorWrapperMiddleware{idRetriever: requestIdRetriever}, "OperationDeserializer", middleware.Before)
+	stack.Deserialize.Insert(&errorWrapperMiddleware{idRetriever: requestIDRetriever}, "OperationDeserializer", middleware.Before)
 }
 
 type errorWrapperMiddleware struct {

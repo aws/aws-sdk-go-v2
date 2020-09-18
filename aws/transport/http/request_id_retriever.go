@@ -8,6 +8,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
+// TODO: Should this be moved to some internal folder?
+
 // XMLRequestIDRetriever used by retriever to retrieve xml response request id
 type XMLRequestIDRetriever struct {
 	// header representing the request id member
