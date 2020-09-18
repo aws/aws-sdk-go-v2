@@ -2,7 +2,6 @@ package http
 
 import (
 	"context"
-	"errors"
 
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -14,9 +13,6 @@ func AddResponseErrorWrapper(stack *middleware.Stack) {
 	// returned by operation deserializers
 	stack.Deserialize.Insert(&errorWrapperMiddleware{}, "OperationDeserializer", middleware.Before)
 }
-
-// RequestID is the identifier for Request Id set in response metadata
-const RequestID = "RequestID"
 
 type errorWrapperMiddleware struct {
 }
@@ -35,29 +31,20 @@ func (m *errorWrapperMiddleware) HandleDeserialize(ctx context.Context, in middl
 		return out, metadata, err
 	}
 
-	_, ok := out.RawResponse.(*smithyhttp.Response)
+	resp, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
 		// No raw response to wrap with.
 		return out, metadata, err
 	}
 
-	var reqID string
-	// TODO: modify protocol deserializers to set RequestID on metadata when
-	//  available in raw response.
-	if metadata.Has(RequestID) {
-		if v, ok := metadata.Get(RequestID).(string); ok {
-			reqID = v
-		}
-	}
-
 	// Wrap the returned smithy error with the request id retrieved from the metadata
 	if err != nil {
-		var respErr *smithyhttp.ResponseError
-		if errors.As(err, &respErr) {
-			err = &ResponseError{
-				ResponseError: respErr,
-				RequestID:     reqID,
-			}
+		err = &ResponseError{
+			ResponseError: &smithyhttp.ResponseError{
+				Response: resp,
+				Err:      err,
+			},
+			RequestID: GetRequestIDMetadata(metadata),
 		}
 	}
 

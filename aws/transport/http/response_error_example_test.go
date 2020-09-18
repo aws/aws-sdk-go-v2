@@ -30,13 +30,6 @@ func ExampleResponseError() {
 				return out, metadata, err
 			}
 
-			var reqID string
-			if metadata.Has("RequestID") {
-				if v, ok := metadata.Get("RequestID").(string); ok {
-					reqID = v
-				}
-			}
-
 			// Wrap the returned error with the response error containing the
 			// returned response.
 			if err != nil {
@@ -44,7 +37,7 @@ func ExampleResponseError() {
 				if errors.As(err, &respErr) {
 					err = &ResponseError{
 						ResponseError: respErr,
-						RequestID:     reqID,
+						RequestID:     GetRequestIDMetadata(metadata),
 					}
 				}
 			}
@@ -121,8 +114,8 @@ func ExampleResponseError() {
 			},
 		}
 
-		// set a mock request Id
-		metadata.Set("RequestID", "mock-requestId")
+		// set request id metadata
+		SetRequestIDMetadata(&metadata, "mock-requestId")
 
 		// The handler's returned response will be available as the
 		// DeserializeOutput.RawResponse field.

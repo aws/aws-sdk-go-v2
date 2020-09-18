@@ -163,6 +163,19 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     /*     ================Deserializer===========================     */
 
     @Override
+    public void processRawResponse(GenerationContext context, OperationShape operationShape) {
+        GoWriter writer = context.getWriter();
+
+        // process raw response for request id.
+        //
+        // attempt to retrieve request id from `X-Amzn-Requestid` header for RestXML
+        writer.openBlock("if reqId:= response.Header.Get(\"X-Amzn-Requestid\"); len(reqId) !=0 {", "}", () -> {
+            writer.addUseImports(AwsGoDependency.AWS_HTTP_TRANSPORT);
+            writer.write("awshttp.SetRequestIDMetadata(&metadata, reqId)");
+        });
+    }
+
+    @Override
     protected void deserializeError(GenerationContext context, StructureShape shape) {
         GoWriter writer = context.getWriter();
         Symbol symbol = context.getSymbolProvider().toSymbol(shape);
