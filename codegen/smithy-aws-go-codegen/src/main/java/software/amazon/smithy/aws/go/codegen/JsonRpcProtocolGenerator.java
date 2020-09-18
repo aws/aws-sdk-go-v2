@@ -97,7 +97,8 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
         StructureShape output = ProtocolUtils.expectOutput(context.getModel(), operation);
         String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(output, getProtocolName());
         initializeJsonDecoder(writer, "response.Body");
-        writer.write("err = $L(&output, decoder)", functionName);
+        AwsProtocolUtils.decodeJsonIntoInterface(writer, "out, metadata, ");
+        writer.write("err = $L(&output, shape)", functionName);
         handleDecodeError(writer, "out, metadata, ");
     }
 
@@ -116,8 +117,9 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
         String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, getProtocolName());
 
         initializeJsonDecoder(writer, "errorBody");
+        AwsProtocolUtils.decodeJsonIntoInterface(writer, "");
         writer.write("output := &$T{}", symbol);
-        writer.write("err := $L(&output, decoder)", functionName);
+        writer.write("err := $L(&output, shape)", functionName);
         writer.write("");
         handleDecodeError(writer);
         writer.write("errorBody.Seek(0, io.SeekStart)");

@@ -22,6 +22,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoWriter;
@@ -36,7 +37,6 @@ import software.amazon.smithy.model.shapes.DocumentShape;
 import software.amazon.smithy.model.shapes.MapShape;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.Shape;
-import software.amazon.smithy.model.shapes.SimpleShape;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.shapes.UnionShape;
 import software.amazon.smithy.model.traits.JsonNameTrait;
@@ -47,10 +47,10 @@ import software.amazon.smithy.utils.FunctionalUtils;
 /**
  * Visitor to generate deserialization functions for shapes in AWS JSON protocol
  * document bodies.
- *
+ * <p>
  * This class handles function body generation for all types expected by the
  * {@code DocumentShapeDeserVisitor}. No other shape type serialization is overwritten.
- *
+ * <p>
  * Timestamps are serialized to {@link Format}.EPOCH_SECONDS by default.
  */
 public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
@@ -67,9 +67,9 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
     }
 
     /**
-     * @param context The generation context.
+     * @param context      The generation context.
      * @param memberFilter A filter that is applied to structure members. This is useful for
-     *     members that won't be in the body.
+     *                     members that won't be in the body.
      */
     public JsonShapeDeserVisitor(GenerationContext context, Predicate<MemberShape> memberFilter) {
         super(context);
@@ -85,7 +85,7 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
 
     @Override
     protected Map<String, String> getAdditionalArguments() {
-        return Collections.singletonMap("decoder", "*json.Decoder");
+        return Collections.singletonMap("value", "interface{}");
     }
 
     @Override
@@ -93,7 +93,7 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
         GoWriter writer = context.getWriter();
         MemberShape member = shape.getMember();
         Shape target = context.getModel().expectShape(member.getTarget());
-        writeJsonTokenizerStartStub(writer, shape);
+        writeJsonTypeAssertStub(writer, shape);
         Symbol symbol = context.getSymbolProvider().toSymbol(shape);
 
         // Initialize the value now that the start stub has verified that there's something there.
@@ -106,7 +106,7 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
         });
 
         // Iterate through the decoder. The member visitor will handle popping tokens.
-        writer.openBlock("for decoder.More() {", "}", () -> {
+        writer.openBlock("for _, value := range shape {", "}", () -> {
             // We need to write out an intermediate variable to assign the value of the
             // member to so that we can use it in the append function later.
             writer.write("var col $P", context.getSymbolProvider().toSymbol(target));
@@ -115,7 +115,6 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
             writer.write("");
         });
 
-        writeJsonTokenizerEndStub(writer, shape);
         writer.write("*v = cv");
         writer.write("return nil");
     }
@@ -125,7 +124,7 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
         GoWriter writer = context.getWriter();
         // TODO: implement document deserialization
         LOGGER.warning("Document type is currently unsupported for JSON deserialization.");
-        context.getWriter().writeDocs("TODO: implement document serialization.");
+        writer.writeDocs("TODO: implement document serialization.");
         writer.write("return nil");
     }
 
@@ -136,7 +135,7 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
         Symbol symbol = symbolProvider.toSymbol(shape);
         MemberShape member = shape.getValue();
         Symbol targetSymbol = symbolProvider.toSymbol(member);
-        writeJsonTokenizerStartStub(writer, shape);
+        writeJsonTypeAssertStub(writer, shape);
 
         // Initialize the value now that the start stub has verified that there's something there.
         writer.write("var mv $P", symbol);
@@ -148,15 +147,7 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
         });
 
         // Iterate through the decoder. The member visitor will handle popping tokens.
-        writer.openBlock("for decoder.More() {", "}", () -> {
-            // Deserialize the key
-            writer.write("token, err := decoder.Token()");
-            writer.write("if err != nil { return err }");
-            writer.write("");
-            writer.write("key, ok := token.(string)");
-            writer.write("if !ok { return fmt.Errorf(\"expected map-key of type string, found type %T\", token)}");
-            writer.write("");
-
+        writer.openBlock("for key, value := range shape {", "}", () -> {
             // Deserialize the value. We need to write out an intermediate variable here
             // since we can't just pass in &mv[key]
             writer.write("var parsedVal $P", targetSymbol);
@@ -165,7 +156,6 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
             writer.write("");
         });
 
-        writeJsonTokenizerEndStub(writer, shape);
         writer.write("*v = mv");
         writer.write("return nil");
     }
@@ -176,7 +166,7 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
         SymbolProvider symbolProvider = context.getSymbolProvider();
         Symbol symbol = symbolProvider.toSymbol(shape);
 
-        writeJsonTokenizerStartStub(writer, shape);
+        writeJsonTypeAssertStub(writer, shape);
 
         // Initialize the value now that the start stub has verified that there's something there.
         writer.write("var sv $P", symbol);
@@ -188,10 +178,8 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
         });
 
         // Iterate through the decoder. The member visitor will handle popping tokens.
-        writer.openBlock("for decoder.More() {", "}", () -> {
-            writer.write("t, err := decoder.Token()");
-            writer.write("if err != nil { return err }");
-            writer.openBlock("switch t {", "}", () -> {
+        writer.openBlock("for key, value := range shape {", "}", () -> {
+            writer.openBlock("switch key {", "}", () -> {
                 Set<MemberShape> members = new TreeSet<>(shape.members());
                 for (MemberShape member : members) {
                     if (!memberFilter.test(member)) {
@@ -206,14 +194,11 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
                 }
 
                 writer.openBlock("default:", "", () -> {
-                    writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
-                    writer.write("err := smithyjson.DiscardUnknownField(decoder)");
-                    writer.write("if err != nil {return err}");
+                    writer.write("_, _ = key, value");
                 });
             });
         });
 
-        writeJsonTokenizerEndStub(writer, shape);
         writer.write("*v = sv");
         writer.write("return nil");
     }
@@ -223,55 +208,53 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
         GoWriter writer = context.getWriter();
         SymbolProvider symbolProvider = context.getSymbolProvider();
         Symbol symbol = symbolProvider.toSymbol(shape);
-        writeJsonTokenizerStartStub(writer, shape);
+        writeJsonTypeAssertStub(writer, shape);
 
         writer.write("var uv $P", symbol);
 
-        writer.write("t, err := decoder.Token()");
-        writer.write("if err != nil { return err }");
-        writer.openBlock("switch t {", "}", () -> {
-            Set<MemberShape> members = new TreeSet<>(shape.members());
-            for (MemberShape member : members) {
-                if (!memberFilter.test(member)) {
-                    continue;
+        writer.openBlock("loop: for key, value := range shape {", "}", () -> {
+            writer.openBlock("switch key {", "}", () -> {
+                Set<MemberShape> members = new TreeSet<>(shape.members());
+                for (MemberShape member : members) {
+                    if (!memberFilter.test(member)) {
+                        continue;
+                    }
+
+                    Shape target = context.getModel().expectShape(member.getTarget());
+                    Symbol targetSymbol = symbolProvider.toSymbol(member);
+
+                    Symbol memberSymbol = SymbolUtils.createValueSymbolBuilder(
+                            symbolProvider.toMemberName(member),
+                            symbol.getNamespace()
+                    ).build();
+
+                    writer.openBlock("case $S:", "", member.getMemberName(), () -> {
+                        writer.write("var mv $P", targetSymbol);
+                        target.accept(getMemberDeserVisitor(member, "mv"));
+
+                        if (!ProtocolUtils.usesScalarWhenUnionValue(target)) {
+                            writer.write("uv = &$T{Value: *mv}", memberSymbol);
+                        } else {
+                            writer.write("uv = &$T{Value: mv}", memberSymbol);
+                        }
+                        writer.write("break loop");
+                    });
                 }
 
-                Shape target = context.getModel().expectShape(member.getTarget());
-                Symbol targetSymbol = symbolProvider.toSymbol(member);
-
-                Symbol memberSymbol = SymbolUtils.createValueSymbolBuilder(
-                        symbolProvider.toMemberName(member),
-                        symbol.getNamespace()
-                ).build();
-
-                writer.openBlock("case $S:", "", member.getMemberName(), () -> {
-                    writer.write("var mv $P", targetSymbol);
-                    target.accept(getMemberDeserVisitor(member, "mv"));
-
-                    if (!ProtocolUtils.usesScalarWhenUnionValue(target)) {
-                        writer.write("uv = &$T{Value: *mv}", memberSymbol);
-                    } else {
-                        writer.write("uv = &$T{Value: mv}", memberSymbol);
-                    }
+                writer.openBlock("default:", "", () -> {
+                    // This is the function to take a value and convert it to the union type.
+                    Symbol unknownMemberSymbol = SymbolUtils.createValueSymbolBuilder(
+                            UnionGenerator.UNKNOWN_MEMBER_NAME,
+                            symbol.getNamespace()
+                    ).build();
+                    writer.write("uv = &$T{Tag: key}", unknownMemberSymbol);
+                    writer.writeDocs("TODO: FIX ME");
+                    writer.write("_ = value");
+                    writer.write("break loop");
                 });
-            }
-
-            writer.openBlock("default:", "", () -> {
-                // This is the function to take a value and convert it to the union type.
-                Symbol unknownMemberSymbol = SymbolUtils.createValueSymbolBuilder(
-                        UnionGenerator.UNKNOWN_MEMBER_NAME,
-                        symbol.getNamespace()
-                ).build();
-                writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
-                writer.write("tagString, ok := t.(string)");
-                writer.write("if !ok { return fmt.Errorf(\"expected string key, found %T\", t) }");
-                writer.write("value, err := smithyjson.CollectUnknownField(decoder)");
-                writer.write("if err != nil { return err }");
-                writer.write("uv = &$T{Tag: tagString, Value: value}", unknownMemberSymbol);
             });
         });
 
-        writeJsonTokenizerEndStub(writer, shape);
         writer.write("*v = uv");
         writer.write("return nil");
     }
@@ -285,36 +268,22 @@ public class JsonShapeDeserVisitor extends DocumentShapeDeserVisitor {
      * Writes out a stub to initialize decoding.
      *
      * @param writer The GoWriter to use.
-     * @param shape The shape the stub is intended to start parsing.
+     * @param shape  The shape the stub is intended to start parsing.
      */
-    private void writeJsonTokenizerStartStub(GoWriter writer, Shape shape) {
-        writer.addUseImports(SmithyGoDependency.JSON);
-        String startToken = shape instanceof CollectionShape ? "[" : "{";
-        writer.write("startToken, err := decoder.Token()");
-        writer.write("if err == io.EOF { return nil }");
-        writer.write("if err != nil { return err }");
-        writer.write("if startToken == nil { return nil }");
-        writer.openBlock("if t, ok := startToken.(json.Delim); !ok || t != '$L' {","}", startToken, () -> {
-            writer.addUseImports(SmithyGoDependency.FMT);
-            writer.write("return fmt.Errorf(\"expect `$L` as start token\")", startToken);
-        });
+    private void writeJsonTypeAssertStub(GoWriter writer, Shape shape) {
+        writer.openBlock("if value == nil {", "}", () -> writer.write("return nil"));
         writer.write("");
-
-    }
-
-    /**
-     * Writes out a stub to finalize decoding.
-     *
-     * @param writer The GoWriter to use.
-     * @param shape The shape the stub is intended to finalize parsing for.
-     */
-    private void writeJsonTokenizerEndStub(GoWriter writer, Shape shape) {
-        String endToken = shape instanceof CollectionShape ? "]" : "}";
-        writer.write("endToken, err := decoder.Token()");
-        writer.write("if err != nil { return err }");
-        writer.openBlock("if t, ok := endToken.(json.Delim); !ok || t != '$L' {", "}", endToken, () -> {
-            writer.write("return fmt.Errorf(\"expect `$L` as end token\")", endToken);
-        });
+        writer.addUseImports(SmithyGoDependency.FMT);
+        String targetType;
+        if (shape instanceof CollectionShape) {
+            targetType = "[]interface{}";
+        } else if (shape instanceof StructureShape || shape instanceof MapShape || shape instanceof UnionShape) {
+            targetType = "map[string]interface{}";
+        } else {
+            throw new CodegenException("unimplemented JSON type " + shape);
+        }
+        writer.write("shape, ok := value.($L)", targetType);
+        writer.openBlock("if !ok {", "}", () -> writer.write("return fmt.Errorf(\"unexpected JSON type %v\", value)"));
         writer.write("");
     }
 }

@@ -17,6 +17,7 @@ package software.amazon.smithy.aws.go.codegen;
 
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.function.Consumer;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolTestGenerator;
@@ -145,7 +146,36 @@ final class AwsProtocolUtils {
         writer.write("body := io.TeeReader($L, ringBuffer)", bodyLocation);
         writer.write("decoder := json.NewDecoder(body)");
         writer.write("decoder.UseNumber()");
+    }
+
+    /**
+     * Decodes JSON into {@code shape} with type {@code interface{}} using the encoding/json decoder
+     * referenced by {@code decoder}.
+     *
+     * @param writer GoWriter to write code to
+     * @param errorReturnExtras extra parameters to return if an error occurs
+     */
+    public static void decodeJsonIntoInterface(GoWriter writer, String errorReturnExtras) {
+        writer.write("var shape interface{}");
+        writer.addUseImports(SmithyGoDependency.IO);
+        writer.openBlock("if err := decoder.Decode(&shape); err != nil && err != io.EOF {", "}", () -> {
+            wrapAsDeserializationError(writer);
+            writer.write("return $Lerr", errorReturnExtras);
+        });
         writer.write("");
+    }
+
+    /**
+     * Wraps the Go error {@code err} in a {@code DeserializationError} with a snapshot
+     * @param writer
+     */
+    private static void wrapAsDeserializationError(GoWriter writer) {
+        writer.write("var snapshot bytes.Buffer");
+        writer.write("io.Copy(&snapshot, ringBuffer)");
+        writer.openBlock("err = &smithy.DeserializationError {", "}", () -> {
+            writer.write("Err: fmt.Errorf(\"failed to decode response body, %w\", err),");
+            writer.write("Snapshot: snapshot.Bytes(),");
+        });
     }
 
     public static void handleDecodeError(GoWriter writer, String returnExtras) {
@@ -153,12 +183,8 @@ final class AwsProtocolUtils {
             writer.addUseImports(SmithyGoDependency.BYTES);
             writer.addUseImports(SmithyGoDependency.SMITHY);
             writer.addUseImports(SmithyGoDependency.IO);
-            writer.write("var snapshot bytes.Buffer");
-            writer.write("io.Copy(&snapshot, ringBuffer)");
-            writer.openBlock("return $L&smithy.DeserializationError {", "}", returnExtras, () -> {
-                writer.write("Err: fmt.Errorf(\"failed to decode response body, %w\", err),");
-                writer.write("Snapshot: snapshot.Bytes(),");
-            });
+            wrapAsDeserializationError(writer);
+            writer.write("return $Lerr", returnExtras);
         }).write("");
     }
 

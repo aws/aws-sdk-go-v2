@@ -103,8 +103,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.write("jsonEncoder := smithyjson.NewEncoder()");
         writer.openBlock("if err := $L($L, jsonEncoder.Value); err != nil {", "}", functionName,
                 operand, () -> {
-            writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
-        });
+                    writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
+                });
 
         writer.addUseImports(SmithyGoDependency.BYTES);
         writer.write("payload := bytes.NewReader(jsonEncoder.Bytes())");
@@ -215,6 +215,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         writer.addUseImports(SmithyGoDependency.JSON);
         writer.write("decoder := json.NewDecoder(body)");
         writer.write("decoder.UseNumber()");
+        AwsProtocolUtils.decodeJsonIntoInterface(writer, "out, metadata, ");
         writer.write("");
 
         writeMiddlewareDocumentBindingDeserializerDelegator(writer, targetShape, operand);
@@ -239,7 +240,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             String operand
     ) {
         String deserFuncName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, getProtocolName());
-        writer.write("err = $L(&$L, decoder)", deserFuncName, operand);
+        writer.write("err = $L(&$L, shape)", deserFuncName, operand);
         writer.openBlock("if err != nil {", "}", () -> {
             writer.addUseImports(SmithyGoDependency.BYTES);
             writer.addUseImports(SmithyGoDependency.SMITHY);
@@ -302,7 +303,8 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             String documentDeserFunctionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
                     shape, getProtocolName());
             initializeJsonDecoder(writer, "errorBody");
-            writer.write("err := $L(&output, decoder)", documentDeserFunctionName);
+            AwsProtocolUtils.decodeJsonIntoInterface(writer, "");
+            writer.write("err := $L(&output, shape)", documentDeserFunctionName);
             writer.write("");
             handleDecodeError(writer);
             writer.write("errorBody.Seek(0, io.SeekStart)");
