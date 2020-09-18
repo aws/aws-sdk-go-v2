@@ -43,6 +43,19 @@ class AwsQuery extends HttpRpcProtocolGenerator {
     }
 
     @Override
+    public void processRawResponse(GenerationContext context, OperationShape operationShape) {
+        GoWriter writer = context.getWriter();
+
+        // process raw response for request id.
+        //
+        // attempt to retrieve request id from `x-amzn` header for Query
+        writer.openBlock("if reqId:= response.Header.Get(\"x-amzn\"); len(reqId) !=0 {", "}", () -> {
+            writer.addUseImports(AwsGoDependency.AWS_HTTP_TRANSPORT);
+            writer.write("awshttp.SetRequestIDMetadata(&metadata, reqId)");
+        });
+    }
+
+    @Override
     protected void generateDocumentBodyShapeSerializers(GenerationContext context, Set<Shape> shapes) {
         QueryShapeSerVisitor visitor = new QueryShapeSerVisitor(context);
         shapes.forEach(shape -> shape.accept(visitor));

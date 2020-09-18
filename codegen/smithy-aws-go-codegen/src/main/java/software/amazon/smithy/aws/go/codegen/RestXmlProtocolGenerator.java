@@ -26,6 +26,7 @@ import software.amazon.smithy.model.knowledge.HttpBinding;
 import software.amazon.smithy.model.knowledge.HttpBindingIndex;
 import software.amazon.smithy.model.shapes.MemberShape;
 import software.amazon.smithy.model.shapes.OperationShape;
+import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.traits.MediaTypeTrait;
@@ -165,6 +166,20 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
     @Override
     public void processRawResponse(GenerationContext context, OperationShape operationShape) {
         GoWriter writer = context.getWriter();
+        ServiceShape serviceShape = context.getService();
+
+        // TODO: makes all this customization
+        //  This should actually be GoIntegration. We have the response & metadata so we first
+        //  look at the metadata, check for request id, if yes. Wrap it.
+        //  If no fetch from req.header and set on metadata or wrap so that success and error
+        //  response both work
+        //
+        // S3 specific customization
+        // TODO: This is kinda hard coded here. Do we
+        if (serviceShape.getId().getName() != "S3") {
+
+        }
+
 
         // process raw response for request id.
         //
