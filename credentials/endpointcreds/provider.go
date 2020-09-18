@@ -42,7 +42,7 @@ import (
 const ProviderName = `CredentialsEndpointProvider`
 
 type getCredentials interface {
-	GetCredentials(ctx context.Context, optFns ...func(*client.Options)) (*client.GetCredentialsOutput, error)
+	GetCredentials(context.Context, *client.GetCredentialsInput, ...func(*client.Options)) (*client.GetCredentialsOutput, error)
 }
 
 // Provider satisfies the aws.CredentialsProvider interface, and is a client to
@@ -53,11 +53,11 @@ type Provider struct {
 	// EndpointResolver.
 	client getCredentials
 
-	options ProviderOptions
+	options Options
 }
 
-// ProviderOptions is structure of configurable options for Provider
-type ProviderOptions struct {
+// Options is structure of configurable options for Provider
+type Options struct {
 	// ExpiryWindow will allow the credentials to trigger refreshing prior to
 	// the credentials actually expiring. This is beneficial so race conditions
 	// with expiring credentials do not cause request to fail unexpectedly
@@ -69,26 +69,38 @@ type ProviderOptions struct {
 	// If ExpiryWindow is 0 or less it will be ignored.
 	ExpiryWindow time.Duration
 
-	// Endpoint to retrieve credentials from
+	// Endpoint to retrieve credentials from.
 	Endpoint string
+
+	// HTTPClient to handle sending HTTP requests to the target endpoint.
+	HTTPClient client.HTTPClient
 
 	// Optional authorization token value if set will be used as the value of
 	// the Authorization header of the endpoint credential request.
 	AuthorizationToken string
 }
 
+// Clone returns a copy of the provider options
+func (o Options) Clone() Options {
+	c := o
+	return c
+}
+
 // New returns a credentials Provider for retrieving AWS credentials
 // from arbitrary endpoint.
-func New(cfg aws.Config, endpoint string, options ...func(*ProviderOptions)) *Provider {
-	p := &Provider{
-		client: client.NewFromConfig(cfg),
-		options: ProviderOptions{
-			Endpoint: endpoint,
-		},
+func New(options Options, optFns ...func(*Options)) *Provider {
+	o := options.Clone()
+
+	for _, fn := range optFns {
+		fn(&o)
 	}
 
-	for _, option := range options {
-		option(&p.options)
+	p := &Provider{
+		client: client.New(client.Options{
+			HTTPClient: o.HTTPClient,
+			Endpoint:   o.Endpoint,
+		}),
+		options: o,
 	}
 
 	return p
@@ -118,8 +130,8 @@ func (p *Provider) Retrieve(ctx context.Context) (aws.Credentials, error) {
 }
 
 func (p *Provider) getCredentials(ctx context.Context) (*client.GetCredentialsOutput, error) {
-	return p.client.GetCredentials(ctx, func(options *client.Options) {
-		options.Endpoint = p.options.Endpoint
-		options.AuthorizationToken = p.options.AuthorizationToken
-	})
+	return p.client.GetCredentials(ctx, &client.GetCredentialsInput{AuthorizationToken: p.options.AuthorizationToken},
+		func(options *client.Options) {
+			options.Endpoint = p.options.Endpoint
+		})
 }

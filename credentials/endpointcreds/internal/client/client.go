@@ -7,11 +7,15 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/awslabs/smithy-go"
 	smithymiddleware "github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
+
+// ServiceId is the client identifer
+const ServiceId = "EndpointCredentials"
 
 // HTTPClient is a client for sending HTTP requests
 type HTTPClient interface {
@@ -22,14 +26,6 @@ type HTTPClient interface {
 type Options struct {
 	// The endpoint to retrieve credentials from
 	Endpoint string
-
-	// The authorization token to pass in the Authorization header with the request
-	AuthorizationToken string
-
-	// Set of options to modify how an operation is invoked. These apply to all
-	// operations invoked for this client. Use functional options on operation call to
-	// modify this list for per operation behavior.
-	APIOptions []func(*smithymiddleware.Stack) error
 
 	// The HTTP client to invoke API calls with. Defaults to client's default HTTP
 	// implementation if nil.
@@ -43,7 +39,6 @@ type Options struct {
 // Copy creates a copy of the API options.
 func (o Options) Copy() Options {
 	to := o
-	to.APIOptions = append([]func(*smithymiddleware.Stack) error{}, o.APIOptions...)
 	return to
 }
 
@@ -57,9 +52,7 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	options = options.Copy()
 
 	if options.HTTPClient == nil {
-		options.HTTPClient = aws.NewBuildableHTTPClient().WithTransportOptions(func(t *http.Transport) {
-			t.Proxy = nil
-		})
+		options.HTTPClient = aws.NewBuildableHTTPClient()
 	}
 
 	if options.Retryer == nil {
@@ -77,34 +70,28 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	return client
 }
 
-// NewFromConfig constructs a new client using the provided SDK config.
-func NewFromConfig(cfg aws.Config, optsFns ...func(options *Options)) *Client {
-	opts := Options{
-		HTTPClient: cfg.HTTPClient,
-		Retryer:    cfg.Retryer,
-	}
-
-	return New(opts, optsFns...)
+// GetCredentialsInput is the input to send with the endpoint service to receive credentials.
+type GetCredentialsInput struct {
+	AuthorizationToken string
 }
 
 // GetCredentials retrieves credentials from credential endpoint
-func (c *Client) GetCredentials(ctx context.Context, optFns ...func(*Options)) (*GetCredentialsOutput, error) {
+func (c *Client) GetCredentials(ctx context.Context, params *GetCredentialsInput, optFns ...func(*Options)) (*GetCredentialsOutput, error) {
 	stack := smithymiddleware.NewStack("GetCredentials", smithyhttp.NewStackRequest)
 	options := c.options.Copy()
 	for _, fn := range optFns {
 		fn(&options)
 	}
 
-	stack.Serialize.Add(&serializeOpGetCredential{AuthorizationToken: options.AuthorizationToken}, smithymiddleware.After)
+	stack.Serialize.Add(&serializeOpGetCredential{}, smithymiddleware.After)
 	stack.Build.Add(&buildEndpoint{Endpoint: options.Endpoint}, smithymiddleware.After)
 	stack.Deserialize.Add(&deserializeOpGetCredential{}, smithymiddleware.After)
-
-	for _, fn := range options.APIOptions {
-		fn(stack)
-	}
+	middleware.AddUserAgentKey(ServiceId)
+	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
+	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 
 	handler := smithymiddleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
-	result, _, err := handler.Handle(ctx, nil)
+	result, _, err := handler.Handle(ctx, params)
 	if err != nil {
 		return nil, err
 	}
@@ -122,8 +109,9 @@ type GetCredentialsOutput struct {
 
 // EndpointError is an error returned from the endpoint service
 type EndpointError struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
+	Code    string            `json:"code"`
+	Message string            `json:"message"`
+	Fault   smithy.ErrorFault `json:"-"`
 }
 
 // Error is the error mesage string
@@ -143,5 +131,5 @@ func (e *EndpointError) ErrorMessage() string {
 
 // ErrorFault indicates error fault classification
 func (e *EndpointError) ErrorFault() smithy.ErrorFault {
-	return smithy.FaultUnknown
+	return e.Fault
 }

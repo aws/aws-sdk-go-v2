@@ -41,9 +41,7 @@ func (b *buildEndpoint) HandleBuild(ctx context.Context, in smithymiddleware.Bui
 	return next.HandleBuild(ctx, in)
 }
 
-type serializeOpGetCredential struct {
-	AuthorizationToken string
-}
+type serializeOpGetCredential struct{}
 
 func (s *serializeOpGetCredential) ID() string {
 	return "OperationSerializer"
@@ -57,12 +55,17 @@ func (s *serializeOpGetCredential) HandleSerialize(ctx context.Context, in smith
 		return out, metadata, fmt.Errorf("unknown transport type, %T", in.Request)
 	}
 
+	params, ok := in.Parameters.(*GetCredentialsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters, %T", in.Parameters)
+	}
+
 	const acceptHeader = "Accept"
 	request.Header[acceptHeader] = append(request.Header[acceptHeader][:0], "application/json")
 
-	if len(s.AuthorizationToken) > 0 {
+	if len(params.AuthorizationToken) > 0 {
 		const authHeader = "Authorization"
-		request.Header[authHeader] = append(request.Header[authHeader][:0], s.AuthorizationToken)
+		request.Header[authHeader] = append(request.Header[authHeader][:0], params.AuthorizationToken)
 	}
 
 	return next.HandleSerialize(ctx, in)
@@ -86,6 +89,7 @@ func (d *deserializeOpGetCredential) HandleDeserialize(ctx context.Context, in s
 	if !ok {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
+	defer response.Body.Close()
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, deserializeError(response)
@@ -105,6 +109,12 @@ func deserializeError(response *smithyhttp.Response) error {
 	err := json.NewDecoder(response.Body).Decode(&errShape)
 	if err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode error message, %w", err)}
+	}
+
+	if response.StatusCode >= 500 {
+		errShape.Fault = smithy.FaultServer
+	} else {
+		errShape.Fault = smithy.FaultClient
 	}
 
 	return errShape

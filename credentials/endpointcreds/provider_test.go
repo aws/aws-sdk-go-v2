@@ -11,7 +11,6 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/credentials/endpointcreds"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/awslabs/smithy-go"
@@ -27,7 +26,8 @@ func TestRetrieveRefreshableCredentials(t *testing.T) {
 	orig := sdk.NowTime
 	defer func() { sdk.NowTime = orig }()
 
-	cfg := aws.Config{
+	p := endpointcreds.New(endpointcreds.Options{
+		Endpoint: "http://127.0.0.1",
 		HTTPClient: mockClient(func(r *http.Request) (*http.Response, error) {
 			expTime := time.Now().UTC().Add(1 * time.Hour).Format("2006-01-02T15:04:05Z")
 
@@ -41,9 +41,7 @@ func TestRetrieveRefreshableCredentials(t *testing.T) {
 }`, expTime)))),
 			}, nil
 		}),
-	}
-
-	p := endpointcreds.New(cfg, "http://127.0.0.1")
+	})
 	creds, err := p.Retrieve(context.Background())
 
 	if err != nil {
@@ -75,7 +73,8 @@ func TestRetrieveStaticCredentials(t *testing.T) {
 	orig := sdk.NowTime
 	defer func() { sdk.NowTime = orig }()
 
-	cfg := aws.Config{
+	p := endpointcreds.New(endpointcreds.Options{
+		Endpoint: "http://127.0.0.1",
 		HTTPClient: mockClient(func(r *http.Request) (*http.Response, error) {
 			return &http.Response{
 				StatusCode: 200,
@@ -85,9 +84,7 @@ func TestRetrieveStaticCredentials(t *testing.T) {
 }`))),
 			}, nil
 		}),
-	}
-
-	p := endpointcreds.New(cfg, "http://127.0.0.1")
+	})
 	creds, err := p.Retrieve(context.Background())
 
 	if err != nil {
@@ -114,7 +111,8 @@ func TestRetrieveStaticCredentials(t *testing.T) {
 }
 
 func TestFailedRetrieveCredentials(t *testing.T) {
-	cfg := aws.Config{
+	p := endpointcreds.New(endpointcreds.Options{
+		Endpoint: "http://127.0.0.1",
 		HTTPClient: mockClient(func(r *http.Request) (*http.Response, error) {
 			return &http.Response{
 				StatusCode: 400,
@@ -124,9 +122,7 @@ func TestFailedRetrieveCredentials(t *testing.T) {
 }`))),
 			}, nil
 		}),
-	}
-
-	p := endpointcreds.New(cfg, "http://127.0.0.1")
+	})
 	creds, err := p.Retrieve(context.Background())
 
 	if err == nil {

@@ -90,7 +90,7 @@ func TestClient_GetCredentials(t *testing.T) {
 				SecretAccessKey: "FooSecret",
 			},
 		},
-		"json error response": {
+		"json error response client fault": {
 			ResponseCode: 403,
 			ResponseBody: []byte(`{
   "code": "Unauthorized",
@@ -106,6 +106,40 @@ func TestClient_GetCredentials(t *testing.T) {
 						ok = false
 					}
 					if e, a := "not authorized for endpoint", apiError.ErrorMessage(); e != a {
+						t.Errorf("expect %v, got %v", e, a)
+						ok = false
+					}
+					if e, a := smithy.FaultClient, apiError.ErrorFault(); e != a {
+						t.Errorf("expect %v, got %v", e, a)
+						ok = false
+					}
+				} else {
+					t.Errorf("expect %T error type, got %T: %v", apiError, err, err)
+					ok = false
+				}
+				return ok
+			},
+		},
+		"json error response server fault": {
+			ResponseCode: 500,
+			ResponseBody: []byte(`{
+  "code": "InternalError",
+  "message": "an error occurred"
+}`),
+			ExpectErr: true,
+			ValidateError: func(t *testing.T, err error) (ok bool) {
+				t.Helper()
+				var apiError smithy.APIError
+				if errors.As(err, &apiError) {
+					if e, a := "InternalError", apiError.ErrorCode(); e != a {
+						t.Errorf("expect %v, got %v", e, a)
+						ok = false
+					}
+					if e, a := "an error occurred", apiError.ErrorMessage(); e != a {
+						t.Errorf("expect %v, got %v", e, a)
+						ok = false
+					}
+					if e, a := smithy.FaultServer, apiError.ErrorFault(); e != a {
 						t.Errorf("expect %v, got %v", e, a)
 						ok = false
 					}
@@ -148,12 +182,9 @@ func TestClient_GetCredentials(t *testing.T) {
 			}))
 			defer server.Close()
 
-			client := New(Options{
-				AuthorizationToken: tt.Token,
-				Endpoint:           server.URL + tt.RelativeURI,
-			})
+			client := New(Options{Endpoint: server.URL + tt.RelativeURI})
 
-			result, err := client.GetCredentials(context.Background())
+			result, err := client.GetCredentials(context.Background(), &GetCredentialsInput{AuthorizationToken: tt.Token})
 			if (err != nil) != tt.ExpectErr {
 				t.Fatalf("got error %v, but ExpectErr=%v", err, tt.ExpectErr)
 			}
@@ -187,9 +218,9 @@ func TestClient_GetCredentials(t *testing.T) {
 func TestClient_GetCredentials_NoEndpoint(t *testing.T) {
 	client := New(Options{})
 
-	_, err := client.GetCredentials(context.Background())
+	_, err := client.GetCredentials(context.Background(), &GetCredentialsInput{})
 	if err == nil {
-		t.Fatalf("expect ~ got none")
+		t.Fatalf("expect error got none")
 	}
 	if e, a := "endpoint not provided", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %v, got %v", e, a)
