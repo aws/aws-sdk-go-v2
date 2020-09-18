@@ -69,7 +69,7 @@ type Options struct {
 	// If ExpiryWindow is 0 or less it will be ignored.
 	ExpiryWindow time.Duration
 
-	// Endpoint to retrieve credentials from.
+	// Endpoint to retrieve credentials from. Required
 	Endpoint string
 
 	// HTTPClient to handle sending HTTP requests to the target endpoint.
