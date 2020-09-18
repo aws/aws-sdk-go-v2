@@ -57,8 +57,8 @@ credentials.
 	creds := stscreds.NewAssumeRoleProvider(stscreds.AssumeRoleOptions{
 		Client: sts.NewFromConfig(cfg),
 		RoleARN: "myRoleArn",
-		SerialNumber: ptr.String("myTokenSerialNumber"),
-		TokenCode: ptr.String("00000000"),
+		SerialNumber: aws.String("myTokenSerialNumber"),
+		TokenCode: aws.String("00000000"),
 	})
 
 	cfg.Credentials = aws.CredentialsCache{Provider: creds}
@@ -92,7 +92,7 @@ single Credentials with an AssumeRoleProvider can be shared safely.
 	creds := stscreds.NewAssumeRoleProvider(stscreds.AssumeRoleOptions{
 		Client: sts.NewFromConfig(cfg),
 		RoleARN: "myRoleArn",
-		SerialNumber: ptr.String("myTokenSerialNumber"),
+		SerialNumber: aws.String("myTokenSerialNumber"),
 		TokenProvider: stscreds.StdinTokenProvider,
 	})
 
@@ -112,7 +112,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 	"github.com/aws/aws-sdk-go-v2/service/sts/types"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 // StdinTokenProvider will prompt on stdout and read from stdin for a string value.
@@ -276,10 +275,10 @@ func (p *AssumeRoleProvider) Retrieve(ctx context.Context) (aws.Credentials, err
 		p.options.Duration = DefaultDuration
 	}
 	input := &sts.AssumeRoleInput{
-		DurationSeconds: ptr.Int32(int32(p.options.Duration / time.Second)),
+		DurationSeconds: aws.Int32(int32(p.options.Duration / time.Second)),
 		PolicyArns:      p.options.PolicyARNs,
-		RoleArn:         ptr.String(p.options.RoleARN),
-		RoleSessionName: ptr.String(p.options.RoleSessionName),
+		RoleArn:         aws.String(p.options.RoleARN),
+		RoleSessionName: aws.String(p.options.RoleSessionName),
 		ExternalId:      p.options.ExternalID,
 	}
 	if p.options.Policy != nil {
@@ -292,7 +291,7 @@ func (p *AssumeRoleProvider) Retrieve(ctx context.Context) (aws.Credentials, err
 			if err != nil {
 				return aws.Credentials{}, err
 			}
-			input.TokenCode = ptr.String(code)
+			input.TokenCode = aws.String(code)
 		} else {
 			return aws.Credentials{}, fmt.Errorf("assume role with MFA enabled, but neither TokenCode nor TokenProvider are set")
 		}

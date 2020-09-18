@@ -12,7 +12,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 	"github.com/aws/aws-sdk-go-v2/service/sts/types"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 var invalidIdentityTokenExceptionCode = (&types.InvalidIdentityTokenException{}).ErrorCode()
@@ -123,7 +122,7 @@ func (p *WebIdentityRoleProvider) Retrieve(ctx context.Context) (aws.Credentials
 		PolicyArns:       p.options.PolicyARNs,
 		RoleArn:          &p.options.RoleARN,
 		RoleSessionName:  &sessionName,
-		WebIdentityToken: ptr.String(string(b)),
+		WebIdentityToken: aws.String(string(b)),
 	}, func(options *sts.Options) {
 		options.Retryer = retry.AddWithErrorCodes(options.Retryer, invalidIdentityTokenExceptionCode)
 	})
@@ -135,9 +134,9 @@ func (p *WebIdentityRoleProvider) Retrieve(ctx context.Context) (aws.Credentials
 	// when assuming an Role with a JWT web identity token.
 
 	value := aws.Credentials{
-		AccessKeyID:     ptr.ToString(resp.Credentials.AccessKeyId),
-		SecretAccessKey: ptr.ToString(resp.Credentials.SecretAccessKey),
-		SessionToken:    ptr.ToString(resp.Credentials.SessionToken),
+		AccessKeyID:     aws.ToString(resp.Credentials.AccessKeyId),
+		SecretAccessKey: aws.ToString(resp.Credentials.SecretAccessKey),
+		SessionToken:    aws.ToString(resp.Credentials.SessionToken),
 		Source:          WebIdentityProviderName,
 		CanExpire:       true,
 		Expires:         resp.Credentials.Expiration.Add(-p.options.ExpiryWindow),
