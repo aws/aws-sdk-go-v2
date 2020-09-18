@@ -14,8 +14,8 @@ import (
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
 
-// ServiceId is the client identifer
-const ServiceId = "EndpointCredentials"
+// ServiceID is the client identifer
+const ServiceID = "EndpointCredentials"
 
 // HTTPClient is a client for sending HTTP requests
 type HTTPClient interface {
@@ -86,7 +86,7 @@ func (c *Client) GetCredentials(ctx context.Context, params *GetCredentialsInput
 	stack.Serialize.Add(&serializeOpGetCredential{}, smithymiddleware.After)
 	stack.Build.Add(&buildEndpoint{Endpoint: options.Endpoint}, smithymiddleware.After)
 	stack.Deserialize.Add(&deserializeOpGetCredential{}, smithymiddleware.After)
-	middleware.AddUserAgentKey(ServiceId)
+	middleware.AddUserAgentKey(ServiceID)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 
