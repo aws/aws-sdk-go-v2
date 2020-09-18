@@ -89,7 +89,6 @@ func (d *deserializeOpGetCredential) HandleDeserialize(ctx context.Context, in s
 	if !ok {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
-	defer response.Body.Close()
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, deserializeError(response)
