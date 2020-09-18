@@ -11,7 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
-	smithyjson "github.com/awslabs/smithy-go/json"
 	"github.com/awslabs/smithy-go/middleware"
 	"github.com/awslabs/smithy-go/ptr"
 	smithytime "github.com/awslabs/smithy-go/time"
@@ -52,15 +51,26 @@ func (m *awsAwsjson11_deserializeOpAssociateEntityToThing) HandleDeserialize(ctx
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentAssociateEntityToThingOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentAssociateEntityToThingOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -87,15 +97,15 @@ func awsAwsjson11_deserializeOpErrorAssociateEntityToThing(response *smithyhttp.
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -161,15 +171,26 @@ func (m *awsAwsjson11_deserializeOpCreateFlowTemplate) HandleDeserialize(ctx con
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentCreateFlowTemplateOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentCreateFlowTemplateOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -196,15 +217,15 @@ func awsAwsjson11_deserializeOpErrorCreateFlowTemplate(response *smithyhttp.Resp
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -273,15 +294,26 @@ func (m *awsAwsjson11_deserializeOpCreateSystemInstance) HandleDeserialize(ctx c
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentCreateSystemInstanceOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentCreateSystemInstanceOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -308,15 +340,15 @@ func awsAwsjson11_deserializeOpErrorCreateSystemInstance(response *smithyhttp.Re
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -385,15 +417,26 @@ func (m *awsAwsjson11_deserializeOpCreateSystemTemplate) HandleDeserialize(ctx c
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentCreateSystemTemplateOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentCreateSystemTemplateOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -420,15 +463,15 @@ func awsAwsjson11_deserializeOpErrorCreateSystemTemplate(response *smithyhttp.Re
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -494,15 +537,26 @@ func (m *awsAwsjson11_deserializeOpDeleteFlowTemplate) HandleDeserialize(ctx con
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentDeleteFlowTemplateOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDeleteFlowTemplateOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -529,15 +583,15 @@ func awsAwsjson11_deserializeOpErrorDeleteFlowTemplate(response *smithyhttp.Resp
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -603,15 +657,26 @@ func (m *awsAwsjson11_deserializeOpDeleteNamespace) HandleDeserialize(ctx contex
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentDeleteNamespaceOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDeleteNamespaceOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -638,15 +703,15 @@ func awsAwsjson11_deserializeOpErrorDeleteNamespace(response *smithyhttp.Respons
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -706,15 +771,26 @@ func (m *awsAwsjson11_deserializeOpDeleteSystemInstance) HandleDeserialize(ctx c
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentDeleteSystemInstanceOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDeleteSystemInstanceOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -741,15 +817,15 @@ func awsAwsjson11_deserializeOpErrorDeleteSystemInstance(response *smithyhttp.Re
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -815,15 +891,26 @@ func (m *awsAwsjson11_deserializeOpDeleteSystemTemplate) HandleDeserialize(ctx c
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentDeleteSystemTemplateOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDeleteSystemTemplateOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -850,15 +937,15 @@ func awsAwsjson11_deserializeOpErrorDeleteSystemTemplate(response *smithyhttp.Re
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -924,15 +1011,26 @@ func (m *awsAwsjson11_deserializeOpDeploySystemInstance) HandleDeserialize(ctx c
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentDeploySystemInstanceOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDeploySystemInstanceOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -959,15 +1057,15 @@ func awsAwsjson11_deserializeOpErrorDeploySystemInstance(response *smithyhttp.Re
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -1036,15 +1134,26 @@ func (m *awsAwsjson11_deserializeOpDeprecateFlowTemplate) HandleDeserialize(ctx 
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentDeprecateFlowTemplateOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDeprecateFlowTemplateOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -1071,15 +1180,15 @@ func awsAwsjson11_deserializeOpErrorDeprecateFlowTemplate(response *smithyhttp.R
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -1145,15 +1254,26 @@ func (m *awsAwsjson11_deserializeOpDeprecateSystemTemplate) HandleDeserialize(ct
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentDeprecateSystemTemplateOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDeprecateSystemTemplateOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -1180,15 +1300,15 @@ func awsAwsjson11_deserializeOpErrorDeprecateSystemTemplate(response *smithyhttp
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -1254,15 +1374,26 @@ func (m *awsAwsjson11_deserializeOpDescribeNamespace) HandleDeserialize(ctx cont
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentDescribeNamespaceOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDescribeNamespaceOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -1289,15 +1420,15 @@ func awsAwsjson11_deserializeOpErrorDescribeNamespace(response *smithyhttp.Respo
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -1363,15 +1494,26 @@ func (m *awsAwsjson11_deserializeOpDissociateEntityFromThing) HandleDeserialize(
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentDissociateEntityFromThingOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDissociateEntityFromThingOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -1398,15 +1540,15 @@ func awsAwsjson11_deserializeOpErrorDissociateEntityFromThing(response *smithyht
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -1472,15 +1614,26 @@ func (m *awsAwsjson11_deserializeOpGetEntities) HandleDeserialize(ctx context.Co
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentGetEntitiesOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentGetEntitiesOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -1507,15 +1660,15 @@ func awsAwsjson11_deserializeOpErrorGetEntities(response *smithyhttp.Response) e
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -1581,15 +1734,26 @@ func (m *awsAwsjson11_deserializeOpGetFlowTemplate) HandleDeserialize(ctx contex
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentGetFlowTemplateOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentGetFlowTemplateOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -1616,15 +1780,15 @@ func awsAwsjson11_deserializeOpErrorGetFlowTemplate(response *smithyhttp.Respons
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -1690,15 +1854,26 @@ func (m *awsAwsjson11_deserializeOpGetFlowTemplateRevisions) HandleDeserialize(c
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentGetFlowTemplateRevisionsOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentGetFlowTemplateRevisionsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -1725,15 +1900,15 @@ func awsAwsjson11_deserializeOpErrorGetFlowTemplateRevisions(response *smithyhtt
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -1799,15 +1974,26 @@ func (m *awsAwsjson11_deserializeOpGetNamespaceDeletionStatus) HandleDeserialize
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentGetNamespaceDeletionStatusOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentGetNamespaceDeletionStatusOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -1834,15 +2020,15 @@ func awsAwsjson11_deserializeOpErrorGetNamespaceDeletionStatus(response *smithyh
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -1905,15 +2091,26 @@ func (m *awsAwsjson11_deserializeOpGetSystemInstance) HandleDeserialize(ctx cont
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentGetSystemInstanceOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentGetSystemInstanceOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -1940,15 +2137,15 @@ func awsAwsjson11_deserializeOpErrorGetSystemInstance(response *smithyhttp.Respo
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -2014,15 +2211,26 @@ func (m *awsAwsjson11_deserializeOpGetSystemTemplate) HandleDeserialize(ctx cont
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentGetSystemTemplateOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentGetSystemTemplateOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -2049,15 +2257,15 @@ func awsAwsjson11_deserializeOpErrorGetSystemTemplate(response *smithyhttp.Respo
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -2123,15 +2331,26 @@ func (m *awsAwsjson11_deserializeOpGetSystemTemplateRevisions) HandleDeserialize
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentGetSystemTemplateRevisionsOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentGetSystemTemplateRevisionsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -2158,15 +2377,15 @@ func awsAwsjson11_deserializeOpErrorGetSystemTemplateRevisions(response *smithyh
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -2232,15 +2451,26 @@ func (m *awsAwsjson11_deserializeOpGetUploadStatus) HandleDeserialize(ctx contex
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentGetUploadStatusOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentGetUploadStatusOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -2267,15 +2497,15 @@ func awsAwsjson11_deserializeOpErrorGetUploadStatus(response *smithyhttp.Respons
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -2341,15 +2571,26 @@ func (m *awsAwsjson11_deserializeOpListFlowExecutionMessages) HandleDeserialize(
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentListFlowExecutionMessagesOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentListFlowExecutionMessagesOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -2376,15 +2617,15 @@ func awsAwsjson11_deserializeOpErrorListFlowExecutionMessages(response *smithyht
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -2450,15 +2691,26 @@ func (m *awsAwsjson11_deserializeOpListTagsForResource) HandleDeserialize(ctx co
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -2485,15 +2737,15 @@ func awsAwsjson11_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -2559,15 +2811,26 @@ func (m *awsAwsjson11_deserializeOpSearchEntities) HandleDeserialize(ctx context
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentSearchEntitiesOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentSearchEntitiesOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -2594,15 +2857,15 @@ func awsAwsjson11_deserializeOpErrorSearchEntities(response *smithyhttp.Response
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -2665,15 +2928,26 @@ func (m *awsAwsjson11_deserializeOpSearchFlowExecutions) HandleDeserialize(ctx c
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentSearchFlowExecutionsOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentSearchFlowExecutionsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -2700,15 +2974,15 @@ func awsAwsjson11_deserializeOpErrorSearchFlowExecutions(response *smithyhttp.Re
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -2774,15 +3048,26 @@ func (m *awsAwsjson11_deserializeOpSearchFlowTemplates) HandleDeserialize(ctx co
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentSearchFlowTemplatesOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentSearchFlowTemplatesOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -2809,15 +3094,15 @@ func awsAwsjson11_deserializeOpErrorSearchFlowTemplates(response *smithyhttp.Res
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -2880,15 +3165,26 @@ func (m *awsAwsjson11_deserializeOpSearchSystemInstances) HandleDeserialize(ctx 
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentSearchSystemInstancesOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentSearchSystemInstancesOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -2915,15 +3211,15 @@ func awsAwsjson11_deserializeOpErrorSearchSystemInstances(response *smithyhttp.R
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -2986,15 +3282,26 @@ func (m *awsAwsjson11_deserializeOpSearchSystemTemplates) HandleDeserialize(ctx 
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentSearchSystemTemplatesOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentSearchSystemTemplatesOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -3021,15 +3328,15 @@ func awsAwsjson11_deserializeOpErrorSearchSystemTemplates(response *smithyhttp.R
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -3092,15 +3399,26 @@ func (m *awsAwsjson11_deserializeOpSearchThings) HandleDeserialize(ctx context.C
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentSearchThingsOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentSearchThingsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -3127,15 +3445,15 @@ func awsAwsjson11_deserializeOpErrorSearchThings(response *smithyhttp.Response) 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -3201,15 +3519,26 @@ func (m *awsAwsjson11_deserializeOpTagResource) HandleDeserialize(ctx context.Co
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentTagResourceOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentTagResourceOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -3236,15 +3565,15 @@ func awsAwsjson11_deserializeOpErrorTagResource(response *smithyhttp.Response) e
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -3310,15 +3639,26 @@ func (m *awsAwsjson11_deserializeOpUndeploySystemInstance) HandleDeserialize(ctx
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentUndeploySystemInstanceOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentUndeploySystemInstanceOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -3345,15 +3685,15 @@ func awsAwsjson11_deserializeOpErrorUndeploySystemInstance(response *smithyhttp.
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -3422,15 +3762,26 @@ func (m *awsAwsjson11_deserializeOpUntagResource) HandleDeserialize(ctx context.
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentUntagResourceOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentUntagResourceOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -3457,15 +3808,15 @@ func awsAwsjson11_deserializeOpErrorUntagResource(response *smithyhttp.Response)
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -3531,15 +3882,26 @@ func (m *awsAwsjson11_deserializeOpUpdateFlowTemplate) HandleDeserialize(ctx con
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentUpdateFlowTemplateOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentUpdateFlowTemplateOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -3566,15 +3928,15 @@ func awsAwsjson11_deserializeOpErrorUpdateFlowTemplate(response *smithyhttp.Resp
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -3640,15 +4002,26 @@ func (m *awsAwsjson11_deserializeOpUpdateSystemTemplate) HandleDeserialize(ctx c
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentUpdateSystemTemplateOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentUpdateSystemTemplateOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -3675,15 +4048,15 @@ func awsAwsjson11_deserializeOpErrorUpdateSystemTemplate(response *smithyhttp.Re
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -3749,15 +4122,26 @@ func (m *awsAwsjson11_deserializeOpUploadEntityDefinitions) HandleDeserialize(ct
 	body := io.TeeReader(response.Body, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
-	err = awsAwsjson11_deserializeOpDocumentUploadEntityDefinitionsOutput(&output, decoder)
-	if err != nil {
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentUploadEntityDefinitionsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -3784,15 +4168,15 @@ func awsAwsjson11_deserializeOpErrorUploadEntityDefinitions(response *smithyhttp
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-
 	code, message, err := restjson.GetErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -3830,17 +4214,28 @@ func awsAwsjson11_deserializeErrorInternalFailureException(response *smithyhttp.
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
 
 	output := &types.InternalFailureException{}
-	err := awsAwsjson11_deserializeDocumentInternalFailureException(&output, decoder)
+	err := awsAwsjson11_deserializeDocumentInternalFailureException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -3854,17 +4249,28 @@ func awsAwsjson11_deserializeErrorInvalidRequestException(response *smithyhttp.R
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
 
 	output := &types.InvalidRequestException{}
-	err := awsAwsjson11_deserializeDocumentInvalidRequestException(&output, decoder)
+	err := awsAwsjson11_deserializeDocumentInvalidRequestException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -3878,17 +4284,28 @@ func awsAwsjson11_deserializeErrorLimitExceededException(response *smithyhttp.Re
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
 
 	output := &types.LimitExceededException{}
-	err := awsAwsjson11_deserializeDocumentLimitExceededException(&output, decoder)
+	err := awsAwsjson11_deserializeDocumentLimitExceededException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -3902,17 +4319,28 @@ func awsAwsjson11_deserializeErrorResourceAlreadyExistsException(response *smith
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
 
 	output := &types.ResourceAlreadyExistsException{}
-	err := awsAwsjson11_deserializeDocumentResourceAlreadyExistsException(&output, decoder)
+	err := awsAwsjson11_deserializeDocumentResourceAlreadyExistsException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -3926,17 +4354,28 @@ func awsAwsjson11_deserializeErrorResourceInUseException(response *smithyhttp.Re
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
 
 	output := &types.ResourceInUseException{}
-	err := awsAwsjson11_deserializeDocumentResourceInUseException(&output, decoder)
+	err := awsAwsjson11_deserializeDocumentResourceInUseException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -3950,17 +4389,28 @@ func awsAwsjson11_deserializeErrorResourceNotFoundException(response *smithyhttp
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
 
 	output := &types.ResourceNotFoundException{}
-	err := awsAwsjson11_deserializeDocumentResourceNotFoundException(&output, decoder)
+	err := awsAwsjson11_deserializeDocumentResourceNotFoundException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
@@ -3974,39 +4424,45 @@ func awsAwsjson11_deserializeErrorThrottlingException(response *smithyhttp.Respo
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
 
 	output := &types.ThrottlingException{}
-	err := awsAwsjson11_deserializeDocumentThrottlingException(&output, decoder)
+	err := awsAwsjson11_deserializeDocumentThrottlingException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return err
 	}
 
 	errorBody.Seek(0, io.SeekStart)
 	return output
 }
 
-func awsAwsjson11_deserializeDocumentDefinitionDocument(v **types.DefinitionDocument, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentDefinitionDocument(v **types.DefinitionDocument, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *types.DefinitionDocument
@@ -4016,74 +4472,46 @@ func awsAwsjson11_deserializeDocumentDefinitionDocument(v **types.DefinitionDocu
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "language":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected DefinitionLanguage to be of type string, got %T instead", val)
+					return fmt.Errorf("expected DefinitionLanguage to be of type string, got %T instead", value)
 				}
 				sv.Language = types.DefinitionLanguage(jtv)
 			}
 
 		case "text":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected DefinitionText to be of type string, got %T instead", val)
+					return fmt.Errorf("expected DefinitionText to be of type string, got %T instead", value)
 				}
 				sv.Text = &jtv
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDependencyRevision(v **types.DependencyRevision, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentDependencyRevision(v **types.DependencyRevision, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *types.DependencyRevision
@@ -4093,34 +4521,22 @@ func awsAwsjson11_deserializeDocumentDependencyRevision(v **types.DependencyRevi
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "id":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Urn to be of type string, got %T instead", val)
+					return fmt.Errorf("expected Urn to be of type string, got %T instead", value)
 				}
 				sv.Id = &jtv
 			}
 
 		case "revisionNumber":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(json.Number)
+			if value != nil {
+				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Version to be json.Number, got %T instead", val)
+					return fmt.Errorf("expected Version to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -4130,41 +4546,25 @@ func awsAwsjson11_deserializeDocumentDependencyRevision(v **types.DependencyRevi
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDependencyRevisions(v *[]*types.DependencyRevision, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentDependencyRevisions(v *[]*types.DependencyRevision, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '[' {
-		return fmt.Errorf("expect `[` as start token")
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var cv []*types.DependencyRevision
@@ -4174,42 +4574,29 @@ func awsAwsjson11_deserializeDocumentDependencyRevisions(v *[]*types.DependencyR
 		cv = *v
 	}
 
-	for decoder.More() {
+	for _, value := range shape {
 		var col *types.DependencyRevision
-		if err := awsAwsjson11_deserializeDocumentDependencyRevision(&col, decoder); err != nil {
+		if err := awsAwsjson11_deserializeDocumentDependencyRevision(&col, value); err != nil {
 			return err
 		}
 		cv = append(cv, col)
 
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != ']' {
-		return fmt.Errorf("expect `]` as end token")
-	}
-
 	*v = cv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentEntityDescription(v **types.EntityDescription, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentEntityDescription(v **types.EntityDescription, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *types.EntityDescription
@@ -4219,34 +4606,22 @@ func awsAwsjson11_deserializeDocumentEntityDescription(v **types.EntityDescripti
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "arn":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Arn to be of type string, got %T instead", val)
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.Arn = &jtv
 			}
 
 		case "createdAt":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(json.Number)
+			if value != nil {
+				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", val)
+					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
 				}
 				f64, err := jtv.Float64()
 				if err != nil {
@@ -4256,72 +4631,48 @@ func awsAwsjson11_deserializeDocumentEntityDescription(v **types.EntityDescripti
 			}
 
 		case "definition":
-			if err := awsAwsjson11_deserializeDocumentDefinitionDocument(&sv.Definition, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentDefinitionDocument(&sv.Definition, value); err != nil {
 				return err
 			}
 
 		case "id":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Urn to be of type string, got %T instead", val)
+					return fmt.Errorf("expected Urn to be of type string, got %T instead", value)
 				}
 				sv.Id = &jtv
 			}
 
 		case "type":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected EntityType to be of type string, got %T instead", val)
+					return fmt.Errorf("expected EntityType to be of type string, got %T instead", value)
 				}
 				sv.Type = types.EntityType(jtv)
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentEntityDescriptions(v *[]*types.EntityDescription, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentEntityDescriptions(v *[]*types.EntityDescription, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '[' {
-		return fmt.Errorf("expect `[` as start token")
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var cv []*types.EntityDescription
@@ -4331,42 +4682,29 @@ func awsAwsjson11_deserializeDocumentEntityDescriptions(v *[]*types.EntityDescri
 		cv = *v
 	}
 
-	for decoder.More() {
+	for _, value := range shape {
 		var col *types.EntityDescription
-		if err := awsAwsjson11_deserializeDocumentEntityDescription(&col, decoder); err != nil {
+		if err := awsAwsjson11_deserializeDocumentEntityDescription(&col, value); err != nil {
 			return err
 		}
 		cv = append(cv, col)
 
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != ']' {
-		return fmt.Errorf("expect `]` as end token")
-	}
-
 	*v = cv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentFlowExecutionMessage(v **types.FlowExecutionMessage, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentFlowExecutionMessage(v **types.FlowExecutionMessage, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *types.FlowExecutionMessage
@@ -4376,60 +4714,40 @@ func awsAwsjson11_deserializeDocumentFlowExecutionMessage(v **types.FlowExecutio
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "eventType":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected FlowExecutionEventType to be of type string, got %T instead", val)
+					return fmt.Errorf("expected FlowExecutionEventType to be of type string, got %T instead", value)
 				}
 				sv.EventType = types.FlowExecutionEventType(jtv)
 			}
 
 		case "messageId":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected FlowExecutionMessageId to be of type string, got %T instead", val)
+					return fmt.Errorf("expected FlowExecutionMessageId to be of type string, got %T instead", value)
 				}
 				sv.MessageId = &jtv
 			}
 
 		case "payload":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected FlowExecutionMessagePayload to be of type string, got %T instead", val)
+					return fmt.Errorf("expected FlowExecutionMessagePayload to be of type string, got %T instead", value)
 				}
 				sv.Payload = &jtv
 			}
 
 		case "timestamp":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(json.Number)
+			if value != nil {
+				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", val)
+					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
 				}
 				f64, err := jtv.Float64()
 				if err != nil {
@@ -4439,41 +4757,25 @@ func awsAwsjson11_deserializeDocumentFlowExecutionMessage(v **types.FlowExecutio
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentFlowExecutionMessages(v *[]*types.FlowExecutionMessage, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentFlowExecutionMessages(v *[]*types.FlowExecutionMessage, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '[' {
-		return fmt.Errorf("expect `[` as start token")
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var cv []*types.FlowExecutionMessage
@@ -4483,42 +4785,29 @@ func awsAwsjson11_deserializeDocumentFlowExecutionMessages(v *[]*types.FlowExecu
 		cv = *v
 	}
 
-	for decoder.More() {
+	for _, value := range shape {
 		var col *types.FlowExecutionMessage
-		if err := awsAwsjson11_deserializeDocumentFlowExecutionMessage(&col, decoder); err != nil {
+		if err := awsAwsjson11_deserializeDocumentFlowExecutionMessage(&col, value); err != nil {
 			return err
 		}
 		cv = append(cv, col)
 
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != ']' {
-		return fmt.Errorf("expect `]` as end token")
-	}
-
 	*v = cv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentFlowExecutionSummaries(v *[]*types.FlowExecutionSummary, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentFlowExecutionSummaries(v *[]*types.FlowExecutionSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '[' {
-		return fmt.Errorf("expect `[` as start token")
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var cv []*types.FlowExecutionSummary
@@ -4528,42 +4817,29 @@ func awsAwsjson11_deserializeDocumentFlowExecutionSummaries(v *[]*types.FlowExec
 		cv = *v
 	}
 
-	for decoder.More() {
+	for _, value := range shape {
 		var col *types.FlowExecutionSummary
-		if err := awsAwsjson11_deserializeDocumentFlowExecutionSummary(&col, decoder); err != nil {
+		if err := awsAwsjson11_deserializeDocumentFlowExecutionSummary(&col, value); err != nil {
 			return err
 		}
 		cv = append(cv, col)
 
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != ']' {
-		return fmt.Errorf("expect `]` as end token")
-	}
-
 	*v = cv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentFlowExecutionSummary(v **types.FlowExecutionSummary, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentFlowExecutionSummary(v **types.FlowExecutionSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *types.FlowExecutionSummary
@@ -4573,21 +4849,13 @@ func awsAwsjson11_deserializeDocumentFlowExecutionSummary(v **types.FlowExecutio
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "createdAt":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(json.Number)
+			if value != nil {
+				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", val)
+					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
 				}
 				f64, err := jtv.Float64()
 				if err != nil {
@@ -4597,66 +4865,46 @@ func awsAwsjson11_deserializeDocumentFlowExecutionSummary(v **types.FlowExecutio
 			}
 
 		case "flowExecutionId":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected FlowExecutionId to be of type string, got %T instead", val)
+					return fmt.Errorf("expected FlowExecutionId to be of type string, got %T instead", value)
 				}
 				sv.FlowExecutionId = &jtv
 			}
 
 		case "flowTemplateId":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Urn to be of type string, got %T instead", val)
+					return fmt.Errorf("expected Urn to be of type string, got %T instead", value)
 				}
 				sv.FlowTemplateId = &jtv
 			}
 
 		case "status":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected FlowExecutionStatus to be of type string, got %T instead", val)
+					return fmt.Errorf("expected FlowExecutionStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.FlowExecutionStatus(jtv)
 			}
 
 		case "systemInstanceId":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Urn to be of type string, got %T instead", val)
+					return fmt.Errorf("expected Urn to be of type string, got %T instead", value)
 				}
 				sv.SystemInstanceId = &jtv
 			}
 
 		case "updatedAt":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(json.Number)
+			if value != nil {
+				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", val)
+					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
 				}
 				f64, err := jtv.Float64()
 				if err != nil {
@@ -4666,41 +4914,25 @@ func awsAwsjson11_deserializeDocumentFlowExecutionSummary(v **types.FlowExecutio
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentFlowTemplateDescription(v **types.FlowTemplateDescription, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentFlowTemplateDescription(v **types.FlowTemplateDescription, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *types.FlowTemplateDescription
@@ -4710,31 +4942,23 @@ func awsAwsjson11_deserializeDocumentFlowTemplateDescription(v **types.FlowTempl
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "definition":
-			if err := awsAwsjson11_deserializeDocumentDefinitionDocument(&sv.Definition, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentDefinitionDocument(&sv.Definition, value); err != nil {
 				return err
 			}
 
 		case "summary":
-			if err := awsAwsjson11_deserializeDocumentFlowTemplateSummary(&sv.Summary, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentFlowTemplateSummary(&sv.Summary, value); err != nil {
 				return err
 			}
 
 		case "validatedNamespaceVersion":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(json.Number)
+			if value != nil {
+				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Version to be json.Number, got %T instead", val)
+					return fmt.Errorf("expected Version to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -4744,41 +4968,25 @@ func awsAwsjson11_deserializeDocumentFlowTemplateDescription(v **types.FlowTempl
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentFlowTemplateSummaries(v *[]*types.FlowTemplateSummary, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentFlowTemplateSummaries(v *[]*types.FlowTemplateSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '[' {
-		return fmt.Errorf("expect `[` as start token")
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var cv []*types.FlowTemplateSummary
@@ -4788,42 +4996,29 @@ func awsAwsjson11_deserializeDocumentFlowTemplateSummaries(v *[]*types.FlowTempl
 		cv = *v
 	}
 
-	for decoder.More() {
+	for _, value := range shape {
 		var col *types.FlowTemplateSummary
-		if err := awsAwsjson11_deserializeDocumentFlowTemplateSummary(&col, decoder); err != nil {
+		if err := awsAwsjson11_deserializeDocumentFlowTemplateSummary(&col, value); err != nil {
 			return err
 		}
 		cv = append(cv, col)
 
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != ']' {
-		return fmt.Errorf("expect `]` as end token")
-	}
-
 	*v = cv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentFlowTemplateSummary(v **types.FlowTemplateSummary, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentFlowTemplateSummary(v **types.FlowTemplateSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *types.FlowTemplateSummary
@@ -4833,34 +5028,22 @@ func awsAwsjson11_deserializeDocumentFlowTemplateSummary(v **types.FlowTemplateS
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "arn":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Arn to be of type string, got %T instead", val)
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.Arn = &jtv
 			}
 
 		case "createdAt":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(json.Number)
+			if value != nil {
+				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", val)
+					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
 				}
 				f64, err := jtv.Float64()
 				if err != nil {
@@ -4870,27 +5053,19 @@ func awsAwsjson11_deserializeDocumentFlowTemplateSummary(v **types.FlowTemplateS
 			}
 
 		case "id":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Urn to be of type string, got %T instead", val)
+					return fmt.Errorf("expected Urn to be of type string, got %T instead", value)
 				}
 				sv.Id = &jtv
 			}
 
 		case "revisionNumber":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(json.Number)
+			if value != nil {
+				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Version to be json.Number, got %T instead", val)
+					return fmt.Errorf("expected Version to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -4900,41 +5075,25 @@ func awsAwsjson11_deserializeDocumentFlowTemplateSummary(v **types.FlowTemplateS
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentInternalFailureException(v **types.InternalFailureException, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentInternalFailureException(v **types.InternalFailureException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *types.InternalFailureException
@@ -4944,61 +5103,37 @@ func awsAwsjson11_deserializeDocumentInternalFailureException(v **types.Internal
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "message":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", val)
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = &jtv
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentInvalidRequestException(v **types.InvalidRequestException, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentInvalidRequestException(v **types.InvalidRequestException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *types.InvalidRequestException
@@ -5008,61 +5143,37 @@ func awsAwsjson11_deserializeDocumentInvalidRequestException(v **types.InvalidRe
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "message":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", val)
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = &jtv
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExceededException, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExceededException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *types.LimitExceededException
@@ -5072,61 +5183,37 @@ func awsAwsjson11_deserializeDocumentLimitExceededException(v **types.LimitExcee
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "message":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", val)
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = &jtv
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentMetricsConfiguration(v **types.MetricsConfiguration, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentMetricsConfiguration(v **types.MetricsConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *types.MetricsConfiguration
@@ -5136,74 +5223,46 @@ func awsAwsjson11_deserializeDocumentMetricsConfiguration(v **types.MetricsConfi
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "cloudMetricEnabled":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(bool)
+			if value != nil {
+				jtv, ok := value.(bool)
 				if !ok {
-					return fmt.Errorf("expected Enabled to be of type *bool, got %T instead", val)
+					return fmt.Errorf("expected Enabled to be of type *bool, got %T instead", value)
 				}
 				sv.CloudMetricEnabled = &jtv
 			}
 
 		case "metricRuleRoleArn":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", val)
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
 				}
 				sv.MetricRuleRoleArn = &jtv
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentResourceAlreadyExistsException(v **types.ResourceAlreadyExistsException, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentResourceAlreadyExistsException(v **types.ResourceAlreadyExistsException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *types.ResourceAlreadyExistsException
@@ -5213,61 +5272,37 @@ func awsAwsjson11_deserializeDocumentResourceAlreadyExistsException(v **types.Re
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "message":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", val)
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = &jtv
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentResourceInUseException(v **types.ResourceInUseException, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentResourceInUseException(v **types.ResourceInUseException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *types.ResourceInUseException
@@ -5277,61 +5312,37 @@ func awsAwsjson11_deserializeDocumentResourceInUseException(v **types.ResourceIn
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "message":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", val)
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = &jtv
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.ResourceNotFoundException, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.ResourceNotFoundException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *types.ResourceNotFoundException
@@ -5341,61 +5352,37 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "message":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", val)
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = &jtv
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentStringList(v *[]*string, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentStringList(v *[]*string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '[' {
-		return fmt.Errorf("expect `[` as start token")
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var cv []*string
@@ -5405,50 +5392,33 @@ func awsAwsjson11_deserializeDocumentStringList(v *[]*string, decoder *json.Deco
 		cv = *v
 	}
 
-	for decoder.More() {
+	for _, value := range shape {
 		var col *string
-		val, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if val != nil {
-			jtv, ok := val.(string)
+		if value != nil {
+			jtv, ok := value.(string)
 			if !ok {
-				return fmt.Errorf("expected String to be of type string, got %T instead", val)
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
 			}
 			col = &jtv
 		}
 		cv = append(cv, col)
 
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != ']' {
-		return fmt.Errorf("expect `]` as end token")
-	}
-
 	*v = cv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentSystemInstanceDescription(v **types.SystemInstanceDescription, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentSystemInstanceDescription(v **types.SystemInstanceDescription, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *types.SystemInstanceDescription
@@ -5458,67 +5428,51 @@ func awsAwsjson11_deserializeDocumentSystemInstanceDescription(v **types.SystemI
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "definition":
-			if err := awsAwsjson11_deserializeDocumentDefinitionDocument(&sv.Definition, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentDefinitionDocument(&sv.Definition, value); err != nil {
 				return err
 			}
 
 		case "flowActionsRoleArn":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", val)
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
 				}
 				sv.FlowActionsRoleArn = &jtv
 			}
 
 		case "metricsConfiguration":
-			if err := awsAwsjson11_deserializeDocumentMetricsConfiguration(&sv.MetricsConfiguration, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentMetricsConfiguration(&sv.MetricsConfiguration, value); err != nil {
 				return err
 			}
 
 		case "s3BucketName":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected S3BucketName to be of type string, got %T instead", val)
+					return fmt.Errorf("expected S3BucketName to be of type string, got %T instead", value)
 				}
 				sv.S3BucketName = &jtv
 			}
 
 		case "summary":
-			if err := awsAwsjson11_deserializeDocumentSystemInstanceSummary(&sv.Summary, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentSystemInstanceSummary(&sv.Summary, value); err != nil {
 				return err
 			}
 
 		case "validatedDependencyRevisions":
-			if err := awsAwsjson11_deserializeDocumentDependencyRevisions(&sv.ValidatedDependencyRevisions, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentDependencyRevisions(&sv.ValidatedDependencyRevisions, value); err != nil {
 				return err
 			}
 
 		case "validatedNamespaceVersion":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(json.Number)
+			if value != nil {
+				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Version to be json.Number, got %T instead", val)
+					return fmt.Errorf("expected Version to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -5528,41 +5482,25 @@ func awsAwsjson11_deserializeDocumentSystemInstanceDescription(v **types.SystemI
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentSystemInstanceSummaries(v *[]*types.SystemInstanceSummary, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentSystemInstanceSummaries(v *[]*types.SystemInstanceSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '[' {
-		return fmt.Errorf("expect `[` as start token")
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var cv []*types.SystemInstanceSummary
@@ -5572,42 +5510,29 @@ func awsAwsjson11_deserializeDocumentSystemInstanceSummaries(v *[]*types.SystemI
 		cv = *v
 	}
 
-	for decoder.More() {
+	for _, value := range shape {
 		var col *types.SystemInstanceSummary
-		if err := awsAwsjson11_deserializeDocumentSystemInstanceSummary(&col, decoder); err != nil {
+		if err := awsAwsjson11_deserializeDocumentSystemInstanceSummary(&col, value); err != nil {
 			return err
 		}
 		cv = append(cv, col)
 
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != ']' {
-		return fmt.Errorf("expect `]` as end token")
-	}
-
 	*v = cv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentSystemInstanceSummary(v **types.SystemInstanceSummary, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentSystemInstanceSummary(v **types.SystemInstanceSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *types.SystemInstanceSummary
@@ -5617,34 +5542,22 @@ func awsAwsjson11_deserializeDocumentSystemInstanceSummary(v **types.SystemInsta
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "arn":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Arn to be of type string, got %T instead", val)
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.Arn = &jtv
 			}
 
 		case "createdAt":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(json.Number)
+			if value != nil {
+				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", val)
+					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
 				}
 				f64, err := jtv.Float64()
 				if err != nil {
@@ -5654,92 +5567,64 @@ func awsAwsjson11_deserializeDocumentSystemInstanceSummary(v **types.SystemInsta
 			}
 
 		case "greengrassGroupId":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected GreengrassGroupId to be of type string, got %T instead", val)
+					return fmt.Errorf("expected GreengrassGroupId to be of type string, got %T instead", value)
 				}
 				sv.GreengrassGroupId = &jtv
 			}
 
 		case "greengrassGroupName":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected GroupName to be of type string, got %T instead", val)
+					return fmt.Errorf("expected GroupName to be of type string, got %T instead", value)
 				}
 				sv.GreengrassGroupName = &jtv
 			}
 
 		case "greengrassGroupVersionId":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected GreengrassGroupVersionId to be of type string, got %T instead", val)
+					return fmt.Errorf("expected GreengrassGroupVersionId to be of type string, got %T instead", value)
 				}
 				sv.GreengrassGroupVersionId = &jtv
 			}
 
 		case "id":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Urn to be of type string, got %T instead", val)
+					return fmt.Errorf("expected Urn to be of type string, got %T instead", value)
 				}
 				sv.Id = &jtv
 			}
 
 		case "status":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected SystemInstanceDeploymentStatus to be of type string, got %T instead", val)
+					return fmt.Errorf("expected SystemInstanceDeploymentStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.SystemInstanceDeploymentStatus(jtv)
 			}
 
 		case "target":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected DeploymentTarget to be of type string, got %T instead", val)
+					return fmt.Errorf("expected DeploymentTarget to be of type string, got %T instead", value)
 				}
 				sv.Target = types.DeploymentTarget(jtv)
 			}
 
 		case "updatedAt":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(json.Number)
+			if value != nil {
+				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", val)
+					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
 				}
 				f64, err := jtv.Float64()
 				if err != nil {
@@ -5749,41 +5634,25 @@ func awsAwsjson11_deserializeDocumentSystemInstanceSummary(v **types.SystemInsta
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentSystemTemplateDescription(v **types.SystemTemplateDescription, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentSystemTemplateDescription(v **types.SystemTemplateDescription, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *types.SystemTemplateDescription
@@ -5793,31 +5662,23 @@ func awsAwsjson11_deserializeDocumentSystemTemplateDescription(v **types.SystemT
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "definition":
-			if err := awsAwsjson11_deserializeDocumentDefinitionDocument(&sv.Definition, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentDefinitionDocument(&sv.Definition, value); err != nil {
 				return err
 			}
 
 		case "summary":
-			if err := awsAwsjson11_deserializeDocumentSystemTemplateSummary(&sv.Summary, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentSystemTemplateSummary(&sv.Summary, value); err != nil {
 				return err
 			}
 
 		case "validatedNamespaceVersion":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(json.Number)
+			if value != nil {
+				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Version to be json.Number, got %T instead", val)
+					return fmt.Errorf("expected Version to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -5827,41 +5688,25 @@ func awsAwsjson11_deserializeDocumentSystemTemplateDescription(v **types.SystemT
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentSystemTemplateSummaries(v *[]*types.SystemTemplateSummary, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentSystemTemplateSummaries(v *[]*types.SystemTemplateSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '[' {
-		return fmt.Errorf("expect `[` as start token")
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var cv []*types.SystemTemplateSummary
@@ -5871,42 +5716,29 @@ func awsAwsjson11_deserializeDocumentSystemTemplateSummaries(v *[]*types.SystemT
 		cv = *v
 	}
 
-	for decoder.More() {
+	for _, value := range shape {
 		var col *types.SystemTemplateSummary
-		if err := awsAwsjson11_deserializeDocumentSystemTemplateSummary(&col, decoder); err != nil {
+		if err := awsAwsjson11_deserializeDocumentSystemTemplateSummary(&col, value); err != nil {
 			return err
 		}
 		cv = append(cv, col)
 
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != ']' {
-		return fmt.Errorf("expect `]` as end token")
-	}
-
 	*v = cv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentSystemTemplateSummary(v **types.SystemTemplateSummary, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentSystemTemplateSummary(v **types.SystemTemplateSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *types.SystemTemplateSummary
@@ -5916,34 +5748,22 @@ func awsAwsjson11_deserializeDocumentSystemTemplateSummary(v **types.SystemTempl
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "arn":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Arn to be of type string, got %T instead", val)
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.Arn = &jtv
 			}
 
 		case "createdAt":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(json.Number)
+			if value != nil {
+				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", val)
+					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
 				}
 				f64, err := jtv.Float64()
 				if err != nil {
@@ -5953,27 +5773,19 @@ func awsAwsjson11_deserializeDocumentSystemTemplateSummary(v **types.SystemTempl
 			}
 
 		case "id":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Urn to be of type string, got %T instead", val)
+					return fmt.Errorf("expected Urn to be of type string, got %T instead", value)
 				}
 				sv.Id = &jtv
 			}
 
 		case "revisionNumber":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(json.Number)
+			if value != nil {
+				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Version to be json.Number, got %T instead", val)
+					return fmt.Errorf("expected Version to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -5983,41 +5795,25 @@ func awsAwsjson11_deserializeDocumentSystemTemplateSummary(v **types.SystemTempl
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentTag(v **types.Tag, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *types.Tag
@@ -6027,74 +5823,46 @@ func awsAwsjson11_deserializeDocumentTag(v **types.Tag, decoder *json.Decoder) e
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "key":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected TagKey to be of type string, got %T instead", val)
+					return fmt.Errorf("expected TagKey to be of type string, got %T instead", value)
 				}
 				sv.Key = &jtv
 			}
 
 		case "value":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected TagValue to be of type string, got %T instead", val)
+					return fmt.Errorf("expected TagValue to be of type string, got %T instead", value)
 				}
 				sv.Value = &jtv
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentTagList(v *[]*types.Tag, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentTagList(v *[]*types.Tag, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '[' {
-		return fmt.Errorf("expect `[` as start token")
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var cv []*types.Tag
@@ -6104,42 +5872,29 @@ func awsAwsjson11_deserializeDocumentTagList(v *[]*types.Tag, decoder *json.Deco
 		cv = *v
 	}
 
-	for decoder.More() {
+	for _, value := range shape {
 		var col *types.Tag
-		if err := awsAwsjson11_deserializeDocumentTag(&col, decoder); err != nil {
+		if err := awsAwsjson11_deserializeDocumentTag(&col, value); err != nil {
 			return err
 		}
 		cv = append(cv, col)
 
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != ']' {
-		return fmt.Errorf("expect `]` as end token")
-	}
-
 	*v = cv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentThing(v **types.Thing, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentThing(v **types.Thing, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *types.Thing
@@ -6149,74 +5904,46 @@ func awsAwsjson11_deserializeDocumentThing(v **types.Thing, decoder *json.Decode
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "thingArn":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected ThingArn to be of type string, got %T instead", val)
+					return fmt.Errorf("expected ThingArn to be of type string, got %T instead", value)
 				}
 				sv.ThingArn = &jtv
 			}
 
 		case "thingName":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected ThingName to be of type string, got %T instead", val)
+					return fmt.Errorf("expected ThingName to be of type string, got %T instead", value)
 				}
 				sv.ThingName = &jtv
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentThings(v *[]*types.Thing, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentThings(v *[]*types.Thing, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '[' {
-		return fmt.Errorf("expect `[` as start token")
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var cv []*types.Thing
@@ -6226,42 +5953,29 @@ func awsAwsjson11_deserializeDocumentThings(v *[]*types.Thing, decoder *json.Dec
 		cv = *v
 	}
 
-	for decoder.More() {
+	for _, value := range shape {
 		var col *types.Thing
-		if err := awsAwsjson11_deserializeDocumentThing(&col, decoder); err != nil {
+		if err := awsAwsjson11_deserializeDocumentThing(&col, value); err != nil {
 			return err
 		}
 		cv = append(cv, col)
 
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != ']' {
-		return fmt.Errorf("expect `]` as end token")
-	}
-
 	*v = cv
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingException, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *types.ThrottlingException
@@ -6271,61 +5985,37 @@ func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "message":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", val)
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = &jtv
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentAssociateEntityToThingOutput(v **AssociateEntityToThingOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentAssociateEntityToThingOutput(v **AssociateEntityToThingOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *AssociateEntityToThingOutput
@@ -6335,48 +6025,28 @@ func awsAwsjson11_deserializeOpDocumentAssociateEntityToThingOutput(v **Associat
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentCreateFlowTemplateOutput(v **CreateFlowTemplateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateFlowTemplateOutput(v **CreateFlowTemplateOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *CreateFlowTemplateOutput
@@ -6386,53 +6056,33 @@ func awsAwsjson11_deserializeOpDocumentCreateFlowTemplateOutput(v **CreateFlowTe
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "summary":
-			if err := awsAwsjson11_deserializeDocumentFlowTemplateSummary(&sv.Summary, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentFlowTemplateSummary(&sv.Summary, value); err != nil {
 				return err
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentCreateSystemInstanceOutput(v **CreateSystemInstanceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateSystemInstanceOutput(v **CreateSystemInstanceOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *CreateSystemInstanceOutput
@@ -6442,53 +6092,33 @@ func awsAwsjson11_deserializeOpDocumentCreateSystemInstanceOutput(v **CreateSyst
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "summary":
-			if err := awsAwsjson11_deserializeDocumentSystemInstanceSummary(&sv.Summary, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentSystemInstanceSummary(&sv.Summary, value); err != nil {
 				return err
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentCreateSystemTemplateOutput(v **CreateSystemTemplateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentCreateSystemTemplateOutput(v **CreateSystemTemplateOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *CreateSystemTemplateOutput
@@ -6498,53 +6128,33 @@ func awsAwsjson11_deserializeOpDocumentCreateSystemTemplateOutput(v **CreateSyst
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "summary":
-			if err := awsAwsjson11_deserializeDocumentSystemTemplateSummary(&sv.Summary, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentSystemTemplateSummary(&sv.Summary, value); err != nil {
 				return err
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentDeleteFlowTemplateOutput(v **DeleteFlowTemplateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteFlowTemplateOutput(v **DeleteFlowTemplateOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *DeleteFlowTemplateOutput
@@ -6554,48 +6164,28 @@ func awsAwsjson11_deserializeOpDocumentDeleteFlowTemplateOutput(v **DeleteFlowTe
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentDeleteNamespaceOutput(v **DeleteNamespaceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteNamespaceOutput(v **DeleteNamespaceOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *DeleteNamespaceOutput
@@ -6605,74 +6195,46 @@ func awsAwsjson11_deserializeOpDocumentDeleteNamespaceOutput(v **DeleteNamespace
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "namespaceArn":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Arn to be of type string, got %T instead", val)
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.NamespaceArn = &jtv
 			}
 
 		case "namespaceName":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NamespaceName to be of type string, got %T instead", val)
+					return fmt.Errorf("expected NamespaceName to be of type string, got %T instead", value)
 				}
 				sv.NamespaceName = &jtv
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentDeleteSystemInstanceOutput(v **DeleteSystemInstanceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteSystemInstanceOutput(v **DeleteSystemInstanceOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *DeleteSystemInstanceOutput
@@ -6682,48 +6244,28 @@ func awsAwsjson11_deserializeOpDocumentDeleteSystemInstanceOutput(v **DeleteSyst
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentDeleteSystemTemplateOutput(v **DeleteSystemTemplateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeleteSystemTemplateOutput(v **DeleteSystemTemplateOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *DeleteSystemTemplateOutput
@@ -6733,48 +6275,28 @@ func awsAwsjson11_deserializeOpDocumentDeleteSystemTemplateOutput(v **DeleteSyst
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentDeploySystemInstanceOutput(v **DeploySystemInstanceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeploySystemInstanceOutput(v **DeploySystemInstanceOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *DeploySystemInstanceOutput
@@ -6784,66 +6306,42 @@ func awsAwsjson11_deserializeOpDocumentDeploySystemInstanceOutput(v **DeploySyst
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "greengrassDeploymentId":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected GreengrassDeploymentId to be of type string, got %T instead", val)
+					return fmt.Errorf("expected GreengrassDeploymentId to be of type string, got %T instead", value)
 				}
 				sv.GreengrassDeploymentId = &jtv
 			}
 
 		case "summary":
-			if err := awsAwsjson11_deserializeDocumentSystemInstanceSummary(&sv.Summary, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentSystemInstanceSummary(&sv.Summary, value); err != nil {
 				return err
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentDeprecateFlowTemplateOutput(v **DeprecateFlowTemplateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeprecateFlowTemplateOutput(v **DeprecateFlowTemplateOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *DeprecateFlowTemplateOutput
@@ -6853,48 +6351,28 @@ func awsAwsjson11_deserializeOpDocumentDeprecateFlowTemplateOutput(v **Deprecate
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentDeprecateSystemTemplateOutput(v **DeprecateSystemTemplateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDeprecateSystemTemplateOutput(v **DeprecateSystemTemplateOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *DeprecateSystemTemplateOutput
@@ -6904,48 +6382,28 @@ func awsAwsjson11_deserializeOpDocumentDeprecateSystemTemplateOutput(v **Depreca
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentDescribeNamespaceOutput(v **DescribeNamespaceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDescribeNamespaceOutput(v **DescribeNamespaceOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *DescribeNamespaceOutput
@@ -6955,47 +6413,31 @@ func awsAwsjson11_deserializeOpDocumentDescribeNamespaceOutput(v **DescribeNames
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "namespaceArn":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Arn to be of type string, got %T instead", val)
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.NamespaceArn = &jtv
 			}
 
 		case "namespaceName":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NamespaceName to be of type string, got %T instead", val)
+					return fmt.Errorf("expected NamespaceName to be of type string, got %T instead", value)
 				}
 				sv.NamespaceName = &jtv
 			}
 
 		case "namespaceVersion":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(json.Number)
+			if value != nil {
+				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Version to be json.Number, got %T instead", val)
+					return fmt.Errorf("expected Version to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -7005,27 +6447,19 @@ func awsAwsjson11_deserializeOpDocumentDescribeNamespaceOutput(v **DescribeNames
 			}
 
 		case "trackingNamespaceName":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NamespaceName to be of type string, got %T instead", val)
+					return fmt.Errorf("expected NamespaceName to be of type string, got %T instead", value)
 				}
 				sv.TrackingNamespaceName = &jtv
 			}
 
 		case "trackingNamespaceVersion":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(json.Number)
+			if value != nil {
+				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Version to be json.Number, got %T instead", val)
+					return fmt.Errorf("expected Version to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -7035,41 +6469,25 @@ func awsAwsjson11_deserializeOpDocumentDescribeNamespaceOutput(v **DescribeNames
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentDissociateEntityFromThingOutput(v **DissociateEntityFromThingOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentDissociateEntityFromThingOutput(v **DissociateEntityFromThingOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *DissociateEntityFromThingOutput
@@ -7079,48 +6497,28 @@ func awsAwsjson11_deserializeOpDocumentDissociateEntityFromThingOutput(v **Disso
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentGetEntitiesOutput(v **GetEntitiesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetEntitiesOutput(v **GetEntitiesOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *GetEntitiesOutput
@@ -7130,53 +6528,33 @@ func awsAwsjson11_deserializeOpDocumentGetEntitiesOutput(v **GetEntitiesOutput, 
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "descriptions":
-			if err := awsAwsjson11_deserializeDocumentEntityDescriptions(&sv.Descriptions, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentEntityDescriptions(&sv.Descriptions, value); err != nil {
 				return err
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentGetFlowTemplateOutput(v **GetFlowTemplateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetFlowTemplateOutput(v **GetFlowTemplateOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *GetFlowTemplateOutput
@@ -7186,53 +6564,33 @@ func awsAwsjson11_deserializeOpDocumentGetFlowTemplateOutput(v **GetFlowTemplate
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "description":
-			if err := awsAwsjson11_deserializeDocumentFlowTemplateDescription(&sv.Description, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentFlowTemplateDescription(&sv.Description, value); err != nil {
 				return err
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentGetFlowTemplateRevisionsOutput(v **GetFlowTemplateRevisionsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetFlowTemplateRevisionsOutput(v **GetFlowTemplateRevisionsOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *GetFlowTemplateRevisionsOutput
@@ -7242,66 +6600,42 @@ func awsAwsjson11_deserializeOpDocumentGetFlowTemplateRevisionsOutput(v **GetFlo
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "nextToken":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NextToken to be of type string, got %T instead", val)
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = &jtv
 			}
 
 		case "summaries":
-			if err := awsAwsjson11_deserializeDocumentFlowTemplateSummaries(&sv.Summaries, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentFlowTemplateSummaries(&sv.Summaries, value); err != nil {
 				return err
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentGetNamespaceDeletionStatusOutput(v **GetNamespaceDeletionStatusOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetNamespaceDeletionStatusOutput(v **GetNamespaceDeletionStatusOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *GetNamespaceDeletionStatusOutput
@@ -7311,113 +6645,73 @@ func awsAwsjson11_deserializeOpDocumentGetNamespaceDeletionStatusOutput(v **GetN
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "errorCode":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NamespaceDeletionStatusErrorCodes to be of type string, got %T instead", val)
+					return fmt.Errorf("expected NamespaceDeletionStatusErrorCodes to be of type string, got %T instead", value)
 				}
 				sv.ErrorCode = types.NamespaceDeletionStatusErrorCodes(jtv)
 			}
 
 		case "errorMessage":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", val)
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ErrorMessage = &jtv
 			}
 
 		case "namespaceArn":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Arn to be of type string, got %T instead", val)
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.NamespaceArn = &jtv
 			}
 
 		case "namespaceName":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NamespaceName to be of type string, got %T instead", val)
+					return fmt.Errorf("expected NamespaceName to be of type string, got %T instead", value)
 				}
 				sv.NamespaceName = &jtv
 			}
 
 		case "status":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NamespaceDeletionStatus to be of type string, got %T instead", val)
+					return fmt.Errorf("expected NamespaceDeletionStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.NamespaceDeletionStatus(jtv)
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentGetSystemInstanceOutput(v **GetSystemInstanceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetSystemInstanceOutput(v **GetSystemInstanceOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *GetSystemInstanceOutput
@@ -7427,53 +6721,33 @@ func awsAwsjson11_deserializeOpDocumentGetSystemInstanceOutput(v **GetSystemInst
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "description":
-			if err := awsAwsjson11_deserializeDocumentSystemInstanceDescription(&sv.Description, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentSystemInstanceDescription(&sv.Description, value); err != nil {
 				return err
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentGetSystemTemplateOutput(v **GetSystemTemplateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetSystemTemplateOutput(v **GetSystemTemplateOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *GetSystemTemplateOutput
@@ -7483,53 +6757,33 @@ func awsAwsjson11_deserializeOpDocumentGetSystemTemplateOutput(v **GetSystemTemp
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "description":
-			if err := awsAwsjson11_deserializeDocumentSystemTemplateDescription(&sv.Description, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentSystemTemplateDescription(&sv.Description, value); err != nil {
 				return err
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentGetSystemTemplateRevisionsOutput(v **GetSystemTemplateRevisionsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetSystemTemplateRevisionsOutput(v **GetSystemTemplateRevisionsOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *GetSystemTemplateRevisionsOutput
@@ -7539,66 +6793,42 @@ func awsAwsjson11_deserializeOpDocumentGetSystemTemplateRevisionsOutput(v **GetS
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "nextToken":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NextToken to be of type string, got %T instead", val)
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = &jtv
 			}
 
 		case "summaries":
-			if err := awsAwsjson11_deserializeDocumentSystemTemplateSummaries(&sv.Summaries, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentSystemTemplateSummaries(&sv.Summaries, value); err != nil {
 				return err
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentGetUploadStatusOutput(v **GetUploadStatusOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentGetUploadStatusOutput(v **GetUploadStatusOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *GetUploadStatusOutput
@@ -7608,21 +6838,13 @@ func awsAwsjson11_deserializeOpDocumentGetUploadStatusOutput(v **GetUploadStatus
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "createdDate":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(json.Number)
+			if value != nil {
+				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", val)
+					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
 				}
 				f64, err := jtv.Float64()
 				if err != nil {
@@ -7632,45 +6854,33 @@ func awsAwsjson11_deserializeOpDocumentGetUploadStatusOutput(v **GetUploadStatus
 			}
 
 		case "failureReason":
-			if err := awsAwsjson11_deserializeDocumentStringList(&sv.FailureReason, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentStringList(&sv.FailureReason, value); err != nil {
 				return err
 			}
 
 		case "namespaceArn":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Arn to be of type string, got %T instead", val)
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.NamespaceArn = &jtv
 			}
 
 		case "namespaceName":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NamespaceName to be of type string, got %T instead", val)
+					return fmt.Errorf("expected NamespaceName to be of type string, got %T instead", value)
 				}
 				sv.NamespaceName = &jtv
 			}
 
 		case "namespaceVersion":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(json.Number)
+			if value != nil {
+				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Version to be json.Number, got %T instead", val)
+					return fmt.Errorf("expected Version to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
@@ -7680,67 +6890,43 @@ func awsAwsjson11_deserializeOpDocumentGetUploadStatusOutput(v **GetUploadStatus
 			}
 
 		case "uploadId":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected UploadId to be of type string, got %T instead", val)
+					return fmt.Errorf("expected UploadId to be of type string, got %T instead", value)
 				}
 				sv.UploadId = &jtv
 			}
 
 		case "uploadStatus":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected UploadStatus to be of type string, got %T instead", val)
+					return fmt.Errorf("expected UploadStatus to be of type string, got %T instead", value)
 				}
 				sv.UploadStatus = types.UploadStatus(jtv)
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentListFlowExecutionMessagesOutput(v **ListFlowExecutionMessagesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListFlowExecutionMessagesOutput(v **ListFlowExecutionMessagesOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *ListFlowExecutionMessagesOutput
@@ -7750,66 +6936,42 @@ func awsAwsjson11_deserializeOpDocumentListFlowExecutionMessagesOutput(v **ListF
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "messages":
-			if err := awsAwsjson11_deserializeDocumentFlowExecutionMessages(&sv.Messages, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentFlowExecutionMessages(&sv.Messages, value); err != nil {
 				return err
 			}
 
 		case "nextToken":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NextToken to be of type string, got %T instead", val)
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = &jtv
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsForResourceOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *ListTagsForResourceOutput
@@ -7819,66 +6981,42 @@ func awsAwsjson11_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsFor
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "nextToken":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NextToken to be of type string, got %T instead", val)
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = &jtv
 			}
 
 		case "tags":
-			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentSearchEntitiesOutput(v **SearchEntitiesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentSearchEntitiesOutput(v **SearchEntitiesOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *SearchEntitiesOutput
@@ -7888,66 +7026,42 @@ func awsAwsjson11_deserializeOpDocumentSearchEntitiesOutput(v **SearchEntitiesOu
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "descriptions":
-			if err := awsAwsjson11_deserializeDocumentEntityDescriptions(&sv.Descriptions, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentEntityDescriptions(&sv.Descriptions, value); err != nil {
 				return err
 			}
 
 		case "nextToken":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NextToken to be of type string, got %T instead", val)
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = &jtv
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentSearchFlowExecutionsOutput(v **SearchFlowExecutionsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentSearchFlowExecutionsOutput(v **SearchFlowExecutionsOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *SearchFlowExecutionsOutput
@@ -7957,66 +7071,42 @@ func awsAwsjson11_deserializeOpDocumentSearchFlowExecutionsOutput(v **SearchFlow
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "nextToken":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NextToken to be of type string, got %T instead", val)
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = &jtv
 			}
 
 		case "summaries":
-			if err := awsAwsjson11_deserializeDocumentFlowExecutionSummaries(&sv.Summaries, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentFlowExecutionSummaries(&sv.Summaries, value); err != nil {
 				return err
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentSearchFlowTemplatesOutput(v **SearchFlowTemplatesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentSearchFlowTemplatesOutput(v **SearchFlowTemplatesOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *SearchFlowTemplatesOutput
@@ -8026,66 +7116,42 @@ func awsAwsjson11_deserializeOpDocumentSearchFlowTemplatesOutput(v **SearchFlowT
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "nextToken":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NextToken to be of type string, got %T instead", val)
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = &jtv
 			}
 
 		case "summaries":
-			if err := awsAwsjson11_deserializeDocumentFlowTemplateSummaries(&sv.Summaries, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentFlowTemplateSummaries(&sv.Summaries, value); err != nil {
 				return err
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentSearchSystemInstancesOutput(v **SearchSystemInstancesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentSearchSystemInstancesOutput(v **SearchSystemInstancesOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *SearchSystemInstancesOutput
@@ -8095,66 +7161,42 @@ func awsAwsjson11_deserializeOpDocumentSearchSystemInstancesOutput(v **SearchSys
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "nextToken":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NextToken to be of type string, got %T instead", val)
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = &jtv
 			}
 
 		case "summaries":
-			if err := awsAwsjson11_deserializeDocumentSystemInstanceSummaries(&sv.Summaries, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentSystemInstanceSummaries(&sv.Summaries, value); err != nil {
 				return err
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentSearchSystemTemplatesOutput(v **SearchSystemTemplatesOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentSearchSystemTemplatesOutput(v **SearchSystemTemplatesOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *SearchSystemTemplatesOutput
@@ -8164,66 +7206,42 @@ func awsAwsjson11_deserializeOpDocumentSearchSystemTemplatesOutput(v **SearchSys
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "nextToken":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NextToken to be of type string, got %T instead", val)
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = &jtv
 			}
 
 		case "summaries":
-			if err := awsAwsjson11_deserializeDocumentSystemTemplateSummaries(&sv.Summaries, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentSystemTemplateSummaries(&sv.Summaries, value); err != nil {
 				return err
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentSearchThingsOutput(v **SearchThingsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentSearchThingsOutput(v **SearchThingsOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *SearchThingsOutput
@@ -8233,66 +7251,42 @@ func awsAwsjson11_deserializeOpDocumentSearchThingsOutput(v **SearchThingsOutput
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "nextToken":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NextToken to be of type string, got %T instead", val)
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = &jtv
 			}
 
 		case "things":
-			if err := awsAwsjson11_deserializeDocumentThings(&sv.Things, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentThings(&sv.Things, value); err != nil {
 				return err
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentTagResourceOutput(v **TagResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentTagResourceOutput(v **TagResourceOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *TagResourceOutput
@@ -8302,48 +7296,28 @@ func awsAwsjson11_deserializeOpDocumentTagResourceOutput(v **TagResourceOutput, 
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentUndeploySystemInstanceOutput(v **UndeploySystemInstanceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUndeploySystemInstanceOutput(v **UndeploySystemInstanceOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *UndeploySystemInstanceOutput
@@ -8353,53 +7327,33 @@ func awsAwsjson11_deserializeOpDocumentUndeploySystemInstanceOutput(v **Undeploy
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "summary":
-			if err := awsAwsjson11_deserializeDocumentSystemInstanceSummary(&sv.Summary, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentSystemInstanceSummary(&sv.Summary, value); err != nil {
 				return err
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentUntagResourceOutput(v **UntagResourceOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUntagResourceOutput(v **UntagResourceOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *UntagResourceOutput
@@ -8409,48 +7363,28 @@ func awsAwsjson11_deserializeOpDocumentUntagResourceOutput(v **UntagResourceOutp
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentUpdateFlowTemplateOutput(v **UpdateFlowTemplateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateFlowTemplateOutput(v **UpdateFlowTemplateOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *UpdateFlowTemplateOutput
@@ -8460,53 +7394,33 @@ func awsAwsjson11_deserializeOpDocumentUpdateFlowTemplateOutput(v **UpdateFlowTe
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "summary":
-			if err := awsAwsjson11_deserializeDocumentFlowTemplateSummary(&sv.Summary, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentFlowTemplateSummary(&sv.Summary, value); err != nil {
 				return err
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentUpdateSystemTemplateOutput(v **UpdateSystemTemplateOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUpdateSystemTemplateOutput(v **UpdateSystemTemplateOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *UpdateSystemTemplateOutput
@@ -8516,53 +7430,33 @@ func awsAwsjson11_deserializeOpDocumentUpdateSystemTemplateOutput(v **UpdateSyst
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "summary":
-			if err := awsAwsjson11_deserializeDocumentSystemTemplateSummary(&sv.Summary, decoder); err != nil {
+			if err := awsAwsjson11_deserializeDocumentSystemTemplateSummary(&sv.Summary, value); err != nil {
 				return err
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }
 
-func awsAwsjson11_deserializeOpDocumentUploadEntityDefinitionsOutput(v **UploadEntityDefinitionsOutput, decoder *json.Decoder) error {
+func awsAwsjson11_deserializeOpDocumentUploadEntityDefinitionsOutput(v **UploadEntityDefinitionsOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	startToken, err := decoder.Token()
-	if err == io.EOF {
+	if value == nil {
 		return nil
 	}
-	if err != nil {
-		return err
-	}
-	if startToken == nil {
-		return nil
-	}
-	if t, ok := startToken.(json.Delim); !ok || t != '{' {
-		return fmt.Errorf("expect `{` as start token")
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
 	var sv *UploadEntityDefinitionsOutput
@@ -8572,41 +7466,22 @@ func awsAwsjson11_deserializeOpDocumentUploadEntityDefinitionsOutput(v **UploadE
 		sv = *v
 	}
 
-	for decoder.More() {
-		t, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		switch t {
+	for key, value := range shape {
+		switch key {
 		case "uploadId":
-			val, err := decoder.Token()
-			if err != nil {
-				return err
-			}
-			if val != nil {
-				jtv, ok := val.(string)
+			if value != nil {
+				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected UploadId to be of type string, got %T instead", val)
+					return fmt.Errorf("expected UploadId to be of type string, got %T instead", value)
 				}
 				sv.UploadId = &jtv
 			}
 
 		default:
-			err := smithyjson.DiscardUnknownField(decoder)
-			if err != nil {
-				return err
-			}
+			_, _ = key, value
 
 		}
 	}
-	endToken, err := decoder.Token()
-	if err != nil {
-		return err
-	}
-	if t, ok := endToken.(json.Delim); !ok || t != '}' {
-		return fmt.Errorf("expect `}` as end token")
-	}
-
 	*v = sv
 	return nil
 }

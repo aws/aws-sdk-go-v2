@@ -70,10 +70,11 @@ func (m *awsAwsquery_deserializeOpDeleteAlarms) HandleDeserialize(ctx context.Co
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -156,10 +157,11 @@ func (m *awsAwsquery_deserializeOpDeleteAnomalyDetector) HandleDeserialize(ctx c
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -251,10 +253,11 @@ func (m *awsAwsquery_deserializeOpDeleteDashboards) HandleDeserialize(ctx contex
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -343,10 +346,11 @@ func (m *awsAwsquery_deserializeOpDeleteInsightRules) HandleDeserialize(ctx cont
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -432,10 +436,11 @@ func (m *awsAwsquery_deserializeOpDescribeAlarmHistory) HandleDeserialize(ctx co
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -518,10 +523,11 @@ func (m *awsAwsquery_deserializeOpDescribeAlarms) HandleDeserialize(ctx context.
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -604,10 +610,11 @@ func (m *awsAwsquery_deserializeOpDescribeAlarmsForMetric) HandleDeserialize(ctx
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -687,10 +694,11 @@ func (m *awsAwsquery_deserializeOpDescribeAnomalyDetectors) HandleDeserialize(ct
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -779,10 +787,11 @@ func (m *awsAwsquery_deserializeOpDescribeInsightRules) HandleDeserialize(ctx co
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -865,10 +874,11 @@ func (m *awsAwsquery_deserializeOpDisableAlarmActions) HandleDeserialize(ctx con
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -948,10 +958,11 @@ func (m *awsAwsquery_deserializeOpDisableInsightRules) HandleDeserialize(ctx con
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -1037,10 +1048,11 @@ func (m *awsAwsquery_deserializeOpEnableAlarmActions) HandleDeserialize(ctx cont
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -1120,10 +1132,11 @@ func (m *awsAwsquery_deserializeOpEnableInsightRules) HandleDeserialize(ctx cont
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -1212,10 +1225,11 @@ func (m *awsAwsquery_deserializeOpGetDashboard) HandleDeserialize(ctx context.Co
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -1304,10 +1318,11 @@ func (m *awsAwsquery_deserializeOpGetInsightRuleReport) HandleDeserialize(ctx co
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -1396,10 +1411,11 @@ func (m *awsAwsquery_deserializeOpGetMetricData) HandleDeserialize(ctx context.C
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -1482,10 +1498,11 @@ func (m *awsAwsquery_deserializeOpGetMetricStatistics) HandleDeserialize(ctx con
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -1577,10 +1594,11 @@ func (m *awsAwsquery_deserializeOpGetMetricWidgetImage) HandleDeserialize(ctx co
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -1660,10 +1678,11 @@ func (m *awsAwsquery_deserializeOpListDashboards) HandleDeserialize(ctx context.
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -1749,10 +1768,11 @@ func (m *awsAwsquery_deserializeOpListMetrics) HandleDeserialize(ctx context.Con
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -1838,10 +1858,11 @@ func (m *awsAwsquery_deserializeOpListTagsForResource) HandleDeserialize(ctx con
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -1930,10 +1951,11 @@ func (m *awsAwsquery_deserializeOpPutAnomalyDetector) HandleDeserialize(ctx cont
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -2025,10 +2047,11 @@ func (m *awsAwsquery_deserializeOpPutCompositeAlarm) HandleDeserialize(ctx conte
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -2111,10 +2134,11 @@ func (m *awsAwsquery_deserializeOpPutDashboard) HandleDeserialize(ctx context.Co
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -2200,10 +2224,11 @@ func (m *awsAwsquery_deserializeOpPutInsightRule) HandleDeserialize(ctx context.
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -2292,10 +2317,11 @@ func (m *awsAwsquery_deserializeOpPutMetricAlarm) HandleDeserialize(ctx context.
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -2378,10 +2404,11 @@ func (m *awsAwsquery_deserializeOpPutMetricData) HandleDeserialize(ctx context.C
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -2473,10 +2500,11 @@ func (m *awsAwsquery_deserializeOpSetAlarmState) HandleDeserialize(ctx context.C
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -2562,10 +2590,11 @@ func (m *awsAwsquery_deserializeOpTagResource) HandleDeserialize(ctx context.Con
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -2657,10 +2686,11 @@ func (m *awsAwsquery_deserializeOpUntagResource) HandleDeserialize(ctx context.C
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
-		return out, metadata, &smithy.DeserializationError{
+		err = &smithy.DeserializationError{
 			Err:      fmt.Errorf("failed to decode response body, %w", err),
 			Snapshot: snapshot.Bytes(),
 		}
+		return out, metadata, err
 	}
 
 	return out, metadata, err
