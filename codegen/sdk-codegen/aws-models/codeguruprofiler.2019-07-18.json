@@ -1683,7 +1683,7 @@
           "sdkId": "CodeGuruProfiler",
           "arnNamespace": "codeguru-profiler",
           "cloudFormationName": "CodeGuruProfiler",
-          "cloudTrailEventSource": "REPLACE_WITH_EVENT_SOURCE"
+          "cloudTrailEventSource": "codeguru-profiler.amazonaws.com"
         },
         "aws.auth#sigv4": {
           "name": "codeguruprofiler"
