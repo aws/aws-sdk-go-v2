@@ -6,7 +6,9 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/credentials/ec2rolecreds"
+	"github.com/aws/aws-sdk-go-v2/credentials/endpointcreds"
 	"github.com/aws/aws-sdk-go-v2/credentials/processcreds"
+	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
 	"github.com/aws/aws-sdk-go-v2/ec2imds"
 )
 
@@ -350,4 +352,94 @@ func GetDefaultRegion(configs Configs) (value string, found bool, err error) {
 	}
 
 	return value, found, err
+}
+
+// EndpointCredentialProviderOptions is an interface for retrieving a function for setting
+// the endpointcreds.ProviderOptions.
+type EndpointCredentialProviderOptions interface {
+	GetEndpointCredentialProviderOptions() (func(*endpointcreds.Options), bool, error)
+}
+
+// WithEndpointCredentialProviderOptions wraps a function and satisfies the EC2RoleCredentialProviderOptions interface
+type WithEndpointCredentialProviderOptions func(*endpointcreds.Options)
+
+// GetEndpointCredentialProviderOptions returns the wrapped function
+func (w WithEndpointCredentialProviderOptions) GetEndpointCredentialProviderOptions() (func(*endpointcreds.Options), bool, error) {
+	return w, true, nil
+}
+
+// GetEndpointCredentialProviderOptions searches the slice of configs and returns the first function found
+func GetEndpointCredentialProviderOptions(configs Configs) (f func(*endpointcreds.Options), found bool, err error) {
+	for _, config := range configs {
+		if p, ok := config.(EndpointCredentialProviderOptions); ok {
+			f, found, err = p.GetEndpointCredentialProviderOptions()
+			if err != nil {
+				return nil, false, err
+			}
+			if found {
+				break
+			}
+		}
+	}
+	return f, found, err
+}
+
+// WebIdentityCredentialProviderOptions is an interface for retrieving a function for setting
+// the stscreds.WebIdentityCredentialProviderOptions.
+type WebIdentityCredentialProviderOptions interface {
+	GetWebIdentityCredentialProviderOptions() (func(*stscreds.WebIdentityRoleOptions), bool, error)
+}
+
+// WithWebIdentityCredentialProviderOptions wraps a function and satisfies the EC2RoleCredentialProviderOptions interface
+type WithWebIdentityCredentialProviderOptions func(*stscreds.WebIdentityRoleOptions)
+
+// GetWebIdentityCredentialProviderOptions returns the wrapped function
+func (w WithWebIdentityCredentialProviderOptions) GetWebIdentityCredentialProviderOptions() (func(*stscreds.WebIdentityRoleOptions), bool, error) {
+	return w, true, nil
+}
+
+// GetWebIdentityCredentialProviderOptions searches the slice of configs and returns the first function found
+func GetWebIdentityCredentialProviderOptions(configs Configs) (f func(*stscreds.WebIdentityRoleOptions), found bool, err error) {
+	for _, config := range configs {
+		if p, ok := config.(WebIdentityCredentialProviderOptions); ok {
+			f, found, err = p.GetWebIdentityCredentialProviderOptions()
+			if err != nil {
+				return nil, false, err
+			}
+			if found {
+				break
+			}
+		}
+	}
+	return f, found, err
+}
+
+// AssumeRoleCredentialProviderOptions is an interface for retrieving a function for setting
+// the stscreds.AssumeRoleProviderOptions.
+type AssumeRoleCredentialProviderOptions interface {
+	GetAssumeRoleCredentialProviderOptions() (func(*stscreds.AssumeRoleOptions), bool, error)
+}
+
+// WithAssumeRoleCredentialProviderOptions wraps a function and satisfies the EC2RoleCredentialProviderOptions interface
+type WithAssumeRoleCredentialProviderOptions func(*stscreds.AssumeRoleOptions)
+
+// GetAssumeRoleCredentialProviderOptions returns the wrapped function
+func (w WithAssumeRoleCredentialProviderOptions) GetAssumeRoleCredentialProviderOptions() (func(*stscreds.AssumeRoleOptions), bool, error) {
+	return w, true, nil
+}
+
+// GetAssumeRoleCredentialProviderOptions searches the slice of configs and returns the first function found
+func GetAssumeRoleCredentialProviderOptions(configs Configs) (f func(*stscreds.AssumeRoleOptions), found bool, err error) {
+	for _, config := range configs {
+		if p, ok := config.(AssumeRoleCredentialProviderOptions); ok {
+			f, found, err = p.GetAssumeRoleCredentialProviderOptions()
+			if err != nil {
+				return nil, false, err
+			}
+			if found {
+				break
+			}
+		}
+	}
+	return f, found, err
 }
