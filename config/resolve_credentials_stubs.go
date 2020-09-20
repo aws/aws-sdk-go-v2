@@ -10,10 +10,6 @@ func resolveHTTPCredProvider(cfg *aws.Config, url, authToken string, configs Con
 	return fmt.Errorf("endpoint credential provider is not currently supported")
 }
 
-func resolveEC2RoleCredentials(cfg *aws.Config, configs Configs) error {
-	return fmt.Errorf("ec2 role credential provider is not currently supported")
-}
-
 func assumeWebIdentity(cfg *aws.Config, filepath string, roleARN, sessionName string, configs Configs) error {
 	return fmt.Errorf("assume web identity role is not currently supported")
 }

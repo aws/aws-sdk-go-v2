@@ -12,7 +12,6 @@ import (
 	"testing"
 	"time"
 
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/awslabs/smithy-go/middleware"
@@ -47,7 +46,9 @@ func TestAddRequestMiddleware(t *testing.T) {
 				"EndpointResolver",
 				"OperationSerializer",
 			},
-			ExpectBuild: []string{},
+			ExpectBuild: []string{
+				"requestUserAgent",
+			},
 			ExpectFinalize: []string{
 				"RetryAttemptMiddleware",
 				"APITokenProvider",
@@ -56,8 +57,6 @@ func TestAddRequestMiddleware(t *testing.T) {
 			ExpectDeserialize: []string{
 				"APITokenProvider",
 				"OperationDeserializer",
-				"OperationErrorDeserializer",
-				(*awsmiddleware.WrapSendErrorMiddleware)(nil).ID(),
 			},
 		},
 
@@ -79,15 +78,15 @@ func TestAddRequestMiddleware(t *testing.T) {
 				"EndpointResolver",
 				"OperationSerializer",
 			},
-			ExpectBuild: []string{},
+			ExpectBuild: []string{
+				"requestUserAgent",
+			},
 			ExpectFinalize: []string{
 				"RetryAttemptMiddleware",
 				"MetricsHeaderMiddleware",
 			},
 			ExpectDeserialize: []string{
 				"OperationDeserializer",
-				"OperationErrorDeserializer",
-				(*awsmiddleware.WrapSendErrorMiddleware)(nil).ID(),
 			},
 		},
 	}
@@ -216,8 +215,11 @@ func TestRequestGetToken(t *testing.T) {
 			ExpectTrace: []string{
 				getTokenPath,
 				"/latest/foo",
+				getTokenPath,
 				"/latest/foo",
+				getTokenPath,
 				"/latest/foo",
+				getTokenPath,
 				"/latest/foo",
 			},
 			APICallCount: 4,
@@ -225,7 +227,7 @@ func TestRequestGetToken(t *testing.T) {
 				return newTestServeMux(t,
 					newSecureAPIHandler(t,
 						[]string{"tokenA", "tokenB", "tokenC"},
-						5*time.Minute,
+						1,
 						&successAPIResponseHandler{t: t,
 							path:   "/latest/foo",
 							method: "GET",

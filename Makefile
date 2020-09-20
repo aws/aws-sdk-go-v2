@@ -49,7 +49,7 @@ gen-external-asserts:
 build:
 	go build -o /dev/null -tags ${ALL_TAGS} ${SDK_ALL_PKGS}
 
-unit: verify build test-protocols test-services
+unit: verify build test-protocols test-services test-ec2imds test-credentials test-config
 	@echo "go test SDK and vendor packages"
 	@go test -tags ${UNIT_TEST_TAGS} ${SDK_ALL_PKGS}
 
@@ -75,7 +75,16 @@ test-protocols:
 	./test_submodules.sh `pwd`/internal/protocoltest "go test -count 1 -run NONE ./..."
 
 test-services:
-	./test_submodules.sh `pwd`/service "go test -count 1 -run NONE ./..."
+	./test_submodules.sh `pwd`/service "go test -count 1 -tags "integration,ec2env" -run NONE ./..."
+
+test-ec2imds:
+	cd ec2imds && go test -run NONE -tags "integration,ec2env" ./... && go test -count 1 ./...
+
+test-credentials:
+	cd credentials && go test -run NONE -tags "integration,ec2env" ./... && go test -count 1 ./...
+
+test-config:
+	cd config && go test -run NONE -tags "integration,ec2env" ./... && go test -count 1 ./...
 
 mod_replace_local:
 	./mod_replace_local_submodules.sh `pwd` `pwd` `pwd`/../smithy-go

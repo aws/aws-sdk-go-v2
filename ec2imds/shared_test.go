@@ -2,6 +2,7 @@ package ec2imds
 
 import (
 	"net/http"
+	"strconv"
 	"sync"
 	"sync/atomic"
 	"testing"
@@ -73,8 +74,15 @@ func (h *secureAPIHandler) handleAPIToken(w http.ResponseWriter, r *http.Request
 		h.tokens = h.tokens[1:]
 	}
 
+	var tokenTTLHeaderVal string
+	if h.tokenTTL == 0 {
+		tokenTTLHeaderVal = r.Header.Get(tokenTTLHeader)
+	} else {
+		tokenTTLHeaderVal = strconv.Itoa(int(h.tokenTTL / time.Second))
+	}
+
 	// set the header and response body
-	w.Header().Set(tokenTTLHeader, r.Header.Get(tokenTTLHeader))
+	w.Header().Set(tokenTTLHeader, tokenTTLHeaderVal)
 	activeToken := h.getActiveToken()
 
 	w.Write([]byte(activeToken))
@@ -97,8 +105,6 @@ func (h *secureAPIHandler) handleAPI(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, http.StatusText(401), 401)
 		return
 	}
-
-	w.Header().Set(tokenTTLHeader, r.Header.Get(tokenTTLHeader))
 
 	// delegate to configure handler for the request
 	h.apiHandler.ServeHTTP(w, r)

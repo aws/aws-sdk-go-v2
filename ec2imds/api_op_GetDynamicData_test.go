@@ -15,18 +15,30 @@ import (
 func TestGetDynamicData(t *testing.T) {
 	cases := map[string]struct {
 		Path          string
+		ExpectPath    string
 		ExpectContent []byte
 		ExpectTrace   []string
 	}{
 		"empty path": {
+			ExpectPath:    getDynamicDataPath,
 			ExpectContent: []byte("success"),
 			ExpectTrace: []string{
 				getTokenPath,
 				getDynamicDataPath,
 			},
 		},
+		"with path no leading slash": {
+			Path:          "abc",
+			ExpectPath:    getDynamicDataPath + "/abc",
+			ExpectContent: []byte("success"),
+			ExpectTrace: []string{
+				getTokenPath,
+				getDynamicDataPath + "/abc",
+			},
+		},
 		"with path": {
 			Path:          "/abc",
+			ExpectPath:    getDynamicDataPath + "/abc",
 			ExpectContent: []byte("success"),
 			ExpectTrace: []string{
 				getTokenPath,
@@ -35,6 +47,7 @@ func TestGetDynamicData(t *testing.T) {
 		},
 		"with path trailing slash": {
 			Path:          "/abc/",
+			ExpectPath:    getDynamicDataPath + "/abc/",
 			ExpectContent: []byte("success"),
 			ExpectTrace: []string{
 				getTokenPath,
@@ -54,7 +67,7 @@ func TestGetDynamicData(t *testing.T) {
 						[]string{"tokenA"},
 						5*time.Minute,
 						&successAPIResponseHandler{t: t,
-							path:   getDynamicDataPath + c.Path,
+							path:   c.ExpectPath,
 							method: "GET",
 							body:   append([]byte{}, c.ExpectContent...),
 						},

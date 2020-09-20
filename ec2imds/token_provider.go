@@ -9,7 +9,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
+	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -184,8 +184,8 @@ func (t *tokenProvider) updateToken(ctx context.Context) (*apiToken, error) {
 		}
 
 		// Disable if request send failed or timed out getting response
-		var re *aws.RequestSendError
-		var ce *aws.RequestCanceledError
+		var re *smithyhttp.RequestSendError
+		var ce *smithy.CanceledError
 		if errors.As(err, &re) || errors.As(err, &ce) {
 			atomic.StoreUint32(&t.disabled, 1)
 		}
