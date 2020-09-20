@@ -1,10 +1,13 @@
 package config
 
 import (
+	"context"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/credentials/ec2rolecreds"
 	"github.com/aws/aws-sdk-go-v2/credentials/processcreds"
+	"github.com/aws/aws-sdk-go-v2/ec2imds"
 )
 
 // SharedConfigProfileProvider provides access to the shared config profile
@@ -142,6 +145,38 @@ func GetRegion(configs Configs) (string, bool, error) {
 	return "", false, nil
 }
 
+// WithEC2IMDSRegion provides a RegionProvider that retrieves the region
+// from the EC2 Metadata service.
+//
+// TODO should this provider be added to the default config loading?
+type WithEC2IMDSRegion struct {
+	// If unset will be defaulted to Background context
+	Context context.Context
+
+	// If unset will default to generic EC2 IMDS client.
+	Client *ec2imds.Client
+}
+
+// GetRegion attempts to retrieve the region from EC2 Metadata service.
+func (p WithEC2IMDSRegion) GetRegion() (string, error) {
+	ctx := p.Context
+	if ctx == nil {
+		ctx = context.Background()
+	}
+
+	client := p.Client
+	if client == nil {
+		client = ec2imds.New(ec2imds.Options{})
+	}
+
+	result, err := p.Client.GetRegion(ctx, nil)
+	if err != nil {
+		return "", err
+	}
+
+	return result.Region, nil
+}
+
 // CredentialsProviderProvider provides access to the credentials external
 // configuration value.
 type CredentialsProviderProvider interface {
@@ -231,7 +266,8 @@ type ProcessCredentialOptions interface {
 	GetProcessCredentialOptions() (func(*processcreds.Options), bool, error)
 }
 
-// WithProcessCredentialOptions wraps a function and satisfies the EC2RoleCredentialOptions interface
+// WithProcessCredentialOptions wraps a function and satisfies the
+// ProcessCredentialOptions interface
 type WithProcessCredentialOptions func(*processcreds.Options)
 
 // GetProcessCredentialOptions returns the wrapped function
@@ -244,6 +280,37 @@ func GetProcessCredentialOptions(configs Configs) (f func(*processcreds.Options)
 	for _, config := range configs {
 		if p, ok := config.(ProcessCredentialOptions); ok {
 			f, found, err = p.GetProcessCredentialOptions()
+			if err != nil {
+				return nil, false, err
+			}
+			if found {
+				break
+			}
+		}
+	}
+	return f, found, err
+}
+
+// EC2RoleCredentialProviderOptions is an interface for retrieving a function
+// for setting the ec2rolecreds.Provider options.
+type EC2RoleCredentialProviderOptions interface {
+	GetEC2RoleCredentialProviderOptions() (func(*ec2rolecreds.Options), bool, error)
+}
+
+// WithEC2RoleCredentialProviderOptions wraps a function and satisfies the
+// EC2RoleCredentialProviderOptions interface
+type WithEC2RoleCredentialProviderOptions func(*ec2rolecreds.Options)
+
+// GetEC2RoleCredentialProviderOptions returns the wrapped function
+func (w WithEC2RoleCredentialProviderOptions) GetEC2RoleCredentialProviderOptions() (func(*ec2rolecreds.Options), bool, error) {
+	return w, true, nil
+}
+
+// GetEC2RoleCredentialProviderOptions searches the slice of configs and returns the first function found
+func GetEC2RoleCredentialProviderOptions(configs Configs) (f func(*ec2rolecreds.Options), found bool, err error) {
+	for _, config := range configs {
+		if p, ok := config.(EC2RoleCredentialProviderOptions); ok {
+			f, found, err = p.GetEC2RoleCredentialProviderOptions()
 			if err != nil {
 				return nil, false, err
 			}

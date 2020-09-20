@@ -15,18 +15,30 @@ import (
 func TestGetMetadata(t *testing.T) {
 	cases := map[string]struct {
 		Path          string
+		ExpectPath    string
 		ExpectContent []byte
 		ExpectTrace   []string
 	}{
 		"empty path": {
+			ExpectPath:    getMetadataPath,
 			ExpectContent: []byte("success"),
 			ExpectTrace: []string{
 				getTokenPath,
 				getMetadataPath,
 			},
 		},
+		"with path no leading slash": {
+			Path:          "abc",
+			ExpectPath:    getMetadataPath + "/abc",
+			ExpectContent: []byte("success"),
+			ExpectTrace: []string{
+				getTokenPath,
+				getMetadataPath + "/abc",
+			},
+		},
 		"with path": {
 			Path:          "/abc",
+			ExpectPath:    getMetadataPath + "/abc",
 			ExpectContent: []byte("success"),
 			ExpectTrace: []string{
 				getTokenPath,
@@ -35,6 +47,7 @@ func TestGetMetadata(t *testing.T) {
 		},
 		"with path trailing slash": {
 			Path:          "/abc/",
+			ExpectPath:    getMetadataPath + "/abc/",
 			ExpectContent: []byte("success"),
 			ExpectTrace: []string{
 				getTokenPath,
@@ -54,7 +67,7 @@ func TestGetMetadata(t *testing.T) {
 						[]string{"tokenA"},
 						5*time.Minute,
 						&successAPIResponseHandler{t: t,
-							path:   getMetadataPath + c.Path,
+							path:   c.ExpectPath,
 							method: "GET",
 							body:   append([]byte{}, c.ExpectContent...),
 						},

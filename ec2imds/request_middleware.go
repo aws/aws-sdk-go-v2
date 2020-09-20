@@ -47,6 +47,11 @@ func addRequestMiddleware(stack *middleware.Stack,
 	getPath func(interface{}) (string, error),
 	getOutput func(*smithyhttp.Response) (interface{}, error),
 ) (err error) {
+	err = awsmiddleware.AddUserAgentKey(ServiceID)(stack)
+	if err != nil {
+		return err
+	}
+
 	// Operation timeout
 	err = stack.Initialize.Add(&operationTimeoutMiddleware{
 		Timeout: defaultOperationTimeout,
@@ -80,22 +85,8 @@ func addRequestMiddleware(stack *middleware.Stack,
 		return err
 	}
 
-	// Operation Error Deserializer
-	err = stack.Deserialize.Insert(&deserializeResponseError{},
-		"OperationDeserializer", middleware.After)
-	if err != nil {
-		return err
-	}
-
 	// Retry support
 	retry.AddRetryMiddlewares(stack, options)
-
-	// HTTP transport request send error wrapper
-	err = stack.Deserialize.Add(&awsmiddleware.WrapSendErrorMiddleware{},
-		middleware.After)
-	if err != nil {
-		return err
-	}
 
 	return nil
 }
@@ -154,6 +145,15 @@ func (m *deserializeResponse) HandleDeserialize(
 			"unexpected transport response type, %T", out.RawResponse)
 	}
 
+	// Anything thats not 200 |< 300 is error
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		resp.Body.Close()
+		return out, metadata, &smithyhttp.ResponseError{
+			Response: resp,
+			Err:      fmt.Errorf("request to EC2 IMDS failed"),
+		}
+	}
+
 	result, err := m.GetOutput(resp)
 	if err != nil {
 		return out, metadata, fmt.Errorf(
@@ -163,38 +163,6 @@ func (m *deserializeResponse) HandleDeserialize(
 	out.Result = result
 
 	return out, metadata, err
-}
-
-type deserializeResponseError struct{}
-
-func (*deserializeResponseError) ID() string {
-	return "OperationErrorDeserializer"
-}
-
-func (m *deserializeResponseError) HandleDeserialize(
-	ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler,
-) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-) {
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
-
-	resp, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, fmt.Errorf(
-			"unexpected transport response type, %T", out.RawResponse)
-	}
-
-	if resp.StatusCode < 400 {
-		return out, metadata, err
-	}
-
-	return out, metadata, &smithyhttp.ResponseError{
-		Response: resp,
-		Err:      fmt.Errorf("request to EC2 IMDS failed"),
-	}
 }
 
 type resolveEndpoint struct {

@@ -1,4 +1,4 @@
-// +build integration
+// +build integration,ec2env
 
 package ec2imds
 
