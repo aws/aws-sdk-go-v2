@@ -111,12 +111,10 @@ func TestWebIdentityProviderRetrieve(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			p := stscreds.NewWebIdentityRoleProvider(stscreds.WebIdentityRoleOptions{
-				Client:          c.mockClient,
-				RoleARN:         c.roleARN,
-				RoleSessionName: c.sessionName,
-				TokenRetriever:  stscreds.IdentityTokenFile(c.tokenFilepath),
-			})
+			p := stscreds.NewWebIdentityRoleProvider(c.mockClient, c.roleARN, stscreds.IdentityTokenFile(c.tokenFilepath),
+				func(o *stscreds.WebIdentityRoleOptions) {
+					o.RoleSessionName = c.sessionName
+				})
 			credValue, err := p.Retrieve(context.Background())
 			if e, a := c.expectedError, err; !reflect.DeepEqual(e, a) {
 				t.Errorf("expected %v, but received %v", e, a)

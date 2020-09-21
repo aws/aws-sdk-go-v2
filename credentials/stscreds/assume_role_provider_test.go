@@ -38,7 +38,7 @@ const tokenCode = "00000000000000000000"
 
 func TestAssumeRoleProvider(t *testing.T) {
 	stub := &mockAssumeRole{}
-	p := stscreds.NewAssumeRoleProvider(stscreds.AssumeRoleOptions{Client: stub, RoleARN: roleARN})
+	p := stscreds.NewAssumeRoleProvider(stub, roleARN)
 
 	creds, err := p.Retrieve(context.Background())
 	if err != nil {
@@ -67,7 +67,7 @@ func TestAssumeRoleProvider_WithTokenProvider(t *testing.T) {
 			}
 		},
 	}
-	p := stscreds.NewAssumeRoleProvider(stscreds.AssumeRoleOptions{Client: stub, RoleARN: roleARN}, func(options *stscreds.AssumeRoleOptions) {
+	p := stscreds.NewAssumeRoleProvider(stub, roleARN, func(options *stscreds.AssumeRoleOptions) {
 		options.SerialNumber = aws.String("0123456789")
 		options.TokenProvider = func() (string, error) {
 			return tokenCode, nil
@@ -96,7 +96,7 @@ func TestAssumeRoleProvider_WithTokenProviderError(t *testing.T) {
 			t.Fatalf("API request should not of been called")
 		},
 	}
-	p := stscreds.NewAssumeRoleProvider(stscreds.AssumeRoleOptions{Client: stub, RoleARN: roleARN}, func(options *stscreds.AssumeRoleOptions) {
+	p := stscreds.NewAssumeRoleProvider(stub, roleARN, func(options *stscreds.AssumeRoleOptions) {
 		options.SerialNumber = aws.String("0123456789")
 		options.TokenProvider = func() (string, error) {
 			return "", fmt.Errorf("error occurred")
@@ -125,7 +125,7 @@ func TestAssumeRoleProvider_MFAWithNoToken(t *testing.T) {
 			t.Fatalf("API request should not of been called")
 		},
 	}
-	p := stscreds.NewAssumeRoleProvider(stscreds.AssumeRoleOptions{Client: stub, RoleARN: roleARN}, func(options *stscreds.AssumeRoleOptions) {
+	p := stscreds.NewAssumeRoleProvider(stub, roleARN, func(options *stscreds.AssumeRoleOptions) {
 		options.SerialNumber = aws.String("0123456789")
 	})
 
@@ -147,7 +147,7 @@ func TestAssumeRoleProvider_MFAWithNoToken(t *testing.T) {
 
 func BenchmarkAssumeRoleProvider(b *testing.B) {
 	stub := &mockAssumeRole{}
-	p := stscreds.NewAssumeRoleProvider(stscreds.AssumeRoleOptions{Client: stub, RoleARN: roleARN})
+	p := stscreds.NewAssumeRoleProvider(stub, roleARN)
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
