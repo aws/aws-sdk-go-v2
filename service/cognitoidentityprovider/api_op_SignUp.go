@@ -126,7 +126,6 @@ func newServiceMetadataMiddleware_opSignUp(region string) awsmiddleware.Register
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "cognito-idp",
 		OperationName: "SignUp",
 	}
 }

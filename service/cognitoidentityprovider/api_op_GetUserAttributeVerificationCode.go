@@ -108,7 +108,6 @@ func newServiceMetadataMiddleware_opGetUserAttributeVerificationCode(region stri
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "cognito-idp",
 		OperationName: "GetUserAttributeVerificationCode",
 	}
 }

@@ -116,7 +116,6 @@ func newServiceMetadataMiddleware_opResendConfirmationCode(region string) awsmid
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "cognito-idp",
 		OperationName: "ResendConfirmationCode",
 	}
 }

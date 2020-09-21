@@ -106,7 +106,6 @@ func newServiceMetadataMiddleware_opCreateToken(region string) awsmiddleware.Reg
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "awsssooidc",
 		OperationName: "CreateToken",
 	}
 }

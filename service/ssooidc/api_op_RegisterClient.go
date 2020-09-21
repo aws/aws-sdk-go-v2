@@ -91,7 +91,6 @@ func newServiceMetadataMiddleware_opRegisterClient(region string) awsmiddleware.
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "awsssooidc",
 		OperationName: "RegisterClient",
 	}
 }

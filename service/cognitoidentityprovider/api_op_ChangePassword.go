@@ -74,7 +74,6 @@ func newServiceMetadataMiddleware_opChangePassword(region string) awsmiddleware.
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "cognito-idp",
 		OperationName: "ChangePassword",
 	}
 }

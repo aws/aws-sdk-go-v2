@@ -85,7 +85,6 @@ func newServiceMetadataMiddleware_opListAccountRoles(region string) awsmiddlewar
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "awsssoportal",
 		OperationName: "ListAccountRoles",
 	}
 }
