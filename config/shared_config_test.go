@@ -330,7 +330,7 @@ func TestLoadSharedConfigFromFile(t *testing.T) {
 		10: {
 			Profile: "does_not_exist",
 			Err: SharedConfigProfileNotExistError{
-				Filename: "testdata/shared_config",
+				Filename: filepath.Join("testdata", "shared_config"),
 				Profile:  "does_not_exist",
 				Err:      nil,
 			},
