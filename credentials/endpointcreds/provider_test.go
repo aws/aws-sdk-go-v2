@@ -26,9 +26,8 @@ func TestRetrieveRefreshableCredentials(t *testing.T) {
 	orig := sdk.NowTime
 	defer func() { sdk.NowTime = orig }()
 
-	p := endpointcreds.New(endpointcreds.Options{
-		Endpoint: "http://127.0.0.1",
-		HTTPClient: mockClient(func(r *http.Request) (*http.Response, error) {
+	p := endpointcreds.New("http://127.0.0.1", func(o *endpointcreds.Options) {
+		o.HTTPClient = mockClient(func(r *http.Request) (*http.Response, error) {
 			expTime := time.Now().UTC().Add(1 * time.Hour).Format("2006-01-02T15:04:05Z")
 
 			return &http.Response{
@@ -40,7 +39,7 @@ func TestRetrieveRefreshableCredentials(t *testing.T) {
   "Expiration": "%s"
 }`, expTime)))),
 			}, nil
-		}),
+		})
 	})
 	creds, err := p.Retrieve(context.Background())
 
@@ -73,9 +72,8 @@ func TestRetrieveStaticCredentials(t *testing.T) {
 	orig := sdk.NowTime
 	defer func() { sdk.NowTime = orig }()
 
-	p := endpointcreds.New(endpointcreds.Options{
-		Endpoint: "http://127.0.0.1",
-		HTTPClient: mockClient(func(r *http.Request) (*http.Response, error) {
+	p := endpointcreds.New("http://127.0.0.1", func(o *endpointcreds.Options) {
+		o.HTTPClient = mockClient(func(r *http.Request) (*http.Response, error) {
 			return &http.Response{
 				StatusCode: 200,
 				Body: ioutil.NopCloser(bytes.NewReader([]byte(`{
@@ -83,7 +81,7 @@ func TestRetrieveStaticCredentials(t *testing.T) {
   "SecretAccessKey": "SECRET"
 }`))),
 			}, nil
-		}),
+		})
 	})
 	creds, err := p.Retrieve(context.Background())
 
@@ -111,9 +109,8 @@ func TestRetrieveStaticCredentials(t *testing.T) {
 }
 
 func TestFailedRetrieveCredentials(t *testing.T) {
-	p := endpointcreds.New(endpointcreds.Options{
-		Endpoint: "http://127.0.0.1",
-		HTTPClient: mockClient(func(r *http.Request) (*http.Response, error) {
+	p := endpointcreds.New("http://127.0.0.1", func(o *endpointcreds.Options) {
+		o.HTTPClient = mockClient(func(r *http.Request) (*http.Response, error) {
 			return &http.Response{
 				StatusCode: 400,
 				Body: ioutil.NopCloser(bytes.NewReader([]byte(`{
@@ -121,7 +118,7 @@ func TestFailedRetrieveCredentials(t *testing.T) {
   "message": "Message"
 }`))),
 			}, nil
-		}),
+		})
 	})
 	creds, err := p.Retrieve(context.Background())
 

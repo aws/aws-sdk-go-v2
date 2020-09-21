@@ -32,16 +32,18 @@ package endpointcreds
 import (
 	"context"
 	"fmt"
+	"net/http"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/credentials/endpointcreds/internal/client"
+	"github.com/awslabs/smithy-go/middleware"
 )
 
 // ProviderName is the name of the credentials provider.
 const ProviderName = `CredentialsEndpointProvider`
 
-type getCredentials interface {
+type getCredentialsAPIClient interface {
 	GetCredentials(context.Context, *client.GetCredentialsInput, ...func(*client.Options)) (*client.GetCredentialsOutput, error)
 }
 
@@ -51,9 +53,14 @@ type Provider struct {
 	// The AWS Client to make HTTP requests to the endpoint with. The endpoint
 	// the request will be made to is provided by the aws.Config's
 	// EndpointResolver.
-	client getCredentials
+	client getCredentialsAPIClient
 
 	options Options
+}
+
+// HTTPClient is a client for sending HTTP requests
+type HTTPClient interface {
+	Do(*http.Request) (*http.Response, error)
 }
 
 // Options is structure of configurable options for Provider
@@ -73,23 +80,22 @@ type Options struct {
 	Endpoint string
 
 	// HTTPClient to handle sending HTTP requests to the target endpoint.
-	HTTPClient client.HTTPClient
+	HTTPClient HTTPClient
+
+	// Set of options to modify how the credentials operation is invoked.
+	APIOptions []func(*middleware.Stack) error
 
 	// Optional authorization token value if set will be used as the value of
 	// the Authorization header of the endpoint credential request.
 	AuthorizationToken string
 }
 
-// Clone returns a copy of the provider options
-func (o Options) Clone() Options {
-	c := o
-	return c
-}
-
 // New returns a credentials Provider for retrieving AWS credentials
 // from arbitrary endpoint.
-func New(options Options, optFns ...func(*Options)) *Provider {
-	o := options.Clone()
+func New(endpoint string, optFns ...func(*Options)) *Provider {
+	o := Options{
+		Endpoint: endpoint,
+	}
 
 	for _, fn := range optFns {
 		fn(&o)
@@ -99,6 +105,7 @@ func New(options Options, optFns ...func(*Options)) *Provider {
 		client: client.New(client.Options{
 			HTTPClient: o.HTTPClient,
 			Endpoint:   o.Endpoint,
+			APIOptions: o.APIOptions,
 		}),
 		options: o,
 	}
@@ -130,8 +137,5 @@ func (p *Provider) Retrieve(ctx context.Context) (aws.Credentials, error) {
 }
 
 func (p *Provider) getCredentials(ctx context.Context) (*client.GetCredentialsOutput, error) {
-	return p.client.GetCredentials(ctx, &client.GetCredentialsInput{AuthorizationToken: p.options.AuthorizationToken},
-		func(options *client.Options) {
-			options.Endpoint = p.options.Endpoint
-		})
+	return p.client.GetCredentials(ctx, &client.GetCredentialsInput{AuthorizationToken: p.options.AuthorizationToken})
 }

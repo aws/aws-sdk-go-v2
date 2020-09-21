@@ -34,6 +34,9 @@ type Options struct {
 	// Retryer guides how HTTP requests should be retried in case of recoverable
 	// failures. When nil the API client will use a default retryer.
 	Retryer retry.Retryer
+
+	// Set of options to modify how the credentials operation is invoked.
+	APIOptions []func(*smithymiddleware.Stack) error
 }
 
 // Copy creates a copy of the API options.
@@ -89,6 +92,12 @@ func (c *Client) GetCredentials(ctx context.Context, params *GetCredentialsInput
 	middleware.AddUserAgentKey(ServiceID)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+
+	for _, fn := range options.APIOptions {
+		if err := fn(stack); err != nil {
+			return nil, err
+		}
+	}
 
 	handler := smithymiddleware.DecorateHandler(smithyhttp.NewClientHandler(options.HTTPClient), stack)
 	result, _, err := handler.Handle(ctx, params)
