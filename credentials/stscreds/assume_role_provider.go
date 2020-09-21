@@ -237,18 +237,6 @@ type AssumeRoleOptions struct {
 	ExpiryWindow time.Duration
 }
 
-// Copy returns a copy of the AssumeRoleOptions
-func (o AssumeRoleOptions) Copy() AssumeRoleOptions {
-	c := o
-
-	c.PolicyARNs = make([]*types.PolicyDescriptorType, len(o.PolicyARNs))
-	for _, arn := range o.PolicyARNs {
-		c.PolicyARNs = append(c.PolicyARNs, arn)
-	}
-
-	return c
-}
-
 // NewAssumeRoleProvider constructs and returns a credentials provider that
 // will retrieve credentials by assuming a IAM role using STS.
 func NewAssumeRoleProvider(client AssumeRoleAPIClient, roleARN string, optFns ...func(*AssumeRoleOptions)) *AssumeRoleProvider {
