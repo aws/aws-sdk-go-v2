@@ -29,7 +29,7 @@ public class AwsGoDependency {
     public static final GoDependency AWS_MIDDLEWARE = aws("aws/middleware", "awsmiddleware");
     public static final GoDependency AWS_RETRY = aws("aws/retry");
     public static final GoDependency AWS_SIGNER_V4 = aws("aws/signer/v4");
-    public static final GoDependency AWS_ENDPOINTS = aws("aws/endpoints/v2", "endpoints");
+    public static final GoDependency AWS_ENDPOINTS = aws("aws/endpoints", "endpoints");
 
     public static final GoDependency REGEXP = SmithyGoDependency.stdlib("regexp");
 
@@ -51,6 +51,6 @@ public class AwsGoDependency {
     }
 
     private static final class Versions {
-        private static final String AWS_SDK = "v0.0.0-20200917190145-b1e29934cff1";
+        private static final String AWS_SDK = "v0.24.1-0.20200921180648-50b89d38c63c";
     }
 }
