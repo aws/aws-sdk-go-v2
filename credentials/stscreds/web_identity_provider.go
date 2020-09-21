@@ -21,7 +21,8 @@ const (
 	WebIdentityProviderName = "WebIdentityCredentials"
 )
 
-type AssumeRoleWithWebIdentity interface {
+// AssumeRoleWithWebIdentityAPIClient is a client capable of the STS AssumeRoleWithWebIdentity operation.
+type AssumeRoleWithWebIdentityAPIClient interface {
 	AssumeRoleWithWebIdentity(ctx context.Context, params *sts.AssumeRoleWithWebIdentityInput, optFns ...func(*sts.Options)) (*sts.AssumeRoleWithWebIdentityOutput, error)
 }
 
@@ -34,7 +35,7 @@ type WebIdentityRoleProvider struct {
 // WebIdentityRoleOptions is a structure of configurable options for WebIdentityRoleProvider
 type WebIdentityRoleOptions struct {
 	// Client implementation of the AssumeRoleWithWebIdentity operation. Required
-	Client AssumeRoleWithWebIdentity
+	Client AssumeRoleWithWebIdentityAPIClient
 
 	// JWT Token Provider. Required
 	TokenRetriever IdentityTokenRetriever
@@ -93,8 +94,12 @@ func (j IdentityTokenFile) GetIdentityToken() ([]byte, error) {
 
 // NewWebIdentityRoleProvider will return a new WebIdentityRoleProvider with the
 // provided stsiface.ClientAPI
-func NewWebIdentityRoleProvider(options WebIdentityRoleOptions, optFns ...func(*WebIdentityRoleOptions)) *WebIdentityRoleProvider {
-	o := options.Copy()
+func NewWebIdentityRoleProvider(client AssumeRoleWithWebIdentityAPIClient, roleARN string, tokenRetriever IdentityTokenRetriever, optFns ...func(*WebIdentityRoleOptions)) *WebIdentityRoleProvider {
+	o := WebIdentityRoleOptions{
+		Client:         client,
+		RoleARN:        roleARN,
+		TokenRetriever: tokenRetriever,
+	}
 
 	for _, fn := range optFns {
 		fn(&o)

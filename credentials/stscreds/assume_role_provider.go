@@ -136,8 +136,8 @@ func StdinTokenProvider() (string, error) {
 // ProviderName provides a name of AssumeRole provider
 const ProviderName = "AssumeRoleProvider"
 
-// AssumeRole represents the minimal subset of the STS client API used by this provider.
-type AssumeRole interface {
+// AssumeRoleAPIClient is a client capable of the STS AssumeRole operation.
+type AssumeRoleAPIClient interface {
 	AssumeRole(ctx context.Context, params *sts.AssumeRoleInput, optFns ...func(*sts.Options)) (*sts.AssumeRoleOutput, error)
 }
 
@@ -162,7 +162,7 @@ type AssumeRoleProvider struct {
 // AssumeRoleOptions is the configurable options for AssumeRoleProvider
 type AssumeRoleOptions struct {
 	// Client implementation of the AssumeRole operation. Required
-	Client AssumeRole
+	Client AssumeRoleAPIClient
 
 	// IAM Role ARN to be assumed. Required
 	RoleARN string
@@ -251,8 +251,11 @@ func (o AssumeRoleOptions) Copy() AssumeRoleOptions {
 
 // NewAssumeRoleProvider constructs and returns a credentials provider that
 // will retrieve credentials by assuming a IAM role using STS.
-func NewAssumeRoleProvider(options AssumeRoleOptions, optFns ...func(*AssumeRoleOptions)) *AssumeRoleProvider {
-	o := options.Copy()
+func NewAssumeRoleProvider(client AssumeRoleAPIClient, roleARN string, optFns ...func(*AssumeRoleOptions)) *AssumeRoleProvider {
+	o := AssumeRoleOptions{
+		Client:  client,
+		RoleARN: roleARN,
+	}
 
 	for _, fn := range optFns {
 		fn(&o)
@@ -268,7 +271,7 @@ func (p *AssumeRoleProvider) Retrieve(ctx context.Context) (aws.Credentials, err
 	// Apply defaults where parameters are not set.
 	if len(p.options.RoleSessionName) == 0 {
 		// Try to work out a role name that will hopefully end up unique.
-		p.options.RoleSessionName = fmt.Sprintf("%d", time.Now().UTC().UnixNano())
+		p.options.RoleSessionName = fmt.Sprintf("aws-go-sdk-%d", time.Now().UTC().UnixNano())
 	}
 	if p.options.Duration == 0 {
 		// Expire as often as AWS permits.
