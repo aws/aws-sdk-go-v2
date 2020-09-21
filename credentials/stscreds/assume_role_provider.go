@@ -25,10 +25,7 @@ with the SDKs's stscreds package.
 	// Create the credentials from AssumeRoleProvider to assume the role
 	// referenced by the "myRoleARN" ARN.
 	stsSvc := sts.NewFromConfig(cfg)
-	creds := stscreds.NewAssumeRoleProvider(stscreds.AssumeRoleOptions{
-		Client: stsSvc,
-		RoleARN: "myRoleArn",
-	})
+	creds := stscreds.NewAssumeRoleProvider(stsSvc, "myRoleArn")
 
 	cfg.Credentials = aws.CredentialsCache{Provider: creds}
 
@@ -54,11 +51,9 @@ credentials.
 
 	// Create the credentials from AssumeRoleProvider to assume the role
 	// referenced by the "myRoleARN" ARN using the MFA token code provided.
-	creds := stscreds.NewAssumeRoleProvider(stscreds.AssumeRoleOptions{
-		Client: sts.NewFromConfig(cfg),
-		RoleARN: "myRoleArn",
-		SerialNumber: aws.String("myTokenSerialNumber"),
-		TokenCode: aws.String("00000000"),
+	creds := stscreds.NewAssumeRoleProvider(sts.NewFromConfig(cfg), "myRoleArn", func(o *stscreds.AssumeRoleOptions) {
+		o.SerialNumber = aws.String("myTokenSerialNumber")
+		o.TokenCode = aws.String("00000000")
 	})
 
 	cfg.Credentials = aws.CredentialsCache{Provider: creds}
@@ -89,11 +84,9 @@ single Credentials with an AssumeRoleProvider can be shared safely.
 
 	// Create the credentials from AssumeRoleProvider to assume the role
 	// referenced by the "myRoleARN" ARN using the MFA token code provided.
-	creds := stscreds.NewAssumeRoleProvider(stscreds.AssumeRoleOptions{
-		Client: sts.NewFromConfig(cfg),
-		RoleARN: "myRoleArn",
-		SerialNumber: aws.String("myTokenSerialNumber"),
-		TokenProvider: stscreds.StdinTokenProvider,
+	creds := stscreds.NewAssumeRoleProvider(sts.NewFromConfig(cfg), "myRoleArn", func(o *stscreds.AssumeRoleOptions) {
+		o.SerialNumber = aws.String("myTokenSerialNumber")
+		o.TokenProvider = stscreds.StdinTokenProvider
 	})
 
 	cfg.Credentials = aws.CredentialsCache{Provider: creds}
