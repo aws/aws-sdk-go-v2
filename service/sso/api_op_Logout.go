@@ -71,7 +71,6 @@ func newServiceMetadataMiddleware_opLogout(region string) awsmiddleware.Register
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "awsssoportal",
 		OperationName: "Logout",
 	}
 }

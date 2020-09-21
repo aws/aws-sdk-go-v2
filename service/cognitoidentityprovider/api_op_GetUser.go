@@ -90,7 +90,6 @@ func newServiceMetadataMiddleware_opGetUser(region string) awsmiddleware.Registe
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "cognito-idp",
 		OperationName: "GetUser",
 	}
 }

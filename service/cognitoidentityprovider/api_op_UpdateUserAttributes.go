@@ -106,7 +106,6 @@ func newServiceMetadataMiddleware_opUpdateUserAttributes(region string) awsmiddl
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "cognito-idp",
 		OperationName: "UpdateUserAttributes",
 	}
 }

@@ -76,7 +76,6 @@ func newServiceMetadataMiddleware_opSetUserSettings(region string) awsmiddleware
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "cognito-idp",
 		OperationName: "SetUserSettings",
 	}
 }

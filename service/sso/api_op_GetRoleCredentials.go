@@ -80,7 +80,6 @@ func newServiceMetadataMiddleware_opGetRoleCredentials(region string) awsmiddlew
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "awsssoportal",
 		OperationName: "GetRoleCredentials",
 	}
 }

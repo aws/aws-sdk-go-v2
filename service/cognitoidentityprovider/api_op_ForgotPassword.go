@@ -123,7 +123,6 @@ func newServiceMetadataMiddleware_opForgotPassword(region string) awsmiddleware.
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "cognito-idp",
 		OperationName: "ForgotPassword",
 	}
 }

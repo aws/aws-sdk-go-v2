@@ -117,7 +117,6 @@ func newServiceMetadataMiddleware_opConfirmForgotPassword(region string) awsmidd
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "cognito-idp",
 		OperationName: "ConfirmForgotPassword",
 	}
 }
