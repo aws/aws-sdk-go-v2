@@ -18,7 +18,7 @@ Jump To:
 * [More Resources](_#Resources_)
 
 ## Project Status
-The service API clients have been significantly rewritten as part of the `0.25.0` release. Clients are now independently versioned Go modules that are bundled with their respective API types and endpoints. Client API serialization and deserialization are now fully code-generated from the service model, providing performance improvements over previous releases.
+The service API clients have been significantly rewritten as part of the `v0.25.0` release. Clients are now independently versioned Go modules that are bundled with their respective API types and endpoints. Client API serialization and deserialization are now fully code-generated from the service model, providing performance improvements over previous releases.
 
 A number of clients may be immediately available or usable without workarounds. Additional support for these clients will be added over the next series of releases as support is extended to support their feature set.
 
@@ -55,11 +55,8 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/external"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
-	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
-	"github.com/awslabs/smithy-go/ptr"
 )
 
 func main() {
@@ -78,8 +75,8 @@ func main() {
 	svc := dynamodb.NewFromConfig(cfg)
 
 	// Build the request with its input parameters
-	out, err := svc.DescribeTable(context.Background(), &dynamodb.DescribeTableInput{
-		TableName: ptr.String("myTable"),
+	resp, err := svc.DescribeTable(context.Background(), &dynamodb.DescribeTableInput{
+		TableName: aws.String("myTable"),
 	})
 	if err != nil {
 		panic("failed to describe table, " + err.Error())
