@@ -98,7 +98,6 @@ func newServiceMetadataMiddleware_opStartDeviceAuthorization(region string) awsm
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "awsssooidc",
 		OperationName: "StartDeviceAuthorization",
 	}
 }

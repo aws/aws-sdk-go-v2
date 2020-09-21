@@ -152,7 +152,6 @@ func newServiceMetadataMiddleware_opRespondToAuthChallenge(region string) awsmid
 	return awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		SigningName:   "cognito-idp",
 		OperationName: "RespondToAuthChallenge",
 	}
 }
