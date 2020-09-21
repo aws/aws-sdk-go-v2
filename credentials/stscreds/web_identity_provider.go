@@ -62,18 +62,6 @@ type WebIdentityRoleOptions struct {
 	PolicyARNs []*types.PolicyDescriptorType
 }
 
-// Copy returns a copy of the AssumeRoleOptions
-func (o WebIdentityRoleOptions) Copy() WebIdentityRoleOptions {
-	c := o
-
-	c.PolicyARNs = make([]*types.PolicyDescriptorType, len(o.PolicyARNs))
-	for _, arn := range o.PolicyARNs {
-		c.PolicyARNs = append(c.PolicyARNs, arn)
-	}
-
-	return c
-}
-
 // IdentityTokenRetriever is an interface for retrieving a JWT
 type IdentityTokenRetriever interface {
 	GetIdentityToken() ([]byte, error)
