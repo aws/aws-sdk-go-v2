@@ -45,6 +45,11 @@ func (o Options) Copy() Options {
 	return to
 }
 
+// GetRetryer returns the configured retryer
+func (o Options) GetRetryer() retry.Retryer {
+	return o.Retryer
+}
+
 // Client is an client for retrieving AWS credentials from an endpoint
 type Client struct {
 	options Options
@@ -89,6 +94,7 @@ func (c *Client) GetCredentials(ctx context.Context, params *GetCredentialsInput
 	stack.Serialize.Add(&serializeOpGetCredential{}, smithymiddleware.After)
 	stack.Build.Add(&buildEndpoint{Endpoint: options.Endpoint}, smithymiddleware.After)
 	stack.Deserialize.Add(&deserializeOpGetCredential{}, smithymiddleware.After)
+	retry.AddRetryMiddlewares(stack, options)
 	middleware.AddUserAgentKey(ServiceID)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
