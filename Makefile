@@ -8,8 +8,9 @@ LINTIGNOREDEPS='vendor/.+\.go'
 LINTIGNOREPKGCOMMENT='service/[^/]+/doc_custom.go:.+package comment should be of the form'
 LINTIGNOREENDPOINTS='aws/endpoints/defaults.go:.+(method|const) .+ should be '
 LINTIGNORESINGLEFIGHT='internal/sync/singleflight/singleflight.go:.+error should be the last type'
-UNIT_TEST_TAGS="example codegen awsinclude"
-ALL_TAGS="example codegen awsinclude integration perftest sdktool"
+
+UNIT_TEST_TAGS="example,codegen,awsinclude"
+ALL_TAGS="example,codegen,awsinclude,integration,perftest,sdktool"
 
 # SDK's Core and client packages that are compatable with Go 1.9+.
 SDK_CORE_PKGS=./aws/... ./internal/...
@@ -20,28 +21,19 @@ SDK_COMPA_PKGS=${SDK_CORE_PKGS} ${SDK_CLIENT_PKGS}
 SDK_EXAMPLES_PKGS=
 SDK_ALL_PKGS=${SDK_COMPA_PKGS} ${SDK_EXAMPLES_PKGS}
 
-
 all: generate unit
 
 ###################
 # Code Generation #
 ###################
-generate: gen-services gen-external-asserts
+generate: smithy-generate gen-external-asserts
 
 smithy-generate:
 	cd codegen && ./gradlew clean build -Plog-tests
 
-#gen-codegen-test:
-#	@echo "Generating SDK API tests"
-#	go generate ./private/model/api/codegentest/service
-
-gen-services:
-	@echo "TODO: Wire Up Smithy Client Generation"
-	#go generate ./service
-
-gen-external-asserts:
-	@echo "Generating SDK external package implementor assertions"
-	go generate ./aws/external
+gen-config-asserts:
+	@echo "Generating SDK config package implementor assertions"
+	cd config && go generate
 
 ###################
 # Unit/CI Testing #
