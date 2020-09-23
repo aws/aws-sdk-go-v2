@@ -7,6 +7,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -61,6 +62,7 @@ func (c *Client) SetVaultNotifications(ctx context.Context, params *SetVaultNoti
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSetVaultNotificationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSetVaultNotifications(options.Region), middleware.Before)
+	glaciercust.AddTreeHashMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
