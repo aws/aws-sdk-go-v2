@@ -288,9 +288,9 @@ final class XmlProtocolUtils {
             writer.insertTrailingNewline();
         }
 
-        writer.addUseImports(AwsGoDependency.AWS_CORE);
+        writer.addUseImports(AwsGoDependency.AWS_MIDDLEWARE);
         writer.openBlock("if reqID := errorComponents.RequestID; len(reqID)!=0 {", "}", () -> {
-                    writer.write("aws.SetRequestIDMetadata(metadata, reqID)");
+                    writer.write("awsmiddleware.SetRequestIDMetadata(metadata, reqID)");
         });
         writer.insertTrailingNewline();
 
