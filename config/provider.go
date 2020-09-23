@@ -2,6 +2,8 @@ package config
 
 import (
 	"context"
+	"fmt"
+	"net/http"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -10,6 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/credentials/processcreds"
 	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
 	"github.com/aws/aws-sdk-go-v2/ec2imds"
+	"github.com/awslabs/smithy-go/middleware"
 )
 
 // SharedConfigProfileProvider provides access to the shared config profile
@@ -442,4 +445,71 @@ func GetAssumeRoleCredentialProviderOptions(configs Configs) (f func(*stscreds.A
 		}
 	}
 	return f, found, err
+}
+
+// HTTPClient is an HTTP client implementation
+type HTTPClient interface {
+	Do(*http.Request) (*http.Response, error)
+}
+
+// HTTPClientProvider is an interface for retrieving an HTTPClient.
+type HTTPClientProvider interface {
+	GetHTTPClient() (HTTPClient, bool, error)
+}
+
+// WithHTTPClient wraps a HTTPClient and satisfies the HTTPClientProvider interface
+type WithHTTPClient struct {
+	HTTPClient
+}
+
+// GetHTTPClient returns the wrapped HTTPClient. Returns an error if the wrapped client is nil.
+func (w WithHTTPClient) GetHTTPClient() (HTTPClient, bool, error) {
+	if w.HTTPClient == nil {
+		return nil, false, fmt.Errorf("http client must not be nil")
+	}
+	return w.HTTPClient, true, nil
+}
+
+// GetHTTPClient searches the slice of configs and returns the first HTTPClient found.
+func GetHTTPClient(configs Configs) (c HTTPClient, found bool, err error) {
+	for _, config := range configs {
+		if p, ok := config.(HTTPClientProvider); ok {
+			c, found, err = p.GetHTTPClient()
+			if err != nil {
+				return nil, false, err
+			}
+			if found {
+				break
+			}
+		}
+	}
+	return c, found, err
+}
+
+// APIOptionsProvider is an interface for retrieving APIOptions.
+type APIOptionsProvider interface {
+	GetAPIOptions() ([]func(*middleware.Stack) error, bool, error)
+}
+
+// WithAPIOptions wraps a slice of middlewares stack mutators and satisfies the APIOptionsProvider interface.
+type WithAPIOptions []func(*middleware.Stack) error
+
+// GetAPIOptions returns the wrapped middleware stack mutators.
+func (w WithAPIOptions) GetAPIOptions() ([]func(*middleware.Stack) error, bool, error) {
+	return w, true, nil
+}
+
+func GetAPIOptions(configs Configs) (o []func(*middleware.Stack) error, found bool, err error) {
+	for _, config := range configs {
+		if p, ok := config.(APIOptionsProvider); ok {
+			o, found, err = p.GetAPIOptions()
+			if err != nil {
+				return nil, false, err
+			}
+			if found {
+				break
+			}
+		}
+	}
+	return o, found, err
 }

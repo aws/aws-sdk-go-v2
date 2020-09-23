@@ -196,15 +196,17 @@ func resolveLocalHTTPCredProvider(cfg *aws.Config, endpointURL, authToken string
 }
 
 func resolveHTTPCredProvider(cfg *aws.Config, url, authToken string, configs Configs) error {
-	options := endpointcreds.Options{
-		Endpoint:     url,
-		ExpiryWindow: 5 * time.Minute,
-	}
-	if len(authToken) != 0 {
-		options.AuthorizationToken = authToken
+	optFns := []func(*endpointcreds.Options){
+		func(options *endpointcreds.Options) {
+			options.ExpiryWindow = 5 * time.Minute
+			if len(authToken) != 0 {
+				options.AuthorizationToken = authToken
+			}
+			options.APIOptions = cfg.APIOptions
+			options.Retryer = cfg.Retryer
+		},
 	}
 
-	var optFns []func(*endpointcreds.Options)
 	optFn, found, err := GetEndpointCredentialProviderOptions(configs)
 	if err != nil {
 		return err
@@ -213,7 +215,7 @@ func resolveHTTPCredProvider(cfg *aws.Config, url, authToken string, configs Con
 		optFns = append(optFns, optFn)
 	}
 
-	provider := endpointcreds.New(options, optFns...)
+	provider := endpointcreds.New(url, optFns...)
 
 	cfg.Credentials = provider
 
@@ -331,7 +333,11 @@ func assumeWebIdentity(cfg *aws.Config, filepath string, roleARN, sessionName st
 		return fmt.Errorf("role ARN is not set")
 	}
 
-	var optFns []func(*stscreds.WebIdentityRoleOptions)
+	optFns := []func(*stscreds.WebIdentityRoleOptions){
+		func(options *stscreds.WebIdentityRoleOptions) {
+			options.RoleSessionName = sessionName
+		},
+	}
 
 	optFn, found, err := GetWebIdentityCredentialProviderOptions(configs)
 	if err != nil {
@@ -341,14 +347,7 @@ func assumeWebIdentity(cfg *aws.Config, filepath string, roleARN, sessionName st
 		optFns = append(optFns, optFn)
 	}
 
-	options := stscreds.WebIdentityRoleOptions{
-		Client:          sts.NewFromConfig(cfg.Copy()),
-		RoleARN:         roleARN,
-		RoleSessionName: sessionName,
-		TokenRetriever:  stscreds.IdentityTokenFile(filepath),
-	}
-
-	provider := stscreds.NewWebIdentityRoleProvider(options, optFns...)
+	provider := stscreds.NewWebIdentityRoleProvider(sts.NewFromConfig(cfg.Copy()), roleARN, stscreds.IdentityTokenFile(filepath), optFns...)
 
 	cfg.Credentials = provider
 
@@ -371,7 +370,26 @@ func credsFromAssumeRole(cfg *aws.Config, sharedCfg *SharedConfig, configs Confi
 		}
 	}
 
-	var optFns []func(*stscreds.AssumeRoleOptions)
+	optFns := []func(*stscreds.AssumeRoleOptions){
+		func(options *stscreds.AssumeRoleOptions) {
+			options.RoleSessionName = sharedCfg.RoleSessionName
+			if sharedCfg.RoleDurationSeconds != nil {
+				if *sharedCfg.RoleDurationSeconds/time.Minute > 15 {
+					options.Duration = *sharedCfg.RoleDurationSeconds
+				}
+			}
+			// Assume role with external ID
+			if len(sharedCfg.ExternalID) > 0 {
+				options.ExternalID = aws.String(sharedCfg.ExternalID)
+			}
+
+			// Assume role with MFA
+			if len(sharedCfg.MFASerial) != 0 {
+				options.SerialNumber = aws.String(sharedCfg.MFASerial)
+				options.TokenProvider = tokenFunc
+			}
+		},
+	}
 
 	optFn, found, err := GetAssumeRoleCredentialProviderOptions(configs)
 	if err != nil {
@@ -381,30 +399,7 @@ func credsFromAssumeRole(cfg *aws.Config, sharedCfg *SharedConfig, configs Confi
 		optFns = append(optFns, optFn)
 	}
 
-	options := stscreds.AssumeRoleOptions{
-		Client:          sts.NewFromConfig(cfg.Copy()),
-		RoleARN:         sharedCfg.RoleARN,
-		RoleSessionName: sharedCfg.RoleSessionName,
-	}
-
-	if sharedCfg.RoleDurationSeconds != nil {
-		if *sharedCfg.RoleDurationSeconds/time.Minute > 15 {
-			options.Duration = *sharedCfg.RoleDurationSeconds
-		}
-	}
-
-	// Assume role with external ID
-	if len(sharedCfg.ExternalID) > 0 {
-		options.ExternalID = aws.String(sharedCfg.ExternalID)
-	}
-
-	// Assume role with MFA
-	if len(sharedCfg.MFASerial) != 0 {
-		options.SerialNumber = aws.String(sharedCfg.MFASerial)
-		options.TokenProvider = tokenFunc
-	}
-
-	cfg.Credentials = stscreds.NewAssumeRoleProvider(options, optFns...)
+	cfg.Credentials = stscreds.NewAssumeRoleProvider(sts.NewFromConfig(cfg.Copy()), sharedCfg.RoleARN, optFns...)
 
 	return nil
 }
