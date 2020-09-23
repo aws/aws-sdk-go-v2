@@ -26,6 +26,10 @@ type Config struct {
 	// will prevent the SDK from modifying the HTTP client.
 	HTTPClient HTTPClient
 
+	// An endpoint resolver that can be used to provide or override an endpoint for the given
+	// service and region Please see the `aws.EndpointResolver` documentation on usage.
+	EndpointResolver EndpointResolver
+
 	// Retryer guides how HTTP requests should be retried in case of
 	// recoverable failures. When nil the API client will use a default
 	// retryer.
