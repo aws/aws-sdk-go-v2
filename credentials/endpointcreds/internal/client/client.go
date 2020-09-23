@@ -42,6 +42,10 @@ type Options struct {
 // Copy creates a copy of the API options.
 func (o Options) Copy() Options {
 	to := o
+	to.APIOptions = make([]func(*smithymiddleware.Stack) error, len(o.APIOptions))
+	for _, fn := range o.APIOptions {
+		to.APIOptions = append(to.APIOptions, fn)
+	}
 	return to
 }
 
