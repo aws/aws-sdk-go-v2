@@ -11,8 +11,6 @@ import (
 	"io"
 )
 
-const bufsize = 1024 * 1024
-
 // AddTreeHashMiddleware adds middleware needed to automatically
 // calculate Glacier's required checksum headers.
 func AddTreeHashMiddleware(stack *middleware.Stack) {
@@ -79,6 +77,8 @@ type Hash struct {
 //
 // See http://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html for more information.
 func computeHashes(r io.Reader) Hash {
+	const bufsize = 1024 * 1024
+
 	buf := make([]byte, bufsize)
 	hashes := [][]byte{}
 	hsh := sha256.New()
