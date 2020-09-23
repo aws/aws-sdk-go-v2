@@ -7,3 +7,5 @@ require (
 	github.com/awslabs/smithy-go v0.0.0-20200923183614-866bcae027e6
 	github.com/google/go-cmp v0.4.1
 )
+
+replace github.com/aws/aws-sdk-go-v2 => ../../../
