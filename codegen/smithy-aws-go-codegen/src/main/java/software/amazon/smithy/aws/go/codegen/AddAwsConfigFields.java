@@ -43,8 +43,6 @@ public class AddAwsConfigFields implements GoIntegration {
     public static final String CREDENTIALS_CONFIG_NAME = "Credentials";
     public static final String ENDPOINT_RESOLVER_CONFIG_NAME = "EndpointResolver";
     public static final String HTTP_CLIENT_CONFIG_NAME = "HTTPClient";
-    public static final String LOGGER_CONFIG_NAME = "Logger";
-    public static final String LOG_LEVEL_CONFIG_NAME = "LogLevel";
     public static final String RETRYER_CONFIG_NAME = "Retryer";
 
     private static final String RESOLVE_HTTP_CLIENT = "resolveHTTPClient";
@@ -63,16 +61,6 @@ public class AddAwsConfigFields implements GoIntegration {
                             + "recoverable failures. When nil the API client will use a default\n"
                             + "retryer.")
                     .resolveFunction(SymbolUtils.createValueSymbolBuilder(RESOLVE_RETRYER).build())
-                    .build(),
-            AwsConfigField.builder()
-                    .name(LOG_LEVEL_CONFIG_NAME)
-                    .type(getAwsCoreSymbol("LogLevel"))
-                    .documentation("An integer value representing the logging level.")
-                    .build(),
-            AwsConfigField.builder()
-                    .name(LOGGER_CONFIG_NAME)
-                    .type(getAwsCoreSymbol("Logger"))
-                    .documentation("The logger writer interface to write logging messages to.")
                     .build(),
             AwsConfigField.builder()
                     .name(HTTP_CLIENT_CONFIG_NAME)
