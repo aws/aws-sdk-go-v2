@@ -24,7 +24,8 @@ public class GlacierCustomizations implements GoIntegration {
                 RuntimeClientPlugin.builder()
                         .servicePredicate(GlacierCustomizations::isGlacier)
                         .registerMiddleware(MiddlewareRegistrar.builder()
-                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(TREE_HASH_ADDER).build())
+                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(TREE_HASH_ADDER,
+                                        AwsCustomGoDependency.GLACIER_CUSTOMIZATION).build())
                                 .build())
                         .build()
         );
