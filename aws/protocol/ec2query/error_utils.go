@@ -6,17 +6,19 @@ import (
 	"io"
 )
 
-// errorResponse denotes the error response structure for ec2Query error response
-type errorResponse struct {
-	Code    string `xml:"Errors>Error>Code"`
-	Message string `xml:"Errors>Error>Message"`
+// ErrorComponents represents the error response fields
+// that will be deserialized from a ec2query error response body
+type ErrorComponents struct {
+	Code      string `xml:"Errors>Error>Code"`
+	Message   string `xml:"Errors>Error>Message"`
+	RequestID string `xml:"RequestID"`
 }
 
-// GetResponseErrorCode returns the error code, error message from an ec2query error response body
-func GetResponseErrorCode(r io.Reader) (code string, message string, err error) {
-	var er errorResponse
+// GetErrorResponseComponents returns the error components from a ec2query error response body
+func GetErrorResponseComponents(r io.Reader) (ErrorComponents, error) {
+	var er ErrorComponents
 	if err := xml.NewDecoder(r).Decode(&er); err != nil {
-		return code, message, fmt.Errorf("error while fetching xml error response code: %w", err)
+		return ErrorComponents{}, fmt.Errorf("error while fetching xml error response code: %w", err)
 	}
-	return er.Code, er.Message, nil
+	return er, nil
 }

@@ -29,7 +29,13 @@ public class AwsGoDependency {
     public static final GoDependency AWS_MIDDLEWARE = aws("aws/middleware", "awsmiddleware");
     public static final GoDependency AWS_RETRY = aws("aws/retry");
     public static final GoDependency AWS_SIGNER_V4 = aws("aws/signer/v4");
+<<<<<<< HEAD
     public static final GoDependency AWS_ENDPOINTS = aws("internal/endpoints");
+=======
+    public static final GoDependency AWS_ENDPOINTS = aws("aws/endpoints/v2", "endpoints");
+    public static final GoDependency AWS_XML = aws("aws/protocol/xml", "awsxml");
+    public static final GoDependency AWS_HTTP_TRANSPORT = aws("aws/transport/http", "awshttp");
+>>>>>>> Adds support for req id fetch and aws response error wrap. Also adds s3 customization for host id and response errors
 
     public static final GoDependency REGEXP = SmithyGoDependency.stdlib("regexp");
 

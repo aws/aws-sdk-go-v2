@@ -35,8 +35,16 @@ final class Ec2Query extends AwsQuery {
     protected void writeErrorMessageCodeDeserializer(GenerationContext context) {
         GoWriter writer = context.getWriter();
         writer.addUseImports(AwsGoDependency.AWS_EC2QUERY_PROTOCOL);
-        writer.write("errorCode, errorMessage, err := ec2query.GetResponseErrorCode(errorBody)");
+        writer.write("errorComponents, err := ec2query.GetErrorResponseComponents(errorBody)");
         writer.write("if err != nil { return err }");
+        writer.insertTrailingNewline();
+
+        writer.addUseImports(AwsGoDependency.AWS_MIDDLEWARE);
+        writer.write("awsmiddleware.SetRequestIDMetadata(metadata, errorComponents.RequestID)");
+        writer.insertTrailingNewline();
+
+        writer.write("if len(errorComponents.Code) != 0 { errorCode = errorComponents.Code}");
+        writer.write("if len(errorComponents.Message) != 0 { errorMessage = errorComponents.Message}");
         writer.insertTrailingNewline();
 
         writer.write("errorBody.Seek(0, io.SeekStart)");
