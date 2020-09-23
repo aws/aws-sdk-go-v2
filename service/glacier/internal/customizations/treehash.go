@@ -73,15 +73,6 @@ type Hash struct {
 	LinearHash []byte
 }
 
-// ComputeHashes computes the tree-hash and linear hash of a reader r.
-//
-// See http://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html for more information.
-func ComputeHashes(r io.ReadSeeker) Hash {
-	start, _ := r.Seek(0, io.SeekCurrent) // Read the whole stream
-	defer r.Seek(start, io.SeekStart)     		// Rewind stream at end
-	return computeHashes(r)
-}
-
 // computeHashes computes the tree-hash and linear hash of a reader r.
 //
 // Note that this does not perform seeks before or after, these must be done manually.
@@ -110,16 +101,16 @@ func computeHashes(r io.Reader) Hash {
 
 	return Hash{
 		LinearHash: hsh.Sum(nil),
-		TreeHash:   ComputeTreeHash(hashes),
+		TreeHash:   computeTreeHash(hashes),
 	}
 }
 
-// ComputeTreeHash builds a tree hash root node given a slice of
+// computeTreeHash builds a tree hash root node given a slice of
 // hashes. Glacier tree hash to be derived from SHA256 hashes of 1MB
 // chucks of the data.
 //
 // See http://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html for more information.
-func ComputeTreeHash(hashes [][]byte) []byte {
+func computeTreeHash(hashes [][]byte) []byte {
 	if hashes == nil || len(hashes) == 0 {
 		return nil
 	}
