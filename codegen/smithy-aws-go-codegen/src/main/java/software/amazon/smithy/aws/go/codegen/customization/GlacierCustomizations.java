@@ -12,6 +12,7 @@ import software.amazon.smithy.utils.ListUtils;
 
 public class GlacierCustomizations implements GoIntegration {
     private static final String TREE_HASH_ADDER = "AddTreeHashMiddleware";
+    private static final String API_VERSION_ADDER = "AddGlacierAPIVersionMiddleware";
 
     @Override
     public byte getOrder() {
@@ -26,6 +27,15 @@ public class GlacierCustomizations implements GoIntegration {
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(TREE_HASH_ADDER,
                                         AwsCustomGoDependency.GLACIER_CUSTOMIZATION).build())
+                                .build())
+                        .build(),
+                RuntimeClientPlugin.builder()
+                        .servicePredicate(GlacierCustomizations::isGlacier)
+                        .registerMiddleware(MiddlewareRegistrar.builder()
+                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(API_VERSION_ADDER,
+                                        AwsCustomGoDependency.GLACIER_CUSTOMIZATION).build())
+                                .functionArguments(ListUtils.of(
+                                        SymbolUtils.createValueSymbolBuilder("ServiceAPIVersion").build()))
                                 .build())
                         .build()
         );
