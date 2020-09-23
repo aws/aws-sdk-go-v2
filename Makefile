@@ -26,22 +26,18 @@ all: generate unit
 ###################
 # Code Generation #
 ###################
-generate: gen-services gen-external-asserts
+generate: smithy-generate gen-external-asserts
 
 smithy-generate:
 	cd codegen && ./gradlew clean build -Plog-tests
 
-#gen-codegen-test:
-#	@echo "Generating SDK API tests"
-#	go generate ./private/model/api/codegentest/service
-
-gen-services:
-	@echo "TODO: Wire Up Smithy Client Generation"
-	#go generate ./service
-
 gen-external-asserts:
 	@echo "Generating SDK external package implementor assertions"
 	go generate ./aws/external
+
+gen-repo-mod-replace:
+	@echo "Generating go.mod replace for repo modules"
+	cd internal/cmd/makerelative && go run ./
 
 ###################
 # Unit/CI Testing #

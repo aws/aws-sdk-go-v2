@@ -12,7 +12,7 @@ require (
 
 replace (
 	github.com/aws/aws-sdk-go-v2 => ../../../../
-	github.com/aws/aws-sdk-go-v2/config => ../../../../config
-	github.com/aws/aws-sdk-go-v2/credentials => ../../../../credentials
+	github.com/aws/aws-sdk-go-v2/config => ../../../../config/
+	github.com/aws/aws-sdk-go-v2/credentials => ../../../../credentials/
 	github.com/aws/aws-sdk-go-v2/service/dynamodb => ../../
 )
