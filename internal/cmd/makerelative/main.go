@@ -26,7 +26,7 @@ func main() {
 
 	_, ok := isGoModPresent(gitRoot)
 	if !ok {
-		log.Fatalf("go.Module not present at %v", gitRoot)
+		log.Fatalf("go.mod not present at %v", gitRoot)
 	}
 
 	root := gitRoot
