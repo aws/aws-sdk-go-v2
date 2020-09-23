@@ -186,7 +186,7 @@ func resolveLocalHTTPCredProvider(cfg *aws.Config, endpointURL, authToken string
 	}
 
 	if resolveErr != nil {
-		return fmt.Errorf("failed to resolve credentials from provider, %w", resolveErr)
+		return resolveErr
 	}
 
 	return resolveHTTPCredProvider(cfg, endpointURL, authToken, configs)
