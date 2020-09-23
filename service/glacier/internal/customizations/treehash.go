@@ -50,6 +50,10 @@ func addChecksum(req *smithyhttp.Request) error {
 		return nil
 	}
 
+	if !req.IsStreamSeekable() {
+		return fmt.Errorf("glacier content-sha26 and tree hash can only be automatically computed if the request body is seekable")
+	}
+
 	h := computeHashes(req.GetStream())
 	if err := req.RewindStream(); err != nil {
 		return err
