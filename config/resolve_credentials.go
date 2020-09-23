@@ -169,27 +169,24 @@ func processCredentials(cfg *aws.Config, sharedConfig *SharedConfig, configs Con
 }
 
 func resolveLocalHTTPCredProvider(cfg *aws.Config, endpointURL, authToken string, configs Configs) error {
-	var resolveError error
+	var resolveErr error
 
 	parsed, err := url.Parse(endpointURL)
 	if err != nil {
-		resolveError = fmt.Errorf("invalid URL, %w", err)
+		resolveErr = fmt.Errorf("invalid URL, %w", err)
 	} else {
 		host := parsed.Hostname()
 		if len(host) == 0 {
-			resolveError = fmt.Errorf("unable to parse host from local HTTP cred provider URL")
+			resolveErr = fmt.Errorf("unable to parse host from local HTTP cred provider URL")
 		} else if isLoopback, loopbackErr := isLoopbackHost(host); loopbackErr != nil {
-			resolveError = fmt.Errorf("failed to resolve host %q, %v", host, loopbackErr)
+			resolveErr = fmt.Errorf("failed to resolve host %q, %v", host, loopbackErr)
 		} else if !isLoopback {
-			resolveError = fmt.Errorf("invalid endpoint host, %q, only loopback hosts are allowed", host)
+			resolveErr = fmt.Errorf("invalid endpoint host, %q, only loopback hosts are allowed", host)
 		}
 	}
 
-	if resolveError != nil {
-		if cfg.Logger != nil {
-			cfg.Logger.Log("Ignoring, HTTP credential provider", resolveError.Error())
-		}
-		return fmt.Errorf("container credentials failure: %w", resolveError)
+	if resolveErr != nil {
+		return fmt.Errorf("failed to resolve credentials from provider, %w", resolveErr)
 	}
 
 	return resolveHTTPCredProvider(cfg, endpointURL, authToken, configs)
