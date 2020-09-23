@@ -51,6 +51,6 @@ public class AwsGoDependency {
     }
 
     private static final class Versions {
-        private static final String AWS_SDK = "v0.24.1-0.20200921180648-50b89d38c63c";
+        private static final String AWS_SDK = "v0.0.0-20200923000934-8cf2e0ac6dea";
     }
 }

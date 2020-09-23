@@ -3,10 +3,13 @@ package config
 import (
 	"fmt"
 	"net/url"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/credentials"
+	"github.com/aws/aws-sdk-go-v2/credentials/ec2rolecreds"
 	"github.com/aws/aws-sdk-go-v2/credentials/processcreds"
+	"github.com/aws/aws-sdk-go-v2/ec2imds"
 )
 
 const (
@@ -209,6 +212,36 @@ func resolveCredsFromSource(cfg *aws.Config, envConfig *EnvConfig, sharedCfg *Sh
 	default:
 		return fmt.Errorf("credential_source values must be EcsContainer, Ec2InstanceMetadata, or Environment")
 	}
+
+	return nil
+}
+
+func resolveEC2RoleCredentials(cfg *aws.Config, configs Configs) error {
+	optFns := make([]func(*ec2rolecreds.Options), 0, 2)
+
+	optFn, found, err := GetEC2RoleCredentialProviderOptions(configs)
+	if err != nil {
+		return err
+	}
+	if found {
+		optFns = append(optFns, optFn)
+	}
+
+	optFns = append(optFns, func(o *ec2rolecreds.Options) {
+		// Only define a client from config if not already defined.
+		if o.Client != nil {
+			o.Client = ec2imds.New(ec2imds.Options{
+				HTTPClient: cfg.HTTPClient,
+				Retryer:    cfg.Retryer,
+			})
+		}
+	})
+
+	provider := ec2rolecreds.New(ec2rolecreds.Options{
+		ExpiryWindow: 5 * time.Minute,
+	}, optFns...)
+
+	cfg.Credentials = provider
 
 	return nil
 }

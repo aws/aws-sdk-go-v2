@@ -3,6 +3,6 @@ module github.com/aws/aws-sdk-go-v2/service/comprehend
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v0.24.1-0.20200921180648-50b89d38c63c
-	github.com/awslabs/smithy-go v0.0.0-20200917082847-627658712072
+	github.com/aws/aws-sdk-go-v2 v0.0.0-20200923000934-8cf2e0ac6dea
+	github.com/awslabs/smithy-go v0.0.0-20200922192056-dab44aa99759
 )

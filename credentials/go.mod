@@ -3,12 +3,14 @@ module github.com/aws/aws-sdk-go-v2/credentials
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v0.24.1-0.20200921214008-bd52d2b3309e
-	github.com/aws/aws-sdk-go-v2/service/sts v0.0.0-20200921214008-bd52d2b3309e
-	github.com/awslabs/smithy-go v0.0.0-20200921163940-68b34a89572d
+	github.com/aws/aws-sdk-go-v2 v0.24.1-0.20200921180648-50b89d38c63c
+	github.com/aws/aws-sdk-go-v2/ec2imds v0.0.0-20200923000803-25ae3780f7e8
+	github.com/aws/aws-sdk-go-v2/service/sts v0.0.0-20200922201841-db749849ec30
+	github.com/awslabs/smithy-go v0.0.0-20200922192056-dab44aa99759
 )
 
 replace (
 	github.com/aws/aws-sdk-go-v2 => ../
+	github.com/aws/aws-sdk-go-v2/ec2imds => ../ec2imds
 	github.com/aws/aws-sdk-go-v2/service/sts => ../service/sts
 )

@@ -4,6 +4,8 @@ import (
 	"fmt"
 )
 
+// TODO remove replace with smithy.CanceledError
+
 // RequestCanceledError is the error that will be returned by an API request
 // that was canceled. Requests given a Context may return this error when
 // canceled.
