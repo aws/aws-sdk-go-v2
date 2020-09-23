@@ -47,6 +47,7 @@ public class AddAwsConfigFields implements GoIntegration {
 
     private static final String RESOLVE_HTTP_CLIENT = "resolveHTTPClient";
     private static final String RESOLVE_RETRYER = "resolveRetryer";
+    private static final String RESOLVE_AWS_CONFIG_ENDPOINT_RESOLVER = "resolveAWSEndpointResolver";
 
     private static final List<AwsConfigField> AWS_CONFIG_FIELDS = ListUtils.of(
             AwsConfigField.builder()
@@ -73,6 +74,13 @@ public class AddAwsConfigFields implements GoIntegration {
                     .type(getAwsCoreSymbol("CredentialsProvider"))
                     .documentation("The credentials object to use when signing requests.")
                     .servicePredicate(AwsSignatureVersion4::isSupportedAuthentication)
+                    .build(),
+            AwsConfigField.builder()
+                    .name(ENDPOINT_RESOLVER_CONFIG_NAME)
+                    .type(getAwsCoreSymbol("EndpointResolver"))
+                    .generatedOnClient(false)
+                    .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(RESOLVE_AWS_CONFIG_ENDPOINT_RESOLVER)
+                            .build())
                     .build()
     );
 
@@ -125,6 +133,7 @@ public class AddAwsConfigFields implements GoIntegration {
     private void writeAwsDefaultResolvers(GoWriter writer) {
         writeHttpClientResolver(writer);
         writeRetryerResolver(writer);
+        writeAwsConfigEndpointResolver(writer);
     }
 
     private void writeRetryerResolver(GoWriter writer) {
@@ -143,6 +152,15 @@ public class AddAwsConfigFields implements GoIntegration {
                     SymbolUtils.createValueSymbolBuilder("NewBuildableHTTPClient", AwsGoDependency.AWS_CORE).build());
         });
         writer.write("");
+    }
+
+    private void writeAwsConfigEndpointResolver(GoWriter writer) {
+        writer.openBlock("func $L(cfg aws.Config, o *Options) {", "}", RESOLVE_AWS_CONFIG_ENDPOINT_RESOLVER, () -> {
+            writer.openBlock("if cfg.$L == nil {", "}", ENDPOINT_RESOLVER_CONFIG_NAME, () -> writer.write("return"));
+            writer.write("o.$L = $L(cfg.$L, $L())", ENDPOINT_RESOLVER_CONFIG_NAME,
+                    EndpointGenerator.AWS_ENDPOINT_RESOLVER_HELPER, ENDPOINT_RESOLVER_CONFIG_NAME,
+                    EndpointGenerator.RESOLVER_CONSTRUCTOR_NAME);
+        });
     }
 
     @Override
@@ -176,9 +194,21 @@ public class AddAwsConfigFields implements GoIntegration {
                                     continue;
                                 }
                             }
+                            if (field.getAwsResolverFunction().isPresent()) {
+                                continue;
+                            }
                             writer.write("$L: cfg.$L,", field.getName(), field.getName());
                         }
                     });
+
+                    for (AwsConfigField field : AWS_CONFIG_FIELDS) {
+                        Optional<Symbol> awsResolverFunction = field.getAwsResolverFunction();
+                        if (!awsResolverFunction.isPresent()) {
+                            continue;
+                        }
+                        writer.write("$L(cfg, &opts)", awsResolverFunction.get());
+                    }
+
                     writer.write("return New(opts, optFns...)");
                 });
         writer.write("");
@@ -191,12 +221,14 @@ public class AddAwsConfigFields implements GoIntegration {
         private final boolean generatedOnClient;
         private final BiPredicate<Model, ServiceShape> servicePredicate;
         private final Symbol resolveFunction;
+        private final Symbol awsResolveFunction;
 
         private AwsConfigField(Builder builder) {
             super(builder);
             this.generatedOnClient = builder.generatedOnClient;
             this.servicePredicate = builder.servicePredicate;
             this.resolveFunction = builder.resolveFunction;
+            this.awsResolveFunction = builder.awsResolveFunction;
         }
 
         public boolean isGeneratedOnClient() {
@@ -211,6 +243,10 @@ public class AddAwsConfigFields implements GoIntegration {
             return Optional.ofNullable(resolveFunction);
         }
 
+        public Optional<Symbol> getAwsResolverFunction() {
+            return Optional.ofNullable(awsResolveFunction);
+        }
+
         public static Builder builder() {
             return new Builder();
         }
@@ -222,6 +258,7 @@ public class AddAwsConfigFields implements GoIntegration {
             private boolean generatedOnClient = true;
             private BiPredicate<Model, ServiceShape> servicePredicate = null;
             private Symbol resolveFunction = null;
+            private Symbol awsResolveFunction = null;
 
             private Builder() {
                 super();
@@ -239,6 +276,11 @@ public class AddAwsConfigFields implements GoIntegration {
 
             public Builder resolveFunction(Symbol resolveFunction) {
                 this.resolveFunction = resolveFunction;
+                return this;
+            }
+
+            public Builder awsResolveFunction(Symbol awsResolveFunction) {
+                this.awsResolveFunction = awsResolveFunction;
                 return this;
             }
 

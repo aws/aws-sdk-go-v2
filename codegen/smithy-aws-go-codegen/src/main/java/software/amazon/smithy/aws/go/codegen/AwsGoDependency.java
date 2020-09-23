@@ -29,7 +29,7 @@ public class AwsGoDependency {
     public static final GoDependency AWS_MIDDLEWARE = aws("aws/middleware", "awsmiddleware");
     public static final GoDependency AWS_RETRY = aws("aws/retry");
     public static final GoDependency AWS_SIGNER_V4 = aws("aws/signer/v4");
-    public static final GoDependency AWS_ENDPOINTS = aws("aws/endpoints", "endpoints");
+    public static final GoDependency AWS_ENDPOINTS = aws("internal/endpoints");
 
     public static final GoDependency REGEXP = SmithyGoDependency.stdlib("regexp");
 
