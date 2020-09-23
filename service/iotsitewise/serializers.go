@@ -35,6 +35,7 @@ func (m *awsRestjson1_serializeOpAssociateAssets) HandleSerialize(ctx context.Co
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "model."
 
 	opPath, opQuery := httpbinding.SplitURI("/assets/{assetId}/associate")
 	request.URL.Path = opPath
@@ -128,6 +129,7 @@ func (m *awsRestjson1_serializeOpBatchAssociateProjectAssets) HandleSerialize(ct
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "monitor."
 
 	opPath, opQuery := httpbinding.SplitURI("/projects/{projectId}/assets/associate")
 	request.URL.Path = opPath
@@ -218,6 +220,7 @@ func (m *awsRestjson1_serializeOpBatchDisassociateProjectAssets) HandleSerialize
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "monitor."
 
 	opPath, opQuery := httpbinding.SplitURI("/projects/{projectId}/assets/disassociate")
 	request.URL.Path = opPath
@@ -308,6 +311,7 @@ func (m *awsRestjson1_serializeOpBatchPutAssetPropertyValue) HandleSerialize(ctx
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "data."
 
 	opPath, opQuery := httpbinding.SplitURI("/properties")
 	request.URL.Path = opPath
@@ -383,6 +387,7 @@ func (m *awsRestjson1_serializeOpCreateAccessPolicy) HandleSerialize(ctx context
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "monitor."
 
 	opPath, opQuery := httpbinding.SplitURI("/access-policies")
 	request.URL.Path = opPath
@@ -482,6 +487,7 @@ func (m *awsRestjson1_serializeOpCreateAsset) HandleSerialize(ctx context.Contex
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "model."
 
 	opPath, opQuery := httpbinding.SplitURI("/assets")
 	request.URL.Path = opPath
@@ -572,6 +578,7 @@ func (m *awsRestjson1_serializeOpCreateAssetModel) HandleSerialize(ctx context.C
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "model."
 
 	opPath, opQuery := httpbinding.SplitURI("/asset-models")
 	request.URL.Path = opPath
@@ -676,6 +683,7 @@ func (m *awsRestjson1_serializeOpCreateDashboard) HandleSerialize(ctx context.Co
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "monitor."
 
 	opPath, opQuery := httpbinding.SplitURI("/dashboards")
 	request.URL.Path = opPath
@@ -776,6 +784,7 @@ func (m *awsRestjson1_serializeOpCreateGateway) HandleSerialize(ctx context.Cont
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "edge."
 
 	opPath, opQuery := httpbinding.SplitURI("/20200301/gateways")
 	request.URL.Path = opPath
@@ -863,6 +872,7 @@ func (m *awsRestjson1_serializeOpCreatePortal) HandleSerialize(ctx context.Conte
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "monitor."
 
 	opPath, opQuery := httpbinding.SplitURI("/portals")
 	request.URL.Path = opPath
@@ -970,6 +980,7 @@ func (m *awsRestjson1_serializeOpCreateProject) HandleSerialize(ctx context.Cont
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "monitor."
 
 	opPath, opQuery := httpbinding.SplitURI("/projects")
 	request.URL.Path = opPath
@@ -1065,6 +1076,7 @@ func (m *awsRestjson1_serializeOpDeleteAccessPolicy) HandleSerialize(ctx context
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "monitor."
 
 	opPath, opQuery := httpbinding.SplitURI("/access-policies/{accessPolicyId}")
 	request.URL.Path = opPath
@@ -1129,6 +1141,7 @@ func (m *awsRestjson1_serializeOpDeleteAsset) HandleSerialize(ctx context.Contex
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "model."
 
 	opPath, opQuery := httpbinding.SplitURI("/assets/{assetId}")
 	request.URL.Path = opPath
@@ -1193,6 +1206,7 @@ func (m *awsRestjson1_serializeOpDeleteAssetModel) HandleSerialize(ctx context.C
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "model."
 
 	opPath, opQuery := httpbinding.SplitURI("/asset-models/{assetModelId}")
 	request.URL.Path = opPath
@@ -1257,6 +1271,7 @@ func (m *awsRestjson1_serializeOpDeleteDashboard) HandleSerialize(ctx context.Co
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "monitor."
 
 	opPath, opQuery := httpbinding.SplitURI("/dashboards/{dashboardId}")
 	request.URL.Path = opPath
@@ -1321,6 +1336,7 @@ func (m *awsRestjson1_serializeOpDeleteGateway) HandleSerialize(ctx context.Cont
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "edge."
 
 	opPath, opQuery := httpbinding.SplitURI("/20200301/gateways/{gatewayId}")
 	request.URL.Path = opPath
@@ -1381,6 +1397,7 @@ func (m *awsRestjson1_serializeOpDeletePortal) HandleSerialize(ctx context.Conte
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "monitor."
 
 	opPath, opQuery := httpbinding.SplitURI("/portals/{portalId}")
 	request.URL.Path = opPath
@@ -1445,6 +1462,7 @@ func (m *awsRestjson1_serializeOpDeleteProject) HandleSerialize(ctx context.Cont
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "monitor."
 
 	opPath, opQuery := httpbinding.SplitURI("/projects/{projectId}")
 	request.URL.Path = opPath
@@ -1509,6 +1527,7 @@ func (m *awsRestjson1_serializeOpDescribeAccessPolicy) HandleSerialize(ctx conte
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "monitor."
 
 	opPath, opQuery := httpbinding.SplitURI("/access-policies/{accessPolicyId}")
 	request.URL.Path = opPath
@@ -1569,6 +1588,7 @@ func (m *awsRestjson1_serializeOpDescribeAsset) HandleSerialize(ctx context.Cont
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "model."
 
 	opPath, opQuery := httpbinding.SplitURI("/assets/{assetId}")
 	request.URL.Path = opPath
@@ -1629,6 +1649,7 @@ func (m *awsRestjson1_serializeOpDescribeAssetModel) HandleSerialize(ctx context
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "model."
 
 	opPath, opQuery := httpbinding.SplitURI("/asset-models/{assetModelId}")
 	request.URL.Path = opPath
@@ -1689,6 +1710,7 @@ func (m *awsRestjson1_serializeOpDescribeAssetProperty) HandleSerialize(ctx cont
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "model."
 
 	opPath, opQuery := httpbinding.SplitURI("/assets/{assetId}/properties/{propertyId}")
 	request.URL.Path = opPath
@@ -1755,6 +1777,7 @@ func (m *awsRestjson1_serializeOpDescribeDashboard) HandleSerialize(ctx context.
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "monitor."
 
 	opPath, opQuery := httpbinding.SplitURI("/dashboards/{dashboardId}")
 	request.URL.Path = opPath
@@ -1815,6 +1838,7 @@ func (m *awsRestjson1_serializeOpDescribeGateway) HandleSerialize(ctx context.Co
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "edge."
 
 	opPath, opQuery := httpbinding.SplitURI("/20200301/gateways/{gatewayId}")
 	request.URL.Path = opPath
@@ -1875,6 +1899,7 @@ func (m *awsRestjson1_serializeOpDescribeGatewayCapabilityConfiguration) HandleS
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "edge."
 
 	opPath, opQuery := httpbinding.SplitURI("/20200301/gateways/{gatewayId}/capability/{capabilityNamespace}")
 	request.URL.Path = opPath
@@ -1941,6 +1966,7 @@ func (m *awsRestjson1_serializeOpDescribeLoggingOptions) HandleSerialize(ctx con
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "model."
 
 	opPath, opQuery := httpbinding.SplitURI("/logging")
 	request.URL.Path = opPath
@@ -1991,6 +2017,7 @@ func (m *awsRestjson1_serializeOpDescribePortal) HandleSerialize(ctx context.Con
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "monitor."
 
 	opPath, opQuery := httpbinding.SplitURI("/portals/{portalId}")
 	request.URL.Path = opPath
@@ -2051,6 +2078,7 @@ func (m *awsRestjson1_serializeOpDescribeProject) HandleSerialize(ctx context.Co
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "monitor."
 
 	opPath, opQuery := httpbinding.SplitURI("/projects/{projectId}")
 	request.URL.Path = opPath
@@ -2111,6 +2139,7 @@ func (m *awsRestjson1_serializeOpDisassociateAssets) HandleSerialize(ctx context
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "model."
 
 	opPath, opQuery := httpbinding.SplitURI("/assets/{assetId}/disassociate")
 	request.URL.Path = opPath
@@ -2204,6 +2233,7 @@ func (m *awsRestjson1_serializeOpGetAssetPropertyAggregates) HandleSerialize(ctx
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "data."
 
 	opPath, opQuery := httpbinding.SplitURI("/properties/aggregates")
 	request.URL.Path = opPath
@@ -2306,6 +2336,7 @@ func (m *awsRestjson1_serializeOpGetAssetPropertyValue) HandleSerialize(ctx cont
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "data."
 
 	opPath, opQuery := httpbinding.SplitURI("/properties/latest")
 	request.URL.Path = opPath
@@ -2372,6 +2403,7 @@ func (m *awsRestjson1_serializeOpGetAssetPropertyValueHistory) HandleSerialize(c
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "data."
 
 	opPath, opQuery := httpbinding.SplitURI("/properties/history")
 	request.URL.Path = opPath
@@ -2464,6 +2496,7 @@ func (m *awsRestjson1_serializeOpListAccessPolicies) HandleSerialize(ctx context
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "monitor."
 
 	opPath, opQuery := httpbinding.SplitURI("/access-policies")
 	request.URL.Path = opPath
@@ -2542,6 +2575,7 @@ func (m *awsRestjson1_serializeOpListAssetModels) HandleSerialize(ctx context.Co
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "model."
 
 	opPath, opQuery := httpbinding.SplitURI("/asset-models")
 	request.URL.Path = opPath
@@ -2604,6 +2638,7 @@ func (m *awsRestjson1_serializeOpListAssets) HandleSerialize(ctx context.Context
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "model."
 
 	opPath, opQuery := httpbinding.SplitURI("/assets")
 	request.URL.Path = opPath
@@ -2674,6 +2709,7 @@ func (m *awsRestjson1_serializeOpListAssociatedAssets) HandleSerialize(ctx conte
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "model."
 
 	opPath, opQuery := httpbinding.SplitURI("/assets/{assetId}/hierarchies")
 	request.URL.Path = opPath
@@ -2746,6 +2782,7 @@ func (m *awsRestjson1_serializeOpListDashboards) HandleSerialize(ctx context.Con
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "monitor."
 
 	opPath, opQuery := httpbinding.SplitURI("/dashboards")
 	request.URL.Path = opPath
@@ -2812,6 +2849,7 @@ func (m *awsRestjson1_serializeOpListGateways) HandleSerialize(ctx context.Conte
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "edge."
 
 	opPath, opQuery := httpbinding.SplitURI("/20200301/gateways")
 	request.URL.Path = opPath
@@ -2874,6 +2912,7 @@ func (m *awsRestjson1_serializeOpListPortals) HandleSerialize(ctx context.Contex
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "monitor."
 
 	opPath, opQuery := httpbinding.SplitURI("/portals")
 	request.URL.Path = opPath
@@ -2936,6 +2975,7 @@ func (m *awsRestjson1_serializeOpListProjectAssets) HandleSerialize(ctx context.
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "monitor."
 
 	opPath, opQuery := httpbinding.SplitURI("/projects/{projectId}/assets")
 	request.URL.Path = opPath
@@ -3004,6 +3044,7 @@ func (m *awsRestjson1_serializeOpListProjects) HandleSerialize(ctx context.Conte
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "monitor."
 
 	opPath, opQuery := httpbinding.SplitURI("/projects")
 	request.URL.Path = opPath
@@ -3128,6 +3169,7 @@ func (m *awsRestjson1_serializeOpPutLoggingOptions) HandleSerialize(ctx context.
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "model."
 
 	opPath, opQuery := httpbinding.SplitURI("/logging")
 	request.URL.Path = opPath
@@ -3353,6 +3395,7 @@ func (m *awsRestjson1_serializeOpUpdateAccessPolicy) HandleSerialize(ctx context
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "monitor."
 
 	opPath, opQuery := httpbinding.SplitURI("/access-policies/{accessPolicyId}")
 	request.URL.Path = opPath
@@ -3455,6 +3498,7 @@ func (m *awsRestjson1_serializeOpUpdateAsset) HandleSerialize(ctx context.Contex
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "model."
 
 	opPath, opQuery := httpbinding.SplitURI("/assets/{assetId}")
 	request.URL.Path = opPath
@@ -3543,6 +3587,7 @@ func (m *awsRestjson1_serializeOpUpdateAssetModel) HandleSerialize(ctx context.C
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "model."
 
 	opPath, opQuery := httpbinding.SplitURI("/asset-models/{assetModelId}")
 	request.URL.Path = opPath
@@ -3650,6 +3695,7 @@ func (m *awsRestjson1_serializeOpUpdateAssetProperty) HandleSerialize(ctx contex
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "model."
 
 	opPath, opQuery := httpbinding.SplitURI("/assets/{assetId}/properties/{propertyId}")
 	request.URL.Path = opPath
@@ -3749,6 +3795,7 @@ func (m *awsRestjson1_serializeOpUpdateDashboard) HandleSerialize(ctx context.Co
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "monitor."
 
 	opPath, opQuery := httpbinding.SplitURI("/dashboards/{dashboardId}")
 	request.URL.Path = opPath
@@ -3847,6 +3894,7 @@ func (m *awsRestjson1_serializeOpUpdateGateway) HandleSerialize(ctx context.Cont
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "edge."
 
 	opPath, opQuery := httpbinding.SplitURI("/20200301/gateways/{gatewayId}")
 	request.URL.Path = opPath
@@ -3930,6 +3978,7 @@ func (m *awsRestjson1_serializeOpUpdateGatewayCapabilityConfiguration) HandleSer
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "edge."
 
 	opPath, opQuery := httpbinding.SplitURI("/20200301/gateways/{gatewayId}/capability")
 	request.URL.Path = opPath
@@ -4018,6 +4067,7 @@ func (m *awsRestjson1_serializeOpUpdatePortal) HandleSerialize(ctx context.Conte
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "monitor."
 
 	opPath, opQuery := httpbinding.SplitURI("/portals/{portalId}")
 	request.URL.Path = opPath
@@ -4128,6 +4178,7 @@ func (m *awsRestjson1_serializeOpUpdateProject) HandleSerialize(ctx context.Cont
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
+	request.HostPrefix = "monitor."
 
 	opPath, opQuery := httpbinding.SplitURI("/projects/{projectId}")
 	request.URL.Path = opPath
