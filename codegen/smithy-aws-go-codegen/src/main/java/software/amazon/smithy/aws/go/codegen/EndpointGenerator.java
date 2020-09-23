@@ -154,8 +154,9 @@ final class EndpointGenerator implements Runnable {
             writer.write("");
 
             writer.addUseImports(SmithyGoDependency.ERRORS);
-            writer.openBlock("if nf := (&$T{}); !errors.As(err, &nf) {", "}", SymbolUtils.createValueSymbolBuilder("EndpointNotFound",
-                    AwsGoDependency.AWS_CORE).build(), () -> writer.write("return endpoint, err"));
+            writer.openBlock("if nf := (&$T{}); !errors.As(err, &nf) {", "}",
+                    SymbolUtils.createValueSymbolBuilder("EndpointNotFound", AwsGoDependency.AWS_CORE).build(),
+                    () -> writer.write("return endpoint, err"));
             writer.write("");
 
             writer.write("fallback:");
@@ -169,8 +170,8 @@ final class EndpointGenerator implements Runnable {
         // Generate exported helper for constructing a wrapper around the AWS EndpointResolver type that is compatible
         // with the clients EndpointResolver interface.
         writer.writeDocs(String.format("%s returns an EndpointResolver that first delegates endpoint resolution "
-                + "to the awsResolver. If awsResolver returns `aws.EndpointNotFound` error, the resolver will use the "
-                + "the provided fallbackResolver for resolution. awsResolver and fallbackResolver must not be nil",
+                        + "to the awsResolver. If awsResolver returns `aws.EndpointNotFound` error, the resolver will use the "
+                        + "the provided fallbackResolver for resolution. awsResolver and fallbackResolver must not be nil",
                 AWS_ENDPOINT_RESOLVER_HELPER));
         writer.openBlock("func $L(awsResolver $T, fallbackResolver $T) $T {", "}", AWS_ENDPOINT_RESOLVER_HELPER,
                 awsEndpointResolver, resolverInterface, resolverInterface, () -> {
@@ -353,11 +354,11 @@ final class EndpointGenerator implements Runnable {
     /**
      * Writes the ResolveEndpoint function signature to satisfy the EndpointResolver interface.
      *
-     * @param writer the code writer
-     * @param receiverType the receiver symbol type should be can be value or pointer
-     * @param receiverIdentifier the identifier to use for the receiver
+     * @param writer                the code writer
+     * @param receiverType          the receiver symbol type should be can be value or pointer
+     * @param receiverIdentifier    the identifier to use for the receiver
      * @param resolverOptionsSymbol the symbol for the options
-     * @param body a runnable that will populate the function implementation.
+     * @param body                  a runnable that will populate the function implementation.
      */
     private void writeResolveEndpointImplementation(
             GoWriter writer,
