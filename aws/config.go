@@ -31,15 +31,6 @@ type Config struct {
 	// retryer.
 	Retryer Retryer
 
-	// An integer value representing the logging level. The default log level
-	// is zero (LogOff), which represents no logging. To enable logging set
-	// to a LogLevel Value.
-	LogLevel LogLevel
-
-	// The logger writer interface to write logging messages to. Defaults to
-	// standard out.
-	Logger Logger
-
 	// ConfigSources are the sources that were used to construct the Config.
 	// Allows for additional configuration to be loaded by clients.
 	ConfigSources []interface{}

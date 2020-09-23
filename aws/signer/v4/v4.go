@@ -47,7 +47,6 @@ import (
 	"context"
 	"crypto/sha256"
 	"encoding/hex"
-	"fmt"
 	"hash"
 	"net/http"
 	"net/url"
@@ -78,17 +77,6 @@ type keyDerivator interface {
 // Signer applies AWS v4 signing to given request. Use this to sign requests
 // that need to be signed with AWS V4 Signatures.
 type Signer struct {
-	// Sets the log level the signer should use when reporting information to
-	// the logger. If the logger is nil nothing will be logged. See
-	// aws.LogLevel for more information on available logging levels
-	//
-	// By default nothing will be logged.
-	Debug aws.LogLevel
-
-	// The logger loging information will be written to. If there the logger
-	// is nil, nothing will be logged.
-	Logger aws.Logger
-
 	// Disables the Signer's moving HTTP header key/value pairs from the HTTP
 	// request header to the request's query string. This is most commonly used
 	// with pre-signed requests preventing headers from being added to the
@@ -267,12 +255,10 @@ func (v4 Signer) SignHTTP(ctx context.Context, credentials aws.Credentials, r *h
 		KeyDerivator:           v4.keyDerivator,
 	}
 
-	signedRequest, err := signer.Build()
+	_, err := signer.Build()
 	if err != nil {
 		return err
 	}
-
-	v4.logHTTPSigningInfo(signedRequest)
 
 	return nil
 }
@@ -318,32 +304,7 @@ func (v4 *Signer) PresignHTTP(ctx context.Context, credentials aws.Credentials, 
 		return "", nil, err
 	}
 
-	v4.logHTTPSigningInfo(signedRequest)
-
 	return signedRequest.Request.URL.String(), signedRequest.SignedHeaders, nil
-}
-
-const logSignInfoMsg = `DEBUG: Request Signature:
----[ CANONICAL STRING  ]-----------------------------
-%s
----[ STRING TO SIGN ]--------------------------------
-%s%s
------------------------------------------------------`
-const logSignedURLMsg = `
----[ SIGNED URL ]------------------------------------
-%s`
-
-func (v4 Signer) logHTTPSigningInfo(r signedRequest) {
-	if !v4.Debug.Matches(aws.LogDebugWithSigning) || v4.Logger == nil {
-		return
-	}
-
-	signedURLMsg := ""
-	if r.PreSigned {
-		signedURLMsg = fmt.Sprintf(logSignedURLMsg, r.Request.URL.String())
-	}
-	msg := fmt.Sprintf(logSignInfoMsg, r.CanonicalString, r.StringToSign, signedURLMsg)
-	v4.Logger.Log(msg)
 }
 
 func (s *httpSigner) buildCredentialScope() string {
