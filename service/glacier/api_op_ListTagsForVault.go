@@ -7,6 +7,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -35,6 +36,7 @@ func (c *Client) ListTagsForVault(ctx context.Context, params *ListTagsForVaultI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListTagsForVaultValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListTagsForVault(options.Region), middleware.Before)
+	glaciercust.AddTreeHashMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
