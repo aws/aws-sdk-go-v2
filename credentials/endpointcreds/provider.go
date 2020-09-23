@@ -85,6 +85,9 @@ type Options struct {
 	// Set of options to modify how the credentials operation is invoked.
 	APIOptions []func(*middleware.Stack) error
 
+	// The Retryer to be used for determining whether a failed requested should be retried
+	Retryer aws.Retryer
+
 	// Optional authorization token value if set will be used as the value of
 	// the Authorization header of the endpoint credential request.
 	AuthorizationToken string
@@ -106,6 +109,7 @@ func New(endpoint string, optFns ...func(*Options)) *Provider {
 			HTTPClient: o.HTTPClient,
 			Endpoint:   o.Endpoint,
 			APIOptions: o.APIOptions,
+			Retryer:    o.Retryer,
 		}),
 		options: o,
 	}
