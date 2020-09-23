@@ -155,7 +155,7 @@ final class EndpointGenerator implements Runnable {
 
             writer.addUseImports(SmithyGoDependency.ERRORS);
             writer.openBlock("if nf := (&$T{}); !errors.As(err, &nf) {", "}",
-                    SymbolUtils.createValueSymbolBuilder("EndpointNotFound", AwsGoDependency.AWS_CORE).build(),
+                    SymbolUtils.createValueSymbolBuilder("EndpointNotFoundError", AwsGoDependency.AWS_CORE).build(),
                     () -> writer.write("return endpoint, err"));
             writer.write("");
 
@@ -170,8 +170,9 @@ final class EndpointGenerator implements Runnable {
         // Generate exported helper for constructing a wrapper around the AWS EndpointResolver type that is compatible
         // with the clients EndpointResolver interface.
         writer.writeDocs(String.format("%s returns an EndpointResolver that first delegates endpoint resolution "
-                        + "to the awsResolver. If awsResolver returns `aws.EndpointNotFound` error, the resolver will use the "
-                        + "the provided fallbackResolver for resolution. awsResolver and fallbackResolver must not be nil",
+                        + "to the awsResolver. If awsResolver returns `aws.EndpointNotFoundError` error, the resolver "
+                        + "will use the the provided fallbackResolver for resolution. awsResolver and fallbackResolver "
+                        + "must not be nil",
                 AWS_ENDPOINT_RESOLVER_HELPER));
         writer.openBlock("func $L(awsResolver $T, fallbackResolver $T) $T {", "}", AWS_ENDPOINT_RESOLVER_HELPER,
                 awsEndpointResolver, resolverInterface, resolverInterface, () -> {
