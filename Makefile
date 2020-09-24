@@ -44,7 +44,7 @@ tidy-modules-%:
 	@#
 	@# e.g. build-modules-internal_protocoltest
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst tidy-modules-,,$@)) -c 4 \
+		&& go run . -p $(subst _,/,$(subst tidy-modules-,,$@)) -c 8 \
 		"go mod tidy"
 
 
