@@ -33,6 +33,8 @@ func (c *Client) AdminForgetDevice(ctx context.Context, params *AdminForgetDevic
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAdminForgetDeviceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAdminForgetDevice(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

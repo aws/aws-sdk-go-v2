@@ -33,6 +33,8 @@ func (c *Client) GetNetwork(ctx context.Context, params *GetNetworkInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetNetworkValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetNetwork(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

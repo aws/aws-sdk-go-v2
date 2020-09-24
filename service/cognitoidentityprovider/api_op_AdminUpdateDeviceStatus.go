@@ -34,6 +34,8 @@ func (c *Client) AdminUpdateDeviceStatus(ctx context.Context, params *AdminUpdat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAdminUpdateDeviceStatusValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAdminUpdateDeviceStatus(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -44,6 +44,8 @@ func (c *Client) CreateLogStream(ctx context.Context, params *CreateLogStreamInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateLogStreamValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLogStream(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

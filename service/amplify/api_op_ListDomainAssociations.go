@@ -33,6 +33,8 @@ func (c *Client) ListDomainAssociations(ctx context.Context, params *ListDomainA
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListDomainAssociationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListDomainAssociations(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

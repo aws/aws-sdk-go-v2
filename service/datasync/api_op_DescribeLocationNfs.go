@@ -34,6 +34,8 @@ func (c *Client) DescribeLocationNfs(ctx context.Context, params *DescribeLocati
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeLocationNfsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLocationNfs(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

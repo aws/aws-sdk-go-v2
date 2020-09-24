@@ -32,6 +32,8 @@ func (c *Client) ListBranches(ctx context.Context, params *ListBranchesInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListBranchesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListBranches(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -43,6 +43,8 @@ func (c *Client) ModifyLunaClient(ctx context.Context, params *ModifyLunaClientI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyLunaClientValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyLunaClient(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,8 @@ func (c *Client) GetEntitlements(ctx context.Context, params *GetEntitlementsInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetEntitlementsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetEntitlements(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

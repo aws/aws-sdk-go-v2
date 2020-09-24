@@ -50,6 +50,8 @@ func (c *Client) CreateSAMLProvider(ctx context.Context, params *CreateSAMLProvi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateSAMLProviderValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSAMLProvider(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

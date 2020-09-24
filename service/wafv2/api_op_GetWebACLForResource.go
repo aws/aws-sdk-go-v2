@@ -37,6 +37,8 @@ func (c *Client) GetWebACLForResource(ctx context.Context, params *GetWebACLForR
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetWebACLForResourceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetWebACLForResource(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

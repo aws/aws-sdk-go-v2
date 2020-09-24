@@ -36,6 +36,8 @@ func (c *Client) GetUICustomization(ctx context.Context, params *GetUICustomizat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetUICustomizationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetUICustomization(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

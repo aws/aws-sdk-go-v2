@@ -131,6 +131,8 @@ func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateServiceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateService(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

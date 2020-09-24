@@ -36,6 +36,8 @@ func (c *Client) SetCognitoEvents(ctx context.Context, params *SetCognitoEventsI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSetCognitoEventsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSetCognitoEvents(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

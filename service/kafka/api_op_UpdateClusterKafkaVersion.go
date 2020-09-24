@@ -33,6 +33,8 @@ func (c *Client) UpdateClusterKafkaVersion(ctx context.Context, params *UpdateCl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateClusterKafkaVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateClusterKafkaVersion(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

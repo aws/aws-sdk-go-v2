@@ -33,6 +33,8 @@ func (c *Client) DeleteSubnet(ctx context.Context, params *DeleteSubnetInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteSubnetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSubnet(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

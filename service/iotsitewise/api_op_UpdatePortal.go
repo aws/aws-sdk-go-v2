@@ -35,6 +35,8 @@ func (c *Client) UpdatePortal(ctx context.Context, params *UpdatePortalInput, op
 	addIdempotencyToken_opUpdatePortalMiddleware(stack, options)
 	addOpUpdatePortalValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePortal(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

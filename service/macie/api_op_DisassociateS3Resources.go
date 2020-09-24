@@ -37,6 +37,8 @@ func (c *Client) DisassociateS3Resources(ctx context.Context, params *Disassocia
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisassociateS3ResourcesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateS3Resources(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

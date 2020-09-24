@@ -32,6 +32,8 @@ func (c *Client) DeleteEgressOnlyInternetGateway(ctx context.Context, params *De
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteEgressOnlyInternetGatewayValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteEgressOnlyInternetGateway(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -39,6 +39,8 @@ func (c *Client) RenewCertificate(ctx context.Context, params *RenewCertificateI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRenewCertificateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRenewCertificate(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

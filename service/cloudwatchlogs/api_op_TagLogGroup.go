@@ -39,6 +39,8 @@ func (c *Client) TagLogGroup(ctx context.Context, params *TagLogGroupInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTagLogGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTagLogGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

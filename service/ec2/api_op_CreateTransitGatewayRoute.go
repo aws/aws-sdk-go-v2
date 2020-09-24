@@ -33,6 +33,8 @@ func (c *Client) CreateTransitGatewayRoute(ctx context.Context, params *CreateTr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateTransitGatewayRouteValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTransitGatewayRoute(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

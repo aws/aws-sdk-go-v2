@@ -35,6 +35,8 @@ func (c *Client) GetLexicon(ctx context.Context, params *GetLexiconInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetLexiconValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetLexicon(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

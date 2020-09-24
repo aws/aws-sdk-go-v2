@@ -33,6 +33,8 @@ func (c *Client) StopChannel(ctx context.Context, params *StopChannelInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopChannelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopChannel(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

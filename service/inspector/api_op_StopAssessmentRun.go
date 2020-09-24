@@ -33,6 +33,8 @@ func (c *Client) StopAssessmentRun(ctx context.Context, params *StopAssessmentRu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopAssessmentRunValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopAssessmentRun(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

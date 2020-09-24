@@ -39,6 +39,8 @@ func (c *Client) SendBonus(ctx context.Context, params *SendBonusInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSendBonusValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSendBonus(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

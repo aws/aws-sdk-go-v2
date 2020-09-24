@@ -34,6 +34,8 @@ func (c *Client) SubmitJob(ctx context.Context, params *SubmitJobInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSubmitJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSubmitJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

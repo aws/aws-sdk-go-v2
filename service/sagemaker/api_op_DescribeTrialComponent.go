@@ -34,6 +34,8 @@ func (c *Client) DescribeTrialComponent(ctx context.Context, params *DescribeTri
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeTrialComponentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTrialComponent(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

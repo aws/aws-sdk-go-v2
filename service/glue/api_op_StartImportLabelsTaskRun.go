@@ -55,6 +55,8 @@ func (c *Client) StartImportLabelsTaskRun(ctx context.Context, params *StartImpo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartImportLabelsTaskRunValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartImportLabelsTaskRun(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

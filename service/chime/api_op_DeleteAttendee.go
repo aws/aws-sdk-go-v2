@@ -37,6 +37,8 @@ func (c *Client) DeleteAttendee(ctx context.Context, params *DeleteAttendeeInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteAttendeeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAttendee(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

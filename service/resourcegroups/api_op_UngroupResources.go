@@ -33,6 +33,8 @@ func (c *Client) UngroupResources(ctx context.Context, params *UngroupResourcesI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUngroupResourcesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUngroupResources(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

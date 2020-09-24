@@ -33,6 +33,8 @@ func (c *Client) DescribeTargetHealth(ctx context.Context, params *DescribeTarge
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeTargetHealthValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTargetHealth(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

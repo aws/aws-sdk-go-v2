@@ -33,6 +33,8 @@ func (c *Client) ListApplicationDependencies(ctx context.Context, params *ListAp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListApplicationDependenciesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListApplicationDependencies(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

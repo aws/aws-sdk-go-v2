@@ -35,6 +35,8 @@ func (c *Client) RegisterContainerInstance(ctx context.Context, params *Register
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterContainerInstanceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterContainerInstance(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

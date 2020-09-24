@@ -37,6 +37,8 @@ func (c *Client) StopTrainingJob(ctx context.Context, params *StopTrainingJobInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopTrainingJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopTrainingJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

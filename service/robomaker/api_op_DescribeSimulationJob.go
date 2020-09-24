@@ -34,6 +34,8 @@ func (c *Client) DescribeSimulationJob(ctx context.Context, params *DescribeSimu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeSimulationJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSimulationJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

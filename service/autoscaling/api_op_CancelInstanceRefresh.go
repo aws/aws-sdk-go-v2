@@ -36,6 +36,8 @@ func (c *Client) CancelInstanceRefresh(ctx context.Context, params *CancelInstan
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCancelInstanceRefreshValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCancelInstanceRefresh(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,8 @@ func (c *Client) CreateUsageLimit(ctx context.Context, params *CreateUsageLimitI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateUsageLimitValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateUsageLimit(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

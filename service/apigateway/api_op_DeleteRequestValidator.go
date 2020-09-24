@@ -32,6 +32,8 @@ func (c *Client) DeleteRequestValidator(ctx context.Context, params *DeleteReque
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteRequestValidatorValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRequestValidator(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

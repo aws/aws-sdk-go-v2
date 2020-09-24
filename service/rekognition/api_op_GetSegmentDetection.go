@@ -56,6 +56,8 @@ func (c *Client) GetSegmentDetection(ctx context.Context, params *GetSegmentDete
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetSegmentDetectionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSegmentDetection(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

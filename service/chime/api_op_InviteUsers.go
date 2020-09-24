@@ -35,6 +35,8 @@ func (c *Client) InviteUsers(ctx context.Context, params *InviteUsersInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpInviteUsersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opInviteUsers(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

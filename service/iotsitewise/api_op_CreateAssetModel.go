@@ -41,6 +41,8 @@ func (c *Client) CreateAssetModel(ctx context.Context, params *CreateAssetModelI
 	addIdempotencyToken_opCreateAssetModelMiddleware(stack, options)
 	addOpCreateAssetModelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAssetModel(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

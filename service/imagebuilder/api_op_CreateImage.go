@@ -36,6 +36,8 @@ func (c *Client) CreateImage(ctx context.Context, params *CreateImageInput, optF
 	addIdempotencyToken_opCreateImageMiddleware(stack, options)
 	addOpCreateImageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateImage(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

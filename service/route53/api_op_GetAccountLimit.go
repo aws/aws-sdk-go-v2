@@ -43,6 +43,8 @@ func (c *Client) GetAccountLimit(ctx context.Context, params *GetAccountLimitInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetAccountLimitValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetAccountLimit(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

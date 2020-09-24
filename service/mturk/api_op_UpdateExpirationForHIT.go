@@ -35,6 +35,8 @@ func (c *Client) UpdateExpirationForHIT(ctx context.Context, params *UpdateExpir
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateExpirationForHITValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateExpirationForHIT(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

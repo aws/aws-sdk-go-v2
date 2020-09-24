@@ -34,6 +34,8 @@ func (c *Client) ApplyPendingMaintenanceAction(ctx context.Context, params *Appl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpApplyPendingMaintenanceActionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opApplyPendingMaintenanceAction(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

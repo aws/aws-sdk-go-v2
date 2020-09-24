@@ -37,6 +37,8 @@ func (c *Client) CreateResourceGroup(ctx context.Context, params *CreateResource
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateResourceGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateResourceGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

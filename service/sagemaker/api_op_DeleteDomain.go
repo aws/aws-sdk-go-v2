@@ -36,6 +36,8 @@ func (c *Client) DeleteDomain(ctx context.Context, params *DeleteDomainInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDomainValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDomain(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

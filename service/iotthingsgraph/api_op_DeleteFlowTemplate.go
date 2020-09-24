@@ -35,6 +35,8 @@ func (c *Client) DeleteFlowTemplate(ctx context.Context, params *DeleteFlowTempl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteFlowTemplateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFlowTemplate(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -47,6 +47,8 @@ func (c *Client) DescribeTrustedAdvisorCheckRefreshStatuses(ctx context.Context,
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeTrustedAdvisorCheckRefreshStatusesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTrustedAdvisorCheckRefreshStatuses(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

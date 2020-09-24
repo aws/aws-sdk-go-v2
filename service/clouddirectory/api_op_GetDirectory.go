@@ -33,6 +33,8 @@ func (c *Client) GetDirectory(ctx context.Context, params *GetDirectoryInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDirectoryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDirectory(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

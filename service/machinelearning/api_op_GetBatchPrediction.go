@@ -35,6 +35,8 @@ func (c *Client) GetBatchPrediction(ctx context.Context, params *GetBatchPredict
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBatchPredictionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBatchPrediction(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

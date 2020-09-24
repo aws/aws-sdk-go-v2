@@ -41,6 +41,8 @@ func (c *Client) RegisterDelegatedAdministrator(ctx context.Context, params *Reg
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterDelegatedAdministratorValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterDelegatedAdministrator(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

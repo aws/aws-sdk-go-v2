@@ -34,6 +34,8 @@ func (c *Client) UpdatePortfolio(ctx context.Context, params *UpdatePortfolioInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdatePortfolioValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePortfolio(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

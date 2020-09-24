@@ -68,6 +68,8 @@ func (c *Client) TransferDomain(ctx context.Context, params *TransferDomainInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTransferDomainValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTransferDomain(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -62,6 +62,8 @@ func (c *Client) SetVaultNotifications(ctx context.Context, params *SetVaultNoti
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSetVaultNotificationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSetVaultNotifications(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	glaciercust.AddTreeHashMiddleware(stack)
 
 	for _, fn := range options.APIOptions {

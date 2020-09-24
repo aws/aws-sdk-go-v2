@@ -40,6 +40,8 @@ func (c *Client) ListServiceQuotas(ctx context.Context, params *ListServiceQuota
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListServiceQuotasValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListServiceQuotas(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

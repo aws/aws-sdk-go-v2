@@ -42,6 +42,8 @@ func (c *Client) RevokeSecurityGroupEgress(ctx context.Context, params *RevokeSe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRevokeSecurityGroupEgressValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRevokeSecurityGroupEgress(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

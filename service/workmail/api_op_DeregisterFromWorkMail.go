@@ -35,6 +35,8 @@ func (c *Client) DeregisterFromWorkMail(ctx context.Context, params *DeregisterF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeregisterFromWorkMailValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterFromWorkMail(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

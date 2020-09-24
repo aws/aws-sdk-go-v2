@@ -33,6 +33,8 @@ func (c *Client) PutReportDefinition(ctx context.Context, params *PutReportDefin
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutReportDefinitionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutReportDefinition(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

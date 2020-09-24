@@ -78,6 +78,8 @@ func (c *Client) CreateFileSystem(ctx context.Context, params *CreateFileSystemI
 	addIdempotencyToken_opCreateFileSystemMiddleware(stack, options)
 	addOpCreateFileSystemValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFileSystem(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

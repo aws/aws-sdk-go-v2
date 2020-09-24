@@ -39,6 +39,8 @@ func (c *Client) DeleteCustomActionType(ctx context.Context, params *DeleteCusto
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteCustomActionTypeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCustomActionType(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

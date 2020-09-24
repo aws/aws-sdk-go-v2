@@ -39,6 +39,8 @@ func (c *Client) CreateJobQueue(ctx context.Context, params *CreateJobQueueInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateJobQueueValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateJobQueue(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -36,6 +36,8 @@ func (c *Client) BatchGetTriggers(ctx context.Context, params *BatchGetTriggersI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchGetTriggersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetTriggers(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

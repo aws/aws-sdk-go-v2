@@ -36,6 +36,8 @@ func (c *Client) SetStatus(ctx context.Context, params *SetStatusInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSetStatusValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSetStatus(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

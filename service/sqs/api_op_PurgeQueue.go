@@ -39,6 +39,8 @@ func (c *Client) PurgeQueue(ctx context.Context, params *PurgeQueueInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPurgeQueueValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPurgeQueue(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

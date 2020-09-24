@@ -34,6 +34,8 @@ func (c *Client) DeleteReplicationInstance(ctx context.Context, params *DeleteRe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteReplicationInstanceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteReplicationInstance(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

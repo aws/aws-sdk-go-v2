@@ -33,6 +33,8 @@ func (c *Client) GetFinding(ctx context.Context, params *GetFindingInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetFindingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetFinding(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

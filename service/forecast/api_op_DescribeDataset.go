@@ -43,6 +43,8 @@ func (c *Client) DescribeDataset(ctx context.Context, params *DescribeDatasetInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeDatasetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDataset(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -52,6 +52,8 @@ func (c *Client) CreateEmailIdentity(ctx context.Context, params *CreateEmailIde
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateEmailIdentityValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEmailIdentity(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

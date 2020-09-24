@@ -34,6 +34,8 @@ func (c *Client) ListTestGridSessions(ctx context.Context, params *ListTestGridS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListTestGridSessionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListTestGridSessions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

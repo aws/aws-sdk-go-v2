@@ -44,6 +44,8 @@ func (c *Client) RestoreDBClusterFromSnapshot(ctx context.Context, params *Resto
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRestoreDBClusterFromSnapshotValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreDBClusterFromSnapshot(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,8 @@ func (c *Client) DeleteProtection(ctx context.Context, params *DeleteProtectionI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteProtectionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteProtection(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

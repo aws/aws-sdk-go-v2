@@ -33,6 +33,8 @@ func (c *Client) GetQueue(ctx context.Context, params *GetQueueInput, optFns ...
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetQueueValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetQueue(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

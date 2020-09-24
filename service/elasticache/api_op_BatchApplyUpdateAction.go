@@ -35,6 +35,8 @@ func (c *Client) BatchApplyUpdateAction(ctx context.Context, params *BatchApplyU
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchApplyUpdateActionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchApplyUpdateAction(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

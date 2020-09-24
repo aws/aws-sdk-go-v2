@@ -38,6 +38,8 @@ func (c *Client) SetIdentityHeadersInNotificationsEnabled(ctx context.Context, p
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSetIdentityHeadersInNotificationsEnabledValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSetIdentityHeadersInNotificationsEnabled(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

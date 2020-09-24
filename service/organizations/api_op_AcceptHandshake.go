@@ -61,6 +61,8 @@ func (c *Client) AcceptHandshake(ctx context.Context, params *AcceptHandshakeInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAcceptHandshakeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptHandshake(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

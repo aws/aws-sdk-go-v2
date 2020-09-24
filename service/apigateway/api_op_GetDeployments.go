@@ -33,6 +33,8 @@ func (c *Client) GetDeployments(ctx context.Context, params *GetDeploymentsInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDeploymentsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDeployments(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

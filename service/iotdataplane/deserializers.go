@@ -39,7 +39,7 @@ func (m *awsRestjson1_deserializeOpDeleteThingShadow) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorDeleteThingShadow(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorDeleteThingShadow(response, &metadata)
 	}
 	output := &DeleteThingShadowOutput{}
 	out.Result = output
@@ -52,7 +52,7 @@ func (m *awsRestjson1_deserializeOpDeleteThingShadow) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorDeleteThingShadow(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorDeleteThingShadow(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -163,7 +163,7 @@ func (m *awsRestjson1_deserializeOpGetThingShadow) HandleDeserialize(ctx context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorGetThingShadow(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorGetThingShadow(response, &metadata)
 	}
 	output := &GetThingShadowOutput{}
 	out.Result = output
@@ -176,7 +176,7 @@ func (m *awsRestjson1_deserializeOpGetThingShadow) HandleDeserialize(ctx context
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorGetThingShadow(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorGetThingShadow(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -287,7 +287,7 @@ func (m *awsRestjson1_deserializeOpListNamedShadowsForThing) HandleDeserialize(c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorListNamedShadowsForThing(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorListNamedShadowsForThing(response, &metadata)
 	}
 	output := &ListNamedShadowsForThingOutput{}
 	out.Result = output
@@ -323,7 +323,7 @@ func (m *awsRestjson1_deserializeOpListNamedShadowsForThing) HandleDeserialize(c
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorListNamedShadowsForThing(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorListNamedShadowsForThing(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -474,7 +474,7 @@ func (m *awsRestjson1_deserializeOpPublish) HandleDeserialize(ctx context.Contex
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorPublish(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorPublish(response, &metadata)
 	}
 	output := &PublishOutput{}
 	out.Result = output
@@ -482,7 +482,7 @@ func (m *awsRestjson1_deserializeOpPublish) HandleDeserialize(ctx context.Contex
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorPublish(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorPublish(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -566,7 +566,7 @@ func (m *awsRestjson1_deserializeOpUpdateThingShadow) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorUpdateThingShadow(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorUpdateThingShadow(response, &metadata)
 	}
 	output := &UpdateThingShadowOutput{}
 	out.Result = output
@@ -579,7 +579,7 @@ func (m *awsRestjson1_deserializeOpUpdateThingShadow) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorUpdateThingShadow(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorUpdateThingShadow(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

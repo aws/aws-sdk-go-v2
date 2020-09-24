@@ -47,6 +47,8 @@ func (c *Client) UpdateOriginRequestPolicy(ctx context.Context, params *UpdateOr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateOriginRequestPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateOriginRequestPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

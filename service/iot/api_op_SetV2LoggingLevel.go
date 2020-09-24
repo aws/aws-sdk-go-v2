@@ -33,6 +33,8 @@ func (c *Client) SetV2LoggingLevel(ctx context.Context, params *SetV2LoggingLeve
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSetV2LoggingLevelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSetV2LoggingLevel(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

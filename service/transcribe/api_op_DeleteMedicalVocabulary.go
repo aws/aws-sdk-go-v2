@@ -32,6 +32,8 @@ func (c *Client) DeleteMedicalVocabulary(ctx context.Context, params *DeleteMedi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteMedicalVocabularyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMedicalVocabulary(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

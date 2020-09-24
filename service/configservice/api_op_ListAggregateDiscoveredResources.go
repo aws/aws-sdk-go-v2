@@ -41,6 +41,8 @@ func (c *Client) ListAggregateDiscoveredResources(ctx context.Context, params *L
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListAggregateDiscoveredResourcesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListAggregateDiscoveredResources(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

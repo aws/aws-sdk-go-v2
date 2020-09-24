@@ -52,6 +52,8 @@ func (c *Client) DescribeJob(ctx context.Context, params *DescribeJobInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	glaciercust.AddTreeHashMiddleware(stack)
 
 	for _, fn := range options.APIOptions {

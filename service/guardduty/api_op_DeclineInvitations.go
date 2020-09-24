@@ -34,6 +34,8 @@ func (c *Client) DeclineInvitations(ctx context.Context, params *DeclineInvitati
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeclineInvitationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeclineInvitations(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

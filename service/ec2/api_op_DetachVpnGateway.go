@@ -38,6 +38,8 @@ func (c *Client) DetachVpnGateway(ctx context.Context, params *DetachVpnGatewayI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDetachVpnGatewayValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDetachVpnGateway(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

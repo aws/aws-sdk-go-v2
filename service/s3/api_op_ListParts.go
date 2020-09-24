@@ -54,6 +54,8 @@ func (c *Client) ListParts(ctx context.Context, params *ListPartsInput, optFns .
 	addOpListPartsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListParts(options.Region), middleware.Before)
 	addUpdateEndpointMiddleware(stack, options)
+	addResponseErrorMiddleware(stack)
+	addMetadataRetrieverMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

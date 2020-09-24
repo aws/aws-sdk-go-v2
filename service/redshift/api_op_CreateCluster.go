@@ -39,6 +39,8 @@ func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateClusterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCluster(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -36,6 +36,8 @@ func (c *Client) ListUserTags(ctx context.Context, params *ListUserTagsInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListUserTagsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListUserTags(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

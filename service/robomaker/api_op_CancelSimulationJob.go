@@ -32,6 +32,8 @@ func (c *Client) CancelSimulationJob(ctx context.Context, params *CancelSimulati
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCancelSimulationJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCancelSimulationJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

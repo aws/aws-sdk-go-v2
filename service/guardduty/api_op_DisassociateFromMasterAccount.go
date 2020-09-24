@@ -32,6 +32,8 @@ func (c *Client) DisassociateFromMasterAccount(ctx context.Context, params *Disa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisassociateFromMasterAccountValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateFromMasterAccount(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

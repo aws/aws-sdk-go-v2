@@ -34,6 +34,8 @@ func (c *Client) ListDeviceEvents(ctx context.Context, params *ListDeviceEventsI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListDeviceEventsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListDeviceEvents(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

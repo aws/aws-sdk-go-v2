@@ -34,6 +34,8 @@ func (c *Client) DeleteSlotTypeVersion(ctx context.Context, params *DeleteSlotTy
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteSlotTypeVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSlotTypeVersion(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

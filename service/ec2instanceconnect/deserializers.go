@@ -38,7 +38,7 @@ func (m *awsAwsjson11_deserializeOpSendSSHPublicKey) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorSendSSHPublicKey(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorSendSSHPublicKey(response, &metadata)
 	}
 	output := &SendSSHPublicKeyOutput{}
 	out.Result = output
@@ -74,7 +74,7 @@ func (m *awsAwsjson11_deserializeOpSendSSHPublicKey) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorSendSSHPublicKey(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorSendSSHPublicKey(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

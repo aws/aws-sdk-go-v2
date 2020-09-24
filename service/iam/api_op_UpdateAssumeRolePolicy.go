@@ -35,6 +35,8 @@ func (c *Client) UpdateAssumeRolePolicy(ctx context.Context, params *UpdateAssum
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateAssumeRolePolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAssumeRolePolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

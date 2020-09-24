@@ -43,6 +43,8 @@ func (c *Client) AddApplicationVpcConfiguration(ctx context.Context, params *Add
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAddApplicationVpcConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAddApplicationVpcConfiguration(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

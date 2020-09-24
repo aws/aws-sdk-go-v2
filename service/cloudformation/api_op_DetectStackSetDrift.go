@@ -67,6 +67,8 @@ func (c *Client) DetectStackSetDrift(ctx context.Context, params *DetectStackSet
 	addIdempotencyToken_opDetectStackSetDriftMiddleware(stack, options)
 	addOpDetectStackSetDriftValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDetectStackSetDrift(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

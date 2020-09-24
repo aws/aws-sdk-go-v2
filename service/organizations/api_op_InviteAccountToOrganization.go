@@ -54,6 +54,8 @@ func (c *Client) InviteAccountToOrganization(ctx context.Context, params *Invite
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpInviteAccountToOrganizationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opInviteAccountToOrganization(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

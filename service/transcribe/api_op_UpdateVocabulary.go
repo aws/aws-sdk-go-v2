@@ -36,6 +36,8 @@ func (c *Client) UpdateVocabulary(ctx context.Context, params *UpdateVocabularyI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateVocabularyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateVocabulary(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

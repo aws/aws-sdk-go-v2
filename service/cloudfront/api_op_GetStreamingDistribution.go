@@ -34,6 +34,8 @@ func (c *Client) GetStreamingDistribution(ctx context.Context, params *GetStream
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetStreamingDistributionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetStreamingDistribution(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

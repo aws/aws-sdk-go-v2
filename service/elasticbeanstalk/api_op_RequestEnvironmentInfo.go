@@ -41,6 +41,8 @@ func (c *Client) RequestEnvironmentInfo(ctx context.Context, params *RequestEnvi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRequestEnvironmentInfoValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRequestEnvironmentInfo(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

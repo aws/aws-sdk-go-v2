@@ -34,6 +34,8 @@ func (c *Client) EnableRadius(ctx context.Context, params *EnableRadiusInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpEnableRadiusValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opEnableRadius(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

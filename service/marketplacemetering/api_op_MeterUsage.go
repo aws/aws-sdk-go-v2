@@ -36,6 +36,8 @@ func (c *Client) MeterUsage(ctx context.Context, params *MeterUsageInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpMeterUsageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opMeterUsage(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

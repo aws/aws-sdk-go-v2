@@ -36,6 +36,8 @@ func (c *Client) ChangeTagsForResource(ctx context.Context, params *ChangeTagsFo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpChangeTagsForResourceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opChangeTagsForResource(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

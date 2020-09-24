@@ -34,6 +34,8 @@ func (c *Client) DeleteChapCredentials(ctx context.Context, params *DeleteChapCr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteChapCredentialsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteChapCredentials(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,8 @@ func (c *Client) CancelUpdateStack(ctx context.Context, params *CancelUpdateStac
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCancelUpdateStackValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCancelUpdateStack(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,8 @@ func (c *Client) GetDocument(ctx context.Context, params *GetDocumentInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDocumentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDocument(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

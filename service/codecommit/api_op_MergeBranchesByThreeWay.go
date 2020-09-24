@@ -33,6 +33,8 @@ func (c *Client) MergeBranchesByThreeWay(ctx context.Context, params *MergeBranc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpMergeBranchesByThreeWayValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opMergeBranchesByThreeWay(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

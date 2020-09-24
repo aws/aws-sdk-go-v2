@@ -39,6 +39,8 @@ func (c *Client) GetConfigurationSet(ctx context.Context, params *GetConfigurati
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetConfigurationSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetConfigurationSet(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

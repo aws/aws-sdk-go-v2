@@ -35,6 +35,8 @@ func (c *Client) StartCanary(ctx context.Context, params *StartCanaryInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartCanaryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartCanary(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

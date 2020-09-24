@@ -33,6 +33,8 @@ func (c *Client) DeregisterJobDefinition(ctx context.Context, params *Deregister
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeregisterJobDefinitionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterJobDefinition(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

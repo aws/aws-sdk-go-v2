@@ -39,6 +39,8 @@ func (c *Client) PutIdentityPolicy(ctx context.Context, params *PutIdentityPolic
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutIdentityPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutIdentityPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

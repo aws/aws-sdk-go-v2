@@ -40,6 +40,8 @@ func (c *Client) StartMonitoringMember(ctx context.Context, params *StartMonitor
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartMonitoringMemberValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartMonitoringMember(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

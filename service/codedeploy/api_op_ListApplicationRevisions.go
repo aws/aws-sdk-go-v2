@@ -33,6 +33,8 @@ func (c *Client) ListApplicationRevisions(ctx context.Context, params *ListAppli
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListApplicationRevisionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListApplicationRevisions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,8 @@ func (c *Client) UpdateDataCatalog(ctx context.Context, params *UpdateDataCatalo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateDataCatalogValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDataCatalog(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

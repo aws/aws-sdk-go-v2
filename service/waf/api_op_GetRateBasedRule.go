@@ -40,6 +40,8 @@ func (c *Client) GetRateBasedRule(ctx context.Context, params *GetRateBasedRuleI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetRateBasedRuleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetRateBasedRule(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

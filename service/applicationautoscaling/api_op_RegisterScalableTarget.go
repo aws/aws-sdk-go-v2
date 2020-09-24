@@ -52,6 +52,8 @@ func (c *Client) RegisterScalableTarget(ctx context.Context, params *RegisterSca
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterScalableTargetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterScalableTarget(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

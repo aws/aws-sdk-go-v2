@@ -34,6 +34,8 @@ func (c *Client) ApproveSkill(ctx context.Context, params *ApproveSkillInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpApproveSkillValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opApproveSkill(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

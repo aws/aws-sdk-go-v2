@@ -34,6 +34,8 @@ func (c *Client) CreateDashboard(ctx context.Context, params *CreateDashboardInp
 	addIdempotencyToken_opCreateDashboardMiddleware(stack, options)
 	addOpCreateDashboardValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDashboard(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

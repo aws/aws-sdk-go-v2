@@ -53,6 +53,8 @@ func (c *Client) CreateCustomKeyStore(ctx context.Context, params *CreateCustomK
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateCustomKeyStoreValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCustomKeyStore(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

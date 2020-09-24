@@ -40,6 +40,8 @@ func (c *Client) GetRules(ctx context.Context, params *GetRulesInput, optFns ...
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetRulesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetRules(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

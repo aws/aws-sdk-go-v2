@@ -33,6 +33,8 @@ func (c *Client) BatchDetectKeyPhrases(ctx context.Context, params *BatchDetectK
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchDetectKeyPhrasesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDetectKeyPhrases(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

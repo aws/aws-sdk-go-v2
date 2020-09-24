@@ -39,6 +39,8 @@ func (c *Client) DescribeTable(ctx context.Context, params *DescribeTableInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeTableValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTable(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	addValidateResponseChecksum(stack, options)
 	addAcceptEncodingGzip(stack, options)
 

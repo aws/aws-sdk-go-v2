@@ -33,6 +33,8 @@ func (c *Client) DeleteIpGroup(ctx context.Context, params *DeleteIpGroupInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteIpGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteIpGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

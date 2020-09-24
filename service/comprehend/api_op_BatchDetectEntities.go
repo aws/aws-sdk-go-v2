@@ -35,6 +35,8 @@ func (c *Client) BatchDetectEntities(ctx context.Context, params *BatchDetectEnt
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchDetectEntitiesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDetectEntities(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

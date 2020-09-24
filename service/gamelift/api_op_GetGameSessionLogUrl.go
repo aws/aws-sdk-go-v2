@@ -62,6 +62,8 @@ func (c *Client) GetGameSessionLogUrl(ctx context.Context, params *GetGameSessio
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetGameSessionLogUrlValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetGameSessionLogUrl(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

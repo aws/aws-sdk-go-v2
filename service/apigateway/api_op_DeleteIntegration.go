@@ -32,6 +32,8 @@ func (c *Client) DeleteIntegration(ctx context.Context, params *DeleteIntegratio
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteIntegrationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteIntegration(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

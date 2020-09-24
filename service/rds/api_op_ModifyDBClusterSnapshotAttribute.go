@@ -48,6 +48,8 @@ func (c *Client) ModifyDBClusterSnapshotAttribute(ctx context.Context, params *M
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyDBClusterSnapshotAttributeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyDBClusterSnapshotAttribute(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

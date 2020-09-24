@@ -33,6 +33,8 @@ func (c *Client) CopyOptionGroup(ctx context.Context, params *CopyOptionGroupInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCopyOptionGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCopyOptionGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

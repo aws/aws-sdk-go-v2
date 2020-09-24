@@ -39,6 +39,8 @@ func (c *Client) AssociateHostedConnection(ctx context.Context, params *Associat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateHostedConnectionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateHostedConnection(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

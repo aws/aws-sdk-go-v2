@@ -33,6 +33,8 @@ func (c *Client) UpdateTemplateAlias(ctx context.Context, params *UpdateTemplate
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateTemplateAliasValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTemplateAlias(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

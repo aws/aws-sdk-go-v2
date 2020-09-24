@@ -34,6 +34,8 @@ func (c *Client) ListVolumeInitiators(ctx context.Context, params *ListVolumeIni
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListVolumeInitiatorsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListVolumeInitiators(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

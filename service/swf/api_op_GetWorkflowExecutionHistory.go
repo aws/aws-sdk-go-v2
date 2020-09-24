@@ -56,6 +56,8 @@ func (c *Client) GetWorkflowExecutionHistory(ctx context.Context, params *GetWor
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetWorkflowExecutionHistoryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetWorkflowExecutionHistory(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

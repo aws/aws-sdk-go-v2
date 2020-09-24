@@ -34,6 +34,8 @@ func (c *Client) GetCommentReactions(ctx context.Context, params *GetCommentReac
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetCommentReactionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetCommentReactions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -35,6 +35,8 @@ func (c *Client) SubmitTaskStateChange(ctx context.Context, params *SubmitTaskSt
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSubmitTaskStateChangeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSubmitTaskStateChange(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

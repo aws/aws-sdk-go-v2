@@ -35,6 +35,8 @@ func (c *Client) CreateClassificationJob(ctx context.Context, params *CreateClas
 	addIdempotencyToken_opCreateClassificationJobMiddleware(stack, options)
 	addOpCreateClassificationJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateClassificationJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

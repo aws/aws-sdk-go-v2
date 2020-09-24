@@ -34,6 +34,8 @@ func (c *Client) DisassociatePhoneNumbersFromVoiceConnectorGroup(ctx context.Con
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisassociatePhoneNumbersFromVoiceConnectorGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociatePhoneNumbersFromVoiceConnectorGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

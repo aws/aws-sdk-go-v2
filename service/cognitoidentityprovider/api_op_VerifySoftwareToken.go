@@ -35,6 +35,8 @@ func (c *Client) VerifySoftwareToken(ctx context.Context, params *VerifySoftware
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpVerifySoftwareTokenValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opVerifySoftwareToken(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

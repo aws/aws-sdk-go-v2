@@ -39,6 +39,8 @@ func (c *Client) BatchDeleteTable(ctx context.Context, params *BatchDeleteTableI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchDeleteTableValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDeleteTable(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

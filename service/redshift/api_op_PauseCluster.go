@@ -33,6 +33,8 @@ func (c *Client) PauseCluster(ctx context.Context, params *PauseClusterInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPauseClusterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPauseCluster(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,8 @@ func (c *Client) GetDataCatalog(ctx context.Context, params *GetDataCatalogInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDataCatalogValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDataCatalog(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

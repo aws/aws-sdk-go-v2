@@ -36,6 +36,8 @@ func (c *Client) PurchaseHostReservation(ctx context.Context, params *PurchaseHo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPurchaseHostReservationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPurchaseHostReservation(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

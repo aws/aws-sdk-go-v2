@@ -33,6 +33,8 @@ func (c *Client) BatchDisassociateUserStack(ctx context.Context, params *BatchDi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchDisassociateUserStackValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDisassociateUserStack(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

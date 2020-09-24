@@ -32,6 +32,8 @@ func (c *Client) GetRepositoryPolicy(ctx context.Context, params *GetRepositoryP
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetRepositoryPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetRepositoryPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

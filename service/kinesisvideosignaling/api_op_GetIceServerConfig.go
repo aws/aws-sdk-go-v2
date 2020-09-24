@@ -46,6 +46,8 @@ func (c *Client) GetIceServerConfig(ctx context.Context, params *GetIceServerCon
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetIceServerConfigValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetIceServerConfig(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -40,6 +40,8 @@ func (c *Client) BatchUpdatePhoneNumber(ctx context.Context, params *BatchUpdate
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchUpdatePhoneNumberValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUpdatePhoneNumber(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

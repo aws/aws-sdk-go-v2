@@ -39,6 +39,8 @@ func (c *Client) ModifyReplicationGroup(ctx context.Context, params *ModifyRepli
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyReplicationGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyReplicationGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -39,6 +39,8 @@ func (c *Client) LookupPolicy(ctx context.Context, params *LookupPolicyInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpLookupPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opLookupPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

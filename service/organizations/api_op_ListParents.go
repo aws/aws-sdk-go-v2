@@ -42,6 +42,8 @@ func (c *Client) ListParents(ctx context.Context, params *ListParentsInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListParentsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListParents(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

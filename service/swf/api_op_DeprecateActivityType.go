@@ -62,6 +62,8 @@ func (c *Client) DeprecateActivityType(ctx context.Context, params *DeprecateAct
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeprecateActivityTypeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeprecateActivityType(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,8 @@ func (c *Client) StartDiscoverer(ctx context.Context, params *StartDiscovererInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartDiscovererValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartDiscoverer(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -36,6 +36,8 @@ func (c *Client) CreateAddress(ctx context.Context, params *CreateAddressInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateAddressValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAddress(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

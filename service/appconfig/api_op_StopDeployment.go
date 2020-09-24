@@ -35,6 +35,8 @@ func (c *Client) StopDeployment(ctx context.Context, params *StopDeploymentInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopDeploymentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopDeployment(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

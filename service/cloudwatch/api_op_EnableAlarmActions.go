@@ -32,6 +32,8 @@ func (c *Client) EnableAlarmActions(ctx context.Context, params *EnableAlarmActi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpEnableAlarmActionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opEnableAlarmActions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

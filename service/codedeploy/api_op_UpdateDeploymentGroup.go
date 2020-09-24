@@ -33,6 +33,8 @@ func (c *Client) UpdateDeploymentGroup(ctx context.Context, params *UpdateDeploy
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateDeploymentGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDeploymentGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

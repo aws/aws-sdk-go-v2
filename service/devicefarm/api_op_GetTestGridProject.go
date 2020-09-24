@@ -33,6 +33,8 @@ func (c *Client) GetTestGridProject(ctx context.Context, params *GetTestGridProj
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetTestGridProjectValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetTestGridProject(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

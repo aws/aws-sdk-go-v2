@@ -59,6 +59,8 @@ func (c *Client) BatchImportFindings(ctx context.Context, params *BatchImportFin
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchImportFindingsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchImportFindings(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

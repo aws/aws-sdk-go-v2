@@ -46,6 +46,8 @@ func (c *Client) CreateDataRepositoryTask(ctx context.Context, params *CreateDat
 	addIdempotencyToken_opCreateDataRepositoryTaskMiddleware(stack, options)
 	addOpCreateDataRepositoryTaskValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataRepositoryTask(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -40,6 +40,8 @@ func (c *Client) AssociateWebACL(ctx context.Context, params *AssociateWebACLInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateWebACLValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateWebACL(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

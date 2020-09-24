@@ -50,6 +50,8 @@ func (c *Client) PutRolePolicy(ctx context.Context, params *PutRolePolicyInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutRolePolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutRolePolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

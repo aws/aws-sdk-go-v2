@@ -34,6 +34,8 @@ func (c *Client) PutThirdPartyJobFailureResult(ctx context.Context, params *PutT
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutThirdPartyJobFailureResultValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutThirdPartyJobFailureResult(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

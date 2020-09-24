@@ -36,6 +36,8 @@ func (c *Client) DescribeSnapshotSchedule(ctx context.Context, params *DescribeS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeSnapshotScheduleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSnapshotSchedule(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

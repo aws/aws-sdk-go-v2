@@ -42,6 +42,8 @@ func (c *Client) CopyClusterSnapshot(ctx context.Context, params *CopyClusterSna
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCopyClusterSnapshotValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCopyClusterSnapshot(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

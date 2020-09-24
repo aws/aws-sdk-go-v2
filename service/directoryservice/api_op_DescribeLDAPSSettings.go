@@ -33,6 +33,8 @@ func (c *Client) DescribeLDAPSSettings(ctx context.Context, params *DescribeLDAP
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeLDAPSSettingsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLDAPSSettings(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

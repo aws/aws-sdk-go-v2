@@ -34,6 +34,8 @@ func (c *Client) DeleteProject(ctx context.Context, params *DeleteProjectInput, 
 	addIdempotencyToken_opDeleteProjectMiddleware(stack, options)
 	addOpDeleteProjectValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteProject(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

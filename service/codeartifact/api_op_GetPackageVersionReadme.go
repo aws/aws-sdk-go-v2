@@ -37,6 +37,8 @@ func (c *Client) GetPackageVersionReadme(ctx context.Context, params *GetPackage
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetPackageVersionReadmeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetPackageVersionReadme(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

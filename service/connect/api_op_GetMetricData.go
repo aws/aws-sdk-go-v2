@@ -37,6 +37,8 @@ func (c *Client) GetMetricData(ctx context.Context, params *GetMetricDataInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetMetricDataValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetMetricData(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

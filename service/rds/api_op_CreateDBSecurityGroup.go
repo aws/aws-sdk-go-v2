@@ -35,6 +35,8 @@ func (c *Client) CreateDBSecurityGroup(ctx context.Context, params *CreateDBSecu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDBSecurityGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDBSecurityGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

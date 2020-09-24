@@ -36,6 +36,8 @@ func (c *Client) MergePullRequestByThreeWay(ctx context.Context, params *MergePu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpMergePullRequestByThreeWayValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opMergePullRequestByThreeWay(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

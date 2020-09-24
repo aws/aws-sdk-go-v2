@@ -33,6 +33,8 @@ func (c *Client) DescribeFargateProfile(ctx context.Context, params *DescribeFar
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeFargateProfileValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFargateProfile(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

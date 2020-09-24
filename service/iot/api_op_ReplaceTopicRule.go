@@ -35,6 +35,8 @@ func (c *Client) ReplaceTopicRule(ctx context.Context, params *ReplaceTopicRuleI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpReplaceTopicRuleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opReplaceTopicRule(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

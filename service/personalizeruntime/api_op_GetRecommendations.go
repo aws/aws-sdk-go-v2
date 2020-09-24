@@ -43,6 +43,8 @@ func (c *Client) GetRecommendations(ctx context.Context, params *GetRecommendati
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetRecommendationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetRecommendations(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

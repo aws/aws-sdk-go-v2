@@ -36,6 +36,8 @@ func (c *Client) InvokeScreenAutomation(ctx context.Context, params *InvokeScree
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpInvokeScreenAutomationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opInvokeScreenAutomation(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

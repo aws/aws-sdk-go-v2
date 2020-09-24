@@ -38,6 +38,8 @@ func (c *Client) DeleteWebACL(ctx context.Context, params *DeleteWebACLInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteWebACLValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteWebACL(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

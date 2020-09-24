@@ -52,6 +52,8 @@ func (c *Client) DeleteRegexMatchSet(ctx context.Context, params *DeleteRegexMat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteRegexMatchSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRegexMatchSet(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

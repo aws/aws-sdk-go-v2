@@ -90,6 +90,8 @@ func (c *Client) CreateGameServerGroup(ctx context.Context, params *CreateGameSe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateGameServerGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGameServerGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

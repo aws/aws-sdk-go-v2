@@ -33,6 +33,8 @@ func (c *Client) UpdateUserPhoneConfig(ctx context.Context, params *UpdateUserPh
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateUserPhoneConfigValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateUserPhoneConfig(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

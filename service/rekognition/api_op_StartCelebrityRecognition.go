@@ -44,6 +44,8 @@ func (c *Client) StartCelebrityRecognition(ctx context.Context, params *StartCel
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartCelebrityRecognitionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartCelebrityRecognition(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

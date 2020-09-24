@@ -33,6 +33,8 @@ func (c *Client) DeregisterDBProxyTargets(ctx context.Context, params *Deregiste
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeregisterDBProxyTargetsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterDBProxyTargets(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,8 @@ func (c *Client) ValidatePipelineDefinition(ctx context.Context, params *Validat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpValidatePipelineDefinitionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opValidatePipelineDefinition(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

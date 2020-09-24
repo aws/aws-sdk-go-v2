@@ -39,6 +39,8 @@ func (c *Client) CancelSpotFleetRequests(ctx context.Context, params *CancelSpot
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCancelSpotFleetRequestsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCancelSpotFleetRequests(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -45,6 +45,8 @@ func (c *Client) CreateForecast(ctx context.Context, params *CreateForecastInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateForecastValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateForecast(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

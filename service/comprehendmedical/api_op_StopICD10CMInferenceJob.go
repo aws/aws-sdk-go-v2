@@ -32,6 +32,8 @@ func (c *Client) StopICD10CMInferenceJob(ctx context.Context, params *StopICD10C
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopICD10CMInferenceJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopICD10CMInferenceJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

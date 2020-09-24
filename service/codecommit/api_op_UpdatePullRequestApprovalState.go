@@ -34,6 +34,8 @@ func (c *Client) UpdatePullRequestApprovalState(ctx context.Context, params *Upd
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdatePullRequestApprovalStateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePullRequestApprovalState(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

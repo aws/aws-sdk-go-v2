@@ -32,6 +32,8 @@ func (c *Client) StopTrigger(ctx context.Context, params *StopTriggerInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopTriggerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopTrigger(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

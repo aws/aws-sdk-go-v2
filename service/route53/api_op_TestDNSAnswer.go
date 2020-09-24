@@ -35,6 +35,8 @@ func (c *Client) TestDNSAnswer(ctx context.Context, params *TestDNSAnswerInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTestDNSAnswerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTestDNSAnswer(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

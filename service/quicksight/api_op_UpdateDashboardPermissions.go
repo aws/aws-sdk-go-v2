@@ -33,6 +33,8 @@ func (c *Client) UpdateDashboardPermissions(ctx context.Context, params *UpdateD
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateDashboardPermissionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDashboardPermissions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

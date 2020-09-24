@@ -48,6 +48,8 @@ func (c *Client) DescribeMatchmaking(ctx context.Context, params *DescribeMatchm
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeMatchmakingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeMatchmaking(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

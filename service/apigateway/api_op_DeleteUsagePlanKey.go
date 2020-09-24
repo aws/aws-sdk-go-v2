@@ -33,6 +33,8 @@ func (c *Client) DeleteUsagePlanKey(ctx context.Context, params *DeleteUsagePlan
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteUsagePlanKeyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteUsagePlanKey(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

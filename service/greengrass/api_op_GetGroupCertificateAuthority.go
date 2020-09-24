@@ -32,6 +32,8 @@ func (c *Client) GetGroupCertificateAuthority(ctx context.Context, params *GetGr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetGroupCertificateAuthorityValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetGroupCertificateAuthority(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

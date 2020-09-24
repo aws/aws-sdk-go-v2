@@ -66,6 +66,8 @@ func (c *Client) DescribeScalingPolicies(ctx context.Context, params *DescribeSc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeScalingPoliciesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeScalingPolicies(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

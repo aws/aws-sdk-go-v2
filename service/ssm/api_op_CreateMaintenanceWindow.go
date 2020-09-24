@@ -41,6 +41,8 @@ func (c *Client) CreateMaintenanceWindow(ctx context.Context, params *CreateMain
 	addIdempotencyToken_opCreateMaintenanceWindowMiddleware(stack, options)
 	addOpCreateMaintenanceWindowValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMaintenanceWindow(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

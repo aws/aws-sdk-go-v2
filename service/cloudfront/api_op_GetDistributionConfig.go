@@ -33,6 +33,8 @@ func (c *Client) GetDistributionConfig(ctx context.Context, params *GetDistribut
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDistributionConfigValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDistributionConfig(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

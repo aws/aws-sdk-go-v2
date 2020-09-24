@@ -38,6 +38,8 @@ func (c *Client) GetAttributeValues(ctx context.Context, params *GetAttributeVal
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetAttributeValuesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetAttributeValues(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

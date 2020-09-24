@@ -34,6 +34,8 @@ func (c *Client) ResetFpgaImageAttribute(ctx context.Context, params *ResetFpgaI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpResetFpgaImageAttributeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opResetFpgaImageAttribute(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

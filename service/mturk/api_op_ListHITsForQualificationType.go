@@ -36,6 +36,8 @@ func (c *Client) ListHITsForQualificationType(ctx context.Context, params *ListH
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListHITsForQualificationTypeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListHITsForQualificationType(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

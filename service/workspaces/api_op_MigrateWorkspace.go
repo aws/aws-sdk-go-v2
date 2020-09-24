@@ -43,6 +43,8 @@ func (c *Client) MigrateWorkspace(ctx context.Context, params *MigrateWorkspaceI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpMigrateWorkspaceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opMigrateWorkspace(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

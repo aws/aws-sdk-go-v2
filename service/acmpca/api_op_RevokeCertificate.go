@@ -40,6 +40,8 @@ func (c *Client) RevokeCertificate(ctx context.Context, params *RevokeCertificat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRevokeCertificateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRevokeCertificate(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

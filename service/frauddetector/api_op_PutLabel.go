@@ -35,6 +35,8 @@ func (c *Client) PutLabel(ctx context.Context, params *PutLabelInput, optFns ...
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutLabelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutLabel(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

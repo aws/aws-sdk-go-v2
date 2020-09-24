@@ -35,6 +35,8 @@ func (c *Client) CreateResourceDefinition(ctx context.Context, params *CreateRes
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateResourceDefinitionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateResourceDefinition(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

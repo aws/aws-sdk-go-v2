@@ -37,6 +37,8 @@ func (c *Client) RebootRelationalDatabase(ctx context.Context, params *RebootRel
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRebootRelationalDatabaseValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRebootRelationalDatabase(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

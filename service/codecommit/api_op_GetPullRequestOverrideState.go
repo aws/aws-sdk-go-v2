@@ -35,6 +35,8 @@ func (c *Client) GetPullRequestOverrideState(ctx context.Context, params *GetPul
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetPullRequestOverrideStateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetPullRequestOverrideState(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

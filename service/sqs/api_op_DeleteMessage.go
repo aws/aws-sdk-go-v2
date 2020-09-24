@@ -48,6 +48,8 @@ func (c *Client) DeleteMessage(ctx context.Context, params *DeleteMessageInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteMessageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMessage(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

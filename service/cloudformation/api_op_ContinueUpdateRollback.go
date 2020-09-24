@@ -44,6 +44,8 @@ func (c *Client) ContinueUpdateRollback(ctx context.Context, params *ContinueUpd
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpContinueUpdateRollbackValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opContinueUpdateRollback(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

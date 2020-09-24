@@ -33,6 +33,8 @@ func (c *Client) UpdateMemberSession(ctx context.Context, params *UpdateMemberSe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateMemberSessionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMemberSession(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,8 @@ func (c *Client) CreateOTAUpdate(ctx context.Context, params *CreateOTAUpdateInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateOTAUpdateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateOTAUpdate(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

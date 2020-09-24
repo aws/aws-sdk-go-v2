@@ -34,6 +34,8 @@ func (c *Client) StartImport(ctx context.Context, params *StartImportInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartImportValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartImport(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

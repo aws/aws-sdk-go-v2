@@ -34,6 +34,8 @@ func (c *Client) ImportInstallationMedia(ctx context.Context, params *ImportInst
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpImportInstallationMediaValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opImportInstallationMedia(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

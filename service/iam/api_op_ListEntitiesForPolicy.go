@@ -38,6 +38,8 @@ func (c *Client) ListEntitiesForPolicy(ctx context.Context, params *ListEntities
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListEntitiesForPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListEntitiesForPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -43,6 +43,8 @@ func (c *Client) CreateAccelerator(ctx context.Context, params *CreateAccelerato
 	addIdempotencyToken_opCreateAcceleratorMiddleware(stack, options)
 	addOpCreateAcceleratorValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAccelerator(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

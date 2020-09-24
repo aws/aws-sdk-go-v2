@@ -36,6 +36,8 @@ func (c *Client) DeleteKeyPair(ctx context.Context, params *DeleteKeyPairInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteKeyPairValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteKeyPair(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

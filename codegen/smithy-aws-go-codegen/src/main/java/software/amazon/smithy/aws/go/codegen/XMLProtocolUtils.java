@@ -3,6 +3,8 @@ package software.amazon.smithy.aws.go.codegen;
 import static software.amazon.smithy.go.codegen.integration.ProtocolUtils.writeSafeMemberAccessor;
 
 import java.util.Optional;
+import software.amazon.smithy.aws.go.codegen.customization.AwsCustomGoDependency;
+import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
@@ -10,7 +12,9 @@ import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SyntheticClone;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
+import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.MemberShape;
+import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 import software.amazon.smithy.model.traits.XmlAttributeTrait;
@@ -267,12 +271,42 @@ final class XmlProtocolUtils {
         boolean isNoErrorWrapping = context.getService().getTrait(RestXmlTrait.class).map(
                 RestXmlTrait::isNoErrorWrapping).orElse(false);
 
-        writer.addUseImports(SmithyGoDependency.SMITHY_XML);
-        writer.write("errorCode, err := smithyxml.GetResponseErrorCode(errorBody, $L)", isNoErrorWrapping);
-        writer.write("if err != nil { return err }");
+        ServiceShape service = context.getService();
+
+        if (requiresS3Customization(service)) {
+            writer.addUseImports(AwsCustomGoDependency.S3_SHARED_CUSTOMIZATION);
+            writer.write("errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)");
+            writer.write("if err != nil { return err }");
+            writer.insertTrailingNewline();
+            writer.openBlock("if hostID := errorComponents.HostID; len(hostID)!=0 {", "}", () -> {
+                writer.write("s3shared.SetHostIDMetadata(metadata, hostID)");
+            });
+        } else {
+            writer.addUseImports(AwsGoDependency.AWS_XML);
+            writer.write("errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, $L)", isNoErrorWrapping);
+            writer.write("if err != nil { return err }");
+            writer.insertTrailingNewline();
+        }
+
+        writer.addUseImports(AwsGoDependency.AWS_MIDDLEWARE);
+        writer.openBlock("if reqID := errorComponents.RequestID; len(reqID)!=0 {", "}", () -> {
+                    writer.write("awsmiddleware.SetRequestIDMetadata(metadata, reqID)");
+        });
+        writer.insertTrailingNewline();
+
+        writer.write("if len(errorComponents.Code) != 0 { errorCode = errorComponents.Code}");
+        writer.write("if len(errorComponents.Message) != 0 { errorMessage = errorComponents.Message}");
         writer.insertTrailingNewline();
 
         writer.write("errorBody.Seek(0, io.SeekStart)");
         writer.insertTrailingNewline();
     }
+
+    // returns true if service is either s3 or s3 control and needs s3 customization
+    private static boolean requiresS3Customization(ServiceShape service) {
+        String serviceId= service.expectTrait(ServiceTrait.class).getSdkId();
+        return serviceId.equalsIgnoreCase("S3") || serviceId.equalsIgnoreCase("S3 Control");
+    }
 }
+
+

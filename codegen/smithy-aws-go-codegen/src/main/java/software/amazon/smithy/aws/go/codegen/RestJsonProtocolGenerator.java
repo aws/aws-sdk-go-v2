@@ -134,7 +134,6 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         return getDocumentContentType();
     }
 
-
     @Override
     protected void writeMiddlewareDocumentSerializerDelegator(
             GenerationContext context,

@@ -37,6 +37,8 @@ func (c *Client) TerminateProvisionedProduct(ctx context.Context, params *Termin
 	addIdempotencyToken_opTerminateProvisionedProductMiddleware(stack, options)
 	addOpTerminateProvisionedProductValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTerminateProvisionedProduct(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -37,6 +37,8 @@ func (c *Client) DescribeTableStatistics(ctx context.Context, params *DescribeTa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeTableStatisticsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTableStatistics(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

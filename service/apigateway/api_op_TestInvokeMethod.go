@@ -33,6 +33,8 @@ func (c *Client) TestInvokeMethod(ctx context.Context, params *TestInvokeMethodI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTestInvokeMethodValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTestInvokeMethod(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

@@ -33,6 +33,8 @@ func (c *Client) IncreaseReplicationFactor(ctx context.Context, params *Increase
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpIncreaseReplicationFactorValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opIncreaseReplicationFactor(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

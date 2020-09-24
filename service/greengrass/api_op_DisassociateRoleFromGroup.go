@@ -32,6 +32,8 @@ func (c *Client) DisassociateRoleFromGroup(ctx context.Context, params *Disassoc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisassociateRoleFromGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateRoleFromGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

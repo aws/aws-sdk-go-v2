@@ -32,6 +32,8 @@ func (c *Client) DeleteBackupVaultAccessPolicy(ctx context.Context, params *Dele
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteBackupVaultAccessPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBackupVaultAccessPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

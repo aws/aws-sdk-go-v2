@@ -96,6 +96,8 @@ func (c *Client) IndexFaces(ctx context.Context, params *IndexFacesInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpIndexFacesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opIndexFaces(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

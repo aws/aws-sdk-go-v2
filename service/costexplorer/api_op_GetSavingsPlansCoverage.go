@@ -49,6 +49,8 @@ func (c *Client) GetSavingsPlansCoverage(ctx context.Context, params *GetSavings
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetSavingsPlansCoverageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSavingsPlansCoverage(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

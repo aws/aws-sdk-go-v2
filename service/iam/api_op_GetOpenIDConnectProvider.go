@@ -34,6 +34,8 @@ func (c *Client) GetOpenIDConnectProvider(ctx context.Context, params *GetOpenID
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetOpenIDConnectProviderValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetOpenIDConnectProvider(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

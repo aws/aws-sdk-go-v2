@@ -32,6 +32,8 @@ func (c *Client) DeleteDatastore(ctx context.Context, params *DeleteDatastoreInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDatastoreValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDatastore(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

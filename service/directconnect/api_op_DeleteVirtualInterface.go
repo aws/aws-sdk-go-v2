@@ -33,6 +33,8 @@ func (c *Client) DeleteVirtualInterface(ctx context.Context, params *DeleteVirtu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteVirtualInterfaceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVirtualInterface(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

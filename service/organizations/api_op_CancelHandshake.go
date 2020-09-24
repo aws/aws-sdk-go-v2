@@ -39,6 +39,8 @@ func (c *Client) CancelHandshake(ctx context.Context, params *CancelHandshakeInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCancelHandshakeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCancelHandshake(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

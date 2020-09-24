@@ -65,6 +65,8 @@ func (c *Client) UpdateFileSystem(ctx context.Context, params *UpdateFileSystemI
 	addIdempotencyToken_opUpdateFileSystemMiddleware(stack, options)
 	addOpUpdateFileSystemValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFileSystem(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -53,6 +53,8 @@ func (c *Client) DeleteSqlInjectionMatchSet(ctx context.Context, params *DeleteS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteSqlInjectionMatchSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSqlInjectionMatchSet(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

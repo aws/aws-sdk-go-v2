@@ -33,6 +33,8 @@ func (c *Client) GetSchemaCreationStatus(ctx context.Context, params *GetSchemaC
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetSchemaCreationStatusValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSchemaCreationStatus(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

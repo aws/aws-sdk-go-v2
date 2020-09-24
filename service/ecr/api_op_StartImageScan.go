@@ -37,6 +37,8 @@ func (c *Client) StartImageScan(ctx context.Context, params *StartImageScanInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartImageScanValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartImageScan(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

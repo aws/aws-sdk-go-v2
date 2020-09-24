@@ -38,6 +38,8 @@ func (c *Client) BatchCheckLayerAvailability(ctx context.Context, params *BatchC
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchCheckLayerAvailabilityValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchCheckLayerAvailability(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

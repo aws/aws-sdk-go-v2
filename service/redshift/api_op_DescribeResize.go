@@ -37,6 +37,8 @@ func (c *Client) DescribeResize(ctx context.Context, params *DescribeResizeInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeResizeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeResize(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -37,6 +37,8 @@ func (c *Client) DeleteMLTransform(ctx context.Context, params *DeleteMLTransfor
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteMLTransformValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMLTransform(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

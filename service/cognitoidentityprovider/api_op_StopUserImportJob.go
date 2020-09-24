@@ -33,6 +33,8 @@ func (c *Client) StopUserImportJob(ctx context.Context, params *StopUserImportJo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopUserImportJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopUserImportJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

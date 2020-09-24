@@ -33,6 +33,8 @@ func (c *Client) ListInvalidations(ctx context.Context, params *ListInvalidation
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListInvalidationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListInvalidations(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -38,6 +38,8 @@ func (c *Client) CreateManagedPrefixList(ctx context.Context, params *CreateMana
 	addIdempotencyToken_opCreateManagedPrefixListMiddleware(stack, options)
 	addOpCreateManagedPrefixListValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateManagedPrefixList(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

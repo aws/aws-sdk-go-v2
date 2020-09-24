@@ -71,6 +71,8 @@ func (c *Client) CreateComputeEnvironment(ctx context.Context, params *CreateCom
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateComputeEnvironmentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateComputeEnvironment(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

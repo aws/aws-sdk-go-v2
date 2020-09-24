@@ -35,6 +35,8 @@ func (c *Client) ModifyCacheCluster(ctx context.Context, params *ModifyCacheClus
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyCacheClusterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyCacheCluster(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

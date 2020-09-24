@@ -35,6 +35,8 @@ func (c *Client) DescribeHumanTaskUi(ctx context.Context, params *DescribeHumanT
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeHumanTaskUiValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeHumanTaskUi(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

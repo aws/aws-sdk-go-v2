@@ -34,6 +34,8 @@ func (c *Client) GetAccount(ctx context.Context, params *GetAccountInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetAccountValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetAccount(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

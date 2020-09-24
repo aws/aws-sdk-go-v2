@@ -36,6 +36,8 @@ func (c *Client) ListTagsForVault(ctx context.Context, params *ListTagsForVaultI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListTagsForVaultValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListTagsForVault(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	glaciercust.AddTreeHashMiddleware(stack)
 
 	for _, fn := range options.APIOptions {

@@ -41,6 +41,8 @@ func (c *Client) PutDeliveryChannel(ctx context.Context, params *PutDeliveryChan
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutDeliveryChannelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutDeliveryChannel(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

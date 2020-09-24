@@ -35,6 +35,8 @@ func (c *Client) UpdateApplicationVersion(ctx context.Context, params *UpdateApp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateApplicationVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateApplicationVersion(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

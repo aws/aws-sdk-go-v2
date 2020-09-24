@@ -35,6 +35,8 @@ func (c *Client) DeleteDatasetImportJob(ctx context.Context, params *DeleteDatas
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDatasetImportJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDatasetImportJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

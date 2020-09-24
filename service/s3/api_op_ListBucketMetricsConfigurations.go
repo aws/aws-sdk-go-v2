@@ -59,6 +59,8 @@ func (c *Client) ListBucketMetricsConfigurations(ctx context.Context, params *Li
 	addOpListBucketMetricsConfigurationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListBucketMetricsConfigurations(options.Region), middleware.Before)
 	addUpdateEndpointMiddleware(stack, options)
+	addResponseErrorMiddleware(stack)
+	addMetadataRetrieverMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

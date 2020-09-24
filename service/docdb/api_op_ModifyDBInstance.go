@@ -35,6 +35,8 @@ func (c *Client) ModifyDBInstance(ctx context.Context, params *ModifyDBInstanceI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyDBInstanceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyDBInstance(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

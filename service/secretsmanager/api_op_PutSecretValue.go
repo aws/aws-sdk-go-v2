@@ -107,6 +107,8 @@ func (c *Client) PutSecretValue(ctx context.Context, params *PutSecretValueInput
 	addIdempotencyToken_opPutSecretValueMiddleware(stack, options)
 	addOpPutSecretValueValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutSecretValue(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

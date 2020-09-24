@@ -59,6 +59,8 @@ func (c *Client) RespondActivityTaskCompleted(ctx context.Context, params *Respo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRespondActivityTaskCompletedValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRespondActivityTaskCompleted(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

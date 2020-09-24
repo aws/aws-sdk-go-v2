@@ -33,6 +33,8 @@ func (c *Client) UpdateUserDefinedFunction(ctx context.Context, params *UpdateUs
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateUserDefinedFunctionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateUserDefinedFunction(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,8 @@ func (c *Client) DeleteDestination(ctx context.Context, params *DeleteDestinatio
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDestinationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDestination(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

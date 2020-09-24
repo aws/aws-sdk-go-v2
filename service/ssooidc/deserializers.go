@@ -39,7 +39,7 @@ func (m *awsRestjson1_deserializeOpCreateToken) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorCreateToken(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorCreateToken(response, &metadata)
 	}
 	output := &CreateTokenOutput{}
 	out.Result = output
@@ -75,7 +75,7 @@ func (m *awsRestjson1_deserializeOpCreateToken) HandleDeserialize(ctx context.Co
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorCreateToken(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorCreateToken(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -260,7 +260,7 @@ func (m *awsRestjson1_deserializeOpRegisterClient) HandleDeserialize(ctx context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorRegisterClient(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorRegisterClient(response, &metadata)
 	}
 	output := &RegisterClientOutput{}
 	out.Result = output
@@ -296,7 +296,7 @@ func (m *awsRestjson1_deserializeOpRegisterClient) HandleDeserialize(ctx context
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorRegisterClient(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorRegisterClient(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -473,7 +473,7 @@ func (m *awsRestjson1_deserializeOpStartDeviceAuthorization) HandleDeserialize(c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorStartDeviceAuthorization(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorStartDeviceAuthorization(response, &metadata)
 	}
 	output := &StartDeviceAuthorizationOutput{}
 	out.Result = output
@@ -509,7 +509,7 @@ func (m *awsRestjson1_deserializeOpStartDeviceAuthorization) HandleDeserialize(c
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorStartDeviceAuthorization(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorStartDeviceAuthorization(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

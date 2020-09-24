@@ -42,6 +42,8 @@ func (c *Client) CreateWebACLMigrationStack(ctx context.Context, params *CreateW
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateWebACLMigrationStackValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWebACLMigrationStack(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

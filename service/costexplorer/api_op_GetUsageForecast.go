@@ -34,6 +34,8 @@ func (c *Client) GetUsageForecast(ctx context.Context, params *GetUsageForecastI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetUsageForecastValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetUsageForecast(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

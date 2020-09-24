@@ -42,6 +42,8 @@ func (c *Client) CreateKeyPair(ctx context.Context, params *CreateKeyPairInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateKeyPairValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateKeyPair(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

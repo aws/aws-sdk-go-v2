@@ -90,6 +90,8 @@ func (c *Client) PostContent(ctx context.Context, params *PostContentInput, optF
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	addOpPostContentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPostContent(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

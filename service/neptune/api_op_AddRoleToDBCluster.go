@@ -33,6 +33,8 @@ func (c *Client) AddRoleToDBCluster(ctx context.Context, params *AddRoleToDBClus
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAddRoleToDBClusterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAddRoleToDBCluster(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

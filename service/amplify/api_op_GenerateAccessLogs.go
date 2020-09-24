@@ -33,6 +33,8 @@ func (c *Client) GenerateAccessLogs(ctx context.Context, params *GenerateAccessL
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGenerateAccessLogsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGenerateAccessLogs(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

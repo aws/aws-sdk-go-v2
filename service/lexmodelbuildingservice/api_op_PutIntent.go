@@ -72,6 +72,8 @@ func (c *Client) PutIntent(ctx context.Context, params *PutIntentInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutIntentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutIntent(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

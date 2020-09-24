@@ -34,6 +34,8 @@ func (c *Client) PromoteReadReplicaDBCluster(ctx context.Context, params *Promot
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPromoteReadReplicaDBClusterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPromoteReadReplicaDBCluster(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

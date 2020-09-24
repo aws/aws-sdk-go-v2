@@ -53,6 +53,8 @@ func (c *Client) CreateSecurityGroup(ctx context.Context, params *CreateSecurity
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateSecurityGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSecurityGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

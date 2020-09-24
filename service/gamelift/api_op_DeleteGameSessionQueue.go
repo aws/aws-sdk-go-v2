@@ -46,6 +46,8 @@ func (c *Client) DeleteGameSessionQueue(ctx context.Context, params *DeleteGameS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteGameSessionQueueValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteGameSessionQueue(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

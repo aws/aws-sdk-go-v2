@@ -36,6 +36,8 @@ func (c *Client) DescribeGlobalClusters(ctx context.Context, params *DescribeGlo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeGlobalClustersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeGlobalClusters(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

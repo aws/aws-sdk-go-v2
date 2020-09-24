@@ -37,6 +37,8 @@ func (c *Client) GetDomainPermissionsPolicy(ctx context.Context, params *GetDoma
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDomainPermissionsPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDomainPermissionsPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

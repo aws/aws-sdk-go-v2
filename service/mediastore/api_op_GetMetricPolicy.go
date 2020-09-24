@@ -33,6 +33,8 @@ func (c *Client) GetMetricPolicy(ctx context.Context, params *GetMetricPolicyInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetMetricPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetMetricPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

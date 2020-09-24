@@ -35,6 +35,8 @@ func (c *Client) SendEvent(ctx context.Context, params *SendEventInput, optFns .
 	addIdempotencyToken_opSendEventMiddleware(stack, options)
 	addOpSendEventValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSendEvent(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

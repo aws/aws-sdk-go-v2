@@ -39,6 +39,8 @@ func (c *Client) UnassignInstance(ctx context.Context, params *UnassignInstanceI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUnassignInstanceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUnassignInstance(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

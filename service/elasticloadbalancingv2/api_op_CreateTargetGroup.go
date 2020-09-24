@@ -46,6 +46,8 @@ func (c *Client) CreateTargetGroup(ctx context.Context, params *CreateTargetGrou
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateTargetGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTargetGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

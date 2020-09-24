@@ -39,6 +39,8 @@ func (c *Client) ReportTaskProgress(ctx context.Context, params *ReportTaskProgr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpReportTaskProgressValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opReportTaskProgress(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

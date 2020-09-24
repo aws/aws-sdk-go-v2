@@ -40,7 +40,7 @@ func (m *awsAwsjson11_deserializeOpCreateMedicalVocabulary) HandleDeserialize(ct
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorCreateMedicalVocabulary(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorCreateMedicalVocabulary(response, &metadata)
 	}
 	output := &CreateMedicalVocabularyOutput{}
 	out.Result = output
@@ -76,7 +76,7 @@ func (m *awsAwsjson11_deserializeOpCreateMedicalVocabulary) HandleDeserialize(ct
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorCreateMedicalVocabulary(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorCreateMedicalVocabulary(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -160,7 +160,7 @@ func (m *awsAwsjson11_deserializeOpCreateVocabulary) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorCreateVocabulary(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorCreateVocabulary(response, &metadata)
 	}
 	output := &CreateVocabularyOutput{}
 	out.Result = output
@@ -196,7 +196,7 @@ func (m *awsAwsjson11_deserializeOpCreateVocabulary) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorCreateVocabulary(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorCreateVocabulary(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -280,7 +280,7 @@ func (m *awsAwsjson11_deserializeOpCreateVocabularyFilter) HandleDeserialize(ctx
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorCreateVocabularyFilter(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorCreateVocabularyFilter(response, &metadata)
 	}
 	output := &CreateVocabularyFilterOutput{}
 	out.Result = output
@@ -316,7 +316,7 @@ func (m *awsAwsjson11_deserializeOpCreateVocabularyFilter) HandleDeserialize(ctx
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorCreateVocabularyFilter(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorCreateVocabularyFilter(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -400,7 +400,7 @@ func (m *awsAwsjson11_deserializeOpDeleteMedicalTranscriptionJob) HandleDeserial
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteMedicalTranscriptionJob(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteMedicalTranscriptionJob(response, &metadata)
 	}
 	output := &DeleteMedicalTranscriptionJobOutput{}
 	out.Result = output
@@ -436,7 +436,7 @@ func (m *awsAwsjson11_deserializeOpDeleteMedicalTranscriptionJob) HandleDeserial
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorDeleteMedicalTranscriptionJob(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorDeleteMedicalTranscriptionJob(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -517,7 +517,7 @@ func (m *awsAwsjson11_deserializeOpDeleteMedicalVocabulary) HandleDeserialize(ct
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteMedicalVocabulary(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteMedicalVocabulary(response, &metadata)
 	}
 	output := &DeleteMedicalVocabularyOutput{}
 	out.Result = output
@@ -553,7 +553,7 @@ func (m *awsAwsjson11_deserializeOpDeleteMedicalVocabulary) HandleDeserialize(ct
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorDeleteMedicalVocabulary(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorDeleteMedicalVocabulary(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -637,7 +637,7 @@ func (m *awsAwsjson11_deserializeOpDeleteTranscriptionJob) HandleDeserialize(ctx
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteTranscriptionJob(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteTranscriptionJob(response, &metadata)
 	}
 	output := &DeleteTranscriptionJobOutput{}
 	out.Result = output
@@ -673,7 +673,7 @@ func (m *awsAwsjson11_deserializeOpDeleteTranscriptionJob) HandleDeserialize(ctx
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorDeleteTranscriptionJob(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorDeleteTranscriptionJob(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -754,7 +754,7 @@ func (m *awsAwsjson11_deserializeOpDeleteVocabulary) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteVocabulary(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteVocabulary(response, &metadata)
 	}
 	output := &DeleteVocabularyOutput{}
 	out.Result = output
@@ -790,7 +790,7 @@ func (m *awsAwsjson11_deserializeOpDeleteVocabulary) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorDeleteVocabulary(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorDeleteVocabulary(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -874,7 +874,7 @@ func (m *awsAwsjson11_deserializeOpDeleteVocabularyFilter) HandleDeserialize(ctx
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteVocabularyFilter(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteVocabularyFilter(response, &metadata)
 	}
 	output := &DeleteVocabularyFilterOutput{}
 	out.Result = output
@@ -910,7 +910,7 @@ func (m *awsAwsjson11_deserializeOpDeleteVocabularyFilter) HandleDeserialize(ctx
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorDeleteVocabularyFilter(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorDeleteVocabularyFilter(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -994,7 +994,7 @@ func (m *awsAwsjson11_deserializeOpGetMedicalTranscriptionJob) HandleDeserialize
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorGetMedicalTranscriptionJob(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetMedicalTranscriptionJob(response, &metadata)
 	}
 	output := &GetMedicalTranscriptionJobOutput{}
 	out.Result = output
@@ -1030,7 +1030,7 @@ func (m *awsAwsjson11_deserializeOpGetMedicalTranscriptionJob) HandleDeserialize
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorGetMedicalTranscriptionJob(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorGetMedicalTranscriptionJob(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1114,7 +1114,7 @@ func (m *awsAwsjson11_deserializeOpGetMedicalVocabulary) HandleDeserialize(ctx c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorGetMedicalVocabulary(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetMedicalVocabulary(response, &metadata)
 	}
 	output := &GetMedicalVocabularyOutput{}
 	out.Result = output
@@ -1150,7 +1150,7 @@ func (m *awsAwsjson11_deserializeOpGetMedicalVocabulary) HandleDeserialize(ctx c
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorGetMedicalVocabulary(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorGetMedicalVocabulary(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1234,7 +1234,7 @@ func (m *awsAwsjson11_deserializeOpGetTranscriptionJob) HandleDeserialize(ctx co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorGetTranscriptionJob(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetTranscriptionJob(response, &metadata)
 	}
 	output := &GetTranscriptionJobOutput{}
 	out.Result = output
@@ -1270,7 +1270,7 @@ func (m *awsAwsjson11_deserializeOpGetTranscriptionJob) HandleDeserialize(ctx co
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorGetTranscriptionJob(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorGetTranscriptionJob(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1354,7 +1354,7 @@ func (m *awsAwsjson11_deserializeOpGetVocabulary) HandleDeserialize(ctx context.
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorGetVocabulary(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetVocabulary(response, &metadata)
 	}
 	output := &GetVocabularyOutput{}
 	out.Result = output
@@ -1390,7 +1390,7 @@ func (m *awsAwsjson11_deserializeOpGetVocabulary) HandleDeserialize(ctx context.
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorGetVocabulary(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorGetVocabulary(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1474,7 +1474,7 @@ func (m *awsAwsjson11_deserializeOpGetVocabularyFilter) HandleDeserialize(ctx co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorGetVocabularyFilter(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetVocabularyFilter(response, &metadata)
 	}
 	output := &GetVocabularyFilterOutput{}
 	out.Result = output
@@ -1510,7 +1510,7 @@ func (m *awsAwsjson11_deserializeOpGetVocabularyFilter) HandleDeserialize(ctx co
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorGetVocabularyFilter(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorGetVocabularyFilter(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1594,7 +1594,7 @@ func (m *awsAwsjson11_deserializeOpListMedicalTranscriptionJobs) HandleDeseriali
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorListMedicalTranscriptionJobs(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorListMedicalTranscriptionJobs(response, &metadata)
 	}
 	output := &ListMedicalTranscriptionJobsOutput{}
 	out.Result = output
@@ -1630,7 +1630,7 @@ func (m *awsAwsjson11_deserializeOpListMedicalTranscriptionJobs) HandleDeseriali
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorListMedicalTranscriptionJobs(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorListMedicalTranscriptionJobs(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1711,7 +1711,7 @@ func (m *awsAwsjson11_deserializeOpListMedicalVocabularies) HandleDeserialize(ct
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorListMedicalVocabularies(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorListMedicalVocabularies(response, &metadata)
 	}
 	output := &ListMedicalVocabulariesOutput{}
 	out.Result = output
@@ -1747,7 +1747,7 @@ func (m *awsAwsjson11_deserializeOpListMedicalVocabularies) HandleDeserialize(ct
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorListMedicalVocabularies(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorListMedicalVocabularies(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1828,7 +1828,7 @@ func (m *awsAwsjson11_deserializeOpListTranscriptionJobs) HandleDeserialize(ctx 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorListTranscriptionJobs(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorListTranscriptionJobs(response, &metadata)
 	}
 	output := &ListTranscriptionJobsOutput{}
 	out.Result = output
@@ -1864,7 +1864,7 @@ func (m *awsAwsjson11_deserializeOpListTranscriptionJobs) HandleDeserialize(ctx 
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorListTranscriptionJobs(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorListTranscriptionJobs(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1945,7 +1945,7 @@ func (m *awsAwsjson11_deserializeOpListVocabularies) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorListVocabularies(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorListVocabularies(response, &metadata)
 	}
 	output := &ListVocabulariesOutput{}
 	out.Result = output
@@ -1981,7 +1981,7 @@ func (m *awsAwsjson11_deserializeOpListVocabularies) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorListVocabularies(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorListVocabularies(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2062,7 +2062,7 @@ func (m *awsAwsjson11_deserializeOpListVocabularyFilters) HandleDeserialize(ctx 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorListVocabularyFilters(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorListVocabularyFilters(response, &metadata)
 	}
 	output := &ListVocabularyFiltersOutput{}
 	out.Result = output
@@ -2098,7 +2098,7 @@ func (m *awsAwsjson11_deserializeOpListVocabularyFilters) HandleDeserialize(ctx 
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorListVocabularyFilters(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorListVocabularyFilters(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2179,7 +2179,7 @@ func (m *awsAwsjson11_deserializeOpStartMedicalTranscriptionJob) HandleDeseriali
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorStartMedicalTranscriptionJob(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorStartMedicalTranscriptionJob(response, &metadata)
 	}
 	output := &StartMedicalTranscriptionJobOutput{}
 	out.Result = output
@@ -2215,7 +2215,7 @@ func (m *awsAwsjson11_deserializeOpStartMedicalTranscriptionJob) HandleDeseriali
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorStartMedicalTranscriptionJob(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorStartMedicalTranscriptionJob(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2299,7 +2299,7 @@ func (m *awsAwsjson11_deserializeOpStartTranscriptionJob) HandleDeserialize(ctx 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorStartTranscriptionJob(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorStartTranscriptionJob(response, &metadata)
 	}
 	output := &StartTranscriptionJobOutput{}
 	out.Result = output
@@ -2335,7 +2335,7 @@ func (m *awsAwsjson11_deserializeOpStartTranscriptionJob) HandleDeserialize(ctx 
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorStartTranscriptionJob(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorStartTranscriptionJob(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2419,7 +2419,7 @@ func (m *awsAwsjson11_deserializeOpUpdateMedicalVocabulary) HandleDeserialize(ct
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateMedicalVocabulary(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateMedicalVocabulary(response, &metadata)
 	}
 	output := &UpdateMedicalVocabularyOutput{}
 	out.Result = output
@@ -2455,7 +2455,7 @@ func (m *awsAwsjson11_deserializeOpUpdateMedicalVocabulary) HandleDeserialize(ct
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorUpdateMedicalVocabulary(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorUpdateMedicalVocabulary(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2542,7 +2542,7 @@ func (m *awsAwsjson11_deserializeOpUpdateVocabulary) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateVocabulary(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateVocabulary(response, &metadata)
 	}
 	output := &UpdateVocabularyOutput{}
 	out.Result = output
@@ -2578,7 +2578,7 @@ func (m *awsAwsjson11_deserializeOpUpdateVocabulary) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorUpdateVocabulary(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorUpdateVocabulary(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2665,7 +2665,7 @@ func (m *awsAwsjson11_deserializeOpUpdateVocabularyFilter) HandleDeserialize(ctx
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateVocabularyFilter(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateVocabularyFilter(response, &metadata)
 	}
 	output := &UpdateVocabularyFilterOutput{}
 	out.Result = output
@@ -2701,7 +2701,7 @@ func (m *awsAwsjson11_deserializeOpUpdateVocabularyFilter) HandleDeserialize(ctx
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorUpdateVocabularyFilter(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorUpdateVocabularyFilter(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

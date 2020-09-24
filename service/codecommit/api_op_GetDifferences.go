@@ -35,6 +35,8 @@ func (c *Client) GetDifferences(ctx context.Context, params *GetDifferencesInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDifferencesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDifferences(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

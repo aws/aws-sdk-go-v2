@@ -35,6 +35,8 @@ func (c *Client) CreateContact(ctx context.Context, params *CreateContactInput, 
 	addIdempotencyToken_opCreateContactMiddleware(stack, options)
 	addOpCreateContactValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateContact(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

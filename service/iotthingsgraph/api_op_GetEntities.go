@@ -57,6 +57,8 @@ func (c *Client) GetEntities(ctx context.Context, params *GetEntitiesInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetEntitiesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetEntities(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

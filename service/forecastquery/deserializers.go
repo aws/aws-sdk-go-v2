@@ -38,7 +38,7 @@ func (m *awsAwsjson11_deserializeOpQueryForecast) HandleDeserialize(ctx context.
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorQueryForecast(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorQueryForecast(response, &metadata)
 	}
 	output := &QueryForecastOutput{}
 	out.Result = output
@@ -74,7 +74,7 @@ func (m *awsAwsjson11_deserializeOpQueryForecast) HandleDeserialize(ctx context.
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorQueryForecast(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorQueryForecast(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

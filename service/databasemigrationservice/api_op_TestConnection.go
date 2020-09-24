@@ -33,6 +33,8 @@ func (c *Client) TestConnection(ctx context.Context, params *TestConnectionInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTestConnectionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTestConnection(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

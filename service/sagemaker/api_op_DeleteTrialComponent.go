@@ -34,6 +34,8 @@ func (c *Client) DeleteTrialComponent(ctx context.Context, params *DeleteTrialCo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteTrialComponentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteTrialComponent(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

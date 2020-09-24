@@ -33,6 +33,8 @@ func (c *Client) BatchDeleteScheduledAction(ctx context.Context, params *BatchDe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchDeleteScheduledActionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDeleteScheduledAction(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

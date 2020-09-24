@@ -32,6 +32,8 @@ func (c *Client) DisableMetricsCollection(ctx context.Context, params *DisableMe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisableMetricsCollectionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisableMetricsCollection(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

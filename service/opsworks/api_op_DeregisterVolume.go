@@ -38,6 +38,8 @@ func (c *Client) DeregisterVolume(ctx context.Context, params *DeregisterVolumeI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeregisterVolumeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterVolume(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

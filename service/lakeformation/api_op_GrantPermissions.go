@@ -36,6 +36,8 @@ func (c *Client) GrantPermissions(ctx context.Context, params *GrantPermissionsI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGrantPermissionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGrantPermissions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

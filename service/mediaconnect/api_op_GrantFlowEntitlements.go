@@ -33,6 +33,8 @@ func (c *Client) GrantFlowEntitlements(ctx context.Context, params *GrantFlowEnt
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGrantFlowEntitlementsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGrantFlowEntitlements(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

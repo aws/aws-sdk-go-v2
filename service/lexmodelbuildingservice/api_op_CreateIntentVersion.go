@@ -42,6 +42,8 @@ func (c *Client) CreateIntentVersion(ctx context.Context, params *CreateIntentVe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateIntentVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateIntentVersion(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

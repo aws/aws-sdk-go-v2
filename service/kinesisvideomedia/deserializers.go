@@ -39,7 +39,7 @@ func (m *awsRestjson1_deserializeOpGetMedia) HandleDeserialize(ctx context.Conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorGetMedia(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorGetMedia(response, &metadata)
 	}
 	output := &GetMediaOutput{}
 	out.Result = output
@@ -57,7 +57,7 @@ func (m *awsRestjson1_deserializeOpGetMedia) HandleDeserialize(ctx context.Conte
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorGetMedia(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorGetMedia(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

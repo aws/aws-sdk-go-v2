@@ -8,6 +8,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	"github.com/awslabs/smithy-go/middleware"
 	"net/http"
@@ -351,4 +352,12 @@ func getBucketFromInput(input interface{}) (*string, bool) {
 	default:
 		return nil, false
 	}
+}
+
+func addResponseErrorMiddleware(stack *middleware.Stack) {
+	s3shared.AddResponseErrorMiddleware(stack)
+}
+
+func addMetadataRetrieverMiddleware(stack *middleware.Stack) {
+	s3shared.AddMetadataRetrieverMiddleware(stack)
 }

@@ -40,7 +40,7 @@ func (m *awsAwsjson11_deserializeOpCreateLicenseConfiguration) HandleDeserialize
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorCreateLicenseConfiguration(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorCreateLicenseConfiguration(response, &metadata)
 	}
 	output := &CreateLicenseConfigurationOutput{}
 	out.Result = output
@@ -76,7 +76,7 @@ func (m *awsAwsjson11_deserializeOpCreateLicenseConfiguration) HandleDeserialize
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorCreateLicenseConfiguration(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorCreateLicenseConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -166,7 +166,7 @@ func (m *awsAwsjson11_deserializeOpDeleteLicenseConfiguration) HandleDeserialize
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteLicenseConfiguration(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteLicenseConfiguration(response, &metadata)
 	}
 	output := &DeleteLicenseConfigurationOutput{}
 	out.Result = output
@@ -202,7 +202,7 @@ func (m *awsAwsjson11_deserializeOpDeleteLicenseConfiguration) HandleDeserialize
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorDeleteLicenseConfiguration(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorDeleteLicenseConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -289,7 +289,7 @@ func (m *awsAwsjson11_deserializeOpGetLicenseConfiguration) HandleDeserialize(ct
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorGetLicenseConfiguration(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetLicenseConfiguration(response, &metadata)
 	}
 	output := &GetLicenseConfigurationOutput{}
 	out.Result = output
@@ -325,7 +325,7 @@ func (m *awsAwsjson11_deserializeOpGetLicenseConfiguration) HandleDeserialize(ct
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorGetLicenseConfiguration(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorGetLicenseConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -412,7 +412,7 @@ func (m *awsAwsjson11_deserializeOpGetServiceSettings) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorGetServiceSettings(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetServiceSettings(response, &metadata)
 	}
 	output := &GetServiceSettingsOutput{}
 	out.Result = output
@@ -448,7 +448,7 @@ func (m *awsAwsjson11_deserializeOpGetServiceSettings) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorGetServiceSettings(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorGetServiceSettings(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -532,7 +532,7 @@ func (m *awsAwsjson11_deserializeOpListAssociationsForLicenseConfiguration) Hand
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorListAssociationsForLicenseConfiguration(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorListAssociationsForLicenseConfiguration(response, &metadata)
 	}
 	output := &ListAssociationsForLicenseConfigurationOutput{}
 	out.Result = output
@@ -568,7 +568,7 @@ func (m *awsAwsjson11_deserializeOpListAssociationsForLicenseConfiguration) Hand
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorListAssociationsForLicenseConfiguration(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorListAssociationsForLicenseConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -658,7 +658,7 @@ func (m *awsAwsjson11_deserializeOpListFailuresForLicenseConfigurationOperations
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorListFailuresForLicenseConfigurationOperations(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorListFailuresForLicenseConfigurationOperations(response, &metadata)
 	}
 	output := &ListFailuresForLicenseConfigurationOperationsOutput{}
 	out.Result = output
@@ -694,7 +694,7 @@ func (m *awsAwsjson11_deserializeOpListFailuresForLicenseConfigurationOperations
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorListFailuresForLicenseConfigurationOperations(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorListFailuresForLicenseConfigurationOperations(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -781,7 +781,7 @@ func (m *awsAwsjson11_deserializeOpListLicenseConfigurations) HandleDeserialize(
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorListLicenseConfigurations(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorListLicenseConfigurations(response, &metadata)
 	}
 	output := &ListLicenseConfigurationsOutput{}
 	out.Result = output
@@ -817,7 +817,7 @@ func (m *awsAwsjson11_deserializeOpListLicenseConfigurations) HandleDeserialize(
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorListLicenseConfigurations(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorListLicenseConfigurations(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -907,7 +907,7 @@ func (m *awsAwsjson11_deserializeOpListLicenseSpecificationsForResource) HandleD
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorListLicenseSpecificationsForResource(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorListLicenseSpecificationsForResource(response, &metadata)
 	}
 	output := &ListLicenseSpecificationsForResourceOutput{}
 	out.Result = output
@@ -943,7 +943,7 @@ func (m *awsAwsjson11_deserializeOpListLicenseSpecificationsForResource) HandleD
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorListLicenseSpecificationsForResource(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorListLicenseSpecificationsForResource(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1030,7 +1030,7 @@ func (m *awsAwsjson11_deserializeOpListResourceInventory) HandleDeserialize(ctx 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorListResourceInventory(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorListResourceInventory(response, &metadata)
 	}
 	output := &ListResourceInventoryOutput{}
 	out.Result = output
@@ -1066,7 +1066,7 @@ func (m *awsAwsjson11_deserializeOpListResourceInventory) HandleDeserialize(ctx 
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorListResourceInventory(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorListResourceInventory(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1159,7 +1159,7 @@ func (m *awsAwsjson11_deserializeOpListTagsForResource) HandleDeserialize(ctx co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorListTagsForResource(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorListTagsForResource(response, &metadata)
 	}
 	output := &ListTagsForResourceOutput{}
 	out.Result = output
@@ -1195,7 +1195,7 @@ func (m *awsAwsjson11_deserializeOpListTagsForResource) HandleDeserialize(ctx co
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorListTagsForResource(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorListTagsForResource(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1282,7 +1282,7 @@ func (m *awsAwsjson11_deserializeOpListUsageForLicenseConfiguration) HandleDeser
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorListUsageForLicenseConfiguration(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorListUsageForLicenseConfiguration(response, &metadata)
 	}
 	output := &ListUsageForLicenseConfigurationOutput{}
 	out.Result = output
@@ -1318,7 +1318,7 @@ func (m *awsAwsjson11_deserializeOpListUsageForLicenseConfiguration) HandleDeser
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorListUsageForLicenseConfiguration(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorListUsageForLicenseConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1408,7 +1408,7 @@ func (m *awsAwsjson11_deserializeOpTagResource) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorTagResource(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorTagResource(response, &metadata)
 	}
 	output := &TagResourceOutput{}
 	out.Result = output
@@ -1444,7 +1444,7 @@ func (m *awsAwsjson11_deserializeOpTagResource) HandleDeserialize(ctx context.Co
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorTagResource(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorTagResource(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1531,7 +1531,7 @@ func (m *awsAwsjson11_deserializeOpUntagResource) HandleDeserialize(ctx context.
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorUntagResource(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorUntagResource(response, &metadata)
 	}
 	output := &UntagResourceOutput{}
 	out.Result = output
@@ -1567,7 +1567,7 @@ func (m *awsAwsjson11_deserializeOpUntagResource) HandleDeserialize(ctx context.
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorUntagResource(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorUntagResource(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1654,7 +1654,7 @@ func (m *awsAwsjson11_deserializeOpUpdateLicenseConfiguration) HandleDeserialize
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateLicenseConfiguration(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateLicenseConfiguration(response, &metadata)
 	}
 	output := &UpdateLicenseConfigurationOutput{}
 	out.Result = output
@@ -1690,7 +1690,7 @@ func (m *awsAwsjson11_deserializeOpUpdateLicenseConfiguration) HandleDeserialize
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorUpdateLicenseConfiguration(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorUpdateLicenseConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1777,7 +1777,7 @@ func (m *awsAwsjson11_deserializeOpUpdateLicenseSpecificationsForResource) Handl
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateLicenseSpecificationsForResource(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateLicenseSpecificationsForResource(response, &metadata)
 	}
 	output := &UpdateLicenseSpecificationsForResourceOutput{}
 	out.Result = output
@@ -1813,7 +1813,7 @@ func (m *awsAwsjson11_deserializeOpUpdateLicenseSpecificationsForResource) Handl
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorUpdateLicenseSpecificationsForResource(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorUpdateLicenseSpecificationsForResource(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1906,7 +1906,7 @@ func (m *awsAwsjson11_deserializeOpUpdateServiceSettings) HandleDeserialize(ctx 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateServiceSettings(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateServiceSettings(response, &metadata)
 	}
 	output := &UpdateServiceSettingsOutput{}
 	out.Result = output
@@ -1942,7 +1942,7 @@ func (m *awsAwsjson11_deserializeOpUpdateServiceSettings) HandleDeserialize(ctx 
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorUpdateServiceSettings(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorUpdateServiceSettings(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

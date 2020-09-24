@@ -33,6 +33,8 @@ func (c *Client) GetDatabase(ctx context.Context, params *GetDatabaseInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDatabaseValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDatabase(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

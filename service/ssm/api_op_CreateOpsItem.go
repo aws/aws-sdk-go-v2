@@ -42,6 +42,8 @@ func (c *Client) CreateOpsItem(ctx context.Context, params *CreateOpsItemInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateOpsItemValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateOpsItem(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

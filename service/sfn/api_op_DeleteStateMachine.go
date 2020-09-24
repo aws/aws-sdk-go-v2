@@ -35,6 +35,8 @@ func (c *Client) DeleteStateMachine(ctx context.Context, params *DeleteStateMach
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteStateMachineValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteStateMachine(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

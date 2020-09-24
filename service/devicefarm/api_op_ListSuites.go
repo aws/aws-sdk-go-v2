@@ -33,6 +33,8 @@ func (c *Client) ListSuites(ctx context.Context, params *ListSuitesInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListSuitesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListSuites(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -40,6 +40,8 @@ func (c *Client) DeleteEmailIdentityPolicy(ctx context.Context, params *DeleteEm
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteEmailIdentityPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteEmailIdentityPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

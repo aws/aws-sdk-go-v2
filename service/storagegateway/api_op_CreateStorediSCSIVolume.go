@@ -42,6 +42,8 @@ func (c *Client) CreateStorediSCSIVolume(ctx context.Context, params *CreateStor
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateStorediSCSIVolumeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStorediSCSIVolume(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -35,6 +35,8 @@ func (c *Client) GetQueryExecution(ctx context.Context, params *GetQueryExecutio
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetQueryExecutionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetQueryExecution(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

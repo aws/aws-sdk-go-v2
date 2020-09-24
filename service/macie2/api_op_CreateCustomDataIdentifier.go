@@ -34,6 +34,8 @@ func (c *Client) CreateCustomDataIdentifier(ctx context.Context, params *CreateC
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addIdempotencyToken_opCreateCustomDataIdentifierMiddleware(stack, options)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCustomDataIdentifier(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

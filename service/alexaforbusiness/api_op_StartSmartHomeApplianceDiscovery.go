@@ -32,6 +32,8 @@ func (c *Client) StartSmartHomeApplianceDiscovery(ctx context.Context, params *S
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartSmartHomeApplianceDiscoveryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartSmartHomeApplianceDiscovery(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

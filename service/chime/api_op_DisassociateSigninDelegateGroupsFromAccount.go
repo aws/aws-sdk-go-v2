@@ -33,6 +33,8 @@ func (c *Client) DisassociateSigninDelegateGroupsFromAccount(ctx context.Context
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisassociateSigninDelegateGroupsFromAccountValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateSigninDelegateGroupsFromAccount(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -82,6 +82,8 @@ func (c *Client) HeadObject(ctx context.Context, params *HeadObjectInput, optFns
 	addOpHeadObjectValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHeadObject(options.Region), middleware.Before)
 	addUpdateEndpointMiddleware(stack, options)
+	addResponseErrorMiddleware(stack)
+	addMetadataRetrieverMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

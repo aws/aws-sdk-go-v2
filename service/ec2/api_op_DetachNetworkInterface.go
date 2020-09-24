@@ -32,6 +32,8 @@ func (c *Client) DetachNetworkInterface(ctx context.Context, params *DetachNetwo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDetachNetworkInterfaceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDetachNetworkInterface(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
