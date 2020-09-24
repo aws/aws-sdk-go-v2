@@ -46,6 +46,8 @@ func (c *Client) RestoreDBClusterToPointInTime(ctx context.Context, params *Rest
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRestoreDBClusterToPointInTimeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreDBClusterToPointInTime(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

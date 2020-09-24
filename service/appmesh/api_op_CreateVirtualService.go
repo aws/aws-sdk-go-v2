@@ -38,6 +38,8 @@ func (c *Client) CreateVirtualService(ctx context.Context, params *CreateVirtual
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateVirtualServiceValidationMiddleware(stack)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

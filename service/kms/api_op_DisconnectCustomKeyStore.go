@@ -49,6 +49,8 @@ func (c *Client) DisconnectCustomKeyStore(ctx context.Context, params *Disconnec
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisconnectCustomKeyStoreValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisconnectCustomKeyStore(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

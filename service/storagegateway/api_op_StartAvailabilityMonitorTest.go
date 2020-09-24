@@ -37,6 +37,8 @@ func (c *Client) StartAvailabilityMonitorTest(ctx context.Context, params *Start
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartAvailabilityMonitorTestValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartAvailabilityMonitorTest(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

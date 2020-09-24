@@ -33,6 +33,8 @@ func (c *Client) CreatePackagingGroup(ctx context.Context, params *CreatePackagi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreatePackagingGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePackagingGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

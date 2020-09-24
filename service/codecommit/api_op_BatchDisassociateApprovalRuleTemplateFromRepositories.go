@@ -34,6 +34,8 @@ func (c *Client) BatchDisassociateApprovalRuleTemplateFromRepositories(ctx conte
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchDisassociateApprovalRuleTemplateFromRepositoriesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDisassociateApprovalRuleTemplateFromRepositories(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

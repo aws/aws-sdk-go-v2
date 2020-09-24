@@ -33,6 +33,8 @@ func (c *Client) ListRemoteAccessSessions(ctx context.Context, params *ListRemot
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListRemoteAccessSessionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListRemoteAccessSessions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

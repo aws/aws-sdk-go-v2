@@ -34,6 +34,8 @@ func (c *Client) PutAggregationAuthorization(ctx context.Context, params *PutAgg
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutAggregationAuthorizationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutAggregationAuthorization(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

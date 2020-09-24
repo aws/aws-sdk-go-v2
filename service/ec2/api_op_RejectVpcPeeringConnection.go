@@ -36,6 +36,8 @@ func (c *Client) RejectVpcPeeringConnection(ctx context.Context, params *RejectV
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRejectVpcPeeringConnectionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRejectVpcPeeringConnection(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

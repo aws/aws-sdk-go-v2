@@ -54,6 +54,8 @@ func (c *Client) ListObjectsV2(ctx context.Context, params *ListObjectsV2Input, 
 	addOpListObjectsV2ValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListObjectsV2(options.Region), middleware.Before)
 	addUpdateEndpointMiddleware(stack, options)
+	addResponseErrorMiddleware(stack)
+	addMetadataRetrieverMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

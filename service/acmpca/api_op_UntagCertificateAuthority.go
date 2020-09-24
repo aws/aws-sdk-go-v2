@@ -38,6 +38,8 @@ func (c *Client) UntagCertificateAuthority(ctx context.Context, params *UntagCer
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUntagCertificateAuthorityValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUntagCertificateAuthority(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

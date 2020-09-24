@@ -33,6 +33,8 @@ func (c *Client) CreateInput(ctx context.Context, params *CreateInputInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateInputValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateInput(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,8 @@ func (c *Client) CreateAddressBook(ctx context.Context, params *CreateAddressBoo
 	addIdempotencyToken_opCreateAddressBookMiddleware(stack, options)
 	addOpCreateAddressBookValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAddressBook(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

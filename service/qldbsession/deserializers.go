@@ -39,7 +39,7 @@ func (m *awsAwsjson10_deserializeOpSendCommand) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorSendCommand(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorSendCommand(response, &metadata)
 	}
 	output := &SendCommandOutput{}
 	out.Result = output
@@ -75,7 +75,7 @@ func (m *awsAwsjson10_deserializeOpSendCommand) HandleDeserialize(ctx context.Co
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorSendCommand(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorSendCommand(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

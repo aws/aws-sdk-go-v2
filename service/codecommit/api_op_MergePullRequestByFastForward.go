@@ -36,6 +36,8 @@ func (c *Client) MergePullRequestByFastForward(ctx context.Context, params *Merg
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpMergePullRequestByFastForwardValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opMergePullRequestByFastForward(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

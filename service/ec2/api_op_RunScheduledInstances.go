@@ -43,6 +43,8 @@ func (c *Client) RunScheduledInstances(ctx context.Context, params *RunScheduled
 	addIdempotencyToken_opRunScheduledInstancesMiddleware(stack, options)
 	addOpRunScheduledInstancesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRunScheduledInstances(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

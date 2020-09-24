@@ -34,6 +34,8 @@ func (c *Client) GetMaintenanceWindowExecution(ctx context.Context, params *GetM
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetMaintenanceWindowExecutionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetMaintenanceWindowExecution(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

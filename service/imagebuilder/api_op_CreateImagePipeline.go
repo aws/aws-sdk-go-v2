@@ -36,6 +36,8 @@ func (c *Client) CreateImagePipeline(ctx context.Context, params *CreateImagePip
 	addIdempotencyToken_opCreateImagePipelineMiddleware(stack, options)
 	addOpCreateImagePipelineValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateImagePipeline(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

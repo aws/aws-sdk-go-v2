@@ -35,6 +35,8 @@ func (c *Client) PutEvaluations(ctx context.Context, params *PutEvaluationsInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutEvaluationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutEvaluations(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,8 @@ func (c *Client) StartTranscriptionJob(ctx context.Context, params *StartTranscr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartTranscriptionJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartTranscriptionJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

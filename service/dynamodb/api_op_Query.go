@@ -69,6 +69,8 @@ func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpQueryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opQuery(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	addValidateResponseChecksum(stack, options)
 	addAcceptEncodingGzip(stack, options)
 

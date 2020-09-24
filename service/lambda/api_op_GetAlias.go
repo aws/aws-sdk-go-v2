@@ -34,6 +34,8 @@ func (c *Client) GetAlias(ctx context.Context, params *GetAliasInput, optFns ...
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetAliasValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetAlias(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

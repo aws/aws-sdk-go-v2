@@ -32,6 +32,8 @@ func (c *Client) GetMailboxDetails(ctx context.Context, params *GetMailboxDetail
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetMailboxDetailsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetMailboxDetails(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

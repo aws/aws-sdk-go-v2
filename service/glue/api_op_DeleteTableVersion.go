@@ -32,6 +32,8 @@ func (c *Client) DeleteTableVersion(ctx context.Context, params *DeleteTableVers
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteTableVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteTableVersion(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

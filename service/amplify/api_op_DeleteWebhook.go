@@ -33,6 +33,8 @@ func (c *Client) DeleteWebhook(ctx context.Context, params *DeleteWebhookInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteWebhookValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteWebhook(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

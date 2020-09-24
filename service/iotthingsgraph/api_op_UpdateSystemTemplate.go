@@ -35,6 +35,8 @@ func (c *Client) UpdateSystemTemplate(ctx context.Context, params *UpdateSystemT
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateSystemTemplateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSystemTemplate(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

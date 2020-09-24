@@ -32,6 +32,8 @@ func (c *Client) DeleteIAMPolicyAssignment(ctx context.Context, params *DeleteIA
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteIAMPolicyAssignmentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteIAMPolicyAssignment(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

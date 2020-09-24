@@ -37,6 +37,8 @@ func (c *Client) GetDownloadUrlForLayer(ctx context.Context, params *GetDownload
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDownloadUrlForLayerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDownloadUrlForLayer(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

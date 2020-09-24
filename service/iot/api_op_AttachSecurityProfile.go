@@ -34,6 +34,8 @@ func (c *Client) AttachSecurityProfile(ctx context.Context, params *AttachSecuri
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAttachSecurityProfileValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAttachSecurityProfile(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

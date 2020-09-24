@@ -38,6 +38,8 @@ func (c *Client) UpdateKeyDescription(ctx context.Context, params *UpdateKeyDesc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateKeyDescriptionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateKeyDescription(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,8 @@ func (c *Client) AssociateDeviceWithPlacement(ctx context.Context, params *Assoc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateDeviceWithPlacementValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateDeviceWithPlacement(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

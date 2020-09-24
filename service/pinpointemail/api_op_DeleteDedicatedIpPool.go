@@ -32,6 +32,8 @@ func (c *Client) DeleteDedicatedIpPool(ctx context.Context, params *DeleteDedica
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDedicatedIpPoolValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDedicatedIpPool(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

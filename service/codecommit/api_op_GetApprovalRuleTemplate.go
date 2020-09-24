@@ -33,6 +33,8 @@ func (c *Client) GetApprovalRuleTemplate(ctx context.Context, params *GetApprova
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetApprovalRuleTemplateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetApprovalRuleTemplate(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

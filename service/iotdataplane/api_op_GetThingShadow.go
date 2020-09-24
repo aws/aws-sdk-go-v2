@@ -35,6 +35,8 @@ func (c *Client) GetThingShadow(ctx context.Context, params *GetThingShadowInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetThingShadowValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetThingShadow(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

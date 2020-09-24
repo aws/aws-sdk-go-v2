@@ -37,6 +37,8 @@ func (c *Client) CreateProvisioningArtifact(ctx context.Context, params *CreateP
 	addIdempotencyToken_opCreateProvisioningArtifactMiddleware(stack, options)
 	addOpCreateProvisioningArtifactValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProvisioningArtifact(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

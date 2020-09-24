@@ -35,6 +35,8 @@ func (c *Client) GetPipelineDefinition(ctx context.Context, params *GetPipelineD
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetPipelineDefinitionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetPipelineDefinition(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

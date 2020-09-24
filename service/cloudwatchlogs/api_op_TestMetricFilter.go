@@ -35,6 +35,8 @@ func (c *Client) TestMetricFilter(ctx context.Context, params *TestMetricFilterI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTestMetricFilterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTestMetricFilter(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -39,7 +39,7 @@ func (m *awsAwsjson11_deserializeOpAnalyzeDocument) HandleDeserialize(ctx contex
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorAnalyzeDocument(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorAnalyzeDocument(response, &metadata)
 	}
 	output := &AnalyzeDocumentOutput{}
 	out.Result = output
@@ -75,7 +75,7 @@ func (m *awsAwsjson11_deserializeOpAnalyzeDocument) HandleDeserialize(ctx contex
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorAnalyzeDocument(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorAnalyzeDocument(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -177,7 +177,7 @@ func (m *awsAwsjson11_deserializeOpDetectDocumentText) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorDetectDocumentText(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorDetectDocumentText(response, &metadata)
 	}
 	output := &DetectDocumentTextOutput{}
 	out.Result = output
@@ -213,7 +213,7 @@ func (m *awsAwsjson11_deserializeOpDetectDocumentText) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorDetectDocumentText(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorDetectDocumentText(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -312,7 +312,7 @@ func (m *awsAwsjson11_deserializeOpGetDocumentAnalysis) HandleDeserialize(ctx co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorGetDocumentAnalysis(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetDocumentAnalysis(response, &metadata)
 	}
 	output := &GetDocumentAnalysisOutput{}
 	out.Result = output
@@ -348,7 +348,7 @@ func (m *awsAwsjson11_deserializeOpGetDocumentAnalysis) HandleDeserialize(ctx co
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorGetDocumentAnalysis(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorGetDocumentAnalysis(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -438,7 +438,7 @@ func (m *awsAwsjson11_deserializeOpGetDocumentTextDetection) HandleDeserialize(c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorGetDocumentTextDetection(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetDocumentTextDetection(response, &metadata)
 	}
 	output := &GetDocumentTextDetectionOutput{}
 	out.Result = output
@@ -474,7 +474,7 @@ func (m *awsAwsjson11_deserializeOpGetDocumentTextDetection) HandleDeserialize(c
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorGetDocumentTextDetection(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorGetDocumentTextDetection(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -564,7 +564,7 @@ func (m *awsAwsjson11_deserializeOpStartDocumentAnalysis) HandleDeserialize(ctx 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorStartDocumentAnalysis(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorStartDocumentAnalysis(response, &metadata)
 	}
 	output := &StartDocumentAnalysisOutput{}
 	out.Result = output
@@ -600,7 +600,7 @@ func (m *awsAwsjson11_deserializeOpStartDocumentAnalysis) HandleDeserialize(ctx 
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorStartDocumentAnalysis(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorStartDocumentAnalysis(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -705,7 +705,7 @@ func (m *awsAwsjson11_deserializeOpStartDocumentTextDetection) HandleDeserialize
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorStartDocumentTextDetection(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorStartDocumentTextDetection(response, &metadata)
 	}
 	output := &StartDocumentTextDetectionOutput{}
 	out.Result = output
@@ -741,7 +741,7 @@ func (m *awsAwsjson11_deserializeOpStartDocumentTextDetection) HandleDeserialize
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorStartDocumentTextDetection(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorStartDocumentTextDetection(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

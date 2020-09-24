@@ -46,6 +46,8 @@ func (c *Client) GetBucketPolicyStatus(ctx context.Context, params *GetBucketPol
 	addOpGetBucketPolicyStatusValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketPolicyStatus(options.Region), middleware.Before)
 	addUpdateEndpointMiddleware(stack, options)
+	addResponseErrorMiddleware(stack)
+	addMetadataRetrieverMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,8 @@ func (c *Client) GetFile(ctx context.Context, params *GetFileInput, optFns ...fu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetFileValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetFile(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

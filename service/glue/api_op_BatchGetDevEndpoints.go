@@ -36,6 +36,8 @@ func (c *Client) BatchGetDevEndpoints(ctx context.Context, params *BatchGetDevEn
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchGetDevEndpointsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetDevEndpoints(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

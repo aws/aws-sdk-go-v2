@@ -39,6 +39,8 @@ func (c *Client) ListJournalS3ExportsForLedger(ctx context.Context, params *List
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListJournalS3ExportsForLedgerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListJournalS3ExportsForLedger(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

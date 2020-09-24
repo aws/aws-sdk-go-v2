@@ -34,6 +34,8 @@ func (c *Client) RemoveLayerVersionPermission(ctx context.Context, params *Remov
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRemoveLayerVersionPermissionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveLayerVersionPermission(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

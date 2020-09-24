@@ -34,6 +34,8 @@ func (c *Client) SearchContacts(ctx context.Context, params *SearchContactsInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSearchContactsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSearchContacts(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,8 @@ func (c *Client) ReplaceTransitGatewayRoute(ctx context.Context, params *Replace
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpReplaceTransitGatewayRouteValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opReplaceTransitGatewayRoute(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

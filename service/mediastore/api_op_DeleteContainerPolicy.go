@@ -32,6 +32,8 @@ func (c *Client) DeleteContainerPolicy(ctx context.Context, params *DeleteContai
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteContainerPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteContainerPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

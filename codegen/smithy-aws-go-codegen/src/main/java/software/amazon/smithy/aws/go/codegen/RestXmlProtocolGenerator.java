@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.TreeSet;
 import java.util.function.Predicate;
+import software.amazon.smithy.aws.go.codegen.customization.AwsCustomGoDependency;
 import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;

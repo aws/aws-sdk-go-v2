@@ -33,6 +33,8 @@ func (c *Client) GetRevision(ctx context.Context, params *GetRevisionInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetRevisionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetRevision(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

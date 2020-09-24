@@ -65,6 +65,8 @@ func (c *Client) GetClip(ctx context.Context, params *GetClipInput, optFns ...fu
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	addOpGetClipValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetClip(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

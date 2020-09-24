@@ -34,6 +34,8 @@ func (c *Client) DeletePredictor(ctx context.Context, params *DeletePredictorInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeletePredictorValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePredictor(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

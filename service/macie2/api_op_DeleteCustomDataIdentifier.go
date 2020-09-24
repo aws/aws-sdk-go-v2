@@ -32,6 +32,8 @@ func (c *Client) DeleteCustomDataIdentifier(ctx context.Context, params *DeleteC
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteCustomDataIdentifierValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCustomDataIdentifier(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

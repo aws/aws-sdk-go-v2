@@ -52,6 +52,8 @@ func (c *Client) DescribePredictor(ctx context.Context, params *DescribePredicto
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribePredictorValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePredictor(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

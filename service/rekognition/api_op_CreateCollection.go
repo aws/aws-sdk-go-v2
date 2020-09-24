@@ -39,6 +39,8 @@ func (c *Client) CreateCollection(ctx context.Context, params *CreateCollectionI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateCollectionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCollection(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -38,6 +38,8 @@ func (c *Client) GetDistributionMetricData(ctx context.Context, params *GetDistr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDistributionMetricDataValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDistributionMetricData(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

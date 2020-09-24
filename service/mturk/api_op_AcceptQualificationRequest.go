@@ -35,6 +35,8 @@ func (c *Client) AcceptQualificationRequest(ctx context.Context, params *AcceptQ
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAcceptQualificationRequestValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptQualificationRequest(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,8 @@ func (c *Client) UpdateRoute(ctx context.Context, params *UpdateRouteInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateRouteValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRoute(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

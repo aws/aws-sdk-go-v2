@@ -32,6 +32,8 @@ func (c *Client) StopContact(ctx context.Context, params *StopContactInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopContactValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopContact(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -7,6 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
+	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyrand "github.com/awslabs/smithy-go/rand"
 	"net/http"
@@ -153,4 +154,12 @@ func resolveIdempotencyTokenProvider(o *Options) {
 // IdempotencyTokenProvider interface for providing idempotency token
 type IdempotencyTokenProvider interface {
 	GetIdempotencyToken() (string, error)
+}
+
+func addRequestIDRetrieverMiddleware(stack *middleware.Stack) {
+	awsmiddleware.AddRequestIDRetrieverMiddleware(stack)
+}
+
+func addResponseErrorMiddleware(stack *middleware.Stack) {
+	awshttp.AddResponseErrorMiddleware(stack)
 }

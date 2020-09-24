@@ -71,6 +71,8 @@ func (c *Client) CompareFaces(ctx context.Context, params *CompareFacesInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCompareFacesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCompareFaces(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

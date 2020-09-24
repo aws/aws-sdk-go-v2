@@ -35,6 +35,8 @@ func (c *Client) RegisterTargetWithMaintenanceWindow(ctx context.Context, params
 	addIdempotencyToken_opRegisterTargetWithMaintenanceWindowMiddleware(stack, options)
 	addOpRegisterTargetWithMaintenanceWindowValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterTargetWithMaintenanceWindow(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -35,6 +35,8 @@ func (c *Client) UpdateAuthEventFeedback(ctx context.Context, params *UpdateAuth
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateAuthEventFeedbackValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAuthEventFeedback(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

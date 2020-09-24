@@ -37,6 +37,8 @@ func (c *Client) Tag(ctx context.Context, params *TagInput, optFns ...func(*Opti
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTagValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTag(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

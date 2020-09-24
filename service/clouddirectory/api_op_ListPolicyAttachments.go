@@ -33,6 +33,8 @@ func (c *Client) ListPolicyAttachments(ctx context.Context, params *ListPolicyAt
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListPolicyAttachmentsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListPolicyAttachments(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

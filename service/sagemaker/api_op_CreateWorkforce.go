@@ -48,6 +48,8 @@ func (c *Client) CreateWorkforce(ctx context.Context, params *CreateWorkforceInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateWorkforceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWorkforce(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

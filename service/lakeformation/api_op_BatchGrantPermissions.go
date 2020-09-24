@@ -33,6 +33,8 @@ func (c *Client) BatchGrantPermissions(ctx context.Context, params *BatchGrantPe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchGrantPermissionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGrantPermissions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

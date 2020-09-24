@@ -37,6 +37,8 @@ func (c *Client) SendAlexaOfferToMaster(ctx context.Context, params *SendAlexaOf
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSendAlexaOfferToMasterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSendAlexaOfferToMaster(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

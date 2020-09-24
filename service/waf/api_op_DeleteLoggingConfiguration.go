@@ -39,6 +39,8 @@ func (c *Client) DeleteLoggingConfiguration(ctx context.Context, params *DeleteL
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteLoggingConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteLoggingConfiguration(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

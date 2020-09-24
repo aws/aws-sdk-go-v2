@@ -43,6 +43,8 @@ func (c *Client) SetIdentityDkimEnabled(ctx context.Context, params *SetIdentity
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSetIdentityDkimEnabledValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSetIdentityDkimEnabled(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -65,6 +65,8 @@ func (c *Client) InitiateVaultLock(ctx context.Context, params *InitiateVaultLoc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpInitiateVaultLockValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opInitiateVaultLock(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	glaciercust.AddTreeHashMiddleware(stack)
 
 	for _, fn := range options.APIOptions {

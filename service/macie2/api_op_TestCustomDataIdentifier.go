@@ -32,6 +32,8 @@ func (c *Client) TestCustomDataIdentifier(ctx context.Context, params *TestCusto
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTestCustomDataIdentifierValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTestCustomDataIdentifier(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

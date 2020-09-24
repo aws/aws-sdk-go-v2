@@ -33,6 +33,8 @@ func (c *Client) UpdateRuleMetadata(ctx context.Context, params *UpdateRuleMetad
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateRuleMetadataValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRuleMetadata(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

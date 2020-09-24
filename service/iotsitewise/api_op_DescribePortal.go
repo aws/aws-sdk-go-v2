@@ -34,6 +34,8 @@ func (c *Client) DescribePortal(ctx context.Context, params *DescribePortalInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribePortalValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePortal(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,8 @@ func (c *Client) ListNamespaces(ctx context.Context, params *ListNamespacesInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListNamespacesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListNamespaces(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

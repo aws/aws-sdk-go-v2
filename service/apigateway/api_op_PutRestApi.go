@@ -36,6 +36,8 @@ func (c *Client) PutRestApi(ctx context.Context, params *PutRestApiInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutRestApiValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutRestApi(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

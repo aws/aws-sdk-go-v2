@@ -32,6 +32,8 @@ func (c *Client) UpdateTrial(ctx context.Context, params *UpdateTrialInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateTrialValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTrial(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

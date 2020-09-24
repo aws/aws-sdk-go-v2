@@ -49,6 +49,8 @@ func (c *Client) ApproveAssignment(ctx context.Context, params *ApproveAssignmen
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpApproveAssignmentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opApproveAssignment(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

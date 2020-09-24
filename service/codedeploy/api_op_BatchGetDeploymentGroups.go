@@ -33,6 +33,8 @@ func (c *Client) BatchGetDeploymentGroups(ctx context.Context, params *BatchGetD
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchGetDeploymentGroupsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetDeploymentGroups(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

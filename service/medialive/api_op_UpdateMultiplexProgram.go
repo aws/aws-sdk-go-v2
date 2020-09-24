@@ -33,6 +33,8 @@ func (c *Client) UpdateMultiplexProgram(ctx context.Context, params *UpdateMulti
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateMultiplexProgramValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMultiplexProgram(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

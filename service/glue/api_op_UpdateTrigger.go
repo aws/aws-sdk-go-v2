@@ -33,6 +33,8 @@ func (c *Client) UpdateTrigger(ctx context.Context, params *UpdateTriggerInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateTriggerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTrigger(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

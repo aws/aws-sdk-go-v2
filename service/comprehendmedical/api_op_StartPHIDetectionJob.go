@@ -36,6 +36,8 @@ func (c *Client) StartPHIDetectionJob(ctx context.Context, params *StartPHIDetec
 	addIdempotencyToken_opStartPHIDetectionJobMiddleware(stack, options)
 	addOpStartPHIDetectionJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartPHIDetectionJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

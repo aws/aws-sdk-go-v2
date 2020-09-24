@@ -33,6 +33,8 @@ func (c *Client) DeprecateThingType(ctx context.Context, params *DeprecateThingT
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeprecateThingTypeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeprecateThingType(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

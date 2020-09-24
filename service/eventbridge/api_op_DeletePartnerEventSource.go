@@ -35,6 +35,8 @@ func (c *Client) DeletePartnerEventSource(ctx context.Context, params *DeletePar
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeletePartnerEventSourceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePartnerEventSource(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

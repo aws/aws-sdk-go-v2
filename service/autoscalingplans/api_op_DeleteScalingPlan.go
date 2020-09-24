@@ -35,6 +35,8 @@ func (c *Client) DeleteScalingPlan(ctx context.Context, params *DeleteScalingPla
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteScalingPlanValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteScalingPlan(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,8 @@ func (c *Client) DescribePlacement(ctx context.Context, params *DescribePlacemen
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribePlacementValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePlacement(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

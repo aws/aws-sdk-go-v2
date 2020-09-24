@@ -34,6 +34,8 @@ func (c *Client) ListTemplateVersions(ctx context.Context, params *ListTemplateV
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListTemplateVersionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListTemplateVersions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,8 @@ func (c *Client) CreateCoreDefinitionVersion(ctx context.Context, params *Create
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateCoreDefinitionVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCoreDefinitionVersion(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

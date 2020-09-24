@@ -31,6 +31,8 @@ func (c *Client) RegisterClient(ctx context.Context, params *RegisterClientInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterClientValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterClient(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

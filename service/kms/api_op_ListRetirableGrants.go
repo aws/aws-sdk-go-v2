@@ -35,6 +35,8 @@ func (c *Client) ListRetirableGrants(ctx context.Context, params *ListRetirableG
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListRetirableGrantsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListRetirableGrants(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

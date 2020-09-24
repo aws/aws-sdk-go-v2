@@ -33,6 +33,8 @@ func (c *Client) DeleteBudget(ctx context.Context, params *DeleteBudgetInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteBudgetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBudget(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

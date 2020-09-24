@@ -33,6 +33,8 @@ func (c *Client) CreateCostCategoryDefinition(ctx context.Context, params *Creat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateCostCategoryDefinitionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCostCategoryDefinition(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -62,6 +62,8 @@ func (c *Client) CreateIPSet(ctx context.Context, params *CreateIPSetInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateIPSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateIPSet(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

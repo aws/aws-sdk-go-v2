@@ -34,6 +34,8 @@ func (c *Client) GetBotAliases(ctx context.Context, params *GetBotAliasesInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBotAliasesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBotAliases(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

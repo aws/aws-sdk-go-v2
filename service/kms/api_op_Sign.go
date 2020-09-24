@@ -70,6 +70,8 @@ func (c *Client) Sign(ctx context.Context, params *SignInput, optFns ...func(*Op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSignValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSign(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

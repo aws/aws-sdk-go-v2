@@ -38,6 +38,8 @@ func (c *Client) UpdateMLTransform(ctx context.Context, params *UpdateMLTransfor
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateMLTransformValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMLTransform(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

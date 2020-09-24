@@ -60,6 +60,8 @@ func (c *Client) AssociateDRTRole(ctx context.Context, params *AssociateDRTRoleI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateDRTRoleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateDRTRole(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

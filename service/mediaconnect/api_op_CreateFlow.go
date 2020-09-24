@@ -34,6 +34,8 @@ func (c *Client) CreateFlow(ctx context.Context, params *CreateFlowInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateFlowValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFlow(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

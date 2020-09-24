@@ -41,6 +41,8 @@ func (c *Client) TagCertificateAuthority(ctx context.Context, params *TagCertifi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTagCertificateAuthorityValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTagCertificateAuthority(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

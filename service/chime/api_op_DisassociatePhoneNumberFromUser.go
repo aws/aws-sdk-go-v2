@@ -33,6 +33,8 @@ func (c *Client) DisassociatePhoneNumberFromUser(ctx context.Context, params *Di
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisassociatePhoneNumberFromUserValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociatePhoneNumberFromUser(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

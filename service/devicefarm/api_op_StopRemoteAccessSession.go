@@ -33,6 +33,8 @@ func (c *Client) StopRemoteAccessSession(ctx context.Context, params *StopRemote
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopRemoteAccessSessionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopRemoteAccessSession(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

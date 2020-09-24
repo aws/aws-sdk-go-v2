@@ -33,6 +33,8 @@ func (c *Client) AddTagsToOnPremisesInstances(ctx context.Context, params *AddTa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAddTagsToOnPremisesInstancesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAddTagsToOnPremisesInstances(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -37,6 +37,8 @@ func (c *Client) GetOrganizationConformancePackDetailedStatus(ctx context.Contex
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetOrganizationConformancePackDetailedStatusValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetOrganizationConformancePackDetailedStatus(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

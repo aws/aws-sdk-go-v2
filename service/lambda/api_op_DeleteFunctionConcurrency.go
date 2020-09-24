@@ -32,6 +32,8 @@ func (c *Client) DeleteFunctionConcurrency(ctx context.Context, params *DeleteFu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteFunctionConcurrencyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFunctionConcurrency(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

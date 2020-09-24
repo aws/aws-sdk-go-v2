@@ -36,6 +36,8 @@ func (c *Client) ResyncMFADevice(ctx context.Context, params *ResyncMFADeviceInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpResyncMFADeviceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opResyncMFADevice(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

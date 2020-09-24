@@ -38,6 +38,8 @@ func (c *Client) RejectAssignment(ctx context.Context, params *RejectAssignmentI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRejectAssignmentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRejectAssignment(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

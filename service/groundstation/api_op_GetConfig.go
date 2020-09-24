@@ -32,6 +32,8 @@ func (c *Client) GetConfig(ctx context.Context, params *GetConfigInput, optFns .
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetConfigValidationMiddleware(stack)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

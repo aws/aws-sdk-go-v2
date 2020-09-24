@@ -32,6 +32,8 @@ func (c *Client) UpdateSubscriptionDefinition(ctx context.Context, params *Updat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateSubscriptionDefinitionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSubscriptionDefinition(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -35,6 +35,8 @@ func (c *Client) GetInstancePortStates(ctx context.Context, params *GetInstanceP
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetInstancePortStatesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetInstancePortStates(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

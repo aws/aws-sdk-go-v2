@@ -52,6 +52,8 @@ func (c *Client) DeleteSizeConstraintSet(ctx context.Context, params *DeleteSize
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteSizeConstraintSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSizeConstraintSet(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

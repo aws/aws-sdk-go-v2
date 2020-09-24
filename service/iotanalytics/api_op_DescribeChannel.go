@@ -33,6 +33,8 @@ func (c *Client) DescribeChannel(ctx context.Context, params *DescribeChannelInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeChannelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeChannel(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

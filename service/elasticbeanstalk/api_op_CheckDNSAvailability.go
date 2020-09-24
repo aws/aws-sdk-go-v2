@@ -32,6 +32,8 @@ func (c *Client) CheckDNSAvailability(ctx context.Context, params *CheckDNSAvail
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCheckDNSAvailabilityValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCheckDNSAvailability(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

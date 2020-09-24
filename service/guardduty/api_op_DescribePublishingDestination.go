@@ -34,6 +34,8 @@ func (c *Client) DescribePublishingDestination(ctx context.Context, params *Desc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribePublishingDestinationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePublishingDestination(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

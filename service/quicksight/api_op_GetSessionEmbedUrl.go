@@ -33,6 +33,8 @@ func (c *Client) GetSessionEmbedUrl(ctx context.Context, params *GetSessionEmbed
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetSessionEmbedUrlValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSessionEmbedUrl(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

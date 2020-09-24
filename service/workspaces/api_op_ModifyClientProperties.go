@@ -33,6 +33,8 @@ func (c *Client) ModifyClientProperties(ctx context.Context, params *ModifyClien
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyClientPropertiesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyClientProperties(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

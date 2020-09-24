@@ -33,6 +33,8 @@ func (c *Client) GetOutpost(ctx context.Context, params *GetOutpostInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetOutpostValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetOutpost(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

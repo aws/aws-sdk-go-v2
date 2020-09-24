@@ -58,6 +58,8 @@ func (c *Client) DeleteArchive(ctx context.Context, params *DeleteArchiveInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteArchiveValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteArchive(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	glaciercust.AddTreeHashMiddleware(stack)
 
 	for _, fn := range options.APIOptions {

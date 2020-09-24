@@ -33,6 +33,8 @@ func (c *Client) ListPlacements(ctx context.Context, params *ListPlacementsInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListPlacementsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListPlacements(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

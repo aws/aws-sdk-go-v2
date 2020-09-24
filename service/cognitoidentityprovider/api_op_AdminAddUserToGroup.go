@@ -33,6 +33,8 @@ func (c *Client) AdminAddUserToGroup(ctx context.Context, params *AdminAddUserTo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAdminAddUserToGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAdminAddUserToGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

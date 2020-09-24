@@ -34,6 +34,8 @@ func (c *Client) GetAuthorizer(ctx context.Context, params *GetAuthorizerInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetAuthorizerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetAuthorizer(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

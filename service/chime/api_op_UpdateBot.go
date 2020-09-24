@@ -34,6 +34,8 @@ func (c *Client) UpdateBot(ctx context.Context, params *UpdateBotInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateBotValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateBot(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

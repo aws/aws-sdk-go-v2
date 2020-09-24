@@ -32,6 +32,8 @@ func (c *Client) DeleteThingGroup(ctx context.Context, params *DeleteThingGroupI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteThingGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteThingGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -35,6 +35,8 @@ func (c *Client) GetDomainStatisticsReport(ctx context.Context, params *GetDomai
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDomainStatisticsReportValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDomainStatisticsReport(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

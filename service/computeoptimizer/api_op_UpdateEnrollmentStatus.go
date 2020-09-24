@@ -35,6 +35,8 @@ func (c *Client) UpdateEnrollmentStatus(ctx context.Context, params *UpdateEnrol
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateEnrollmentStatusValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateEnrollmentStatus(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

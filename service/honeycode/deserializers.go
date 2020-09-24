@@ -38,7 +38,7 @@ func (m *awsRestjson1_deserializeOpGetScreenData) HandleDeserialize(ctx context.
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorGetScreenData(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorGetScreenData(response, &metadata)
 	}
 	output := &GetScreenDataOutput{}
 	out.Result = output
@@ -74,7 +74,7 @@ func (m *awsRestjson1_deserializeOpGetScreenData) HandleDeserialize(ctx context.
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorGetScreenData(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorGetScreenData(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -225,7 +225,7 @@ func (m *awsRestjson1_deserializeOpInvokeScreenAutomation) HandleDeserialize(ctx
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorInvokeScreenAutomation(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorInvokeScreenAutomation(response, &metadata)
 	}
 	output := &InvokeScreenAutomationOutput{}
 	out.Result = output
@@ -261,7 +261,7 @@ func (m *awsRestjson1_deserializeOpInvokeScreenAutomation) HandleDeserialize(ctx
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorInvokeScreenAutomation(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorInvokeScreenAutomation(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

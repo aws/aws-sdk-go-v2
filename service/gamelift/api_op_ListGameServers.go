@@ -54,6 +54,8 @@ func (c *Client) ListGameServers(ctx context.Context, params *ListGameServersInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListGameServersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListGameServers(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

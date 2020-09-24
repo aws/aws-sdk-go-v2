@@ -35,6 +35,8 @@ func (c *Client) GetStatistics(ctx context.Context, params *GetStatisticsInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetStatisticsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetStatistics(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

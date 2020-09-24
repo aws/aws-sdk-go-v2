@@ -52,6 +52,8 @@ func (c *Client) GetBucketMetricsConfiguration(ctx context.Context, params *GetB
 	addOpGetBucketMetricsConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketMetricsConfiguration(options.Region), middleware.Before)
 	addUpdateEndpointMiddleware(stack, options)
+	addResponseErrorMiddleware(stack)
+	addMetadataRetrieverMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

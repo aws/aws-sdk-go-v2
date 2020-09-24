@@ -34,6 +34,8 @@ func (c *Client) GetVoiceConnectorProxy(ctx context.Context, params *GetVoiceCon
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetVoiceConnectorProxyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetVoiceConnectorProxy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

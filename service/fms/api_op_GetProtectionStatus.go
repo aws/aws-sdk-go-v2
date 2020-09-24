@@ -36,6 +36,8 @@ func (c *Client) GetProtectionStatus(ctx context.Context, params *GetProtectionS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetProtectionStatusValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetProtectionStatus(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

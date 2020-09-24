@@ -43,6 +43,8 @@ func (c *Client) BatchSuspendUser(ctx context.Context, params *BatchSuspendUserI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchSuspendUserValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchSuspendUser(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -43,6 +43,8 @@ func (c *Client) DeleteJobTagging(ctx context.Context, params *DeleteJobTaggingI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteJobTaggingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteJobTagging(options.Region), middleware.Before)
+	addResponseErrorMiddleware(stack)
+	addMetadataRetrieverMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

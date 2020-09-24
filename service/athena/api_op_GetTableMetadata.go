@@ -33,6 +33,8 @@ func (c *Client) GetTableMetadata(ctx context.Context, params *GetTableMetadataI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetTableMetadataValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetTableMetadata(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

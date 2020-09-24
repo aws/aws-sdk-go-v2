@@ -43,6 +43,8 @@ func (c *Client) DeleteObjectTagging(ctx context.Context, params *DeleteObjectTa
 	addOpDeleteObjectTaggingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteObjectTagging(options.Region), middleware.Before)
 	addUpdateEndpointMiddleware(stack, options)
+	addResponseErrorMiddleware(stack)
+	addMetadataRetrieverMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

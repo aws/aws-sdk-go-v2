@@ -35,6 +35,8 @@ func (c *Client) AuthorizeIpRules(ctx context.Context, params *AuthorizeIpRulesI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAuthorizeIpRulesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAuthorizeIpRules(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

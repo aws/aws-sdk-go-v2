@@ -38,6 +38,8 @@ func (c *Client) UnassignVolume(ctx context.Context, params *UnassignVolumeInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUnassignVolumeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUnassignVolume(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

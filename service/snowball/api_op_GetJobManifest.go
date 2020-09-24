@@ -45,6 +45,8 @@ func (c *Client) GetJobManifest(ctx context.Context, params *GetJobManifestInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetJobManifestValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetJobManifest(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,8 @@ func (c *Client) DeleteUserEndpoints(ctx context.Context, params *DeleteUserEndp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteUserEndpointsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteUserEndpoints(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

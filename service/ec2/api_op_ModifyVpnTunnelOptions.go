@@ -38,6 +38,8 @@ func (c *Client) ModifyVpnTunnelOptions(ctx context.Context, params *ModifyVpnTu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyVpnTunnelOptionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyVpnTunnelOptions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

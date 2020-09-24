@@ -40,7 +40,7 @@ func (m *awsRestjson1_deserializeOpCreateLifecyclePolicy) HandleDeserialize(ctx 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorCreateLifecyclePolicy(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorCreateLifecyclePolicy(response, &metadata)
 	}
 	output := &CreateLifecyclePolicyOutput{}
 	out.Result = output
@@ -76,7 +76,7 @@ func (m *awsRestjson1_deserializeOpCreateLifecyclePolicy) HandleDeserialize(ctx 
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorCreateLifecyclePolicy(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorCreateLifecyclePolicy(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -197,7 +197,7 @@ func (m *awsRestjson1_deserializeOpDeleteLifecyclePolicy) HandleDeserialize(ctx 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorDeleteLifecyclePolicy(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorDeleteLifecyclePolicy(response, &metadata)
 	}
 	output := &DeleteLifecyclePolicyOutput{}
 	out.Result = output
@@ -205,7 +205,7 @@ func (m *awsRestjson1_deserializeOpDeleteLifecyclePolicy) HandleDeserialize(ctx 
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorDeleteLifecyclePolicy(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorDeleteLifecyclePolicy(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -286,7 +286,7 @@ func (m *awsRestjson1_deserializeOpGetLifecyclePolicies) HandleDeserialize(ctx c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorGetLifecyclePolicies(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorGetLifecyclePolicies(response, &metadata)
 	}
 	output := &GetLifecyclePoliciesOutput{}
 	out.Result = output
@@ -322,7 +322,7 @@ func (m *awsRestjson1_deserializeOpGetLifecyclePolicies) HandleDeserialize(ctx c
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorGetLifecyclePolicies(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorGetLifecyclePolicies(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -442,7 +442,7 @@ func (m *awsRestjson1_deserializeOpGetLifecyclePolicy) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorGetLifecyclePolicy(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorGetLifecyclePolicy(response, &metadata)
 	}
 	output := &GetLifecyclePolicyOutput{}
 	out.Result = output
@@ -478,7 +478,7 @@ func (m *awsRestjson1_deserializeOpGetLifecyclePolicy) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorGetLifecyclePolicy(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorGetLifecyclePolicy(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -595,7 +595,7 @@ func (m *awsRestjson1_deserializeOpListTagsForResource) HandleDeserialize(ctx co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorListTagsForResource(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorListTagsForResource(response, &metadata)
 	}
 	output := &ListTagsForResourceOutput{}
 	out.Result = output
@@ -631,7 +631,7 @@ func (m *awsRestjson1_deserializeOpListTagsForResource) HandleDeserialize(ctx co
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorListTagsForResource(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorListTagsForResource(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -748,7 +748,7 @@ func (m *awsRestjson1_deserializeOpTagResource) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorTagResource(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorTagResource(response, &metadata)
 	}
 	output := &TagResourceOutput{}
 	out.Result = output
@@ -756,7 +756,7 @@ func (m *awsRestjson1_deserializeOpTagResource) HandleDeserialize(ctx context.Co
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorTagResource(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorTagResource(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -837,7 +837,7 @@ func (m *awsRestjson1_deserializeOpUntagResource) HandleDeserialize(ctx context.
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorUntagResource(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorUntagResource(response, &metadata)
 	}
 	output := &UntagResourceOutput{}
 	out.Result = output
@@ -845,7 +845,7 @@ func (m *awsRestjson1_deserializeOpUntagResource) HandleDeserialize(ctx context.
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorUntagResource(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorUntagResource(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -926,7 +926,7 @@ func (m *awsRestjson1_deserializeOpUpdateLifecyclePolicy) HandleDeserialize(ctx 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorUpdateLifecyclePolicy(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorUpdateLifecyclePolicy(response, &metadata)
 	}
 	output := &UpdateLifecyclePolicyOutput{}
 	out.Result = output
@@ -934,7 +934,7 @@ func (m *awsRestjson1_deserializeOpUpdateLifecyclePolicy) HandleDeserialize(ctx 
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorUpdateLifecyclePolicy(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorUpdateLifecyclePolicy(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

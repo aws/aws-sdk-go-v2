@@ -35,6 +35,8 @@ func (c *Client) ListAuditTasks(ctx context.Context, params *ListAuditTasksInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListAuditTasksValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListAuditTasks(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

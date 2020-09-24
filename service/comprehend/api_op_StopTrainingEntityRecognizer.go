@@ -37,6 +37,8 @@ func (c *Client) StopTrainingEntityRecognizer(ctx context.Context, params *StopT
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopTrainingEntityRecognizerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopTrainingEntityRecognizer(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

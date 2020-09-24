@@ -50,6 +50,8 @@ func (c *Client) CreateHIT(ctx context.Context, params *CreateHITInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateHITValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateHIT(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

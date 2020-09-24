@@ -38,6 +38,8 @@ func (c *Client) ListRuleGroups(ctx context.Context, params *ListRuleGroupsInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListRuleGroupsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListRuleGroups(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

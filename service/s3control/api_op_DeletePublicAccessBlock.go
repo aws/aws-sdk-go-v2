@@ -32,6 +32,8 @@ func (c *Client) DeletePublicAccessBlock(ctx context.Context, params *DeletePubl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeletePublicAccessBlockValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePublicAccessBlock(options.Region), middleware.Before)
+	addResponseErrorMiddleware(stack)
+	addMetadataRetrieverMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

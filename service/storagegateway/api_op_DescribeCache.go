@@ -35,6 +35,8 @@ func (c *Client) DescribeCache(ctx context.Context, params *DescribeCacheInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeCacheValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCache(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

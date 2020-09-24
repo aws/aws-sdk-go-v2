@@ -32,6 +32,8 @@ func (c *Client) DescribeRoute(ctx context.Context, params *DescribeRouteInput, 
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeRouteValidationMiddleware(stack)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

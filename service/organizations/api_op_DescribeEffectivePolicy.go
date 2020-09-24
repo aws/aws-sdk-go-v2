@@ -42,6 +42,8 @@ func (c *Client) DescribeEffectivePolicy(ctx context.Context, params *DescribeEf
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeEffectivePolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEffectivePolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

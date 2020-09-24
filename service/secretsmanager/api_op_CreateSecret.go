@@ -108,6 +108,8 @@ func (c *Client) CreateSecret(ctx context.Context, params *CreateSecretInput, op
 	addIdempotencyToken_opCreateSecretMiddleware(stack, options)
 	addOpCreateSecretValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSecret(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

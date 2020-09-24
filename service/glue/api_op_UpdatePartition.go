@@ -33,6 +33,8 @@ func (c *Client) UpdatePartition(ctx context.Context, params *UpdatePartitionInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdatePartitionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePartition(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

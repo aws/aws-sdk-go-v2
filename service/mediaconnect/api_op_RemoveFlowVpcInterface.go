@@ -35,6 +35,8 @@ func (c *Client) RemoveFlowVpcInterface(ctx context.Context, params *RemoveFlowV
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRemoveFlowVpcInterfaceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveFlowVpcInterface(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

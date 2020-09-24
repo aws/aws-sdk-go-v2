@@ -34,6 +34,8 @@ func (c *Client) BatchWrite(ctx context.Context, params *BatchWriteInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchWriteValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchWrite(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,8 @@ func (c *Client) DeleteRevision(ctx context.Context, params *DeleteRevisionInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteRevisionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRevision(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -40,6 +40,8 @@ func (c *Client) CreateHttpNamespace(ctx context.Context, params *CreateHttpName
 	addIdempotencyToken_opCreateHttpNamespaceMiddleware(stack, options)
 	addOpCreateHttpNamespaceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateHttpNamespace(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

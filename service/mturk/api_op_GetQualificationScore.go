@@ -37,6 +37,8 @@ func (c *Client) GetQualificationScore(ctx context.Context, params *GetQualifica
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetQualificationScoreValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetQualificationScore(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

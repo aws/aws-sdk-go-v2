@@ -7,6 +7,8 @@ import (
 	"context"
 	"encoding/xml"
 	"fmt"
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
@@ -41,7 +43,7 @@ func (m *awsRestxml_deserializeOpAbortMultipartUpload) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorAbortMultipartUpload(response)
+		return out, metadata, awsRestxml_deserializeOpErrorAbortMultipartUpload(response, &metadata)
 	}
 	output := &AbortMultipartUploadOutput{}
 	out.Result = output
@@ -54,7 +56,7 @@ func (m *awsRestxml_deserializeOpAbortMultipartUpload) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorAbortMultipartUpload(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorAbortMultipartUpload(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -64,9 +66,21 @@ func awsRestxml_deserializeOpErrorAbortMultipartUpload(response *smithyhttp.Resp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -117,7 +131,7 @@ func (m *awsRestxml_deserializeOpCompleteMultipartUpload) HandleDeserialize(ctx 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorCompleteMultipartUpload(response)
+		return out, metadata, awsRestxml_deserializeOpErrorCompleteMultipartUpload(response, &metadata)
 	}
 	output := &CompleteMultipartUploadOutput{}
 	out.Result = output
@@ -158,7 +172,7 @@ func (m *awsRestxml_deserializeOpCompleteMultipartUpload) HandleDeserialize(ctx 
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorCompleteMultipartUpload(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorCompleteMultipartUpload(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -168,9 +182,21 @@ func awsRestxml_deserializeOpErrorCompleteMultipartUpload(response *smithyhttp.R
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -333,7 +359,7 @@ func (m *awsRestxml_deserializeOpCopyObject) HandleDeserialize(ctx context.Conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorCopyObject(response)
+		return out, metadata, awsRestxml_deserializeOpErrorCopyObject(response, &metadata)
 	}
 	output := &CopyObjectOutput{}
 	out.Result = output
@@ -374,7 +400,7 @@ func (m *awsRestxml_deserializeOpCopyObject) HandleDeserialize(ctx context.Conte
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorCopyObject(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorCopyObject(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -384,9 +410,21 @@ func awsRestxml_deserializeOpErrorCopyObject(response *smithyhttp.Response) erro
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -514,7 +552,7 @@ func (m *awsRestxml_deserializeOpCreateBucket) HandleDeserialize(ctx context.Con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorCreateBucket(response)
+		return out, metadata, awsRestxml_deserializeOpErrorCreateBucket(response, &metadata)
 	}
 	output := &CreateBucketOutput{}
 	out.Result = output
@@ -527,7 +565,7 @@ func (m *awsRestxml_deserializeOpCreateBucket) HandleDeserialize(ctx context.Con
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorCreateBucket(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorCreateBucket(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -537,9 +575,21 @@ func awsRestxml_deserializeOpErrorCreateBucket(response *smithyhttp.Response) er
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -593,7 +643,7 @@ func (m *awsRestxml_deserializeOpCreateMultipartUpload) HandleDeserialize(ctx co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorCreateMultipartUpload(response)
+		return out, metadata, awsRestxml_deserializeOpErrorCreateMultipartUpload(response, &metadata)
 	}
 	output := &CreateMultipartUploadOutput{}
 	out.Result = output
@@ -634,7 +684,7 @@ func (m *awsRestxml_deserializeOpCreateMultipartUpload) HandleDeserialize(ctx co
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorCreateMultipartUpload(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorCreateMultipartUpload(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -644,9 +694,21 @@ func awsRestxml_deserializeOpErrorCreateMultipartUpload(response *smithyhttp.Res
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -812,7 +874,7 @@ func (m *awsRestxml_deserializeOpDeleteBucket) HandleDeserialize(ctx context.Con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorDeleteBucket(response)
+		return out, metadata, awsRestxml_deserializeOpErrorDeleteBucket(response, &metadata)
 	}
 	output := &DeleteBucketOutput{}
 	out.Result = output
@@ -820,7 +882,7 @@ func (m *awsRestxml_deserializeOpDeleteBucket) HandleDeserialize(ctx context.Con
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorDeleteBucket(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorDeleteBucket(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -830,9 +892,21 @@ func awsRestxml_deserializeOpErrorDeleteBucket(response *smithyhttp.Response) er
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -867,7 +941,7 @@ func (m *awsRestxml_deserializeOpDeleteBucketAnalyticsConfiguration) HandleDeser
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorDeleteBucketAnalyticsConfiguration(response)
+		return out, metadata, awsRestxml_deserializeOpErrorDeleteBucketAnalyticsConfiguration(response, &metadata)
 	}
 	output := &DeleteBucketAnalyticsConfigurationOutput{}
 	out.Result = output
@@ -875,7 +949,7 @@ func (m *awsRestxml_deserializeOpDeleteBucketAnalyticsConfiguration) HandleDeser
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorDeleteBucketAnalyticsConfiguration(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorDeleteBucketAnalyticsConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -885,9 +959,21 @@ func awsRestxml_deserializeOpErrorDeleteBucketAnalyticsConfiguration(response *s
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -922,7 +1008,7 @@ func (m *awsRestxml_deserializeOpDeleteBucketCors) HandleDeserialize(ctx context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorDeleteBucketCors(response)
+		return out, metadata, awsRestxml_deserializeOpErrorDeleteBucketCors(response, &metadata)
 	}
 	output := &DeleteBucketCorsOutput{}
 	out.Result = output
@@ -930,7 +1016,7 @@ func (m *awsRestxml_deserializeOpDeleteBucketCors) HandleDeserialize(ctx context
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorDeleteBucketCors(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorDeleteBucketCors(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -940,9 +1026,21 @@ func awsRestxml_deserializeOpErrorDeleteBucketCors(response *smithyhttp.Response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -977,7 +1075,7 @@ func (m *awsRestxml_deserializeOpDeleteBucketEncryption) HandleDeserialize(ctx c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorDeleteBucketEncryption(response)
+		return out, metadata, awsRestxml_deserializeOpErrorDeleteBucketEncryption(response, &metadata)
 	}
 	output := &DeleteBucketEncryptionOutput{}
 	out.Result = output
@@ -985,7 +1083,7 @@ func (m *awsRestxml_deserializeOpDeleteBucketEncryption) HandleDeserialize(ctx c
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorDeleteBucketEncryption(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorDeleteBucketEncryption(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -995,9 +1093,21 @@ func awsRestxml_deserializeOpErrorDeleteBucketEncryption(response *smithyhttp.Re
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1032,7 +1142,7 @@ func (m *awsRestxml_deserializeOpDeleteBucketInventoryConfiguration) HandleDeser
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorDeleteBucketInventoryConfiguration(response)
+		return out, metadata, awsRestxml_deserializeOpErrorDeleteBucketInventoryConfiguration(response, &metadata)
 	}
 	output := &DeleteBucketInventoryConfigurationOutput{}
 	out.Result = output
@@ -1040,7 +1150,7 @@ func (m *awsRestxml_deserializeOpDeleteBucketInventoryConfiguration) HandleDeser
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorDeleteBucketInventoryConfiguration(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorDeleteBucketInventoryConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1050,9 +1160,21 @@ func awsRestxml_deserializeOpErrorDeleteBucketInventoryConfiguration(response *s
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1087,7 +1209,7 @@ func (m *awsRestxml_deserializeOpDeleteBucketLifecycle) HandleDeserialize(ctx co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorDeleteBucketLifecycle(response)
+		return out, metadata, awsRestxml_deserializeOpErrorDeleteBucketLifecycle(response, &metadata)
 	}
 	output := &DeleteBucketLifecycleOutput{}
 	out.Result = output
@@ -1095,7 +1217,7 @@ func (m *awsRestxml_deserializeOpDeleteBucketLifecycle) HandleDeserialize(ctx co
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorDeleteBucketLifecycle(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorDeleteBucketLifecycle(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1105,9 +1227,21 @@ func awsRestxml_deserializeOpErrorDeleteBucketLifecycle(response *smithyhttp.Res
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1142,7 +1276,7 @@ func (m *awsRestxml_deserializeOpDeleteBucketMetricsConfiguration) HandleDeseria
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorDeleteBucketMetricsConfiguration(response)
+		return out, metadata, awsRestxml_deserializeOpErrorDeleteBucketMetricsConfiguration(response, &metadata)
 	}
 	output := &DeleteBucketMetricsConfigurationOutput{}
 	out.Result = output
@@ -1150,7 +1284,7 @@ func (m *awsRestxml_deserializeOpDeleteBucketMetricsConfiguration) HandleDeseria
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorDeleteBucketMetricsConfiguration(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorDeleteBucketMetricsConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1160,9 +1294,21 @@ func awsRestxml_deserializeOpErrorDeleteBucketMetricsConfiguration(response *smi
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1197,7 +1343,7 @@ func (m *awsRestxml_deserializeOpDeleteBucketPolicy) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorDeleteBucketPolicy(response)
+		return out, metadata, awsRestxml_deserializeOpErrorDeleteBucketPolicy(response, &metadata)
 	}
 	output := &DeleteBucketPolicyOutput{}
 	out.Result = output
@@ -1205,7 +1351,7 @@ func (m *awsRestxml_deserializeOpDeleteBucketPolicy) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorDeleteBucketPolicy(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorDeleteBucketPolicy(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1215,9 +1361,21 @@ func awsRestxml_deserializeOpErrorDeleteBucketPolicy(response *smithyhttp.Respon
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1252,7 +1410,7 @@ func (m *awsRestxml_deserializeOpDeleteBucketReplication) HandleDeserialize(ctx 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorDeleteBucketReplication(response)
+		return out, metadata, awsRestxml_deserializeOpErrorDeleteBucketReplication(response, &metadata)
 	}
 	output := &DeleteBucketReplicationOutput{}
 	out.Result = output
@@ -1260,7 +1418,7 @@ func (m *awsRestxml_deserializeOpDeleteBucketReplication) HandleDeserialize(ctx 
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorDeleteBucketReplication(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorDeleteBucketReplication(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1270,9 +1428,21 @@ func awsRestxml_deserializeOpErrorDeleteBucketReplication(response *smithyhttp.R
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1307,7 +1477,7 @@ func (m *awsRestxml_deserializeOpDeleteBucketTagging) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorDeleteBucketTagging(response)
+		return out, metadata, awsRestxml_deserializeOpErrorDeleteBucketTagging(response, &metadata)
 	}
 	output := &DeleteBucketTaggingOutput{}
 	out.Result = output
@@ -1315,7 +1485,7 @@ func (m *awsRestxml_deserializeOpDeleteBucketTagging) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorDeleteBucketTagging(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorDeleteBucketTagging(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1325,9 +1495,21 @@ func awsRestxml_deserializeOpErrorDeleteBucketTagging(response *smithyhttp.Respo
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1362,7 +1544,7 @@ func (m *awsRestxml_deserializeOpDeleteBucketWebsite) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorDeleteBucketWebsite(response)
+		return out, metadata, awsRestxml_deserializeOpErrorDeleteBucketWebsite(response, &metadata)
 	}
 	output := &DeleteBucketWebsiteOutput{}
 	out.Result = output
@@ -1370,7 +1552,7 @@ func (m *awsRestxml_deserializeOpDeleteBucketWebsite) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorDeleteBucketWebsite(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorDeleteBucketWebsite(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1380,9 +1562,21 @@ func awsRestxml_deserializeOpErrorDeleteBucketWebsite(response *smithyhttp.Respo
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1417,7 +1611,7 @@ func (m *awsRestxml_deserializeOpDeleteObject) HandleDeserialize(ctx context.Con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorDeleteObject(response)
+		return out, metadata, awsRestxml_deserializeOpErrorDeleteObject(response, &metadata)
 	}
 	output := &DeleteObjectOutput{}
 	out.Result = output
@@ -1430,7 +1624,7 @@ func (m *awsRestxml_deserializeOpDeleteObject) HandleDeserialize(ctx context.Con
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorDeleteObject(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorDeleteObject(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1440,9 +1634,21 @@ func awsRestxml_deserializeOpErrorDeleteObject(response *smithyhttp.Response) er
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1504,7 +1710,7 @@ func (m *awsRestxml_deserializeOpDeleteObjects) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorDeleteObjects(response)
+		return out, metadata, awsRestxml_deserializeOpErrorDeleteObjects(response, &metadata)
 	}
 	output := &DeleteObjectsOutput{}
 	out.Result = output
@@ -1545,7 +1751,7 @@ func (m *awsRestxml_deserializeOpDeleteObjects) HandleDeserialize(ctx context.Co
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorDeleteObjects(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorDeleteObjects(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1555,9 +1761,21 @@ func awsRestxml_deserializeOpErrorDeleteObjects(response *smithyhttp.Response) e
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1648,7 +1866,7 @@ func (m *awsRestxml_deserializeOpDeleteObjectTagging) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorDeleteObjectTagging(response)
+		return out, metadata, awsRestxml_deserializeOpErrorDeleteObjectTagging(response, &metadata)
 	}
 	output := &DeleteObjectTaggingOutput{}
 	out.Result = output
@@ -1661,7 +1879,7 @@ func (m *awsRestxml_deserializeOpDeleteObjectTagging) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorDeleteObjectTagging(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorDeleteObjectTagging(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1671,9 +1889,21 @@ func awsRestxml_deserializeOpErrorDeleteObjectTagging(response *smithyhttp.Respo
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1721,7 +1951,7 @@ func (m *awsRestxml_deserializeOpDeletePublicAccessBlock) HandleDeserialize(ctx 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorDeletePublicAccessBlock(response)
+		return out, metadata, awsRestxml_deserializeOpErrorDeletePublicAccessBlock(response, &metadata)
 	}
 	output := &DeletePublicAccessBlockOutput{}
 	out.Result = output
@@ -1729,7 +1959,7 @@ func (m *awsRestxml_deserializeOpDeletePublicAccessBlock) HandleDeserialize(ctx 
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorDeletePublicAccessBlock(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorDeletePublicAccessBlock(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1739,9 +1969,21 @@ func awsRestxml_deserializeOpErrorDeletePublicAccessBlock(response *smithyhttp.R
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1776,7 +2018,7 @@ func (m *awsRestxml_deserializeOpGetBucketAccelerateConfiguration) HandleDeseria
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetBucketAccelerateConfiguration(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetBucketAccelerateConfiguration(response, &metadata)
 	}
 	output := &GetBucketAccelerateConfigurationOutput{}
 	out.Result = output
@@ -1812,7 +2054,7 @@ func (m *awsRestxml_deserializeOpGetBucketAccelerateConfiguration) HandleDeseria
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetBucketAccelerateConfiguration(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetBucketAccelerateConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1822,9 +2064,21 @@ func awsRestxml_deserializeOpErrorGetBucketAccelerateConfiguration(response *smi
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1904,7 +2158,7 @@ func (m *awsRestxml_deserializeOpGetBucketAcl) HandleDeserialize(ctx context.Con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetBucketAcl(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetBucketAcl(response, &metadata)
 	}
 	output := &GetBucketAclOutput{}
 	out.Result = output
@@ -1940,7 +2194,7 @@ func (m *awsRestxml_deserializeOpGetBucketAcl) HandleDeserialize(ctx context.Con
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetBucketAcl(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetBucketAcl(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1950,9 +2204,21 @@ func awsRestxml_deserializeOpErrorGetBucketAcl(response *smithyhttp.Response) er
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -2031,7 +2297,7 @@ func (m *awsRestxml_deserializeOpGetBucketAnalyticsConfiguration) HandleDeserial
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetBucketAnalyticsConfiguration(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetBucketAnalyticsConfiguration(response, &metadata)
 	}
 	output := &GetBucketAnalyticsConfigurationOutput{}
 	out.Result = output
@@ -2067,7 +2333,7 @@ func (m *awsRestxml_deserializeOpGetBucketAnalyticsConfiguration) HandleDeserial
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetBucketAnalyticsConfiguration(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetBucketAnalyticsConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2077,9 +2343,21 @@ func awsRestxml_deserializeOpErrorGetBucketAnalyticsConfiguration(response *smit
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -2152,7 +2430,7 @@ func (m *awsRestxml_deserializeOpGetBucketCors) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetBucketCors(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetBucketCors(response, &metadata)
 	}
 	output := &GetBucketCorsOutput{}
 	out.Result = output
@@ -2188,7 +2466,7 @@ func (m *awsRestxml_deserializeOpGetBucketCors) HandleDeserialize(ctx context.Co
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetBucketCors(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetBucketCors(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2198,9 +2476,21 @@ func awsRestxml_deserializeOpErrorGetBucketCors(response *smithyhttp.Response) e
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -2273,7 +2563,7 @@ func (m *awsRestxml_deserializeOpGetBucketEncryption) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetBucketEncryption(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetBucketEncryption(response, &metadata)
 	}
 	output := &GetBucketEncryptionOutput{}
 	out.Result = output
@@ -2309,7 +2599,7 @@ func (m *awsRestxml_deserializeOpGetBucketEncryption) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetBucketEncryption(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetBucketEncryption(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2319,9 +2609,21 @@ func awsRestxml_deserializeOpErrorGetBucketEncryption(response *smithyhttp.Respo
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -2394,7 +2696,7 @@ func (m *awsRestxml_deserializeOpGetBucketInventoryConfiguration) HandleDeserial
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetBucketInventoryConfiguration(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetBucketInventoryConfiguration(response, &metadata)
 	}
 	output := &GetBucketInventoryConfigurationOutput{}
 	out.Result = output
@@ -2430,7 +2732,7 @@ func (m *awsRestxml_deserializeOpGetBucketInventoryConfiguration) HandleDeserial
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetBucketInventoryConfiguration(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetBucketInventoryConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2440,9 +2742,21 @@ func awsRestxml_deserializeOpErrorGetBucketInventoryConfiguration(response *smit
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -2515,7 +2829,7 @@ func (m *awsRestxml_deserializeOpGetBucketLifecycleConfiguration) HandleDeserial
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetBucketLifecycleConfiguration(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetBucketLifecycleConfiguration(response, &metadata)
 	}
 	output := &GetBucketLifecycleConfigurationOutput{}
 	out.Result = output
@@ -2551,7 +2865,7 @@ func (m *awsRestxml_deserializeOpGetBucketLifecycleConfiguration) HandleDeserial
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetBucketLifecycleConfiguration(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetBucketLifecycleConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2561,9 +2875,21 @@ func awsRestxml_deserializeOpErrorGetBucketLifecycleConfiguration(response *smit
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -2636,7 +2962,7 @@ func (m *awsRestxml_deserializeOpGetBucketLocation) HandleDeserialize(ctx contex
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetBucketLocation(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetBucketLocation(response, &metadata)
 	}
 	output := &GetBucketLocationOutput{}
 	out.Result = output
@@ -2672,7 +2998,7 @@ func (m *awsRestxml_deserializeOpGetBucketLocation) HandleDeserialize(ctx contex
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetBucketLocation(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetBucketLocation(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2682,9 +3008,21 @@ func awsRestxml_deserializeOpErrorGetBucketLocation(response *smithyhttp.Respons
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -2764,7 +3102,7 @@ func (m *awsRestxml_deserializeOpGetBucketLogging) HandleDeserialize(ctx context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetBucketLogging(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetBucketLogging(response, &metadata)
 	}
 	output := &GetBucketLoggingOutput{}
 	out.Result = output
@@ -2800,7 +3138,7 @@ func (m *awsRestxml_deserializeOpGetBucketLogging) HandleDeserialize(ctx context
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetBucketLogging(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetBucketLogging(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2810,9 +3148,21 @@ func awsRestxml_deserializeOpErrorGetBucketLogging(response *smithyhttp.Response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -2885,7 +3235,7 @@ func (m *awsRestxml_deserializeOpGetBucketMetricsConfiguration) HandleDeserializ
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetBucketMetricsConfiguration(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetBucketMetricsConfiguration(response, &metadata)
 	}
 	output := &GetBucketMetricsConfigurationOutput{}
 	out.Result = output
@@ -2921,7 +3271,7 @@ func (m *awsRestxml_deserializeOpGetBucketMetricsConfiguration) HandleDeserializ
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetBucketMetricsConfiguration(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetBucketMetricsConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2931,9 +3281,21 @@ func awsRestxml_deserializeOpErrorGetBucketMetricsConfiguration(response *smithy
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -3006,7 +3368,7 @@ func (m *awsRestxml_deserializeOpGetBucketNotificationConfiguration) HandleDeser
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetBucketNotificationConfiguration(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetBucketNotificationConfiguration(response, &metadata)
 	}
 	output := &GetBucketNotificationConfigurationOutput{}
 	out.Result = output
@@ -3042,7 +3404,7 @@ func (m *awsRestxml_deserializeOpGetBucketNotificationConfiguration) HandleDeser
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetBucketNotificationConfiguration(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetBucketNotificationConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3052,9 +3414,21 @@ func awsRestxml_deserializeOpErrorGetBucketNotificationConfiguration(response *s
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -3139,7 +3513,7 @@ func (m *awsRestxml_deserializeOpGetBucketPolicy) HandleDeserialize(ctx context.
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetBucketPolicy(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetBucketPolicy(response, &metadata)
 	}
 	output := &GetBucketPolicyOutput{}
 	out.Result = output
@@ -3175,7 +3549,7 @@ func (m *awsRestxml_deserializeOpGetBucketPolicy) HandleDeserialize(ctx context.
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetBucketPolicy(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetBucketPolicy(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3185,9 +3559,21 @@ func awsRestxml_deserializeOpErrorGetBucketPolicy(response *smithyhttp.Response)
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -3270,7 +3656,7 @@ func (m *awsRestxml_deserializeOpGetBucketPolicyStatus) HandleDeserialize(ctx co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetBucketPolicyStatus(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetBucketPolicyStatus(response, &metadata)
 	}
 	output := &GetBucketPolicyStatusOutput{}
 	out.Result = output
@@ -3306,7 +3692,7 @@ func (m *awsRestxml_deserializeOpGetBucketPolicyStatus) HandleDeserialize(ctx co
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetBucketPolicyStatus(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetBucketPolicyStatus(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3316,9 +3702,21 @@ func awsRestxml_deserializeOpErrorGetBucketPolicyStatus(response *smithyhttp.Res
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -3391,7 +3789,7 @@ func (m *awsRestxml_deserializeOpGetBucketReplication) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetBucketReplication(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetBucketReplication(response, &metadata)
 	}
 	output := &GetBucketReplicationOutput{}
 	out.Result = output
@@ -3427,7 +3825,7 @@ func (m *awsRestxml_deserializeOpGetBucketReplication) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetBucketReplication(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetBucketReplication(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3437,9 +3835,21 @@ func awsRestxml_deserializeOpErrorGetBucketReplication(response *smithyhttp.Resp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -3512,7 +3922,7 @@ func (m *awsRestxml_deserializeOpGetBucketRequestPayment) HandleDeserialize(ctx 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetBucketRequestPayment(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetBucketRequestPayment(response, &metadata)
 	}
 	output := &GetBucketRequestPaymentOutput{}
 	out.Result = output
@@ -3548,7 +3958,7 @@ func (m *awsRestxml_deserializeOpGetBucketRequestPayment) HandleDeserialize(ctx 
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetBucketRequestPayment(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetBucketRequestPayment(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3558,9 +3968,21 @@ func awsRestxml_deserializeOpErrorGetBucketRequestPayment(response *smithyhttp.R
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -3640,7 +4062,7 @@ func (m *awsRestxml_deserializeOpGetBucketTagging) HandleDeserialize(ctx context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetBucketTagging(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetBucketTagging(response, &metadata)
 	}
 	output := &GetBucketTaggingOutput{}
 	out.Result = output
@@ -3676,7 +4098,7 @@ func (m *awsRestxml_deserializeOpGetBucketTagging) HandleDeserialize(ctx context
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetBucketTagging(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetBucketTagging(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3686,9 +4108,21 @@ func awsRestxml_deserializeOpErrorGetBucketTagging(response *smithyhttp.Response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -3761,7 +4195,7 @@ func (m *awsRestxml_deserializeOpGetBucketVersioning) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetBucketVersioning(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetBucketVersioning(response, &metadata)
 	}
 	output := &GetBucketVersioningOutput{}
 	out.Result = output
@@ -3797,7 +4231,7 @@ func (m *awsRestxml_deserializeOpGetBucketVersioning) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetBucketVersioning(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetBucketVersioning(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3807,9 +4241,21 @@ func awsRestxml_deserializeOpErrorGetBucketVersioning(response *smithyhttp.Respo
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -3902,7 +4348,7 @@ func (m *awsRestxml_deserializeOpGetBucketWebsite) HandleDeserialize(ctx context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetBucketWebsite(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetBucketWebsite(response, &metadata)
 	}
 	output := &GetBucketWebsiteOutput{}
 	out.Result = output
@@ -3938,7 +4384,7 @@ func (m *awsRestxml_deserializeOpGetBucketWebsite) HandleDeserialize(ctx context
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetBucketWebsite(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetBucketWebsite(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3948,9 +4394,21 @@ func awsRestxml_deserializeOpErrorGetBucketWebsite(response *smithyhttp.Response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -4041,7 +4499,7 @@ func (m *awsRestxml_deserializeOpGetObject) HandleDeserialize(ctx context.Contex
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetObject(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetObject(response, &metadata)
 	}
 	output := &GetObjectOutput{}
 	out.Result = output
@@ -4059,7 +4517,7 @@ func (m *awsRestxml_deserializeOpGetObject) HandleDeserialize(ctx context.Contex
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetObject(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetObject(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4069,9 +4527,21 @@ func awsRestxml_deserializeOpErrorGetObject(response *smithyhttp.Response) error
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -4311,7 +4781,7 @@ func (m *awsRestxml_deserializeOpGetObjectAcl) HandleDeserialize(ctx context.Con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetObjectAcl(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetObjectAcl(response, &metadata)
 	}
 	output := &GetObjectAclOutput{}
 	out.Result = output
@@ -4352,7 +4822,7 @@ func (m *awsRestxml_deserializeOpGetObjectAcl) HandleDeserialize(ctx context.Con
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetObjectAcl(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetObjectAcl(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4362,9 +4832,21 @@ func awsRestxml_deserializeOpErrorGetObjectAcl(response *smithyhttp.Response) er
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -4458,7 +4940,7 @@ func (m *awsRestxml_deserializeOpGetObjectLegalHold) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetObjectLegalHold(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetObjectLegalHold(response, &metadata)
 	}
 	output := &GetObjectLegalHoldOutput{}
 	out.Result = output
@@ -4494,7 +4976,7 @@ func (m *awsRestxml_deserializeOpGetObjectLegalHold) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetObjectLegalHold(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetObjectLegalHold(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4504,9 +4986,21 @@ func awsRestxml_deserializeOpErrorGetObjectLegalHold(response *smithyhttp.Respon
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -4579,7 +5073,7 @@ func (m *awsRestxml_deserializeOpGetObjectLockConfiguration) HandleDeserialize(c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetObjectLockConfiguration(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetObjectLockConfiguration(response, &metadata)
 	}
 	output := &GetObjectLockConfigurationOutput{}
 	out.Result = output
@@ -4615,7 +5109,7 @@ func (m *awsRestxml_deserializeOpGetObjectLockConfiguration) HandleDeserialize(c
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetObjectLockConfiguration(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetObjectLockConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4625,9 +5119,21 @@ func awsRestxml_deserializeOpErrorGetObjectLockConfiguration(response *smithyhtt
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -4700,7 +5206,7 @@ func (m *awsRestxml_deserializeOpGetObjectRetention) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetObjectRetention(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetObjectRetention(response, &metadata)
 	}
 	output := &GetObjectRetentionOutput{}
 	out.Result = output
@@ -4736,7 +5242,7 @@ func (m *awsRestxml_deserializeOpGetObjectRetention) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetObjectRetention(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetObjectRetention(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4746,9 +5252,21 @@ func awsRestxml_deserializeOpErrorGetObjectRetention(response *smithyhttp.Respon
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -4821,7 +5339,7 @@ func (m *awsRestxml_deserializeOpGetObjectTagging) HandleDeserialize(ctx context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetObjectTagging(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetObjectTagging(response, &metadata)
 	}
 	output := &GetObjectTaggingOutput{}
 	out.Result = output
@@ -4862,7 +5380,7 @@ func (m *awsRestxml_deserializeOpGetObjectTagging) HandleDeserialize(ctx context
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetObjectTagging(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetObjectTagging(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4872,9 +5390,21 @@ func awsRestxml_deserializeOpErrorGetObjectTagging(response *smithyhttp.Response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -4959,7 +5489,7 @@ func (m *awsRestxml_deserializeOpGetObjectTorrent) HandleDeserialize(ctx context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetObjectTorrent(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetObjectTorrent(response, &metadata)
 	}
 	output := &GetObjectTorrentOutput{}
 	out.Result = output
@@ -4977,7 +5507,7 @@ func (m *awsRestxml_deserializeOpGetObjectTorrent) HandleDeserialize(ctx context
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetObjectTorrent(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetObjectTorrent(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4987,9 +5517,21 @@ func awsRestxml_deserializeOpErrorGetObjectTorrent(response *smithyhttp.Response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -5044,7 +5586,7 @@ func (m *awsRestxml_deserializeOpGetPublicAccessBlock) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorGetPublicAccessBlock(response)
+		return out, metadata, awsRestxml_deserializeOpErrorGetPublicAccessBlock(response, &metadata)
 	}
 	output := &GetPublicAccessBlockOutput{}
 	out.Result = output
@@ -5080,7 +5622,7 @@ func (m *awsRestxml_deserializeOpGetPublicAccessBlock) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorGetPublicAccessBlock(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorGetPublicAccessBlock(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -5090,9 +5632,21 @@ func awsRestxml_deserializeOpErrorGetPublicAccessBlock(response *smithyhttp.Resp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -5165,7 +5719,7 @@ func (m *awsRestxml_deserializeOpHeadBucket) HandleDeserialize(ctx context.Conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorHeadBucket(response)
+		return out, metadata, awsRestxml_deserializeOpErrorHeadBucket(response, &metadata)
 	}
 	output := &HeadBucketOutput{}
 	out.Result = output
@@ -5173,7 +5727,7 @@ func (m *awsRestxml_deserializeOpHeadBucket) HandleDeserialize(ctx context.Conte
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorHeadBucket(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorHeadBucket(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -5183,9 +5737,21 @@ func awsRestxml_deserializeOpErrorHeadBucket(response *smithyhttp.Response) erro
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -5223,7 +5789,7 @@ func (m *awsRestxml_deserializeOpHeadObject) HandleDeserialize(ctx context.Conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorHeadObject(response)
+		return out, metadata, awsRestxml_deserializeOpErrorHeadObject(response, &metadata)
 	}
 	output := &HeadObjectOutput{}
 	out.Result = output
@@ -5236,7 +5802,7 @@ func (m *awsRestxml_deserializeOpHeadObject) HandleDeserialize(ctx context.Conte
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorHeadObject(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorHeadObject(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -5246,9 +5812,21 @@ func awsRestxml_deserializeOpErrorHeadObject(response *smithyhttp.Response) erro
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -5467,7 +6045,7 @@ func (m *awsRestxml_deserializeOpListBucketAnalyticsConfigurations) HandleDeseri
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorListBucketAnalyticsConfigurations(response)
+		return out, metadata, awsRestxml_deserializeOpErrorListBucketAnalyticsConfigurations(response, &metadata)
 	}
 	output := &ListBucketAnalyticsConfigurationsOutput{}
 	out.Result = output
@@ -5503,7 +6081,7 @@ func (m *awsRestxml_deserializeOpListBucketAnalyticsConfigurations) HandleDeseri
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorListBucketAnalyticsConfigurations(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorListBucketAnalyticsConfigurations(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -5513,9 +6091,21 @@ func awsRestxml_deserializeOpErrorListBucketAnalyticsConfigurations(response *sm
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -5636,7 +6226,7 @@ func (m *awsRestxml_deserializeOpListBucketInventoryConfigurations) HandleDeseri
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorListBucketInventoryConfigurations(response)
+		return out, metadata, awsRestxml_deserializeOpErrorListBucketInventoryConfigurations(response, &metadata)
 	}
 	output := &ListBucketInventoryConfigurationsOutput{}
 	out.Result = output
@@ -5672,7 +6262,7 @@ func (m *awsRestxml_deserializeOpListBucketInventoryConfigurations) HandleDeseri
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorListBucketInventoryConfigurations(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorListBucketInventoryConfigurations(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -5682,9 +6272,21 @@ func awsRestxml_deserializeOpErrorListBucketInventoryConfigurations(response *sm
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -5805,7 +6407,7 @@ func (m *awsRestxml_deserializeOpListBucketMetricsConfigurations) HandleDeserial
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorListBucketMetricsConfigurations(response)
+		return out, metadata, awsRestxml_deserializeOpErrorListBucketMetricsConfigurations(response, &metadata)
 	}
 	output := &ListBucketMetricsConfigurationsOutput{}
 	out.Result = output
@@ -5841,7 +6443,7 @@ func (m *awsRestxml_deserializeOpListBucketMetricsConfigurations) HandleDeserial
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorListBucketMetricsConfigurations(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorListBucketMetricsConfigurations(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -5851,9 +6453,21 @@ func awsRestxml_deserializeOpErrorListBucketMetricsConfigurations(response *smit
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -5974,7 +6588,7 @@ func (m *awsRestxml_deserializeOpListBuckets) HandleDeserialize(ctx context.Cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorListBuckets(response)
+		return out, metadata, awsRestxml_deserializeOpErrorListBuckets(response, &metadata)
 	}
 	output := &ListBucketsOutput{}
 	out.Result = output
@@ -6010,7 +6624,7 @@ func (m *awsRestxml_deserializeOpListBuckets) HandleDeserialize(ctx context.Cont
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorListBuckets(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorListBuckets(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -6020,9 +6634,21 @@ func awsRestxml_deserializeOpErrorListBuckets(response *smithyhttp.Response) err
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -6101,7 +6727,7 @@ func (m *awsRestxml_deserializeOpListMultipartUploads) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorListMultipartUploads(response)
+		return out, metadata, awsRestxml_deserializeOpErrorListMultipartUploads(response, &metadata)
 	}
 	output := &ListMultipartUploadsOutput{}
 	out.Result = output
@@ -6137,7 +6763,7 @@ func (m *awsRestxml_deserializeOpListMultipartUploads) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorListMultipartUploads(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorListMultipartUploads(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -6147,9 +6773,21 @@ func awsRestxml_deserializeOpErrorListMultipartUploads(response *smithyhttp.Resp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -6386,7 +7024,7 @@ func (m *awsRestxml_deserializeOpListObjects) HandleDeserialize(ctx context.Cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorListObjects(response)
+		return out, metadata, awsRestxml_deserializeOpErrorListObjects(response, &metadata)
 	}
 	output := &ListObjectsOutput{}
 	out.Result = output
@@ -6422,7 +7060,7 @@ func (m *awsRestxml_deserializeOpListObjects) HandleDeserialize(ctx context.Cont
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorListObjects(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorListObjects(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -6432,9 +7070,21 @@ func awsRestxml_deserializeOpErrorListObjects(response *smithyhttp.Response) err
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -6642,7 +7292,7 @@ func (m *awsRestxml_deserializeOpListObjectsV2) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorListObjectsV2(response)
+		return out, metadata, awsRestxml_deserializeOpErrorListObjectsV2(response, &metadata)
 	}
 	output := &ListObjectsV2Output{}
 	out.Result = output
@@ -6678,7 +7328,7 @@ func (m *awsRestxml_deserializeOpListObjectsV2) HandleDeserialize(ctx context.Co
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorListObjectsV2(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorListObjectsV2(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -6688,9 +7338,21 @@ func awsRestxml_deserializeOpErrorListObjectsV2(response *smithyhttp.Response) e
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -6931,7 +7593,7 @@ func (m *awsRestxml_deserializeOpListObjectVersions) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorListObjectVersions(response)
+		return out, metadata, awsRestxml_deserializeOpErrorListObjectVersions(response, &metadata)
 	}
 	output := &ListObjectVersionsOutput{}
 	out.Result = output
@@ -6967,7 +7629,7 @@ func (m *awsRestxml_deserializeOpListObjectVersions) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorListObjectVersions(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorListObjectVersions(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -6977,9 +7639,21 @@ func awsRestxml_deserializeOpErrorListObjectVersions(response *smithyhttp.Respon
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -7222,7 +7896,7 @@ func (m *awsRestxml_deserializeOpListParts) HandleDeserialize(ctx context.Contex
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorListParts(response)
+		return out, metadata, awsRestxml_deserializeOpErrorListParts(response, &metadata)
 	}
 	output := &ListPartsOutput{}
 	out.Result = output
@@ -7263,7 +7937,7 @@ func (m *awsRestxml_deserializeOpListParts) HandleDeserialize(ctx context.Contex
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorListParts(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorListParts(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -7273,9 +7947,21 @@ func awsRestxml_deserializeOpErrorListParts(response *smithyhttp.Response) error
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -7514,7 +8200,7 @@ func (m *awsRestxml_deserializeOpPutBucketAccelerateConfiguration) HandleDeseria
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorPutBucketAccelerateConfiguration(response)
+		return out, metadata, awsRestxml_deserializeOpErrorPutBucketAccelerateConfiguration(response, &metadata)
 	}
 	output := &PutBucketAccelerateConfigurationOutput{}
 	out.Result = output
@@ -7522,7 +8208,7 @@ func (m *awsRestxml_deserializeOpPutBucketAccelerateConfiguration) HandleDeseria
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorPutBucketAccelerateConfiguration(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorPutBucketAccelerateConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -7532,9 +8218,21 @@ func awsRestxml_deserializeOpErrorPutBucketAccelerateConfiguration(response *smi
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -7569,7 +8267,7 @@ func (m *awsRestxml_deserializeOpPutBucketAcl) HandleDeserialize(ctx context.Con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorPutBucketAcl(response)
+		return out, metadata, awsRestxml_deserializeOpErrorPutBucketAcl(response, &metadata)
 	}
 	output := &PutBucketAclOutput{}
 	out.Result = output
@@ -7577,7 +8275,7 @@ func (m *awsRestxml_deserializeOpPutBucketAcl) HandleDeserialize(ctx context.Con
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorPutBucketAcl(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorPutBucketAcl(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -7587,9 +8285,21 @@ func awsRestxml_deserializeOpErrorPutBucketAcl(response *smithyhttp.Response) er
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -7624,7 +8334,7 @@ func (m *awsRestxml_deserializeOpPutBucketAnalyticsConfiguration) HandleDeserial
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorPutBucketAnalyticsConfiguration(response)
+		return out, metadata, awsRestxml_deserializeOpErrorPutBucketAnalyticsConfiguration(response, &metadata)
 	}
 	output := &PutBucketAnalyticsConfigurationOutput{}
 	out.Result = output
@@ -7632,7 +8342,7 @@ func (m *awsRestxml_deserializeOpPutBucketAnalyticsConfiguration) HandleDeserial
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorPutBucketAnalyticsConfiguration(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorPutBucketAnalyticsConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -7642,9 +8352,21 @@ func awsRestxml_deserializeOpErrorPutBucketAnalyticsConfiguration(response *smit
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -7679,7 +8401,7 @@ func (m *awsRestxml_deserializeOpPutBucketCors) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorPutBucketCors(response)
+		return out, metadata, awsRestxml_deserializeOpErrorPutBucketCors(response, &metadata)
 	}
 	output := &PutBucketCorsOutput{}
 	out.Result = output
@@ -7687,7 +8409,7 @@ func (m *awsRestxml_deserializeOpPutBucketCors) HandleDeserialize(ctx context.Co
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorPutBucketCors(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorPutBucketCors(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -7697,9 +8419,21 @@ func awsRestxml_deserializeOpErrorPutBucketCors(response *smithyhttp.Response) e
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -7734,7 +8468,7 @@ func (m *awsRestxml_deserializeOpPutBucketEncryption) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorPutBucketEncryption(response)
+		return out, metadata, awsRestxml_deserializeOpErrorPutBucketEncryption(response, &metadata)
 	}
 	output := &PutBucketEncryptionOutput{}
 	out.Result = output
@@ -7742,7 +8476,7 @@ func (m *awsRestxml_deserializeOpPutBucketEncryption) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorPutBucketEncryption(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorPutBucketEncryption(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -7752,9 +8486,21 @@ func awsRestxml_deserializeOpErrorPutBucketEncryption(response *smithyhttp.Respo
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -7789,7 +8535,7 @@ func (m *awsRestxml_deserializeOpPutBucketInventoryConfiguration) HandleDeserial
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorPutBucketInventoryConfiguration(response)
+		return out, metadata, awsRestxml_deserializeOpErrorPutBucketInventoryConfiguration(response, &metadata)
 	}
 	output := &PutBucketInventoryConfigurationOutput{}
 	out.Result = output
@@ -7797,7 +8543,7 @@ func (m *awsRestxml_deserializeOpPutBucketInventoryConfiguration) HandleDeserial
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorPutBucketInventoryConfiguration(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorPutBucketInventoryConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -7807,9 +8553,21 @@ func awsRestxml_deserializeOpErrorPutBucketInventoryConfiguration(response *smit
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -7844,7 +8602,7 @@ func (m *awsRestxml_deserializeOpPutBucketLifecycleConfiguration) HandleDeserial
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorPutBucketLifecycleConfiguration(response)
+		return out, metadata, awsRestxml_deserializeOpErrorPutBucketLifecycleConfiguration(response, &metadata)
 	}
 	output := &PutBucketLifecycleConfigurationOutput{}
 	out.Result = output
@@ -7852,7 +8610,7 @@ func (m *awsRestxml_deserializeOpPutBucketLifecycleConfiguration) HandleDeserial
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorPutBucketLifecycleConfiguration(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorPutBucketLifecycleConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -7862,9 +8620,21 @@ func awsRestxml_deserializeOpErrorPutBucketLifecycleConfiguration(response *smit
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -7899,7 +8669,7 @@ func (m *awsRestxml_deserializeOpPutBucketLogging) HandleDeserialize(ctx context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorPutBucketLogging(response)
+		return out, metadata, awsRestxml_deserializeOpErrorPutBucketLogging(response, &metadata)
 	}
 	output := &PutBucketLoggingOutput{}
 	out.Result = output
@@ -7907,7 +8677,7 @@ func (m *awsRestxml_deserializeOpPutBucketLogging) HandleDeserialize(ctx context
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorPutBucketLogging(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorPutBucketLogging(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -7917,9 +8687,21 @@ func awsRestxml_deserializeOpErrorPutBucketLogging(response *smithyhttp.Response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -7954,7 +8736,7 @@ func (m *awsRestxml_deserializeOpPutBucketMetricsConfiguration) HandleDeserializ
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorPutBucketMetricsConfiguration(response)
+		return out, metadata, awsRestxml_deserializeOpErrorPutBucketMetricsConfiguration(response, &metadata)
 	}
 	output := &PutBucketMetricsConfigurationOutput{}
 	out.Result = output
@@ -7962,7 +8744,7 @@ func (m *awsRestxml_deserializeOpPutBucketMetricsConfiguration) HandleDeserializ
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorPutBucketMetricsConfiguration(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorPutBucketMetricsConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -7972,9 +8754,21 @@ func awsRestxml_deserializeOpErrorPutBucketMetricsConfiguration(response *smithy
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -8009,7 +8803,7 @@ func (m *awsRestxml_deserializeOpPutBucketNotificationConfiguration) HandleDeser
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorPutBucketNotificationConfiguration(response)
+		return out, metadata, awsRestxml_deserializeOpErrorPutBucketNotificationConfiguration(response, &metadata)
 	}
 	output := &PutBucketNotificationConfigurationOutput{}
 	out.Result = output
@@ -8017,7 +8811,7 @@ func (m *awsRestxml_deserializeOpPutBucketNotificationConfiguration) HandleDeser
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorPutBucketNotificationConfiguration(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorPutBucketNotificationConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -8027,9 +8821,21 @@ func awsRestxml_deserializeOpErrorPutBucketNotificationConfiguration(response *s
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -8064,7 +8870,7 @@ func (m *awsRestxml_deserializeOpPutBucketPolicy) HandleDeserialize(ctx context.
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorPutBucketPolicy(response)
+		return out, metadata, awsRestxml_deserializeOpErrorPutBucketPolicy(response, &metadata)
 	}
 	output := &PutBucketPolicyOutput{}
 	out.Result = output
@@ -8072,7 +8878,7 @@ func (m *awsRestxml_deserializeOpPutBucketPolicy) HandleDeserialize(ctx context.
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorPutBucketPolicy(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorPutBucketPolicy(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -8082,9 +8888,21 @@ func awsRestxml_deserializeOpErrorPutBucketPolicy(response *smithyhttp.Response)
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -8119,7 +8937,7 @@ func (m *awsRestxml_deserializeOpPutBucketReplication) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorPutBucketReplication(response)
+		return out, metadata, awsRestxml_deserializeOpErrorPutBucketReplication(response, &metadata)
 	}
 	output := &PutBucketReplicationOutput{}
 	out.Result = output
@@ -8127,7 +8945,7 @@ func (m *awsRestxml_deserializeOpPutBucketReplication) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorPutBucketReplication(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorPutBucketReplication(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -8137,9 +8955,21 @@ func awsRestxml_deserializeOpErrorPutBucketReplication(response *smithyhttp.Resp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -8174,7 +9004,7 @@ func (m *awsRestxml_deserializeOpPutBucketRequestPayment) HandleDeserialize(ctx 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorPutBucketRequestPayment(response)
+		return out, metadata, awsRestxml_deserializeOpErrorPutBucketRequestPayment(response, &metadata)
 	}
 	output := &PutBucketRequestPaymentOutput{}
 	out.Result = output
@@ -8182,7 +9012,7 @@ func (m *awsRestxml_deserializeOpPutBucketRequestPayment) HandleDeserialize(ctx 
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorPutBucketRequestPayment(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorPutBucketRequestPayment(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -8192,9 +9022,21 @@ func awsRestxml_deserializeOpErrorPutBucketRequestPayment(response *smithyhttp.R
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -8229,7 +9071,7 @@ func (m *awsRestxml_deserializeOpPutBucketTagging) HandleDeserialize(ctx context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorPutBucketTagging(response)
+		return out, metadata, awsRestxml_deserializeOpErrorPutBucketTagging(response, &metadata)
 	}
 	output := &PutBucketTaggingOutput{}
 	out.Result = output
@@ -8237,7 +9079,7 @@ func (m *awsRestxml_deserializeOpPutBucketTagging) HandleDeserialize(ctx context
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorPutBucketTagging(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorPutBucketTagging(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -8247,9 +9089,21 @@ func awsRestxml_deserializeOpErrorPutBucketTagging(response *smithyhttp.Response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -8284,7 +9138,7 @@ func (m *awsRestxml_deserializeOpPutBucketVersioning) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorPutBucketVersioning(response)
+		return out, metadata, awsRestxml_deserializeOpErrorPutBucketVersioning(response, &metadata)
 	}
 	output := &PutBucketVersioningOutput{}
 	out.Result = output
@@ -8292,7 +9146,7 @@ func (m *awsRestxml_deserializeOpPutBucketVersioning) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorPutBucketVersioning(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorPutBucketVersioning(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -8302,9 +9156,21 @@ func awsRestxml_deserializeOpErrorPutBucketVersioning(response *smithyhttp.Respo
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -8339,7 +9205,7 @@ func (m *awsRestxml_deserializeOpPutBucketWebsite) HandleDeserialize(ctx context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorPutBucketWebsite(response)
+		return out, metadata, awsRestxml_deserializeOpErrorPutBucketWebsite(response, &metadata)
 	}
 	output := &PutBucketWebsiteOutput{}
 	out.Result = output
@@ -8347,7 +9213,7 @@ func (m *awsRestxml_deserializeOpPutBucketWebsite) HandleDeserialize(ctx context
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorPutBucketWebsite(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorPutBucketWebsite(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -8357,9 +9223,21 @@ func awsRestxml_deserializeOpErrorPutBucketWebsite(response *smithyhttp.Response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -8394,7 +9272,7 @@ func (m *awsRestxml_deserializeOpPutObject) HandleDeserialize(ctx context.Contex
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorPutObject(response)
+		return out, metadata, awsRestxml_deserializeOpErrorPutObject(response, &metadata)
 	}
 	output := &PutObjectOutput{}
 	out.Result = output
@@ -8407,7 +9285,7 @@ func (m *awsRestxml_deserializeOpPutObject) HandleDeserialize(ctx context.Contex
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorPutObject(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorPutObject(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -8417,9 +9295,21 @@ func awsRestxml_deserializeOpErrorPutObject(response *smithyhttp.Response) error
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -8507,7 +9397,7 @@ func (m *awsRestxml_deserializeOpPutObjectAcl) HandleDeserialize(ctx context.Con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorPutObjectAcl(response)
+		return out, metadata, awsRestxml_deserializeOpErrorPutObjectAcl(response, &metadata)
 	}
 	output := &PutObjectAclOutput{}
 	out.Result = output
@@ -8520,7 +9410,7 @@ func (m *awsRestxml_deserializeOpPutObjectAcl) HandleDeserialize(ctx context.Con
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorPutObjectAcl(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorPutObjectAcl(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -8530,9 +9420,21 @@ func awsRestxml_deserializeOpErrorPutObjectAcl(response *smithyhttp.Response) er
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -8583,7 +9485,7 @@ func (m *awsRestxml_deserializeOpPutObjectLegalHold) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorPutObjectLegalHold(response)
+		return out, metadata, awsRestxml_deserializeOpErrorPutObjectLegalHold(response, &metadata)
 	}
 	output := &PutObjectLegalHoldOutput{}
 	out.Result = output
@@ -8596,7 +9498,7 @@ func (m *awsRestxml_deserializeOpPutObjectLegalHold) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorPutObjectLegalHold(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorPutObjectLegalHold(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -8606,9 +9508,21 @@ func awsRestxml_deserializeOpErrorPutObjectLegalHold(response *smithyhttp.Respon
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -8656,7 +9570,7 @@ func (m *awsRestxml_deserializeOpPutObjectLockConfiguration) HandleDeserialize(c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorPutObjectLockConfiguration(response)
+		return out, metadata, awsRestxml_deserializeOpErrorPutObjectLockConfiguration(response, &metadata)
 	}
 	output := &PutObjectLockConfigurationOutput{}
 	out.Result = output
@@ -8669,7 +9583,7 @@ func (m *awsRestxml_deserializeOpPutObjectLockConfiguration) HandleDeserialize(c
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorPutObjectLockConfiguration(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorPutObjectLockConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -8679,9 +9593,21 @@ func awsRestxml_deserializeOpErrorPutObjectLockConfiguration(response *smithyhtt
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -8729,7 +9655,7 @@ func (m *awsRestxml_deserializeOpPutObjectRetention) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorPutObjectRetention(response)
+		return out, metadata, awsRestxml_deserializeOpErrorPutObjectRetention(response, &metadata)
 	}
 	output := &PutObjectRetentionOutput{}
 	out.Result = output
@@ -8742,7 +9668,7 @@ func (m *awsRestxml_deserializeOpPutObjectRetention) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorPutObjectRetention(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorPutObjectRetention(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -8752,9 +9678,21 @@ func awsRestxml_deserializeOpErrorPutObjectRetention(response *smithyhttp.Respon
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -8802,7 +9740,7 @@ func (m *awsRestxml_deserializeOpPutObjectTagging) HandleDeserialize(ctx context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorPutObjectTagging(response)
+		return out, metadata, awsRestxml_deserializeOpErrorPutObjectTagging(response, &metadata)
 	}
 	output := &PutObjectTaggingOutput{}
 	out.Result = output
@@ -8815,7 +9753,7 @@ func (m *awsRestxml_deserializeOpPutObjectTagging) HandleDeserialize(ctx context
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorPutObjectTagging(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorPutObjectTagging(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -8825,9 +9763,21 @@ func awsRestxml_deserializeOpErrorPutObjectTagging(response *smithyhttp.Response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -8875,7 +9825,7 @@ func (m *awsRestxml_deserializeOpPutPublicAccessBlock) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorPutPublicAccessBlock(response)
+		return out, metadata, awsRestxml_deserializeOpErrorPutPublicAccessBlock(response, &metadata)
 	}
 	output := &PutPublicAccessBlockOutput{}
 	out.Result = output
@@ -8883,7 +9833,7 @@ func (m *awsRestxml_deserializeOpPutPublicAccessBlock) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorPutPublicAccessBlock(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorPutPublicAccessBlock(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -8893,9 +9843,21 @@ func awsRestxml_deserializeOpErrorPutPublicAccessBlock(response *smithyhttp.Resp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -8930,7 +9892,7 @@ func (m *awsRestxml_deserializeOpRestoreObject) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorRestoreObject(response)
+		return out, metadata, awsRestxml_deserializeOpErrorRestoreObject(response, &metadata)
 	}
 	output := &RestoreObjectOutput{}
 	out.Result = output
@@ -8943,7 +9905,7 @@ func (m *awsRestxml_deserializeOpRestoreObject) HandleDeserialize(ctx context.Co
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorRestoreObject(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorRestoreObject(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -8953,9 +9915,21 @@ func awsRestxml_deserializeOpErrorRestoreObject(response *smithyhttp.Response) e
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -9011,7 +9985,7 @@ func (m *awsRestxml_deserializeOpUploadPart) HandleDeserialize(ctx context.Conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorUploadPart(response)
+		return out, metadata, awsRestxml_deserializeOpErrorUploadPart(response, &metadata)
 	}
 	output := &UploadPartOutput{}
 	out.Result = output
@@ -9024,7 +9998,7 @@ func (m *awsRestxml_deserializeOpUploadPart) HandleDeserialize(ctx context.Conte
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorUploadPart(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorUploadPart(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -9034,9 +10008,21 @@ func awsRestxml_deserializeOpErrorUploadPart(response *smithyhttp.Response) erro
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -9109,7 +10095,7 @@ func (m *awsRestxml_deserializeOpUploadPartCopy) HandleDeserialize(ctx context.C
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestxml_deserializeOpErrorUploadPartCopy(response)
+		return out, metadata, awsRestxml_deserializeOpErrorUploadPartCopy(response, &metadata)
 	}
 	output := &UploadPartCopyOutput{}
 	out.Result = output
@@ -9150,7 +10136,7 @@ func (m *awsRestxml_deserializeOpUploadPartCopy) HandleDeserialize(ctx context.C
 	return out, metadata, err
 }
 
-func awsRestxml_deserializeOpErrorUploadPartCopy(response *smithyhttp.Response) error {
+func awsRestxml_deserializeOpErrorUploadPartCopy(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -9160,9 +10146,21 @@ func awsRestxml_deserializeOpErrorUploadPartCopy(response *smithyhttp.Response) 
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, true)
+	errorComponents, err := s3shared.GetErrorResponseComponents(errorBody)
 	if err != nil {
 		return err
+	}
+	if hostID := errorComponents.HostID; len(hostID) != 0 {
+		s3shared.SetHostIDMetadata(metadata, hostID)
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {

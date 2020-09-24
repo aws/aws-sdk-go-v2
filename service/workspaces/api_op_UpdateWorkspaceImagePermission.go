@@ -40,6 +40,8 @@ func (c *Client) UpdateWorkspaceImagePermission(ctx context.Context, params *Upd
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateWorkspaceImagePermissionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWorkspaceImagePermission(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

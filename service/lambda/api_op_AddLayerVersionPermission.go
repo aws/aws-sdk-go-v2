@@ -37,6 +37,8 @@ func (c *Client) AddLayerVersionPermission(ctx context.Context, params *AddLayer
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAddLayerVersionPermissionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAddLayerVersionPermission(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

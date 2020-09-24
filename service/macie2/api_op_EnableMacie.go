@@ -35,6 +35,8 @@ func (c *Client) EnableMacie(ctx context.Context, params *EnableMacieInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addIdempotencyToken_opEnableMacieMiddleware(stack, options)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opEnableMacie(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

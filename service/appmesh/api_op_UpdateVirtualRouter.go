@@ -32,6 +32,8 @@ func (c *Client) UpdateVirtualRouter(ctx context.Context, params *UpdateVirtualR
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateVirtualRouterValidationMiddleware(stack)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

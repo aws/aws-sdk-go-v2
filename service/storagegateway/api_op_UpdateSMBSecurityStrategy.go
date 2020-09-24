@@ -36,6 +36,8 @@ func (c *Client) UpdateSMBSecurityStrategy(ctx context.Context, params *UpdateSM
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateSMBSecurityStrategyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSMBSecurityStrategy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

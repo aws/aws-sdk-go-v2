@@ -34,6 +34,8 @@ func (c *Client) ListPullRequests(ctx context.Context, params *ListPullRequestsI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListPullRequestsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListPullRequests(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

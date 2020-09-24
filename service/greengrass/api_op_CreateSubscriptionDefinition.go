@@ -35,6 +35,8 @@ func (c *Client) CreateSubscriptionDefinition(ctx context.Context, params *Creat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateSubscriptionDefinitionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSubscriptionDefinition(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

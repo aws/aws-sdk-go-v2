@@ -33,6 +33,8 @@ func (c *Client) GetDeployablePatchSnapshotForInstance(ctx context.Context, para
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDeployablePatchSnapshotForInstanceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDeployablePatchSnapshotForInstance(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

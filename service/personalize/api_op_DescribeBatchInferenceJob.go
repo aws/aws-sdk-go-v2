@@ -35,6 +35,8 @@ func (c *Client) DescribeBatchInferenceJob(ctx context.Context, params *Describe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeBatchInferenceJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeBatchInferenceJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

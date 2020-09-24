@@ -32,6 +32,8 @@ func (c *Client) CreateLabels(ctx context.Context, params *CreateLabelsInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateLabelsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLabels(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

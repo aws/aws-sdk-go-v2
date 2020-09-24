@@ -34,6 +34,8 @@ func (c *Client) RotateChannelCredentials(ctx context.Context, params *RotateCha
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRotateChannelCredentialsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRotateChannelCredentials(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

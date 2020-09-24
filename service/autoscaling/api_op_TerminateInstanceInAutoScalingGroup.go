@@ -45,6 +45,8 @@ func (c *Client) TerminateInstanceInAutoScalingGroup(ctx context.Context, params
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTerminateInstanceInAutoScalingGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTerminateInstanceInAutoScalingGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

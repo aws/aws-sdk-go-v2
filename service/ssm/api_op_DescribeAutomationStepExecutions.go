@@ -34,6 +34,8 @@ func (c *Client) DescribeAutomationStepExecutions(ctx context.Context, params *D
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeAutomationStepExecutionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAutomationStepExecutions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

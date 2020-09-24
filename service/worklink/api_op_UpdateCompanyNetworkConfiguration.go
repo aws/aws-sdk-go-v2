@@ -32,6 +32,8 @@ func (c *Client) UpdateCompanyNetworkConfiguration(ctx context.Context, params *
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateCompanyNetworkConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCompanyNetworkConfiguration(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,8 @@ func (c *Client) GetAsset(ctx context.Context, params *GetAssetInput, optFns ...
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetAssetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetAsset(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

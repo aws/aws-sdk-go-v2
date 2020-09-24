@@ -33,6 +33,8 @@ func (c *Client) AssociateWebsiteCertificateAuthority(ctx context.Context, param
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateWebsiteCertificateAuthorityValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateWebsiteCertificateAuthority(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

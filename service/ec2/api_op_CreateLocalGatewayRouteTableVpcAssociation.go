@@ -33,6 +33,8 @@ func (c *Client) CreateLocalGatewayRouteTableVpcAssociation(ctx context.Context,
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateLocalGatewayRouteTableVpcAssociationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLocalGatewayRouteTableVpcAssociation(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,8 @@ func (c *Client) AttachNetworkInterface(ctx context.Context, params *AttachNetwo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAttachNetworkInterfaceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAttachNetworkInterface(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

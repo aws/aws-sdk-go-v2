@@ -35,6 +35,8 @@ func (c *Client) GetScreenData(ctx context.Context, params *GetScreenDataInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetScreenDataValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetScreenData(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

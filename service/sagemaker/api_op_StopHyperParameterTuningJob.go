@@ -37,6 +37,8 @@ func (c *Client) StopHyperParameterTuningJob(ctx context.Context, params *StopHy
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopHyperParameterTuningJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopHyperParameterTuningJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

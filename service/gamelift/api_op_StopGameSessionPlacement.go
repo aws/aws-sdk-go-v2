@@ -59,6 +59,8 @@ func (c *Client) StopGameSessionPlacement(ctx context.Context, params *StopGameS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopGameSessionPlacementValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopGameSessionPlacement(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

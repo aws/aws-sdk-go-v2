@@ -38,6 +38,8 @@ func (c *Client) CreateClientVpnRoute(ctx context.Context, params *CreateClientV
 	addIdempotencyToken_opCreateClientVpnRouteMiddleware(stack, options)
 	addOpCreateClientVpnRouteValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateClientVpnRoute(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -36,6 +36,8 @@ func (c *Client) DecreaseReplicaCount(ctx context.Context, params *DecreaseRepli
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDecreaseReplicaCountValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDecreaseReplicaCount(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

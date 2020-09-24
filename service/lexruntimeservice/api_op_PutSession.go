@@ -36,6 +36,8 @@ func (c *Client) PutSession(ctx context.Context, params *PutSessionInput, optFns
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	addOpPutSessionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutSession(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

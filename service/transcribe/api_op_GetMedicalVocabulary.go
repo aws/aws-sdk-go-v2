@@ -34,6 +34,8 @@ func (c *Client) GetMedicalVocabulary(ctx context.Context, params *GetMedicalVoc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetMedicalVocabularyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetMedicalVocabulary(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

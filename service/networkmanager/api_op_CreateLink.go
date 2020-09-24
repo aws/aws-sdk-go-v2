@@ -33,6 +33,8 @@ func (c *Client) CreateLink(ctx context.Context, params *CreateLinkInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateLinkValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLink(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

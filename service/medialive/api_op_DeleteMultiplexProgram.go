@@ -33,6 +33,8 @@ func (c *Client) DeleteMultiplexProgram(ctx context.Context, params *DeleteMulti
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteMultiplexProgramValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMultiplexProgram(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

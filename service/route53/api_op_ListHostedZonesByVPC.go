@@ -45,6 +45,8 @@ func (c *Client) ListHostedZonesByVPC(ctx context.Context, params *ListHostedZon
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListHostedZonesByVPCValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListHostedZonesByVPC(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

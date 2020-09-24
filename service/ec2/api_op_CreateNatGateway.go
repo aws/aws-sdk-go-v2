@@ -41,6 +41,8 @@ func (c *Client) CreateNatGateway(ctx context.Context, params *CreateNatGatewayI
 	addIdempotencyToken_opCreateNatGatewayMiddleware(stack, options)
 	addOpCreateNatGatewayValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateNatGateway(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

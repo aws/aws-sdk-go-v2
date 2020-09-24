@@ -34,6 +34,8 @@ func (c *Client) StartCrawler(ctx context.Context, params *StartCrawlerInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartCrawlerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartCrawler(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

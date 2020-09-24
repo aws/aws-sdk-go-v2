@@ -37,6 +37,8 @@ func (c *Client) GetDataRetrievalPolicy(ctx context.Context, params *GetDataRetr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDataRetrievalPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDataRetrievalPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	glaciercust.AddTreeHashMiddleware(stack)
 
 	for _, fn := range options.APIOptions {

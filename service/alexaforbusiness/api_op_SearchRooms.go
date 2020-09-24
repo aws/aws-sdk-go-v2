@@ -33,6 +33,8 @@ func (c *Client) SearchRooms(ctx context.Context, params *SearchRoomsInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSearchRoomsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSearchRooms(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

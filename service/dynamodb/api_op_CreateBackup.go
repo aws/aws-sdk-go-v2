@@ -56,6 +56,8 @@ func (c *Client) CreateBackup(ctx context.Context, params *CreateBackupInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateBackupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBackup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	addValidateResponseChecksum(stack, options)
 	addAcceptEncodingGzip(stack, options)
 

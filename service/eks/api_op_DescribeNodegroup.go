@@ -33,6 +33,8 @@ func (c *Client) DescribeNodegroup(ctx context.Context, params *DescribeNodegrou
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeNodegroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeNodegroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

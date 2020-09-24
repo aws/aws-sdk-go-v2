@@ -37,6 +37,8 @@ func (c *Client) UploadLayerPart(ctx context.Context, params *UploadLayerPartInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUploadLayerPartValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUploadLayerPart(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

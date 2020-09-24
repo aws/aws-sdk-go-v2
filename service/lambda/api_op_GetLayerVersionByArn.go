@@ -35,6 +35,8 @@ func (c *Client) GetLayerVersionByArn(ctx context.Context, params *GetLayerVersi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetLayerVersionByArnValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetLayerVersionByArn(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

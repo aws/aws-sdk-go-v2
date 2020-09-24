@@ -41,7 +41,7 @@ func (m *awsAwsjson10_deserializeOpBatchGetItem) HandleDeserialize(ctx context.C
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorBatchGetItem(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorBatchGetItem(response, &metadata)
 	}
 	output := &BatchGetItemOutput{}
 	out.Result = output
@@ -77,7 +77,7 @@ func (m *awsAwsjson10_deserializeOpBatchGetItem) HandleDeserialize(ctx context.C
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorBatchGetItem(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorBatchGetItem(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -164,7 +164,7 @@ func (m *awsAwsjson10_deserializeOpBatchWriteItem) HandleDeserialize(ctx context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorBatchWriteItem(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorBatchWriteItem(response, &metadata)
 	}
 	output := &BatchWriteItemOutput{}
 	out.Result = output
@@ -200,7 +200,7 @@ func (m *awsAwsjson10_deserializeOpBatchWriteItem) HandleDeserialize(ctx context
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorBatchWriteItem(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorBatchWriteItem(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -290,7 +290,7 @@ func (m *awsAwsjson10_deserializeOpCreateBackup) HandleDeserialize(ctx context.C
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorCreateBackup(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorCreateBackup(response, &metadata)
 	}
 	output := &CreateBackupOutput{}
 	out.Result = output
@@ -326,7 +326,7 @@ func (m *awsAwsjson10_deserializeOpCreateBackup) HandleDeserialize(ctx context.C
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorCreateBackup(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorCreateBackup(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -419,7 +419,7 @@ func (m *awsAwsjson10_deserializeOpCreateGlobalTable) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorCreateGlobalTable(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorCreateGlobalTable(response, &metadata)
 	}
 	output := &CreateGlobalTableOutput{}
 	out.Result = output
@@ -455,7 +455,7 @@ func (m *awsAwsjson10_deserializeOpCreateGlobalTable) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorCreateGlobalTable(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorCreateGlobalTable(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -542,7 +542,7 @@ func (m *awsAwsjson10_deserializeOpCreateTable) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorCreateTable(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorCreateTable(response, &metadata)
 	}
 	output := &CreateTableOutput{}
 	out.Result = output
@@ -578,7 +578,7 @@ func (m *awsAwsjson10_deserializeOpCreateTable) HandleDeserialize(ctx context.Co
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorCreateTable(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorCreateTable(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -662,7 +662,7 @@ func (m *awsAwsjson10_deserializeOpDeleteBackup) HandleDeserialize(ctx context.C
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorDeleteBackup(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorDeleteBackup(response, &metadata)
 	}
 	output := &DeleteBackupOutput{}
 	out.Result = output
@@ -698,7 +698,7 @@ func (m *awsAwsjson10_deserializeOpDeleteBackup) HandleDeserialize(ctx context.C
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorDeleteBackup(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorDeleteBackup(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -785,7 +785,7 @@ func (m *awsAwsjson10_deserializeOpDeleteItem) HandleDeserialize(ctx context.Con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorDeleteItem(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorDeleteItem(response, &metadata)
 	}
 	output := &DeleteItemOutput{}
 	out.Result = output
@@ -821,7 +821,7 @@ func (m *awsAwsjson10_deserializeOpDeleteItem) HandleDeserialize(ctx context.Con
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorDeleteItem(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorDeleteItem(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -917,7 +917,7 @@ func (m *awsAwsjson10_deserializeOpDeleteTable) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorDeleteTable(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorDeleteTable(response, &metadata)
 	}
 	output := &DeleteTableOutput{}
 	out.Result = output
@@ -953,7 +953,7 @@ func (m *awsAwsjson10_deserializeOpDeleteTable) HandleDeserialize(ctx context.Co
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorDeleteTable(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorDeleteTable(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1040,7 +1040,7 @@ func (m *awsAwsjson10_deserializeOpDescribeBackup) HandleDeserialize(ctx context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorDescribeBackup(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorDescribeBackup(response, &metadata)
 	}
 	output := &DescribeBackupOutput{}
 	out.Result = output
@@ -1076,7 +1076,7 @@ func (m *awsAwsjson10_deserializeOpDescribeBackup) HandleDeserialize(ctx context
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorDescribeBackup(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorDescribeBackup(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1157,7 +1157,7 @@ func (m *awsAwsjson10_deserializeOpDescribeContinuousBackups) HandleDeserialize(
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorDescribeContinuousBackups(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorDescribeContinuousBackups(response, &metadata)
 	}
 	output := &DescribeContinuousBackupsOutput{}
 	out.Result = output
@@ -1193,7 +1193,7 @@ func (m *awsAwsjson10_deserializeOpDescribeContinuousBackups) HandleDeserialize(
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorDescribeContinuousBackups(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorDescribeContinuousBackups(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1274,7 +1274,7 @@ func (m *awsAwsjson10_deserializeOpDescribeContributorInsights) HandleDeserializ
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorDescribeContributorInsights(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorDescribeContributorInsights(response, &metadata)
 	}
 	output := &DescribeContributorInsightsOutput{}
 	out.Result = output
@@ -1310,7 +1310,7 @@ func (m *awsAwsjson10_deserializeOpDescribeContributorInsights) HandleDeserializ
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorDescribeContributorInsights(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorDescribeContributorInsights(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1388,7 +1388,7 @@ func (m *awsAwsjson10_deserializeOpDescribeEndpoints) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorDescribeEndpoints(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorDescribeEndpoints(response, &metadata)
 	}
 	output := &DescribeEndpointsOutput{}
 	out.Result = output
@@ -1424,7 +1424,7 @@ func (m *awsAwsjson10_deserializeOpDescribeEndpoints) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorDescribeEndpoints(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorDescribeEndpoints(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1496,7 +1496,7 @@ func (m *awsAwsjson10_deserializeOpDescribeGlobalTable) HandleDeserialize(ctx co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorDescribeGlobalTable(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorDescribeGlobalTable(response, &metadata)
 	}
 	output := &DescribeGlobalTableOutput{}
 	out.Result = output
@@ -1532,7 +1532,7 @@ func (m *awsAwsjson10_deserializeOpDescribeGlobalTable) HandleDeserialize(ctx co
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorDescribeGlobalTable(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorDescribeGlobalTable(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1613,7 +1613,7 @@ func (m *awsAwsjson10_deserializeOpDescribeGlobalTableSettings) HandleDeserializ
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorDescribeGlobalTableSettings(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorDescribeGlobalTableSettings(response, &metadata)
 	}
 	output := &DescribeGlobalTableSettingsOutput{}
 	out.Result = output
@@ -1649,7 +1649,7 @@ func (m *awsAwsjson10_deserializeOpDescribeGlobalTableSettings) HandleDeserializ
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorDescribeGlobalTableSettings(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorDescribeGlobalTableSettings(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1730,7 +1730,7 @@ func (m *awsAwsjson10_deserializeOpDescribeLimits) HandleDeserialize(ctx context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorDescribeLimits(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorDescribeLimits(response, &metadata)
 	}
 	output := &DescribeLimitsOutput{}
 	out.Result = output
@@ -1766,7 +1766,7 @@ func (m *awsAwsjson10_deserializeOpDescribeLimits) HandleDeserialize(ctx context
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorDescribeLimits(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorDescribeLimits(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1844,7 +1844,7 @@ func (m *awsAwsjson10_deserializeOpDescribeTable) HandleDeserialize(ctx context.
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorDescribeTable(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorDescribeTable(response, &metadata)
 	}
 	output := &DescribeTableOutput{}
 	out.Result = output
@@ -1880,7 +1880,7 @@ func (m *awsAwsjson10_deserializeOpDescribeTable) HandleDeserialize(ctx context.
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorDescribeTable(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorDescribeTable(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1961,7 +1961,7 @@ func (m *awsAwsjson10_deserializeOpDescribeTableReplicaAutoScaling) HandleDeseri
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorDescribeTableReplicaAutoScaling(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorDescribeTableReplicaAutoScaling(response, &metadata)
 	}
 	output := &DescribeTableReplicaAutoScalingOutput{}
 	out.Result = output
@@ -1997,7 +1997,7 @@ func (m *awsAwsjson10_deserializeOpDescribeTableReplicaAutoScaling) HandleDeseri
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorDescribeTableReplicaAutoScaling(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorDescribeTableReplicaAutoScaling(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2075,7 +2075,7 @@ func (m *awsAwsjson10_deserializeOpDescribeTimeToLive) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorDescribeTimeToLive(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorDescribeTimeToLive(response, &metadata)
 	}
 	output := &DescribeTimeToLiveOutput{}
 	out.Result = output
@@ -2111,7 +2111,7 @@ func (m *awsAwsjson10_deserializeOpDescribeTimeToLive) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorDescribeTimeToLive(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorDescribeTimeToLive(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2192,7 +2192,7 @@ func (m *awsAwsjson10_deserializeOpGetItem) HandleDeserialize(ctx context.Contex
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorGetItem(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorGetItem(response, &metadata)
 	}
 	output := &GetItemOutput{}
 	out.Result = output
@@ -2228,7 +2228,7 @@ func (m *awsAwsjson10_deserializeOpGetItem) HandleDeserialize(ctx context.Contex
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorGetItem(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorGetItem(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2315,7 +2315,7 @@ func (m *awsAwsjson10_deserializeOpListBackups) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorListBackups(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorListBackups(response, &metadata)
 	}
 	output := &ListBackupsOutput{}
 	out.Result = output
@@ -2351,7 +2351,7 @@ func (m *awsAwsjson10_deserializeOpListBackups) HandleDeserialize(ctx context.Co
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorListBackups(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorListBackups(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2429,7 +2429,7 @@ func (m *awsAwsjson10_deserializeOpListContributorInsights) HandleDeserialize(ct
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorListContributorInsights(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorListContributorInsights(response, &metadata)
 	}
 	output := &ListContributorInsightsOutput{}
 	out.Result = output
@@ -2465,7 +2465,7 @@ func (m *awsAwsjson10_deserializeOpListContributorInsights) HandleDeserialize(ct
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorListContributorInsights(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorListContributorInsights(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2543,7 +2543,7 @@ func (m *awsAwsjson10_deserializeOpListGlobalTables) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorListGlobalTables(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorListGlobalTables(response, &metadata)
 	}
 	output := &ListGlobalTablesOutput{}
 	out.Result = output
@@ -2579,7 +2579,7 @@ func (m *awsAwsjson10_deserializeOpListGlobalTables) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorListGlobalTables(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorListGlobalTables(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2657,7 +2657,7 @@ func (m *awsAwsjson10_deserializeOpListTables) HandleDeserialize(ctx context.Con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorListTables(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorListTables(response, &metadata)
 	}
 	output := &ListTablesOutput{}
 	out.Result = output
@@ -2693,7 +2693,7 @@ func (m *awsAwsjson10_deserializeOpListTables) HandleDeserialize(ctx context.Con
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorListTables(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorListTables(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2771,7 +2771,7 @@ func (m *awsAwsjson10_deserializeOpListTagsOfResource) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorListTagsOfResource(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorListTagsOfResource(response, &metadata)
 	}
 	output := &ListTagsOfResourceOutput{}
 	out.Result = output
@@ -2807,7 +2807,7 @@ func (m *awsAwsjson10_deserializeOpListTagsOfResource) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorListTagsOfResource(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorListTagsOfResource(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2888,7 +2888,7 @@ func (m *awsAwsjson10_deserializeOpPutItem) HandleDeserialize(ctx context.Contex
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorPutItem(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorPutItem(response, &metadata)
 	}
 	output := &PutItemOutput{}
 	out.Result = output
@@ -2924,7 +2924,7 @@ func (m *awsAwsjson10_deserializeOpPutItem) HandleDeserialize(ctx context.Contex
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorPutItem(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorPutItem(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3020,7 +3020,7 @@ func (m *awsAwsjson10_deserializeOpQuery) HandleDeserialize(ctx context.Context,
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorQuery(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorQuery(response, &metadata)
 	}
 	output := &QueryOutput{}
 	out.Result = output
@@ -3056,7 +3056,7 @@ func (m *awsAwsjson10_deserializeOpQuery) HandleDeserialize(ctx context.Context,
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorQuery(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorQuery(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3143,7 +3143,7 @@ func (m *awsAwsjson10_deserializeOpRestoreTableFromBackup) HandleDeserialize(ctx
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorRestoreTableFromBackup(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorRestoreTableFromBackup(response, &metadata)
 	}
 	output := &RestoreTableFromBackupOutput{}
 	out.Result = output
@@ -3179,7 +3179,7 @@ func (m *awsAwsjson10_deserializeOpRestoreTableFromBackup) HandleDeserialize(ctx
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorRestoreTableFromBackup(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorRestoreTableFromBackup(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3272,7 +3272,7 @@ func (m *awsAwsjson10_deserializeOpRestoreTableToPointInTime) HandleDeserialize(
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorRestoreTableToPointInTime(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorRestoreTableToPointInTime(response, &metadata)
 	}
 	output := &RestoreTableToPointInTimeOutput{}
 	out.Result = output
@@ -3308,7 +3308,7 @@ func (m *awsAwsjson10_deserializeOpRestoreTableToPointInTime) HandleDeserialize(
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorRestoreTableToPointInTime(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorRestoreTableToPointInTime(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3404,7 +3404,7 @@ func (m *awsAwsjson10_deserializeOpScan) HandleDeserialize(ctx context.Context, 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorScan(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorScan(response, &metadata)
 	}
 	output := &ScanOutput{}
 	out.Result = output
@@ -3440,7 +3440,7 @@ func (m *awsAwsjson10_deserializeOpScan) HandleDeserialize(ctx context.Context, 
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorScan(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorScan(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3527,7 +3527,7 @@ func (m *awsAwsjson10_deserializeOpTagResource) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorTagResource(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorTagResource(response, &metadata)
 	}
 	output := &TagResourceOutput{}
 	out.Result = output
@@ -3563,7 +3563,7 @@ func (m *awsAwsjson10_deserializeOpTagResource) HandleDeserialize(ctx context.Co
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorTagResource(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorTagResource(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3650,7 +3650,7 @@ func (m *awsAwsjson10_deserializeOpTransactGetItems) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorTransactGetItems(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorTransactGetItems(response, &metadata)
 	}
 	output := &TransactGetItemsOutput{}
 	out.Result = output
@@ -3686,7 +3686,7 @@ func (m *awsAwsjson10_deserializeOpTransactGetItems) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorTransactGetItems(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorTransactGetItems(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3776,7 +3776,7 @@ func (m *awsAwsjson10_deserializeOpTransactWriteItems) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorTransactWriteItems(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorTransactWriteItems(response, &metadata)
 	}
 	output := &TransactWriteItemsOutput{}
 	out.Result = output
@@ -3812,7 +3812,7 @@ func (m *awsAwsjson10_deserializeOpTransactWriteItems) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorTransactWriteItems(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorTransactWriteItems(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3908,7 +3908,7 @@ func (m *awsAwsjson10_deserializeOpUntagResource) HandleDeserialize(ctx context.
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorUntagResource(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorUntagResource(response, &metadata)
 	}
 	output := &UntagResourceOutput{}
 	out.Result = output
@@ -3944,7 +3944,7 @@ func (m *awsAwsjson10_deserializeOpUntagResource) HandleDeserialize(ctx context.
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorUntagResource(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorUntagResource(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4031,7 +4031,7 @@ func (m *awsAwsjson10_deserializeOpUpdateContinuousBackups) HandleDeserialize(ct
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorUpdateContinuousBackups(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorUpdateContinuousBackups(response, &metadata)
 	}
 	output := &UpdateContinuousBackupsOutput{}
 	out.Result = output
@@ -4067,7 +4067,7 @@ func (m *awsAwsjson10_deserializeOpUpdateContinuousBackups) HandleDeserialize(ct
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorUpdateContinuousBackups(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorUpdateContinuousBackups(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4151,7 +4151,7 @@ func (m *awsAwsjson10_deserializeOpUpdateContributorInsights) HandleDeserialize(
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorUpdateContributorInsights(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorUpdateContributorInsights(response, &metadata)
 	}
 	output := &UpdateContributorInsightsOutput{}
 	out.Result = output
@@ -4187,7 +4187,7 @@ func (m *awsAwsjson10_deserializeOpUpdateContributorInsights) HandleDeserialize(
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorUpdateContributorInsights(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorUpdateContributorInsights(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4265,7 +4265,7 @@ func (m *awsAwsjson10_deserializeOpUpdateGlobalTable) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorUpdateGlobalTable(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorUpdateGlobalTable(response, &metadata)
 	}
 	output := &UpdateGlobalTableOutput{}
 	out.Result = output
@@ -4301,7 +4301,7 @@ func (m *awsAwsjson10_deserializeOpUpdateGlobalTable) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorUpdateGlobalTable(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorUpdateGlobalTable(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4391,7 +4391,7 @@ func (m *awsAwsjson10_deserializeOpUpdateGlobalTableSettings) HandleDeserialize(
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorUpdateGlobalTableSettings(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorUpdateGlobalTableSettings(response, &metadata)
 	}
 	output := &UpdateGlobalTableSettingsOutput{}
 	out.Result = output
@@ -4427,7 +4427,7 @@ func (m *awsAwsjson10_deserializeOpUpdateGlobalTableSettings) HandleDeserialize(
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorUpdateGlobalTableSettings(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorUpdateGlobalTableSettings(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4520,7 +4520,7 @@ func (m *awsAwsjson10_deserializeOpUpdateItem) HandleDeserialize(ctx context.Con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorUpdateItem(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorUpdateItem(response, &metadata)
 	}
 	output := &UpdateItemOutput{}
 	out.Result = output
@@ -4556,7 +4556,7 @@ func (m *awsAwsjson10_deserializeOpUpdateItem) HandleDeserialize(ctx context.Con
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorUpdateItem(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorUpdateItem(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4652,7 +4652,7 @@ func (m *awsAwsjson10_deserializeOpUpdateTable) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorUpdateTable(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorUpdateTable(response, &metadata)
 	}
 	output := &UpdateTableOutput{}
 	out.Result = output
@@ -4688,7 +4688,7 @@ func (m *awsAwsjson10_deserializeOpUpdateTable) HandleDeserialize(ctx context.Co
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorUpdateTable(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorUpdateTable(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4775,7 +4775,7 @@ func (m *awsAwsjson10_deserializeOpUpdateTableReplicaAutoScaling) HandleDeserial
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorUpdateTableReplicaAutoScaling(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorUpdateTableReplicaAutoScaling(response, &metadata)
 	}
 	output := &UpdateTableReplicaAutoScalingOutput{}
 	out.Result = output
@@ -4811,7 +4811,7 @@ func (m *awsAwsjson10_deserializeOpUpdateTableReplicaAutoScaling) HandleDeserial
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorUpdateTableReplicaAutoScaling(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorUpdateTableReplicaAutoScaling(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4895,7 +4895,7 @@ func (m *awsAwsjson10_deserializeOpUpdateTimeToLive) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorUpdateTimeToLive(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorUpdateTimeToLive(response, &metadata)
 	}
 	output := &UpdateTimeToLiveOutput{}
 	out.Result = output
@@ -4931,7 +4931,7 @@ func (m *awsAwsjson10_deserializeOpUpdateTimeToLive) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorUpdateTimeToLive(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorUpdateTimeToLive(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

@@ -32,6 +32,8 @@ func (c *Client) DeleteMailboxPermissions(ctx context.Context, params *DeleteMai
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteMailboxPermissionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMailboxPermissions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

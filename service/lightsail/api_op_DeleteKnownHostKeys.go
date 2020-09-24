@@ -41,6 +41,8 @@ func (c *Client) DeleteKnownHostKeys(ctx context.Context, params *DeleteKnownHos
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteKnownHostKeysValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteKnownHostKeys(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

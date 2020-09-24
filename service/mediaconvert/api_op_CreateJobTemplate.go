@@ -34,6 +34,8 @@ func (c *Client) CreateJobTemplate(ctx context.Context, params *CreateJobTemplat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateJobTemplateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateJobTemplate(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

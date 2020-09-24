@@ -35,6 +35,8 @@ func (c *Client) CreateNetworkInterfacePermission(ctx context.Context, params *C
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateNetworkInterfacePermissionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateNetworkInterfacePermission(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

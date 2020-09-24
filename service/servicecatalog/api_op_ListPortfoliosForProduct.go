@@ -33,6 +33,8 @@ func (c *Client) ListPortfoliosForProduct(ctx context.Context, params *ListPortf
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListPortfoliosForProductValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListPortfoliosForProduct(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

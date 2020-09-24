@@ -45,6 +45,8 @@ func (c *Client) CreateMLModel(ctx context.Context, params *CreateMLModelInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateMLModelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMLModel(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

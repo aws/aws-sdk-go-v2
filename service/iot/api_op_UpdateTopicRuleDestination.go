@@ -34,6 +34,8 @@ func (c *Client) UpdateTopicRuleDestination(ctx context.Context, params *UpdateT
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateTopicRuleDestinationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTopicRuleDestination(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

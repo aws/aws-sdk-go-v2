@@ -33,6 +33,8 @@ func (c *Client) CreateComment(ctx context.Context, params *CreateCommentInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateCommentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateComment(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

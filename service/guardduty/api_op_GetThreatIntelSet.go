@@ -33,6 +33,8 @@ func (c *Client) GetThreatIntelSet(ctx context.Context, params *GetThreatIntelSe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetThreatIntelSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetThreatIntelSet(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

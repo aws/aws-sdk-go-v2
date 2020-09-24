@@ -45,6 +45,8 @@ func (c *Client) GetConsoleOutput(ctx context.Context, params *GetConsoleOutputI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetConsoleOutputValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetConsoleOutput(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

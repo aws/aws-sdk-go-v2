@@ -64,6 +64,8 @@ func (c *Client) CountOpenWorkflowExecutions(ctx context.Context, params *CountO
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCountOpenWorkflowExecutionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCountOpenWorkflowExecutions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

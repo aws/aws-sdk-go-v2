@@ -37,6 +37,8 @@ func (c *Client) DescribeImages(ctx context.Context, params *DescribeImagesInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeImagesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeImages(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

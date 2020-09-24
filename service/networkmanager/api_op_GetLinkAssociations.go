@@ -34,6 +34,8 @@ func (c *Client) GetLinkAssociations(ctx context.Context, params *GetLinkAssocia
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetLinkAssociationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetLinkAssociations(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

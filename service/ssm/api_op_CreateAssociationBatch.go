@@ -38,6 +38,8 @@ func (c *Client) CreateAssociationBatch(ctx context.Context, params *CreateAssoc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateAssociationBatchValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAssociationBatch(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

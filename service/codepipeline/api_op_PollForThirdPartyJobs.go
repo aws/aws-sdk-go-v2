@@ -37,6 +37,8 @@ func (c *Client) PollForThirdPartyJobs(ctx context.Context, params *PollForThird
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPollForThirdPartyJobsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPollForThirdPartyJobs(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

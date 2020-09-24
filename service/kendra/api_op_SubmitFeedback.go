@@ -34,6 +34,8 @@ func (c *Client) SubmitFeedback(ctx context.Context, params *SubmitFeedbackInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSubmitFeedbackValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSubmitFeedback(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

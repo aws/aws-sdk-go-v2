@@ -51,6 +51,8 @@ func (c *Client) StartDeviceSync(ctx context.Context, params *StartDeviceSyncInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartDeviceSyncValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartDeviceSync(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

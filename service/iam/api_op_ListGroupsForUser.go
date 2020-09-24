@@ -34,6 +34,8 @@ func (c *Client) ListGroupsForUser(ctx context.Context, params *ListGroupsForUse
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListGroupsForUserValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListGroupsForUser(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

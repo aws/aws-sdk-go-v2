@@ -39,6 +39,8 @@ func (c *Client) CreateSamplingRule(ctx context.Context, params *CreateSamplingR
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateSamplingRuleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSamplingRule(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

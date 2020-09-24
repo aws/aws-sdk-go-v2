@@ -33,6 +33,8 @@ func (c *Client) DeleteLoadBalancerPolicy(ctx context.Context, params *DeleteLoa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteLoadBalancerPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteLoadBalancerPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -37,6 +37,8 @@ func (c *Client) DeleteRegexPatternSet(ctx context.Context, params *DeleteRegexP
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteRegexPatternSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRegexPatternSet(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

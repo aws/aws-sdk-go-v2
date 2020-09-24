@@ -47,6 +47,8 @@ func (c *Client) AssociateConnectionWithLag(ctx context.Context, params *Associa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateConnectionWithLagValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateConnectionWithLag(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

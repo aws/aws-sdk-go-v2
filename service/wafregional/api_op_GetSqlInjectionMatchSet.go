@@ -40,6 +40,8 @@ func (c *Client) GetSqlInjectionMatchSet(ctx context.Context, params *GetSqlInje
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetSqlInjectionMatchSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSqlInjectionMatchSet(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

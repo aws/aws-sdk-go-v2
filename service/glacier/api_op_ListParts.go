@@ -56,6 +56,8 @@ func (c *Client) ListParts(ctx context.Context, params *ListPartsInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListPartsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListParts(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	glaciercust.AddTreeHashMiddleware(stack)
 
 	for _, fn := range options.APIOptions {

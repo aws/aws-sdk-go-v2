@@ -36,6 +36,8 @@ func (c *Client) ListUsageForLicenseConfiguration(ctx context.Context, params *L
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListUsageForLicenseConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListUsageForLicenseConfiguration(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

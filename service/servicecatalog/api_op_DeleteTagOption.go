@@ -33,6 +33,8 @@ func (c *Client) DeleteTagOption(ctx context.Context, params *DeleteTagOptionInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteTagOptionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteTagOption(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

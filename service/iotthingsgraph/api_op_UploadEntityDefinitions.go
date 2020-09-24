@@ -49,6 +49,8 @@ func (c *Client) UploadEntityDefinitions(ctx context.Context, params *UploadEnti
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUploadEntityDefinitionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUploadEntityDefinitions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -52,6 +52,8 @@ func (c *Client) DeleteByteMatchSet(ctx context.Context, params *DeleteByteMatch
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteByteMatchSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteByteMatchSet(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

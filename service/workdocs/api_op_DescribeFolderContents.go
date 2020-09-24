@@ -37,6 +37,8 @@ func (c *Client) DescribeFolderContents(ctx context.Context, params *DescribeFol
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeFolderContentsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFolderContents(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

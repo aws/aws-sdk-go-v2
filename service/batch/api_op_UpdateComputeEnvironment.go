@@ -33,6 +33,8 @@ func (c *Client) UpdateComputeEnvironment(ctx context.Context, params *UpdateCom
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateComputeEnvironmentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateComputeEnvironment(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

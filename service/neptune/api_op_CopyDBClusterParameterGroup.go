@@ -33,6 +33,8 @@ func (c *Client) CopyDBClusterParameterGroup(ctx context.Context, params *CopyDB
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCopyDBClusterParameterGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCopyDBClusterParameterGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

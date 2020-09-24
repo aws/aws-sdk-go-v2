@@ -32,6 +32,8 @@ func (c *Client) DeleteQueue(ctx context.Context, params *DeleteQueueInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteQueueValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteQueue(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

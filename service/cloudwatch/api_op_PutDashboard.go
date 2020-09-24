@@ -46,6 +46,8 @@ func (c *Client) PutDashboard(ctx context.Context, params *PutDashboardInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutDashboardValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutDashboard(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

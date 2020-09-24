@@ -33,6 +33,8 @@ func (c *Client) GetDeliverabilityTestReport(ctx context.Context, params *GetDel
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDeliverabilityTestReportValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDeliverabilityTestReport(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

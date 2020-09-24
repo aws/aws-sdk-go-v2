@@ -41,6 +41,8 @@ func (c *Client) CreateConfigurationSetEventDestination(ctx context.Context, par
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateConfigurationSetEventDestinationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateConfigurationSetEventDestination(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

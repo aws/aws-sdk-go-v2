@@ -33,6 +33,8 @@ func (c *Client) GetEventStream(ctx context.Context, params *GetEventStreamInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetEventStreamValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetEventStream(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,8 @@ func (c *Client) ListFilters(ctx context.Context, params *ListFiltersInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListFiltersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListFilters(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

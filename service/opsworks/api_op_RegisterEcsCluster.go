@@ -40,6 +40,8 @@ func (c *Client) RegisterEcsCluster(ctx context.Context, params *RegisterEcsClus
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterEcsClusterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterEcsCluster(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

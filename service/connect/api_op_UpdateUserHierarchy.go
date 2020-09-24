@@ -32,6 +32,8 @@ func (c *Client) UpdateUserHierarchy(ctx context.Context, params *UpdateUserHier
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateUserHierarchyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateUserHierarchy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

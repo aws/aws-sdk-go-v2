@@ -36,6 +36,8 @@ func (c *Client) BatchGetWorkflows(ctx context.Context, params *BatchGetWorkflow
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchGetWorkflowsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetWorkflows(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

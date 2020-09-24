@@ -46,6 +46,8 @@ func (c *Client) StartStreamEncryption(ctx context.Context, params *StartStreamE
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartStreamEncryptionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartStreamEncryption(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

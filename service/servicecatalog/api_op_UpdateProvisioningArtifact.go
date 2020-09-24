@@ -35,6 +35,8 @@ func (c *Client) UpdateProvisioningArtifact(ctx context.Context, params *UpdateP
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateProvisioningArtifactValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateProvisioningArtifact(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

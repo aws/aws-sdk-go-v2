@@ -36,6 +36,8 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUntagResourceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUntagResource(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	addValidateResponseChecksum(stack, options)
 	addAcceptEncodingGzip(stack, options)
 

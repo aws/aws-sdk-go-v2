@@ -37,6 +37,8 @@ func (c *Client) InitiateJob(ctx context.Context, params *InitiateJobInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpInitiateJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opInitiateJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	glaciercust.AddTreeHashMiddleware(stack)
 
 	for _, fn := range options.APIOptions {

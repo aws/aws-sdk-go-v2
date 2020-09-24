@@ -60,6 +60,8 @@ func (c *Client) CreatePlayerSessions(ctx context.Context, params *CreatePlayerS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreatePlayerSessionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePlayerSessions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

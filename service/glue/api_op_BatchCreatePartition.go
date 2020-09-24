@@ -33,6 +33,8 @@ func (c *Client) BatchCreatePartition(ctx context.Context, params *BatchCreatePa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchCreatePartitionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchCreatePartition(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

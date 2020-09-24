@@ -39,6 +39,8 @@ func (c *Client) GetBotVersions(ctx context.Context, params *GetBotVersionsInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBotVersionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBotVersions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

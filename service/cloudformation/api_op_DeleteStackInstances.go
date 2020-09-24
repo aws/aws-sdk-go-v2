@@ -35,6 +35,8 @@ func (c *Client) DeleteStackInstances(ctx context.Context, params *DeleteStackIn
 	addIdempotencyToken_opDeleteStackInstancesMiddleware(stack, options)
 	addOpDeleteStackInstancesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteStackInstances(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,8 @@ func (c *Client) CancelResize(ctx context.Context, params *CancelResizeInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCancelResizeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCancelResize(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

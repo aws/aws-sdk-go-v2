@@ -34,6 +34,8 @@ func (c *Client) VerifyTrust(ctx context.Context, params *VerifyTrustInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpVerifyTrustValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opVerifyTrust(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

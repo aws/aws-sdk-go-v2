@@ -34,6 +34,8 @@ func (c *Client) CreateAlgorithm(ctx context.Context, params *CreateAlgorithmInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateAlgorithmValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAlgorithm(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -54,6 +54,8 @@ func (c *Client) DetectCustomLabels(ctx context.Context, params *DetectCustomLab
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDetectCustomLabelsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDetectCustomLabels(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

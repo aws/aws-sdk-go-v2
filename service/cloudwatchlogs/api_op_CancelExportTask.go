@@ -33,6 +33,8 @@ func (c *Client) CancelExportTask(ctx context.Context, params *CancelExportTaskI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCancelExportTaskValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCancelExportTask(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

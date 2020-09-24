@@ -34,6 +34,8 @@ func (c *Client) EnableSso(ctx context.Context, params *EnableSsoInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpEnableSsoValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opEnableSso(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

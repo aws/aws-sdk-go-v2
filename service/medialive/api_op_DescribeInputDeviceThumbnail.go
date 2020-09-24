@@ -34,6 +34,8 @@ func (c *Client) DescribeInputDeviceThumbnail(ctx context.Context, params *Descr
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	addOpDescribeInputDeviceThumbnailValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeInputDeviceThumbnail(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

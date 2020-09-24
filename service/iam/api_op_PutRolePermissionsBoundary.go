@@ -42,6 +42,8 @@ func (c *Client) PutRolePermissionsBoundary(ctx context.Context, params *PutRole
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutRolePermissionsBoundaryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutRolePermissionsBoundary(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

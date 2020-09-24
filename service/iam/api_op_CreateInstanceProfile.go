@@ -39,6 +39,8 @@ func (c *Client) CreateInstanceProfile(ctx context.Context, params *CreateInstan
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateInstanceProfileValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateInstanceProfile(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

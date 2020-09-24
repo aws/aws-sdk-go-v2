@@ -58,6 +58,8 @@ func (c *Client) ListMultipartUploads(ctx context.Context, params *ListMultipart
 	addOpListMultipartUploadsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListMultipartUploads(options.Region), middleware.Before)
 	addUpdateEndpointMiddleware(stack, options)
+	addResponseErrorMiddleware(stack)
+	addMetadataRetrieverMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

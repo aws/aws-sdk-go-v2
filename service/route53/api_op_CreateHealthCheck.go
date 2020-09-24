@@ -57,6 +57,8 @@ func (c *Client) CreateHealthCheck(ctx context.Context, params *CreateHealthChec
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateHealthCheckValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateHealthCheck(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -41,6 +41,8 @@ func (c *Client) GetLogGroupFields(ctx context.Context, params *GetLogGroupField
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetLogGroupFieldsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetLogGroupFields(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

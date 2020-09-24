@@ -33,6 +33,8 @@ func (c *Client) SendMessages(ctx context.Context, params *SendMessagesInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSendMessagesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSendMessages(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

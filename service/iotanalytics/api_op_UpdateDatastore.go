@@ -33,6 +33,8 @@ func (c *Client) UpdateDatastore(ctx context.Context, params *UpdateDatastoreInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateDatastoreValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDatastore(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

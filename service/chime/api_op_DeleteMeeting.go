@@ -36,6 +36,8 @@ func (c *Client) DeleteMeeting(ctx context.Context, params *DeleteMeetingInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteMeetingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMeeting(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

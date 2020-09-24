@@ -33,6 +33,8 @@ func (c *Client) DeleteAlias(ctx context.Context, params *DeleteAliasInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteAliasValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAlias(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

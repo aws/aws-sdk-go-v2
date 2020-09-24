@@ -33,6 +33,8 @@ func (c *Client) UpdateWorkteam(ctx context.Context, params *UpdateWorkteamInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateWorkteamValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWorkteam(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

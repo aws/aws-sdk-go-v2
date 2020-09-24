@@ -242,6 +242,8 @@ func (c *Client) RestoreObject(ctx context.Context, params *RestoreObjectInput, 
 	addOpRestoreObjectValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreObject(options.Region), middleware.Before)
 	addUpdateEndpointMiddleware(stack, options)
+	addResponseErrorMiddleware(stack)
+	addMetadataRetrieverMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

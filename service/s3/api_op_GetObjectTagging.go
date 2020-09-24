@@ -47,6 +47,8 @@ func (c *Client) GetObjectTagging(ctx context.Context, params *GetObjectTaggingI
 	addOpGetObjectTaggingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetObjectTagging(options.Region), middleware.Before)
 	addUpdateEndpointMiddleware(stack, options)
+	addResponseErrorMiddleware(stack)
+	addMetadataRetrieverMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

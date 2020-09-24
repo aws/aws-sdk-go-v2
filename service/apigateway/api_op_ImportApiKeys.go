@@ -33,6 +33,8 @@ func (c *Client) ImportApiKeys(ctx context.Context, params *ImportApiKeysInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpImportApiKeysValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opImportApiKeys(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

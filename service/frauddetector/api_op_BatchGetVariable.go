@@ -33,6 +33,8 @@ func (c *Client) BatchGetVariable(ctx context.Context, params *BatchGetVariableI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchGetVariableValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetVariable(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

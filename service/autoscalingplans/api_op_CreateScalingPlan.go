@@ -33,6 +33,8 @@ func (c *Client) CreateScalingPlan(ctx context.Context, params *CreateScalingPla
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateScalingPlanValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateScalingPlan(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -77,6 +77,8 @@ func (c *Client) UpdateRegexPatternSet(ctx context.Context, params *UpdateRegexP
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateRegexPatternSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRegexPatternSet(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

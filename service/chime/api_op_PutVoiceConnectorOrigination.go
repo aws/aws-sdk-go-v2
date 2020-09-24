@@ -35,6 +35,8 @@ func (c *Client) PutVoiceConnectorOrigination(ctx context.Context, params *PutVo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutVoiceConnectorOriginationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutVoiceConnectorOrigination(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

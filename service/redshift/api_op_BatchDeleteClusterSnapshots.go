@@ -33,6 +33,8 @@ func (c *Client) BatchDeleteClusterSnapshots(ctx context.Context, params *BatchD
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBatchDeleteClusterSnapshotsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDeleteClusterSnapshots(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

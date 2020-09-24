@@ -33,6 +33,8 @@ func (c *Client) DeleteDomainPermissionsPolicy(ctx context.Context, params *Dele
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDomainPermissionsPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDomainPermissionsPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

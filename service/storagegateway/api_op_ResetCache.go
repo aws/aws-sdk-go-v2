@@ -42,6 +42,8 @@ func (c *Client) ResetCache(ctx context.Context, params *ResetCacheInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpResetCacheValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opResetCache(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,8 @@ func (c *Client) DeleteNamespace(ctx context.Context, params *DeleteNamespaceInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteNamespaceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteNamespace(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

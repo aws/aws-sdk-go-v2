@@ -37,6 +37,8 @@ func (c *Client) GetCurrentMetricData(ctx context.Context, params *GetCurrentMet
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetCurrentMetricDataValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetCurrentMetricData(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

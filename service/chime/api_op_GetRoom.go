@@ -34,6 +34,8 @@ func (c *Client) GetRoom(ctx context.Context, params *GetRoomInput, optFns ...fu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetRoomValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetRoom(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

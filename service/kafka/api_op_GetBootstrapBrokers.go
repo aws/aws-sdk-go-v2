@@ -32,6 +32,8 @@ func (c *Client) GetBootstrapBrokers(ctx context.Context, params *GetBootstrapBr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBootstrapBrokersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBootstrapBrokers(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

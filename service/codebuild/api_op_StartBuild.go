@@ -33,6 +33,8 @@ func (c *Client) StartBuild(ctx context.Context, params *StartBuildInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartBuildValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartBuild(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

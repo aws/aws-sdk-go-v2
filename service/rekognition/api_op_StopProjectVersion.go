@@ -34,6 +34,8 @@ func (c *Client) StopProjectVersion(ctx context.Context, params *StopProjectVers
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopProjectVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopProjectVersion(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

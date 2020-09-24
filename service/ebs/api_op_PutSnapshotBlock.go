@@ -38,6 +38,8 @@ func (c *Client) PutSnapshotBlock(ctx context.Context, params *PutSnapshotBlockI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutSnapshotBlockValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutSnapshotBlock(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

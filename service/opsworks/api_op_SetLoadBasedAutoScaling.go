@@ -43,6 +43,8 @@ func (c *Client) SetLoadBasedAutoScaling(ctx context.Context, params *SetLoadBas
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSetLoadBasedAutoScalingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSetLoadBasedAutoScaling(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

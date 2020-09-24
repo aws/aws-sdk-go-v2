@@ -32,6 +32,8 @@ func (c *Client) ListNamedShadowsForThing(ctx context.Context, params *ListNamed
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListNamedShadowsForThingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListNamedShadowsForThing(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

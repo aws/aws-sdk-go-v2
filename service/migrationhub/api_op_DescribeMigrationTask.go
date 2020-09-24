@@ -33,6 +33,8 @@ func (c *Client) DescribeMigrationTask(ctx context.Context, params *DescribeMigr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeMigrationTaskValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeMigrationTask(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

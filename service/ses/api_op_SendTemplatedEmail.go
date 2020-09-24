@@ -76,6 +76,8 @@ func (c *Client) SendTemplatedEmail(ctx context.Context, params *SendTemplatedEm
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSendTemplatedEmailValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSendTemplatedEmail(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

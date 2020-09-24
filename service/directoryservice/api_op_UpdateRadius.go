@@ -34,6 +34,8 @@ func (c *Client) UpdateRadius(ctx context.Context, params *UpdateRadiusInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateRadiusValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRadius(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

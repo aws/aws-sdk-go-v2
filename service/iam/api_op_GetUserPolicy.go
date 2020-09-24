@@ -43,6 +43,8 @@ func (c *Client) GetUserPolicy(ctx context.Context, params *GetUserPolicyInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetUserPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetUserPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,8 @@ func (c *Client) AssociateDeviceWithNetworkProfile(ctx context.Context, params *
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateDeviceWithNetworkProfileValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateDeviceWithNetworkProfile(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

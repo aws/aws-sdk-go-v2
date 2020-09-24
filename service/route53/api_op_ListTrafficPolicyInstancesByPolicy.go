@@ -40,6 +40,8 @@ func (c *Client) ListTrafficPolicyInstancesByPolicy(ctx context.Context, params 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListTrafficPolicyInstancesByPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListTrafficPolicyInstancesByPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,8 @@ func (c *Client) StopMonitoringSchedule(ctx context.Context, params *StopMonitor
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopMonitoringScheduleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopMonitoringSchedule(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

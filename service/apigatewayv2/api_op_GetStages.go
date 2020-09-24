@@ -33,6 +33,8 @@ func (c *Client) GetStages(ctx context.Context, params *GetStagesInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetStagesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetStages(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

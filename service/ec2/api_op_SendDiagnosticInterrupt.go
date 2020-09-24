@@ -46,6 +46,8 @@ func (c *Client) SendDiagnosticInterrupt(ctx context.Context, params *SendDiagno
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSendDiagnosticInterruptValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSendDiagnosticInterrupt(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

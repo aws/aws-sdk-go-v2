@@ -60,6 +60,8 @@ func (c *Client) DeleteMatchmakingRuleSet(ctx context.Context, params *DeleteMat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteMatchmakingRuleSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMatchmakingRuleSet(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

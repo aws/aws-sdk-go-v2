@@ -61,6 +61,8 @@ func (c *Client) InitiateMultipartUpload(ctx context.Context, params *InitiateMu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpInitiateMultipartUploadValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opInitiateMultipartUpload(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	glaciercust.AddTreeHashMiddleware(stack)
 
 	for _, fn := range options.APIOptions {

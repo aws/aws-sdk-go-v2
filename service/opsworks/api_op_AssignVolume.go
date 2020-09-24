@@ -41,6 +41,8 @@ func (c *Client) AssignVolume(ctx context.Context, params *AssignVolumeInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssignVolumeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssignVolume(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

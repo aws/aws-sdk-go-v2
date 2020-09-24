@@ -33,6 +33,8 @@ func (c *Client) DescribeInputSecurityGroup(ctx context.Context, params *Describ
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeInputSecurityGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeInputSecurityGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

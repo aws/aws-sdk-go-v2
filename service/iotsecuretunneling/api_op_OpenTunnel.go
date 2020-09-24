@@ -34,6 +34,8 @@ func (c *Client) OpenTunnel(ctx context.Context, params *OpenTunnelInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpOpenTunnelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opOpenTunnel(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

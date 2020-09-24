@@ -34,6 +34,8 @@ func (c *Client) ArchiveFindings(ctx context.Context, params *ArchiveFindingsInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpArchiveFindingsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opArchiveFindings(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

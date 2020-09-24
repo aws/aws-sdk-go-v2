@@ -33,6 +33,8 @@ func (c *Client) GetPublicKeyConfig(ctx context.Context, params *GetPublicKeyCon
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetPublicKeyConfigValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetPublicKeyConfig(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

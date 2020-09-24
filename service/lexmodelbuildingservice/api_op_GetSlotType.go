@@ -36,6 +36,8 @@ func (c *Client) GetSlotType(ctx context.Context, params *GetSlotTypeInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetSlotTypeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSlotType(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

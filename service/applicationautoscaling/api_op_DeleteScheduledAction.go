@@ -36,6 +36,8 @@ func (c *Client) DeleteScheduledAction(ctx context.Context, params *DeleteSchedu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteScheduledActionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteScheduledAction(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

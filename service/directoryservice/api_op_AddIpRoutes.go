@@ -42,6 +42,8 @@ func (c *Client) AddIpRoutes(ctx context.Context, params *AddIpRoutesInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAddIpRoutesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAddIpRoutes(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

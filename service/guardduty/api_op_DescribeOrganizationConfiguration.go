@@ -34,6 +34,8 @@ func (c *Client) DescribeOrganizationConfiguration(ctx context.Context, params *
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeOrganizationConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeOrganizationConfiguration(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

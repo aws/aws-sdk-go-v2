@@ -41,6 +41,8 @@ func (c *Client) AssociateDhcpOptions(ctx context.Context, params *AssociateDhcp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateDhcpOptionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateDhcpOptions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

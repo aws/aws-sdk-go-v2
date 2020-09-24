@@ -7,6 +7,8 @@ import (
 	"context"
 	"encoding/xml"
 	"fmt"
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	awsxml "github.com/aws/aws-sdk-go-v2/aws/protocol/xml"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
@@ -41,7 +43,7 @@ func (m *awsAwsquery_deserializeOpCloneReceiptRuleSet) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorCloneReceiptRuleSet(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorCloneReceiptRuleSet(response, &metadata)
 	}
 	output := &CloneReceiptRuleSetOutput{}
 	out.Result = output
@@ -78,7 +80,7 @@ func (m *awsAwsquery_deserializeOpCloneReceiptRuleSet) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorCloneReceiptRuleSet(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorCloneReceiptRuleSet(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -88,9 +90,18 @@ func awsAwsquery_deserializeOpErrorCloneReceiptRuleSet(response *smithyhttp.Resp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -134,7 +145,7 @@ func (m *awsAwsquery_deserializeOpCreateConfigurationSet) HandleDeserialize(ctx 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorCreateConfigurationSet(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorCreateConfigurationSet(response, &metadata)
 	}
 	output := &CreateConfigurationSetOutput{}
 	out.Result = output
@@ -171,7 +182,7 @@ func (m *awsAwsquery_deserializeOpCreateConfigurationSet) HandleDeserialize(ctx 
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorCreateConfigurationSet(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorCreateConfigurationSet(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -181,9 +192,18 @@ func awsAwsquery_deserializeOpErrorCreateConfigurationSet(response *smithyhttp.R
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -227,7 +247,7 @@ func (m *awsAwsquery_deserializeOpCreateConfigurationSetEventDestination) Handle
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorCreateConfigurationSetEventDestination(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorCreateConfigurationSetEventDestination(response, &metadata)
 	}
 	output := &CreateConfigurationSetEventDestinationOutput{}
 	out.Result = output
@@ -264,7 +284,7 @@ func (m *awsAwsquery_deserializeOpCreateConfigurationSetEventDestination) Handle
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorCreateConfigurationSetEventDestination(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorCreateConfigurationSetEventDestination(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -274,9 +294,18 @@ func awsAwsquery_deserializeOpErrorCreateConfigurationSetEventDestination(respon
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -329,7 +358,7 @@ func (m *awsAwsquery_deserializeOpCreateConfigurationSetTrackingOptions) HandleD
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorCreateConfigurationSetTrackingOptions(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorCreateConfigurationSetTrackingOptions(response, &metadata)
 	}
 	output := &CreateConfigurationSetTrackingOptionsOutput{}
 	out.Result = output
@@ -366,7 +395,7 @@ func (m *awsAwsquery_deserializeOpCreateConfigurationSetTrackingOptions) HandleD
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorCreateConfigurationSetTrackingOptions(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorCreateConfigurationSetTrackingOptions(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -376,9 +405,18 @@ func awsAwsquery_deserializeOpErrorCreateConfigurationSetTrackingOptions(respons
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -422,7 +460,7 @@ func (m *awsAwsquery_deserializeOpCreateCustomVerificationEmailTemplate) HandleD
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorCreateCustomVerificationEmailTemplate(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorCreateCustomVerificationEmailTemplate(response, &metadata)
 	}
 	output := &CreateCustomVerificationEmailTemplateOutput{}
 	out.Result = output
@@ -459,7 +497,7 @@ func (m *awsAwsquery_deserializeOpCreateCustomVerificationEmailTemplate) HandleD
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorCreateCustomVerificationEmailTemplate(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorCreateCustomVerificationEmailTemplate(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -469,9 +507,18 @@ func awsAwsquery_deserializeOpErrorCreateCustomVerificationEmailTemplate(respons
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -518,7 +565,7 @@ func (m *awsAwsquery_deserializeOpCreateReceiptFilter) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorCreateReceiptFilter(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorCreateReceiptFilter(response, &metadata)
 	}
 	output := &CreateReceiptFilterOutput{}
 	out.Result = output
@@ -555,7 +602,7 @@ func (m *awsAwsquery_deserializeOpCreateReceiptFilter) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorCreateReceiptFilter(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorCreateReceiptFilter(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -565,9 +612,18 @@ func awsAwsquery_deserializeOpErrorCreateReceiptFilter(response *smithyhttp.Resp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -608,7 +664,7 @@ func (m *awsAwsquery_deserializeOpCreateReceiptRule) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorCreateReceiptRule(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorCreateReceiptRule(response, &metadata)
 	}
 	output := &CreateReceiptRuleOutput{}
 	out.Result = output
@@ -645,7 +701,7 @@ func (m *awsAwsquery_deserializeOpCreateReceiptRule) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorCreateReceiptRule(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorCreateReceiptRule(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -655,9 +711,18 @@ func awsAwsquery_deserializeOpErrorCreateReceiptRule(response *smithyhttp.Respon
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -713,7 +778,7 @@ func (m *awsAwsquery_deserializeOpCreateReceiptRuleSet) HandleDeserialize(ctx co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorCreateReceiptRuleSet(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorCreateReceiptRuleSet(response, &metadata)
 	}
 	output := &CreateReceiptRuleSetOutput{}
 	out.Result = output
@@ -750,7 +815,7 @@ func (m *awsAwsquery_deserializeOpCreateReceiptRuleSet) HandleDeserialize(ctx co
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorCreateReceiptRuleSet(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorCreateReceiptRuleSet(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -760,9 +825,18 @@ func awsAwsquery_deserializeOpErrorCreateReceiptRuleSet(response *smithyhttp.Res
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -803,7 +877,7 @@ func (m *awsAwsquery_deserializeOpCreateTemplate) HandleDeserialize(ctx context.
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorCreateTemplate(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorCreateTemplate(response, &metadata)
 	}
 	output := &CreateTemplateOutput{}
 	out.Result = output
@@ -840,7 +914,7 @@ func (m *awsAwsquery_deserializeOpCreateTemplate) HandleDeserialize(ctx context.
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorCreateTemplate(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorCreateTemplate(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -850,9 +924,18 @@ func awsAwsquery_deserializeOpErrorCreateTemplate(response *smithyhttp.Response)
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -896,7 +979,7 @@ func (m *awsAwsquery_deserializeOpDeleteConfigurationSet) HandleDeserialize(ctx 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorDeleteConfigurationSet(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorDeleteConfigurationSet(response, &metadata)
 	}
 	output := &DeleteConfigurationSetOutput{}
 	out.Result = output
@@ -933,7 +1016,7 @@ func (m *awsAwsquery_deserializeOpDeleteConfigurationSet) HandleDeserialize(ctx 
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorDeleteConfigurationSet(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorDeleteConfigurationSet(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -943,9 +1026,18 @@ func awsAwsquery_deserializeOpErrorDeleteConfigurationSet(response *smithyhttp.R
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -983,7 +1075,7 @@ func (m *awsAwsquery_deserializeOpDeleteConfigurationSetEventDestination) Handle
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorDeleteConfigurationSetEventDestination(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorDeleteConfigurationSetEventDestination(response, &metadata)
 	}
 	output := &DeleteConfigurationSetEventDestinationOutput{}
 	out.Result = output
@@ -1020,7 +1112,7 @@ func (m *awsAwsquery_deserializeOpDeleteConfigurationSetEventDestination) Handle
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorDeleteConfigurationSetEventDestination(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorDeleteConfigurationSetEventDestination(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1030,9 +1122,18 @@ func awsAwsquery_deserializeOpErrorDeleteConfigurationSetEventDestination(respon
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1073,7 +1174,7 @@ func (m *awsAwsquery_deserializeOpDeleteConfigurationSetTrackingOptions) HandleD
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorDeleteConfigurationSetTrackingOptions(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorDeleteConfigurationSetTrackingOptions(response, &metadata)
 	}
 	output := &DeleteConfigurationSetTrackingOptionsOutput{}
 	out.Result = output
@@ -1110,7 +1211,7 @@ func (m *awsAwsquery_deserializeOpDeleteConfigurationSetTrackingOptions) HandleD
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorDeleteConfigurationSetTrackingOptions(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorDeleteConfigurationSetTrackingOptions(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1120,9 +1221,18 @@ func awsAwsquery_deserializeOpErrorDeleteConfigurationSetTrackingOptions(respons
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1163,7 +1273,7 @@ func (m *awsAwsquery_deserializeOpDeleteCustomVerificationEmailTemplate) HandleD
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorDeleteCustomVerificationEmailTemplate(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorDeleteCustomVerificationEmailTemplate(response, &metadata)
 	}
 	output := &DeleteCustomVerificationEmailTemplateOutput{}
 	out.Result = output
@@ -1200,7 +1310,7 @@ func (m *awsAwsquery_deserializeOpDeleteCustomVerificationEmailTemplate) HandleD
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorDeleteCustomVerificationEmailTemplate(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorDeleteCustomVerificationEmailTemplate(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1210,9 +1320,18 @@ func awsAwsquery_deserializeOpErrorDeleteCustomVerificationEmailTemplate(respons
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1247,7 +1366,7 @@ func (m *awsAwsquery_deserializeOpDeleteIdentity) HandleDeserialize(ctx context.
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorDeleteIdentity(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorDeleteIdentity(response, &metadata)
 	}
 	output := &DeleteIdentityOutput{}
 	out.Result = output
@@ -1284,7 +1403,7 @@ func (m *awsAwsquery_deserializeOpDeleteIdentity) HandleDeserialize(ctx context.
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorDeleteIdentity(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorDeleteIdentity(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1294,9 +1413,18 @@ func awsAwsquery_deserializeOpErrorDeleteIdentity(response *smithyhttp.Response)
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1331,7 +1459,7 @@ func (m *awsAwsquery_deserializeOpDeleteIdentityPolicy) HandleDeserialize(ctx co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorDeleteIdentityPolicy(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorDeleteIdentityPolicy(response, &metadata)
 	}
 	output := &DeleteIdentityPolicyOutput{}
 	out.Result = output
@@ -1368,7 +1496,7 @@ func (m *awsAwsquery_deserializeOpDeleteIdentityPolicy) HandleDeserialize(ctx co
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorDeleteIdentityPolicy(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorDeleteIdentityPolicy(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1378,9 +1506,18 @@ func awsAwsquery_deserializeOpErrorDeleteIdentityPolicy(response *smithyhttp.Res
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1415,7 +1552,7 @@ func (m *awsAwsquery_deserializeOpDeleteReceiptFilter) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorDeleteReceiptFilter(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorDeleteReceiptFilter(response, &metadata)
 	}
 	output := &DeleteReceiptFilterOutput{}
 	out.Result = output
@@ -1452,7 +1589,7 @@ func (m *awsAwsquery_deserializeOpDeleteReceiptFilter) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorDeleteReceiptFilter(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorDeleteReceiptFilter(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1462,9 +1599,18 @@ func awsAwsquery_deserializeOpErrorDeleteReceiptFilter(response *smithyhttp.Resp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1499,7 +1645,7 @@ func (m *awsAwsquery_deserializeOpDeleteReceiptRule) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorDeleteReceiptRule(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorDeleteReceiptRule(response, &metadata)
 	}
 	output := &DeleteReceiptRuleOutput{}
 	out.Result = output
@@ -1536,7 +1682,7 @@ func (m *awsAwsquery_deserializeOpDeleteReceiptRule) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorDeleteReceiptRule(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorDeleteReceiptRule(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1546,9 +1692,18 @@ func awsAwsquery_deserializeOpErrorDeleteReceiptRule(response *smithyhttp.Respon
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1586,7 +1741,7 @@ func (m *awsAwsquery_deserializeOpDeleteReceiptRuleSet) HandleDeserialize(ctx co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorDeleteReceiptRuleSet(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorDeleteReceiptRuleSet(response, &metadata)
 	}
 	output := &DeleteReceiptRuleSetOutput{}
 	out.Result = output
@@ -1623,7 +1778,7 @@ func (m *awsAwsquery_deserializeOpDeleteReceiptRuleSet) HandleDeserialize(ctx co
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorDeleteReceiptRuleSet(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorDeleteReceiptRuleSet(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1633,9 +1788,18 @@ func awsAwsquery_deserializeOpErrorDeleteReceiptRuleSet(response *smithyhttp.Res
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1673,7 +1837,7 @@ func (m *awsAwsquery_deserializeOpDeleteTemplate) HandleDeserialize(ctx context.
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorDeleteTemplate(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorDeleteTemplate(response, &metadata)
 	}
 	output := &DeleteTemplateOutput{}
 	out.Result = output
@@ -1710,7 +1874,7 @@ func (m *awsAwsquery_deserializeOpDeleteTemplate) HandleDeserialize(ctx context.
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorDeleteTemplate(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorDeleteTemplate(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1720,9 +1884,18 @@ func awsAwsquery_deserializeOpErrorDeleteTemplate(response *smithyhttp.Response)
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1757,7 +1930,7 @@ func (m *awsAwsquery_deserializeOpDeleteVerifiedEmailAddress) HandleDeserialize(
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorDeleteVerifiedEmailAddress(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorDeleteVerifiedEmailAddress(response, &metadata)
 	}
 	output := &DeleteVerifiedEmailAddressOutput{}
 	out.Result = output
@@ -1794,7 +1967,7 @@ func (m *awsAwsquery_deserializeOpDeleteVerifiedEmailAddress) HandleDeserialize(
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorDeleteVerifiedEmailAddress(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorDeleteVerifiedEmailAddress(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1804,9 +1977,18 @@ func awsAwsquery_deserializeOpErrorDeleteVerifiedEmailAddress(response *smithyht
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1841,7 +2023,7 @@ func (m *awsAwsquery_deserializeOpDescribeActiveReceiptRuleSet) HandleDeserializ
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorDescribeActiveReceiptRuleSet(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorDescribeActiveReceiptRuleSet(response, &metadata)
 	}
 	output := &DescribeActiveReceiptRuleSetOutput{}
 	out.Result = output
@@ -1878,7 +2060,7 @@ func (m *awsAwsquery_deserializeOpDescribeActiveReceiptRuleSet) HandleDeserializ
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorDescribeActiveReceiptRuleSet(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorDescribeActiveReceiptRuleSet(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1888,9 +2070,18 @@ func awsAwsquery_deserializeOpErrorDescribeActiveReceiptRuleSet(response *smithy
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1925,7 +2116,7 @@ func (m *awsAwsquery_deserializeOpDescribeConfigurationSet) HandleDeserialize(ct
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorDescribeConfigurationSet(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorDescribeConfigurationSet(response, &metadata)
 	}
 	output := &DescribeConfigurationSetOutput{}
 	out.Result = output
@@ -1962,7 +2153,7 @@ func (m *awsAwsquery_deserializeOpDescribeConfigurationSet) HandleDeserialize(ct
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorDescribeConfigurationSet(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorDescribeConfigurationSet(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1972,9 +2163,18 @@ func awsAwsquery_deserializeOpErrorDescribeConfigurationSet(response *smithyhttp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -2012,7 +2212,7 @@ func (m *awsAwsquery_deserializeOpDescribeReceiptRule) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorDescribeReceiptRule(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorDescribeReceiptRule(response, &metadata)
 	}
 	output := &DescribeReceiptRuleOutput{}
 	out.Result = output
@@ -2049,7 +2249,7 @@ func (m *awsAwsquery_deserializeOpDescribeReceiptRule) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorDescribeReceiptRule(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorDescribeReceiptRule(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2059,9 +2259,18 @@ func awsAwsquery_deserializeOpErrorDescribeReceiptRule(response *smithyhttp.Resp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -2102,7 +2311,7 @@ func (m *awsAwsquery_deserializeOpDescribeReceiptRuleSet) HandleDeserialize(ctx 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorDescribeReceiptRuleSet(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorDescribeReceiptRuleSet(response, &metadata)
 	}
 	output := &DescribeReceiptRuleSetOutput{}
 	out.Result = output
@@ -2139,7 +2348,7 @@ func (m *awsAwsquery_deserializeOpDescribeReceiptRuleSet) HandleDeserialize(ctx 
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorDescribeReceiptRuleSet(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorDescribeReceiptRuleSet(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2149,9 +2358,18 @@ func awsAwsquery_deserializeOpErrorDescribeReceiptRuleSet(response *smithyhttp.R
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -2189,7 +2407,7 @@ func (m *awsAwsquery_deserializeOpGetAccountSendingEnabled) HandleDeserialize(ct
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorGetAccountSendingEnabled(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorGetAccountSendingEnabled(response, &metadata)
 	}
 	output := &GetAccountSendingEnabledOutput{}
 	out.Result = output
@@ -2226,7 +2444,7 @@ func (m *awsAwsquery_deserializeOpGetAccountSendingEnabled) HandleDeserialize(ct
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorGetAccountSendingEnabled(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorGetAccountSendingEnabled(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2236,9 +2454,18 @@ func awsAwsquery_deserializeOpErrorGetAccountSendingEnabled(response *smithyhttp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -2273,7 +2500,7 @@ func (m *awsAwsquery_deserializeOpGetCustomVerificationEmailTemplate) HandleDese
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorGetCustomVerificationEmailTemplate(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorGetCustomVerificationEmailTemplate(response, &metadata)
 	}
 	output := &GetCustomVerificationEmailTemplateOutput{}
 	out.Result = output
@@ -2310,7 +2537,7 @@ func (m *awsAwsquery_deserializeOpGetCustomVerificationEmailTemplate) HandleDese
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorGetCustomVerificationEmailTemplate(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorGetCustomVerificationEmailTemplate(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2320,9 +2547,18 @@ func awsAwsquery_deserializeOpErrorGetCustomVerificationEmailTemplate(response *
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -2360,7 +2596,7 @@ func (m *awsAwsquery_deserializeOpGetIdentityDkimAttributes) HandleDeserialize(c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorGetIdentityDkimAttributes(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorGetIdentityDkimAttributes(response, &metadata)
 	}
 	output := &GetIdentityDkimAttributesOutput{}
 	out.Result = output
@@ -2397,7 +2633,7 @@ func (m *awsAwsquery_deserializeOpGetIdentityDkimAttributes) HandleDeserialize(c
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorGetIdentityDkimAttributes(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorGetIdentityDkimAttributes(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2407,9 +2643,18 @@ func awsAwsquery_deserializeOpErrorGetIdentityDkimAttributes(response *smithyhtt
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -2444,7 +2689,7 @@ func (m *awsAwsquery_deserializeOpGetIdentityMailFromDomainAttributes) HandleDes
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorGetIdentityMailFromDomainAttributes(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorGetIdentityMailFromDomainAttributes(response, &metadata)
 	}
 	output := &GetIdentityMailFromDomainAttributesOutput{}
 	out.Result = output
@@ -2481,7 +2726,7 @@ func (m *awsAwsquery_deserializeOpGetIdentityMailFromDomainAttributes) HandleDes
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorGetIdentityMailFromDomainAttributes(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorGetIdentityMailFromDomainAttributes(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2491,9 +2736,18 @@ func awsAwsquery_deserializeOpErrorGetIdentityMailFromDomainAttributes(response 
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -2528,7 +2782,7 @@ func (m *awsAwsquery_deserializeOpGetIdentityNotificationAttributes) HandleDeser
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorGetIdentityNotificationAttributes(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorGetIdentityNotificationAttributes(response, &metadata)
 	}
 	output := &GetIdentityNotificationAttributesOutput{}
 	out.Result = output
@@ -2565,7 +2819,7 @@ func (m *awsAwsquery_deserializeOpGetIdentityNotificationAttributes) HandleDeser
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorGetIdentityNotificationAttributes(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorGetIdentityNotificationAttributes(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2575,9 +2829,18 @@ func awsAwsquery_deserializeOpErrorGetIdentityNotificationAttributes(response *s
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -2612,7 +2875,7 @@ func (m *awsAwsquery_deserializeOpGetIdentityPolicies) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorGetIdentityPolicies(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorGetIdentityPolicies(response, &metadata)
 	}
 	output := &GetIdentityPoliciesOutput{}
 	out.Result = output
@@ -2649,7 +2912,7 @@ func (m *awsAwsquery_deserializeOpGetIdentityPolicies) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorGetIdentityPolicies(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorGetIdentityPolicies(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2659,9 +2922,18 @@ func awsAwsquery_deserializeOpErrorGetIdentityPolicies(response *smithyhttp.Resp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -2696,7 +2968,7 @@ func (m *awsAwsquery_deserializeOpGetIdentityVerificationAttributes) HandleDeser
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorGetIdentityVerificationAttributes(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorGetIdentityVerificationAttributes(response, &metadata)
 	}
 	output := &GetIdentityVerificationAttributesOutput{}
 	out.Result = output
@@ -2733,7 +3005,7 @@ func (m *awsAwsquery_deserializeOpGetIdentityVerificationAttributes) HandleDeser
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorGetIdentityVerificationAttributes(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorGetIdentityVerificationAttributes(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2743,9 +3015,18 @@ func awsAwsquery_deserializeOpErrorGetIdentityVerificationAttributes(response *s
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -2780,7 +3061,7 @@ func (m *awsAwsquery_deserializeOpGetSendQuota) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorGetSendQuota(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorGetSendQuota(response, &metadata)
 	}
 	output := &GetSendQuotaOutput{}
 	out.Result = output
@@ -2817,7 +3098,7 @@ func (m *awsAwsquery_deserializeOpGetSendQuota) HandleDeserialize(ctx context.Co
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorGetSendQuota(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorGetSendQuota(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2827,9 +3108,18 @@ func awsAwsquery_deserializeOpErrorGetSendQuota(response *smithyhttp.Response) e
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -2864,7 +3154,7 @@ func (m *awsAwsquery_deserializeOpGetSendStatistics) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorGetSendStatistics(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorGetSendStatistics(response, &metadata)
 	}
 	output := &GetSendStatisticsOutput{}
 	out.Result = output
@@ -2901,7 +3191,7 @@ func (m *awsAwsquery_deserializeOpGetSendStatistics) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorGetSendStatistics(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorGetSendStatistics(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2911,9 +3201,18 @@ func awsAwsquery_deserializeOpErrorGetSendStatistics(response *smithyhttp.Respon
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -2948,7 +3247,7 @@ func (m *awsAwsquery_deserializeOpGetTemplate) HandleDeserialize(ctx context.Con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorGetTemplate(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorGetTemplate(response, &metadata)
 	}
 	output := &GetTemplateOutput{}
 	out.Result = output
@@ -2985,7 +3284,7 @@ func (m *awsAwsquery_deserializeOpGetTemplate) HandleDeserialize(ctx context.Con
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorGetTemplate(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorGetTemplate(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2995,9 +3294,18 @@ func awsAwsquery_deserializeOpErrorGetTemplate(response *smithyhttp.Response) er
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -3035,7 +3343,7 @@ func (m *awsAwsquery_deserializeOpListConfigurationSets) HandleDeserialize(ctx c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorListConfigurationSets(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorListConfigurationSets(response, &metadata)
 	}
 	output := &ListConfigurationSetsOutput{}
 	out.Result = output
@@ -3072,7 +3380,7 @@ func (m *awsAwsquery_deserializeOpListConfigurationSets) HandleDeserialize(ctx c
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorListConfigurationSets(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorListConfigurationSets(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3082,9 +3390,18 @@ func awsAwsquery_deserializeOpErrorListConfigurationSets(response *smithyhttp.Re
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -3119,7 +3436,7 @@ func (m *awsAwsquery_deserializeOpListCustomVerificationEmailTemplates) HandleDe
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorListCustomVerificationEmailTemplates(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorListCustomVerificationEmailTemplates(response, &metadata)
 	}
 	output := &ListCustomVerificationEmailTemplatesOutput{}
 	out.Result = output
@@ -3156,7 +3473,7 @@ func (m *awsAwsquery_deserializeOpListCustomVerificationEmailTemplates) HandleDe
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorListCustomVerificationEmailTemplates(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorListCustomVerificationEmailTemplates(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3166,9 +3483,18 @@ func awsAwsquery_deserializeOpErrorListCustomVerificationEmailTemplates(response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -3203,7 +3529,7 @@ func (m *awsAwsquery_deserializeOpListIdentities) HandleDeserialize(ctx context.
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorListIdentities(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorListIdentities(response, &metadata)
 	}
 	output := &ListIdentitiesOutput{}
 	out.Result = output
@@ -3240,7 +3566,7 @@ func (m *awsAwsquery_deserializeOpListIdentities) HandleDeserialize(ctx context.
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorListIdentities(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorListIdentities(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3250,9 +3576,18 @@ func awsAwsquery_deserializeOpErrorListIdentities(response *smithyhttp.Response)
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -3287,7 +3622,7 @@ func (m *awsAwsquery_deserializeOpListIdentityPolicies) HandleDeserialize(ctx co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorListIdentityPolicies(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorListIdentityPolicies(response, &metadata)
 	}
 	output := &ListIdentityPoliciesOutput{}
 	out.Result = output
@@ -3324,7 +3659,7 @@ func (m *awsAwsquery_deserializeOpListIdentityPolicies) HandleDeserialize(ctx co
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorListIdentityPolicies(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorListIdentityPolicies(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3334,9 +3669,18 @@ func awsAwsquery_deserializeOpErrorListIdentityPolicies(response *smithyhttp.Res
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -3371,7 +3715,7 @@ func (m *awsAwsquery_deserializeOpListReceiptFilters) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorListReceiptFilters(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorListReceiptFilters(response, &metadata)
 	}
 	output := &ListReceiptFiltersOutput{}
 	out.Result = output
@@ -3408,7 +3752,7 @@ func (m *awsAwsquery_deserializeOpListReceiptFilters) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorListReceiptFilters(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorListReceiptFilters(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3418,9 +3762,18 @@ func awsAwsquery_deserializeOpErrorListReceiptFilters(response *smithyhttp.Respo
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -3455,7 +3808,7 @@ func (m *awsAwsquery_deserializeOpListReceiptRuleSets) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorListReceiptRuleSets(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorListReceiptRuleSets(response, &metadata)
 	}
 	output := &ListReceiptRuleSetsOutput{}
 	out.Result = output
@@ -3492,7 +3845,7 @@ func (m *awsAwsquery_deserializeOpListReceiptRuleSets) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorListReceiptRuleSets(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorListReceiptRuleSets(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3502,9 +3855,18 @@ func awsAwsquery_deserializeOpErrorListReceiptRuleSets(response *smithyhttp.Resp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -3539,7 +3901,7 @@ func (m *awsAwsquery_deserializeOpListTemplates) HandleDeserialize(ctx context.C
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorListTemplates(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorListTemplates(response, &metadata)
 	}
 	output := &ListTemplatesOutput{}
 	out.Result = output
@@ -3576,7 +3938,7 @@ func (m *awsAwsquery_deserializeOpListTemplates) HandleDeserialize(ctx context.C
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorListTemplates(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorListTemplates(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3586,9 +3948,18 @@ func awsAwsquery_deserializeOpErrorListTemplates(response *smithyhttp.Response) 
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -3623,7 +3994,7 @@ func (m *awsAwsquery_deserializeOpListVerifiedEmailAddresses) HandleDeserialize(
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorListVerifiedEmailAddresses(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorListVerifiedEmailAddresses(response, &metadata)
 	}
 	output := &ListVerifiedEmailAddressesOutput{}
 	out.Result = output
@@ -3660,7 +4031,7 @@ func (m *awsAwsquery_deserializeOpListVerifiedEmailAddresses) HandleDeserialize(
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorListVerifiedEmailAddresses(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorListVerifiedEmailAddresses(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3670,9 +4041,18 @@ func awsAwsquery_deserializeOpErrorListVerifiedEmailAddresses(response *smithyht
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -3707,7 +4087,7 @@ func (m *awsAwsquery_deserializeOpPutConfigurationSetDeliveryOptions) HandleDese
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorPutConfigurationSetDeliveryOptions(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorPutConfigurationSetDeliveryOptions(response, &metadata)
 	}
 	output := &PutConfigurationSetDeliveryOptionsOutput{}
 	out.Result = output
@@ -3744,7 +4124,7 @@ func (m *awsAwsquery_deserializeOpPutConfigurationSetDeliveryOptions) HandleDese
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorPutConfigurationSetDeliveryOptions(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorPutConfigurationSetDeliveryOptions(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3754,9 +4134,18 @@ func awsAwsquery_deserializeOpErrorPutConfigurationSetDeliveryOptions(response *
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -3797,7 +4186,7 @@ func (m *awsAwsquery_deserializeOpPutIdentityPolicy) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorPutIdentityPolicy(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorPutIdentityPolicy(response, &metadata)
 	}
 	output := &PutIdentityPolicyOutput{}
 	out.Result = output
@@ -3834,7 +4223,7 @@ func (m *awsAwsquery_deserializeOpPutIdentityPolicy) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorPutIdentityPolicy(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorPutIdentityPolicy(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3844,9 +4233,18 @@ func awsAwsquery_deserializeOpErrorPutIdentityPolicy(response *smithyhttp.Respon
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -3884,7 +4282,7 @@ func (m *awsAwsquery_deserializeOpReorderReceiptRuleSet) HandleDeserialize(ctx c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorReorderReceiptRuleSet(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorReorderReceiptRuleSet(response, &metadata)
 	}
 	output := &ReorderReceiptRuleSetOutput{}
 	out.Result = output
@@ -3921,7 +4319,7 @@ func (m *awsAwsquery_deserializeOpReorderReceiptRuleSet) HandleDeserialize(ctx c
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorReorderReceiptRuleSet(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorReorderReceiptRuleSet(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3931,9 +4329,18 @@ func awsAwsquery_deserializeOpErrorReorderReceiptRuleSet(response *smithyhttp.Re
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -3974,7 +4381,7 @@ func (m *awsAwsquery_deserializeOpSendBounce) HandleDeserialize(ctx context.Cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorSendBounce(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorSendBounce(response, &metadata)
 	}
 	output := &SendBounceOutput{}
 	out.Result = output
@@ -4011,7 +4418,7 @@ func (m *awsAwsquery_deserializeOpSendBounce) HandleDeserialize(ctx context.Cont
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorSendBounce(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorSendBounce(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4021,9 +4428,18 @@ func awsAwsquery_deserializeOpErrorSendBounce(response *smithyhttp.Response) err
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -4061,7 +4477,7 @@ func (m *awsAwsquery_deserializeOpSendBulkTemplatedEmail) HandleDeserialize(ctx 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorSendBulkTemplatedEmail(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorSendBulkTemplatedEmail(response, &metadata)
 	}
 	output := &SendBulkTemplatedEmailOutput{}
 	out.Result = output
@@ -4098,7 +4514,7 @@ func (m *awsAwsquery_deserializeOpSendBulkTemplatedEmail) HandleDeserialize(ctx 
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorSendBulkTemplatedEmail(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorSendBulkTemplatedEmail(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4108,9 +4524,18 @@ func awsAwsquery_deserializeOpErrorSendBulkTemplatedEmail(response *smithyhttp.R
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -4163,7 +4588,7 @@ func (m *awsAwsquery_deserializeOpSendCustomVerificationEmail) HandleDeserialize
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorSendCustomVerificationEmail(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorSendCustomVerificationEmail(response, &metadata)
 	}
 	output := &SendCustomVerificationEmailOutput{}
 	out.Result = output
@@ -4200,7 +4625,7 @@ func (m *awsAwsquery_deserializeOpSendCustomVerificationEmail) HandleDeserialize
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorSendCustomVerificationEmail(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorSendCustomVerificationEmail(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4210,9 +4635,18 @@ func awsAwsquery_deserializeOpErrorSendCustomVerificationEmail(response *smithyh
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -4262,7 +4696,7 @@ func (m *awsAwsquery_deserializeOpSendEmail) HandleDeserialize(ctx context.Conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorSendEmail(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorSendEmail(response, &metadata)
 	}
 	output := &SendEmailOutput{}
 	out.Result = output
@@ -4299,7 +4733,7 @@ func (m *awsAwsquery_deserializeOpSendEmail) HandleDeserialize(ctx context.Conte
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorSendEmail(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorSendEmail(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4309,9 +4743,18 @@ func awsAwsquery_deserializeOpErrorSendEmail(response *smithyhttp.Response) erro
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -4361,7 +4804,7 @@ func (m *awsAwsquery_deserializeOpSendRawEmail) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorSendRawEmail(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorSendRawEmail(response, &metadata)
 	}
 	output := &SendRawEmailOutput{}
 	out.Result = output
@@ -4398,7 +4841,7 @@ func (m *awsAwsquery_deserializeOpSendRawEmail) HandleDeserialize(ctx context.Co
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorSendRawEmail(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorSendRawEmail(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4408,9 +4851,18 @@ func awsAwsquery_deserializeOpErrorSendRawEmail(response *smithyhttp.Response) e
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -4460,7 +4912,7 @@ func (m *awsAwsquery_deserializeOpSendTemplatedEmail) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorSendTemplatedEmail(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorSendTemplatedEmail(response, &metadata)
 	}
 	output := &SendTemplatedEmailOutput{}
 	out.Result = output
@@ -4497,7 +4949,7 @@ func (m *awsAwsquery_deserializeOpSendTemplatedEmail) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorSendTemplatedEmail(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorSendTemplatedEmail(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4507,9 +4959,18 @@ func awsAwsquery_deserializeOpErrorSendTemplatedEmail(response *smithyhttp.Respo
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -4562,7 +5023,7 @@ func (m *awsAwsquery_deserializeOpSetActiveReceiptRuleSet) HandleDeserialize(ctx
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorSetActiveReceiptRuleSet(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorSetActiveReceiptRuleSet(response, &metadata)
 	}
 	output := &SetActiveReceiptRuleSetOutput{}
 	out.Result = output
@@ -4599,7 +5060,7 @@ func (m *awsAwsquery_deserializeOpSetActiveReceiptRuleSet) HandleDeserialize(ctx
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorSetActiveReceiptRuleSet(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorSetActiveReceiptRuleSet(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4609,9 +5070,18 @@ func awsAwsquery_deserializeOpErrorSetActiveReceiptRuleSet(response *smithyhttp.
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -4649,7 +5119,7 @@ func (m *awsAwsquery_deserializeOpSetIdentityDkimEnabled) HandleDeserialize(ctx 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorSetIdentityDkimEnabled(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorSetIdentityDkimEnabled(response, &metadata)
 	}
 	output := &SetIdentityDkimEnabledOutput{}
 	out.Result = output
@@ -4686,7 +5156,7 @@ func (m *awsAwsquery_deserializeOpSetIdentityDkimEnabled) HandleDeserialize(ctx 
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorSetIdentityDkimEnabled(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorSetIdentityDkimEnabled(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4696,9 +5166,18 @@ func awsAwsquery_deserializeOpErrorSetIdentityDkimEnabled(response *smithyhttp.R
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -4733,7 +5212,7 @@ func (m *awsAwsquery_deserializeOpSetIdentityFeedbackForwardingEnabled) HandleDe
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorSetIdentityFeedbackForwardingEnabled(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorSetIdentityFeedbackForwardingEnabled(response, &metadata)
 	}
 	output := &SetIdentityFeedbackForwardingEnabledOutput{}
 	out.Result = output
@@ -4770,7 +5249,7 @@ func (m *awsAwsquery_deserializeOpSetIdentityFeedbackForwardingEnabled) HandleDe
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorSetIdentityFeedbackForwardingEnabled(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorSetIdentityFeedbackForwardingEnabled(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4780,9 +5259,18 @@ func awsAwsquery_deserializeOpErrorSetIdentityFeedbackForwardingEnabled(response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -4817,7 +5305,7 @@ func (m *awsAwsquery_deserializeOpSetIdentityHeadersInNotificationsEnabled) Hand
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorSetIdentityHeadersInNotificationsEnabled(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorSetIdentityHeadersInNotificationsEnabled(response, &metadata)
 	}
 	output := &SetIdentityHeadersInNotificationsEnabledOutput{}
 	out.Result = output
@@ -4854,7 +5342,7 @@ func (m *awsAwsquery_deserializeOpSetIdentityHeadersInNotificationsEnabled) Hand
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorSetIdentityHeadersInNotificationsEnabled(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorSetIdentityHeadersInNotificationsEnabled(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4864,9 +5352,18 @@ func awsAwsquery_deserializeOpErrorSetIdentityHeadersInNotificationsEnabled(resp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -4901,7 +5398,7 @@ func (m *awsAwsquery_deserializeOpSetIdentityMailFromDomain) HandleDeserialize(c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorSetIdentityMailFromDomain(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorSetIdentityMailFromDomain(response, &metadata)
 	}
 	output := &SetIdentityMailFromDomainOutput{}
 	out.Result = output
@@ -4938,7 +5435,7 @@ func (m *awsAwsquery_deserializeOpSetIdentityMailFromDomain) HandleDeserialize(c
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorSetIdentityMailFromDomain(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorSetIdentityMailFromDomain(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4948,9 +5445,18 @@ func awsAwsquery_deserializeOpErrorSetIdentityMailFromDomain(response *smithyhtt
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -4985,7 +5491,7 @@ func (m *awsAwsquery_deserializeOpSetIdentityNotificationTopic) HandleDeserializ
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorSetIdentityNotificationTopic(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorSetIdentityNotificationTopic(response, &metadata)
 	}
 	output := &SetIdentityNotificationTopicOutput{}
 	out.Result = output
@@ -5022,7 +5528,7 @@ func (m *awsAwsquery_deserializeOpSetIdentityNotificationTopic) HandleDeserializ
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorSetIdentityNotificationTopic(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorSetIdentityNotificationTopic(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -5032,9 +5538,18 @@ func awsAwsquery_deserializeOpErrorSetIdentityNotificationTopic(response *smithy
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -5069,7 +5584,7 @@ func (m *awsAwsquery_deserializeOpSetReceiptRulePosition) HandleDeserialize(ctx 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorSetReceiptRulePosition(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorSetReceiptRulePosition(response, &metadata)
 	}
 	output := &SetReceiptRulePositionOutput{}
 	out.Result = output
@@ -5106,7 +5621,7 @@ func (m *awsAwsquery_deserializeOpSetReceiptRulePosition) HandleDeserialize(ctx 
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorSetReceiptRulePosition(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorSetReceiptRulePosition(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -5116,9 +5631,18 @@ func awsAwsquery_deserializeOpErrorSetReceiptRulePosition(response *smithyhttp.R
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -5159,7 +5683,7 @@ func (m *awsAwsquery_deserializeOpTestRenderTemplate) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorTestRenderTemplate(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorTestRenderTemplate(response, &metadata)
 	}
 	output := &TestRenderTemplateOutput{}
 	out.Result = output
@@ -5196,7 +5720,7 @@ func (m *awsAwsquery_deserializeOpTestRenderTemplate) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorTestRenderTemplate(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorTestRenderTemplate(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -5206,9 +5730,18 @@ func awsAwsquery_deserializeOpErrorTestRenderTemplate(response *smithyhttp.Respo
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -5252,7 +5785,7 @@ func (m *awsAwsquery_deserializeOpUpdateAccountSendingEnabled) HandleDeserialize
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorUpdateAccountSendingEnabled(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorUpdateAccountSendingEnabled(response, &metadata)
 	}
 	output := &UpdateAccountSendingEnabledOutput{}
 	out.Result = output
@@ -5289,7 +5822,7 @@ func (m *awsAwsquery_deserializeOpUpdateAccountSendingEnabled) HandleDeserialize
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorUpdateAccountSendingEnabled(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorUpdateAccountSendingEnabled(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -5299,9 +5832,18 @@ func awsAwsquery_deserializeOpErrorUpdateAccountSendingEnabled(response *smithyh
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -5336,7 +5878,7 @@ func (m *awsAwsquery_deserializeOpUpdateConfigurationSetEventDestination) Handle
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorUpdateConfigurationSetEventDestination(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorUpdateConfigurationSetEventDestination(response, &metadata)
 	}
 	output := &UpdateConfigurationSetEventDestinationOutput{}
 	out.Result = output
@@ -5373,7 +5915,7 @@ func (m *awsAwsquery_deserializeOpUpdateConfigurationSetEventDestination) Handle
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorUpdateConfigurationSetEventDestination(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorUpdateConfigurationSetEventDestination(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -5383,9 +5925,18 @@ func awsAwsquery_deserializeOpErrorUpdateConfigurationSetEventDestination(respon
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -5435,7 +5986,7 @@ func (m *awsAwsquery_deserializeOpUpdateConfigurationSetReputationMetricsEnabled
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorUpdateConfigurationSetReputationMetricsEnabled(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorUpdateConfigurationSetReputationMetricsEnabled(response, &metadata)
 	}
 	output := &UpdateConfigurationSetReputationMetricsEnabledOutput{}
 	out.Result = output
@@ -5472,7 +6023,7 @@ func (m *awsAwsquery_deserializeOpUpdateConfigurationSetReputationMetricsEnabled
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorUpdateConfigurationSetReputationMetricsEnabled(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorUpdateConfigurationSetReputationMetricsEnabled(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -5482,9 +6033,18 @@ func awsAwsquery_deserializeOpErrorUpdateConfigurationSetReputationMetricsEnable
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -5522,7 +6082,7 @@ func (m *awsAwsquery_deserializeOpUpdateConfigurationSetSendingEnabled) HandleDe
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorUpdateConfigurationSetSendingEnabled(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorUpdateConfigurationSetSendingEnabled(response, &metadata)
 	}
 	output := &UpdateConfigurationSetSendingEnabledOutput{}
 	out.Result = output
@@ -5559,7 +6119,7 @@ func (m *awsAwsquery_deserializeOpUpdateConfigurationSetSendingEnabled) HandleDe
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorUpdateConfigurationSetSendingEnabled(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorUpdateConfigurationSetSendingEnabled(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -5569,9 +6129,18 @@ func awsAwsquery_deserializeOpErrorUpdateConfigurationSetSendingEnabled(response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -5609,7 +6178,7 @@ func (m *awsAwsquery_deserializeOpUpdateConfigurationSetTrackingOptions) HandleD
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorUpdateConfigurationSetTrackingOptions(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorUpdateConfigurationSetTrackingOptions(response, &metadata)
 	}
 	output := &UpdateConfigurationSetTrackingOptionsOutput{}
 	out.Result = output
@@ -5646,7 +6215,7 @@ func (m *awsAwsquery_deserializeOpUpdateConfigurationSetTrackingOptions) HandleD
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorUpdateConfigurationSetTrackingOptions(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorUpdateConfigurationSetTrackingOptions(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -5656,9 +6225,18 @@ func awsAwsquery_deserializeOpErrorUpdateConfigurationSetTrackingOptions(respons
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -5702,7 +6280,7 @@ func (m *awsAwsquery_deserializeOpUpdateCustomVerificationEmailTemplate) HandleD
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorUpdateCustomVerificationEmailTemplate(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorUpdateCustomVerificationEmailTemplate(response, &metadata)
 	}
 	output := &UpdateCustomVerificationEmailTemplateOutput{}
 	out.Result = output
@@ -5739,7 +6317,7 @@ func (m *awsAwsquery_deserializeOpUpdateCustomVerificationEmailTemplate) HandleD
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorUpdateCustomVerificationEmailTemplate(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorUpdateCustomVerificationEmailTemplate(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -5749,9 +6327,18 @@ func awsAwsquery_deserializeOpErrorUpdateCustomVerificationEmailTemplate(respons
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -5795,7 +6382,7 @@ func (m *awsAwsquery_deserializeOpUpdateReceiptRule) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorUpdateReceiptRule(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorUpdateReceiptRule(response, &metadata)
 	}
 	output := &UpdateReceiptRuleOutput{}
 	out.Result = output
@@ -5832,7 +6419,7 @@ func (m *awsAwsquery_deserializeOpUpdateReceiptRule) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorUpdateReceiptRule(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorUpdateReceiptRule(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -5842,9 +6429,18 @@ func awsAwsquery_deserializeOpErrorUpdateReceiptRule(response *smithyhttp.Respon
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -5897,7 +6493,7 @@ func (m *awsAwsquery_deserializeOpUpdateTemplate) HandleDeserialize(ctx context.
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorUpdateTemplate(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorUpdateTemplate(response, &metadata)
 	}
 	output := &UpdateTemplateOutput{}
 	out.Result = output
@@ -5934,7 +6530,7 @@ func (m *awsAwsquery_deserializeOpUpdateTemplate) HandleDeserialize(ctx context.
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorUpdateTemplate(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorUpdateTemplate(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -5944,9 +6540,18 @@ func awsAwsquery_deserializeOpErrorUpdateTemplate(response *smithyhttp.Response)
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -5987,7 +6592,7 @@ func (m *awsAwsquery_deserializeOpVerifyDomainDkim) HandleDeserialize(ctx contex
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorVerifyDomainDkim(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorVerifyDomainDkim(response, &metadata)
 	}
 	output := &VerifyDomainDkimOutput{}
 	out.Result = output
@@ -6024,7 +6629,7 @@ func (m *awsAwsquery_deserializeOpVerifyDomainDkim) HandleDeserialize(ctx contex
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorVerifyDomainDkim(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorVerifyDomainDkim(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -6034,9 +6639,18 @@ func awsAwsquery_deserializeOpErrorVerifyDomainDkim(response *smithyhttp.Respons
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -6071,7 +6685,7 @@ func (m *awsAwsquery_deserializeOpVerifyDomainIdentity) HandleDeserialize(ctx co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorVerifyDomainIdentity(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorVerifyDomainIdentity(response, &metadata)
 	}
 	output := &VerifyDomainIdentityOutput{}
 	out.Result = output
@@ -6108,7 +6722,7 @@ func (m *awsAwsquery_deserializeOpVerifyDomainIdentity) HandleDeserialize(ctx co
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorVerifyDomainIdentity(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorVerifyDomainIdentity(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -6118,9 +6732,18 @@ func awsAwsquery_deserializeOpErrorVerifyDomainIdentity(response *smithyhttp.Res
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -6155,7 +6778,7 @@ func (m *awsAwsquery_deserializeOpVerifyEmailAddress) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorVerifyEmailAddress(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorVerifyEmailAddress(response, &metadata)
 	}
 	output := &VerifyEmailAddressOutput{}
 	out.Result = output
@@ -6192,7 +6815,7 @@ func (m *awsAwsquery_deserializeOpVerifyEmailAddress) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorVerifyEmailAddress(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorVerifyEmailAddress(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -6202,9 +6825,18 @@ func awsAwsquery_deserializeOpErrorVerifyEmailAddress(response *smithyhttp.Respo
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -6239,7 +6871,7 @@ func (m *awsAwsquery_deserializeOpVerifyEmailIdentity) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorVerifyEmailIdentity(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorVerifyEmailIdentity(response, &metadata)
 	}
 	output := &VerifyEmailIdentityOutput{}
 	out.Result = output
@@ -6276,7 +6908,7 @@ func (m *awsAwsquery_deserializeOpVerifyEmailIdentity) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorVerifyEmailIdentity(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorVerifyEmailIdentity(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -6286,9 +6918,18 @@ func awsAwsquery_deserializeOpErrorVerifyEmailIdentity(response *smithyhttp.Resp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {

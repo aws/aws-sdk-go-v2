@@ -47,6 +47,8 @@ func (c *Client) DiscoverInputSchema(ctx context.Context, params *DiscoverInputS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDiscoverInputSchemaValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDiscoverInputSchema(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

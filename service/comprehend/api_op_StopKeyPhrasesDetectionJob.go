@@ -39,6 +39,8 @@ func (c *Client) StopKeyPhrasesDetectionJob(ctx context.Context, params *StopKey
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopKeyPhrasesDetectionJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopKeyPhrasesDetectionJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

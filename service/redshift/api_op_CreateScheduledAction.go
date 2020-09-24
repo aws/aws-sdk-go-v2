@@ -36,6 +36,8 @@ func (c *Client) CreateScheduledAction(ctx context.Context, params *CreateSchedu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateScheduledActionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateScheduledAction(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

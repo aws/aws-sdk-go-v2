@@ -33,6 +33,8 @@ func (c *Client) PutEncryptionConfig(ctx context.Context, params *PutEncryptionC
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutEncryptionConfigValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutEncryptionConfig(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

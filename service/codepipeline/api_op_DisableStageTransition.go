@@ -34,6 +34,8 @@ func (c *Client) DisableStageTransition(ctx context.Context, params *DisableStag
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisableStageTransitionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisableStageTransition(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

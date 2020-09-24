@@ -48,6 +48,8 @@ func (c *Client) GetBucketAnalyticsConfiguration(ctx context.Context, params *Ge
 	addOpGetBucketAnalyticsConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketAnalyticsConfiguration(options.Region), middleware.Before)
 	addUpdateEndpointMiddleware(stack, options)
+	addResponseErrorMiddleware(stack)
+	addMetadataRetrieverMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

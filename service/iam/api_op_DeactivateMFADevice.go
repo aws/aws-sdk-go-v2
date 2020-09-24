@@ -37,6 +37,8 @@ func (c *Client) DeactivateMFADevice(ctx context.Context, params *DeactivateMFAD
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeactivateMFADeviceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeactivateMFADevice(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

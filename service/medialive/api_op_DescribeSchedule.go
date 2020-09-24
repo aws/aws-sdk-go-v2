@@ -33,6 +33,8 @@ func (c *Client) DescribeSchedule(ctx context.Context, params *DescribeScheduleI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeScheduleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSchedule(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

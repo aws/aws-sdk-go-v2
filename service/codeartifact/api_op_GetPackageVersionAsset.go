@@ -35,6 +35,8 @@ func (c *Client) GetPackageVersionAsset(ctx context.Context, params *GetPackageV
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	addOpGetPackageVersionAssetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetPackageVersionAsset(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

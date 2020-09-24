@@ -35,6 +35,8 @@ func (c *Client) GetSpeechSynthesisTask(ctx context.Context, params *GetSpeechSy
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetSpeechSynthesisTaskValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSpeechSynthesisTask(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -65,6 +65,8 @@ func (c *Client) UploadArchive(ctx context.Context, params *UploadArchiveInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUploadArchiveValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUploadArchive(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	glaciercust.AddTreeHashMiddleware(stack)
 
 	for _, fn := range options.APIOptions {

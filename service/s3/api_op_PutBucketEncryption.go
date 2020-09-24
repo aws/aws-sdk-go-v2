@@ -52,6 +52,8 @@ func (c *Client) PutBucketEncryption(ctx context.Context, params *PutBucketEncry
 	addOpPutBucketEncryptionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBucketEncryption(options.Region), middleware.Before)
 	addUpdateEndpointMiddleware(stack, options)
+	addResponseErrorMiddleware(stack)
+	addMetadataRetrieverMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,8 @@ func (c *Client) GetMergeCommit(ctx context.Context, params *GetMergeCommitInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetMergeCommitValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetMergeCommit(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,8 @@ func (c *Client) PutAccessPointPolicy(ctx context.Context, params *PutAccessPoin
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutAccessPointPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutAccessPointPolicy(options.Region), middleware.Before)
+	addResponseErrorMiddleware(stack)
+	addMetadataRetrieverMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

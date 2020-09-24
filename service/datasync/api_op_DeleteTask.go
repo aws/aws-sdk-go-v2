@@ -32,6 +32,8 @@ func (c *Client) DeleteTask(ctx context.Context, params *DeleteTaskInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteTaskValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteTask(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,8 @@ func (c *Client) GetInstanceState(ctx context.Context, params *GetInstanceStateI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetInstanceStateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetInstanceState(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

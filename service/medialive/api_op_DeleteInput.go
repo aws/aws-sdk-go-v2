@@ -32,6 +32,8 @@ func (c *Client) DeleteInput(ctx context.Context, params *DeleteInputInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteInputValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteInput(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

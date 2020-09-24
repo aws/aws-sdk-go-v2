@@ -54,6 +54,8 @@ func (c *Client) RegisterTaskDefinition(ctx context.Context, params *RegisterTas
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterTaskDefinitionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterTaskDefinition(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

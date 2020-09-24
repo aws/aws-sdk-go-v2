@@ -59,6 +59,8 @@ func (c *Client) PutConfigRule(ctx context.Context, params *PutConfigRuleInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutConfigRuleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutConfigRule(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

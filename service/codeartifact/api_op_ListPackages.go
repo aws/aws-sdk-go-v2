@@ -35,6 +35,8 @@ func (c *Client) ListPackages(ctx context.Context, params *ListPackagesInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListPackagesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListPackages(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

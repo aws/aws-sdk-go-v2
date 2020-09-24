@@ -34,6 +34,8 @@ func (c *Client) CreateCustomActionType(ctx context.Context, params *CreateCusto
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateCustomActionTypeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCustomActionType(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -9,9 +9,10 @@ import (
 
 func TestGetResponseErrorCode(t *testing.T) {
 	cases := map[string]struct {
-		errorResponse        io.Reader
-		expectedErrorCode    string
-		expectedErrorMessage string
+		errorResponse          io.Reader
+		expectedErrorCode      string
+		expectedErrorMessage   string
+		expectedErrorRequestID string
 	}{
 		"Invalid Greeting": {
 			errorResponse: bytes.NewReader([]byte(`<Response>
@@ -21,10 +22,11 @@ func TestGetResponseErrorCode(t *testing.T) {
 			            <Message>Hi</Message>
 			        </Error>
 			    </Errors>
-			    <RequestId>foo-id</RequestId>
+			    <RequestID>foo-id</RequestID>
 			</Response>`)),
-			expectedErrorCode:    "InvalidGreeting",
-			expectedErrorMessage: "Hi",
+			expectedErrorCode:      "InvalidGreeting",
+			expectedErrorMessage:   "Hi",
+			expectedErrorRequestID: "foo-id",
 		},
 		"InvalidGreetingWithNoMessage": {
 			errorResponse: bytes.NewReader([]byte(`<Response>
@@ -33,9 +35,10 @@ func TestGetResponseErrorCode(t *testing.T) {
 			            <Code>InvalidGreeting</Code>
 			        </Error>
 			    </Errors>
-			    <RequestId>foo-id</RequestId>
+			    <RequestID>foo-id</RequestID>
 			</Response>`)),
-			expectedErrorCode: "InvalidGreeting",
+			expectedErrorCode:      "InvalidGreeting",
+			expectedErrorRequestID: "foo-id",
 		},
 		"Error with no code": {
 			errorResponse: bytes.NewReader([]byte(`<Response>
@@ -44,26 +47,32 @@ func TestGetResponseErrorCode(t *testing.T) {
 			            <Message>Hi</Message>
 			        </Error>
 			    </Errors>
-			    <RequestId>foo-id</RequestId>
+			    <RequestID>foo-id</RequestID>
 			</Response>`)),
-			expectedErrorMessage: "Hi",
+			expectedErrorMessage:   "Hi",
+			expectedErrorRequestID: "foo-id",
 		},
 	}
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			errorcode, errorMessage, err := GetResponseErrorCode(c.errorResponse)
+			ec, err := GetErrorResponseComponents(c.errorResponse)
 			if err != nil {
 				t.Fatalf("expected no error, got %v", err)
 			}
 
-			if e, a := c.expectedErrorCode, errorcode; !strings.EqualFold(e, a) {
+			if e, a := c.expectedErrorCode, ec.Code; !strings.EqualFold(e, a) {
 				t.Fatalf("expected %v, got %v", e, a)
 			}
 
-			if e, a := c.expectedErrorMessage, errorMessage; !strings.EqualFold(e, a) {
+			if e, a := c.expectedErrorMessage, ec.Message; !strings.EqualFold(e, a) {
 				t.Fatalf("expected %v, got %v", e, a)
 			}
+
+			if e, a := c.expectedErrorRequestID, ec.RequestID; !strings.EqualFold(e, a) {
+				t.Fatalf("expected %v, got %v", e, a)
+			}
+
 		})
 	}
 }

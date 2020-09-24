@@ -34,6 +34,8 @@ func (c *Client) RestoreManagedPrefixListVersion(ctx context.Context, params *Re
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRestoreManagedPrefixListVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreManagedPrefixListVersion(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

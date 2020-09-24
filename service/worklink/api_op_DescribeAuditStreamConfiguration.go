@@ -33,6 +33,8 @@ func (c *Client) DescribeAuditStreamConfiguration(ctx context.Context, params *D
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeAuditStreamConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAuditStreamConfiguration(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

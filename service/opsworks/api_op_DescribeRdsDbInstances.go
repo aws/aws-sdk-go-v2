@@ -38,6 +38,8 @@ func (c *Client) DescribeRdsDbInstances(ctx context.Context, params *DescribeRds
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeRdsDbInstancesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRdsDbInstances(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

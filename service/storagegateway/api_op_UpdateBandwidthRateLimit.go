@@ -40,6 +40,8 @@ func (c *Client) UpdateBandwidthRateLimit(ctx context.Context, params *UpdateBan
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateBandwidthRateLimitValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateBandwidthRateLimit(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

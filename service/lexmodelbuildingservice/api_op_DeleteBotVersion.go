@@ -34,6 +34,8 @@ func (c *Client) DeleteBotVersion(ctx context.Context, params *DeleteBotVersionI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteBotVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBotVersion(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

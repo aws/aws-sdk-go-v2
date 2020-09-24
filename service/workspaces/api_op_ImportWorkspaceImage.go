@@ -35,6 +35,8 @@ func (c *Client) ImportWorkspaceImage(ctx context.Context, params *ImportWorkspa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpImportWorkspaceImageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opImportWorkspaceImage(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -37,6 +37,8 @@ func (c *Client) CreateTheme(ctx context.Context, params *CreateThemeInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateThemeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTheme(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

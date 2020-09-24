@@ -34,6 +34,8 @@ func (c *Client) UpdateWorkGroup(ctx context.Context, params *UpdateWorkGroupInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateWorkGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWorkGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

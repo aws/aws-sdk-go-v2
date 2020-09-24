@@ -35,6 +35,8 @@ func (c *Client) GetApplicationDateRangeKpi(ctx context.Context, params *GetAppl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetApplicationDateRangeKpiValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetApplicationDateRangeKpi(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

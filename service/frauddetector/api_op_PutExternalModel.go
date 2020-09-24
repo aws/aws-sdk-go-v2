@@ -35,6 +35,8 @@ func (c *Client) PutExternalModel(ctx context.Context, params *PutExternalModelI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutExternalModelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutExternalModel(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

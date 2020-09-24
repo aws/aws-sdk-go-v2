@@ -34,6 +34,8 @@ func (c *Client) DisableFastSnapshotRestores(ctx context.Context, params *Disabl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisableFastSnapshotRestoresValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisableFastSnapshotRestores(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -35,6 +35,8 @@ func (c *Client) DisassociateSubnetCidrBlock(ctx context.Context, params *Disass
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisassociateSubnetCidrBlockValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateSubnetCidrBlock(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,8 @@ func (c *Client) PutFile(ctx context.Context, params *PutFileInput, optFns ...fu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutFileValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutFile(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

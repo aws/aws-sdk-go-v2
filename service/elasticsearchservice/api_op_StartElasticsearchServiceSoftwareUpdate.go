@@ -33,6 +33,8 @@ func (c *Client) StartElasticsearchServiceSoftwareUpdate(ctx context.Context, pa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartElasticsearchServiceSoftwareUpdateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartElasticsearchServiceSoftwareUpdate(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

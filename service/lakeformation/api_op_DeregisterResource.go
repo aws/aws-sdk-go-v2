@@ -34,6 +34,8 @@ func (c *Client) DeregisterResource(ctx context.Context, params *DeregisterResou
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeregisterResourceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterResource(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

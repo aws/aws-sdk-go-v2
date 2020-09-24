@@ -35,6 +35,8 @@ func (c *Client) UpdateVTLDeviceType(ctx context.Context, params *UpdateVTLDevic
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateVTLDeviceTypeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateVTLDeviceType(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

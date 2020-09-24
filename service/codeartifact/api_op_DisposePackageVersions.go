@@ -45,6 +45,8 @@ func (c *Client) DisposePackageVersions(ctx context.Context, params *DisposePack
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisposePackageVersionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisposePackageVersions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

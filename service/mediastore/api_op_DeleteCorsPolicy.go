@@ -35,6 +35,8 @@ func (c *Client) DeleteCorsPolicy(ctx context.Context, params *DeleteCorsPolicyI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteCorsPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCorsPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

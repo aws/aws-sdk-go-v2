@@ -40,7 +40,7 @@ func (m *awsAwsjson11_deserializeOpAssociateServiceQuotaTemplate) HandleDeserial
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorAssociateServiceQuotaTemplate(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorAssociateServiceQuotaTemplate(response, &metadata)
 	}
 	output := &AssociateServiceQuotaTemplateOutput{}
 	out.Result = output
@@ -76,7 +76,7 @@ func (m *awsAwsjson11_deserializeOpAssociateServiceQuotaTemplate) HandleDeserial
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorAssociateServiceQuotaTemplate(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorAssociateServiceQuotaTemplate(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -172,7 +172,7 @@ func (m *awsAwsjson11_deserializeOpDeleteServiceQuotaIncreaseRequestFromTemplate
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteServiceQuotaIncreaseRequestFromTemplate(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteServiceQuotaIncreaseRequestFromTemplate(response, &metadata)
 	}
 	output := &DeleteServiceQuotaIncreaseRequestFromTemplateOutput{}
 	out.Result = output
@@ -208,7 +208,7 @@ func (m *awsAwsjson11_deserializeOpDeleteServiceQuotaIncreaseRequestFromTemplate
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorDeleteServiceQuotaIncreaseRequestFromTemplate(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorDeleteServiceQuotaIncreaseRequestFromTemplate(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -307,7 +307,7 @@ func (m *awsAwsjson11_deserializeOpDisassociateServiceQuotaTemplate) HandleDeser
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorDisassociateServiceQuotaTemplate(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorDisassociateServiceQuotaTemplate(response, &metadata)
 	}
 	output := &DisassociateServiceQuotaTemplateOutput{}
 	out.Result = output
@@ -343,7 +343,7 @@ func (m *awsAwsjson11_deserializeOpDisassociateServiceQuotaTemplate) HandleDeser
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorDisassociateServiceQuotaTemplate(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorDisassociateServiceQuotaTemplate(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -439,7 +439,7 @@ func (m *awsAwsjson11_deserializeOpGetAssociationForServiceQuotaTemplate) Handle
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorGetAssociationForServiceQuotaTemplate(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetAssociationForServiceQuotaTemplate(response, &metadata)
 	}
 	output := &GetAssociationForServiceQuotaTemplateOutput{}
 	out.Result = output
@@ -475,7 +475,7 @@ func (m *awsAwsjson11_deserializeOpGetAssociationForServiceQuotaTemplate) Handle
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorGetAssociationForServiceQuotaTemplate(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorGetAssociationForServiceQuotaTemplate(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -571,7 +571,7 @@ func (m *awsAwsjson11_deserializeOpGetAWSDefaultServiceQuota) HandleDeserialize(
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorGetAWSDefaultServiceQuota(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetAWSDefaultServiceQuota(response, &metadata)
 	}
 	output := &GetAWSDefaultServiceQuotaOutput{}
 	out.Result = output
@@ -607,7 +607,7 @@ func (m *awsAwsjson11_deserializeOpGetAWSDefaultServiceQuota) HandleDeserialize(
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorGetAWSDefaultServiceQuota(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorGetAWSDefaultServiceQuota(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -694,7 +694,7 @@ func (m *awsAwsjson11_deserializeOpGetRequestedServiceQuotaChange) HandleDeseria
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorGetRequestedServiceQuotaChange(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetRequestedServiceQuotaChange(response, &metadata)
 	}
 	output := &GetRequestedServiceQuotaChangeOutput{}
 	out.Result = output
@@ -730,7 +730,7 @@ func (m *awsAwsjson11_deserializeOpGetRequestedServiceQuotaChange) HandleDeseria
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorGetRequestedServiceQuotaChange(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorGetRequestedServiceQuotaChange(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -817,7 +817,7 @@ func (m *awsAwsjson11_deserializeOpGetServiceQuota) HandleDeserialize(ctx contex
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorGetServiceQuota(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetServiceQuota(response, &metadata)
 	}
 	output := &GetServiceQuotaOutput{}
 	out.Result = output
@@ -853,7 +853,7 @@ func (m *awsAwsjson11_deserializeOpGetServiceQuota) HandleDeserialize(ctx contex
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorGetServiceQuota(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorGetServiceQuota(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -940,7 +940,7 @@ func (m *awsAwsjson11_deserializeOpGetServiceQuotaIncreaseRequestFromTemplate) H
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorGetServiceQuotaIncreaseRequestFromTemplate(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetServiceQuotaIncreaseRequestFromTemplate(response, &metadata)
 	}
 	output := &GetServiceQuotaIncreaseRequestFromTemplateOutput{}
 	out.Result = output
@@ -976,7 +976,7 @@ func (m *awsAwsjson11_deserializeOpGetServiceQuotaIncreaseRequestFromTemplate) H
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorGetServiceQuotaIncreaseRequestFromTemplate(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorGetServiceQuotaIncreaseRequestFromTemplate(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1075,7 +1075,7 @@ func (m *awsAwsjson11_deserializeOpListAWSDefaultServiceQuotas) HandleDeserializ
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorListAWSDefaultServiceQuotas(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorListAWSDefaultServiceQuotas(response, &metadata)
 	}
 	output := &ListAWSDefaultServiceQuotasOutput{}
 	out.Result = output
@@ -1111,7 +1111,7 @@ func (m *awsAwsjson11_deserializeOpListAWSDefaultServiceQuotas) HandleDeserializ
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorListAWSDefaultServiceQuotas(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorListAWSDefaultServiceQuotas(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1201,7 +1201,7 @@ func (m *awsAwsjson11_deserializeOpListRequestedServiceQuotaChangeHistory) Handl
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorListRequestedServiceQuotaChangeHistory(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorListRequestedServiceQuotaChangeHistory(response, &metadata)
 	}
 	output := &ListRequestedServiceQuotaChangeHistoryOutput{}
 	out.Result = output
@@ -1237,7 +1237,7 @@ func (m *awsAwsjson11_deserializeOpListRequestedServiceQuotaChangeHistory) Handl
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorListRequestedServiceQuotaChangeHistory(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorListRequestedServiceQuotaChangeHistory(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1327,7 +1327,7 @@ func (m *awsAwsjson11_deserializeOpListRequestedServiceQuotaChangeHistoryByQuota
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorListRequestedServiceQuotaChangeHistoryByQuota(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorListRequestedServiceQuotaChangeHistoryByQuota(response, &metadata)
 	}
 	output := &ListRequestedServiceQuotaChangeHistoryByQuotaOutput{}
 	out.Result = output
@@ -1363,7 +1363,7 @@ func (m *awsAwsjson11_deserializeOpListRequestedServiceQuotaChangeHistoryByQuota
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorListRequestedServiceQuotaChangeHistoryByQuota(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorListRequestedServiceQuotaChangeHistoryByQuota(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1453,7 +1453,7 @@ func (m *awsAwsjson11_deserializeOpListServiceQuotaIncreaseRequestsInTemplate) H
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorListServiceQuotaIncreaseRequestsInTemplate(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorListServiceQuotaIncreaseRequestsInTemplate(response, &metadata)
 	}
 	output := &ListServiceQuotaIncreaseRequestsInTemplateOutput{}
 	out.Result = output
@@ -1489,7 +1489,7 @@ func (m *awsAwsjson11_deserializeOpListServiceQuotaIncreaseRequestsInTemplate) H
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorListServiceQuotaIncreaseRequestsInTemplate(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorListServiceQuotaIncreaseRequestsInTemplate(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1585,7 +1585,7 @@ func (m *awsAwsjson11_deserializeOpListServiceQuotas) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorListServiceQuotas(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorListServiceQuotas(response, &metadata)
 	}
 	output := &ListServiceQuotasOutput{}
 	out.Result = output
@@ -1621,7 +1621,7 @@ func (m *awsAwsjson11_deserializeOpListServiceQuotas) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorListServiceQuotas(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorListServiceQuotas(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1711,7 +1711,7 @@ func (m *awsAwsjson11_deserializeOpListServices) HandleDeserialize(ctx context.C
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorListServices(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorListServices(response, &metadata)
 	}
 	output := &ListServicesOutput{}
 	out.Result = output
@@ -1747,7 +1747,7 @@ func (m *awsAwsjson11_deserializeOpListServices) HandleDeserialize(ctx context.C
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorListServices(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorListServices(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1834,7 +1834,7 @@ func (m *awsAwsjson11_deserializeOpPutServiceQuotaIncreaseRequestIntoTemplate) H
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorPutServiceQuotaIncreaseRequestIntoTemplate(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorPutServiceQuotaIncreaseRequestIntoTemplate(response, &metadata)
 	}
 	output := &PutServiceQuotaIncreaseRequestIntoTemplateOutput{}
 	out.Result = output
@@ -1870,7 +1870,7 @@ func (m *awsAwsjson11_deserializeOpPutServiceQuotaIncreaseRequestIntoTemplate) H
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorPutServiceQuotaIncreaseRequestIntoTemplate(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorPutServiceQuotaIncreaseRequestIntoTemplate(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1972,7 +1972,7 @@ func (m *awsAwsjson11_deserializeOpRequestServiceQuotaIncrease) HandleDeserializ
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorRequestServiceQuotaIncrease(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorRequestServiceQuotaIncrease(response, &metadata)
 	}
 	output := &RequestServiceQuotaIncreaseOutput{}
 	out.Result = output
@@ -2008,7 +2008,7 @@ func (m *awsAwsjson11_deserializeOpRequestServiceQuotaIncrease) HandleDeserializ
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorRequestServiceQuotaIncrease(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorRequestServiceQuotaIncrease(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

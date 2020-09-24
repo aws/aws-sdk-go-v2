@@ -33,6 +33,8 @@ func (c *Client) DeleteSchema(ctx context.Context, params *DeleteSchemaInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteSchemaValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSchema(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

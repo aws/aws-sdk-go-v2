@@ -38,6 +38,8 @@ func (c *Client) SetUserMFAPreference(ctx context.Context, params *SetUserMFAPre
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSetUserMFAPreferenceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSetUserMFAPreference(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

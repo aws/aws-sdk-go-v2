@@ -34,6 +34,8 @@ func (c *Client) CreateSavingsPlan(ctx context.Context, params *CreateSavingsPla
 	addIdempotencyToken_opCreateSavingsPlanMiddleware(stack, options)
 	addOpCreateSavingsPlanValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSavingsPlan(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

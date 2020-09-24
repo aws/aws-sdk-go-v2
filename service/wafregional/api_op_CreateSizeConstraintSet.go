@@ -64,6 +64,8 @@ func (c *Client) CreateSizeConstraintSet(ctx context.Context, params *CreateSize
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateSizeConstraintSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSizeConstraintSet(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

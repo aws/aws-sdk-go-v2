@@ -32,6 +32,8 @@ func (c *Client) UpdateAddressBook(ctx context.Context, params *UpdateAddressBoo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateAddressBookValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAddressBook(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

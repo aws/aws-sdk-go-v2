@@ -37,6 +37,8 @@ func (c *Client) DisassociateRouteTable(ctx context.Context, params *Disassociat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisassociateRouteTableValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateRouteTable(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -43,6 +43,8 @@ func (c *Client) DetectModerationLabels(ctx context.Context, params *DetectModer
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDetectModerationLabelsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDetectModerationLabels(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

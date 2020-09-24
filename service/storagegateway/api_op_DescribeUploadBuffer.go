@@ -35,6 +35,8 @@ func (c *Client) DescribeUploadBuffer(ctx context.Context, params *DescribeUploa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeUploadBufferValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeUploadBuffer(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

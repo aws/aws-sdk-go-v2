@@ -40,6 +40,8 @@ func (c *Client) DeleteVaultAccessPolicy(ctx context.Context, params *DeleteVaul
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteVaultAccessPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVaultAccessPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	glaciercust.AddTreeHashMiddleware(stack)
 
 	for _, fn := range options.APIOptions {

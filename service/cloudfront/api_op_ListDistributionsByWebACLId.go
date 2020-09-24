@@ -33,6 +33,8 @@ func (c *Client) ListDistributionsByWebACLId(ctx context.Context, params *ListDi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListDistributionsByWebACLIdValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListDistributionsByWebACLId(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

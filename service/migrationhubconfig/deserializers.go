@@ -40,7 +40,7 @@ func (m *awsAwsjson11_deserializeOpCreateHomeRegionControl) HandleDeserialize(ct
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorCreateHomeRegionControl(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorCreateHomeRegionControl(response, &metadata)
 	}
 	output := &CreateHomeRegionControlOutput{}
 	out.Result = output
@@ -76,7 +76,7 @@ func (m *awsAwsjson11_deserializeOpCreateHomeRegionControl) HandleDeserialize(ct
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorCreateHomeRegionControl(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorCreateHomeRegionControl(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -166,7 +166,7 @@ func (m *awsAwsjson11_deserializeOpDescribeHomeRegionControls) HandleDeserialize
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorDescribeHomeRegionControls(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorDescribeHomeRegionControls(response, &metadata)
 	}
 	output := &DescribeHomeRegionControlsOutput{}
 	out.Result = output
@@ -202,7 +202,7 @@ func (m *awsAwsjson11_deserializeOpDescribeHomeRegionControls) HandleDeserialize
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorDescribeHomeRegionControls(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorDescribeHomeRegionControls(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -289,7 +289,7 @@ func (m *awsAwsjson11_deserializeOpGetHomeRegion) HandleDeserialize(ctx context.
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorGetHomeRegion(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetHomeRegion(response, &metadata)
 	}
 	output := &GetHomeRegionOutput{}
 	out.Result = output
@@ -325,7 +325,7 @@ func (m *awsAwsjson11_deserializeOpGetHomeRegion) HandleDeserialize(ctx context.
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorGetHomeRegion(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorGetHomeRegion(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

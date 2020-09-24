@@ -38,6 +38,8 @@ func (c *Client) StopCompilationJob(ctx context.Context, params *StopCompilation
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopCompilationJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopCompilationJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -42,6 +42,8 @@ func (c *Client) UpdateAccessKey(ctx context.Context, params *UpdateAccessKeyInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateAccessKeyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAccessKey(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

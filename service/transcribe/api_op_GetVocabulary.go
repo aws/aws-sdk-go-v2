@@ -34,6 +34,8 @@ func (c *Client) GetVocabulary(ctx context.Context, params *GetVocabularyInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetVocabularyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetVocabulary(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

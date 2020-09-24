@@ -37,6 +37,8 @@ func (c *Client) ApplySecurityGroupsToLoadBalancer(ctx context.Context, params *
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpApplySecurityGroupsToLoadBalancerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opApplySecurityGroupsToLoadBalancer(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

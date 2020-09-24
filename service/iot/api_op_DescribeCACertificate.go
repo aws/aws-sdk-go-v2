@@ -33,6 +33,8 @@ func (c *Client) DescribeCACertificate(ctx context.Context, params *DescribeCACe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeCACertificateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCACertificate(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

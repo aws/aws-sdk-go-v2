@@ -116,6 +116,8 @@ func (c *Client) CreateBucket(ctx context.Context, params *CreateBucketInput, op
 	addOpCreateBucketValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBucket(options.Region), middleware.Before)
 	addUpdateEndpointMiddleware(stack, options)
+	addResponseErrorMiddleware(stack)
+	addMetadataRetrieverMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

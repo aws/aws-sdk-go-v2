@@ -35,6 +35,8 @@ func (c *Client) DeletePortal(ctx context.Context, params *DeletePortalInput, op
 	addIdempotencyToken_opDeletePortalMiddleware(stack, options)
 	addOpDeletePortalValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePortal(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

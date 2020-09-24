@@ -34,6 +34,8 @@ func (c *Client) UpdateHITReviewStatus(ctx context.Context, params *UpdateHITRev
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateHITReviewStatusValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateHITReviewStatus(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

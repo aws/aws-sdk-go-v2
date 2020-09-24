@@ -61,6 +61,8 @@ func (c *Client) AnalyzeDocument(ctx context.Context, params *AnalyzeDocumentInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAnalyzeDocumentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAnalyzeDocument(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

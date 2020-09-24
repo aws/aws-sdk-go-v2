@@ -33,6 +33,8 @@ func (c *Client) GetUpload(ctx context.Context, params *GetUploadInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetUploadValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetUpload(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

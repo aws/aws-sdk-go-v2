@@ -45,6 +45,8 @@ func (c *Client) DeleteVolume(ctx context.Context, params *DeleteVolumeInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteVolumeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVolume(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

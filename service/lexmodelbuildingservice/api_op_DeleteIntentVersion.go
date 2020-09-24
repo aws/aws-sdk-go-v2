@@ -34,6 +34,8 @@ func (c *Client) DeleteIntentVersion(ctx context.Context, params *DeleteIntentVe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteIntentVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteIntentVersion(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

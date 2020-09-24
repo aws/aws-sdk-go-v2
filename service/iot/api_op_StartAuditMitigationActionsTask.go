@@ -35,6 +35,8 @@ func (c *Client) StartAuditMitigationActionsTask(ctx context.Context, params *St
 	addIdempotencyToken_opStartAuditMitigationActionsTaskMiddleware(stack, options)
 	addOpStartAuditMitigationActionsTaskValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartAuditMitigationActionsTask(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,8 @@ func (c *Client) DeletePermission(ctx context.Context, params *DeletePermissionI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeletePermissionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePermission(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

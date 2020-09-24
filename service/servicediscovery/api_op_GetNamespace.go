@@ -33,6 +33,8 @@ func (c *Client) GetNamespace(ctx context.Context, params *GetNamespaceInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetNamespaceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetNamespace(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

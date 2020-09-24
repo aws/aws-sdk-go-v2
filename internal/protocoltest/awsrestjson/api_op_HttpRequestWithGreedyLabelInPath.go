@@ -28,6 +28,8 @@ func (c *Client) HttpRequestWithGreedyLabelInPath(ctx context.Context, params *H
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpHttpRequestWithGreedyLabelInPathValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opHttpRequestWithGreedyLabelInPath(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

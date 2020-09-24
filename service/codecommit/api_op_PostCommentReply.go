@@ -36,6 +36,8 @@ func (c *Client) PostCommentReply(ctx context.Context, params *PostCommentReplyI
 	addIdempotencyToken_opPostCommentReplyMiddleware(stack, options)
 	addOpPostCommentReplyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPostCommentReply(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -39,7 +39,7 @@ func (m *awsRestjson1_deserializeOpCancelQuantumTask) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorCancelQuantumTask(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorCancelQuantumTask(response, &metadata)
 	}
 	output := &CancelQuantumTaskOutput{}
 	out.Result = output
@@ -75,7 +75,7 @@ func (m *awsRestjson1_deserializeOpCancelQuantumTask) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorCancelQuantumTask(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorCancelQuantumTask(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -214,7 +214,7 @@ func (m *awsRestjson1_deserializeOpCreateQuantumTask) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorCreateQuantumTask(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorCreateQuantumTask(response, &metadata)
 	}
 	output := &CreateQuantumTaskOutput{}
 	out.Result = output
@@ -250,7 +250,7 @@ func (m *awsRestjson1_deserializeOpCreateQuantumTask) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorCreateQuantumTask(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorCreateQuantumTask(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -380,7 +380,7 @@ func (m *awsRestjson1_deserializeOpGetDevice) HandleDeserialize(ctx context.Cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorGetDevice(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorGetDevice(response, &metadata)
 	}
 	output := &GetDeviceOutput{}
 	out.Result = output
@@ -416,7 +416,7 @@ func (m *awsRestjson1_deserializeOpGetDevice) HandleDeserialize(ctx context.Cont
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorGetDevice(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorGetDevice(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -588,7 +588,7 @@ func (m *awsRestjson1_deserializeOpGetQuantumTask) HandleDeserialize(ctx context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorGetQuantumTask(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorGetQuantumTask(response, &metadata)
 	}
 	output := &GetQuantumTaskOutput{}
 	out.Result = output
@@ -624,7 +624,7 @@ func (m *awsRestjson1_deserializeOpGetQuantumTask) HandleDeserialize(ctx context
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorGetQuantumTask(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorGetQuantumTask(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -844,7 +844,7 @@ func (m *awsRestjson1_deserializeOpSearchDevices) HandleDeserialize(ctx context.
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorSearchDevices(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorSearchDevices(response, &metadata)
 	}
 	output := &SearchDevicesOutput{}
 	out.Result = output
@@ -880,7 +880,7 @@ func (m *awsRestjson1_deserializeOpSearchDevices) HandleDeserialize(ctx context.
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorSearchDevices(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorSearchDevices(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1009,7 +1009,7 @@ func (m *awsRestjson1_deserializeOpSearchQuantumTasks) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorSearchQuantumTasks(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorSearchQuantumTasks(response, &metadata)
 	}
 	output := &SearchQuantumTasksOutput{}
 	out.Result = output
@@ -1045,7 +1045,7 @@ func (m *awsRestjson1_deserializeOpSearchQuantumTasks) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorSearchQuantumTasks(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorSearchQuantumTasks(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

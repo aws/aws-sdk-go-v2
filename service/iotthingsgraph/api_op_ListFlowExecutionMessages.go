@@ -34,6 +34,8 @@ func (c *Client) ListFlowExecutionMessages(ctx context.Context, params *ListFlow
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListFlowExecutionMessagesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListFlowExecutionMessages(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

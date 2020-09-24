@@ -37,6 +37,8 @@ func (c *Client) GetObjectLockConfiguration(ctx context.Context, params *GetObje
 	addOpGetObjectLockConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetObjectLockConfiguration(options.Region), middleware.Before)
 	addUpdateEndpointMiddleware(stack, options)
+	addResponseErrorMiddleware(stack)
+	addMetadataRetrieverMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

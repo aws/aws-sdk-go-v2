@@ -35,6 +35,8 @@ func (c *Client) ListInstanceFleets(ctx context.Context, params *ListInstanceFle
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListInstanceFleetsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListInstanceFleets(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

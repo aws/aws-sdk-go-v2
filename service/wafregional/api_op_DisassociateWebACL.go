@@ -40,6 +40,8 @@ func (c *Client) DisassociateWebACL(ctx context.Context, params *DisassociateWeb
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisassociateWebACLValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateWebACL(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
