@@ -1,4 +1,4 @@
-package customizations
+package acceptencoding
 
 import (
 	"compress/gzip"
@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"io"
 
-	smithy "github.com/awslabs/smithy-go"
+	"github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
@@ -25,26 +25,26 @@ type AddAcceptEncodingGzipOptions struct {
 // computed without disabling GZIP support.
 func AddAcceptEncodingGzip(stack *middleware.Stack, options AddAcceptEncodingGzipOptions) {
 	if options.Enable {
-		stack.Finalize.Add(&AcceptEncodingGzipMiddleware{}, middleware.Before)
+		stack.Finalize.Add(&EnableGzipMiddleware{}, middleware.Before)
 		stack.Deserialize.Insert(&DecompressGzipMiddleware{}, "OperationDeserializer", middleware.After)
 		return
 	}
 
-	stack.Finalize.Add(&DisableAcceptEncodingGzipMiddleware{}, middleware.Before)
+	stack.Finalize.Add(&DisableGzipMiddleware{}, middleware.Before)
 }
 
-// DisableAcceptEncodingGzipMiddleware provides the middleware that will
+// DisableGzipMiddleware provides the middleware that will
 // disable the underlying http client automatically enabling for gzip
 // decompress content-encoding support.
-type DisableAcceptEncodingGzipMiddleware struct{}
+type DisableGzipMiddleware struct{}
 
 // ID returns the id for the middleware.
-func (*DisableAcceptEncodingGzipMiddleware) ID() string {
-	return "DynamoDB:DisableAcceptEncodingGzipMiddleware"
+func (*DisableGzipMiddleware) ID() string {
+	return "DisableAcceptEncodingGzipMiddleware"
 }
 
-// HandleFinalize implements the FinalizeMiddlware interface.
-func (*DisableAcceptEncodingGzipMiddleware) HandleFinalize(
+// HandleFinalize implements the FinalizeMiddleware interface.
+func (*DisableGzipMiddleware) HandleFinalize(
 	ctx context.Context, input middleware.FinalizeInput, next middleware.FinalizeHandler,
 ) (
 	output middleware.FinalizeOutput, metadata middleware.Metadata, err error,
@@ -63,16 +63,16 @@ func (*DisableAcceptEncodingGzipMiddleware) HandleFinalize(
 	return next.HandleFinalize(ctx, input)
 }
 
-// AcceptEncodingGzipMiddleware provides a middleware to enable support for
+// EnableGzipMiddleware provides a middleware to enable support for
 // gzip responses, with manual decompression. This prevents the underlying HTTP
 // client from performing the gzip decompression automatically.
-type AcceptEncodingGzipMiddleware struct{}
+type EnableGzipMiddleware struct{}
 
 // ID returns the id for the middleware.
-func (*AcceptEncodingGzipMiddleware) ID() string { return "DynamoDB:AcceptEncodingGzipMiddleware" }
+func (*EnableGzipMiddleware) ID() string { return "AcceptEncodingGzipMiddleware" }
 
 // HandleFinalize implements the FinalizeMiddlware interface.
-func (*AcceptEncodingGzipMiddleware) HandleFinalize(
+func (*EnableGzipMiddleware) HandleFinalize(
 	ctx context.Context, input middleware.FinalizeInput, next middleware.FinalizeHandler,
 ) (
 	output middleware.FinalizeOutput, metadata middleware.Metadata, err error,
@@ -96,7 +96,7 @@ func (*AcceptEncodingGzipMiddleware) HandleFinalize(
 type DecompressGzipMiddleware struct{}
 
 // ID returns the id for the middleware.
-func (*DecompressGzipMiddleware) ID() string { return "DynamoDB:DecompressGzipMiddleware" }
+func (*DecompressGzipMiddleware) ID() string { return "DecompressGzipMiddleware" }
 
 // HandleDeserialize implements the DeserializeMiddlware interface.
 func (*DecompressGzipMiddleware) HandleDeserialize(
