@@ -25,7 +25,7 @@ matrix:
       os: windows
       go: 1.15.x
       script:
-        - make ci-test-no-generate
+        - make vet build unit-test
 
     - language: java
       jdk: openjdk8
