@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "Glacier"
+const ServiceAPIVersion = "2012-06-01"
 
 // Amazon S3 Glacier (Glacier) is a storage solution for "cold data."  <p>Glacier
 // is an extremely low-cost storage service that provides secure, durable, and
@@ -145,6 +146,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -160,6 +162,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

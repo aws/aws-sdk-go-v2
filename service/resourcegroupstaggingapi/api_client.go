@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "Resource Groups Tagging API"
+const ServiceAPIVersion = "2017-01-26"
 
 // Resource Groups Tagging API  <p>This guide describes the API operations for the
 // resource groups tagging.</p> <p>A tag is a label that you assign to an AWS
@@ -193,6 +194,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -208,6 +210,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

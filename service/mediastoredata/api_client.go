@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "MediaStore Data"
+const ServiceAPIVersion = "2017-09-01"
 
 // An AWS Elemental MediaStore asset is an object, similar to an object in the
 // Amazon S3 service. Objects are the fundamental entities that are stored in AWS
@@ -123,6 +124,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -138,6 +140,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

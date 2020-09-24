@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "AppConfig"
+const ServiceAPIVersion = "2019-10-09"
 
 // AWS AppConfig Use AWS AppConfig, a capability of AWS Systems Manager, to create,
 // manage, and quickly deploy application configurations. AppConfig supports
@@ -150,6 +151,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -165,6 +167,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

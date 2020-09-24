@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "Auto Scaling"
+const ServiceAPIVersion = "2011-01-01"
 
 // Amazon EC2 Auto Scaling  <p>Amazon EC2 Auto Scaling is designed to automatically
 // launch or terminate EC2 instances based on user-defined scaling policies,
@@ -128,6 +129,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -143,6 +145,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

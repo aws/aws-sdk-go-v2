@@ -4,7 +4,7 @@ package endpoints
 
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
+	"github.com/aws/aws-sdk-go-v2/internal/endpoints"
 	"regexp"
 )
 
@@ -19,7 +19,7 @@ type Resolver struct {
 }
 
 // ResolveEndpoint resolves the service endpoint for the given region and options
-func (r *Resolver) ResolveEndpoint(region string, options Options) (aws.Endpoint, error) {
+func (r *Resolver) ResolveEndpoint(region string, options Options) (endpoint aws.Endpoint, err error) {
 	opt := endpoints.Options{
 		DisableHTTPS: options.DisableHTTPS,
 	}

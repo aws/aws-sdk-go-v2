@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "Cloud9"
+const ServiceAPIVersion = "2017-09-23"
 
 // AWS Cloud9 AWS Cloud9 is a collection of tools that you can use to code, build,
 // run, test, debug, and release software in the cloud. For more information about
@@ -166,6 +167,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -181,6 +183,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

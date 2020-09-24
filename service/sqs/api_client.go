@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "SQS"
+const ServiceAPIVersion = "2012-11-05"
 
 // Welcome to the Amazon Simple Queue Service API Reference. Amazon Simple Queue
 // Service (Amazon SQS) is a reliable, highly-scalable hosted queue for storing
@@ -150,6 +151,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -165,6 +167,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

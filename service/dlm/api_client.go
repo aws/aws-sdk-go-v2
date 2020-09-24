@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "DLM"
+const ServiceAPIVersion = "2018-01-12"
 
 // Amazon Data Lifecycle Manager With Amazon Data Lifecycle Manager, you can manage
 // the lifecycle of your AWS resources. You create lifecycle policies, which are
@@ -127,6 +128,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -142,6 +144,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

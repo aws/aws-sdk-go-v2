@@ -13,6 +13,7 @@ import (
 )
 
 const ServiceID = "Rest Xml Protocol"
+const ServiceAPIVersion = "2019-12-16"
 
 // A REST XML service that sends XML requests and responses.
 type Client struct {
@@ -113,6 +114,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		Retryer:    cfg.Retryer,
 		HTTPClient: cfg.HTTPClient,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -128,6 +130,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

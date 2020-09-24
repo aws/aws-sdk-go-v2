@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "RDS Data"
+const ServiceAPIVersion = "2018-08-01"
 
 // Amazon RDS Data Service Amazon RDS provides an HTTP endpoint to run SQL
 // statements on an Amazon Aurora Serverless DB cluster. To run these statements,
@@ -128,6 +129,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -143,6 +145,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

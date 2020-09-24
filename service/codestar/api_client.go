@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "CodeStar"
+const ServiceAPIVersion = "2017-04-19"
 
 // AWS CodeStar This is the API reference for AWS CodeStar. This reference provides
 // descriptions of the operations and data types for the AWS CodeStar API along
@@ -179,6 +180,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -194,6 +196,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

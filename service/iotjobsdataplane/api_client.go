@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "IoT Jobs Data Plane"
+const ServiceAPIVersion = "2017-09-29"
 
 // AWS IoT Jobs is a service that allows you to define a set of jobs — remote
 // operations that are sent to and executed on one or more devices connected to AWS
@@ -133,6 +134,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -148,6 +150,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

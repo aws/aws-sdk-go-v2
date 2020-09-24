@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "CloudTrail"
+const ServiceAPIVersion = "2013-11-01"
 
 // AWS CloudTrail This is the CloudTrail API Reference. It provides descriptions of
 // actions, data types, common parameters, and common errors for CloudTrail.
@@ -137,6 +138,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -152,6 +154,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

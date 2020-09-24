@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "Storage Gateway"
+const ServiceAPIVersion = "2013-06-30"
 
 // AWS Storage Gateway Service  <p>AWS Storage Gateway is the service that connects
 // an on-premises software appliance with cloud-based storage to provide seamless
@@ -164,6 +165,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -179,6 +181,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {
