@@ -1,0 +1,84 @@
+package main
+
+import (
+	"bytes"
+	"context"
+	"fmt"
+	"io"
+	"os"
+	"os/exec"
+	"runtime"
+)
+
+// Work provides a pending job to be done.
+type Work struct {
+	Path string
+	Cmd  string
+}
+
+// WorkLog provides the result of a job.
+type WorkLog struct {
+	Path, Cmd string
+	Err       error
+	Output    *bytes.Buffer
+}
+
+// CommandWorker provides a consumer of work jobs and posts results to the worklog
+func CommandWorker(ctx context.Context, jobs <-chan Work, results chan<- WorkLog) {
+	for {
+		var result WorkLog
+
+		select {
+		case <-ctx.Done():
+			return
+		case w, ok := <-jobs:
+			if !ok {
+				return
+			}
+			output := bytes.NewBuffer(nil)
+			result.Path = w.Path
+			result.Cmd = w.Cmd
+			result.Output = output
+
+			cmd, err := NewCommand(ctx, output, output, w.Path, w.Cmd)
+			if err != nil {
+				result.Err = fmt.Errorf("failed to build command, %w", err)
+				break
+			}
+
+			if err := cmd.Run(); err != nil {
+				result.Err = fmt.Errorf("failed to run command, %v", err)
+			}
+		}
+
+		select {
+		case <-ctx.Done():
+			return
+		case results <- result:
+		}
+	}
+}
+
+// NewCommand initializes and returns a exec.Cmd for the command provided.
+func NewCommand(ctx context.Context, stdout, stderr io.Writer, workingDir string, args ...string) (*exec.Cmd, error) {
+	var cmdArgs []string
+	if runtime.GOOS == "windows" {
+		cmdArgs = []string{"cmd.exe", "/C"}
+	} else {
+		cmdArgs = []string{"sh", "-c"}
+	}
+
+	if len(args) == 0 {
+		return nil, fmt.Errorf("failed to create command, no arguments provided")
+	}
+
+	cmdArgs = append(cmdArgs, args...)
+	cmd := exec.CommandContext(ctx, cmdArgs[0], cmdArgs[1:]...)
+	cmd.Env = os.Environ()
+	cmd.Dir = workingDir
+
+	cmd.Stdout = stdout
+	cmd.Stderr = stderr
+
+	return cmd, nil
+}
