@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "CloudWatch Logs"
+const ServiceAPIVersion = "2014-03-28"
 
 // You can use Amazon CloudWatch Logs to monitor, store, and access your log files
 // from Amazon EC2 instances, AWS CloudTrail, or other sources. You can then
@@ -149,6 +150,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -164,6 +166,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

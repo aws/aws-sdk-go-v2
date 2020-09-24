@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "Pinpoint Email"
+const ServiceAPIVersion = "2018-07-26"
 
 // Amazon Pinpoint Email Service Welcome to the Amazon Pinpoint Email API
 // Reference. This guide provides information about the Amazon Pinpoint Email API
@@ -153,6 +154,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -168,6 +170,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

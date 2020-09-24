@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "Cost and Usage Report Service"
+const ServiceAPIVersion = "2017-01-06"
 
 // The AWS Cost and Usage Report API enables you to programmatically create, query,
 // and delete AWS Cost and Usage report definitions. AWS Cost and Usage reports
@@ -129,6 +130,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -144,6 +146,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

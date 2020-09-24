@@ -16,6 +16,7 @@ import (
 )
 
 const ServiceID = "CodeGuru Reviewer"
+const ServiceAPIVersion = "2019-09-19"
 
 // This section provides documentation for the Amazon CodeGuru Reviewer API
 // operations. CodeGuru Reviewer is a service that uses program analysis and
@@ -142,6 +143,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -157,6 +159,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

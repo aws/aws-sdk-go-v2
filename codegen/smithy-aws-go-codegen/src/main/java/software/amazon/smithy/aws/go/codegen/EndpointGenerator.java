@@ -50,9 +50,10 @@ final class EndpointGenerator implements Runnable {
     public static final String RESOLVER_FUNC_NAME = "EndpointResolverFunc";
     public static final String RESOLVER_OPTIONS = "ResolverOptions";
     public static final String CLIENT_CONFIG_RESOLVER = "resolveDefaultEndpointConfiguration";
+    public static final String RESOLVER_CONSTRUCTOR_NAME = "NewDefaultEndpointResolver";
+    public static final String AWS_ENDPOINT_RESOLVER_HELPER = "WithEndpointResolver";
 
     private static final int ENDPOINT_MODEL_VERSION = 3;
-    private static final String RESOLVER_CONSTRUCTOR_NAME = "NewDefaultEndpointResolver";
     private static final String INTERNAL_ENDPOINT_PACKAGE = "internal/endpoints";
     private static final String INTERNAL_RESOLVER_NAME = "Resolver";
     private static final String INTERNAL_RESOLVER_OPTIONS_NAME = "Options";
@@ -117,19 +118,67 @@ final class EndpointGenerator implements Runnable {
 
     @Override
     public void run() {
-        writerFactory.accept(INTERNAL_ENDPOINT_PACKAGE + "/endpoints.go", getInternalEndpointImportPath(), (writer) -> {
-            generateInternalResolverImplementation(writer);
-            generateInternalEndpointsModel(writer);
-        });
         writerFactory.accept("endpoints.go", settings.getModuleName(), writer -> {
             generatePublicResolverTypes(writer);
             generateMiddleware(writer);
+            generateAwsEndpointResolverWrapper(writer);
+        });
+        writerFactory.accept(INTERNAL_ENDPOINT_PACKAGE + "/endpoints.go", getInternalEndpointImportPath(), (writer) -> {
+            generateInternalResolverImplementation(writer);
+            generateInternalEndpointsModel(writer);
         });
         writerFactory.accept(INTERNAL_ENDPOINT_PACKAGE + "/endpoints_test.go",
                 getInternalEndpointImportPath(), (writer) -> {
                     writer.addUseImports(SmithyGoDependency.TESTING);
                     writer.openBlock("func TestRegexCompile(t *testing.T) {", "}", () -> {
                         writer.write("_ = $T", getInternalEndpointsSymbol(INTERNAL_ENDPOINTS_DATA_NAME, false).build());
+                    });
+                });
+    }
+
+    private void generateAwsEndpointResolverWrapper(GoWriter writer) {
+        Symbol awsEndpointResolver = SymbolUtils.createValueSymbolBuilder("EndpointResolver", AwsGoDependency.AWS_CORE)
+                .build();
+        Symbol resolverInterface = SymbolUtils.createValueSymbolBuilder(RESOLVER_INTERFACE_NAME).build();
+
+        Symbol wrappedResolverSymbol = SymbolUtils.createPointableSymbolBuilder("wrappedEndpointResolver").build();
+        writer.openBlock("type $T struct {", "}", wrappedResolverSymbol, () -> {
+            writer.write("awsResolver $T", awsEndpointResolver);
+            writer.write("resolver $T", resolverInterface);
+        });
+        writeExternalResolveEndpointImplementation(writer, wrappedResolverSymbol, "w", () -> {
+            writer.openBlock("if w.awsResolver == nil {", "}", () -> writer.write("goto fallback"));
+
+            writer.write("endpoint, err = w.awsResolver.ResolveEndpoint(ServiceID, region)");
+            writer.openBlock("if err == nil {", "}", () -> writer.write("return endpoint, nil"));
+            writer.write("");
+
+            writer.addUseImports(SmithyGoDependency.ERRORS);
+            writer.openBlock("if nf := (&$T{}); !errors.As(err, &nf) {", "}",
+                    SymbolUtils.createValueSymbolBuilder("EndpointNotFoundError", AwsGoDependency.AWS_CORE).build(),
+                    () -> writer.write("return endpoint, err"));
+            writer.write("");
+
+            writer.write("fallback:");
+            writer.openBlock("if w.resolver == nil {", "}", () -> {
+                writer.addUseImports(SmithyGoDependency.FMT);
+                writer.write("return endpoint, fmt.Errorf(\"default endpoint resolver provided was nil\")");
+            });
+            writer.write("return w.resolver.ResolveEndpoint(region, options)");
+        });
+
+        // Generate exported helper for constructing a wrapper around the AWS EndpointResolver type that is compatible
+        // with the clients EndpointResolver interface.
+        writer.writeDocs(String.format("%s returns an EndpointResolver that first delegates endpoint resolution "
+                        + "to the awsResolver. If awsResolver returns `aws.EndpointNotFoundError` error, the resolver "
+                        + "will use the the provided fallbackResolver for resolution. awsResolver and fallbackResolver "
+                        + "must not be nil",
+                AWS_ENDPOINT_RESOLVER_HELPER));
+        writer.openBlock("func $L(awsResolver $T, fallbackResolver $T) $T {", "}", AWS_ENDPOINT_RESOLVER_HELPER,
+                awsEndpointResolver, resolverInterface, resolverInterface, () -> {
+                    writer.openBlock("return &$T{", "}", wrappedResolverSymbol, () -> {
+                        writer.write("awsResolver: awsResolver,");
+                        writer.write("resolver: fallbackResolver,");
                     });
                 });
     }
@@ -260,17 +309,18 @@ final class EndpointGenerator implements Runnable {
                     .build());
         });
 
+        Symbol resolverFuncSymbol = SymbolUtils.createValueSymbolBuilder(RESOLVER_FUNC_NAME).build();
+
         // Generate resolver function creator
         writer.writeDocs(String.format("%s is a helper utility that wraps a function so it satisfies the %s "
                 + "interface. This is useful when you want to add additional endpoint resolving logic, or stub out "
                 + "specific endpoints with custom values.", RESOLVER_FUNC_NAME, RESOLVER_INTERFACE_NAME));
-        writer.write("type $L func(region string, options $T) ($T, error)",
-                RESOLVER_FUNC_NAME, resolverOptionsSymbol, awsEndpointSymbol);
+        writer.write("type $T func(region string, options $T) ($T, error)",
+                resolverFuncSymbol, resolverOptionsSymbol, awsEndpointSymbol);
 
-        writer.openBlock("func (fn $L) ResolveEndpoint(region string, options $T) ($T, error) {", "}",
-                RESOLVER_FUNC_NAME, resolverOptionsSymbol, awsEndpointSymbol, () -> {
+        writeExternalResolveEndpointImplementation(writer, resolverFuncSymbol, "fn", () -> {
             writer.write("return fn(region, options)");
-        }).write("");
+        });
 
         // Generate Client Options Configuration Resolver
         writer.openBlock("func $L(o $P) {", "}", CLIENT_CONFIG_RESOLVER,
@@ -280,9 +330,51 @@ final class EndpointGenerator implements Runnable {
                 });
     }
 
-    private void generateInternalResolverImplementation(GoWriter writer) {
-        Symbol awsEndpointSymbol = SymbolUtils.createValueSymbolBuilder("Endpoint", AwsGoDependency.AWS_CORE).build();
+    private void writeExternalResolveEndpointImplementation(
+            GoWriter writer,
+            Symbol receiverType,
+            String receiverIdentifier,
+            Runnable body
+    ) {
+        Symbol resolverOptionsSymbol = SymbolUtils.createPointableSymbolBuilder(RESOLVER_OPTIONS).build();
+        writeResolveEndpointImplementation(writer, receiverType, receiverIdentifier, resolverOptionsSymbol,
+                body);
+    }
 
+    private void writeInternalResolveEndpointImplementation(
+            GoWriter writer,
+            Symbol receiverType,
+            String receiverIdentifier,
+            Runnable body
+    ) {
+        Symbol resolverOptionsSymbol = SymbolUtils.createPointableSymbolBuilder(INTERNAL_RESOLVER_OPTIONS_NAME).build();
+        writeResolveEndpointImplementation(writer, receiverType, receiverIdentifier, resolverOptionsSymbol,
+                body);
+    }
+
+    /**
+     * Writes the ResolveEndpoint function signature to satisfy the EndpointResolver interface.
+     *
+     * @param writer                the code writer
+     * @param receiverType          the receiver symbol type should be can be value or pointer
+     * @param receiverIdentifier    the identifier to use for the receiver
+     * @param resolverOptionsSymbol the symbol for the options
+     * @param body                  a runnable that will populate the function implementation.
+     */
+    private void writeResolveEndpointImplementation(
+            GoWriter writer,
+            Symbol receiverType,
+            String receiverIdentifier,
+            Symbol resolverOptionsSymbol,
+            Runnable body
+    ) {
+        Symbol awsEndpointSymbol = SymbolUtils.createValueSymbolBuilder("Endpoint", AwsGoDependency.AWS_CORE).build();
+        writer.openBlock("func ($L $P) ResolveEndpoint(region string, options $T) (endpoint $T, err error) {", "}",
+                receiverIdentifier, receiverType, resolverOptionsSymbol, awsEndpointSymbol, body::run)
+                .write("");
+    }
+
+    private void generateInternalResolverImplementation(GoWriter writer) {
         // Options
         Symbol resolverOptionsSymbol = SymbolUtils.createPointableSymbolBuilder(INTERNAL_RESOLVER_OPTIONS_NAME).build();
         writer.writeDocs(String.format("%s is the endpoint resolver configuration options",
@@ -304,17 +396,16 @@ final class EndpointGenerator implements Runnable {
         });
         writer.write("");
         writer.writeDocs("ResolveEndpoint resolves the service endpoint for the given region and options");
-        writer.openBlock("func (r $P) ResolveEndpoint(region string, options $T) ($T, error) {", "}",
-                resolverImplSymbol, resolverOptionsSymbol, awsEndpointSymbol, () -> {
-                    Symbol sharedOptions = SymbolUtils.createPointableSymbolBuilder("Options",
-                            AwsGoDependency.AWS_ENDPOINTS).build();
-                    writer.openBlock("opt := $T{", "}", sharedOptions, () -> {
-                        resolveConfigFields.stream().filter(ResolveConfigField::isShared).forEach(field -> {
-                            writer.write("$L: options.$L,", field.getName(), field.getName());
-                        });
-                    });
-                    writer.write("return r.partitions.ResolveEndpoint(region, opt)");
+        writeInternalResolveEndpointImplementation(writer, resolverImplSymbol, "r", () -> {
+            Symbol sharedOptions = SymbolUtils.createPointableSymbolBuilder("Options",
+                    AwsGoDependency.AWS_ENDPOINTS).build();
+            writer.openBlock("opt := $T{", "}", sharedOptions, () -> {
+                resolveConfigFields.stream().filter(ResolveConfigField::isShared).forEach(field -> {
+                    writer.write("$L: options.$L,", field.getName(), field.getName());
                 });
+            });
+            writer.write("return r.partitions.ResolveEndpoint(region, opt)");
+        });
         writer.write("");
         writer.writeDocs(String.format("New returns a new %s", resolverImplSymbol.getName()));
         writer.openBlock("func New() *$T {", "}", resolverImplSymbol, () -> writer.openBlock("return &$T{", "}",

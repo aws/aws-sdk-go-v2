@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "CodeBuild"
+const ServiceAPIVersion = "2016-10-06"
 
 // AWS CodeBuild AWS CodeBuild is a fully managed build service in the cloud. AWS
 // CodeBuild compiles your source code, runs unit tests, and produces artifacts
@@ -247,6 +248,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -262,6 +264,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

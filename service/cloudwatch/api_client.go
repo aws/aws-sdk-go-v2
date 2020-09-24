@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "CloudWatch"
+const ServiceAPIVersion = "2010-08-01"
 
 // Amazon CloudWatch monitors your Amazon Web Services (AWS) resources and the
 // applications you run on AWS in real time. You can use CloudWatch to collect and
@@ -132,6 +133,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -147,6 +149,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "Transfer"
+const ServiceAPIVersion = "2018-11-05"
 
 // AWS Transfer Family is a fully managed service that enables the transfer of
 // files over the the File Transfer Protocol (FTP), File Transfer Protocol over SSL
@@ -130,6 +131,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -145,6 +147,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

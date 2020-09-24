@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "Elastic Load Balancing v2"
+const ServiceAPIVersion = "2015-12-01"
 
 // Elastic Load Balancing  <p>A load balancer distributes incoming traffic across
 // targets, such as your EC2 instances. This enables you to increase the
@@ -142,6 +143,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -157,6 +159,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "OpsWorks"
+const ServiceAPIVersion = "2013-02-18"
 
 // AWS OpsWorks Welcome to the AWS OpsWorks Stacks API Reference. This guide
 // provides descriptions, syntax, and usage examples for AWS OpsWorks Stacks
@@ -171,6 +172,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -186,6 +188,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

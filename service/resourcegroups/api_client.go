@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "Resource Groups"
+const ServiceAPIVersion = "2017-11-27"
 
 // AWS Resource Groups  <p>AWS Resource Groups lets you organize AWS resources such
 // as Amazon EC2 instances, Amazon Relational Database Service databases, and
@@ -144,6 +145,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -159,6 +161,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "Route53Resolver"
+const ServiceAPIVersion = "2018-04-01"
 
 // Here's how you set up to query an Amazon Route 53 private hosted zone from your
 // network:  <ol> <li> <p>Connect your network to a VPC using AWS Direct Connect or
@@ -140,6 +141,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -155,6 +157,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

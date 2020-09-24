@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "Lex Runtime Service"
+const ServiceAPIVersion = "2016-11-28"
 
 // Amazon Lex provides both build and runtime endpoints. Each endpoint provides a
 // set of operations (API). Your conversational bot uses the runtime API to
@@ -131,6 +132,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -146,6 +148,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

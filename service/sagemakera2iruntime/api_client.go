@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "SageMaker A2I Runtime"
+const ServiceAPIVersion = "2019-11-07"
 
 // Amazon Augmented AI is in preview release and is subject to change. We do not
 // recommend using this product in production environments. Amazon Augmented AI
@@ -156,6 +157,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -171,6 +173,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

@@ -16,6 +16,7 @@ import (
 )
 
 const ServiceID = "ServiceDiscovery"
+const ServiceAPIVersion = "2017-03-14"
 
 // AWS Cloud Map lets you configure public DNS, private DNS, or HTTP namespaces
 // that your microservice applications run in. When an instance of the service
@@ -139,6 +140,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -154,6 +156,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

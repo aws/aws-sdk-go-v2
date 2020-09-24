@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "Cognito Identity Provider"
+const ServiceAPIVersion = "2016-04-18"
 
 // Using the Amazon Cognito User Pools API, you can create a user pool to manage
 // directories and users. You can authenticate a user to obtain tokens related to
@@ -125,6 +126,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -140,6 +142,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

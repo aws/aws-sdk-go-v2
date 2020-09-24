@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "Elasticsearch Service"
+const ServiceAPIVersion = "2015-01-01"
 
 // Amazon Elasticsearch Configuration Service Use the Amazon Elasticsearch
 // Configuration API to create, configure, and manage Elasticsearch domains. For
@@ -132,6 +133,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -147,6 +149,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

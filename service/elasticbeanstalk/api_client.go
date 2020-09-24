@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "Elastic Beanstalk"
+const ServiceAPIVersion = "2010-12-01"
 
 // AWS Elastic Beanstalk  <p>AWS Elastic Beanstalk makes it easy for you to create,
 // deploy, and manage scalable, fault-tolerant applications running on the Amazon
@@ -133,6 +134,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -148,6 +150,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {
