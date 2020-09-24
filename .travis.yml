@@ -13,6 +13,7 @@ script:
     make ci-test-no-generate;
 
 before_install:
+  - go get -u golang.org/x/lint/golint
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then choco install make; fi
 
 matrix:
