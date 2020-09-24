@@ -128,7 +128,7 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 			},
 			expectedAccessKey: "AKID",
 			expectedSecretKey: "SECRET",
-			// mockHttpClient(func(r *http.Request) (*http.Response, error) {
+			// mockHTTPClient(func(r *http.Request) (*http.Response, error) {
 			//	return &http.Response{StatusCode: 200, Body: ioutil.NopCloser(bytes.NewReader(nil))}, nil
 			//}),
 		},
@@ -231,9 +231,8 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 						t.Fatalf("expect %v, but got %v", e, a)
 					}
 					return
-				} else {
-					t.Fatalf("expect no error, got %v", err)
 				}
+				t.Fatalf("expect no error, got %v", err)
 			} else if len(c.expectedError) > 0 {
 				t.Fatalf("expect error, got none")
 			}

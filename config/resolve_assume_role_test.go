@@ -22,7 +22,7 @@ func TestAssumeRole(t *testing.T) {
 	os.Setenv("AWS_SHARED_CREDENTIALS_FILE", testConfigFilename)
 	os.Setenv("AWS_PROFILE", "assume_role_w_creds")
 
-	client := mockHttpClient(func(r *http.Request) (*http.Response, error) {
+	client := mockHTTPClient(func(r *http.Request) (*http.Response, error) {
 		return &http.Response{
 			StatusCode: 200,
 			Body: ioutil.NopCloser(bytes.NewReader([]byte(fmt.Sprintf(assumeRoleRespMsg,
@@ -61,7 +61,7 @@ func TestAssumeRole_WithMFA(t *testing.T) {
 	os.Setenv("AWS_SHARED_CREDENTIALS_FILE", testConfigFilename)
 	os.Setenv("AWS_PROFILE", "assume_role_w_creds")
 
-	client := mockHttpClient(func(r *http.Request) (*http.Response, error) {
+	client := mockHTTPClient(func(r *http.Request) (*http.Response, error) {
 		t.Helper()
 
 		if e, a := r.FormValue("SerialNumber"), "0123456789"; e != a {
@@ -160,7 +160,7 @@ func TestAssumeRole_ExtendedDuration(t *testing.T) {
 	os.Setenv("AWS_SHARED_CREDENTIALS_FILE", testConfigFilename)
 	os.Setenv("AWS_PROFILE", "assume_role_w_creds_ext_dur")
 
-	client := mockHttpClient(func(r *http.Request) (*http.Response, error) {
+	client := mockHTTPClient(func(r *http.Request) (*http.Response, error) {
 		t.Helper()
 
 		if e, a := "1800", r.FormValue("DurationSeconds"); e != a {
