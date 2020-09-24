@@ -1,100 +1,98 @@
-/*
-Package stscreds are credential Providers to retrieve STS AWS credentials.
-
-STS provides multiple ways to retrieve credentials which can be used when making
-future AWS service API operation calls.
-
-The SDK will ensure that per instance of credentials.Credentials all requests
-to refresh the credentials will be synchronized. But, the SDK is unable to
-ensure synchronous usage of the AssumeRoleProvider if the value is shared
-between multiple Credentials or service clients.
-
-Assume Role
-
-To assume an IAM role using STS with the SDK you can create a new Credentials
-with the SDKs's stscreds package.
-
-	// Initial credentials loaded from SDK's default credential chain. Such as
-	// the environment, shared credentials (~/.aws/credentials), or EC2 Instance
-	// Role. These credentials will be used to to make the STS Assume Role API.
-	cfg, err := config.LoadDefaultConfig()
-	if err != nil {
-		panic(err)
-	}
-
-	// Create the credentials from AssumeRoleProvider to assume the role
-	// referenced by the "myRoleARN" ARN.
-	stsSvc := sts.NewFromConfig(cfg)
-	creds := stscreds.NewAssumeRoleProvider(stsSvc, "myRoleArn")
-
-	cfg.Credentials = aws.CredentialsCache{Provider: creds}
-
-	// Create service client value configured for credentials
-	// from assumed role.
-	svc := s3.NewFromConfig(cfg)
-
-Assume Role with static MFA Token
-
-To assume an IAM role with a MFA token you can either specify a MFA token code
-directly or provide a function to prompt the user each time the credentials
-need to refresh the role's credentials. Specifying the TokenCode should be used
-for short lived operations that will not need to be refreshed, and when you do
-not want to have direct control over the user provides their MFA token.
-
-With TokenCode the AssumeRoleProvider will be not be able to refresh the role's
-credentials.
-
-	cfg, err := config.LoadDefaultConfig()
-	if err != nil {
-		panic(err)
-	}
-
-	// Create the credentials from AssumeRoleProvider to assume the role
-	// referenced by the "myRoleARN" ARN using the MFA token code provided.
-	creds := stscreds.NewAssumeRoleProvider(sts.NewFromConfig(cfg), "myRoleArn", func(o *stscreds.AssumeRoleOptions) {
-		o.SerialNumber = aws.String("myTokenSerialNumber")
-		o.TokenCode = aws.String("00000000")
-	})
-
-	cfg.Credentials = aws.CredentialsCache{Provider: creds}
-
-	// Create service client value configured for credentials
-	// from assumed role.
-	svc := s3.NewFromConfig(cfg)
-
-Assume Role with MFA Token Provider
-
-To assume an IAM role with MFA for longer running tasks where the credentials
-may need to be refreshed setting the TokenProvider field of AssumeRoleProvider
-will allow the credential provider to prompt for new MFA token code when the
-role's credentials need to be refreshed.
-
-The StdinTokenProvider function is available to prompt on stdin to retrieve
-the MFA token code from the user. You can also implement custom prompts by
-satisfying the TokenProvider function signature.
-
-Using StdinTokenProvider with multiple AssumeRoleProviders, or Credentials will
-have undesirable results as the StdinTokenProvider will not be synchronized. A
-single Credentials with an AssumeRoleProvider can be shared safely.
-
-	cfg, err := config.LoadDefaultConfig()
-	if err != nil {
-		panic(err)
-	}
-
-	// Create the credentials from AssumeRoleProvider to assume the role
-	// referenced by the "myRoleARN" ARN using the MFA token code provided.
-	creds := stscreds.NewAssumeRoleProvider(sts.NewFromConfig(cfg), "myRoleArn", func(o *stscreds.AssumeRoleOptions) {
-		o.SerialNumber = aws.String("myTokenSerialNumber")
-		o.TokenProvider = stscreds.StdinTokenProvider
-	})
-
-	cfg.Credentials = aws.CredentialsCache{Provider: creds}
-
-	// Create service client value configured for credentials
-	// from assumed role.
-	svc := s3.NewFromConfig(cfg)
-*/
+// Package stscreds are credential Providers to retrieve STS AWS credentials.
+//
+// STS provides multiple ways to retrieve credentials which can be used when making
+// future AWS service API operation calls.
+//
+// The SDK will ensure that per instance of credentials.Credentials all requests
+// to refresh the credentials will be synchronized. But, the SDK is unable to
+// ensure synchronous usage of the AssumeRoleProvider if the value is shared
+// between multiple Credentials or service clients.
+//
+// Assume Role
+//
+// To assume an IAM role using STS with the SDK you can create a new Credentials
+// with the SDKs's stscreds package.
+//
+// 	// Initial credentials loaded from SDK's default credential chain. Such as
+// 	// the environment, shared credentials (~/.aws/credentials), or EC2 Instance
+// 	// Role. These credentials will be used to to make the STS Assume Role API.
+// 	cfg, err := config.LoadDefaultConfig()
+// 	if err != nil {
+// 		panic(err)
+// 	}
+//
+// 	// Create the credentials from AssumeRoleProvider to assume the role
+// 	// referenced by the "myRoleARN" ARN.
+// 	stsSvc := sts.NewFromConfig(cfg)
+// 	creds := stscreds.NewAssumeRoleProvider(stsSvc, "myRoleArn")
+//
+// 	cfg.Credentials = aws.CredentialsCache{Provider: creds}
+//
+// 	// Create service client value configured for credentials
+// 	// from assumed role.
+// 	svc := s3.NewFromConfig(cfg)
+//
+// Assume Role with static MFA Token
+//
+// To assume an IAM role with a MFA token you can either specify a MFA token code
+// directly or provide a function to prompt the user each time the credentials
+// need to refresh the role's credentials. Specifying the TokenCode should be used
+// for short lived operations that will not need to be refreshed, and when you do
+// not want to have direct control over the user provides their MFA token.
+//
+// With TokenCode the AssumeRoleProvider will be not be able to refresh the role's
+// credentials.
+//
+// 	cfg, err := config.LoadDefaultConfig()
+// 	if err != nil {
+// 		panic(err)
+// 	}
+//
+// 	// Create the credentials from AssumeRoleProvider to assume the role
+// 	// referenced by the "myRoleARN" ARN using the MFA token code provided.
+// 	creds := stscreds.NewAssumeRoleProvider(sts.NewFromConfig(cfg), "myRoleArn", func(o *stscreds.AssumeRoleOptions) {
+// 		o.SerialNumber = aws.String("myTokenSerialNumber")
+// 		o.TokenCode = aws.String("00000000")
+// 	})
+//
+// 	cfg.Credentials = aws.CredentialsCache{Provider: creds}
+//
+// 	// Create service client value configured for credentials
+// 	// from assumed role.
+// 	svc := s3.NewFromConfig(cfg)
+//
+// Assume Role with MFA Token Provider
+//
+// To assume an IAM role with MFA for longer running tasks where the credentials
+// may need to be refreshed setting the TokenProvider field of AssumeRoleProvider
+// will allow the credential provider to prompt for new MFA token code when the
+// role's credentials need to be refreshed.
+//
+// The StdinTokenProvider function is available to prompt on stdin to retrieve
+// the MFA token code from the user. You can also implement custom prompts by
+// satisfying the TokenProvider function signature.
+//
+// Using StdinTokenProvider with multiple AssumeRoleProviders, or Credentials will
+// have undesirable results as the StdinTokenProvider will not be synchronized. A
+// single Credentials with an AssumeRoleProvider can be shared safely.
+//
+// 	cfg, err := config.LoadDefaultConfig()
+// 	if err != nil {
+// 		panic(err)
+// 	}
+//
+// 	// Create the credentials from AssumeRoleProvider to assume the role
+// 	// referenced by the "myRoleARN" ARN using the MFA token code provided.
+// 	creds := stscreds.NewAssumeRoleProvider(sts.NewFromConfig(cfg), "myRoleArn", func(o *stscreds.AssumeRoleOptions) {
+// 		o.SerialNumber = aws.String("myTokenSerialNumber")
+// 		o.TokenProvider = stscreds.StdinTokenProvider
+// 	})
+//
+// 	cfg.Credentials = aws.CredentialsCache{Provider: creds}
+//
+// 	// Create service client value configured for credentials
+// 	// from assumed role.
+// 	svc := s3.NewFromConfig(cfg)
 package stscreds
 
 import (
