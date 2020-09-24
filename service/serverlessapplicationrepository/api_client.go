@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "ServerlessApplicationRepository"
+const ServiceAPIVersion = "2017-09-08"
 
 // The AWS Serverless Application Repository makes it easy for developers and
 // enterprises to quickly find and deploy serverless applications in the AWS Cloud.
@@ -146,6 +147,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -161,6 +163,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

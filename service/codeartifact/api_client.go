@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "codeartifact"
+const ServiceAPIVersion = "2018-09-22"
 
 // AWS CodeArtifact is a fully managed artifact repository compatible with
 // language-native package managers and build tools such as npm, Apache Maven, and
@@ -240,6 +241,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -255,6 +257,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

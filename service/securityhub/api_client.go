@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "SecurityHub"
+const ServiceAPIVersion = "2018-10-26"
 
 // Security Hub provides you with a comprehensive view of the security state of
 // your AWS environment and resources. It also provides you with the readiness
@@ -149,6 +150,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -164,6 +166,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

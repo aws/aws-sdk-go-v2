@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "Compute Optimizer"
+const ServiceAPIVersion = "2019-11-01"
 
 // AWS Compute Optimizer is a service that analyzes the configuration and
 // utilization metrics of your AWS resources, such as EC2 instances and Auto
@@ -132,6 +133,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -147,6 +149,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

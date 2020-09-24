@@ -4,6 +4,7 @@ package codestar
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
@@ -33,7 +34,7 @@ func NewDefaultEndpointResolver() *internalendpoints.Resolver {
 // endpoint resolving logic, or stub out specific endpoints with custom values.
 type EndpointResolverFunc func(region string, options ResolverOptions) (aws.Endpoint, error)
 
-func (fn EndpointResolverFunc) ResolveEndpoint(region string, options ResolverOptions) (aws.Endpoint, error) {
+func (fn EndpointResolverFunc) ResolveEndpoint(region string, options ResolverOptions) (endpoint aws.Endpoint, err error) {
 	return fn(region, options)
 }
 
@@ -102,4 +103,40 @@ func AddResolveEndpointMiddleware(stack *middleware.Stack, options ResolveEndpoi
 
 func RemoveResolveEndpointMiddleware(stack *middleware.Stack) error {
 	return stack.Serialize.Remove((&ResolveEndpoint{}).ID())
+}
+
+type wrappedEndpointResolver struct {
+	awsResolver aws.EndpointResolver
+	resolver    EndpointResolver
+}
+
+func (w *wrappedEndpointResolver) ResolveEndpoint(region string, options ResolverOptions) (endpoint aws.Endpoint, err error) {
+	if w.awsResolver == nil {
+		goto fallback
+	}
+	endpoint, err = w.awsResolver.ResolveEndpoint(ServiceID, region)
+	if err == nil {
+		return endpoint, nil
+	}
+
+	if nf := (&aws.EndpointNotFoundError{}); !errors.As(err, &nf) {
+		return endpoint, err
+	}
+
+fallback:
+	if w.resolver == nil {
+		return endpoint, fmt.Errorf("default endpoint resolver provided was nil")
+	}
+	return w.resolver.ResolveEndpoint(region, options)
+}
+
+// WithEndpointResolver returns an EndpointResolver that first delegates endpoint
+// resolution to the awsResolver. If awsResolver returns aws.EndpointNotFoundError
+// error, the resolver will use the the provided fallbackResolver for resolution.
+// awsResolver and fallbackResolver must not be nil
+func WithEndpointResolver(awsResolver aws.EndpointResolver, fallbackResolver EndpointResolver) EndpointResolver {
+	return &wrappedEndpointResolver{
+		awsResolver: awsResolver,
+		resolver:    fallbackResolver,
+	}
 }

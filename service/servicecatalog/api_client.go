@@ -16,6 +16,7 @@ import (
 )
 
 const ServiceID = "Service Catalog"
+const ServiceAPIVersion = "2015-12-10"
 
 // AWS Service Catalog AWS Service Catalog (https://aws.amazon.com/servicecatalog/)
 // enables organizations to create and manage catalogs of IT services that are
@@ -137,6 +138,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -152,6 +154,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

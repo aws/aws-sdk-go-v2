@@ -15,6 +15,7 @@ import (
 )
 
 const ServiceID = "API Gateway"
+const ServiceAPIVersion = "2015-07-09"
 
 // Amazon API Gateway Amazon API Gateway helps developers deliver robust, secure,
 // and scalable mobile and web application back ends. API Gateway allows developers
@@ -126,6 +127,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -141,6 +143,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

@@ -16,6 +16,7 @@ import (
 )
 
 const ServiceID = "IoTSiteWise"
+const ServiceAPIVersion = "2019-12-02"
 
 // Welcome to the AWS IoT SiteWise API Reference. AWS IoT SiteWise is an AWS
 // service that connects Industrial Internet of Things (IIoT)
@@ -141,6 +142,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -156,6 +158,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "ACM"
+const ServiceAPIVersion = "2015-12-08"
 
 // AWS Certificate Manager Welcome to the AWS Certificate Manager (ACM) API
 // documentation. You can use ACM to manage SSL/TLS certificates for your AWS-based
@@ -125,6 +126,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -140,6 +142,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "Direct Connect"
+const ServiceAPIVersion = "2012-10-25"
 
 // AWS Direct Connect links your internal network to an AWS Direct Connect location
 // over a standard Ethernet fiber-optic cable. One end of the cable is connected to
@@ -129,6 +130,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -144,6 +146,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

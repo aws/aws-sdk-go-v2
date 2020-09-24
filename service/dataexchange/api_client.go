@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "DataExchange"
+const ServiceAPIVersion = "2017-07-25"
 
 // AWS Data Exchange is a service that makes it easy for AWS customers to exchange
 // data in the cloud. You can use the AWS Data Exchange APIs to create, update,
@@ -136,6 +137,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -151,6 +153,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "IoT Events Data"
+const ServiceAPIVersion = "2018-10-23"
 
 // AWS IoT Events monitors your equipment or device fleets for failures or changes
 // in operation, and triggers actions when such events occur. AWS IoT Events Data
@@ -124,6 +125,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -139,6 +141,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "App Mesh"
+const ServiceAPIVersion = "2019-01-25"
 
 // AWS App Mesh is a service mesh based on the Envoy proxy that makes it easy to
 // monitor and control microservices. App Mesh standardizes how your microservices
@@ -134,6 +135,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -149,6 +151,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

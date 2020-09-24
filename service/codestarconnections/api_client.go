@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "CodeStar connections"
+const ServiceAPIVersion = "2019-12-01"
 
 // AWS CodeStar Connections The CodeStar Connections feature is in preview release
 // and is subject to change. This AWS CodeStar Connections API Reference provides
@@ -183,6 +184,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -198,6 +200,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

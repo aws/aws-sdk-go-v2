@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "Marketplace Metering"
+const ServiceAPIVersion = "2016-01-14"
 
 // AWS Marketplace Metering Service This reference provides descriptions of the
 // low-level AWS Marketplace Metering Service API. AWS Marketplace sellers can use
@@ -163,6 +164,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -178,6 +180,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

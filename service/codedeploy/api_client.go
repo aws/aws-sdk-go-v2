@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "CodeDeploy"
+const ServiceAPIVersion = "2014-10-06"
 
 // AWS CodeDeploy AWS CodeDeploy is a deployment service that automates application
 // deployments to Amazon EC2 instances, on-premises instances running in your own
@@ -192,6 +193,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -207,6 +209,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {
