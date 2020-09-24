@@ -33,6 +33,8 @@ func (c *Client) UpgradePublishedSchema(ctx context.Context, params *UpgradePubl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpgradePublishedSchemaValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpgradePublishedSchema(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

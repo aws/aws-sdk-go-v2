@@ -37,6 +37,8 @@ func (c *Client) GetLoadBalancerMetricData(ctx context.Context, params *GetLoadB
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetLoadBalancerMetricDataValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetLoadBalancerMetricData(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

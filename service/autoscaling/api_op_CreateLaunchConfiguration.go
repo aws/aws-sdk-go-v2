@@ -41,6 +41,8 @@ func (c *Client) CreateLaunchConfiguration(ctx context.Context, params *CreateLa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateLaunchConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLaunchConfiguration(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

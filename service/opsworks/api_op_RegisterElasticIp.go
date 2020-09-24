@@ -40,6 +40,8 @@ func (c *Client) RegisterElasticIp(ctx context.Context, params *RegisterElasticI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterElasticIpValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterElasticIp(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

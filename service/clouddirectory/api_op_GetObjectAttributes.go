@@ -33,6 +33,8 @@ func (c *Client) GetObjectAttributes(ctx context.Context, params *GetObjectAttri
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetObjectAttributesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetObjectAttributes(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

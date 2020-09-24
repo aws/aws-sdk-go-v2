@@ -37,6 +37,8 @@ func (c *Client) StartRemediationExecution(ctx context.Context, params *StartRem
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartRemediationExecutionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartRemediationExecution(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

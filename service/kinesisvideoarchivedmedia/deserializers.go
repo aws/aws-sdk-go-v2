@@ -40,7 +40,7 @@ func (m *awsRestjson1_deserializeOpGetClip) HandleDeserialize(ctx context.Contex
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorGetClip(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorGetClip(response, &metadata)
 	}
 	output := &GetClipOutput{}
 	out.Result = output
@@ -58,7 +58,7 @@ func (m *awsRestjson1_deserializeOpGetClip) HandleDeserialize(ctx context.Contex
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorGetClip(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorGetClip(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -178,7 +178,7 @@ func (m *awsRestjson1_deserializeOpGetDASHStreamingSessionURL) HandleDeserialize
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorGetDASHStreamingSessionURL(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorGetDASHStreamingSessionURL(response, &metadata)
 	}
 	output := &GetDASHStreamingSessionURLOutput{}
 	out.Result = output
@@ -214,7 +214,7 @@ func (m *awsRestjson1_deserializeOpGetDASHStreamingSessionURL) HandleDeserialize
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorGetDASHStreamingSessionURL(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorGetDASHStreamingSessionURL(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -350,7 +350,7 @@ func (m *awsRestjson1_deserializeOpGetHLSStreamingSessionURL) HandleDeserialize(
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorGetHLSStreamingSessionURL(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorGetHLSStreamingSessionURL(response, &metadata)
 	}
 	output := &GetHLSStreamingSessionURLOutput{}
 	out.Result = output
@@ -386,7 +386,7 @@ func (m *awsRestjson1_deserializeOpGetHLSStreamingSessionURL) HandleDeserialize(
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorGetHLSStreamingSessionURL(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorGetHLSStreamingSessionURL(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -522,7 +522,7 @@ func (m *awsRestjson1_deserializeOpGetMediaForFragmentList) HandleDeserialize(ct
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorGetMediaForFragmentList(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorGetMediaForFragmentList(response, &metadata)
 	}
 	output := &GetMediaForFragmentListOutput{}
 	out.Result = output
@@ -540,7 +540,7 @@ func (m *awsRestjson1_deserializeOpGetMediaForFragmentList) HandleDeserialize(ct
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorGetMediaForFragmentList(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorGetMediaForFragmentList(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -645,7 +645,7 @@ func (m *awsRestjson1_deserializeOpListFragments) HandleDeserialize(ctx context.
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorListFragments(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorListFragments(response, &metadata)
 	}
 	output := &ListFragmentsOutput{}
 	out.Result = output
@@ -681,7 +681,7 @@ func (m *awsRestjson1_deserializeOpListFragments) HandleDeserialize(ctx context.
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorListFragments(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorListFragments(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

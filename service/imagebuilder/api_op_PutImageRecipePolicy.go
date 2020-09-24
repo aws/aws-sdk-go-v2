@@ -39,6 +39,8 @@ func (c *Client) PutImageRecipePolicy(ctx context.Context, params *PutImageRecip
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutImageRecipePolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutImageRecipePolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

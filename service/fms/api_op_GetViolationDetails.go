@@ -34,6 +34,8 @@ func (c *Client) GetViolationDetails(ctx context.Context, params *GetViolationDe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetViolationDetailsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetViolationDetails(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

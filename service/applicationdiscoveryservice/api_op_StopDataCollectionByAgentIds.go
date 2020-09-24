@@ -33,6 +33,8 @@ func (c *Client) StopDataCollectionByAgentIds(ctx context.Context, params *StopD
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopDataCollectionByAgentIdsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopDataCollectionByAgentIds(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

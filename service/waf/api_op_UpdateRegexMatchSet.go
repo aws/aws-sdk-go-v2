@@ -78,6 +78,8 @@ func (c *Client) UpdateRegexMatchSet(ctx context.Context, params *UpdateRegexMat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateRegexMatchSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRegexMatchSet(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

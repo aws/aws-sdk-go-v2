@@ -33,6 +33,8 @@ func (c *Client) GetGateway(ctx context.Context, params *GetGatewayInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetGatewayValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetGateway(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

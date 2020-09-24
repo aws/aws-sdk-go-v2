@@ -35,6 +35,8 @@ func (c *Client) DeleteActivation(ctx context.Context, params *DeleteActivationI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteActivationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteActivation(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

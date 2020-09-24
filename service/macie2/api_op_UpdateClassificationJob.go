@@ -33,6 +33,8 @@ func (c *Client) UpdateClassificationJob(ctx context.Context, params *UpdateClas
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateClassificationJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateClassificationJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

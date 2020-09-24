@@ -46,6 +46,8 @@ func (c *Client) GetAssetPropertyAggregates(ctx context.Context, params *GetAsse
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetAssetPropertyAggregatesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetAssetPropertyAggregates(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

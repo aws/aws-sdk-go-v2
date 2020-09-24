@@ -71,6 +71,8 @@ func (c *Client) DescribeKey(ctx context.Context, params *DescribeKeyInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeKeyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeKey(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

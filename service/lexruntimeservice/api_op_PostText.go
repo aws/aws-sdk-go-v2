@@ -75,6 +75,8 @@ func (c *Client) PostText(ctx context.Context, params *PostTextInput, optFns ...
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPostTextValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPostText(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

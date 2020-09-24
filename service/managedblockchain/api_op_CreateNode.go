@@ -35,6 +35,8 @@ func (c *Client) CreateNode(ctx context.Context, params *CreateNodeInput, optFns
 	addIdempotencyToken_opCreateNodeMiddleware(stack, options)
 	addOpCreateNodeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateNode(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -40,6 +40,8 @@ func (c *Client) CreateTrust(ctx context.Context, params *CreateTrustInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateTrustValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTrust(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -44,6 +44,8 @@ func (c *Client) StartSupportDataExport(ctx context.Context, params *StartSuppor
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartSupportDataExportValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartSupportDataExport(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

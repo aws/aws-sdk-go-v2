@@ -33,6 +33,8 @@ func (c *Client) StopBuild(ctx context.Context, params *StopBuildInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopBuildValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopBuild(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

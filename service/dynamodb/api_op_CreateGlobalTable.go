@@ -78,6 +78,8 @@ func (c *Client) CreateGlobalTable(ctx context.Context, params *CreateGlobalTabl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateGlobalTableValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGlobalTable(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	addValidateResponseChecksum(stack, options)
 	addAcceptEncodingGzip(stack, options)
 

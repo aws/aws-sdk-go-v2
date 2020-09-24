@@ -32,6 +32,8 @@ func (c *Client) DeleteUserDefinedFunction(ctx context.Context, params *DeleteUs
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteUserDefinedFunctionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteUserDefinedFunction(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

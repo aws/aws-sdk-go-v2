@@ -38,7 +38,7 @@ func (m *awsRestjson1_deserializeOpGetPersonalizedRanking) HandleDeserialize(ctx
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorGetPersonalizedRanking(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorGetPersonalizedRanking(response, &metadata)
 	}
 	output := &GetPersonalizedRankingOutput{}
 	out.Result = output
@@ -74,7 +74,7 @@ func (m *awsRestjson1_deserializeOpGetPersonalizedRanking) HandleDeserialize(ctx
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorGetPersonalizedRanking(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorGetPersonalizedRanking(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -188,7 +188,7 @@ func (m *awsRestjson1_deserializeOpGetRecommendations) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorGetRecommendations(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorGetRecommendations(response, &metadata)
 	}
 	output := &GetRecommendationsOutput{}
 	out.Result = output
@@ -224,7 +224,7 @@ func (m *awsRestjson1_deserializeOpGetRecommendations) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorGetRecommendations(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorGetRecommendations(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

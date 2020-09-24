@@ -42,6 +42,8 @@ func (c *Client) CreateAssessmentTarget(ctx context.Context, params *CreateAsses
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateAssessmentTargetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAssessmentTarget(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -42,6 +42,8 @@ func (c *Client) DeleteSnapshotSchedule(ctx context.Context, params *DeleteSnaps
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteSnapshotScheduleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSnapshotSchedule(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

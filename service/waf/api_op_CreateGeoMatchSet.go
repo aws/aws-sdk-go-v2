@@ -62,6 +62,8 @@ func (c *Client) CreateGeoMatchSet(ctx context.Context, params *CreateGeoMatchSe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateGeoMatchSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGeoMatchSet(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

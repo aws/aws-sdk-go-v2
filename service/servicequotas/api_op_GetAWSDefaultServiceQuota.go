@@ -34,6 +34,8 @@ func (c *Client) GetAWSDefaultServiceQuota(ctx context.Context, params *GetAWSDe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetAWSDefaultServiceQuotaValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetAWSDefaultServiceQuota(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

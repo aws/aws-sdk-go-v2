@@ -40,6 +40,8 @@ func (c *Client) AssignIpv6Addresses(ctx context.Context, params *AssignIpv6Addr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssignIpv6AddressesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssignIpv6Addresses(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

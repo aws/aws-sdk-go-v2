@@ -32,6 +32,8 @@ func (c *Client) DeleteApiKey(ctx context.Context, params *DeleteApiKeyInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteApiKeyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteApiKey(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

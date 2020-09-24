@@ -61,6 +61,8 @@ func (c *Client) ValidateMatchmakingRuleSet(ctx context.Context, params *Validat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpValidateMatchmakingRuleSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opValidateMatchmakingRuleSet(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

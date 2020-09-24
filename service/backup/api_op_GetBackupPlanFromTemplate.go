@@ -33,6 +33,8 @@ func (c *Client) GetBackupPlanFromTemplate(ctx context.Context, params *GetBacku
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBackupPlanFromTemplateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBackupPlanFromTemplate(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

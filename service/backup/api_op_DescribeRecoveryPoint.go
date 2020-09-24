@@ -35,6 +35,8 @@ func (c *Client) DescribeRecoveryPoint(ctx context.Context, params *DescribeReco
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeRecoveryPointValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRecoveryPoint(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

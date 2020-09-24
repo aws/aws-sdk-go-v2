@@ -33,6 +33,8 @@ func (c *Client) GetInventory(ctx context.Context, params *GetInventoryInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetInventoryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetInventory(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

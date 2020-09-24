@@ -74,6 +74,8 @@ func (c *Client) TransactWriteItems(ctx context.Context, params *TransactWriteIt
 	addIdempotencyToken_opTransactWriteItemsMiddleware(stack, options)
 	addOpTransactWriteItemsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTransactWriteItems(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	addValidateResponseChecksum(stack, options)
 	addAcceptEncodingGzip(stack, options)
 

@@ -39,6 +39,8 @@ func (c *Client) RetrieveTapeArchive(ctx context.Context, params *RetrieveTapeAr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRetrieveTapeArchiveValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRetrieveTapeArchive(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

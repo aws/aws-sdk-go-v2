@@ -35,6 +35,8 @@ func (c *Client) TestRepositoryTriggers(ctx context.Context, params *TestReposit
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTestRepositoryTriggersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTestRepositoryTriggers(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

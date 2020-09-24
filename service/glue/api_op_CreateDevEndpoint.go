@@ -34,6 +34,8 @@ func (c *Client) CreateDevEndpoint(ctx context.Context, params *CreateDevEndpoin
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDevEndpointValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDevEndpoint(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

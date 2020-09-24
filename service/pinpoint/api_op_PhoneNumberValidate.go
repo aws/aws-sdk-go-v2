@@ -33,6 +33,8 @@ func (c *Client) PhoneNumberValidate(ctx context.Context, params *PhoneNumberVal
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPhoneNumberValidateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPhoneNumberValidate(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

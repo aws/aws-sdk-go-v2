@@ -35,6 +35,8 @@ func (c *Client) GetAccessKeyLastUsed(ctx context.Context, params *GetAccessKeyL
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetAccessKeyLastUsedValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetAccessKeyLastUsed(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

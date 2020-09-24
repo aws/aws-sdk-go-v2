@@ -32,6 +32,8 @@ func (c *Client) StartOnDemandAuditTask(ctx context.Context, params *StartOnDema
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartOnDemandAuditTaskValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartOnDemandAuditTask(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

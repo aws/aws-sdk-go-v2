@@ -34,6 +34,8 @@ func (c *Client) GetJourney(ctx context.Context, params *GetJourneyInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetJourneyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetJourney(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

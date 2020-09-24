@@ -55,6 +55,8 @@ func (c *Client) CreateDiskSnapshot(ctx context.Context, params *CreateDiskSnaps
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDiskSnapshotValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDiskSnapshot(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

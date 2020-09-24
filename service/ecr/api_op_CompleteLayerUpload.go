@@ -38,6 +38,8 @@ func (c *Client) CompleteLayerUpload(ctx context.Context, params *CompleteLayerU
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCompleteLayerUploadValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCompleteLayerUpload(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

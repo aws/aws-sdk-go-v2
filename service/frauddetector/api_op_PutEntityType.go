@@ -36,6 +36,8 @@ func (c *Client) PutEntityType(ctx context.Context, params *PutEntityTypeInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutEntityTypeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutEntityType(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

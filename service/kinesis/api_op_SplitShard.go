@@ -69,6 +69,8 @@ func (c *Client) SplitShard(ctx context.Context, params *SplitShardInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSplitShardValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSplitShard(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

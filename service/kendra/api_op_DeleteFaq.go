@@ -32,6 +32,8 @@ func (c *Client) DeleteFaq(ctx context.Context, params *DeleteFaqInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteFaqValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFaq(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,8 @@ func (c *Client) GetSnapshotLimits(ctx context.Context, params *GetSnapshotLimit
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetSnapshotLimitsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSnapshotLimits(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

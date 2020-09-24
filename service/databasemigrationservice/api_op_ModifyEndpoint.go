@@ -33,6 +33,8 @@ func (c *Client) ModifyEndpoint(ctx context.Context, params *ModifyEndpointInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyEndpointValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyEndpoint(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

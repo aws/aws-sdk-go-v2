@@ -35,6 +35,8 @@ func (c *Client) StopTransformJob(ctx context.Context, params *StopTransformJobI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopTransformJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopTransformJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -39,6 +39,8 @@ func (c *Client) PutDataLakeSettings(ctx context.Context, params *PutDataLakeSet
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutDataLakeSettingsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutDataLakeSettings(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

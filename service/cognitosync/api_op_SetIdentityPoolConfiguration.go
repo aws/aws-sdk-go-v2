@@ -35,6 +35,8 @@ func (c *Client) SetIdentityPoolConfiguration(ctx context.Context, params *SetId
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSetIdentityPoolConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSetIdentityPoolConfiguration(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

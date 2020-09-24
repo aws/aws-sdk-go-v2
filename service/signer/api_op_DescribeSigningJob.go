@@ -35,6 +35,8 @@ func (c *Client) DescribeSigningJob(ctx context.Context, params *DescribeSigning
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeSigningJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSigningJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

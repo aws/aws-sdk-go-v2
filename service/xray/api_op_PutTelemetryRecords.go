@@ -33,6 +33,8 @@ func (c *Client) PutTelemetryRecords(ctx context.Context, params *PutTelemetryRe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutTelemetryRecordsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutTelemetryRecords(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

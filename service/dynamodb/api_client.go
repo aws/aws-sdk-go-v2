@@ -9,6 +9,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	ddbcust "github.com/aws/aws-sdk-go-v2/service/dynamodb/internal/customizations"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyrand "github.com/awslabs/smithy-go/rand"
@@ -219,6 +220,14 @@ func resolveIdempotencyTokenProvider(o *Options) {
 // IdempotencyTokenProvider interface for providing idempotency token
 type IdempotencyTokenProvider interface {
 	GetIdempotencyToken() (string, error)
+}
+
+func addRequestIDRetrieverMiddleware(stack *middleware.Stack) {
+	awsmiddleware.AddRequestIDRetrieverMiddleware(stack)
+}
+
+func addResponseErrorMiddleware(stack *middleware.Stack) {
+	awshttp.AddResponseErrorMiddleware(stack)
 }
 
 func addValidateResponseChecksum(stack *middleware.Stack, options Options) {

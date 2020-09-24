@@ -32,6 +32,8 @@ func (c *Client) ListLogPatternSets(ctx context.Context, params *ListLogPatternS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListLogPatternSetsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListLogPatternSets(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

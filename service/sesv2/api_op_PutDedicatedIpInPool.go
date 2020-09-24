@@ -36,6 +36,8 @@ func (c *Client) PutDedicatedIpInPool(ctx context.Context, params *PutDedicatedI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutDedicatedIpInPoolValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutDedicatedIpInPool(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

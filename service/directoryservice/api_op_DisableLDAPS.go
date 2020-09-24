@@ -33,6 +33,8 @@ func (c *Client) DisableLDAPS(ctx context.Context, params *DisableLDAPSInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisableLDAPSValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisableLDAPS(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

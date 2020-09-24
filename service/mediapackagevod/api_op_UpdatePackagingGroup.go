@@ -34,6 +34,8 @@ func (c *Client) UpdatePackagingGroup(ctx context.Context, params *UpdatePackagi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdatePackagingGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePackagingGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

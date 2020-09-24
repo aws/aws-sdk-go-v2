@@ -32,6 +32,8 @@ func (c *Client) ListExclusions(ctx context.Context, params *ListExclusionsInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListExclusionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListExclusions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

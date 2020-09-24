@@ -36,6 +36,8 @@ func (c *Client) DeleteIndexField(ctx context.Context, params *DeleteIndexFieldI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteIndexFieldValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteIndexField(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

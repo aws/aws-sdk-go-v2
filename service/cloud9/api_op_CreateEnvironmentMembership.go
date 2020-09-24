@@ -33,6 +33,8 @@ func (c *Client) CreateEnvironmentMembership(ctx context.Context, params *Create
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateEnvironmentMembershipValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEnvironmentMembership(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

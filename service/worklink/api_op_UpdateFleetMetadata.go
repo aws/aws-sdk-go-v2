@@ -32,6 +32,8 @@ func (c *Client) UpdateFleetMetadata(ctx context.Context, params *UpdateFleetMet
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateFleetMetadataValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFleetMetadata(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

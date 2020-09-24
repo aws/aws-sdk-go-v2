@@ -36,6 +36,8 @@ func (c *Client) GetFunctionConfiguration(ctx context.Context, params *GetFuncti
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetFunctionConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetFunctionConfiguration(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

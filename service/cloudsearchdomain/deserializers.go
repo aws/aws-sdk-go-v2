@@ -38,7 +38,7 @@ func (m *awsRestjson1_deserializeOpSearch) HandleDeserialize(ctx context.Context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorSearch(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorSearch(response, &metadata)
 	}
 	output := &SearchOutput{}
 	out.Result = output
@@ -74,7 +74,7 @@ func (m *awsRestjson1_deserializeOpSearch) HandleDeserialize(ctx context.Context
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorSearch(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorSearch(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -200,7 +200,7 @@ func (m *awsRestjson1_deserializeOpSuggest) HandleDeserialize(ctx context.Contex
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorSuggest(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorSuggest(response, &metadata)
 	}
 	output := &SuggestOutput{}
 	out.Result = output
@@ -236,7 +236,7 @@ func (m *awsRestjson1_deserializeOpSuggest) HandleDeserialize(ctx context.Contex
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorSuggest(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorSuggest(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -352,7 +352,7 @@ func (m *awsRestjson1_deserializeOpUploadDocuments) HandleDeserialize(ctx contex
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorUploadDocuments(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorUploadDocuments(response, &metadata)
 	}
 	output := &UploadDocumentsOutput{}
 	out.Result = output
@@ -388,7 +388,7 @@ func (m *awsRestjson1_deserializeOpUploadDocuments) HandleDeserialize(ctx contex
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorUploadDocuments(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorUploadDocuments(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

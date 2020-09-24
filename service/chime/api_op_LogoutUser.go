@@ -33,6 +33,8 @@ func (c *Client) LogoutUser(ctx context.Context, params *LogoutUserInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpLogoutUserValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opLogoutUser(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -43,6 +43,8 @@ func (c *Client) PutFunctionConcurrency(ctx context.Context, params *PutFunction
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutFunctionConcurrencyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutFunctionConcurrency(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

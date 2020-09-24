@@ -37,6 +37,8 @@ func (c *Client) RequestSpotInstances(ctx context.Context, params *RequestSpotIn
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRequestSpotInstancesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRequestSpotInstances(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

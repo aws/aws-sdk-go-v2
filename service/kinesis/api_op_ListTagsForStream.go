@@ -34,6 +34,8 @@ func (c *Client) ListTagsForStream(ctx context.Context, params *ListTagsForStrea
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListTagsForStreamValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListTagsForStream(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -36,6 +36,8 @@ func (c *Client) StreamJournalToKinesis(ctx context.Context, params *StreamJourn
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStreamJournalToKinesisValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStreamJournalToKinesis(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

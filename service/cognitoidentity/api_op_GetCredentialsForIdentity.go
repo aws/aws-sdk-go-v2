@@ -34,6 +34,8 @@ func (c *Client) GetCredentialsForIdentity(ctx context.Context, params *GetCrede
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetCredentialsForIdentityValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetCredentialsForIdentity(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

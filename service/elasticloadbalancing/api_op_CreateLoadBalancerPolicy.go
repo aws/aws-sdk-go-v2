@@ -35,6 +35,8 @@ func (c *Client) CreateLoadBalancerPolicy(ctx context.Context, params *CreateLoa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateLoadBalancerPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLoadBalancerPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

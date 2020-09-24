@@ -42,6 +42,8 @@ func (c *Client) StartContactRecording(ctx context.Context, params *StartContact
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartContactRecordingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartContactRecording(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

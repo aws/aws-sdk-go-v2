@@ -35,6 +35,8 @@ func (c *Client) DescribeVTLDevices(ctx context.Context, params *DescribeVTLDevi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeVTLDevicesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeVTLDevices(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

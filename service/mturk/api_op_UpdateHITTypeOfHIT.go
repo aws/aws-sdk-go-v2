@@ -35,6 +35,8 @@ func (c *Client) UpdateHITTypeOfHIT(ctx context.Context, params *UpdateHITTypeOf
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateHITTypeOfHITValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateHITTypeOfHIT(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

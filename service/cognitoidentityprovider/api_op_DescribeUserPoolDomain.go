@@ -33,6 +33,8 @@ func (c *Client) DescribeUserPoolDomain(ctx context.Context, params *DescribeUse
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeUserPoolDomainValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeUserPoolDomain(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

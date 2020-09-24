@@ -32,6 +32,8 @@ func (c *Client) CreateApplicationSnapshot(ctx context.Context, params *CreateAp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateApplicationSnapshotValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateApplicationSnapshot(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

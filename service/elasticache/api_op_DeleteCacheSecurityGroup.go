@@ -33,6 +33,8 @@ func (c *Client) DeleteCacheSecurityGroup(ctx context.Context, params *DeleteCac
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteCacheSecurityGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCacheSecurityGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,8 @@ func (c *Client) ListFacetNames(ctx context.Context, params *ListFacetNamesInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListFacetNamesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListFacetNames(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -41,6 +41,8 @@ func (c *Client) GetBlock(ctx context.Context, params *GetBlockInput, optFns ...
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBlockValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBlock(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

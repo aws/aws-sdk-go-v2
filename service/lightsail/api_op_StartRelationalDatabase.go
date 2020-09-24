@@ -38,6 +38,8 @@ func (c *Client) StartRelationalDatabase(ctx context.Context, params *StartRelat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartRelationalDatabaseValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartRelationalDatabase(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

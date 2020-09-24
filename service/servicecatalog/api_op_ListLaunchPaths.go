@@ -35,6 +35,8 @@ func (c *Client) ListLaunchPaths(ctx context.Context, params *ListLaunchPathsInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListLaunchPathsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListLaunchPaths(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

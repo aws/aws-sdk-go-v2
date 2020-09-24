@@ -34,6 +34,8 @@ func (c *Client) DescribeHumanLoop(ctx context.Context, params *DescribeHumanLoo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeHumanLoopValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeHumanLoop(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

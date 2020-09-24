@@ -40,7 +40,7 @@ func (m *awsAwsjson11_deserializeOpCreateScalingPlan) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorCreateScalingPlan(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorCreateScalingPlan(response, &metadata)
 	}
 	output := &CreateScalingPlanOutput{}
 	out.Result = output
@@ -76,7 +76,7 @@ func (m *awsAwsjson11_deserializeOpCreateScalingPlan) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorCreateScalingPlan(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorCreateScalingPlan(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -160,7 +160,7 @@ func (m *awsAwsjson11_deserializeOpDeleteScalingPlan) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteScalingPlan(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteScalingPlan(response, &metadata)
 	}
 	output := &DeleteScalingPlanOutput{}
 	out.Result = output
@@ -196,7 +196,7 @@ func (m *awsAwsjson11_deserializeOpDeleteScalingPlan) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorDeleteScalingPlan(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorDeleteScalingPlan(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -280,7 +280,7 @@ func (m *awsAwsjson11_deserializeOpDescribeScalingPlanResources) HandleDeseriali
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorDescribeScalingPlanResources(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorDescribeScalingPlanResources(response, &metadata)
 	}
 	output := &DescribeScalingPlanResourcesOutput{}
 	out.Result = output
@@ -316,7 +316,7 @@ func (m *awsAwsjson11_deserializeOpDescribeScalingPlanResources) HandleDeseriali
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorDescribeScalingPlanResources(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorDescribeScalingPlanResources(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -400,7 +400,7 @@ func (m *awsAwsjson11_deserializeOpDescribeScalingPlans) HandleDeserialize(ctx c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorDescribeScalingPlans(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorDescribeScalingPlans(response, &metadata)
 	}
 	output := &DescribeScalingPlansOutput{}
 	out.Result = output
@@ -436,7 +436,7 @@ func (m *awsAwsjson11_deserializeOpDescribeScalingPlans) HandleDeserialize(ctx c
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorDescribeScalingPlans(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorDescribeScalingPlans(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -520,7 +520,7 @@ func (m *awsAwsjson11_deserializeOpGetScalingPlanResourceForecastData) HandleDes
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorGetScalingPlanResourceForecastData(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorGetScalingPlanResourceForecastData(response, &metadata)
 	}
 	output := &GetScalingPlanResourceForecastDataOutput{}
 	out.Result = output
@@ -556,7 +556,7 @@ func (m *awsAwsjson11_deserializeOpGetScalingPlanResourceForecastData) HandleDes
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorGetScalingPlanResourceForecastData(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorGetScalingPlanResourceForecastData(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -634,7 +634,7 @@ func (m *awsAwsjson11_deserializeOpUpdateScalingPlan) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateScalingPlan(response)
+		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateScalingPlan(response, &metadata)
 	}
 	output := &UpdateScalingPlanOutput{}
 	out.Result = output
@@ -670,7 +670,7 @@ func (m *awsAwsjson11_deserializeOpUpdateScalingPlan) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsAwsjson11_deserializeOpErrorUpdateScalingPlan(response *smithyhttp.Response) error {
+func awsAwsjson11_deserializeOpErrorUpdateScalingPlan(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

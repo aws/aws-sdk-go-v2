@@ -34,6 +34,8 @@ func (c *Client) ListComplianceStatus(ctx context.Context, params *ListComplianc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListComplianceStatusValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListComplianceStatus(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

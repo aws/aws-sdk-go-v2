@@ -37,6 +37,8 @@ func (c *Client) DeprovisionByoipCidr(ctx context.Context, params *DeprovisionBy
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeprovisionByoipCidrValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeprovisionByoipCidr(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

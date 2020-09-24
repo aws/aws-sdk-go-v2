@@ -61,6 +61,8 @@ func (c *Client) DescribeWorkflowType(ctx context.Context, params *DescribeWorkf
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeWorkflowTypeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWorkflowType(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

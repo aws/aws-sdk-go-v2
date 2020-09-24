@@ -34,6 +34,8 @@ func (c *Client) CreatePushTemplate(ctx context.Context, params *CreatePushTempl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreatePushTemplateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePushTemplate(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,8 @@ func (c *Client) ActivateEventSource(ctx context.Context, params *ActivateEventS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpActivateEventSourceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opActivateEventSource(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

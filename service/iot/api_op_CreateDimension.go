@@ -38,6 +38,8 @@ func (c *Client) CreateDimension(ctx context.Context, params *CreateDimensionInp
 	addIdempotencyToken_opCreateDimensionMiddleware(stack, options)
 	addOpCreateDimensionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDimension(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

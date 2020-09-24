@@ -33,6 +33,8 @@ func (c *Client) UpdateDetector(ctx context.Context, params *UpdateDetectorInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateDetectorValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDetector(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

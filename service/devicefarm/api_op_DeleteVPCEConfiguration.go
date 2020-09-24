@@ -32,6 +32,8 @@ func (c *Client) DeleteVPCEConfiguration(ctx context.Context, params *DeleteVPCE
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteVPCEConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVPCEConfiguration(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

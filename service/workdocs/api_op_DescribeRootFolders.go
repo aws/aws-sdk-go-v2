@@ -40,6 +40,8 @@ func (c *Client) DescribeRootFolders(ctx context.Context, params *DescribeRootFo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeRootFoldersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRootFolders(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,8 @@ func (c *Client) DescribeSMBSettings(ctx context.Context, params *DescribeSMBSet
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeSMBSettingsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSMBSettings(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

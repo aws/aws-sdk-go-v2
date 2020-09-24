@@ -32,6 +32,8 @@ func (c *Client) DeleteVpcLink(ctx context.Context, params *DeleteVpcLinkInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteVpcLinkValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVpcLink(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

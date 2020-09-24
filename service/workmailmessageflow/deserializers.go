@@ -38,7 +38,7 @@ func (m *awsRestjson1_deserializeOpGetRawMessageContent) HandleDeserialize(ctx c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorGetRawMessageContent(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorGetRawMessageContent(response, &metadata)
 	}
 	output := &GetRawMessageContentOutput{}
 	out.Result = output
@@ -51,7 +51,7 @@ func (m *awsRestjson1_deserializeOpGetRawMessageContent) HandleDeserialize(ctx c
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorGetRawMessageContent(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorGetRawMessageContent(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

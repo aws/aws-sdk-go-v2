@@ -38,6 +38,8 @@ func (c *Client) CreateListener(ctx context.Context, params *CreateListenerInput
 	addIdempotencyToken_opCreateListenerMiddleware(stack, options)
 	addOpCreateListenerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateListener(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

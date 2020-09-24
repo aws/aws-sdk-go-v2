@@ -33,6 +33,8 @@ func (c *Client) UpdateBatchPrediction(ctx context.Context, params *UpdateBatchP
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateBatchPredictionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateBatchPrediction(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

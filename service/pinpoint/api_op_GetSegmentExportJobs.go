@@ -34,6 +34,8 @@ func (c *Client) GetSegmentExportJobs(ctx context.Context, params *GetSegmentExp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetSegmentExportJobsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSegmentExportJobs(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,8 @@ func (c *Client) DeleteColumnStatisticsForTable(ctx context.Context, params *Del
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteColumnStatisticsForTableValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteColumnStatisticsForTable(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

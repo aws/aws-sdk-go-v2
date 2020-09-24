@@ -33,6 +33,8 @@ func (c *Client) DeleteBackendEnvironment(ctx context.Context, params *DeleteBac
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteBackendEnvironmentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBackendEnvironment(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

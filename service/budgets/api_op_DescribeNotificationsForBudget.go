@@ -33,6 +33,8 @@ func (c *Client) DescribeNotificationsForBudget(ctx context.Context, params *Des
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeNotificationsForBudgetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeNotificationsForBudget(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

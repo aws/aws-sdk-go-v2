@@ -36,6 +36,8 @@ func (c *Client) InferRxNorm(ctx context.Context, params *InferRxNormInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpInferRxNormValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opInferRxNorm(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

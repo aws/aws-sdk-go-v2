@@ -32,6 +32,8 @@ func (c *Client) AdminDisableUser(ctx context.Context, params *AdminDisableUserI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAdminDisableUserValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAdminDisableUser(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

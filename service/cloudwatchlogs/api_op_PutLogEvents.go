@@ -71,6 +71,8 @@ func (c *Client) PutLogEvents(ctx context.Context, params *PutLogEventsInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutLogEventsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutLogEvents(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,8 @@ func (c *Client) DeleteJobExecution(ctx context.Context, params *DeleteJobExecut
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteJobExecutionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteJobExecution(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

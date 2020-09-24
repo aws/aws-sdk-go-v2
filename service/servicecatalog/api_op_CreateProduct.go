@@ -35,6 +35,8 @@ func (c *Client) CreateProduct(ctx context.Context, params *CreateProductInput, 
 	addIdempotencyToken_opCreateProductMiddleware(stack, options)
 	addOpCreateProductValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProduct(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

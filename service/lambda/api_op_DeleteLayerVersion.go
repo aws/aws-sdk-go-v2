@@ -36,6 +36,8 @@ func (c *Client) DeleteLayerVersion(ctx context.Context, params *DeleteLayerVers
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteLayerVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteLayerVersion(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -36,6 +36,8 @@ func (c *Client) DescribeReceiptRuleSet(ctx context.Context, params *DescribeRec
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeReceiptRuleSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReceiptRuleSet(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

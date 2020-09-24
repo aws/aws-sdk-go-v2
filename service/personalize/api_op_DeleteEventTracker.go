@@ -34,6 +34,8 @@ func (c *Client) DeleteEventTracker(ctx context.Context, params *DeleteEventTrac
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteEventTrackerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteEventTracker(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,8 @@ func (c *Client) UpdateConnectorDefinition(ctx context.Context, params *UpdateCo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateConnectorDefinitionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateConnectorDefinition(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,8 @@ func (c *Client) DeleteJobTemplate(ctx context.Context, params *DeleteJobTemplat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteJobTemplateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteJobTemplate(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

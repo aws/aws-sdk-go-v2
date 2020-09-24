@@ -36,6 +36,8 @@ func (c *Client) RevokeDBSecurityGroupIngress(ctx context.Context, params *Revok
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRevokeDBSecurityGroupIngressValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRevokeDBSecurityGroupIngress(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

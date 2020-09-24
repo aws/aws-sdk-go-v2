@@ -33,6 +33,8 @@ func (c *Client) ApplySchema(ctx context.Context, params *ApplySchemaInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpApplySchemaValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opApplySchema(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

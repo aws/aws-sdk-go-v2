@@ -34,6 +34,8 @@ func (c *Client) CreateWorkerBlock(ctx context.Context, params *CreateWorkerBloc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateWorkerBlockValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWorkerBlock(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -68,6 +68,8 @@ func (c *Client) SendBulkTemplatedEmail(ctx context.Context, params *SendBulkTem
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSendBulkTemplatedEmailValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSendBulkTemplatedEmail(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

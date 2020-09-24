@@ -41,6 +41,8 @@ func (c *Client) CreateOrganizationalUnit(ctx context.Context, params *CreateOrg
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateOrganizationalUnitValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateOrganizationalUnit(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

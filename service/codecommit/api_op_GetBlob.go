@@ -32,6 +32,8 @@ func (c *Client) GetBlob(ctx context.Context, params *GetBlobInput, optFns ...fu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBlobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBlob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

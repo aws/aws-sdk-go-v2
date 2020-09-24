@@ -41,6 +41,8 @@ func (c *Client) GetRateBasedRuleManagedKeys(ctx context.Context, params *GetRat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetRateBasedRuleManagedKeysValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetRateBasedRuleManagedKeys(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

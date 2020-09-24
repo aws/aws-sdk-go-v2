@@ -34,6 +34,8 @@ func (c *Client) RestoreBackup(ctx context.Context, params *RestoreBackupInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRestoreBackupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreBackup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

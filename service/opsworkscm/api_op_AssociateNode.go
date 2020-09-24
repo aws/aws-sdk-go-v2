@@ -47,6 +47,8 @@ func (c *Client) AssociateNode(ctx context.Context, params *AssociateNodeInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateNodeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateNode(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

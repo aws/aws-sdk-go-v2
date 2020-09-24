@@ -37,6 +37,8 @@ func (c *Client) DeleteRelationalDatabase(ctx context.Context, params *DeleteRel
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteRelationalDatabaseValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRelationalDatabase(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

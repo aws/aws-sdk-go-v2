@@ -57,6 +57,8 @@ func (c *Client) ModifyInstancePlacement(ctx context.Context, params *ModifyInst
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyInstancePlacementValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyInstancePlacement(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

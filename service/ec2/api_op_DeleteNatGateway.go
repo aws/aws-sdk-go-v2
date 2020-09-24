@@ -34,6 +34,8 @@ func (c *Client) DeleteNatGateway(ctx context.Context, params *DeleteNatGatewayI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteNatGatewayValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteNatGateway(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

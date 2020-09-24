@@ -33,6 +33,8 @@ func (c *Client) DeleteBuildBatch(ctx context.Context, params *DeleteBuildBatchI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteBuildBatchValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBuildBatch(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

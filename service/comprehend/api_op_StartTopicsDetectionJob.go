@@ -36,6 +36,8 @@ func (c *Client) StartTopicsDetectionJob(ctx context.Context, params *StartTopic
 	addIdempotencyToken_opStartTopicsDetectionJobMiddleware(stack, options)
 	addOpStartTopicsDetectionJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartTopicsDetectionJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

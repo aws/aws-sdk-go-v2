@@ -34,6 +34,8 @@ func (c *Client) DetachClassicLinkVpc(ctx context.Context, params *DetachClassic
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDetachClassicLinkVpcValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDetachClassicLinkVpc(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

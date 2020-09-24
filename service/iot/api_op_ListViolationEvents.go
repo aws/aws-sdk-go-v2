@@ -36,6 +36,8 @@ func (c *Client) ListViolationEvents(ctx context.Context, params *ListViolationE
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListViolationEventsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListViolationEvents(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

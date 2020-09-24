@@ -46,6 +46,8 @@ func (c *Client) UpdateJobStatus(ctx context.Context, params *UpdateJobStatusInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateJobStatusValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateJobStatus(options.Region), middleware.Before)
+	addResponseErrorMiddleware(stack)
+	addMetadataRetrieverMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

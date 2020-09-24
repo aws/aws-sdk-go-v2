@@ -37,6 +37,8 @@ func (c *Client) CreateDefaultSubnet(ctx context.Context, params *CreateDefaultS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDefaultSubnetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDefaultSubnet(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

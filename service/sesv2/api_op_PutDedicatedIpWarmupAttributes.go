@@ -32,6 +32,8 @@ func (c *Client) PutDedicatedIpWarmupAttributes(ctx context.Context, params *Put
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutDedicatedIpWarmupAttributesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutDedicatedIpWarmupAttributes(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

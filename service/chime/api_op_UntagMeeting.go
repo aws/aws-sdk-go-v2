@@ -32,6 +32,8 @@ func (c *Client) UntagMeeting(ctx context.Context, params *UntagMeetingInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUntagMeetingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUntagMeeting(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,8 @@ func (c *Client) DeleteWorkspaceImage(ctx context.Context, params *DeleteWorkspa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteWorkspaceImageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteWorkspaceImage(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

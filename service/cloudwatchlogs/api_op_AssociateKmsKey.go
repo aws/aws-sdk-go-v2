@@ -45,6 +45,8 @@ func (c *Client) AssociateKmsKey(ctx context.Context, params *AssociateKmsKeyInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateKmsKeyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateKmsKey(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -46,6 +46,8 @@ func (c *Client) UpdateCachePolicy(ctx context.Context, params *UpdateCachePolic
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateCachePolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCachePolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

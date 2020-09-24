@@ -37,6 +37,8 @@ func (c *Client) StartICD10CMInferenceJob(ctx context.Context, params *StartICD1
 	addIdempotencyToken_opStartICD10CMInferenceJobMiddleware(stack, options)
 	addOpStartICD10CMInferenceJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartICD10CMInferenceJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

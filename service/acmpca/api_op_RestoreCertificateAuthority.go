@@ -45,6 +45,8 @@ func (c *Client) RestoreCertificateAuthority(ctx context.Context, params *Restor
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRestoreCertificateAuthorityValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreCertificateAuthority(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

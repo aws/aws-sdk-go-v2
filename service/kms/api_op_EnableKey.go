@@ -39,6 +39,8 @@ func (c *Client) EnableKey(ctx context.Context, params *EnableKeyInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpEnableKeyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opEnableKey(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

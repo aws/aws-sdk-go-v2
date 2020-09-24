@@ -37,6 +37,8 @@ func (c *Client) GetLogEvents(ctx context.Context, params *GetLogEventsInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetLogEventsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetLogEvents(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

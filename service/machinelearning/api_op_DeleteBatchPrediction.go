@@ -36,6 +36,8 @@ func (c *Client) DeleteBatchPrediction(ctx context.Context, params *DeleteBatchP
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteBatchPredictionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBatchPrediction(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

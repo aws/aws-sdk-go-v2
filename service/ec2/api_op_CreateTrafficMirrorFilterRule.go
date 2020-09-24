@@ -37,6 +37,8 @@ func (c *Client) CreateTrafficMirrorFilterRule(ctx context.Context, params *Crea
 	addIdempotencyToken_opCreateTrafficMirrorFilterRuleMiddleware(stack, options)
 	addOpCreateTrafficMirrorFilterRuleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTrafficMirrorFilterRule(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

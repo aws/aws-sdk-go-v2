@@ -35,6 +35,8 @@ func (c *Client) UntagDeliveryStream(ctx context.Context, params *UntagDeliveryS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUntagDeliveryStreamValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUntagDeliveryStream(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

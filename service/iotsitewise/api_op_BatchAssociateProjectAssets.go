@@ -35,6 +35,8 @@ func (c *Client) BatchAssociateProjectAssets(ctx context.Context, params *BatchA
 	addIdempotencyToken_opBatchAssociateProjectAssetsMiddleware(stack, options)
 	addOpBatchAssociateProjectAssetsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBatchAssociateProjectAssets(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

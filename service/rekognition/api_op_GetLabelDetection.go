@@ -57,6 +57,8 @@ func (c *Client) GetLabelDetection(ctx context.Context, params *GetLabelDetectio
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetLabelDetectionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetLabelDetection(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

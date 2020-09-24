@@ -34,6 +34,8 @@ func (c *Client) DescribeEngineDefaultClusterParameters(ctx context.Context, par
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeEngineDefaultClusterParametersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEngineDefaultClusterParameters(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

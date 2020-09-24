@@ -39,6 +39,8 @@ func (c *Client) DescribeAffectedEntities(ctx context.Context, params *DescribeA
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeAffectedEntitiesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAffectedEntities(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,8 @@ func (c *Client) GetSchemaAsJson(ctx context.Context, params *GetSchemaAsJsonInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetSchemaAsJsonValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSchemaAsJson(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

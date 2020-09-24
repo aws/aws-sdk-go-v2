@@ -36,6 +36,8 @@ func (c *Client) DescribeExecution(ctx context.Context, params *DescribeExecutio
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeExecutionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeExecution(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

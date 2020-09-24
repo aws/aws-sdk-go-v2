@@ -37,6 +37,8 @@ func (c *Client) AuthorizeSnapshotAccess(ctx context.Context, params *AuthorizeS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAuthorizeSnapshotAccessValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAuthorizeSnapshotAccess(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

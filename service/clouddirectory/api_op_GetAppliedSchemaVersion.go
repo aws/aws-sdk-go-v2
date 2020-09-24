@@ -32,6 +32,8 @@ func (c *Client) GetAppliedSchemaVersion(ctx context.Context, params *GetApplied
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetAppliedSchemaVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetAppliedSchemaVersion(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

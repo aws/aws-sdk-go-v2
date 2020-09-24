@@ -32,6 +32,8 @@ func (c *Client) DisassociateBudgetFromResource(ctx context.Context, params *Dis
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisassociateBudgetFromResourceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateBudgetFromResource(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,8 @@ func (c *Client) ListDomainsForPackage(ctx context.Context, params *ListDomainsF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListDomainsForPackageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListDomainsForPackage(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

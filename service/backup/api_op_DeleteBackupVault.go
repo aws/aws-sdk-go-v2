@@ -33,6 +33,8 @@ func (c *Client) DeleteBackupVault(ctx context.Context, params *DeleteBackupVaul
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteBackupVaultValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBackupVault(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

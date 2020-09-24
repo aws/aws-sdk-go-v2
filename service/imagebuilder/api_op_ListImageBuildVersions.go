@@ -33,6 +33,8 @@ func (c *Client) ListImageBuildVersions(ctx context.Context, params *ListImageBu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListImageBuildVersionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListImageBuildVersions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,8 @@ func (c *Client) StopStreamProcessor(ctx context.Context, params *StopStreamProc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopStreamProcessorValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopStreamProcessor(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

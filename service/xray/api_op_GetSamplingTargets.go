@@ -35,6 +35,8 @@ func (c *Client) GetSamplingTargets(ctx context.Context, params *GetSamplingTarg
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetSamplingTargetsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetSamplingTargets(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

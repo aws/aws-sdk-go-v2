@@ -37,6 +37,8 @@ func (c *Client) GetHostnameSuggestion(ctx context.Context, params *GetHostnameS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetHostnameSuggestionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetHostnameSuggestion(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

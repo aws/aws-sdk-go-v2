@@ -32,6 +32,8 @@ func (c *Client) RemoveIpRoutes(ctx context.Context, params *RemoveIpRoutesInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRemoveIpRoutesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveIpRoutes(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

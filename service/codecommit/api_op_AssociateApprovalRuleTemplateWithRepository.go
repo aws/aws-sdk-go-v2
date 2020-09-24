@@ -38,6 +38,8 @@ func (c *Client) AssociateApprovalRuleTemplateWithRepository(ctx context.Context
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateApprovalRuleTemplateWithRepositoryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateApprovalRuleTemplateWithRepository(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

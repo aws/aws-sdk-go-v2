@@ -32,6 +32,8 @@ func (c *Client) DeleteDatasetContent(ctx context.Context, params *DeleteDataset
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDatasetContentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDatasetContent(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

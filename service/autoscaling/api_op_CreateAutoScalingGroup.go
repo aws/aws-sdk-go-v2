@@ -50,6 +50,8 @@ func (c *Client) CreateAutoScalingGroup(ctx context.Context, params *CreateAutoS
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateAutoScalingGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAutoScalingGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,8 @@ func (c *Client) DeregisterTargets(ctx context.Context, params *DeregisterTarget
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeregisterTargetsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterTargets(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

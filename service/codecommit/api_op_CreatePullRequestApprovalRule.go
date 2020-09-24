@@ -33,6 +33,8 @@ func (c *Client) CreatePullRequestApprovalRule(ctx context.Context, params *Crea
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreatePullRequestApprovalRuleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePullRequestApprovalRule(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

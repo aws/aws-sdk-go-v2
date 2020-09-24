@@ -41,6 +41,8 @@ func (c *Client) GetCalendarState(ctx context.Context, params *GetCalendarStateI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetCalendarStateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetCalendarState(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

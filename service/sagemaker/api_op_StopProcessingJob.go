@@ -32,6 +32,8 @@ func (c *Client) StopProcessingJob(ctx context.Context, params *StopProcessingJo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopProcessingJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopProcessingJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

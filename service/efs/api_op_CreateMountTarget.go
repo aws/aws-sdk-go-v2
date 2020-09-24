@@ -110,6 +110,8 @@ func (c *Client) CreateMountTarget(ctx context.Context, params *CreateMountTarge
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateMountTargetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMountTarget(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -42,6 +42,8 @@ func (c *Client) StartTextDetection(ctx context.Context, params *StartTextDetect
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartTextDetectionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartTextDetection(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

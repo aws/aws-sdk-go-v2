@@ -32,6 +32,8 @@ func (c *Client) UpdateActionTarget(ctx context.Context, params *UpdateActionTar
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateActionTargetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateActionTarget(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

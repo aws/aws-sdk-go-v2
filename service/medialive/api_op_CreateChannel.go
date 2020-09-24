@@ -35,6 +35,8 @@ func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, 
 	addIdempotencyToken_opCreateChannelMiddleware(stack, options)
 	addOpCreateChannelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateChannel(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

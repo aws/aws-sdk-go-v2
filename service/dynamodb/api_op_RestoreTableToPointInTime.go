@@ -59,6 +59,8 @@ func (c *Client) RestoreTableToPointInTime(ctx context.Context, params *RestoreT
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRestoreTableToPointInTimeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreTableToPointInTime(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	addValidateResponseChecksum(stack, options)
 	addAcceptEncodingGzip(stack, options)
 

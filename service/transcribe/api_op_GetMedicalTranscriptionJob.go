@@ -36,6 +36,8 @@ func (c *Client) GetMedicalTranscriptionJob(ctx context.Context, params *GetMedi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetMedicalTranscriptionJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetMedicalTranscriptionJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,8 @@ func (c *Client) GetBlacklistReports(ctx context.Context, params *GetBlacklistRe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBlacklistReportsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBlacklistReports(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

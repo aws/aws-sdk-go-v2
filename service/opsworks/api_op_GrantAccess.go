@@ -34,6 +34,8 @@ func (c *Client) GrantAccess(ctx context.Context, params *GrantAccessInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGrantAccessValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGrantAccess(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

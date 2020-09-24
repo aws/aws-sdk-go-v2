@@ -34,6 +34,8 @@ func (c *Client) DescribeBackupJob(ctx context.Context, params *DescribeBackupJo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeBackupJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeBackupJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

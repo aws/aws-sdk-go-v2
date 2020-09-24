@@ -36,6 +36,8 @@ func (c *Client) StartKeyPhrasesDetectionJob(ctx context.Context, params *StartK
 	addIdempotencyToken_opStartKeyPhrasesDetectionJobMiddleware(stack, options)
 	addOpStartKeyPhrasesDetectionJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartKeyPhrasesDetectionJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

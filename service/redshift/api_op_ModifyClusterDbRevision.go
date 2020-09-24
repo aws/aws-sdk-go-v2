@@ -34,6 +34,8 @@ func (c *Client) ModifyClusterDbRevision(ctx context.Context, params *ModifyClus
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyClusterDbRevisionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyClusterDbRevision(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

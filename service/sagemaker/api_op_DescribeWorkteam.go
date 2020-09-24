@@ -35,6 +35,8 @@ func (c *Client) DescribeWorkteam(ctx context.Context, params *DescribeWorkteamI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeWorkteamValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWorkteam(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

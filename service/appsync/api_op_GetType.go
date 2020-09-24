@@ -33,6 +33,8 @@ func (c *Client) GetType(ctx context.Context, params *GetTypeInput, optFns ...fu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetTypeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetType(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

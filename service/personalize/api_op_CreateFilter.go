@@ -33,6 +33,8 @@ func (c *Client) CreateFilter(ctx context.Context, params *CreateFilterInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateFilterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFilter(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,8 @@ func (c *Client) GetResources(ctx context.Context, params *GetResourcesInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetResourcesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetResources(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

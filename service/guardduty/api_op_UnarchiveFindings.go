@@ -32,6 +32,8 @@ func (c *Client) UnarchiveFindings(ctx context.Context, params *UnarchiveFinding
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUnarchiveFindingsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUnarchiveFindings(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

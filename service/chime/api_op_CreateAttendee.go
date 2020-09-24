@@ -36,6 +36,8 @@ func (c *Client) CreateAttendee(ctx context.Context, params *CreateAttendeeInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateAttendeeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAttendee(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

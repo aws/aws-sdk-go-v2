@@ -33,6 +33,8 @@ func (c *Client) PutProtocolsList(ctx context.Context, params *PutProtocolsListI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutProtocolsListValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutProtocolsList(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

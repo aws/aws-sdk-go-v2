@@ -32,6 +32,8 @@ func (c *Client) ListTagsForProject(ctx context.Context, params *ListTagsForProj
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListTagsForProjectValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListTagsForProject(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

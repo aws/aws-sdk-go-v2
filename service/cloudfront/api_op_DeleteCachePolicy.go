@@ -36,6 +36,8 @@ func (c *Client) DeleteCachePolicy(ctx context.Context, params *DeleteCachePolic
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteCachePolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCachePolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

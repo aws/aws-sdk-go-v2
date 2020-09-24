@@ -44,6 +44,8 @@ func (c *Client) DeleteStream(ctx context.Context, params *DeleteStreamInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteStreamValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteStream(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

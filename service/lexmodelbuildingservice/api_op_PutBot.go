@@ -48,6 +48,8 @@ func (c *Client) PutBot(ctx context.Context, params *PutBotInput, optFns ...func
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutBotValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBot(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

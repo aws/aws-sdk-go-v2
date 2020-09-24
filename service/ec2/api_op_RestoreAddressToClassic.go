@@ -36,6 +36,8 @@ func (c *Client) RestoreAddressToClassic(ctx context.Context, params *RestoreAdd
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRestoreAddressToClassicValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreAddressToClassic(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

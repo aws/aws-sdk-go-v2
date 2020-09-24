@@ -33,6 +33,8 @@ func (c *Client) GetCoipPoolUsage(ctx context.Context, params *GetCoipPoolUsageI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetCoipPoolUsageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetCoipPoolUsage(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

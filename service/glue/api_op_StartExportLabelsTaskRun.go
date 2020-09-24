@@ -40,6 +40,8 @@ func (c *Client) StartExportLabelsTaskRun(ctx context.Context, params *StartExpo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartExportLabelsTaskRunValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartExportLabelsTaskRun(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

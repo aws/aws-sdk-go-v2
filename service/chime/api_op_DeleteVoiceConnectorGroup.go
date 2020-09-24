@@ -34,6 +34,8 @@ func (c *Client) DeleteVoiceConnectorGroup(ctx context.Context, params *DeleteVo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteVoiceConnectorGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVoiceConnectorGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

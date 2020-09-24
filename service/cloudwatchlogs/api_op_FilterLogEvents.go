@@ -39,6 +39,8 @@ func (c *Client) FilterLogEvents(ctx context.Context, params *FilterLogEventsInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpFilterLogEventsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opFilterLogEvents(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

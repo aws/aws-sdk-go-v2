@@ -68,6 +68,8 @@ func (c *Client) TagRole(ctx context.Context, params *TagRoleInput, optFns ...fu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTagRoleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTagRole(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

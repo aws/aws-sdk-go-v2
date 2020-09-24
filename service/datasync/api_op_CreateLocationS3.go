@@ -40,6 +40,8 @@ func (c *Client) CreateLocationS3(ctx context.Context, params *CreateLocationS3I
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateLocationS3ValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLocationS3(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

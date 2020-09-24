@@ -40,6 +40,8 @@ func (c *Client) IncreaseStreamRetentionPeriod(ctx context.Context, params *Incr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpIncreaseStreamRetentionPeriodValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opIncreaseStreamRetentionPeriod(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,8 @@ func (c *Client) DeleteVocabularyFilter(ctx context.Context, params *DeleteVocab
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteVocabularyFilterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVocabularyFilter(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -39,7 +39,7 @@ func (m *awsRestjson1_deserializeOpDescribeJobExecution) HandleDeserialize(ctx c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorDescribeJobExecution(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorDescribeJobExecution(response, &metadata)
 	}
 	output := &DescribeJobExecutionOutput{}
 	out.Result = output
@@ -75,7 +75,7 @@ func (m *awsRestjson1_deserializeOpDescribeJobExecution) HandleDeserialize(ctx c
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorDescribeJobExecution(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorDescribeJobExecution(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -201,7 +201,7 @@ func (m *awsRestjson1_deserializeOpGetPendingJobExecutions) HandleDeserialize(ct
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorGetPendingJobExecutions(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorGetPendingJobExecutions(response, &metadata)
 	}
 	output := &GetPendingJobExecutionsOutput{}
 	out.Result = output
@@ -237,7 +237,7 @@ func (m *awsRestjson1_deserializeOpGetPendingJobExecutions) HandleDeserialize(ct
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorGetPendingJobExecutions(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorGetPendingJobExecutions(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -365,7 +365,7 @@ func (m *awsRestjson1_deserializeOpStartNextPendingJobExecution) HandleDeseriali
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorStartNextPendingJobExecution(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorStartNextPendingJobExecution(response, &metadata)
 	}
 	output := &StartNextPendingJobExecutionOutput{}
 	out.Result = output
@@ -401,7 +401,7 @@ func (m *awsRestjson1_deserializeOpStartNextPendingJobExecution) HandleDeseriali
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorStartNextPendingJobExecution(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorStartNextPendingJobExecution(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -524,7 +524,7 @@ func (m *awsRestjson1_deserializeOpUpdateJobExecution) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorUpdateJobExecution(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorUpdateJobExecution(response, &metadata)
 	}
 	output := &UpdateJobExecutionOutput{}
 	out.Result = output
@@ -560,7 +560,7 @@ func (m *awsRestjson1_deserializeOpUpdateJobExecution) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorUpdateJobExecution(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorUpdateJobExecution(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

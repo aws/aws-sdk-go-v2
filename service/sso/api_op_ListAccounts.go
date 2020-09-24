@@ -33,6 +33,8 @@ func (c *Client) ListAccounts(ctx context.Context, params *ListAccountsInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListAccountsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListAccounts(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

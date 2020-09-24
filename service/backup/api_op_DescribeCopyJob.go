@@ -33,6 +33,8 @@ func (c *Client) DescribeCopyJob(ctx context.Context, params *DescribeCopyJobInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeCopyJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCopyJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

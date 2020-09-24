@@ -92,6 +92,8 @@ func (c *Client) PutItem(ctx context.Context, params *PutItemInput, optFns ...fu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutItemValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutItem(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	addValidateResponseChecksum(stack, options)
 	addAcceptEncodingGzip(stack, options)
 

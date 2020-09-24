@@ -32,6 +32,8 @@ func (c *Client) RedactRoomMessage(ctx context.Context, params *RedactRoomMessag
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRedactRoomMessageValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRedactRoomMessage(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

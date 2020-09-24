@@ -34,6 +34,8 @@ func (c *Client) AssociateRoleToGroup(ctx context.Context, params *AssociateRole
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateRoleToGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateRoleToGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

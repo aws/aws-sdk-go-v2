@@ -33,6 +33,8 @@ func (c *Client) PurchaseProvisionedCapacity(ctx context.Context, params *Purcha
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPurchaseProvisionedCapacityValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPurchaseProvisionedCapacity(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	glaciercust.AddTreeHashMiddleware(stack)
 
 	for _, fn := range options.APIOptions {

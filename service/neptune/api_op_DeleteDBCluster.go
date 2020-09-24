@@ -38,6 +38,8 @@ func (c *Client) DeleteDBCluster(ctx context.Context, params *DeleteDBClusterInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteDBClusterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDBCluster(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

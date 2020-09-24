@@ -49,6 +49,8 @@ func (c *Client) SendCommand(ctx context.Context, params *SendCommandInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSendCommandValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSendCommand(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

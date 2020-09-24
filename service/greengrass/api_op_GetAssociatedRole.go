@@ -32,6 +32,8 @@ func (c *Client) GetAssociatedRole(ctx context.Context, params *GetAssociatedRol
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetAssociatedRoleValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetAssociatedRole(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -44,6 +44,8 @@ func (c *Client) DeleteImportedKeyMaterial(ctx context.Context, params *DeleteIm
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteImportedKeyMaterialValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteImportedKeyMaterial(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,8 @@ func (c *Client) GetHostedConfigurationVersion(ctx context.Context, params *GetH
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetHostedConfigurationVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetHostedConfigurationVersion(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

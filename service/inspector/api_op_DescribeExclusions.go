@@ -33,6 +33,8 @@ func (c *Client) DescribeExclusions(ctx context.Context, params *DescribeExclusi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeExclusionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeExclusions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

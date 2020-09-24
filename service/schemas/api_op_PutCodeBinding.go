@@ -34,6 +34,8 @@ func (c *Client) PutCodeBinding(ctx context.Context, params *PutCodeBindingInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutCodeBindingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutCodeBinding(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

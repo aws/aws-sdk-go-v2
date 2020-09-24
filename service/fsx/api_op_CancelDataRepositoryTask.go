@@ -44,6 +44,8 @@ func (c *Client) CancelDataRepositoryTask(ctx context.Context, params *CancelDat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCancelDataRepositoryTaskValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCancelDataRepositoryTask(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

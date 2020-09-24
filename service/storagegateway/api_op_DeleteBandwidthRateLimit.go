@@ -37,6 +37,8 @@ func (c *Client) DeleteBandwidthRateLimit(ctx context.Context, params *DeleteBan
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteBandwidthRateLimitValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBandwidthRateLimit(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

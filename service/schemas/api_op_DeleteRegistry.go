@@ -32,6 +32,8 @@ func (c *Client) DeleteRegistry(ctx context.Context, params *DeleteRegistryInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteRegistryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRegistry(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

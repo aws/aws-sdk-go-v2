@@ -53,6 +53,8 @@ func (c *Client) SignalWorkflowExecution(ctx context.Context, params *SignalWork
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSignalWorkflowExecutionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSignalWorkflowExecution(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

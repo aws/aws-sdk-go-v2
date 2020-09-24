@@ -39,6 +39,8 @@ func (c *Client) ModifyReservedInstances(ctx context.Context, params *ModifyRese
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyReservedInstancesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyReservedInstances(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

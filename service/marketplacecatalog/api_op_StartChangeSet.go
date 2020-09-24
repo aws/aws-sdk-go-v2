@@ -44,6 +44,8 @@ func (c *Client) StartChangeSet(ctx context.Context, params *StartChangeSetInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartChangeSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartChangeSet(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

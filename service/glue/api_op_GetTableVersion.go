@@ -33,6 +33,8 @@ func (c *Client) GetTableVersion(ctx context.Context, params *GetTableVersionInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetTableVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetTableVersion(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

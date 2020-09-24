@@ -32,6 +32,8 @@ func (c *Client) DeleteSnapshotCopyGrant(ctx context.Context, params *DeleteSnap
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteSnapshotCopyGrantValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSnapshotCopyGrant(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

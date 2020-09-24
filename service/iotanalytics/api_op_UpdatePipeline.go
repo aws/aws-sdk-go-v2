@@ -35,6 +35,8 @@ func (c *Client) UpdatePipeline(ctx context.Context, params *UpdatePipelineInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdatePipelineValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePipeline(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

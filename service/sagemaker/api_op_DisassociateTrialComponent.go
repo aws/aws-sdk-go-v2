@@ -38,6 +38,8 @@ func (c *Client) DisassociateTrialComponent(ctx context.Context, params *Disasso
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisassociateTrialComponentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateTrialComponent(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

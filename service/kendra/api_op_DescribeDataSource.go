@@ -34,6 +34,8 @@ func (c *Client) DescribeDataSource(ctx context.Context, params *DescribeDataSou
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeDataSourceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDataSource(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

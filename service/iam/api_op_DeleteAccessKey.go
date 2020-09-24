@@ -36,6 +36,8 @@ func (c *Client) DeleteAccessKey(ctx context.Context, params *DeleteAccessKeyInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteAccessKeyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAccessKey(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,8 @@ func (c *Client) AssociateEntityToThing(ctx context.Context, params *AssociateEn
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateEntityToThingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateEntityToThing(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

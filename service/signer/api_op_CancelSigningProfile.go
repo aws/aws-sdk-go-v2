@@ -34,6 +34,8 @@ func (c *Client) CancelSigningProfile(ctx context.Context, params *CancelSigning
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCancelSigningProfileValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCancelSigningProfile(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

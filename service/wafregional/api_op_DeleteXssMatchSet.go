@@ -51,6 +51,8 @@ func (c *Client) DeleteXssMatchSet(ctx context.Context, params *DeleteXssMatchSe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteXssMatchSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteXssMatchSet(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -35,6 +35,8 @@ func (c *Client) CreateBroker(ctx context.Context, params *CreateBrokerInput, op
 	addIdempotencyToken_opCreateBrokerMiddleware(stack, options)
 	addOpCreateBrokerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBroker(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -48,6 +48,8 @@ func (c *Client) TagQueue(ctx context.Context, params *TagQueueInput, optFns ...
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTagQueueValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTagQueue(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

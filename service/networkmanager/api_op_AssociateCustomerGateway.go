@@ -42,6 +42,8 @@ func (c *Client) AssociateCustomerGateway(ctx context.Context, params *Associate
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateCustomerGatewayValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateCustomerGateway(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

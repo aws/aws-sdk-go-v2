@@ -35,6 +35,8 @@ func (c *Client) StartPipelineExecution(ctx context.Context, params *StartPipeli
 	addIdempotencyToken_opStartPipelineExecutionMiddleware(stack, options)
 	addOpStartPipelineExecutionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartPipelineExecution(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

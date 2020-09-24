@@ -49,6 +49,8 @@ func (c *Client) DeleteCertificateAuthority(ctx context.Context, params *DeleteC
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteCertificateAuthorityValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCertificateAuthority(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

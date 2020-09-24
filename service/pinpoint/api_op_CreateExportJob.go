@@ -33,6 +33,8 @@ func (c *Client) CreateExportJob(ctx context.Context, params *CreateExportJobInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateExportJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateExportJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -37,6 +37,8 @@ func (c *Client) CreateThreatIntelSet(ctx context.Context, params *CreateThreatI
 	addIdempotencyToken_opCreateThreatIntelSetMiddleware(stack, options)
 	addOpCreateThreatIntelSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateThreatIntelSet(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

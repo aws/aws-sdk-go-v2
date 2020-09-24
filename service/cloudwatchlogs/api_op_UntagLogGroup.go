@@ -36,6 +36,8 @@ func (c *Client) UntagLogGroup(ctx context.Context, params *UntagLogGroupInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUntagLogGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUntagLogGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

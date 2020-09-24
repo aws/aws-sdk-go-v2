@@ -91,6 +91,8 @@ func (c *Client) UpdateWebACL(ctx context.Context, params *UpdateWebACLInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateWebACLValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWebACL(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

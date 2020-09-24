@@ -34,6 +34,8 @@ func (c *Client) StartConfigurationRecorder(ctx context.Context, params *StartCo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartConfigurationRecorderValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartConfigurationRecorder(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

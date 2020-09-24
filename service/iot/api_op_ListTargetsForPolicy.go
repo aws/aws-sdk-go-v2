@@ -32,6 +32,8 @@ func (c *Client) ListTargetsForPolicy(ctx context.Context, params *ListTargetsFo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListTargetsForPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListTargetsForPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

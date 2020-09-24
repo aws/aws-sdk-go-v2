@@ -35,6 +35,8 @@ func (c *Client) ResolveCustomer(ctx context.Context, params *ResolveCustomerInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpResolveCustomerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opResolveCustomer(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

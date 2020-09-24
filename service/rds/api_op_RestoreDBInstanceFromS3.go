@@ -39,6 +39,8 @@ func (c *Client) RestoreDBInstanceFromS3(ctx context.Context, params *RestoreDBI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRestoreDBInstanceFromS3ValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreDBInstanceFromS3(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

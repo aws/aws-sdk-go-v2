@@ -35,6 +35,8 @@ func (c *Client) DeleteResourceConfig(ctx context.Context, params *DeleteResourc
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteResourceConfigValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteResourceConfig(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

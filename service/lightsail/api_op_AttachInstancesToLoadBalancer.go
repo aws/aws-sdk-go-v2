@@ -38,6 +38,8 @@ func (c *Client) AttachInstancesToLoadBalancer(ctx context.Context, params *Atta
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAttachInstancesToLoadBalancerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAttachInstancesToLoadBalancer(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

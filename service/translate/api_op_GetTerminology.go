@@ -33,6 +33,8 @@ func (c *Client) GetTerminology(ctx context.Context, params *GetTerminologyInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetTerminologyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetTerminology(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

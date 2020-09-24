@@ -33,6 +33,8 @@ func (c *Client) RegisterJobDefinition(ctx context.Context, params *RegisterJobD
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterJobDefinitionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterJobDefinition(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -46,6 +46,8 @@ func (c *Client) ModifyHsm(ctx context.Context, params *ModifyHsmInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpModifyHsmValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opModifyHsm(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

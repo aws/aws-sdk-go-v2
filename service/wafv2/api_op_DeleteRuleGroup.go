@@ -37,6 +37,8 @@ func (c *Client) DeleteRuleGroup(ctx context.Context, params *DeleteRuleGroupInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteRuleGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRuleGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

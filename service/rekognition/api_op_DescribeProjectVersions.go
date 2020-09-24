@@ -36,6 +36,8 @@ func (c *Client) DescribeProjectVersions(ctx context.Context, params *DescribePr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeProjectVersionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeProjectVersions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

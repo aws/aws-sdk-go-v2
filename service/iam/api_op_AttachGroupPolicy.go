@@ -37,6 +37,8 @@ func (c *Client) AttachGroupPolicy(ctx context.Context, params *AttachGroupPolic
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAttachGroupPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAttachGroupPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

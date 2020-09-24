@@ -36,6 +36,8 @@ func (c *Client) ExecuteProvisionedProductPlan(ctx context.Context, params *Exec
 	addIdempotencyToken_opExecuteProvisionedProductPlanMiddleware(stack, options)
 	addOpExecuteProvisionedProductPlanValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opExecuteProvisionedProductPlan(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

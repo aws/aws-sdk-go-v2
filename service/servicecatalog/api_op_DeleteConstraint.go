@@ -33,6 +33,8 @@ func (c *Client) DeleteConstraint(ctx context.Context, params *DeleteConstraintI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteConstraintValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteConstraint(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

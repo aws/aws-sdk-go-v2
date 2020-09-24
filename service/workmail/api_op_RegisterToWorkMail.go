@@ -40,6 +40,8 @@ func (c *Client) RegisterToWorkMail(ctx context.Context, params *RegisterToWorkM
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRegisterToWorkMailValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterToWorkMail(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

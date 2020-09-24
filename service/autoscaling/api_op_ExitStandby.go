@@ -37,6 +37,8 @@ func (c *Client) ExitStandby(ctx context.Context, params *ExitStandbyInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpExitStandbyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opExitStandby(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

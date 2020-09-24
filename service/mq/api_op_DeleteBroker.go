@@ -32,6 +32,8 @@ func (c *Client) DeleteBroker(ctx context.Context, params *DeleteBrokerInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteBrokerValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBroker(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

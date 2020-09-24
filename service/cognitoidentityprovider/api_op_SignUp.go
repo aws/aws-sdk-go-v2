@@ -31,6 +31,8 @@ func (c *Client) SignUp(ctx context.Context, params *SignUpInput, optFns ...func
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSignUpValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSignUp(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

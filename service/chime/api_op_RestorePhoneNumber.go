@@ -34,6 +34,8 @@ func (c *Client) RestorePhoneNumber(ctx context.Context, params *RestorePhoneNum
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRestorePhoneNumberValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRestorePhoneNumber(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

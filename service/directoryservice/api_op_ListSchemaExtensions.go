@@ -33,6 +33,8 @@ func (c *Client) ListSchemaExtensions(ctx context.Context, params *ListSchemaExt
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListSchemaExtensionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListSchemaExtensions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

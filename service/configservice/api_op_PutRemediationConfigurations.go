@@ -38,6 +38,8 @@ func (c *Client) PutRemediationConfigurations(ctx context.Context, params *PutRe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutRemediationConfigurationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutRemediationConfigurations(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

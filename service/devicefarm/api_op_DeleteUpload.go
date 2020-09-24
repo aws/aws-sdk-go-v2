@@ -32,6 +32,8 @@ func (c *Client) DeleteUpload(ctx context.Context, params *DeleteUploadInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteUploadValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteUpload(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

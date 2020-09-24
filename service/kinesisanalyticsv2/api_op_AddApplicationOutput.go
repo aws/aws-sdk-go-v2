@@ -44,6 +44,8 @@ func (c *Client) AddApplicationOutput(ctx context.Context, params *AddApplicatio
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAddApplicationOutputValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAddApplicationOutput(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

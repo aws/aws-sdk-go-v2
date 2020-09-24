@@ -35,6 +35,8 @@ func (c *Client) UpdateFindings(ctx context.Context, params *UpdateFindingsInput
 	addIdempotencyToken_opUpdateFindingsMiddleware(stack, options)
 	addOpUpdateFindingsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFindings(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

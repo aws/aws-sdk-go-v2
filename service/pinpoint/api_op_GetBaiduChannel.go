@@ -34,6 +34,8 @@ func (c *Client) GetBaiduChannel(ctx context.Context, params *GetBaiduChannelInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetBaiduChannelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetBaiduChannel(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

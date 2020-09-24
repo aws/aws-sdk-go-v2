@@ -40,6 +40,8 @@ func (c *Client) ActivatePipeline(ctx context.Context, params *ActivatePipelineI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpActivatePipelineValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opActivatePipeline(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

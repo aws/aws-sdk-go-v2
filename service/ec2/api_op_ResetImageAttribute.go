@@ -34,6 +34,8 @@ func (c *Client) ResetImageAttribute(ctx context.Context, params *ResetImageAttr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpResetImageAttributeValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opResetImageAttribute(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

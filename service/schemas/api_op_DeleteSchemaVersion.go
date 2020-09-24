@@ -32,6 +32,8 @@ func (c *Client) DeleteSchemaVersion(ctx context.Context, params *DeleteSchemaVe
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteSchemaVersionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSchemaVersion(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -48,6 +48,8 @@ func (c *Client) DeleteVaultNotifications(ctx context.Context, params *DeleteVau
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteVaultNotificationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVaultNotifications(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	glaciercust.AddTreeHashMiddleware(stack)
 
 	for _, fn := range options.APIOptions {

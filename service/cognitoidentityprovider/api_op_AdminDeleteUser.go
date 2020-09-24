@@ -33,6 +33,8 @@ func (c *Client) AdminDeleteUser(ctx context.Context, params *AdminDeleteUserInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAdminDeleteUserValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAdminDeleteUser(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

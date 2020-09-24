@@ -34,6 +34,8 @@ func (c *Client) UpdateClientCertificate(ctx context.Context, params *UpdateClie
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateClientCertificateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateClientCertificate(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

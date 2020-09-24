@@ -35,6 +35,8 @@ func (c *Client) ReportTaskRunnerHeartbeat(ctx context.Context, params *ReportTa
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpReportTaskRunnerHeartbeatValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opReportTaskRunnerHeartbeat(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -41,6 +41,8 @@ func (c *Client) StopInstance(ctx context.Context, params *StopInstanceInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStopInstanceValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStopInstance(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

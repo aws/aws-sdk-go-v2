@@ -45,6 +45,8 @@ func (c *Client) PutClusterCapacityProviders(ctx context.Context, params *PutClu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutClusterCapacityProvidersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutClusterCapacityProviders(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -35,6 +35,8 @@ func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns
 	addIdempotencyToken_opCreateUserMiddleware(stack, options)
 	addOpCreateUserValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateUser(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

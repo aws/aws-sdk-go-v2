@@ -33,6 +33,8 @@ func (c *Client) AdminRemoveUserFromGroup(ctx context.Context, params *AdminRemo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAdminRemoveUserFromGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAdminRemoveUserFromGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

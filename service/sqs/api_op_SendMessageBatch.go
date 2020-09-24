@@ -51,6 +51,8 @@ func (c *Client) SendMessageBatch(ctx context.Context, params *SendMessageBatchI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSendMessageBatchValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSendMessageBatch(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

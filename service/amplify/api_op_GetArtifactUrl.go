@@ -32,6 +32,8 @@ func (c *Client) GetArtifactUrl(ctx context.Context, params *GetArtifactUrlInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetArtifactUrlValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetArtifactUrl(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,8 @@ func (c *Client) SearchFlowTemplates(ctx context.Context, params *SearchFlowTemp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSearchFlowTemplatesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSearchFlowTemplates(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

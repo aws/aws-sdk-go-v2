@@ -38,6 +38,8 @@ func (c *Client) DeleteEventSourceMapping(ctx context.Context, params *DeleteEve
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteEventSourceMappingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteEventSourceMapping(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

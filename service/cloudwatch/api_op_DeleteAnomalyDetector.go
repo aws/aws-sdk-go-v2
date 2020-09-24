@@ -33,6 +33,8 @@ func (c *Client) DeleteAnomalyDetector(ctx context.Context, params *DeleteAnomal
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteAnomalyDetectorValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAnomalyDetector(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -35,6 +35,8 @@ func (c *Client) ResumeSession(ctx context.Context, params *ResumeSessionInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpResumeSessionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opResumeSession(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

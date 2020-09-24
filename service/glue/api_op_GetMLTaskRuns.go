@@ -38,6 +38,8 @@ func (c *Client) GetMLTaskRuns(ctx context.Context, params *GetMLTaskRunsInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetMLTaskRunsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetMLTaskRuns(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

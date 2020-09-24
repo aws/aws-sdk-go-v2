@@ -33,6 +33,8 @@ func (c *Client) GetParameterHistory(ctx context.Context, params *GetParameterHi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetParameterHistoryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetParameterHistory(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

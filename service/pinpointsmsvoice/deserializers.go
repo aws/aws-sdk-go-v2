@@ -38,7 +38,7 @@ func (m *awsRestjson1_deserializeOpCreateConfigurationSet) HandleDeserialize(ctx
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorCreateConfigurationSet(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorCreateConfigurationSet(response, &metadata)
 	}
 	output := &CreateConfigurationSetOutput{}
 	out.Result = output
@@ -46,7 +46,7 @@ func (m *awsRestjson1_deserializeOpCreateConfigurationSet) HandleDeserialize(ctx
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorCreateConfigurationSet(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorCreateConfigurationSet(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -133,7 +133,7 @@ func (m *awsRestjson1_deserializeOpCreateConfigurationSetEventDestination) Handl
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorCreateConfigurationSetEventDestination(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorCreateConfigurationSetEventDestination(response, &metadata)
 	}
 	output := &CreateConfigurationSetEventDestinationOutput{}
 	out.Result = output
@@ -141,7 +141,7 @@ func (m *awsRestjson1_deserializeOpCreateConfigurationSetEventDestination) Handl
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorCreateConfigurationSetEventDestination(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorCreateConfigurationSetEventDestination(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -231,7 +231,7 @@ func (m *awsRestjson1_deserializeOpDeleteConfigurationSet) HandleDeserialize(ctx
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorDeleteConfigurationSet(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorDeleteConfigurationSet(response, &metadata)
 	}
 	output := &DeleteConfigurationSetOutput{}
 	out.Result = output
@@ -239,7 +239,7 @@ func (m *awsRestjson1_deserializeOpDeleteConfigurationSet) HandleDeserialize(ctx
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorDeleteConfigurationSet(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorDeleteConfigurationSet(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -323,7 +323,7 @@ func (m *awsRestjson1_deserializeOpDeleteConfigurationSetEventDestination) Handl
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorDeleteConfigurationSetEventDestination(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorDeleteConfigurationSetEventDestination(response, &metadata)
 	}
 	output := &DeleteConfigurationSetEventDestinationOutput{}
 	out.Result = output
@@ -331,7 +331,7 @@ func (m *awsRestjson1_deserializeOpDeleteConfigurationSetEventDestination) Handl
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorDeleteConfigurationSetEventDestination(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorDeleteConfigurationSetEventDestination(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -415,7 +415,7 @@ func (m *awsRestjson1_deserializeOpGetConfigurationSetEventDestinations) HandleD
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorGetConfigurationSetEventDestinations(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorGetConfigurationSetEventDestinations(response, &metadata)
 	}
 	output := &GetConfigurationSetEventDestinationsOutput{}
 	out.Result = output
@@ -451,7 +451,7 @@ func (m *awsRestjson1_deserializeOpGetConfigurationSetEventDestinations) HandleD
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorGetConfigurationSetEventDestinations(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorGetConfigurationSetEventDestinations(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -571,7 +571,7 @@ func (m *awsRestjson1_deserializeOpListConfigurationSets) HandleDeserialize(ctx 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorListConfigurationSets(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorListConfigurationSets(response, &metadata)
 	}
 	output := &ListConfigurationSetsOutput{}
 	out.Result = output
@@ -607,7 +607,7 @@ func (m *awsRestjson1_deserializeOpListConfigurationSets) HandleDeserialize(ctx 
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorListConfigurationSets(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorListConfigurationSets(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -733,7 +733,7 @@ func (m *awsRestjson1_deserializeOpSendVoiceMessage) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorSendVoiceMessage(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorSendVoiceMessage(response, &metadata)
 	}
 	output := &SendVoiceMessageOutput{}
 	out.Result = output
@@ -769,7 +769,7 @@ func (m *awsRestjson1_deserializeOpSendVoiceMessage) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorSendVoiceMessage(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorSendVoiceMessage(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -890,7 +890,7 @@ func (m *awsRestjson1_deserializeOpUpdateConfigurationSetEventDestination) Handl
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorUpdateConfigurationSetEventDestination(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorUpdateConfigurationSetEventDestination(response, &metadata)
 	}
 	output := &UpdateConfigurationSetEventDestinationOutput{}
 	out.Result = output
@@ -898,7 +898,7 @@ func (m *awsRestjson1_deserializeOpUpdateConfigurationSetEventDestination) Handl
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorUpdateConfigurationSetEventDestination(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorUpdateConfigurationSetEventDestination(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

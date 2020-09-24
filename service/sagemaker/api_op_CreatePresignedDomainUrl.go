@@ -36,6 +36,8 @@ func (c *Client) CreatePresignedDomainUrl(ctx context.Context, params *CreatePre
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreatePresignedDomainUrlValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePresignedDomainUrl(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

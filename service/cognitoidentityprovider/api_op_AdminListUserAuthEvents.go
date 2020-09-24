@@ -34,6 +34,8 @@ func (c *Client) AdminListUserAuthEvents(ctx context.Context, params *AdminListU
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAdminListUserAuthEventsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAdminListUserAuthEvents(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -37,6 +37,8 @@ func (c *Client) CreateProposal(ctx context.Context, params *CreateProposalInput
 	addIdempotencyToken_opCreateProposalMiddleware(stack, options)
 	addOpCreateProposalValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProposal(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

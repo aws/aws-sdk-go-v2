@@ -36,6 +36,8 @@ func (c *Client) InferICD10CM(ctx context.Context, params *InferICD10CMInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpInferICD10CMValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opInferICD10CM(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

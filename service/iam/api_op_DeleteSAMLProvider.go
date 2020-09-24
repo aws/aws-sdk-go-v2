@@ -37,6 +37,8 @@ func (c *Client) DeleteSAMLProvider(ctx context.Context, params *DeleteSAMLProvi
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteSAMLProviderValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSAMLProvider(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

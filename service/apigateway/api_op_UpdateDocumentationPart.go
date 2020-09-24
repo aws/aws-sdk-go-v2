@@ -32,6 +32,8 @@ func (c *Client) UpdateDocumentationPart(ctx context.Context, params *UpdateDocu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateDocumentationPartValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDocumentationPart(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	addAcceptHeader(stack)
 
 	for _, fn := range options.APIOptions {

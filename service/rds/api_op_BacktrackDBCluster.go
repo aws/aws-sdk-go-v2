@@ -37,6 +37,8 @@ func (c *Client) BacktrackDBCluster(ctx context.Context, params *BacktrackDBClus
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpBacktrackDBClusterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opBacktrackDBCluster(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,8 @@ func (c *Client) GetPlaybackConfiguration(ctx context.Context, params *GetPlayba
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetPlaybackConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetPlaybackConfiguration(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

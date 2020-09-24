@@ -33,6 +33,8 @@ func (c *Client) CreateRoleAlias(ctx context.Context, params *CreateRoleAliasInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateRoleAliasValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRoleAlias(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

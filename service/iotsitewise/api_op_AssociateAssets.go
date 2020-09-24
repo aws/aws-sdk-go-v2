@@ -37,6 +37,8 @@ func (c *Client) AssociateAssets(ctx context.Context, params *AssociateAssetsInp
 	addIdempotencyToken_opAssociateAssetsMiddleware(stack, options)
 	addOpAssociateAssetsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateAssets(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

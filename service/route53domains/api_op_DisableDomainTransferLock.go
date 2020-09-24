@@ -37,6 +37,8 @@ func (c *Client) DisableDomainTransferLock(ctx context.Context, params *DisableD
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisableDomainTransferLockValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisableDomainTransferLock(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

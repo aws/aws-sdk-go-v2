@@ -37,6 +37,8 @@ func (c *Client) DeleteNamedQuery(ctx context.Context, params *DeleteNamedQueryI
 	addIdempotencyToken_opDeleteNamedQueryMiddleware(stack, options)
 	addOpDeleteNamedQueryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteNamedQuery(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

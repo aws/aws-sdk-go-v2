@@ -41,6 +41,8 @@ func (c *Client) ImportTerminology(ctx context.Context, params *ImportTerminolog
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpImportTerminologyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opImportTerminology(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -43,6 +43,8 @@ func (c *Client) DetachInstances(ctx context.Context, params *DetachInstancesInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDetachInstancesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDetachInstances(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

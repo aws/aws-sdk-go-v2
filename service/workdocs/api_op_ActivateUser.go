@@ -33,6 +33,8 @@ func (c *Client) ActivateUser(ctx context.Context, params *ActivateUserInput, op
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpActivateUserValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opActivateUser(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,8 @@ func (c *Client) CreateNotification(ctx context.Context, params *CreateNotificat
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateNotificationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateNotification(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

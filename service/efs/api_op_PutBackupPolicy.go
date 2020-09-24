@@ -34,6 +34,8 @@ func (c *Client) PutBackupPolicy(ctx context.Context, params *PutBackupPolicyInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutBackupPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutBackupPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

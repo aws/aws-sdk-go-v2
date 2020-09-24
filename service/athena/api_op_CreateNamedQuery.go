@@ -37,6 +37,8 @@ func (c *Client) CreateNamedQuery(ctx context.Context, params *CreateNamedQueryI
 	addIdempotencyToken_opCreateNamedQueryMiddleware(stack, options)
 	addOpCreateNamedQueryValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateNamedQuery(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

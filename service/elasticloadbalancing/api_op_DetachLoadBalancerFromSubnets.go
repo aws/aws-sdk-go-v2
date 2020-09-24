@@ -35,6 +35,8 @@ func (c *Client) DetachLoadBalancerFromSubnets(ctx context.Context, params *Deta
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDetachLoadBalancerFromSubnetsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDetachLoadBalancerFromSubnets(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

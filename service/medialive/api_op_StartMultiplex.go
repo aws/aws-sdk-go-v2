@@ -34,6 +34,8 @@ func (c *Client) StartMultiplex(ctx context.Context, params *StartMultiplexInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartMultiplexValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartMultiplex(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

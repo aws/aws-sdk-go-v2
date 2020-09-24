@@ -33,6 +33,8 @@ func (c *Client) DeleteRealtimeEndpoint(ctx context.Context, params *DeleteRealt
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteRealtimeEndpointValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRealtimeEndpoint(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

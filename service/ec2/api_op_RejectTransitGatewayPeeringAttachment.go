@@ -33,6 +33,8 @@ func (c *Client) RejectTransitGatewayPeeringAttachment(ctx context.Context, para
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRejectTransitGatewayPeeringAttachmentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRejectTransitGatewayPeeringAttachment(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

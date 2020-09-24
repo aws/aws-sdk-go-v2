@@ -37,6 +37,8 @@ func (c *Client) RemoveTagsFromVault(ctx context.Context, params *RemoveTagsFrom
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpRemoveTagsFromVaultValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveTagsFromVault(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	glaciercust.AddTreeHashMiddleware(stack)
 
 	for _, fn := range options.APIOptions {

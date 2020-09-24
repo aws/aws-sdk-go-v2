@@ -34,6 +34,8 @@ func (c *Client) DisableUser(ctx context.Context, params *DisableUserInput, optF
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisableUserValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisableUser(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

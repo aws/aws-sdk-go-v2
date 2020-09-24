@@ -36,6 +36,8 @@ func (c *Client) UnlinkDeveloperIdentity(ctx context.Context, params *UnlinkDeve
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUnlinkDeveloperIdentityValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUnlinkDeveloperIdentity(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

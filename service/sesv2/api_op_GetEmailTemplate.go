@@ -35,6 +35,8 @@ func (c *Client) GetEmailTemplate(ctx context.Context, params *GetEmailTemplateI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetEmailTemplateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetEmailTemplate(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -32,6 +32,8 @@ func (c *Client) DeleteRoleAlias(ctx context.Context, params *DeleteRoleAliasInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteRoleAliasValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRoleAlias(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

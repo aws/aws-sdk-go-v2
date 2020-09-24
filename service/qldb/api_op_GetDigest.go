@@ -34,6 +34,8 @@ func (c *Client) GetDigest(ctx context.Context, params *GetDigestInput, optFns .
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetDigestValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetDigest(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

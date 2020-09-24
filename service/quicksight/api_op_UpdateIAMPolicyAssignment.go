@@ -34,6 +34,8 @@ func (c *Client) UpdateIAMPolicyAssignment(ctx context.Context, params *UpdateIA
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateIAMPolicyAssignmentValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateIAMPolicyAssignment(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

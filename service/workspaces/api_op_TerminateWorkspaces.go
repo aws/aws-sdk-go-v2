@@ -38,6 +38,8 @@ func (c *Client) TerminateWorkspaces(ctx context.Context, params *TerminateWorks
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTerminateWorkspacesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTerminateWorkspaces(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

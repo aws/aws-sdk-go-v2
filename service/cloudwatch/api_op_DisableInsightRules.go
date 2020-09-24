@@ -34,6 +34,8 @@ func (c *Client) DisableInsightRules(ctx context.Context, params *DisableInsight
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisableInsightRulesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisableInsightRules(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

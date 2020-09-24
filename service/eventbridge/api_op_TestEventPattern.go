@@ -36,6 +36,8 @@ func (c *Client) TestEventPattern(ctx context.Context, params *TestEventPatternI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpTestEventPatternValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opTestEventPattern(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

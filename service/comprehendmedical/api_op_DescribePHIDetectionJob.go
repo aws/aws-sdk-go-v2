@@ -34,6 +34,8 @@ func (c *Client) DescribePHIDetectionJob(ctx context.Context, params *DescribePH
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribePHIDetectionJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePHIDetectionJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

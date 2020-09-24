@@ -34,6 +34,8 @@ func (c *Client) ListMailboxPermissions(ctx context.Context, params *ListMailbox
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListMailboxPermissionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListMailboxPermissions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,8 @@ func (c *Client) CreateProvisioningClaim(ctx context.Context, params *CreateProv
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateProvisioningClaimValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProvisioningClaim(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

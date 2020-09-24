@@ -36,6 +36,8 @@ func (c *Client) ListTagsForCertificate(ctx context.Context, params *ListTagsFor
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListTagsForCertificateValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListTagsForCertificate(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -40,7 +40,7 @@ func (m *awsRestjson1_deserializeOpCreateGatewayRoute) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorCreateGatewayRoute(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorCreateGatewayRoute(response, &metadata)
 	}
 	output := &CreateGatewayRouteOutput{}
 	out.Result = output
@@ -76,7 +76,7 @@ func (m *awsRestjson1_deserializeOpCreateGatewayRoute) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorCreateGatewayRoute(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorCreateGatewayRoute(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -208,7 +208,7 @@ func (m *awsRestjson1_deserializeOpCreateMesh) HandleDeserialize(ctx context.Con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorCreateMesh(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorCreateMesh(response, &metadata)
 	}
 	output := &CreateMeshOutput{}
 	out.Result = output
@@ -244,7 +244,7 @@ func (m *awsRestjson1_deserializeOpCreateMesh) HandleDeserialize(ctx context.Con
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorCreateMesh(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorCreateMesh(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -376,7 +376,7 @@ func (m *awsRestjson1_deserializeOpCreateRoute) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorCreateRoute(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorCreateRoute(response, &metadata)
 	}
 	output := &CreateRouteOutput{}
 	out.Result = output
@@ -412,7 +412,7 @@ func (m *awsRestjson1_deserializeOpCreateRoute) HandleDeserialize(ctx context.Co
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorCreateRoute(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorCreateRoute(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -544,7 +544,7 @@ func (m *awsRestjson1_deserializeOpCreateVirtualGateway) HandleDeserialize(ctx c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorCreateVirtualGateway(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorCreateVirtualGateway(response, &metadata)
 	}
 	output := &CreateVirtualGatewayOutput{}
 	out.Result = output
@@ -580,7 +580,7 @@ func (m *awsRestjson1_deserializeOpCreateVirtualGateway) HandleDeserialize(ctx c
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorCreateVirtualGateway(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorCreateVirtualGateway(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -712,7 +712,7 @@ func (m *awsRestjson1_deserializeOpCreateVirtualNode) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorCreateVirtualNode(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorCreateVirtualNode(response, &metadata)
 	}
 	output := &CreateVirtualNodeOutput{}
 	out.Result = output
@@ -748,7 +748,7 @@ func (m *awsRestjson1_deserializeOpCreateVirtualNode) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorCreateVirtualNode(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorCreateVirtualNode(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -880,7 +880,7 @@ func (m *awsRestjson1_deserializeOpCreateVirtualRouter) HandleDeserialize(ctx co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorCreateVirtualRouter(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorCreateVirtualRouter(response, &metadata)
 	}
 	output := &CreateVirtualRouterOutput{}
 	out.Result = output
@@ -916,7 +916,7 @@ func (m *awsRestjson1_deserializeOpCreateVirtualRouter) HandleDeserialize(ctx co
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorCreateVirtualRouter(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorCreateVirtualRouter(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1048,7 +1048,7 @@ func (m *awsRestjson1_deserializeOpCreateVirtualService) HandleDeserialize(ctx c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorCreateVirtualService(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorCreateVirtualService(response, &metadata)
 	}
 	output := &CreateVirtualServiceOutput{}
 	out.Result = output
@@ -1084,7 +1084,7 @@ func (m *awsRestjson1_deserializeOpCreateVirtualService) HandleDeserialize(ctx c
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorCreateVirtualService(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorCreateVirtualService(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1216,7 +1216,7 @@ func (m *awsRestjson1_deserializeOpDeleteGatewayRoute) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorDeleteGatewayRoute(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorDeleteGatewayRoute(response, &metadata)
 	}
 	output := &DeleteGatewayRouteOutput{}
 	out.Result = output
@@ -1252,7 +1252,7 @@ func (m *awsRestjson1_deserializeOpDeleteGatewayRoute) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorDeleteGatewayRoute(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorDeleteGatewayRoute(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1381,7 +1381,7 @@ func (m *awsRestjson1_deserializeOpDeleteMesh) HandleDeserialize(ctx context.Con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorDeleteMesh(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorDeleteMesh(response, &metadata)
 	}
 	output := &DeleteMeshOutput{}
 	out.Result = output
@@ -1417,7 +1417,7 @@ func (m *awsRestjson1_deserializeOpDeleteMesh) HandleDeserialize(ctx context.Con
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorDeleteMesh(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorDeleteMesh(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1546,7 +1546,7 @@ func (m *awsRestjson1_deserializeOpDeleteRoute) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorDeleteRoute(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorDeleteRoute(response, &metadata)
 	}
 	output := &DeleteRouteOutput{}
 	out.Result = output
@@ -1582,7 +1582,7 @@ func (m *awsRestjson1_deserializeOpDeleteRoute) HandleDeserialize(ctx context.Co
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorDeleteRoute(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorDeleteRoute(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1711,7 +1711,7 @@ func (m *awsRestjson1_deserializeOpDeleteVirtualGateway) HandleDeserialize(ctx c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorDeleteVirtualGateway(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorDeleteVirtualGateway(response, &metadata)
 	}
 	output := &DeleteVirtualGatewayOutput{}
 	out.Result = output
@@ -1747,7 +1747,7 @@ func (m *awsRestjson1_deserializeOpDeleteVirtualGateway) HandleDeserialize(ctx c
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorDeleteVirtualGateway(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorDeleteVirtualGateway(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1876,7 +1876,7 @@ func (m *awsRestjson1_deserializeOpDeleteVirtualNode) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorDeleteVirtualNode(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorDeleteVirtualNode(response, &metadata)
 	}
 	output := &DeleteVirtualNodeOutput{}
 	out.Result = output
@@ -1912,7 +1912,7 @@ func (m *awsRestjson1_deserializeOpDeleteVirtualNode) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorDeleteVirtualNode(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorDeleteVirtualNode(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2041,7 +2041,7 @@ func (m *awsRestjson1_deserializeOpDeleteVirtualRouter) HandleDeserialize(ctx co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorDeleteVirtualRouter(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorDeleteVirtualRouter(response, &metadata)
 	}
 	output := &DeleteVirtualRouterOutput{}
 	out.Result = output
@@ -2077,7 +2077,7 @@ func (m *awsRestjson1_deserializeOpDeleteVirtualRouter) HandleDeserialize(ctx co
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorDeleteVirtualRouter(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorDeleteVirtualRouter(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2206,7 +2206,7 @@ func (m *awsRestjson1_deserializeOpDeleteVirtualService) HandleDeserialize(ctx c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorDeleteVirtualService(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorDeleteVirtualService(response, &metadata)
 	}
 	output := &DeleteVirtualServiceOutput{}
 	out.Result = output
@@ -2242,7 +2242,7 @@ func (m *awsRestjson1_deserializeOpDeleteVirtualService) HandleDeserialize(ctx c
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorDeleteVirtualService(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorDeleteVirtualService(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2371,7 +2371,7 @@ func (m *awsRestjson1_deserializeOpDescribeGatewayRoute) HandleDeserialize(ctx c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorDescribeGatewayRoute(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorDescribeGatewayRoute(response, &metadata)
 	}
 	output := &DescribeGatewayRouteOutput{}
 	out.Result = output
@@ -2407,7 +2407,7 @@ func (m *awsRestjson1_deserializeOpDescribeGatewayRoute) HandleDeserialize(ctx c
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorDescribeGatewayRoute(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorDescribeGatewayRoute(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2533,7 +2533,7 @@ func (m *awsRestjson1_deserializeOpDescribeMesh) HandleDeserialize(ctx context.C
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorDescribeMesh(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorDescribeMesh(response, &metadata)
 	}
 	output := &DescribeMeshOutput{}
 	out.Result = output
@@ -2569,7 +2569,7 @@ func (m *awsRestjson1_deserializeOpDescribeMesh) HandleDeserialize(ctx context.C
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorDescribeMesh(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorDescribeMesh(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2695,7 +2695,7 @@ func (m *awsRestjson1_deserializeOpDescribeRoute) HandleDeserialize(ctx context.
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorDescribeRoute(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorDescribeRoute(response, &metadata)
 	}
 	output := &DescribeRouteOutput{}
 	out.Result = output
@@ -2731,7 +2731,7 @@ func (m *awsRestjson1_deserializeOpDescribeRoute) HandleDeserialize(ctx context.
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorDescribeRoute(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorDescribeRoute(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2857,7 +2857,7 @@ func (m *awsRestjson1_deserializeOpDescribeVirtualGateway) HandleDeserialize(ctx
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorDescribeVirtualGateway(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorDescribeVirtualGateway(response, &metadata)
 	}
 	output := &DescribeVirtualGatewayOutput{}
 	out.Result = output
@@ -2893,7 +2893,7 @@ func (m *awsRestjson1_deserializeOpDescribeVirtualGateway) HandleDeserialize(ctx
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorDescribeVirtualGateway(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorDescribeVirtualGateway(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3019,7 +3019,7 @@ func (m *awsRestjson1_deserializeOpDescribeVirtualNode) HandleDeserialize(ctx co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorDescribeVirtualNode(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorDescribeVirtualNode(response, &metadata)
 	}
 	output := &DescribeVirtualNodeOutput{}
 	out.Result = output
@@ -3055,7 +3055,7 @@ func (m *awsRestjson1_deserializeOpDescribeVirtualNode) HandleDeserialize(ctx co
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorDescribeVirtualNode(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorDescribeVirtualNode(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3181,7 +3181,7 @@ func (m *awsRestjson1_deserializeOpDescribeVirtualRouter) HandleDeserialize(ctx 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorDescribeVirtualRouter(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorDescribeVirtualRouter(response, &metadata)
 	}
 	output := &DescribeVirtualRouterOutput{}
 	out.Result = output
@@ -3217,7 +3217,7 @@ func (m *awsRestjson1_deserializeOpDescribeVirtualRouter) HandleDeserialize(ctx 
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorDescribeVirtualRouter(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorDescribeVirtualRouter(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3343,7 +3343,7 @@ func (m *awsRestjson1_deserializeOpDescribeVirtualService) HandleDeserialize(ctx
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorDescribeVirtualService(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorDescribeVirtualService(response, &metadata)
 	}
 	output := &DescribeVirtualServiceOutput{}
 	out.Result = output
@@ -3379,7 +3379,7 @@ func (m *awsRestjson1_deserializeOpDescribeVirtualService) HandleDeserialize(ctx
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorDescribeVirtualService(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorDescribeVirtualService(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3505,7 +3505,7 @@ func (m *awsRestjson1_deserializeOpListGatewayRoutes) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorListGatewayRoutes(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorListGatewayRoutes(response, &metadata)
 	}
 	output := &ListGatewayRoutesOutput{}
 	out.Result = output
@@ -3541,7 +3541,7 @@ func (m *awsRestjson1_deserializeOpListGatewayRoutes) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorListGatewayRoutes(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorListGatewayRoutes(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3676,7 +3676,7 @@ func (m *awsRestjson1_deserializeOpListMeshes) HandleDeserialize(ctx context.Con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorListMeshes(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorListMeshes(response, &metadata)
 	}
 	output := &ListMeshesOutput{}
 	out.Result = output
@@ -3712,7 +3712,7 @@ func (m *awsRestjson1_deserializeOpListMeshes) HandleDeserialize(ctx context.Con
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorListMeshes(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorListMeshes(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -3847,7 +3847,7 @@ func (m *awsRestjson1_deserializeOpListRoutes) HandleDeserialize(ctx context.Con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorListRoutes(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorListRoutes(response, &metadata)
 	}
 	output := &ListRoutesOutput{}
 	out.Result = output
@@ -3883,7 +3883,7 @@ func (m *awsRestjson1_deserializeOpListRoutes) HandleDeserialize(ctx context.Con
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorListRoutes(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorListRoutes(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4018,7 +4018,7 @@ func (m *awsRestjson1_deserializeOpListTagsForResource) HandleDeserialize(ctx co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorListTagsForResource(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorListTagsForResource(response, &metadata)
 	}
 	output := &ListTagsForResourceOutput{}
 	out.Result = output
@@ -4054,7 +4054,7 @@ func (m *awsRestjson1_deserializeOpListTagsForResource) HandleDeserialize(ctx co
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorListTagsForResource(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorListTagsForResource(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4189,7 +4189,7 @@ func (m *awsRestjson1_deserializeOpListVirtualGateways) HandleDeserialize(ctx co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorListVirtualGateways(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorListVirtualGateways(response, &metadata)
 	}
 	output := &ListVirtualGatewaysOutput{}
 	out.Result = output
@@ -4225,7 +4225,7 @@ func (m *awsRestjson1_deserializeOpListVirtualGateways) HandleDeserialize(ctx co
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorListVirtualGateways(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorListVirtualGateways(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4360,7 +4360,7 @@ func (m *awsRestjson1_deserializeOpListVirtualNodes) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorListVirtualNodes(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorListVirtualNodes(response, &metadata)
 	}
 	output := &ListVirtualNodesOutput{}
 	out.Result = output
@@ -4396,7 +4396,7 @@ func (m *awsRestjson1_deserializeOpListVirtualNodes) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorListVirtualNodes(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorListVirtualNodes(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4531,7 +4531,7 @@ func (m *awsRestjson1_deserializeOpListVirtualRouters) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorListVirtualRouters(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorListVirtualRouters(response, &metadata)
 	}
 	output := &ListVirtualRoutersOutput{}
 	out.Result = output
@@ -4567,7 +4567,7 @@ func (m *awsRestjson1_deserializeOpListVirtualRouters) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorListVirtualRouters(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorListVirtualRouters(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4702,7 +4702,7 @@ func (m *awsRestjson1_deserializeOpListVirtualServices) HandleDeserialize(ctx co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorListVirtualServices(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorListVirtualServices(response, &metadata)
 	}
 	output := &ListVirtualServicesOutput{}
 	out.Result = output
@@ -4738,7 +4738,7 @@ func (m *awsRestjson1_deserializeOpListVirtualServices) HandleDeserialize(ctx co
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorListVirtualServices(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorListVirtualServices(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4873,7 +4873,7 @@ func (m *awsRestjson1_deserializeOpTagResource) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorTagResource(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorTagResource(response, &metadata)
 	}
 	output := &TagResourceOutput{}
 	out.Result = output
@@ -4881,7 +4881,7 @@ func (m *awsRestjson1_deserializeOpTagResource) HandleDeserialize(ctx context.Co
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorTagResource(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorTagResource(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -4974,7 +4974,7 @@ func (m *awsRestjson1_deserializeOpUntagResource) HandleDeserialize(ctx context.
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorUntagResource(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorUntagResource(response, &metadata)
 	}
 	output := &UntagResourceOutput{}
 	out.Result = output
@@ -4982,7 +4982,7 @@ func (m *awsRestjson1_deserializeOpUntagResource) HandleDeserialize(ctx context.
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorUntagResource(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorUntagResource(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -5072,7 +5072,7 @@ func (m *awsRestjson1_deserializeOpUpdateGatewayRoute) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorUpdateGatewayRoute(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorUpdateGatewayRoute(response, &metadata)
 	}
 	output := &UpdateGatewayRouteOutput{}
 	out.Result = output
@@ -5108,7 +5108,7 @@ func (m *awsRestjson1_deserializeOpUpdateGatewayRoute) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorUpdateGatewayRoute(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorUpdateGatewayRoute(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -5240,7 +5240,7 @@ func (m *awsRestjson1_deserializeOpUpdateMesh) HandleDeserialize(ctx context.Con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorUpdateMesh(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorUpdateMesh(response, &metadata)
 	}
 	output := &UpdateMeshOutput{}
 	out.Result = output
@@ -5276,7 +5276,7 @@ func (m *awsRestjson1_deserializeOpUpdateMesh) HandleDeserialize(ctx context.Con
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorUpdateMesh(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorUpdateMesh(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -5405,7 +5405,7 @@ func (m *awsRestjson1_deserializeOpUpdateRoute) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorUpdateRoute(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorUpdateRoute(response, &metadata)
 	}
 	output := &UpdateRouteOutput{}
 	out.Result = output
@@ -5441,7 +5441,7 @@ func (m *awsRestjson1_deserializeOpUpdateRoute) HandleDeserialize(ctx context.Co
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorUpdateRoute(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorUpdateRoute(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -5573,7 +5573,7 @@ func (m *awsRestjson1_deserializeOpUpdateVirtualGateway) HandleDeserialize(ctx c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorUpdateVirtualGateway(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorUpdateVirtualGateway(response, &metadata)
 	}
 	output := &UpdateVirtualGatewayOutput{}
 	out.Result = output
@@ -5609,7 +5609,7 @@ func (m *awsRestjson1_deserializeOpUpdateVirtualGateway) HandleDeserialize(ctx c
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorUpdateVirtualGateway(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorUpdateVirtualGateway(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -5741,7 +5741,7 @@ func (m *awsRestjson1_deserializeOpUpdateVirtualNode) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorUpdateVirtualNode(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorUpdateVirtualNode(response, &metadata)
 	}
 	output := &UpdateVirtualNodeOutput{}
 	out.Result = output
@@ -5777,7 +5777,7 @@ func (m *awsRestjson1_deserializeOpUpdateVirtualNode) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorUpdateVirtualNode(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorUpdateVirtualNode(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -5909,7 +5909,7 @@ func (m *awsRestjson1_deserializeOpUpdateVirtualRouter) HandleDeserialize(ctx co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorUpdateVirtualRouter(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorUpdateVirtualRouter(response, &metadata)
 	}
 	output := &UpdateVirtualRouterOutput{}
 	out.Result = output
@@ -5945,7 +5945,7 @@ func (m *awsRestjson1_deserializeOpUpdateVirtualRouter) HandleDeserialize(ctx co
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorUpdateVirtualRouter(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorUpdateVirtualRouter(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -6077,7 +6077,7 @@ func (m *awsRestjson1_deserializeOpUpdateVirtualService) HandleDeserialize(ctx c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorUpdateVirtualService(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorUpdateVirtualService(response, &metadata)
 	}
 	output := &UpdateVirtualServiceOutput{}
 	out.Result = output
@@ -6113,7 +6113,7 @@ func (m *awsRestjson1_deserializeOpUpdateVirtualService) HandleDeserialize(ctx c
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorUpdateVirtualService(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorUpdateVirtualService(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

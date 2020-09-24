@@ -34,6 +34,8 @@ func (c *Client) CreateDBClusterEndpoint(ctx context.Context, params *CreateDBCl
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateDBClusterEndpointValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDBClusterEndpoint(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

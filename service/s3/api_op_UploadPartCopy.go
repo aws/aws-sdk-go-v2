@@ -104,6 +104,8 @@ func (c *Client) UploadPartCopy(ctx context.Context, params *UploadPartCopyInput
 	addOpUploadPartCopyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUploadPartCopy(options.Region), middleware.Before)
 	addUpdateEndpointMiddleware(stack, options)
+	addResponseErrorMiddleware(stack)
+	addMetadataRetrieverMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

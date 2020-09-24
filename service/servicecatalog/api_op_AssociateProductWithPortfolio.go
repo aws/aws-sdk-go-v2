@@ -33,6 +33,8 @@ func (c *Client) AssociateProductWithPortfolio(ctx context.Context, params *Asso
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAssociateProductWithPortfolioValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateProductWithPortfolio(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

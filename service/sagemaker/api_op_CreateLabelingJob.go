@@ -61,6 +61,8 @@ func (c *Client) CreateLabelingJob(ctx context.Context, params *CreateLabelingJo
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateLabelingJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLabelingJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

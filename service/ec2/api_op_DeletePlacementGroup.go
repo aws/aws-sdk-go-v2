@@ -36,6 +36,8 @@ func (c *Client) DeletePlacementGroup(ctx context.Context, params *DeletePlaceme
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeletePlacementGroupValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePlacementGroup(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -34,6 +34,8 @@ func (c *Client) DeleteTestGridProject(ctx context.Context, params *DeleteTestGr
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteTestGridProjectValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteTestGridProject(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

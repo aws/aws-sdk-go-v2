@@ -34,6 +34,8 @@ func (c *Client) StartNextPendingJobExecution(ctx context.Context, params *Start
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartNextPendingJobExecutionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartNextPendingJobExecution(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

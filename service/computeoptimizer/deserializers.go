@@ -41,7 +41,7 @@ func (m *awsAwsjson10_deserializeOpDescribeRecommendationExportJobs) HandleDeser
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorDescribeRecommendationExportJobs(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorDescribeRecommendationExportJobs(response, &metadata)
 	}
 	output := &DescribeRecommendationExportJobsOutput{}
 	out.Result = output
@@ -77,7 +77,7 @@ func (m *awsAwsjson10_deserializeOpDescribeRecommendationExportJobs) HandleDeser
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorDescribeRecommendationExportJobs(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorDescribeRecommendationExportJobs(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -173,7 +173,7 @@ func (m *awsAwsjson10_deserializeOpExportAutoScalingGroupRecommendations) Handle
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorExportAutoScalingGroupRecommendations(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorExportAutoScalingGroupRecommendations(response, &metadata)
 	}
 	output := &ExportAutoScalingGroupRecommendationsOutput{}
 	out.Result = output
@@ -209,7 +209,7 @@ func (m *awsAwsjson10_deserializeOpExportAutoScalingGroupRecommendations) Handle
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorExportAutoScalingGroupRecommendations(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorExportAutoScalingGroupRecommendations(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -305,7 +305,7 @@ func (m *awsAwsjson10_deserializeOpExportEC2InstanceRecommendations) HandleDeser
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorExportEC2InstanceRecommendations(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorExportEC2InstanceRecommendations(response, &metadata)
 	}
 	output := &ExportEC2InstanceRecommendationsOutput{}
 	out.Result = output
@@ -341,7 +341,7 @@ func (m *awsAwsjson10_deserializeOpExportEC2InstanceRecommendations) HandleDeser
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorExportEC2InstanceRecommendations(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorExportEC2InstanceRecommendations(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -437,7 +437,7 @@ func (m *awsAwsjson10_deserializeOpGetAutoScalingGroupRecommendations) HandleDes
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorGetAutoScalingGroupRecommendations(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorGetAutoScalingGroupRecommendations(response, &metadata)
 	}
 	output := &GetAutoScalingGroupRecommendationsOutput{}
 	out.Result = output
@@ -473,7 +473,7 @@ func (m *awsAwsjson10_deserializeOpGetAutoScalingGroupRecommendations) HandleDes
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorGetAutoScalingGroupRecommendations(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorGetAutoScalingGroupRecommendations(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -569,7 +569,7 @@ func (m *awsAwsjson10_deserializeOpGetEC2InstanceRecommendations) HandleDeserial
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorGetEC2InstanceRecommendations(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorGetEC2InstanceRecommendations(response, &metadata)
 	}
 	output := &GetEC2InstanceRecommendationsOutput{}
 	out.Result = output
@@ -605,7 +605,7 @@ func (m *awsAwsjson10_deserializeOpGetEC2InstanceRecommendations) HandleDeserial
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorGetEC2InstanceRecommendations(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorGetEC2InstanceRecommendations(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -701,7 +701,7 @@ func (m *awsAwsjson10_deserializeOpGetEC2RecommendationProjectedMetrics) HandleD
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorGetEC2RecommendationProjectedMetrics(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorGetEC2RecommendationProjectedMetrics(response, &metadata)
 	}
 	output := &GetEC2RecommendationProjectedMetricsOutput{}
 	out.Result = output
@@ -737,7 +737,7 @@ func (m *awsAwsjson10_deserializeOpGetEC2RecommendationProjectedMetrics) HandleD
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorGetEC2RecommendationProjectedMetrics(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorGetEC2RecommendationProjectedMetrics(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -833,7 +833,7 @@ func (m *awsAwsjson10_deserializeOpGetEnrollmentStatus) HandleDeserialize(ctx co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorGetEnrollmentStatus(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorGetEnrollmentStatus(response, &metadata)
 	}
 	output := &GetEnrollmentStatusOutput{}
 	out.Result = output
@@ -869,7 +869,7 @@ func (m *awsAwsjson10_deserializeOpGetEnrollmentStatus) HandleDeserialize(ctx co
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorGetEnrollmentStatus(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorGetEnrollmentStatus(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -959,7 +959,7 @@ func (m *awsAwsjson10_deserializeOpGetRecommendationSummaries) HandleDeserialize
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorGetRecommendationSummaries(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorGetRecommendationSummaries(response, &metadata)
 	}
 	output := &GetRecommendationSummariesOutput{}
 	out.Result = output
@@ -995,7 +995,7 @@ func (m *awsAwsjson10_deserializeOpGetRecommendationSummaries) HandleDeserialize
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorGetRecommendationSummaries(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorGetRecommendationSummaries(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1088,7 +1088,7 @@ func (m *awsAwsjson10_deserializeOpUpdateEnrollmentStatus) HandleDeserialize(ctx
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson10_deserializeOpErrorUpdateEnrollmentStatus(response)
+		return out, metadata, awsAwsjson10_deserializeOpErrorUpdateEnrollmentStatus(response, &metadata)
 	}
 	output := &UpdateEnrollmentStatusOutput{}
 	out.Result = output
@@ -1124,7 +1124,7 @@ func (m *awsAwsjson10_deserializeOpUpdateEnrollmentStatus) HandleDeserialize(ctx
 	return out, metadata, err
 }
 
-func awsAwsjson10_deserializeOpErrorUpdateEnrollmentStatus(response *smithyhttp.Response) error {
+func awsAwsjson10_deserializeOpErrorUpdateEnrollmentStatus(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

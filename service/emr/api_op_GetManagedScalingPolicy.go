@@ -33,6 +33,8 @@ func (c *Client) GetManagedScalingPolicy(ctx context.Context, params *GetManaged
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetManagedScalingPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetManagedScalingPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

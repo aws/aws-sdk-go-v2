@@ -40,6 +40,8 @@ func (c *Client) DescribeSuggesters(ctx context.Context, params *DescribeSuggest
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDescribeSuggestersValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSuggesters(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

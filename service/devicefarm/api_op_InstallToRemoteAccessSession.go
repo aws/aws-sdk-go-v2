@@ -35,6 +35,8 @@ func (c *Client) InstallToRemoteAccessSession(ctx context.Context, params *Insta
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpInstallToRemoteAccessSessionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opInstallToRemoteAccessSession(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

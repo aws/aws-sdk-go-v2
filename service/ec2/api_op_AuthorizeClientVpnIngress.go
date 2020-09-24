@@ -38,6 +38,8 @@ func (c *Client) AuthorizeClientVpnIngress(ctx context.Context, params *Authoriz
 	addIdempotencyToken_opAuthorizeClientVpnIngressMiddleware(stack, options)
 	addOpAuthorizeClientVpnIngressValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAuthorizeClientVpnIngress(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -51,6 +51,8 @@ func (c *Client) PutPermission(ctx context.Context, params *PutPermissionInput, 
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutPermissionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutPermission(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

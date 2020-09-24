@@ -6,6 +6,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
+	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/awslabs/smithy-go/middleware"
 	"net/http"
 )
@@ -128,4 +129,12 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 
 func addClientUserAgent(stack *middleware.Stack) {
 	awsmiddleware.AddUserAgentKey("jsonrpc10")(stack)
+}
+
+func addRequestIDRetrieverMiddleware(stack *middleware.Stack) {
+	awsmiddleware.AddRequestIDRetrieverMiddleware(stack)
+}
+
+func addResponseErrorMiddleware(stack *middleware.Stack) {
+	awshttp.AddResponseErrorMiddleware(stack)
 }

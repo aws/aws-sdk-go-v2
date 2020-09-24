@@ -33,6 +33,8 @@ func (c *Client) PutImageScanningConfiguration(ctx context.Context, params *PutI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutImageScanningConfigurationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutImageScanningConfiguration(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

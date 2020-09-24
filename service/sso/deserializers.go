@@ -38,7 +38,7 @@ func (m *awsRestjson1_deserializeOpGetRoleCredentials) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorGetRoleCredentials(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorGetRoleCredentials(response, &metadata)
 	}
 	output := &GetRoleCredentialsOutput{}
 	out.Result = output
@@ -74,7 +74,7 @@ func (m *awsRestjson1_deserializeOpGetRoleCredentials) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorGetRoleCredentials(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorGetRoleCredentials(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -194,7 +194,7 @@ func (m *awsRestjson1_deserializeOpListAccountRoles) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorListAccountRoles(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorListAccountRoles(response, &metadata)
 	}
 	output := &ListAccountRolesOutput{}
 	out.Result = output
@@ -230,7 +230,7 @@ func (m *awsRestjson1_deserializeOpListAccountRoles) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorListAccountRoles(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorListAccountRoles(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -359,7 +359,7 @@ func (m *awsRestjson1_deserializeOpListAccounts) HandleDeserialize(ctx context.C
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorListAccounts(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorListAccounts(response, &metadata)
 	}
 	output := &ListAccountsOutput{}
 	out.Result = output
@@ -395,7 +395,7 @@ func (m *awsRestjson1_deserializeOpListAccounts) HandleDeserialize(ctx context.C
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorListAccounts(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorListAccounts(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -524,7 +524,7 @@ func (m *awsRestjson1_deserializeOpLogout) HandleDeserialize(ctx context.Context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorLogout(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorLogout(response, &metadata)
 	}
 	output := &LogoutOutput{}
 	out.Result = output
@@ -532,7 +532,7 @@ func (m *awsRestjson1_deserializeOpLogout) HandleDeserialize(ctx context.Context
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorLogout(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorLogout(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

@@ -33,6 +33,8 @@ func (c *Client) CreateIntegrationResponse(ctx context.Context, params *CreateIn
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateIntegrationResponseValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateIntegrationResponse(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -33,6 +33,8 @@ func (c *Client) DisassociateConnector(ctx context.Context, params *Disassociate
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDisassociateConnectorValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateConnector(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

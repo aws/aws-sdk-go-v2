@@ -41,6 +41,8 @@ func (c *Client) CreateProtection(ctx context.Context, params *CreateProtectionI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpCreateProtectionValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProtection(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

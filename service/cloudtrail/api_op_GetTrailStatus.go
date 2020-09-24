@@ -37,6 +37,8 @@ func (c *Client) GetTrailStatus(ctx context.Context, params *GetTrailStatusInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetTrailStatusValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetTrailStatus(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

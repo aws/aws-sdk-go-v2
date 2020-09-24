@@ -42,6 +42,8 @@ func (c *Client) StartPersonTracking(ctx context.Context, params *StartPersonTra
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpStartPersonTrackingValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opStartPersonTracking(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

@@ -35,6 +35,8 @@ func (c *Client) ListClusterJobs(ctx context.Context, params *ListClusterJobsInp
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListClusterJobsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListClusterJobs(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

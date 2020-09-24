@@ -8,6 +8,8 @@ import (
 	"encoding/base64"
 	"encoding/xml"
 	"fmt"
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	awsxml "github.com/aws/aws-sdk-go-v2/aws/protocol/xml"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/types"
 	smithy "github.com/awslabs/smithy-go"
 	smithyio "github.com/awslabs/smithy-go/io"
@@ -43,7 +45,7 @@ func (m *awsAwsquery_deserializeOpEmptyInputAndEmptyOutput) HandleDeserialize(ct
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorEmptyInputAndEmptyOutput(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorEmptyInputAndEmptyOutput(response, &metadata)
 	}
 	output := &EmptyInputAndEmptyOutputOutput{}
 	out.Result = output
@@ -80,7 +82,7 @@ func (m *awsAwsquery_deserializeOpEmptyInputAndEmptyOutput) HandleDeserialize(ct
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorEmptyInputAndEmptyOutput(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorEmptyInputAndEmptyOutput(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -90,9 +92,18 @@ func awsAwsquery_deserializeOpErrorEmptyInputAndEmptyOutput(response *smithyhttp
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -127,7 +138,7 @@ func (m *awsAwsquery_deserializeOpFlattenedXmlMap) HandleDeserialize(ctx context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorFlattenedXmlMap(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorFlattenedXmlMap(response, &metadata)
 	}
 	output := &FlattenedXmlMapOutput{}
 	out.Result = output
@@ -164,7 +175,7 @@ func (m *awsAwsquery_deserializeOpFlattenedXmlMap) HandleDeserialize(ctx context
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorFlattenedXmlMap(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorFlattenedXmlMap(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -174,9 +185,18 @@ func awsAwsquery_deserializeOpErrorFlattenedXmlMap(response *smithyhttp.Response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -211,7 +231,7 @@ func (m *awsAwsquery_deserializeOpFlattenedXmlMapWithXmlName) HandleDeserialize(
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorFlattenedXmlMapWithXmlName(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorFlattenedXmlMapWithXmlName(response, &metadata)
 	}
 	output := &FlattenedXmlMapWithXmlNameOutput{}
 	out.Result = output
@@ -248,7 +268,7 @@ func (m *awsAwsquery_deserializeOpFlattenedXmlMapWithXmlName) HandleDeserialize(
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorFlattenedXmlMapWithXmlName(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorFlattenedXmlMapWithXmlName(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -258,9 +278,18 @@ func awsAwsquery_deserializeOpErrorFlattenedXmlMapWithXmlName(response *smithyht
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -295,7 +324,7 @@ func (m *awsAwsquery_deserializeOpGreetingWithErrors) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorGreetingWithErrors(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorGreetingWithErrors(response, &metadata)
 	}
 	output := &GreetingWithErrorsOutput{}
 	out.Result = output
@@ -332,7 +361,7 @@ func (m *awsAwsquery_deserializeOpGreetingWithErrors) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorGreetingWithErrors(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorGreetingWithErrors(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -342,9 +371,18 @@ func awsAwsquery_deserializeOpErrorGreetingWithErrors(response *smithyhttp.Respo
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -385,7 +423,7 @@ func (m *awsAwsquery_deserializeOpIgnoresWrappingXmlName) HandleDeserialize(ctx 
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorIgnoresWrappingXmlName(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorIgnoresWrappingXmlName(response, &metadata)
 	}
 	output := &IgnoresWrappingXmlNameOutput{}
 	out.Result = output
@@ -422,7 +460,7 @@ func (m *awsAwsquery_deserializeOpIgnoresWrappingXmlName) HandleDeserialize(ctx 
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorIgnoresWrappingXmlName(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorIgnoresWrappingXmlName(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -432,9 +470,18 @@ func awsAwsquery_deserializeOpErrorIgnoresWrappingXmlName(response *smithyhttp.R
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -469,7 +516,7 @@ func (m *awsAwsquery_deserializeOpNestedStructures) HandleDeserialize(ctx contex
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorNestedStructures(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorNestedStructures(response, &metadata)
 	}
 	output := &NestedStructuresOutput{}
 	out.Result = output
@@ -506,7 +553,7 @@ func (m *awsAwsquery_deserializeOpNestedStructures) HandleDeserialize(ctx contex
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorNestedStructures(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorNestedStructures(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -516,9 +563,18 @@ func awsAwsquery_deserializeOpErrorNestedStructures(response *smithyhttp.Respons
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -553,7 +609,7 @@ func (m *awsAwsquery_deserializeOpNoInputAndNoOutput) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorNoInputAndNoOutput(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorNoInputAndNoOutput(response, &metadata)
 	}
 	output := &NoInputAndNoOutputOutput{}
 	out.Result = output
@@ -590,7 +646,7 @@ func (m *awsAwsquery_deserializeOpNoInputAndNoOutput) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorNoInputAndNoOutput(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorNoInputAndNoOutput(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -600,9 +656,18 @@ func awsAwsquery_deserializeOpErrorNoInputAndNoOutput(response *smithyhttp.Respo
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -637,7 +702,7 @@ func (m *awsAwsquery_deserializeOpNoInputAndOutput) HandleDeserialize(ctx contex
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorNoInputAndOutput(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorNoInputAndOutput(response, &metadata)
 	}
 	output := &NoInputAndOutputOutput{}
 	out.Result = output
@@ -674,7 +739,7 @@ func (m *awsAwsquery_deserializeOpNoInputAndOutput) HandleDeserialize(ctx contex
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorNoInputAndOutput(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorNoInputAndOutput(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -684,9 +749,18 @@ func awsAwsquery_deserializeOpErrorNoInputAndOutput(response *smithyhttp.Respons
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -721,7 +795,7 @@ func (m *awsAwsquery_deserializeOpQueryIdempotencyTokenAutoFill) HandleDeseriali
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorQueryIdempotencyTokenAutoFill(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorQueryIdempotencyTokenAutoFill(response, &metadata)
 	}
 	output := &QueryIdempotencyTokenAutoFillOutput{}
 	out.Result = output
@@ -758,7 +832,7 @@ func (m *awsAwsquery_deserializeOpQueryIdempotencyTokenAutoFill) HandleDeseriali
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorQueryIdempotencyTokenAutoFill(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorQueryIdempotencyTokenAutoFill(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -768,9 +842,18 @@ func awsAwsquery_deserializeOpErrorQueryIdempotencyTokenAutoFill(response *smith
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -805,7 +888,7 @@ func (m *awsAwsquery_deserializeOpQueryLists) HandleDeserialize(ctx context.Cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorQueryLists(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorQueryLists(response, &metadata)
 	}
 	output := &QueryListsOutput{}
 	out.Result = output
@@ -842,7 +925,7 @@ func (m *awsAwsquery_deserializeOpQueryLists) HandleDeserialize(ctx context.Cont
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorQueryLists(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorQueryLists(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -852,9 +935,18 @@ func awsAwsquery_deserializeOpErrorQueryLists(response *smithyhttp.Response) err
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -889,7 +981,7 @@ func (m *awsAwsquery_deserializeOpQueryMaps) HandleDeserialize(ctx context.Conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorQueryMaps(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorQueryMaps(response, &metadata)
 	}
 	output := &QueryMapsOutput{}
 	out.Result = output
@@ -926,7 +1018,7 @@ func (m *awsAwsquery_deserializeOpQueryMaps) HandleDeserialize(ctx context.Conte
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorQueryMaps(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorQueryMaps(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -936,9 +1028,18 @@ func awsAwsquery_deserializeOpErrorQueryMaps(response *smithyhttp.Response) erro
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -973,7 +1074,7 @@ func (m *awsAwsquery_deserializeOpQueryTimestamps) HandleDeserialize(ctx context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorQueryTimestamps(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorQueryTimestamps(response, &metadata)
 	}
 	output := &QueryTimestampsOutput{}
 	out.Result = output
@@ -1010,7 +1111,7 @@ func (m *awsAwsquery_deserializeOpQueryTimestamps) HandleDeserialize(ctx context
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorQueryTimestamps(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorQueryTimestamps(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1020,9 +1121,18 @@ func awsAwsquery_deserializeOpErrorQueryTimestamps(response *smithyhttp.Response
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1057,7 +1167,7 @@ func (m *awsAwsquery_deserializeOpRecursiveXmlShapes) HandleDeserialize(ctx cont
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorRecursiveXmlShapes(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorRecursiveXmlShapes(response, &metadata)
 	}
 	output := &RecursiveXmlShapesOutput{}
 	out.Result = output
@@ -1094,7 +1204,7 @@ func (m *awsAwsquery_deserializeOpRecursiveXmlShapes) HandleDeserialize(ctx cont
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorRecursiveXmlShapes(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorRecursiveXmlShapes(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1104,9 +1214,18 @@ func awsAwsquery_deserializeOpErrorRecursiveXmlShapes(response *smithyhttp.Respo
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1141,7 +1260,7 @@ func (m *awsAwsquery_deserializeOpSimpleInputParams) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorSimpleInputParams(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorSimpleInputParams(response, &metadata)
 	}
 	output := &SimpleInputParamsOutput{}
 	out.Result = output
@@ -1178,7 +1297,7 @@ func (m *awsAwsquery_deserializeOpSimpleInputParams) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorSimpleInputParams(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorSimpleInputParams(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1188,9 +1307,18 @@ func awsAwsquery_deserializeOpErrorSimpleInputParams(response *smithyhttp.Respon
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1225,7 +1353,7 @@ func (m *awsAwsquery_deserializeOpSimpleScalarXmlProperties) HandleDeserialize(c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorSimpleScalarXmlProperties(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorSimpleScalarXmlProperties(response, &metadata)
 	}
 	output := &SimpleScalarXmlPropertiesOutput{}
 	out.Result = output
@@ -1262,7 +1390,7 @@ func (m *awsAwsquery_deserializeOpSimpleScalarXmlProperties) HandleDeserialize(c
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorSimpleScalarXmlProperties(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorSimpleScalarXmlProperties(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1272,9 +1400,18 @@ func awsAwsquery_deserializeOpErrorSimpleScalarXmlProperties(response *smithyhtt
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1309,7 +1446,7 @@ func (m *awsAwsquery_deserializeOpXmlBlobs) HandleDeserialize(ctx context.Contex
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorXmlBlobs(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorXmlBlobs(response, &metadata)
 	}
 	output := &XmlBlobsOutput{}
 	out.Result = output
@@ -1346,7 +1483,7 @@ func (m *awsAwsquery_deserializeOpXmlBlobs) HandleDeserialize(ctx context.Contex
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorXmlBlobs(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorXmlBlobs(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1356,9 +1493,18 @@ func awsAwsquery_deserializeOpErrorXmlBlobs(response *smithyhttp.Response) error
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1393,7 +1539,7 @@ func (m *awsAwsquery_deserializeOpXmlEmptyBlobs) HandleDeserialize(ctx context.C
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorXmlEmptyBlobs(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorXmlEmptyBlobs(response, &metadata)
 	}
 	output := &XmlEmptyBlobsOutput{}
 	out.Result = output
@@ -1430,7 +1576,7 @@ func (m *awsAwsquery_deserializeOpXmlEmptyBlobs) HandleDeserialize(ctx context.C
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorXmlEmptyBlobs(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorXmlEmptyBlobs(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1440,9 +1586,18 @@ func awsAwsquery_deserializeOpErrorXmlEmptyBlobs(response *smithyhttp.Response) 
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1477,7 +1632,7 @@ func (m *awsAwsquery_deserializeOpXmlEmptyLists) HandleDeserialize(ctx context.C
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorXmlEmptyLists(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorXmlEmptyLists(response, &metadata)
 	}
 	output := &XmlEmptyListsOutput{}
 	out.Result = output
@@ -1514,7 +1669,7 @@ func (m *awsAwsquery_deserializeOpXmlEmptyLists) HandleDeserialize(ctx context.C
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorXmlEmptyLists(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorXmlEmptyLists(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1524,9 +1679,18 @@ func awsAwsquery_deserializeOpErrorXmlEmptyLists(response *smithyhttp.Response) 
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1561,7 +1725,7 @@ func (m *awsAwsquery_deserializeOpXmlEmptyMaps) HandleDeserialize(ctx context.Co
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorXmlEmptyMaps(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorXmlEmptyMaps(response, &metadata)
 	}
 	output := &XmlEmptyMapsOutput{}
 	out.Result = output
@@ -1598,7 +1762,7 @@ func (m *awsAwsquery_deserializeOpXmlEmptyMaps) HandleDeserialize(ctx context.Co
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorXmlEmptyMaps(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorXmlEmptyMaps(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1608,9 +1772,18 @@ func awsAwsquery_deserializeOpErrorXmlEmptyMaps(response *smithyhttp.Response) e
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1645,7 +1818,7 @@ func (m *awsAwsquery_deserializeOpXmlEnums) HandleDeserialize(ctx context.Contex
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorXmlEnums(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorXmlEnums(response, &metadata)
 	}
 	output := &XmlEnumsOutput{}
 	out.Result = output
@@ -1682,7 +1855,7 @@ func (m *awsAwsquery_deserializeOpXmlEnums) HandleDeserialize(ctx context.Contex
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorXmlEnums(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorXmlEnums(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1692,9 +1865,18 @@ func awsAwsquery_deserializeOpErrorXmlEnums(response *smithyhttp.Response) error
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1729,7 +1911,7 @@ func (m *awsAwsquery_deserializeOpXmlLists) HandleDeserialize(ctx context.Contex
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorXmlLists(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorXmlLists(response, &metadata)
 	}
 	output := &XmlListsOutput{}
 	out.Result = output
@@ -1766,7 +1948,7 @@ func (m *awsAwsquery_deserializeOpXmlLists) HandleDeserialize(ctx context.Contex
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorXmlLists(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorXmlLists(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1776,9 +1958,18 @@ func awsAwsquery_deserializeOpErrorXmlLists(response *smithyhttp.Response) error
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1813,7 +2004,7 @@ func (m *awsAwsquery_deserializeOpXmlMaps) HandleDeserialize(ctx context.Context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorXmlMaps(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorXmlMaps(response, &metadata)
 	}
 	output := &XmlMapsOutput{}
 	out.Result = output
@@ -1850,7 +2041,7 @@ func (m *awsAwsquery_deserializeOpXmlMaps) HandleDeserialize(ctx context.Context
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorXmlMaps(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorXmlMaps(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1860,9 +2051,18 @@ func awsAwsquery_deserializeOpErrorXmlMaps(response *smithyhttp.Response) error 
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1897,7 +2097,7 @@ func (m *awsAwsquery_deserializeOpXmlMapsXmlName) HandleDeserialize(ctx context.
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorXmlMapsXmlName(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorXmlMapsXmlName(response, &metadata)
 	}
 	output := &XmlMapsXmlNameOutput{}
 	out.Result = output
@@ -1934,7 +2134,7 @@ func (m *awsAwsquery_deserializeOpXmlMapsXmlName) HandleDeserialize(ctx context.
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorXmlMapsXmlName(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorXmlMapsXmlName(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1944,9 +2144,18 @@ func awsAwsquery_deserializeOpErrorXmlMapsXmlName(response *smithyhttp.Response)
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -1981,7 +2190,7 @@ func (m *awsAwsquery_deserializeOpXmlNamespaces) HandleDeserialize(ctx context.C
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorXmlNamespaces(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorXmlNamespaces(response, &metadata)
 	}
 	output := &XmlNamespacesOutput{}
 	out.Result = output
@@ -2018,7 +2227,7 @@ func (m *awsAwsquery_deserializeOpXmlNamespaces) HandleDeserialize(ctx context.C
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorXmlNamespaces(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorXmlNamespaces(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2028,9 +2237,18 @@ func awsAwsquery_deserializeOpErrorXmlNamespaces(response *smithyhttp.Response) 
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
@@ -2065,7 +2283,7 @@ func (m *awsAwsquery_deserializeOpXmlTimestamps) HandleDeserialize(ctx context.C
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsquery_deserializeOpErrorXmlTimestamps(response)
+		return out, metadata, awsAwsquery_deserializeOpErrorXmlTimestamps(response, &metadata)
 	}
 	output := &XmlTimestampsOutput{}
 	out.Result = output
@@ -2102,7 +2320,7 @@ func (m *awsAwsquery_deserializeOpXmlTimestamps) HandleDeserialize(ctx context.C
 	return out, metadata, err
 }
 
-func awsAwsquery_deserializeOpErrorXmlTimestamps(response *smithyhttp.Response) error {
+func awsAwsquery_deserializeOpErrorXmlTimestamps(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -2112,9 +2330,18 @@ func awsAwsquery_deserializeOpErrorXmlTimestamps(response *smithyhttp.Response) 
 	errorCode := "UnknownError"
 	errorMessage := errorCode
 
-	errorCode, err := smithyxml.GetResponseErrorCode(errorBody, false)
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
 	if err != nil {
 		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {

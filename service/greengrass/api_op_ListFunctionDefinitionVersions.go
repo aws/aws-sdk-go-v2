@@ -33,6 +33,8 @@ func (c *Client) ListFunctionDefinitionVersions(ctx context.Context, params *Lis
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListFunctionDefinitionVersionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListFunctionDefinitionVersions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

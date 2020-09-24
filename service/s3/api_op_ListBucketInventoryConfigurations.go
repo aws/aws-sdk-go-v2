@@ -57,6 +57,8 @@ func (c *Client) ListBucketInventoryConfigurations(ctx context.Context, params *
 	addOpListBucketInventoryConfigurationsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListBucketInventoryConfigurations(options.Region), middleware.Before)
 	addUpdateEndpointMiddleware(stack, options)
+	addResponseErrorMiddleware(stack)
+	addMetadataRetrieverMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

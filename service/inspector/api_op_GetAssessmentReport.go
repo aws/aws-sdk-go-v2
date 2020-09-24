@@ -34,6 +34,8 @@ func (c *Client) GetAssessmentReport(ctx context.Context, params *GetAssessmentR
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpGetAssessmentReportValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetAssessmentReport(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

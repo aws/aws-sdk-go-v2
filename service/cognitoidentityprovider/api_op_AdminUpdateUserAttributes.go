@@ -37,6 +37,8 @@ func (c *Client) AdminUpdateUserAttributes(ctx context.Context, params *AdminUpd
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpAdminUpdateUserAttributesValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opAdminUpdateUserAttributes(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

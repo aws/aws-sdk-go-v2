@@ -41,7 +41,7 @@ func (m *awsRestjson1_deserializeOpDeleteLexicon) HandleDeserialize(ctx context.
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorDeleteLexicon(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorDeleteLexicon(response, &metadata)
 	}
 	output := &DeleteLexiconOutput{}
 	out.Result = output
@@ -49,7 +49,7 @@ func (m *awsRestjson1_deserializeOpDeleteLexicon) HandleDeserialize(ctx context.
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorDeleteLexicon(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorDeleteLexicon(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -127,7 +127,7 @@ func (m *awsRestjson1_deserializeOpDescribeVoices) HandleDeserialize(ctx context
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorDescribeVoices(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorDescribeVoices(response, &metadata)
 	}
 	output := &DescribeVoicesOutput{}
 	out.Result = output
@@ -163,7 +163,7 @@ func (m *awsRestjson1_deserializeOpDescribeVoices) HandleDeserialize(ctx context
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorDescribeVoices(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorDescribeVoices(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -286,7 +286,7 @@ func (m *awsRestjson1_deserializeOpGetLexicon) HandleDeserialize(ctx context.Con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorGetLexicon(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorGetLexicon(response, &metadata)
 	}
 	output := &GetLexiconOutput{}
 	out.Result = output
@@ -322,7 +322,7 @@ func (m *awsRestjson1_deserializeOpGetLexicon) HandleDeserialize(ctx context.Con
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorGetLexicon(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorGetLexicon(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -441,7 +441,7 @@ func (m *awsRestjson1_deserializeOpGetSpeechSynthesisTask) HandleDeserialize(ctx
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorGetSpeechSynthesisTask(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorGetSpeechSynthesisTask(response, &metadata)
 	}
 	output := &GetSpeechSynthesisTaskOutput{}
 	out.Result = output
@@ -477,7 +477,7 @@ func (m *awsRestjson1_deserializeOpGetSpeechSynthesisTask) HandleDeserialize(ctx
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorGetSpeechSynthesisTask(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorGetSpeechSynthesisTask(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -594,7 +594,7 @@ func (m *awsRestjson1_deserializeOpListLexicons) HandleDeserialize(ctx context.C
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorListLexicons(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorListLexicons(response, &metadata)
 	}
 	output := &ListLexiconsOutput{}
 	out.Result = output
@@ -630,7 +630,7 @@ func (m *awsRestjson1_deserializeOpListLexicons) HandleDeserialize(ctx context.C
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorListLexicons(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorListLexicons(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -753,7 +753,7 @@ func (m *awsRestjson1_deserializeOpListSpeechSynthesisTasks) HandleDeserialize(c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorListSpeechSynthesisTasks(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorListSpeechSynthesisTasks(response, &metadata)
 	}
 	output := &ListSpeechSynthesisTasksOutput{}
 	out.Result = output
@@ -789,7 +789,7 @@ func (m *awsRestjson1_deserializeOpListSpeechSynthesisTasks) HandleDeserialize(c
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorListSpeechSynthesisTasks(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorListSpeechSynthesisTasks(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -912,7 +912,7 @@ func (m *awsRestjson1_deserializeOpPutLexicon) HandleDeserialize(ctx context.Con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorPutLexicon(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorPutLexicon(response, &metadata)
 	}
 	output := &PutLexiconOutput{}
 	out.Result = output
@@ -920,7 +920,7 @@ func (m *awsRestjson1_deserializeOpPutLexicon) HandleDeserialize(ctx context.Con
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorPutLexicon(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorPutLexicon(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1013,7 +1013,7 @@ func (m *awsRestjson1_deserializeOpStartSpeechSynthesisTask) HandleDeserialize(c
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorStartSpeechSynthesisTask(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorStartSpeechSynthesisTask(response, &metadata)
 	}
 	output := &StartSpeechSynthesisTaskOutput{}
 	out.Result = output
@@ -1049,7 +1049,7 @@ func (m *awsRestjson1_deserializeOpStartSpeechSynthesisTask) HandleDeserialize(c
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorStartSpeechSynthesisTask(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorStartSpeechSynthesisTask(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -1193,7 +1193,7 @@ func (m *awsRestjson1_deserializeOpSynthesizeSpeech) HandleDeserialize(ctx conte
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorSynthesizeSpeech(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorSynthesizeSpeech(response, &metadata)
 	}
 	output := &SynthesizeSpeechOutput{}
 	out.Result = output
@@ -1211,7 +1211,7 @@ func (m *awsRestjson1_deserializeOpSynthesizeSpeech) HandleDeserialize(ctx conte
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorSynthesizeSpeech(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorSynthesizeSpeech(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

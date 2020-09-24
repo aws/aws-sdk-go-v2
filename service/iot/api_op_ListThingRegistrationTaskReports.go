@@ -33,6 +33,8 @@ func (c *Client) ListThingRegistrationTaskReports(ctx context.Context, params *L
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListThingRegistrationTaskReportsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListThingRegistrationTaskReports(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

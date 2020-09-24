@@ -37,6 +37,8 @@ func (c *Client) ForgotPassword(ctx context.Context, params *ForgotPasswordInput
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpForgotPasswordValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opForgotPassword(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

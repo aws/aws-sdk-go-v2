@@ -34,6 +34,8 @@ func (c *Client) DeleteAdmChannel(ctx context.Context, params *DeleteAdmChannelI
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteAdmChannelValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAdmChannel(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

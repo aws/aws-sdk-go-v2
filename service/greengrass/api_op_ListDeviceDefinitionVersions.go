@@ -33,6 +33,8 @@ func (c *Client) ListDeviceDefinitionVersions(ctx context.Context, params *ListD
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListDeviceDefinitionVersionsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListDeviceDefinitionVersions(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

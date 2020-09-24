@@ -39,7 +39,7 @@ func (m *awsRestjson1_deserializeOpGetIceServerConfig) HandleDeserialize(ctx con
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorGetIceServerConfig(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorGetIceServerConfig(response, &metadata)
 	}
 	output := &GetIceServerConfigOutput{}
 	out.Result = output
@@ -75,7 +75,7 @@ func (m *awsRestjson1_deserializeOpGetIceServerConfig) HandleDeserialize(ctx con
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorGetIceServerConfig(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorGetIceServerConfig(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -201,7 +201,7 @@ func (m *awsRestjson1_deserializeOpSendAlexaOfferToMaster) HandleDeserialize(ctx
 	}
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsRestjson1_deserializeOpErrorSendAlexaOfferToMaster(response)
+		return out, metadata, awsRestjson1_deserializeOpErrorSendAlexaOfferToMaster(response, &metadata)
 	}
 	output := &SendAlexaOfferToMasterOutput{}
 	out.Result = output
@@ -237,7 +237,7 @@ func (m *awsRestjson1_deserializeOpSendAlexaOfferToMaster) HandleDeserialize(ctx
 	return out, metadata, err
 }
 
-func awsRestjson1_deserializeOpErrorSendAlexaOfferToMaster(response *smithyhttp.Response) error {
+func awsRestjson1_deserializeOpErrorSendAlexaOfferToMaster(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}

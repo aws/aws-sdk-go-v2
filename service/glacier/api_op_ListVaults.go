@@ -54,6 +54,8 @@ func (c *Client) ListVaults(ctx context.Context, params *ListVaultsInput, optFns
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpListVaultsValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListVaults(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	glaciercust.AddTreeHashMiddleware(stack)
 
 	for _, fn := range options.APIOptions {

@@ -34,6 +34,8 @@ func (c *Client) UpdateAccountCustomization(ctx context.Context, params *UpdateA
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpUpdateAccountCustomizationValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAccountCustomization(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

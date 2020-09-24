@@ -57,6 +57,8 @@ func (c *Client) PutSubscriptionFilter(ctx context.Context, params *PutSubscript
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPutSubscriptionFilterValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPutSubscriptionFilter(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

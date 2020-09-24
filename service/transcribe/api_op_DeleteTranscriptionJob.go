@@ -33,6 +33,8 @@ func (c *Client) DeleteTranscriptionJob(ctx context.Context, params *DeleteTrans
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpDeleteTranscriptionJobValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteTranscriptionJob(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

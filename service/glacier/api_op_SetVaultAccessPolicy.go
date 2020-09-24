@@ -40,6 +40,8 @@ func (c *Client) SetVaultAccessPolicy(ctx context.Context, params *SetVaultAcces
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpSetVaultAccessPolicyValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opSetVaultAccessPolicy(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 	glaciercust.AddTreeHashMiddleware(stack)
 
 	for _, fn := range options.APIOptions {

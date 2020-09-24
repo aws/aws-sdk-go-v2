@@ -35,6 +35,8 @@ func (c *Client) CreateMultiplexProgram(ctx context.Context, params *CreateMulti
 	addIdempotencyToken_opCreateMultiplexProgramMiddleware(stack, options)
 	addOpCreateMultiplexProgramValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMultiplexProgram(options.Region), middleware.Before)
+	addRequestIDRetrieverMiddleware(stack)
+	addResponseErrorMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
