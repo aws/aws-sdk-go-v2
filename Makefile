@@ -8,8 +8,9 @@ LINTIGNOREDEPS='vendor/.+\.go'
 LINTIGNOREPKGCOMMENT='service/[^/]+/doc_custom.go:.+package comment should be of the form'
 LINTIGNOREENDPOINTS='aws/endpoints/defaults.go:.+(method|const) .+ should be '
 LINTIGNORESINGLEFIGHT='internal/sync/singleflight/singleflight.go:.+error should be the last type'
-UNIT_TEST_TAGS="example codegen awsinclude"
-ALL_TAGS="example codegen awsinclude integration perftest sdktool"
+
+UNIT_TEST_TAGS="example,codegen,awsinclude"
+ALL_TAGS="example,codegen,awsinclude,integration,perftest,sdktool"
 
 # SDK's Core and client packages that are compatable with Go 1.9+.
 SDK_CORE_PKGS=./aws/... ./internal/...
@@ -19,7 +20,6 @@ SDK_COMPA_PKGS=${SDK_CORE_PKGS} ${SDK_CLIENT_PKGS}
 # SDK additional packages that are used for development of the SDK.
 SDK_EXAMPLES_PKGS=
 SDK_ALL_PKGS=${SDK_COMPA_PKGS} ${SDK_EXAMPLES_PKGS}
-
 
 all: generate unit
 
@@ -31,9 +31,10 @@ generate: smithy-generate gen-external-asserts
 smithy-generate:
 	cd codegen && ./gradlew clean build -Plog-tests
 
-gen-external-asserts:
-	@echo "Generating SDK external package implementor assertions"
-	go generate ./aws/external
+
+gen-config-asserts:
+	@echo "Generating SDK config package implementor assertions"
+	cd config && go generate
 
 gen-repo-mod-replace:
 	@echo "Generating go.mod replace for repo modules"
@@ -43,19 +44,19 @@ gen-repo-mod-replace:
 # Unit/CI Testing #
 ###################
 build:
-	go build -o /dev/null -tags ${ALL_TAGS} ${SDK_ALL_PKGS}
+	go test -tags ${ALL_TAGS} -run NONE ${SDK_ALL_PKGS}
 
 unit: verify build test-protocols test-services test-ec2imds test-credentials test-config
 	@echo "go test SDK and vendor packages"
 	@go test -tags ${UNIT_TEST_TAGS} ${SDK_ALL_PKGS}
 
-unit-with-race-cover: verify build
+unit-with-race-cover: verify build test-protocols test-services test-config test-credentials
 	@echo "go test SDK and vendor packages"
 	@go test -tags ${UNIT_TEST_TAGS} -race -cpu=1,2,4 ${SDK_ALL_PKGS}
 
-ci-test: generate unit-with-race-cover ci-test-generate-validate test-protocols test-services
+ci-test: generate unit-with-race-cover ci-test-generate-validate
 
-ci-test-no-generate: unit-with-race-cover test-protocols test-services
+ci-test-no-generate: unit-with-race-cover
 
 ci-test-generate-validate:
 	@echo "CI test validate no generated code changes"
@@ -66,11 +67,16 @@ ci-test-generate-validate:
 	if [ "$$gitstatus" != "" ] && [ "$$gitstatus" != "skipping validation" ]; then echo "$$gitstatus"; exit 1; fi
 	git update-index --no-assume-unchanged go.mod go.sum
 
+test-all:
+	./test_submodules.sh `pwd` "go test -tags ${ALL_TAGS} -count 1 ./..."
+
 
 test-protocols:
+	# TODO replace with module walker.
 	./test_submodules.sh `pwd`/internal/protocoltest "go test -count 1 -run NONE ./..."
 
 test-services:
+	# TODO replace with module walker.
 	./test_submodules.sh `pwd`/service "go test -count 1 -tags "integration,ec2env" -run NONE ./..."
 
 test-ec2imds:
@@ -81,6 +87,7 @@ test-credentials:
 
 test-config:
 	cd config && go test -run NONE -tags "integration,ec2env" ./... && go test -count 1 ./...
+
 
 mod_replace_local:
 	./mod_replace_local_submodules.sh `pwd` `pwd` `pwd`/../smithy-go

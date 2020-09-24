@@ -145,7 +145,7 @@ func TestProcessCredentialsProvider_FromCredentialsWithProfile(t *testing.T) {
 	restoreEnv := awstesting.StashEnv()
 	defer awstesting.PopEnv(restoreEnv)
 
-	os.Setenv("AWS_PROFILE", "non_expire")
+	os.Setenv("AWS_PROFILE", "not_expire")
 	setupEnvForProcesscredsCredentialsFile()
 
 	config, err := LoadDefaultConfig(WithRegion("region"))

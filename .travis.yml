@@ -7,17 +7,25 @@ os:
     - osx
 go:
     - 1.15.x
-    - 1.14.x
     - tip
 
 script:
     make ci-test-no-generate;
+
+before_install:
+  - if [ "$TRAVIS_OS_NAME" = "windows" ]; then choco install make; fi
 
 matrix:
   allow_failures:
       - go: tip
 
   include:
+    - language: go
+      os: windows
+      go: 1.15.x
+      script:
+        - make ci-test-no-generate
+
     - language: java
       jdk: openjdk8
       before_script:
@@ -40,3 +48,7 @@ matrix:
       script:
           - make smithy-generate # generation is not stable ci-test-generate-validate
 
+branches:
+  only:
+    - master
+    - feature/SmithyAPIClient
