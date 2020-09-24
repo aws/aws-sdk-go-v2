@@ -2,10 +2,11 @@ package git
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/util"
 	"os"
 	"os/exec"
 	"strings"
+
+	"github.com/aws/aws-sdk-go-v2/internal/repotools/changes/util"
 )
 
 // Client is a wrapper around the git CLI tool.

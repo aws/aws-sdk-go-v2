@@ -1,11 +1,12 @@
 package changes
 
 import (
-	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/golist"
-	"github.com/google/go-cmp/cmp"
 	"path/filepath"
 	"strings"
 	"testing"
+
+	"github.com/aws/aws-sdk-go-v2/internal/repotools/changes/golist"
+	"github.com/google/go-cmp/cmp"
 )
 
 func TestGetCurrentModule(t *testing.T) {
@@ -14,8 +15,8 @@ func TestGetCurrentModule(t *testing.T) {
 		t.Errorf("expected nil err, got %v", err)
 	}
 
-	if mod != "internal/tools/changes" {
-		t.Errorf("expected mod to be \"internal/tools/changes\", got %s", mod)
+	if mod != "internal/repotools/changes" {
+		t.Errorf("expected mod to be \"internal/repotools/changes\", got %s", mod)
 	}
 }
 

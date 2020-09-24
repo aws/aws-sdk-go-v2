@@ -4,16 +4,17 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/util"
-	"golang.org/x/mod/module"
-	"golang.org/x/mod/sumdb/dirhash"
-	"golang.org/x/mod/zip"
 	"io"
 	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
+
+	"github.com/aws/aws-sdk-go-v2/internal/repotools/changes/util"
+	"golang.org/x/mod/module"
+	"golang.org/x/mod/sumdb/dirhash"
+	"golang.org/x/mod/zip"
 )
 
 // Client gets information about Go modules and packages.

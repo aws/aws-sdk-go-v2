@@ -1,13 +1,14 @@
 package changes
 
 import (
-	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/util"
-	"github.com/google/go-cmp/cmp"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
+
+	"github.com/aws/aws-sdk-go-v2/internal/repotools/changes/util"
+	"github.com/google/go-cmp/cmp"
 )
 
 var tmpDir string // tmpDir is a temporary directory metadata tests use.

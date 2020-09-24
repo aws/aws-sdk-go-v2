@@ -1,10 +1,11 @@
 package golist
 
 import (
-	"github.com/google/go-cmp/cmp"
 	"io/ioutil"
 	"path/filepath"
 	"testing"
+
+	"github.com/google/go-cmp/cmp"
 )
 
 func TestParseGoList(t *testing.T) {

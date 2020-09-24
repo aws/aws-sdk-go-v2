@@ -2,11 +2,12 @@ package changes
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/git"
-	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/golist"
-	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/util"
 	"log"
 	"path/filepath"
+
+	"github.com/aws/aws-sdk-go-v2/internal/repotools/changes/git"
+	"github.com/aws/aws-sdk-go-v2/internal/repotools/changes/golist"
+	"github.com/aws/aws-sdk-go-v2/internal/repotools/changes/util"
 )
 
 // Repository is a representation of a git repository containing multiple Go modules.

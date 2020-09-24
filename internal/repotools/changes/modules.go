@@ -2,16 +2,17 @@ package changes
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/git"
-	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/golist"
-	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/util"
-	"golang.org/x/mod/modfile"
-	"golang.org/x/mod/module"
-	"golang.org/x/mod/semver"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/aws/aws-sdk-go-v2/internal/repotools/changes/git"
+	"github.com/aws/aws-sdk-go-v2/internal/repotools/changes/golist"
+	"github.com/aws/aws-sdk-go-v2/internal/repotools/changes/util"
+	"golang.org/x/mod/modfile"
+	"golang.org/x/mod/module"
+	"golang.org/x/mod/semver"
 )
 
 var sdkRepo = "github.com/aws/aws-sdk-go-v2"

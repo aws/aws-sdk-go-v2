@@ -3,12 +3,13 @@ package changes
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/util"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"sort"
 	"strings"
+
+	"github.com/aws/aws-sdk-go-v2/internal/repotools/changes/util"
 )
 
 // SchemaVersion defines the current JSON schema version for persistent data types (Change, Release, ...)

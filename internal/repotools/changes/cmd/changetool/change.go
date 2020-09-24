@@ -5,11 +5,12 @@ import (
 	"errors"
 	"flag"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/internal/tools/changes"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strconv"
+
+	"github.com/aws/aws-sdk-go-v2/internal/repotools/changes"
 )
 
 var changeParams = struct {

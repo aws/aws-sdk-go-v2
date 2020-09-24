@@ -3,12 +3,13 @@ package changes
 import (
 	"errors"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/git"
-	"golang.org/x/mod/module"
-	"golang.org/x/mod/semver"
 	"sort"
 	"strconv"
 	"strings"
+
+	"github.com/aws/aws-sdk-go-v2/internal/repotools/changes/git"
+	"golang.org/x/mod/module"
+	"golang.org/x/mod/semver"
 )
 
 // VersionIncrement describes how a Change should affect a module's version.

@@ -1,7 +1,7 @@
 package changes
 
 import (
-	"github.com/aws/aws-sdk-go-v2/internal/tools/changes/golist"
+	"github.com/aws/aws-sdk-go-v2/internal/repotools/changes/golist"
 )
 
 // ModuleGraph is a mapping between modules in a repository and a list of modules within the same repository that depend on that module.

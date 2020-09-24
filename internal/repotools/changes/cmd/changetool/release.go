@@ -5,9 +5,10 @@ import (
 	"errors"
 	"flag"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/internal/tools/changes"
 	"log"
 	"os"
+
+	"github.com/aws/aws-sdk-go-v2/internal/repotools/changes"
 )
 
 var releaseParams = struct {
