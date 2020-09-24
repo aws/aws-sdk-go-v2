@@ -70,7 +70,7 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsAwsjson11Deserialize(t *te
 					}
 					return response, nil
 				}),
-				APIOptions: []APIOptionFunc{
+				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
 						return nil
@@ -184,7 +184,7 @@ func TestClient_GreetingWithErrors_ComplexError_awsAwsjson11Deserialize(t *testi
 					}
 					return response, nil
 				}),
-				APIOptions: []APIOptionFunc{
+				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
 						return nil
@@ -380,7 +380,7 @@ func TestClient_GreetingWithErrors_FooError_awsAwsjson11Deserialize(t *testing.T
 					}
 					return response, nil
 				}),
-				APIOptions: []APIOptionFunc{
+				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
 						return nil

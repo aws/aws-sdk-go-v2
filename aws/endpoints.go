@@ -48,3 +48,11 @@ func (e *EndpointNotFoundError) Unwrap() error {
 type EndpointResolver interface {
 	ResolveEndpoint(service, region string) (Endpoint, error)
 }
+
+// EndpointResolverFunc wraps a function to satisfy the EndpointResolver interface.
+type EndpointResolverFunc func(service, region string) (Endpoint, error)
+
+// ResolveEndpoint calls the wrapped function and returns the results
+func (e EndpointResolverFunc) ResolveEndpoint(service, region string) (Endpoint, error) {
+	return e(service, region)
+}

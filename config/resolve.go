@@ -15,7 +15,9 @@ import (
 // This should be used as the first resolver in the slice of resolvers when
 // resolving external configuration.
 func ResolveDefaultAWSConfig(cfg *aws.Config, configs Configs) error {
-	*cfg = aws.Config{}
+	*cfg = aws.Config{
+		Credentials: aws.AnonymousCredentials{},
+	}
 	return nil
 }
 
@@ -101,6 +103,53 @@ func ResolveDefaultRegion(cfg *aws.Config, configs Configs) error {
 	}
 
 	cfg.Region = region
+
+	return nil
+}
+
+// ResolveHTTPClient extracts the first instance of a HTTPClient and sets `aws.Config.HTTPClient` to the HTTPClient instance
+// if one has not been resolved from other sources.
+func ResolveHTTPClient(cfg *aws.Config, configs Configs) error {
+	c, found, err := GetHTTPClient(configs)
+	if err != nil {
+		return err
+	}
+	if !found {
+		return nil
+	}
+
+	cfg.HTTPClient = c
+	return nil
+}
+
+// ResolveAPIOptions extracts the first instance of APIOptions and sets `aws.Config.APIOptions` to the resolved API options
+// if one has not been resolved from other sources.
+func ResolveAPIOptions(cfg *aws.Config, configs Configs) error {
+	o, found, err := GetAPIOptions(configs)
+	if err != nil {
+		return err
+	}
+	if !found {
+		return nil
+	}
+
+	cfg.APIOptions = o
+
+	return nil
+}
+
+// ResolveEndpointResolver extracts the first instance of a EndpointResolverFunc from the config slice
+// and sets the functions result on the aws.Config.EndpointResolver
+func ResolveEndpointResolver(cfg *aws.Config, configs Configs) error {
+	endpointResolver, found, err := GetEndpointResolver(configs)
+	if err != nil {
+		return err
+	}
+	if !found {
+		return nil
+	}
+
+	cfg.EndpointResolver = endpointResolver
 
 	return nil
 }

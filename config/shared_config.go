@@ -83,10 +83,6 @@ var DefaultSharedConfigFiles = []string{
 	DefaultSharedConfigFilename(),
 }
 
-// AssumeRoleConfig provides the values defining the configuration for an IAM
-// assume role.
-type AssumeRoleConfig struct{}
-
 // SharedConfig represents the configuration fields of the SDK config files.
 type SharedConfig struct {
 	Profile string

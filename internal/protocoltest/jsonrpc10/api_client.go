@@ -45,7 +45,7 @@ type Options struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
-	APIOptions []APIOptionFunc
+	APIOptions []func(*middleware.Stack) error
 
 	// The endpoint options to be used when attempting to resolve an endpoint.
 	EndpointOptions ResolverOptions
@@ -88,12 +88,10 @@ type HTTPClient interface {
 // Copy creates a clone where the APIOptions list is deep copied.
 func (o Options) Copy() Options {
 	to := o
-	to.APIOptions = make([]APIOptionFunc, len(o.APIOptions))
+	to.APIOptions = make([]func(*middleware.Stack) error, len(o.APIOptions))
 	copy(to.APIOptions, o.APIOptions)
 	return to
 }
-
-type APIOptionFunc func(*middleware.Stack) error
 
 // NewFromConfig returns a new client from the provided config.
 func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
@@ -101,6 +99,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		Region:     cfg.Region,
 		Retryer:    cfg.Retryer,
 		HTTPClient: cfg.HTTPClient,
+		APIOptions: cfg.APIOptions,
 	}
 	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)

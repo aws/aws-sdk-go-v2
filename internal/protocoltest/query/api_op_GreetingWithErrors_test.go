@@ -74,7 +74,7 @@ func TestClient_GreetingWithErrors_awsAwsqueryDeserialize(t *testing.T) {
 					}
 					return response, nil
 				}),
-				APIOptions: []APIOptionFunc{
+				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
 						return nil
@@ -160,7 +160,7 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsAwsqueryDeserialize(t *tes
 					}
 					return response, nil
 				}),
-				APIOptions: []APIOptionFunc{
+				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
 						return nil
@@ -269,7 +269,7 @@ func TestClient_GreetingWithErrors_ComplexError_awsAwsqueryDeserialize(t *testin
 					}
 					return response, nil
 				}),
-				APIOptions: []APIOptionFunc{
+				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
 						return nil

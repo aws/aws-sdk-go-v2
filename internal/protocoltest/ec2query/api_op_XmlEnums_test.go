@@ -104,7 +104,7 @@ func TestClient_XmlEnums_awsEc2queryDeserialize(t *testing.T) {
 					}
 					return response, nil
 				}),
-				APIOptions: []APIOptionFunc{
+				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
 						return nil

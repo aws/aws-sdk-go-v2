@@ -6,6 +6,8 @@ github.com/awslabs/smithy-go v0.0.0-20200923183614-866bcae027e6 h1:3HzjWeiZ3yHAj
 github.com/awslabs/smithy-go v0.0.0-20200923183614-866bcae027e6/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
 github.com/awslabs/smithy-go v0.0.0-20200923224119-6c637abd889a h1:lkD+DU5l2JoiymZ5gDVXJsxXBYt3ItVxZmYscXK5blg=
 github.com/awslabs/smithy-go v0.0.0-20200923224119-6c637abd889a/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
+github.com/awslabs/smithy-go v0.0.0-20200924163652-fc0366622e14 h1:tcnEwhMlgKoYyT/VHFNGC6TW51e1kNs9uLNpFkeIjuw=
+github.com/awslabs/smithy-go v0.0.0-20200924163652-fc0366622e14/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/google/go-cmp v0.4.1 h1:/exdXoGamhu5ONeUJH0deniYLWYvQwW66yvlfiiKTu0=
 github.com/google/go-cmp v0.4.1/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=

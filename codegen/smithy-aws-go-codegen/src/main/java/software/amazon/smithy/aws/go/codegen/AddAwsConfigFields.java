@@ -25,6 +25,7 @@ import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
@@ -49,6 +50,7 @@ public class AddAwsConfigFields implements GoIntegration {
     private static final String RESOLVE_RETRYER = "resolveRetryer";
     private static final String RESOLVE_AWS_CONFIG_ENDPOINT_RESOLVER = "resolveAWSEndpointResolver";
 
+    public static final String API_OPTIONS_CONFIG_NAME = "APIOptions";
     private static final List<AwsConfigField> AWS_CONFIG_FIELDS = ListUtils.of(
             AwsConfigField.builder()
                     .name(REGION_CONFIG_NAME)
@@ -74,6 +76,13 @@ public class AddAwsConfigFields implements GoIntegration {
                     .type(getAwsCoreSymbol("CredentialsProvider"))
                     .documentation("The credentials object to use when signing requests.")
                     .servicePredicate(AwsSignatureVersion4::isSupportedAuthentication)
+                    .build(),
+            AwsConfigField.builder()
+                    .name(API_OPTIONS_CONFIG_NAME)
+                    .type(SymbolUtils.createValueSymbolBuilder("[]func(*middleware.Stack) error")
+                            .addDependency(SmithyGoDependency.SMITHY_MIDDLEWARE).build())
+                    .documentation("API stack mutators")
+                    .generatedOnClient(false)
                     .build(),
             AwsConfigField.builder()
                     .name(ENDPOINT_RESOLVER_CONFIG_NAME)
