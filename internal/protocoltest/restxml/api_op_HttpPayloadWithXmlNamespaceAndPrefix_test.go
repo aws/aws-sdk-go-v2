@@ -81,7 +81,7 @@ func TestClient_HttpPayloadWithXmlNamespaceAndPrefix_awsRestxmlSerialize(t *test
 			defer server.Close()
 			url := server.URL
 			client := New(Options{
-				APIOptions: []APIOptionFunc{
+				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
 						return nil
@@ -178,7 +178,7 @@ func TestClient_HttpPayloadWithXmlNamespaceAndPrefix_awsRestxmlDeserialize(t *te
 					}
 					return response, nil
 				}),
-				APIOptions: []APIOptionFunc{
+				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
 						return nil
