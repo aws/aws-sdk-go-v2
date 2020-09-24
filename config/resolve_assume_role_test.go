@@ -176,8 +176,6 @@ func TestAssumeRole_ExtendedDuration(t *testing.T) {
 	})
 
 	config, err := LoadDefaultConfig(WithHTTPClient{client})
-	// TODO: Set Assume Role Duration
-	//	AssumeRoleDuration: 30 * time.Minute,
 	if err != nil {
 		t.Fatalf("expect no error, got %v", err)
 	}
