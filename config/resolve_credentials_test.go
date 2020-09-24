@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"os"
+	"path/filepath"
 	"reflect"
 	"runtime"
 	"strings"
@@ -87,8 +88,8 @@ func setupCredentialsEndpoints(t *testing.T) (aws.EndpointResolver, func()) {
 }
 
 func TestSharedConfigCredentialSource(t *testing.T) {
-	const configFileForWindows = "testdata/credential_source_config_for_windows"
-	const configFile = "testdata/credential_source_config"
+	var configFileForWindows = filepath.Join("testdata", "credential_source_config_for_windows")
+	var configFile = filepath.Join("testdata", "credential_source_config")
 
 	cases := map[string]struct {
 		name              string
@@ -128,9 +129,6 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 			},
 			expectedAccessKey: "AKID",
 			expectedSecretKey: "SECRET",
-			// mockHTTPClient(func(r *http.Request) (*http.Response, error) {
-			//	return &http.Response{StatusCode: 200, Body: ioutil.NopCloser(bytes.NewReader(nil))}, nil
-			//}),
 		},
 		"ecs container credential source": {
 			envProfile:        "ecscontainer",
