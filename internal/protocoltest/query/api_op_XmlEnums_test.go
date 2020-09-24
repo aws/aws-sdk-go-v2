@@ -105,7 +105,7 @@ func TestClient_XmlEnums_awsAwsqueryDeserialize(t *testing.T) {
 					}
 					return response, nil
 				}),
-				APIOptions: []APIOptionFunc{
+				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
 						return nil

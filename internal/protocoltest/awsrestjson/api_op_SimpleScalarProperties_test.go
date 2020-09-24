@@ -108,7 +108,7 @@ func TestClient_SimpleScalarProperties_awsRestjson1Serialize(t *testing.T) {
 			defer server.Close()
 			url := server.URL
 			client := New(Options{
-				APIOptions: []APIOptionFunc{
+				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
 						return nil
@@ -232,7 +232,7 @@ func TestClient_SimpleScalarProperties_awsRestjson1Deserialize(t *testing.T) {
 					}
 					return response, nil
 				}),
-				APIOptions: []APIOptionFunc{
+				APIOptions: []func(*middleware.Stack) error{
 					func(s *middleware.Stack) error {
 						s.Finalize.Clear()
 						return nil
