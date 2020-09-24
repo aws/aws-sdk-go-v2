@@ -1,4 +1,4 @@
-package main
+package repotools
 
 import (
 	"os"
@@ -7,11 +7,18 @@ import (
 
 // Boots was made for walking the file tree searching for modules.
 type Boots struct {
+	// Directories to skip when iterating.
+	SkipDirs []string
+
 	modulePaths []string
-	skipDirs    []string
 }
 
-func (b *Boots) walk(path string, info os.FileInfo, err error) error {
+func (b *Boots) Modules() []string {
+	return b.modulePaths
+}
+
+// Walk is the function to walk folders in the repo searching for go modules.
+func (b *Boots) Walk(path string, info os.FileInfo, err error) error {
 	if err != nil {
 		return err
 	}
@@ -20,7 +27,7 @@ func (b *Boots) walk(path string, info os.FileInfo, err error) error {
 		return nil
 	}
 
-	for _, skip := range b.skipDirs {
+	for _, skip := range b.SkipDirs {
 		if path == skip {
 			return filepath.SkipDir
 		}
