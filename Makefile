@@ -51,11 +51,38 @@ tidy-modules-%:
 ################
 # Unit Testing #
 ################
+
+# TODO replace the command with the unit-modules-. once protocol tests pass
+
 unit: verify build unit-test
 unit-race: verify build unit-test-race
 
 unit-test: test-modules-aws test-modules-service
 unit-test-race: test-modules-race-aws test-modules-race-service
+
+unit-modules-%:
+	@# unit command that uses the pattern to define the root path that the
+	@# module testing will start from. Strips off the "unit-modules-" and
+	@# replaces all "_" with "/".
+	@#
+	@# e.g. unit-modules-internal_protocoltest
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst unit-modules-,,$@)) -c 4 \
+		"go vet ${BUILD_TAGS} --all ./..." \
+		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
+		"go test -timeout=1m ${UNIT_TEST_TAGS} ./..."
+
+unit-race-modules-%:
+	@# unit command that uses the pattern to define the root path that the
+	@# module testing will start from. Strips off the "unit-race-modules-" and
+	@# replaces all "_" with "/".
+	@#
+	@# e.g. unit-modules-internal_protocoltest
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst unit-race-modules-,,$@)) -c 4 \
+		"go vet ${BUILD_TAGS} --all ./..." \
+		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
+		"go test -timeout=1m ${UNIT_TEST_TAGS} -race -cpu=1,2,4 ./..."
 
 build: build-modules-.
 
@@ -69,6 +96,8 @@ build-modules-%:
 		&& go run . -p $(subst _,/,$(subst build-modules-,,$@)) -c 4 \
 		"go test ${BUILD_TAGS} ${RUN_NONE} ./..."
 
+test: test-modules-.
+
 test-modules-race-%:
 	@# Test command that uses the pattern to define the root path that the
 	@# module testing will start from. Strips off the "test-modules-race-" and
@@ -77,7 +106,6 @@ test-modules-race-%:
 	@# e.g. test-modules-race-internal_protocoltest
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst test-modules-race-,,$@)) \
-		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
 		"go test -timeout=1m ${UNIT_TEST_TAGS} -race -cpu=1,2,4 ./..."
 
 test-modules-%:
@@ -88,7 +116,6 @@ test-modules-%:
 	@# e.g. test-modules-internal_protocoltest
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst test-modules-,,$@)) -c 4 \
-		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
 		"go test -timeout=1m ${UNIT_TEST_TAGS} ./..."
 
 ##############
@@ -158,7 +185,7 @@ vet: vet-modules-.
 vet-modules-%:
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst vet-modules-,,$@)) -c 4 \
-		"go vet ${BUILD_TAGS} --all ./..." \
+		"go vet ${BUILD_TAGS} --all ./..."
 
 sdkv1check:
 	@echo "Checking for usage of AWS SDK for Go v1"
