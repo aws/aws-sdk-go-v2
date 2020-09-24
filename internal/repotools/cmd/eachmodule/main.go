@@ -44,7 +44,7 @@ func run() (err error) {
 		log.Fatalf("no command specified")
 	}
 
-	var boots Boots
+	var boots repotools.Boots
 
 	repoRoot, err := repotools.FindRepoRoot(rootPath)
 	if err != nil {
@@ -62,7 +62,7 @@ func run() (err error) {
 			}
 
 			for _, skip := range getSkipDirs() {
-				boots.skipDirs = append(boots.skipDirs, filepath.Join(rootPath, skip))
+				boots.SkipDirs = append(boots.SkipDirs, filepath.Join(rootPath, skip))
 			}
 		} else if !filepath.IsAbs(rootPath) {
 			rootPath, err = repotools.JoinWorkingDirectory(rootPath)
@@ -72,7 +72,7 @@ func run() (err error) {
 		}
 	}
 
-	if err := filepath.Walk(rootPath, boots.walk); err != nil {
+	if err := filepath.Walk(rootPath, boots.Walk); err != nil {
 		return fmt.Errorf("failed to walk directory, %w", err)
 	}
 
@@ -123,7 +123,7 @@ func run() (err error) {
 	}
 
 Loop:
-	for _, modPath := range boots.modulePaths {
+	for _, modPath := range boots.Modules() {
 		for _, cmd := range cmds {
 			select {
 			case <-ctx.Done():
