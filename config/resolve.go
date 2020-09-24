@@ -137,3 +137,19 @@ func ResolveAPIOptions(cfg *aws.Config, configs Configs) error {
 
 	return nil
 }
+
+// ResolveEndpointResolver extracts the first instance of a EndpointResolverFunc from the config slice
+// and sets the functions result on the aws.Config.EndpointResolver
+func ResolveEndpointResolver(cfg *aws.Config, configs Configs) error {
+	endpointResolver, found, err := GetEndpointResolver(configs)
+	if err != nil {
+		return err
+	}
+	if !found {
+		return nil
+	}
+
+	cfg.EndpointResolver = endpointResolver
+
+	return nil
+}

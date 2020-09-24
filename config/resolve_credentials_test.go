@@ -1,22 +1,90 @@
 package config
 
 import (
-	"bytes"
 	"context"
 	"fmt"
-	"io/ioutil"
 	"net/http"
+	"net/http/httptest"
 	"os"
 	"reflect"
 	"runtime"
+	"strings"
 	"testing"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 	"github.com/awslabs/smithy-go/middleware"
-	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 )
+
+func swapECSContainerURI(path string) func() {
+	o := ecsContainerEndpoint
+	ecsContainerEndpoint = path
+	return func() {
+		ecsContainerEndpoint = o
+	}
+}
+
+func setupCredentialsEndpoints(t *testing.T) (aws.EndpointResolver, func()) {
+	ecsMetadataServer := httptest.NewServer(http.HandlerFunc(
+		func(w http.ResponseWriter, r *http.Request) {
+			if r.URL.Path == "/ECS" {
+				w.Write([]byte(ecsResponse))
+			} else {
+				w.Write([]byte(""))
+			}
+		}))
+	resetECSEndpoint := swapECSContainerURI(ecsMetadataServer.URL)
+
+	ec2MetadataServer := httptest.NewServer(http.HandlerFunc(
+		func(w http.ResponseWriter, r *http.Request) {
+			if r.URL.Path == "/latest/meta-data/iam/security-credentials/RoleName" {
+				w.Write([]byte(ec2MetadataResponse))
+			} else if r.URL.Path == "/latest/meta-data/iam/security-credentials/" {
+				w.Write([]byte("RoleName"))
+			} else if r.URL.Path == "/latest/api/token" {
+				header := w.Header()
+				// bounce the TTL header
+				const ttlHeader = "X-Aws-Ec2-Metadata-Token-Ttl-Seconds"
+				header.Set(ttlHeader, r.Header.Get(ttlHeader))
+				w.Write([]byte("validToken"))
+			} else {
+				w.Write([]byte(""))
+			}
+		}))
+
+	os.Setenv("AWS_EC2_METADATA_SERVICE_ENDPOINT", ec2MetadataServer.URL)
+
+	stsServer := httptest.NewServer(http.HandlerFunc(
+		func(w http.ResponseWriter, r *http.Request) {
+			w.Write([]byte(fmt.Sprintf(
+				assumeRoleRespMsg,
+				time.Now().
+					Add(15*time.Minute).
+					Format("2006-01-02T15:04:05Z"))))
+		}))
+
+	resolver := aws.EndpointResolverFunc(
+		func(service, region string) (aws.Endpoint, error) {
+			switch service {
+			case sts.ServiceID:
+				return aws.Endpoint{
+					URL: stsServer.URL,
+				}, nil
+			default:
+				return aws.Endpoint{},
+					fmt.Errorf("unknown service endpoint, %s", service)
+			}
+		})
+
+	return resolver, func() {
+		resetECSEndpoint()
+		ecsMetadataServer.Close()
+		ec2MetadataServer.Close()
+		stsServer.Close()
+	}
+}
 
 func TestSharedConfigCredentialSource(t *testing.T) {
 	const configFileForWindows = "testdata/credential_source_config_for_windows"
@@ -26,17 +94,16 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 		name              string
 		envProfile        string
 		configProfile     string
-		expectedError     error
+		expectedError     string
 		expectedAccessKey string
 		expectedSecretKey string
 		expectedChain     []string
 		init              func()
 		dependentOnOS     bool
-		client            HTTPClient
 	}{
 		"credential source and source profile": {
 			envProfile:    "invalid_source_and_credential_source",
-			expectedError: fmt.Errorf("TODO"),
+			expectedError: "nly source profile or credential source can be specified",
 			init: func() {
 				os.Setenv("AWS_ACCESS_KEY", "access_key")
 				os.Setenv("AWS_SECRET_KEY", "secret_key")
@@ -61,9 +128,9 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 			},
 			expectedAccessKey: "AKID",
 			expectedSecretKey: "SECRET",
-			client: mockHttpClient(func(r *http.Request) (*http.Response, error) {
-				return &http.Response{StatusCode: 200, Body: ioutil.NopCloser(bytes.NewReader(nil))}, nil
-			}),
+			// mockHttpClient(func(r *http.Request) (*http.Response, error) {
+			//	return &http.Response{StatusCode: 200, Body: ioutil.NopCloser(bytes.NewReader(nil))}, nil
+			//}),
 		},
 		"ecs container credential source": {
 			envProfile:        "ecscontainer",
@@ -127,19 +194,17 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 				os.Setenv("AWS_PROFILE", c.envProfile)
 			}
 
+			endpointResolver, cleanupFn := setupCredentialsEndpoints(t)
+			defer cleanupFn()
+
 			if c.init != nil {
 				c.init()
 			}
 
 			var credChain []string
 
-			const (
-				ECS = iota
-				AssumeRole
-			)
-			var apiExecuting int
-
 			configSources := []Config{
+				WithEndpointResolver{endpointResolver},
 				WithAPIOptions(append([]func(*middleware.Stack) error{}, func(stack *middleware.Stack) error {
 					return stack.Initialize.Add(middleware.InitializeMiddlewareFunc("GetRoleArns", func(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler,
 					) (
@@ -148,44 +213,11 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 						switch v := in.Parameters.(type) {
 						case *sts.AssumeRoleInput:
 							credChain = append(credChain, *v.RoleArn)
-							apiExecuting = AssumeRole
-						default:
-							apiExecuting = ECS
 						}
 
 						return next.HandleInitialize(ctx, in)
 					}), middleware.After)
-				}, func(stack *middleware.Stack) error {
-					return stack.Deserialize.Add(middleware.DeserializeMiddlewareFunc("Response", func(ctx context.Context, input middleware.DeserializeInput, next middleware.DeserializeHandler) (
-						out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
-					) {
-						if apiExecuting == ECS {
-							var response []byte
-							if input.Request.(*http.Request).URL.Path == "/ECS" {
-								response = []byte(ecsResponse)
-							} else {
-								response = []byte("")
-							}
-							out.RawResponse = &smithyhttp.Response{Response: &http.Response{
-								StatusCode: 200,
-								Body:       ioutil.NopCloser(bytes.NewReader(response)),
-							}}
-						} else if apiExecuting == AssumeRole {
-							out.RawResponse = &smithyhttp.Response{Response: &http.Response{
-								StatusCode: 200,
-								Body: ioutil.NopCloser(bytes.NewReader([]byte(fmt.Sprintf(assumeRoleRespMsg,
-									time.Now().Add(15*time.Minute).Format("2006-01-02T15:04:05Z"))))),
-							}}
-						} else {
-							out, metadata, err = next.HandleDeserialize(ctx, input)
-						}
-						return out, metadata, err
-					}), middleware.After)
 				})),
-			}
-
-			if c.client != nil {
-				configSources = append(configSources, WithHTTPClient{c.client})
 			}
 
 			if len(c.configProfile) != 0 {
@@ -193,12 +225,17 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 			}
 
 			config, err := LoadDefaultConfig(configSources...)
-			if e, a := c.expectedError, err; !reflect.DeepEqual(e, a) {
-				t.Fatalf("expected %v, but received %v", e, a)
-			}
-
-			if c.expectedError != nil {
-				return
+			if err != nil {
+				if len(c.expectedError) > 0 {
+					if e, a := c.expectedError, err.Error(); !strings.Contains(a, e) {
+						t.Fatalf("expect %v, but got %v", e, a)
+					}
+					return
+				} else {
+					t.Fatalf("expect no error, got %v", err)
+				}
+			} else if len(c.expectedError) > 0 {
+				t.Fatalf("expect error, got none")
 			}
 
 			creds, err := config.Credentials.Retrieve(context.Background())

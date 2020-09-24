@@ -17,23 +17,33 @@ const ecsResponse = `{
   "LastUpdated": "2009-11-23T0:00:00Z"
 }`
 
+const ec2MetadataResponse = `{
+  "Code": "Success",
+  "Type": "AWS-HMAC",
+  "AccessKeyId": "ec2-access-key",
+  "SecretAccessKey": "ec2-secret-key",
+  "Token": "token",
+  "Expiration": "2100-01-01T00:00:00Z",
+  "LastUpdated": "2009-11-23T0:00:00Z"
+}`
+
 const assumeRoleRespMsg = `
 <AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">
-  <AssumeRoleResult>
-    <AssumedRoleUser>
-      <Arn>arn:aws:sts::account_id:assumed-role/role/session_name</Arn>
-      <AssumedRoleId>AKID:session_name</AssumedRoleId>
-    </AssumedRoleUser>
-    <Credentials>
-      <AccessKeyId>AKID</AccessKeyId>
-      <SecretAccessKey>SECRET</SecretAccessKey>
-      <SessionToken>SESSION_TOKEN</SessionToken>
-      <Expiration>%s</Expiration>
-    </Credentials>
-  </AssumeRoleResult>
-  <ResponseMetadata>
-    <RequestId>request-id</RequestId>
-  </ResponseMetadata>
+    <AssumeRoleResult>
+        <AssumedRoleUser>
+            <Arn>arn:aws:sts::account_id:assumed-role/role/session_name</Arn>
+            <AssumedRoleId>AKID:session_name</AssumedRoleId>
+        </AssumedRoleUser>
+        <Credentials>
+            <AccessKeyId>AKID</AccessKeyId>
+            <SecretAccessKey>SECRET</SecretAccessKey>
+            <SessionToken>SESSION_TOKEN</SessionToken>
+            <Expiration>%s</Expiration>
+        </Credentials>
+    </AssumeRoleResult>
+    <ResponseMetadata>
+        <RequestId>request-id</RequestId>
+    </ResponseMetadata>
 </AssumeRoleResponse>
 `
 

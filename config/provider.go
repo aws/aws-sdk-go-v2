@@ -499,6 +499,7 @@ func (w WithAPIOptions) GetAPIOptions() ([]func(*middleware.Stack) error, bool, 
 	return w, true, nil
 }
 
+// GetAPIOptions searches the slice of configs and returns the first APIOptions found.
 func GetAPIOptions(configs Configs) (o []func(*middleware.Stack) error, found bool, err error) {
 	for _, config := range configs {
 		if p, ok := config.(APIOptionsProvider); ok {
@@ -512,4 +513,33 @@ func GetAPIOptions(configs Configs) (o []func(*middleware.Stack) error, found bo
 		}
 	}
 	return o, found, err
+}
+
+// EndpointResolverFuncProvider is an interface for retrieving an aws.EndpointResolver from a configuration source
+type EndpointResolverFuncProvider interface {
+	GetEndpointResolver() (aws.EndpointResolver, bool, error)
+}
+
+// WithEndpointResolver wraps a aws.EndpointResolver value to satisfy the EndpointResolverFuncProvider interface
+type WithEndpointResolver struct {
+	aws.EndpointResolver
+}
+
+// GetEndpointResolver returns the wrapped EndpointResolver
+func (w WithEndpointResolver) GetEndpointResolver() (aws.EndpointResolver, bool, error) {
+	return w.EndpointResolver, true, nil
+}
+
+// GetEndpointResolver searches the provided config sources for a EndpointResolverFunc that can be used
+// to configure the aws.Config.EndpointResolver value.
+func GetEndpointResolver(configs Configs) (f aws.EndpointResolver, found bool, err error) {
+	for _, c := range configs {
+		if p, ok := c.(EndpointResolverFuncProvider); ok {
+			f, found, err = p.GetEndpointResolver()
+			if err != nil {
+				return nil, false, err
+			}
+		}
+	}
+	return f, found, err
 }
