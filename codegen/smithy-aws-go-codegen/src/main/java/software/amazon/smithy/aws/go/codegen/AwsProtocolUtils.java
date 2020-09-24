@@ -18,8 +18,10 @@ package software.amazon.smithy.aws.go.codegen;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Consumer;
+import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
+import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolTestGenerator;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestGenerator;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestGenerator.ConfigValue;
@@ -63,9 +65,10 @@ final class AwsProtocolUtils {
                 HttpProtocolUnitTestGenerator.ConfigValue.builder()
                         .name("APIOptions")
                         .value(writer -> {
-                            writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
-                            writer.openBlock("[]APIOptionFunc{", "},", () -> {
-                                writer.openBlock("func(s *middleware.Stack) error {", "},", () -> {
+                            Symbol stackSymbol = SymbolUtils.createPointableSymbolBuilder("Stack",
+                                    SmithyGoDependency.SMITHY_MIDDLEWARE).build();
+                            writer.openBlock("[]func($P) error{", "},", stackSymbol, () -> {
+                                writer.openBlock("func(s $P) error {", "},", stackSymbol, () -> {
                                     writer.write("s.Finalize.Clear()");
                                     writer.write("return nil");
                                 });
