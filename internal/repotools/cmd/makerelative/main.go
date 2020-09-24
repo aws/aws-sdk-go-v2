@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/aws/aws-sdk-go-v2/internal/repotools"
 	"golang.org/x/mod/modfile"
 )
 
@@ -19,7 +20,7 @@ func main() {
 		log.Fatalf("failed to get current directory: %v", err)
 	}
 
-	gitRoot, err := findGitRoot(currDir)
+	gitRoot, err := repotools.FindRepoRoot(currDir)
 	if err != nil {
 		log.Fatal(err)
 	}
