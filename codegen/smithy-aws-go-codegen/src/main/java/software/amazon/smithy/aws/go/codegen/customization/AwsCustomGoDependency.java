@@ -29,7 +29,8 @@ public final class AwsCustomGoDependency extends AwsGoDependency {
             "service/apigateway/internal/customizations", "agcust");
     public static final GoDependency GLACIER_CUSTOMIZATION = aws(
             "service/glacier/internal/customizations", "glaciercust");
-    public static final GoDependency S3_SHARED_CUSTOMIZATION = aws("service/internal/s3shared", "s3shared");
+    public static final GoDependency S3_SHARED_CUSTOMIZATION = awsModuleDep(
+            "service/internal/s3shared", null, "s3shared");
 
     private AwsCustomGoDependency() {
         super();
