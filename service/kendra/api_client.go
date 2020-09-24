@@ -16,6 +16,7 @@ import (
 )
 
 const ServiceID = "kendra"
+const ServiceAPIVersion = "2019-02-03"
 
 // Amazon Kendra is a service for indexing large document sets.
 type Client struct {
@@ -71,12 +72,6 @@ type Options struct {
 	// idempotent API operations.
 	IdempotencyTokenProvider IdempotencyTokenProvider
 
-	// An integer value representing the logging level.
-	LogLevel aws.LogLevel
-
-	// The logger writer interface to write logging messages to.
-	Logger aws.Logger
-
 	// The region to send requests to. (Required)
 	Region string
 
@@ -109,14 +104,6 @@ func (o Options) GetIdempotencyTokenProvider() IdempotencyTokenProvider {
 	return o.IdempotencyTokenProvider
 }
 
-func (o Options) GetLogLevel() aws.LogLevel {
-	return o.LogLevel
-}
-
-func (o Options) GetLogger() aws.Logger {
-	return o.Logger
-}
-
 func (o Options) GetRegion() string {
 	return o.Region
 }
@@ -144,11 +131,10 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	opts := Options{
 		Region:      cfg.Region,
 		Retryer:     cfg.Retryer,
-		LogLevel:    cfg.LogLevel,
-		Logger:      cfg.Logger,
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -164,6 +150,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

@@ -14,6 +14,7 @@ import (
 )
 
 const ServiceID = "Detective"
+const ServiceAPIVersion = "2018-10-26"
 
 // Detective uses machine learning and purpose-built visualizations to help you
 // analyze and investigate security issues across your Amazon Web Services (AWS)
@@ -103,12 +104,6 @@ type Options struct {
 	// Signature Version 4 (SigV4) Signer
 	HTTPSignerV4 HTTPSignerV4
 
-	// An integer value representing the logging level.
-	LogLevel aws.LogLevel
-
-	// The logger writer interface to write logging messages to.
-	Logger aws.Logger
-
 	// The region to send requests to. (Required)
 	Region string
 
@@ -135,14 +130,6 @@ func (o Options) GetEndpointResolver() EndpointResolver {
 
 func (o Options) GetHTTPSignerV4() HTTPSignerV4 {
 	return o.HTTPSignerV4
-}
-
-func (o Options) GetLogLevel() aws.LogLevel {
-	return o.LogLevel
-}
-
-func (o Options) GetLogger() aws.Logger {
-	return o.Logger
 }
 
 func (o Options) GetRegion() string {
@@ -172,11 +159,10 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	opts := Options{
 		Region:      cfg.Region,
 		Retryer:     cfg.Retryer,
-		LogLevel:    cfg.LogLevel,
-		Logger:      cfg.Logger,
 		HTTPClient:  cfg.HTTPClient,
 		Credentials: cfg.Credentials,
 	}
+	resolveAWSEndpointResolver(cfg, &opts)
 	return New(opts, optFns...)
 }
 
@@ -192,6 +178,13 @@ func resolveRetryer(o *Options) {
 		return
 	}
 	o.Retryer = retry.NewStandard()
+}
+
+func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
+	if cfg.EndpointResolver == nil {
+		return
+	}
+	o.EndpointResolver = WithEndpointResolver(cfg.EndpointResolver, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) {

@@ -26,19 +26,14 @@ type Config struct {
 	// will prevent the SDK from modifying the HTTP client.
 	HTTPClient HTTPClient
 
+	// An endpoint resolver that can be used to provide or override an endpoint for the given
+	// service and region Please see the `aws.EndpointResolver` documentation on usage.
+	EndpointResolver EndpointResolver
+
 	// Retryer guides how HTTP requests should be retried in case of
 	// recoverable failures. When nil the API client will use a default
 	// retryer.
 	Retryer Retryer
-
-	// An integer value representing the logging level. The default log level
-	// is zero (LogOff), which represents no logging. To enable logging set
-	// to a LogLevel Value.
-	LogLevel LogLevel
-
-	// The logger writer interface to write logging messages to. Defaults to
-	// standard out.
-	Logger Logger
 
 	// ConfigSources are the sources that were used to construct the Config.
 	// Allows for additional configuration to be loaded by clients.

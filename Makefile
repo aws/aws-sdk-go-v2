@@ -31,9 +31,14 @@ generate: smithy-generate gen-external-asserts
 smithy-generate:
 	cd codegen && ./gradlew clean build -Plog-tests
 
+
 gen-config-asserts:
 	@echo "Generating SDK config package implementor assertions"
 	cd config && go generate
+
+gen-repo-mod-replace:
+	@echo "Generating go.mod replace for repo modules"
+	cd internal/cmd/makerelative && go run ./
 
 ###################
 # Unit/CI Testing #

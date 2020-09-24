@@ -1,7 +1,9 @@
-github.com/aws/aws-sdk-go-v2 v0.0.0-20200923000934-8cf2e0ac6dea h1:pluDatvf+x4HoukWRXaqdnmPXtb7/83r3TyC/Usu9mE=
-github.com/aws/aws-sdk-go-v2 v0.0.0-20200923000934-8cf2e0ac6dea/go.mod h1:GMY0NQdES7ftQEC9M5GaLiZhhVmBIotOKC1Lxgs7rjs=
+github.com/aws/aws-sdk-go-v2 v0.0.0-20200923184724-5013332bb7ed h1:RzO5kWV1NxhYUiaiT0aWVj/RLYMcyKnh7h79GF1arqk=
+github.com/aws/aws-sdk-go-v2 v0.0.0-20200923184724-5013332bb7ed/go.mod h1:GMY0NQdES7ftQEC9M5GaLiZhhVmBIotOKC1Lxgs7rjs=
 github.com/awslabs/smithy-go v0.0.0-20200922192056-dab44aa99759 h1:jgGfVJaeAs+VN7pdR0YGvJhSUwHetVfGcisKwx6q4pU=
 github.com/awslabs/smithy-go v0.0.0-20200922192056-dab44aa99759/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
+github.com/awslabs/smithy-go v0.0.0-20200923183614-866bcae027e6 h1:3HzjWeiZ3yHAjkktkHKZAbh6HA8CwWkfoXpCCR3nbZo=
+github.com/awslabs/smithy-go v0.0.0-20200923183614-866bcae027e6/go.mod h1:hPOQwnmBLHsUphH13tVSjQhTAFma0/0XoZGbBcOuABI=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/google/go-cmp v0.4.1 h1:/exdXoGamhu5ONeUJH0deniYLWYvQwW66yvlfiiKTu0=
