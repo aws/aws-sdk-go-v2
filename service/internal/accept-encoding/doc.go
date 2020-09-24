@@ -1,5 +1,5 @@
 /*
-Package customizations provides customizations associated with Accept Encoding Header.
+Package acceptencoding provides customizations associated with Accept Encoding Header.
 
 Accept encoding gzip
 
