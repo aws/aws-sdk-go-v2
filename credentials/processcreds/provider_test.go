@@ -9,7 +9,6 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
-	"os/exec"
 	"path/filepath"
 	"runtime"
 	"strings"
@@ -290,16 +289,11 @@ func TestProviderForceExpire(t *testing.T) {
 }
 
 func TestProviderAltConstruct(t *testing.T) {
-	// constructing with exec.Cmd instead of string
-	cmdBuilder := NewCommandBuilderFunc(func(ctx context.Context) (*exec.Cmd, error) {
-		cmd := exec.CommandContext(ctx,
-			getOSCat(),
+	cmdBuilder := DefaultNewCommandBuilder{Args: []string{
+		fmt.Sprintf("%s %s", getOSCat(),
 			filepath.Join("testdata", "static.json"),
-		)
-		cmd.Env = os.Environ()
-
-		return cmd, nil
-	})
+		),
+	}}
 
 	provider := NewProviderCommand(cmdBuilder, func(options *Options) {
 		options.Timeout = time.Duration(1) * time.Second
