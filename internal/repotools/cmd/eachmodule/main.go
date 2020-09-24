@@ -98,17 +98,21 @@ func run() (err error) {
 	go func() {
 		defer resWG.Done()
 		for result := range results {
-			if result.Err != nil {
-				failed = true
-			}
 			relPath, err := filepath.Rel(repoRoot, result.Path)
 			if err != nil {
 				log.Println("failed to get path relative to repo root",
 					repoRoot, result.Path, err)
 				relPath = result.Path
 			}
-			log.Printf("%s: %s => error: %v\n%s",
-				relPath, result.Cmd, result.Err, result.Output.String())
+
+			if result.Err != nil {
+				log.Printf("%s: %s => error: %v\n%s",
+					relPath, result.Cmd, result.Err, result.Output.String())
+				failed = true
+			} else {
+				log.Printf("%s: %s =>\n%s",
+					relPath, result.Cmd, result.Output.String())
+			}
 		}
 	}()
 
