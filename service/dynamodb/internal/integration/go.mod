@@ -3,10 +3,13 @@ module github.com/aws/aws-sdk-go-v2/service/dynamodb/internal/integration
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v0.24.1-0.20200924201813-c4bcc170fc79
-	github.com/aws/aws-sdk-go-v2/config v0.0.0-20200923001701-7b95ccd95ed9
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v0.0.0-00010101000000-000000000000
-	github.com/awslabs/smithy-go v0.0.0-20200924163652-fc0366622e14
+	github.com/aws/aws-sdk-go-v2 v0.24.1-0.20200924225551-a2b886903b8b
+	github.com/aws/aws-sdk-go-v2/config v0.0.0-20200924225551-a2b886903b8b
+	github.com/aws/aws-sdk-go-v2/credentials v0.0.0-20200924225551-a2b886903b8b // indirect
+	github.com/aws/aws-sdk-go-v2/ec2imds v0.0.0-20200924225551-a2b886903b8b // indirect
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v0.0.0-20200924225551-a2b886903b8b
+	github.com/aws/aws-sdk-go-v2/service/sts v0.0.0-20200924225551-a2b886903b8b // indirect
+	github.com/awslabs/smithy-go v0.0.0-20200924210334-28773c6e7960
 )
 
 replace (
