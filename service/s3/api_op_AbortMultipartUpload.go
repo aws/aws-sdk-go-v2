@@ -59,6 +59,7 @@ func (c *Client) AbortMultipartUpload(ctx context.Context, params *AbortMultipar
 	addUpdateEndpointMiddleware(stack, options)
 	addResponseErrorMiddleware(stack)
 	addMetadataRetrieverMiddleware(stack)
+	v4.AddContentSHA256HeaderMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

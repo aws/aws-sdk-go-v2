@@ -174,6 +174,7 @@ func (c *Client) CreateMultipartUpload(ctx context.Context, params *CreateMultip
 	addUpdateEndpointMiddleware(stack, options)
 	addResponseErrorMiddleware(stack)
 	addMetadataRetrieverMiddleware(stack)
+	v4.AddContentSHA256HeaderMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

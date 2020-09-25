@@ -46,6 +46,7 @@ func (c *Client) GetJobTagging(ctx context.Context, params *GetJobTaggingInput, 
 	stack.Initialize.Add(newServiceMetadataMiddleware_opGetJobTagging(options.Region), middleware.Before)
 	addResponseErrorMiddleware(stack)
 	addMetadataRetrieverMiddleware(stack)
+	v4.AddContentSHA256HeaderMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

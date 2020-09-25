@@ -109,6 +109,7 @@ func (c *Client) PutBucketAcl(ctx context.Context, params *PutBucketAclInput, op
 	addUpdateEndpointMiddleware(stack, options)
 	addResponseErrorMiddleware(stack)
 	addMetadataRetrieverMiddleware(stack)
+	v4.AddContentSHA256HeaderMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
