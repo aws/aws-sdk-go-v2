@@ -66,7 +66,7 @@ func (r *Repository) Modules() ([]string, error) {
 
 // DoRelease runs the automated release process, consuming the given Repository's Metadata, updating module's go.mod files,
 // creating a release JSON file, committing changes, tagging the repository, and pushing.
-func (r *Repository) DoRelease(releaseID string) error {
+func (r *Repository) DoRelease(releaseID string, push bool) error {
 	if err := r.Metadata.CurrentVersions.isValid(r.git); err != nil {
 		return fmt.Errorf("couldn't create a release: %v", err)
 	}
@@ -96,15 +96,15 @@ func (r *Repository) DoRelease(releaseID string) error {
 		return fmt.Errorf("failed to update version files: %v", err)
 	}
 
-	err = r.tagAndPush(releaseID, bumps)
+	err = r.tagAndPush(releaseID, bumps, push)
 	if err != nil {
 		return fmt.Errorf("failed to tag and push to repo: %v", err)
 	}
 	return nil
 }
 
-func (r *Repository) tagAndPush(releaseID string, bumps map[string]VersionBump) error {
-	err := r.git.Commit([]string{"."}, fmt.Sprintf("release %s", releaseID))
+func (r *Repository) tagAndPush(releaseID string, bumps map[string]VersionBump, push bool) error {
+	err := r.git.Commit([]string{"."}, fmt.Sprintf("Release %s", releaseID))
 	if err != nil {
 		return err
 	}
@@ -115,6 +115,10 @@ func (r *Repository) tagAndPush(releaseID string, bumps map[string]VersionBump) 
 		if err != nil {
 			return err
 		}
+	}
+
+	if !push {
+		return nil
 	}
 
 	return r.git.Push()

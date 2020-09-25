@@ -78,7 +78,7 @@ func TestRepository_DoRelease(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	err = repo.DoRelease("test-release")
+	err = repo.DoRelease("test-release", true)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -123,7 +123,7 @@ func TestRepository_TagAndPush(t *testing.T) {
 
 	wantTags := []string{"a/v1.0.1", "b/v1.0.0", "c/v2.0.0"}
 
-	err := repo.tagAndPush("test-release", bumps)
+	err := repo.tagAndPush("test-release", bumps, true)
 	if err != nil {
 		t.Fatal(err)
 	}
