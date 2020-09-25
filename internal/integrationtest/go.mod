@@ -6,6 +6,19 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/acm v0.0.0-20200925205449-f9c5cc24907e
 	github.com/aws/aws-sdk-go-v2/service/apigateway v0.0.0-20200925205449-f9c5cc24907e
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/appstream v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/athena v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/autoscaling v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/batch v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/cloudformation v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/cloudfront v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/cloudsearch v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/cloudtrail v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/cloudwatch v0.0.0-20200925205449-f9c5cc24907e
+	//github.com/aws/aws-sdk-go-v2/service/cloudwatchevents v0.0.0-20200925205449-f9c5cc24907e
+	//github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs v0.0.0-20200925205449-f9c5cc24907e
 	github.com/aws/aws-sdk-go-v2/service/docdb v0.0.0-20200925205449-f9c5cc24907e
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v0.0.0-20200925205449-f9c5cc24907e
 	github.com/aws/aws-sdk-go-v2/service/ec2 v0.0.0-20200925205449-f9c5cc24907e
