@@ -146,7 +146,7 @@ integ-modules-%:
 	@# e.g. test-modules-service_dynamodb
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst integ-modules-,,$@)) \
-		"go test -timeout=10m -tags "integration" -v ${RUN_INTEG} ./..."
+		"go test -timeout=10m -tags "integration" -v ${RUN_INTEG} -count 1 ./..."
 
 cleanup-integ-buckets:
 	@echo "Cleaning up SDK integraiton resources"
