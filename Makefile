@@ -67,7 +67,7 @@ unit-modules-%:
 	@#
 	@# e.g. unit-modules-internal_protocoltest
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst unit-modules-,,$@)) -c 4 \
+		&& go run . -p $(subst _,/,$(subst unit-modules-,,$@)) \
 		"go vet ${BUILD_TAGS} --all ./..." \
 		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
 		"go test -timeout=1m ${UNIT_TEST_TAGS} ./..."
@@ -79,10 +79,10 @@ unit-race-modules-%:
 	@#
 	@# e.g. unit-modules-internal_protocoltest
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst unit-race-modules-,,$@)) -c 4 \
+		&& go run . -p $(subst _,/,$(subst unit-race-modules-,,$@)) \
 		"go vet ${BUILD_TAGS} --all ./..." \
 		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
-		"go test -timeout=1m ${UNIT_TEST_TAGS} -race -cpu=1,2,4 ./..."
+		"go test -timeout=1m ${UNIT_TEST_TAGS} -race -cpu=4 ./..."
 
 build: build-modules-.
 
@@ -106,7 +106,7 @@ test-modules-race-%:
 	@# e.g. test-modules-race-internal_protocoltest
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst test-modules-race-,,$@)) \
-		"go test -timeout=1m ${UNIT_TEST_TAGS} -race -cpu=1,2,4 ./..."
+		"go test -timeout=1m ${UNIT_TEST_TAGS} -race -cpu=4 ./..."
 
 test-modules-%:
 	@# Test command that uses the pattern to define the root path that the

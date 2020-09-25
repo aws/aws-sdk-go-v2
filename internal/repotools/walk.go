@@ -13,6 +13,7 @@ type Boots struct {
 	modulePaths []string
 }
 
+// Modules returns a slice of module directory absolute paths.
 func (b *Boots) Modules() []string {
 	return b.modulePaths
 }
