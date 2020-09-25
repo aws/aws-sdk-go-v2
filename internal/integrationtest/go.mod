@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53 v0.0.0-20200925183546-de4a17a19ce2
 	github.com/aws/aws-sdk-go-v2/service/route53domains v0.0.0-20200925183546-de4a17a19ce2
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v0.0.0-20200925183546-de4a17a19ce2
-	github.com/aws/aws-sdk-go-v2/service/s3 v0.0.0-20200925183546-de4a17a19ce2
+	github.com/aws/aws-sdk-go-v2/service/s3 v0.0.0-20200925190416-3c26e065f4b5
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v0.0.0-20200925183546-de4a17a19ce2
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v0.0.0-20200925183546-de4a17a19ce2
 	github.com/aws/aws-sdk-go-v2/service/ses v0.0.0-20200925183546-de4a17a19ce2
