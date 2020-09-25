@@ -14,6 +14,10 @@ github.com/aws/aws-sdk-go-v2/ec2imds v0.0.0-20200924224731-ccbcb2eb486d h1:848xM
 github.com/aws/aws-sdk-go-v2/ec2imds v0.0.0-20200924224731-ccbcb2eb486d/go.mod h1:EjSg63Jxn5QRYgGQQN+S/JQfYxGGEV8XdXgOnv/bOO8=
 github.com/aws/aws-sdk-go-v2/service/acm v0.0.0-20200925183546-de4a17a19ce2 h1:wosNJ2PUPUtEdyYQ5VPvFEhQFlD/NT20HmecyUY2WbI=
 github.com/aws/aws-sdk-go-v2/service/acm v0.0.0-20200925183546-de4a17a19ce2/go.mod h1:c74jMqwjbytD7Sj4CcrBhjWAGK2n781WXh/4WL14rGE=
+github.com/aws/aws-sdk-go-v2/service/apigateway v0.0.0-20200925183546-de4a17a19ce2 h1:LEkODgDkP5LhlDL3c0+XLqzp9eIG+aX9AL+FB16B3XI=
+github.com/aws/aws-sdk-go-v2/service/apigateway v0.0.0-20200925183546-de4a17a19ce2/go.mod h1:pjOPbzK+dmOF5xzCVNR4v42yc7xZYg3rb1kA9mPiqD4=
+github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v0.0.0-20200925183546-de4a17a19ce2 h1:VaX/4lGhbiHZSd3EIGCvwJ00BLTSCcaND7xlQiAREyE=
+github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v0.0.0-20200925183546-de4a17a19ce2/go.mod h1:If4aVj6y06UEEK0vIhEVVfhMKNsuMWxWOeiZAkH7DQw=
 github.com/aws/aws-sdk-go-v2/service/emr v0.0.0-20200925183546-de4a17a19ce2 h1:Zn2j32Hse2aFZlOroccihiMs+uKt/F8Vmb9x9Iq7hy8=
 github.com/aws/aws-sdk-go-v2/service/emr v0.0.0-20200925183546-de4a17a19ce2/go.mod h1:zq6IqHbLaQGafIOdbC95H55BNncS8ealn/dGtZ2g67E=
 github.com/aws/aws-sdk-go-v2/service/eventbridge v0.0.0-20200925183546-de4a17a19ce2 h1:M4N5SqmHNFcSDBgpPoOYJKx2qR/iQnqKUkiUD8sC03A=

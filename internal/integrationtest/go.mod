@@ -4,6 +4,8 @@ require (
 	github.com/aws/aws-sdk-go-v2 v0.24.1-0.20200924224914-965b6782bf3d
 	github.com/aws/aws-sdk-go-v2/config v0.0.0-20200925183546-de4a17a19ce2
 	github.com/aws/aws-sdk-go-v2/service/acm v0.0.0-20200925183546-de4a17a19ce2
+	github.com/aws/aws-sdk-go-v2/service/apigateway v0.0.0-20200925183546-de4a17a19ce2
+	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v0.0.0-20200925183546-de4a17a19ce2
 	github.com/aws/aws-sdk-go-v2/service/emr v0.0.0-20200925183546-de4a17a19ce2
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v0.0.0-20200925183546-de4a17a19ce2
 	github.com/aws/aws-sdk-go-v2/service/firehose v0.0.0-20200925183546-de4a17a19ce2
