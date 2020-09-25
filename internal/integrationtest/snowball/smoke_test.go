@@ -21,8 +21,8 @@ func TestInteg_00_DescribeAddresses(t *testing.T) {
 	}
 
 	client := snowball.NewFromConfig(cfg)
-	params := &snowball.DescribeAddressInput{}
-	_, err = client.DescribeAddress(ctx, params)
+	params := &snowball.DescribeAddressesInput{}
+	_, err = client.DescribeAddresses(ctx, params)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
