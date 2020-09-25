@@ -197,3 +197,210 @@ func addRequestIDRetrieverMiddleware(stack *middleware.Stack) {
 func addResponseErrorMiddleware(stack *middleware.Stack) {
 	awshttp.AddResponseErrorMiddleware(stack)
 }
+
+// setDefaultAccountID sets the AccountID to the given value if the current value
+// is nil
+func setDefaultAccountID(input interface{}, accountID string) interface{} {
+	switch i := input.(type) {
+	case *GetVaultNotificationsInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *AddTagsToVaultInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *InitiateMultipartUploadInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *DeleteVaultInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *AbortVaultLockInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *InitiateJobInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *DeleteVaultAccessPolicyInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *GetVaultLockInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *InitiateVaultLockInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *ListPartsInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *GetDataRetrievalPolicyInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *CompleteVaultLockInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *SetVaultAccessPolicyInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *DescribeVaultInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *SetDataRetrievalPolicyInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *CreateVaultInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *DeleteVaultNotificationsInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *SetVaultNotificationsInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *ListProvisionedCapacityInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *UploadArchiveInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *UploadMultipartPartInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *AbortMultipartUploadInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *GetJobOutputInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *GetVaultAccessPolicyInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *PurchaseProvisionedCapacityInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *ListTagsForVaultInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *ListJobsInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *DescribeJobInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *ListMultipartUploadsInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *RemoveTagsFromVaultInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *CompleteMultipartUploadInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *ListVaultsInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	case *DeleteArchiveInput:
+		if i.AccountId == nil {
+			i.AccountId = &accountID
+		}
+		return i
+
+	default:
+		return input
+	}
+}

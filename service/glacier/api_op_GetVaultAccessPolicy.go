@@ -44,6 +44,8 @@ func (c *Client) GetVaultAccessPolicy(ctx context.Context, params *GetVaultAcces
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
 	glaciercust.AddTreeHashMiddleware(stack)
+	glaciercust.AddGlacierAPIVersionMiddleware(stack, ServiceAPIVersion)
+	glaciercust.AddDefaultAccountIDMiddleware(stack, setDefaultAccountID)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
