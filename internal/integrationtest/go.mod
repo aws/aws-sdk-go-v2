@@ -6,6 +6,18 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/acm v0.0.0-20200925205449-f9c5cc24907e
 	github.com/aws/aws-sdk-go-v2/service/apigateway v0.0.0-20200925205449-f9c5cc24907e
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/docdb v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/ec2 v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/ecr v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/ecs v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/efs v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/elasticache v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v0.0.0-20200925205449-f9c5cc24907e
 	github.com/aws/aws-sdk-go-v2/service/emr v0.0.0-20200925205449-f9c5cc24907e
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v0.0.0-20200925205449-f9c5cc24907e
 	github.com/aws/aws-sdk-go-v2/service/firehose v0.0.0-20200925205449-f9c5cc24907e
