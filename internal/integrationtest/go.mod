@@ -19,6 +19,12 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v0.0.0-20200925205449-f9c5cc24907e
 	//github.com/aws/aws-sdk-go-v2/service/cloudwatchevents v0.0.0-20200925205449-f9c5cc24907e
 	//github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/codebuild v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/codecommit v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/codedeploy v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/codepipeline v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/codestar v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v0.0.0-20200925205449-f9c5cc24907e
 	github.com/aws/aws-sdk-go-v2/service/docdb v0.0.0-20200925205449-f9c5cc24907e
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v0.0.0-20200925205449-f9c5cc24907e
 	github.com/aws/aws-sdk-go-v2/service/ec2 v0.0.0-20200925205449-f9c5cc24907e
