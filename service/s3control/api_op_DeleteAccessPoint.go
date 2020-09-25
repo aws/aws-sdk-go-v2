@@ -34,6 +34,7 @@ func (c *Client) DeleteAccessPoint(ctx context.Context, params *DeleteAccessPoin
 	stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAccessPoint(options.Region), middleware.Before)
 	addResponseErrorMiddleware(stack)
 	addMetadataRetrieverMiddleware(stack)
+	v4.AddContentSHA256HeaderMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

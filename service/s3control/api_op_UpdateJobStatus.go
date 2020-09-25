@@ -48,6 +48,7 @@ func (c *Client) UpdateJobStatus(ctx context.Context, params *UpdateJobStatusInp
 	stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateJobStatus(options.Region), middleware.Before)
 	addResponseErrorMiddleware(stack)
 	addMetadataRetrieverMiddleware(stack)
+	v4.AddContentSHA256HeaderMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

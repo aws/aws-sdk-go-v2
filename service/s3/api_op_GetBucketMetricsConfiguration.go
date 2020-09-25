@@ -54,6 +54,7 @@ func (c *Client) GetBucketMetricsConfiguration(ctx context.Context, params *GetB
 	addUpdateEndpointMiddleware(stack, options)
 	addResponseErrorMiddleware(stack)
 	addMetadataRetrieverMiddleware(stack)
+	v4.AddContentSHA256HeaderMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

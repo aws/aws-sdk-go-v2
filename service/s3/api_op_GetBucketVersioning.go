@@ -43,6 +43,7 @@ func (c *Client) GetBucketVersioning(ctx context.Context, params *GetBucketVersi
 	addUpdateEndpointMiddleware(stack, options)
 	addResponseErrorMiddleware(stack)
 	addMetadataRetrieverMiddleware(stack)
+	v4.AddContentSHA256HeaderMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

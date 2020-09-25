@@ -39,6 +39,7 @@ func (c *Client) ListAccessPoints(ctx context.Context, params *ListAccessPointsI
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListAccessPoints(options.Region), middleware.Before)
 	addResponseErrorMiddleware(stack)
 	addMetadataRetrieverMiddleware(stack)
+	v4.AddContentSHA256HeaderMiddleware(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
