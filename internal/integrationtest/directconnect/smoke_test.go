@@ -1,6 +1,6 @@
 // +build integration
 
-package directconnect
+package apigateway
 
 import (
 	"context"
@@ -9,13 +9,13 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/directconnect"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway"
 
 	"github.com/aws/aws-sdk-go-v2/internal/integrationtest"
 	"github.com/awslabs/smithy-go"
 )
 
-func TestInteg_00_DescribeConnections(t *testing.T) {
+func TestInteg_00_GetDomainNames(t *testing.T) {
 	ctx, cancelFn := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelFn()
 
@@ -24,15 +24,15 @@ func TestInteg_00_DescribeConnections(t *testing.T) {
 		t.Fatalf("failed to load config, %v", err)
 	}
 
-	client := directconnect.NewFromConfig(cfg)
-	params := &directconnect.DescribeConnectionsInput{}
-	_, err = client.DescribeConnections(ctx, params)
+	client := apigateway.NewFromConfig(cfg)
+	params := &apigateway.GetDomainNamesInput{}
+	_, err = client.GetDomainNames(ctx, params)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
 }
 
-func TestInteg_01_DescribeConnections(t *testing.T) {
+func TestInteg_01_CreateUsagePlanKey(t *testing.T) {
 	ctx, cancelFn := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelFn()
 
@@ -41,11 +41,13 @@ func TestInteg_01_DescribeConnections(t *testing.T) {
 		t.Fatalf("failed to load config, %v", err)
 	}
 
-	client := directconnect.NewFromConfig(cfg)
-	params := &directconnect.DescribeConnectionsInput{
-		ConnectionId: aws.String("fake-connection"),
+	client := apigateway.NewFromConfig(cfg)
+	params := &apigateway.CreateUsagePlanKeyInput{
+		KeyId:       aws.String("bar"),
+		KeyType:     aws.String("fixx"),
+		UsagePlanId: aws.String("foo"),
 	}
-	_, err = client.DescribeConnections(ctx, params)
+	_, err = client.CreateUsagePlanKey(ctx, params)
 	if err == nil {
 		t.Fatalf("expect request to fail")
 	}

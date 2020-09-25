@@ -25,6 +25,12 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v0.0.0-20200925205449-f9c5cc24907e
 	github.com/aws/aws-sdk-go-v2/service/codestar v0.0.0-20200925205449-f9c5cc24907e
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/configservice v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/devicefarm v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/directconnect v0.0.0-20200925205449-f9c5cc24907e
+	github.com/aws/aws-sdk-go-v2/service/directoryservice v0.0.0-20200925205449-f9c5cc24907e
 	github.com/aws/aws-sdk-go-v2/service/docdb v0.0.0-20200925205449-f9c5cc24907e
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v0.0.0-20200925205449-f9c5cc24907e
 	github.com/aws/aws-sdk-go-v2/service/ec2 v0.0.0-20200925205449-f9c5cc24907e
