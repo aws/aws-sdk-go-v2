@@ -1,6 +1,6 @@
 // +build integration
 
-package apigateway
+package autoscaling
 
 import (
 	"context"
@@ -9,13 +9,13 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/apigateway"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling"
 
 	"github.com/aws/aws-sdk-go-v2/internal/integrationtest"
 	"github.com/awslabs/smithy-go"
 )
 
-func TestInteg_00_GetDomainNames(t *testing.T) {
+func TestInteg_00_DescribeScalingProcessTypes(t *testing.T) {
 	ctx, cancelFn := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelFn()
 
@@ -24,15 +24,15 @@ func TestInteg_00_GetDomainNames(t *testing.T) {
 		t.Fatalf("failed to load config, %v", err)
 	}
 
-	client := apigateway.NewFromConfig(cfg)
-	params := &apigateway.GetDomainNamesInput{}
-	_, err = client.GetDomainNames(ctx, params)
+	client := autoscaling.NewFromConfig(cfg)
+	params := &autoscaling.DescribeScalingProcessTypesInput{}
+	_, err = client.DescribeScalingProcessTypes(ctx, params)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
 }
 
-func TestInteg_01_CreateUsagePlanKey(t *testing.T) {
+func TestInteg_01_CreateLaunchConfiguration(t *testing.T) {
 	ctx, cancelFn := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelFn()
 
@@ -41,13 +41,13 @@ func TestInteg_01_CreateUsagePlanKey(t *testing.T) {
 		t.Fatalf("failed to load config, %v", err)
 	}
 
-	client := apigateway.NewFromConfig(cfg)
-	params := &apigateway.CreateUsagePlanKeyInput{
-		KeyId:       aws.String("bar"),
-		KeyType:     aws.String("fixx"),
-		UsagePlanId: aws.String("foo"),
+	client := autoscaling.NewFromConfig(cfg)
+	params := &autoscaling.CreateLaunchConfigurationInput{
+		ImageId:                 aws.String("ami-12345678"),
+		InstanceType:            aws.String("m1.small"),
+		LaunchConfigurationName: aws.String("hello, world"),
 	}
-	_, err = client.CreateUsagePlanKey(ctx, params)
+	_, err = client.CreateLaunchConfiguration(ctx, params)
 	if err == nil {
 		t.Fatalf("expect request to fail")
 	}

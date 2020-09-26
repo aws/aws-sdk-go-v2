@@ -1,6 +1,6 @@
 // +build integration
 
-package apigateway
+package cloudhsmv2
 
 import (
 	"context"
@@ -9,13 +9,13 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/apigateway"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2"
 
 	"github.com/aws/aws-sdk-go-v2/internal/integrationtest"
 	"github.com/awslabs/smithy-go"
 )
 
-func TestInteg_00_GetDomainNames(t *testing.T) {
+func TestInteg_00_DescribeClusters(t *testing.T) {
 	ctx, cancelFn := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelFn()
 
@@ -24,15 +24,15 @@ func TestInteg_00_GetDomainNames(t *testing.T) {
 		t.Fatalf("failed to load config, %v", err)
 	}
 
-	client := apigateway.NewFromConfig(cfg)
-	params := &apigateway.GetDomainNamesInput{}
-	_, err = client.GetDomainNames(ctx, params)
+	client := cloudhsmv2.NewFromConfig(cfg)
+	params := &cloudhsmv2.DescribeClustersInput{}
+	_, err = client.DescribeClusters(ctx, params)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
 }
 
-func TestInteg_01_CreateUsagePlanKey(t *testing.T) {
+func TestInteg_01_ListTags(t *testing.T) {
 	ctx, cancelFn := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelFn()
 
@@ -41,13 +41,11 @@ func TestInteg_01_CreateUsagePlanKey(t *testing.T) {
 		t.Fatalf("failed to load config, %v", err)
 	}
 
-	client := apigateway.NewFromConfig(cfg)
-	params := &apigateway.CreateUsagePlanKeyInput{
-		KeyId:       aws.String("bar"),
-		KeyType:     aws.String("fixx"),
-		UsagePlanId: aws.String("foo"),
+	client := cloudhsmv2.NewFromConfig(cfg)
+	params := &cloudhsmv2.ListTagsInput{
+		ResourceId: aws.String("bogus-arn"),
 	}
-	_, err = client.CreateUsagePlanKey(ctx, params)
+	_, err = client.ListTags(ctx, params)
 	if err == nil {
 		t.Fatalf("expect request to fail")
 	}

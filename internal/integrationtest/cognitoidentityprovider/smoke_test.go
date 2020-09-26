@@ -1,6 +1,6 @@
 // +build integration
 
-package apigateway
+package cognitoidentityprovider
 
 import (
 	"context"
@@ -9,13 +9,13 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/apigateway"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider"
 
 	"github.com/aws/aws-sdk-go-v2/internal/integrationtest"
 	"github.com/awslabs/smithy-go"
 )
 
-func TestInteg_00_GetDomainNames(t *testing.T) {
+func TestInteg_00_ListUserPools(t *testing.T) {
 	ctx, cancelFn := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelFn()
 
@@ -24,15 +24,17 @@ func TestInteg_00_GetDomainNames(t *testing.T) {
 		t.Fatalf("failed to load config, %v", err)
 	}
 
-	client := apigateway.NewFromConfig(cfg)
-	params := &apigateway.GetDomainNamesInput{}
-	_, err = client.GetDomainNames(ctx, params)
+	client := cognitoidentityprovider.NewFromConfig(cfg)
+	params := &cognitoidentityprovider.ListUserPoolsInput{
+		MaxResults: aws.Int32(10),
+	}
+	_, err = client.ListUserPools(ctx, params)
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
 }
 
-func TestInteg_01_CreateUsagePlanKey(t *testing.T) {
+func TestInteg_01_DescribeUserPool(t *testing.T) {
 	ctx, cancelFn := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelFn()
 
@@ -41,13 +43,11 @@ func TestInteg_01_CreateUsagePlanKey(t *testing.T) {
 		t.Fatalf("failed to load config, %v", err)
 	}
 
-	client := apigateway.NewFromConfig(cfg)
-	params := &apigateway.CreateUsagePlanKeyInput{
-		KeyId:       aws.String("bar"),
-		KeyType:     aws.String("fixx"),
-		UsagePlanId: aws.String("foo"),
+	client := cognitoidentityprovider.NewFromConfig(cfg)
+	params := &cognitoidentityprovider.DescribeUserPoolInput{
+		UserPoolId: aws.String("us-east-1:aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"),
 	}
-	_, err = client.CreateUsagePlanKey(ctx, params)
+	_, err = client.DescribeUserPool(ctx, params)
 	if err == nil {
 		t.Fatalf("expect request to fail")
 	}
