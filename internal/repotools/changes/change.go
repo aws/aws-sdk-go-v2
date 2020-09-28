@@ -337,6 +337,10 @@ func AffectedModules(changes []Change) []string {
 }
 
 func generateID(module string, changeType ChangeType) string {
+	if module == rootModule {
+		module = "sdk"
+	}
+
 	module = strings.ReplaceAll(module, "...", "wildcard")
 	module = strings.ReplaceAll(module, "/", ".")
 

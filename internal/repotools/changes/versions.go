@@ -195,7 +195,7 @@ func tagRepo(git git.VcsClient, releaseID, mod, version string) error {
 
 	tag := path + version
 
-	msg := fmt.Sprintf("\"release %s module %s version %s\"", releaseID, mod, version)
+	msg := fmt.Sprintf("Release %s", releaseID)
 
 	return git.Tag(tag, msg)
 }

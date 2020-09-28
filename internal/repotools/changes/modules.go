@@ -45,7 +45,7 @@ func getModFile(path string) (*modfile.File, error) {
 }
 
 func shortenModPath(modulePath string) string {
-	if modulePath == sdkRepo {
+	if modulePath == sdkRepo || modulePath == rootModule {
 		return rootModule
 	}
 
