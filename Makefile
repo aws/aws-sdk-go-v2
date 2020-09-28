@@ -24,7 +24,7 @@ all: generate unit
 generate: smithy-generate gen-config-asserts gen-repo-mod-replace tidy-modules-.
 
 smithy-generate:
-	cd codegen && ./gradlew clean build -Plog-tests
+	cd codegen && ./gradlew clean build -Plog-tests && ./gradlew clean
 
 gen-config-asserts:
 	@echo "Generating SDK config package implementor assertions"
@@ -54,11 +54,24 @@ tidy-modules-%:
 
 # TODO replace the command with the unit-modules-. once protocol tests pass
 
-unit: verify build unit-test
-unit-race: verify build unit-test-race
+unit: lint unit-modules-aws unit-modules-service unit-modules-config unit-modules-credentials unit-modules-ec2imds
+unit-race: lint unit-race-modules-aws unit-race-modules-service unit-race-modules-config unit-race-modules-credentials unit-race-modules-ec2imds
 
-unit-test: test-modules-aws test-modules-service
-unit-test-race: test-modules-race-aws test-modules-race-service
+unit-test: test-modules-aws test-modules-service test-modules-config test-modules-credentials test-modules-ec2imds
+unit-race-test: test-race-modules-aws test-race-modules-service test-race-modules-config test-race-modules-credentials test-race-modules-ec2imds
+
+unit-race-modules-%:
+	@# unit command that uses the pattern to define the root path that the
+	@# module testing will start from. Strips off the "unit-race-modules-" and
+	@# replaces all "_" with "/".
+	@#
+	@# e.g. unit-race-modules-internal_protocoltest
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst unit-race-modules-,,$@)) \
+		"go vet ${BUILD_TAGS} --all ./..." \
+		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
+		"go test -timeout=1m ${UNIT_TEST_TAGS} -race -cpu=4 ./..."
+
 
 unit-modules-%:
 	@# unit command that uses the pattern to define the root path that the
@@ -71,18 +84,6 @@ unit-modules-%:
 		"go vet ${BUILD_TAGS} --all ./..." \
 		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
 		"go test -timeout=1m ${UNIT_TEST_TAGS} ./..."
-
-unit-race-modules-%:
-	@# unit command that uses the pattern to define the root path that the
-	@# module testing will start from. Strips off the "unit-race-modules-" and
-	@# replaces all "_" with "/".
-	@#
-	@# e.g. unit-modules-internal_protocoltest
-	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst unit-race-modules-,,$@)) \
-		"go vet ${BUILD_TAGS} --all ./..." \
-		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
-		"go test -timeout=1m ${UNIT_TEST_TAGS} -race -cpu=4 ./..."
 
 build: build-modules-.
 
@@ -98,14 +99,14 @@ build-modules-%:
 
 test: test-modules-.
 
-test-modules-race-%:
+test-race-modules-%:
 	@# Test command that uses the pattern to define the root path that the
-	@# module testing will start from. Strips off the "test-modules-race-" and
+	@# module testing will start from. Strips off the "test-race-modules-" and
 	@# replaces all "_" with "/".
 	@#
-	@# e.g. test-modules-race-internal_protocoltest
+	@# e.g. test-race-modules-internal_protocoltest
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst test-modules-race-,,$@)) \
+		&& go run . -p $(subst _,/,$(subst test-race-modules-,,$@)) \
 		"go test -timeout=1m ${UNIT_TEST_TAGS} -race -cpu=4 ./..."
 
 test-modules-%:

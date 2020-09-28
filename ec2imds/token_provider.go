@@ -103,7 +103,7 @@ func (t *tokenProvider) HandleDeserialize(
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, input)
-	if err != nil {
+	if err == nil {
 		return out, metadata, err
 	}
 
