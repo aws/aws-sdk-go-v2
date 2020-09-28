@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"path/filepath"
+	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/internal/repotools/changes/git"
 	"github.com/aws/aws-sdk-go-v2/internal/repotools/changes/golist"
@@ -66,7 +67,7 @@ func (r *Repository) Modules() ([]string, error) {
 
 // DoRelease runs the automated release process, consuming the given Repository's Metadata, updating module's go.mod files,
 // creating a release JSON file, committing changes, tagging the repository, and pushing.
-func (r *Repository) DoRelease(releaseID string, push bool) error {
+func (r *Repository) DoRelease(releaseID string, push, interactive bool) error {
 	if err := r.Metadata.CurrentVersions.isValid(r.git); err != nil {
 		return fmt.Errorf("couldn't create a release: %v", err)
 	}
@@ -96,32 +97,58 @@ func (r *Repository) DoRelease(releaseID string, push bool) error {
 		return fmt.Errorf("failed to update version files: %v", err)
 	}
 
-	err = r.tagAndPush(releaseID, bumps, push)
-	if err != nil {
-		return fmt.Errorf("failed to tag and push to repo: %v", err)
-	}
-	return nil
-}
-
-func (r *Repository) tagAndPush(releaseID string, bumps map[string]VersionBump, push bool) error {
-	err := r.git.Commit([]string{"."}, fmt.Sprintf("Release %s", releaseID))
-	if err != nil {
-		return err
+	if err = r.commit(releaseID); err != nil {
+		return fmt.Errorf("failed to commit changes to local repo: %w", err)
 	}
 
-	for mod, bump := range bumps {
-		r.logf("tagging module %s: %s -> %s\n", mod, bump.From, bump.To)
-		err = tagRepo(r.git, releaseID, mod, bump.To)
-		if err != nil {
+	if interactive {
+		if err = confirmationPrompt("Enter \"yes\" to proceed with tagging"); err != nil {
 			return err
 		}
 	}
 
-	if !push {
-		return nil
+	if err = r.tag(releaseID, bumps); err != nil {
+		return fmt.Errorf("failed to tag and push to repo: %v", err)
 	}
 
-	return r.git.Push()
+	if push {
+		if err = r.git.Push(); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func confirmationPrompt(msg string) error {
+	for {
+		fmt.Printf(msg + ": ")
+		var response string
+		_, err := fmt.Scanln(&response)
+		if err != nil {
+			return err
+		}
+		if strings.EqualFold(response, "yes") {
+			return nil
+		} else if strings.EqualFold(response, "no") {
+			return fmt.Errorf("stopping execution")
+		}
+	}
+}
+
+func (r *Repository) commit(releaseID string) error {
+	return r.git.Commit([]string{"."}, fmt.Sprintf("Release %s", releaseID))
+}
+
+func (r *Repository) tag(releaseID string, bumps map[string]VersionBump) error {
+	for mod, bump := range bumps {
+		r.logf("tagging module %s: %s -> %s\n", mod, bump.From, bump.To)
+		err := tagRepo(r.git, releaseID, mod, bump.To)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 func (r *Repository) resolveDependencies(enc *VersionEnclosure, bumps map[string]VersionBump) error {

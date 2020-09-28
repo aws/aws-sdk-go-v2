@@ -12,11 +12,12 @@ import (
 )
 
 var releaseParams = struct {
-	repo      string
-	releaseID string
-	selector  changes.VersionSelector
-	pretty    bool
-	push      bool
+	repo           string
+	releaseID      string
+	selector       changes.VersionSelector
+	pretty         bool
+	push           bool
+	nonInteractive bool
 }{}
 
 var staticVersionsFlags *flag.FlagSet
@@ -44,6 +45,7 @@ func init() {
 	createReleaseFlags.StringVar(&releaseParams.repo, "repo", ".", "path to the SDK git repository")
 	createReleaseFlags.StringVar(&releaseParams.releaseID, "id", "", "the ID of the release (e.g. 2020-07-17)")
 	createReleaseFlags.BoolVar(&releaseParams.push, "push", false, "controls whether to push the release commit and tags to upstream repository")
+	createReleaseFlags.BoolVar(&releaseParams.nonInteractive, "non-interactive", false, "bypass interactive prompts")
 	createReleaseFlags.Usage = func() {
 		fmt.Printf("%s release create [-repo=<repo>]\n", os.Args[0])
 		createReleaseFlags.PrintDefaults()
@@ -72,7 +74,7 @@ func releaseSubcmd(args []string) error {
 			return fmt.Errorf("couldn't load repository: %v", err)
 		}
 
-		err = repo.DoRelease(releaseParams.releaseID, releaseParams.push)
+		err = repo.DoRelease(releaseParams.releaseID, releaseParams.push, !releaseParams.nonInteractive)
 		if err != nil {
 			return err
 		}
