@@ -63,6 +63,19 @@ unit-modules-race: unit-modules-race-aws unit-modules-race-service unit-modules-
 unit-test: test-modules-aws test-modules-service test-modules-config test-modules-credentials test-modules-ec2imds
 unit-test-race: test-modules-race-aws test-modules-race-service test-modules-race-config test-modules-race-credentials test-modules-race-ec2imds
 
+unit-modules-race-%:
+	@# unit command that uses the pattern to define the root path that the
+	@# module testing will start from. Strips off the "unit-race-modules-" and
+	@# replaces all "_" with "/".
+	@#
+	@# e.g. unit-modules-internal_protocoltest
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst unit-modules-race-,,$@)) \
+		"go vet ${BUILD_TAGS} --all ./..." \
+		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
+		"go test -timeout=1m ${UNIT_TEST_TAGS} -race -cpu=4 ./..."
+
+
 unit-modules-%:
 	@# unit command that uses the pattern to define the root path that the
 	@# module testing will start from. Strips off the "unit-modules-" and
@@ -74,18 +87,6 @@ unit-modules-%:
 		"go vet ${BUILD_TAGS} --all ./..." \
 		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
 		"go test -timeout=1m ${UNIT_TEST_TAGS} ./..."
-
-unit-race-modules-%:
-	@# unit command that uses the pattern to define the root path that the
-	@# module testing will start from. Strips off the "unit-race-modules-" and
-	@# replaces all "_" with "/".
-	@#
-	@# e.g. unit-modules-internal_protocoltest
-	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst unit-race-modules-,,$@)) \
-		"go vet ${BUILD_TAGS} --all ./..." \
-		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
-		"go test -timeout=1m ${UNIT_TEST_TAGS} -race -cpu=4 ./..."
 
 build: build-modules-.
 
