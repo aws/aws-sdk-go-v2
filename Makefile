@@ -54,11 +54,14 @@ tidy-modules-%:
 
 # TODO replace the command with the unit-modules-. once protocol tests pass
 
-unit: verify build unit-test
-unit-race: verify build unit-test-race
+unit: unit-modules
+unit-race: unit-modules-race
 
-unit-test: test-modules-aws test-modules-service
-unit-test-race: test-modules-race-aws test-modules-race-service
+unit-modules: unit-modules-aws unit-modules-service unit-modules-config unit-modules-credentials unit-modules-ec2imds
+unit-modules-race: unit-modules-race-aws unit-modules-race-service unit-modules-race-config unit-modules-race-credentials unit-modules-race-ec2imds
+
+unit-test: test-modules-aws test-modules-service test-modules-config test-modules-credentials test-modules-ec2imds
+unit-test-race: test-modules-race-aws test-modules-race-service test-modules-race-config test-modules-race-credentials test-modules-race-ec2imds
 
 unit-modules-%:
 	@# unit command that uses the pattern to define the root path that the
