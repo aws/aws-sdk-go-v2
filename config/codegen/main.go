@@ -21,7 +21,7 @@ var implAsserts = map[string][]string{
 	"CustomCABundleProvider":      {envConfigType, "WithCustomCABundle([]byte{})"},
 	"RegionProvider":              {envConfigType, sharedConfigType, `WithRegion("")` /*"&WithEC2MetadataRegion{}"*/},
 	"MFATokenFuncProvider":        {`WithMFATokenFunc(func() (string, error) { return "", nil })`},
-	"CredentialsProviderProvider": {`WithCredentialsProvider{aws.NewStaticCredentialsProvider("", "", "")}`},
+	"CredentialsProviderProvider": {`WithCredentialsProvider{credentials.NewStaticCredentialsProvider("", "", "")}`},
 	"DefaultRegionProvider":       {`WithDefaultRegion("")`},
 }
 
@@ -42,7 +42,7 @@ var tplProviderTests = template.Must(template.New("tplProviderTests").Funcs(map[
 package config
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/credentials"
 )
 
 {{ $sortedKeys := SortKeys . }}

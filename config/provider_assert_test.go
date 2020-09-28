@@ -3,12 +3,12 @@
 package config
 
 import (
-	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/credentials"
 )
 
 // CredentialsProviderProvider implementor assertions
 var (
-	_ CredentialsProviderProvider = WithCredentialsProvider{aws.NewStaticCredentialsProvider("", "", "")}
+	_ CredentialsProviderProvider = WithCredentialsProvider{credentials.NewStaticCredentialsProvider("", "", "")}
 )
 
 // CustomCABundleProvider implementor assertions
