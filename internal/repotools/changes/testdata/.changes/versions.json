@@ -1,0 +1,31 @@
+{
+ "SchemaVersion": 1,
+ "ModuleVersions": {
+  "internal/tools/changes/testdata/modules/a": {
+   "Module": "internal/tools/changes/testdata/modules/a",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/internal/tools/changes/testdata/modules/a",
+   "Version": "v0.0.0"
+  },
+  "internal/tools/changes/testdata/modules/b": {
+   "Module": "internal/tools/changes/testdata/modules/b",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/internal/tools/changes/testdata/modules/b",
+   "Version": "v0.0.0"
+  },
+  "internal/tools/changes/testdata/modules/nested/c": {
+   "Module": "internal/tools/changes/testdata/modules/nested/c",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/internal/tools/changes/testdata/modules/nested/c",
+   "Version": "v0.0.0"
+  },
+  "internal/tools/changes/testdata/modules/nested/c/d": {
+   "Module": "internal/tools/changes/testdata/modules/nested/c/d",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/internal/tools/changes/testdata/modules/nested/c/d",
+   "Version": "v0.0.0"
+  }
+ },
+ "Packages": {
+  "github.com/aws/aws-sdk-go-v2/internal/tools/changes/testdata/modules/a": "internal/tools/changes/testdata/modules/a",
+  "github.com/aws/aws-sdk-go-v2/internal/tools/changes/testdata/modules/b": "internal/tools/changes/testdata/modules/b",
+  "github.com/aws/aws-sdk-go-v2/internal/tools/changes/testdata/modules/nested/c": "internal/tools/changes/testdata/modules/nested/c",
+  "github.com/aws/aws-sdk-go-v2/internal/tools/changes/testdata/modules/nested/c/d": "internal/tools/changes/testdata/modules/nested/c/d"
+ }
+}

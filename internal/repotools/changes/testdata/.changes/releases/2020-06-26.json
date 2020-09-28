@@ -1,0 +1,30 @@
+{
+ "ID": "2020-06-26",
+ "SchemaVersion": 1,
+ "VersionBumps": {
+  "changes": {
+   "From": "v1.0.0",
+   "To": "v1.0.1"
+  },
+  "test": {
+   "From": "v1.2.3",
+   "To": "v1.3.0"
+  }
+ },
+ "Changes": [
+  {
+   "ID": "changes-feature-1593193458080809000",
+   "SchemaVersion": "1.0",
+   "Module": "changes",
+   "Type": "feature",
+   "Description": "this is a test"
+  },
+  {
+   "ID": "test-feature-1593193458080838000",
+   "SchemaVersion": "1.0",
+   "Module": "test",
+   "Type": "feature",
+   "Description": "this is a test"
+  }
+ ]
+}

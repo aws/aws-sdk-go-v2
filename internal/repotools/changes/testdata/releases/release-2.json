@@ -1,0 +1,44 @@
+{
+  "ID": "release-2",
+  "SchemaVersion": 1,
+  "VersionBumps": {
+    "core/a": {
+      "From": "v1.0.0",
+      "To": "v1.0.1"
+    },
+    "service/a": {
+      "From": "v1.0.0",
+      "To": "v1.1.0"
+    }
+  },
+  "Changes": [
+    {
+      "ID": "core-a-feature-1593193458080809000",
+      "SchemaVersion": 1,
+      "Module": "core/a",
+      "Type": "feature",
+      "Description": "this is a test"
+    },
+    {
+      "ID": "service-a-feature-1593193458080838000",
+      "SchemaVersion": 1,
+      "Module": "service/a",
+      "Type": "feature",
+      "Description": "this is a test"
+    },
+    {
+      "ID": "service-a-feature-1593193458080838000",
+      "SchemaVersion": 1,
+      "Module": "service/a",
+      "Type": "feature",
+      "Description": "this is another feature"
+    },
+    {
+      "ID": "service-a-feature-1593193458080838000",
+      "SchemaVersion": 1,
+      "Module": "service/a",
+      "Type": "bugfix",
+      "Description": "this is a bug fix"
+    }
+  ]
+}

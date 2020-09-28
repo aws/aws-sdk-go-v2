@@ -1,0 +1,8 @@
+modules:
+  - test
+  - other
+type: bugfix
+description: test description
+
+# type may be one of "feature" or "bugfix".
+# multiple modules may be listed. A change metadata file will be created for each module.
