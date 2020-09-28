@@ -1875,7 +1875,7 @@ type Object struct {
 	// contents of an object, not its metadata.
 	ETag *string
 	// Size in bytes of the object
-	Size *int32
+	Size *int64
 	// The name that you assign to an object. You use the object key to retrieve the
 	// object.
 	Key *string
@@ -1932,7 +1932,7 @@ type ObjectVersion struct {
 	// Version ID of an object.
 	VersionId *string
 	// Size in bytes of the object.
-	Size *int32
+	Size *int64
 	// The object key.
 	Key *string
 	// Date and time the object was last modified.
@@ -1975,7 +1975,7 @@ type Part struct {
 	// Date and time at which the part was uploaded.
 	LastModified *time.Time
 	// Size in bytes of the uploaded part data.
-	Size *int32
+	Size *int64
 }
 
 // The container element for a bucket's policy status.

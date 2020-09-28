@@ -15005,7 +15005,7 @@ func awsRestxml_deserializeDocumentObject(v **types.Object, decoder smithyxml.No
 				if err != nil {
 					return err
 				}
-				sv.Size = ptr.Int32(int32(i64))
+				sv.Size = &i64
 			}
 
 		case strings.EqualFold("StorageClass", t.Name.Local):
@@ -15459,7 +15459,7 @@ func awsRestxml_deserializeDocumentObjectVersion(v **types.ObjectVersion, decode
 				if err != nil {
 					return err
 				}
-				sv.Size = ptr.Int32(int32(i64))
+				sv.Size = &i64
 			}
 
 		case strings.EqualFold("StorageClass", t.Name.Local):
@@ -15712,7 +15712,7 @@ func awsRestxml_deserializeDocumentPart(v **types.Part, decoder smithyxml.NodeDe
 				if err != nil {
 					return err
 				}
-				sv.Size = ptr.Int32(int32(i64))
+				sv.Size = &i64
 			}
 
 		default:

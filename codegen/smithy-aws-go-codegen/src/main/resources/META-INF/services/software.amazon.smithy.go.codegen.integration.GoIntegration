@@ -17,3 +17,4 @@ software.amazon.smithy.aws.go.codegen.customization.GlacierCustomizations
 software.amazon.smithy.aws.go.codegen.customization.S3ResponseErrorWrapper
 software.amazon.smithy.aws.go.codegen.customization.S3MetadataRetriever
 software.amazon.smithy.aws.go.codegen.customization.S3ContentSHA256Header
+software.amazon.smithy.aws.go.codegen.customization.BackfillS3ObjectSizeMemberShapeType
