@@ -21,9 +21,13 @@ var (
 	skipRootPath       bool
 	skipPaths          string
 	skipEmptyRootPaths bool
+	failFast           bool
 )
 
 func init() {
+	flag.BoolVar(&failFast, "fail-fast", true,
+		"Terminates the module walking and command as soon as a error in any command occurs.")
+
 	flag.BoolVar(&skipEmptyRootPaths, "skip-empty-root", true,
 		"Directs to skip the root path if empty.")
 
@@ -138,6 +142,11 @@ func run() (err error) {
 			} else {
 				log.Printf("%s: %s =>\n%s",
 					relPath, result.Cmd, result.Output.String())
+			}
+
+			//  Terminate early as soon as any command fails.
+			if failFast && result.Err != nil {
+				cancelFn()
 			}
 		}
 	}()
