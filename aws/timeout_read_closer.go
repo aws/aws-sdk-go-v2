@@ -1,7 +1,11 @@
 package aws
 
 import (
+	"context"
 	"fmt"
+	"github.com/awslabs/smithy-go"
+	"github.com/awslabs/smithy-go/middleware"
+	smithyhttp "github.com/awslabs/smithy-go/transport/http"
 	"io"
 	"time"
 )
@@ -55,4 +59,45 @@ func (r *timeoutReadCloser) Read(b []byte) (int, error) {
 
 func (r *timeoutReadCloser) Close() error {
 	return r.reader.Close()
+}
+
+// AddResponseReadTimeoutMiddleware adds a middleware to the stack that wraps the
+// response body so that a read that takes too long will return an error.
+func AddResponseReadTimeoutMiddleware(stack *middleware.Stack, duration time.Duration) {
+	stack.Deserialize.Add(&readTimeoutMiddleware{duration: duration}, middleware.After)
+}
+
+// readTimeoutMiddleware wraps the response body with a timeoutReadCloser
+type readTimeoutMiddleware struct {
+	duration time.Duration
+}
+
+// ID returns the id of the middleware
+func (*readTimeoutMiddleware) ID() string {
+	return "AWSReadTimeoutMiddleware"
+}
+
+// HandleDeserialize implements the DeserializeMiddleware interface
+func (m *readTimeoutMiddleware) HandleDeserialize(
+	ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler,
+) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	response.Body = &timeoutReadCloser{
+		reader:   response.Body,
+		duration: m.duration,
+	}
+	out.RawResponse = response
+
+	return out, metadata, err
 }

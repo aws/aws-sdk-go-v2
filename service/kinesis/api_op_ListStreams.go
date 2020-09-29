@@ -4,9 +4,11 @@ package kinesis
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	kinesiscust "github.com/aws/aws-sdk-go-v2/service/kinesis/internal/customizations"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyhttp "github.com/awslabs/smithy-go/transport/http"
@@ -44,6 +46,7 @@ func (c *Client) ListStreams(ctx context.Context, params *ListStreamsInput, optF
 	stack.Initialize.Add(newServiceMetadataMiddleware_opListStreams(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
+	aws.AddResponseReadTimeoutMiddleware(stack, kinesiscust.ReadTimeoutDuration)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {
